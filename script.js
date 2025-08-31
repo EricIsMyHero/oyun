@@ -29,8 +29,8 @@ function createCardElement(data) {
       <div class="stat-item"><b>S.B.H</b><span>${data.stats.sps}</span></div>
       <div class="stat-item"><b>Saldırı Hızı</b><span>${data.stats.attackSpeed}</span></div>
       <div class="stat-item"><b>Gecikmə</b><span>${data.stats.delay}</span></div>
-      <div class="stat-item"><b>Mana</b><span>${data.additionalStats.mana}</span></div>
-      <div class="stat-item"><b>Number</b><span>${data.additionalStats.number}</span></div>
+      <div class="stat-item"><b>Mana</b><span>${data.stats.mana}</span></div>
+      <div class="stat-item"><b>Say</b><span>${data.stats.number}</span></div>
     </div>
     
     <div class="stats-section" data-section-id="additional-stats">
