@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kart Dizaynı – Tipə uyğun vizual demo</title>
+  <style>
+    :root{
+      --bg:#0f1220;            /* ümumi fon */
+      --card:#151934;          /* kart fonu */
+      --muted:#8a92b2;         /* ikinci mətn */
+      --text:#eaf0ff;          /* əsas mətn */
+      --ring:#ffffff20;        /* hover halqa */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+      /* tip rəngləri */
+      --insan:#5bc0eb;
+      --heyvan:#9ccc65;
+      --robot:#ffb300;
+      --uzayli:#7e57c2;
+      --ruh:#ec407a;
+      --varliq:#26c6da;
+      --nadir:#ffd54f; /* hibrid-nadir accent */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background: radial-gradient(1200px 700px at 20% 0%, #1a1f3f, #0f1220 60%);
+      color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell;
+    }
+
+    .wrap{max-width:1200px; margin:32px auto; padding:16px}
+    header{display:flex; gap:16px; align-items:center; justify-content:space-between; margin-bottom:18px}
+    h1{font-size:28px; margin:0; letter-spacing:.2px}
+    .hint{color:var(--muted); font-size:14px}
+
+    .controls{display:flex; gap:10px; flex-wrap:wrap}
+    button{
+      background:#22284f; color:var(--text); border:1px solid #2f3769; border-radius:12px;
+      padding:10px 14px; cursor:pointer; box-shadow: var(--shadow); transition:.25s ease;
+    }
+    button:hover{transform:translateY(-1px); box-shadow:0 14px 40px rgba(0,0,0,.45)}
+
+    /* grid */
+    .grid{display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:16px}
+
+    /* card */
+    .card{
+      position:relative; overflow:hidden; border-radius:18px; background:var(--card);
+      border:1px solid #2a2f57; padding:14px; box-shadow: var(--shadow);
+      transition: transform .25s ease, box-shadow .25s ease; isolation:isolate;
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.5) }
+
+    .card::after{ /* parıltı halqası */
+      content:""; position:absolute; inset:-2px; border-radius:20px; pointer-events:none;
+      border:2px solid var(--ring); filter:blur(4px); opacity:.5; z-index:-1;
+    }
+
+    .card .head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
+    .name{font-weight:700; letter-spacing:.3px}
+    .badge{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid #ffffff2b}
+
+    .meta{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px}
+    .pill{font-size:11px; padding:4px 8px; border-radius:999px; background:#1e244a; color:#c9d3ff; border:1px solid #2b3264}
+
+    .stats{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px}
+    .stat{background:#111636; border:1px solid #252c59; border-radius:12px; padding:8px}
+    .stat b{display:block; font-size:12px; color:#c6ceff; margin-bottom:4px}
+    .stat span{font-size:13px}
+
+    .trait{margin-top:10px; font-size:13px; color:#dfe6ff}
+
+    /* tip temaları */
+    .t-insan    { box-shadow: 0 6px 28px color-mix(in oklab, var(--insan) 35%, transparent) }
+    .t-heyvan   { box-shadow: 0 6px 28px color-mix(in oklab, var(--heyvan) 35%, transparent) }
+    .t-robot    { box-shadow: 0 6px 28px color-mix(in oklab, var(--robot) 35%, transparent) }
+    .t-uzayli   { box-shadow: 0 6px 28px color-mix(in oklab, var(--uzayli) 35%, transparent) }
+    .t-ruh      { box-shadow: 0 6px 28px color-mix(in oklab, var(--ruh) 35%, transparent) }
+    .t-varliq   { box-shadow: 0 6px 28px color-mix(in oklab, var(--varliq) 35%, transparent) }
+
+    /* yuxarı kənar çubuğu (tip rəngi) */
+    .stripe{height:6px; border-radius:12px; margin:-14px -14px 10px; opacity:.9}
+    .t-insan  .stripe{background: linear-gradient(90deg, var(--insan), #84d8ff)}
+    .t-heyvan .stripe{background: linear-gradient(90deg, var(--heyvan), #c5e1a5)}
+    .t-robot  .stripe{background: linear-gradient(90deg, var(--robot), #ffd54f)}
+    .t-uzayli .stripe{background: linear-gradient(90deg, var(--uzayli), #b39ddb)}
+    .t-ruh    .stripe{background: linear-gradient(90deg, var(--ruh), #f48fb1)}
+    .t-varliq .stripe{background: linear-gradient(90deg, var(--varliq), #80deea)}
+
+    /* nadir / hibrid effekt */
+    .hybrid{position:absolute; inset:0; pointer-events:none; mix-blend:screen; opacity:.18;
+      background: conic-gradient(from 0deg at 50% 50%, #fff0 0 20%, #7e57c2 20% 21%, #fff0 21% 40%, #26c6da 40% 41%, #fff0 41% 60%, #ffb300 60% 61%, #fff0 61% 80%, #ec407a 80% 81%, #fff0 81% 100%);
+      animation: spin 8s linear infinite;
+      border-radius:18px;
+    }
+    @keyframes spin{to{transform:rotate(1turn)}}
+
+    .rarity{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#ffeaa7}
+    .rarity svg{width:14px; height:14px}
+
+    /* ağac xətti */
+    .tree{margin-top:28px; border-top:1px dashed #2b2f55; padding-top:20px}
+    .tree h2{font-size:20px; margin:0 0 12px}
+    .branch{display:flex; gap:12px; align-items:stretch; flex-wrap:wrap}
+    .node{flex:1 1 260px; position:relative}
+    .node .card{min-height:180px}
+    .arrow{display:flex; align-items:center; justify-content:center; font-size:22px; color:#aab2db}
+
+    .footer-note{margin-top:24px; color:#9aa3cf; font-size:13px}
+
+    /* gizlə/göstər */
+    .hidden{display:none!important}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Kart Dizaynı – Tipə uyğun vizual demo</h1>
+        <div class="hint">Hibrid kartlar <b>az</b> saxlanılıb. AxB hücum tipində <i>Gecikmə vaxtı</i> göstərilir, tək zərbədə isə "-".</div>
+      </div>
+      <div class="controls">
+        <button id="toggle-hybrid">Hibrid parıltını aç/bağla</button>
+        <button id="toggle-tree">Kart ağacını göstər/gizlə</button>
+      </div>
+    </header>
+
+    <!-- GRID: nümunə kartlar -->
+    <section class="grid" id="cards">
+
+      <!-- İnsan -->
+      <article class="card t-insan">
+        <div class="stripe"></div>
+        <div class="head">
+          <div class="name">Skyhunter</div>
+          <span class="badge">İnsan</span>
+        </div>
+        <div class="meta">
+          <span class="pill">Hasar: 22</span>
+          <span class="pill">S.B.H: 18</span>
+          <span class="pill">Saldırı Hızı: 0,70s</span>
+          <span class="pill">Gecikmə: -</span>
+          <span class="pill">Qalxan: 50</span>
+        </div>
+        <div class="trait">Uçan kartlara <b>+20% Hasar</b> bonusu.</div>
+        <div class="stats">
+          <div class="stat"><b>Mana</b><span>10</span></div>
+          <div class="stat"><b>Menzil</b><span>1,500</span></div>
+          <div class="stat"><b>Hız</b><span>1,000</span></div>
+          <div class="stat"><b>Kritik</b><span>5%</span></div>
+        </div>
+      </article>
+
+      <!-- Heyvan -->
+      <article class="card t-heyvan">
+        <div class="stripe"></div>
+        <div class="head">
+          <div class="name">Rockback</div>
+          <span class="badge">Heyvan</span>
+        </div>
+        <div class="meta">
+          <span class="pill">Hasar: 16x2</span>
+          <span class="pill">S.B.H: 24</span>
+          <span class="pill">Saldırı Hızı: 0,90s</span>
+          <span class="pill">Gecikmə: 1,20s</span>
+          <span class="pill">Qalxan: 120</span>
+        </div>
+        <div class="trait">Qalxanı 0 olanda hər atışdan sonra <b>+10 Qalxan</b> qazanır.</div>
+        <div class="stats">
+          <div class="stat"><b>Mana</b><span>12</span></div>
+          <div class="stat"><b>Menzil</b><span>1,200</span></div>
+          <div class="stat"><b>Hız</b><span>0,900</span></div>
+          <div class="stat"><b>Kritik</b><span>5%</span></div>
+        </div>
+      </article>
+
+      <!-- Robot -->
+      <article class="card t-robot">
+        <div class="stripe"></div>
+        <div class="head">
+          <div class="name">Neon Droid</div>
+          <span class="badge">Robot</span>
+        </div>
+        <div class="meta">
+          <span class="pill">Hasar: 10-30</span>
+          <span class="pill">S.B.H: 10-30</span>
+          <span class="pill">Saldırı Hızı: 1,00s</span>
+          <span class="pill">Gecikmə: 0,80s</span>
+          <span class="pill">Qalxan: 40</span>
+        </div>
+        <div class="trait">Hasar verdikcə 5s ərzində <b>+15% Saldırı Hızı</b>.</div>
+        <div class="stats">
+          <div class="stat"><b>Mana</b><span>9</span></div>
+          <div class="stat"><b>Menzil</b><span>2,500</span></div>
+          <div class="stat"><b>Hız</b><span>1,050</span></div>
+          <div class="stat"><b>Kritik</b><span>5%</span></div>
+        </div>
+      </article>
+
+      <!-- Uzaylı -->
+      <article class="card t-uzayli">
+        <div class="stripe"></div>
+        <div class="head">
+          <div class="name">Void Slower</div>
+          <span class="badge">Uzaylı</span>
+        </div>
+        <div class="meta">
+          <span class="pill">Hasar: 10x2</span>
+          <span class="pill">S.B.H: 32</span>
+          <span class="pill">Saldırı Hızı: 0,35s</span>
+          <span class="pill">Gecikmə: 1,45s</span>
+          <span class="pill">Qalxan: 0</span>
+        </div>
+        <div class="trait">Atışlar rəqibin hızını <b>-25%</b> azaldır (1,2s).</div>
+        <div class="stats">
+          <div class="stat"><b>Mana</b><span>6</span></div>
+          <div class="stat"><b>Menzil</b><span>4,000</span></div>
+          <div class="stat"><b>Hız</b><span>1,000</span></div>
+          <div class="stat"><b>Kritik</b><span>5%</span></div>
+        </div>
+      </article>
+
+      <!-- Ruh -->
+      <article class="card t-ruh">
+        <div class="stripe"></div>
+        <div class="head">
+          <div class="name">Hexon</div>
+          <span class="badge">Ruh</span>
+        </div>
+        <div class="meta">
+          <span class="pill">Hasar: 3x9</span>
+          <span class="pill">S.B.H: 21</span>
+          <span class="pill">Saldırı Hızı: 0,45s</span>
+          <span class="pill">Gecikmə: 0,90s</span>
+          <span class="pill">Qalxan: 40</span>
+        </div>
+        <div class="trait">Hər 3-cü vuruş düşməni <b>1,5s susdurur</b>.</div>
+        <div class="stats">
+          <div class="stat"><b>Mana</b><span>11</span></div>
+          <div class="stat"><b>Menzil</b><span>2,800</span></div>
+          <div class="stat"><b>Hız</b><span>1,000</span></div>
+          <div class="stat"><b>Kritik</b><span>5%</span></div>
+        </div>
+      </article>
+
+      <!-- Varlıq -->
+      <article class="card t-varliq">
+        <div class="stripe"></div>
+        <div class="head">
+          <div class="name">Starcaller</div>
+          <span class="badge">Varlıq</span>
+        </div>
+        <div class="meta">
+          <span class="pill">Hasar: 10x2</span>
+          <span class="pill">S.B.H: 32</span>
+          <span class="pill">Saldırı Hızı: 0,30s</span>
+          <span class="pill">Gecikmə: 1,50s</span>
+          <span class="pill">Qalxan: 70</span>
+        </div>
+        <div class="trait">Hər 10-cu atış 5x5 sahəyə <b>+120% Hasar</b>.</div>
+        <div class="stats">
+          <div class="stat"><b>Mana</b><span>14</span></div>
+          <div class="stat"><b>Menzil</b><span>3,000</span></div>
+          <div class="stat"><b>Hız</b><span>0,900</span></div>
+          <div class="stat"><b>Kritik</b><span>15%</span></div>
+        </div>
+      </article>
+
+      <!-- HİBRİD (az və nadir) -->
+      <article class="card t-robot" id="biomech">
+        <div class="stripe"></div>
+        <div class="head">
+          <div class="name">Bio Mech</div>
+          <span class="badge">Robot/Heyvan</span>
+        </div>
+        <div class="hybrid" aria-hidden="true"></div>
+        <div class="meta">
+          <span class="pill">Hasar: 8x3</span>
+          <span class="pill">S.B.H: 18</span>
+          <span class="pill">Saldırı Hızı: 0,80s</span>
+          <span class="pill">Gecikmə: 1,10s</span>
+          <span class="pill">Qalxan: 60</span>
+        </div>
+        <div class="trait">Hər vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.</div>
+        <div class="stats">
+          <div class="stat"><b>Mana</b><span>13</span></div>
+          <div class="stat"><b>Menzil</b><span>2,000</span></div>
+          <div class="stat"><b>Hız</b><span>1,000</span></div>
+          <div class="stat rarity" title="Nadir">
+            <!-- ulduz -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.6L22 10l-5 4.6L18 22l-6-3.5L6 22l1-7.4L2 10l7.1-1.4L12 2z"/></svg>
+            Nadir Hibrid
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- KART AĞACI (evolyusiya) -->
+    <section class="tree hidden" id="tree">
+      <h2>Kart Ağacı – inkişaf yolu</h2>
+      <div class="branch">
+        <div class="node">
+          <article class="card t-heyvan">
+            <div class="stripe"></div>
+            <div class="head"><div class="name">Cubling</div><span class="badge">Heyvan</span></div>
+            <div class="trait">Başlanğıc: hər 5s <b>+2 Can</b>.</div>
+          </article>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node">
+          <article class="card t-heyvan">
+            <div class="stripe"></div>
+            <div class="head"><div class="name">Rockback</div><span class="badge">Heyvan</span></div>
+            <div class="trait">Qalxan 0 olduqda hər atış <b>+10 Qalxan</b>.</div>
+          </article>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node">
+          <article class="card t-robot" id="hybrid-node">
+            <div class="stripe"></div>
+            <div class="head"><div class="name">Bio Mech</div><span class="badge">Robot/Heyvan</span></div>
+            <div class="hybrid" aria-hidden="true"></div>
+            <div class="trait">Hibrid mərhələ: vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.</div>
+          </article>
+        </div>
+      </div>
+      <div class="footer-note">Qeyd: Hibridlər yalnız inkişaf yolu ilə açılır və <b>nadir</b> saxlanılır.</div>
+    </section>
+  </div>
+
+  <script>
+    const hybridGlowBtn = document.getElementById('toggle-hybrid');
+    const treeBtn = document.getElementById('toggle-tree');
+    const biomech = document.getElementById('biomech');
+    const tree = document.getElementById('tree');
+
+    hybridGlowBtn.addEventListener('click', ()=>{
+      const overlay = biomech.querySelector('.hybrid');
+      overlay.classList.toggle('hidden');
+    });
+
+    treeBtn.addEventListener('click', ()=>{
+      tree.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
