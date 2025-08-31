@@ -1,95 +1,125 @@
-// DOM Elementləri və funksiyaları DOMContentLoaded içərisində işə sal
+// DOM Elementləri
+const filterButtons = document.querySelectorAll('.controls button');
+const cardsContainer = document.getElementById('cards');
 
-document.addEventListener('DOMContentLoaded', () => {
-  const filterButtons = document.querySelectorAll('.controls button');
-  const cardsContainer = document.getElementById('cards');
+let allCardsData = [];
 
-  let allCardsData = []; // Bütün kart məlumatlarını saxlamaq üçün massiv
+// Kart yaratmaq üçün funksiya
+function createCardElement(data) {
+  const card = document.createElement('article');
+  card.className = `card r-${data.rarity.toLowerCase()}`;
+  
+  const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
 
-  // Kart yaratmaq üçün funksiya
-  function createCardElement(data) {
-    const card = document.createElement('article');
-
-    card.className = `card r-${data.rarity.toLowerCase()}`;
-    
-    const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
-
-    card.innerHTML = `
+  card.innerHTML = `
     <div class="stripe"></div>
     <div class="head">
       <div class="name">${data.name}</div><span class="badge">${badgeText}</span>
     </div>
-    <div class="meta">
-      <span class="pill">Can: ${data.stats.health}</span>
-      <span class="pill">Hasar: ${data.stats.damage}</span>
-      <span class="pill">S.B.H: ${data.stats.sps}</span>
-      <span class="pill">Saldırı Hızı: ${data.stats.attackSpeed}</span>
-      <span class="pill">Gecikmə: ${data.stats.delay}</span>
-      <span class="pill">Qalxan: ${data.stats.shield}</span>
-      <span class="pill">Mana: ${data.additionalStats.mana}</span>
-      <span class="pill">Menzil: ${data.additionalStats.range}</span>
-      <span class="pill">Hız: ${data.additionalStats.speed}</span>
-      <span class="pill">Kritik: ${data.additionalStats.critical}</span>
+    <div class="card-tabs">
+      <button class="active" data-section="main-stats">Əsas</button>
+      <button data-section="additional-stats">Əlavə</button>
+      <button data-section="trait">Özəllik</button>
     </div>
-    <div class="trait">${data.trait}</div>
+    
+    <div class="stats-section visible" data-section-id="main-stats">
+      <div class="stat-item"><b>Can</b><span>${data.stats.health}</span></div>
+      <div class="stat-item"><b>Hasar</b><span>${data.stats.damage}</span></div>
+      <div class="stat-item"><b>S.B.H</b><span>${data.stats.sps}</span></div>
+      <div class="stat-item"><b>Qalxan</b><span>${data.stats.shield}</span></div>
+      <div class="stat-item"><b>Saldırı Hızı</b><span>${data.stats.attackSpeed}</span></div>
+      <div class="stat-item"><b>Gecikmə</b><span>${data.stats.delay}</span></div>
+      <div class="stat-item"><b>Mana</b><span>${data.additionalStats.mana}</span></div>
+    </div>
+    
+    <div class="stats-section" data-section-id="additional-stats">
+      <div class="pill-group">
+        <span class="pill">Menzil: ${data.additionalStats.range}</span>
+        <span class="pill">Hız: ${data.additionalStats.speed}</span>
+        <span class="pill">Kritik Şansı: ${data.additionalStats.criticalChance}</span>
+        <span class="pill">Can Çalma Şansı: ${data.additionalStats.lifestealChance}</span>
+      </div>
+    </div>
+    
+    <div class="stats-section" data-section-id="trait">
+      <div class="trait">${data.trait}</div>
+    </div>
   `;
 
-    // Ethereal parıltısını əlavə et
-    if (data.rarity.toLowerCase() === 'ethereal') {
-      const glowDiv = document.createElement('div');
-      glowDiv.className = 'card-glow';
-      glowDiv.setAttribute('aria-hidden', 'true');
-      card.appendChild(glowDiv);
-    }
-
-    return card;
+  // Ethereal parıltısını əlavə et
+  if (data.rarity.toLowerCase() === 'ethereal') {
+    const glowDiv = document.createElement('div');
+    glowDiv.className = 'card-glow';
+    glowDiv.setAttribute('aria-hidden', 'true');
+    card.appendChild(glowDiv);
   }
 
-  // Kartları render edən funksiya
-  function renderCards(cardsToRender) {
-    cardsContainer.innerHTML = '';
-    cardsToRender.forEach(data => {
-      cardsContainer.appendChild(createCardElement(data));
-    });
-  }
-
-  // JSON faylından məlumatları çəkən funksiya
-  async function fetchCards() {
-    try {
-      const response = await fetch('cards.json');
-      if (!response.ok) {
-        throw new Error(`HTTP xətası! Status: ${response.status}`);
-      }
-      allCardsData = await response.json();
-      renderCards(allCardsData);
-    } catch (error) {
-      console.error('Məlumatları yükləmə zamanı xəta:', error);
-      cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
-    }
-  }
-
-  // Filtrləmə funksiyası
-  function filterCards(rarity) {
-    let filteredCards = allCardsData;
-    if (rarity !== 'all') {
-      filteredCards = allCardsData.filter(card => card.rarity.toLowerCase() === rarity);
-    }
-    renderCards(filteredCards);
-  }
-
-  // Event Listeners
-  filterButtons.forEach(button => {
+  // Kart içindəki düymələrə funksionallıq əlavə et
+  const cardButtons = card.querySelectorAll('.card-tabs button');
+  cardButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const rarity = button.id.split('-')[1];
-
-      // Aktiv düymə sinifini yenilə
-      filterButtons.forEach(btn => btn.classList.remove('active'));
+      const sectionId = button.dataset.section;
+      
+      // Bütün düymələrdən "active" sinifini sil
+      cardButtons.forEach(btn => btn.classList.remove('active'));
+      // Kliklənən düyməyə "active" sinifi əlavə et
       button.classList.add('active');
 
-      filterCards(rarity);
+      // Bütün bölmələri gizlət
+      card.querySelectorAll('.stats-section').forEach(section => {
+        section.classList.remove('visible');
+      });
+      // Müvafiq bölməni göstər
+      card.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
     });
   });
 
-  // Səhifə yüklənərkən kartları çək və göstər
-  fetchCards();
+  return card;
+}
+
+// Kartları render edən funksiya
+function renderCards(cardsToRender) {
+  cardsContainer.innerHTML = '';
+  cardsToRender.forEach(data => {
+    cardsContainer.appendChild(createCardElement(data));
+  });
+}
+
+// JSON faylından məlumatları çəkən funksiya
+async function fetchCards() {
+  try {
+    const response = await fetch('cards.json');
+    if (!response.ok) {
+      throw new Error(`HTTP xətası! Status: ${response.status}`);
+    }
+    allCardsData = await response.json();
+    renderCards(allCardsData);
+  } catch (error) {
+    console.error('Məlumatları yükləmə zamanı xəta:', error);
+    cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
+  }
+}
+
+// Filtrləmə funksiyası
+function filterCards(rarity) {
+  let filteredCards = allCardsData;
+  if (rarity !== 'all') {
+    filteredCards = allCardsData.filter(card => card.rarity.toLowerCase() === rarity);
+  }
+  renderCards(filteredCards);
+}
+
+// Event Listeners
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const rarity = button.id.split('-')[1];
+
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    filterCards(rarity);
+  });
 });
+
+// Səhifə yüklənərkən kartları çək və göstər
+document.addEventListener('DOMContentLoaded', fetchCards);
