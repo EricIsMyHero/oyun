@@ -1,29 +1,104 @@
 [
   {
-    "name": "Skyhunter",
-    "type": "insan",
+    "name": "Earthen Protector",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
     "isHybrid": false,
-    "rarity": null,
     "stats": {
-      "damage": "22",
-      "sps": "18",
-      "attackSpeed": "0,70s",
+      "damage": "10",
+      "sps": "5",
+      "attackSpeed": "1.20s",
+      "delay": "-",
+      "shield": "100"
+    },
+    "trait": "Döyüş başladıqdan sonra 10 saniyə <b>+15% Qalxan</b>.",
+    "additionalStats": {
+      "mana": "5",
+      "range": "300",
+      "speed": "800"
+    }
+  },
+  {
+    "name": "Whisperwind",
+    "type": ["Heyvan"],
+    "rarity": "Familiar",
+    "isHybrid": false,
+    "stats": {
+      "damage": "15",
+      "sps": "10",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "shield": "60"
+    },
+    "trait": "Hər 5 saniyədə bir <b>+5% Hız</b> bonusu.",
+    "additionalStats": {
+      "mana": "8",
+      "range": "800",
+      "speed": "1200"
+    }
+  },
+  {
+    "name": "Arcane Golem",
+    "type": ["Robot"],
+    "rarity": "Arcane",
+    "isHybrid": false,
+    "stats": {
+      "damage": "25",
+      "sps": "20",
+      "attackSpeed": "0.90s",
+      "delay": "-",
+      "shield": "80"
+    },
+    "trait": "Düşmənə ziyan vurduqda <b>+2 Mana</b> qazanır.",
+    "additionalStats": {
+      "mana": "15",
+      "range": "1500",
+      "speed": "900"
+    }
+  },
+  {
+    "name": "Shadow Weaver",
+    "type": ["Ruh"],
+    "rarity": "Mythic",
+    "isHybrid": false,
+    "stats": {
+      "damage": "40",
+      "sps": "30",
+      "attackSpeed": "0.60s",
       "delay": "-",
       "shield": "50"
     },
-    "trait": "Uçan kartlara <b>+20% Hasar</b> bonusu.",
+    "trait": "Hər 3-cü zərbə rəqibi <b>1s dondurur</b>.",
     "additionalStats": {
-      "mana": "10",
-      "range": "1,500",
-      "speed": "1,000",
-      "critical": "5%"
+      "mana": "20",
+      "range": "2000",
+      "speed": "1100"
+    }
+  },
+  {
+    "name": "Cosmic Dragon",
+    "type": ["Uzaylı"],
+    "rarity": "Legendary",
+    "isHybrid": false,
+    "stats": {
+      "damage": "60",
+      "sps": "40",
+      "attackSpeed": "0.50s",
+      "delay": "-",
+      "shield": "120"
+    },
+    "trait": "Canı 50%-dən aşağı düşdükdə <b>+20% Hasar</b> bonusu alır.",
+    "additionalStats": {
+      "mana": "30",
+      "range": "2500",
+      "speed": "1500"
     }
   },
   {
     "name": "Bio Mech",
-    "type": "robot",
+    "type": ["Robot", "Heyvan"],
+    "rarity": "Ethereal",
     "isHybrid": true,
-    "rarity": "Nadir",
     "stats": {
       "damage": "8x3",
       "sps": "18",
@@ -34,8 +109,8 @@
     "trait": "Hər vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.",
     "additionalStats": {
       "mana": "13",
-      "range": "2,000",
-      "speed": "1,000"
+      "range": "2000",
+      "speed": "1000"
     }
   }
 ]
