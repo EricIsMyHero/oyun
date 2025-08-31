@@ -1,96 +1,102 @@
 :root {
-  --bg:#0f1220;
-  --card:#151934;
-  --muted:#8a92b2;
-  --text:#eaf0ff;
-  --ring:#ffffff20;
+  --bg: #0f1220;
+  --card: #151934;
+  --muted: #8a92b2;
+  --text: #eaf0ff;
+  --ring: #ffffff20;
   --shadow: 0 10px 30px rgba(0,0,0,.35);
-  --insan:#5bc0eb;
-  --heyvan:#9ccc65;
-  --robot:#ffb300;
-  --uzayli:#7e57c2;
-  --ruh:#ec407a;
-  --varliq:#26c6da;
-  --nadir:#ffd54f;
+  --insan: #5bc0eb;
+  --heyvan: #9ccc65;
+  --robot: #ffb300;
+  --uzayli: #7e57c2;
+  --ruh: #ec407a;
+  --varliq: #26c6da;
+  --nadir: #ffd54f;
+  --olu: #bdbdbd;
 }
 
-* { box-sizing:border-box }
-html,body { height:100% }
+* { box-sizing: border-box }
+html, body { height: 100% }
 body {
-  margin:0;
+  margin: 0;
   background: radial-gradient(1200px 700px at 20% 0%, #1a1f3f, #0f1220 60%);
-  color:var(--text);
+  color: var(--text);
   font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
 }
 
-.wrap { max-width:1200px; margin:32px auto; padding:16px }
-header { display:flex; gap:16px; justify-content:space-between; align-items:center; margin-bottom:18px }
-h1 { font-size:28px; margin:0; letter-spacing:.2px }
-.hint { color:var(--muted); font-size:14px }
+.wrap { max-width: 1200px; margin: 32px auto; padding: 16px }
+header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 18px }
+h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
+.hint { color: var(--muted); font-size: 14px }
 
-.controls { display:flex; gap:10px; flex-wrap:wrap }
+.controls { display: flex; gap: 10px; flex-wrap: wrap }
 button {
-  background:#22284f; color:var(--text);
-  border:1px solid #2f3769; border-radius:12px;
-  padding:10px 14px; cursor:pointer;
-  box-shadow: var(--shadow); transition:.25s ease;
+  background: #22284f; color: var(--text);
+  border: 1px solid #2f3769; border-radius: 12px;
+  padding: 10px 14px; cursor: pointer;
+  box-shadow: var(--shadow); transition: .25s ease;
 }
-button:hover { transform:translateY(-1px); box-shadow:0 14px 40px rgba(0,0,0,.45) }
+button:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.45) }
 
 .grid {
-  display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap:16px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
 }
 .card {
-  position:relative; overflow:hidden; border-radius:18px; background:var(--card);
-  border:1px solid #2a2f57; padding:14px; box-shadow: var(--shadow);
+  position: relative; overflow: hidden; border-radius: 18px; background: var(--card);
+  border: 1px solid #2a2f57; padding: 14px; box-shadow: var(--shadow);
   transition: transform .25s ease, box-shadow .25s ease;
 }
-.card:hover { transform: translateY(-4px); box-shadow:0 22px 60px rgba(0,0,0,.5) }
+.card:hover { transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.5) }
 .card::after {
-  content:""; position:absolute; inset:-2px; border-radius:20px;
-  pointer-events:none; border:2px solid var(--ring); filter:blur(4px);
-  opacity:.5; z-index:-1;
+  content: ""; position: absolute; inset: -2px; border-radius: 20px;
+  pointer-events: none; border: 2px solid var(--ring); filter: blur(4px);
+  opacity: .5; z-index: -1;
 }
 
-.head { display:flex; justify-content:space-between; margin-bottom:10px }
-.name { font-weight:700; letter-spacing:.3px }
-.badge { font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid #ffffff2b }
-.meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px }
-.pill { font-size:11px; padding:4px 8px; border-radius:999px; background:#1e244a; color:#c9d3ff; border:1px solid #2b3264 }
+.head { display: flex; justify-content: space-between; margin-bottom: 10px }
+.name { font-weight: 700; letter-spacing: .3px }
+.badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px }
+.pill { font-size: 11px; padding: 4px 8px; border-radius: 999px; background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264 }
 
-.stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px }
-.stat { background:#111636; border:1px solid #252c59; border-radius:12px; padding:8px }
-.stat b { display:block; font-size:12px; color:#c6ceff; margin-bottom:4px }
-.stat span { font-size:13px }
-.trait { margin-top:10px; font-size:13px; color:#dfe6ff }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px }
+.stat { background: #111636; border: 1px solid #252c59; border-radius: 12px; padding: 8px }
+.stat b { display: block; font-size: 12px; color: #c6ceff; margin-bottom: 4px }
+.stat span { font-size: 13px }
+.trait { margin-top: 10px; font-size: 13px; color: #dfe6ff }
 
 /* Tip temaları */
-.t-insan { box-shadow:0 6px 28px color-mix(in oklab, var(--insan) 35%, transparent) }
-.t-heyvan{ box-shadow:0 6px 28px color-mix(in oklab, var(--heyvan)35%, transparent) }
-.t-robot { box-shadow:0 6px 28px color-mix(in oklab, var(--robot) 35%, transparent) }
-.t-uzayli{ box-shadow:0 6px 28px color-mix(in oklab, var(--uzayli)35%, transparent) }
-.t-ruh   { box-shadow:0 6px 28px color-mix(in oklab, var(--ruh)   35%, transparent) }
-.t-olu   { box-shadow:0 6px 28px color-mix(in oklab, var(--olu)   35%, transparent) }
-.t-varliq{ box-shadow:0 6px 28px color-mix(in oklab, var(--varliq)35%, transparent) }
+.t-insan  { box-shadow: 0 6px 28px color-mix(in oklab, var(--insan) 35%, transparent) }
+.t-heyvan { box-shadow: 0 6px 28px color-mix(in oklab, var(--heyvan) 35%, transparent) }
+.t-robot  { box-shadow: 0 6px 28px color-mix(in oklab, var(--robot) 35%, transparent) }
+.t-uzayli { box-shadow: 0 6px 28px color-mix(in oklab, var(--uzayli) 35%, transparent) }
+.t-ruh    { box-shadow: 0 6px 28px color-mix(in oklab, var(--ruh) 35%, transparent) }
+.t-olu    { box-shadow: 0 6px 28px color-mix(in oklab, var(--olu) 35%, transparent) }
+.t-varliq { box-shadow: 0 6px 28px color-mix(in oklab, var(--varliq) 35%, transparent) }
 
 /* Stripe (yuxarı rəng xətti) */
-.stripe{ height:6px; border-radius:12px; margin:-14px -14px 10px; opacity:.9 }
-.t-insan .stripe { background:linear-gradient(90deg,var(--insan),#84d8ff) }
-.t-heyvan.stripe{ background:linear-gradient(90deg,var(--heyvan),#c5e1a5) }
+.stripe { height: 6px; border-radius: 12px; margin: -14px -14px 10px; opacity: .9 }
+.t-insan .stripe  { background: linear-gradient(90deg, var(--insan), #84d8ff) }
+.t-heyvan .stripe { background: linear-gradient(90deg, var(--heyvan), #c5e1a5) }
+.t-robot .stripe  { background: linear-gradient(90deg, var(--robot), #ffe082) }
+.t-uzayli .stripe { background: linear-gradient(90deg, var(--uzayli), #b39ddb) }
+.t-ruh .stripe    { background: linear-gradient(90deg, var(--ruh), #f8bbd0) }
+.t-olu .stripe    { background: linear-gradient(90deg, var(--olu), #e0e0e0) }
+.t-varliq .stripe { background: linear-gradient(90deg, var(--varliq), #80deea) }
 /* ... digər tiplərin stripe rəngləri ... */
 
 /* Hybrid parıltısı */
 .hybrid {
-  position:absolute; inset:0; pointer-events:none; mix-blend:screen; opacity:.18;
-  background:conic-gradient(from 0deg at 50% 50%, #fff0 0 20%, #7e57c2 20% 21%, #fff0 21% 40%, #26c6da 40% 41%, #fff0 41% 60%, #ffb300 60% 61%, #fff0 61% 80%, #ec407a 80% 81%, #fff0 81% 100%);
-  animation:spin 8s linear infinite; border-radius:18px;
+  position: absolute; inset: 0; pointer-events: none; mix-blend: screen; opacity: .18;
+  background: conic-gradient(from 0deg at 50% 50%, #fff0 0 20%, #7e57c2 20% 21%, #fff0 21% 40%, #26c6da 40% 41%, #fff0 41% 60%, #ffb300 60% 61%, #fff0 61% 80%, #ec407a 80% 81%, #fff0 81% 100%);
+  animation: spin 8s linear infinite; border-radius: 18px;
 }
-@keyframes spin { to { transform:rotate(1turn) } }
+@keyframes spin { to { transform: rotate(1turn) } }
 
-.rarity { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#ffeaa7 }
-.rarity svg { width:14px; height:14px }
+.rarity { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #ffeaa7 }
+.rarity svg { width: 14px; height: 14px }
 
-.tree { margin-top:28px; border-top:1px dashed #2b2f55; padding-top:20px }
-.footer-note { margin-top:24px; color:#9aa3cf; font-size:13px }
-.hidden { display:none!important }
+.tree { margin-top: 28px; border-top: 1px dashed #2b2f55; padding-top: 20px }
+.footer-note { margin-top: 24px; color: #9aa3cf; font-size: 13px }
+.hidden { display: none!important }
