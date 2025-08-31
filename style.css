@@ -62,8 +62,6 @@ button.active {
 .name { font-weight: 700; letter-spacing: .3px }
 .badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b }
 
-.trait { margin-top: 10px; font-size: 13px; color: #dfe6ff }
-
 /* Kart içindəki düymələr */
 .card-tabs { display: flex; margin-bottom: 8px; gap: 8px; }
 .card-tabs button {
@@ -89,24 +87,35 @@ button.active {
   gap: 8px;
 }
 
+/* Özəllik (Trait) bölməsi üçün xüsusi stil */
+.stats-section[data-section-id="trait"] {
+  display: none;
+  padding: 12px;
+  background: #111636;
+  border: 1px solid #252c59;
+  border-radius: 12px;
+}
+.stats-section[data-section-id="trait"].visible {
+  display: block;
+}
+
 /* Fərdi stat elementləri */
 .stat-item { padding: 4px; }
 .stat-item b { display: block; font-size: 12px; color: #c6ceff; margin-bottom: 4px }
 .stat-item span { font-size: 13px }
 
-/* Əlavə statlar üçün pill-stil */
-.pill-group { display: flex; flex-wrap: wrap; gap: 8px; }
-.pill-group .pill {
-  font-size: 13px; padding: 6px 10px; border-radius: 999px; background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264;
+/* Özəllik mətnini mərkəzə hizalama */
+.trait-center {
+  text-align: center;
 }
 
 /* Nadirlik temaları */
-.r-mundane  { box-shadow: 0 6px 28px rgba(204,204,204,0.35) }
-.r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35) }
-.r-arcane   { box-shadow: 0 6px 28px rgba(126,87,194,0.35) }
-.r-mythic   { box-shadow: 0 6px 28px rgba(229,57,53,0.35) }
-.r-legendary{ box-shadow: 0 6px 28px rgba(251,192,45,0.35) }
-.r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35) }
+.r-mundane  { box-shadow: 0 6px 28px color-mix(in oklab, var(--mundane) 35%, transparent) }
+.r-familiar { box-shadow: 0 6px 28px color-mix(in oklab, var(--familiar) 35%, transparent) }
+.r-arcane   { box-shadow: 0 6px 28px color-mix(in oklab, var(--arcane) 35%, transparent) }
+.r-mythic   { box-shadow: 0 6px 28px color-mix(in oklab, var(--mythic) 35%, transparent) }
+.r-legendary{ box-shadow: 0 6px 28px color-mix(in oklab, var(--legendary) 35%, transparent) }
+.r-ethereal { box-shadow: 0 6px 28px color-mix(in oklab, var(--ethereal) 35%, transparent) }
 
 /* Stripe (yuxarı rəng xətti) */
 .stripe { height: 6px; border-radius: 12px; margin: -14px -14px 10px; opacity: .9 }
