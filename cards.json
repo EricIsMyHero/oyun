@@ -6,11 +6,11 @@
     "isHybrid": false,
     "stats": {
       "health": "310",
+      "shield": "0",
       "damage": "20",
       "sps": "18",
       "attackSpeed": "1.10s",
-      "delay": "-",
-      "shield": "0"
+      "delay": "-"
     },
     "trait": "<b>*Heyvan*</b> tipli kartlardan <b>-25%</b> daha az hasar alar.",
     "additionalStats": {
@@ -28,11 +28,11 @@
     "isHybrid": false,
     "stats": {
       "health": "90",
+      "shield": "0",
       "damage": "20",
       "sps": "20",
       "attackSpeed": "1.00s",
-      "delay": "-",
-      "shield": "0"
+      "delay": "-"
     },
     "trait": "<b>25%</b> şansla ekstra <b>+50%</b> Hasar verər, atışları qalxandan keçər.",
     "additionalStats": {
