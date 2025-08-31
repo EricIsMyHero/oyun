@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="name">${data.name}</div><span class="badge">${badgeText}</span>
       </div>
       <div class="meta">
-        <span class="pill">Hasar: ${data.stats.damage}</span><span class="pill">S.B.H: ${data.stats.sps}</span>
+        <span class="pill">Can: ${data.stats.health}</span><span class="pill">Hasar: ${data.stats.damage}</span><span class="pill">S.B.H: ${data.stats.sps}</span>
         <span class="pill">Saldırı Hızı: ${data.stats.attackSpeed}</span><span class="pill">Gecikmə: ${data.stats.delay}</span>
         <span class="pill">Qalxan: ${data.stats.shield}</span>
       </div>
