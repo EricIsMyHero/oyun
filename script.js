@@ -1,9 +1,3 @@
-// DOM Elementləri
-const hybridGlowBtn = document.getElementById('toggle-hybrid');
-const treeBtn = document.getElementById('toggle-tree');
-const tree = document.getElementById('tree');
-const cardsContainer = document.getElementById('cards');
-
 // Kart yaratmaq üçün funksiya
 function createCardElement(data) {
   const card = document.createElement('article');
@@ -45,7 +39,7 @@ function createCardElement(data) {
 }
 
 // Kartları render edən funksiya
-function renderCards(cardData) {
+function renderCards(cardData, cardsContainer) {
   cardsContainer.innerHTML = '';
   cardData.forEach(data => {
     cardsContainer.appendChild(createCardElement(data));
@@ -53,31 +47,43 @@ function renderCards(cardData) {
 }
 
 // JSON faylından məlumatları çəkən funksiya
-async function fetchCards() {
+async function fetchCards(cardsContainer) {
   try {
     const response = await fetch('cards.json');
     if (!response.ok) {
       throw new Error(`HTTP xətası! Status: ${response.status}`);
     }
     const data = await response.json();
-    renderCards(data);
+    renderCards(data, cardsContainer);
   } catch (error) {
     console.error('Məlumatları yükləmə zamanı xəta:', error);
     cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
   }
 }
 
-// Event Listeners
-hybridGlowBtn.addEventListener('click', () => {
-  const hybridGlows = document.querySelectorAll('.card-glow');
-  hybridGlows.forEach(glow => {
-    glow.classList.toggle('hidden');
-  });
-});
+// Səhifə yüklənəndə bütün DOM əməliyyatları burada olmalıdır
+document.addEventListener('DOMContentLoaded', () => {
+  const hybridGlowBtn = document.getElementById('toggle-hybrid');
+  const treeBtn = document.getElementById('toggle-tree');
+  const tree = document.getElementById('tree');
+  const cardsContainer = document.getElementById('cards');
 
-treeBtn.addEventListener('click', () => {
-  tree.classList.toggle('hidden');
-});
+  // Kartları çək və göstər
+  fetchCards(cardsContainer);
 
-// Səhifə yüklənərkən kartları çək və göstər
-document.addEventListener('DOMContentLoaded', fetchCards);
+  // Event Listeners
+  if (hybridGlowBtn) {
+    hybridGlowBtn.addEventListener('click', () => {
+      const hybridGlows = document.querySelectorAll('.card-glow');
+      hybridGlows.forEach(glow => {
+        glow.classList.toggle('hidden');
+      });
+    });
+  }
+
+  if (treeBtn && tree) {
+    treeBtn.addEventListener('click', () => {
+      tree.classList.toggle('hidden');
+    });
+  }
+});
