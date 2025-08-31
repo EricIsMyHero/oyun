@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Skyhunter",
+    "type": "insan",
+    "isHybrid": false,
+    "rarity": null,
+    "stats": {
+      "damage": "22",
+      "sps": "18",
+      "attackSpeed": "0,70s",
+      "delay": "-",
+      "shield": "50"
+    },
+    "trait": "Uçan kartlara <b>+20% Hasar</b> bonusu.",
+    "additionalStats": {
+      "mana": "10",
+      "range": "1,500",
+      "speed": "1,000",
+      "critical": "5%"
+    }
+  },
+  {
+    "name": "Bio Mech",
+    "type": "robot",
+    "isHybrid": true,
+    "rarity": "Nadir",
+    "stats": {
+      "damage": "8x3",
+      "sps": "18",
+      "attackSpeed": "0,80s",
+      "delay": "1,10s",
+      "shield": "60"
+    },
+    "trait": "Hər vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.",
+    "additionalStats": {
+      "mana": "13",
+      "range": "2,000",
+      "speed": "1,000"
+    }
+  }
+]
