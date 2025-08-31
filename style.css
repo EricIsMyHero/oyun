@@ -24,16 +24,36 @@ body {
   font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
 }
 
+/* Ortalanmış düymələr üçün yeni stil */
+.center-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 36px 0 36px 0;
+}
+
 .wrap { max-width: 1200px; margin: 32px auto; padding: 16px }
 header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 18px }
 h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
 .hint { color: var(--muted); font-size: 14px }
 
-.controls { display: flex; gap: 10px; flex-wrap: wrap }
+/* Düymələri böyüt və ortala */
+.controls {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
 button {
   background: #22284f; color: var(--text);
-  border: 1px solid #2f3769; border-radius: 12px;
-  padding: 10px 14px; cursor: pointer;
+  border: 1px solid #2f3769; border-radius: 16px;
+  padding: 18px 36px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
   box-shadow: var(--shadow); transition: .25s ease;
 }
 button:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.45) }
@@ -63,10 +83,11 @@ button.active {
 .badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b }
 
 /* Kart içindəki düymələr */
-.card-tabs { display: flex; margin-bottom: 8px; gap: 8px; }
+.card-tabs { display: flex; margin-bottom: 8px; gap: 8px; justify-content: center; }
 .card-tabs button {
   background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264;
-  font-size: 11px; padding: 6px 12px; border-radius: 12px;
+  font-size: 15px; padding: 10px 22px; border-radius: 14px;
+  font-weight: 600;
   cursor: pointer; transition: background .2s ease;
 }
 .card-tabs button.active {
