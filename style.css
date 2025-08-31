@@ -37,6 +37,10 @@ button {
   box-shadow: var(--shadow); transition: .25s ease;
 }
 button:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.45) }
+button.active {
+  background: #394073;
+  border-color: #5d66a2;
+}
 
 .grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -87,8 +91,8 @@ button:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.
   animation: ethereal-animate 10s linear infinite;
 }
 
-/* Hybrid parıltısı - indi hibrid kartlar üçün istifadə olunur */
-.hybrid-card .card-glow {
+/* Ethereal Parıltısı */
+.r-ethereal .card-glow {
   position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: .25;
   border-radius: 18px;
   background: conic-gradient(from 0deg at 50% 50%, #fff0 0 20%, #7e57c2 20% 21%, #fff0 21% 40%, #26c6da 40% 41%, #fff0 41% 60%, #ffb300 60% 61%, #fff0 61% 80%, #ec407a 80% 81%, #fff0 81% 100%);
