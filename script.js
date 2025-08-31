@@ -24,9 +24,9 @@ function createCardElement(data) {
     
     <div class="stats-section visible" data-section-id="main-stats">
       <div class="stat-item"><b>Can</b><span>${data.stats.health}</span></div>
+      <div class="stat-item"><b>Qalxan</b><span>${data.stats.shield}</span></div>
       <div class="stat-item"><b>Hasar</b><span>${data.stats.damage}</span></div>
       <div class="stat-item"><b>S.B.H</b><span>${data.stats.sps}</span></div>
-      <div class="stat-item"><b>Qalxan</b><span>${data.stats.shield}</span></div>
       <div class="stat-item"><b>Saldırı Hızı</b><span>${data.stats.attackSpeed}</span></div>
       <div class="stat-item"><b>Gecikmə</b><span>${data.stats.delay}</span></div>
       <div class="stat-item"><b>Mana</b><span>${data.additionalStats.mana}</span></div>
