@@ -15,7 +15,8 @@
     "additionalStats": {
       "mana": "5",
       "range": "300",
-      "speed": "800"
+      "speed": "800",
+      "critical": "2%"
     }
   },
   {
@@ -34,7 +35,8 @@
     "additionalStats": {
       "mana": "8",
       "range": "800",
-      "speed": "1200"
+      "speed": "1200",
+      "critical": "5%"
     }
   },
   {
@@ -53,7 +55,8 @@
     "additionalStats": {
       "mana": "15",
       "range": "1500",
-      "speed": "900"
+      "speed": "900",
+      "critical": "8%"
     }
   },
   {
@@ -72,7 +75,8 @@
     "additionalStats": {
       "mana": "20",
       "range": "2000",
-      "speed": "1100"
+      "speed": "1100",
+      "critical": "10%"
     }
   },
   {
@@ -91,7 +95,8 @@
     "additionalStats": {
       "mana": "30",
       "range": "2500",
-      "speed": "1500"
+      "speed": "1500",
+      "critical": "15%"
     }
   },
   {
@@ -110,7 +115,8 @@
     "additionalStats": {
       "mana": "13",
       "range": "2000",
-      "speed": "1000"
+      "speed": "1000",
+      "critical": "8%"
     }
   }
 ]
