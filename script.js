@@ -33,16 +33,14 @@ function createCardElement(data) {
     </div>
     
     <div class="stats-section" data-section-id="additional-stats">
-      <div class="pill-group">
-        <span class="pill">Menzil: ${data.additionalStats.range}</span>
-        <span class="pill">Hız: ${data.additionalStats.speed}</span>
-        <span class="pill">Kritik Şansı: ${data.additionalStats.criticalChance}</span>
-        <span class="pill">Can Çalma Şansı: ${data.additionalStats.lifestealChance}</span>
-      </div>
+      <div class="stat-item"><b>Menzil</b><span>${data.additionalStats.range}</span></div>
+      <div class="stat-item"><b>Hız</b><span>${data.additionalStats.speed}</span></div>
+      <div class="stat-item"><b>Kritik Şansı</b><span>${data.additionalStats.criticalChance}</span></div>
+      <div class="stat-item"><b>Can Çalma Şansı</b><span>${data.additionalStats.lifestealChance}</span></div>
     </div>
     
     <div class="stats-section" data-section-id="trait">
-      <div class="trait">${data.trait}</div>
+      <div class="trait trait-center">${data.trait}</div>
     </div>
   `;
 
