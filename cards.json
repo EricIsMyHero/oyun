@@ -11,7 +11,7 @@
       "attackSpeed": "1.10s",
       "shield": "0"
     },
-    "trait": "<b>*Heyvan*<b> tipli kartlardan <b>-25%<b> daha az hasar alar.",
+    "trait": "<b>*Heyvan*</b> tipli kartlardan <b>-25%</b> daha az hasar alar.",
     "additionalStats": {
       "mana": "12",
       "range": "1000",
@@ -31,7 +31,7 @@
       "attackSpeed": "1.00s",
       "shield": "0"
     },
-    "trait": "<b>25%<b> şansla ekstra <b>+50%<b> Hasar verər, atışları qalxandan keçər.",
+    "trait": "<b>25%</b> şansla ekstra <b>+50%</b> Hasar verər, atışları qalxandan keçər.",
     "additionalStats": {
       "mana": "4",
       "range": "2500",
