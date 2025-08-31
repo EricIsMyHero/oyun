@@ -1,19 +1,15 @@
 // DOM Elementləri
-const hybridGlowBtn = document.getElementById('toggle-hybrid');
-const treeBtn = document.getElementById('toggle-tree');
-const tree = document.getElementById('tree');
+const filterButtons = document.querySelectorAll('.controls button');
 const cardsContainer = document.getElementById('cards');
+
+let allCardsData = []; // Bütün kart məlumatlarını saxlamaq üçün massiv
 
 // Kart yaratmaq üçün funksiya
 function createCardElement(data) {
   const card = document.createElement('article');
 
-  // Nadirlik və tip siniflərini əlavə et
   card.className = `card r-${data.rarity.toLowerCase()}`;
-  if (data.isHybrid) {
-    card.classList.add('hybrid-card');
-  }
-
+  
   const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
 
   card.innerHTML = `
@@ -21,7 +17,6 @@ function createCardElement(data) {
     <div class="head">
       <div class="name">${data.name}</div><span class="badge">${badgeText}</span>
     </div>
-    ${data.isHybrid ? '<div class="card-glow" aria-hidden="true"></div>' : ''}
     <div class="meta">
       <span class="pill">Hasar: ${data.stats.damage}</span><span class="pill">S.B.H: ${data.stats.sps}</span>
       <span class="pill">Saldırı Hızı: ${data.stats.attackSpeed}</span><span class="pill">Gecikmə: ${data.stats.delay}</span>
@@ -36,13 +31,21 @@ function createCardElement(data) {
     </div>
   `;
 
+  // Ethereal parıltısını əlavə et
+  if (data.rarity.toLowerCase() === 'ethereal') {
+    const glowDiv = document.createElement('div');
+    glowDiv.className = 'card-glow';
+    glowDiv.setAttribute('aria-hidden', 'true');
+    card.appendChild(glowDiv);
+  }
+
   return card;
 }
 
 // Kartları render edən funksiya
-function renderCards(cardData) {
+function renderCards(cardsToRender) {
   cardsContainer.innerHTML = '';
-  cardData.forEach(data => {
+  cardsToRender.forEach(data => {
     cardsContainer.appendChild(createCardElement(data));
   });
 }
@@ -54,24 +57,34 @@ async function fetchCards() {
     if (!response.ok) {
       throw new Error(`HTTP xətası! Status: ${response.status}`);
     }
-    const data = await response.json();
-    renderCards(data);
+    allCardsData = await response.json();
+    renderCards(allCardsData);
   } catch (error) {
     console.error('Məlumatları yükləmə zamanı xəta:', error);
     cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
   }
 }
 
-// Event Listeners
-hybridGlowBtn.addEventListener('click', () => {
-  const hybridGlows = document.querySelectorAll('.card-glow');
-  hybridGlows.forEach(glow => {
-    glow.classList.toggle('hidden');
-  });
-});
+// Filtrləmə funksiyası
+function filterCards(rarity) {
+  let filteredCards = allCardsData;
+  if (rarity !== 'all') {
+    filteredCards = allCardsData.filter(card => card.rarity.toLowerCase() === rarity);
+  }
+  renderCards(filteredCards);
+}
 
-treeBtn.addEventListener('click', () => {
-  tree.classList.toggle('hidden');
+// Event Listeners
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const rarity = button.id.split('-')[1];
+
+    // Aktiv düymə sinifini yenilə
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    filterCards(rarity);
+  });
 });
 
 // Səhifə yüklənərkən kartları çək və göstər
