@@ -10,12 +10,12 @@
       "damage": "20",
       "sps": "18",
       "attackSpeed": "1.10s",
-      "number": "1",
-      "delay": "-"
+      "delay": "-",
+      "mana": "12",
+      "number": "1"
     },
     "trait": "<b>*Heyvan*</b> tipli kartlardan <b>-25%</b> daha az hasar alar.",
     "additionalStats": {
-      "mana": "12",
       "range": "1000",
       "speed": "1150",
       "criticalChance": "15%",
@@ -33,12 +33,12 @@
       "damage": "20",
       "sps": "20",
       "attackSpeed": "1.00s",
-      "number": "1",
-      "delay": "-"
+      "delay": "-",
+      "mana": "4",
+      "number": "2"
     },
     "trait": "<b>25%</b> şansla ekstra <b>+50%</b> Hasar verər, atışları qalxandan keçər.",
     "additionalStats": {
-      "mana": "4",
       "range": "2500",
       "speed": "1000",
       "criticalChance": "5%",
@@ -52,15 +52,16 @@
     "isHybrid": false,
     "stats": {
       "health": "180",
+      "shield": "60",
       "damage": "15",
       "sps": "10",
       "attackSpeed": "1.00s",
       "delay": "-",
-      "shield": "60"
+      "mana": "8",
+      "number": "3"
     },
     "trait": "Hər 5 saniyədə bir <b>+5% Hız</b> bonusu.",
     "additionalStats": {
-      "mana": "8",
       "range": "800",
       "speed": "1200",
       "criticalChance": "5%",
@@ -74,15 +75,16 @@
     "isHybrid": false,
     "stats": {
       "health": "220",
+      "shield": "80",
       "damage": "25",
       "sps": "20",
       "attackSpeed": "0.90s",
       "delay": "-",
-      "shield": "80"
+      "mana": "15",
+      "number": "4"
     },
     "trait": "Düşmənə ziyan vurduqda <b>+2 Mana</b> qazanır.",
     "additionalStats": {
-      "mana": "15",
       "range": "1500",
       "speed": "900",
       "criticalChance": "8%",
@@ -96,15 +98,16 @@
     "isHybrid": false,
     "stats": {
       "health": "150",
+      "shield": "50",
       "damage": "40",
       "sps": "30",
       "attackSpeed": "0.60s",
       "delay": "-",
-      "shield": "50"
+      "mana": "20",
+      "number": "5"
     },
     "trait": "Hər 3-cü zərbə rəqibi <b>1s dondurur</b>.",
     "additionalStats": {
-      "mana": "20",
       "range": "2000",
       "speed": "1100",
       "criticalChance": "10%",
@@ -118,15 +121,16 @@
     "isHybrid": false,
     "stats": {
       "health": "300",
+      "shield": "120",
       "damage": "60",
       "sps": "40",
       "attackSpeed": "0.50s",
       "delay": "-",
-      "shield": "120"
+      "mana": "30",
+      "number": "6"
     },
     "trait": "Canı 50%-dən aşağı düşdükdə <b>+20% Hasar</b> bonusu alır.",
     "additionalStats": {
-      "mana": "30",
       "range": "2500",
       "speed": "1500",
       "criticalChance": "15%",
@@ -140,15 +144,16 @@
     "isHybrid": true,
     "stats": {
       "health": "200",
+      "shield": "60",
       "damage": "8x3",
       "sps": "18",
       "attackSpeed": "0,80s",
       "delay": "1,10s",
-      "shield": "60"
+      "mana": "13",
+      "number": "7"
     },
     "trait": "Hər vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.",
     "additionalStats": {
-      "mana": "13",
       "range": "2000",
       "speed": "1000",
       "criticalChance": "8%",
