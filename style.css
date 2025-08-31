@@ -58,17 +58,13 @@ button.active {
   opacity: .5; z-index: -1;
 }
 
-.head { display: flex; justify-content: space-between; margin-bottom: 10px; }
-.name { font-weight: 700; letter-spacing: .3px; }
-.badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b; }
-.meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
-.pill { font-size: 11px; padding: 4px 8px; border-radius: 999px; background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264; }
+.head { display: flex; justify-content: space-between; margin-bottom: 10px }
+.name { font-weight: 700; letter-spacing: .3px }
+.badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px }
+.pill { font-size: 13px; padding: 6px 10px; border-radius: 999px; background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264 }
 
-.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-.stat { background: #111636; border: 1px solid #252c59; border-radius: 12px; padding: 8px; }
-.stat b { display: block; font-size: 12px; color: #c6ceff; margin-bottom: 4px; }
-.stat span { font-size: 13px; }
-.trait { margin-top: 10px; font-size: 13px; color: #dfe6ff; }
+.trait { margin-top: 10px; font-size: 13px; color: #dfe6ff }
 
 /* Nadirlik temaları */
 .r-mundane  { box-shadow: 0 6px 28px color-mix(in oklab, var(--mundane) 35%, transparent); }
