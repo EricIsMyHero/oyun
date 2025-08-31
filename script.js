@@ -15,23 +15,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
 
     card.innerHTML = `
-      <div class="stripe"></div>
-      <div class="head">
-        <div class="name">${data.name}</div><span class="badge">${badgeText}</span>
-      </div>
-      <div class="meta">
-        <span class="pill">Can: ${data.stats.health}</span><span class="pill">Hasar: ${data.stats.damage}</span><span class="pill">S.B.H: ${data.stats.sps}</span>
-        <span class="pill">Saldırı Hızı: ${data.stats.attackSpeed}</span><span class="pill">Gecikmə: ${data.stats.delay}</span>
-        <span class="pill">Qalxan: ${data.stats.shield}</span>
-      </div>
-      <div class="trait">${data.trait}</div>
-      <div class="stats">
-        <div class="stat"><b>Mana</b><span>${data.additionalStats.mana}</span></div>
-        <div class="stat"><b>Menzil</b><span>${data.additionalStats.range}</span></div>
-        <div class="stat"><b>Hız</b><span>${data.additionalStats.speed}</span></div>
-        <div class="stat"><b>Kritik</b><span>${data.additionalStats.critical}</span></div>
-      </div>
-    `;
+    <div class="stripe"></div>
+    <div class="head">
+      <div class="name">${data.name}</div><span class="badge">${badgeText}</span>
+    </div>
+    <div class="meta">
+      <span class="pill">Can: ${data.stats.health}</span>
+      <span class="pill">Hasar: ${data.stats.damage}</span>
+      <span class="pill">S.B.H: ${data.stats.sps}</span>
+      <span class="pill">Saldırı Hızı: ${data.stats.attackSpeed}</span>
+      <span class="pill">Gecikmə: ${data.stats.delay}</span>
+      <span class="pill">Qalxan: ${data.stats.shield}</span>
+      <span class="pill">Mana: ${data.additionalStats.mana}</span>
+      <span class="pill">Menzil: ${data.additionalStats.range}</span>
+      <span class="pill">Hız: ${data.additionalStats.speed}</span>
+      <span class="pill">Kritik: ${data.additionalStats.critical}</span>
+    </div>
+    <div class="trait">${data.trait}</div>
+  `;
 
     // Ethereal parıltısını əlavə et
     if (data.rarity.toLowerCase() === 'ethereal') {
