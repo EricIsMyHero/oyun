@@ -1,22 +1,44 @@
 [
   {
-    "name": "Earthen Protector",
-    "type": ["İnsan"],
+    "name": "B-B",
+    "type": ["Heyvan"],
     "rarity": "Mundane",
     "isHybrid": false,
     "stats": {
-      "damage": "10",
-      "sps": "5",
-      "attackSpeed": "1.20s",
+      "health": "310",
+      "damage": "20",
+      "sps": "18",
+      "attackSpeed": "1.10s",
       "delay": "-",
-      "shield": "100"
+      "shield": "0"
     },
-    "trait": "Döyüş başladıqdan sonra 10 saniyə <b>+15% Qalxan</b>.",
+    "trait": "<b><Heyvan><b> tipli kartlardan <b>-25%<b> daha az hasar alar.",
     "additionalStats": {
-      "mana": "5",
-      "range": "300",
-      "speed": "800",
-      "critical": "2%"
+      "mana": "12",
+      "range": "1000",
+      "speed": "1150",
+      "critical": "15%"
+    }
+  },
+  {
+    "name": "Scrapy",
+    "type": ["Robot"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "stats": {
+      "health": "90",
+      "damage": "20",
+      "sps": "20",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "shield": "0"
+    },
+    "trait": "<b>25%<b> şansla ekstra <b>+50%<b> Hasar verər, atışları qalxandan keçər.",
+    "additionalStats": {
+      "mana": "4",
+      "range": "2500",
+      "speed": "1000",
+      "critical": "5%"
     }
   },
   {
