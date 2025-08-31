@@ -101,12 +101,12 @@ button.active {
 }
 
 /* Nadirlik temaları */
-.r-mundane  { box-shadow: 0 6px 28px color-mix(in oklab, var(--mundane) 35%, transparent) }
-.r-familiar { box-shadow: 0 6px 28px color-mix(in oklab, var(--familiar) 35%, transparent) }
-.r-arcane   { box-shadow: 0 6px 28px color-mix(in oklab, var(--arcane) 35%, transparent) }
-.r-mythic   { box-shadow: 0 6px 28px color-mix(in oklab, var(--mythic) 35%, transparent) }
-.r-legendary{ box-shadow: 0 6px 28px color-mix(in oklab, var(--legendary) 35%, transparent) }
-.r-ethereal { box-shadow: 0 6px 28px color-mix(in oklab, var(--ethereal) 35%, transparent) }
+.r-mundane  { box-shadow: 0 6px 28px rgba(204,204,204,0.35) }
+.r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35) }
+.r-arcane   { box-shadow: 0 6px 28px rgba(126,87,194,0.35) }
+.r-mythic   { box-shadow: 0 6px 28px rgba(229,57,53,0.35) }
+.r-legendary{ box-shadow: 0 6px 28px rgba(251,192,45,0.35) }
+.r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35) }
 
 /* Stripe (yuxarı rəng xətti) */
 .stripe { height: 6px; border-radius: 12px; margin: -14px -14px 10px; opacity: .9 }
