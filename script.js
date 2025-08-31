@@ -15,19 +15,19 @@ function createCardElement(data) {
   card.innerHTML = `
     <div class="stripe"></div>
     <div class="head">
-      <div class="name">${data.name}</div><span class="badge">${data.type}</span>
+      <div class="name">${data.name ?? ''}</div><span class="badge">${data.type ?? ''}</span>
     </div>
     ${data.isHybrid ? '<div class="hybrid" aria-hidden="true"></div>' : ''}
     <div class="meta">
-      <span class="pill">Hasar: ${data.stats.damage}</span><span class="pill">S.B.H: ${data.stats.sps}</span>
-      <span class="pill">Saldırı Hızı: ${data.stats.attackSpeed}</span><span class="pill">Gecikmə: ${data.stats.delay}</span>
-      <span class="pill">Qalxan: ${data.stats.shield}</span>
+      <span class="pill">Hasar: ${data.stats?.damage ?? '-'}</span><span class="pill">S.B.H: ${data.stats?.sps ?? '-'}</span>
+      <span class="pill">Saldırı Hızı: ${data.stats?.attackSpeed ?? '-'}</span><span class="pill">Gecikmə: ${data.stats?.delay ?? '-'}</span>
+      <span class="pill">Qalxan: ${data.stats?.shield ?? '-'}</span>
     </div>
-    <div class="trait">${data.trait}</div>
+    <div class="trait">${data.trait ?? ''}</div>
     <div class="stats">
-      <div class="stat"><b>Mana</b><span>${data.additionalStats.mana}</span></div>
-      <div class="stat"><b>Menzil</b><span>${data.additionalStats.range}</span></div>
-      <div class="stat"><b>Hız</b><span>${data.additionalStats.speed}</span></div>
+      <div class="stat"><b>Mana</b><span>${data.additionalStats?.mana ?? '-'}</span></div>
+      <div class="stat"><b>Menzil</b><span>${data.additionalStats?.range ?? '-'}</span></div>
+      <div class="stat"><b>Hız</b><span>${data.additionalStats?.speed ?? '-'}</span></div>
       ${data.rarity ? `
         <div class="stat rarity" title="${data.rarity}">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -35,7 +35,7 @@ function createCardElement(data) {
           </svg>
           ${data.rarity} Hibrid
         </div>` : `
-        <div class="stat"><b>Kritik</b><span>${data.additionalStats.critical}</span></div>
+        <div class="stat"><b>Kritik</b><span>${data.additionalStats?.critical ?? '-'}</span></div>
       `}
     </div>
   `;
@@ -45,6 +45,7 @@ function createCardElement(data) {
 
 // Kartları render edən funksiya
 function renderCards(cardData) {
+  if (!cardsContainer) return;
   cardsContainer.innerHTML = ''; // Köhnə kartları təmizlə
   cardData.forEach(data => {
     cardsContainer.appendChild(createCardElement(data));
@@ -53,6 +54,7 @@ function renderCards(cardData) {
 
 // JSON faylından məlumatları çəkən funksiya
 async function fetchCards() {
+  if (!cardsContainer) return;
   try {
     const response = await fetch('cards.json');
     if (!response.ok) {
@@ -67,16 +69,20 @@ async function fetchCards() {
 }
 
 // Event Listeners
-hybridGlowBtn.addEventListener('click', () => {
-  const hybridCards = document.querySelectorAll('.hybrid');
-  hybridCards.forEach(card => {
-    card.classList.toggle('hidden');
+if (hybridGlowBtn) {
+  hybridGlowBtn.addEventListener('click', () => {
+    const hybridCards = document.querySelectorAll('.hybrid');
+    hybridCards.forEach(card => {
+      card.classList.toggle('hidden');
+    });
   });
-});
+}
 
-treeBtn.addEventListener('click', () => {
-  tree.classList.toggle('hidden');
-});
+if (treeBtn && tree) {
+  treeBtn.addEventListener('click', () => {
+    tree.classList.toggle('hidden');
+  });
+}
 
 // Səhifə yüklənərkən kartları çək və göstər
 document.addEventListener('DOMContentLoaded', fetchCards);
