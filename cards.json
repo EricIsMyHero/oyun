@@ -107,8 +107,8 @@
     "stats": {
       "damage": "8x3",
       "sps": "18",
-      "attackSpeed": "0,80s",
-      "delay": "1,10s",
+      "attackSpeed": "0.80s",
+      "delay": "1.10s",
       "shield": "60"
     },
     "trait": "Hər vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.",
