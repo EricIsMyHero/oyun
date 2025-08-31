@@ -17,7 +17,8 @@
       "mana": "12",
       "range": "1000",
       "speed": "1150",
-      "critical": "15%"
+      "criticalChance": "15%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -38,7 +39,8 @@
       "mana": "4",
       "range": "2500",
       "speed": "1000",
-      "critical": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -47,6 +49,7 @@
     "rarity": "Familiar",
     "isHybrid": false,
     "stats": {
+      "health": "180",
       "damage": "15",
       "sps": "10",
       "attackSpeed": "1.00s",
@@ -58,7 +61,8 @@
       "mana": "8",
       "range": "800",
       "speed": "1200",
-      "critical": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "3%"
     }
   },
   {
@@ -67,6 +71,7 @@
     "rarity": "Arcane",
     "isHybrid": false,
     "stats": {
+      "health": "220",
       "damage": "25",
       "sps": "20",
       "attackSpeed": "0.90s",
@@ -78,7 +83,8 @@
       "mana": "15",
       "range": "1500",
       "speed": "900",
-      "critical": "8%"
+      "criticalChance": "8%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -87,6 +93,7 @@
     "rarity": "Mythic",
     "isHybrid": false,
     "stats": {
+      "health": "150",
       "damage": "40",
       "sps": "30",
       "attackSpeed": "0.60s",
@@ -98,7 +105,8 @@
       "mana": "20",
       "range": "2000",
       "speed": "1100",
-      "critical": "10%"
+      "criticalChance": "10%",
+      "lifestealChance": "5%"
     }
   },
   {
@@ -107,6 +115,7 @@
     "rarity": "Legendary",
     "isHybrid": false,
     "stats": {
+      "health": "300",
       "damage": "60",
       "sps": "40",
       "attackSpeed": "0.50s",
@@ -118,7 +127,8 @@
       "mana": "30",
       "range": "2500",
       "speed": "1500",
-      "critical": "15%"
+      "criticalChance": "15%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -127,10 +137,11 @@
     "rarity": "Ethereal",
     "isHybrid": true,
     "stats": {
+      "health": "200",
       "damage": "8x3",
       "sps": "18",
-      "attackSpeed": "0.80s",
-      "delay": "1.10s",
+      "attackSpeed": "0,80s",
+      "delay": "1,10s",
       "shield": "60"
     },
     "trait": "Hər vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.",
@@ -138,7 +149,8 @@
       "mana": "13",
       "range": "2000",
       "speed": "1000",
-      "critical": "8%"
+      "criticalChance": "8%",
+      "lifestealChance": "10%"
     }
   }
 ]
