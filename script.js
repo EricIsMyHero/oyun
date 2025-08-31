@@ -1,52 +1,10 @@
+// DOM Elementləri
 const hybridGlowBtn = document.getElementById('toggle-hybrid');
 const treeBtn = document.getElementById('toggle-tree');
 const tree = document.getElementById('tree');
 const cardsContainer = document.getElementById('cards');
 
-// Kart məlumatları (bu massiv artırıla bilər)
-const cardData = [
-  {
-    name: 'Skyhunter',
-    type: 'insan',
-    isHybrid: false,
-    rarity: null,
-    stats: {
-      damage: '22',
-      sps: '18',
-      attackSpeed: '0,70s',
-      delay: '-',
-      shield: '50'
-    },
-    trait: 'Uçan kartlara <b>+20% Hasar</b> bonusu.',
-    additionalStats: {
-      mana: '10',
-      range: '1,500',
-      speed: '1,000',
-      critical: '5%'
-    }
-  },
-  {
-    name: 'Bio Mech',
-    type: 'robot',
-    isHybrid: true,
-    rarity: 'Nadir',
-    stats: {
-      damage: '8x3',
-      sps: '18',
-      attackSpeed: '0,80s',
-      delay: '1,10s',
-      shield: '60'
-    },
-    trait: 'Hər vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.',
-    additionalStats: {
-      mana: '13',
-      range: '2,000',
-      speed: '1,000'
-    }
-  }
-];
-
-// Kart yaratma funksiyası
+// Kart yaratmaq üçün funksiya
 function createCardElement(data) {
   const card = document.createElement('article');
   card.className = `card t-${data.type}`;
@@ -86,13 +44,29 @@ function createCardElement(data) {
 }
 
 // Kartları render edən funksiya
-function renderCards() {
+function renderCards(cardData) {
+  cardsContainer.innerHTML = ''; // Köhnə kartları təmizlə
   cardData.forEach(data => {
     cardsContainer.appendChild(createCardElement(data));
   });
 }
 
-// Düymə hadisələri
+// JSON faylından məlumatları çəkən funksiya
+async function fetchCards() {
+  try {
+    const response = await fetch('cards.json');
+    if (!response.ok) {
+      throw new Error(`HTTP xətası! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    renderCards(data);
+  } catch (error) {
+    console.error('Məlumatları yükləmə zamanı xəta:', error);
+    cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
+  }
+}
+
+// Event Listeners
 hybridGlowBtn.addEventListener('click', () => {
   const hybridCards = document.querySelectorAll('.hybrid');
   hybridCards.forEach(card => {
@@ -104,5 +78,5 @@ treeBtn.addEventListener('click', () => {
   tree.classList.toggle('hidden');
 });
 
-// Səhifə yüklənərkən kartları göstər
-renderCards();
+// Səhifə yüklənərkən kartları çək və göstər
+document.addEventListener('DOMContentLoaded', fetchCards);
