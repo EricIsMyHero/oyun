@@ -35,7 +35,7 @@
       "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "4",
-      "number": "2"
+      "number": "1"
     },
     "trait": "<b>25%</b> şansla ekstra <b>+50%</b> Hasar verər, atışları qalxandan keçər.",
     "additionalStats": {
@@ -58,7 +58,7 @@
       "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "8",
-      "number": "3"
+      "number": "1"
     },
     "trait": "Hər 5 saniyədə bir <b>+5% Hız</b> bonusu.",
     "additionalStats": {
@@ -81,7 +81,7 @@
       "attackSpeed": "0.90s",
       "delay": "-",
       "mana": "15",
-      "number": "4"
+      "number": "1"
     },
     "trait": "Düşmənə ziyan vurduqda <b>+2 Mana</b> qazanır.",
     "additionalStats": {
@@ -104,7 +104,7 @@
       "attackSpeed": "0.60s",
       "delay": "-",
       "mana": "20",
-      "number": "5"
+      "number": "1"
     },
     "trait": "Hər 3-cü zərbə rəqibi <b>1s dondurur</b>.",
     "additionalStats": {
@@ -127,7 +127,7 @@
       "attackSpeed": "0.50s",
       "delay": "-",
       "mana": "30",
-      "number": "6"
+      "number": "1"
     },
     "trait": "Canı 50%-dən aşağı düşdükdə <b>+20% Hasar</b> bonusu alır.",
     "additionalStats": {
@@ -150,7 +150,7 @@
       "attackSpeed": "0,80s",
       "delay": "1,10s",
       "mana": "13",
-      "number": "7"
+      "number": "1"
     },
     "trait": "Hər vuruşdan sonra 3s <b>-5 Can/Zəhər</b>.",
     "additionalStats": {
