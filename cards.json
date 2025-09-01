@@ -10,12 +10,12 @@
       "shield": "0",
       "damage": "25",
       "sps": "23",
-      "attackSpeed": "1.10s",
+      "attackSpeed": "1,10s",
       "delay": "-",
       "mana": "3",
-      "number": "3"
+      "number": "1"
     },
-    "trait": "Hər <b>12</b> saniyə <b>+20%</b> Hız bonusu",
+    "trait": "<b>-12%</b> daha az hasar alar, <b>+20%</b> Hasar bonusu verər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1800",
@@ -34,12 +34,12 @@
       "shield": "0",
       "damage": "20",
       "sps": "18",
-      "attackSpeed": "1.10s",
+      "attackSpeed": "1,10s",
       "delay": "-",
       "mana": "12",
       "number": "1"
     },
-    "trait": "<b>*Heyvan*</b> tipli kartlardan <b>-60%</b> daha az hasar alar",
+    "trait": "<b>*Heyvan*</b> tipli kartlardan <b>-60%</b> daha az hasar alar.",
     "additionalStats": {
       "range": "1000",
       "speed": "1150",
@@ -58,12 +58,12 @@
       "shield": "0",
       "damage": "20",
       "sps": "20",
-      "attackSpeed": "1.00s",
+      "attackSpeed": "1,00s",
       "delay": "-",
       "mana": "4",
       "number": "1"
     },
-    "trait": "<b>25%</b> Şansla ekstra <b>+50%</b> Hasar verər, atışları qalxandan keçər",
+    "trait": "<b>25%</b> şansla ekstra <b>+50%</b> Hasar verər, atışları qalxandan keçər.",
     "additionalStats": {
       "range": "2500",
       "speed": "1000",
@@ -82,12 +82,12 @@
       "shield": "20",
       "damage": "16",
       "sps": "20",
-      "attackSpeed": "0.80s",
+      "attackSpeed": "0,80s",
       "delay": "-",
       "mana": "5",
       "number": "1"
     },
-    "trait": "Yanındakı kartlar ekstra <b>+12%</b> Saldırı hızı qazanar",
+    "trait": "Yaxındakı kartlara ekstra <b>+12%</b> Saldırı hızı qazanar.",
     "additionalStats": {
       "range": "2400",
       "speed": "1500",
@@ -103,20 +103,20 @@
     "isMulti": false,
     "stats": {
       "health": "70",
-      "shield": "5",
+      "shield": "50",
       "damage": "3x5",
       "sps": "15",
-      "attackSpeed": "0.30s",
-      "delay": "1.00s",
-      "mana": "50",
+      "attackSpeed": "0,30s",
+      "delay": "1,00s",
+      "mana": "8",
       "number": "1"
     },
-    "trait": "Hər bir sonrakı atışı ekstra <b>+40%</b> Hasar bonusu",
+    "trait": "Hər bir sonrakı atışa <b>+40%</b> Hasar bonusu.",
     "additionalStats": {
       "range": "3000",
       "speed": "1000",
       "criticalChance": "5%",
-      "lifestealChance": "5%"
+      "lifestealChance": "0%"
     }
   },
   {
@@ -127,17 +127,17 @@
     "isMulti": false,
     "stats": {
       "health": "900",
-      "shield": "10",
+      "shield": "0",
       "damage": "10",
-      "sps": "-",
-      "attackSpeed": "1.00s",
+      "sps": "10",
+      "attackSpeed": "1,00s",
       "delay": "-",
-      "mana": "0",
+      "mana": "9",
       "number": "1"
     },
-    "trait": "Toxunduğu kartları içinə çəkər, <b>-6 Can</b> hər saniyə",
+    "trait": "Toxunduğu kartlara igrip çıxar, <b>+6</b> Can hər saniyə yeniləmə verir.",
     "additionalStats": {
-      "range": "10",
+      "range": "1000",
       "speed": "800",
       "criticalChance": "0%",
       "lifestealChance": "0%"
@@ -145,26 +145,26 @@
   },
   {
     "name": "Henry",
-    "type": ["İnsan"],
+    "type": ["Heyvan"],
     "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "400",
-      "shield": "80",
-      "damage": "62",
-      "sps": "52",
-      "attackSpeed": "1.30s",
+      "shield": "0",
+      "damage": "80",
+      "sps": "62",
+      "attackSpeed": "1,30s",
       "delay": "-",
-      "mana": "0",
+      "mana": "10",
       "number": "1"
     },
-    "trait": "<b>*Heyvan*</b> tipli kartlara ekstra <b>+25%</b> Hasar bonusu",
+    "trait": "<b>*Heyvan*</b> tipli kartlara ekstra <b>+25%</b> Hasar bonusu.",
     "additionalStats": {
       "range": "1200",
       "speed": "800",
       "criticalChance": "5%",
-      "lifestealChance": "5%"
+      "lifestealChance": "0%"
     }
   },
   {
@@ -175,19 +175,19 @@
     "isMulti": false,
     "stats": {
       "health": "200",
-      "shield": "4",
+      "shield": "0",
       "damage": "4x5",
       "sps": "14",
-      "attackSpeed": "0.35s",
-      "delay": "1.45s",
-      "mana": "0",
+      "attackSpeed": "0,35s",
+      "delay": "1,45s",
+      "mana": "6",
       "number": "1"
     },
-    "trait": "Atışları rəqibləri 2 saniyəlik zəvəşlədə",
+    "trait": "Atışları rəqibləri 2 saniyəlik zəhərləyər, yavaşladar.",
     "additionalStats": {
       "range": "4000",
       "speed": "1000",
-      "criticalChance": "15%",
+      "criticalChance": "5%",
       "lifestealChance": "0%"
     }
   },
@@ -198,21 +198,21 @@
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": "210 (Qalaya)",
-      "shield": "75",
-      "damage": "39",
+      "health": "210",
+      "shield": "90 (Qalxaya)",
+      "damage": "75",
       "sps": "39",
-      "attackSpeed": "1.90s",
+      "attackSpeed": "1,90s",
       "delay": "-",
-      "mana": "90",
+      "mana": "10",
       "number": "1"
     },
-    "trait": "Gələn bütün böyükləri bloklayar (Mənzil: 2000 Qalaya)",
+    "trait": "Gələn bütün gücləri bloklayar (Mənzil: 20,000 Karo).",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "15%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -223,20 +223,20 @@
     "isMulti": false,
     "stats": {
       "health": "170",
-      "shield": "3x5",
-      "damage": "15",
+      "shield": "30",
+      "damage": "3x5",
       "sps": "15",
-      "attackSpeed": "0.20s",
-      "delay": "1.50s",
-      "mana": "50",
+      "attackSpeed": "0,20s",
+      "delay": "1,50s",
+      "mana": "5",
       "number": "1"
     },
-    "trait": "<b>*İnsan*</b> tipli kartlara ekstra <b>+20%</b> Hasar bonusu",
+    "trait": "<b>*İnsan*</b> tipli kartlara ekstra <b>+20%</b> Hasar bonusu.",
     "additionalStats": {
       "range": "3600",
       "speed": "1000",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -247,15 +247,15 @@
     "isMulti": false,
     "stats": {
       "health": "200",
-      "shield": "5x9",
-      "damage": "45",
-      "sps": "35",
-      "attackSpeed": "0.20s",
-      "delay": "1.10s",
-      "mana": "30",
+      "shield": "50",
+      "damage": "5x9",
+      "sps": "45",
+      "attackSpeed": "0,20s",
+      "delay": "1,10s",
+      "mana": "10",
       "number": "1"
     },
-    "trait": "Vuruşları qalxandan keçər, 5 saniyə <b>+100%</b> Hasar bonusu",
+    "trait": "Vuruşları qalxandan keçər, <b>5%</b> şansla <b>+200%</b> Hasar bonusu.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -271,15 +271,15 @@
     "isMulti": true,
     "stats": {
       "health": "230",
-      "shield": "20",
+      "shield": "0",
       "damage": "20",
       "sps": "20",
-      "attackSpeed": "1.00s",
+      "attackSpeed": "1,00s",
       "delay": "-",
-      "mana": "0",
+      "mana": "9",
       "number": "1"
     },
-    "trait": "Hər saniyə +1 Can yeniləmə, öləndə 2 yerə parçalanar",
+    "trait": "Hər saniyə <b>+1</b> Can yeniləmə, öləndə 2 yerə parçalanar.",
     "additionalStats": {
       "range": "1000",
       "speed": "850",
@@ -293,20 +293,20 @@
       "isHybrid": false,
       "stats": {
         "health": "100",
-        "shield": "10",
-        "damage": "13",
+        "shield": "0",
+        "damage": "10",
         "sps": "13",
-        "attackSpeed": "0.80s",
+        "attackSpeed": "0,80s",
         "delay": "-",
         "mana": "-",
         "number": "2"
       },
-      "trait": "Öləndə partlayaraq 50 Hasar verər",
+      "trait": "Öləndə partlayaraq 50 Hasar verər.",
       "additionalStats": {
         "range": "1000",
         "speed": "1000",
-        "criticalChance": "-",
-        "lifestealChance": "-"
+        "criticalChance": "5%",
+        "lifestealChance": "0%"
       }
     }
   },
@@ -318,20 +318,20 @@
     "isMulti": false,
     "stats": {
       "health": "90",
-      "shield": "50",
-      "damage": "33",
+      "shield": "0",
+      "damage": "50",
       "sps": "33",
-      "attackSpeed": "1.50s",
+      "attackSpeed": "1,50s",
       "delay": "-",
-      "mana": "0",
+      "mana": "5",
       "number": "1"
     },
-    "trait": "Bütün saniyə görünməz olaraq <b>+10%</b> Hiz bonusu qazanar",
+    "trait": "İlk 15 saniyə görünməz olar, <b>+70%</b> Hasar bonusu qazanar.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -342,19 +342,19 @@
     "isMulti": false,
     "stats": {
       "health": "50",
-      "shield": "25",
-      "damage": "28",
+      "shield": "20",
+      "damage": "25",
       "sps": "28",
-      "attackSpeed": "0.90s",
+      "attackSpeed": "0,90s",
       "delay": "-",
-      "mana": "20",
-      "number": "2"
+      "mana": "8",
+      "number": "1"
     },
-    "trait": "Biri ölərsə digəri <b>+200%</b> Can və <b>+100%</b> Hasar bonusu qazanar",
+    "trait": "Biri Hasar diğəri <b>+100%</b> Can verər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1150",
-      "criticalChance": "0%",
+      "criticalChance": "5%",
       "lifestealChance": "0%"
     }
   },
@@ -366,44 +366,44 @@
     "isMulti": false,
     "stats": {
       "health": "120",
-      "shield": "2x20",
-      "damage": "40",
+      "shield": "30",
+      "damage": "2x20",
       "sps": "40",
-      "attackSpeed": "0.25s",
-      "delay": "0.75s",
-      "mana": "30",
+      "attackSpeed": "0,25s",
+      "delay": "0,75s",
+      "mana": "8",
       "number": "1"
     },
-    "trait": "Hər rəqib kartı öldürdükdə <b>+5%</b> Hiz qazanar (Max:50%)",
+    "trait": "Hər rəqib öldürdükdə <b>+5%</b> Hız qazanar (Max: 50%).",
     "additionalStats": {
       "range": "2750",
       "speed": "1000",
       "criticalChance": "10%",
-      "lifestealChance": "10%"
+      "lifestealChance": "0%"
     }
   },
   {
-    "name": "Snakyx",
+    "name": "Snaky",
     "type": ["Heyvan"],
     "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "50",
-      "shield": "2x9",
-      "damage": "17",
+      "shield": "0",
+      "damage": "15",
       "sps": "17",
-      "attackSpeed": "0.90s",
+      "attackSpeed": "0,90s",
       "delay": "-",
-      "mana": "0",
+      "mana": "4",
       "number": "2"
     },
-    "trait": "Vuruşları qalxandan keçər, vuruşları ekstra <b>2x4</b> Hasar verər",
+    "trait": "Vuruşları qalxandan keçər, vuruşları ekstra <b>2x4</b> Hasar verər.",
     "additionalStats": {
-      "range": "4000",
+      "range": "2050",
       "speed": "1100",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -414,20 +414,20 @@
     "isMulti": false,
     "stats": {
       "health": "120",
-      "shield": "15x3",
-      "damage": "15",
+      "shield": "120",
+      "damage": "15x3",
       "sps": "15",
-      "attackSpeed": "0.20s",
-      "delay": "1.60s",
-      "mana": "120",
+      "attackSpeed": "0,20s",
+      "delay": "1,60s",
+      "mana": "9",
       "number": "1"
     },
-    "trait": "Uçan kartlara ekstra <b>+33%</b> Hasar bonusu",
+    "trait": "Uçan kartlara ekstra <b>+33%</b> Hasar bonusu.",
     "additionalStats": {
       "range": "4000",
       "speed": "1050",
-      "criticalChance": "0%",
-      "lifestealChance": "10%"
+      "criticalChance": "10%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -438,44 +438,44 @@
     "isMulti": false,
     "stats": {
       "health": "40",
-      "shield": "70",
+      "shield": "0",
       "damage": "70",
       "sps": "70",
-      "attackSpeed": "0.60s",
+      "attackSpeed": "0,60s",
       "delay": "-",
-      "mana": "0",
+      "mana": "3",
       "number": "5"
     },
-    "trait": "Vuruşları ekstra <b>10x3</b> Hasar verər, vuruş etdikdən sonra ölər",
+    "trait": "Vuruşları ekstra <b>10x3</b> Hasar verər, vuruş etdikdən sonra ölər.",
     "additionalStats": {
-      "range": "3800",
+      "range": "800",
       "speed": "1150",
       "criticalChance": "0%",
       "lifestealChance": "0%"
     }
   },
   {
-    "name": "Hailey",
+    "name": "Halley",
     "type": ["İnsan"],
     "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "250",
-      "shield": "45",
-      "damage": "30",
+      "shield": "80",
+      "damage": "45",
       "sps": "30",
-      "attackSpeed": "1.50s",
+      "attackSpeed": "1,50s",
       "delay": "-",
-      "mana": "80",
+      "mana": "11",
       "number": "1"
     },
-    "trait": "<b>360°</b> Hasar, hər vuruşda <b>+1%</b> Şansı qazanar",
+    "trait": "<b>360°</b> Hasar verər, Hasar verdikcə <b>+1%</b> Kritik Şansı qazanar.",
     "additionalStats": {
       "range": "1100",
       "speed": "900",
-      "criticalChance": "0%",
-      "lifestealChance": "10%"
+      "criticalChance": "10%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -485,21 +485,21 @@
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": "110",
+      "health": "10",
       "shield": "6",
       "damage": "7",
       "sps": "7",
-      "attackSpeed": "0.90s",
+      "attackSpeed": "0,90s",
       "delay": "-",
-      "mana": "0",
+      "mana": "8",
       "number": "10"
     },
-    "trait": "Hər <b>0,4</b> saniyə arxında çıxar",
+    "trait": "Hər <b>0,4</b> saniyədə arxasında çıxar.",
     "additionalStats": {
-      "range": "800",
+      "range": "900",
       "speed": "1100",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -510,15 +510,15 @@
     "isMulti": false,
     "stats": {
       "health": "110",
-      "shield": "14",
-      "damage": "6",
+      "shield": "40",
+      "damage": "14",
       "sps": "6",
-      "attackSpeed": "2.40s",
+      "attackSpeed": "2,40s",
       "delay": "-",
-      "mana": "40",
+      "mana": "4",
       "number": "1"
     },
-    "trait": "<b>3,500</b> Karo getdikdə atışı geri qaytar",
+    "trait": "<b>3,500</b> Karo getdikdə atışları geri qayıdar.",
     "additionalStats": {
       "range": "3500",
       "speed": "1000",
@@ -528,26 +528,26 @@
   },
   {
     "name": "PhewPhew",
-    "type": ["Heyvan"],
+    "type": ["İnsan"],
     "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "180",
-      "shield": "2x8",
-      "damage": "16",
+      "shield": "50",
+      "damage": "2x8",
       "sps": "16",
-      "attackSpeed": "0.50s",
-      "delay": "0.25s",
-      "mana": "50",
+      "attackSpeed": "0,50s",
+      "delay": "0,25s",
+      "mana": "6",
       "number": "1"
     },
-    "trait": "Qalxana ekstra <b>+100%</b> Hasar bonusu",
+    "trait": "Qalxana ekstra <b>+100%</b> Hasar bonusu.",
     "additionalStats": {
       "range": "2700",
       "speed": "1100",
       "criticalChance": "5%",
-      "lifestealChance": "5%"
+      "lifestealChance": "0%"
     }
   },
   {
@@ -558,20 +558,20 @@
     "isMulti": false,
     "stats": {
       "health": "400",
-      "shield": "48",
-      "damage": "27",
+      "shield": "0",
+      "damage": "48",
       "sps": "27",
-      "attackSpeed": "1.80s",
+      "attackSpeed": "1,80s",
       "delay": "-",
-      "mana": "0",
+      "mana": "11",
       "number": "1"
     },
-    "trait": "Hər 2-ci atışda rəqibin hızını <b>1,2</b> saniyəlik <b>-33%</b> azaldar",
+    "trait": "Hər <b>2-ci</b> atışda rəqibin hızını <b>1,2</b> saniyəlik <b>-33%</b> azaldar.",
     "additionalStats": {
       "range": "4000",
       "speed": "900",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -582,20 +582,20 @@
     "isMulti": false,
     "stats": {
       "health": "440",
-      "shield": "22",
-      "damage": "20",
+      "shield": "60",
+      "damage": "22",
       "sps": "20",
-      "attackSpeed": "1.10s",
+      "attackSpeed": "1,10s",
       "delay": "-",
-      "mana": "60",
+      "mana": "9",
       "number": "1"
     },
-    "trait": "<b>3x3</b> yanındakı kartlar ekstra <b>-20%</b> daha az hasar alar",
+    "trait": "<b>3x3</b> yaxındakı kartlara ekstra <b>20%</b> daha az hasar alar.",
     "additionalStats": {
       "range": "1200",
       "speed": "900",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -606,20 +606,20 @@
     "isMulti": false,
     "stats": {
       "health": "270",
-      "shield": "18x3",
-      "damage": "12",
+      "shield": "50",
+      "damage": "18x3",
       "sps": "12",
-      "attackSpeed": "0.25s",
-      "delay": "0.75s",
-      "mana": "50",
+      "attackSpeed": "0,25s",
+      "delay": "0,75s",
+      "mana": "11",
       "number": "1"
     },
-    "trait": "Hər hasar aldıqda <b>+10%</b> Qalxan qazanar (Max:150)",
+    "trait": "Hər Hasar aldıqda <b>+10</b> Qalxan qazanar (Max: 150).",
     "additionalStats": {
-      "range": "1000",
+      "range": "1200",
       "speed": "950",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "10%",
+      "lifestealChance": "25%"
     }
   },
   {
@@ -630,17 +630,17 @@
     "isMulti": false,
     "stats": {
       "health": "130",
-      "shield": "5",
-      "damage": "11",
+      "shield": "20",
+      "damage": "5",
       "sps": "11",
-      "attackSpeed": "0.45s",
+      "attackSpeed": "0,95s",
       "delay": "-",
-      "mana": "20",
+      "mana": "1",
       "number": "1"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər",
+    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
     "additionalStats": {
-      "range": "1200",
+      "range": "1000",
       "speed": "950",
       "criticalChance": "0%",
       "lifestealChance": "0%"
