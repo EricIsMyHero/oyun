@@ -1,0 +1,271 @@
+[
+  {
+    "name": "Hammies",
+    "type": ["Heyvan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "70", "shield": "0", "damage": "25", "sps": "23", "attackSpeed": "1,10s", "delay": "-", "mana": "3", "number": "1" },
+    "trait": "<b>-12%</b> daha az hasar alar, <b>+20%</b> Hasar bonusu verər.",
+    "additionalStats": { "range": "1000", "speed": "1800", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "B-B",
+    "type": ["Heyvan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "310", "shield": "0", "damage": "20", "sps": "18", "attackSpeed": "1,10s", "delay": "-", "mana": "12", "number": "1" },
+    "trait": "<b>*Heyvan*</b> tipli kartlardan <b>-60%</b> daha az hasar alar.",
+    "additionalStats": { "range": "1000", "speed": "1150", "criticalChance": "15%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Scrapy",
+    "type": ["Robot"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "90", "shield": "0", "damage": "20", "sps": "20", "attackSpeed": "1,00s", "delay": "-", "mana": "4", "number": "1" },
+    "trait": "<b>25%</b> şansla ekstra <b>+50%</b> Hasar verər, atışları qalxandan keçər.",
+    "additionalStats": { "range": "2500", "speed": "1000", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Turbo",
+    "type": ["Robot"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "80", "shield": "20", "damage": "16", "sps": "20", "attackSpeed": "0,80s", "delay": "-", "mana": "5", "number": "1" },
+    "trait": "Yaxındakı kartlara ekstra <b>+12%</b> Saldırı hızı qazanar.",
+    "additionalStats": { "range": "2400", "speed": "1500", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Srox",
+    "type": ["Uzaylı"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "70", "shield": "50", "damage": "3x5", "sps": "15", "attackSpeed": "0,30s", "delay": "1,00s", "mana": "8", "number": "1" },
+    "trait": "Hər bir sonrakı atışa <b>+40%</b> Hasar bonusu.",
+    "additionalStats": { "range": "3000", "speed": "1000", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Slimey",
+    "type": ["Uzaylı"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "900", "shield": "0", "damage": "10", "sps": "10", "attackSpeed": "1,00s", "delay": "-", "mana": "9", "number": "1" },
+    "trait": "Toxunduğu kartlara igrip çıxar, <b>+6</b> Can hər saniyə yeniləmə verir.",
+    "additionalStats": { "range": "1000", "speed": "800", "criticalChance": "0%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Henry",
+    "type": ["Heyvan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "400", "shield": "0", "damage": "80", "sps": "62", "attackSpeed": "1,30s", "delay": "-", "mana": "10", "number": "1" },
+    "trait": "<b>*Heyvan*</b> tipli kartlara ekstra <b>+25%</b> Hasar bonusu.",
+    "additionalStats": { "range": "1200", "speed": "800", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Hydra",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "200", "shield": "0", "damage": "4x5", "sps": "14", "attackSpeed": "0,35s", "delay": "1,45s", "mana": "6", "number": "1" },
+    "trait": "Atışları rəqibləri 2 saniyəlik zəhərləyər, yavaşladar.",
+    "additionalStats": { "range": "4000", "speed": "1000", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Blocker",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "210", "shield": "90 (Qalxaya)", "damage": "75", "sps": "39", "attackSpeed": "1,90s", "delay": "-", "mana": "10", "number": "1" },
+    "trait": "Gələn bütün gücləri bloklayar (Mənzil: 20,000 Karo).",
+    "additionalStats": { "range": "1000", "speed": "1100", "criticalChance": "15%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Fen",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "170", "shield": "30", "damage": "3x5", "sps": "15", "attackSpeed": "0,20s", "delay": "1,50s", "mana": "5", "number": "1" },
+    "trait": "<b>*İnsan*</b> tipli kartlara ekstra <b>+20%</b> Hasar bonusu.",
+    "additionalStats": { "range": "3600", "speed": "1000", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Ben",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "200", "shield": "50", "damage": "5x9", "sps": "45", "attackSpeed": "0,20s", "delay": "1,10s", "mana": "10", "number": "1" },
+    "trait": "Vuruşları qalxandan keçər, <b>5%</b> şansla <b>+200%</b> Hasar bonusu.",
+    "additionalStats": { "range": "1000", "speed": "1000", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Freak",
+    "type": ["Uzaylı"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": true,
+    "stats": { "health": "230", "shield": "0", "damage": "20", "sps": "20", "attackSpeed": "1,00s", "delay": "-", "mana": "9", "number": "1" },
+    "trait": "Hər saniyə <b>+1</b> Can yeniləmə, öləndə 2 yerə parçalanar.",
+    "additionalStats": { "range": "1000", "speed": "850", "criticalChance": "5%", "lifestealChance": "0%" },
+    "secondForm": {
+      "name": "Mini Freaks",
+      "type": ["Uzaylı"],
+      "rarity": "Mundane",
+      "isHybrid": false,
+      "stats": { "health": "100", "shield": "0", "damage": "10", "sps": "13", "attackSpeed": "0,80s", "delay": "-", "mana": "-", "number": "2" },
+      "trait": "Öləndə partlayaraq 50 Hasar verər.",
+      "additionalStats": { "range": "1000", "speed": "1000", "criticalChance": "5%", "lifestealChance": "0%" }
+    }
+  },
+  {
+    "name": "Nightprowler",
+    "type": ["Ruh"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "90", "shield": "0", "damage": "50", "sps": "33", "attackSpeed": "1,50s", "delay": "-", "mana": "5", "number": "1" },
+    "trait": "İlk 15 saniyə görünməz olar, <b>+70%</b> Hasar bonusu qazanar.",
+    "additionalStats": { "range": "1000", "speed": "1000", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Twins",
+    "type": ["Ruh"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "50", "shield": "20", "damage": "25", "sps": "28", "attackSpeed": "0,90s", "delay": "-", "mana": "8", "number": "1" },
+    "trait": "Biri Hasar diğəri <b>+100%</b> Can verər.",
+    "additionalStats": { "range": "1000", "speed": "1150", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Bethe",
+    "type": ["Heyvan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "120", "shield": "30", "damage": "2x20", "sps": "40", "attackSpeed": "0,25s", "delay": "0,75s", "mana": "8", "number": "1" },
+    "trait": "Hər rəqib öldürdükdə <b>+5%</b> Hız qazanar (Max: 50%).",
+    "additionalStats": { "range": "2750", "speed": "1000", "criticalChance": "10%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Snaky",
+    "type": ["Heyvan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "50", "shield": "0", "damage": "15", "sps": "17", "attackSpeed": "0,90s", "delay": "-", "mana": "4", "number": "2" },
+    "trait": "Vuruşları qalxandan keçər, vuruşları ekstra <b>2x4</b> Hasar verər.",
+    "additionalStats": { "range": "2050", "speed": "1100", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Soldier",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "120", "shield": "120", "damage": "15x3", "sps": "15", "attackSpeed": "0,20s", "delay": "1,60s", "mana": "9", "number": "1" },
+    "trait": "Uçan kartlara ekstra <b>+33%</b> Hasar bonusu.",
+    "additionalStats": { "range": "4000", "speed": "1050", "criticalChance": "10%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Bees",
+    "type": ["Heyvan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "40", "shield": "0", "damage": "70", "sps": "70", "attackSpeed": "0,60s", "delay": "-", "mana": "3", "number": "5" },
+    "trait": "Vuruşları ekstra <b>10x3</b> Hasar verər, vuruş etdikdən sonra ölər.",
+    "additionalStats": { "range": "800", "speed": "1150", "criticalChance": "0%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Halley",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "250", "shield": "80", "damage": "45", "sps": "30", "attackSpeed": "1,50s", "delay": "-", "mana": "11", "number": "1" },
+    "trait": "<b>360°</b> Hasar verər, Hasar verdikcə <b>+1%</b> Kritik Şansı qazanar.",
+    "additionalStats": { "range": "1100", "speed": "900", "criticalChance": "10%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Angels",
+    "type": ["Varlıq"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "10", "shield": "6", "damage": "7", "sps": "7", "attackSpeed": "0,90s", "delay": "-", "mana": "8", "number": "10" },
+    "trait": "Hər <b>0,4</b> saniyədə arxasında çıxar.",
+    "additionalStats": { "range": "900", "speed": "1100", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "BOOMera",
+    "type": ["Varlıq"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "110", "shield": "40", "damage": "14", "sps": "6", "attackSpeed": "2,40s", "delay": "-", "mana": "4", "number": "1" },
+    "trait": "<b>3,500</b> Karo getdikdə atışları geri qayıdar.",
+    "additionalStats": { "range": "3500", "speed": "1000", "criticalChance": "5%", "lifestealChance": "5%" }
+  },
+  {
+    "name": "PhewPhew",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "180", "shield": "50", "damage": "2x8", "sps": "16", "attackSpeed": "0,50s", "delay": "0,25s", "mana": "6", "number": "1" },
+    "trait": "Qalxana ekstra <b>+100%</b> Hasar bonusu.",
+    "additionalStats": { "range": "2700", "speed": "1100", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Chrono Mage",
+    "type": ["İnsan"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "400", "shield": "0", "damage": "48", "sps": "27", "attackSpeed": "1,80s", "delay": "-", "mana": "11", "number": "1" },
+    "trait": "Hər <b>2-ci</b> atışda rəqibin hızını <b>1,2</b> saniyəlik <b>-33%</b> azaldar.",
+    "additionalStats": { "range": "4000", "speed": "900", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Aegis Guard",
+    "type": ["Varlıq"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "440", "shield": "60", "damage": "22", "sps": "20", "attackSpeed": "1,10s", "delay": "-", "mana": "9", "number": "1" },
+    "trait": "<b>3x3</b> yaxındakı kartlara ekstra <b>20%</b> daha az hasar alar.",
+    "additionalStats": { "range": "1200", "speed": "900", "criticalChance": "5%", "lifestealChance": "0%" }
+  },
+  {
+    "name": "Ironjaw",
+    "type": ["Robot"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "270", "shield": "50", "damage": "18x3", "sps": "12", "attackSpeed": "0,25s", "delay": "0,75s", "mana": "11", "number": "1" },
+    "trait": "Hər Hasar aldıqda <b>+10</b> Qalxan qazanar (Max: 150).",
+    "additionalStats": { "range": "1200", "speed": "950", "criticalChance": "10%", "lifestealChance": "25%" }
+  },
+  {
+    "name": "M-Manager",
+    "type": ["Robot"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": { "health": "130", "shield": "20", "damage": "5", "sps": "11", "attackSpeed": "0,95s", "delay": "-", "mana": "10", "number": "1" },
+    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "additionalStats": { "range": "1000", "speed": "950", "criticalChance": "0%", "lifestealChance": "0%" }
+  }
+]
