@@ -4,6 +4,7 @@
     "type": ["Heyvan"],
     "rarity": "Mundane",
     "isHybrid": false,
+    "isMulti": false,
     "stats": {
       "health": "310",
       "shield": "0",
@@ -27,6 +28,7 @@
     "type": ["Robot"],
     "rarity": "Mundane",
     "isHybrid": false,
+    "isMulti": false,
     "stats": {
       "health": "90",
       "shield": "0",
@@ -50,6 +52,7 @@
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "isHybrid": false,
+    "isMulti": false,
     "stats": {
       "health": "240",
       "shield": "10",
@@ -73,6 +76,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "isHybrid": false,
+    "isMulti": false,
     "stats": {
       "health": "50",
       "shield": "50",
@@ -96,6 +100,7 @@
     "type": ["İnsan"],
     "rarity": "Mythic",
     "isHybrid": false,
+    "isMulti": false,
     "stats": {
       "health": "140",
       "shield": "60",
@@ -119,6 +124,7 @@
     "type": ["Uzaylı"],
     "rarity": "Legendary",
     "isHybrid": false,
+    "isMulti": false,
     "stats": {
       "health": "320",
       "shield": "0",
@@ -142,6 +148,7 @@
     "type": ["Robot", "Heyvan"],
     "rarity": "Ethereal",
     "isHybrid": true,
+    "isMulti": false,
     "stats": {
       "health": "200",
       "shield": "60",
@@ -158,6 +165,53 @@
       "speed": "1000",
       "criticalChance": "8%",
       "lifestealChance": "10%"
+    }
+  },
+  {
+    "name": "Freak",
+    "type": ["Uzaylı"],
+    "rarity": "Familiar",
+    "isHybrid": false,
+    "isMulti": true,
+    "stats": {
+      "health": "280",
+      "shield": "0",
+      "damage": "20",
+      "sps": "20",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "9",
+      "number": "1"
+    },
+    "trait": "Hər saniyə +1 Can yeniləmə, öləndə 2 yerə parçalanar.",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1850",
+      "criticalChance": "0%",
+      "lifestealChance": "5%"
+    },
+    "secondForm": {
+      "name": "Mini Freaks",
+      "type": ["Uzaylı"],
+      "rarity": "Familiar",
+      "isHybrid": false,
+      "stats": {
+        "health": "100",
+        "shield": "0",
+        "damage": "10",
+        "sps": "13",
+        "attackSpeed": "0.80s",
+        "delay": "-",
+        "mana": "-",
+        "number": "2"
+      },
+      "trait": "Öləndə partlayaraq 50 Hasar verər.",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "-",
+        "lifestealChance": "-"
+      }
     }
   }
 ]
