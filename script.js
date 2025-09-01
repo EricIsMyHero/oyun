@@ -2,8 +2,6 @@
 const filterButtons = document.querySelectorAll('.controls button');
 const cardsContainer = document.getElementById('cards');
 
-let allCardsData = [];
-
 // Kart yaratmaq üçün əsas funksiya
 function createCardElement(data) {
   const cardContainer = document.createElement('article');
@@ -107,33 +105,42 @@ function createCardContent(data) {
 // Kartları render edən funksiya
 function renderCards(cardsToRender) {
   cardsContainer.innerHTML = '';
+  if (cardsToRender.length === 0) {
+      cardsContainer.innerHTML = '<p>Bu endərlikdə kart tapılmadı.</p>';
+      return;
+  }
   cardsToRender.forEach(data => {
     cardsContainer.appendChild(createCardElement(data));
   });
 }
 
-// JSON faylından məlumatları çəkən funksiya
-async function fetchCards() {
+// Məlumatları endərliyə görə çəkən və göstərən funksiya
+async function fetchAndRender(rarity) {
+  cardsContainer.innerHTML = '<p>Yüklənir...</p>';
   try {
-    const response = await fetch('cards.json');
-    if (!response.ok) {
-      throw new Error(`HTTP xətası! Status: ${response.status}`);
+    let cardsData = [];
+    if (rarity === 'all') {
+      const rarities = ['mundane', 'familiar', 'arcane', 'mythic', 'legendary', 'ethereal'];
+      const fetchPromises = rarities.map(r => 
+        fetch(`${r}.json`).then(res => {
+          if (!res.ok) throw new Error(`${r}.json yüklənmədi`);
+          return res.json();
+        })
+      );
+      const results = await Promise.all(fetchPromises);
+      cardsData = results.flat(); // Bütün massivləri birinə birləşdirir
+    } else {
+      const response = await fetch(`${rarity}.json`);
+      if (!response.ok) {
+        throw new Error(`HTTP xətası! Status: ${response.status}`);
+      }
+      cardsData = await response.json();
     }
-    allCardsData = await response.json();
-    renderCards(allCardsData);
+    renderCards(cardsData);
   } catch (error) {
     console.error('Məlumatları yükləmə zamanı xəta:', error);
     cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
   }
-}
-
-// Filtrləmə funksiyası
-function filterCards(rarity) {
-  let filteredCards = allCardsData;
-  if (rarity !== 'all') {
-    filteredCards = allCardsData.filter(card => card.rarity.toLowerCase() === rarity);
-  }
-  renderCards(filteredCards);
 }
 
 // Event Listeners
@@ -142,9 +149,9 @@ filterButtons.forEach(button => {
     const rarity = button.id.split('-')[1];
     filterButtons.forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
-    filterCards(rarity);
+    fetchAndRender(rarity);
   });
 });
 
-// Səhifə yüklənərkən kartları çək və göstər
-document.addEventListener('DOMContentLoaded', fetchCards);
+// Səhifə yüklənərkən bütün kartları çək və göstər
+document.addEventListener('DOMContentLoaded', () => fetchAndRender('all'));
