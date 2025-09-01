@@ -141,7 +141,7 @@ button.active {
   display: flex; 
   justify-content: space-between; 
   margin-bottom: 10px;
-  margin-top: -14px; /* Bu sətr mətnin yerdəyişməsini düzəltmək üçün əlavə edildi */
+  margin-top: -14px; /* Bu sətir mətnin düzgün yerləşməsi üçün əlavə edildi */
 }
 .name { font-weight: 700; letter-spacing: .3px }
 .badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b }
@@ -167,7 +167,7 @@ button.active {
 .stat-item span { font-size: 13px }
 .trait-center { text-align: center }
 
-/* color-mix istifadə edilən yerlərdə əvəzləmələr: */
+/* Nadirliyə uyğun kölgələr */
 .r-mundane { box-shadow: 0 6px 28px rgba(204,204,204,0.35); }
 .r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35); }
 .r-arcane { box-shadow: 0 6px 28px rgba(126,87,194,0.35); }
@@ -175,14 +175,14 @@ button.active {
 .r-legendary { box-shadow: 0 6px 28px rgba(251,192,45,0.35); }
 .r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35); }
 
-/* Kart adını rəngləndirən yeni stil */
+/* Kart adını rəngləndirən stillər */
 .r-mundane .name { color: var(--mundane) }
 .r-familiar .name { color: var(--familiar) }
 .r-arcane .name { color: var(--arcane) }
 .r-mythic .name { color: var(--mythic) }
 .r-legendary .name { color: var(--legendary) }
 
-/* Gradient text effekti alınmayan brauzerlər üçün ehtiyat rəng */
+/* Gradient text effekti üçün stil */
 .r-ethereal .name {
   color: var(--ethereal);
   background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
@@ -193,7 +193,7 @@ button.active {
   animation: ethereal-animate 10s linear infinite;
 }
 
-/* Ethereal Parıltısi */
+/* Ethereal parıltısı */
 .r-ethereal .card-glow {
   position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: .25;
   border-radius: 18px;
