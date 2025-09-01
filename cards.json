@@ -635,7 +635,7 @@
       "sps": "11",
       "attackSpeed": "0,95s",
       "delay": "-",
-      "mana": "1",
+      "mana": "10",
       "number": "1"
     },
     "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
