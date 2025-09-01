@@ -17,7 +17,7 @@
     },
     "trait": "<b>-12%</b> daha az hasar alar, <b>+20%</b> Hasar bonusu verər.",
     "additionalStats": {
-      "range": 1000,
+      "range": 1200,
       "speed": 1800,
       "criticalChance": "5%",
       "lifestealChance": "0%"
