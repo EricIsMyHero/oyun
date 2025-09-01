@@ -7,10 +7,10 @@ let allCardsData = [];
 // Kart yaratmaq üçün funksiya
 function createCardElement(data) {
   const card = document.createElement('article');
-  card.className = `card r-${data.rarity.toLowerCase()}`;
+  card.className = `card r-${(data.rarity || '').toLowerCase()}`;
   
   // Ethereal parıltısını əlavə et (kartın hər iki tərəfində görünmək üçün)
-  if (data.rarity.toLowerCase() === 'ethereal') {
+  if ((data.rarity || '').toLowerCase() === 'ethereal') {
     const glowDiv = document.createElement('div');
     glowDiv.className = 'card-glow';
     glowDiv.setAttribute('aria-hidden', 'true');
@@ -18,7 +18,7 @@ function createCardElement(data) {
   }
 
   // İki tərəfli kart üçün əlavə konteyner
-  if (data.isMulti) {
+  if (data.isMulti && data.secondForm) {
     card.classList.add('card-flip-container');
     const cardInner = document.createElement('div');
     cardInner.className = 'card-inner';
@@ -38,6 +38,8 @@ function createCardElement(data) {
     flipButton.addEventListener('click', () => {
       card.classList.toggle('is-flipped');
     });
+    flipButton.setAttribute('title', 'Kartı çevir');
+    flipButton.innerText = '⇄';
     card.appendChild(flipButton);
   } else {
     // Tək tərəfli kart
@@ -51,11 +53,24 @@ function createCardElement(data) {
 // Kartın iç məzmununu yaradan köməkçi funksiya
 function createCardContent(data) {
   const content = document.createElement('div');
-  const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
+  // type array mövcudluğunu yoxla
+  let badgeText = '';
+  if (data.isHybrid && Array.isArray(data.type) && data.type.length > 1) {
+    badgeText = `${data.type[0]}/${data.type[1]}`;
+  } else if (Array.isArray(data.type) && data.type.length > 0) {
+    badgeText = data.type[0];
+  } else {
+    badgeText = '';
+  }
+
+  // stats və additionalStats yoxla
+  const stats = data.stats || {};
+  const additionalStats = data.additionalStats || {};
+
   content.innerHTML = `
     <div class="stripe"></div>
     <div class="head">
-      <div class="name">${data.name}</div><span class="badge">${badgeText}</span>
+      <div class="name">${data.name || ''}</div><span class="badge">${badgeText}</span>
     </div>
     <div class="card-tabs">
       <button class="active" data-section="main-stats">Əsas</button>
@@ -64,25 +79,25 @@ function createCardContent(data) {
     </div>
     
     <div class="stats-section visible" data-section-id="main-stats">
-      <div class="stat-item"><b>Can</b><span>${data.stats.health}</span></div>
-      <div class="stat-item"><b>Qalxan</b><span>${data.stats.shield}</span></div>
-      <div class="stat-item"><b>Hasar</b><span>${data.stats.damage}</span></div>
-      <div class="stat-item"><b>S.B.H</b><span>${data.stats.sps}</span></div>
-      <div class="stat-item"><b>Saldırı Hızı</b><span>${data.stats.attackSpeed}</span></div>
-      <div class="stat-item"><b>Gecikmə</b><span>${data.stats.delay}</span></div>
-      <div class="stat-item"><b>Mana</b><span>${data.stats.mana}</span></div>
-      <div class="stat-item"><b>Say</b><span>${data.stats.number}</span></div>
+      <div class="stat-item"><b>Can</b><span>${stats.health ?? '-'}</span></div>
+      <div class="stat-item"><b>Qalxan</b><span>${stats.shield ?? '-'}</span></div>
+      <div class="stat-item"><b>Hasar</b><span>${stats.damage ?? '-'}</span></div>
+      <div class="stat-item"><b>S.B.H</b><span>${stats.sps ?? '-'}</span></div>
+      <div class="stat-item"><b>Saldırı Hızı</b><span>${stats.attackSpeed ?? '-'}</span></div>
+      <div class="stat-item"><b>Gecikmə</b><span>${stats.delay ?? '-'}</span></div>
+      <div class="stat-item"><b>Mana</b><span>${stats.mana ?? '-'}</span></div>
+      <div class="stat-item"><b>Say</b><span>${stats.number ?? '-'}</span></div>
     </div>
     
     <div class="stats-section" data-section-id="additional-stats">
-      <div class="stat-item"><b>Menzil</b><span>${data.additionalStats.range}</span></div>
-      <div class="stat-item"><b>Hız</b><span>${data.additionalStats.speed}</span></div>
-      <div class="stat-item"><b>Kritik Şansı</b><span>${data.additionalStats.criticalChance}</span></div>
-      <div class="stat-item"><b>Can Çalma Şansı</b><span>${data.additionalStats.lifestealChance}</span></div>
+      <div class="stat-item"><b>Menzil</b><span>${additionalStats.range ?? '-'}</span></div>
+      <div class="stat-item"><b>Hız</b><span>${additionalStats.speed ?? '-'}</span></div>
+      <div class="stat-item"><b>Kritik Şansı</b><span>${additionalStats.criticalChance ?? '-'}</span></div>
+      <div class="stat-item"><b>Can Çalma Şansı</b><span>${additionalStats.lifestealChance ?? '-'}</span></div>
     </div>
     
     <div class="stats-section" data-section-id="trait">
-      <div class="trait trait-center">${data.trait}</div>
+      <div class="trait trait-center">${data.trait || '-'}</div>
     </div>
   `;
 
@@ -132,7 +147,7 @@ async function fetchCards() {
 function filterCards(rarity) {
   let filteredCards = allCardsData;
   if (rarity !== 'all') {
-    filteredCards = allCardsData.filter(card => card.rarity.toLowerCase() === rarity);
+    filteredCards = allCardsData.filter(card => (card.rarity || '').toLowerCase() === rarity);
   }
   renderCards(filteredCards);
 }
