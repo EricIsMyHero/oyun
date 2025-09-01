@@ -1,6 +1,6 @@
 [
   {
-    "name": "Hammies",
+    "name": "Hamm",
     "type": ["Heyvan"],
     "rarity": "Mundane",
     "isHybrid": false,
@@ -23,3 +23,28 @@
       "lifestealChance": "0%"
     }
   },
+ {
+    "name": "M-M",
+    "type": ["Robot"],
+    "rarity": "Mundane",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "130",
+      "shield": "20",
+      "damage": "5",
+      "sps": "11",
+      "attackSpeed": "0,95s",
+      "delay": "-",
+      "mana": "10",
+      "number": "1"
+    },
+    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "950",
+      "criticalChance": "0%",
+      "lifestealChance": "0%"
+    }
+  }
+]
