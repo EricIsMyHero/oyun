@@ -350,7 +350,7 @@
       "mana": "13",
       "number": "1"
     },
-    "trait": "Eyn anda 5 rəqibi yavaşladar",
+    "trait": "Eyni anda 5 rəqibi yavaşladar",
     "additionalStats": {
       "range": "2500",
       "speed": "900",
@@ -374,7 +374,7 @@
       "mana": "4",
       "number": "1"
     },
-    "trait": "Hər <b>-4</b>cü atışdan sonra 3 saniyəlik <b>+80%</b> Saldırı Hızı qazanar",
+    "trait": "Hər <b>4</b>-cü atışdan sonra 3 saniyəlik <b>+80%</b> Saldırı Hızı qazanar",
     "additionalStats": {
       "range": "2500",
       "speed": "1000",
@@ -431,7 +431,7 @@
     }
   },
   {
-    "name": "Frostmaiw",
+    "name": "Frostmaw",
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "isHybrid": false,
@@ -503,7 +503,7 @@
     }
   },
   {
-    "name": "Venomsnake",
+    "name": "Venomspike",
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "isHybrid": false,
@@ -527,7 +527,7 @@
     }
   },
   {
-    "name": "Stargazer",
+    "name": "Starcaller",
     "type": ["Varlıq"],
     "rarity": "Familiar",
     "isHybrid": false,
