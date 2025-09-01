@@ -46,94 +46,94 @@
     }
   },
   {
-    "name": "Whisperwind",
+    "name": "Albert",
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "isHybrid": false,
     "stats": {
-      "health": "180",
-      "shield": "60",
-      "damage": "15",
-      "sps": "10",
-      "attackSpeed": "1.00s",
-      "delay": "-",
-      "mana": "8",
-      "number": "1"
-    },
-    "trait": "Hər 5 saniyədə bir <b>+5% Hız</b> bonusu.",
-    "additionalStats": {
-      "range": "800",
-      "speed": "1200",
-      "criticalChance": "5%",
-      "lifestealChance": "3%"
-    }
-  },
-  {
-    "name": "Arcane Golem",
-    "type": ["Robot"],
-    "rarity": "Arcane",
-    "isHybrid": false,
-    "stats": {
-      "health": "220",
-      "shield": "80",
-      "damage": "25",
-      "sps": "20",
-      "attackSpeed": "0.90s",
+      "health": "240",
+      "shield": "10",
+      "damage": "90",
+      "sps": "73",
+      "attackSpeed": "1.70s",
       "delay": "-",
       "mana": "15",
       "number": "1"
     },
-    "trait": "Düşmənə ziyan vurduqda <b>+2 Mana</b> qazanır.",
+    "trait": "<b>*İnsan*</b> tipli kartlara <b>+10%</b> Hasar bonusu.",
     "additionalStats": {
-      "range": "1500",
+      "range": "1200",
       "speed": "900",
-      "criticalChance": "8%",
+      "criticalChance": "5%",
       "lifestealChance": "0%"
     }
   },
   {
-    "name": "Shadow Weaver",
-    "type": ["Ruh"],
+    "name": "Arcanyx",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "isHybrid": false,
+    "stats": {
+      "health": "50",
+      "shield": "50",
+      "damage": "15",
+      "sps": "14",
+      "attackSpeed": "1.10s",
+      "delay": "-",
+      "mana": "9",
+      "number": "1"
+    },
+    "trait": "Atışları kartlardan keçər və sonda partlayaraq <b>+200%</b> Hasar verər, yaxındakı kartlara hər <b>5</b> saniyədə <b>+8</b> can verər.",
+    "additionalStats": {
+      "range": "2100",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
+    }
+  },
+  {
+    "name": "Stacy",
+    "type": ["İnsan"],
     "rarity": "Mythic",
     "isHybrid": false,
     "stats": {
-      "health": "150",
-      "shield": "50",
-      "damage": "40",
-      "sps": "30",
-      "attackSpeed": "0.60s",
+      "health": "140",
+      "shield": "60",
+      "damage": "4x40",
+      "sps": "80",
+      "attackSpeed": "2.40s",
       "delay": "-",
       "mana": "20",
       "number": "1"
     },
-    "trait": "Hər 3-cü zərbə rəqibi <b>1s dondurur</b>.",
+    "trait": "Atışları rəqib kartlara ekstra <b>3x10</b> Yanma Hasarı verər.",
     "additionalStats": {
-      "range": "2000",
-      "speed": "1100",
-      "criticalChance": "10%",
-      "lifestealChance": "5%"
+      "range": "2500",
+      "speed": "1400",
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
-    "name": "Cosmic Dragon",
+    "name": "UnTouch",
     "type": ["Uzaylı"],
     "rarity": "Legendary",
     "isHybrid": false,
     "stats": {
-      "health": "300",
-      "shield": "120",
-      "damage": "60",
+      "health": "320",
+      "shield": "0",
+      "damage": "56",
       "sps": "40",
-      "attackSpeed": "0.50s",
+      "attackSpeed": "1.40s",
       "delay": "-",
-      "mana": "30",
+      "mana": "18",
       "number": "1"
     },
-    "trait": "Canı 50%-dən aşağı düşdükdə <b>+20% Hasar</b> bonusu alır.",
+    "trait": "Canı hər <b>20%</b> azaldıqda <b>3</b> saniyəlik ölümsüz olar və ilk vuruşu ekstra <b>+200%</b> Hasar verər.",
     "additionalStats": {
-      "range": "2500",
-      "speed": "1500",
-      "criticalChance": "15%",
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "0%",
       "lifestealChance": "0%"
     }
   },
