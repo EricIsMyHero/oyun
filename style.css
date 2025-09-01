@@ -183,7 +183,7 @@ button.active {
   animation: ethereal-animate 10s linear infinite;
 }
 
-/* Ethereal Parıltısı */
+/* Ethereal Parıltısi */
 .r-ethereal .card-glow {
   position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: .25;
   border-radius: 18px;
