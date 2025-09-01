@@ -9,9 +9,50 @@ function createCardElement(data) {
   const card = document.createElement('article');
   card.className = `card r-${data.rarity.toLowerCase()}`;
   
-  const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
+  // Ethereal parıltısını əlavə et (kartın hər iki tərəfində görünmək üçün)
+  if (data.rarity.toLowerCase() === 'ethereal') {
+    const glowDiv = document.createElement('div');
+    glowDiv.className = 'card-glow';
+    glowDiv.setAttribute('aria-hidden', 'true');
+    card.appendChild(glowDiv);
+  }
 
-  card.innerHTML = `
+  // İki tərəfli kart üçün əlavə konteyner
+  if (data.isMulti) {
+    card.classList.add('card-flip-container');
+    const cardInner = document.createElement('div');
+    cardInner.className = 'card-inner';
+
+    const cardFront = createCardContent(data);
+    cardFront.classList.add('card-front');
+    
+    const cardBack = createCardContent(data.secondForm);
+    cardBack.classList.add('card-back');
+
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    card.appendChild(cardInner);
+
+    const flipButton = document.createElement('button');
+    flipButton.className = 'flip-button';
+    flipButton.addEventListener('click', () => {
+      card.classList.toggle('is-flipped');
+    });
+    card.appendChild(flipButton);
+  } else {
+    // Tək tərəfli kart
+    const singleCard = createCardContent(data);
+    card.appendChild(singleCard);
+  }
+
+  return card;
+}
+
+// Kartın iç məzmununu yaradan köməkçi funksiya
+function createCardContent(data) {
+  const content = document.createElement('div');
+  const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
+  content.innerHTML = `
     <div class="stripe"></div>
     <div class="head">
       <div class="name">${data.name}</div><span class="badge">${badgeText}</span>
@@ -45,35 +86,23 @@ function createCardElement(data) {
     </div>
   `;
 
-  // Ethereal parıltısını əlavə et
-  if (data.rarity.toLowerCase() === 'ethereal') {
-    const glowDiv = document.createElement('div');
-    glowDiv.className = 'card-glow';
-    glowDiv.setAttribute('aria-hidden', 'true');
-    card.appendChild(glowDiv);
-  }
-
   // Kart içindəki düymələrə funksionallıq əlavə et
-  const cardButtons = card.querySelectorAll('.card-tabs button');
+  const cardButtons = content.querySelectorAll('.card-tabs button');
   cardButtons.forEach(button => {
     button.addEventListener('click', () => {
       const sectionId = button.dataset.section;
       
-      // Bütün düymələrdən "active" sinifini sil
       cardButtons.forEach(btn => btn.classList.remove('active'));
-      // Kliklənən düyməyə "active" sinifi əlavə et
       button.classList.add('active');
 
-      // Bütün bölmələri gizlət
-      card.querySelectorAll('.stats-section').forEach(section => {
+      content.querySelectorAll('.stats-section').forEach(section => {
         section.classList.remove('visible');
       });
-      // Müvafiq bölməni göstər
-      card.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
+      content.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
     });
   });
 
-  return card;
+  return content;
 }
 
 // Kartları render edən funksiya
