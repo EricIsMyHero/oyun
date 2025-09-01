@@ -122,9 +122,17 @@ async function fetchAndRender(rarity) {
     if (rarity === 'all') {
       const rarities = ['mundane', 'familiar', 'arcane', 'mythic', 'legendary', 'ethereal'];
       const fetchPromises = rarities.map(r => 
-        fetch(`${r}.json`).then(res => {
-          if (!res.ok) throw new Error(`${r}.json yüklənmədi`);
-          return res.json();
+        fetch(`${r}.json`).then(async res => {
+          if (!res.ok) {
+            if (res.status === 404) {
+              console.warn(`${r}.json tapılmadı, bu endərlik ötürülür.`);
+              return []; // Fayl tapılmasa, boş massiv qaytar
+            }
+            throw new Error(`${r}.json yüklənmədi`);
+          }
+          const text = await res.text();
+          console.log(`'${r}.json' faylından gələn xam məzmun:`, text); // Xam mətni konsola yazdır
+          return text ? JSON.parse(text) : []; // Yalnız məzmun varsa, parse et
         })
       );
       const results = await Promise.all(fetchPromises);
@@ -132,9 +140,17 @@ async function fetchAndRender(rarity) {
     } else {
       const response = await fetch(`${rarity}.json`);
       if (!response.ok) {
-        throw new Error(`HTTP xətası! Status: ${response.status}`);
+        if (response.status === 404) {
+          console.warn(`${rarity}.json tapılmadı.`);
+          cardsData = [];
+        } else {
+          throw new Error(`HTTP xətası! Status: ${response.status}`);
+        }
+      } else {
+        const text = await response.text();
+        console.log(`'${rarity}.json' faylından gələn xam məzmun:`, text); // Xam mətni konsola yazdır
+        cardsData = text ? JSON.parse(text) : []; // Yalnız məzmun varsa, parse et
       }
-      cardsData = await response.json();
     }
     renderCards(cardsData);
   } catch (error) {
