@@ -7,15 +7,15 @@
     "isMulti": false,
     "stats": {
       "health": "70",
-      "shield": "25",
-      "damage": "23",
-      "sps": "18",
+      "shield": "0",
+      "damage": "25",
+      "sps": "23",
       "attackSpeed": "1.10s",
       "delay": "-",
-      "mana": "1",
+      "mana": "3",
       "number": "3"
     },
-    "trait": "Hər 12 saniyə +20% Hiz bonusu",
+    "trait": "Hər <b>12</b> saniyə <b>+20%</b> Hız bonusu",
     "additionalStats": {
       "range": "1000",
       "speed": "1800",
@@ -31,8 +31,8 @@
     "isMulti": false,
     "stats": {
       "health": "310",
-      "shield": "20",
-      "damage": "18",
+      "shield": "0",
+      "damage": "20",
       "sps": "18",
       "attackSpeed": "1.10s",
       "delay": "-",
@@ -43,8 +43,8 @@
     "additionalStats": {
       "range": "1000",
       "speed": "1150",
-      "criticalChance": "0%",
-      "lifestealChance": "15%"
+      "criticalChance": "15%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -55,7 +55,7 @@
     "isMulti": false,
     "stats": {
       "health": "90",
-      "shield": "20",
+      "shield": "0",
       "damage": "20",
       "sps": "20",
       "attackSpeed": "1.00s",
@@ -79,20 +79,20 @@
     "isMulti": false,
     "stats": {
       "health": "80",
-      "shield": "16",
-      "damage": "20",
-      "sps": "-",
+      "shield": "20",
+      "damage": "16",
+      "sps": "20",
       "attackSpeed": "0.80s",
       "delay": "-",
-      "mana": "20",
+      "mana": "5",
       "number": "1"
     },
     "trait": "Yanındakı kartlar ekstra <b>+12%</b> Saldırı hızı qazanar",
     "additionalStats": {
       "range": "2400",
       "speed": "1500",
-      "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticalChance": "5%",
+      "lifestealChance": "0%"
     }
   },
   {
@@ -122,7 +122,7 @@
   {
     "name": "Slimey",
     "type": ["Uzaylı"],
-    "rarity": "Familiar",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -146,7 +146,7 @@
   {
     "name": "Henry",
     "type": ["İnsan"],
-    "rarity": "Familiar",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -170,7 +170,7 @@
   {
     "name": "Hydra",
     "type": ["İnsan"],
-    "rarity": "Mythic",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -218,7 +218,7 @@
   {
     "name": "Fen",
     "type": ["İnsan"],
-    "rarity": "Familiar",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -266,7 +266,7 @@
   {
     "name": "Freak",
     "type": ["Uzaylı"],
-    "rarity": "Familiar",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": true,
     "stats": {
@@ -289,7 +289,7 @@
     "secondForm": {
       "name": "Mini Freaks",
       "type": ["Uzaylı"],
-      "rarity": "Familiar",
+      "rarity": "Mundane",
       "isHybrid": false,
       "stats": {
         "health": "100",
@@ -313,7 +313,7 @@
   {
     "name": "Nightprowler",
     "type": ["Ruh"],
-    "rarity": "Legendary",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -337,7 +337,7 @@
   {
     "name": "Twins",
     "type": ["Ruh"],
-    "rarity": "Arcane",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -361,7 +361,7 @@
   {
     "name": "Bethe",
     "type": ["Heyvan"],
-    "rarity": "Mythic",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -385,7 +385,7 @@
   {
     "name": "Snakyx",
     "type": ["Heyvan"],
-    "rarity": "Mythic",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -409,7 +409,7 @@
   {
     "name": "Soldier",
     "type": ["İnsan"],
-    "rarity": "Ethereal",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -433,7 +433,7 @@
   {
     "name": "Bees",
     "type": ["Heyvan"],
-    "rarity": "Legendary",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -457,7 +457,7 @@
   {
     "name": "Hailey",
     "type": ["İnsan"],
-    "rarity": "Legendary",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -480,8 +480,8 @@
   },
   {
     "name": "Angels",
-    "type": ["Uzaylı"],
-    "rarity": "Arcane",
+    "type": ["Varlıq"],
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -505,7 +505,7 @@
   {
     "name": "BOOMera",
     "type": ["Varlıq"],
-    "rarity": "Arcane",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -529,7 +529,7 @@
   {
     "name": "PhewPhew",
     "type": ["Heyvan"],
-    "rarity": "Mythic",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -553,7 +553,7 @@
   {
     "name": "Chrono Mage",
     "type": ["İnsan"],
-    "rarity": "Legendary",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -577,7 +577,7 @@
   {
     "name": "Aegis Guard",
     "type": ["Varlıq"],
-    "rarity": "Legendary",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -601,7 +601,7 @@
   {
     "name": "Ironjaw",
     "type": ["Robot"],
-    "rarity": "Mythic",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -625,7 +625,7 @@
   {
     "name": "M-Manager",
     "type": ["Robot"],
-    "rarity": "Ethereal",
+    "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
