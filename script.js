@@ -7,7 +7,7 @@ function createCardElement(data) {
   const cardContainer = document.createElement('article');
   // Əsas class-ları əlavə et: həm flip, həm də card
   cardContainer.className = `card-flip-container card r-${data.rarity.toLowerCase()}`;
-  
+   
   if (data.isMulti) {
     const cardInner = document.createElement('div');
     cardInner.className = 'card-inner';
