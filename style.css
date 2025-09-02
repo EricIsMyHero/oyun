@@ -167,6 +167,7 @@ button.active {
 .r-arcane { box-shadow: 0 6px 28px rgba(126,87,194,0.35); }
 .r-mythic { box-shadow: 0 6px 28px rgba(229,57,53,0.35); }
 .r-legendary { box-shadow: 0 6px 28px rgba(251,192,45,0.35); }
+.r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35); }
 
 /* Stripe (yuxarı rəng xətti) */
 .stripe { height: 6px; border-radius: 12px; margin: -14px -14px 10px; opacity: .9 }
@@ -175,11 +176,6 @@ button.active {
 .r-arcane .stripe { background: var(--arcane) }
 .r-mythic .stripe { background: var(--mythic) }
 .r-legendary .stripe { background: var(--legendary) }
-.r-ethereal .stripe {
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
-  background-size: 600% 100%;
-  animation: ethereal-animate 10s linear infinite;
-}
 
 /* Kart adını rəngləndirən yeni stil */
 .r-mundane .name { color: var(--mundane) }
@@ -188,20 +184,4 @@ button.active {
 .r-mythic .name { color: var(--mythic) }
 .r-legendary .name { color: var(--legendary) }
 
-/* Gradient text effekti alınmayan brauzerlər üçün ehtiyat rəng */
-.r-ethereal .name {
-  color: var(--ethereal);
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 600% 100%;
-  animation: ethereal-animate 10s linear infinite;
-}
-
 .hidden { display: none!important }
-@keyframes ethereal-animate {
-  0% { background-position: 0% 50% }
-  50% { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
-}
