@@ -65,7 +65,7 @@ function createCardContent(data) {
         <div class="stats-section visible" data-section-id="main-stats">
       <div class="stat-item"><b>Can <i class="fa-solid fa-heart"></i></b><span>${data.stats.health}</span></div>
       <div class="stat-item"><b>Qalxan <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield}</span></div>
-      <div class="stat-item"><b>Hasar <i class="fa-solid fa-sword"></i></b><span>${data.stats.damage}</span></div>
+      <div class="stat-item"><b>Hasar <i class="fa-solid fa-swords"></i></b><span>${data.stats.damage}</span></div>
       <div class="stat-item"><b>S.B.H <i class="fa-solid fa-bolt"></i></b><span>${data.stats.sps}</span></div>
       <div class="stat-item"><b>Saldırı Hızı <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed}</span></div>
       <div class="stat-item"><b>Gecikmə <i class="fa-solid fa-clock"></i></b><span>${data.stats.delay}</span></div>
