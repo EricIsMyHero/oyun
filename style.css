@@ -200,21 +200,3 @@ button.active {
   background-size: 600% 100%;
   animation: ethereal-animate 10s linear infinite;
 }
-
-/* Ethereal Parıltısi */
-.r-ethereal .card-glow {
-  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: .25;
-  border-radius: 18px;
-  background: conic-gradient(from 0deg at 50% 50%, #fff0 0 20%, #7e57c2 20% 21%, #fff0 21% 40%, #26c6da 40% 41%, #fff0 41% 60%, #ffb300 60% 61%, #fff0 61% 80%, #ec407a 80% 81%, #fff0 81% 100%);
-  animation: spin 8s linear infinite;
-}
-.hidden { display: none!important }
-
-@keyframes spin {
-  to { transform: rotate(1turn) }
-}
-@keyframes ethereal-animate {
-  0% { background-position: 0% 50% }
-  50% { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
-}
