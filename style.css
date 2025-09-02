@@ -23,7 +23,7 @@ body {
   font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
 }
 
-.wrap { max-width: 1200px; margin: 32px auto; padding: 16px }
+.wrap { max-width: 1200px; margin: 32px auto; padding: 32px 16px; }
 header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 18px }
 h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
 .hint { color: var(--muted); font-size: 14px }
@@ -43,15 +43,16 @@ button.active {
 
 .grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
+  gap: 24px;
 }
 
 /* Əsas kart konteyneri */
 .card-container {
-  position: relative; /* Bu sətir düymənin kartın içində qalmasını təmin edir */
+  position: relative;
   width: 100%;
-  height: 320px; /* Bütün kartlar üçün sabit hündürlük */
+  height: 320px;
   perspective: 1000px;
+  margin-bottom: 32px;
 }
 .card-container:hover { transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.5) }
 
@@ -77,7 +78,7 @@ button.active {
   border-radius: 14px;
   background: var(--card);
   border: 1px solid #2a2f57;
-  padding: 14px;
+  padding: 24px 14px 14px 14px;
   box-shadow: var(--shadow);
 }
 .card-back {
@@ -92,7 +93,7 @@ button.active {
   border-radius: 14px;
   background: var(--card);
   border: 1px solid #2a2f57;
-  padding: 14px;
+  padding: 24px 14px 14px 14px;
   box-shadow: var(--shadow);
   transition: transform .25s ease, box-shadow .25s ease;
 }
@@ -139,7 +140,7 @@ button.active {
 .head { display: flex; justify-content: space-between; margin-bottom: 10px }
 .name { font-weight: 700; letter-spacing: .3px }
 .badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b }
-.card-tabs { display: flex; justify-content: center; margin-bottom: 8px; gap: 8px }
+.card-tabs { display: flex; justify-content: center; margin-bottom: 8px; gap: 16px; }
 .card-tabs button {
   background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264;
   font-size: 11px; padding: 6px 12px; border-radius: 12px;
@@ -170,7 +171,14 @@ button.active {
 .r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35); }
 
 /* Stripe (yuxarı rəng xətti) */
-.stripe { height: 6px; border-radius: 12px; margin: -14px -14px 10px; opacity: .9 }
+.stripe { 
+  height: 6px; 
+  border-radius: 12px 12px 0 0; 
+  margin: -14px -14px 10px -14px; 
+  opacity: .9;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+}
 .r-mundane .stripe { background: var(--mundane) }
 .r-familiar .stripe { background: var(--familiar) }
 .r-arcane .stripe { background: var(--arcane) }
@@ -185,3 +193,12 @@ button.active {
 .r-legendary .name { color: var(--legendary) }
 
 .hidden { display: none!important }
+
+.heyyan-label {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: right;
+}
