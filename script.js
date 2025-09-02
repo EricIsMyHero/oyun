@@ -70,7 +70,7 @@ function createCardContent(data) {
       <div class="stat-item"><b>Saldırı Hızı <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed}</span></div>
       <div class="stat-item"><b>Gecikmə <i class="fa-solid fa-clock"></i></b><span>${data.stats.delay}</span></div>
       <div class="stat-item"><b>Mana <i class="fa-solid fa-wand-magic-sparkles"></i></b><span>${data.stats.mana}</span></div>
-      <div class="stat-item"><b>Say <i class="fa-solid fa-hashtag"></i></b><span>${data.stats.number}</span></div>
+      <div class="stat-item"><b>Say <i class="fa-solid fa-user"></i></b><span>${data.stats.number}</span></div>
     </div>
         
         <div class="stats-section" data-section-id="additional-stats">
