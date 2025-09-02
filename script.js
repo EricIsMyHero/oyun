@@ -63,15 +63,15 @@ function createCardContent(data) {
         </div>
         
         <div class="stats-section visible" data-section-id="main-stats">
-            <div class="stat-item"><b>Can</b><span>${data.stats.health}</span></div>
-            <div class="stat-item"><b>Qalxan</b><span>${data.stats.shield}</span></div>
-            <div class="stat-item"><b>Hasar</b><span>${data.stats.damage}</span></div>
-            <div class="stat-item"><b>S.B.H</b><span>${data.stats.sps}</span></div>
-            <div class="stat-item"><b>Saldırı Hızı</b><span>${data.stats.attackSpeed}</span></div>
-            <div class="stat-item"><b>Gecikmə</b><span>${data.stats.delay}</span></div>
-            <div class="stat-item"><b>Mana</b><span>${data.stats.mana}</span></div>
-            <div class="stat-item"><b>Say</b><span>${data.stats.number}</span></div>
-        </div>
+      <div class="stat-item"><b>Can <i class="fa-solid fa-heart"></i></b><span>${data.stats.health}</span></div>
+      <div class="stat-item"><b>Qalxan <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield}</span></div>
+      <div class="stat-item"><b>Hasar <i class="fa-solid fa-sword"></i></b><span>${data.stats.damage}</span></div>
+      <div class="stat-item"><b>S.B.H <i class="fa-solid fa-bolt"></i></b><span>${data.stats.sps}</span></div>
+      <div class="stat-item"><b>Saldırı Hızı <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed}</span></div>
+      <div class="stat-item"><b>Gecikmə <i class="fa-solid fa-clock"></i></b><span>${data.stats.delay}</span></div>
+      <div class="stat-item"><b>Mana <i class="fa-solid fa-wand-magic-sparkles"></i></b><span>${data.stats.mana}</span></div>
+      <div class="stat-item"><b>Say <i class="fa-solid fa-hashtag"></i></b><span>${data.stats.number}</span></div>
+    </div>
         
         <div class="stats-section" data-section-id="additional-stats">
             <div class="stat-item"><b>Menzil</b><span>${data.additionalStats.range}</span></div>
