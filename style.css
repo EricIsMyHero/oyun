@@ -170,32 +170,37 @@ button.active {
 .r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35); }
 
 /* Stripe (yuxarı rəng xətti) */
-.stripe { height: 6px; border-radius: 12px; margin: -14px -14px 10px; opacity: .9 }
-.r-mundane .stripe { background: var(--mundane) }
-.r-familiar .stripe { background: var(--familiar) }
-.r-arcane .stripe { background: var(--arcane) }
-.r-mythic .stripe { background: var(--mythic) }
-.r-legendary .stripe { background: var(--legendary) }
+.stripe { 
+  height: 6px; 
+  border-radius: 12px; 
+  margin: -14px -14px 10px; 
+  opacity: .9;
+}
+.r-mundane .stripe { background: var(--mundane) !important; }
+.r-familiar .stripe { background: var(--familiar) !important; }
+.r-arcane .stripe { background: var(--arcane) !important; }
+.r-mythic .stripe { background: var(--mythic) !important; }
+.r-legendary .stripe { background: var(--legendary) !important; }
 .r-ethereal .stripe {
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5) !important;
   background-size: 600% 100%;
   animation: ethereal-animate 10s linear infinite;
 }
 
 /* Kart adını rəngləndirən yeni stil */
-.r-mundane .name { color: var(--mundane) }
-.r-familiar .name { color: var(--familiar) }
-.r-arcane .name { color: var(--arcane) }
-.r-mythic .name { color: var(--mythic) }
-.r-legendary .name { color: var(--legendary) }
+.r-mundane .name { color: var(--mundane) !important; }
+.r-familiar .name { color: var(--familiar) !important; }
+.r-arcane .name { color: var(--arcane) !important; }
+.r-mythic .name { color: var(--mythic) !important; }
+.r-legendary .name { color: var(--legendary) !important; }
 
 /* Gradient text effekti alınmayan brauzerlər üçün ehtiyat rəng */
 .r-ethereal .name {
   color: var(--ethereal);
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   background-size: 600% 100%;
   animation: ethereal-animate 10s linear infinite;
 }
