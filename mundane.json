@@ -135,7 +135,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Toxunduğu kartlara igrip çıxar, <b>+6</b> Can hər saniyə yeniləmə verir",
+    "trait": "Toxunduğu kartlara içinə çəkər, <b>-6</b> Can hər saniyə itirər",
     "additionalStats": {
       "range": "1000",
       "speed": "800",
@@ -199,7 +199,7 @@
     "isMulti": false,
     "stats": {
       "health": "210",
-      "shield": "90 (Qalxaya)",
+      "shield": "90",
       "damage": "75",
       "sps": "39",
       "attackSpeed": "1,90s",
@@ -207,7 +207,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Gələn bütün büyüləri bloklayar (Menzil: 20,000 Karo)",
+    "trait": "Gələn bütün büyüləri bloklayar (Menzil: 20,000 Karo), sadəcə <b>Qalxana</b> hasar verər",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
