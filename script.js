@@ -75,9 +75,9 @@ function createCardContent(data) {
         
         <div class="stats-section" data-section-id="additional-stats">
             <div class="stat-item"><b>Menzil <i class="fa-solid fa-road"></i></b><span>${data.additionalStats.range}</span></div>
-            <div class="stat-item"><b>Hız <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.additionalStats.speed}</span></div>
-            <div class="stat-item"><b>Kritik Şansı <i class="fa-solid fa-crosshairs"></b><span>${data.additionalStats.criticalChance}</span></div>
-            <div class="stat-item"><b>Can Çalma Şansı <i class="fa-solid fa-skull "></b><span>${data.additionalStats.lifestealChance}</span></div>
+            <div class="stat-item"><b>Hız <i class="fa-solid fa-water"></i><i class="fa-solid fa-person-running"></i></b><span>${data.additionalStats.speed}</span></div>
+            <div class="stat-item"><b>Kritik Şansı <i class="fa-solid fa-crosshairs"></i></b><span>${data.additionalStats.criticalChance}</span></div>
+            <div class="stat-item"><b>Can Çalma Şansı <i class="fa-solid fa-skull "></i></b><span>${data.additionalStats.lifestealChance}</span></div>
         </div>
         
         <div class="stats-section" data-section-id="trait">
