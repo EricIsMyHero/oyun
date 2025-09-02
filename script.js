@@ -8,46 +8,51 @@ const cardsContainer = document.getElementById('cards');
 
 // Kart yaratmaq üçün əsas funksiya
 function createCardElement(data) {
-  const cardContainer = document.createElement('article');
-  // Əsas class-ları əlavə et: həm flip, həm də card
-  cardContainer.className = `card-flip-container card r-${data.rarity.toLowerCase()}`;
-   
-  if (data.isMulti) {
-    const cardInner = document.createElement('div');
-    cardInner.className = 'card-inner';
-
-    const cardFront = createCardContent(data);
-    cardFront.classList.add('card-front');
+    const cardContainer = document.createElement('article');
+    // Əsas class-ları əlavə et: həm flip, həm də card
+    cardContainer.className = `card-flip-container card r-${data.rarity.toLowerCase()}`;
     
-    const cardBack = createCardContent(data.secondForm);
-    cardBack.classList.add('card-back');
+    if (data.isMulti) {
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
 
-    cardInner.appendChild(cardFront);
-    cardInner.appendChild(cardBack);
-    cardContainer.appendChild(cardInner);
+        const cardFront = createCardContent(data);
+        cardFront.classList.add('card-front');
+        
+        const cardBack = createCardContent(data.secondForm);
+        cardBack.classList.add('card-back');
 
-    const flipButton = document.createElement('button');
-    flipButton.className = 'flip-button';
-    flipButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      cardContainer.classList.toggle('is-flipped');
-    });
-    cardContainer.appendChild(flipButton);
-  } else {
-    const singleCard = createCardContent(data);
-    singleCard.classList.add('card-single');
-    cardContainer.appendChild(singleCard);
-  }
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        cardContainer.appendChild(cardInner);
 
-  // Ethereal parıltısını əlavə et
-  if (data.rarity.toLowerCase() === 'ethereal') {
-    const glowDiv = document.createElement('div');
-    glowDiv.className = 'card-glow';
-    glowDiv.setAttribute('aria-hidden', 'true');
-    cardContainer.appendChild(glowDiv);
-  }
+        const flipButton = document.createElement('button');
+        flipButton.className = 'flip-button';
 
-  return cardContainer;
+        // Olay dinləyicisini cardContainer üzərinə əlavə edin və hedefi yoxlayın
+        cardContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.flip-button')) {
+                cardContainer.classList.toggle('is-flipped');
+            }
+        });
+
+        cardInner.appendChild(flipButton); // Düğmeyi iç kısma yerleştirin
+
+    } else {
+        const singleCard = createCardContent(data);
+        singleCard.classList.add('card-single');
+        cardContainer.appendChild(singleCard);
+    }
+
+    // Ethereal parıltısını əlavə et
+    if (data.rarity.toLowerCase() === 'ethereal') {
+        const glowDiv = document.createElement('div');
+        glowDiv.className = 'card-glow';
+        glowDiv.setAttribute('aria-hidden', 'true');
+        cardContainer.appendChild(glowDiv);
+    }
+
+    return cardContainer;
 }
 
 // Kartın iç məzmununu yaradan köməkçi funksiya
