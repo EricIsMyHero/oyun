@@ -159,7 +159,7 @@
       "mana": "7",
       "number": "1"
     },
-    "trait": "<b>25,000</b> karo gedərsə <b>+150%</b> Hasar bonusu",
+    "trait": "<b>25000</b> karo gedərsə <b>+150%</b> Hasar bonusu",
     "additionalStats": {
       "range": "2100",
       "speed": "1500",
@@ -183,7 +183,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Bir rəqib kartı öldürdükdə bir sonrakı atış <b>+80%</b> Saldırı hızı bonusu qazanar",
+    "trait": "Bir rəqib kartı öldürdükdə bir sonrakı atış <b>+80%</b> Saldırı Hızı bonusu qazanar",
     "additionalStats": {
       "range": "8000",
       "speed": "900",
@@ -207,7 +207,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Qalxan qırıldıqda 3 saniyə arzində hasar almaz, <b>+50</b> Qalxan qazanar",
+    "trait": "Qalxan qırıldıqda <b>3</b> saniyə arzində hasar almaz, <b>+50</b> Qalxan qazanar",
     "additionalStats": {
       "range": "800",
       "speed": "700",
@@ -229,7 +229,7 @@
         "mana": "-",
         "number": "4"
       },
-      "trait": "<b>*Turtle*</b> ölərsə <b>+100%</b> Hasar bonusu qazanar, <b>*Turtle*</b>nin arxasında gələrlər",
+      "trait": "<b>*Turtle*</b> ölərsə <b>+100%</b> Hasar bonusu qazanar, <b>*Turtle*</b>-nın arxasında gələrlər",
       "additionalStats": {
         "range": "800",
         "speed": "700",
@@ -254,7 +254,7 @@
       "mana": "7",
       "number": "1"
     },
-    "trait": "İlk 16 saniyə <b>+100%</b> Hız bonusu, ilk vuruşu ekstra <b>+30%</b> Hasar bonusu verər",
+    "trait": "İlk <b>16</b> saniyə <b>+100%</b> Hız bonusu, ilk vuruşu ekstra <b>+30%</b> Hasar bonusu qazanar",
     "additionalStats": {
       "range": "1000",
       "speed": "1500",
@@ -278,7 +278,7 @@
       "mana": "16",
       "number": "1"
     },
-    "trait": "Hər 24 Hasar alanda <b>+1%</b> Saldırı Hızı bonusu",
+    "trait": "Hər <b>24</b> Hasar alanda <b>+1%</b> Saldırı Hızı bonusu qazanar",
     "additionalStats": {
       "range": "1000",
       "speed": "900",
@@ -302,7 +302,7 @@
       "mana": "16",
       "number": "1"
     },
-    "trait": "Rəqibi içinə alaraq hasar verər və <b>3,5</b> karo uzağa atar, canı <b>-50%</b>ə düşdükdə ekstra <b>+3</b> Hasar bonusu",
+    "trait": "Rəqibi içinə alaraq hasar verər və <b>3500</b> karo uzağa atar, canı <b>50%</b>-ə düşdükdə ekstra <b>+3</b> Hasar bonusu",
     "additionalStats": {
       "range": "1200",
       "speed": "900",
@@ -326,7 +326,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hər hasar verdikdə <b>+3</b> Hasar bonusu (Max:24)",
+    "trait": "Hər hasar verdikdə <b>+3</b> Hasar bonusu <b>(Max:24)</b>",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -374,7 +374,7 @@
       "mana": "4",
       "number": "1"
     },
-    "trait": "Hər <b>4</b>-cü atışdan sonra 3 saniyəlik <b>+80%</b> Saldırı Hızı qazanar",
+    "trait": "Hər <b>4</b>-cü atışdan sonra <b>3</b> saniyəlik <b>+80%</b> Saldırı Hızı qazanar",
     "additionalStats": {
       "range": "2500",
       "speed": "1000",
@@ -446,7 +446,7 @@
       "mana": "7",
       "number": "1"
     },
-    "trait": "Vuruşları 2 saniyəlik rəqibin <b>-20%</b> Hızını azaldar",
+    "trait": "Vuruşları <b>2</b> saniyəlik rəqibin <b>-20%</b> Hızını azaldar",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
@@ -518,7 +518,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hər vuruşdan sonra 3 saniyəlik +1 Can yenilənmə",
+    "trait": "Hər vuruşdan sonra <b>3</b> saniyəlik <b>+1</b> Can yenilənmə qazanar",
     "additionalStats": {
       "range": "1000",
       "speed": "950",
@@ -542,7 +542,7 @@
       "mana": "3",
       "number": "1"
     },
-    "trait": "Hər <b>10</b>-cu atış <b>5</b> saniyəlik <b>+400%</b> Hasar bonusu verər",
+    "trait": "Hər <b>10</b>-cu atış <b>5x5</b> yaxındakı rəqib kartlara <b>+400%</b> Hasar bonusu verər",
     "additionalStats": {
       "range": "1000",
       "speed": "900",
