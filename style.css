@@ -1,17 +1,17 @@
 :root {
-  --bg: #000411;
-  --card: #0a0e1c;
-  --muted: #4a5d8c;
-  --text: #c0f4ff;
-  --ring: #00ffff;
-  --shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  --bg: #0f1220;
+  --card: #151934;
+  --muted: #8a92b2;
+  --text: #eaf0ff;
+  --ring: #ffffff20;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
 
   /* Nadirlik rəngləri */
-  --mundane: #7f8a9e;
-  --familiar: #39FF14;
-  --arcane: #9932CC;
-  --mythic: #FF4500;
-  --legendary: #FFD700;
+  --mundane: #CCCCCC;
+  --familiar: #4CAF50;
+  --arcane: #7E57C2;
+  --mythic: #E53935;
+  --legendary: #FBC02D;
   --ethereal: #ff007f;
 }
 
@@ -19,28 +19,27 @@
 html, body { height: 100% }
 body {
   margin: 0;
-  background: radial-gradient(1200px 700px at 20% 0%, #0d1226, #000411 60%);
+  background: radial-gradient(1200px 700px at 20% 0%, #1a1f3f, #0f1220 60%);
   color: var(--text);
-  font-family: 'Courier Prime', monospace; /* Fərqli bir şrift istifadə edin */
+  font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
 }
 
 .wrap { max-width: 1200px; margin: 32px auto; padding: 16px }
 header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 18px }
-h1 { font-size: 28px; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
+h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
 .hint { color: var(--muted); font-size: 14px }
 
 .controls { display: flex; gap: 10px; flex-wrap: wrap }
 button {
-  background: var(--card); color: var(--text);
-  border: 1px solid var(--ring); border-radius: 4px; /* Kəskin künclər */
+  background: #22284f; color: var(--text);
+  border: 1px solid #2f3769; border-radius: 12px;
   padding: 10px 14px; cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2); transition: .25s ease;
+  box-shadow: var(--shadow); transition: .25s ease;
 }
-button:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0, 255, 255, 0.4) }
+button:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.45) }
 button.active {
-  background: var(--ring);
-  color: #000;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  background: #394073;
+  border-color: #5d66a2;
 }
 
 .grid {
@@ -52,10 +51,10 @@ button.active {
 .card-container {
   position: relative;
   width: 100%;
-  height: 320px;
+  height: 320px; /* Bütün kartlar üçün sabit hündürlük */
   perspective: 1000px;
 }
-.card-container:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(0, 255, 255, 0.4) }
+.card-container:hover { transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.5) }
 
 /* Fırlanma effekti üçün daxili konteyner */
 .card-inner {
@@ -76,11 +75,11 @@ button.active {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 8px; /* Kəskin künclər */
+  border-radius: 14px;
   background: var(--card);
-  border: 1px solid #141b30;
+  border: 1px solid #2a2f57;
   padding: 14px;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+  box-shadow: var(--shadow);
 }
 .card-back {
   transform: rotateY(180deg);
@@ -91,14 +90,14 @@ button.active {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: 14px;
   background: var(--card);
-  border: 1px solid #141b30;
+  border: 1px solid #2a2f57;
   padding: 14px;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+  box-shadow: var(--shadow);
   transition: transform .25s ease, box-shadow .25s ease;
 }
-.card-single:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(0, 255, 255, 0.4) }
+.card-single:hover { transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.5) }
 
 /* Fırlatma düyməsi */
 .flip-button {
@@ -106,8 +105,8 @@ button.active {
   bottom: 14px;
   right: 14px;
   z-index: 10;
-  background: rgba(0, 255, 255, 0.1);
-  border: 1px solid var(--ring);
+  background: rgba(43, 50, 100, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -119,12 +118,11 @@ button.active {
 }
 .flip-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 15px var(--ring);
 }
 .flip-button::before {
   content: '⇌';
   font-size: 20px;
-  color: var(--ring);
+  color: white;
   display: block;
   transform: scaleX(-1);
 }
@@ -134,47 +132,49 @@ button.active {
 
 /* Digər köhnə stillər */
 .card-front::after, .card-single::after {
-  content: ""; position: absolute; inset: -2px; border-radius: 10px;
+  content: ""; position: absolute; inset: -2px; border-radius: 20px;
   pointer-events: none; border: 2px solid var(--ring); filter: blur(4px);
   opacity: .5; z-index: -1;
 }
 
 .head { display: flex; justify-content: space-between; margin-bottom: 10px }
 .name { font-weight: 700; letter-spacing: .3px }
-.badge { font-size: 12px; padding: 4px 8px; border-radius: 2px; border: 1px solid var(--ring) }
+.badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b }
 .card-tabs { display: flex; justify-content: center; margin-bottom: 8px; gap: 8px }
 .card-tabs button {
-  background: #1e244a; color: #c0f4ff; border: 1px solid #00ffff;
-  font-size: 11px; padding: 6px 12px; border-radius: 4px;
+  background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264;
+  font-size: 11px; padding: 6px 12px; border-radius: 12px;
   cursor: pointer; transition: background .2s ease;
 }
-.card-tabs button.active { background: #00ffff; color: #000 }
+.card-tabs button.active { background: #2b3264; color: #fff }
 .stats-section {
-  display: none; border-radius: 8px; padding: 8px;
-  background: #0d1226; border: 1px solid #141b30;
+  display: none; border-radius: 12px; padding: 8px;
+  background: #111636; border: 1px solid #252c59;
 }
 .stats-section.visible { display: grid; grid-template-columns: 1fr 1fr; gap: 8px }
 .stats-section[data-section-id="trait"] {
-  display: none; padding: 12px; background: #0d1226;
-  border: 1px solid #141b30; border-radius: 8px;
+  display: none; padding: 12px; background: #111636;
+  border: 1px solid #252c59; border-radius: 12px;
 }
 .stats-section[data-section-id="trait"].visible { display: block }
 .stat-item { padding: 4px }
-.stat-item b { display: block; font-size: 12px; color: var(--ring); margin-bottom: 4px }
+.stat-item b { display: block; font-size: 12px; color: #c6ceff; margin-bottom: 4px }
 .stat-item span { font-size: 13px }
 .trait-center { text-align: center }
 
 /* color-mix istifadə edilən yerlərdə əvəzləmələr: */
-.r-mundane { box-shadow: 0 0 20px rgba(127, 138, 158, 0.35); }
-.r-familiar { box-shadow: 0 0 20px rgba(57, 255, 20, 0.35); }
-.r-arcane { box-shadow: 0 0 20px rgba(153, 50, 204, 0.35); }
-.r-mythic { box-shadow: 0 0 20px rgba(255, 69, 0, 0.35); }
-.r-legendary { box-shadow: 0 0 20px rgba(255, 215, 0, 0.35); }
-.r-ethereal { box-shadow: 0 0 20px rgba(255, 0, 127, 0.35); }
+.r-mundane { box-shadow: 0 6px 28px rgba(204,204,204,0.35); }
+.r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35); }
+.r-arcane { box-shadow: 0 6px 28px rgba(126,87,194,0.35); }
+.r-mythic { box-shadow: 0 6px 28px rgba(229,57,53,0.35); }
+.r-legendary { box-shadow: 0 6px 28px rgba(251,192,45,0.35); }
+.r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35); }
 
 /* Stripe (yuxarı rəng xətti) */
 .stripe {
-  height: 6px; border-radius: 8px 8px 0 0; margin: -14px -14px 10px;
+  height: 6px;
+  border-radius: 12px;
+  margin: -14px -14px 10px;
   opacity: .9;
 }
 .r-mundane .stripe { background: var(--mundane) }
@@ -183,9 +183,9 @@ button.active {
 .r-mythic .stripe { background: var(--mythic) }
 .r-legendary .stripe { background: var(--legendary) }
 .r-ethereal .stripe {
-  background: linear-gradient(90deg, #ff007f, #00ffff, #ff007f);
-  background-size: 300% 100%;
-  animation: ethereal-animate 5s linear infinite;
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
+  background-size: 600% 100%;
+  animation: ethereal-animate 10s linear infinite;
 }
 
 /* Kart adını rəngləndirən yeni stil */
@@ -198,12 +198,12 @@ button.active {
 /* Gradient text effekti alınmayan brauzerlər üçün ehtiyat rəng */
 .r-ethereal .name {
   color: var(--ethereal);
-  background: linear-gradient(90deg, #ff007f, #00ffff, #ff007f);
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 300% 100%;
-  animation: ethereal-animate 5s linear infinite;
+  background-size: 600% 100%;
+  animation: ethereal-animate 10s linear infinite;
 }
 
 @keyframes ethereal-animate {
