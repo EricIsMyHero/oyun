@@ -202,7 +202,7 @@ button.active {
 .r-mythic .name { color: var(--mythic) }
 .r-legendary .name { color: var(--legendary) }
 
-/* Gradient text effekti alınmayan brauzerlər üçün ehtiyat rəng */
+/* Gradient teext effekti alınmayan brauzerlər üçün ehtiyat rəng */
 .r-ethereal .name {
   color: var(--ethereal);
   background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
