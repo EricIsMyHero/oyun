@@ -20,7 +20,11 @@
       "range": "1200",
       "speed": "900",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -49,7 +53,11 @@
       "range": "800",
       "speed": "1300",
       "criticalChance": "0%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
    },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -78,7 +86,11 @@
       "range": "6000",
       "speed": "850",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -107,7 +119,11 @@
       "range": "800",
       "speed": "1050",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -136,7 +152,11 @@
       "range": "1300",
       "speed": "1000",
       "criticalChance": "25%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
    },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -165,7 +185,11 @@
       "range": "1700",
       "speed": "1200",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -194,7 +218,11 @@
       "range": "2100",
       "speed": "1500",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -223,7 +251,11 @@
       "range": "8000",
       "speed": "900",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -252,7 +284,11 @@
       "range": "800",
       "speed": "700",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -279,7 +315,11 @@
         "range": "800",
         "speed": "700",
         "criticalChance": "-",
-        "lifestealChance": "-"
+        "criticDamage": "-",
+      "lifestealChance": "-"
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-"
       },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -309,7 +349,11 @@
       "range": "1000",
       "speed": "1500",
       "criticalChance": "0%",
-      "lifestealChance": "5%"
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -338,7 +382,11 @@
       "range": "1000",
       "speed": "900",
       "criticalChance": "30%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -367,7 +415,11 @@
       "range": "1200",
       "speed": "900",
       "criticalChance": "0%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -396,7 +448,11 @@
       "range": "1000",
       "speed": "1000",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
    },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -425,7 +481,11 @@
       "range": "2500",
       "speed": "900",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -454,7 +514,11 @@
       "range": "2500",
       "speed": "1000",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -483,7 +547,11 @@
       "range": "1400",
       "speed": "1100",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -512,7 +580,11 @@
       "range": "1000",
       "speed": "1000",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
    },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -541,7 +613,11 @@
       "range": "1000",
       "speed": "1100",
       "criticalChance": "10%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -570,7 +646,11 @@
       "range": "1000",
       "speed": "1000",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -599,7 +679,11 @@
       "range": "2900",
       "speed": "800",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -628,7 +712,11 @@
       "range": "1000",
       "speed": "950",
       "criticalChance": "5%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
@@ -657,7 +745,11 @@
       "range": "1000",
       "speed": "900",
       "criticalChance": "15%",
+      "criticDamage": "1.5x",
       "lifestealChance": "0%"
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
