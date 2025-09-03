@@ -21,7 +21,12 @@
       "speed": "900",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Chicken",
@@ -45,7 +50,12 @@
       "speed": "1300",
       "criticalChance": "0%",
       "lifestealChance": "0%"
-    }
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Snowballer",
@@ -69,7 +79,12 @@
       "speed": "850",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Wild Bees",
@@ -93,7 +108,12 @@
       "speed": "1050",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Warnborn",
@@ -117,7 +137,12 @@
       "speed": "1000",
       "criticalChance": "25%",
       "lifestealChance": "0%"
-    }
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "X-Bot",
@@ -141,7 +166,12 @@
       "speed": "1200",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Etta",
@@ -165,7 +195,12 @@
       "speed": "1500",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Sniper",
@@ -189,7 +224,12 @@
       "speed": "900",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Turtle",
@@ -214,6 +254,11 @@
       "criticalChance": "5%",
       "lifestealChance": "0%"
     },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+  },
     "secondForm": {
       "name": "Mini Turtles",
       "type": ["Heyvan"],
@@ -235,8 +280,13 @@
         "speed": "700",
         "criticalChance": "-",
         "lifestealChance": "-"
+      },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
       }
-    }
+  }
   },
   {
     "name": "Sar-1",
@@ -260,7 +310,12 @@
       "speed": "1500",
       "criticalChance": "0%",
       "lifestealChance": "5%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Trac",
@@ -284,7 +339,12 @@
       "speed": "900",
       "criticalChance": "30%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Tornado",
@@ -308,7 +368,12 @@
       "speed": "900",
       "criticalChance": "0%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Dino",
@@ -332,7 +397,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Tenta",
@@ -356,7 +426,12 @@
       "speed": "900",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Fire Archer",
@@ -380,7 +455,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Shadow Reaper",
@@ -404,7 +484,12 @@
       "speed": "1100",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Volt Striker",
@@ -428,7 +513,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Frostmaw",
@@ -452,7 +542,12 @@
       "speed": "1100",
       "criticalChance": "10%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Hexon",
@@ -476,7 +571,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Mecha Shield",
@@ -500,7 +600,12 @@
       "speed": "800",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Venomspike",
@@ -524,7 +629,12 @@
       "speed": "950",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Starcaller",
@@ -548,6 +658,11 @@
       "speed": "900",
       "criticalChance": "15%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   }
 ]
