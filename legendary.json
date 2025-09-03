@@ -21,7 +21,7 @@
       "speed": 1800,
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -54,7 +54,7 @@
       "speed": 950,
       "criticalChance": "0%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
