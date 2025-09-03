@@ -21,7 +21,7 @@
       "speed": "900",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -54,7 +54,7 @@
       "speed": "1300",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -87,7 +87,7 @@
       "speed": "850",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -120,7 +120,7 @@
       "speed": "1050",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -153,7 +153,7 @@
       "speed": "1000",
       "criticalChance": "25%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -186,7 +186,7 @@
       "speed": "1200",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -219,7 +219,7 @@
       "speed": "1500",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -252,7 +252,7 @@
       "speed": "900",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -285,7 +285,7 @@
       "speed": "700",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -316,7 +316,7 @@
         "speed": "700",
         "criticalChance": "-",
         "criticDamage": "-",
-      "lifestealChance": "-"
+      "lifestealChance": "-",
       "lifesteal": "-",
       "damageminimiser": "-",
       "dodge": "-"
@@ -350,7 +350,7 @@
       "speed": "1500",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -383,7 +383,7 @@
       "speed": "900",
       "criticalChance": "30%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -416,7 +416,7 @@
       "speed": "900",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -449,7 +449,7 @@
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -482,7 +482,7 @@
       "speed": "900",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -515,7 +515,7 @@
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -548,7 +548,7 @@
       "speed": "1100",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -581,7 +581,7 @@
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -614,7 +614,7 @@
       "speed": "1100",
       "criticalChance": "10%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -647,7 +647,7 @@
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -680,7 +680,7 @@
       "speed": "800",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -713,7 +713,7 @@
       "speed": "950",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
@@ -746,7 +746,7 @@
       "speed": "900",
       "criticalChance": "15%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%"
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
