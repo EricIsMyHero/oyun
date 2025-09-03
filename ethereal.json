@@ -2,7 +2,7 @@
   {
     "name": "Hamm",
     "type": ["Heyvan"],
-    "rarity": "Ethereal",
+    "rarity": "Legendary",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -17,25 +17,25 @@
     },
     "trait": "<b>-12%</b> daha az hasar alar, <b>+20%</b> Hasar bonusu verər.",
     "additionalStats": {
-      "range": 1200,
+      "range": 1000,
       "speed": 1800,
       "criticalChance": "5%",
       "lifestealChance": "0%"
    },
     "showlevels": {
-      "level1": "+15% Can",
-      "level2": "+17% Hız",
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
       "level3": "+7% Hasar"
       }
   },
   {
     "name": "M-M",
     "type": ["Robot"],
-    "rarity": "Ethereal",
+    "rarity": "Legendary",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": 130,
+      "health": 110,
       "shield": 20,
       "damage": 5,
       "sps": 11,
