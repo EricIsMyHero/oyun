@@ -21,11 +21,11 @@
       "speed": 1800,
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    },
+   },
     "showlevels": {
-      "level1": "+5% Can",
-      "level2": "+4% Hız",
-      "level3": "+9% Hasar"
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
       }
   },
   {
@@ -35,7 +35,7 @@
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": 130,
+      "health": 110,
       "shield": 20,
       "damage": 5,
       "sps": 11,
