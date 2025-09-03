@@ -21,7 +21,12 @@
       "speed": "1800",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "B-B",
@@ -45,7 +50,12 @@
       "speed": "1150",
       "criticalChance": "15%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Scrapy",
@@ -69,7 +79,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Turbo",
@@ -93,7 +108,12 @@
       "speed": "1500",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Srox",
@@ -117,7 +137,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Slimey",
@@ -141,7 +166,12 @@
       "speed": "800",
       "criticalChance": "0%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Henry",
@@ -165,7 +195,12 @@
       "speed": "800",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Hydra",
@@ -189,7 +224,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Blocker",
@@ -213,7 +253,12 @@
       "speed": "1100",
       "criticalChance": "15%",
       "lifestealChance": "0%"
-    }
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Fen",
@@ -237,7 +282,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Ben",
@@ -261,7 +311,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Freak",
@@ -286,6 +341,11 @@
       "criticalChance": "5%",
       "lifestealChance": "0%"
     },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+  },
     "secondForm": {
       "name": "Mini Freaks",
       "type": ["Uzaylı"],
@@ -307,8 +367,13 @@
         "speed": "1000",
         "criticalChance": "5%",
         "lifestealChance": "0%"
+      },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
       }
-    }
+      }
   },
   {
     "name": "Nightprowler",
@@ -332,7 +397,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Twins",
@@ -356,7 +426,12 @@
       "speed": "1150",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Bethe",
@@ -380,7 +455,12 @@
       "speed": "1000",
       "criticalChance": "10%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Snaykies",
@@ -404,7 +484,12 @@
       "speed": "1100",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Soldier",
@@ -428,7 +513,12 @@
       "speed": "1050",
       "criticalChance": "10%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Bees",
@@ -452,7 +542,12 @@
       "speed": "1150",
       "criticalChance": "0%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Hailey",
@@ -476,7 +571,12 @@
       "speed": "900",
       "criticalChance": "10%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Angels",
@@ -500,7 +600,12 @@
       "speed": "1100",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "BOOMera",
@@ -524,7 +629,12 @@
       "speed": "1000",
       "criticalChance": "5%",
       "lifestealChance": "5%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "PhewPhew",
@@ -548,7 +658,12 @@
       "speed": "1100",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Chrono Mage",
@@ -572,7 +687,12 @@
       "speed": "900",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Aegis Guard",
@@ -596,7 +716,12 @@
       "speed": "900",
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "Ironjaw",
@@ -620,7 +745,12 @@
       "speed": "950",
       "criticalChance": "10%",
       "lifestealChance": "25%"
-    }
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   },
   {
     "name": "M-Manager",
@@ -644,6 +774,11 @@
       "speed": "950",
       "criticalChance": "0%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   }
 ]
