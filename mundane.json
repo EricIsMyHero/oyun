@@ -15,17 +15,17 @@
       "mana": "3",
       "number": "1"
     },
-    "trait": "<b>İlk 12</b> saniyə, <b>+20%</b> Hız bonusu qazanar",
+    "trait": "<b>İlk 12</b> saniyə <b>+20%</b> Hız bonusu qazanar",
     "additionalStats": {
       "range": "1000",
-      "speed": "1800",
+      "speed": "1500",
       "criticalChance": "5%",
       "lifestealChance": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+10% Can  |  70 » 77",
+      "level2": "+8% Hasar  |  25 » 27",
+      "level3": "+10% Öz. Hız bonusu  |  20% » 30%"
       }
   },
   {
@@ -52,9 +52,9 @@
       "lifestealChance": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Saldırı Hızı  |  1.1s » 1.045",
+      "level2": "+5% Kritik Şansı  |  15% » 20%",
+      "level3": "+10% Hasar  |  20 » 22"
       }
   },
   {
@@ -81,9 +81,9 @@
       "lifestealChance": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+4% Menzil  |  2500 » 2600",
+      "level2": "+10% Hız  |  1000 » 1100",
+      "level3": "+10% Can  |  90 » 99"
       }
   },
   {
@@ -110,9 +110,9 @@
       "lifestealChance": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+3% Öz. Saldırı Hızı  |  12% » 15%",
+      "level2": "+5% Menzil  |  2400 » 2520",
+      "level3": "+12% Hasar  |  16 » 18"
       }
   },
   {
