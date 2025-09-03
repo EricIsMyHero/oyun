@@ -20,7 +20,7 @@
       "range": 1000,
       "speed": 1800,
       "criticalChance": "5%",
-      "criticDamage": "1,5x",
+      "criticDamage": "150%",
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
