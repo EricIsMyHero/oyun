@@ -21,7 +21,12 @@
       "speed": 1800,
       "criticalChance": "5%",
       "lifestealChance": "0%"
-    }
+    },
+    "showlevels": {
+      "level1": "+5% Can",
+      "level2": "+4% Hız",
+      "level3": "+9% Hasar"
+      }
   },
   {
     "name": "M-M",
@@ -45,6 +50,11 @@
       "speed": 950,
       "criticalChance": "0%",
       "lifestealChance": "0%"
-    }
+   },
+    "showlevels": {
+      "level1": "+5% Can",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      }
   }
 ]
