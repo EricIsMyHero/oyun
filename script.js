@@ -81,7 +81,7 @@ function createCardContent(data) {
             <div class="stat-item"><b>Kritik Hasar <i class="fa-solid fa-crosshairs"></i></b><span>${data.additionalStats.criticalDamage}</span></div>
             <div class="stat-item"><b>C.Çalma Şansı <i class="fa-solid fa-percent "></i></b><span>${data.additionalStats.lifestealChance}</span></div>
             <div class="stat-item"><b>Can Çalma <i class="fa-solid fa-skull "></i></b><span>${data.additionalStats.lifesteal}</span></div>
-            <div class="stat-item"><b>Hasar Azaltma <i class="fa-solid fa-skull "></i></b><span>${data.additionalStats.damageMinimiser}</span></div>
+            <div class="stat-item"><b>Hasar Azaltma <i class="fa-solid fa-skull "></i></b><span>${data.additionalStats.damageminimiser}</span></div>
             <div class="stat-item"><b>Sıyrılma Şansı <i class="fa-solid fa-wind "></i></b><span>${data.additionalStats.dodge}</span></div>
         </div>
         
