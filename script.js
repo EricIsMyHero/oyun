@@ -1,219 +1,181 @@
-:root {
-  --bg: #0f1220;
-  --card: #151934;
-  --muted: #8a92b2;
-  --text: #eaf0ff;
-  --ring: #ffffff20;
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
+// DOM Elementləri
+const filterButtons = document.querySelectorAll('.controls button');
+const cardsContainer = document.getElementById('cards');
 
-  /* Nadirlik rəngləri */
-  --mundane: #CCCCCC;
-  --familiar: #4CAF50;
-  --arcane: #7E57C2;
-  --mythic: #E53935;
-  --legendary: #FBC02D;
-  --ethereal: #ff007f;
-}
+// Kart yaratmaq üçün əsas funksiya
+function createCardElement(data) {
+    const cardContainer = document.createElement('article');
+    cardContainer.className = `card-container card r-${data.rarity.toLowerCase()}`;
+    
+    if (data.isMulti) {
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
 
-* { box-sizing: border-box }
-html, body { height: 100% }
-body {
-  margin: 0;
-  background: radial-gradient(1200px 700px at 20% 0%, #1a1f3f, #0f1220 60%);
-  color: var(--text);
-  font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
-}
+        const cardFront = createCardContent(data);
+        cardFront.classList.add('card-front');
+        
+        const cardBack = createCardContent(data.secondForm);
+        cardBack.classList.add('card-back');
 
-.wrap { max-width: 1200px; margin: 32px auto; padding: 16px }
-header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 18px }
-h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
-.hint { color: var(--muted); font-size: 14px }
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        cardContainer.appendChild(cardInner);
 
-.controls { display: flex; gap: 10px; flex-wrap: wrap }
-button {
-  background: #22284f; color: var(--text);
-  border: 1px solid #2f3769; border-radius: 12px;
-  padding: 10px 14px; cursor: pointer;
-  box-shadow: var(--shadow); transition: .25s ease;
-}
-button:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.45) }
-button.active {
-  background: #394073;
-  border-color: #5d66a2;
-}
+        const flipButton = document.createElement('button');
+        flipButton.className = 'flip-button';
 
-.grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-}
+        cardContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.flip-button')) {
+                cardContainer.classList.toggle('is-flipped');
+            }
+        });
 
-/* Əsas kart konteyneri */
-.card-container {
-  position: relative;
-  width: 100%;
-  height: 340px; /* Bütün kartlar üçün sabit hündürlük */
-  perspective: 1000px;
-}
-.card-container:hover { transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.5) }
+        cardContainer.appendChild(flipButton);
+    } else {
+        const singleCard = createCardContent(data);
+        singleCard.classList.add('card-single');
+        cardContainer.appendChild(singleCard);
+    }
 
-/* Fırlanma effekti üçün daxili konteyner */
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-.card-container.is-flipped .card-inner {
-  transform: rotateY(180deg);
+    if (data.rarity.toLowerCase() === 'ethereal') {
+        const glowDiv = document.createElement('div');
+        glowDiv.className = 'card-glow';
+        glowDiv.setAttribute('aria-hidden', 'true');
+        cardContainer.appendChild(glowDiv);
+    }
+
+    return cardContainer;
 }
 
-/* Kartın iki tərəfi */
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 12px;
-  background: var(--card);
-  border: 1px solid #2a2f57;
-  padding: 14px;
-  box-shadow: var(--shadow);
-}
-.card-back {
-  transform: rotateY(180deg);
+// Kartın iç məzmununu yaradan köməkçi funksiya
+function createCardContent(data) {
+    const content = document.createElement('div');
+    const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
+    content.innerHTML = `
+        <div class="stripe"></div>
+        <div class="head">
+            <div class="name">${data.name}</div><span class="badge">${badgeText}</span>
+        </div>
+        <div class="card-tabs">
+            <button class="active" data-section="main-stats">Əsas</button>
+            <button data-section="additional-stats">Əlavə</button>
+            <button data-section="trait">Özəllik</button>
+            <button data-section="showlevels">Səviyyələr</button>
+        </div>
+        
+        <div class="stats-section visible" data-section-id="main-stats">
+      <div class="stat-item"><b>Can <i class="fa-solid fa-heart"></i></b><span>${data.stats.health}</span></div>
+      <div class="stat-item"><b>Qalxan <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield}</span></div>
+      <div class="stat-item"><b>Hasar <i class="fa-solid fa-hammer"></i></b><span>${data.stats.damage}</span></div>
+      <div class="stat-item"><b>S.B.H <i class="fa-solid fa-bolt"></i></b><span>${data.stats.sps}</span></div>
+      <div class="stat-item"><b>Saldırı Hızı <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed}</span></div>
+      <div class="stat-item"><b>Gecikmə <i class="fa-solid fa-clock"></i></b><span>${data.stats.delay}</span></div>
+      <div class="stat-item"><b>Mana <i class="fa-solid fa-certificate"></i></b><span>${data.stats.mana}</span></div>
+      <div class="stat-item"><b>Say <i class="fa-solid fa-user"></i></b><span>${data.stats.number}</span></div>
+    </div>
+        
+        <div class="stats-section" data-section-id="additional-stats">
+            <div class="stat-item"><b>Menzil <i class="fa-solid fa-road"></i></b><span>${data.additionalStats.range}</span></div>
+            <div class="stat-item"><b>Hız <i class="fa-solid fa-person-running"></i></b><span>${data.additionalStats.speed}</span></div>
+            <div class="stat-item"><b>Kritik Şansı <i class="fa-solid fa-crosshairs"></i></b><span>${data.additionalStats.criticalChance}</span></div>
+            <div class="stat-item"><b>C.Çalma Şansı <i class="fa-solid fa-skull "></i></b><span>${data.additionalStats.lifestealChance}</span></div>
+        </div>
+        
+        <div class="stats-section" data-section-id="trait">
+            <div class="trait trait-center">${data.trait}</div>
+        </div>
+
+<div class="stats-section" data-section-id="showlevels">
+            <div class="stat-item"><b>Səviyyə 1</b><span>${data.showlevels.level1}</span></div>
+            <div class="stat-item"><b>Səviyyə 2</b><span>${data.showlevels.level2}</span></div>
+            <div class="stat-item"><b>Səviyyə 3</b><span>${data.showlevels.level3}</span></div>
+        </div>
+        
+    `;
+
+    const cardButtons = content.querySelectorAll('.card-tabs button');
+    cardButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const sectionId = button.dataset.section;
+            
+            cardButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            content.querySelectorAll('.stats-section').forEach(section => {
+                section.classList.remove('visible');
+            });
+            content.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
+        });
+    });
+
+    return content;
 }
 
-/* Tək tərəfli kartın əsas stilləri */
-.card-single {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: var(--card);
-  border: 1px solid #2a2f57;
-  padding: 14px;
-  box-shadow: var(--shadow);
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-.card-single:hover { transform: translateY(-4px); box-shadow: 0 22px 60px rgba(0,0,0,.5) }
-
-/* Fırlatma düyməsi */
-.flip-button {
-  position: absolute;
-  bottom: 14px;
-  right: 14px;
-  z-index: 10;
-  background: rgba(43, 50, 100, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease-in-out;
-}
-.flip-button:hover {
-  transform: scale(1.1);
-}
-.flip-button::before {
-  content: '⇌';
-  font-size: 20px;
-  color: white;
-  display: block;
-  transform: scaleX(-1);
-}
-.card-container.is-flipped .flip-button::before {
-  transform: scaleX(1);
+// Kartları render edən funksiya
+function renderCards(cardsToRender) {
+    cardsContainer.innerHTML = '';
+    if (cardsToRender.length === 0) {
+        cardsContainer.innerHTML = '<p>Bu endərlikdə kart tapılmadı.</p>';
+        return;
+    }
+    cardsToRender.forEach(data => {
+        cardsContainer.appendChild(createCardElement(data));
+    });
 }
 
-/* Digər köhnə stillər */
-.card-front::after, .card-single::after {
-  content: ""; position: absolute; inset: -2px; border-radius: 20px;
-  pointer-events: none; border: 2px solid var(--ring); filter: blur(4px);
-  opacity: .5; z-index: -1;
+// Məlumatları endərliyə görə çəkən və göstərən funksiya
+async function fetchAndRender(rarity) {
+    cardsContainer.innerHTML = '<p>Yüklənir...</p>';
+    try {
+        let cardsData = [];
+        if (rarity === 'all') {
+            const rarities = ['mundane', 'familiar', 'arcane', 'mythic', 'legendary', 'ethereal'];
+            const fetchPromises = rarities.map(r =>
+                fetch(`${r}.json`).then(async res => {
+                    if (!res.ok) {
+                        if (res.status === 404) {
+                            console.warn(`${r}.json tapılmadı, bu endərlik ötürülür.`);
+                            return [];
+                        }
+                        throw new Error(`${r}.json yüklənmədi`);
+                    }
+                    const text = await res.text();
+                    return text ? JSON.parse(text) : [];
+                })
+            );
+            const results = await Promise.all(fetchPromises);
+            cardsData = results.flat();
+        } else {
+            const response = await fetch(`${rarity}.json`);
+            if (!response.ok) {
+                if (response.status === 404) {
+                    console.warn(`${rarity}.json tapılmadı.`);
+                    cardsData = [];
+                } else {
+                    throw new Error(`HTTP xətası! Status: ${response.status}`);
+                }
+            } else {
+                const text = await response.text();
+                cardsData = text ? JSON.parse(text) : [];
+            }
+        }
+        renderCards(cardsData);
+    } catch (error) {
+        console.error('Məlumatları yükləmə zamanı xəta:', error);
+        cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
+    }
 }
 
-.head { display: flex; justify-content: space-between; margin-bottom: 10px }
-.name { font-weight: 700; letter-spacing: .3px }
-.badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid #ffffff2b }
-.card-tabs { display: flex; justify-content: center; margin-bottom: 8px; gap: 8px }
-.card-tabs button {
-  background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264;
-  font-size: 11px; padding: 6px 12px; border-radius: 12px;
-  cursor: pointer; transition: background .2s ease;
-}
-.card-tabs button.active { background: #2b3264; color: #fff }
-/* Bütün statistikalar bölmələri üçün ümumi stil */
-.stats-section {
-  display: none; border-radius: 12px; padding: 8px;
-  background: #111636; border: 1px solid #252c59;
-}
-.stats-section.visible { display: grid; grid-template-columns: 1fr 1fr; gap: 8px }
-.stats-section[data-section-id="trait"] {
-  display: none; padding: 12px; background: #111636;
-  border: 1px solid #252c59; border-radius: 12px;
-}
-.stats-section[data-section-id="trait"].visible { display: block }
-.stat-item { padding: 4px }
-.stat-item b { display: block; font-size: 12px; color: #c6ceff; margin-bottom: 4px }
-.stat-item span { font-size: 13px }
-.trait-center { text-align: center }
+// Event Listeners
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const rarity = button.id.split('-')[1];
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        fetchAndRender(rarity);
+    });
+});
 
-/* Özəllik və Səviyyələr üçün blok düzülüşü (alt-alta) */
-.stats-section[data-section-id="trait"].visible,
-.stats-section[data-section-id="showlevels"].visible {
-    display: block;
-}
-
-/* color-mix istifadə edilən yerlərdə əvəzləmələr: */
-.r-mundane { box-shadow: 0 6px 28px rgba(204,204,204,0.35); }
-.r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35); }
-.r-arcane { box-shadow: 0 6px 28px rgba(126,87,194,0.35); }
-.r-mythic { box-shadow: 0 6px 28px rgba(229,57,53,0.35); }
-.r-legendary { box-shadow: 0 6px 28px rgba(251,192,45,0.35); }
-.r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35); }
-
-/* Stripe (yuxarı rəng xətti) */
-.stripe {
-  height: 6px;
-  border-radius: 12px;
-  margin: -14px -14px 10px;
-  opacity: .9;
-}
-.r-mundane .stripe { background: var(--mundane) }
-.r-familiar .stripe { background: var(--familiar) }
-.r-arcane .stripe { background: var(--arcane) }
-.r-mythic .stripe { background: var(--mythic) }
-.r-legendary .stripe { background: var(--legendary) }
-.r-ethereal .stripe {
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
-  background-size: 600% 100%;
-  animation: ethereal-animate 10s linear infinite;
-}
-
-/* Kart adını rəngləndirən yeni stil */
-.r-mundane .name { color: var(--mundane) }
-.r-familiar .name { color: var(--familiar) }
-.r-arcane .name { color: var(--arcane) }
-.r-mythic .name { color: var(--mythic) }
-.r-legendary .name { color: var(--legendary) }
-
-/* Gradient text effekti alınmayan brauzerlər üçün ehtiyat rəng */
-.r-ethereal .name {
-  color: var(--ethereal);
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 600% 100%;
-  animation: ethereal-animate 10s linear infinite;
-}
-
-@keyframes ethereal-animate {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+// Səhifə yüklənərkən bütün kartları çək və göstər
+document.addEventListener('DOMContentLoaded', () => fetchAndRender('all'));
