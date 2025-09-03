@@ -147,6 +147,7 @@ button.active {
   cursor: pointer; transition: background .2s ease;
 }
 .card-tabs button.active { background: #2b3264; color: #fff }
+/* Bütün statistikalar bölmələri üçün ümumi stil */
 .stats-section {
   display: none; border-radius: 12px; padding: 8px;
   background: #111636; border: 1px solid #252c59;
@@ -161,6 +162,12 @@ button.active {
 .stat-item b { display: block; font-size: 12px; color: #c6ceff; margin-bottom: 4px }
 .stat-item span { font-size: 13px }
 .trait-center { text-align: center }
+
+/* Özəllik və Səviyyələr üçün blok düzülüşü (alt-alta) */
+.stats-section[data-section-id="trait"].visible,
+.stats-section[data-section-id="showlevels"].visible {
+    display: block;
+}
 
 /* color-mix istifadə edilən yerlərdə əvəzləmələr: */
 .r-mundane { box-shadow: 0 6px 28px rgba(204,204,204,0.35); }
