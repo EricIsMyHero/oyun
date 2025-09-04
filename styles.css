@@ -29,7 +29,7 @@ header { display: flex; gap: 16px; justify-content: space-between; align-items: 
 h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
 .hint { color: var(--muted); font-size: 14px }
 
-.controls { display: flex; gap: 10px; flex-wrap: wrap }
+.controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px }
 button {
   background: #22284f; color: var(--text);
   border: 1px solid #2f3769; border-radius: 12px;
