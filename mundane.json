@@ -60,7 +60,7 @@
       "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+5% Saldırı Hızı  |  1.1s » 1.045s",
+      "level1": "+5% Saldırı Hızı  |  1,1s » 1,045s",
       "level2": "+5% Kritik Şansı  |  15% » 20%",
       "level3": "+10% Hasar  |  20 » 22"
       }
@@ -159,7 +159,7 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+10% Gecikmə  |  1.10s » 0.99s",
+      "level1": "+10% Gecikmə  |  1,10s » 0,99s",
       "level2": "+10% Öz. Hasar Bonusu  |  40% » 50%",
       "level3": "+5% Hız  |  1000 » 1050"
       }
