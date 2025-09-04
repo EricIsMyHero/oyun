@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="az">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kart Dizaynı – Vizual Demo</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Clash-A-Mana</title> 
+  <link rel="stylesheet" href="styles.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> 
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        <h1>Kartlar – Vizual demo</h1>
-        <div class="hint">
-          Kartları nadirlik dərəcəsinə görə filtrləyin.
-          AxB hücum tipində <i>Gecikmə vaxtı</i> göstərilir, tək zərbədə isə "-".
-        </div>
+  <div class="wrap" id="main-content">
+    <!-- Əsas Menyu -->
+    <section class="main-menu" id="main-menu">
+      <h1>Clas-A-Mana: Real-Time Card Arena</h1>
+      <div class="menu-buttons">
+        <button id="show-cards-btn">Kartlar</button>
+        <button id="show-spells-btn">Büyülər</button>
+        <button id="show-boosters-btn">Güçləndiricilər</button>
+        <button id="show-towers-btn">Qala silahları</button>
       </div>
+    </section>
+
+    <!-- Kartlar Bölməsi -->
+    <section id="cards-section" class="hidden">
+      <header class="card-title-header">
+        <div>
+          <h1>Kartlar – Vizual demo</h1>
+          <div class="hint">
+            Burada oyunda olacaq bütün kartların ilkin demosu vardır. Unutmayın sadəcə bir DEMO-dur.
+          </div>
+        </div>
+        <button id="back-to-menu-btn" class="back-button">Geri</button>
+      </header>
+
       <div class="controls">
-        <button id="filter-all" class="active">Hamısı</button>
+        <button id="filter-all" class="active">Bütün Kartlar</button>
         <button id="filter-mundane">Mundane</button>
         <button id="filter-familiar">Familiar</button>
         <button id="filter-arcane">Arcane</button>
@@ -27,9 +41,9 @@
         <button id="filter-legendary">Legendary</button>
         <button id="filter-ethereal">Ethereal</button>
       </div>
-    </header>
 
-    <section class="grid" id="cards"></section>
+      <section class="grid" id="cards"></section>
+    </section>
   </div>
   <script src="script.js"></script>
 </body>
