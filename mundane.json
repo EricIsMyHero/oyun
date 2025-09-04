@@ -29,7 +29,7 @@
     "showlevels": {
       "level1": "+10% Can  |  70 » 77",
       "level2": "+8% Hasar  |  25 » 27",
-      "level3": "+10% Öz. Hız bonusu  |  20% » 30%"
+      "level3": "+10% Öz. Hız Bonusu  |  20% » 30%"
       }
   },
   {
@@ -194,12 +194,12 @@
     "showlevels": {
       "level1": "+10% Hasar  |  10 » 11",
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
-      "level3": "+7% Hasar"
+      "level3": "+20% Ömür  |  150s » 180s"
       }
   },
   {
     "name": "Henry",
-    "type": ["Heyvan"],
+    "type": ["İnsan"],
     "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
@@ -225,9 +225,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+3% Can  |  400 » 412",
+      "level2": "+10% Vuruş Genişliyi  |  1100 » 1210",
+      "level3": "+5% Hız  |  800 » 840"
       }
   },
   {
@@ -258,9 +258,9 @@
       "dodge": "0%"
    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Öz. Yavaşlatma  |  25% » 30%",
+      "level2": "+5% Can  |  200% » 210%",
+      "level3": "+5% Kritik Şansı  |  5% » 10%"
       }
   },
   {
@@ -279,7 +279,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Gələn bütün büyüləri bloklayar (Menzil: 20,000 Karo), sadəcə <b>Qalxana</b> hasar verər",
+    "trait": "Gələn bütün büyüləri bloklayar <b>(Menzil: 20,000 Karo)</b>, sadəcə <b>Qalxana</b> hasar verər",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
@@ -291,9 +291,9 @@
       "dodge": "0%"
    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+50% Öz. Menzil  |  20,000 » 30,000",
+      "level2": "+10% Qalxan  |  90 » 99",
+      "level3": "+5% Menzil  |  1000 » 1050"
       }
   },
   {
@@ -324,9 +324,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+20% Qalxan  |  30 » 36",
+      "level2": "+1 Ekstra Atış  |  3x » 4x",
+      "level3": "+5% Menzil  |  3600 » 3780"
       }
   },
   {
@@ -345,7 +345,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Vuruşları qalxandan keçər, <b>5%</b> şansla ilk vuruşu <b>+200%</b> Hasar bonusu verər",
+    "trait": "Vuruşları qalxandan keçər, <b>5%</b> şansla ilk vuruşu <b>+100%</b> Hasar bonusu verər",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -357,9 +357,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+2% Öz. Şansı  |  5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
+      "level3": "+12% Qalxan  |  50 » 56"
       }
   },
   {
@@ -390,9 +390,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+20% Hasar  |  20 » 24",
+      "level2": "+10% Hız  |  850 » 935",
+      "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
   },
     "secondForm": {
       "name": "Mini Freaks",
@@ -421,9 +421,9 @@
         "dodge": "-"
       },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
       }
       }
   },
@@ -455,9 +455,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+6% Saldırı Hızı  |  1,5s » 1,425",
+      "level2": "+10% Can  |  90 » 99",
+      "level3": "+12% Hasar  |  40 » 45"
       }
   },
   {
