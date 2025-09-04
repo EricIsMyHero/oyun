@@ -224,3 +224,58 @@ button.active {
   0% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* Halo və halqa effektləri */
+.card-front::after, .card-single::after {
+content: "";
+position: absolute;
+inset: -2px;
+border-radius: 20px;
+pointer-events: none;
+border: 2px solid var(--ring);
+filter: blur(4px);
+opacity: .5;
+z-index: -1;
+}
+
+/* Əsas menyu və geri düyməsi */
+.main-menu {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+text-align: center;
+}
+.main-menu h1 { font-size: 48px; margin-bottom: 24px; text-shadow: 0 0 15px rgba(255,255,255,.2) }
+.menu-buttons { display: flex; flex-direction: column; gap: 16px; width: 80%; max-width: 300px }
+
+.hidden { display: none !important }
+
+.card-title-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 18px;
+}
+.back-button {
+background: transparent;
+border: 1px solid var(--muted);
+color: var(--muted);
+font-size: 14px;
+padding: 8px 16px;
+border-radius: 8px;
+}
+
+/* Ethereal parıltısı üçün əlavə glow */
+.card-glow {
+position: absolute;
+inset: -8px;
+border-radius: 16px;
+pointer-events: none;
+background: radial-gradient(120px 80px at 80% 0%, rgba(255,0,127,.35), transparent 70%),
+radial-gradient(120px 80px at 0% 100%, rgba(255,220,120,.25), transparent 70%);
+filter: blur(8px);
+opacity: .9;
+z-index: -1;
+}
