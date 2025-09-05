@@ -325,7 +325,7 @@
     },
     "showlevels": {
       "level1": "+20% Qalxan  |  30 » 36",
-      "level2": "+1 Ekstra Atış  |  3x » 4x",
+      "level2": "+1 Ekstra Atış  |  3x5 » 4x5",
       "level3": "+5% Menzil  |  3600 » 3780"
       }
   },
@@ -488,14 +488,14 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Kritik Şansı  |  5% » 10%",
+      "level2": "+4% Hız  |  1150 » 1200",
+      "level3": "+10% Menzil  |  1000% » 1100"
       }
   },
   {
     "name": "Bethe",
-    "type": ["Heyvan"],
+    "type": ["İnsan"],
     "rarity": "Mundane",
     "isHybrid": false,
     "isMulti": false,
@@ -509,7 +509,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Hər rəqib kartı öldürdükdə <b>+5%</b> Hız qazanar <b>(Max: 50%)</b>",
+    "trait": "Hər rəqib kartı öldürdükdə <b>+5%</b> Hız Bonusu qazanar <b>(Max: 50%)</b>",
     "additionalStats": {
       "range": "2750",
       "speed": "1000",
@@ -521,9 +521,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+6% Gecikmə  |  0,75 » 0,705",
+      "level2": "+30% Qalxan  |  30% » 39",
+      "level3": "+5% Sıyrılma  |  0% » 5%"
       }
   },
   {
@@ -551,12 +551,12 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+12% Hasar  |  15 » 17",
+      "level2": "+1 Öz. Hasar Bonusu  |  2x4 » 2x5",
+      "level3": "+5% Hız  |  1100 » 1155"
       }
   },
   {
@@ -587,9 +587,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+3% Menzil  |  4000 » 4120",
+      "level2": "+5% Qalxan  |  120 » 126",
+      "level3": "+33% Öz. Hasar Bonusu  |  33% » 66%"
       }
   },
   {
@@ -614,15 +614,15 @@
       "speed": "1150",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
+      "lifestealChance": "-",
+      "lifesteal": "-",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "20%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+10% Hasar  |  70 » 77",
+      "level2": "+5% Sıyrılma  |  20% » 25%",
+      "level3": "+10% Menzil  |  800 » 880"
       }
   },
   {
@@ -641,7 +641,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "<b>360°</b> Hasar verər, hasar verdikcə <b>+1%</b> Kritik Şansı qazanar.",
+    "trait": "<b>360°</b> Hasar verər, hasar verdikcə <b>+0,5%</b> Kritik Şansı qazanar.",
     "additionalStats": {
       "range": "1100",
       "speed": "900",
@@ -653,9 +653,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+15% Qalxan  |  80 » 92",
+      "level2": "+0,5% Öz. Kritik Şansı  |  0,5% » 1%",
+      "level3": "+6% Saldırı Hızı  |  1,50s » 1,41s"
       }
   },
   {
@@ -682,13 +682,13 @@
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
-      "damageminimiser": "0%",
+      "damageminimiser": "20%",
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+15% Hasar  |  7 » 8",
+      "level2": "+1 Angel Sayı  |  10 » 11",
+      "level3": "+5% Hız  |  1100 » 1155"
       }
   },
   {
@@ -719,9 +719,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+10% Saldırı Hızı  |  2,4s » 2,16s",
+      "level2": "+4% Hız  |  1000 » 1040",
+      "level3": "+25% Qalxan  |  40 » 50"
       }
   },
   {
@@ -752,9 +752,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Menzil  |  2700 » 2835",
+      "level2": "+7% Kritik Şansı  |  5% » 10%",
+      "level3": "+25% Hasar  |  2x8 » 2x10"
       }
   },
   {
@@ -785,9 +785,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+4% Can  |  400 » 416",
+      "level2": "+10% Hız  |  900 » 990",
+      "level3": "+5% Saldırı Hızı  |  1,80s » 1,62s"
       }
   },
   {
@@ -814,13 +814,13 @@
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
-      "damageminimiser": "0%",
+      "damageminimiser": "10%",
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Kritik Şansı  |  5% » 10%",
+      "level2": "+10% Qalxan  |  60 » 66",
+      "level3": "+5% Menzil  |  1200 » 1260"
       }
   },
   {
@@ -843,17 +843,17 @@
     "additionalStats": {
       "range": "1200",
       "speed": "950",
-      "criticalChance": "10%",
-      "criticDamage": "1.5x",
+      "criticalChance": "20%",
+      "criticDamage": "2x",
       "lifestealChance": "25%",
-      "lifesteal": "25%",
+      "lifesteal": "33%",
       "damageminimiser": "0%",
       "dodge": "0%"
    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+20% Öz. Qalxan  |  10 » 12",
+      "level2": "+5% Can Çalma Şansı  |  25% » 30%",
+      "level3": "+67% Can Çalma  |  33% » !00%"
       }
   },
   {
@@ -884,9 +884,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "-1 Öz. Vaxtı  |  6 » 5",
+      "level2": "+5% Can  |  130 » 137",
+      "level3": "+10% Sıyrılma  |  0% » 10%"
       }
   }
 ]
