@@ -9,7 +9,7 @@
       "health": "240",
       "shield": "10",
       "damage": "90",
-      "sps": "73",
+      "sps": "53",
       "attackSpeed": "1,70s",
       "delay": "-",
       "mana": "15",
@@ -27,9 +27,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Saldırı Hızı  |  1,70s » 1,615s",
+      "level2": "+5% Hız  |  900 » 945",
+      "level3": "+4% Can  |  240 » 250"
       }
   },
   {
@@ -48,21 +48,21 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "Öləndə İnsan, Robot, Ölü, Ruh, Uzaylı tipli kartlara ekstra <b>+400%</b> Hasar bonusu",
+    "trait": "Öləndə İnsan, Robot, Ölü, Ruh, Uzaylı tipli kartlara ekstra <b>+400%</b> Hasar bonusu verər",
     "additionalStats": {
       "range": "800",
       "speed": "1300",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
+      "lifestealChance": "-",
+      "lifesteal": "-",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "10%"
    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+16% Can  |  50 » 58",
+      "level2": "+100% Öz. Hasarı  |  400% » 500%",
+      "level3": "+10% Hız  |  1300 » 1430"
       }
   },
   {
@@ -74,14 +74,14 @@
     "stats": {
       "health": "100",
       "shield": "50",
-      "damage": "2x10/50",
-      "sps": "20/42",
+      "damage": "2x10",
+      "sps": "20",
       "attackSpeed": "0,1s",
       "delay": "1,2s",
       "mana": "7",
       "number": "1"
     },
-    "trait": "Atışları 2 saniyəlik yavaşladar, 12 saniyə vuruşma hasar artar",
+    "trait": "Atışları rəqib kartı <b>2</b> saniyəlik <b>25%</b> yavaşladar, <b>12</b> saniyə hasar verməzsə hasarı <b>+400%</b> artar",
     "additionalStats": {
       "range": "6000",
       "speed": "850",
@@ -93,9 +93,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "-2 Öz. Saniyə  |  12 » 10",
+      "level2": "+26% Qalxan  |  50 » 63",
+      "level3": "+5% Öz. Yavaşlatma  |  25% » 30%"
       }
   },
   {
@@ -123,12 +123,12 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+10% Can  |  130 » 143",
+      "level2": "+10% Sıyrılma  |  10% » 20%",
+      "level3": "+5% Kritik Şansı  |  5% » 10%"
       }
   },
   {
@@ -147,7 +147,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hər 5 saniyədə ekstra <b>+8</b> Qalxan qazanar",
+    "trait": "Hər <b>6<b> saniyədə ekstra <b>+8</b> Qalxan qazanar",
     "additionalStats": {
       "range": "1300",
       "speed": "1000",
@@ -159,9 +159,9 @@
       "dodge": "0%"
    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Menzil  |  1300 » 1365",
+      "level2": "+2 Öz. Qalxan  |  8 » 10",
+      "level3": "+0.5x Kritik Hasar  |  1.5x » 2x"
       }
   },
   {
