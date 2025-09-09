@@ -371,11 +371,11 @@
     "stats": {
       "health": "230",
       "shield": "0",
-      "damage": "20",
-      "sps": "20",
+      "damage": "18",
+      "sps": "18",
       "attackSpeed": "1,00s",
       "delay": "-",
-      "mana": "9",
+      "mana": "10",
       "number": "1"
     },
     "trait": "Hər saniyə <b>+1</b> Can yeniləyər, öləndə <b>2</b> yerə parçalanar.",
@@ -390,7 +390,7 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+20% Hasar  |  20 » 24",
+      "level1": "+22% Hasar  |  18 » 22",
       "level2": "+10% Hız  |  850 » 935",
       "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
   },
