@@ -147,7 +147,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hər <b>6<b> saniyədə ekstra <b>+8</b> Qalxan qazanar",
+    "trait": "Hər <b>6</b> saniyədə ekstra <b>+8</b> Qalxan qazanar",
     "additionalStats": {
       "range": "1300",
       "speed": "1000",
@@ -180,7 +180,7 @@
       "mana": "5",
       "number": "1"
     },
-    "trait": "Hasar vermədikcə 20 saniyə arzinda enerji yığar və ardinca 10 saniyə sonra partlayar",
+    "trait": "Hasar vermədikcə 20 saniyə arzinda enerji yığar və ardınca 10 saniyə sonra partlayar",
     "additionalStats": {
       "range": "1700",
       "speed": "1200",
