@@ -455,7 +455,7 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+6% Saldırı Hızı  |  1,5s » 1,425",
+      "level1": "+6% Saldırı Hızı  |  1,5s » 1,425s",
       "level2": "+10% Can  |  90 » 99",
       "level3": "+12% Hasar  |  40 » 45"
       }
