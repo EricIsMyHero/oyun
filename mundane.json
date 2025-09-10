@@ -114,7 +114,7 @@
       "mana": "5",
       "number": "1"
     },
-    "trait": "Yaxındakı kartlara ekstra <b>+12%</b> Saldırı hızı qazanar",
+    "trait": "Yaxındakı kartlara ekstra <b>+12%</b> Saldırı Hızı qazanar",
     "additionalStats": {
       "range": "2400",
       "speed": "1500",
@@ -147,7 +147,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Hər bir sonrakı atışa <b>+40%</b> Hasar bonusu",
+    "trait": "Hər bir sonrakı atışa <b>+40%</b> Hasar bonusu qazanar",
     "additionalStats": {
       "range": "3000",
       "speed": "1000",
@@ -180,7 +180,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Toxunduğu kartlara içinə çəkər, <b>-6</b> Can hər saniyə itirər",
+    "trait": "Toxunduğu kartlara içinə çəkər, <b>150</b> saniyəlik ömrü olar",
     "additionalStats": {
       "range": "1000",
       "speed": "800",
@@ -753,7 +753,7 @@
     },
     "showlevels": {
       "level1": "+5% Menzil  |  2700 » 2835",
-      "level2": "+7% Kritik Şansı  |  5% » 10%",
+      "level2": "+5% Kritik Şansı  |  5% » 10%",
       "level3": "+25% Hasar  |  2x8 » 2x10"
       }
   },
@@ -853,7 +853,7 @@
     "showlevels": {
       "level1": "+20% Öz. Qalxan  |  10 » 12",
       "level2": "+5% Can Çalma Şansı  |  25% » 30%",
-      "level3": "+67% Can Çalma  |  33% » !00%"
+      "level3": "+67% Can Çalma  |  33% » 100%"
       }
   },
   {
