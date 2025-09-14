@@ -279,3 +279,9 @@ filter: blur(8px);
 opacity: .9;
 z-index: -1;
 }
+
+.name .note {
+  font-size: 0.75em;
+  opacity: 0.6;
+  margin-left: 6px;
+}
