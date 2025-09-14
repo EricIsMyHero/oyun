@@ -784,7 +784,7 @@
     "name": "Chrono Mage",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Mage/Controller",
+    "note": "Controller",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
