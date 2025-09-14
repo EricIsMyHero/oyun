@@ -3,6 +3,7 @@
     "name": "Albert",
     "type": ["İnsan"],
     "rarity": "Familiar",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -36,6 +37,7 @@
     "name": "Chicken",
     "type": ["Heyvan"],
     "rarity": "Familiar",
+    "note": "Suicide Assassin",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -69,6 +71,7 @@
     "name": "Snowballer",
     "type": ["Robot"],
     "rarity": "Familiar",
+    "note": "Controller",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -102,6 +105,7 @@
     "name": "Wild Bees",
     "type": ["Heyvan"],
     "rarity": "Familiar",
+    "note": "Fighter/Swarm",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -135,6 +139,7 @@
     "name": "Warnborn",
     "type": ["İnsan"],
     "rarity": "Familiar",
+    "note": "Tank",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -168,6 +173,7 @@
     "name": "X-Bot",
     "type": ["Robot"],
     "rarity": "Familiar",
+    "note": "Suicide Tank",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -201,6 +207,7 @@
     "name": "Etta",
     "type": ["Robot"],
     "rarity": "Familiar",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -234,6 +241,7 @@
     "name": "Sniper",
     "type": ["İnsan"],
     "rarity": "Familiar",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -267,6 +275,7 @@
     "name": "Turtle",
     "type": ["Heyvan"],
     "rarity": "Familiar",
+    "note": "Tank",
     "isHybrid": false,
     "isMulti": true,
     "stats": {
@@ -299,6 +308,7 @@
       "name": "Mini Turtles",
       "type": ["Heyvan"],
       "rarity": "Familiar",
+      "note": "Support/Fighter",
       "isHybrid": false,
       "stats": {
         "health": "120",
@@ -332,6 +342,7 @@
     "name": "Sar-1",
     "type": ["Heyvan"],
     "rarity": "Familiar",
+    "note": "Assassin",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -365,6 +376,7 @@
     "name": "Trac",
     "type": ["İnsan"],
     "rarity": "Familiar",
+    "note": "Tank/Bruiser",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -398,6 +410,7 @@
     "name": "Tornado",
     "type": ["Uzaylı"],
     "rarity": "Familiar",
+    "note": "Controller",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -429,8 +442,9 @@
   },
   {
     "name": "Dino",
-    "type": ["Robot", "Heyvan"],
+    "type": ["Robot/Heyvan"],
     "rarity": "Familiar",
+    "note": "Fighter/Bruiser",
     "isHybrid": true,
     "isMulti": false,
     "stats": {
@@ -464,6 +478,7 @@
     "name": "Tenta",
     "type": ["Uzaylı"],
     "rarity": "Familiar",
+    "note": "AOE DPS",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -497,6 +512,7 @@
     "name": "Fire Archer",
     "type": ["İnsan"],
     "rarity": "Familiar",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -528,8 +544,9 @@
   },
   {
     "name": "Shadow Reaper",
-    "type": ["İnsan", "Ölü"],
+    "type": ["İnsan/Ölü"],
     "rarity": "Familiar",
+    "note": "Assassin",
     "isHybrid": true,
     "isMulti": false,
     "stats": {
@@ -563,6 +580,7 @@
     "name": "Volt Striker",
     "type": ["Robot"],
     "rarity": "Familiar",
+    "note": "Fighter/AOE",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -596,6 +614,7 @@
     "name": "Frostmaw",
     "type": ["Heyvan"],
     "rarity": "Familiar",
+    "note": "Controller",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -629,6 +648,7 @@
     "name": "Hexon",
     "type": ["Uzaylı"],
     "rarity": "Familiar",
+    "note": "Mage/Controller",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -662,6 +682,7 @@
     "name": "Mecha Shield",
     "type": ["Robot"],
     "rarity": "Familiar",
+    "note": "Tank/Support",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -695,6 +716,7 @@
     "name": "Venomspike",
     "type": ["Heyvan"],
     "rarity": "Familiar",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -728,6 +750,7 @@
     "name": "Starcaller",
     "type": ["Varlıq"],
     "rarity": "Familiar",
+    "note": "Mage/Nuker",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
