@@ -3,6 +3,7 @@
     "name": "Hammies",
     "type": ["Heyvan"],
     "rarity": "Mundane",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -36,6 +37,7 @@
     "name": "B-B",
     "type": ["Heyvan"],
     "rarity": "Mundane",
+    "note": "Tank",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -69,6 +71,7 @@
     "name": "Scrapy",
     "type": ["Robot"],
     "rarity": "Mundane",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -102,6 +105,7 @@
     "name": "Turbo",
     "type": ["Robot"],
     "rarity": "Mundane",
+    "note": "Support",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -135,6 +139,7 @@
     "name": "Srox",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -168,6 +173,7 @@
     "name": "Slimey",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
+    "note": "Tank/Special",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -201,6 +207,7 @@
     "name": "Henry",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Fighter/Assassin",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -234,6 +241,7 @@
     "name": "Hydra",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Mage/Controller",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -267,6 +275,7 @@
     "name": "Blocker",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Tank/Support",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -300,6 +309,7 @@
     "name": "Fen",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Assassin",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -333,6 +343,7 @@
     "name": "Ben",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -366,6 +377,7 @@
     "name": "Freak",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
+    "note": "Fighter/Tank",
     "isHybrid": false,
     "isMulti": true,
     "stats": {
@@ -398,6 +410,7 @@
       "name": "Mini Freaks",
       "type": ["Uzaylı"],
       "rarity": "Mundane",
+      "note": "Suicide Assassin",
       "isHybrid": false,
       "stats": {
         "health": "100",
@@ -431,6 +444,7 @@
     "name": "Nightprowler",
     "type": ["Ruh"],
     "rarity": "Mundane",
+    "note": "Assassin",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -464,6 +478,7 @@
     "name": "Twins",
     "type": ["Ruh"],
     "rarity": "Mundane",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -497,6 +512,7 @@
     "name": "Bethe",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Assassin",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -530,6 +546,7 @@
     "name": "Snaykies",
     "type": ["Heyvan"],
     "rarity": "Mundane",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -563,6 +580,7 @@
     "name": "Soldier",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -596,6 +614,7 @@
     "name": "Bees",
     "type": ["Heyvan"],
     "rarity": "Mundane",
+    "note": "Suicide Assassin",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -629,6 +648,7 @@
     "name": "Hailey",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -662,6 +682,7 @@
     "name": "Angels",
     "type": ["Varlıq"],
     "rarity": "Mundane",
+    "note": "Support/Swarm",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -695,6 +716,7 @@
     "name": "BOOMera",
     "type": ["Varlıq"],
     "rarity": "Mundane",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -728,6 +750,7 @@
     "name": "PhewPhew",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -761,6 +784,7 @@
     "name": "Chrono Mage",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "note": "Mage/Controller",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -794,6 +818,7 @@
     "name": "Aegis Guard",
     "type": ["Varlıq"],
     "rarity": "Mundane",
+    "note": "Tank/Support",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -827,6 +852,7 @@
     "name": "Ironjaw",
     "type": ["Robot"],
     "rarity": "Mundane",
+    "note": "Tank/Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -860,6 +886,7 @@
     "name": "M-Manager",
     "type": ["Robot"],
     "rarity": "Mundane",
+    "note": "Support",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
