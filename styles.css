@@ -282,6 +282,8 @@ z-index: -1;
 
 .name .note {
   font-size: 0.75em;
-  opacity: 0.6;
-  margin-left: 6px;
+  color: #CCCCCC;
+  opacity: 0.7;
+  margin-left: 3px;
 }
+
