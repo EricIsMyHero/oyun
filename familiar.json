@@ -308,7 +308,7 @@
       "name": "Mini Turtles",
       "type": ["Heyvan"],
       "rarity": "Familiar",
-      "note": "Support/Fighter",
+      "note": "Fighter",
       "isHybrid": false,
       "stats": {
         "health": "120",
