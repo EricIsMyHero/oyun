@@ -3,7 +3,7 @@
     "name": "Albert",
     "type": ["İnsan"],
     "rarity": "Familiar",
-    "note": "Fighter",
+    "note": "Fighter/Bruiser",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -37,7 +37,7 @@
     "name": "Chicken",
     "type": ["Heyvan"],
     "rarity": "Familiar",
-    "note": "Suicide Assassin",
+    "note": "Assassin/Suicide",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -71,7 +71,7 @@
     "name": "Snowballer",
     "type": ["Robot"],
     "rarity": "Familiar",
-    "note": "Controller",
+    "note": "Special/Disruptor",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -105,7 +105,7 @@
     "name": "Wild Bees",
     "type": ["Heyvan"],
     "rarity": "Familiar",
-    "note": "Fighter/Swarm",
+    "note": "Special/Swarm",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -401,16 +401,16 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+3% Can  |  700 » 721",
+      "level2": "+13% Öz. Hasar Alma  |  24 » 21",
+      "level3": "+15% Hasar  |  12 » 14"
       }
   },
   {
     "name": "Tornado",
     "type": ["Uzaylı"],
     "rarity": "Familiar",
-    "note": "Controller",
+    "note": "Controller, DPS",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -435,9 +435,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+25% Hasar  |  4 » 5",
+      "level2": "+5% Hız  |  900 » 945",
+      "level3": "+10% Öz. Can Düşmə  |  50% » 60%"
       }
   },
   {
@@ -466,12 +466,12 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "5%"
    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Hasar Azaltma  |  0% » 5%",
+      "level2": "+5% Kritik Şansı  |  5% » 10%",
+      "level3": "+5% Saldırı Hızı  |  1,00s » 0,95s"
       }
   },
   {
