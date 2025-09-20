@@ -364,12 +364,12 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+10% Sıyrılma  |  10% » 20%",
+      "level2": "+12% Öz. Vaxtı  |  16 » 18",
+      "level3": "+5% Saldırı Hızı  |  0,95s » 0,9s"
       }
   },
   {
