@@ -491,9 +491,9 @@
       "mana": "13",
       "number": "1"
     },
-    "trait": "Eyni anda 5 rəqibi yavaşladar",
+    "trait": "Eyni anda <b>5</b> fərqli rəqibə hasar verər və <b>1</b> saniyəlik <b>25%</b> yavaşladar",
     "additionalStats": {
-      "range": "2500",
+      "range": "2000",
       "speed": "900",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -503,9 +503,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+15% Hasar  |  52 » 60",
+      "level2": "+10% Qalxan  |  50 » 55",
+      "level3": "+5% Menzil  |  2000 » 2100"
       }
   },
   {
@@ -525,11 +525,11 @@
       "mana": "4",
       "number": "1"
     },
-    "trait": "Hər <b>4</b>-cü atışdan sonra <b>3</b> saniyəlik <b>+80%</b> Saldırı Hızı qazanar",
+    "trait": "Hər <b>4</b>-cü atışdan sonra <b>3</b> saniyəlik <b>+70%</b> Saldırı Hızı qazanar",
     "additionalStats": {
       "range": "2500",
       "speed": "1000",
-      "criticalChance": "5%",
+      "criticalChance": "10%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
@@ -537,9 +537,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+10% Öz. Saldırı Hızı  |  70% » 80%",
+      "level2": "+10% Kritik Şansı  |  5% » 20%",
+      "level3": "+4% Menzil  |  2500 » 2600"
       }
   },
   {
@@ -559,11 +559,11 @@
       "mana": "17",
       "number": "1"
     },
-    "trait": "<b>17</b> saniyə hasar almaz, ilk vuruş <b>+100%</b> Kritik Şans",
+    "trait": "<b>10</b> saniyə hasar almazsa ilk vuruş <b>+100%</b> Kritik Şans",
     "additionalStats": {
       "range": "1400",
       "speed": "1100",
-      "criticalChance": "5%",
+      "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
@@ -571,9 +571,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+5% Saldırı Hızı  |  1,40s » 1,33s",
+      "level2": "+5% Hız  |  1100 » 1155",
+      "level3": "+10% Qalxan  |  140 » 154"
       }
   },
   {
