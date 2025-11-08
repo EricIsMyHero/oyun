@@ -24,7 +24,7 @@ body {
   font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
 }
 
-.wrap { max-width: 1200px; margin: 32px auto; padding: 16px }
+.wrap { max-width: 1364px; margin: 32px auto; padding: 16px }
 header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 18px }
 h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
 .hint { color: var(--muted); font-size: 14px }
