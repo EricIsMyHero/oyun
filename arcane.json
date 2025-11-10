@@ -33,6 +33,9 @@
       "level3": "+7% Hasar"
       }
   },
+  "story": {
+      "salam"
+      },
   {
     "name": "M-M",
     "type": ["Robot"],
