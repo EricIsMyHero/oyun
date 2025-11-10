@@ -25,7 +25,7 @@ body {
 }
 
 .wrap { max-width: 1364px; margin: 32px auto; padding: 16px }
-header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 18px }
+header {display: flex;gap: 16px;justify-content: space-between;align-items: center;margin-bottom: 30px; }
 h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
 .hint { color: var(--muted); font-size: 14px }
 
@@ -69,6 +69,14 @@ button.active {
   transform: rotateY(180deg);
 }
 
+.card-content-area {
+    flex-grow: 1; /* Mövcud yeri doldurur */
+    display: flex; /* İçərisindəki statistikaları idarə etmək üçün */
+    flex-direction: column;
+    justify-content: center; /* Statistikaları mərkəzə gətirir */
+    padding-bottom: 8px;
+}
+
 /* Kartın iki tərəfi */
 .card-front, .card-back {
   position: absolute;
@@ -80,6 +88,9 @@ button.active {
   border: 1px solid #2a2f57;
   padding: 14px;
   box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .card-back {
   transform: rotateY(180deg);
@@ -252,19 +263,20 @@ text-align: center;
 
 .hidden { display: none !important }
 
-.card-title-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 18px;
-}
 .back-button {
-background: transparent;
-border: 1px solid var(--muted);
-color: var(--muted);
-font-size: 14px;
-padding: 8px 16px;
-border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--muted);
+  color: var(--muted);
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: .25s ease; 
+  cursor: pointer;
+}
+.back-button:hover {
+  color: var(--text);
+  border-color: var(--text);
+  transform: translateY(-1px);
 }
 
 /* Ethereal parıltısı üçün əlavə glow */
