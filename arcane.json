@@ -31,11 +31,10 @@
       "level1": "+5% Can  |  50 » 55",
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
-      }
-  },
-  "story": {
-      "salam"
       },
+    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    }
+  },
   {
     "name": "M-M",
     "type": ["Robot"],
@@ -68,9 +67,8 @@
       "level1": "+5% Can",
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
-     }
-  },
-  "story": {
-      "salam"
-      }
+     },
+    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    }
+  }
 ]
