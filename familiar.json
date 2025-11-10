@@ -341,14 +341,14 @@
         "dodge": "-"
       },
       "showlevels": {
-        "level1": "-",
-        "level2": "-",
-        "level3": "-"
+      "level1": "-",
+      "level2": "-",
+      "level3": "-" 
       },
-      "story": "Mini Turtles-ın hekayəsi buradadır. İkinci formanın tarixi haqqında mətn yazın."
-      }
-  }, 
-  {
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+      }
+  },
+  {
     "name": "Sar-1",
     "type": ["Heyvan"],
     "rarity": "Familiar",
