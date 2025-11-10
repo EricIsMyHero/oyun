@@ -32,8 +32,7 @@
       "level2": "+8% Hasar  |  25 » 27",
       "level3": "+10% Öz. Hız Bonusu  |  20% » 30%"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "B-B",
@@ -68,8 +67,7 @@
       "level2": "+5% Kritik Şansı  |  15% » 20%",
       "level3": "+10% Hasar  |  20 » 22"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Scrapy",
@@ -104,8 +102,7 @@
       "level2": "+10% Hız  |  1000 » 1100",
       "level3": "+10% Can  |  90 » 99"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Turbo",
@@ -140,8 +137,7 @@
       "level2": "+5% Menzil  |  2400 » 2520",
       "level3": "+12% Hasar  |  16 » 18"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Srox",
@@ -176,8 +172,7 @@
       "level2": "+10% Öz. Hasar Bonusu  |  40% » 50%",
       "level3": "+5% Hız  |  1000 » 1050"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+   "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Slimey",
@@ -212,8 +207,7 @@
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
       "level3": "+20% Ömür  |  150s » 180s"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Henry",
@@ -248,8 +242,7 @@
       "level2": "+10% Vuruş Genişliyi  |  1100 » 1210",
       "level3": "+5% Hız  |  800 » 840"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Hydra",
@@ -284,8 +277,7 @@
       "level2": "+5% Can  |  200% » 210%",
       "level3": "+5% Kritik Şansı  |  5% » 10%"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Blocker",
@@ -320,8 +312,7 @@
       "level2": "+10% Qalxan  |  90 » 99",
       "level3": "+5% Menzil  |  1000 » 1050"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Fen",
@@ -356,8 +347,7 @@
       "level2": "+1 Ekstra Atış  |  3x5 » 4x5",
       "level3": "+5% Menzil  |  3600 » 3780"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Ben",
@@ -392,8 +382,7 @@
       "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
       "level3": "+12% Qalxan  |  50 » 56"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Freak",
@@ -428,8 +417,7 @@
       "level2": "+10% Hız  |  850 » 935",
       "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
   },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-  },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
     "secondForm": {
       "name": "Mini Freaks",
       "type": ["Uzaylı"],
@@ -462,8 +450,7 @@
       "level2": "-",
       "level3": "-" 
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
       }
   },
   {
@@ -499,8 +486,7 @@
       "level2": "+10% Can  |  90 » 99",
       "level3": "+12% Hasar  |  40 » 45"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Twins",
@@ -535,8 +521,7 @@
       "level2": "+4% Hız  |  1150 » 1200",
       "level3": "+10% Menzil  |  1000% » 1100"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Bethe",
@@ -571,8 +556,7 @@
       "level2": "+30% Qalxan  |  30% » 39",
       "level3": "+5% Sıyrılma  |  0% » 5%"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Snaykies",
@@ -607,8 +591,7 @@
       "level2": "+1 Öz. Hasar Bonusu  |  2x4 » 2x5",
       "level3": "+5% Hız  |  1100 » 1155"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Soldier",
@@ -643,8 +626,7 @@
       "level2": "+5% Qalxan  |  120 » 126",
       "level3": "+33% Öz. Hasar Bonusu  |  33% » 66%"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Bees",
@@ -679,8 +661,7 @@
       "level2": "+5% Sıyrılma  |  20% » 25%",
       "level3": "+10% Menzil  |  800 » 880"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Hailey",
@@ -715,8 +696,7 @@
       "level2": "+0,5% Öz. Kritik Şansı  |  0,5% » 1%",
       "level3": "+6% Saldırı Hızı  |  1,50s » 1,41s"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Angels",
@@ -751,8 +731,7 @@
       "level2": "+1 Angel Sayı  |  10 » 11",
       "level3": "+5% Hız  |  1100 » 1155"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "BOOMera",
@@ -787,8 +766,7 @@
       "level2": "+4% Hız  |  1000 » 1040",
       "level3": "+25% Qalxan  |  40 » 50"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "PhewPhew",
@@ -823,8 +801,7 @@
       "level2": "+5% Kritik Şansı  |  5% » 10%",
       "level3": "+25% Hasar  |  2x8 » 2x10"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Chrono Mage",
@@ -859,8 +836,7 @@
       "level2": "+10% Hız  |  900 » 990",
       "level3": "+5% Saldırı Hızı  |  1,80s » 1,62s"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Aegis Guard",
@@ -895,8 +871,7 @@
       "level2": "+10% Qalxan  |  60 » 66",
       "level3": "+5% Menzil  |  1200 » 1260"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "Ironjaw",
@@ -931,8 +906,7 @@
       "level2": "+5% Can Çalma Şansı  |  25% » 30%",
       "level3": "+67% Can Çalma  |  33% » 100%"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
     "name": "M-Manager",
@@ -967,7 +941,6 @@
       "level2": "+5% Can  |  130 » 137",
       "level3": "+10% Sıyrılma  |  0% » 10%"
       },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   }
 ]
