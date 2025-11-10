@@ -2,7 +2,7 @@
   {
     "name": "Hamm",
     "type": ["Heyvan"],
-    "rarity": "Ethereal",
+    "rarity": "Arcane",
     "note": "Tank",
     "isHybrid": false,
     "isMulti": false,
@@ -33,10 +33,13 @@
       "level3": "+7% Hasar"
       }
   },
+  "story": {
+      "salam"
+      },
   {
     "name": "M-M",
     "type": ["Robot"],
-    "rarity": "Ethereal",
+    "rarity": "Arcane",
     "note": "Tank",
     "isHybrid": false,
     "isMulti": false,
@@ -65,6 +68,9 @@
       "level1": "+5% Can",
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
+     }
+  },
+  "story": {
+      "salam"
       }
-  }
 ]
