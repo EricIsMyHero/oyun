@@ -77,32 +77,32 @@ function createCardContent(data) {
 </div>
 
         <div class="card-tabs">
-            <button class="active" data-section="main-stats">Əsas</button>
-            <button data-section="additional-stats">Əlavə</button>
-            <button data-section="trait">Özəllik</button>
-            <button data-section="showlevels">Səviyyələr</button>
+            <button class="active" data-section="main-stats">Main</button>
+            <button data-section="additional-stats">Other</button>
+            <button data-section="trait">Ability</button>
+            <button data-section="showlevels">Levels</button>
         </div>
         
         <div class="stats-section visible" data-section-id="main-stats">
-      <div class="stat-item"><b>Can <i class="fa-solid fa-heart"></i></b><span>${data.stats.health}</span></div>
-      <div class="stat-item"><b>Qalxan <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield}</span></div>
-      <div class="stat-item"><b>Hasar <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damage}</span></div>
-      <div class="stat-item"><b>S.B.H <i class="fa-solid fa-bolt"></i></b><span>${data.stats.sps}</span></div>
-      <div class="stat-item"><b>Saldırı Hızı <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed}</span></div>
-      <div class="stat-item"><b>Gecikmə <i class="fa-solid fa-clock"></i></b><span>${data.stats.delay}</span></div>
+      <div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${data.stats.health}</span></div>
+      <div class="stat-item"><b>Shield <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield}</span></div>
+      <div class="stat-item"><b>Damage <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damage}</span></div>
+      <div class="stat-item"><b>D.P.S <i class="fa-solid fa-bolt"></i></b><span>${data.stats.sps}</span></div>
+      <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed}</span></div>
+      <div class="stat-item"><b>Delay <i class="fa-solid fa-clock"></i></b><span>${data.stats.delay}</span></div>
       <div class="stat-item"><b>Mana <i class="fa-solid fa-certificate"></i></b><span>${data.stats.mana}</span></div>
-      <div class="stat-item"><b>Say <i class="fa-solid fa-user"></i></b><span>${data.stats.number}</span></div>
+      <div class="stat-item"><b>Number <i class="fa-solid fa-user"></i></b><span>${data.stats.number}</span></div>
     </div>
         
         <div class="stats-section" data-section-id="additional-stats">
-            <div class="stat-item"><b>Menzil <i class="fa-solid fa-road"></i></b><span>${data.additionalStats.range}</span></div>
-            <div class="stat-item"><b>Hız <i class="fa-solid fa-person-running"></i></b><span>${data.additionalStats.speed}</span></div>
-            <div class="stat-item"><b>Kritik Şansı <i class="fa-solid fa-percent"></i></b><span>${data.additionalStats.criticalChance}</span></div>
-            <div class="stat-item"><b>Kritik Hasar <i class="fa-solid fa-crosshairs"></i></b><span>${data.additionalStats.criticDamage}</span></div>
-            <div class="stat-item"><b>C.Çalma Şansı <i class="fa-solid fa-percent "></i></b><span>${data.additionalStats.lifestealChance}</span></div>
-            <div class="stat-item"><b>Can Çalma <i class="fa-solid fa-skull-crossbones "></i></b><span>${data.additionalStats.lifesteal}</span></div>
-            <div class="stat-item"><b>Hasar Azaltma <i class="fa-solid fa-helmet-un "></i></b><span>${data.additionalStats.damageminimiser}</span></div>
-            <div class="stat-item"><b>Sıyrılma Şansı <i class="fa-solid fa-wind "></i></b><span>${data.additionalStats.dodge}</span></div>
+            <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.additionalStats.range}</span></div>
+            <div class="stat-item"><b>Speed <i class="fa-solid fa-person-running"></i></b><span>${data.additionalStats.speed}</span></div>
+            <div class="stat-item"><b>Critic Chance <i class="fa-solid fa-percent"></i></b><span>${data.additionalStats.criticalChance}</span></div>
+            <div class="stat-item"><b>Critical Damage <i class="fa-solid fa-crosshairs"></i></b><span>${data.additionalStats.criticDamage}</span></div>
+            <div class="stat-item"><b>Life Steal Chance <i class="fa-solid fa-percent "></i></b><span>${data.additionalStats.lifestealChance}</span></div>
+            <div class="stat-item"><b>Life Steal <i class="fa-solid fa-skull-crossbones "></i></b><span>${data.additionalStats.lifesteal}</span></div>
+            <div class="stat-item"><b>Damage Reduction <i class="fa-solid fa-helmet-un "></i></b><span>${data.additionalStats.damageminimiser}</span></div>
+            <div class="stat-item"><b>Dodge Chance <i class="fa-solid fa-wind "></i></b><span>${data.additionalStats.dodge}</span></div>
         </div>
         
         <div class="stats-section" data-section-id="trait">
@@ -110,9 +110,9 @@ function createCardContent(data) {
         </div>
 
 <div class="stats-section" data-section-id="showlevels">
-            <div class="stat-item"><b>Səviyyə 1</b><span>${data.showlevels.level1}</span></div>
-            <div class="stat-item"><b>Səviyyə 2</b><span>${data.showlevels.level2}</span></div>
-            <div class="stat-item"><b>Səviyyə 3</b><span>${data.showlevels.level3}</span></div>
+            <div class="stat-item"><b>Level 1</b><span>${data.showlevels.level1}</span></div>
+            <div class="stat-item"><b>Level 2</b><span>${data.showlevels.level2}</span></div>
+            <div class="stat-item"><b>Level 3</b><span>${data.showlevels.level3}</span></div>
         </div>
         
     `;
@@ -150,7 +150,7 @@ function renderCards(cardsToRender) {
 
 // Məlumatları endərliyə görə çəkən və göstərən funksiya
 async function fetchAndRender(rarity) {
-  cardsContainer.innerHTML = '<p>Yüklənir...</p>';
+  cardsContainer.innerHTML = '<p>Loading...</p>';
   try {
     let cardsData = [];
     if (rarity === 'all') {
@@ -208,7 +208,7 @@ backToMenuBtn.addEventListener('click', showMenu);
     modal.style.borderRadius='12px';
     modal.style.boxShadow='var(--shadow)';
     modal.style.zIndex='1000';
-    modal.textContent="Bu bölmə hələ hazır deyil.";
+    modal.textContent="Coming Soon...";
     document.body.appendChild(modal);
     setTimeout(()=>{document.body.removeChild(modal);},3000);
   });
