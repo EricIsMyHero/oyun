@@ -110,12 +110,16 @@ function createCardContent(data) {
         </div>
 
 <div class="stats-section" data-section-id="showlevels">
-            <div class="stat-item"><b>Level 1</b><span>${data.showlevels.level1}</span></div>
-            <div class="stat-item"><b>Level 2</b><span>${data.showlevels.level2}</span></div>
-            <div class="stat-item"><b>Level 3</b><span>${data.showlevels.level3}</span></div>
-        </div>
-        
-    `;
+            <div class="stat-item"><b>Level 1</b><span>${data.showlevels.level1}</span></div>
+            <div class="stat-item"><b>Level 2</b><span>${data.showlevels.level2}</span></div>
+            <div class="stat-item"><b>Level 3</b><span>${data.showlevels.level3}</span></div>
+        </div>
+        
+        **<div class="stats-section" data-section-id="story-section">**
+            **<div class="story-content">${data.story || 'Hekayə mövcud deyil.'}</div>**
+        **</div>**
+        
+    `;
 
     const cardButtons = content.querySelectorAll('.card-tabs button');
     cardButtons.forEach(button => {
