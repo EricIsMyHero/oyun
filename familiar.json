@@ -309,11 +309,11 @@
       "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+10% Qalxan  |  110 » 121",
-      "level2": "+7% Hız  |  700 » 750",
-      "level3": "+5% Hasar Azaltma  |  0% » 5%"
-  },
-    "story": {"Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+      "level1": "+10% Qalxan | 110 » 121",
+      "level2": "+7% Hız | 700 » 750",
+      "level3": "+5% Hasar Azaltma | 0% » 5%"
+    },
+    "story": "Turtle-ın hekayəsi buradadır. Kartın tarixi haqqında mətn yazın.",
     "secondForm": {
       "name": "Mini Turtles",
       "type": ["Heyvan"],
@@ -336,19 +336,19 @@
         "speed": "700",
         "criticalChance": "-",
         "criticDamage": "-",
-      "lifestealChance": "-",
-      "lifesteal": "-",
-      "damageminimiser": "-",
-      "dodge": "-"
+        "lifestealChance": "-",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-"
       },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-" 
-  },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "Mini Turtles-ın hekayəsi buradadır. İkinci formanın tarixi haqqında mətn yazın."
     }
-  },
+},
   {
     "name": "Sar-1",
     "type": ["Heyvan"],
