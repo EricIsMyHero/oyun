@@ -1,25 +1,95 @@
 [
   {
-    "name": "Hamm",
-    "type": ["Heyvan"],
+    "name": "Arcanyx",
+    "type": ["Varlıq"],
     "rarity": "Arcane",
-    "note": "Tank",
+    "note": "Support/Healer",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": 7,
-      "shield": 0,
-      "damage": 25,
-      "sps": 23,
+      "health": "50",
+      "shield": "50",
+      "damage": "15",
+      "sps": "14",
       "attackSpeed": "1,10s",
       "delay": "-",
-      "mana": 3,
-      "number": 1
+      "mana": "6",
+      "number": "1"
     },
-    "trait": "<b>-12%</b> daha az hasar alar, <b>+20%</b> Hasar bonusu verər.",
+    "trait": "Atışları sonda partlayaraq +60% Hasar verər, yaxındakı kartlara hər 5 saniyədə +8 Can verər",
+    "additionalStats": {
+      "range": 2100,
+      "speed": 1000,
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+  },
+  {
+    "name": "Leafshade",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "note": "Support/Healer",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "220",
+      "shield": "0",
+      "damage": "50",
+      "sps": "33",
+      "attackSpeed": "1,50s",
+      "delay": "-",
+      "mana": "15",
+      "number": "1"
+    },
+    "trait": "Vuruşları qalxandan keçər, hər 7 saniyədə +1% Can Çalma Şansı (Max:25%)",
     "additionalStats": {
       "range": 1000,
-      "speed": 1800,
+      "speed": 1200,
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "10%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+  },
+  {
+    "name": "Clown",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "Support/Healer",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "80",
+      "shield": "80",
+      "damage": "14",
+      "sps": "14",
+      "attackSpeed": "1,00s",
+      "delay": "-",
+      "mana": "8",
+      "number": "1"
+    },
+    "trait": "Öləndə *Box* buraxar",
+    "additionalStats": {
+      "range": 3000,
+      "speed": 1100,
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
