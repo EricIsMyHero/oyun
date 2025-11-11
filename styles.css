@@ -194,11 +194,6 @@ button.active { background: #394073; border-color: #5d66a2 }
   border: 1px solid #252c59;
 }
 
-/* Bu bölmə alt-alta stat-item-ləri düzgün göstərmək üçün BLOCK olmalıdır */
-.stats-section[data-section-id="showlevels"] {
-    display: block;
-}
-
 /* Əsas statistikalar üçün grid tətbiq edildiyi yerdə */
 .stats-section[data-section-id="main-stats"].visible,
 .stats-section[data-section-id="additional-stats"].visible {
