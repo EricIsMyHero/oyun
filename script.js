@@ -81,7 +81,7 @@ function createCardContent(data) {
             <button data-section="additional-stats">Other</button>
             <button data-section="trait">Ability</button>
             <button data-section="showlevels">Levels</button>
-            **<button data-section="story-section">Story</button>**
+            <button data-section="story-section">Story</button>
         </div>
         
         <div class="stats-section visible" data-section-id="main-stats">
@@ -116,9 +116,9 @@ function createCardContent(data) {
             <div class="stat-item"><b>Level 3</b><span>${data.showlevels.level3}</span></div>
         </div>
         
-        **<div class="stats-section" data-section-id="story-section">**
-            **<div class="story-content">${data.story || 'Hekayə mövcud deyil.'}</div>**
-        **</div>**
+        <div class="stats-section" data-section-id="story-section">
+            <div class="story-content">${data.story || 'Hekayə mövcud deyil.'}</div>
+        </div>
         
     `;
 
