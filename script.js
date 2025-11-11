@@ -119,7 +119,7 @@ function createCardContent(data) {
             </div>
             
             <div class="stats-section" data-section-id="story-section">
-                <div class="story-content">${data.story || 'Hekayə mövcud deyil.'}</div>
+                <div class="story-content">${data.story}</div>
             </div>
 
         </div> `;
