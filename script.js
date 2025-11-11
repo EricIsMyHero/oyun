@@ -85,7 +85,7 @@ function createCardContent(data) {
         </div>
         
         <div class="card-content-area">
-
+        
             <div class="stats-section visible" data-section-id="main-stats">
                 <div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${data.stats.health}</span></div>
                 <div class="stat-item"><b>Shield <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield}</span></div>
@@ -123,24 +123,24 @@ function createCardContent(data) {
             </div>
 
         </div> `;
-
+    
     const cardButtons = content.querySelectorAll('.card-tabs button');
-    cardButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const sectionId = button.dataset.section;
-            
-            cardButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+    cardButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const sectionId = button.dataset.section;
+            
+            cardButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-            content.querySelectorAll('.stats-section').forEach(section => {
-                section.classList.remove('visible');
-            });
-            content.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
-        });
-    });
+            content.querySelectorAll('.stats-section').forEach(section => {
+                section.classList.remove('visible');
+            });
+            content.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
+        });
+    });
 
-    return content;
+    return content;
 }
 
 // Kartları render edən funksiya
