@@ -25,7 +25,7 @@ body {
 }
 
 .wrap { max-width: 1364px; margin: 32px auto; padding: 16px }
-header {display: flex;gap: 16px;justify-content: space-between;align-items: center;margin-bottom: 30px; }
+header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 30px; }
 h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
 .hint { color: var(--muted); font-size: 14px }
 
@@ -37,11 +37,9 @@ button {
   box-shadow: var(--shadow); transition: .25s ease;
 }
 button:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.45) }
-button.active {
-  background: #394073;
-  border-color: #5d66a2;
-}
+button.active { background: #394073; border-color: #5d66a2 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -52,24 +50,34 @@ button.active {
   overflow: visible;
 }
 
-/* Kart konteyneri (iki üzlü üçün) */
-.card-container {
-  position: relative;
+/* ÜMUMİ KART ÖLÇÜLƏRİ */
+.card-container,
+.card-single {
   width: 100%;
-  height: 360px;
-  perspective: 1000px;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
+  height: 320px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: var(--card);
+  border: 1px solid #2a2f57;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-container:hover {
+.card-container:hover,
+.card-single:hover {
   transform: translateY(-5px);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
 }
 
-/* Fırlanma effekti üçün daxili konteyner */
+/* İKİÜZLÜ KART STRUKTURU */
+.card-container {
+  position: relative;
+  perspective: 1000px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* İÇ FƏRLANMA */
 .card-inner {
   position: relative;
   width: 100%;
@@ -85,93 +93,44 @@ button.active {
   transform: rotateY(180deg);
 }
 
-.card-content-area {
-    flex-grow: 1; /* Mövcud yeri doldurur */
-    display: flex; /* İçərisindəki statistikaları idarə etmək üçün */
-    flex-direction: column;
-    justify-content: center; /* Statistikaları mərkəzə gətirir */
-    padding-bottom: 8px;
-}
-
-/* Kartın iki tərəfi */
+/* ÖN VƏ ARXA TƏRƏF */
 .card-front,
 .card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--card);
   border: 1px solid #2a2f57;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 14px;
+  padding: 10px;
 }
 
-.card-back {
-  transform: rotateY(180deg);
-}
+.card-back { transform: rotateY(180deg) }
 
-/* Tək tərəfli kartın əsas stilləri */
+/* TƏKÜZLÜ KART */
 .card-single {
   position: relative;
-  width: 100%;
-  height: 360px;
-  border-radius: 12px;
-  background: var(--card);
-  border: 1px solid #2a2f57;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 10px;
 }
 
-.card-single:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
-}
-
-/* Fırlatma düyməsi */
-.flip-button {
-  position: absolute;
-  bottom: 14px;
-  right: 14px;
-  z-index: 10;
-  background: rgba(43, 50, 100, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+/* KARTIN İÇİ */
+.card-content-area {
+  flex-grow: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  transition: transform 0.2s ease-in-out;
-}
-.flip-button:hover {
-  transform: scale(1.1);
-}
-.flip-button::before {
-  content: '⇌';
-  font-size: 20px;
-  color: white;
-  display: block;
-  transform: scaleX(-1);
-}
-.card-container.is-flipped .flip-button::before {
-  transform: scaleX(1);
+  padding-bottom: 8px;
 }
 
-/* Digər köhnə stillər */
-.card-front::after, .card-single::after {
-  content: ""; position: absolute; inset: -2px; border-radius: 20px;
-  pointer-events: none; border: 2px solid var(--ring); filter: blur(4px);
-  opacity: .5; z-index: -1;
-}
-
+/* BAŞLIQ VƏ ETİKETLƏR */
 .head {
   display: flex;
   justify-content: space-between;
@@ -188,6 +147,37 @@ button.active {
   color: #bfc7ff;
   margin-top: 4px;
 }
+
+.head > .badge:last-child { margin-left: auto }
+
+/* FİRLATMA DÜYMƏSİ */
+.flip-button {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 10;
+  background: rgba(43, 50, 100, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+.flip-button:hover { transform: scale(1.1) }
+.flip-button::before {
+  content: '⇌';
+  font-size: 20px;
+  color: white;
+  display: block;
+  transform: scaleX(-1);
+}
+.card-container.is-flipped .flip-button::before { transform: scaleX(1) }
+
+/* STATİSTİKALAR */
 .card-tabs { display: flex; justify-content: center; margin-bottom: 8px; gap: 8px }
 .card-tabs button {
   background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264;
@@ -196,27 +186,24 @@ button.active {
 }
 .card-tabs button.active { background: #2b3264; color: #fff }
 
-/* Bütün statistikalar bölmələri üçün ümumi stil */
 .stats-section {
-    display: none;
-    border-radius: 12px;
-    padding: 8px;
-    background: #111636;
-    border: 1px solid #252c59;
+  display: none;
+  border-radius: 12px;
+  padding: 8px;
+  background: #111636;
+  border: 1px solid #252c59;
 }
 
-/* Əsas və Əlavə statistikalar üçün grid düzülüşü */
 .stats-section[data-section-id="main-stats"].visible,
 .stats-section[data-section-id="additional-stats"].visible {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 
-/* Özəllik və Səviyyələr üçün blok düzülüşü (alt-alta) */
 .stats-section[data-section-id="trait"].visible,
 .stats-section[data-section-id="showlevels"].visible {
-    display: block;
+  display: block;
 }
 
 .stat-item { padding: 4px }
@@ -224,19 +211,19 @@ button.active {
 .stat-item span { font-size: 13px }
 .trait-center { text-align: center }
 
-/* color-mix istifadə edilən yerlərdə əvəzləmələr: */
-.r-mundane { box-shadow: 0 6px 28px rgba(204,204,204,0.35); }
-.r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35); }
-.r-arcane { box-shadow: 0 6px 28px rgba(126,87,194,0.35); }
-.r-mythic { box-shadow: 0 6px 28px rgba(229,57,53,0.35); }
-.r-legendary { box-shadow: 0 6px 28px rgba(251,192,45,0.35); }
-.r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35); }
+/* NADİRLİK RƏNGLƏRİ */
+.r-mundane { box-shadow: 0 6px 28px rgba(204,204,204,0.35) }
+.r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35) }
+.r-arcane { box-shadow: 0 6px 28px rgba(126,87,194,0.35) }
+.r-mythic { box-shadow: 0 6px 28px rgba(229,57,53,0.35) }
+.r-legendary { box-shadow: 0 6px 28px rgba(251,192,45,0.35) }
+.r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35) }
 
-/* Stripe (yuxarı rəng xətti) */
+/* STRIPE */
 .stripe {
   height: 6px;
   border-radius: 12px;
-  margin: -14px -14px 10px;
+  margin: -10px -10px 10px;
   opacity: .9;
 }
 .r-mundane .stripe { background: var(--mundane) }
@@ -245,22 +232,20 @@ button.active {
 .r-mythic .stripe { background: var(--mythic) }
 .r-legendary .stripe { background: var(--legendary) }
 .r-ethereal .stripe {
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
   background-size: 600% 100%;
   animation: ethereal-animate 10s linear infinite;
 }
 
-/* Kart adını rəngləndirən yeni stil */
+/* ADLARIN RƏNGLƏRİ */
 .r-mundane .name { color: var(--mundane) }
 .r-familiar .name { color: var(--familiar) }
 .r-arcane .name { color: var(--arcane) }
 .r-mythic .name { color: var(--mythic) }
 .r-legendary .name { color: var(--legendary) }
-
-/* Gradient teext effekti alınmayan brauzerlər üçün ehtiyat rəng */
 .r-ethereal .name {
   color: var(--ethereal);
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -269,33 +254,38 @@ button.active {
 }
 
 @keyframes ethereal-animate {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
 }
 
-/* Halo və halqa effektləri */
-.card-front::after, .card-single::after {
-content: "";
-position: absolute;
-inset: -2px;
-border-radius: 20px;
-pointer-events: none;
-border: 2px solid var(--ring);
-filter: blur(4px);
-opacity: .5;
-z-index: -1;
+/* HALO EFFEKTLƏRİ */
+.card-front::after,
+.card-single::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  pointer-events: none;
+  border: 2px solid var(--ring);
+  filter: blur(4px);
+  opacity: .5;
+  z-index: -1;
 }
 
-/* Əsas menyu və geri düyməsi */
+/* MENYU */
 .main-menu {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-height: 100vh;
-text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
 }
-.main-menu h1 { font-size: 48px; margin-bottom: 24px; text-shadow: 0 0 15px rgba(255,255,255,.2) }
+.main-menu h1 {
+  font-size: 48px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 15px rgba(255,255,255,.2);
+}
 .menu-buttons { display: flex; flex-direction: column; gap: 16px; width: 80%; max-width: 300px }
 
 .hidden { display: none !important }
@@ -307,7 +297,7 @@ text-align: center;
   font-size: 14px;
   padding: 8px 16px;
   border-radius: 8px;
-  transition: .25s ease; 
+  transition: .25s ease;
   cursor: pointer;
 }
 .back-button:hover {
@@ -316,17 +306,17 @@ text-align: center;
   transform: translateY(-1px);
 }
 
-/* Ethereal parıltısı üçün əlavə glow */
+/* ETHEREAL PARILTISI */
 .card-glow {
-position: absolute;
-inset: -8px;
-border-radius: 16px;
-pointer-events: none;
-background: radial-gradient(120px 80px at 80% 0%, rgba(255,0,127,.35), transparent 70%),
-radial-gradient(120px 80px at 0% 100%, rgba(255,220,120,.25), transparent 70%);
-filter: blur(8px);
-opacity: .9;
-z-index: -1;
+  position: absolute;
+  inset: -8px;
+  border-radius: 16px;
+  pointer-events: none;
+  background: radial-gradient(120px 80px at 80% 0%, rgba(255,0,127,.35), transparent 70%),
+              radial-gradient(120px 80px at 0% 100%, rgba(255,220,120,.25), transparent 70%);
+  filter: blur(8px);
+  opacity: .9;
+  z-index: -1;
 }
 
 .name .note {
@@ -336,8 +326,5 @@ z-index: -1;
   margin-left: 3px;
 }
 
-/* Sağda olan “Robot / Heyvan / İnsan” yazıları sabit qalır */
-.head > .badge:last-child {
-  margin-left: auto;
-}
-
+/* ÜMUMİ XƏTA QARŞISININ ALINMASI */
+body, .wrap { overflow-x: hidden }
