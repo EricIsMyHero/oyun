@@ -202,9 +202,11 @@ button.active { background: #394073; border-color: #5d66a2 }
 }
 
 .stats-section[data-section-id="trait"].visible,
-.stats-section[data-section-id="showlevels"].visible {
-  display: block;
+.stats-section[data-section-id="showlevels"].visible,
+.stats-section[data-section-id="story-section"].visible {
+    display: block;
 }
+
 
 .stat-item { padding: 4px }
 .stat-item b { display: block; font-size: 12px; color: #c6ceff; margin-bottom: 4px }
