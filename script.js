@@ -19,47 +19,77 @@ function showCards() {
 
 // Kart yaratmaq üçün əsas funksiya
 function createCardElement(data) {
-    const cardContainer = document.createElement('article');
-    cardContainer.className = `card-container card r-${data.rarity.toLowerCase()}`;
-    
-    if (data.isMulti) {
-        const cardInner = document.createElement('div');
-        cardInner.className = 'card-inner';
+    const cardContainer = document.createElement('article');
+    cardContainer.className = `card-container card r-${data.rarity.toLowerCase()}`;
+    
+    // YENİ KÖMƏKÇİ FUNKSİYA: Təkrar kodu azaltmaq və listenerləri düzgün tətbiq etmək üçün
+    const setupCardListeners = (contentElement) => {
+        const cardButtons = contentElement.querySelectorAll('.card-tabs button');
+        cardButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const sectionId = button.dataset.section;
+                
+                // 1. Düymələri təmizlə və seçiləni aktiv et
+                cardButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
 
-        const cardFront = createCardContent(data);
-        cardFront.classList.add('card-front');
-        
-        const cardBack = createCardContent(data.secondForm);
-        cardBack.classList.add('card-back');
+                // 2. Bütün bölmələri gizlət (YALNIZ BU ÜZDƏ)
+                contentElement.querySelectorAll('.stats-section').forEach(section => {
+                    section.classList.remove('visible');
+                });
+                
+                // 3. Seçiləni göstər
+                contentElement.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
+            });
+        });
+    }
 
-        cardInner.appendChild(cardFront);
-        cardInner.appendChild(cardBack);
-        cardContainer.appendChild(cardInner);
+    if (data.isMulti) {
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
 
-        const flipButton = document.createElement('button');
-        flipButton.className = 'flip-button';
+        const cardFront = createCardContent(data);
+        cardFront.classList.add('card-front');
+        
+        const cardBack = createCardContent(data.secondForm);
+        cardBack.classList.add('card-back');
 
-        cardContainer.addEventListener('click', (e) => {
-            if (e.target.closest('.flip-button')) {
-                cardContainer.classList.toggle('is-flipped');
-            }
-        });
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        cardContainer.appendChild(cardInner);
 
-        cardContainer.appendChild(flipButton);
-    } else {
-        const singleCard = createCardContent(data);
-        singleCard.classList.add('card-single');
-        cardContainer.appendChild(singleCard);
-    }
+        // Listenerləri qoşa üz üçün tətbiq et
+        setupCardListeners(cardFront);
+        setupCardListeners(cardBack);
+        
+        const flipButton = document.createElement('button');
+        flipButton.className = 'flip-button';
 
-    if (data.rarity.toLowerCase() === 'ethereal') {
-        const glowDiv = document.createElement('div');
-        glowDiv.className = 'card-glow';
-        glowDiv.setAttribute('aria-hidden', 'true');
-        cardContainer.appendChild(glowDiv);
-    }
+        cardContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.flip-button')) {
+                cardContainer.classList.toggle('is-flipped');
+            }
+        });
 
-    return cardContainer;
+        cardContainer.appendChild(flipButton);
+    } else {
+        const singleCard = createCardContent(data);
+        singleCard.classList.add('card-single');
+        cardContainer.appendChild(singleCard);
+        
+        // Listenerləri tək üz üçün tətbiq et
+        setupCardListeners(singleCard);
+    }
+
+    if (data.rarity.toLowerCase() === 'ethereal') {
+        const glowDiv = document.createElement('div');
+        glowDiv.className = 'card-glow';
+        glowDiv.setAttribute('aria-hidden', 'true');
+        cardContainer.appendChild(glowDiv);
+    }
+
+    return cardContainer;
 }
 
 // Kartın iç məzmununu yaradan köməkçi funksiya
@@ -123,22 +153,6 @@ function createCardContent(data) {
             </div>
 
         </div> `;
-    
-    const cardButtons = content.querySelectorAll('.card-tabs button');
-    cardButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const sectionId = button.dataset.section;
-            
-            cardButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            content.querySelectorAll('.stats-section').forEach(section => {
-                section.classList.remove('visible');
-            });
-            content.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
-        });
-    });
 
     return content;
 }
