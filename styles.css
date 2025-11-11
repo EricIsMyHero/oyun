@@ -213,6 +213,17 @@ button.active { background: #394073; border-color: #5d66a2 }
 .stat-item span { font-size: 13px }
 .trait-center { text-align: center }
 
+/* Hekayə məzmunu üçün daxili stil */
+.story-content {
+    /* Məzmunu tənzimləmək üçün */
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.4;
+    max-height: 160px; /* Kartın hündürlüyünə sığması üçün */
+    overflow-y: auto; /* Əgər mətn çox uzundursa, scroll əlavə edin */
+    padding: 4px;
+}
+
 /* NADİRLİK RƏNGLƏRİ */
 .r-mundane { box-shadow: 0 6px 28px rgba(204,204,204,0.35) }
 .r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35) }
