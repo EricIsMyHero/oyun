@@ -75,7 +75,7 @@
     "rarity": "Arcane",
     "note": "Support/Healer",
     "isHybrid": false,
-    "isMulti": false,
+    "isMulti": true,
     "stats": {
       "health": "80",
       "shield": "80",
@@ -98,33 +98,67 @@
       "dodge": "0%"
    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "+22% Hasar  |  18 » 22",
+      "level2": "+10% Hız  |  850 » 935",
+      "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
+  },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "secondForm": {
+      "name": "Box",
+      "type": ["Robot"],
+      "rarity": "Arcane",
+      "note": "Suicide Assassin",
+      "isHybrid": false,
+      "stats": {
+        "health": "50",
+        "shield": "50",
+        "damage": "30",
+        "sps": "13",
+        "attackSpeed": "2,40s",
+        "delay": "-",
+        "mana": "-",
+        "number": "1"
+      },
+      "trait": "Rəqib kart yaxına gələrsə açılaraq hasar verər və 1,3 saniyə sərsəmlətər",
+      "additionalStats": {
+        "range": "1500",
+        "speed": "-",
+        "criticalChance": "-",
+        "criticDamage": "-",
+        "lifestealChance": "-",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-"
+      },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-" 
       },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+      }
   },
   {
-    "name": "M-M",
-    "type": ["Robot"],
+    "name": "Tphoneix",
+    "type": ["İnsan"],
     "rarity": "Arcane",
-    "note": "Tank",
+    "note": "Fighter",
     "isHybrid": false,
-    "isMulti": false,
+    "isMulti": true,
     "stats": {
-      "health": 110,
-      "shield": 20,
-      "damage": 5,
-      "sps": 11,
-      "attackSpeed": "0,95s",
+      "health": "400",
+      "shield": "0",
+      "damage": "15",
+      "sps": "19",
+      "attackSpeed": "0,80s",
       "delay": "-",
-      "mana": 10,
-      "number": 1
+      "mana": "15",
+      "number": "1"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər. Fire Egg Can: 100 Özəllik: 4,3 saniyə ərzində qırılmazsa *Phoneix*-ə dönüşər, qırılarsa *Tphoneix*-ə",
     "additionalStats": {
       "range": 1000,
-      "speed": 950,
+      "speed": 100,
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -137,6 +171,39 @@
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
      },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+  "secondForm": {
+      "name": "Phoneix",
+      "type": ["Heyvan"],
+      "rarity": "Arcane",
+      "note": "Suicide Assassin",
+      "isHybrid": false,
+      "stats": {
+        "health": "200",
+        "shield": "0",
+        "damage": "20",
+        "sps": "25",
+        "attackSpeed": "0,80s",
+        "delay": "-",
+        "mana": "-",
+        "number": "1"
+      },
+      "trait": "Vuruşları qalxandan keçər",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "-",
+        "criticDamage": "-",
+        "lifestealChance": "-",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-"
+      },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-" 
+      },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-  }
+      }
 ]
