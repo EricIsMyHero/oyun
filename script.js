@@ -64,63 +64,65 @@ function createCardElement(data) {
 
 // Kartın iç məzmununu yaradan köməkçi funksiya
 function createCardContent(data) {
-    const content = document.createElement('div');
-    const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
-    content.innerHTML = `
-        <div class="stripe"></div>
-        <div class="head">
-    <div class="name">
-        ${data.name}
-        ${data.note ? `<span class="note">${data.note}</span>` : ""}
-    </div>
-    <span class="badge">${badgeText}</span>
-</div>
+    const content = document.createElement('div');
+    const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
+    content.innerHTML = `
+        <div class="stripe"></div>
+        <div class="head">
+            <div class="name">
+                ${data.name}
+                ${data.note ? `<span class="note">${data.note}</span>` : ""}
+            </div>
+            <span class="badge">${badgeText}</span>
+        </div>
 
-        <div class="card-tabs">
-            <button class="active" data-section="main-stats">Main</button>
-            <button data-section="additional-stats">Other</button>
-            <button data-section="trait">Ability</button>
-            <button data-section="showlevels">Levels</button>
-            <button data-section="story-section">Story</button>
-        </div>
-        
-        <div class="stats-section visible" data-section-id="main-stats">
-      <div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${data.stats.health}</span></div>
-      <div class="stat-item"><b>Shield <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield}</span></div>
-      <div class="stat-item"><b>Damage <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damage}</span></div>
-      <div class="stat-item"><b>D.P.S <i class="fa-solid fa-bolt"></i></b><span>${data.stats.sps}</span></div>
-      <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed}</span></div>
-      <div class="stat-item"><b>Delay <i class="fa-solid fa-clock"></i></b><span>${data.stats.delay}</span></div>
-      <div class="stat-item"><b>Mana <i class="fa-solid fa-certificate"></i></b><span>${data.stats.mana}</span></div>
-      <div class="stat-item"><b>Number <i class="fa-solid fa-user"></i></b><span>${data.stats.number}</span></div>
-    </div>
-        
-        <div class="stats-section" data-section-id="additional-stats">
-            <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.additionalStats.range}</span></div>
-            <div class="stat-item"><b>Speed <i class="fa-solid fa-person-running"></i></b><span>${data.additionalStats.speed}</span></div>
-            <div class="stat-item"><b>Critic Chance <i class="fa-solid fa-percent"></i></b><span>${data.additionalStats.criticalChance}</span></div>
-            <div class="stat-item"><b>Critical Damage <i class="fa-solid fa-crosshairs"></i></b><span>${data.additionalStats.criticDamage}</span></div>
-            <div class="stat-item"><b>Life Steal Chance <i class="fa-solid fa-percent "></i></b><span>${data.additionalStats.lifestealChance}</span></div>
-            <div class="stat-item"><b>Life Steal <i class="fa-solid fa-skull-crossbones "></i></b><span>${data.additionalStats.lifesteal}</span></div>
-            <div class="stat-item"><b>Damage Reduction <i class="fa-solid fa-helmet-un "></i></b><span>${data.additionalStats.damageminimiser}</span></div>
-            <div class="stat-item"><b>Dodge Chance <i class="fa-solid fa-wind "></i></b><span>${data.additionalStats.dodge}</span></div>
-        </div>
-        
-        <div class="stats-section" data-section-id="trait">
-            <div class="trait trait-center">${data.trait}</div>
-        </div>
+        <div class="card-tabs">
+            <button class="active" data-section="main-stats">Main</button>
+            <button data-section="additional-stats">Other</button>
+            <button data-section="trait">Ability</button>
+            <button data-section="showlevels">Levels</button>
+            <button data-section="story-section">Story</button>
+        </div>
+        
+        <div class="card-content-area">
 
-<div class="stats-section" data-section-id="showlevels">
-            <div class="stat-item"><b>Level 1</b><span>${data.showlevels.level1}</span></div>
-            <div class="stat-item"><b>Level 2</b><span>${data.showlevels.level2}</span></div>
-            <div class="stat-item"><b>Level 3</b><span>${data.showlevels.level3}</span></div>
-        </div>
-        
-        <div class="stats-section" data-section-id="story-section">
-            <div class="story-content">${data.story || 'Hekayə mövcud deyil.'}</div>
-        </div>
-        
-    `;
+            <div class="stats-section visible" data-section-id="main-stats">
+                <div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${data.stats.health}</span></div>
+                <div class="stat-item"><b>Shield <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield}</span></div>
+                <div class="stat-item"><b>Damage <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damage}</span></div>
+                <div class="stat-item"><b>D.P.S <i class="fa-solid fa-bolt"></i></b><span>${data.stats.sps}</span></div>
+                <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed}</span></div>
+                <div class="stat-item"><b>Delay <i class="fa-solid fa-clock"></i></b><span>${data.stats.delay}</span></div>
+                <div class="stat-item"><b>Mana <i class="fa-solid fa-certificate"></i></b><span>${data.stats.mana}</span></div>
+                <div class="stat-item"><b>Number <i class="fa-solid fa-user"></i></b><span>${data.stats.number}</span></div>
+            </div>
+            
+            <div class="stats-section" data-section-id="additional-stats">
+                <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.additionalStats.range}</span></div>
+                <div class="stat-item"><b>Speed <i class="fa-solid fa-person-running"></i></b><span>${data.additionalStats.speed}</span></div>
+                <div class="stat-item"><b>Critic Chance <i class="fa-solid fa-percent"></i></b><span>${data.additionalStats.criticalChance}</span></div>
+                <div class="stat-item"><b>Critical Damage <i class="fa-solid fa-crosshairs"></i></b><span>${data.additionalStats.criticDamage}</span></div>
+                <div class="stat-item"><b>Life Steal Chance <i class="fa-solid fa-percent "></i></b><span>${data.additionalStats.lifestealChance}</span></div>
+                <div class="stat-item"><b>Life Steal <i class="fa-solid fa-skull-crossbones "></i></b><span>${data.additionalStats.lifesteal}</span></div>
+                <div class="stat-item"><b>Damage Reduction <i class="fa-solid fa-helmet-un "></i></b><span>${data.additionalStats.damageminimiser}</span></div>
+                <div class="stat-item"><b>Dodge Chance <i class="fa-solid fa-wind "></i></b><span>${data.additionalStats.dodge}</span></div>
+            </div>
+            
+            <div class="stats-section" data-section-id="trait">
+                <div class="trait trait-center">${data.trait}</div>
+            </div>
+
+            <div class="stats-section" data-section-id="showlevels">
+                <div class="stat-item"><b>Level 1</b><span>${data.showlevels.level1}</span></div>
+                <div class="stat-item"><b>Level 2</b><span>${data.showlevels.level2}</span></div>
+                <div class="stat-item"><b>Level 3</b><span>${data.showlevels.level3}</span></div>
+            </div>
+            
+            <div class="stats-section" data-section-id="story-section">
+                <div class="story-content">${data.story || 'Hekayə mövcud deyil.'}</div>
+            </div>
+
+        </div> `;
 
     const cardButtons = content.querySelectorAll('.card-tabs button');
     cardButtons.forEach(button => {
