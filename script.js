@@ -6,6 +6,13 @@ const backToMenuBtn = document.getElementById('back-to-menu-btn');
 const filterButtons = document.querySelectorAll('.controls button');
 const cardsContainer = document.getElementById('cards');
 
+// YENİ ELEMENT: HTML-də yaratdığınız axtarış sahəsini götürün
+const searchInput = document.getElementById('search-input'); 
+
+// YENİ GLOBAL DƏYİŞƏNLƏR
+let allCardsData = []; // Bütün yüklənmiş kartları saxlayır
+let activeRarity = 'all'; // Aktiv endərliyi yadda saxlayır
+
 function showMenu() {
   mainMenu.classList.remove('hidden');
   cardsSection.classList.add('hidden');
@@ -15,6 +22,7 @@ function showCards() {
   mainMenu.classList.add('hidden');
   cardsSection.classList.remove('hidden');
   fetchAndRender('all');
+  if (searchInput) searchInput.value = '';
 }
 
 // Kart yaratmaq üçün əsas funksiya
@@ -169,12 +177,37 @@ function renderCards(cardsToRender) {
     });
 }
 
-// Məlumatları endərliyə görə çəkən və göstərən funksiya
+// YENİ ƏSAS FİLTR VƏ AXTAARİŞ FUNKSİYASI
+function filterAndRender() {
+    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    
+    // Bütün kartlardan başlayın
+    let filteredCards = allCardsData;
+
+    // 1. Endərliyə görə filtrləmə (Əgər 'all' deyilsə)
+    if (activeRarity !== 'all') {
+        filteredCards = filteredCards.filter(card => card.rarity.toLowerCase() === activeRarity);
+    }
+
+    // 2. Axtarış termininə görə filtrləmə
+    if (searchTerm.length > 0) {
+        filteredCards = filteredCards.filter(card => 
+            card.name.toLowerCase().includes(searchTerm)
+        );
+    }
+
+    renderCards(filteredCards);
+}
+
+
+// Məlumatları çəkən funksiya (Əhəmiyyətli dərəcədə DƏYİŞİR)
 async function fetchAndRender(rarity) {
-  cardsContainer.innerHTML = '<p>Loading...</p>';
+  cardsContainer.innerHTML = '<p>Məlumatlar yüklənir...</p>';
+  activeRarity = rarity; 
   try {
-    let cardsData = [];
-    if (rarity === 'all') {
+    
+    // 'all' kartları çəkmək lazımdırsa VƏ hələ çəkilməyibsə:
+    if (allCardsData.length === 0) {
       const rarities = ['mundane', 'familiar', 'arcane', 'mythic', 'legendary', 'ethereal'];
       const fetchPromises = rarities.map(r =>
         fetch(`${r}.json`).then(async res => {
@@ -190,28 +223,20 @@ async function fetchAndRender(rarity) {
         })
       );
       const results = await Promise.all(fetchPromises);
-      cardsData = results.flat();
-    } else {
-      const response = await fetch(`${rarity}.json`);
-      if (!response.ok) {
-        if (response.status === 404) {
-          console.warn(`${rarity}.json tapılmadı.`);
-          cardsData = [];
-        } else {
-          throw new Error(`HTTP xətası! Status: ${response.status}`);
-        }
-      } else {
-        const text = await response.text();
-        cardsData = text ? JSON.parse(text) : [];
-      }
+      allCardsData = results.flat(); // Bütün kartları bir dəfə çəkib saxlayırıq
     }
-    renderCards(cardsData);
+    
+    // Məlumatı çəkdikdən sonra filtrləmə və render etməyi icra edin
+    filterAndRender();
+    
   } catch (error) {
     console.error('Məlumatları yükləmə zamanı xəta:', error);
     cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
   }
 }
 
+
+// EVENT LİSTENERLƏRİ
 
 showCardsBtn.addEventListener('click', showCards);
 backToMenuBtn.addEventListener('click', showMenu);
@@ -235,13 +260,25 @@ backToMenuBtn.addEventListener('click', showMenu);
   });
 });
 
+// FİLTR DÜYMƏLƏRİ (DƏYİŞİR)
 filterButtons.forEach(button => {
   button.addEventListener('click', () => {
     const rarity = button.id.split('-')[1];
     filterButtons.forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
-    fetchAndRender(rarity);
+    
+    // Active rarity yenilənir və filtrasiya təkrar icra olunur
+    activeRarity = rarity; 
+    filterAndRender(); 
   });
 });
+
+// AXTARIŞ GİRİŞİNƏ EVENT LİSTENER ƏLAVƏ EDİN
+if (searchInput) {
+    searchInput.addEventListener('input', filterAndRender);
+} else {
+    // Əgər axtarış inputu tapılmayıbsa, xəbərdarlıq verin
+    console.warn("Axtarış inputu (id='search-input') tapılmadı. HTML-i yoxlayın.");
+}
 
 document.addEventListener('DOMContentLoaded', showMenu);
