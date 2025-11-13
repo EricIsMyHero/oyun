@@ -18,8 +18,8 @@
     },
     "trait": "Atışları sonda partlayaraq +60% Hasar verər, yaxındakı kartlara hər 5 saniyədə +8 Can verər",
     "additionalStats": {
-      "range": 2100,
-      "speed": 1000,
+      "range": "2100",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -53,8 +53,8 @@
     },
     "trait": "Vuruşları qalxandan keçər, hər 7 saniyədə +1% Can Çalma Şansı (Max:25%)",
     "additionalStats": {
-      "range": 1000,
-      "speed": 1200,
+      "range": "1000",
+      "speed": "1200",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "10%",
@@ -88,8 +88,8 @@
     },
     "trait": "Öləndə *Box* buraxar",
     "additionalStats": {
-      "range": 3000,
-      "speed": 1100,
+      "range": "3000",
+      "speed": "1100",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -157,8 +157,8 @@
     },
     "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər. Fire Egg Can: 100 Özəllik: 4,3 saniyə ərzində qırılmazsa *Phoneix*-ə dönüşər, qırılarsa *Tphoneix*-ə",
     "additionalStats": {
-      "range": 1000,
-      "speed": 100,
+      "range": "1000",
+      "speed": "100",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -226,8 +226,8 @@
     },
     "trait": "Hər 7 saniyədə +5 Can yeniləyər",
     "additionalStats": {
-      "range": 1000,
-      "speed": 100,
+      "range": "1000",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -295,8 +295,8 @@
     },
     "trait": "Sahib olduğu hər 20 qalxan üçün +0,5% Saldırı Hızı qazanar bonusu qazanar",
     "additionalStats": {
-      "range": 3200,
-      "speed": 900,
+      "range": "3200",
+      "speed": "900",
       "criticalChance": "15%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -310,5 +310,75 @@
       "level3": "+12% Qalxan  |  50 » 56"
       },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
-  }
+  },
+  {
+    "name": "Toxic",
+    "type": ["Uzaylı"],
+    "rarity": "Arcane",
+    "note": "Support",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "50",
+      "shield": "30",
+      "damage": "70",
+      "sps": "42",
+      "attackSpeed": "1,65s",
+      "delay": "-",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "Rəqib kartları zəhərləyərək ekstra 2x3 Hasar verər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "750",
+      "criticalChance": "25%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "25%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+2% Öz. Şansı  |  5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
+      "level3": "+12% Qalxan  |  50 » 56"
+      },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+  },
+  {
+    "name": "Aura girl",
+    "type": ["Uzaylı"],
+    "rarity": "Arcane",
+    "note": "Support",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "500",
+      "shield": "500",
+      "damage": "120",
+      "sps": "48",
+      "attackSpeed": "2,50s",
+      "delay": "-",
+      "mana": "18",
+      "number": "1"
+    },
+    "trait": "2x2 yaxındakı rəqib kartlara hər 0,2 saniyə ərzində 2 Hasar verər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "800",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+2% Öz. Şansı  |  5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
+      "level3": "+12% Qalxan  |  50 » 56"
+      },
+    "story": "k."
+  },
 ]
