@@ -234,38 +234,6 @@ button.active { background: #394073; border-color: #5d66a2 }
 .r-legendary { box-shadow: 0 6px 28px rgba(251,192,45,0.35) }
 .r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35) }
 
-/* STRIPE */
-/* Stripe hər kartda sabit qalır */
-.stripe {
-  display: block;
-  height: 6px;
-  border-radius: 12px;
-  margin: -10px -10px 10px;
-  opacity: .9;
-}
-
-/* Stripe rəngləri kartın ümumi sinifinə görə dəyişir */
-.card-single.r-mundane .stripe,
-.card-container.r-mundane .stripe { background: var(--mundane) }
-
-.card-single.r-familiar .stripe,
-.card-container.r-familiar .stripe { background: var(--familiar) }
-
-.card-single.r-arcane .stripe,
-.card-container.r-arcane .stripe { background: var(--arcane) }
-
-.card-single.r-mythic .stripe,
-.card-container.r-mythic .stripe { background: var(--mythic) }
-
-.card-single.r-legendary .stripe,
-.card-container.r-legendary .stripe { background: var(--legendary) }
-
-.card-single.r-ethereal .stripe,
-.card-container.r-ethereal .stripe {
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
-  background-size: 600% 100%;
-  animation: ethereal-animate 10s linear infinite;
-}
 
 /* ADLARIN RƏNGLƏRİ */
 .r-mundane .name { color: var(--mundane) }
