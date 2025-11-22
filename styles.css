@@ -291,9 +291,9 @@ button.active { background: #394073; border-color: #5d66a2 }
 .hidden { display: none !important }
 
 .back-button {
-  background: transparent;
+  background: #22284f; 
   border: 1px solid var(--muted);
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
   padding: 8px 16px;
   border-radius: 8px;
