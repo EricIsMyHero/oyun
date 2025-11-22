@@ -60,6 +60,8 @@ button.active { background: #394073; border-color: #5d66a2 }
   background: var(--card);
   border: 1px solid #2a2f57;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* DÜZƏLİŞ: Düymələrə yer açmaq üçün */
+  padding-bottom: 50px; 
 }
 
 .card-container:hover,
@@ -322,6 +324,149 @@ button.active { background: #394073; border-color: #5d66a2 }
   color: #CCCCCC;
   opacity: 0.7;
   margin-left: 3px;
+}
+
+/* TEAM BUILDER LAYOUT STİLLƏRİ */
+#cards-layout-wrapper {
+    display: flex;
+    flex-direction: column; /* Default */
+    gap: 20px;
+}
+
+/* TEAM MODE AKTİV OLDUQDA LAYOUT */
+#cards-section.team-mode-active #cards-layout-wrapper {
+    flex-direction: row; /* Yan-yana düzülüş: Panel solda, kartlar sağda */
+    align-items: flex-start;
+}
+
+/* KOMANDA PANELİ */
+#team-builder-panel {
+    /* ... stillər ... */
+    width: 300px;
+    min-width: 300px;
+    position: sticky; 
+    top: 20px;
+    height: fit-content; 
+}
+
+/* KARTLARIN OLDUĞU ƏSAS HİSSƏ */
+#cards-wrapper { 
+    flex-grow: 1; 
+    min-width: 0;
+}
+
+/* TEAM MODE AKTİV OLDUQDA KART QRİPİNİ DƏYİŞDİR (4 kartlıq sıra) */
+#cards-section.team-mode-active #cards.grid {
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); 
+}
+
+/* MÖVCUD Team Builder element stilləri (saxlayın) */
+#team-builder-panel h2 {
+    font-size: 20px;
+    border-bottom: 2px solid var(--ring);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+.team-cards-list {
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.team-card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--ring);
+}
+
+.team-card-item:last-child {
+  border-bottom: none;
+}
+
+.remove-from-team-btn {
+  background: #e53935; /* Mythic rəngi ilə uyğun */
+  color: var(--text);
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background .2s;
+}
+
+.remove-from-team-btn:hover {
+  background: #c62828;
+}
+
+.stats-summary {
+  padding-top: 15px;
+  border-top: 2px solid var(--ring);
+}
+
+.stats-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+#clear-team-btn {
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* DÜZƏLİŞ: DÜYMƏLƏRİN YERLƏŞMƏSİ ÜÇÜN YENİ STİL */
+.card-buttons-container {
+    position: absolute;
+    bottom: 12px; /* Kartın altından yuxarı məsafə */
+    right: 12px; /* Kartın solundan sağa məsafə */
+    display: flex;
+    gap: 8px; /* Düymələr arasındakı məsafə */
+    z-index: 10; 
+}
+
+
+/* Ümumi Düymə Stili (Comp və Team üçün) */
+.add-to-team-btn,
+.add-to-compare-btn {
+    background: var(--card); 
+    color: var(--text);
+    border: 1px solid var(--muted);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.add-to-team-btn:hover,
+.add-to-compare-btn:hover {
+    background: #3a416e; 
+    border-color: var(--text);
+}
+
+/* Team düyməsinə xüsusi rəng (Team Builder rəngi) */
+.add-to-team-btn {
+    background-color: #e53935; /* Qırmızı rəng (Team Builder rəngi) */
+    border-color: #e53935;
+    color: white;
+}
+
+.add-to-team-btn:hover {
+    background-color: #c42c2c;
+    border-color: #c42c2c;
+}
+
+/* Gizlədilmiş düymələr sinfi (script.js-də istifadə olunur) */
+.hidden-team-btn {
+    opacity: 0;
+    pointer-events: none; /* Klikləri ləğv et */
 }
 
 /* ÜMUMİ XƏTA QARŞISININ ALINMASI */
