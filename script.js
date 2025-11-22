@@ -5,32 +5,104 @@ const showCardsBtn = document.getElementById('show-cards-btn');
 const backToMenuBtn = document.getElementById('back-to-menu-btn');
 const filterButtons = document.querySelectorAll('.controls button');
 const cardsContainer = document.getElementById('cards');
-
-// YENİ ELEMENT: HTML-də yaratdığınız axtarış sahəsini götürün
 const searchInput = document.getElementById('search-input'); 
 
-// YENİ GLOBAL DƏYİŞƏNLƏR
+// TEAM BUILDER VƏ LAYOUT ELEMENTLƏRİ
+const openTeamBuilderBtn = document.getElementById('open-team-builder-btn');
+const closeTeamBuilderBtn = document.getElementById('close-team-builder-btn');
+const teamBuilderPanel = document.getElementById('team-builder-panel');
+const selectedTeamCards = document.getElementById('selected-team-cards');
+const totalHealth = document.getElementById('total-health');
+const totalShield = document.getElementById('total-shield');
+const totalDamage = document.getElementById('total-damage');
+const totalDPS = document.getElementById('total-dps');
+const totalMana = document.getElementById('total-mana');
+const clearTeamBtn = document.getElementById('clear-team-btn');
+const placeholderText = document.getElementById('placeholder-text');
+
+// MÜQAYİSƏ ELEMENTLƏRİ (Mövcud olmaya bilər, lakin təyin olunub)
+const comparisonModal = document.getElementById('comparison-modal');
+const comparisonResults = document.getElementById('comparison-results');
+const comparisonDropZone = document.getElementById('comparison-drop-zone');
+
+
+// GLOBAL DƏYİŞƏNLƏR
 let allCardsData = []; // Bütün yüklənmiş kartları saxlayır
 let activeRarity = 'all'; // Aktiv endərliyi yadda saxlayır
+let currentTeam = []; // Seçilmiş kartları (statistikalarla) saxlayır
+let comparisonCards = []; // Seçilmiş müqayisə kartları (Maks 2)
 
 function showMenu() {
-  mainMenu.classList.remove('hidden');
-  cardsSection.classList.add('hidden');
+    mainMenu.classList.remove('hidden');
+    cardsSection.classList.add('hidden');
+    // Menyuya qayıdanda komanda rejimini ləğv et
+    if (cardsSection.classList.contains('team-mode-active')) {
+         cardsSection.classList.remove('team-mode-active');
+         if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
+         toggleCardButtons(false);
+    }
 }
 
 function showCards() {
-  mainMenu.classList.add('hidden');
-  cardsSection.classList.remove('hidden');
-  fetchAndRender('all');
-  if (searchInput) searchInput.value = '';
+    mainMenu.classList.add('hidden');
+    cardsSection.classList.remove('hidden');
+    fetchAndRender('all');
+    if (searchInput) searchInput.value = '';
 }
+
+// Bu funksiya bütün kartlardakı Team/Compare düymələrinin görünməsinə nəzarət edir.
+function toggleCardButtons(isVisible) {
+    const buttons = document.querySelectorAll('.hidden-team-btn, .add-to-compare-btn, .add-to-team-btn');
+    buttons.forEach(button => {
+        if (isVisible) {
+            button.classList.remove('hidden-team-btn');
+        } else {
+            button.classList.add('hidden-team-btn');
+        }
+    });
+}
+
 
 // Kart yaratmaq üçün əsas funksiya
 function createCardElement(data) {
     const cardContainer = document.createElement('article');
     cardContainer.className = `card-container card r-${data.rarity.toLowerCase()}`;
     
-    // YENİ KÖMƏKÇİ FUNKSİYA: Təkrar kodu azaltmaq və listenerləri düzgün tətbiq etmək üçün
+    // YENİ DÜYMƏLƏRİN KONTEYNERİ
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.className = 'card-buttons-container'; 
+    
+    // TEAM BUILDER DÜYMƏSİ
+    const addButton = document.createElement('button');
+    addButton.className = 'add-to-team-btn hidden-team-btn action-button'; // 'action-button' əlavə edildi
+    addButton.textContent = '+ Team'; // Mətn dəyişmədi, amma stil dəyişdi
+    addButton.title = 'Komandaya Əlavə Et';
+    addButton.dataset.cardName = data.name;
+
+    addButton.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        addToTeam(data); 
+    });
+    
+    // MÜQAYİSƏ DÜYMƏSİ
+    const compareButton = document.createElement('button');
+    compareButton.className = 'add-to-compare-btn hidden-team-btn action-button'; // 'action-button' əlavə edildi
+    compareButton.textContent = '+ Comp'; // Mətn '+ Comp' olaraq dəyişdirildi
+    compareButton.title = 'Müqayisəyə Əlavə Et';
+    compareButton.dataset.cardName = data.name;
+
+    compareButton.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        addToComparison(data);
+        // comparisonModal artıq yoxlanıldığı üçün yoxlamaya ehtiyac yoxdur.
+        // if (comparisonModal) comparisonModal.classList.remove('hidden'); 
+    });
+    
+    buttonsContainer.appendChild(compareButton);
+    buttonsContainer.appendChild(addButton); // Sıralama dəyişdi: Comp, Team
+    
+    cardContainer.appendChild(buttonsContainer); 
+    
     const setupCardListeners = (contentElement) => {
         const cardButtons = contentElement.querySelectorAll('.card-tabs button');
         cardButtons.forEach(button => {
@@ -38,16 +110,13 @@ function createCardElement(data) {
                 e.stopPropagation();
                 const sectionId = button.dataset.section;
                 
-                // 1. Düymələri təmizlə və seçiləni aktiv et
                 cardButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
-                // 2. Bütün bölmələri gizlət (YALNIZ BU ÜZDƏ)
                 contentElement.querySelectorAll('.stats-section').forEach(section => {
                     section.classList.remove('visible');
                 });
                 
-                // 3. Seçiləni göstər
                 contentElement.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
             });
         });
@@ -67,7 +136,6 @@ function createCardElement(data) {
         cardInner.appendChild(cardBack);
         cardContainer.appendChild(cardInner);
 
-        // Listenerləri qoşa üz üçün tətbiq et
         setupCardListeners(cardFront);
         setupCardListeners(cardBack);
         
@@ -86,7 +154,6 @@ function createCardElement(data) {
         singleCard.classList.add('card-single');
         cardContainer.appendChild(singleCard);
         
-        // Listenerləri tək üz üçün tətbiq et
         setupCardListeners(singleCard);
     }
 
@@ -167,29 +234,119 @@ function createCardContent(data) {
 
 // Kartları render edən funksiya
 function renderCards(cardsToRender) {
-    cardsContainer.innerHTML = '';
-    if (cardsToRender.length === 0) {
-        cardsContainer.innerHTML = '<p>Bu endərlikdə kart tapılmadı.</p>';
-        return;
-    }
-    cardsToRender.forEach(data => {
-        cardsContainer.appendChild(createCardElement(data));
-    });
+    if (!cardsContainer) return; // cardsContainer tapılmasa funksiyanı dayandır
+    
+    cardsContainer.innerHTML = '';
+    if (cardsToRender.length === 0) {
+        cardsContainer.innerHTML = '<p>Bu endərlikdə kart tapılmadı.</p>';
+        return;
+    }
+    cardsToRender.forEach(data => {
+        cardsContainer.appendChild(createCardElement(data));
+    });
 }
 
-// YENİ ƏSAS FİLTR VƏ AXTAARİŞ FUNKSİYASI
+function getNumericStat(statValue) {
+    if (typeof statValue === 'string') {
+        const cleanedValue = statValue.replace(/[^\d.]/g, ''); 
+        return parseInt(cleanedValue) || 0;
+    }
+    return statValue || 0;
+}
+
+function addToTeam(cardData) {
+    if (currentTeam.length >= 6) {
+        alert('Komandada maksimum 6 kart ola bilər.');
+        return;
+    }
+    
+    const cardToAdd = {
+        name: cardData.name,
+        health: getNumericStat(cardData.stats.health),
+        shield: getNumericStat(cardData.stats.shield),
+        damage: getNumericStat(cardData.stats.damage), 
+        sps: getNumericStat(cardData.stats.sps),
+        mana: getNumericStat(cardData.stats.mana), 
+        originalCardData: cardData
+    };
+
+    currentTeam.push(cardToAdd);
+    
+    updateTeamPanel();
+    updateTeamStats();
+}
+
+function removeFromTeam(cardName) {
+    const index = currentTeam.findIndex(card => card.name === cardName);
+    if (index > -1) {
+        currentTeam.splice(index, 1);
+    }
+    
+    updateTeamPanel();
+    updateTeamStats();
+}
+
+function updateTeamPanel() {
+    if (!selectedTeamCards || !placeholderText) return; 
+
+    selectedTeamCards.innerHTML = '';
+    
+    if (currentTeam.length === 0) {
+        placeholderText.style.display = 'block';
+        selectedTeamCards.appendChild(placeholderText);
+        return;
+    }
+    placeholderText.style.display = 'none';
+
+    currentTeam.forEach(card => {
+        const teamItem = document.createElement('div');
+        teamItem.className = 'team-card-item';
+        teamItem.innerHTML = `
+            <span>${card.name}</span>
+            <button class="remove-from-team-btn" data-card-name="${card.name}">X</button>
+        `;
+        selectedTeamCards.appendChild(teamItem);
+    });
+
+    selectedTeamCards.querySelectorAll('.remove-from-team-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const cardName = button.dataset.cardName;
+            removeFromTeam(cardName);
+        });
+    });
+}
+
+function updateTeamStats() {
+    const stats = currentTeam.reduce((acc, card) => {
+        acc.health += card.health;
+        acc.shield += card.shield;
+        acc.damage += card.damage; 
+        acc.dps += card.sps;
+        acc.mana += card.mana; 
+        return acc;
+    }, { health: 0, shield: 0, damage: 0, dps: 0, mana: 0 }); 
+
+    if (totalHealth) totalHealth.textContent = stats.health;
+    if (totalShield) totalShield.textContent = stats.shield;
+    if (totalDamage) totalDamage.textContent = stats.damage; 
+    if (totalDPS) totalDPS.textContent = stats.dps;
+    if (totalMana) totalMana.textContent = stats.mana;
+
+    if (openTeamBuilderBtn) {
+        openTeamBuilderBtn.textContent = `Komandanı Göstər (${currentTeam.length}/6)`;
+    }
+}
+
+// ƏSAS FİLTR VƏ AXTARIŞ FUNKSİYASI
 function filterAndRender() {
     const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
     
-    // Bütün kartlardan başlayın
     let filteredCards = allCardsData;
 
-    // 1. Endərliyə görə filtrləmə (Əgər 'all' deyilsə)
     if (activeRarity !== 'all') {
         filteredCards = filteredCards.filter(card => card.rarity.toLowerCase() === activeRarity);
     }
 
-    // 2. Axtarış termininə görə filtrləmə
     if (searchTerm.length > 0) {
         filteredCards = filteredCards.filter(card => 
             card.name.toLowerCase().includes(searchTerm)
@@ -197,42 +354,70 @@ function filterAndRender() {
     }
 
     renderCards(filteredCards);
+    
+    // XƏTA DÜZƏLİŞİ: teamBuilderModal əvəzinə teamBuilderPanel-in mövcudluğunu və vəziyyətini yoxlayın
+    if (teamBuilderPanel && !teamBuilderPanel.classList.contains('hidden')) { 
+        toggleCardButtons(true);
+    } else {
+        toggleCardButtons(false);
+    }
 }
 
 
-// Məlumatları çəkən funksiya (Əhəmiyyətli dərəcədə DƏYİŞİR)
+function addToComparison(cardData) {
+    // Təkrar kartın əlavə edilməsinin qarşısını alın
+    if (comparisonCards.some(card => card.name === cardData.name)) {
+        return;
+    }
+
+    if (comparisonCards.length >= 2) {
+        alert('Eyni anda yalnız 2 kartı müqayisə edə bilərsiniz.');
+        return;
+    }
+    
+    const cardToAdd = {
+        name: cardData.name,
+        originalCardData: cardData 
+    };
+
+    comparisonCards.push(cardToAdd);
+    
+    // updateComparisonView(); // HTML olmadığından hələlik deaktiv
+}
+
+// Məlumatları çəkən funksiya
 async function fetchAndRender(rarity) {
-  cardsContainer.innerHTML = '<p>Məlumatlar yüklənir...</p>';
-  activeRarity = rarity; 
-  try {
-    
-    // 'all' kartları çəkmək lazımdırsa VƏ hələ çəkilməyibsə:
-    if (allCardsData.length === 0) {
-      const rarities = ['mundane', 'familiar', 'arcane', 'mythic', 'legendary', 'ethereal'];
-      const fetchPromises = rarities.map(r =>
-        fetch(`${r}.json`).then(async res => {
-          if (!res.ok) {
-            if (res.status === 404) {
-              console.warn(`${r}.json tapılmadı, bu endərlik ötürülür.`);
-              return [];
-            }
-            throw new Error(`${r}.json yüklənmədi`);
-          }
-          const text = await res.text();
-          return text ? JSON.parse(text) : [];
-        })
-      );
-      const results = await Promise.all(fetchPromises);
-      allCardsData = results.flat(); // Bütün kartları bir dəfə çəkib saxlayırıq
-    }
-    
-    // Məlumatı çəkdikdən sonra filtrləmə və render etməyi icra edin
-    filterAndRender();
-    
-  } catch (error) {
-    console.error('Məlumatları yükləmə zamanı xəta:', error);
-    cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
-  }
+    if (cardsContainer) cardsContainer.innerHTML = '<p>Məlumatlar yüklənir...</p>';
+    activeRarity = rarity; 
+    try {
+        
+        // 'all' kartları çəkmək lazımdırsa VƏ hələ çəkilməyibsə:
+        if (allCardsData.length === 0) {
+            const rarities = ['mundane', 'familiar', 'arcane', 'mythic', 'legendary', 'ethereal'];
+            const fetchPromises = rarities.map(r =>
+                fetch(`${r}.json`).then(async res => {
+                    if (!res.ok) {
+                        if (res.status === 404) {
+                            console.warn(`${r}.json tapılmadı, bu endərlik ötürülür.`);
+                            return [];
+                        }
+                        throw new Error(`${r}.json yüklənmədi`);
+                    }
+                    const text = await res.text();
+                    return text ? JSON.parse(text) : [];
+                })
+            );
+            const results = await Promise.all(fetchPromises);
+            allCardsData = results.flat(); // Bütün kartları bir dəfə çəkib saxlayırıq
+        }
+        
+        // Məlumatı çəkdikdən sonra filtrləmə və render etməyi icra edin
+        filterAndRender();
+        
+    } catch (error) {
+        console.error('Məlumatları yükləmə zamanı xəta:', error);
+        if (cardsContainer) cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
+    }
 }
 
 
@@ -242,43 +427,87 @@ showCardsBtn.addEventListener('click', showCards);
 backToMenuBtn.addEventListener('click', showMenu);
 
 ['show-spells-btn','show-boosters-btn','show-towers-btn'].forEach(id=>{
-  document.getElementById(id).addEventListener('click',()=>{
-    const modal=document.createElement('div');
-    modal.style.position='fixed';
-    modal.style.top='50%';
-    modal.style.left='50%';
-    modal.style.transform='translate(-50%, -50%)';
-    modal.style.padding='20px';
-    modal.style.backgroundColor='var(--card)';
-    modal.style.color='var(--text)';
-    modal.style.borderRadius='12px';
-    modal.style.boxShadow='var(--shadow)';
-    modal.style.zIndex='1000';
-    modal.textContent="Coming Soon...";
-    document.body.appendChild(modal);
-    setTimeout(()=>{document.body.removeChild(modal);},3000);
-  });
+    const btn = document.getElementById(id);
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const modal=document.createElement('div');
+            modal.style.position='fixed';
+            modal.style.top='50%';
+            modal.style.left='50%';
+            modal.style.transform='translate(-50%, -50%)';
+            modal.style.padding='20px';
+            modal.style.backgroundColor='var(--card)';
+            modal.style.color='var(--text)';
+            modal.style.borderRadius='12px';
+            modal.style.boxShadow='var(--shadow)';
+            modal.style.zIndex='1000';
+            modal.textContent="Coming Soon...";
+            document.body.appendChild(modal);
+            setTimeout(()=>{document.body.removeChild(modal);},3000);
+        });
+    }
 });
 
-// FİLTR DÜYMƏLƏRİ (DƏYİŞİR)
+// FİLTR DÜYMƏLƏRİ
 filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const rarity = button.id.split('-')[1];
-    filterButtons.forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
-    
-    // Active rarity yenilənir və filtrasiya təkrar icra olunur
-    activeRarity = rarity; 
-    filterAndRender(); 
-  });
+    button.addEventListener('click', () => {
+        const rarity = button.id.split('-')[1];
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Active rarity yenilənir və filtrasiya təkrar icra olunur
+        activeRarity = rarity; 
+        filterAndRender(); 
+    });
 });
 
-// AXTARIŞ GİRİŞİNƏ EVENT LİSTENER ƏLAVƏ EDİN
+// AXTARIŞ GİRİŞİNƏ EVENT LİSTENER
 if (searchInput) {
     searchInput.addEventListener('input', filterAndRender);
 } else {
-    // Əgər axtarış inputu tapılmayıbsa, xəbərdarlıq verin
     console.warn("Axtarış inputu (id='search-input') tapılmadı. HTML-i yoxlayın.");
 }
 
-document.addEventListener('DOMContentLoaded', showMenu);
+// TEAM BUILDER PANEL EVENT LİSTENERLƏRİ (YENİLƏNMİŞ)
+if (openTeamBuilderBtn) {
+    openTeamBuilderBtn.addEventListener('click', () => {
+        // Layotu iki sütunlu rejimi aktivləşdir
+        if (cardsSection) cardsSection.classList.add('team-mode-active');
+        
+        // Paneli göstər
+        if (teamBuilderPanel) teamBuilderPanel.classList.remove('hidden');
+
+        updateTeamPanel();
+        toggleCardButtons(true); // Team və Compare düymələrini göstər
+    });
+}
+
+if (closeTeamBuilderBtn) {
+    closeTeamBuilderBtn.addEventListener('click', () => {
+        // Layotu bir sütunlu rejimi bərpa et
+        if (cardsSection) cardsSection.classList.remove('team-mode-active');
+        
+        // Paneli gizlət
+        if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
+
+        toggleCardButtons(false); // Team və Compare düymələrini gizlət
+    });
+}
+
+// Komandanı Təmizlə funksiyası üçün listener
+if(clearTeamBtn) {
+    clearTeamBtn.addEventListener('click', () => {
+        currentTeam = [];
+        updateTeamPanel();
+        updateTeamStats();
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    showMenu();
+    updateTeamStats(); 
+    updateTeamPanel();
+    // DOM yüklənəndə Komanda Panelini gizlət (Layout dəyişikliyinin ilk vizual xətasını aradan qaldırır)
+    if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden'); 
+});
