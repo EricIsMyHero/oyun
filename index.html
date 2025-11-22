@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="wrap" id="main-content">
-    <!-- Əsas Menyu -->
     <section class="main-menu" id="main-menu">
       <h1>Clash-A-Mana: Real-Time Card Arena</h1>
       <div class="menu-buttons">
@@ -20,7 +19,6 @@
       </div>
     </section>
 
-    <!-- Kartlar Bölməsi -->
     <section id="cards-section" class="hidden">
       <header class="card-title-header">
         <div>
@@ -30,28 +28,52 @@
           </div>
         </div>
         <button id="back-to-menu-btn" class="back-button">Back</button>
+        <button id="open-team-builder-btn" class="back-button" style="background: #e53935; color: var(--text);">Komandanı Göstər (0/6)</button>
       </header>
+      
+      <div id="cards-layout-wrapper"> 
 
-      <div class="controls">
-        <button id="filter-all" class="active">All Cards</button>
-        <button id="filter-mundane">Mundane</button>
-        <button id="filter-familiar">Familiar</button>
-        <button id="filter-arcane">Arcane</button>
-        <button id="filter-mythic">Mythic</button>
-        <button id="filter-legendary">Legendary</button>
-        <button id="filter-ethereal">Ethereal</button>
-        <input type="text" id="search-input" placeholder="Kart adını axtar..." 
-        style=" background: #22284f; color: var(--text);
-                border: 1px solid #2f3769; border-radius: 12px;
-                padding: 10px 14px;
-                box-shadow: var(--shadow);
-                flex-grow: 1; 
-                max-width: 300px;
-    ">
+        <div id="team-builder-panel" class="hidden">
+            <h2>Team Summary</h2>
+            <div id="selected-team-cards" class="team-cards-list">
+                <p id="placeholder-text">Komandaya heç bir kart əlavə edilməyib.</p>
+            </div>
+
+            <div class="stats-summary">
+                <p>Total Health: <span id="total-health">0</span></p>
+                <p>Total Shield: <span id="total-shield">0</span></p>
+                <p>Total Damage: <span id="total-damage">0</span></p>
+                <p>Total DPS: <span id="total-dps">0</span></p>
+                <p>Total Mana: <span id="total-mana">0</span></p>
+            </div>
+
+            <button id="clear-team-btn">Komandanı Təmizlə</button>
+            <button id="close-team-builder-btn" style="margin-top: 10px;">Kartlara Qayıt</button>
+        </div>
+        
+        <div id="cards-wrapper"> 
+          <div class="controls">
+            <button id="filter-all" class="active">All Cards</button>
+            <button id="filter-mundane">Mundane</button>
+            <button id="filter-familiar">Familiar</button>
+            <button id="filter-arcane">Arcane</button>
+            <button id="filter-mythic">Mythic</button>
+            <button id="filter-legendary">Legendary</button>
+            <button id="filter-ethereal">Ethereal</button>
+            <input type="text" id="search-input" placeholder="Kart adını axtar..." 
+            style=" background: #22284f; color: var(--text);
+                    border: 1px solid #2f3769; border-radius: 12px;
+                    padding: 10px 14px;
+                    box-shadow: var(--shadow);
+                    flex-grow: 1; 
+                    max-width: 300px;
+            ">
+          </div>
+          <section class="grid" id="cards"></section>
+        </div>
       </div>
-
-      <section class="grid" id="cards"></section>
     </section>
+
   </div>
   <script src="script.js"></script>
 </body>
