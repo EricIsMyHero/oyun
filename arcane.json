@@ -380,5 +380,75 @@
       "level3": "+12% Qalxan  |  50 » 56"
       },
     "story": "k."
+  },
+  {
+    "name": "Hell boy",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "note": "Support",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "170",
+      "shield": "50",
+      "damage": "50",
+      "sps": "25",
+      "attackSpeed": "2,00s",
+      "delay": "-",
+      "mana": "8",
+      "number": "1"
+    },
+    "trait": "Hər 5-ci atış ekstra +40% Hasar verər",
+    "additionalStats": {
+      "range": "3750",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+2% Öz. Şansı  |  5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
+      "level3": "+12% Qalxan  |  50 » 56"
+      },
+    "story": "k."
+  },
+  {
+    "name": "Killer",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "Assassin",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "110",
+      "shield": "20",
+      "damage": "25",
+      "sps": "29",
+      "attackSpeed": "0,85s",
+      "delay": "-",
+      "mana": "3",
+      "number": "1"
+    },
+    "trait": "1+(Qalxan miqdarı)% Şansla rəqibi anında öldürər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1150",
+      "criticalChance": "25%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "25%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+2% Öz. Şansı  |  5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
+      "level3": "+12% Qalxan  |  50 » 56"
+      },
+    "story": "k."
   }
 ]
