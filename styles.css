@@ -156,7 +156,7 @@ button.active { background: #394073; border-color: #5d66a2 }
 .flip-button {
   position: absolute;
   right: 14px; /* Sağdan mövqeyi saxlayır */
-  bottom: 80px; /* <--- DƏYİŞİKLİK: Yeni düymə qrupundan yuxarı qaldırıldı (təxmini sətir 172) */
+  bottom: 14px; /* <--- DƏYİŞİKLİK: Yeni düymə qrupundan yuxarı qaldırıldı (təxmini sətir 172) */
   z-index: 10;
   background: rgba(43, 50, 100, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -422,7 +422,7 @@ button.active { background: #394073; border-color: #5d66a2 }
 /* DÜZƏLİŞ: DÜYMƏLƏRİN YERLƏŞMƏSİ ÜÇÜN YENİ STİL */
 .card-buttons-container {
     position: absolute;
-    bottom: 12px; /* Kartın altından yuxarı məsafə */
+    bottom: 50px; /* Kartın altından yuxarı məsafə */
     right: 12px; /* Kartın sağından sola məsafə */
     display: flex;
     flex-direction: column; /* <--- DƏYİŞİKLİK: Şaquli düzülüş */
