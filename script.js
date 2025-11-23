@@ -256,11 +256,21 @@ function getNumericStat(statValue) {
 }
 
 function addToTeam(cardData) {
+    // 1. Unikal kart yoxlaması
+    const isAlreadyInTeam = currentTeam.some(card => card.name === cardData.name);
+
+    if (isAlreadyInTeam) {
+        alert(`❌ '${cardData.name}' kartı artıq komandada var. Hər kartdan yalnız bir dəfə istifadə edə bilərsiniz.`);
+        return;
+    }
+    
+    // 2. Maksimum kart sayının yoxlanılması
     if (currentTeam.length >= 6) {
         alert('Komandada maksimum 6 kart ola bilər.');
         return;
     }
     
+    // 3. Kartın düzgün formatlanaraq əlavə edilməsi
     const cardToAdd = {
         name: cardData.name,
         health: getNumericStat(cardData.stats.health),
@@ -273,6 +283,7 @@ function addToTeam(cardData) {
 
     currentTeam.push(cardToAdd);
     
+    // 4. Panellərin və statistikaların yenilənməsi
     updateTeamPanel();
     updateTeamStats();
 }
