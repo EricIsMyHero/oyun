@@ -455,6 +455,17 @@ button.active { background: #394073; border-color: #5d66a2 }
     border-color: var(--text);
 }
 
+#comparison-modal.hidden {
+    display: none !important;
+}
+
+.compare-column {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--ring);
+} 
+
 /* Team düyməsinə xüsusi rəng (Team Builder rəngi) */
 .add-to-team-btn {
     background-color: #e53935; /* Qırmızı rəng (Team Builder rəngi) */
