@@ -428,7 +428,7 @@ async function fetchAndRender(rarity) {
         
         // 'all' kartları çəkmək lazımdırsa VƏ hələ çəkilməyibsə:
         if (allCardsData.length === 0) {
-            const rarities = ['mundane', 'familiar', 'arcane', 'mythic', 'legendary', 'ethereal'];
+            const rarities = ['mundane', 'familiar', 'arcane', 'relic', 'ascendant', 'apex', 'ethereal'];
             const fetchPromises = rarities.map(r =>
                 fetch(`${r}.json`).then(async res => {
                     if (!res.ok) {
