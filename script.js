@@ -390,6 +390,10 @@ function filterAndRender() {
 
     renderCards(filteredCards);
     
+    const isAnyPanelOpen = !teamBuilderPanel.classList.contains('hidden') || 
+                       !document.getElementById('comparison-panel').classList.contains('hidden');
+toggleCardButtons(isAnyPanelOpen);
+    
     // XƏTA DÜZƏLİŞİ: teamBuilderModal əvəzinə teamBuilderPanel-in mövcudluğunu və vəziyyətini yoxlayın
     if (teamBuilderPanel && !teamBuilderPanel.classList.contains('hidden')) { 
         toggleCardButtons(true);
@@ -417,8 +421,6 @@ function addToComparison(cardData) {
     });
 
     updateComparisonView();
-    // Kart əlavə olunan kimi modalı avtomatik aç
-    document.getElementById('comparison-modal').classList.remove('hidden');
 }
 
 function updateComparisonView() {
@@ -444,23 +446,25 @@ function updateComparisonView() {
         resultsContainer.appendChild(item);
     });
 
-    // Kart əlavə olunubsa paneli göstər, layout-u dəyiş
+    // Panel və Layout idarəetməsi
     if (comparisonCards.length > 0) {
         panel.classList.remove('hidden');
         cardsSection.classList.add('team-mode-active');
+        toggleCardButtons(true); // Düymələri aktiv saxla
     } else {
         panel.classList.add('hidden');
+        // Əgər Team Builder də bağlıdırsa, rejimi söndür
         if (teamBuilderPanel.classList.contains('hidden')) {
             cardsSection.classList.remove('team-mode-active');
         }
     }
 }
 
-// Paneli bağlama düyməsi
-document.getElementById('close-comparison-panel-btn')?.addEventListener('click', () => {
-    comparisonCards = [];
+// Qlobal funksiya kimi təyin edin (HTML onclick üçün)
+window.removeFromComparison = function(cardName) {
+    comparisonCards = comparisonCards.filter(c => c.name !== cardName);
     updateComparisonView();
-});
+};
 
 // Məlumatları çəkən funksiya
 async function fetchAndRender(rarity) {
