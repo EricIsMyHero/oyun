@@ -445,9 +445,44 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı  |  5% » 7%",
+      "level1": "+5% Kritik Şansı  |  5% » 10%",
       "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
       "level3": "+12% Qalxan  |  50 » 56"
+      },
+    "story": "k."
+  },
+  {
+    "name": "Sheriff",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "Marksman",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "210",
+      "shield": "40",
+      "damage": "12x4",
+      "sps": "40",
+      "attackSpeed": "0,10s",
+      "delay": "1.60",
+      "mana": "13",
+      "number": "1"
+    },
+    "trait": "10,000 Karo uzaqdakı rəqibləri işarətləyər və onlara ekstra +25% Hasar verər",
+    "additionalStats": {
+      "range": "2500",
+      "speed": "950",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+25% Öz. Hasar Bonusu  |  25% » 50%",
+      "level2": "+50% Qalxan  |  40 » 60",
+      "level3": "+12% Menzil  |  2500 » 2800"
       },
     "story": "k."
   }
