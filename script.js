@@ -428,44 +428,64 @@ function updateComparisonView() {
     const resultsContainer = document.getElementById('comparison-results');
     
     if (!panel || !resultsContainer) return;
-
     resultsContainer.innerHTML = '';
 
-    comparisonCards.forEach(card => {
+    // Müqayisə ediləcək statistikalar
+    const statsToCompare = ['health', 'shield', 'damage', 'sps', 'mana'];
+    const winners = {};
+
+    if (comparisonCards.length === 2) {
+        statsToCompare.forEach(stat => {
+            const val1 = getNumericStat(comparisonCards[0].originalCardData.stats[stat]);
+            const val2 = getNumericStat(comparisonCards[1].originalCardData.stats[stat]);
+            
+            if (val1 > val2) {
+                winners[stat] = stat === 'mana' ? 1 : 0; 
+            } else if (val2 > val1) {
+                winners[stat] = stat === 'mana' ? 0 : 1;
+            } else {
+                winners[stat] = null; 
+            }
+        });
+    }
+
+    comparisonCards.forEach((card, index) => {
         const d = card.originalCardData;
         const item = document.createElement('div');
         item.className = 'compare-item';
         
+        const getStyle = (s) => {
+            if (comparisonCards.length < 2 || winners[s] === null) return '';
+            return winners[s] === index ? 'color: #4CAF50; font-weight: bold;' : 'color: #f44336;';
+        };
+
+        const getArrow = (s) => {
+            if (comparisonCards.length < 2 || winners[s] === null) return '';
+            return winners[s] === index ? ' ↑' : ' ↓';
+        };
+
         item.innerHTML = `
-            <h3 style="color: var(--${d.rarity.toLowerCase()})">${d.name}</h3>
-            <div class="comp-stat-row"><b>HP:</b> <span>${d.stats.health}</span></div>
-            <div class="comp-stat-row"><b>DMG:</b> <span>${d.stats.damage}</span></div>
-            <div class="comp-stat-row"><b>Mana:</b> <span>${d.stats.mana}</span></div>
+            <h3 style="color: var(--${d.rarity.toLowerCase()}); border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">${d.name}</h3>
+            <div class="comp-stat-row"><b>HP:</b> <span style="${getStyle('health')}">${d.stats.health}${getArrow('health')}</span></div>
+            <div class="comp-stat-row"><b>Shield:</b> <span style="${getStyle('shield')}">${d.stats.shield}${getArrow('shield')}</span></div>
+            <div class="comp-stat-row"><b>DMG:</b> <span style="${getStyle('damage')}">${d.stats.damage}${getArrow('damage')}</span></div>
+            <div class="comp-stat-row"><b>DPS:</b> <span style="${getStyle('sps')}">${d.stats.sps}${getArrow('sps')}</span></div>
+            <div class="comp-stat-row"><b>Mana:</b> <span style="${getStyle('mana')}">${d.stats.mana}${getArrow('mana')}</span></div>
             <button onclick="removeFromComparison('${d.name}')" class="remove-comp-btn">Sil</button>
         `;
         resultsContainer.appendChild(item);
     });
 
-    // Panel və Layout idarəetməsi
     if (comparisonCards.length > 0) {
         panel.classList.remove('hidden');
         cardsSection.classList.add('team-mode-active');
-        toggleCardButtons(true); // Düymələri aktiv saxla
     } else {
         panel.classList.add('hidden');
-        // Əgər Team Builder də bağlıdırsa, rejimi söndür
         if (teamBuilderPanel.classList.contains('hidden')) {
             cardsSection.classList.remove('team-mode-active');
         }
     }
 }
-
-// Qlobal funksiya kimi təyin edin (HTML onclick üçün)
-window.removeFromComparison = function(cardName) {
-    comparisonCards = comparisonCards.filter(c => c.name !== cardName);
-    updateComparisonView();
-};
-
 // Məlumatları çəkən funksiya
 async function fetchAndRender(rarity) {
     if (cardsContainer) cardsContainer.innerHTML = '<p>Məlumatlar yüklənir...</p>';
