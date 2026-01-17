@@ -10,8 +10,9 @@
   --mundane: #CCCCCC;
   --familiar: #4CAF50;
   --arcane: #7E57C2;
-  --mythic: #E53935;
-  --legendary: #FBC02D;
+  --relic: #E53935;
+  --ascendant: #ff9800;
+  --apex: #FBC02D;
   --ethereal: #ff007f;
 }
 
@@ -60,7 +61,6 @@ button.active { background: #394073; border-color: #5d66a2 }
   background: var(--card);
   border: 1px solid #2a2f57;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* DÜZƏLİŞ: Düymələrə yer açmaq üçün */
   padding-bottom: 50px; 
 }
 
@@ -229,23 +229,24 @@ button.active { background: #394073; border-color: #5d66a2 }
 }
 
 /* NADİRLİK RƏNGLƏRİ */
-.r-mundane { box-shadow: 0 6px 28px rgba(204,204,204,0.35) }
-.r-familiar { box-shadow: 0 6px 28px rgba(76,175,80,0.35) }
-.r-arcane { box-shadow: 0 6px 28px rgba(126,87,194,0.35) }
-.r-mythic { box-shadow: 0 6px 28px rgba(229,57,53,0.35) }
-.r-legendary { box-shadow: 0 6px 28px rgba(251,192,45,0.35) }
-.r-ethereal { box-shadow: 0 6px 28px rgba(255,0,127,0.35) }
-
+.r-mundane { box-shadow: 0 6px 28px rgba(204, 204, 204, 0.35); }
+.r-familiar { box-shadow: 0 6px 28px rgba(76, 175, 80, 0.35); }
+.r-arcane { box-shadow: 0 6px 28px rgba(126, 87, 194, 0.35); }
+.r-relic { box-shadow: 0 6px 28px rgba(229, 57, 53, 0.35); }
+.r-ascendant { box-shadow: 0 6px 28px rgba(255, 152, 0, 0.35); }
+.r-apex { box-shadow: 0 6px 28px rgba(251, 192, 45, 0.35); }
+.r-ethereal { box-shadow: 0 6px 28px rgba(255, 0, 127, 0.35); }
 
 /* ADLARIN RƏNGLƏRİ */
-.r-mundane .name { color: var(--mundane) }
-.r-familiar .name { color: var(--familiar) }
-.r-arcane .name { color: var(--arcane) }
-.r-mythic .name { color: var(--mythic) }
-.r-legendary .name { color: var(--legendary) }
+.r-mundane .name { color: #CCCCCC; }
+.r-familiar .name { color: #4CAF50; }
+.r-arcane .name { color: #7E57C2; }
+.r-relic .name { color: #E53935; }
+.r-ascendant .name { color: #FF9800; }
+.r-apex .name { color: #FBC02D; }
 .r-ethereal .name {
-  color: var(--ethereal);
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #ffd1ff, #ffecb3, #c3f5d5);
+  color: #FF007F;
+  background: linear-gradient(90deg, #ff007f, #ff9a9e, #fad0c4, #ffd1ff, #ff007f);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -254,8 +255,8 @@ button.active { background: #394073; border-color: #5d66a2 }
 }
 
 @keyframes ethereal-animate {
-  0% { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* HALO EFFEKTLƏRİ */
