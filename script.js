@@ -401,15 +401,13 @@ function filterAndRender() {
 
 // MÜQAYİSƏ SİSTEMİ
 function addToComparison(cardData) {
-    // Eyni kartı iki dəfə əlavə etməyi blokla
     if (comparisonCards.some(card => card.name === cardData.name)) {
         alert("Bu kart artıq müqayisə siyahısındadır.");
         return;
     }
 
-    // Limit yoxlaması
     if (comparisonCards.length >= 2) {
-        alert('Maksimum 2 kartı müqayisə edə bilərsiniz. Yeni kart əlavə etmək üçün əvvəlkiləri silin.');
+        alert('Maksimum 2 kartı müqayisə edə bilərsiniz.');
         return;
     }
 
@@ -419,16 +417,22 @@ function addToComparison(cardData) {
     });
 
     updateComparisonView();
+    // Kart əlavə olunan kimi modalı avtomatik aç
+    document.getElementById('comparison-modal').classList.remove('hidden');
 }
 
 function updateComparisonView() {
     const modal = document.getElementById('comparison-modal');
     const resultsContainer = document.getElementById('comparison-results');
+    const compBtn = document.getElementById('open-comparison-btn');
     
-    if (!modal || !resultsContainer) return;
+    if (!modal || !resultsContainer || !compBtn) return;
+
+    // Düymə sayğacını yenilə
+    compBtn.textContent = `Müqayisə (${comparisonCards.length}/2)`;
+    compBtn.style.display = comparisonCards.length > 0 ? 'inline-block' : 'none';
 
     resultsContainer.innerHTML = '';
-    modal.classList.remove('hidden');
 
     comparisonCards.forEach(card => {
         const d = card.originalCardData;
@@ -453,6 +457,7 @@ function updateComparisonView() {
         resultsContainer.appendChild(col);
     });
 
+    // Əgər kart yoxdursa modalı bağla
     if (comparisonCards.length === 0) {
         modal.classList.add('hidden');
     }
@@ -463,7 +468,11 @@ function removeFromComparison(cardName) {
     updateComparisonView();
 }
 
-// Bağlama düyməsi üçün listener
+// Event Listener-lər
+document.getElementById('open-comparison-btn')?.addEventListener('click', () => {
+    document.getElementById('comparison-modal').classList.remove('hidden');
+});
+
 document.getElementById('close-comp-btn')?.addEventListener('click', () => {
     document.getElementById('comparison-modal').classList.add('hidden');
 });
