@@ -399,26 +399,74 @@ function filterAndRender() {
 }
 
 
+// MÜQAYİSƏ SİSTEMİ
 function addToComparison(cardData) {
-    // Təkrar kartın əlavə edilməsinin qarşısını alın
+    // Eyni kartı iki dəfə əlavə etməyi blokla
     if (comparisonCards.some(card => card.name === cardData.name)) {
+        alert("Bu kart artıq müqayisə siyahısındadır.");
         return;
     }
 
+    // Limit yoxlaması
     if (comparisonCards.length >= 2) {
-        alert('Eyni anda yalnız 2 kartı müqayisə edə bilərsiniz.');
+        alert('Maksimum 2 kartı müqayisə edə bilərsiniz. Yeni kart əlavə etmək üçün əvvəlkiləri silin.');
         return;
     }
-    
-    const cardToAdd = {
+
+    comparisonCards.push({
         name: cardData.name,
         originalCardData: cardData 
-    };
+    });
 
-    comparisonCards.push(cardToAdd);
-    
-    // updateComparisonView(); // HTML olmadığından hələlik deaktiv
+    updateComparisonView();
 }
+
+function updateComparisonView() {
+    const modal = document.getElementById('comparison-modal');
+    const resultsContainer = document.getElementById('comparison-results');
+    
+    if (!modal || !resultsContainer) return;
+
+    resultsContainer.innerHTML = '';
+    modal.classList.remove('hidden');
+
+    comparisonCards.forEach(card => {
+        const d = card.originalCardData;
+        const col = document.createElement('div');
+        col.style.cssText = "background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid var(--ring);";
+        
+        col.innerHTML = `
+            <div style="text-align: center; margin-bottom: 15px;">
+                <h3 style="color: var(--${d.rarity.toLowerCase()}); margin: 0; font-size: 22px;">${d.name}</h3>
+                <small style="color: var(--muted)">${d.rarity.toUpperCase()}</small>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Health:</b> <span>${d.stats.health}</span></div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Shield:</b> <span>${d.stats.shield}</span></div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Damage:</b> <span>${d.stats.damage}</span></div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>D.P.S:</b> <span>${d.stats.sps}</span></div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Mana:</b> <span>${d.stats.mana}</span></div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Range:</b> <span>${d.additionalStats.range}</span></div>
+            </div>
+            <button onclick="removeFromComparison('${d.name}')" style="width: 100%; margin-top: 20px; background: transparent; border: 1px solid #ff4444; color: #ff4444; padding: 8px; border-radius: 8px; cursor: pointer;">Siyahıdan Çıxar</button>
+        `;
+        resultsContainer.appendChild(col);
+    });
+
+    if (comparisonCards.length === 0) {
+        modal.classList.add('hidden');
+    }
+}
+
+function removeFromComparison(cardName) {
+    comparisonCards = comparisonCards.filter(c => c.name !== cardName);
+    updateComparisonView();
+}
+
+// Bağlama düyməsi üçün listener
+document.getElementById('close-comp-btn')?.addEventListener('click', () => {
+    document.getElementById('comparison-modal').classList.add('hidden');
+});
 
 // Məlumatları çəkən funksiya
 async function fetchAndRender(rarity) {
