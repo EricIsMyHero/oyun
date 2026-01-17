@@ -343,13 +343,57 @@ button.active { background: #394073; border-color: #5d66a2 }
 }
 
 /* KOMANDA PANELİ */
-#team-builder-panel {
-    /* ... stillər ... */
+/* KOMANDA VƏ MÜQAYİSƏ PANELİ ÜÇÜN ORTAQ STİLLƏR */
+#team-builder-panel, #comparison-panel {
     width: 300px;
     min-width: 300px;
-    position: sticky; 
+    position: sticky;
     top: 20px;
-    height: fit-content; 
+    height: fit-content;
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+
+.comparison-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.compare-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--ring);
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.compare-item h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.comp-stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.remove-comp-btn {
+    width: 100%;
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid #e53935;
+    color: #e53935;
+    padding: 5px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 /* KARTLARIN OLDUĞU ƏSAS HİSSƏ */
