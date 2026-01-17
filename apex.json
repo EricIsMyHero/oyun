@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Hamm",
+    "type": ["Heyvan"],
+    "rarity": "Apex",
+    "note": "Tank",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": 7,
+      "shield": 0,
+      "damage": 25,
+      "sps": 23,
+      "attackSpeed": "1,10s",
+      "delay": "-",
+      "mana": 3,
+      "number": 1
+    },
+    "trait": "<b>-12%</b> daha az hasar alar, <b>+20%</b> Hasar bonusu verər.",
+    "additionalStats": {
+      "range": 1000,
+      "speed": 1800,
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+   },
+    "showlevels": {
+      "level1": "+5% Can  |  50 » 55",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+      },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+  },
+  {
+    "name": "M-M",
+    "type": ["Robot"],
+    "rarity": "Apex",
+    "note": "Tank",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": 110,
+      "shield": 20,
+      "damage": 5,
+      "sps": 11,
+      "attackSpeed": "0,95s",
+      "delay": "-",
+      "mana": 10,
+      "number": 1
+    },
+    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "additionalStats": {
+      "range": 1000,
+      "speed": 950,
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+   },
+    "showlevels": {
+      "level1": "+5% Can",
+      "level2": "+7% Hız",
+      "level3": "+7% Hasar"
+     },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+  }
+]
