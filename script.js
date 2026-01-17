@@ -422,59 +422,44 @@ function addToComparison(cardData) {
 }
 
 function updateComparisonView() {
-    const modal = document.getElementById('comparison-modal');
+    const panel = document.getElementById('comparison-panel');
     const resultsContainer = document.getElementById('comparison-results');
-    const compBtn = document.getElementById('open-comparison-btn');
     
-    if (!modal || !resultsContainer || !compBtn) return;
-
-    // Düymə sayğacını yenilə
-    compBtn.textContent = `Müqayisə (${comparisonCards.length}/2)`;
-    compBtn.style.display = comparisonCards.length > 0 ? 'inline-block' : 'none';
+    if (!panel || !resultsContainer) return;
 
     resultsContainer.innerHTML = '';
 
     comparisonCards.forEach(card => {
         const d = card.originalCardData;
-        const col = document.createElement('div');
-        col.style.cssText = "background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid var(--ring);";
+        const item = document.createElement('div');
+        item.className = 'compare-item';
         
-        col.innerHTML = `
-            <div style="text-align: center; margin-bottom: 15px;">
-                <h3 style="color: var(--${d.rarity.toLowerCase()}); margin: 0; font-size: 22px;">${d.name}</h3>
-                <small style="color: var(--muted)">${d.rarity.toUpperCase()}</small>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Health:</b> <span>${d.stats.health}</span></div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Shield:</b> <span>${d.stats.shield}</span></div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Damage:</b> <span>${d.stats.damage}</span></div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>D.P.S:</b> <span>${d.stats.sps}</span></div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Mana:</b> <span>${d.stats.mana}</span></div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed #333;"><b>Range:</b> <span>${d.additionalStats.range}</span></div>
-            </div>
-            <button onclick="removeFromComparison('${d.name}')" style="width: 100%; margin-top: 20px; background: transparent; border: 1px solid #ff4444; color: #ff4444; padding: 8px; border-radius: 8px; cursor: pointer;">Siyahıdan Çıxar</button>
+        item.innerHTML = `
+            <h3 style="color: var(--${d.rarity.toLowerCase()})">${d.name}</h3>
+            <div class="comp-stat-row"><b>HP:</b> <span>${d.stats.health}</span></div>
+            <div class="comp-stat-row"><b>DMG:</b> <span>${d.stats.damage}</span></div>
+            <div class="comp-stat-row"><b>Mana:</b> <span>${d.stats.mana}</span></div>
+            <button onclick="removeFromComparison('${d.name}')" class="remove-comp-btn">Sil</button>
         `;
-        resultsContainer.appendChild(col);
+        resultsContainer.appendChild(item);
     });
 
-    // Əgər kart yoxdursa modalı bağla
-    if (comparisonCards.length === 0) {
-        modal.classList.add('hidden');
+    // Kart əlavə olunubsa paneli göstər, layout-u dəyiş
+    if (comparisonCards.length > 0) {
+        panel.classList.remove('hidden');
+        cardsSection.classList.add('team-mode-active');
+    } else {
+        panel.classList.add('hidden');
+        if (teamBuilderPanel.classList.contains('hidden')) {
+            cardsSection.classList.remove('team-mode-active');
+        }
     }
 }
 
-function removeFromComparison(cardName) {
-    comparisonCards = comparisonCards.filter(c => c.name !== cardName);
+// Paneli bağlama düyməsi
+document.getElementById('close-comparison-panel-btn')?.addEventListener('click', () => {
+    comparisonCards = [];
     updateComparisonView();
-}
-
-// Event Listener-lər
-document.getElementById('open-comparison-btn')?.addEventListener('click', () => {
-    document.getElementById('comparison-modal').classList.remove('hidden');
-});
-
-document.getElementById('close-comp-btn')?.addEventListener('click', () => {
-    document.getElementById('comparison-modal').classList.add('hidden');
 });
 
 // Məlumatları çəkən funksiya
