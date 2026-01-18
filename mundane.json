@@ -517,9 +517,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Kritik Şansı  |  5% » 10%",
-      "level2": "+4% Hız  |  1150 » 1200",
-      "level3": "+10% Menzil  |  1000% » 1100"
+      "level1": "+5% Critic Chance  |  5% » 10%",
+      "level2": "+4% Speed  |  1150 » 1200",
+      "level3": "+10% Range  |  1000% » 1100"
       },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
@@ -549,12 +549,12 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "5%"
     },
     "showlevels": {
-      "level1": "+6% Gecikmə  |  0,75 » 0,705",
-      "level2": "+30% Qalxan  |  30% » 39",
-      "level3": "+5% Sıyrılma  |  0% » 5%"
+      "level1": "-6% Delay  |  0,75 » 0,705",
+      "level2": "+30% Shield  |  30% » 39",
+      "level3": "+5% Dodge Chance  |  5% » 10%"
       },
     "story": "Bethe spent her childhood surrounded by mechanical sounds, not gunfire. Growing up surrounded by technology from a young age, this girl joined Mission 1 with her own hand-built Bio Mech. Although she is 23 years old, the systems she has built seem much older than her. It is no coincidence that she stands by the Soldier - it is not just tactics that keep him afloat in battle, but Bethe's intelligence. There is talk of something between them, but questions are not asked on the front lines. Because the answers must remain hidden during battle."
   },
@@ -622,9 +622,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+3% Menzil  |  4000 » 4120",
-      "level2": "+5% Qalxan  |  120 » 126",
-      "level3": "+33% Öz. Hasar Bonusu  |  33% » 66%"
+      "level1": "+3% Range  |  4000 » 4120",
+      "level2": "+10% Shield  |  120 » 132",
+      "level3": "+33% Trait DMG Bonus  |  33% » 66%"
       },
     "story": "Soldier did not watch the war from the outside since he was a child, he wanted to experience it. This young man, who dreamed of following his father into the battlefields, turned his dream into a responsibility over time. Although he is only 25 years old, his combat experience is heavier than his age. He stands on the front line with an M16A4 rifle, and his decisions determine the fate of those behind him. Mission 1 is not his first mission - it is the first mission he has been responsible for as a leader."
   },
@@ -657,9 +657,9 @@
       "dodge": "20%"
     },
     "showlevels": {
-      "level1": "+10% Hasar  |  70 » 77",
-      "level2": "+5% Sıyrılma  |  20% » 25%",
-      "level3": "+10% Menzil  |  800 » 880"
+      "level1": "+10% Damage  |  70 » 77",
+      "level2": "+5% Dodge Chance |  20% » 25%",
+      "level3": "+10% Range  |  800 » 880"
       },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
