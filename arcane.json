@@ -485,5 +485,35 @@
       "level3": "+12% Menzil  |  2500 » 2800"
       },
     "story": "k."
-  }
+  },
+  { "name": "Nurse", 
+    "type": ["Ölü"], 
+    "rarity": "Arcane", 
+    "note": "Assassin", 
+    "isHybrid": false, 
+    "isMulti": false, 
+    "stats": { 
+      "health": "80", 
+      "shield": "10", 
+      "damage": "12", 
+      "sps": "17", 
+      "attackSpeed": "0,70s", 
+      "delay": "-", 
+      "mana": "3", 
+      "number": "1" }, 
+    "trait": "Hər Can Çalanda 15 saniyəlik +1 Hasar bonusu (Max: 18)", 
+    "additionalStats": { 
+      "range": "1,000", 
+      "speed": "1,100", 
+      "criticalChance": "5%", 
+      "criticDamage": "1.5x", 
+      "lifestealChance": "50%", 
+      "lifesteal": "25%", 
+      "damageminimiser": "0%", 
+      "dodge": "0%" }, 
+    "showlevels": { 
+      "level1": "-", 
+      "level2": "-", 
+      "level3": "-" }, 
+    "story": "-" }
 ]
