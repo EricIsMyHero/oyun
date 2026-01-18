@@ -464,7 +464,7 @@
       "damage": "12x4",
       "sps": "40",
       "attackSpeed": "0,10s",
-      "delay": "1.60",
+      "delay": "1,60",
       "mana": "13",
       "number": "1"
     },
@@ -515,5 +515,250 @@
       "level1": "-", 
       "level2": "-", 
       "level3": "-" }, 
-    "story": "-" }
+    "story": "-" },
+  {
+    "name": "Tribe",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "90",
+      "shield": "70",
+      "damage": "6",
+      "sps": "6",
+      "attackSpeed": "1,00",
+      "delay": "-",
+      "mana": "12",
+      "number": "5"
+    },
+    "trait": "Hər 12 saniyədə uzaqdan atış edərək +300% Hasar verər",
+    "additionalStats": {
+      "range": "3,700 / 1,000",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Stunners",
+    "type": ["Ölü"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "50",
+      "shield": "20",
+      "damage": "10",
+      "sps": "8",
+      "attackSpeed": "1,30s",
+      "delay": "-",
+      "mana": "4",
+      "number": "2"
+    },
+    "trait": "25% Şansla rəqib kartları 1,2 saniyə sərsəmlətər",
+    "additionalStats": {
+      "range": "2,400",
+      "speed": "1,100",
+      "criticalChance": "15%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Whisper",
+    "type": ["Ruh"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "50",
+      "shield": "0",
+      "damage": "-",
+      "sps": "-",
+      "attackSpeed": "-",
+      "delay": "-",
+      "mana": "6",
+      "number": "1"
+    },
+    "trait": "Rəqibin içinə girərək 14+(Kritik Şansı) saniyə onu idarə edər və yox olar",
+    "additionalStats": {
+      "range": "0,800",
+      "speed": "1,000",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Bad Boy",
+    "type": ["Robot"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "340",
+      "shield": "40",
+      "damage": "16",
+      "sps": "13",
+      "attackSpeed": "1,20s ",
+      "delay": "-",
+      "mana": "9",
+      "number": "1"
+    },
+    "trait": "Alınan hasarın 50%-ni 2 saniyə sonra qalxana çevirər",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Void Striker",
+    "type": ["Ruh"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "260",
+      "shield": "180",
+      "damage": "2x45",
+      "sps": "75",
+      "attackSpeed": "0,60s",
+      "delay": "1,30s",
+      "mana": "17",
+      "number": "1"
+    },
+    "trait": "Hər 18 saniyədə bir növbəti atışı +20% Saldırı Hızı ilə vurar və rəqibi 0,8 saniyəlik 10% yavaşladar",
+    "additionalStats": {
+      "range": "1,300",
+      "speed": "1,050",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Nightfang",
+    "type": ["Ruh"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "140",
+      "shield": "0",
+      "damage": "1",
+      "sps": "10",
+      "attackSpeed": "0,10s",
+      "delay": "-",
+      "mana": "15",
+      "number": "1"
+    },
+    "trait": "İlk 24 saniyə görünməz olar, hər 45-ci vuruşda 3 saniyəlik görünməz olar",
+    "additionalStats": {
+      "range": "12,000",
+      "speed": "1,000",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Sunrise",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "90",
+      "shield": "90",
+      "damage": "26",
+      "sps": "24",
+      "attackSpeed": "1,10s",
+      "delay": "-",
+      "mana": "11",
+      "number": "1"
+    },
+    "trait": "Hərəkət etdikcə hər 0,6 saniyə ərzində +1 Can qazanar (Max: 210)",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "25%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  }
 ]
