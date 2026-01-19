@@ -1,0 +1,480 @@
+:root {
+  --bg: #0f1220;
+  --card: #151934;
+  --muted: #8a92b2;
+  --text: #eaf0ff;
+  --ring: #ffffff20;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  /* Nadirlik rəngləri */
+  --mundane: #CCCCCC;
+  --familiar: #4CAF50;
+  --arcane: #7E57C2;
+  --relic: #E53935;
+  --ascendant: #ff9800;
+  --apex: #FBC02D;
+  --ethereal: #ff007f;
+}
+
+* { box-sizing: border-box }
+html, body { height: 100% }
+body {
+  margin: 0;
+  background: radial-gradient(1200px 700px at 20% 0%, #1a1f3f, #0f1220 60%);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
+}
+
+.wrap { max-width: 1364px; margin: 32px auto; padding: 16px }
+header { display: flex; gap: 16px; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+h1 { font-size: 28px; margin: 0; letter-spacing: .2px }
+.hint { color: var(--muted); font-size: 14px }
+
+.controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px }
+button {
+  background: #22284f; color: var(--text);
+  border: 1px solid #2f3769; border-radius: 12px;
+  padding: 10px 14px; cursor: pointer;
+  box-shadow: var(--shadow); transition: .25s ease;
+}
+button:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.45) }
+button.active { background: #394073; border-color: #5d66a2 }
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  justify-items: center;
+  padding-bottom: 40px;
+  overflow: visible;
+}
+
+/* ÜMUMİ KART ÖLÇÜLƏRİ */
+.card-container,
+.card-single {
+  width: 100%;
+  height: 320px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: var(--card);
+  border: 1px solid #2a2f57;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding-bottom: 50px; 
+}
+
+.card-container:hover,
+.card-single:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* İKİÜZLÜ KART STRUKTURU */
+.card-container {
+  position: relative;
+  perspective: 1000px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* İÇ FƏRLANMA */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-container.is-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* ÖN VƏ ARXA TƏRƏF */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid #2a2f57;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.card-back { transform: rotateY(180deg) }
+
+/* TƏKÜZLÜ KART */
+.card-single {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+/* KARTIN İÇİ */
+.card-content-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+/* BAŞLIQ VƏ ETİKETLƏR */
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.name { font-weight: 700; letter-spacing: .3px }
+.badge {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #bfc7ff;
+  margin-top: 4px;
+}
+
+.head > .badge:last-child { margin-left: auto }
+
+/* FİRLATMA DÜYMƏSİ */
+.flip-button {
+  position: absolute;
+  right: 14px; /* Sağdan mövqeyi saxlayır */
+  bottom: 10px; /* <--- DƏYİŞİKLİK: Yeni düymə qrupundan yuxarı qaldırıldı (təxmini sətir 172) */
+  z-index: 10;
+  background: rgba(43, 50, 100, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+.flip-button:hover { transform: scale(1.1) }
+.flip-button::before {
+  content: '⇌';
+  font-size: 20px;
+  color: white;
+  display: block;
+  transform: scaleX(-1);
+}
+.card-container.is-flipped .flip-button::before { transform: scaleX(1) }
+
+/* STATİSTİKALAR */
+.card-tabs { display: flex; justify-content: center; margin-bottom: 8px; gap: 8px }
+.card-tabs button {
+  background: #1e244a; color: #c9d3ff; border: 1px solid #2b3264;
+  font-size: 11px; padding: 6px 12px; border-radius: 12px;
+  cursor: pointer; transition: background .2s ease;
+}
+.card-tabs button.active { background: #2b3264; color: #fff }
+
+.stats-section {
+  display: none;
+  border-radius: 12px;
+  padding: 8px;
+  background: #111636;
+  border: 1px solid #252c59;
+}
+
+/* Əsas statistikalar üçün grid tətbiq edildiyi yerdə */
+.stats-section[data-section-id="main-stats"].visible,
+.stats-section[data-section-id="additional-stats"].visible {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+/* Bütün tək elementli (blok) bölmələrin görünməsi */
+.stats-section[data-section-id="trait"].visible,
+.stats-section[data-section-id="showlevels"].visible, /* Bunu artıq yuxarıda təkrar etdik, amma birlikdə saxlayın */
+.stats-section[data-section-id="story-section"].visible {
+    display: block;
+}
+
+
+.stat-item { padding: 4px }
+.stat-item b { display: block; font-size: 12px; color: #c6ceff; margin-bottom: 4px }
+.stat-item span { font-size: 13px }
+.trait-center { text-align: center }
+
+/* Hekayə məzmunu üçün daxili stil */
+.story-content {
+    /* Məzmunu tənzimləmək üçün */
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.4;
+    max-height: 160px; /* Kartın hündürlüyünə sığması üçün */
+    overflow-y: auto; /* Əgər mətn çox uzundursa, scroll əlavə edin */
+    padding: 4px;
+}
+
+/* NADİRLİK VƏ KÖLGƏ EFFEKTLƏRİ (Yenilənmiş) */
+.r-mundane { box-shadow: 0 6px 28px rgba(204, 204, 204, 0.35); --glow: #CCCCCC; }
+.r-familiar { box-shadow: 0 6px 28px rgba(76, 175, 80, 0.35); --glow: #4CAF50; }
+.r-arcane { box-shadow: 0 6px 28px rgba(126, 87, 194, 0.35); --glow: #7E57C2; }
+.r-relic { box-shadow: 0 6px 28px rgba(229, 57, 53, 0.35); --glow: #E53935; }
+.r-ascendant { box-shadow: 0 6px 28px rgba(255, 152, 0, 0.35); --glow: #FF9800; } /* Narıncı yeniləndi */
+.r-apex { box-shadow: 0 6px 28px rgba(251, 192, 45, 0.35); --glow: #FBC02D; }
+.r-ethereal { box-shadow: 0 6px 28px rgba(255, 0, 127, 0.35); --glow: #FF007F; }
+
+/* ADLARIN RƏNGLƏRİ - CSS Dəyişənləri ilə Daha Qısa */
+.r-mundane .name { color: var(--mundane); }
+.r-familiar .name { color: var(--familiar); }
+.r-arcane .name { color: var(--arcane); }
+.r-relic .name { color: var(--relic); }
+.r-ascendant .name { color: var(--ascendant); }
+.r-apex .name { color: var(--apex); }
+
+/* ETHEREAL ÜÇÜN XÜSUSİ EFFEKT */
+.r-ethereal .name {
+  color: var(--ethereal);
+  background: linear-gradient(90deg, #ff007f, #ff9a9e, #fad0c4, #ffd1ff, #ff007f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 600% 100%;
+  animation: ethereal-animate 10s linear infinite;
+}
+
+@keyframes ethereal-animate {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* HALO EFFEKTLƏRİ */
+.card-front::after,
+.card-single::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  pointer-events: none;
+  border: 2px solid var(--ring);
+  filter: blur(4px);
+  opacity: .5;
+  z-index: -1;
+}
+
+/* MENYU */
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+.main-menu h1 {
+  font-size: 48px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 15px rgba(255,255,255,.2);
+}
+.menu-buttons { display: flex; flex-direction: column; gap: 16px; width: 80%; max-width: 300px }
+
+.hidden { display: none !important }
+
+.back-button {
+  background: #22284f; 
+  border: 1px solid var(--muted);
+  color: var(--text);
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: .25s ease;
+  cursor: pointer;
+}
+.back-button:hover {
+  color: var(--text);
+  border-color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* ETHEREAL PARILTISI */
+.card-glow {
+  position: absolute;
+  inset: -8px;
+  border-radius: 16px;
+  pointer-events: none;
+  background: radial-gradient(120px 80px at 80% 0%, rgba(255,0,127,.35), transparent 70%),
+              radial-gradient(120px 80px at 0% 100%, rgba(255,220,120,.25), transparent 70%);
+  filter: blur(8px);
+  opacity: .9;
+  z-index: -1;
+}
+
+.name .note {
+  font-size: 0.75em;
+  color: #CCCCCC;
+  opacity: 0.7;
+  margin-left: 3px;
+}
+
+/* TEAM BUILDER LAYOUT STİLLƏRİ */
+#cards-layout-wrapper {
+    display: flex;
+    flex-direction: column; /* Default */
+    gap: 20px;
+}
+
+/* TEAM MODE AKTİV OLDUQDA LAYOUT */
+#cards-section.team-mode-active #cards-layout-wrapper {
+    flex-direction: row; /* Yan-yana düzülüş: Panel solda, kartlar sağda */
+    align-items: flex-start;
+}
+
+/* KOMANDA PANELİ */
+/* KOMANDA VƏ MÜQAYİSƏ PANELİ ÜÇÜN ORTAQ STİLLƏR */
+#team-builder-panel {
+    width: 300px;
+    min-width: 300px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+
+/* KARTLARIN OLDUĞU ƏSAS HİSSƏ */
+#cards-wrapper { 
+    flex-grow: 1; 
+    min-width: 0;
+}
+
+/* TEAM MODE AKTİV OLDUQDA KART QRİPİNİ DƏYİŞDİR (4 kartlıq sıra) */
+#cards-section.team-mode-active #cards.grid {
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); 
+}
+
+/* MÖVCUD Team Builder element stilləri (saxlayın) */
+#team-builder-panel h2 {
+    font-size: 20px;
+    border-bottom: 2px solid var(--ring);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+.team-cards-list {
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.team-card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--ring);
+}
+
+.team-card-item:last-child {
+  border-bottom: none;
+}
+
+.remove-from-team-btn {
+  background: #e53935; /* Mythic rəngi ilə uyğun */
+  color: var(--text);
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background .2s;
+}
+
+.remove-from-team-btn:hover {
+  background: #c62828;
+}
+
+.stats-summary {
+  padding-top: 15px;
+  border-top: 2px solid var(--ring);
+}
+
+.stats-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+#clear-team-btn {
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* DÜZƏLİŞ: DÜYMƏLƏRİN YERLƏŞMƏSİ ÜÇÜN YENİ STİL */
+.card-buttons-container {
+    position: absolute;
+    bottom: 45px; /* Kartın altından yuxarı məsafə */
+    right: 12px; /* Kartın sağından sola məsafə */
+    display: flex;
+    flex-direction: column; /* <--- DƏYİŞİKLİK: Şaquli düzülüş */
+    gap: 4px; /* <--- DƏYİŞİKLİK: Kiçik aralıq */
+    z-index: 10; 
+}
+
+
+/* Ümumi Düymə Stili (Team üçün) */
+.add-to-team-btn {
+    background: var(--card); 
+    color: var(--text);
+    border: 1px solid var(--muted);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.add-to-team-btn:hover {
+    background: #3a416e; 
+    border-color: var(--text);
+}
+
+/* Team düyməsinə xüsusi rəng (Team Builder rəngi) */
+.add-to-team-btn {
+    background-color: #e53935; /* Qırmızı rəng (Team Builder rəngi) */
+    border-color: #e53935;
+    color: white;
+}
+
+.add-to-team-btn:hover {
+    background-color: #c42c2c;
+    border-color: #c42c2c;
+}
+
+/* Gizlədilmiş düymələr sinfi (script.js-də istifadə olunur) */
+.hidden-team-btn {
+    opacity: 0;
+    pointer-events: none; /* Klikləri ləğv et */
+}
+
+/* ÜMUMİ XƏTA QARŞISININ ALINMASI */
+body, .wrap { overflow-x: hidden }
