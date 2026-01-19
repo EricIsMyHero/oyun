@@ -21,12 +21,6 @@ const cheapestRecycleCostDisplay = document.getElementById('cheapest-recycle-cos
 const clearTeamBtn = document.getElementById('clear-team-btn');
 const placeholderText = document.getElementById('placeholder-text');
 
-// MÜQAYİSƏ ELEMENTLƏRİ (Mövcud olmaya bilər, lakin təyin olunub)
-const comparisonModal = document.getElementById('comparison-modal');
-const comparisonResults = document.getElementById('comparison-results');
-const comparisonDropZone = document.getElementById('comparison-drop-zone');
-
-
 // GLOBAL DƏYİŞƏNLƏR
 let allCardsData = []; // Bütün yüklənmiş kartları saxlayır
 let activeRarity = 'all'; // Aktiv endərliyi yadda saxlayır
@@ -402,90 +396,6 @@ toggleCardButtons(isAnyPanelOpen);
     }
 }
 
-
-// MÜQAYİSƏ SİSTEMİ
-function addToComparison(cardData) {
-    if (comparisonCards.some(card => card.name === cardData.name)) {
-        alert("Bu kart artıq müqayisə siyahısındadır.");
-        return;
-    }
-
-    if (comparisonCards.length >= 2) {
-        alert('Maksimum 2 kartı müqayisə edə bilərsiniz.');
-        return;
-    }
-
-    comparisonCards.push({
-        name: cardData.name,
-        originalCardData: cardData 
-    });
-
-    updateComparisonView();
-}
-
-function updateComparisonView() {
-    const panel = document.getElementById('comparison-panel');
-    const resultsContainer = document.getElementById('comparison-results');
-    
-    if (!panel || !resultsContainer) return;
-    resultsContainer.innerHTML = '';
-
-    // Müqayisə ediləcək statistikalar
-    const statsToCompare = ['health', 'shield', 'damage', 'sps', 'mana'];
-    const winners = {};
-
-    if (comparisonCards.length === 2) {
-        statsToCompare.forEach(stat => {
-            const val1 = getNumericStat(comparisonCards[0].originalCardData.stats[stat]);
-            const val2 = getNumericStat(comparisonCards[1].originalCardData.stats[stat]);
-            
-            if (val1 > val2) {
-                winners[stat] = stat === 'mana' ? 1 : 0; 
-            } else if (val2 > val1) {
-                winners[stat] = stat === 'mana' ? 0 : 1;
-            } else {
-                winners[stat] = null; 
-            }
-        });
-    }
-
-    comparisonCards.forEach((card, index) => {
-        const d = card.originalCardData;
-        const item = document.createElement('div');
-        item.className = 'compare-item';
-        
-        const getStyle = (s) => {
-            if (comparisonCards.length < 2 || winners[s] === null) return '';
-            return winners[s] === index ? 'color: #4CAF50; font-weight: bold;' : 'color: #f44336;';
-        };
-
-        const getArrow = (s) => {
-            if (comparisonCards.length < 2 || winners[s] === null) return '';
-            return winners[s] === index ? ' ↑' : ' ↓';
-        };
-
-        item.innerHTML = `
-            <h3 style="color: var(--${d.rarity.toLowerCase()}); border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">${d.name}</h3>
-            <div class="comp-stat-row"><b>HP:</b> <span style="${getStyle('health')}">${d.stats.health}${getArrow('health')}</span></div>
-            <div class="comp-stat-row"><b>Shield:</b> <span style="${getStyle('shield')}">${d.stats.shield}${getArrow('shield')}</span></div>
-            <div class="comp-stat-row"><b>DMG:</b> <span style="${getStyle('damage')}">${d.stats.damage}${getArrow('damage')}</span></div>
-            <div class="comp-stat-row"><b>DPS:</b> <span style="${getStyle('sps')}">${d.stats.sps}${getArrow('sps')}</span></div>
-            <div class="comp-stat-row"><b>Mana:</b> <span style="${getStyle('mana')}">${d.stats.mana}${getArrow('mana')}</span></div>
-            <button onclick="removeFromComparison('${d.name}')" class="remove-comp-btn">Sil</button>
-        `;
-        resultsContainer.appendChild(item);
-    });
-
-    if (comparisonCards.length > 0) {
-        panel.classList.remove('hidden');
-        cardsSection.classList.add('team-mode-active');
-    } else {
-        panel.classList.add('hidden');
-        if (teamBuilderPanel.classList.contains('hidden')) {
-            cardsSection.classList.remove('team-mode-active');
-        }
-    }
-}
 // Məlumatları çəkən funksiya
 async function fetchAndRender(rarity) {
     if (cardsContainer) cardsContainer.innerHTML = '<p>Məlumatlar yüklənir...</p>';
