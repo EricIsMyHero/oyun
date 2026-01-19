@@ -439,7 +439,7 @@ button.active { background: #394073; border-color: #5d66a2 }
 }
 
 
-/* Ümumi Düymə Stili (Comp və Team üçün) */
+/* Ümumi Düymə Stili (Team üçün) */
 .add-to-team-btn {
     background: var(--card); 
     color: var(--text);
