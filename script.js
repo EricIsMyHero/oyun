@@ -24,8 +24,8 @@ const placeholderText = document.getElementById('placeholder-text');
 // GLOBAL DƏYİŞƏNLƏR
 let allCardsData = []; // Bütün yüklənmiş kartları saxlayır
 let activeRarity = 'all'; // Aktiv endərliyi yadda saxlayır
-let currentTeam = []; // Seçilmiş kartları (statistikalarla) saxlayır
-let comparisonCards = []; // Seçilmiş müqayisə kartları (Maks 2)
+let currentTeam = []; // Seçilmiş kartları (statistikalarla) saxlayır 
+
 
 function showMenu() {
     mainMenu.classList.remove('hidden');
