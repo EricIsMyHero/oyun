@@ -71,7 +71,7 @@
     "type": ["Robot"],
     "rarity": "Ascendant",
     "note": "Tank",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": 110,
