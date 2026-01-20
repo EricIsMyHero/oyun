@@ -69,8 +69,8 @@ function createCardElement(data) {
     
     // TEAM BUILDER DÜYMƏSİ
     const addButton = document.createElement('button');
-    addButton.className = 'add-to-team-btn hidden-team-btn action-button'; // 'action-button' əlavə edildi
-    addButton.textContent = '+ Team'; // Mətn dəyişmədi, amma stil dəyişdi
+    addButton.className = 'add-to-team-btn hidden-team-btn action-button';
+    addButton.textContent = '+ Team';
     addButton.title = 'Komandaya Əlavə Et';
     addButton.dataset.cardName = data.name;
 
@@ -79,7 +79,7 @@ function createCardElement(data) {
         addToTeam(data); 
     });
     
-    buttonsContainer.appendChild(addButton); // Sıralama dəyişdi: Comp, Team
+    buttonsContainer.appendChild(addButton);
     
     cardContainer.appendChild(buttonsContainer); 
     
@@ -102,7 +102,61 @@ function createCardElement(data) {
         });
     }
 
-    if (data.isMulti) {
+    // ASCENDANT KARTLAR ÜÇÜN TRANSFORM SİSTEMİ
+    if (data.isAscendant && data.upgradedsecondForm) {
+        let isUpgraded = false; // Kartın hazırki vəziyyətini izləyir
+        
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+
+        // İlkin vəziyyət - normal statistikalar
+        let currentCardData = data;
+        const cardFront = createCardContent(currentCardData);
+        cardFront.classList.add('card-front');
+        
+        cardInner.appendChild(cardFront);
+        cardContainer.appendChild(cardInner);
+
+        setupCardListeners(cardFront);
+        
+        // TRANSFORM DÜYMƏSİ
+        const transformButton = document.createElement('button');
+        transformButton.className = 'transform-button';
+        transformButton.title = 'Transform';
+
+        transformButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            // Vəziyyəti dəyiş
+            isUpgraded = !isUpgraded;
+            
+            // Kartın məzmununu yenilə
+            if (isUpgraded) {
+                currentCardData = {
+                    ...data,
+                    stats: data.upgradedsecondForm.stats,
+                    trait: data.upgradedsecondForm.trait,
+                    additionalStats: data.upgradedsecondForm.additionalStats,
+                    showlevels: data.upgradedsecondForm.showlevels,
+                    story: data.upgradedsecondForm.story
+                };
+                cardContainer.classList.add('is-upgraded');
+            } else {
+                currentCardData = data;
+                cardContainer.classList.remove('is-upgraded');
+            }
+            
+            // İçindəkiləri təmizlə və yenidən yarat
+            cardFront.innerHTML = '';
+            const newContent = createCardContent(currentCardData);
+            cardFront.innerHTML = newContent.innerHTML;
+            setupCardListeners(cardFront);
+        });
+
+        cardContainer.appendChild(transformButton);
+    }
+    // ÇOX FORMALI (isMulti) KARTLAR
+    else if (data.isMulti) {
         const cardInner = document.createElement('div');
         cardInner.className = 'card-inner';
 
@@ -129,7 +183,9 @@ function createCardElement(data) {
         });
 
         cardContainer.appendChild(flipButton);
-    } else {
+    } 
+    // SADƏ KARTLAR
+    else {
         const singleCard = createCardContent(data);
         singleCard.classList.add('card-single');
         cardContainer.appendChild(singleCard);
@@ -150,7 +206,7 @@ function createCardElement(data) {
 // Kartın iç məzmununu yaradan köməkçi funksiya
 function createCardContent(data) {
     const content = document.createElement('div');
-    const badgeText = data.isHybrid ? `${data.type[0]}/${data.type[1]}` : data.type[0];
+    const badgeText = Array.isArray(data.type) ? data.type.join('/') : data.type;
     content.innerHTML = `
         <div class="stripe"></div>
         <div class="head">
@@ -214,7 +270,7 @@ function createCardContent(data) {
 
 // Kartları render edən funksiya
 function renderCards(cardsToRender) {
-    if (!cardsContainer) return; // cardsContainer tapılmasa funksiyanı dayandır
+    if (!cardsContainer) return;
     
     cardsContainer.innerHTML = '';
     if (cardsToRender.length === 0) {
@@ -313,26 +369,21 @@ function updateTeamStats() {
     
     // 2. Reducer vasitəsilə ümumi statistikaları hesablayırıq
     const stats = currentTeam.reduce((acc, card) => {
-        // Mövcud statistikaların toplanması (original kodunuzu dəyişmədən saxlayırıq)
         acc.health += card.health;
         acc.shield += card.shield;
         acc.damage += card.damage; 
         acc.dps += card.sps;
         acc.mana += card.mana;
 
-        // YENİ: Ən ucuz çevirmə üçün mana dəyərini (ədəd olaraq) massivə əlavə edirik
         manaCosts.push(parseInt(card.mana) || 0); 
 
         return acc;
     }, { health: 0, shield: 0, damage: 0, dps: 0, mana: 0 }); 
 
-    // 3. ƏN UCUZ ÇEVİRMƏ DƏYƏRİNİ HESABLA (Məntiq: ən kiçik 3 mana dəyərinin cəmi)
+    // 3. ƏN UCUZ ÇEVİRMƏ DƏYƏRİNİ HESABLA
     let cheapestRecycleCost = 0;
     if (manaCosts.length > 0) {
-        // Mana dəyərlərini kiçikdən böyüyə sırala
         manaCosts.sort((a, b) => a - b);
-        
-        // Ən ucuz 3 kartın mana dəyərini götür və topla
         cheapestRecycleCost = manaCosts.slice(0, 4).reduce((sum, mana) => sum + mana, 0);
     }
     
@@ -343,7 +394,6 @@ function updateTeamStats() {
     if (totalDPS) totalDPS.textContent = stats.dps;
     if (totalMana) totalMana.textContent = stats.mana;
 
-    // 5. ƏN UCUZ ÇEVİRMƏ STATİSTİKASINI YENİLƏ (aşağıdakı təlimata uyğun olaraq bu elementi HTML-ə əlavə edin)
     if (cheapestRecycleCostDisplay) cheapestRecycleCostDisplay.textContent = cheapestRecycleCost; 
 
     if (openTeamBuilderBtn) {
@@ -369,7 +419,6 @@ function filterAndRender() {
 
     renderCards(filteredCards);
     
-    // XƏTA DÜZƏLİŞİ: teamBuilderModal əvəzinə teamBuilderPanel-in mövcudluğunu və vəziyyətini yoxlayın
     if (teamBuilderPanel && !teamBuilderPanel.classList.contains('hidden')) { 
         toggleCardButtons(true);
     } else {
@@ -383,7 +432,6 @@ async function fetchAndRender(rarity) {
     activeRarity = rarity; 
     try {
         
-        // 'all' kartları çəkmək lazımdırsa VƏ hələ çəkilməyibsə:
         if (allCardsData.length === 0) {
             const rarities = ['mundane', 'familiar', 'arcane', 'relic', 'ascendant', 'apex', 'ethereal'];
             const fetchPromises = rarities.map(r =>
@@ -400,10 +448,9 @@ async function fetchAndRender(rarity) {
                 })
             );
             const results = await Promise.all(fetchPromises);
-            allCardsData = results.flat(); // Bütün kartları bir dəfə çəkib saxlayırıq
+            allCardsData = results.flat();
         }
         
-        // Məlumatı çəkdikdən sonra filtrləmə və render etməyi icra edin
         filterAndRender();
         
     } catch (error) {
@@ -447,7 +494,6 @@ filterButtons.forEach(button => {
         filterButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
         
-        // Active rarity yenilənir və filtrasiya təkrar icra olunur
         activeRarity = rarity; 
         filterAndRender(); 
     });
@@ -460,33 +506,26 @@ if (searchInput) {
     console.warn("Axtarış inputu (id='search-input') tapılmadı. HTML-i yoxlayın.");
 }
 
-// TEAM BUILDER PANEL EVENT LİSTENERLƏRİ (YENİLƏNMİŞ)
+// TEAM BUILDER PANEL EVENT LİSTENERLƏRİ
 if (openTeamBuilderBtn) {
     openTeamBuilderBtn.addEventListener('click', () => {
-        // Layotu iki sütunlu rejimi aktivləşdir
         if (cardsSection) cardsSection.classList.add('team-mode-active');
-        
-        // Paneli göstər
         if (teamBuilderPanel) teamBuilderPanel.classList.remove('hidden');
 
         updateTeamPanel();
-        toggleCardButtons(true); // Team və Compare düymələrini göstər
+        toggleCardButtons(true);
     });
 }
 
 if (closeTeamBuilderBtn) {
     closeTeamBuilderBtn.addEventListener('click', () => {
-        // Layotu bir sütunlu rejimi bərpa et
         if (cardsSection) cardsSection.classList.remove('team-mode-active');
-        
-        // Paneli gizlət
         if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
 
-        toggleCardButtons(false); // Team və Compare düymələrini gizlət
+        toggleCardButtons(false);
     });
 }
 
-// Komandanı Təmizlə funksiyası üçün listener
 if(clearTeamBtn) {
     clearTeamBtn.addEventListener('click', () => {
         currentTeam = [];
@@ -500,6 +539,5 @@ document.addEventListener('DOMContentLoaded', () => {
     showMenu();
     updateTeamStats(); 
     updateTeamPanel();
-    // DOM yüklənəndə Komanda Panelini gizlət (Layout dəyişikliyinin ilk vizual xətasını aradan qaldırır)
     if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden'); 
 });
