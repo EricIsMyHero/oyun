@@ -172,40 +172,6 @@ button.active {
   margin-left: auto; 
 }
 
-/* FİRLATMA DÜYMƏSİ */
-.flip-button {
-  position: absolute;
-  right: 14px;
-  bottom: 10px; 
-  z-index: 10;
-  background: rgba(43, 50, 100, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease-in-out;
-}
-
-.flip-button:hover { 
-  transform: scale(1.1); 
-}
-
-.flip-button::before {
-  content: '⇌';
-  font-size: 20px;
-  color: white;
-  display: block;
-  transform: scaleX(-1);
-}
-
-.card-container.is-flipped .flip-button::before { 
-  transform: scaleX(1); 
-}
-
 /* STATİSTİKALAR */
 .card-tabs { 
   display: flex; 
@@ -526,4 +492,38 @@ button.active {
 /* ÜMUMİ XƏTA QARŞISININ ALINMASI */
 body, .wrap { 
   overflow-x: hidden; 
+}
+
+/* FİRLATMA DÜYMƏSİ */
+.flip-button {
+  position: absolute;
+  right: 14px;
+  bottom: 10px; 
+  z-index: 10;
+  background: rgba(43, 50, 100, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.flip-button:hover { 
+  transform: scale(1.1); 
+}
+
+.flip-button::before {
+  content: '⇌';
+  font-size: 20px;
+  color: white;
+  display: block;
+  transform: scaleX(-1);
+}
+
+.card-container.is-flipped .flip-button::before { 
+  transform: scaleX(1); 
 }
