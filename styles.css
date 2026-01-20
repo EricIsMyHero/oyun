@@ -27,12 +27,14 @@ body {
   background: radial-gradient(1200px 700px at 20% 0%, #1a1f3f, #0f1220 60%);
   color: var(--text);
   font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
+  overflow-x: hidden;
 }
 
 .wrap { 
   max-width: 1364px; 
   margin: 32px auto; 
-  padding: 16px; 
+  padding: 16px;
+  transition: margin-right 0.3s ease;
 }
 
 header { 
@@ -144,119 +146,384 @@ button.active {
 .card-back {
   transform: rotateY(180deg);
 }
-
-/* KART MƏZMUNU */
+/* BAŞLIQ VƏ ETİKETLƏR */
 .head {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .name { 
   font-weight: 700; 
-  font-size: 18px;
+  letter-spacing: .3px; 
 }
 
 .badge {
-  font-size: 11px;
-  background: rgba(255,255,255,0.05);
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--ring);
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #bfc7ff;
+  margin-top: 4px;
 }
 
-.card-content-area {
-  flex: 1;
+.head > .badge:last-child { 
+  margin-left: auto; 
 }
 
-/* STATS */
-.card-tabs {
-  display: flex;
-  gap: 5px;
-  margin-bottom: 10px;
-}
-
-.card-tabs button {
-  padding: 4px 8px;
-  font-size: 11px;
-  border-radius: 6px;
-}
-
-.stats-section {
-  display: none;
-  font-size: 13px;
-  background: rgba(0,0,0,0.15);
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.stats-section.visible {
-  display: block;
-}
-
-/* NADİRLİK EFFEKTLƏRİ */
-.r-mundane { --accent: var(--mundane); }
-.r-familiar { --accent: var(--familiar); }
-.r-arcane { --accent: var(--arcane); }
-.r-relic { --accent: var(--relic); }
-.r-ascendant { --accent: var(--ascendant); }
-.r-apex { --accent: var(--apex); }
-.r-ethereal { --accent: var(--ethereal); }
-
-.card-container:hover,
-.card-single:hover {
-  transform: translateY(-5px);
-  z-index: 5;
-}
-
-.card-front::before,
-.card-single::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent);
-}
-
-.name { color: var(--accent); }
-
-/* DÜYMƏLƏR */
-.card-buttons-container {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    z-index: 10;
-}
-
-.add-to-team-btn {
-    background: #2b3264;
-    color: white;
-    border: 1px solid var(--ring);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
+/* FİRLATMA DÜYMƏSİ */
 .flip-button {
   position: absolute;
-  bottom: 15px;
-  left: 15px;
-  background: rgba(255,255,255,0.1);
-  border: none;
+  right: 14px;
+  bottom: 10px; 
+  z-index: 10;
+  background: rgba(43, 50, 100, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  transition: transform 0.2s ease-in-out;
 }
 
-.hidden { display: none !important; }
+.flip-button:hover { 
+  transform: scale(1.1); 
+}
+
+.flip-button::before {
+  content: '⇌';
+  font-size: 20px;
+  color: white;
+  display: block;
+  transform: scaleX(-1);
+}
+
+.card-container.is-flipped .flip-button::before { 
+  transform: scaleX(1); 
+}
+
+/* STATİSTİKALAR */
+.card-tabs { 
+  display: flex; 
+  justify-content: center; 
+  margin-bottom: 8px; 
+  gap: 8px; 
+}
+
+.card-tabs button {
+  background: #1e244a; 
+  color: #c9d3ff; 
+  border: 1px solid #2b3264;
+  font-size: 11px; 
+  padding: 6px 12px; 
+  border-radius: 12px;
+  cursor: pointer; 
+  transition: background .2s ease;
+}
+
+.card-tabs button.active { 
+  background: #2b3264; 
+  color: #fff; 
+}
+
+.stats-section {
+  display: none;
+  border-radius: 12px;
+  padding: 8px;
+  background: #111636;
+  border: 1px solid #252c59;
+}
+
+.stats-section[data-section-id="main-stats"].visible,
+.stats-section[data-section-id="additional-stats"].visible {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.stats-section[data-section-id="trait"].visible,
+.stats-section[data-section-id="showlevels"].visible,
+.stats-section[data-section-id="story-section"].visible {
+    display: block;
+}
+
+.stat-item { 
+  padding: 4px; 
+}
+
+.stat-item b { 
+  display: block; 
+  font-size: 12px; 
+  color: #c6ceff; 
+  margin-bottom: 4px; 
+}
+
+.stat-item span { 
+  font-size: 13px; 
+}
+
+.trait-center { 
+  text-align: center; 
+}
+
+.story-content {
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.4;
+    max-height: 160px;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+/* NADİRLİK VƏ KÖLGƏ EFFEKTLƏRİ */
+.r-mundane { box-shadow: 0 6px 28px rgba(204, 204, 204, 0.35); --glow: #CCCCCC; }
+.r-familiar { box-shadow: 0 6px 28px rgba(76, 175, 80, 0.35); --glow: #4CAF50; }
+.r-arcane { box-shadow: 0 6px 28px rgba(126, 87, 194, 0.35); --glow: #7E57C2; }
+.r-relic { box-shadow: 0 6px 28px rgba(229, 57, 53, 0.35); --glow: #E53935; }
+.r-ascendant { box-shadow: 0 6px 28px rgba(255, 152, 0, 0.35); --glow: #FF9800; }
+.r-apex { box-shadow: 0 6px 28px rgba(251, 192, 45, 0.35); --glow: #FBC02D; }
+.r-ethereal { box-shadow: 0 6px 28px rgba(255, 0, 127, 0.35); --glow: #FF007F; }
+
+/* ADLARIN RƏNGLƏRİ */
+.r-mundane .name { color: var(--mundane); }
+.r-familiar .name { color: var(--familiar); }
+.r-arcane .name { color: var(--arcane); }
+.r-relic .name { color: var(--relic); }
+.r-ascendant .name { color: var(--ascendant); }
+.r-apex .name { color: var(--apex); }
+
+/* ETHEREAL ÜÇÜN XÜSUSİ EFFEKT */
+.r-ethereal .name {
+  color: var(--ethereal);
+  background: linear-gradient(90deg, #ff007f, #ff9a9e, #fad0c4, #ffd1ff, #ff007f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 600% 100%;
+  animation: ethereal-animate 10s linear infinite;
+}
+
+@keyframes ethereal-animate {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* HALO EFFEKTLƏRİ */
+.card-front::after,
+.card-single::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  pointer-events: none;
+  border: 2px solid var(--ring);
+  filter: blur(4px);
+  opacity: .5;
+  z-index: -1;
+}
+
+/* MENYU */
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.main-menu h1 {
+  font-size: 48px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 15px rgba(255,255,255,.2);
+}
+
+.menu-buttons { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  width: 80%; 
+  max-width: 300px; 
+}
+
+.hidden { 
+  display: none !important; 
+}
+
+.back-button {
+  background: #22284f; 
+  border: 1px solid var(--muted);
+  color: var(--text);
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: .25s ease;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  color: var(--text);
+  border-color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* ETHEREAL PARILTISI */
+.card-glow {
+  position: absolute;
+  inset: -8px;
+  border-radius: 16px;
+  pointer-events: none;
+  background: radial-gradient(120px 80px at 80% 0%, rgba(255,0,127,.35), transparent 70%),
+              radial-gradient(120px 80px at 0% 100%, rgba(255,220,120,.25), transparent 70%);
+  filter: blur(8px);
+  opacity: .9;
+  z-index: -1;
+}
+
+.name .note {
+  font-size: 0.75em;
+  color: #CCCCCC;
+  opacity: 0.7;
+  margin-left: 3px;
+}
+
+/* TEAM BUILDER LAYOUT STİLLƏRİ */
+#cards-layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* TEAM MODE AKTİV OLDUQDA LAYOUT */
+#cards-section.team-mode-active #cards-layout-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+/* KOMANDA PANELİ */
+#team-builder-panel {
+    width: 300px;
+    min-width: 300px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+
+/* KARTLARIN OLDUĞU ƏSAS HİSSƏ */
+#cards-wrapper { 
+    flex-grow: 1; 
+    min-width: 0;
+}
+
+/* TEAM MODE AKTİV OLDUQDA KART QRİPİNİ DƏYİŞDİR */
+#cards-section.team-mode-active #cards.grid {
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); 
+}
+
+#team-builder-panel h2 {
+    font-size: 20px;
+    border-bottom: 2px solid var(--ring);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.team-cards-list {
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.team-card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--ring);
+}
+
+.team-card-item:last-child {
+  border-bottom: none;
+}
+
+.remove-from-team-btn {
+  background: #e53935;
+  color: var(--text);
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background .2s;
+}
+
+.remove-from-team-btn:hover {
+  background: #c62828;
+}
+
+.stats-summary {
+  padding-top: 15px;
+  border-top: 2px solid var(--ring);
+}
+
+.stats-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+#clear-team-btn {
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* DÜZƏLİŞ: DÜYMƏLƏRİN YERLƏŞMƏSİ ÜÇÜN YENİ STİL */
+.card-buttons-container {
+    position: absolute;
+    bottom: 45px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 10; 
+}
+
+/* Ümumi Düymə Stili */
+.add-to-team-btn {
+    background: #e53935;
+    color: white;
+    border: 1px solid #e53935;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.add-to-team-btn:hover {
+    background-color: #c42c2c;
+    border-color: #c42c2c;
+}
+
+.hidden-team-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ÜMUMİ XƏTA QARŞISININ ALINMASI */
+body, .wrap { 
+  overflow-x: hidden; 
+}
