@@ -119,6 +119,11 @@ function createCardElement(data) {
 
         setupCardListeners(cardFront);
         
+        // Flip düyməsi olmayan Ascendant kartlar üçün class əlavə et
+        if (!data.isMulti) {
+            cardContainer.classList.add('no-flip');
+        }
+        
         // TRANSFORM DÜYMƏSİ
         const transformButton = document.createElement('button');
         transformButton.className = 'transform-button';
