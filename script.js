@@ -244,8 +244,8 @@ function addToTeam(cardData) {
     }
     
     // 2. Maksimum kart sayının yoxlanılması
-    if (currentTeam.length >= 6) {
-        alert('Komandada maksimum 6 kart ola bilər.');
+    if (currentTeam.length >= 8) {
+        alert('Komandada maksimum 8 kart ola bilər.');
         return;
     }
     
@@ -333,7 +333,7 @@ function updateTeamStats() {
         manaCosts.sort((a, b) => a - b);
         
         // Ən ucuz 3 kartın mana dəyərini götür və topla
-        cheapestRecycleCost = manaCosts.slice(0, 3).reduce((sum, mana) => sum + mana, 0);
+        cheapestRecycleCost = manaCosts.slice(0, 4).reduce((sum, mana) => sum + mana, 0);
     }
     
     // 4. Mövcud statistikaları yenilə
@@ -347,7 +347,7 @@ function updateTeamStats() {
     if (cheapestRecycleCostDisplay) cheapestRecycleCostDisplay.textContent = cheapestRecycleCost; 
 
     if (openTeamBuilderBtn) {
-        openTeamBuilderBtn.textContent = `Komandanı Göstər (${currentTeam.length}/6)`;
+        openTeamBuilderBtn.textContent = `Komandanı Göstər (${currentTeam.length}/8)`;
     }
 }
 
