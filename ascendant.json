@@ -32,7 +32,8 @@
       "level2": "-",
       "level3": "-"
       },
-    "story": "-", "secondForm": {
+    "story": "-", 
+    "upgradedsecondForm": {
       "name": "Reachy",
       "type": ["İnsan"],
       "rarity": "Ascendant",
