@@ -1,15 +1,15 @@
 [
   {
-    "name": "Hamm",
-    "type": ["Heyvan"],
+    "name": "Reachy",
+    "type": ["İnsan"],
     "rarity": "Ascendant",
     "note": "Tank",
-    "isHybrid": false,
+    "isAscendant": true,
     "isMulti": false,
     "stats": {
-      "health": 7,
-      "shield": 0,
-      "damage": 25,
+      "health": 270,
+      "shield": 130,
+      "damage": 30,
       "sps": 23,
       "attackSpeed": "1,10s",
       "delay": "-",
@@ -28,11 +28,43 @@
       "dodge": "0%"
    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "-", "secondForm": {
+      "name": "Reachy",
+      "type": ["İnsan"],
+      "rarity": "Ascendant",
+      "note": "Suicide Assassin",
+      "stats": {
+        "health": "50",
+        "shield": "50",
+        "damage": "30",
+        "sps": "13",
+        "attackSpeed": "2,40s",
+        "delay": "-",
+        "mana": "-",
+        "number": "1"
+      },
+      "trait": "Rəqib kart yaxına gələrsə açılaraq hasar verər və 1,3 saniyə sərsəmlətər",
+      "additionalStats": {
+        "range": "1500",
+        "speed": "-",
+        "criticalChance": "-",
+        "criticDamage": "-",
+        "lifestealChance": "-",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-"
+      },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-" 
+      },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+      }
   },
   {
     "name": "M-M",
