@@ -179,7 +179,7 @@ button.active {
   color: #bfc7ff;
 }
 
-/* FIRLATMA DÜYMƏSİ */
+/* FİRLATMA DÜYMƏSİ */
 .flip-button {
   position: absolute;
   right: 12px;
@@ -228,13 +228,14 @@ button.active {
   color: white;
 }
 
-.card-container.is-transformed .transform-button {
+/* Transform aktiv olduqda */
+.card-container.is-upgraded .transform-button {
   background: linear-gradient(135deg, #4CAF50, #2E7D32);
   border-color: rgba(76, 175, 80, 0.5);
   box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
 }
 
-.card-container.is-transformed .transform-button::before {
+.card-container.is-upgraded .transform-button::before {
   content: '↺';
 }
 
