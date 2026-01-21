@@ -269,13 +269,20 @@ function createCardElement(data) {
                 contentData = data;
                 unitInfo.textContent = data.name;
             } else {
-                // Köməkçi kart
+                // Köməkçi kart - tam strukturu təmin et
+                const summonData = data.summonedUnits[currentIndex - 1];
                 contentData = {
-                    ...data.summonedUnits[currentIndex - 1],
+                    name: summonData.name || 'Unknown',
+                    note: summonData.note || '',
                     type: data.type, // Ana kartın tipini götür
-                    rarity: data.rarity
+                    rarity: data.rarity,
+                    stats: summonData.stats || {},
+                    trait: summonData.trait || '-',
+                    additionalStats: summonData.additionalStats || {},
+                    showlevels: summonData.showlevels || { level1: '-', level2: '-', level3: '-' },
+                    story: summonData.story || '-'
                 };
-                unitInfo.textContent = data.summonedUnits[currentIndex - 1].name;
+                unitInfo.textContent = summonData.name || 'Unknown';
             }
             
             const newContent = createCardContent(contentData);
