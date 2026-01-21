@@ -139,100 +139,105 @@
       }
   },
   {
-  "name": "Tphoneix",
+  "name": "Tphoenix",
   "type": ["İnsan"],
   "rarity": "Arcane",
   "isEvolution": true,
-  "evolutionChain": 
+  "evolutionChain": [
     {
-      "name": "Tphoneix",
-      "not": "Fighter"
+      "name": "Tphoenix",
+      "note": "Fighter",
       "stats": {
-      "health": "400",
-      "shield": "0",
-      "damage": "15",
-      "sps": "19",
-      "attackSpeed": "0,80s",
-      "delay": "-",
-      "mana": "15",
-      "number": "1"
+        "health": 400,
+        "shield": 0,
+        "damage": 15,
+        "sps": 19,
+        "attackSpeed": "0,80s",
+        "delay": "-",
+        "mana": 15,
+        "number": 1
       },
-      "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər. Fire Egg Can: 100 Özəllik: 4,3 saniyə ərzində qırılmazsa *Phoneix*-ə dönüşər, qırılarsa *Tphoneix*-ə",
+      "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər. Fire Egg Can: 100 Özəllik: 4,3 saniyə ərzində qırılmazsa *Phoenix*-ə dönüşər, qırılarsa *Tphoenix*-ə",
       "additionalStats": {
-      "range": "1000",
-      "speed": "1000",
-      "criticalChance": "0%",
-      "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%",
+        "range": 1000,
+        "speed": 1000,
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
       "showlevels": {
-      "level1": "+22% Hasar  |  18 » 22",
-      "level2": "+10% Hız  |  850 » 935",
-      "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3",
+        "level1": "+22% Hasar | 18 » 22",
+        "level2": "+10% Hız | 850 » 935",
+        "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
+      },
       "story": "-"
     },
     {
       "name": "Fire Egg",
       "note": "2-ci Forma",
       "stats": {
-        "health": "100",
-        "shield": "0",
-        "damage": "-",
-        "sps": "0",
+        "health": 100,
+        "shield": 0,
+        "damage": 0,
+        "sps": 0,
         "attackSpeed": "-",
         "delay": "-",
-        "mana": "-",
+        "mana": 0,
         "number": 1
       },
-      "trait": "4,3 saniyə ərzində qırılmazsa *Phoneix*-ə , qırılarsa *Tphoneix*-ə dönüşər.",
+      "trait": "4,3 saniyə ərzində qırılmazsa *Phoenix*-ə, qırılarsa *Tphoenix*-ə dönüşər.",
       "additionalStats": {
-      "range": "1000",
-      "speed": "1000",
-      "criticalChance": "0%",
-      "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%",
+        "range": 1000,
+        "speed": 1000,
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
       "showlevels": {
-      "level1": "+22% Hasar  |  18 » 22",
-      "level2": "+10% Hız  |  850 » 935",
-      "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3",
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
       "story": "-"
     },
     {
       "name": "Phoenix",
       "note": "Final Forma",
       "stats": {
-        "health": "200",
-        "shield": "0",
-        "damage": "20",
-        "sps": "25",
+        "health": 200,
+        "shield": 0,
+        "damage": 20,
+        "sps": 25,
         "attackSpeed": "0,80s",
         "delay": "-",
-        "mana": "-",
-        "number": "1"
+        "mana": 0,
+        "number": 1
       },
       "trait": "Güclənmiş forma",
       "additionalStats": {
-        "range": "1000",
-        "speed": "1000",
-        "criticalChance": "-",
-        "criticDamage": "-",
-        "lifestealChance": "-",
-        "lifesteal": "-",
-        "damageminimiser": "-",
-        "dodge": "-"
+        "range": 1000,
+        "speed": 1000,
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
       },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-" 
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
       },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+      "story": "Yenidən doğulmuş odun əzəməti."
     }
+  ]
 },
   {
     "name": "Pirate Boy",
