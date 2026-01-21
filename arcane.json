@@ -139,105 +139,127 @@
       }
   },
   {
-  "name": "Tphoenix",
-  "type": ["İnsan"],
-  "rarity": "Arcane",
-  "isEvolution": true,
-  "evolutionChain": [
-    {
-      "name": "Tphoenix",
-      "note": "Fighter",
-      "stats": {
-        "health": 400,
-        "shield": 0,
-        "damage": 15,
-        "sps": 19,
-        "attackSpeed": "0,80s",
-        "delay": "-",
-        "mana": 15,
-        "number": 1
-      },
-      "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər. Fire Egg Can: 100 Özəllik: 4,3 saniyə ərzində qırılmazsa *Phoenix*-ə dönüşər, qırılarsa *Tphoenix*-ə",
-      "additionalStats": {
-        "range": 1000,
-        "speed": 1000,
-        "criticalChance": "0%",
-        "criticDamage": "1.5x",
-        "lifestealChance": "0%",
-        "lifesteal": "25%",
-        "damageminimiser": "0%",
-        "dodge": "0%"
-      },
-      "showlevels": {
-        "level1": "+22% Hasar | 18 » 22",
-        "level2": "+10% Hız | 850 » 935",
-        "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
-      },
-      "story": "-"
+    "name": "Arcanyx",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "note": "Support/Healer",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": 50,
+      "shield": 50,
+      "damage": 15,
+      "sps": 14,
+      "attackSpeed": "1.10s",
+      "delay": "-",
+      "mana": 6,
+      "number": 1
     },
-    {
-      "name": "Fire Egg",
-      "note": "2-ci Forma",
-      "stats": {
-        "health": 100,
-        "shield": 0,
-        "damage": 0,
-        "sps": 0,
-        "attackSpeed": "-",
-        "delay": "-",
-        "mana": 0,
-        "number": 1
-      },
-      "trait": "4,3 saniyə ərzində qırılmazsa *Phoenix*-ə, qırılarsa *Tphoenix*-ə dönüşər.",
-      "additionalStats": {
-        "range": 1000,
-        "speed": 1000,
-        "criticalChance": "0%",
-        "criticDamage": "1.5x",
-        "lifestealChance": "0%",
-        "lifesteal": "25%",
-        "damageminimiser": "0%",
-        "dodge": "0%"
-      },
-      "showlevels": {
-        "level1": "-",
-        "level2": "-",
-        "level3": "-"
-      },
-      "story": "-"
+    "trait": "Atışları sonda partlayaraq +60% Hasar verər, yaxındakı kartlara hər 5 saniyədə +8 Can verər",
+    "additionalStats": {
+      "range": 2100,
+      "speed": 1000,
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
     },
-    {
-      "name": "Phoenix",
-      "note": "Final Forma",
-      "stats": {
-        "health": 200,
-        "shield": 0,
-        "damage": 20,
-        "sps": 25,
-        "attackSpeed": "0,80s",
-        "delay": "-",
-        "mana": 0,
-        "number": 1
+    "showlevels": {
+      "level1": "+2% Öz. Şansı | 5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
+      "level3": "+12% Qalxan | 50 » 56"
+    },
+    "story": "Arcanyx qədim meşələrin qoruyucusudur."
+  },
+  {
+    "name": "Tphoenix",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "isEvolution": true,
+    "evolutionChain": [
+      {
+        "name": "Tphoenix",
+        "note": "Fighter",
+        "stats": {
+          "health": 400,
+          "shield": 0,
+          "damage": 15,
+          "sps": 19,
+          "attackSpeed": "0.80s",
+          "delay": "-",
+          "mana": 15,
+          "number": 1
+        },
+        "trait": "Canı 25%-in altına düşdükdə Fire Egg-ə dönüşər.",
+        "additionalStats": {
+          "range": 1000,
+          "speed": 1000,
+          "criticalChance": "0%",
+          "criticDamage": "1.5x"
+        },
+        "showlevels": {
+          "level1": "+22% Hasar | 18 » 22",
+          "level2": "+10% Hız | 850 » 935",
+          "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
+        },
+        "story": "-"
       },
-      "trait": "Güclənmiş forma",
-      "additionalStats": {
-        "range": 1000,
-        "speed": 1000,
-        "criticalChance": "0%",
-        "criticDamage": "1.5x",
-        "lifestealChance": "0%",
-        "lifesteal": "25%",
-        "damageminimiser": "0%",
-        "dodge": "0%"
+      {
+        "name": "Fire Egg",
+        "note": "2-ci Forma",
+        "stats": {
+          "health": 100,
+          "shield": 0,
+          "damage": 0,
+          "sps": 0,
+          "attackSpeed": "-",
+          "delay": "-",
+          "mana": 0,
+          "number": 1
+        },
+        "trait": "4.3 saniyə ərzində qırılmazsa Phoenix-ə, qırılarsa Tphoenix-ə dönüşər.",
+        "additionalStats": {
+          "range": 1000,
+          "speed": 1000,
+          "criticalChance": "0%"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-"
       },
-      "showlevels": {
-        "level1": "-",
-        "level2": "-",
-        "level3": "-"
-      },
-      "story": "Yenidən doğulmuş odun əzəməti."
-    } ]
-},
+      {
+        "name": "Phoenix",
+        "note": "Final Forma",
+        "stats": {
+          "health": 200,
+          "shield": 0,
+          "damage": 20,
+          "sps": 25,
+          "attackSpeed": "0.80s",
+          "delay": "-",
+          "mana": 0,
+          "number": 1
+        },
+        "trait": "Güclənmiş forma",
+        "additionalStats": {
+          "range": 1000,
+          "speed": 1000,
+          "criticalChance": "0%"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "Yenidən doğulmuş odun gücü."
+      }
+    ]
+  },
   {
     "name": "Pirate Boy",
     "type": ["İnsan"],
