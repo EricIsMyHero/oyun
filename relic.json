@@ -1,72 +1,422 @@
 [
   {
-    "name": "Hamm",
-    "type": ["Heyvan"],
+    "name": "Stacy",
+    "type": ["İnsan"],
     "rarity": "Relic",
-    "note": "Tank",
+    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": 7,
-      "shield": 0,
-      "damage": 25,
-      "sps": 23,
-      "attackSpeed": "1,10s",
-      "delay": "-",
-      "mana": 3,
-      "number": 1
+      "health": "140",
+      "shield": "60",
+      "damage": "4x20",
+      "sps": "80",
+      "attackSpeed": "0,20",
+      "delay": "2,4",
+      "mana": "17",
+      "number": "1"
     },
-    "trait": "<b>-12%</b> daha az hasar alar, <b>+20%</b> Hasar bonusu verər.",
+    "trait": "Atışları ekstra 3x10 Hasar verər",
     "additionalStats": {
-      "range": 1000,
-      "speed": 1800,
+      "range": "2,600",
+      "speed": "1,400",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
   },
   {
-    "name": "M-M",
-    "type": ["Robot"],
+    "name": "Death",
+    "type": ["Ölü"],
     "rarity": "Relic",
-    "note": "Tank",
+    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": 110,
-      "shield": 20,
-      "damage": 5,
-      "sps": 11,
-      "attackSpeed": "0,95s",
+      "health": "200",
+      "shield": "50",
+      "damage": "20",
+      "sps": "17",
+      "attackSpeed": "1,20",
       "delay": "-",
-      "mana": 10,
-      "number": 1
+      "mana": "11",
+      "number": "1"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "trait": "Ölən hər kart üçün +2 Hasar bonusu qazanar. (Max: 80)",
     "additionalStats": {
-      "range": 1000,
-      "speed": 950,
+      "range": "1,200",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Etheris",
+    "type": ["İnsan"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "120",
+      "shield": "500",
+      "damage": "10",
+      "sps": "10",
+      "attackSpeed": "1,00",
+      "delay": "-",
+      "mana": "6",
+      "number": "1"
+    },
+    "trait": "Qalxan alınan hasarın 30%-ni rəqibə ötürər",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Magma",
+    "type": ["Uzaylı"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "800",
+      "shield": "200",
+      "damage": "100",
+      "sps": "40",
+      "attackSpeed": "2,50",
+      "delay": "-",
+      "mana": "18",
+      "number": "1"
+    },
+    "trait": "-5 Can hər saniyə, arxasındakı kartlar ekstra 2x5 Yanma Hasarı verər",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "0,800",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
-      "level1": "+5% Can",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
-     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Avara",
+    "type": ["Varlıq"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "230",
+      "shield": "0",
+      "damage": "32",
+      "sps": "40",
+      "attackSpeed": "0,80",
+      "delay": "1,2",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "33% Şansa hasar almaz, menzilə görə Saldırı Hızı, Gecikmə Vaxtı 80%-ə qədər azalar",
+    "additionalStats": {
+      "range": "3,500",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Far",
+    "type": ["İnsan"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "100",
+      "shield": "20",
+      "damage": "3x7",
+      "sps": "21",
+      "attackSpeed": "0,20",
+      "delay": "0,4",
+      "mana": "6",
+      "number": "1"
+    },
+    "trait": "13% Şansla rəqibləri 2 saniyəlik sərsəmlətər",
+    "additionalStats": {
+      "range": "3,200",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Demo",
+    "type": ["Robot"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "120",
+      "shield": "60",
+      "damage": "12",
+      "sps": "15",
+      "attackSpeed": "0,80",
+      "delay": "-",
+      "mana": "6",
+      "number": "1"
+    },
+    "trait": "Hər 16 saniyədə itirilən canı qədər M.Can qazanar",
+    "additionalStats": {
+      "range": "2,100",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Format",
+    "type": ["Uzaylı"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "30",
+      "shield": "30",
+      "damage": "-",
+      "sps": "-",
+      "attackSpeed": "-",
+      "delay": "-",
+      "mana": "3",
+      "number": "1"
+    },
+    "trait": "15,000 Karo qabaqdakı ən güclü rəqibə dönüşər (3 saniyə ərzində)",
+    "additionalStats": {
+      "range": "-",
+      "speed": "1,050",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Pyhsic",
+    "type": ["Uzaylı"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "90",
+      "shield": "210",
+      "damage": "24",
+      "sps": "12",
+      "attackSpeed": "2,00",
+      "delay": "-",
+      "mana": "10",
+      "number": "1"
+    },
+    "trait": "Hər 34 saniyədə 5,000 Karo qarşıdakı rəqibi yox edər",
+    "additionalStats": {
+      "range": "4,000",
+      "speed": "1,150",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Naar",
+    "type": ["İnsan"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "150",
+      "shield": "40",
+      "damage": "120",
+      "sps": "40",
+      "attackSpeed": "3,00",
+      "delay": "-",
+      "mana": "10",
+      "number": "1"
+    },
+    "trait": "Rəqib ölərsə ətrafdakı rəqiblərə 40 Hasar verər",
+    "additionalStats": {
+      "range": "6,000",
+      "speed": "0,800",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Lyra",
+    "type": ["İnsan"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "190",
+      "shield": "30",
+      "damage": "6",
+      "sps": "12",
+      "attackSpeed": "0,50",
+      "delay": "-",
+      "mana": "3",
+      "number": "1"
+    },
+    "trait": "Hər 3-cü vuruşu ekstra 2 dəfə təkrarlanar (3x6)",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,100",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Aeralis",
+    "type": ["Varlıq"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "50",
+      "shield": "0",
+      "damage": "10x7",
+      "sps": "70",
+      "attackSpeed": "0,10",
+      "delay": "2,6",
+      "mana": "8",
+      "number": "1"
+    },
+    "trait": "Rəqibləri atış başına 0,1 geri atar, 12% Şansla 4x geri atar",
+    "additionalStats": {
+      "range": "2,500",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
   }
 ]
