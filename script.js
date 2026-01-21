@@ -102,6 +102,199 @@ function createCardElement(data) {
         });
     }
 
+    // EVOLUTION SİSTEMİ (Phoenix tipli kartlar)
+    if (data.isEvolution && data.evolutionChain) {
+        let currentStage = 0;
+        
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+
+        const cardFront = createCardContent(data.evolutionChain[currentStage]);
+        cardFront.classList.add('card-front');
+        
+        cardInner.appendChild(cardFront);
+        cardContainer.appendChild(cardInner);
+
+        setupCardListeners(cardFront);
+        
+        // Evolution Controls
+        const evolutionControls = document.createElement('div');
+        evolutionControls.className = 'evolution-controls';
+        
+        // Sol ox
+        const leftArrow = document.createElement('button');
+        leftArrow.className = 'evolution-arrow';
+        leftArrow.innerHTML = '◀';
+        leftArrow.disabled = true;
+        
+        // Progress dots
+        const progressBar = document.createElement('div');
+        progressBar.className = 'evolution-progress';
+        
+        data.evolutionChain.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = 'progress-dot';
+            if (index === 0) dot.classList.add('active');
+            progressBar.appendChild(dot);
+        });
+        
+        // Stage info
+        const stageInfo = document.createElement('span');
+        stageInfo.className = 'stage-info';
+        stageInfo.textContent = `${data.evolutionChain[currentStage].name}`;
+        
+        // Sağ ox
+        const rightArrow = document.createElement('button');
+        rightArrow.className = 'evolution-arrow';
+        rightArrow.innerHTML = '▶';
+        if (data.evolutionChain.length === 1) rightArrow.disabled = true;
+        
+        evolutionControls.appendChild(leftArrow);
+        evolutionControls.appendChild(progressBar);
+        evolutionControls.appendChild(stageInfo);
+        evolutionControls.appendChild(rightArrow);
+        
+        // Ox click event
+        const updateStage = (newStage) => {
+            currentStage = newStage;
+            
+            // Progress dots yenilə
+            progressBar.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentStage);
+            });
+            
+            // Oxları yenilə
+            leftArrow.disabled = currentStage === 0;
+            rightArrow.disabled = currentStage === data.evolutionChain.length - 1;
+            
+            // Stage info yenilə
+            stageInfo.textContent = `${data.evolutionChain[currentStage].name}`;
+            
+            // Kart məzmununu yenilə
+            cardFront.innerHTML = '';
+            const newContent = createCardContent(data.evolutionChain[currentStage]);
+            cardFront.innerHTML = newContent.innerHTML;
+            setupCardListeners(cardFront);
+        };
+        
+        leftArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentStage > 0) updateStage(currentStage - 1);
+        });
+        
+        rightArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentStage < data.evolutionChain.length - 1) updateStage(currentStage + 1);
+        });
+        
+        cardContainer.appendChild(evolutionControls);
+    }
+    // SUMMONER SİSTEMİ (Ana kart + köməkçilər)
+    else if (data.isSummoner && data.summonedUnits) {
+        let currentIndex = 0; // 0 = ana kart, 1+ = köməkçilər
+        
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+        
+        cardContainer.classList.add('is-summoner');
+
+        const cardFront = createCardContent(data);
+        cardFront.classList.add('card-front');
+        
+        cardInner.appendChild(cardFront);
+        cardContainer.appendChild(cardInner);
+
+        setupCardListeners(cardFront);
+        
+        // Summoner Controls
+        const summonerControls = document.createElement('div');
+        summonerControls.className = 'evolution-controls';
+        
+        // Sol ox
+        const leftArrow = document.createElement('button');
+        leftArrow.className = 'evolution-arrow';
+        leftArrow.innerHTML = '◀';
+        leftArrow.disabled = true;
+        
+        // Progress dots (ana kart + summonlar)
+        const progressBar = document.createElement('div');
+        progressBar.className = 'evolution-progress';
+        
+        // Ana kart üçün dot
+        const mainDot = document.createElement('span');
+        mainDot.className = 'progress-dot active';
+        progressBar.appendChild(mainDot);
+        
+        // Hər summon üçün dot
+        data.summonedUnits.forEach(() => {
+            const dot = document.createElement('span');
+            dot.className = 'progress-dot';
+            progressBar.appendChild(dot);
+        });
+        
+        // Unit info
+        const unitInfo = document.createElement('span');
+        unitInfo.className = 'stage-info';
+        unitInfo.textContent = data.name;
+        
+        // Sağ ox
+        const rightArrow = document.createElement('button');
+        rightArrow.className = 'evolution-arrow';
+        rightArrow.innerHTML = '▶';
+        
+        summonerControls.appendChild(leftArrow);
+        summonerControls.appendChild(progressBar);
+        summonerControls.appendChild(unitInfo);
+        summonerControls.appendChild(rightArrow);
+        
+        // Ox click event
+        const updateUnit = (newIndex) => {
+            currentIndex = newIndex;
+            
+            // Progress dots yenilə
+            progressBar.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Oxları yenilə
+            leftArrow.disabled = currentIndex === 0;
+            rightArrow.disabled = currentIndex === data.summonedUnits.length;
+            
+            // Unit məzmununu yenilə
+            cardFront.innerHTML = '';
+            let contentData;
+            
+            if (currentIndex === 0) {
+                // Ana kart
+                contentData = data;
+                unitInfo.textContent = data.name;
+            } else {
+                // Köməkçi kart
+                contentData = {
+                    ...data.summonedUnits[currentIndex - 1],
+                    type: data.type, // Ana kartın tipini götür
+                    rarity: data.rarity
+                };
+                unitInfo.textContent = data.summonedUnits[currentIndex - 1].name;
+            }
+            
+            const newContent = createCardContent(contentData);
+            cardFront.innerHTML = newContent.innerHTML;
+            setupCardListeners(cardFront);
+        };
+        
+        leftArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentIndex > 0) updateUnit(currentIndex - 1);
+        });
+        
+        rightArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentIndex < data.summonedUnits.length) updateUnit(currentIndex + 1);
+        });
+        
+        cardContainer.appendChild(summonerControls);
+    }
     // ASCENDANT KARTLAR ÜÇÜN TRANSFORM SİSTEMİ
     if (data.isAscendant && data.upgradedsecondForm) {
         let isUpgraded = false; // Kartın hazırki vəziyyətini izləyir
