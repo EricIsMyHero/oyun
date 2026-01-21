@@ -70,6 +70,74 @@
     "story": "-"
   },
   {
+    "name": "Sylviana",
+    "type": ["Varlıq"],
+    "rarity": "Relic",
+    "note": "Special/Summoner",
+    "isAscendant": false,
+    "isMulti": true,
+    "stats": {
+      "health": "70",
+      "shield": "30",
+      "damage": "30",
+      "sps": "22",
+      "attackSpeed": "1,35s",
+      "delay": "-",
+      "mana": "5",
+      "number": "1"
+    },
+    "trait": "Öləndə içindən *Butterflies* çıxar, *Uzaylı* tipli kartlardan -20% daha az hasar alar.",
+    "additionalStats": {
+      "range": "2400",
+      "speed": "850",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+22% Hasar  |  18 » 22",
+      "level2": "+10% Hız  |  850 » 935",
+      "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
+  },
+    "story": "-",
+    "secondForm": {
+      "name": "Butterflies",
+      "type": ["Heyvan"],
+      "rarity": "Relic",
+      "note": "Suicide Assassin",
+      "stats": {
+        "health": "30",
+        "shield": "0",
+        "damage": "5",
+        "sps": "5",
+        "attackSpeed": "1,00s",
+        "delay": "-",
+        "mana": "-",
+        "number": "4"
+      },
+      "trait": "-",
+      "additionalStats": {
+        "range": "800",
+        "speed": "1100",
+        "criticalChance": "-",
+        "criticDamage": "-",
+        "lifestealChance": "-",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-"
+      },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-" 
+      },
+    "story": "-"
+      }
+  },
+  {
     "name": "Etheris",
     "type": ["İnsan"],
     "rarity": "Relic",
