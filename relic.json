@@ -4,7 +4,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "140",
@@ -39,7 +39,7 @@
     "type": ["Ölü"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "200",
@@ -74,7 +74,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "120",
@@ -109,7 +109,7 @@
     "type": ["Uzaylı"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "800",
@@ -144,7 +144,7 @@
     "type": ["Varlıq"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "230",
@@ -179,7 +179,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "100",
@@ -214,7 +214,7 @@
     "type": ["Robot"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "120",
@@ -249,7 +249,7 @@
     "type": ["Uzaylı"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "30",
@@ -284,7 +284,7 @@
     "type": ["Uzaylı"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "90",
@@ -319,7 +319,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "150",
@@ -354,7 +354,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "190",
@@ -389,7 +389,7 @@
     "type": ["Varlıq"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
+    "isAscendant": false,
     "isMulti": false,
     "stats": {
       "health": "50",
