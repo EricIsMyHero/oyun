@@ -143,7 +143,7 @@
   "type": ["İnsan"],
   "rarity": "Arcane",
   "isEvolution": true,
-  "evolutionChain":
+  "evolutionChain": [
     {
       "name": "Tphoenix",
       "note": "Fighter",
@@ -236,7 +236,7 @@
         "level3": "-"
       },
       "story": "Yenidən doğulmuş odun əzəməti."
-    }
+    } ]
 },
   {
     "name": "Pirate Boy",
