@@ -143,7 +143,7 @@
   "type": ["İnsan"],
   "rarity": "Arcane",
   "isEvolution": true,
-  "evolutionChain": [
+  "evolutionChain": 
     {
       "name": "Tphoneix",
       "not": "Fighter"
@@ -232,7 +232,7 @@
       "level3": "-" 
       },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }]
+    }
 },
   {
     "name": "Pirate Boy",
