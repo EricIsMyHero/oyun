@@ -313,7 +313,8 @@
       "level3": "+5% Hasar Azaltma | 0% » 5%"
     },
     "story": "Turtle-ın hekayəsi buradadır. Kartın tarixi haqqında mətn yazın.",
-    "secondForm": {
+    "forms": [
+      {
       "name": "Mini Turtles",
       "type": ["Heyvan"],
       "rarity": "Familiar",
@@ -346,7 +347,7 @@
       "level3": "-" 
       },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-      }
+      }]
   },
   {
     "name": "Sar-1",
@@ -455,10 +456,9 @@
   },
   {
     "name": "Dino",
-    "type": ["Robot" , "Heyvan"],
+    "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Fighter/Bruiser",
-    "isHybrid": true,
     "isMulti": false,
     "stats": {
       "health": "190",
@@ -493,7 +493,6 @@
     "type": ["Uzaylı"],
     "rarity": "Familiar",
     "note": "AOE DPS",
-    "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "180",
@@ -560,10 +559,9 @@
   },
   {
     "name": "Shadow Reaper",
-    "type": ["İnsan" , "Ölü"],
+    "type": ["Ölü"],
     "rarity": "Familiar",
     "note": "Assassin",
-    "isHybrid": true,
     "isMulti": false,
     "stats": {
       "health": "310",
