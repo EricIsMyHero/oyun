@@ -4,8 +4,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Support/Healer",
-    "isHybrid": false,
-    "isMulti": false,
+    "isEvolution": false,
     "stats": {
       "health": "50",
       "shield": "50",
@@ -39,8 +38,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Support/Healer",
-    "isHybrid": false,
-    "isMulti": false,
+    "isEvolution": false,
     "stats": {
       "health": "220",
       "shield": "0",
@@ -70,12 +68,15 @@
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
-    "name": "Clown",
+    "name": "Tphoenix",
     "type": ["İnsan"],
     "rarity": "Arcane",
+    "isEvolution": true,
+    "evolutionChain": [
+      {
+    "name": "Clown",
     "note": "Support/Healer",
-    "isHybrid": false,
-    "isMulti": true,
+    "isEvolution": true,
     "stats": {
       "health": "80",
       "shield": "80",
@@ -102,13 +103,13 @@
       "level2": "+10% Hız | 850 » 935",
       "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
     },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
-    "secondForm": {
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+      },
+    {
       "name": "Box",
       "type": ["Robot"],
       "rarity": "Arcane",
       "note": "Suicide Assassin",
-      "isHybrid": false,
       "stats": {
         "health": "50",
         "shield": "50",
@@ -137,6 +138,7 @@
       },
       "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
     }
+    ]
   },
   {
     "name": "Tphoenix",
@@ -243,9 +245,11 @@
     "name": "Pirate Boy",
     "type": ["İnsan"],
     "rarity": "Arcane",
+    "isEvolution": true,
+    "evolutionChain": [
+      {
+    "name": "Pirate Boy",
     "note": "Fighter",
-    "isHybrid": false,
-    "isMulti": true,
     "stats": {
       "health": "250",
       "shield": "0",
@@ -272,13 +276,12 @@
       "level2": "+10% Hız | 850 » 935",
       "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
     },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
-    "secondForm": {
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."},
+    {
       "name": "Pirate Girls",
       "type": ["İnsan"],
       "rarity": "Arcane",
       "note": "Marksman",
-      "isHybrid": false,
       "stats": {
         "health": "120",
         "shield": "0",
@@ -306,15 +309,13 @@
         "level3": "-"
       },
       "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-    }
+    }]
   },
   {
     "name": "Canoballer",
-    "type": ["İnsan", "Robot"],
+    "type": ["İnsan"],
     "rarity": "Arcane",
     "note": "Marksman/Burst",
-    "isHybrid": true,
-    "isMulti": false,
     "stats": {
       "health": "100",
       "shield": "200",
