@@ -426,21 +426,20 @@ button.active {
 
 /* EVOLUTION VƏ SUMMONER SİSTEMİ */
 
-/* Progress Bar Konteyner - Kartın daxilində alt hissədə */
+/* Progress Bar Konteyner */
 .evolution-controls {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  justify-content: center; /* Elementləri mərkəzə yığır */
-  gap: 12px;
+  gap: 10px;
   z-index: 15;
-  background: rgba(21, 25, 52, 0.95); /* Arxa fonu bir az daha tünd etdik */
-  padding: 8px 12px;
-  border-radius: 0 0 12px 12px; /* Yalnız aşağı küncləri yuvarlaqlaşdırır */
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(21, 25, 52, 0.9);
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
 }
 
