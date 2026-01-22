@@ -653,7 +653,7 @@ button.active {
     pointer-events: none;
 }
 
-/* ÜMUMİ XƏTA QARŞISININ ALINMASI */
+/* ÜMUMİ XƏTANIN QARŞISININ ALINMASI */
 body, .wrap { 
   overflow-x: hidden; 
 }
