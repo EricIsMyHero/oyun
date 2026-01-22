@@ -100,6 +100,7 @@ button.active {
 .card-single {
   width: 100%;
   height: 340px;
+  padding-bottom: 40px;
   border-radius: 12px;
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -427,25 +428,21 @@ button.active {
 /* EVOLUTION VƏ SUMMONER SİSTEMİ */
 
 /* Progress Bar Konteyner */
-/* Progress bar – kartın altında */
 .evolution-progress {
   position: absolute;
-  bottom: -18px;              /* kartın altına düşür */
+  bottom: 12px;          /* kartın içində alt */
   left: 50%;
   transform: translateX(-50%);
-  
-  width: 80%;                 /* kartın eninə uyğun */
+  width: 85%;            /* kart eni ilə uyğun */
   height: 10px;
-
   display: flex;
   justify-content: center;
   gap: 8px;
-
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 4px 6px;
-  box-shadow: var(--shadow);
 }
+
 
 /* Ox Düymələri */
 .evolution-arrow {
@@ -488,18 +485,13 @@ button.active {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  transition: all 0.25s ease;
+  background: rgba(255,255,255,0.3);
 }
-
 
 .progress-dot.active {
   background: linear-gradient(135deg, #4CAF50, #66BB6A);
-  border-color: #4CAF50;
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+  box-shadow: 0 0 6px rgba(76,175,80,0.6);
 }
-
 
 /* Stage Info */
 .stage-info {
