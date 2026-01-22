@@ -389,7 +389,6 @@
     "type": ["Uzaylı"],
     "rarity": "Mundane",
     "note": "Special/Splitter",
-    "isHybrid": false,
     "isMulti": true,
     "stats": {
       "health": "230",
@@ -418,12 +417,12 @@
       "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
   },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
-    "secondForm": {
+    "forms": [
+      {
       "name": "Mini Freaks",
       "type": ["Uzaylı"],
       "rarity": "Mundane",
       "note": "Suicide Assassin",
-      "isHybrid": false,
       "stats": {
         "health": "100",
         "shield": "0",
@@ -451,7 +450,7 @@
       "level3": "-" 
       },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-      }
+      }]
   },
   {
     "name": "Nightprowler",
