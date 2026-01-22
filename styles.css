@@ -99,8 +99,7 @@ button.active {
 .card-container,
 .card-single {
   width: 100%;
-  height: 340px;
-  padding-bottom: 40px;
+  height: 320px;
   border-radius: 12px;
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -427,22 +426,23 @@ button.active {
 
 /* EVOLUTION VƏ SUMMONER SİSTEMİ */
 
-/* Progress Bar Konteyner */
-.evolution-progress {
+/* Progress Bar Konteyner - Kartın daxilində alt hissədə */
+.evolution-controls {
   position: absolute;
-  bottom: 12px;          /* kartın içində alt */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 85%;            /* kart eni ilə uyğun */
-  height: 10px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 4px 6px;
+  align-items: center;
+  justify-content: center; /* Elementləri mərkəzə yığır */
+  gap: 12px;
+  z-index: 15;
+  background: rgba(21, 25, 52, 0.95); /* Arxa fonu bir az daha tünd etdik */
+  padding: 8px 12px;
+  border-radius: 0 0 12px 12px; /* Yalnız aşağı küncləri yuvarlaqlaşdırır */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
-
 
 /* Ox Düymələri */
 .evolution-arrow {
@@ -482,15 +482,19 @@ button.active {
 }
 
 .progress-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
 }
 
 .progress-dot.active {
   background: linear-gradient(135deg, #4CAF50, #66BB6A);
-  box-shadow: 0 0 6px rgba(76,175,80,0.6);
+  border-color: #4CAF50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
+  transform: scale(1.3);
 }
 
 /* Stage Info */
@@ -650,7 +654,7 @@ button.active {
     pointer-events: none;
 }
 
-/* ÜMUMİ XƏTANIN QARŞISININ ALINMASI */
+/* ÜMUMİ XƏTA QARŞISININ ALINMASI */
 body, .wrap { 
   overflow-x: hidden; 
 }
