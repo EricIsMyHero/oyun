@@ -22,14 +22,15 @@ const clearTeamBtn = document.getElementById('clear-team-btn');
 const placeholderText = document.getElementById('placeholder-text');
 
 // GLOBAL DƏYİŞƏNLƏR
-let allCardsData = [];
-let activeRarity = 'all';
-let currentTeam = [];
+let allCardsData = []; // Bütün yüklənmiş kartları saxlayır
+let activeRarity = 'all'; // Aktiv endərliyi yadda saxlayır
+let currentTeam = []; // Seçilmiş kartları (statistikalarla) saxlayır 
 
 
 function showMenu() {
     mainMenu.classList.remove('hidden');
     cardsSection.classList.add('hidden');
+    // Menyuya qayıdanda komanda rejimini ləğv et
     if (cardsSection.classList.contains('team-mode-active')) {
          cardsSection.classList.remove('team-mode-active');
          if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
@@ -44,6 +45,7 @@ function showCards() {
     if (searchInput) searchInput.value = '';
 }
 
+// Bu funksiya bütün kartlardakı Team/Compare düymələrinin görünməsinə nəzarət edir.
 function toggleCardButtons(isVisible) {
     const buttons = document.querySelectorAll('.hidden-team-btn, .add-to-team-btn');
     buttons.forEach(button => {
@@ -61,10 +63,11 @@ function createCardElement(data) {
     const cardContainer = document.createElement('article');
     cardContainer.className = `card-container card r-${data.rarity.toLowerCase()}`;
     
-    // TEAM BUILDER DÜYMƏSİ
+    // YENİ DÜYMƏLƏRİN KONTEYNERİ
     const buttonsContainer = document.createElement('div');
     buttonsContainer.className = 'card-buttons-container'; 
     
+    // TEAM BUILDER DÜYMƏSİ
     const addButton = document.createElement('button');
     addButton.className = 'add-to-team-btn hidden-team-btn action-button';
     addButton.textContent = '+ Team';
@@ -77,6 +80,7 @@ function createCardElement(data) {
     });
     
     buttonsContainer.appendChild(addButton);
+    
     cardContainer.appendChild(buttonsContainer); 
     
     const setupCardListeners = (contentElement) => {
@@ -98,14 +102,14 @@ function createCardElement(data) {
         });
     }
 
-    // ÇOX FORMALI KARTLAR (isMulti)
-    if (data.isMulti && data.forms && data.forms.length > 0) {
-        let currentFormIndex = 0;
+    // EVOLUTION SİSTEMİ (Phoenix tipli kartlar)
+    if (data.isEvolution && data.evolutionChain) {
+        let currentStage = 0;
         
         const cardInner = document.createElement('div');
         cardInner.className = 'card-inner';
 
-        const cardFront = createCardContent(data);
+        const cardFront = createCardContent(data.evolutionChain[currentStage]);
         cardFront.classList.add('card-front');
         
         cardInner.appendChild(cardFront);
@@ -113,9 +117,9 @@ function createCardElement(data) {
 
         setupCardListeners(cardFront);
         
-        // MULTI CONTROLS (Progress bar + oxlar)
-        const multiControls = document.createElement('div');
-        multiControls.className = 'evolution-controls';
+        // Evolution Controls
+        const evolutionControls = document.createElement('div');
+        evolutionControls.className = 'evolution-controls';
         
         // Sol ox
         const leftArrow = document.createElement('button');
@@ -127,98 +131,158 @@ function createCardElement(data) {
         const progressBar = document.createElement('div');
         progressBar.className = 'evolution-progress';
         
-        // Əsas kart üçün dot
+        data.evolutionChain.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = 'progress-dot';
+            if (index === 0) dot.classList.add('active');
+            progressBar.appendChild(dot);
+        });
+        
+        // Stage info
+        const stageInfo = document.createElement('span');
+        stageInfo.className = 'stage-info';
+        stageInfo.textContent = `${data.evolutionChain[currentStage].name}`;
+        
+        // Sağ ox
+        const rightArrow = document.createElement('button');
+        rightArrow.className = 'evolution-arrow';
+        rightArrow.innerHTML = '▶';
+        if (data.evolutionChain.length === 1) rightArrow.disabled = true;
+        
+        evolutionControls.appendChild(leftArrow);
+        evolutionControls.appendChild(progressBar);
+        evolutionControls.appendChild(stageInfo);
+        evolutionControls.appendChild(rightArrow);
+        
+        // Ox click event
+        const updateStage = (newStage) => {
+            currentStage = newStage;
+            
+            // Progress dots yenilə
+            progressBar.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentStage);
+            });
+            
+            // Oxları yenilə
+            leftArrow.disabled = currentStage === 0;
+            rightArrow.disabled = currentStage === data.evolutionChain.length - 1;
+            
+            // Stage info yenilə
+            stageInfo.textContent = `${data.evolutionChain[currentStage].name}`;
+            
+            // Kart məzmununu yenilə
+            cardFront.innerHTML = '';
+            const newContent = createCardContent(data.evolutionChain[currentStage]);
+            cardFront.innerHTML = newContent.innerHTML;
+            setupCardListeners(cardFront);
+        };
+        
+        leftArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentStage > 0) updateStage(currentStage - 1);
+        });
+        
+        rightArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentStage < data.evolutionChain.length - 1) updateStage(currentStage + 1);
+        });
+        
+        cardContainer.appendChild(evolutionControls);
+    }
+    // SUMMONER SİSTEMİ (Ana kart + köməkçilər)
+    else if (data.isSummoner && data.summonedUnits) {
+        let currentIndex = 0; // 0 = ana kart, 1+ = köməkçilər
+        
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+        
+        cardContainer.classList.add('is-summoner');
+
+        const cardFront = createCardContent(data);
+        cardFront.classList.add('card-front');
+        
+        cardInner.appendChild(cardFront);
+        cardContainer.appendChild(cardInner);
+
+        setupCardListeners(cardFront);
+        
+        // Summoner Controls
+        const summonerControls = document.createElement('div');
+        summonerControls.className = 'evolution-controls';
+        
+        // Sol ox
+        const leftArrow = document.createElement('button');
+        leftArrow.className = 'evolution-arrow';
+        leftArrow.innerHTML = '◀';
+        leftArrow.disabled = true;
+        
+        // Progress dots (ana kart + summonlar)
+        const progressBar = document.createElement('div');
+        progressBar.className = 'evolution-progress';
+        
+        // Ana kart üçün dot
         const mainDot = document.createElement('span');
         mainDot.className = 'progress-dot active';
         progressBar.appendChild(mainDot);
         
-        // Hər forma üçün dot
-        data.forms.forEach(() => {
+        // Hər summon üçün dot
+        data.summonedUnits.forEach(() => {
             const dot = document.createElement('span');
             dot.className = 'progress-dot';
             progressBar.appendChild(dot);
         });
         
-        // Form info
-        const formInfo = document.createElement('span');
-        formInfo.className = 'stage-info';
-        formInfo.textContent = data.name;
+        // Unit info
+        const unitInfo = document.createElement('span');
+        unitInfo.className = 'stage-info';
+        unitInfo.textContent = data.name;
         
         // Sağ ox
         const rightArrow = document.createElement('button');
         rightArrow.className = 'evolution-arrow';
         rightArrow.innerHTML = '▶';
         
-        multiControls.appendChild(leftArrow);
-        multiControls.appendChild(progressBar);
-        multiControls.appendChild(formInfo);
-        multiControls.appendChild(rightArrow);
+        summonerControls.appendChild(leftArrow);
+        summonerControls.appendChild(progressBar);
+        summonerControls.appendChild(unitInfo);
+        summonerControls.appendChild(rightArrow);
         
         // Ox click event
-        const updateForm = (newIndex) => {
-            currentFormIndex = newIndex;
+        const updateUnit = (newIndex) => {
+            currentIndex = newIndex;
             
             // Progress dots yenilə
             progressBar.querySelectorAll('.progress-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentFormIndex);
+                dot.classList.toggle('active', index === currentIndex);
             });
             
             // Oxları yenilə
-            leftArrow.disabled = currentFormIndex === 0;
-            rightArrow.disabled = currentFormIndex === data.forms.length;
+            leftArrow.disabled = currentIndex === 0;
+            rightArrow.disabled = currentIndex === data.summonedUnits.length;
             
-            // Forma məzmununu yenilə
+            // Unit məzmununu yenilə
             cardFront.innerHTML = '';
             let contentData;
             
-            if (currentFormIndex === 0) {
-                // Əsas kart
+            if (currentIndex === 0) {
+                // Ana kart
                 contentData = data;
-                formInfo.textContent = data.name;
+                unitInfo.textContent = data.name;
             } else {
-                // Digər formalar
-                const formData = data.forms[currentFormIndex - 1];
-                
-                if (!formData) {
-                    console.error('Form data not found at index:', currentFormIndex - 1);
-                    return;
-                }
-                
+                // Köməkçi kart - tam strukturu təmin et
+                const summonData = data.summonedUnits[currentIndex - 1];
                 contentData = {
-                    name: formData.name || 'Unknown',
-                    note: formData.note || '',
-                    type: formData.type || data.type,
+                    name: summonData.name || 'Unknown',
+                    note: summonData.note || '',
+                    type: data.type, // Ana kartın tipini götür
                     rarity: data.rarity,
-                    stats: formData.stats || {
-                        health: 0,
-                        shield: 0,
-                        damage: 0,
-                        sps: 0,
-                        attackSpeed: '-',
-                        delay: '-',
-                        mana: 0,
-                        number: 0
-                    },
-                    trait: formData.trait || '-',
-                    additionalStats: formData.additionalStats || {
-                        range: '-',
-                        speed: '-',
-                        criticalChance: '-',
-                        criticDamage: '-',
-                        lifestealChance: '-',
-                        lifesteal: '-',
-                        damageminimiser: '-',
-                        dodge: '-'
-                    },
-                    showlevels: formData.showlevels || { level1: '-', level2: '-', level3: '-' },
-                    story: formData.story || '-'
+                    stats: summonData.stats || {},
+                    trait: summonData.trait || '-',
+                    additionalStats: summonData.additionalStats || {},
+                    showlevels: summonData.showlevels || { level1: '-', level2: '-', level3: '-' },
+                    story: summonData.story || '-'
                 };
-                formInfo.textContent = formData.name || 'Unknown';
-            }
-            
-            if (!contentData || !contentData.stats) {
-                console.error('Invalid contentData created:', contentData);
-                return;
+                unitInfo.textContent = summonData.name || 'Unknown';
             }
             
             const newContent = createCardContent(contentData);
@@ -228,23 +292,24 @@ function createCardElement(data) {
         
         leftArrow.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (currentFormIndex > 0) updateForm(currentFormIndex - 1);
+            if (currentIndex > 0) updateUnit(currentIndex - 1);
         });
         
         rightArrow.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (currentFormIndex < data.forms.length) updateForm(currentFormIndex + 1);
+            if (currentIndex < data.summonedUnits.length) updateUnit(currentIndex + 1);
         });
         
-        cardContainer.appendChild(multiControls);
+        cardContainer.appendChild(summonerControls);
     }
     // ASCENDANT KARTLAR ÜÇÜN TRANSFORM SİSTEMİ
-    else if (data.isAscendant && data.upgradedsecondForm) {
-        let isUpgraded = false;
+    if (data.isAscendant && data.upgradedsecondForm) {
+        let isUpgraded = false; // Kartın hazırki vəziyyətini izləyir
         
         const cardInner = document.createElement('div');
         cardInner.className = 'card-inner';
 
+        // İlkin vəziyyət - normal statistikalar
         let currentCardData = data;
         const cardFront = createCardContent(currentCardData);
         cardFront.classList.add('card-front');
@@ -254,8 +319,12 @@ function createCardElement(data) {
 
         setupCardListeners(cardFront);
         
-        cardContainer.classList.add('no-flip');
+        // Flip düyməsi olmayan Ascendant kartlar üçün class əlavə et
+        if (!data.isMulti) {
+            cardContainer.classList.add('no-flip');
+        }
         
+        // TRANSFORM DÜYMƏSİ
         const transformButton = document.createElement('button');
         transformButton.className = 'transform-button';
         transformButton.title = 'Transform';
@@ -263,8 +332,10 @@ function createCardElement(data) {
         transformButton.addEventListener('click', (e) => {
             e.stopPropagation();
             
+            // Vəziyyəti dəyiş
             isUpgraded = !isUpgraded;
             
+            // Kartın məzmununu yenilə
             if (isUpgraded) {
                 currentCardData = {
                     ...data,
@@ -280,6 +351,7 @@ function createCardElement(data) {
                 cardContainer.classList.remove('is-upgraded');
             }
             
+            // İçindəkiləri təmizlə və yenidən yarat
             cardFront.innerHTML = '';
             const newContent = createCardContent(currentCardData);
             cardFront.innerHTML = newContent.innerHTML;
@@ -288,6 +360,35 @@ function createCardElement(data) {
 
         cardContainer.appendChild(transformButton);
     }
+    // ÇOX FORMALI (isMulti) KARTLAR
+    else if (data.isMulti) {
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+
+        const cardFront = createCardContent(data);
+        cardFront.classList.add('card-front');
+        
+        const cardBack = createCardContent(data.secondForm);
+        cardBack.classList.add('card-back');
+
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        cardContainer.appendChild(cardInner);
+
+        setupCardListeners(cardFront);
+        setupCardListeners(cardBack);
+        
+        const flipButton = document.createElement('button');
+        flipButton.className = 'flip-button';
+
+        cardContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.flip-button')) {
+                cardContainer.classList.toggle('is-flipped');
+            }
+        });
+
+        cardContainer.appendChild(flipButton);
+    } 
     // SADƏ KARTLAR
     else {
         const singleCard = createCardContent(data);
@@ -311,6 +412,7 @@ function createCardElement(data) {
 function createCardContent(data) {
     const content = document.createElement('div');
     
+    // Əmin olaq ki, data və onun lazımi xüsusiyyətləri mövcuddur
     if (!data || !data.stats) {
         console.error('Invalid card data:', data);
         content.innerHTML = '<p>Kart məlumatları düzgün deyil</p>';
@@ -379,6 +481,7 @@ function createCardContent(data) {
     return content;
 }
 
+// Kartları render edən funksiya
 function renderCards(cardsToRender) {
     if (!cardsContainer) return;
     
@@ -401,6 +504,7 @@ function getNumericStat(statValue) {
 }
 
 function addToTeam(cardData) {
+    // 1. Unikal kart yoxlaması
     const isAlreadyInTeam = currentTeam.some(card => card.name === cardData.name);
 
     if (isAlreadyInTeam) {
@@ -408,11 +512,13 @@ function addToTeam(cardData) {
         return;
     }
     
+    // 2. Maksimum kart sayının yoxlanılması
     if (currentTeam.length >= 8) {
         alert('Komandada maksimum 8 kart ola bilər.');
         return;
     }
     
+    // 3. Kartın düzgün formatlanaraq əlavə edilməsi
     const cardToAdd = {
         name: cardData.name,
         health: getNumericStat(cardData.stats.health),
@@ -425,6 +531,7 @@ function addToTeam(cardData) {
 
     currentTeam.push(cardToAdd);
     
+    // 4. Panellərin və statistikaların yenilənməsi
     updateTeamPanel();
     updateTeamStats();
 }
@@ -470,8 +577,10 @@ function updateTeamPanel() {
 }
 
 function updateTeamStats() {
+    // 1. Mana dəyərlərini toplayacağımız massivi yaradırıq
     const manaCosts = []; 
     
+    // 2. Reducer vasitəsilə ümumi statistikaları hesablayırıq
     const stats = currentTeam.reduce((acc, card) => {
         acc.health += card.health;
         acc.shield += card.shield;
@@ -484,12 +593,14 @@ function updateTeamStats() {
         return acc;
     }, { health: 0, shield: 0, damage: 0, dps: 0, mana: 0 }); 
 
+    // 3. ƏN UCUZ ÇEVİRMƏ DƏYƏRİNİ HESABLA
     let cheapestRecycleCost = 0;
     if (manaCosts.length > 0) {
         manaCosts.sort((a, b) => a - b);
         cheapestRecycleCost = manaCosts.slice(0, 4).reduce((sum, mana) => sum + mana, 0);
     }
     
+    // 4. Mövcud statistikaları yenilə
     if (totalHealth) totalHealth.textContent = stats.health;
     if (totalShield) totalShield.textContent = stats.shield;
     if (totalDamage) totalDamage.textContent = stats.damage; 
@@ -503,6 +614,7 @@ function updateTeamStats() {
     }
 }
 
+// ƏSAS FİLTR VƏ AXTARIŞ FUNKSİYASI
 function filterAndRender() {
     const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
     
@@ -527,6 +639,7 @@ function filterAndRender() {
     }
 }
 
+// Məlumatları çəkən funksiya
 async function fetchAndRender(rarity) {
     if (cardsContainer) cardsContainer.innerHTML = '<p>Məlumatlar yüklənir...</p>';
     activeRarity = rarity; 
@@ -559,6 +672,7 @@ async function fetchAndRender(rarity) {
     }
 }
 
+
 // EVENT LİSTENERLƏRİ
 
 showCardsBtn.addEventListener('click', showCards);
@@ -586,6 +700,7 @@ backToMenuBtn.addEventListener('click', showMenu);
     }
 });
 
+// FİLTR DÜYMƏLƏRİ
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
         const rarity = button.id.split('-')[1];
@@ -597,12 +712,14 @@ filterButtons.forEach(button => {
     });
 });
 
+// AXTARIŞ GİRİŞİNƏ EVENT LİSTENER
 if (searchInput) {
     searchInput.addEventListener('input', filterAndRender);
 } else {
     console.warn("Axtarış inputu (id='search-input') tapılmadı. HTML-i yoxlayın.");
 }
 
+// TEAM BUILDER PANEL EVENT LİSTENERLƏRİ
 if (openTeamBuilderBtn) {
     openTeamBuilderBtn.addEventListener('click', () => {
         if (cardsSection) cardsSection.classList.add('team-mode-active');
@@ -629,6 +746,7 @@ if(clearTeamBtn) {
         updateTeamStats();
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     showMenu();
