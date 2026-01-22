@@ -4,6 +4,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Support/Healer",
+    "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "50",
@@ -27,10 +28,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı  |  5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
-      "level3": "+12% Qalxan  |  50 » 56"
-      },
+      "level1": "+2% Öz. Şansı | 5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
+      "level3": "+12% Qalxan | 50 » 56"
+    },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
@@ -62,10 +63,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı  |  5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
-      "level3": "+12% Qalxan  |  50 » 56"
-      },
+      "level1": "+2% Öz. Şansı | 5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
+      "level3": "+12% Qalxan | 50 » 56"
+    },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
@@ -74,7 +75,7 @@
     "rarity": "Arcane",
     "note": "Support/Healer",
     "isHybrid": false,
-    "isEvolution": true,
+    "isMulti": true,
     "stats": {
       "health": "80",
       "shield": "80",
@@ -85,7 +86,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Öləndə *Box* buraxar",
+    "trait": "Öləndə Box buraxar",
     "additionalStats": {
       "range": "3000",
       "speed": "1100",
@@ -97,17 +98,17 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+22% Hasar  |  18 » 22",
-      "level2": "+10% Hız  |  850 » 935",
-      "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
-  },
+      "level1": "+22% Hasar | 18 » 22",
+      "level2": "+10% Hız | 850 » 935",
+      "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
+    },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
-    "forms": [
-      {
+    "secondForm": {
       "name": "Box",
       "type": ["Robot"],
       "rarity": "Arcane",
       "note": "Suicide Assassin",
+      "isHybrid": false,
       "stats": {
         "health": "50",
         "shield": "50",
@@ -129,20 +130,20 @@
         "damageminimiser": "-",
         "dodge": "-"
       },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-" 
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
       },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-      }]
+      "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    }
   },
   {
     "name": "Tphoenix",
     "type": ["İnsan"],
     "rarity": "Arcane",
-    "isMulti": true,
-    "forms": [
+    "isEvolution": true,
+    "evolutionChain": [
       {
         "name": "Tphoenix",
         "note": "Fighter",
@@ -189,8 +190,8 @@
         },
         "trait": "4.3 saniyə ərzində qırılmazsa Phoenix-ə, qırılarsa Tphoenix-ə dönüşər.",
         "additionalStats": {
-          "range": 1000,
-          "speed": 1000,
+          "range": "1000",
+          "speed": "1000",
           "criticalChance": "-",
           "criticDamage": "-",
           "lifestealChance": "-",
@@ -223,11 +224,11 @@
           "range": "1000",
           "speed": "1000",
           "criticalChance": "-",
-        "criticDamage": "-",
-        "lifestealChance": "-",
-        "lifesteal": "-",
-        "damageminimiser": "-",
-        "dodge": "-"
+          "criticDamage": "-",
+          "lifestealChance": "-",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-"
         },
         "showlevels": {
           "level1": "-",
@@ -243,7 +244,8 @@
     "type": ["İnsan"],
     "rarity": "Arcane",
     "note": "Fighter",
-    "isEvolution": true,
+    "isHybrid": false,
+    "isMulti": true,
     "stats": {
       "health": "250",
       "shield": "0",
@@ -266,12 +268,12 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+22% Hasar  |  18 » 22",
-      "level2": "+10% Hız  |  850 » 935",
-      "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
-  },
+      "level1": "+22% Hasar | 18 » 22",
+      "level2": "+10% Hız | 850 » 935",
+      "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
+    },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
-    "forms": [{
+    "secondForm": {
       "name": "Pirate Girls",
       "type": ["İnsan"],
       "rarity": "Arcane",
@@ -298,19 +300,20 @@
         "damageminimiser": "-",
         "dodge": "-"
       },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-" 
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
       },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-      }]
+      "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    }
   },
   {
     "name": "Canoballer",
-    "type": ["İnsan" , "Robot"],
+    "type": ["İnsan", "Robot"],
     "rarity": "Arcane",
     "note": "Marksman/Burst",
+    "isHybrid": true,
     "isMulti": false,
     "stats": {
       "health": "100",
@@ -322,7 +325,7 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "Sahib olduğu hər 20 qalxan üçün +0,5% Saldırı Hızı qazanar bonusu qazanar",
+    "trait": "Sahib olduğu hər 20 qalxan üçün +0,5% Saldırı Hızı qazanar",
     "additionalStats": {
       "range": "3200",
       "speed": "900",
@@ -334,10 +337,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı  |  5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
-      "level3": "+12% Qalxan  |  50 » 56"
-      },
+      "level1": "+2% Öz. Şansı | 5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
+      "level3": "+12% Qalxan | 50 » 56"
+    },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
@@ -369,10 +372,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı  |  5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
-      "level3": "+12% Qalxan  |  50 » 56"
-      },
+      "level1": "+2% Öz. Şansı | 5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
+      "level3": "+12% Qalxan | 50 » 56"
+    },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
@@ -404,10 +407,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı  |  5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
-      "level3": "+12% Qalxan  |  50 » 56"
-      },
+      "level1": "+2% Öz. Şansı | 5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
+      "level3": "+12% Qalxan | 50 » 56"
+    },
     "story": "k."
   },
   {
@@ -439,10 +442,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı  |  5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
-      "level3": "+12% Qalxan  |  50 » 56"
-      },
+      "level1": "+2% Öz. Şansı | 5% » 7%",
+      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
+      "level3": "+12% Qalxan | 50 » 56"
+    },
     "story": "k."
   },
   {
@@ -474,10 +477,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Kritik Şansı  |  5% » 10%",
-      "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
-      "level3": "+12% Qalxan  |  50 » 56"
-      },
+      "level1": "+5% Kritik Şansı | 5% » 10%",
+      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
+      "level3": "+12% Qalxan | 50 » 56"
+    },
     "story": "k."
   },
   {
@@ -509,42 +512,47 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+25% Öz. Hasar Bonusu  |  25% » 50%",
-      "level2": "+50% Qalxan  |  40 » 60",
-      "level3": "+12% Menzil  |  2500 » 2800"
-      },
+      "level1": "+25% Öz. Hasar Bonusu | 25% » 50%",
+      "level2": "+50% Qalxan | 40 » 60",
+      "level3": "+12% Menzil | 2500 » 2800"
+    },
     "story": "k."
   },
-  { "name": "Nurse", 
-    "type": ["Ölü"], 
-    "rarity": "Arcane", 
-    "note": "Assassin", 
-    "isHybrid": false, 
-    "isMulti": false, 
-    "stats": { 
-      "health": "80", 
-      "shield": "10", 
-      "damage": "12", 
-      "sps": "17", 
-      "attackSpeed": "0,70s", 
-      "delay": "-", 
-      "mana": "3", 
-      "number": "1" }, 
-    "trait": "Hər Can Çalanda 15 saniyəlik +1 Hasar bonusu (Max: 18)", 
-    "additionalStats": { 
-      "range": "1,000", 
-      "speed": "1,100", 
-      "criticalChance": "5%", 
-      "criticDamage": "1.5x", 
-      "lifestealChance": "50%", 
-      "lifesteal": "25%", 
-      "damageminimiser": "0%", 
-      "dodge": "0%" }, 
-    "showlevels": { 
-      "level1": "-", 
-      "level2": "-", 
-      "level3": "-" }, 
-    "story": "-" },
+  {
+    "name": "Nurse",
+    "type": ["Ölü"],
+    "rarity": "Arcane",
+    "note": "Assassin",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "80",
+      "shield": "10",
+      "damage": "12",
+      "sps": "17",
+      "attackSpeed": "0,70s",
+      "delay": "-",
+      "mana": "3",
+      "number": "1"
+    },
+    "trait": "Hər Can Çalanda 15 saniyəlik +1 Hasar bonusu (Max: 18)",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,100",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "50%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
   {
     "name": "Tribe",
     "type": ["İnsan"],
@@ -662,7 +670,7 @@
       "shield": "40",
       "damage": "16",
       "sps": "13",
-      "attackSpeed": "1,20s ",
+      "attackSpeed": "1,20s",
       "delay": "-",
       "mana": "9",
       "number": "1"
