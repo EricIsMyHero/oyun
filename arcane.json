@@ -141,7 +141,7 @@
     "name": "Tphoenix",
     "type": ["İnsan"],
     "rarity": "Arcane",
-    "isEvolution": true,
+    "isMulti": true,
     "forms": [
       {
         "name": "Tphoenix",
