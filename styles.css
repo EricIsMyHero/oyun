@@ -429,20 +429,21 @@ button.active {
 
 /* Progress Bar Konteyner */
 .evolution-controls {
-  position: absolute;
-  bottom: 52px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;          /* absolute SİLİNDİ */
+  margin-top: 12px;            /* content-dən sonra boşluq */
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  z-index: 15;
+
+  z-index: 5;
   background: rgba(21, 25, 52, 0.9);
   padding: 6px 12px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
 }
+
 
 /* Ox Düymələri */
 .evolution-arrow {
