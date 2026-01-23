@@ -286,6 +286,7 @@ button.active {
 
 .stats-section.visible {
     display: grid;
+    margin-bottom: 8px;
     grid-template-columns: 1fr 1fr;
     gap: 6px;
 }
@@ -429,20 +430,19 @@ button.active {
 
 /* Progress Bar Konteyner */
 .evolution-controls {
-  position: relative;          /* absolute SİLİNDİ */
-  margin-top: 12px;            /* content-dən sonra boşluq */
+  position: relative;      /* absolute YOX */
+  margin-top: 10px;        /* stats altı məsafə */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 
-  z-index: 5;
   background: rgba(21, 25, 52, 0.9);
   padding: 6px 12px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.15);
 }
+
 
 
 /* Ox Düymələri */
