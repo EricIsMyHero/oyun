@@ -66,8 +66,8 @@
       "level3": "+12% Qalxan | 50 » 56"
     },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
-  "forms": [
-      {
+  },
+  {
     "name": "Clown",
     "type": ["İnsan"],
     "rarity": "Arcane"
@@ -100,8 +100,8 @@
       "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
     },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-      },
-    {
+      "forms": [
+      {
       "name": "Box",
       "type": ["Robot"],
       "rarity": "Arcane",
