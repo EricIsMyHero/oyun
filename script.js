@@ -177,7 +177,6 @@ function createCardElement(data) {
             if (currentFormIndex === 0) {
                 // Əsas kart
                 contentData = data;
-                formInfo.textContent = data.name;
             } else {
                 // Digər formalar
                 const formData = data.forms[currentFormIndex - 1];
@@ -216,7 +215,6 @@ function createCardElement(data) {
                     showlevels: formData.showlevels || { level1: '-', level2: '-', level3: '-' },
                     story: formData.story || '-'
                 };
-                formInfo.textContent = formData.name || 'Unknown';
             }
             
             if (!contentData || !contentData.stats) {
