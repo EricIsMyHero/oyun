@@ -4,7 +4,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Support/Healer",
-    "isEvolution": false,
+    "isMulti": false,
     "stats": {
       "health": "50",
       "shield": "50",
@@ -38,7 +38,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Support/Healer",
-    "isEvolution": false,
+    "isMulti": false,
     "stats": {
       "health": "220",
       "shield": "0",
@@ -66,17 +66,13 @@
       "level3": "+12% Qalxan | 50 » 56"
     },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
-  },
-  {
-    "name": "Tphoenix",
-    "type": ["İnsan"],
-    "rarity": "Arcane",
-    "isEvolution": true,
-    "evolutionChain": [
+  "forms": [
       {
     "name": "Clown",
-    "note": "Support/Healer",
-    "isEvolution": true,
+    "type": ["İnsan"],
+    "rarity": "Arcane"
+    "note": "Support/Healer",,
+    "isMulti": true,
     "stats": {
       "health": "80",
       "shield": "80",
@@ -144,11 +140,8 @@
     "name": "Tphoenix",
     "type": ["İnsan"],
     "rarity": "Arcane",
-    "isEvolution": true,
-    "evolutionChain": [
-      {
-        "name": "Tphoenix",
-        "note": "Fighter",
+    "note": "Fighter",
+    "isMulti": true,
         "stats": {
           "health": "400",
           "shield": "0",
@@ -176,7 +169,7 @@
           "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
         },
         "story": "-"
-      },
+     "forms": [
       {
         "name": "Fire Egg",
         "note": "2-ci Forma",
@@ -245,11 +238,8 @@
     "name": "Pirate Boy",
     "type": ["İnsan"],
     "rarity": "Arcane",
-    "isEvolution": true,
-    "evolutionChain": [
-      {
-    "name": "Pirate Boy",
     "note": "Fighter",
+    "isMulti": true,
     "stats": {
       "health": "250",
       "shield": "0",
@@ -277,7 +267,8 @@
       "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
     },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."},
-    {
+    "forms": [
+      {
       "name": "Pirate Girls",
       "type": ["İnsan"],
       "rarity": "Arcane",
