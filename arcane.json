@@ -68,40 +68,40 @@
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
-    "name": "Clown",
-    "type": ["İnsan"],
-    "rarity": "Arcane"
-    "note": "Support/Healer",,
-    "isMulti": true,
-    "stats": {
-      "health": "80",
-      "shield": "80",
-      "damage": "14",
-      "sps": "14",
-      "attackSpeed": "1,00s",
-      "delay": "-",
-      "mana": "8",
-      "number": "1"
-    },
-    "trait": "Öləndə Box buraxar",
-    "additionalStats": {
-      "range": "3000",
-      "speed": "1100",
-      "criticalChance": "5%",
-      "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%"
-    },
-    "showlevels": {
-      "level1": "+22% Hasar | 18 » 22",
-      "level2": "+10% Hız | 850 » 935",
-      "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
-    },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
-      "forms": [
-      {
+  "name": "Clown",
+  "type": ["İnsan"],
+  "rarity": "Arcane",
+  "note": "Support/Healer",
+  "isMulti": true,
+  "stats": {
+    "health": "80",
+    "shield": "80",
+    "damage": "14",
+    "sps": "14",
+    "attackSpeed": "1,00s",
+    "delay": "-",
+    "mana": "8",
+    "number": "1"
+  },
+  "trait": "Öləndə Box buraxar",
+  "additionalStats": {
+    "range": "3000",
+    "speed": "1100",
+    "criticalChance": "5%",
+    "criticDamage": "1.5x",
+    "lifestealChance": "0%",
+    "lifesteal": "25%",
+    "damageminimiser": "0%",
+    "dodge": "0%"
+  },
+  "showlevels": {
+    "level1": "+22% Hasar | 18 » 22",
+    "level2": "+10% Hız | 850 » 935",
+    "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
+  },
+  "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+  "forms": [
+    {
       "name": "Box",
       "type": ["Robot"],
       "rarity": "Arcane",
@@ -134,8 +134,8 @@
       },
       "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
     }
-    ]
-  },
+  ]
+},
   {
     "name": "Tphoenix",
     "type": ["İnsan"],
