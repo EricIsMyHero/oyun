@@ -430,8 +430,10 @@ button.active {
 
 /* Progress Bar Konteyner */
 .evolution-controls {
-  position: relative;      /* absolute YOX */
-  margin-top: 10px;        /* stats altı məsafə */
+  position: absolute;      /* relative-dən absolute-ə */
+  bottom: 8px;             /* Kartın aşağısından məsafə */
+  left: 50%;               /* Mərkəzləşdirmə üçün */
+  transform: translateX(-50%);  /* Mərkəzə gətir */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -441,7 +443,9 @@ button.active {
   padding: 6px 12px;
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,.15);
-  z-index: 1;              /* Kartın içində digər elementlərdən üstün olsun */
+  z-index: 5;              /* Kartın içində ən üstdə olsun */
+  width: calc(100% - 24px); /* Kənarlardan 12px boşluq */
+  max-width: 280px;         /* Maksimum genişlik */
 }
 
 /* Ox Düymələri */
