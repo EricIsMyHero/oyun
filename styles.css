@@ -126,8 +126,6 @@ button.active {
 .card-front,
 .card-back,
 .card-single {
-  position: relative;
-  overflow: hidden;
   background: var(--card);
   border: 1px solid #2a2f57;
   border-radius: 12px;
@@ -428,26 +426,6 @@ button.active {
   margin-left: 3px;
 }
 
-/* Progress bar konteyneri */
-.card-progress-bar {
-  width: 100%;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  margin-top: auto; /* Məlumatlardan sonra ən aşağıya itələyir */
-  margin-bottom: 4px; /* Alt çərçivə ilə məsafə */
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-}
-
-/* Daxili dolum hissəsi */
-.progress-fill {
-  height: 100%;
-  width: 75%; /* Faiz dərəcəsi */
-  background: var(--glow); /* Nadirlik rənginə uyğunlaşır */
-  box-shadow: 0 0 8px var(--glow);
-  transition: width 0.3s ease;
-}
 /* EVOLUTION VƏ SUMMONER SİSTEMİ */
 
 /* Progress Bar Konteyner */
@@ -463,9 +441,8 @@ button.active {
   padding: 6px 12px;
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,.15);
+  z-index: 1;              /* Kartın içində digər elementlərdən üstün olsun */
 }
-
-
 
 /* Ox Düymələri */
 .evolution-arrow {
