@@ -487,5 +487,134 @@
       "level3": "-"
     },
     "story": "-"
+  },
+  {
+    "name": "Dark Necromancer",
+    "type": ["Ruh"],
+    "rarity": "Relic",
+    "note": "Fighter",
+    "isMulti": true,
+        "stats": {
+          "health": "180",
+          "shield": "100",
+          "damage": "12",
+          "sps": "8",
+          "attackSpeed": "1,50s",
+          "delay": "-",
+          "mana": "15",
+          "number": "1"
+        },
+        "trait": "Hər 14 saniyədə bir karakter çıxardar (W-40%, A-35%, T-25%)",
+        "additionalStats": {
+          "range": "2500",
+          "speed": "1000",
+          "criticalChance": "5%",
+          "criticDamage": "1.5x",
+          "lifestealChance": "15%",
+          "lifesteal": "25%",
+          "damageminimiser": "0%",
+          "dodge": "10%"
+        },
+        "showlevels": {
+          "level1": "-2",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+     "forms": [
+      {
+        "name": "Warrior",
+        "note": "Ölü",
+        "stats": {
+          "health": "220",
+          "shield": "160",
+          "damage": "24",
+          "sps": "20",
+          "attackSpeed": "1,20s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Vuruşları qalxandan keçər.",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1000",
+          "criticalChance": "-",
+          "criticDamage": "-",
+          "lifestealChance": "-",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-"
+      },
+      {
+        "name": "Archer",
+        "note": "Ölü",
+        "stats": {
+          "health": "120",
+          "shield": "40",
+          "damage": "16",
+          "sps": "12",
+          "attackSpeed": "1,30s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "35% Şansla 2x4 ekstra hasar verər.",
+        "additionalStats": {
+          "range": "2250",
+          "speed": "1100",
+          "criticalChance": "-",
+          "criticDamage": "-",
+          "lifestealChance": "-",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-"
+      },
+       {
+        "name": "Tank",
+        "note": "Ölü",
+        "stats": {
+          "health": "400",
+          "shield": "200",
+          "damage": "44",
+          "sps": "24",
+          "attackSpeed": "1,80s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "*İnsan* tipli kartlardan -20% daha az hasar alar.",
+        "additionalStats": {
+          "range": "1200",
+          "speed": "800",
+          "criticalChance": "-",
+          "criticDamage": "-",
+          "lifestealChance": "-",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-"
+      }
+    ]
   }
 ]
