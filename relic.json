@@ -103,7 +103,8 @@
       "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
   },
     "story": "-",
-    "secondForm": {
+    "forms": [
+      {
       "name": "Butterflies",
       "type": ["Heyvan"],
       "rarity": "Relic",
@@ -135,7 +136,7 @@
       "level3": "-" 
       },
     "story": "-"
-      }
+      }]
   },
   {
     "name": "Etheris",
