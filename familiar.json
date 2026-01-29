@@ -3,7 +3,7 @@
     "name": "Albert",
     "type": ["İnsan"],
     "rarity": "Familiar",
-    "note": "Fighter/Bruiser",
+    "note": "Fighter/Berserker",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -73,7 +73,7 @@
     "name": "Snowballer",
     "type": ["Robot"],
     "rarity": "Familiar",
-    "note": "Special/Disruptor",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -108,7 +108,7 @@
     "name": "Wild Bees",
     "type": ["Heyvan"],
     "rarity": "Familiar",
-    "note": "Special/Swarm",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -143,7 +143,7 @@
     "name": "Warnborn",
     "type": ["İnsan"],
     "rarity": "Familiar",
-    "note": "Tank",
+    "note": "Fighter/Brawler",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -178,7 +178,7 @@
     "name": "X-Bot",
     "type": ["Robot"],
     "rarity": "Familiar",
-    "note": "Suicide Tank",
+    "note": "Fighter/Brawler",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -193,7 +193,7 @@
     },
     "trait": "Hasar vermədikcə <b>20</b> saniyə ərzində enerji yığar və ardınca <b>10</b> saniyə sonra partlayar",
     "additionalStats": {
-      "range": "1700",
+      "range": "1000",
       "speed": "1200",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -205,7 +205,7 @@
     "showlevels": {
       "level1": "+20% Öz. Vaxt  |  10 » 12",
       "level2": "+10% Can Çalma Şansı  |  0% » 10%",
-      "level3": "+20% Can  |  50 » 56"
+      "level3": "+50% Can  |  50 » 75"
       },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
   },
@@ -248,7 +248,7 @@
     "name": "Sniper",
     "type": ["İnsan"],
     "rarity": "Familiar",
-    "note": "Marksman",
+    "note": "Marksman/Sharpshooter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -388,7 +388,7 @@
     "name": "Trac",
     "type": ["İnsan"],
     "rarity": "Familiar",
-    "note": "Tank/Bruiser",
+    "note": "Tank/Brawler",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -423,7 +423,7 @@
     "name": "Tornado",
     "type": ["Uzaylı"],
     "rarity": "Familiar",
-    "note": "Controller, DPS",
+    "note": "Specialist/Disruptor",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -458,7 +458,7 @@
     "name": "Dino",
     "type": ["Robot"],
     "rarity": "Familiar",
-    "note": "Fighter/Bruiser",
+    "note": "Fighter",
     "isMulti": false,
     "stats": {
       "health": "190",
@@ -484,7 +484,7 @@
     "showlevels": {
       "level1": "+5% Hasar Azaltma  |  0% » 5%",
       "level2": "+5% Kritik Şansı  |  5% » 10%",
-      "level3": "+5% Saldırı Hızı  |  1,00s » 0,95s"
+      "level3": "+10% Saldırı Hızı  |  1,00s » 0,90s"
       },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
   },
@@ -492,7 +492,7 @@
     "name": "Tenta",
     "type": ["Uzaylı"],
     "rarity": "Familiar",
-    "note": "AOE DPS",
+    "note": "Specialist",
     "isMulti": false,
     "stats": {
       "health": "180",
@@ -526,7 +526,7 @@
     "name": "Fire Archer",
     "type": ["İnsan"],
     "rarity": "Familiar",
-    "note": "Marksman",
+    "note": "Marksman/Burst",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -595,7 +595,7 @@
     "name": "Volt Striker",
     "type": ["Robot"],
     "rarity": "Familiar",
-    "note": "Fighter/AOE",
+    "note": "Mage/Nuker",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -630,7 +630,7 @@
     "name": "Frostmaw",
     "type": ["Heyvan"],
     "rarity": "Familiar",
-    "note": "Controller",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -700,7 +700,7 @@
     "name": "Mecha Shield",
     "type": ["Robot"],
     "rarity": "Familiar",
-    "note": "Tank/Support",
+    "note": "Tank/Pure",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -735,20 +735,20 @@
     "name": "Venomspike",
     "type": ["Heyvan"],
     "rarity": "Familiar",
-    "note": "Fighter",
+    "note": "Assassin/Poisoner",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "170",
       "shield": "30",
-      "damage": "2x6",
+      "damage": "15",
       "sps": "12",
-      "attackSpeed": "0,5s",
+      "attackSpeed": "1,30s",
       "delay": "-",
       "mana": "10",
-      "number": "1"
+      "number": "4"
     },
-    "trait": "Hər vuruşdan sonra <b>3</b> saniyəlik <b>+1</b> Can yenilənmə qazanar",
+    "trait": "Hər vuruşda rəqibi zəhərləyər 5 dəfə zəhərlədikdə rəqib maksimum canının 8%-i qədər hasar alar.",
     "additionalStats": {
       "range": "1000",
       "speed": "950",
@@ -760,8 +760,8 @@
       "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+30% Qalxan  |  30 » 39",
-      "level2": "+1 Öz. Vaxtı  |  3 » 4",
+      "level1": "+50% Qalxan  |  30 » 45",
+      "level2": "+20% Hasar  |  15 » 18",
       "level3": "+10% Sıyrılma  |  10% » 20%"
       },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
