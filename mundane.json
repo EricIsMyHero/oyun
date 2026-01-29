@@ -38,8 +38,7 @@
     "name": "B-B",
     "type": ["Heyvan"],
     "rarity": "Mundane",
-    "note": "Tank",
-    "isHybrid": false,
+    "note": "Tank/Brawler",
     "isMulti": false,
     "stats": {
       "health": "310",
@@ -178,7 +177,7 @@
     "name": "Slimey",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
-    "note": "Tank",
+    "note": "Tank/Pure",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -213,7 +212,7 @@
     "name": "Henry",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Fighter/Bruiser",
+    "note": "Fighter/Berserker",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -388,7 +387,7 @@
     "name": "Freak",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
-    "note": "Special/Splitter",
+    "note": "Specialist/Splitter",
     "isMulti": true,
     "stats": {
       "health": "230",
@@ -422,7 +421,7 @@
       "name": "Mini Freaks",
       "type": ["Uzaylı"],
       "rarity": "Mundane",
-      "note": "Suicide Assassin",
+      "note": "Assassin/Suicide",
       "stats": {
         "health": "100",
         "shield": "0",
@@ -456,7 +455,7 @@
     "name": "Nightprowler",
     "type": ["Ruh"],
     "rarity": "Mundane",
-    "note": "Assassin",
+    "note": "Assassin/Executioner",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -561,7 +560,7 @@
     "name": "Snaykies",
     "type": ["Heyvan"],
     "rarity": "Mundane",
-    "note": "Fighter",
+    "note": "Assassin/Poisoner",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -596,7 +595,7 @@
     "name": "Soldier",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Marksman/DPS",
+    "note": "Marksman/Burst",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -631,7 +630,7 @@
     "name": "Bees",
     "type": ["Heyvan"],
     "rarity": "Mundane",
-    "note": "Suicide Assassin",
+    "note": "Assassin/Suicide",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -666,7 +665,7 @@
     "name": "Hailey",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Fighter/Bruiser",
+    "note": "Fighter/Berserker",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -701,7 +700,7 @@
     "name": "Angels",
     "type": ["Varlıq"],
     "rarity": "Mundane",
-    "note": "Special/Swarm",
+    "note": "Specialist/Swarm",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -806,7 +805,7 @@
     "name": "Chrono Mage",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Mage",
+    "note": "Mage/Controller",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -876,7 +875,7 @@
     "name": "Ironjaw",
     "type": ["Robot"],
     "rarity": "Mundane",
-    "note": "Burst Assassin",
+    "note": "Assassin",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -885,7 +884,7 @@
       "damage": "18x3",
       "sps": "12",
       "attackSpeed": "0,25s",
-      "delay": "0,75s",
+      "delay": "0,90s",
       "mana": "11",
       "number": "1"
     },
@@ -911,7 +910,7 @@
     "name": "M-Manager",
     "type": ["Robot"],
     "rarity": "Mundane",
-    "note": "Support/Resource",
+    "note": "Support/Resourcer",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
