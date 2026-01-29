@@ -801,8 +801,8 @@
     "stats": {
       "health": "30",
       "shield": "0",
-      "damage": "16",
-      "sps": "12",
+      "damage": "8",
+      "sps": "6",
       "attackSpeed": "1,30",
       "delay": "-",
       "mana": "5",
