@@ -616,5 +616,147 @@
         "story": "-"
       }
     ]
+  },
+  [
+  {
+    "name": "Shine",
+    "type": ["İnsan"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "160",
+      "shield": "60",
+      "damage": "10",
+      "sps": "9",
+      "attackSpeed": "1,10",
+      "delay": "-",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "Ətrafındakı kartlara hər saniyə +1 M.Can verər (Max:50)",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Bloodraider",
+    "type": ["Varlıq"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "300",
+      "shield": "120",
+      "damage": "40",
+      "sps": "33",
+      "attackSpeed": "1,20",
+      "delay": "-",
+      "mana": "16",
+      "number": "1"
+    },
+    "trait": "Hər hasar verdikcə M.Canının 4%-ni itirər və hasarı +20% artar",
+    "additionalStats": {
+      "range": "5,000",
+      "speed": "1,000",
+      "criticalChance": "15%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Fallen Angel",
+    "type": ["Varlıq"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "270",
+      "shield": "160",
+      "damage": "10",
+      "sps": "13",
+      "attackSpeed": "0,80",
+      "delay": "-",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "7,500 Karo qabaqdakı canı ən yüksək rəqibi seçər və alınan hər hasarın 20%-ni ona ötürər",
+    "additionalStats": {
+      "range": "1,100",
+      "speed": "1,050",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Worms",
+    "type": ["Heyvan"],
+    "rarity": "Relic",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "30",
+      "shield": "0",
+      "damage": "16",
+      "sps": "12",
+      "attackSpeed": "1,30",
+      "delay": "-",
+      "mana": "5",
+      "number": "6"
+    },
+    "trait": "İlk vuruşda yerin altından çıxaraq kartları 0,5 saniyəlik sarsəmlətər",
+    "additionalStats": {
+      "range": "0,800",
+      "speed": "1,300",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
   }
+]
 ]
