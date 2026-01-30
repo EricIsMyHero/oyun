@@ -818,7 +818,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hər <b>2</b>-ci atışda rəqibin hızını <b>1,2</b> saniyəlik <b>-33%</b> azaldar",
+    "trait": "Hər <b>2</b>-ci atışda rəqibin hasarını <b>1,6</b> saniyəlik <b>-25%</b> azaldar",
     "additionalStats": {
       "range": "4000",
       "speed": "900",
