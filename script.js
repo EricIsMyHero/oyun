@@ -12,7 +12,6 @@ const showInfoBtn = document.getElementById('show-info-btn');
 const infoSection = document.getElementById('info-section');
 const backToMenuFromInfoBtn = document.getElementById('back-to-menu-from-info-btn');
 const infoContent = document.getElementById('info-content');
-const mainMenu = document.getElementById('main-menu');
 
 // TEAM BUILDER VƏ LAYOUT ELEMENTLƏRİ
 const openTeamBuilderBtn = document.getElementById('open-team-builder-btn');
