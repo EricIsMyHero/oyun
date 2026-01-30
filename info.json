@@ -4,10 +4,11 @@
   "sections": [
     {
       "heading": "Oyun Qaydaları",
-      "content": "Hər oyunçu 6 kartdan ibarət komanda yaradır və Mana resursları ilə kartlarını meydana çıxarır.",
+      "content": "Hər oyunçu 8 kart və maksimum 2 büyü kartından ibarət komanda yaradır və Mana resursları ilə kartlarını meydana çıxarır.",
       "list": [
         "Hər kartın özünəməxsus xüsusiyyətləri var",
         "Mana ilə kartlar aktiv edilir",
+        "Enerji ilə büyülər aktiv edilir",
         "Strategiya quraraq rəqibi məğlub edin"
       ]
     },
@@ -22,6 +23,42 @@
         "Ascendant - Yüksələn kartlar",
         "Apex - Zirvə kartlar",
         "Ethereal - Efir kartlar"
+      ]
+    },
+    {
+      "heading": "Kart Növləri",
+      "content": "Oyunda müxtəlif büyü növləri mövcuddur:",
+      "list": [
+        "Common - Adi kartlar",
+        "Rare - Tanış kartlar",
+        "Epic - Sehrli kartlar",
+      ]
+    },
+    {
+      "heading": "Əsas Xüsusiyyətlər",
+      "content": "Oyunda bir çox özəllik mövcuddur:",
+      "list": [
+        "Health - Bütün kartların can miqdarıdır",
+        "Shield - Qalxan alınan hasarın 70%-ni özünə çəkər",
+        "Damage - Kartların verdiyi hasardır",
+        "DPS - 1 saniyə ərzində verilən hasar",
+        "Attack Speed - Hər bir hasarın(güllənin) arasındakı vaxtdır",
+        "Delay - Ardıcıl zərbə edən kartların bir sonrakı zərbə etmə müddətidir",
+        "Mana - Hər bir kartın müəyyən bir Mana dəyəri var"
+      ]
+    },
+    {
+      "heading": "Əlavə Xüsusiyyətlər",
+      "content": "Oyunda bir çox özəllik mövcuddur:",
+      "list": [
+        "Range - Bütün kartların menzilidir",
+        "Speed - Bütün kartların hızıdır",
+        "Critical Damage - Hər bir kart hasarının 1.5x-i qədər hasar verər",
+        "Critic Chance - Kritik Vurma şansıdır",
+        "Life Steal - Hər bir kartın verdiyi hasarın müəyyən bir hissəsini cana çevirməsidir",
+        "Life Steal Chance - Can çalma şansıdır",
+        "Damage Reduction - Hasar azaltma miqdarıdır",
+        "Dodge - Hər bir kartın hasardan qaçma şansıdır"
       ]
     },
     {
