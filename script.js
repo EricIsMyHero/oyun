@@ -359,7 +359,7 @@ function createCardContent(data) {
             <div class="stats-section" data-section-id="additional-stats">
                 <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.additionalStats?.range || '-'}</span></div>
                 <div class="stat-item"><b>Speed <i class="fa-solid fa-person-running"></i></b><span>${data.additionalStats?.speed || '-'}</span></div>
-                <div class="stat-item"><b>Critic Chance <i class="fa-solid fa-percent"></i></b><span>${data.additionalStats?.criticalChance || '-'}</span></div>
+                <div class="stat-item"><b>Critical Chance <i class="fa-solid fa-percent"></i></b><span>${data.additionalStats?.criticalChance || '-'}</span></div>
                 <div class="stat-item"><b>Critical Damage <i class="fa-solid fa-crosshairs"></i></b><span>${data.additionalStats?.criticDamage || '-'}</span></div>
                 <div class="stat-item"><b>Life Steal Chance <i class="fa-solid fa-percent "></i></b><span>${data.additionalStats?.lifestealChance || '-'}</span></div>
                 <div class="stat-item"><b>Life Steal <i class="fa-solid fa-skull-crossbones "></i></b><span>${data.additionalStats?.lifesteal || '-'}</span></div>
