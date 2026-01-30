@@ -374,7 +374,7 @@
     "name": "Aura girl",
     "type": ["Uzaylı"],
     "rarity": "Arcane",
-    "note": "Support",
+    "note": "Tank/Pure",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -387,7 +387,7 @@
       "mana": "18",
       "number": "1"
     },
-    "trait": "2x2 yaxındakı rəqib kartlara hər 0,2 saniyə ərzində 2 Hasar verər",
+    "trait": "3x3 yaxındakı rəqib kartlara hər 0,2 saniyə ərzində 2 Hasar verər",
     "additionalStats": {
       "range": "1000",
       "speed": "800",
@@ -409,12 +409,12 @@
     "name": "Hell boy",
     "type": ["Varlıq"],
     "rarity": "Arcane",
-    "note": "Support",
+    "note": "Fighter/Brawler",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "170",
-      "shield": "50",
+      "shield": "30",
       "damage": "50",
       "sps": "25",
       "attackSpeed": "2,00s",
@@ -438,7 +438,7 @@
       "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
       "level3": "+12% Qalxan | 50 » 56"
     },
-    "story": "k."
+    "story": "-"
   },
   {
     "name": "Killer",
@@ -492,7 +492,7 @@
       "mana": "13",
       "number": "1"
     },
-    "trait": "10,000 Karo uzaqdakı rəqibləri işarətləyər və onlara ekstra +25% Hasar verər",
+    "trait": "10,000 Karo uzaqdakı maksimum 6 rəqibi işarətləyər və onlara ekstra +25% Hasar verər",
     "additionalStats": {
       "range": "2500",
       "speed": "950",
@@ -518,8 +518,8 @@
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": "80",
-      "shield": "10",
+      "health": "90",
+      "shield": "30",
       "damage": "12",
       "sps": "17",
       "attackSpeed": "0,70s",
@@ -527,7 +527,7 @@
       "mana": "3",
       "number": "1"
     },
-    "trait": "Hər Can Çalanda 15 saniyəlik +1 Hasar bonusu (Max: 18)",
+    "trait": "Hər Can Çalanda 20 saniyəlik +1 Hasar bonusu (Max: 28)",
     "additionalStats": {
       "range": "1,000",
       "speed": "1,100",
@@ -549,7 +549,7 @@
     "name": "Tribe",
     "type": ["İnsan"],
     "rarity": "Arcane",
-    "note": "-",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -584,7 +584,7 @@
     "name": "Stunners",
     "type": ["Ölü"],
     "rarity": "Arcane",
-    "note": "-",
+    "note": "Marksman",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -619,7 +619,7 @@
     "name": "Whisper",
     "type": ["Ruh"],
     "rarity": "Arcane",
-    "note": "-",
+    "note": "Specialist",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -654,7 +654,7 @@
     "name": "Bad Boy",
     "type": ["Robot"],
     "rarity": "Arcane",
-    "note": "-",
+    "note": "Tank",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -689,7 +689,7 @@
     "name": "Void Striker",
     "type": ["Ruh"],
     "rarity": "Arcane",
-    "note": "-",
+    "note": "Fighter/Berserker",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -724,7 +724,7 @@
     "name": "Nightfang",
     "type": ["Ruh"],
     "rarity": "Arcane",
-    "note": "-",
+    "note": "Marksman/Sharpshooter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -759,7 +759,7 @@
     "name": "Sunrise",
     "type": ["Varlıq"],
     "rarity": "Arcane",
-    "note": "-",
+    "note": "Fighter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
