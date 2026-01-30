@@ -38,27 +38,33 @@
       "heading": "Əsas Xüsusiyyətlər",
       "content": "Oyunda bir çox özəllik mövcuddur:",
       "list": [
-        "Health - Bütün kartların can miqdarıdır",
-        "Shield - Qalxan alınan hasarın 70%-ni özünə çəkər",
-        "Damage - Kartların verdiyi hasardır",
-        "DPS - 1 saniyə ərzində verilən hasar",
-        "Attack Speed - Hər bir hasarın(güllənin) arasındakı vaxtdır",
-        "Delay - Ardıcıl zərbə edən kartların bir sonrakı zərbə etmə müddətidir",
-        "Mana - Hər bir kartın müəyyən bir Mana dəyəri var"
+        "Health - The total amount of life your card has. When it reaches zero, your character dies.",
+        "Shield - A protective shield that absorbs 70 percent of incoming damage.",
+        "Damage - The amount of harm dealt to an enemy per hit or action.",
+        "Attack Speed - How fast your card performs attacks within a given time.",
+        "Range - The maximum distance from which your card attacks or uses abilities.",
+        "Speed - How fast your card moves across the game world.",
+        "D.P.S. - Damage per second. The average damage your card deals each second over time.",
+        "Critical Damage - The extra damage dealt when a critical hit occurs.",
+        "Critical Chance - The percentage chance for an attack to become a critical hit.",
+        "Life Steal - A mechanic where a portion of dealt damage restores your health.",
+        "Life Steal Chance - The probability that an attack triggers life steal.",
+        "Damage Reduction - A stat that lowers incoming damage before it affects health.",
+        "Dodge - A chance-based mechanic that avoids incoming attacks completely."
       ]
     },
     {
       "heading": "Əlavə Xüsusiyyətlər",
       "content": "Oyunda bir çox özəllik mövcuddur:",
       "list": [
-        "Range - Bütün kartların menzilidir",
-        "Speed - Bütün kartların hızıdır",
-        "Critical Damage - Hər bir kart hasarının 1.5x-i qədər hasar verər",
-        "Critic Chance - Kritik Vurma şansıdır",
-        "Life Steal - Hər bir kartın verdiyi hasarın müəyyən bir hissəsini cana çevirməsidir",
-        "Life Steal Chance - Can çalma şansıdır",
-        "Damage Reduction - Hasar azaltma miqdarıdır",
-        "Dodge - Hər bir kartın hasardan qaçma şansıdır"
+        "Heal - An effect that restores health to a card over time or instantly.",
+        "Slow - A debuff that reduces a card’s movement speed or attack speed for a duration.",
+        "Burn - A damage over time effect that deals fire damage at fixed intervals.",
+        "Poison - A damage over time effect that deals toxic damage over a period and often weakens the target.",
+        "Silence - A status effect that prevents cards from using abilities or special skills for a duration.",
+        "Stat Reduction - A debuff that lowers an enemy’s stats, such as health or damage output.",
+        "Blind - A status effect that reduces an enemy’s vision, accuracy, or chance to hit.",
+        "Curse - A debuff that increases the amount of damage an enemy receives."
       ]
     },
     {
