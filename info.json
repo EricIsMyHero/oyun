@@ -26,17 +26,17 @@
       ]
     },
     {
-      "heading": "Kart Növləri",
+      "heading": "Büyü Növləri",
       "content": "Oyunda müxtəlif büyü növləri mövcuddur:",
       "list": [
-        "Common - Adi kartlar",
-        "Rare - Tanış kartlar",
-        "Epic - Sehrli kartlar",
+        "Common - Adi büyülər",
+        "Rare - Nadir büyülər",
+        "Epic - Epik büyülər"
       ]
     },
     {
       "heading": "Əsas Xüsusiyyətlər",
-      "content": "Oyunda bir çox özəllik mövcuddur:",
+      "content": "Oyunda bir çox əsas özəllik mövcuddur:",
       "list": [
         "Health - The total amount of life your card has. When it reaches zero, your character dies.",
         "Shield - A protective shield that absorbs 70 percent of incoming damage.",
@@ -55,15 +55,15 @@
     },
     {
       "heading": "Əlavə Xüsusiyyətlər",
-      "content": "Oyunda bir çox özəllik mövcuddur:",
+      "content": "Oyunda müxtəlif effektlər və debuflar mövcuddur:",
       "list": [
         "Heal - An effect that restores health to a card over time or instantly.",
-        "Slow - A debuff that reduces a card’s movement speed or attack speed for a duration.",
+        "Slow - A debuff that reduces a card's movement speed or attack speed for a duration.",
         "Burn - A damage over time effect that deals fire damage at fixed intervals.",
         "Poison - A damage over time effect that deals toxic damage over a period and often weakens the target.",
         "Silence - A status effect that prevents cards from using abilities or special skills for a duration.",
-        "Stat Reduction - A debuff that lowers an enemy’s stats, such as health or damage output.",
-        "Blind - A status effect that reduces an enemy’s vision, accuracy, or chance to hit.",
+        "Stat Reduction - A debuff that lowers an enemy card's stats, such as health or damage output.",
+        "Blind - A status effect that reduces an enemy card's vision, accuracy, or chance to hit.",
         "Curse - A debuff that increases the amount of damage an enemy receives."
       ]
     },
