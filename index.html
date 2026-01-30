@@ -16,9 +16,23 @@
         <button id="show-spells-btn">Spells</button>
         <button id="show-boosters-btn">Powerups</button>
         <button id="show-towers-btn">Tower defences</button>
+        <button id="show-info-btn">Info</button>
       </div>
     </section>
-
+    
+    <!-- Info Section -->
+    <section id="info-section" class="hidden">
+      <header class="card-title-header">
+        <div>
+          <h1>Info</h1>
+        </div>
+        <button id="back-to-menu-from-info-btn" class="back-button">Back</button>
+      </header>
+      <div id="info-content" style="padding: 20px; max-width: 800px; margin: 0 auto;">
+        <p>Məlumat yüklənir...</p>
+      </div>
+    </section>
+    
     <section id="cards-section" class="hidden">
       <header class="card-title-header">
         <div>
@@ -28,17 +42,15 @@
           </div>
         </div>
         <button id="back-to-menu-btn" class="back-button">Back</button>
-        <button id="open-team-builder-btn" class="back-button" style="background: #22284f; color: var(--text);">Komandanı Göstər (0/6)</button>
+        <button id="open-team-builder-btn" class="back-button" style="background: #22284f; color: var(--text);">Komandanı Göstər (0/8)</button>
       </header>
       
       <div id="cards-layout-wrapper"> 
-
         <div id="team-builder-panel" class="hidden">
             <h2>Team Summary</h2>
             <div id="selected-team-cards" class="team-cards-list">
                 <p id="placeholder-text">Komandaya heç bir kart əlavə edilməyib.</p>
             </div>
-
             <div class="stats-summary">
                 <p>Total Health: <span id="total-health">0</span></p>
                 <p>Total Shield: <span id="total-shield">0</span></p>
@@ -47,7 +59,6 @@
                 <p>Total Mana: <span id="total-mana">0</span></p>
                 <p>Recycle: <span id="cheapest-recycle-cost">0</span></p>
             </div>
-
             <button id="clear-team-btn">Komandanı Təmizlə</button>
             <button id="close-team-builder-btn" style="margin-top: 10px;">Kartlara Qayıt</button>
         </div>
@@ -75,7 +86,6 @@
         </div>
       </div>
     </section>
-
   </div>
   <script src="script.js"></script>
 </body>
