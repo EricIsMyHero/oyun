@@ -735,7 +735,7 @@
     "name": "BOOMera",
     "type": ["Varlıq"],
     "rarity": "Mundane",
-    "note": "Marksman",
+    "note": "Marksman/Piercer",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -805,7 +805,7 @@
     "name": "Chrono Mage",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Mage/Controller",
+    "note": "Mage/Debuffer",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -844,7 +844,7 @@
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": "440",
+      "health": "400",
       "shield": "60",
       "damage": "22",
       "sps": "20",
@@ -853,7 +853,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "<b>3x3</b> yaxındakı kartlar <b>20%</b> daha az hasar alar",
+    "trait": "<b>3x3</b> yaxındakı kartlar <b>-20%</b> daha az hasar alar",
     "additionalStats": {
       "range": "1200",
       "speed": "900",
@@ -866,7 +866,7 @@
     },
     "showlevels": {
       "level1": "+5% Kritik Şansı  |  5% » 10%",
-      "level2": "+10% Qalxan  |  60 » 66",
+      "level2": "+20% Qalxan  |  60 » 72",
       "level3": "+5% Menzil  |  1200 » 1260"
       },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
@@ -888,7 +888,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hər hasar aldıqda <b>+10</b> Qalxan qazanar <b>(Max: 150)</b>",
+    "trait": "Hər hasar verdikdə Can Çalma şansı <b>+0,5%</b> artar <b>(Max:20%)</b>",
     "additionalStats": {
       "range": "1200",
       "speed": "950",
@@ -900,11 +900,11 @@
       "dodge": "0%"
    },
     "showlevels": {
-      "level1": "+20% Öz. Qalxan  |  10 » 12",
+      "level1": "+5% Kritik Şansı |  5% » 10%",
       "level2": "+5% Can Çalma Şansı  |  25% » 30%",
-      "level3": "+67% Can Çalma  |  33% » 100%"
+      "level3": "+33% Can Çalma  |  33% » 66%"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "-"
   },
   {
     "name": "M-Manager",
@@ -916,14 +916,14 @@
     "stats": {
       "health": "130",
       "shield": "20",
-      "damage": "5",
-      "sps": "11",
-      "attackSpeed": "0,95s",
+      "damage": "4",
+      "sps": "8",
+      "attackSpeed": "0,50s",
       "delay": "-",
       "mana": "10",
       "number": "1"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər",
+    "trait": "Həyatda qaldığı hər <b>9</b> saniyə üçün <b>+1</b> Mana verər",
     "additionalStats": {
       "range": "1000",
       "speed": "950",
@@ -935,10 +935,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "-1 Öz. Vaxtı  |  6 » 5",
-      "level2": "+5% Can  |  130 » 137",
+      "level1": "-1 Öz. Vaxtı  |  9 » 8",
+      "level2": "+11% Can  |  130 » 144",
       "level3": "+10% Sıyrılma  |  0% » 10%"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "-"
   }
 ]
