@@ -1,0 +1,32 @@
+{
+  "title": "Clash-A-Mana Haqqında",
+  "description": "Clash-A-Mana real vaxt kart döyüşü arenasıdır. Burada strategiya və taktika ilə rəqiblərinizi məğlub edə bilərsiniz.",
+  "sections": [
+    {
+      "heading": "Oyun Qaydaları",
+      "content": "Hər oyunçu 6 kartdan ibarət komanda yaradır və Mana resursları ilə kartlarını meydana çıxarır.",
+      "list": [
+        "Hər kartın özünəməxsus xüsusiyyətləri var",
+        "Mana ilə kartlar aktiv edilir",
+        "Strategiya quraraq rəqibi məğlub edin"
+      ]
+    },
+    {
+      "heading": "Kart Növləri",
+      "content": "Oyunda müxtəlif nadir kart növləri mövcuddur:",
+      "list": [
+        "Mundane - Adi kartlar",
+        "Familiar - Tanış kartlar",
+        "Arcane - Sehrli kartlar",
+        "Relic - Qədim kartlar",
+        "Ascendant - Yüksələn kartlar",
+        "Apex - Zirvə kartlar",
+        "Ethereal - Efir kartlar"
+      ]
+    },
+    {
+      "heading": "Əlaqə",
+      "content": "Suallarınız varsa bizimlə əlaqə saxlaya bilərsiniz: info@clash-a-mana.game"
+    }
+  ]
+}
