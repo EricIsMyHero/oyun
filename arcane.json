@@ -3,7 +3,7 @@
     "name": "Arcanyx",
     "type": ["Varlıq"],
     "rarity": "Arcane",
-    "note": "Support/Healer",
+    "note": "Mage/Nuker",
     "isMulti": false,
     "stats": {
       "health": "50",
@@ -37,7 +37,7 @@
     "name": "Leafshade",
     "type": ["Varlıq"],
     "rarity": "Arcane",
-    "note": "Support/Healer",
+    "note": "Assassin/Executioner",
     "isMulti": false,
     "stats": {
       "health": "220",
@@ -71,7 +71,7 @@
   "name": "Clown",
   "type": ["İnsan"],
   "rarity": "Arcane",
-  "note": "Support/Healer",
+  "note": "Specialist/Distruptor",
   "isMulti": true,
   "stats": {
     "health": "80",
@@ -83,7 +83,7 @@
     "mana": "8",
     "number": "1"
   },
-  "trait": "Öləndə Box buraxar",
+  "trait": "6% Şansla rəqibi 5 saniyəlik susturar. Canı 75%-dən aşağı olduqda *Box* buraxar",
   "additionalStats": {
     "range": "3000",
     "speed": "1100",
@@ -105,7 +105,7 @@
       "name": "Box",
       "type": ["Robot"],
       "rarity": "Arcane",
-      "note": "Suicide Assassin",
+      "note": "Fighter",
       "stats": {
         "health": "50",
         "shield": "50",
@@ -152,7 +152,7 @@
           "mana": "15",
           "number": "1"
         },
-        "trait": "Canı 25%-in altına düşdükdə Fire Egg-ə dönüşər.",
+        "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər.",
         "additionalStats": {
           "range": "1000",
           "speed": "1000",
@@ -172,9 +172,9 @@
      "forms": [
       {
         "name": "Fire Egg",
-        "note": "2-ci Forma",
+        "note": "Tank",
         "stats": {
-          "health": "100",
+          "health": "300",
           "shield": "0",
           "damage": "0",
           "sps": "0",
@@ -183,7 +183,7 @@
           "mana": "0",
           "number": "1"
         },
-        "trait": "4.3 saniyə ərzində qırılmazsa Phoenix-ə, qırılarsa Tphoenix-ə dönüşər.",
+        "trait": "9 saniyə ərzində qırılmazsa Phoenix-ə, qırılarsa Tphoenix-ə dönüşər.",
         "additionalStats": {
           "range": "1000",
           "speed": "1000",
@@ -203,7 +203,7 @@
       },
       {
         "name": "Phoenix",
-        "note": "Final Forma",
+        "note": "Fighter",
         "stats": {
           "health": "200",
           "shield": "0",
@@ -304,7 +304,7 @@
   },
   {
     "name": "Canoballer",
-    "type": ["İnsan"],
+    "type": ["Robot"],
     "rarity": "Arcane",
     "note": "Marksman/Burst",
     "stats": {
@@ -314,7 +314,7 @@
       "sps": "29",
       "attackSpeed": "1,70s",
       "delay": "-",
-      "mana": "6",
+      "mana": "14",
       "number": "1"
     },
     "trait": "Sahib olduğu hər 20 qalxan üçün +0,5% Saldırı Hızı qazanar",
@@ -339,7 +339,7 @@
     "name": "Toxic",
     "type": ["Uzaylı"],
     "rarity": "Arcane",
-    "note": "Support",
+    "note": "Marksman/Sharpshooter",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -354,7 +354,7 @@
     },
     "trait": "Rəqib kartları zəhərləyərək ekstra 2x3 Hasar verər",
     "additionalStats": {
-      "range": "1000",
+      "range": "2650",
       "speed": "750",
       "criticalChance": "25%",
       "criticDamage": "1.5x",
