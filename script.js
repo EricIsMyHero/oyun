@@ -7,6 +7,13 @@ const filterButtons = document.querySelectorAll('.controls button');
 const cardsContainer = document.getElementById('cards');
 const searchInput = document.getElementById('search-input'); 
 
+// Info düyməsi funksionallığı
+const showInfoBtn = document.getElementById('show-info-btn');
+const infoSection = document.getElementById('info-section');
+const backToMenuFromInfoBtn = document.getElementById('back-to-menu-from-info-btn');
+const infoContent = document.getElementById('info-content');
+const mainMenu = document.getElementById('main-menu');
+
 // TEAM BUILDER VƏ LAYOUT ELEMENTLƏRİ
 const openTeamBuilderBtn = document.getElementById('open-team-builder-btn');
 const closeTeamBuilderBtn = document.getElementById('close-team-builder-btn');
@@ -637,3 +644,68 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTeamPanel();
     if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden'); 
 });
+
+// Info düyməsinə klikləmə
+if (showInfoBtn) {
+  showInfoBtn.addEventListener('click', async () => {
+    mainMenu.classList.add('hidden');
+    infoSection.classList.remove('hidden');
+    
+    // info.json faylından məlumatları yüklə
+    try {
+      const response = await fetch('info.json');
+      if (!response.ok) {
+        throw new Error('Məlumat yüklənə bilmədi');
+      }
+      const data = await response.json();
+      
+      // Məlumatları göstər
+      displayInfo(data);
+    } catch (error) {
+      infoContent.innerHTML = `<p style="color: #ff6b6b;">Xəta: ${error.message}</p>`;
+    }
+  });
+}
+
+// Geri düyməsi
+if (backToMenuFromInfoBtn) {
+  backToMenuFromInfoBtn.addEventListener('click', () => {
+    infoSection.classList.add('hidden');
+    mainMenu.classList.remove('hidden');
+  });
+}
+
+// Məlumatları göstərən funksiya
+function displayInfo(data) {
+  let html = '';
+  
+  if (data.title) {
+    html += `<h2 style="margin-bottom: 20px;">${data.title}</h2>`;
+  }
+  
+  if (data.description) {
+    html += `<p style="margin-bottom: 20px; line-height: 1.6;">${data.description}</p>`;
+  }
+  
+  if (data.sections && Array.isArray(data.sections)) {
+    data.sections.forEach(section => {
+      html += `<div style="margin-bottom: 30px;">`;
+      if (section.heading) {
+        html += `<h3 style="margin-bottom: 10px; color: #4a9eff;">${section.heading}</h3>`;
+      }
+      if (section.content) {
+        html += `<p style="line-height: 1.6;">${section.content}</p>`;
+      }
+      if (section.list && Array.isArray(section.list)) {
+        html += `<ul style="margin-top: 10px; padding-left: 20px;">`;
+        section.list.forEach(item => {
+          html += `<li style="margin-bottom: 8px;">${item}</li>`;
+        });
+        html += `</ul>`;
+      }
+      html += `</div>`;
+    });
+  }
+  
+  infoContent.innerHTML = html;
+}
