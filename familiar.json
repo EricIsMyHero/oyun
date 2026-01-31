@@ -44,9 +44,9 @@
     "stats": {
       "health": "50",
       "shield": "0",
-      "damage": "0",
+      "damage": "100",
       "sps": "-",
-      "attackSpeed": "0,80s",
+      "attackSpeed": "-",
       "delay": "-",
       "mana": "6",
       "number": "1"
@@ -63,7 +63,7 @@
       "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+16% Can | 50 » 58",
+      "level1": "+28% Can | 50 » 64",
       "level2": "+100% Öz. Hasarı | 400% » 500%",
       "level3": "+10% Hız | 1300 » 1430"
     },
