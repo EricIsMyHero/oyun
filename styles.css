@@ -663,9 +663,31 @@ body, .wrap {
   overflow-x: hidden; 
 }
 
+
 /* ─────────────────────────────────────
    SPELLS SEKSİYA STİLLƏRİ
    ───────────────────────────────────── */
+
+/* Spell card base — mirrors .card-single / .card-front */
+.spell-card {
+  background: var(--card);
+  border: 1px solid #2a2f57;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  height: 320px;
+  width: 100%;
+  position: relative;
+}
+
+/* spell-treat & spell-story sections must be block, not grid */
+.stats-section[data-section-id="spell-treat"].visible,
+.stats-section[data-section-id="spell-story"].visible {
+  display: block;
+}
 
 /* Filtr bar separator */
 .spell-separator {
@@ -739,14 +761,6 @@ body, .wrap {
   filter: blur(7px);
   opacity: .85;
   z-index: -1;
-}
-
-/* Size display — slightly bigger centre text */
-.spell-size-display {
-  font-size: 28px !important;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--text);
 }
 
 /* Trait-center re-use: make sure it works inside spell cards */
