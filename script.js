@@ -746,25 +746,29 @@ function createSpellCard(data) {
     const card = document.createElement('article');
     card.className = `card-container card ${rarityClass} spell-card`;
 
-    // Ethereal-style glow for Legendary
     if (data.rarity.toLowerCase() === 'legendary') {
         card.classList.add('spell-legendary-glow');
     }
 
     const isBuilding = data.type === 'Building';
 
-    // Main stats HTML — dynamically picks Building vs Normal layout
+    // Building: Health, Lifetime, DmgToCard, DmgToCastle, AttackSpeed, Range, Size, Energy
+    // Normal:   DmgToCard, DmgToCastle, Range, Size, Energy
     const mainStatsHTML = isBuilding
         ? `<div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${data.stats.health || '0'}</span></div>
-           <div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damageToCarte || '0'}</span></div>
+           <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${data.stats.lifetime || '-'}</span></div>
+           <div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damageToCard || '0'}</span></div>
            <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${data.stats.damageToCastle || '0'}</span></div>
            <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed || '-'}</span></div>
            <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.stats.range || '-'}</span></div>
-           <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${data.stats.lifetime || '-'}</span></div>`
-        : `<div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damageToCarte || '0'}</span></div>
+           <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${data.stats.size || '-'}</span></div>
+           <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${data.stats.energy || '0'}</span></div>`
+        : `<div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damageToCard || '0'}</span></div>
            <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${data.stats.damageToCastle || '0'}</span></div>
            <div class="stat-item"><b>Interval <i class="fa-solid fa-clock"></i></b><span>${data.stats.timeBetweenDamage || '-'}</span></div>
-           <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.stats.range || '-'}</span></div>`;
+           <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.stats.range || '-'}</span></div>
+           <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${data.stats.size || '-'}</span></div>
+           <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${data.stats.energy || '0'}</span></div>`;
 
     card.innerHTML = `
         <div class="stripe"></div>
@@ -779,28 +783,19 @@ function createSpellCard(data) {
         <div class="card-tabs">
             <button class="active" data-section="spell-main">Stats</button>
             <button data-section="spell-treat">Treat</button>
-            <button data-section="spell-size">Size</button>
             <button data-section="spell-story">Story</button>
         </div>
 
         <div class="card-content-area">
 
-            <!-- Main Stats -->
             <div class="stats-section visible" data-section-id="spell-main">
                 ${mainStatsHTML}
             </div>
 
-            <!-- Treat -->
             <div class="stats-section" data-section-id="spell-treat">
-                <div class="trait trait-center">${data.stats.treat || '-'}</div>
+                <div class="trait trait-center">${data.treat || '-'}</div>
             </div>
 
-            <!-- Size -->
-            <div class="stats-section" data-section-id="spell-size">
-                <div class="trait trait-center spell-size-display">${data.stats.size || '-'}</div>
-            </div>
-
-            <!-- Story -->
             <div class="stats-section" data-section-id="spell-story">
                 <div class="story-content">${data.story || '-'}</div>
             </div>
@@ -808,7 +803,7 @@ function createSpellCard(data) {
         </div>
     `;
 
-    // Tab click event
+    // Tab click handlers
     const tabs = card.querySelectorAll('.card-tabs button');
     tabs.forEach(btn => {
         btn.addEventListener('click', (e) => {
