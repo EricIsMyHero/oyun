@@ -75,93 +75,93 @@
     }
   },
   {
-    "name": "Wind Slash",
+    "name": "Meteor",
     "type": "Normal",
-    "rarity": "Epic",
-    "treat": "-",
-    "story": "Yel görünmək olmaz, amma yaraları elə bəllə olur.",
+    "rarity": "Common",
+    "treat": "Nə qədər uzağa atılarsa -20%-80% daha az hasar verər",
+    "story": "-",
     "stats": {
-      "damageToCard": "28",
-      "damageToCastle": "8",
-      "timeBetweenDamage": "0,45s",
-      "range": "2800",
-      "size": "2x2",
-      "energy": "7"
-    }
-  },
-  {
-    "name": "Meteor Rain",
-    "type": "Normal",
-    "rarity": "Epic",
-    "treat": "Yanma: 3s",
-    "story": "Göyden gələ bilən ən güclü atəş — heç kim qalmayacaq.",
-    "stats": {
-      "damageToCard": "95",
-      "damageToCastle": "40",
-      "timeBetweenDamage": "1,80s",
-      "range": "3200",
-      "size": "4x4",
-      "energy": "9"
-    }
-  },
-  {
-    "name": "Shadow Bind",
-    "type": "Normal",
-    "rarity": "Epic",
-    "treat": "Dondurma: 3,0s",
-    "story": "Kölgə ilə bağlanan adam artıq heç nə edə bilmez.",
-    "stats": {
-      "damageToCard": "20",
-      "damageToCastle": "0",
+      "damageToCard": "500",
+      "damageToCastle": "100",
       "timeBetweenDamage": "-",
-      "range": "3000",
-      "size": "1x1",
-      "energy": "6"
+      "range": "4x4",
+      "size": "2",
+      "energy": "5"
     }
   },
   {
-    "name": "Void Blast",
+    "name": "Spirit Of The Wild",
     "type": "Normal",
-    "rarity": "Epic",
+    "rarity": "Legendary",
+    "treat": "10 saniyəlik olduğu yerdəki kartların Can Yeniləmə, Can Çalma, Kritik Şansı və Qalxan yeniləmə etkilərini 100% azaldar",
+    "story": "-",
+    "stats": {
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "7x7",
+      "size": "1",
+      "energy": "4"
+    }
+  },
+  {
+    "name": "Roots",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Rəqib kartları 15% Yavaşladar",
+    "story": "-",
+    "stats": {
+      "damageToCard": "15x10",
+      "damageToCastle": "15x4",
+      "timeBetweenDamage": "0,80s",
+      "range": "6x6",
+      "size": "1",
+      "energy": "4"
+    }
+  },
+  {
+    "name": "Lunar Mirrage",
+    "type": "Normal",
+    "rarity": "Common",
     "treat": "-",
-    "story": "Yaradılışın əksinə gələ bilən tək cəhd — boşluqun ürəyi.",
+    "story": "Olduğu yerdə dost kartların kopyalarını çıxardar, kartların ömrü 27 saniyə olar",
     "stats": {
       "damageToCard": "140",
       "damageToCastle": "55",
       "timeBetweenDamage": "-",
-      "range": "2200",
-      "size": "2x2",
-      "energy": "10"
+      "range": "4x4",
+      "size": "1",
+      "energy": "3"
     }
   },
   {
-    "name": "Arcane Nova",
+    "name": "Shock Bomb",
     "type": "Normal",
-    "rarity": "Legendary",
-    "treat": "Sehrəvi Zəif: -25% (2s)",
-    "story": "Elə bir enerji buraxılır ki, rəqibin bütün müdafiəsi uçub getmiş olar.",
+    "rarity": "Common",
+    "treat": "Rəqib kartları 1,5 saniyəlik sərsəmlətər",
+    "story": "-",
     "stats": {
-      "damageToCard": "110",
-      "damageToCastle": "45",
-      "timeBetweenDamage": "2,00s",
-      "range": "5000",
-      "size": "5x5",
-      "energy": "12"
-    }
-  },
-  {
-    "name": "Death Wave",
-    "type": "Normal",
-    "rarity": "Legendary",
-    "treat": "Ölümün İzi: 2s hasar (45/s)",
-    "story": "Ölüm var, ya da yox — bu büyü cavabı verir.",
-    "stats": {
-      "damageToCard": "180",
-      "damageToCastle": "70",
+      "damageToCard": "75",
+      "damageToCastle": "25",
       "timeBetweenDamage": "-",
-      "range": "6000",
-      "size": "6x1",
-      "energy": "14"
+      "range": "2,5x2,5",
+      "size": "1",
+      "energy": "3"
+    }
+  },
+  {
+    "name": "Present",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Rəqib karta ekstra 10%-150% Hasar bonusu, 1% Şansla isə anında öldürər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "50",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "2x2",
+      "size": "1",
+      "energy": "2"
     }
   },
   {
