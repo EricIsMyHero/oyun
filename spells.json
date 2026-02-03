@@ -1,77 +1,77 @@
 [
   {
-    "name": "Flame Wall",
+    "name": "Giga Bomb",
     "type": "Normal",
-    "rarity": "Common",
-    "treat": "-",
-    "story": "Cadinin qadim sözləri alovun dilini canlandırır. Düşmanlara geçmə yolu bağlayır.",
+    "rarity": "Legendary",
+    "treat": "Düşdüyü yerə ekstra 10x25/10x5 Yanma Hasarı verər",
+    "story": "-",
     "stats": {
-      "damageToCard": "35",
-      "damageToCastle": "0",
-      "timeBetweenDamage": "0,80s",
-      "range": "2500",
-      "size": "3x1",
-      "energy": "4"
-    }
-  },
-  {
-    "name": "Ice Shard",
-    "type": "Normal",
-    "rarity": "Common",
-    "treat": "Yavaşlatma: 30% (1,5s)",
-    "story": "Qara dağlardan gelen buzu, büyücünün iradəsi yönlə çəkir.",
-    "stats": {
-      "damageToCard": "55",
-      "damageToCastle": "0",
+      "damageToCard": "1000",
+      "damageToCastle": "500",
       "timeBetweenDamage": "-",
-      "range": "3500",
-      "size": "1x1",
-      "energy": "5"
+      "range": "4x4",
+      "size": "2",
+      "energy": "10"
     }
   },
   {
-    "name": "Poison Cloud",
+    "name": "Illustration Spell",
     "type": "Normal",
-    "rarity": "Common",
-    "treat": "Zəhər: 4s",
-    "story": "Milyonlarca kirayə böyüyən zəhəri bir nöqtəyə toplar.",
+    "rarity": "Epic",
+    "treat": "Rəqib kartları 20 saniyəlik dost kartlara çevirər",
+    "story": "-",
     "stats": {
-      "damageToCard": "12",
-      "damageToCastle": "5",
-      "timeBetweenDamage": "1,00s",
-      "range": "2000",
-      "size": "3x3",
-      "energy": "3"
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "4x4",
+      "size": "2",
+      "energy": "8"
     }
   },
   {
-    "name": "Thunder Strike",
+    "name": "Laser",
     "type": "Normal",
-    "rarity": "Common",
-    "treat": "-",
-    "story": "Göydə çakmaq var, yerde isə. . . ölüm.",
+    "rarity": "Epic",
+    "treat": "2 və daha az kart varsa ekstra +50/+25 Hasar bonusu",
+    "story": "-",
     "stats": {
-      "damageToCard": "70",
-      "damageToCastle": "15",
-      "timeBetweenDamage": "2,50s",
-      "range": "4000",
-      "size": "1x1",
+      "damageToCard": "250",
+      "damageToCastle": "125",
+      "timeBetweenDamage": "-",
+      "range": "3x6",
+      "size": "2",
       "energy": "6"
     }
   },
   {
-    "name": "Heal Aura",
+    "name": "Ember Strike",
     "type": "Normal",
-    "rarity": "Common",
-    "treat": "Sağalma: +18/s",
-    "story": "Işıq nurları yaxın doldaşları yenilə hayata qaçırır.",
+    "rarity": "Epic",
+    "treat": "Vurulan kartlar -10% daha az Can qazanarlar",
+    "story": "-",
     "stats": {
-      "damageToCard": "0",
-      "damageToCastle": "0",
+      "damageToCard": "4x40",
+      "damageToCastle": "x25",
       "timeBetweenDamage": "1,20s",
-      "range": "1800",
-      "size": "3x3",
-      "energy": "4"
+      "range": "7x7",
+      "size": "2",
+      "energy": "6"
+    }
+  },
+  {
+    "name": "Nightfall Curse",
+    "type": "Normal",
+    "rarity": "Epic",
+    "treat": "İçindəki kartlar +40% daha çox hasar alar",
+    "story": "-",
+    "stats": {
+      "damageToCard": "7x12",
+      "damageToCastle": "7x5",
+      "timeBetweenDamage": "0,90s",
+      "range": "6x6",
+      "size": "2",
+      "energy": "5"
     }
   },
   {
