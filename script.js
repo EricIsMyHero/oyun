@@ -36,6 +36,8 @@ let currentTeam = [];
 function showMenu() {
     mainMenu.classList.remove('hidden');
     cardsSection.classList.add('hidden');
+    if (spellsSection) spellsSection.classList.add('hidden');
+    if (infoSection) infoSection.classList.add('hidden');
     if (cardsSection.classList.contains('team-mode-active')) {
          cardsSection.classList.remove('team-mode-active');
          if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
@@ -45,6 +47,8 @@ function showMenu() {
 
 function showCards() {
     mainMenu.classList.add('hidden');
+    if (spellsSection) spellsSection.classList.add('hidden');
+    if (infoSection) infoSection.classList.add('hidden');
     cardsSection.classList.remove('hidden');
     fetchAndRender('all');
     if (searchInput) searchInput.value = '';
@@ -571,7 +575,7 @@ async function fetchAndRender(rarity) {
 showCardsBtn.addEventListener('click', showCards);
 backToMenuBtn.addEventListener('click', showMenu);
 
-['show-spells-btn','show-boosters-btn','show-towers-btn'].forEach(id=>{
+['show-boosters-btn','show-towers-btn'].forEach(id=>{
     const btn = document.getElementById(id);
     if (btn) {
         btn.addEventListener('click', () => {
@@ -636,6 +640,226 @@ if(clearTeamBtn) {
         updateTeamStats();
     });
 }
+
+// ─────────────────────────────────────────────
+// SPELLS SEKSİYA
+// ─────────────────────────────────────────────
+
+const showSpellsBtn       = document.getElementById('show-spells-btn');
+const spellsSection       = document.getElementById('spells-section');
+const backToMenuFromSpells= document.getElementById('back-to-menu-from-spells-btn');
+const spellsGrid          = document.getElementById('spells-grid');
+const spellSearchInput    = document.getElementById('spell-search-input');
+
+// Type filtr düymələri
+const spellFilterAll      = document.getElementById('spell-filter-all');
+const spellFilterNormal   = document.getElementById('spell-filter-normal');
+const spellFilterBuilding = document.getElementById('spell-filter-building');
+const spellTypeButtons    = [spellFilterAll, spellFilterNormal, spellFilterBuilding];
+
+// Rarity filtr düymələri
+const spellRarityAll      = document.getElementById('spell-rarity-all');
+const spellRarityCommon   = document.getElementById('spell-rarity-common');
+const spellRarityEpic     = document.getElementById('spell-rarity-epic');
+const spellRarityLegendary= document.getElementById('spell-rarity-legendary');
+const spellRarityButtons  = [spellRarityAll, spellRarityCommon, spellRarityEpic, spellRarityLegendary];
+
+let allSpellsData   = [];
+let activeSpellType = 'all';           // all | normal | building
+let activeSpellRarity = 'all';         // all | common | epic | legendary
+
+// ── Rarity rəng xəritəsi (spells üçün) ────────────
+const SPELL_RARITY_CSS = {
+    common:    'r-familiar',
+    epic:      'r-arcane',
+    legendary: 'r-apex'
+};
+
+// ── Spellsden menya qayıt ─────────────────────────
+function showMenu_fromSpells() {
+    spellsSection.classList.add('hidden');
+    mainMenu.classList.remove('hidden');
+}
+
+// ── Spells bölmə göstər ──────────────────────────
+function showSpells() {
+    mainMenu.classList.add('hidden');
+    cardsSection.classList.add('hidden');
+    infoSection.classList.add('hidden');
+    spellsSection.classList.remove('hidden');
+    fetchAndRenderSpells();
+    if (spellSearchInput) spellSearchInput.value = '';
+}
+
+// ── JSON yükləmə ─────────────────────────────────
+async function fetchAndRenderSpells() {
+    if (spellsGrid) spellsGrid.innerHTML = '<p>Büyü məlumatları yüklənir...</p>';
+    try {
+        if (allSpellsData.length === 0) {
+            const res = await fetch('spells.json');
+            if (!res.ok) throw new Error('spells.json yüklənə bilmədi');
+            allSpellsData = await res.json();
+        }
+        filterAndRenderSpells();
+    } catch (err) {
+        console.error('Spells yükleme xəta:', err);
+        if (spellsGrid) spellsGrid.innerHTML = '<p style="color:red;">Büyü məlumatları yüklənərkən xəta baş verdi.</p>';
+    }
+}
+
+// ── Filtr + render ────────────────────────────────
+function filterAndRenderSpells() {
+    const search = spellSearchInput ? spellSearchInput.value.toLowerCase().trim() : '';
+
+    let filtered = allSpellsData;
+
+    // Type filtri
+    if (activeSpellType !== 'all') {
+        filtered = filtered.filter(s => s.type.toLowerCase() === activeSpellType);
+    }
+    // Rarity filtri
+    if (activeSpellRarity !== 'all') {
+        filtered = filtered.filter(s => s.rarity.toLowerCase() === activeSpellRarity);
+    }
+    // Axtar
+    if (search.length > 0) {
+        filtered = filtered.filter(s => s.name.toLowerCase().includes(search));
+    }
+
+    renderSpells(filtered);
+}
+
+function renderSpells(spells) {
+    if (!spellsGrid) return;
+    spellsGrid.innerHTML = '';
+    if (spells.length === 0) {
+        spellsGrid.innerHTML = '<p>Bu filtrə görə büyü tapılmadı.</p>';
+        return;
+    }
+    spells.forEach(s => spellsGrid.appendChild(createSpellCard(s)));
+}
+
+// ── Spell card yaratmaq ──────────────────────────
+function createSpellCard(data) {
+    const rarityClass = SPELL_RARITY_CSS[data.rarity.toLowerCase()] || '';
+
+    const card = document.createElement('article');
+    card.className = `card-container card ${rarityClass} spell-card`;
+
+    // Ethereal-style glow for Legendary
+    if (data.rarity.toLowerCase() === 'legendary') {
+        card.classList.add('spell-legendary-glow');
+    }
+
+    const isBuilding = data.type === 'Building';
+
+    // Main stats HTML — dynamically picks Building vs Normal layout
+    const mainStatsHTML = isBuilding
+        ? `<div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${data.stats.health || '0'}</span></div>
+           <div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damageToCarte || '0'}</span></div>
+           <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${data.stats.damageToCastle || '0'}</span></div>
+           <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed || '-'}</span></div>
+           <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.stats.range || '-'}</span></div>
+           <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${data.stats.lifetime || '-'}</span></div>`
+        : `<div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damageToCarte || '0'}</span></div>
+           <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${data.stats.damageToCastle || '0'}</span></div>
+           <div class="stat-item"><b>Interval <i class="fa-solid fa-clock"></i></b><span>${data.stats.timeBetweenDamage || '-'}</span></div>
+           <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.stats.range || '-'}</span></div>`;
+
+    card.innerHTML = `
+        <div class="stripe"></div>
+        <div class="head">
+            <div class="name">
+                ${data.name || 'Unknown'}
+                <span class="badge spell-type-badge spell-type-${data.type.toLowerCase()}">${data.type}</span>
+            </div>
+            <span class="badge spell-rarity-badge">${data.rarity}</span>
+        </div>
+
+        <div class="card-tabs">
+            <button class="active" data-section="spell-main">Stats</button>
+            <button data-section="spell-treat">Treat</button>
+            <button data-section="spell-size">Size</button>
+            <button data-section="spell-story">Story</button>
+        </div>
+
+        <div class="card-content-area">
+
+            <!-- Main Stats -->
+            <div class="stats-section visible" data-section-id="spell-main">
+                ${mainStatsHTML}
+            </div>
+
+            <!-- Treat -->
+            <div class="stats-section" data-section-id="spell-treat">
+                <div class="trait trait-center">${data.stats.treat || '-'}</div>
+            </div>
+
+            <!-- Size -->
+            <div class="stats-section" data-section-id="spell-size">
+                <div class="trait trait-center spell-size-display">${data.stats.size || '-'}</div>
+            </div>
+
+            <!-- Story -->
+            <div class="stats-section" data-section-id="spell-story">
+                <div class="story-content">${data.story || '-'}</div>
+            </div>
+
+        </div>
+    `;
+
+    // Tab click event
+    const tabs = card.querySelectorAll('.card-tabs button');
+    tabs.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tabs.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            card.querySelectorAll('.stats-section').forEach(sec => sec.classList.remove('visible'));
+            card.querySelector(`[data-section-id="${btn.dataset.section}"]`).classList.add('visible');
+        });
+    });
+
+    return card;
+}
+
+// ── EVENT LİSTENERLƏRİ (Spells) ──────────────────
+
+if (showSpellsBtn) {
+    showSpellsBtn.addEventListener('click', showSpells);
+}
+if (backToMenuFromSpells) {
+    backToMenuFromSpells.addEventListener('click', showMenu_fromSpells);
+}
+
+// Type filtr
+spellTypeButtons.forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        spellTypeButtons.forEach(b => b && b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSpellType = btn.id.split('-').pop(); // all | normal | building
+        filterAndRenderSpells();
+    });
+});
+
+// Rarity filtr
+spellRarityButtons.forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        spellRarityButtons.forEach(b => b && b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSpellRarity = btn.id.split('-').pop(); // all | common | epic | legendary
+        filterAndRenderSpells();
+    });
+});
+
+// Axtar
+if (spellSearchInput) {
+    spellSearchInput.addEventListener('input', filterAndRenderSpells);
+}
+
+// ─────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
     showMenu();
