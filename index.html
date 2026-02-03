@@ -86,6 +86,42 @@
         </div>
       </div>
     </section>
+
+    <!-- Spells Section -->
+    <section id="spells-section" class="hidden">
+      <header class="card-title-header">
+        <div>
+          <h1>Spells – Büyülər</h1>
+          <div class="hint">
+            Bütün büyülərin ilkin demosu. İki kateqoriya vardır: <b>Building</b> (bina) və <b>Normal</b> (adi büyülər).
+          </div>
+        </div>
+        <button id="back-to-menu-from-spells-btn" class="back-button">Back</button>
+      </header>
+
+      <div id="spells-wrapper">
+        <div class="controls" id="spells-controls">
+          <button id="spell-filter-all" class="active">All</button>
+          <button id="spell-filter-normal">Normal</button>
+          <button id="spell-filter-building">Building</button>
+          <span class="spell-separator">|</span>
+          <button id="spell-rarity-all" class="active">All Rarities</button>
+          <button id="spell-rarity-common">Common</button>
+          <button id="spell-rarity-epic">Epic</button>
+          <button id="spell-rarity-legendary">Legendary</button>
+          <input type="text" id="spell-search-input" placeholder="Büyü adını axtar..."
+            style=" background: #22284f; color: var(--text);
+                    border: 1px solid #2f3769; border-radius: 12px;
+                    padding: 10px 14px;
+                    box-shadow: var(--shadow);
+                    flex-grow: 1; 
+                    max-width: 300px;
+            ">
+        </div>
+        <section class="grid" id="spells-grid"></section>
+      </div>
+    </section>
+
   </div>
   <script src="script.js"></script>
 </body>
