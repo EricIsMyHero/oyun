@@ -1,0 +1,335 @@
+[
+  {
+    "name": "Flame Wall",
+    "type": "Normal",
+    "rarity": "Common",
+    "description": "Bir hasar barrera yaradır, düşmanlara aralıqlı alov hasar verir.",
+    "stats": {
+      "damageToCarte": "35",
+      "damageToCastle": "0",
+      "timeBetweenDamage": "0,80s",
+      "range": "2500",
+      "treat": "-",
+      "size": "3x1"
+    },
+    "story": "Cadinin qadim sözləri alovun dilini canlandırır. Düşmanlara geçmə yolu bağlayır."
+  },
+  {
+    "name": "Ice Shard",
+    "type": "Normal",
+    "rarity": "Common",
+    "description": "Tək bir düşmana güclü buz hasar verir və onu yavaşladar.",
+    "stats": {
+      "damageToCarte": "55",
+      "damageToCastle": "0",
+      "timeBetweenDamage": "-",
+      "range": "3500",
+      "treat": "Yavaşlatma: 30% (1,5s)",
+      "size": "1x1"
+    },
+    "story": "Qara dağlardan gelen buzu, büyücünün iradəsi yönlə çəkir."
+  },
+  {
+    "name": "Poison Cloud",
+    "type": "Normal",
+    "rarity": "Common",
+    "description": "Əraziyə zəhər budu yayar, vaxtaşırı hasar verir.",
+    "stats": {
+      "damageToCarte": "12",
+      "damageToCastle": "5",
+      "timeBetweenDamage": "1,00s",
+      "range": "2000",
+      "treat": "Zəhər: 4s",
+      "size": "3x3"
+    },
+    "story": "Milyonlarca kirayə böyüyən zəhəri bir nöqtəyə toplar."
+  },
+  {
+    "name": "Thunder Strike",
+    "type": "Normal",
+    "rarity": "Common",
+    "description": "Tək bir güclü ildırım atışı verir, ardından zəif iddırım çakmaya deyam eder.",
+    "stats": {
+      "damageToCarte": "70",
+      "damageToCastle": "15",
+      "timeBetweenDamage": "2,50s",
+      "range": "4000",
+      "treat": "-",
+      "size": "1x1"
+    },
+    "story": "Göydə çakmaq var, yerde isə. . . ölüm."
+  },
+  {
+    "name": "Heal Aura",
+    "type": "Normal",
+    "rarity": "Common",
+    "description": "Yaxın dostuları vaxtaşırı sağalda.",
+    "stats": {
+      "damageToCarte": "0",
+      "damageToCastle": "0",
+      "timeBetweenDamage": "1,20s",
+      "range": "1800",
+      "treat": "Sağalma: +18/s",
+      "size": "3x3"
+    },
+    "story": "Işıq nurları yaxın doldaşları yenilə hayata qaçırır."
+  },
+  {
+    "name": "Wind Slash",
+    "type": "Normal",
+    "rarity": "Epic",
+    "description": "Küçük bir sahə seçilir, küçük amma çox sürətli yel kəsə yaxlayır.",
+    "stats": {
+      "damageToCarte": "28",
+      "damageToCastle": "8",
+      "timeBetweenDamage": "0,45s",
+      "range": "2800",
+      "treat": "-",
+      "size": "2x2"
+    },
+    "story": "Yel görünmək olmaz, amma yaraları elə bəllə olur."
+  },
+  {
+    "name": "Meteor Rain",
+    "type": "Normal",
+    "rarity": "Epic",
+    "description": "Böyük bir sahəyə alov meteorlar yağar, her biri çox hasar verir.",
+    "stats": {
+      "damageToCarte": "95",
+      "damageToCastle": "40",
+      "timeBetweenDamage": "1,80s",
+      "range": "3200",
+      "treat": "Yanma: 3s",
+      "size": "4x4"
+    },
+    "story": "Göyden gələ bilən ən güclü atəş — heç kim qalmayacaq."
+  },
+  {
+    "name": "Shadow Bind",
+    "type": "Normal",
+    "rarity": "Epic",
+    "description": "Düşmanın hərəkəti 3 saniyə üçün dayandırılır.",
+    "stats": {
+      "damageToCarte": "20",
+      "damageToCastle": "0",
+      "timeBetweenDamage": "-",
+      "range": "3000",
+      "treat": "Dondurma: 3,0s",
+      "size": "1x1"
+    },
+    "story": "Kölgə ilə bağlanan adam artıq heç nə edə bilmez."
+  },
+  {
+    "name": "Void Blast",
+    "type": "Normal",
+    "rarity": "Epic",
+    "description": "Tək nəqtə üçün son dərcə güclü mağavi partlayış verir.",
+    "stats": {
+      "damageToCarte": "140",
+      "damageToCastle": "55",
+      "timeBetweenDamage": "-",
+      "range": "2200",
+      "treat": "-",
+      "size": "2x2"
+    },
+    "story": "Yaradılışın əksinə gələ bilən tək cəhd — boşluqun ürəyi."
+  },
+  {
+    "name": "Arcane Nova",
+    "type": "Normal",
+    "rarity": "Legendary",
+    "description": "Bütün sahəyə güclü sehrəvi dalğa yayır, hər düşmana ağır hasar verir.",
+    "stats": {
+      "damageToCarte": "110",
+      "damageToCastle": "45",
+      "timeBetweenDamage": "2,00s",
+      "range": "5000",
+      "treat": "Sehrəvi Zəif: -25% (2s)",
+      "size": "5x5"
+    },
+    "story": "Elə bir enerji buraxılır ki, rəqibin bütün müdafiəsi uçub getmiş olar."
+  },
+  {
+    "name": "Death Wave",
+    "type": "Normal",
+    "rarity": "Legendary",
+    "description": "Ölümün dalğası bütün sahəni keçir, ardında heç şey qalmayır.",
+    "stats": {
+      "damageToCarte": "180",
+      "damageToCastle": "70",
+      "timeBetweenDamage": "-",
+      "range": "6000",
+      "treat": "Ölümün İzi: 2s hasar (45/s)",
+      "size": "6x1"
+    },
+    "story": "Ölüm var, ya da yox — bu büyü cavabı verir."
+  },
+  {
+    "name": "Time Collapse",
+    "type": "Normal",
+    "rarity": "Legendary",
+    "description": "Vaxtı dondurur, tüm düşmanlar 4 saniyə hərəkətsiz qalır, sonra ağır hasar verir.",
+    "stats": {
+      "damageToCarte": "90",
+      "damageToCastle": "30",
+      "timeBetweenDamage": "4,00s",
+      "range": "4500",
+      "treat": "Vaxt Durma: 4,0s",
+      "size": "5x5"
+    },
+    "story": "Vaxt bir nəsnə deyil — kim bilir, kim bilmiyir."
+  },
+  {
+    "name": "Stone Tower",
+    "type": "Building",
+    "rarity": "Common",
+    "description": "Sadə qoruducu brk yaradır. Düşmanların sürətini azaldar.",
+    "stats": {
+      "health": "200",
+      "damageToCarte": "18",
+      "damageToCastle": "0",
+      "attackSpeed": "1,50s",
+      "range": "2200",
+      "lifetime": "45s",
+      "treat": "Yavaşlatma: 15% (1s)",
+      "size": "1x1"
+    },
+    "story": "Daşdan tikilmiş — sade amma emin. Düşmanlara yol bağlar."
+  },
+  {
+    "name": "Guard Post",
+    "type": "Building",
+    "rarity": "Common",
+    "description": "Düşmanlara yaxın menzillikdə tez-tez yaxşı hasar verir.",
+    "stats": {
+      "health": "150",
+      "damageToCarte": "30",
+      "damageToCastle": "5",
+      "attackSpeed": "0,80s",
+      "range": "1500",
+      "lifetime": "35s",
+      "treat": "-",
+      "size": "1x1"
+    },
+    "story": "Kənd qoruycuları çox uzun vaxt böyük savaşlara qaldı."
+  },
+  {
+    "name": "Watchtower",
+    "type": "Building",
+    "rarity": "Common",
+    "description": "Uzaqdan düşmanları müşahidə etdə, amma çox hasar vermiyir.",
+    "stats": {
+      "health": "100",
+      "damageToCarte": "10",
+      "damageToCastle": "0",
+      "attackSpeed": "2,00s",
+      "range": "5000",
+      "lifetime": "50s",
+      "treat": "Işarə: +10% Dostlar Hasar",
+      "size": "1x1"
+    },
+    "story": "Qara dağlardan uzaq görülə bilir. Qalanın gözləri."
+  },
+  {
+    "name": "Fire Turret",
+    "type": "Building",
+    "rarity": "Epic",
+    "description": "Fasiləsiz alov atışı verir, düşmanları yanar.",
+    "stats": {
+      "health": "300",
+      "damageToCarte": "42",
+      "damageToCastle": "12",
+      "attackSpeed": "0,60s",
+      "range": "3000",
+      "lifetime": "60s",
+      "treat": "Yanma: 2,5s",
+      "size": "2x2"
+    },
+    "story": "Alovun dili — kim uça bilir, uçsun."
+  },
+  {
+    "name": "Arcane Shrine",
+    "type": "Building",
+    "rarity": "Epic",
+    "description": "Yaxın dostuları sağalar və onların hasarını artırır.",
+    "stats": {
+      "health": "180",
+      "damageToCarte": "0",
+      "damageToCastle": "0",
+      "attackSpeed": "-",
+      "range": "2500",
+      "lifetime": "55s",
+      "treat": "Sağalma: +22/s | Hasar: +15%",
+      "size": "1x1"
+    },
+    "story": "Qadim məbəd — sehrəvi enerjinin ocağı."
+  },
+  {
+    "name": "Bolt Cannon",
+    "type": "Building",
+    "rarity": "Epic",
+    "description": "Güclü amma yavaş atışlar verir, hasar çox yüksek.",
+    "stats": {
+      "health": "350",
+      "damageToCarte": "80",
+      "damageToCastle": "25",
+      "attackSpeed": "3,00s",
+      "range": "4200",
+      "lifetime": "50s",
+      "treat": "-",
+      "size": "2x1"
+    },
+    "story": "Bir atışda düşman dizi sindi — ikinci lazım olmayacaq."
+  },
+  {
+    "name": "Dragon Nest",
+    "type": "Building",
+    "rarity": "Legendary",
+    "description": "Eyni yer üçün böyük hasar verə bilən əsas bina. Yaxın düşmanları heç nə bağlayar.",
+    "stats": {
+      "health": "600",
+      "damageToCarte": "120",
+      "damageToCastle": "50",
+      "attackSpeed": "1,20s",
+      "range": "3500",
+      "lifetime": "90s",
+      "treat": "Yanma: 4s | Dondurma: 2s",
+      "size": "3x3"
+    },
+    "story": "Ajdahalar yuvası. Kim bura gələ bilir ki?"
+  },
+  {
+    "name": "Obsidian Fortress",
+    "type": "Building",
+    "rarity": "Legendary",
+    "description": "En güclü tibb binaları. Çox sağlam, çox uzun yaşar, düşmanları yavaşladar.",
+    "stats": {
+      "health": "950",
+      "damageToCarte": "60",
+      "damageToCastle": "20",
+      "attackSpeed": "2,50s",
+      "range": "2800",
+      "lifetime": "120s",
+      "treat": "Yavaşlatma: 40% (3s) | Zəif: -30%",
+      "size": "3x3"
+    },
+    "story": "Qara daşdan tikilmiş — ölüm bu kapıdan keçə bilmaz."
+  },
+  {
+    "name": "Phoenix Beacon",
+    "type": "Building",
+    "rarity": "Legendary",
+    "description": "Ölendə yenidə dirilir — amma yalnız 1 dəfə. Dirildikdə sahə üçün alov partlayış verir.",
+    "stats": {
+      "health": "400",
+      "damageToCarte": "90",
+      "damageToCastle": "35",
+      "attackSpeed": "1,80s",
+      "range": "4000",
+      "lifetime": "75s",
+      "treat": "Dirilmə: 1x | Alov Partlayış: 200 Hasar",
+      "size": "2x2"
+    },
+    "story": "Oda ölə bilmir. Kül üstündə yenidə doğar."
+  }
+]
