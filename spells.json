@@ -15,6 +15,21 @@
     }
   },
   {
+    "name": "Spirit Of The Wild",
+    "type": "Normal",
+    "rarity": "Legendary",
+    "treat": "10 saniyəlik olduğu yerdəki kartların Can Yeniləmə, Can Çalma, Kritik Şansı və Qalxan yeniləmə etkilərini 100% azaldar",
+    "story": "-",
+    "stats": {
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "7x7",
+      "size": "1",
+      "energy": "4"
+    }
+  },
+  {
     "name": "Illustration Spell",
     "type": "Normal",
     "rarity": "Epic",
@@ -90,21 +105,6 @@
     }
   },
   {
-    "name": "Spirit Of The Wild",
-    "type": "Normal",
-    "rarity": "Legendary",
-    "treat": "10 saniyəlik olduğu yerdəki kartların Can Yeniləmə, Can Çalma, Kritik Şansı və Qalxan yeniləmə etkilərini 100% azaldar",
-    "story": "-",
-    "stats": {
-      "damageToCard": "-",
-      "damageToCastle": "-",
-      "timeBetweenDamage": "-",
-      "range": "7x7",
-      "size": "1",
-      "energy": "4"
-    }
-  },
-  {
     "name": "Roots",
     "type": "Normal",
     "rarity": "Common",
@@ -152,7 +152,7 @@
   {
     "name": "Present",
     "type": "Normal",
-    "rarity": "Common",
+    "rarity": "Epic",
     "treat": "Rəqib karta ekstra 10%-150% Hasar bonusu, 1% Şansla isə anında öldürər",
     "story": "-",
     "stats": {
@@ -162,6 +162,51 @@
       "range": "2x2",
       "size": "1",
       "energy": "2"
+    }
+  },
+  {
+    "name": "Shield Of Serenity",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Dost kartlara ekstra +20% Qalxan verər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "6x6",
+      "size": "1",
+      "energy": "2"
+    }
+  },
+  {
+    "name": "Healing Light",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Dost kartları 30% sağaldar, bütün mənfi etkiləri silər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "8x8",
+      "size": "1",
+      "energy": "1"
+    }
+  },
+  {
+    "name": "Crystalline Prison",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Rəqib kartları 8 saniyəlik həbs edər, rəqib kart hasar almaz və verməz",
+    "story": "-",
+    "stats": {
+      "damageToCard": "8x5",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "1,00s",
+      "range": "2x2",
+      "size": "1",
+      "energy": "1"
     }
   },
   {
