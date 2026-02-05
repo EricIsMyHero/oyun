@@ -222,24 +222,24 @@
       "damageToCastle": "250",
       "attackSpeed": "-",
       "range": "100000x100000",
-      "size": "1x1",
-      "energy": "5"
+      "size": "2",
+      "energy": "10"
     }
   },
   {
-    "name": "Stone Tower",
+    "name": "Reflector",
     "type": "Building",
-    "rarity": "Common",
-    "treat": "Yavaşlatma: 15% (1s)",
-    "story": "Daşdan tikilmiş — sade amma emin. Düşmanlara yol bağlar.",
+    "rarity": "Epic",
+    "treat": "Alınan hasarın 60%-ni rəqibə ötürər",
+    "story": "-",
     "stats": {
-      "health": "200",
-      "lifetime": "45s",
-      "damageToCard": "18",
-      "damageToCastle": "0",
-      "attackSpeed": "1,50s",
-      "range": "2200",
-      "size": "1x1",
+      "health": "1500",
+      "lifetime": "100s",
+      "damageToCard": "60%",
+      "damageToCastle": "40%",
+      "attackSpeed": "-",
+      "range": "15000x15000",
+      "size": "2",
       "energy": "5"
     }
   },
@@ -256,7 +256,7 @@
       "damageToCastle": "5",
       "attackSpeed": "0,80s",
       "range": "1500",
-      "size": "1x1",
+      "size": "2",
       "energy": "4"
     }
   },
@@ -273,59 +273,42 @@
       "damageToCastle": "0",
       "attackSpeed": "2,00s",
       "range": "5000",
-      "size": "1x1",
+      "size": "2",
       "energy": "3"
     }
   },
   {
-    "name": "Fire Turret",
+    "name": "Ice Tower",
     "type": "Building",
     "rarity": "Epic",
-    "treat": "Yanma: 2,5s",
-    "story": "Alovun dili — kim uça bilir, uçsun.",
+    "treat": "Rəqib kartları 25% Yavaşladar",
+    "story": "-",
     "stats": {
-      "health": "300",
-      "lifetime": "60s",
-      "damageToCard": "42",
-      "damageToCastle": "12",
-      "attackSpeed": "0,60s",
-      "range": "3000",
-      "size": "2x2",
-      "energy": "7"
+      "health": "800",
+      "lifetime": "100s",
+      "damageToCard": "22",
+      "damageToCastle": "-",
+      "attackSpeed": "1,40s",
+      "range": "6000x6000",
+      "size": "1",
+      "energy": "4"
     }
   },
   {
-    "name": "Arcane Shrine",
+    "name": "Stone Wall",
     "type": "Building",
     "rarity": "Epic",
-    "treat": "Sağalma: +22/s | Hasar: +15%",
+    "treat": "Bir kolidoru bağlayar",
     "story": "Qadim məbəd — sehrəvi enerjinin ocağı.",
     "stats": {
-      "health": "180",
-      "lifetime": "55s",
-      "damageToCard": "0",
-      "damageToCastle": "0",
+      "health": "4000",
+      "lifetime": "200s",
+      "damageToCard": "-",
+      "damageToCastle": "-",
       "attackSpeed": "-",
-      "range": "2500",
-      "size": "1x1",
-      "energy": "6"
-    }
-  },
-  {
-    "name": "Bolt Cannon",
-    "type": "Building",
-    "rarity": "Epic",
-    "treat": "-",
-    "story": "Bir atışda düşman dizi sindi — ikinci lazım olmayacaq.",
-    "stats": {
-      "health": "350",
-      "lifetime": "50s",
-      "damageToCard": "80",
-      "damageToCastle": "25",
-      "attackSpeed": "3,00s",
-      "range": "4200",
-      "size": "2x1",
-      "energy": "8"
+      "range": "-",
+      "size": "1",
+      "energy": "3"
     }
   },
   {
@@ -360,23 +343,6 @@
       "range": "2800",
       "size": "3x3",
       "energy": "13"
-    }
-  },
-  {
-    "name": "Phoenix Beacon",
-    "type": "Building",
-    "rarity": "Legendary",
-    "treat": "Dirilmə: 1x | Alov Partlayış: 200 Hasar",
-    "story": "Oda ölə bilmir. Kül üstündə yenidə doğar.",
-    "stats": {
-      "health": "400",
-      "lifetime": "75s",
-      "damageToCard": "90",
-      "damageToCastle": "35",
-      "attackSpeed": "1,80s",
-      "range": "4000",
-      "size": "2x2",
-      "energy": "10"
     }
   }
 ]
