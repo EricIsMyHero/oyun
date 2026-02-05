@@ -63,8 +63,8 @@
         "Poison - A damage over time effect that deals toxic damage over a period and often weakens the target.",
         "Silence - A status effect that prevents cards from using abilities or special skills for a duration.",
         "Stat Reduction - A debuff that lowers an enemy card's stats, such as health or damage output.",
-        "Blind - A status effect that reduces an enemy card's vision, accuracy, or chance to hit.",
-        "Curse - A debuff that increases the amount of damage an enemy receives."
+        "Blind - A status effect that reduces an enemy card's vision, accuracy.",
+        "Curse - A debuff that increases the amount of damage an enemy receives or chance to critical damage."
       ]
     },
     {
