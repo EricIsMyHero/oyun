@@ -9,7 +9,7 @@
       "damageToCard": "1000",
       "damageToCastle": "500",
       "timeBetweenDamage": "-",
-      "range": "4x4",
+      "range": "4000x4000",
       "size": "2",
       "energy": "10"
     }
@@ -24,7 +24,7 @@
       "damageToCard": "-",
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
-      "range": "7x7",
+      "range": "7000x7000",
       "size": "1",
       "energy": "4"
     }
@@ -39,7 +39,7 @@
       "damageToCard": "-",
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
-      "range": "4x4",
+      "range": "4000x4000",
       "size": "2",
       "energy": "8"
     }
@@ -54,7 +54,7 @@
       "damageToCard": "250",
       "damageToCastle": "125",
       "timeBetweenDamage": "-",
-      "range": "3x6",
+      "range": "3000x6000",
       "size": "2",
       "energy": "6"
     }
@@ -69,7 +69,7 @@
       "damageToCard": "4x40",
       "damageToCastle": "x25",
       "timeBetweenDamage": "1,20s",
-      "range": "7x7",
+      "range": "7000x7000",
       "size": "2",
       "energy": "6"
     }
@@ -84,9 +84,24 @@
       "damageToCard": "7x12",
       "damageToCastle": "7x5",
       "timeBetweenDamage": "0,90s",
-      "range": "6x6",
+      "range": "6000x6000",
       "size": "2",
       "energy": "5"
+    }
+  },
+  {
+    "name": "Present",
+    "type": "Normal",
+    "rarity": "Epic",
+    "treat": "Rəqib karta ekstra 10%-150% Hasar bonusu, 1% Şansla isə anında öldürər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "50",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "2000x2000",
+      "size": "1",
+      "energy": "2"
     }
   },
   {
@@ -99,7 +114,7 @@
       "damageToCard": "500",
       "damageToCastle": "100",
       "timeBetweenDamage": "-",
-      "range": "4x4",
+      "range": "4000x4000",
       "size": "2",
       "energy": "5"
     }
@@ -114,7 +129,7 @@
       "damageToCard": "15x10",
       "damageToCastle": "15x4",
       "timeBetweenDamage": "0,80s",
-      "range": "6x6",
+      "range": "6000x6000",
       "size": "1",
       "energy": "4"
     }
@@ -129,7 +144,7 @@
       "damageToCard": "140",
       "damageToCastle": "55",
       "timeBetweenDamage": "-",
-      "range": "4x4",
+      "range": "4000x4000",
       "size": "1",
       "energy": "3"
     }
@@ -144,24 +159,9 @@
       "damageToCard": "75",
       "damageToCastle": "25",
       "timeBetweenDamage": "-",
-      "range": "2,5x2,5",
+      "range": "2500x2500",
       "size": "1",
       "energy": "3"
-    }
-  },
-  {
-    "name": "Present",
-    "type": "Normal",
-    "rarity": "Epic",
-    "treat": "Rəqib karta ekstra 10%-150% Hasar bonusu, 1% Şansla isə anında öldürər",
-    "story": "-",
-    "stats": {
-      "damageToCard": "50",
-      "damageToCastle": "-",
-      "timeBetweenDamage": "-",
-      "range": "2x2",
-      "size": "1",
-      "energy": "2"
     }
   },
   {
@@ -174,7 +174,7 @@
       "damageToCard": "-",
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
-      "range": "6x6",
+      "range": "6000x6000",
       "size": "1",
       "energy": "2"
     }
@@ -189,7 +189,7 @@
       "damageToCard": "-",
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
-      "range": "8x8",
+      "range": "8000x8000",
       "size": "1",
       "energy": "1"
     }
@@ -204,24 +204,26 @@
       "damageToCard": "8x5",
       "damageToCastle": "-",
       "timeBetweenDamage": "1,00s",
-      "range": "2x2",
+      "range": "2000x2000",
       "size": "1",
       "energy": "1"
     }
   },
   {
-    "name": "Time Collapse",
-    "type": "Normal",
+    "name": "Dark Orb",
+    "type": "Building",
     "rarity": "Legendary",
-    "treat": "Vaxt Durma: 4,0s",
-    "story": "Vaxt bir nəsnə deyil — kim bilir, kim bilmiyir.",
+    "treat": "Qırıldıqda bütün rəqib kartlara hasar verər",
+    "story": "-",
     "stats": {
-      "damageToCard": "90",
-      "damageToCastle": "30",
-      "timeBetweenDamage": "4,00s",
-      "range": "4500",
-      "size": "5x5",
-      "energy": "11"
+      "health": "100",
+      "lifetime": "100s",
+      "damageToCard": "500",
+      "damageToCastle": "250",
+      "attackSpeed": "-",
+      "range": "100000x100000",
+      "size": "1x1",
+      "energy": "5"
     }
   },
   {
