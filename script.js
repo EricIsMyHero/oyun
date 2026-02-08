@@ -752,68 +752,165 @@ function createSpellCard(data) {
 
     const isBuilding = data.type === 'Building';
 
-    // Building: Health, Lifetime, DmgToCard, DmgToCastle, AttackSpeed, Range, Size, Energy
-    // Normal:   DmgToCard, DmgToCastle, Range, Size, Energy
-    const mainStatsHTML = isBuilding
-        ? `<div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${data.stats.health || '0'}</span></div>
-           <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${data.stats.lifetime || '-'}</span></div>
-           <div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damageToCard || '0'}</span></div>
-           <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${data.stats.damageToCastle || '0'}</span></div>
-           <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${data.stats.attackSpeed || '-'}</span></div>
-           <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.stats.range || '-'}</span></div>
-           <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${data.stats.size || '-'}</span></div>
-           <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${data.stats.energy || '0'}</span></div>`
-        : `<div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${data.stats.damageToCard || '0'}</span></div>
-           <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${data.stats.damageToCastle || '0'}</span></div>
-           <div class="stat-item"><b>Interval <i class="fa-solid fa-clock"></i></b><span>${data.stats.timeBetweenDamage || '-'}</span></div>
-           <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.stats.range || '-'}</span></div>
-           <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${data.stats.size || '-'}</span></div>
-           <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${data.stats.energy || '0'}</span></div>`;
+    // Helper to create spell content (main card or form)
+    const createSpellContent = (spellData) => {
+        const content = document.createElement('div');
+        content.className = 'spell-content-wrapper';
+        
+        const isBuildingType = spellData.type === 'Building' || spellData.type === 'Summon';
+        
+        const mainStatsHTML = isBuildingType
+            ? `<div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${spellData.stats.health || '0'}</span></div>
+               <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.lifetime || '-'}</span></div>
+               <div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damageToCard || '0'}</span></div>
+               <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${spellData.stats.damageToCastle || '0'}</span></div>
+               <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${spellData.stats.attackSpeed || '-'}</span></div>
+               <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.stats.range || '-'}</span></div>
+               <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${spellData.stats.size || '-'}</span></div>
+               <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.energy || '0'}</span></div>`
+            : `<div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damageToCard || '0'}</span></div>
+               <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${spellData.stats.damageToCastle || '0'}</span></div>
+               <div class="stat-item"><b>Interval <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.timeBetweenDamage || '-'}</span></div>
+               <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.stats.range || '-'}</span></div>
+               <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${spellData.stats.size || '-'}</span></div>
+               <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.energy || '0'}</span></div>`;
 
-    card.innerHTML = `
-        <div class="stripe"></div>
-        <div class="head">
-            <div class="name">
-                ${data.name || 'Unknown'}
-                <span class="badge spell-type-badge spell-type-${data.type.toLowerCase()}">${data.type}</span>
-            </div>
-            <span class="badge spell-rarity-badge">${data.rarity}</span>
-        </div>
-
-        <div class="card-tabs">
-            <button class="active" data-section="spell-main">Stats</button>
-            <button data-section="spell-treat">Treat</button>
-            <button data-section="spell-story">Story</button>
-        </div>
-
-        <div class="card-content-area">
-
-            <div class="stats-section visible" data-section-id="spell-main">
-                ${mainStatsHTML}
+        content.innerHTML = `
+            <div class="stripe"></div>
+            <div class="head">
+                <div class="name">
+                    ${spellData.name || data.name || 'Unknown'}
+                    <span class="badge spell-type-badge spell-type-${(spellData.type || data.type).toLowerCase()}">${spellData.type || data.type}</span>
+                </div>
+                <span class="badge spell-rarity-badge">${data.rarity}</span>
             </div>
 
-            <div class="stats-section" data-section-id="spell-treat">
-                <div class="trait trait-center">${data.treat || '-'}</div>
+            <div class="card-tabs">
+                <button class="active" data-section="spell-main">Stats</button>
+                <button data-section="spell-treat">Treat</button>
+                <button data-section="spell-story">Story</button>
             </div>
 
-            <div class="stats-section" data-section-id="spell-story">
-                <div class="story-content">${data.story || '-'}</div>
+            <div class="card-content-area">
+                <div class="stats-section visible" data-section-id="spell-main">
+                    ${mainStatsHTML}
+                </div>
+
+                <div class="stats-section" data-section-id="spell-treat">
+                    <div class="trait trait-center">${spellData.treat || data.treat || '-'}</div>
+                </div>
+
+                <div class="stats-section" data-section-id="spell-story">
+                    <div class="story-content">${spellData.story || data.story || '-'}</div>
+                </div>
             </div>
+        `;
+        
+        return content;
+    };
 
-        </div>
-    `;
-
-    // Tab click handlers
-    const tabs = card.querySelectorAll('.card-tabs button');
-    tabs.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            tabs.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            card.querySelectorAll('.stats-section').forEach(sec => sec.classList.remove('visible'));
-            card.querySelector(`[data-section-id="${btn.dataset.section}"]`).classList.add('visible');
+    // Setup tab listeners
+    const setupTabListeners = (container) => {
+        const tabs = container.querySelectorAll('.card-tabs button');
+        tabs.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                tabs.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                container.querySelectorAll('.stats-section').forEach(sec => sec.classList.remove('visible'));
+                container.querySelector(`[data-section-id="${btn.dataset.section}"]`).classList.add('visible');
+            });
         });
-    });
+    };
+
+    // Multi system for spells
+    if (data.isMulti && data.forms && data.forms.length > 0) {
+        let currentFormIndex = 0;
+        card.classList.add('has-multi-controls');
+        
+        const spellContent = createSpellContent(data);
+        card.appendChild(spellContent);
+        setupTabListeners(spellContent);
+        
+        // Multi controls (same as cards)
+        const multiControls = document.createElement('div');
+        multiControls.className = 'evolution-controls';
+        
+        const leftArrow = document.createElement('button');
+        leftArrow.className = 'evolution-arrow';
+        leftArrow.innerHTML = '◀';
+        leftArrow.disabled = true;
+        
+        const progressBar = document.createElement('div');
+        progressBar.className = 'evolution-progress';
+        
+        const mainDot = document.createElement('span');
+        mainDot.className = 'progress-dot active';
+        progressBar.appendChild(mainDot);
+        
+        data.forms.forEach(() => {
+            const dot = document.createElement('span');
+            dot.className = 'progress-dot';
+            progressBar.appendChild(dot);
+        });
+        
+        const formInfo = document.createElement('span');
+        formInfo.className = 'stage-info';
+        formInfo.textContent = data.name;
+        
+        const rightArrow = document.createElement('button');
+        rightArrow.className = 'evolution-arrow';
+        rightArrow.innerHTML = '▶';
+        
+        multiControls.appendChild(leftArrow);
+        multiControls.appendChild(progressBar);
+        multiControls.appendChild(formInfo);
+        multiControls.appendChild(rightArrow);
+        
+        const updateForm = (newIndex) => {
+            currentFormIndex = newIndex;
+            
+            progressBar.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentFormIndex);
+            });
+            
+            leftArrow.disabled = currentFormIndex === 0;
+            rightArrow.disabled = currentFormIndex === data.forms.length;
+            
+            spellContent.innerHTML = '';
+            let formData;
+            
+            if (currentFormIndex === 0) {
+                formData = data;
+            } else {
+                formData = data.forms[currentFormIndex - 1];
+            }
+            
+            const newContent = createSpellContent(formData);
+            spellContent.innerHTML = newContent.innerHTML;
+            setupTabListeners(spellContent);
+            
+            formInfo.textContent = formData.name || data.name;
+        };
+        
+        leftArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentFormIndex > 0) updateForm(currentFormIndex - 1);
+        });
+        
+        rightArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentFormIndex < data.forms.length) updateForm(currentFormIndex + 1);
+        });
+        
+        card.appendChild(multiControls);
+    } 
+    // Simple spell (no multi)
+    else {
+        const spellContent = createSpellContent(data);
+        card.appendChild(spellContent);
+        setupTabListeners(spellContent);
+    }
 
     return card;
 }
