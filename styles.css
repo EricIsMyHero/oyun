@@ -771,3 +771,17 @@ body, .wrap {
   font-size: 14px;
   color: #c9d3ff;
 }
+
+/* Spell content wrapper for multi spells */
+.spell-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+/* Spell cards with multi controls need padding adjustment */
+.spell-card.has-multi-controls {
+  padding-bottom: 50px;
+}
