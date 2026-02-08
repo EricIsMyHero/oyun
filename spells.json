@@ -315,15 +315,15 @@
     "name": "Dragon Nest",
     "type": "Building",
     "rarity": "Legendary",
-    "treat": "Yanma: 4s | Dondurma: 2s",
-    "story": "Ajdahalar yuvası. Kim bura gələ bilir ki?",
+    "treat": "Hər 30 saniyədə bir əjdarha çıxardar. (Fire Dragon-60%, Shadow Dragon-40%)",
+    "story": "-",
     "stats": {
-      "health": "600",
-      "lifetime": "90s",
-      "damageToCard": "120",
-      "damageToCastle": "50",
-      "attackSpeed": "1,20s",
-      "range": "3500",
+      "health": "880",
+      "lifetime": "110s",
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "attackSpeed": "-",
+      "range": "-",
       "size": "3x3",
       "energy": "11"
     },
@@ -331,28 +331,28 @@
     "forms": [
       {
         "name": "Fire Dragon",
-        "type": "Summon",
-        "note": "Aerial/DPS",
+        "type": "Heyvan",
+        "note": "Specialist",
         "stats": {
           "health": "450",
           "shield": "0",
-          "damage": "85",
-          "sps": "85",
-          "attackSpeed": "1,00s",
-          "delay": "-",
+          "damage": "4x12",
+          "sps": "48",
+          "attackSpeed": "0,20s",
+          "delay": "1,40s",
           "mana": "-",
           "number": "1"
         },
-        "trait": "Uçan birlik. Hər hücumda <b>Yanma</b> effekti tətbiq edir (3s, 15 hasar/s).",
+        "trait": "Hər hücumda <b>2x4</b> Yanma hasarı verir. (2s, 4 hasar/s).",
         "additionalStats": {
           "range": "2500",
           "speed": "900",
           "criticalChance": "10%",
-          "criticDamage": "1.8x",
+          "criticDamage": "1.5x",
           "lifestealChance": "0%",
           "lifesteal": "0%",
-          "damageminimiser": "5%",
-          "dodge": "8%"
+          "damageminimiser": "0%",
+          "dodge": "10%"
         },
         "showlevels": {
           "level1": "+15% Hasar  |  85 » 98",
@@ -363,21 +363,21 @@
       },
       {
         "name": "Shadow Dragon",
-        "type": "Summon",
-        "note": "Stealth/Control",
+        "type": "Heyvan",
+        "note": "Specialist",
         "stats": {
           "health": "380",
-          "shield": "50",
-          "damage": "95",
-          "sps": "112",
-          "attackSpeed": "0,85s",
+          "shield": "0",
+          "damage": "90",
+          "sps": "60",
+          "attackSpeed": "1,50s",
           "delay": "-",
           "mana": "-",
           "number": "1"
         },
         "trait": "İlk 5 saniyə <b>görünməz</b>dir. Hücumlarında 30% şansla <b>Dondurma</b> (2s).",
         "additionalStats": {
-          "range": "2200",
+          "range": "2800",
           "speed": "1100",
           "criticalChance": "15%",
           "criticDamage": "2.0x",
@@ -399,17 +399,17 @@
     "name": "Obsidian Fortress",
     "type": "Building",
     "rarity": "Legendary",
-    "treat": "Yavaşlatma: 40% (3s) | Zəif: -30%",
-    "story": "Qara daşdan tikilmiş — ölüm bu kapıdan keçə bilmaz.",
+    "treat": "Yaxınındakı kartlar büyülərdən 50% daha az hasar alar.",
+    "story": "-",
     "stats": {
-      "health": "950",
-      "lifetime": "120s",
-      "damageToCard": "60",
-      "damageToCastle": "20",
-      "attackSpeed": "2,50s",
-      "range": "2800",
-      "size": "3x3",
-      "energy": "13"
+      "health": "400",
+      "lifetime": "80s",
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "attackSpeed": "-",
+      "range": "5000x5000",
+      "size": "2",
+      "energy": "5"
     }
   }
 ]
