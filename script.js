@@ -750,61 +750,124 @@ function createSpellCard(data) {
         card.classList.add('spell-legendary-glow');
     }
 
-    const isBuilding = data.type === 'Building';
-
-    // Helper to create spell content (main card or form)
-    const createSpellContent = (spellData) => {
+    // Helper to create spell content - differentiates between base spell and summon forms
+    const createSpellContent = (spellData, isForm = false) => {
         const content = document.createElement('div');
         content.className = 'spell-content-wrapper';
         
-        const isBuildingType = spellData.type === 'Building' || spellData.type === 'Summon';
+        // Determine if this is a summon/form (uses full card stats) or base spell
+        const isCardLike = isForm || spellData.stats.hasOwnProperty('health') && spellData.stats.hasOwnProperty('shield');
         
-        const mainStatsHTML = isBuildingType
-            ? `<div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${spellData.stats.health || '0'}</span></div>
-               <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.lifetime || '-'}</span></div>
-               <div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damageToCard || '0'}</span></div>
-               <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${spellData.stats.damageToCastle || '0'}</span></div>
-               <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${spellData.stats.attackSpeed || '-'}</span></div>
-               <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.stats.range || '-'}</span></div>
-               <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${spellData.stats.size || '-'}</span></div>
-               <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.energy || '0'}</span></div>`
-            : `<div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damageToCard || '0'}</span></div>
-               <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${spellData.stats.damageToCastle || '0'}</span></div>
-               <div class="stat-item"><b>Interval <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.timeBetweenDamage || '-'}</span></div>
-               <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.stats.range || '-'}</span></div>
-               <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${spellData.stats.size || '-'}</span></div>
-               <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.energy || '0'}</span></div>`;
-
-        content.innerHTML = `
-            <div class="stripe"></div>
-            <div class="head">
-                <div class="name">
-                    ${spellData.name || data.name || 'Unknown'}
-                    <span class="badge spell-type-badge spell-type-${(spellData.type || data.type).toLowerCase()}">${spellData.type || data.type}</span>
-                </div>
-                <span class="badge spell-rarity-badge">${data.rarity}</span>
-            </div>
-
-            <div class="card-tabs">
-                <button class="active" data-section="spell-main">Stats</button>
-                <button data-section="spell-treat">Treat</button>
-                <button data-section="spell-story">Story</button>
-            </div>
-
-            <div class="card-content-area">
-                <div class="stats-section visible" data-section-id="spell-main">
-                    ${mainStatsHTML}
+        if (isCardLike) {
+            // FULL CARD STRUCTURE (for summons/forms)
+            const typeText = Array.isArray(spellData.type) ? spellData.type.join('/') : spellData.type;
+            content.innerHTML = `
+                <div class="stripe"></div>
+                <div class="head">
+                    <div class="name">
+                        ${spellData.name || data.name || 'Unknown'}
+                        ${spellData.note ? `<span class="note">${spellData.note}</span>` : ''}
+                    </div>
+                    <span class="badge">${typeText || 'Unknown'}</span>
                 </div>
 
-                <div class="stats-section" data-section-id="spell-treat">
-                    <div class="trait trait-center">${spellData.treat || data.treat || '-'}</div>
+                <div class="card-tabs">
+                    <button class="active" data-section="main-stats">Main</button>
+                    <button data-section="additional-stats">Other</button>
+                    <button data-section="trait">Ability</button>
+                    <button data-section="showlevels">Levels</button>
+                    <button data-section="story-section">Story</button>
                 </div>
 
-                <div class="stats-section" data-section-id="spell-story">
-                    <div class="story-content">${spellData.story || data.story || '-'}</div>
+                <div class="card-content-area">
+                    <div class="stats-section visible" data-section-id="main-stats">
+                        <div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${spellData.stats.health || 0}</span></div>
+                        <div class="stat-item"><b>Shield <i class="fa-solid fa-shield-halved"></i></b><span>${spellData.stats.shield || 0}</span></div>
+                        <div class="stat-item"><b>Damage <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damage || 0}</span></div>
+                        <div class="stat-item"><b>D.P.S <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.sps || 0}</span></div>
+                        <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${spellData.stats.attackSpeed || '-'}</span></div>
+                        <div class="stat-item"><b>Delay <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.delay || '-'}</span></div>
+                        <div class="stat-item"><b>Mana <i class="fa-solid fa-certificate"></i></b><span>${spellData.stats.mana || '-'}</span></div>
+                        <div class="stat-item"><b>Number <i class="fa-solid fa-user"></i></b><span>${spellData.stats.number || 0}</span></div>
+                    </div>
+                    
+                    <div class="stats-section" data-section-id="additional-stats">
+                        <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.additionalStats?.range || '-'}</span></div>
+                        <div class="stat-item"><b>Speed <i class="fa-solid fa-person-running"></i></b><span>${spellData.additionalStats?.speed || '-'}</span></div>
+                        <div class="stat-item"><b>Critical Chance <i class="fa-solid fa-percent"></i></b><span>${spellData.additionalStats?.criticalChance || '-'}</span></div>
+                        <div class="stat-item"><b>Critical Damage <i class="fa-solid fa-crosshairs"></i></b><span>${spellData.additionalStats?.criticDamage || '-'}</span></div>
+                        <div class="stat-item"><b>Life Steal Chance <i class="fa-solid fa-percent"></i></b><span>${spellData.additionalStats?.lifestealChance || '-'}</span></div>
+                        <div class="stat-item"><b>Life Steal <i class="fa-solid fa-skull-crossbones"></i></b><span>${spellData.additionalStats?.lifesteal || '-'}</span></div>
+                        <div class="stat-item"><b>Damage Reduction <i class="fa-solid fa-helmet-un"></i></b><span>${spellData.additionalStats?.damageminimiser || '-'}</span></div>
+                        <div class="stat-item"><b>Dodge Chance <i class="fa-solid fa-wind"></i></b><span>${spellData.additionalStats?.dodge || '-'}</span></div>
+                    </div>
+                    
+                    <div class="stats-section" data-section-id="trait">
+                        <div class="trait trait-center">${spellData.trait || '-'}</div>
+                    </div>
+
+                    <div class="stats-section" data-section-id="showlevels">
+                        <div class="stat-item"><b>Level 1</b><span>${spellData.showlevels?.level1 || '-'}</span></div>
+                        <div class="stat-item"><b>Level 2</b><span>${spellData.showlevels?.level2 || '-'}</span></div>
+                        <div class="stat-item"><b>Level 3</b><span>${spellData.showlevels?.level3 || '-'}</span></div>
+                    </div>
+                    
+                    <div class="stats-section" data-section-id="story-section">
+                        <div class="story-content">${spellData.story || '-'}</div>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        } else {
+            // SPELL STRUCTURE (for base spells: Building or Normal)
+            const isBuildingType = data.type === 'Building';
+            
+            const mainStatsHTML = isBuildingType
+                ? `<div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${spellData.stats.health || '0'}</span></div>
+                   <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.lifetime || '-'}</span></div>
+                   <div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damageToCard || '0'}</span></div>
+                   <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${spellData.stats.damageToCastle || '0'}</span></div>
+                   <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${spellData.stats.attackSpeed || '-'}</span></div>
+                   <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.stats.range || '-'}</span></div>
+                   <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${spellData.stats.size || '-'}</span></div>
+                   <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.energy || '0'}</span></div>`
+                : `<div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damageToCard || '0'}</span></div>
+                   <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${spellData.stats.damageToCastle || '0'}</span></div>
+                   <div class="stat-item"><b>Interval <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.timeBetweenDamage || '-'}</span></div>
+                   <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.stats.range || '-'}</span></div>
+                   <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${spellData.stats.size || '-'}</span></div>
+                   <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.energy || '0'}</span></div>`;
+
+            content.innerHTML = `
+                <div class="stripe"></div>
+                <div class="head">
+                    <div class="name">
+                        ${spellData.name || data.name || 'Unknown'}
+                        <span class="badge spell-type-badge spell-type-${data.type.toLowerCase()}">${data.type}</span>
+                    </div>
+                    <span class="badge spell-rarity-badge">${data.rarity}</span>
+                </div>
+
+                <div class="card-tabs">
+                    <button class="active" data-section="spell-main">Stats</button>
+                    <button data-section="spell-treat">Treat</button>
+                    <button data-section="spell-story">Story</button>
+                </div>
+
+                <div class="card-content-area">
+                    <div class="stats-section visible" data-section-id="spell-main">
+                        ${mainStatsHTML}
+                    </div>
+
+                    <div class="stats-section" data-section-id="spell-treat">
+                        <div class="trait trait-center">${data.treat || '-'}</div>
+                    </div>
+
+                    <div class="stats-section" data-section-id="spell-story">
+                        <div class="story-content">${data.story || '-'}</div>
+                    </div>
+                </div>
+            `;
+        }
         
         return content;
     };
@@ -828,11 +891,10 @@ function createSpellCard(data) {
         let currentFormIndex = 0;
         card.classList.add('has-multi-controls');
         
-        const spellContent = createSpellContent(data);
+        const spellContent = createSpellContent(data, false);
         card.appendChild(spellContent);
         setupTabListeners(spellContent);
         
-        // Multi controls (same as cards)
         const multiControls = document.createElement('div');
         multiControls.className = 'evolution-controls';
         
@@ -879,14 +941,17 @@ function createSpellCard(data) {
             
             spellContent.innerHTML = '';
             let formData;
+            let isFormFlag;
             
             if (currentFormIndex === 0) {
                 formData = data;
+                isFormFlag = false;
             } else {
                 formData = data.forms[currentFormIndex - 1];
+                isFormFlag = true;
             }
             
-            const newContent = createSpellContent(formData);
+            const newContent = createSpellContent(formData, isFormFlag);
             spellContent.innerHTML = newContent.innerHTML;
             setupTabListeners(spellContent);
             
@@ -907,7 +972,7 @@ function createSpellCard(data) {
     } 
     // Simple spell (no multi)
     else {
-        const spellContent = createSpellContent(data);
+        const spellContent = createSpellContent(data, false);
         card.appendChild(spellContent);
         setupTabListeners(spellContent);
     }
