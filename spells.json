@@ -326,7 +326,42 @@
       "range": "3500",
       "size": "3x3",
       "energy": "11"
-    }
+    },
+    "isMulti": true,
+    "forms": [
+      {
+        "name": "Fire Dragon",
+        "type": "Summon",
+        "stats": {
+          "health": "450",
+          "lifetime": "25s",
+          "damageToCard": "85",
+          "damageToCastle": "35",
+          "attackSpeed": "1,00s",
+          "range": "2500",
+          "size": "1x1",
+          "energy": "-"
+        },
+        "treat": "Yanma: 3s | Uçan birlik",
+        "story": "Yuvadan çıxan ilk əjdaha — alov nəfəsi ilə düşmənləri yandırır."
+      },
+      {
+        "name": "Shadow Dragon",
+        "type": "Summon",
+        "stats": {
+          "health": "380",
+          "lifetime": "30s",
+          "damageToCard": "95",
+          "damageToCastle": "40",
+          "attackSpeed": "0,85s",
+          "range": "2200",
+          "size": "1x1",
+          "energy": "-"
+        },
+        "treat": "Dondurma: 2s | Görünməzlik: 5s",
+        "story": "İkinci əjdaha — kölgələrdə gizlənərək düşmənlərə sürpriz hücum edir."
+      }
+    ]
   },
   {
     "name": "Obsidian Fortress",
