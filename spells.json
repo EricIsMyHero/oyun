@@ -332,34 +332,66 @@
       {
         "name": "Fire Dragon",
         "type": "Summon",
+        "note": "Aerial/DPS",
         "stats": {
           "health": "450",
-          "lifetime": "25s",
-          "damageToCard": "85",
-          "damageToCastle": "35",
+          "shield": "0",
+          "damage": "85",
+          "sps": "85",
           "attackSpeed": "1,00s",
-          "range": "2500",
-          "size": "1x1",
-          "energy": "-"
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
         },
-        "treat": "Yanma: 3s | Uçan birlik",
-        "story": "Yuvadan çıxan ilk əjdaha — alov nəfəsi ilə düşmənləri yandırır."
+        "trait": "Uçan birlik. Hər hücumda <b>Yanma</b> effekti tətbiq edir (3s, 15 hasar/s).",
+        "additionalStats": {
+          "range": "2500",
+          "speed": "900",
+          "criticalChance": "10%",
+          "criticDamage": "1.8x",
+          "lifestealChance": "0%",
+          "lifesteal": "0%",
+          "damageminimiser": "5%",
+          "dodge": "8%"
+        },
+        "showlevels": {
+          "level1": "+15% Hasar  |  85 » 98",
+          "level2": "+20% Yanma Hasarı  |  15/s » 18/s",
+          "level3": "+5% Kritik Şans  |  10% » 15%"
+        },
+        "story": "Yuvadan çıxan ilk əjdaha — alov nəfəsi ilə düşmənləri yandırır. Göylərdə sərbəst uçaraq qarşısına çıxan hər şeyi məhv edir."
       },
       {
         "name": "Shadow Dragon",
         "type": "Summon",
+        "note": "Stealth/Control",
         "stats": {
           "health": "380",
-          "lifetime": "30s",
-          "damageToCard": "95",
-          "damageToCastle": "40",
+          "shield": "50",
+          "damage": "95",
+          "sps": "112",
           "attackSpeed": "0,85s",
-          "range": "2200",
-          "size": "1x1",
-          "energy": "-"
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
         },
-        "treat": "Dondurma: 2s | Görünməzlik: 5s",
-        "story": "İkinci əjdaha — kölgələrdə gizlənərək düşmənlərə sürpriz hücum edir."
+        "trait": "İlk 5 saniyə <b>görünməz</b>dir. Hücumlarında 30% şansla <b>Dondurma</b> (2s).",
+        "additionalStats": {
+          "range": "2200",
+          "speed": "1100",
+          "criticalChance": "15%",
+          "criticDamage": "2.0x",
+          "lifestealChance": "10%",
+          "lifesteal": "25%",
+          "damageminimiser": "10%",
+          "dodge": "20%"
+        },
+        "showlevels": {
+          "level1": "+10% Dondurma Şansı  |  30% » 40%",
+          "level2": "+100 Can  |  380 » 480",
+          "level3": "+2s Görünməzlik  |  5s » 7s"
+        },
+        "story": "İkinci əjdaha — kölgələrdə gizlənərək düşmənlərə sürpriz hücum edir. Onun qaranlıq gücü heç kimi sağ buraxmır."
       }
     ]
   },
