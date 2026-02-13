@@ -307,11 +307,11 @@
       "dodge": "0%"
    },
     "showlevels": {
-      "level1": "+50% Öz. Menzil  |  20,000 » 30,000",
-      "level2": "+10% Qalxan  |  90 » 99",
-      "level3": "+5% Menzil  |  1000 » 1050"
+      "level1": "+50% Ability Range  |  20,000 » 30,000",
+      "level2": "+10% Shield  |  90 » 99",
+      "level3": "+5% Range  |  1000 » 1050"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "Blocker is the heart of Mission 1. This 30-year-old Black man carries a heavy riot shield to deflect every incoming threat. While others focus on the gravity of war, his good-natured humor keeps the squad's spirits high. He is the funniest member of the group, often cracking jokes in the heat of battle. Behind his smile lies a relentless wall of defense. He stands firm against any impact, ensuring his friends remain safe. To him, protecting the team is a duty he performs with a grin."
   },
   {
     "name": "Fen",
@@ -622,7 +622,7 @@
     "showlevels": {
       "level1": "+3% Range  |  4000 » 4120",
       "level2": "+10% Shield  |  120 » 132",
-      "level3": "+33% Trait DMG Bonus  |  33% » 66%"
+      "level3": "+33% Ability DMG Bonus  |  33% » 66%"
       },
     "story": "Soldier did not watch the war from the outside since he was a child, he wanted to experience it. This young man, who dreamed of following his father into the battlefields, turned his dream into a responsibility over time. Although he is only 25 years old, his combat experience is heavier than his age. He stands on the front line with an M16A4 rifle, and his decisions determine the fate of those behind him. Mission 1 is not his first mission - it is the first mission he has been responsible for as a leader."
   },
