@@ -865,11 +865,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Kritik Şansı  |  5% » 10%",
-      "level2": "+20% Qalxan  |  60 » 72",
-      "level3": "+5% Menzil  |  1200 » 1260"
+      "level1": "+5% Critical Chance  |  5% » 10%",
+      "level2": "+20% Shield  |  60 » 72",
+      "level3": "+5% Range  |  1200 » 1260"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "Aegis Guard is a masterpiece of Bethe’s mechanical genius. This autonomous protector operates without a human pilot, relying on complex algorithms to identify incoming threats. While Soldier leads the team, Aegis Guard stands as an unbreakable wall between the squad and certain death. Its primary protocol is the preservation of Mission 1 members at any cost. It does not feel fear or fatigue. Every movement serves a single purpose: to ensure that the team lives to see the next sunrise."
   },
   {
     "name": "Ironjaw",
