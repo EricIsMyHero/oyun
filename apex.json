@@ -2,7 +2,7 @@
   {
     "name": "Aza",
     "type": ["İnsan"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -37,7 +37,7 @@
   {
     "name": "Flag",
     "type": ["-"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -72,7 +72,7 @@
   {
     "name": "Untouch",
     "type": ["Uzaylı"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -107,7 +107,7 @@
   {
     "name": "Lover",
     "type": ["İnsan"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -142,7 +142,7 @@
   {
     "name": "R-1",
     "type": ["Robot"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -177,7 +177,7 @@
   {
     "name": "Blank",
     "type": ["Uzaylı"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -212,7 +212,7 @@
   {
     "name": "Magmara",
     "type": ["Uzaylı"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -247,7 +247,7 @@
   {
     "name": "Willowshade",
     "type": ["İnsan"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -282,7 +282,7 @@
   {
     "name": "Octopus",
     "type": ["Heyvan"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -317,7 +317,7 @@
   {
     "name": "Collector",
     "type": ["Robot"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -352,7 +352,7 @@
   {
     "name": "Sushu",
     "type": ["Ruh"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -387,7 +387,7 @@
   {
     "name": "Umbra",
     "type": ["Varlıq"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -422,7 +422,7 @@
   {
     "name": "Thief",
     "type": ["İnsan"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -457,7 +457,7 @@
   {
     "name": "Zomboids",
     "type": ["Ölü"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -492,7 +492,7 @@
   {
     "name": "Mini zombies",
     "type": ["Ölü"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -527,7 +527,7 @@
   {
     "name": "Stormblade",
     "type": ["İnsan"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -562,7 +562,7 @@
   {
     "name": "Venom Fangs",
     "type": ["Varlıq"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -597,7 +597,7 @@
   {
     "name": "Skyhunter",
     "type": ["İnsan"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -632,7 +632,7 @@
   {
     "name": "Rockback",
     "type": ["Heyvan"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -667,7 +667,7 @@
   {
     "name": "Neon Droid",
     "type": ["Robot"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -702,7 +702,7 @@
   {
     "name": "Void Wraith",
     "type": ["Ruh"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -737,7 +737,7 @@
   {
     "name": "Bio Mech",
     "type": ["Robot"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
@@ -772,7 +772,7 @@
   {
     "name": "Whisper",
     "type": ["Ruh"],
-    "rarity": "Arcane",
+    "rarity": "Apex",
     "note": "-",
     "isHybrid": false,
     "isMulti": false,
