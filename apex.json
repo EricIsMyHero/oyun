@@ -1,72 +1,807 @@
 [
   {
-    "name": "Hamm",
-    "type": ["Heyvan"],
-    "rarity": "Apex",
-    "note": "Tank",
+    "name": "Aza",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": 7,
-      "shield": 0,
-      "damage": 25,
-      "sps": 23,
-      "attackSpeed": "1,10s",
+      "health": "240",
+      "shield": "80",
+      "damage": "26",
+      "sps": "17",
+      "attackSpeed": "1,50",
       "delay": "-",
-      "mana": 3,
-      "number": 1
+      "mana": "11",
+      "number": "1"
     },
-    "trait": "<b>-12%</b> daha az hasar alar, <b>+20%</b> Hasar bonusu verər.",
+    "trait": "Qalxanı qırılana qədər ətrafındakı kartlara +10% Hasar bonusu, Qalxanı qırıldıqda olduğu yerə \"Flag\" buraxar",
     "additionalStats": {
-      "range": 1000,
-      "speed": 1800,
-      "criticalChance": "5%",
+      "range": "1,300",
+      "speed": "1,000",
+      "criticalChance": "25%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
-      "level1": "+5% Can  |  50 » 55",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
   },
   {
-    "name": "M-M",
-    "type": ["Robot"],
-    "rarity": "Apex",
-    "note": "Tank",
+    "name": "Flag",
+    "type": ["-"],
+    "rarity": "Arcane",
+    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": 110,
-      "shield": 20,
-      "damage": 5,
-      "sps": 11,
-      "attackSpeed": "0,95s",
+      "health": "80",
+      "shield": "-",
+      "damage": "-",
+      "sps": "-",
+      "attackSpeed": "-",
       "delay": "-",
-      "mana": 10,
-      "number": 1
+      "mana": "-",
+      "number": "1"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "trait": "4x4 yaxındakı kartlara +10% Saldırı Hızı bonusu",
     "additionalStats": {
-      "range": 1000,
-      "speed": 950,
+      "range": "-",
+      "speed": "-",
+      "criticalChance": "-",
+      "criticDamage": "1.5x",
+      "lifestealChance": "-",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Untouch",
+    "type": ["Uzaylı"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "320",
+      "shield": "0",
+      "damage": "56",
+      "sps": "40",
+      "attackSpeed": "1,40",
+      "delay": "-",
+      "mana": "18",
+      "number": "1"
+    },
+    "trait": "Canı hər 20% azaldıqda 3 saniyəlik ölümsüz olar və ilk vuruşu ekstra +200% Hasar verər",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
-      "level1": "+5% Can",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
-     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Lover",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "60",
+      "shield": "60",
+      "damage": "6",
+      "sps": "5",
+      "attackSpeed": "1,25",
+      "delay": "-",
+      "mana": "8",
+      "number": "1"
+    },
+    "trait": "Hər 40 saniyədə qarşıdakı rəqibi öz tərəfinə çəkər",
+    "additionalStats": {
+      "range": "6,000",
+      "speed": "0,900",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "R-1",
+    "type": ["Robot"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "390",
+      "shield": "180",
+      "damage": "3x70",
+      "sps": "88",
+      "attackSpeed": "0,80",
+      "delay": "9,00",
+      "mana": "16",
+      "number": "1"
+    },
+    "trait": "Atışları qalxandan keçər, \"İnsan\" tipli kartlara -50% daha az hasar verər",
+    "additionalStats": {
+      "range": "2,300",
+      "speed": "0,800",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Blank",
+    "type": ["Uzaylı"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "100",
+      "shield": "200",
+      "damage": "5x40",
+      "sps": "80",
+      "attackSpeed": "0,50",
+      "delay": "2,50",
+      "mana": "18",
+      "number": "1"
+    },
+    "trait": "Hər rəqib kart öldürdükdə +1 Hasar bonusu (Max: 5)",
+    "additionalStats": {
+      "range": "3,800",
+      "speed": "1,000",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Magmara",
+    "type": ["Uzaylı"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "350",
+      "shield": "150",
+      "damage": "40",
+      "sps": "25",
+      "attackSpeed": "1,60",
+      "delay": "-",
+      "mana": "16",
+      "number": "1"
+    },
+    "trait": "Rəqib kartlara ekstra 3x10 Yanma Hasarı verər",
+    "additionalStats": {
+      "range": "1,100",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Willowshade",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "150",
+      "shield": "50",
+      "damage": "25",
+      "sps": "25",
+      "attackSpeed": "1,00",
+      "delay": "-",
+      "mana": "9",
+      "number": "1"
+    },
+    "trait": "Vuruşları qalxandan keçər, öləndə \"Octopus\"-a dönüşər",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Octopus",
+    "type": ["Heyvan"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "75",
+      "shield": "0",
+      "damage": "15",
+      "sps": "12",
+      "attackSpeed": "1,30",
+      "delay": "-",
+      "mana": "-",
+      "number": "1"
+    },
+    "trait": "Ölən zaman olduğu yerə 3x5 Zəhər hasarı verər",
+    "additionalStats": {
+      "range": "1,100",
+      "speed": "0,900",
+      "criticalChance": "-",
+      "criticDamage": "1.5x",
+      "lifestealChance": "-",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Collector",
+    "type": ["Robot"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "100",
+      "shield": "100",
+      "damage": "60",
+      "sps": "40",
+      "attackSpeed": "1,50",
+      "delay": "-",
+      "mana": "16",
+      "number": "1"
+    },
+    "trait": "Öldürdüyü hər rəqib kart üçün +2 Mana qazanar",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Sushu",
+    "type": ["Ruh"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "30",
+      "shield": "0",
+      "damage": "8",
+      "sps": "8",
+      "attackSpeed": "1,00",
+      "delay": "-",
+      "mana": "5",
+      "number": "1"
+    },
+    "trait": "Görünməz olar, rəqibin içinə girərək öləndə qədər hasar verər",
+    "additionalStats": {
+      "range": "0,800",
+      "speed": "1,100",
+      "criticalChance": "-",
+      "criticDamage": "1.5x",
+      "lifestealChance": "-",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Umbra",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "140",
+      "shield": "40",
+      "damage": "2x25",
+      "sps": "50",
+      "attackSpeed": "0,25",
+      "delay": "0,50",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "Canı 75% olduqda 3 saniyəlik görünməz olar, 50% olduqda 7,500 Karo geriyə gedər",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Thief",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "180",
+      "shield": "30",
+      "damage": "12",
+      "sps": "12",
+      "attackSpeed": "1,00",
+      "delay": "-",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "15,000 Karo qabaqdakı ilk rəqibin özəlliyini oğurlayar",
+    "additionalStats": {
+      "range": "1,000 / 2,500",
+      "speed": "1,000",
+      "criticalChance": "35%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Zomboids",
+    "type": ["Ölü"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "70",
+      "shield": "140",
+      "damage": "20",
+      "sps": "20",
+      "attackSpeed": "1,00",
+      "delay": "-",
+      "mana": "9",
+      "number": "3"
+    },
+    "trait": "Hər ölən rəqib kart üçün +5% Hasar bonusu",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "10%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "10%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Mini zombies",
+    "type": ["Ölü"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "30",
+      "shield": "60",
+      "damage": "10",
+      "sps": "10",
+      "attackSpeed": "1,00",
+      "delay": "-",
+      "mana": "-",
+      "number": "2"
+    },
+    "trait": "45 saniyə ərzində Zomboidsa çevrilər",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "-",
+      "criticDamage": "1.5x",
+      "lifestealChance": "-",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Stormblade",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "160",
+      "shield": "40",
+      "damage": "26",
+      "sps": "33",
+      "attackSpeed": "0,80",
+      "delay": "-",
+      "mana": "11",
+      "number": "1"
+    },
+    "trait": "Hasarı yaxındakı rəqiblərə sıçrayar",
+    "additionalStats": {
+      "range": "2,600",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Venom Fangs",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "60",
+      "shield": "240",
+      "damage": "12",
+      "sps": "9",
+      "attackSpeed": "1,30",
+      "delay": "-",
+      "mana": "9",
+      "number": "2"
+    },
+    "trait": "Vuruşları ekstra 3x1 hasar verər və rəqib kartdan +0,5% Kritik Şansı oğurlayar",
+    "additionalStats": {
+      "range": "1,000",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Skyhunter",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "180",
+      "shield": "50",
+      "damage": "22",
+      "sps": "31",
+      "attackSpeed": "0,70",
+      "delay": "-",
+      "mana": "11",
+      "number": "1"
+    },
+    "trait": "Uçan kartlara +27% Hasar bonusu",
+    "additionalStats": {
+      "range": "1,500",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Rockback",
+    "type": ["Heyvan"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "140",
+      "shield": "180",
+      "damage": "2x16",
+      "sps": "53",
+      "attackSpeed": "0,30",
+      "delay": "1,2",
+      "mana": "13",
+      "number": "1"
+    },
+    "trait": "Qalxanı qırıldıqdan sonra 6 saniyə ərzində hər atış +10 Qalxan qazanar",
+    "additionalStats": {
+      "range": "1,200",
+      "speed": "0,900",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Neon Droid",
+    "type": ["Robot"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "200",
+      "shield": "40",
+      "damage": "16",
+      "sps": "16",
+      "attackSpeed": "1,00",
+      "delay": "-",
+      "mana": "10",
+      "number": "1"
+    },
+    "trait": "Hasar verdikcə 3 saniyəlik +15% Saldırı Hızı qazanar",
+    "additionalStats": {
+      "range": "2,500",
+      "speed": "1,050",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Void Wraith",
+    "type": ["Ruh"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "150",
+      "shield": "30",
+      "damage": "4x12",
+      "sps": "30",
+      "attackSpeed": "0,40",
+      "delay": "0,9",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "İlk 32 saniyə +50% Hız bonusu qazanar",
+    "additionalStats": {
+      "range": "1,800",
+      "speed": "0,950",
+      "criticalChance": "10%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Bio Mech",
+    "type": ["Robot"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "220",
+      "shield": "60",
+      "damage": "60",
+      "sps": "75",
+      "attackSpeed": "0,80",
+      "delay": "-",
+      "mana": "18",
+      "number": "1"
+    },
+    "trait": "Hər hasar aldıqda ətrafdakı kartlar +1% Qalxan qazanar",
+    "additionalStats": {
+      "range": "2,000",
+      "speed": "0,950",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  },
+  {
+    "name": "Whisper",
+    "type": ["Ruh"],
+    "rarity": "Arcane",
+    "note": "-",
+    "isHybrid": false,
+    "isMulti": false,
+    "stats": {
+      "health": "100",
+      "shield": "0",
+      "damage": "6x8",
+      "sps": "48",
+      "attackSpeed": "0,15",
+      "delay": "0,50",
+      "mana": "5",
+      "number": "1"
+    },
+    "trait": "3x3 Yaxınında ölən kartların canlarının 60%-ni özünə qatar",
+    "additionalStats": {
+      "range": "1,750",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
   }
 ]
