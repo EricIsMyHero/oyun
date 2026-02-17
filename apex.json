@@ -4,8 +4,7 @@
     "type": ["İnsan"],
     "rarity": "Apex",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "isMulti": true,
     "stats": {
       "health": "240",
       "shield": "80",
