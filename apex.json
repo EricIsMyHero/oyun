@@ -38,8 +38,6 @@
     "type": ["-"],
     "rarity": "Apex",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
       "health": "80",
       "shield": "-",
