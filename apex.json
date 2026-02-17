@@ -32,9 +32,9 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
-  },
-  {
+    "story": "-",
+  "forms": [
+    {
     "name": "Flag",
     "type": ["-"],
     "rarity": "Apex",
