@@ -248,8 +248,7 @@
     "type": ["İnsan"],
     "rarity": "Apex",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "isMulti": true,
     "stats": {
       "health": "150",
       "shield": "50",
@@ -460,8 +459,7 @@
     "type": ["Ölü"],
     "rarity": "Apex",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "isMulti": true,
     "stats": {
       "health": "70",
       "shield": "140",
