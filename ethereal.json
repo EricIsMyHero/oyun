@@ -6,6 +6,7 @@
     "note": "Tank",
     "isHybrid": false,
     "isMulti": false,
+    "isDual": false,
     "stats": {
       "health": 7,
       "shield": 0,
@@ -26,12 +27,12 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Can  |  50 » 55",
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
-      },
+    },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
   },
   {
@@ -41,6 +42,7 @@
     "note": "Tank",
     "isHybrid": false,
     "isMulti": false,
+    "isDual": false,
     "stats": {
       "health": 110,
       "shield": 20,
@@ -61,12 +63,114 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Can",
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
     },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+  },
+  {
+    "name": "King",
+    "type": ["İnsan"],
+    "rarity": "Ethereal",
+    "note": "Support",
+    "isHybrid": false,
+    "isMulti": false,
+    "isDual": true,
+    "stats": {
+      "health": 80,
+      "shield": 10,
+      "damage": 15,
+      "sps": 18,
+      "attackSpeed": "1,20s",
+      "delay": "-",
+      "mana": 8,
+      "number": 1
+    },
+    "trait": "Hər <b>5</b> saniyədə dost kartlara <b>+15</b> Can verər.",
+    "additionalStats": {
+      "range": 1200,
+      "speed": 1400,
+      "criticalChance": "3%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "0%",
+      "damageminimiser": "5%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+5% Can  |  80 » 84",
+      "level2": "+8% Heal Miqdarı",
+      "level3": "+10% Heal Sürəti"
+    },
+    "story": "King, öz xalqını hər şeyə qarşı qorumaq üçün yaşayır. Onun ruhunun gücü savaş meydanında hiss olunur.",
+    "secondMode": {
+      "name": "King",
+      "note": "Summoner",
+      "type": ["İnsan"],
+      "stats": {
+        "health": 80,
+        "shield": 10,
+        "damage": 20,
+        "sps": 22,
+        "attackSpeed": "1,00s",
+        "delay": "2,00s",
+        "mana": 12,
+        "number": 1
+      },
+      "trait": "Aktivasiya olduqda <b>4</b> Gardiyan çağırır. Hər Gardiyan <b>+8</b> Hasar verir.",
+      "additionalStats": {
+        "range": 900,
+        "speed": 1400,
+        "criticalChance": "3%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "0%",
+        "damageminimiser": "5%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "+5% Can  |  80 » 84",
+        "level2": "+1 Əlavə Gardiyan",
+        "level3": "+15% Gardiyan Hasarı"
+      },
+      "story": "Taxtını itirəndə King'in içindəki qaranlıq oyanır. O artıq sağaltmır — qisas alır.",
+      "forms": [
+        {
+          "name": "King — Gardiyan II",
+          "note": "Elite Summoner",
+          "type": ["İnsan"],
+          "stats": {
+            "health": 95,
+            "shield": 15,
+            "damage": 28,
+            "sps": 30,
+            "attackSpeed": "0,90s",
+            "delay": "1,50s",
+            "mana": 15,
+            "number": 1
+          },
+          "trait": "Aktivasiya olduqda <b>4</b> Elite Gardiyan çağırır. Hər Elite Gardiyan <b>+15</b> Hasar verir.",
+          "additionalStats": {
+            "range": 900,
+            "speed": 1400,
+            "criticalChance": "5%",
+            "criticDamage": "1.75x",
+            "lifestealChance": "0%",
+            "lifesteal": "0%",
+            "damageminimiser": "10%",
+            "dodge": "5%"
+          },
+          "showlevels": {
+            "level1": "+5% Can  |  95 » 100",
+            "level2": "+2 Əlavə Elite Gardiyan",
+            "level3": "+20% Gardiyan Hasarı"
+          },
+          "story": "Gardiyanlar evolyusiya keçirdi. Artıq onlar sıradan mühafizəçi deyil — ölüm mələkləridir."
+        }
+      ]
+    }
   }
 ]
