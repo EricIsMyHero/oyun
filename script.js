@@ -152,11 +152,6 @@ function createCardElement(data) {
             progressBar.appendChild(dot);
         });
         
-        // Form info
-        const formInfo = document.createElement('span');
-        formInfo.className = 'stage-info';
-        formInfo.textContent = data.name;
-        
         // Sağ ox
         const rightArrow = document.createElement('button');
         rightArrow.className = 'evolution-arrow';
@@ -164,7 +159,6 @@ function createCardElement(data) {
         
         multiControls.appendChild(leftArrow);
         multiControls.appendChild(progressBar);
-        multiControls.appendChild(formInfo);
         multiControls.appendChild(rightArrow);
         
         // Ox click event
@@ -916,17 +910,12 @@ function createSpellCard(data) {
             progressBar.appendChild(dot);
         });
         
-        const formInfo = document.createElement('span');
-        formInfo.className = 'stage-info';
-        formInfo.textContent = data.name;
-        
         const rightArrow = document.createElement('button');
         rightArrow.className = 'evolution-arrow';
         rightArrow.innerHTML = '▶';
         
         multiControls.appendChild(leftArrow);
         multiControls.appendChild(progressBar);
-        multiControls.appendChild(formInfo);
         multiControls.appendChild(rightArrow);
         
         const updateForm = (newIndex) => {
@@ -954,8 +943,6 @@ function createSpellCard(data) {
             const newContent = createSpellContent(formData, isFormFlag);
             spellContent.innerHTML = newContent.innerHTML;
             setupTabListeners(spellContent);
-            
-            formInfo.textContent = formData.name || data.name;
         };
         
         leftArrow.addEventListener('click', (e) => {
