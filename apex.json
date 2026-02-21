@@ -276,9 +276,9 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
-  },
-  {
+    "story": "-",
+  "forms": [
+    {
     "name": "Octopus",
     "type": ["Heyvan"],
     "rarity": "Apex",
@@ -312,7 +312,9 @@
       "level3": "-"
     },
     "story": "-"
-  },
+  }
+  ]
+},
   {
     "name": "Collector",
     "type": ["Robot"],
@@ -486,9 +488,9 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
-  },
-  {
+    "story": "-",
+  "forms": [
+    {
     "name": "Mini zombies",
     "type": ["Ölü"],
     "rarity": "Apex",
@@ -522,7 +524,9 @@
       "level3": "-"
     },
     "story": "-"
-  },
+  }
+  ]
+},
   {
     "name": "Stormblade",
     "type": ["İnsan"],
