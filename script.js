@@ -302,6 +302,146 @@ function createCardElement(data) {
         setupCardListeners(singleCard);
     }
 
+    // ETHEREAL DUAL MODE DÜYMƏSİ
+    if (data.rarity.toLowerCase() === 'ethereal' && data.isDual && data.secondMode) {
+        let isDualActive = false;
+        let dualFormIndex = 0;
+
+        const dualButton = document.createElement('button');
+        dualButton.className = 'dual-mode-button';
+        dualButton.title = 'İkinci Tipə Keçid';
+        cardContainer.appendChild(dualButton);
+
+        let dualMultiControls = null;
+        let dualLeftArrow = null;
+        let dualRightArrow = null;
+        let dualProgressBar = null;
+
+        const getCardFrontElement = () => {
+            return cardContainer.querySelector('.card-front') ||
+                   cardContainer.querySelector('.card-single');
+        };
+
+        const setupCurrentListeners = (frontEl) => {
+            setupCardListeners(frontEl);
+        };
+
+        const renderDualContent = (formIndex) => {
+            const frontEl = getCardFrontElement();
+            if (!frontEl) return;
+            const sm = data.secondMode;
+            let contentData;
+            if (formIndex === 0) {
+                contentData = {
+                    name: sm.name || data.name,
+                    note: sm.note || data.note || '',
+                    type: sm.type || data.type,
+                    rarity: data.rarity,
+                    stats: sm.stats,
+                    trait: sm.trait,
+                    additionalStats: sm.additionalStats,
+                    showlevels: sm.showlevels,
+                    story: sm.story
+                };
+            } else {
+                const formData = sm.forms[formIndex - 1];
+                contentData = {
+                    name: formData.name || sm.name || data.name,
+                    note: formData.note || sm.note || '',
+                    type: formData.type || sm.type || data.type,
+                    rarity: data.rarity,
+                    stats: formData.stats || sm.stats,
+                    trait: formData.trait || sm.trait,
+                    additionalStats: formData.additionalStats || sm.additionalStats,
+                    showlevels: formData.showlevels || sm.showlevels,
+                    story: formData.story || sm.story
+                };
+            }
+            frontEl.innerHTML = '';
+            const newContent = createCardContent(contentData);
+            frontEl.innerHTML = newContent.innerHTML;
+            setupCurrentListeners(frontEl);
+            if (dualProgressBar) {
+                dualProgressBar.querySelectorAll('.progress-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === formIndex);
+                });
+            }
+            if (dualLeftArrow) dualLeftArrow.disabled = formIndex === 0;
+            if (dualRightArrow) dualRightArrow.disabled = formIndex === (sm.forms ? sm.forms.length : 0);
+        };
+
+        const buildDualMultiControls = () => {
+            const sm = data.secondMode;
+            if (!sm.forms || sm.forms.length === 0) return;
+            dualMultiControls = document.createElement('div');
+            dualMultiControls.className = 'evolution-controls dual-multi-controls hidden';
+            dualLeftArrow = document.createElement('button');
+            dualLeftArrow.className = 'evolution-arrow';
+            dualLeftArrow.innerHTML = '&#9664;';
+            dualLeftArrow.disabled = true;
+            dualProgressBar = document.createElement('div');
+            dualProgressBar.className = 'evolution-progress';
+            const mainDot = document.createElement('span');
+            mainDot.className = 'progress-dot active';
+            dualProgressBar.appendChild(mainDot);
+            sm.forms.forEach(() => {
+                const dot = document.createElement('span');
+                dot.className = 'progress-dot';
+                dualProgressBar.appendChild(dot);
+            });
+            dualRightArrow = document.createElement('button');
+            dualRightArrow.className = 'evolution-arrow';
+            dualRightArrow.innerHTML = '&#9654;';
+            dualMultiControls.appendChild(dualLeftArrow);
+            dualMultiControls.appendChild(dualProgressBar);
+            dualMultiControls.appendChild(dualRightArrow);
+            dualLeftArrow.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (dualFormIndex > 0) { dualFormIndex--; renderDualContent(dualFormIndex); }
+            });
+            dualRightArrow.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (dualFormIndex < sm.forms.length) { dualFormIndex++; renderDualContent(dualFormIndex); }
+            });
+            cardContainer.appendChild(dualMultiControls);
+        };
+
+        buildDualMultiControls();
+
+        const firstModeControls = cardContainer.querySelector('.evolution-controls:not(.dual-multi-controls)');
+
+        dualButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isDualActive = !isDualActive;
+            if (isDualActive) {
+                dualFormIndex = 0;
+                cardContainer.classList.add('dual-active');
+                if (firstModeControls) firstModeControls.style.display = 'none';
+                if (dualMultiControls) dualMultiControls.classList.remove('hidden');
+                renderDualContent(0);
+            } else {
+                cardContainer.classList.remove('dual-active');
+                if (firstModeControls) firstModeControls.style.display = '';
+                if (dualMultiControls) dualMultiControls.classList.add('hidden');
+                const frontEl = getCardFrontElement();
+                if (frontEl) {
+                    frontEl.innerHTML = '';
+                    const newContent = createCardContent(data);
+                    frontEl.innerHTML = newContent.innerHTML;
+                    setupCurrentListeners(frontEl);
+                    if (firstModeControls) {
+                        firstModeControls.querySelectorAll('.progress-dot').forEach((dot, i) => {
+                            dot.classList.toggle('active', i === 0);
+                        });
+                        const arrows = firstModeControls.querySelectorAll('.evolution-arrow');
+                        if (arrows[0]) arrows[0].disabled = true;
+                        if (arrows[1]) arrows[1].disabled = (data.forms && data.forms.length === 0);
+                    }
+                }
+            }
+        });
+    }
+
     if (data.rarity.toLowerCase() === 'ethereal') {
         const glowDiv = document.createElement('div');
         glowDiv.className = 'card-glow';
