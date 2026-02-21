@@ -785,3 +785,56 @@ body, .wrap {
 .spell-card.has-multi-controls {
   padding-bottom: 50px;
 }
+
+/* ETHEREAL DUAL MODE DÜYMƏSİ */
+.dual-mode-button {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 20;
+  background: linear-gradient(135deg, #b026ff, #6a0dad);
+  border: 1px solid rgba(176, 38, 255, 0.6);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 12px rgba(176, 38, 255, 0.5);
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+}
+
+.dual-mode-button::before {
+  content: 'II';
+  font-size: 12px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.dual-mode-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(176, 38, 255, 0.8);
+  background: linear-gradient(135deg, #cc44ff, #8800cc);
+}
+
+.card-container.dual-active .dual-mode-button {
+  background: linear-gradient(135deg, #ff6eb0, #b026ff);
+  box-shadow: 0 0 14px rgba(255, 110, 176, 0.7);
+}
+
+.card-container.dual-active .dual-mode-button::before {
+  content: 'I';
+  letter-spacing: 0;
+}
+
+.dual-multi-controls.hidden {
+  display: none;
+}
+
+.dual-multi-controls {
+  display: flex;
+}
