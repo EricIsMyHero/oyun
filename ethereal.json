@@ -33,6 +33,42 @@
       "level3": "+10% Heal Sürəti"
     },
     "story": "King, öz xalqını hər şeyə qarşı qorumaq üçün yaşayır. Onun ruhunun gücü savaş meydanında hiss olunur.",
+  "forms": [
+    {
+    "name": "Flag",
+    "type": ["-"],
+    "rarity": "Apex",
+    "note": "-",
+    "stats": {
+      "health": "80",
+      "shield": "-",
+      "damage": "-",
+      "sps": "-",
+      "attackSpeed": "-",
+      "delay": "-",
+      "mana": "-",
+      "number": "1"
+    },
+    "trait": "4x4 yaxındakı kartlara +10% Saldırı Hızı bonusu",
+    "additionalStats": {
+      "range": "-",
+      "speed": "-",
+      "criticalChance": "-",
+      "criticDamage": "1.5x",
+      "lifestealChance": "-",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
+  }
+  ]
+},
     "secondMode": {
       "name": "King",
       "note": "Summoner",
