@@ -1,28 +1,28 @@
 [
   {
+    "name": "King",
+    "note": "Summoner",
+    "type": ["İnsan"],
+    "rarity": "Ethereal",
+    "isDual": true,
+    "type1": {
       "name": "King",
       "note": "Summoner",
       "type": ["İnsan"],
-      "rarity": "Ethereal",
-      "isDual": true,
-     "type1": {
-       "name": "King",
-      "note": "Summoner",
-      "type": ["İnsan"]
       "stats": {
-        "health": 80,
-        "shield": 10,
-        "damage": 20,
-        "sps": 22,
+        "health": "80",
+        "shield": "10",
+        "damage": "20",
+        "sps": "22",
         "attackSpeed": "1,00s",
         "delay": "2,00s",
-        "mana": 12,
-        "number": 1
+        "mana": "12",
+        "number": "1"
       },
       "trait": "Aktivasiya olduqda <b>4</b> Gardiyan çağırır. Hər Gardiyan <b>+8</b> Hasar verir.",
       "additionalStats": {
-        "range": 900,
-        "speed": 1400,
+        "range": "900",
+        "speed": "1400",
         "criticalChance": "3%",
         "criticDamage": "1.5x",
         "lifestealChance": "0%",
@@ -35,26 +35,27 @@
         "level2": "+1 Əlavə Gardiyan",
         "level3": "+15% Gardiyan Hasarı"
       },
-      "story": "Taxtını itirəndə King'in içindəki qaranlıq oyanır. O artıq sağaltmır — qisas alır." },
-      "type2": {
-        "name": "King",
-        "note": "Summoner",
-        "type": ["İnsan"],
-        "isMulti": true,
-        "stats": {
-        "health": 80,
-        "shield": 10,
-        "damage": 20,
-        "sps": 22,
+      "story": "Taxtını itirəndə King'in içindəki qaranlıq oyanır. O artıq sağaltmır — qisas alır."
+    },
+    "type2": {
+      "name": "King",
+      "note": "Summoner",
+      "type": ["İnsan"],
+      "isMulti": true,
+      "stats": {
+        "health": "80",
+        "shield": "10",
+        "damage": "20",
+        "sps": "22",
         "attackSpeed": "1,00s",
         "delay": "2,00s",
-        "mana": 12,
-        "number": 1
+        "mana": "12",
+        "number": "1"
       },
       "trait": "Aktivasiya olduqda <b>4</b> Gardiyan çağırır. Hər Gardiyan <b>+8</b> Hasar verir.",
       "additionalStats": {
-        "range": 900,
-        "speed": 1400,
+        "range": "900",
+        "speed": "1400",
         "criticalChance": "3%",
         "criticDamage": "1.5x",
         "lifestealChance": "0%",
@@ -74,19 +75,19 @@
           "note": "Elite Summoner",
           "type": ["İnsan"],
           "stats": {
-            "health": 95,
-            "shield": 15,
-            "damage": 28,
-            "sps": 30,
+            "health": "95",
+            "shield": "15",
+            "damage": "28",
+            "sps": "30",
             "attackSpeed": "0,90s",
             "delay": "1,50s",
-            "mana": 15,
-            "number": 1
+            "mana": "15",
+            "number": "1"
           },
           "trait": "Aktivasiya olduqda <b>4</b> Elite Gardiyan çağırır. Hər Elite Gardiyan <b>+15</b> Hasar verir.",
           "additionalStats": {
-            "range": 900,
-            "speed": 1400,
+            "range": "900",
+            "speed": "1400",
             "criticalChance": "5%",
             "criticDamage": "1.75x",
             "lifestealChance": "0%",
@@ -113,19 +114,19 @@
     "isMulti": false,
     "isDual": false,
     "stats": {
-      "health": 110,
-      "shield": 20,
-      "damage": 5,
-      "sps": 11,
-      "attackSpeed": "0,95s",
-      "delay": "-",
-      "mana": 10,
-      "number": 1
+      "health": "95",
+      "shield": "15",
+      "damage": "28",
+      "sps": "30",
+      "attackSpeed": "0,90s",
+      "delay": "1,50s",
+      "mana": "15",
+      "number": "1"
     },
     "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
     "additionalStats": {
-      "range": 1000,
-      "speed": 950,
+      "range": "1000",
+      "speed": "950",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
