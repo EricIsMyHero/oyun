@@ -5,7 +5,7 @@ const showCardsBtn = document.getElementById('show-cards-btn');
 const backToMenuBtn = document.getElementById('back-to-menu-btn');
 const filterButtons = document.querySelectorAll('.controls button');
 const cardsContainer = document.getElementById('cards');
-const searchInput = document.getElementById('search-input'); 
+const searchInput = document.getElementById('search-input');
 
 // Info düyməsi funksionallığı
 const showInfoBtn = document.getElementById('show-info-btn');
@@ -39,9 +39,9 @@ function showMenu() {
     if (spellsSection) spellsSection.classList.add('hidden');
     if (infoSection) infoSection.classList.add('hidden');
     if (cardsSection.classList.contains('team-mode-active')) {
-         cardsSection.classList.remove('team-mode-active');
-         if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
-         toggleCardButtons(false);
+        cardsSection.classList.remove('team-mode-active');
+        if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
+        toggleCardButtons(false);
     }
 }
 
@@ -70,378 +70,224 @@ function toggleCardButtons(isVisible) {
 function createCardElement(data) {
     const cardContainer = document.createElement('article');
     cardContainer.className = `card-container card r-${data.rarity.toLowerCase()}`;
-    
+
     // TEAM BUILDER DÜYMƏSİ
     const buttonsContainer = document.createElement('div');
-    buttonsContainer.className = 'card-buttons-container'; 
-    
+    buttonsContainer.className = 'card-buttons-container';
+
     const addButton = document.createElement('button');
     addButton.className = 'add-to-team-btn hidden-team-btn action-button';
     addButton.textContent = '+ Team';
     addButton.title = 'Komandaya Əlavə Et';
     addButton.dataset.cardName = data.name;
+    addButton.addEventListener('click', e => { e.stopPropagation(); addToTeam(data); });
 
-    addButton.addEventListener('click', (e) => {
-        e.stopPropagation(); 
-        addToTeam(data); 
-    });
-    
     buttonsContainer.appendChild(addButton);
-    cardContainer.appendChild(buttonsContainer); 
-    
-    const setupCardListeners = (contentElement) => {
-        const cardButtons = contentElement.querySelectorAll('.card-tabs button');
-        cardButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const sectionId = button.dataset.section;
-                
-                cardButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
+    cardContainer.appendChild(buttonsContainer);
 
-                contentElement.querySelectorAll('.stats-section').forEach(section => {
-                    section.classList.remove('visible');
-                });
-                
-                contentElement.querySelector(`[data-section-id="${sectionId}"]`).classList.add('visible');
+    // ── Tab listener köməkçisi ────────────────────────────────────────────
+    const setupCardListeners = el => {
+        el.querySelectorAll('.card-tabs button').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                el.querySelectorAll('.card-tabs button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                el.querySelectorAll('.stats-section').forEach(s => s.classList.remove('visible'));
+                el.querySelector(`[data-section-id="${btn.dataset.section}"]`).classList.add('visible');
             });
         });
-    }
+    };
 
-    // ÇOX FORMALI KARTLAR (isMulti)
-    if (data.isMulti && data.forms && data.forms.length > 0) {
-        let currentFormIndex = 0;
-        
-        // Progress bar üçün class əlavə et
-        cardContainer.classList.add('has-multi-controls');
-        
+    // ── Form data birləşdirici ────────────────────────────────────────────
+    // Formun çatışmayan sahələrini typeData-dan tamamlayır
+    const buildFormData = (typeData, formData) => ({
+        name:            formData.name            || typeData.name,
+        note:            formData.note            || typeData.note || '',
+        type:            formData.type            || typeData.type,
+        rarity:          data.rarity,
+        stats:           formData.stats           || typeData.stats,
+        trait:           formData.trait           || typeData.trait || '-',
+        additionalStats: formData.additionalStats || typeData.additionalStats,
+        showlevels:      formData.showlevels      || typeData.showlevels,
+        story:           formData.story           || typeData.story || '-'
+    });
+
+    // ── Bir tip üçün multi-controls yaradır ──────────────────────────────
+    const buildMultiControls = (typeData, frontEl) => {
+        const forms = typeData.forms || [];
+
+        const controls = document.createElement('div');
+        controls.className = 'evolution-controls';
+
+        const left = document.createElement('button');
+        left.className = 'evolution-arrow';
+        left.innerHTML = '◀';
+        left.disabled = true;
+
+        const bar = document.createElement('div');
+        bar.className = 'evolution-progress';
+
+        const mainDot = document.createElement('span');
+        mainDot.className = 'progress-dot active';
+        bar.appendChild(mainDot);
+        forms.forEach(() => {
+            const d = document.createElement('span');
+            d.className = 'progress-dot';
+            bar.appendChild(d);
+        });
+
+        const right = document.createElement('button');
+        right.className = 'evolution-arrow';
+        right.innerHTML = '▶';
+        if (forms.length === 0) right.disabled = true;
+
+        controls.appendChild(left);
+        controls.appendChild(bar);
+        controls.appendChild(right);
+
+        let idx = 0;
+        const goTo = newIdx => {
+            idx = newIdx;
+            bar.querySelectorAll('.progress-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+            left.disabled  = idx === 0;
+            right.disabled = idx === forms.length;
+            const contentData = idx === 0 ? typeData : buildFormData(typeData, forms[idx - 1]);
+            frontEl.innerHTML = createCardContent(contentData).innerHTML;
+            setupCardListeners(frontEl);
+        };
+
+        left.addEventListener('click',  e => { e.stopPropagation(); if (idx > 0)            goTo(idx - 1); });
+        right.addEventListener('click', e => { e.stopPropagation(); if (idx < forms.length)  goTo(idx + 1); });
+
+        return controls;
+    };
+
+    // ── Bir tip render edir, frontEl + controls qaytarır ─────────────────
+    const renderType = typeData => {
+        const frontEl = document.createElement('div');
+        frontEl.className = 'card-front';
+        frontEl.innerHTML = createCardContent(typeData).innerHTML;
+        setupCardListeners(frontEl);
+
+        let controls = null;
+        if (typeData.isMulti && typeData.forms && typeData.forms.length > 0) {
+            controls = buildMultiControls(typeData, frontEl);
+        }
+        return { frontEl, controls };
+    };
+
+    // ════════════════════════════════════════════════════════════════════
+    //  ETHEREAL DUAL  —  type1 / type2
+    // ════════════════════════════════════════════════════════════════════
+    if (data.rarity.toLowerCase() === 'ethereal' && data.isDual && data.type1 && data.type2) {
+
+        let activeType = 1;
+
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+
+        // İlk tipi render et
+        let { frontEl, controls: activeCtrl } = renderType(data.type1);
+        cardInner.appendChild(frontEl);
+        cardContainer.appendChild(cardInner);
+
+        if (activeCtrl) {
+            cardContainer.classList.add('has-multi-controls');
+            cardContainer.appendChild(activeCtrl);
+        }
+
+        // II keçid düyməsi
+        const dualBtn = document.createElement('button');
+        dualBtn.className = 'dual-mode-button';
+        dualBtn.title = 'İkinci Tipə Keçid';
+        cardContainer.appendChild(dualBtn);
+
+        dualBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            activeType = activeType === 1 ? 2 : 1;
+            cardContainer.classList.toggle('dual-active', activeType === 2);
+
+            // Köhnə controls-u sil
+            const oldCtrl = cardContainer.querySelector('.evolution-controls');
+            if (oldCtrl) oldCtrl.remove();
+            cardContainer.classList.remove('has-multi-controls');
+
+            // Yeni tipi render et
+            const typeData = activeType === 1 ? data.type1 : data.type2;
+            const { frontEl: newFront, controls: newCtrl } = renderType(typeData);
+
+            cardInner.innerHTML = '';
+            cardInner.appendChild(newFront);
+
+            if (newCtrl) {
+                cardContainer.classList.add('has-multi-controls');
+                cardContainer.insertBefore(newCtrl, dualBtn);
+            }
+        });
+
+    // ════════════════════════════════════════════════════════════════════
+    //  ASCENDANT TRANSFORM
+    // ════════════════════════════════════════════════════════════════════
+    } else if (data.isAscendant && data.upgradedsecondForm) {
+        let isUpgraded = false;
+
         const cardInner = document.createElement('div');
         cardInner.className = 'card-inner';
 
         const cardFront = createCardContent(data);
         cardFront.classList.add('card-front');
-        
         cardInner.appendChild(cardFront);
         cardContainer.appendChild(cardInner);
-
         setupCardListeners(cardFront);
-        
-        // MULTI CONTROLS (Progress bar + oxlar)
-        const multiControls = document.createElement('div');
-        multiControls.className = 'evolution-controls';
-        
-        // Sol ox
-        const leftArrow = document.createElement('button');
-        leftArrow.className = 'evolution-arrow';
-        leftArrow.innerHTML = '◀';
-        leftArrow.disabled = true;
-        
-        // Progress dots
-        const progressBar = document.createElement('div');
-        progressBar.className = 'evolution-progress';
-        
-        // Əsas kart üçün dot
-        const mainDot = document.createElement('span');
-        mainDot.className = 'progress-dot active';
-        progressBar.appendChild(mainDot);
-        
-        // Hər forma üçün dot
-        data.forms.forEach(() => {
-            const dot = document.createElement('span');
-            dot.className = 'progress-dot';
-            progressBar.appendChild(dot);
-        });
-        
-        // Sağ ox
-        const rightArrow = document.createElement('button');
-        rightArrow.className = 'evolution-arrow';
-        rightArrow.innerHTML = '▶';
-        
-        multiControls.appendChild(leftArrow);
-        multiControls.appendChild(progressBar);
-        multiControls.appendChild(rightArrow);
-        
-        // Ox click event
-        const updateForm = (newIndex) => {
-            currentFormIndex = newIndex;
-            
-            // Progress dots yenilə
-            progressBar.querySelectorAll('.progress-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentFormIndex);
-            });
-            
-            // Oxları yenilə
-            leftArrow.disabled = currentFormIndex === 0;
-            rightArrow.disabled = currentFormIndex === data.forms.length;
-            
-            // Forma məzmununu yenilə
-            cardFront.innerHTML = '';
-            let contentData;
-            
-            if (currentFormIndex === 0) {
-                // Əsas kart
-                contentData = data;
-            } else {
-                // Digər formalar
-                const formData = data.forms[currentFormIndex - 1];
-                
-                if (!formData) {
-                    console.error('Form data not found at index:', currentFormIndex - 1);
-                    return;
-                }
-                
-                contentData = {
-                    name: formData.name || 'Unknown',
-                    note: formData.note || '',
-                    type: formData.type || data.type,
-                    rarity: data.rarity,
-                    stats: formData.stats || {
-                        health: 0,
-                        shield: 0,
-                        damage: 0,
-                        sps: 0,
-                        attackSpeed: '-',
-                        delay: '-',
-                        mana: 0,
-                        number: 0
-                    },
-                    trait: formData.trait || '-',
-                    additionalStats: formData.additionalStats || {
-                        range: '-',
-                        speed: '-',
-                        criticalChance: '-',
-                        criticDamage: '-',
-                        lifestealChance: '-',
-                        lifesteal: '-',
-                        damageminimiser: '-',
-                        dodge: '-'
-                    },
-                    showlevels: formData.showlevels || { level1: '-', level2: '-', level3: '-' },
-                    story: formData.story || '-'
-                };
-            }
-            
-            if (!contentData || !contentData.stats) {
-                console.error('Invalid contentData created:', contentData);
-                return;
-            }
-            
-            const newContent = createCardContent(contentData);
-            cardFront.innerHTML = newContent.innerHTML;
-            setupCardListeners(cardFront);
-        };
-        
-        leftArrow.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (currentFormIndex > 0) updateForm(currentFormIndex - 1);
-        });
-        
-        rightArrow.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (currentFormIndex < data.forms.length) updateForm(currentFormIndex + 1);
-        });
-        
-        cardContainer.appendChild(multiControls);
-    }
-    // ASCENDANT KARTLAR ÜÇÜN TRANSFORM SİSTEMİ
-    else if (data.isAscendant && data.upgradedsecondForm) {
-        let isUpgraded = false;
-        
-        const cardInner = document.createElement('div');
-        cardInner.className = 'card-inner';
-
-        let currentCardData = data;
-        const cardFront = createCardContent(currentCardData);
-        cardFront.classList.add('card-front');
-        
-        cardInner.appendChild(cardFront);
-        cardContainer.appendChild(cardInner);
-
-        setupCardListeners(cardFront);
-        
         cardContainer.classList.add('no-flip');
-        
+
         const transformButton = document.createElement('button');
         transformButton.className = 'transform-button';
         transformButton.title = 'Transform';
-
-        transformButton.addEventListener('click', (e) => {
+        transformButton.addEventListener('click', e => {
             e.stopPropagation();
-            
             isUpgraded = !isUpgraded;
-            
-            if (isUpgraded) {
-                currentCardData = {
-                    ...data,
+            const d = isUpgraded
+                ? { ...data,
                     stats: data.upgradedsecondForm.stats,
                     trait: data.upgradedsecondForm.trait,
                     additionalStats: data.upgradedsecondForm.additionalStats,
                     showlevels: data.upgradedsecondForm.showlevels,
-                    story: data.upgradedsecondForm.story
-                };
-                cardContainer.classList.add('is-upgraded');
-            } else {
-                currentCardData = data;
-                cardContainer.classList.remove('is-upgraded');
-            }
-            
-            cardFront.innerHTML = '';
-            const newContent = createCardContent(currentCardData);
-            cardFront.innerHTML = newContent.innerHTML;
+                    story: data.upgradedsecondForm.story }
+                : data;
+            cardContainer.classList.toggle('is-upgraded', isUpgraded);
+            cardFront.innerHTML = createCardContent(d).innerHTML;
             setupCardListeners(cardFront);
         });
-
         cardContainer.appendChild(transformButton);
-    }
-    // SADƏ KARTLAR
-    else {
+
+    // ════════════════════════════════════════════════════════════════════
+    //  isMulti  —  çox formalı kart
+    // ════════════════════════════════════════════════════════════════════
+    } else if (data.isMulti && data.forms && data.forms.length > 0) {
+        cardContainer.classList.add('has-multi-controls');
+
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+        const cardFront = createCardContent(data);
+        cardFront.classList.add('card-front');
+        cardInner.appendChild(cardFront);
+        cardContainer.appendChild(cardInner);
+        setupCardListeners(cardFront);
+
+        cardContainer.appendChild(buildMultiControls(data, cardFront));
+
+    // ════════════════════════════════════════════════════════════════════
+    //  SADƏ KART
+    // ════════════════════════════════════════════════════════════════════
+    } else {
         const singleCard = createCardContent(data);
         singleCard.classList.add('card-single');
         cardContainer.appendChild(singleCard);
-        
         setupCardListeners(singleCard);
     }
 
-    // ETHEREAL DUAL MODE DÜYMƏSİ
-    if (data.rarity.toLowerCase() === 'ethereal' && data.isDual && data.secondMode) {
-        let isDualActive = false;
-        let dualFormIndex = 0;
-
-        const dualButton = document.createElement('button');
-        dualButton.className = 'dual-mode-button';
-        dualButton.title = 'İkinci Tipə Keçid';
-        cardContainer.appendChild(dualButton);
-
-        let dualMultiControls = null;
-        let dualLeftArrow = null;
-        let dualRightArrow = null;
-        let dualProgressBar = null;
-
-        const getCardFrontElement = () => {
-            return cardContainer.querySelector('.card-front') ||
-                   cardContainer.querySelector('.card-single');
-        };
-
-        const setupCurrentListeners = (frontEl) => {
-            setupCardListeners(frontEl);
-        };
-
-        const renderDualContent = (formIndex) => {
-            const frontEl = getCardFrontElement();
-            if (!frontEl) return;
-            const sm = data.secondMode;
-            let contentData;
-            if (formIndex === 0) {
-                contentData = {
-                    name: sm.name || data.name,
-                    note: sm.note || data.note || '',
-                    type: sm.type || data.type,
-                    rarity: data.rarity,
-                    stats: sm.stats,
-                    trait: sm.trait,
-                    additionalStats: sm.additionalStats,
-                    showlevels: sm.showlevels,
-                    story: sm.story
-                };
-            } else {
-                const formData = sm.forms[formIndex - 1];
-                contentData = {
-                    name: formData.name || sm.name || data.name,
-                    note: formData.note || sm.note || '',
-                    type: formData.type || sm.type || data.type,
-                    rarity: data.rarity,
-                    stats: formData.stats || sm.stats,
-                    trait: formData.trait || sm.trait,
-                    additionalStats: formData.additionalStats || sm.additionalStats,
-                    showlevels: formData.showlevels || sm.showlevels,
-                    story: formData.story || sm.story
-                };
-            }
-            frontEl.innerHTML = '';
-            const newContent = createCardContent(contentData);
-            frontEl.innerHTML = newContent.innerHTML;
-            setupCurrentListeners(frontEl);
-            if (dualProgressBar) {
-                dualProgressBar.querySelectorAll('.progress-dot').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === formIndex);
-                });
-            }
-            if (dualLeftArrow) dualLeftArrow.disabled = formIndex === 0;
-            if (dualRightArrow) dualRightArrow.disabled = formIndex === (sm.forms ? sm.forms.length : 0);
-        };
-
-        const buildDualMultiControls = () => {
-            const sm = data.secondMode;
-            if (!sm.forms || sm.forms.length === 0) return;
-            dualMultiControls = document.createElement('div');
-            dualMultiControls.className = 'evolution-controls dual-multi-controls hidden';
-            dualLeftArrow = document.createElement('button');
-            dualLeftArrow.className = 'evolution-arrow';
-            dualLeftArrow.innerHTML = '&#9664;';
-            dualLeftArrow.disabled = true;
-            dualProgressBar = document.createElement('div');
-            dualProgressBar.className = 'evolution-progress';
-            const mainDot = document.createElement('span');
-            mainDot.className = 'progress-dot active';
-            dualProgressBar.appendChild(mainDot);
-            sm.forms.forEach(() => {
-                const dot = document.createElement('span');
-                dot.className = 'progress-dot';
-                dualProgressBar.appendChild(dot);
-            });
-            dualRightArrow = document.createElement('button');
-            dualRightArrow.className = 'evolution-arrow';
-            dualRightArrow.innerHTML = '&#9654;';
-            dualMultiControls.appendChild(dualLeftArrow);
-            dualMultiControls.appendChild(dualProgressBar);
-            dualMultiControls.appendChild(dualRightArrow);
-            dualLeftArrow.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (dualFormIndex > 0) { dualFormIndex--; renderDualContent(dualFormIndex); }
-            });
-            dualRightArrow.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (dualFormIndex < sm.forms.length) { dualFormIndex++; renderDualContent(dualFormIndex); }
-            });
-            cardContainer.appendChild(dualMultiControls);
-        };
-
-        buildDualMultiControls();
-
-        const firstModeControls = cardContainer.querySelector('.evolution-controls:not(.dual-multi-controls)');
-
-        dualButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            isDualActive = !isDualActive;
-            if (isDualActive) {
-                dualFormIndex = 0;
-                cardContainer.classList.add('dual-active');
-                if (firstModeControls) firstModeControls.style.display = 'none';
-                if (dualMultiControls) dualMultiControls.classList.remove('hidden');
-                renderDualContent(0);
-            } else {
-                cardContainer.classList.remove('dual-active');
-                if (firstModeControls) firstModeControls.style.display = '';
-                if (dualMultiControls) dualMultiControls.classList.add('hidden');
-                const frontEl = getCardFrontElement();
-                if (frontEl) {
-                    frontEl.innerHTML = '';
-                    const newContent = createCardContent(data);
-                    frontEl.innerHTML = newContent.innerHTML;
-                    setupCurrentListeners(frontEl);
-                    if (firstModeControls) {
-                        firstModeControls.querySelectorAll('.progress-dot').forEach((dot, i) => {
-                            dot.classList.toggle('active', i === 0);
-                        });
-                        const arrows = firstModeControls.querySelectorAll('.evolution-arrow');
-                        if (arrows[0]) arrows[0].disabled = true;
-                        if (arrows[1]) arrows[1].disabled = (data.forms && data.forms.length === 0);
-                    }
-                }
-            }
-        });
-    }
-
+    // Ethereal glow
     if (data.rarity.toLowerCase() === 'ethereal') {
         const glowDiv = document.createElement('div');
         glowDiv.className = 'card-glow';
@@ -455,13 +301,13 @@ function createCardElement(data) {
 // Kartın iç məzmununu yaradan köməkçi funksiya
 function createCardContent(data) {
     const content = document.createElement('div');
-    
+
     if (!data || !data.stats) {
         console.error('Invalid card data:', data);
         content.innerHTML = '<p>Kart məlumatları düzgün deyil</p>';
         return content;
     }
-    
+
     const badgeText = Array.isArray(data.type) ? data.type.join('/') : data.type;
     content.innerHTML = `
         <div class="stripe"></div>
@@ -480,9 +326,9 @@ function createCardContent(data) {
             <button data-section="showlevels">Levels</button>
             <button data-section="story-section">Story</button>
         </div>
-        
+
         <div class="card-content-area">
-        
+
             <div class="stats-section visible" data-section-id="main-stats">
                 <div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${data.stats.health || 0}</span></div>
                 <div class="stat-item"><b>Shield <i class="fa-solid fa-shield-halved"></i></b><span>${data.stats.shield || 0}</span></div>
@@ -493,7 +339,7 @@ function createCardContent(data) {
                 <div class="stat-item"><b>Mana <i class="fa-solid fa-certificate"></i></b><span>${data.stats.mana || 0}</span></div>
                 <div class="stat-item"><b>Number <i class="fa-solid fa-user"></i></b><span>${data.stats.number || 0}</span></div>
             </div>
-            
+
             <div class="stats-section" data-section-id="additional-stats">
                 <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${data.additionalStats?.range || '-'}</span></div>
                 <div class="stat-item"><b>Speed <i class="fa-solid fa-person-running"></i></b><span>${data.additionalStats?.speed || '-'}</span></div>
@@ -504,7 +350,7 @@ function createCardContent(data) {
                 <div class="stat-item"><b>Damage Reduction <i class="fa-solid fa-helmet-un "></i></b><span>${data.additionalStats?.damageminimiser || '-'}</span></div>
                 <div class="stat-item"><b>Dodge Chance <i class="fa-solid fa-wind "></i></b><span>${data.additionalStats?.dodge || '-'}</span></div>
             </div>
-            
+
             <div class="stats-section" data-section-id="trait">
                 <div class="trait trait-center">${data.trait || '-'}</div>
             </div>
@@ -514,19 +360,19 @@ function createCardContent(data) {
                 <div class="stat-item"><b>Level 2</b><span>${data.showlevels?.level2 || '-'}</span></div>
                 <div class="stat-item"><b>Level 3</b><span>${data.showlevels?.level3 || '-'}</span></div>
             </div>
-            
+
             <div class="stats-section" data-section-id="story-section">
                 <div class="story-content">${data.story || '-'}</div>
             </div>
 
-        </div> `;
+        </div>`;
 
     return content;
 }
 
 function renderCards(cardsToRender) {
     if (!cardsContainer) return;
-    
+
     cardsContainer.innerHTML = '';
     if (cardsToRender.length === 0) {
         cardsContainer.innerHTML = '<p>Bu endərlikdə kart tapılmadı.</p>';
@@ -539,7 +385,7 @@ function renderCards(cardsToRender) {
 
 function getNumericStat(statValue) {
     if (typeof statValue === 'string') {
-        const cleanedValue = statValue.replace(/[^\d.]/g, ''); 
+        const cleanedValue = statValue.replace(/[^\d.]/g, '');
         return parseInt(cleanedValue) || 0;
     }
     return statValue || 0;
@@ -552,24 +398,23 @@ function addToTeam(cardData) {
         alert(`❌ '${cardData.name}' kartı artıq komandada var. Hər kartdan yalnız bir dəfə istifadə edə bilərsiniz.`);
         return;
     }
-    
+
     if (currentTeam.length >= 8) {
         alert('Komandada maksimum 8 kart ola bilər.');
         return;
     }
-    
+
     const cardToAdd = {
         name: cardData.name,
         health: getNumericStat(cardData.stats.health),
         shield: getNumericStat(cardData.stats.shield),
-        damage: getNumericStat(cardData.stats.damage), 
+        damage: getNumericStat(cardData.stats.damage),
         sps: getNumericStat(cardData.stats.sps),
-        mana: getNumericStat(cardData.stats.mana), 
+        mana: getNumericStat(cardData.stats.mana),
         originalCardData: cardData
     };
 
     currentTeam.push(cardToAdd);
-    
     updateTeamPanel();
     updateTeamStats();
 }
@@ -579,16 +424,15 @@ function removeFromTeam(cardName) {
     if (index > -1) {
         currentTeam.splice(index, 1);
     }
-    
     updateTeamPanel();
     updateTeamStats();
 }
 
 function updateTeamPanel() {
-    if (!selectedTeamCards || !placeholderText) return; 
+    if (!selectedTeamCards || !placeholderText) return;
 
     selectedTeamCards.innerHTML = '';
-    
+
     if (currentTeam.length === 0) {
         placeholderText.style.display = 'block';
         selectedTeamCards.appendChild(placeholderText);
@@ -608,40 +452,36 @@ function updateTeamPanel() {
 
     selectedTeamCards.querySelectorAll('.remove-from-team-btn').forEach(button => {
         button.addEventListener('click', () => {
-            const cardName = button.dataset.cardName;
-            removeFromTeam(cardName);
+            removeFromTeam(button.dataset.cardName);
         });
     });
 }
 
 function updateTeamStats() {
-    const manaCosts = []; 
-    
+    const manaCosts = [];
+
     const stats = currentTeam.reduce((acc, card) => {
         acc.health += card.health;
         acc.shield += card.shield;
-        acc.damage += card.damage; 
-        acc.dps += card.sps;
-        acc.mana += card.mana;
-
-        manaCosts.push(parseInt(card.mana) || 0); 
-
+        acc.damage += card.damage;
+        acc.dps    += card.sps;
+        acc.mana   += card.mana;
+        manaCosts.push(parseInt(card.mana) || 0);
         return acc;
-    }, { health: 0, shield: 0, damage: 0, dps: 0, mana: 0 }); 
+    }, { health: 0, shield: 0, damage: 0, dps: 0, mana: 0 });
 
     let cheapestRecycleCost = 0;
     if (manaCosts.length > 0) {
         manaCosts.sort((a, b) => a - b);
         cheapestRecycleCost = manaCosts.slice(0, 4).reduce((sum, mana) => sum + mana, 0);
     }
-    
-    if (totalHealth) totalHealth.textContent = stats.health;
-    if (totalShield) totalShield.textContent = stats.shield;
-    if (totalDamage) totalDamage.textContent = stats.damage; 
-    if (totalDPS) totalDPS.textContent = stats.dps;
-    if (totalMana) totalMana.textContent = stats.mana;
 
-    if (cheapestRecycleCostDisplay) cheapestRecycleCostDisplay.textContent = cheapestRecycleCost; 
+    if (totalHealth)  totalHealth.textContent  = stats.health;
+    if (totalShield)  totalShield.textContent  = stats.shield;
+    if (totalDamage)  totalDamage.textContent  = stats.damage;
+    if (totalDPS)     totalDPS.textContent     = stats.dps;
+    if (totalMana)    totalMana.textContent    = stats.mana;
+    if (cheapestRecycleCostDisplay) cheapestRecycleCostDisplay.textContent = cheapestRecycleCost;
 
     if (openTeamBuilderBtn) {
         openTeamBuilderBtn.textContent = `Komandanı Göstər (${currentTeam.length}/8)`;
@@ -650,7 +490,7 @@ function updateTeamStats() {
 
 function filterAndRender() {
     const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
-    
+
     let filteredCards = allCardsData;
 
     if (activeRarity !== 'all') {
@@ -658,14 +498,14 @@ function filterAndRender() {
     }
 
     if (searchTerm.length > 0) {
-        filteredCards = filteredCards.filter(card => 
+        filteredCards = filteredCards.filter(card =>
             card.name.toLowerCase().includes(searchTerm)
         );
     }
 
     renderCards(filteredCards);
-    
-    if (teamBuilderPanel && !teamBuilderPanel.classList.contains('hidden')) { 
+
+    if (teamBuilderPanel && !teamBuilderPanel.classList.contains('hidden')) {
         toggleCardButtons(true);
     } else {
         toggleCardButtons(false);
@@ -674,9 +514,8 @@ function filterAndRender() {
 
 async function fetchAndRender(rarity) {
     if (cardsContainer) cardsContainer.innerHTML = '<p>Məlumatlar yüklənir...</p>';
-    activeRarity = rarity; 
+    activeRarity = rarity;
     try {
-        
         if (allCardsData.length === 0) {
             const rarities = ['mundane', 'familiar', 'arcane', 'relic', 'ascendant', 'apex', 'ethereal'];
             const fetchPromises = rarities.map(r =>
@@ -695,9 +534,7 @@ async function fetchAndRender(rarity) {
             const results = await Promise.all(fetchPromises);
             allCardsData = results.flat();
         }
-        
         filterAndRender();
-        
     } catch (error) {
         console.error('Məlumatları yükləmə zamanı xəta:', error);
         if (cardsContainer) cardsContainer.innerHTML = '<p style="color:red;">Kart məlumatları yüklənərkən xəta baş verdi.</p>';
@@ -709,24 +546,24 @@ async function fetchAndRender(rarity) {
 showCardsBtn.addEventListener('click', showCards);
 backToMenuBtn.addEventListener('click', showMenu);
 
-['show-boosters-btn','show-towers-btn'].forEach(id=>{
+['show-boosters-btn', 'show-towers-btn'].forEach(id => {
     const btn = document.getElementById(id);
     if (btn) {
         btn.addEventListener('click', () => {
-            const modal=document.createElement('div');
-            modal.style.position='fixed';
-            modal.style.top='50%';
-            modal.style.left='50%';
-            modal.style.transform='translate(-50%, -50%)';
-            modal.style.padding='20px';
-            modal.style.backgroundColor='var(--card)';
-            modal.style.color='var(--text)';
-            modal.style.borderRadius='12px';
-            modal.style.boxShadow='var(--shadow)';
-            modal.style.zIndex='1000';
-            modal.textContent="Coming Soon...";
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '50%';
+            modal.style.left = '50%';
+            modal.style.transform = 'translate(-50%, -50%)';
+            modal.style.padding = '20px';
+            modal.style.backgroundColor = 'var(--card)';
+            modal.style.color = 'var(--text)';
+            modal.style.borderRadius = '12px';
+            modal.style.boxShadow = 'var(--shadow)';
+            modal.style.zIndex = '1000';
+            modal.textContent = "Coming Soon...";
             document.body.appendChild(modal);
-            setTimeout(()=>{document.body.removeChild(modal);},3000);
+            setTimeout(() => { document.body.removeChild(modal); }, 3000);
         });
     }
 });
@@ -736,9 +573,8 @@ filterButtons.forEach(button => {
         const rarity = button.id.split('-')[1];
         filterButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
-        
-        activeRarity = rarity; 
-        filterAndRender(); 
+        activeRarity = rarity;
+        filterAndRender();
     });
 });
 
@@ -752,7 +588,6 @@ if (openTeamBuilderBtn) {
     openTeamBuilderBtn.addEventListener('click', () => {
         if (cardsSection) cardsSection.classList.add('team-mode-active');
         if (teamBuilderPanel) teamBuilderPanel.classList.remove('hidden');
-
         updateTeamPanel();
         toggleCardButtons(true);
     });
@@ -762,12 +597,11 @@ if (closeTeamBuilderBtn) {
     closeTeamBuilderBtn.addEventListener('click', () => {
         if (cardsSection) cardsSection.classList.remove('team-mode-active');
         if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
-
         toggleCardButtons(false);
     });
 }
 
-if(clearTeamBtn) {
+if (clearTeamBtn) {
     clearTeamBtn.addEventListener('click', () => {
         currentTeam = [];
         updateTeamPanel();
@@ -779,43 +613,38 @@ if(clearTeamBtn) {
 // SPELLS SEKSİYA
 // ─────────────────────────────────────────────
 
-const showSpellsBtn       = document.getElementById('show-spells-btn');
-const spellsSection       = document.getElementById('spells-section');
-const backToMenuFromSpells= document.getElementById('back-to-menu-from-spells-btn');
-const spellsGrid          = document.getElementById('spells-grid');
-const spellSearchInput    = document.getElementById('spell-search-input');
+const showSpellsBtn        = document.getElementById('show-spells-btn');
+const spellsSection        = document.getElementById('spells-section');
+const backToMenuFromSpells = document.getElementById('back-to-menu-from-spells-btn');
+const spellsGrid           = document.getElementById('spells-grid');
+const spellSearchInput     = document.getElementById('spell-search-input');
 
-// Type filtr düymələri
-const spellFilterAll      = document.getElementById('spell-filter-all');
-const spellFilterNormal   = document.getElementById('spell-filter-normal');
-const spellFilterBuilding = document.getElementById('spell-filter-building');
-const spellTypeButtons    = [spellFilterAll, spellFilterNormal, spellFilterBuilding];
+const spellFilterAll       = document.getElementById('spell-filter-all');
+const spellFilterNormal    = document.getElementById('spell-filter-normal');
+const spellFilterBuilding  = document.getElementById('spell-filter-building');
+const spellTypeButtons     = [spellFilterAll, spellFilterNormal, spellFilterBuilding];
 
-// Rarity filtr düymələri
-const spellRarityAll      = document.getElementById('spell-rarity-all');
-const spellRarityCommon   = document.getElementById('spell-rarity-common');
-const spellRarityEpic     = document.getElementById('spell-rarity-epic');
-const spellRarityLegendary= document.getElementById('spell-rarity-legendary');
-const spellRarityButtons  = [spellRarityAll, spellRarityCommon, spellRarityEpic, spellRarityLegendary];
+const spellRarityAll       = document.getElementById('spell-rarity-all');
+const spellRarityCommon    = document.getElementById('spell-rarity-common');
+const spellRarityEpic      = document.getElementById('spell-rarity-epic');
+const spellRarityLegendary = document.getElementById('spell-rarity-legendary');
+const spellRarityButtons   = [spellRarityAll, spellRarityCommon, spellRarityEpic, spellRarityLegendary];
 
-let allSpellsData   = [];
-let activeSpellType = 'all';           // all | normal | building
-let activeSpellRarity = 'all';         // all | common | epic | legendary
+let allSpellsData     = [];
+let activeSpellType   = 'all';
+let activeSpellRarity = 'all';
 
-// ── Rarity rəng xəritəsi (spells üçün) ────────────
 const SPELL_RARITY_CSS = {
     common:    'r-familiar',
     epic:      'r-arcane',
     legendary: 'r-apex'
 };
 
-// ── Spellsden menya qayıt ─────────────────────────
 function showMenu_fromSpells() {
     spellsSection.classList.add('hidden');
     mainMenu.classList.remove('hidden');
 }
 
-// ── Spells bölmə göstər ──────────────────────────
 function showSpells() {
     mainMenu.classList.add('hidden');
     cardsSection.classList.add('hidden');
@@ -825,7 +654,6 @@ function showSpells() {
     if (spellSearchInput) spellSearchInput.value = '';
 }
 
-// ── JSON yükləmə ─────────────────────────────────
 async function fetchAndRenderSpells() {
     if (spellsGrid) spellsGrid.innerHTML = '<p>Büyü məlumatları yüklənir...</p>';
     try {
@@ -841,25 +669,12 @@ async function fetchAndRenderSpells() {
     }
 }
 
-// ── Filtr + render ────────────────────────────────
 function filterAndRenderSpells() {
     const search = spellSearchInput ? spellSearchInput.value.toLowerCase().trim() : '';
-
     let filtered = allSpellsData;
-
-    // Type filtri
-    if (activeSpellType !== 'all') {
-        filtered = filtered.filter(s => s.type.toLowerCase() === activeSpellType);
-    }
-    // Rarity filtri
-    if (activeSpellRarity !== 'all') {
-        filtered = filtered.filter(s => s.rarity.toLowerCase() === activeSpellRarity);
-    }
-    // Axtar
-    if (search.length > 0) {
-        filtered = filtered.filter(s => s.name.toLowerCase().includes(search));
-    }
-
+    if (activeSpellType !== 'all')   filtered = filtered.filter(s => s.type.toLowerCase() === activeSpellType);
+    if (activeSpellRarity !== 'all') filtered = filtered.filter(s => s.rarity.toLowerCase() === activeSpellRarity);
+    if (search.length > 0)           filtered = filtered.filter(s => s.name.toLowerCase().includes(search));
     renderSpells(filtered);
 }
 
@@ -873,27 +688,19 @@ function renderSpells(spells) {
     spells.forEach(s => spellsGrid.appendChild(createSpellCard(s)));
 }
 
-// ── Spell card yaratmaq ──────────────────────────
 function createSpellCard(data) {
     const rarityClass = SPELL_RARITY_CSS[data.rarity.toLowerCase()] || '';
-
     const card = document.createElement('article');
     card.className = `card-container card ${rarityClass} spell-card`;
+    if (data.rarity.toLowerCase() === 'legendary') card.classList.add('spell-legendary-glow');
 
-    if (data.rarity.toLowerCase() === 'legendary') {
-        card.classList.add('spell-legendary-glow');
-    }
-
-    // Helper to create spell content - differentiates between base spell and summon forms
     const createSpellContent = (spellData, isForm = false) => {
         const content = document.createElement('div');
         content.className = 'spell-content-wrapper';
-        
-        // Determine if this is a summon/form (uses full card stats) or base spell
-        const isCardLike = isForm || spellData.stats.hasOwnProperty('health') && spellData.stats.hasOwnProperty('shield');
-        
+
+        const isCardLike = isForm || (spellData.stats.hasOwnProperty('health') && spellData.stats.hasOwnProperty('shield'));
+
         if (isCardLike) {
-            // FULL CARD STRUCTURE (for summons/forms)
             const typeText = Array.isArray(spellData.type) ? spellData.type.join('/') : spellData.type;
             content.innerHTML = `
                 <div class="stripe"></div>
@@ -904,7 +711,6 @@ function createSpellCard(data) {
                     </div>
                     <span class="badge">${typeText || 'Unknown'}</span>
                 </div>
-
                 <div class="card-tabs">
                     <button class="active" data-section="main-stats">Main</button>
                     <button data-section="additional-stats">Other</button>
@@ -912,7 +718,6 @@ function createSpellCard(data) {
                     <button data-section="showlevels">Levels</button>
                     <button data-section="story-section">Story</button>
                 </div>
-
                 <div class="card-content-area">
                     <div class="stats-section visible" data-section-id="main-stats">
                         <div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${spellData.stats.health || 0}</span></div>
@@ -924,7 +729,6 @@ function createSpellCard(data) {
                         <div class="stat-item"><b>Mana <i class="fa-solid fa-certificate"></i></b><span>${spellData.stats.mana || '-'}</span></div>
                         <div class="stat-item"><b>Number <i class="fa-solid fa-user"></i></b><span>${spellData.stats.number || 0}</span></div>
                     </div>
-                    
                     <div class="stats-section" data-section-id="additional-stats">
                         <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.additionalStats?.range || '-'}</span></div>
                         <div class="stat-item"><b>Speed <i class="fa-solid fa-person-running"></i></b><span>${spellData.additionalStats?.speed || '-'}</span></div>
@@ -935,26 +739,20 @@ function createSpellCard(data) {
                         <div class="stat-item"><b>Damage Reduction <i class="fa-solid fa-helmet-un"></i></b><span>${spellData.additionalStats?.damageminimiser || '-'}</span></div>
                         <div class="stat-item"><b>Dodge Chance <i class="fa-solid fa-wind"></i></b><span>${spellData.additionalStats?.dodge || '-'}</span></div>
                     </div>
-                    
                     <div class="stats-section" data-section-id="trait">
                         <div class="trait trait-center">${spellData.trait || '-'}</div>
                     </div>
-
                     <div class="stats-section" data-section-id="showlevels">
                         <div class="stat-item"><b>Level 1</b><span>${spellData.showlevels?.level1 || '-'}</span></div>
                         <div class="stat-item"><b>Level 2</b><span>${spellData.showlevels?.level2 || '-'}</span></div>
                         <div class="stat-item"><b>Level 3</b><span>${spellData.showlevels?.level3 || '-'}</span></div>
                     </div>
-                    
                     <div class="stats-section" data-section-id="story-section">
                         <div class="story-content">${spellData.story || '-'}</div>
                     </div>
-                </div>
-            `;
+                </div>`;
         } else {
-            // SPELL STRUCTURE (for base spells: Building or Normal)
             const isBuildingType = data.type === 'Building';
-            
             const mainStatsHTML = isBuildingType
                 ? `<div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${spellData.stats.health || '0'}</span></div>
                    <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.lifetime || '-'}</span></div>
@@ -980,39 +778,29 @@ function createSpellCard(data) {
                     </div>
                     <span class="badge spell-rarity-badge">${data.rarity}</span>
                 </div>
-
                 <div class="card-tabs">
                     <button class="active" data-section="spell-main">Stats</button>
                     <button data-section="spell-treat">Treat</button>
                     <button data-section="spell-story">Story</button>
                 </div>
-
                 <div class="card-content-area">
-                    <div class="stats-section visible" data-section-id="spell-main">
-                        ${mainStatsHTML}
-                    </div>
-
+                    <div class="stats-section visible" data-section-id="spell-main">${mainStatsHTML}</div>
                     <div class="stats-section" data-section-id="spell-treat">
                         <div class="trait trait-center">${data.treat || '-'}</div>
                     </div>
-
                     <div class="stats-section" data-section-id="spell-story">
                         <div class="story-content">${data.story || '-'}</div>
                     </div>
-                </div>
-            `;
+                </div>`;
         }
-        
         return content;
     };
 
-    // Setup tab listeners
-    const setupTabListeners = (container) => {
-        const tabs = container.querySelectorAll('.card-tabs button');
-        tabs.forEach(btn => {
-            btn.addEventListener('click', (e) => {
+    const setupTabListeners = container => {
+        container.querySelectorAll('.card-tabs button').forEach(btn => {
+            btn.addEventListener('click', e => {
                 e.stopPropagation();
-                tabs.forEach(b => b.classList.remove('active'));
+                container.querySelectorAll('.card-tabs button').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 container.querySelectorAll('.stats-section').forEach(sec => sec.classList.remove('visible'));
                 container.querySelector(`[data-section-id="${btn.dataset.section}"]`).classList.add('visible');
@@ -1020,85 +808,57 @@ function createSpellCard(data) {
         });
     };
 
-    // Multi system for spells
     if (data.isMulti && data.forms && data.forms.length > 0) {
-        let currentFormIndex = 0;
+        let idx = 0;
         card.classList.add('has-multi-controls');
-        
+
         const spellContent = createSpellContent(data, false);
         card.appendChild(spellContent);
         setupTabListeners(spellContent);
-        
+
         const multiControls = document.createElement('div');
         multiControls.className = 'evolution-controls';
-        
+
         const leftArrow = document.createElement('button');
         leftArrow.className = 'evolution-arrow';
         leftArrow.innerHTML = '◀';
         leftArrow.disabled = true;
-        
+
         const progressBar = document.createElement('div');
         progressBar.className = 'evolution-progress';
-        
         const mainDot = document.createElement('span');
         mainDot.className = 'progress-dot active';
         progressBar.appendChild(mainDot);
-        
         data.forms.forEach(() => {
             const dot = document.createElement('span');
             dot.className = 'progress-dot';
             progressBar.appendChild(dot);
         });
-        
+
         const rightArrow = document.createElement('button');
         rightArrow.className = 'evolution-arrow';
         rightArrow.innerHTML = '▶';
-        
+
         multiControls.appendChild(leftArrow);
         multiControls.appendChild(progressBar);
         multiControls.appendChild(rightArrow);
-        
-        const updateForm = (newIndex) => {
-            currentFormIndex = newIndex;
-            
-            progressBar.querySelectorAll('.progress-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentFormIndex);
-            });
-            
-            leftArrow.disabled = currentFormIndex === 0;
-            rightArrow.disabled = currentFormIndex === data.forms.length;
-            
-            spellContent.innerHTML = '';
-            let formData;
-            let isFormFlag;
-            
-            if (currentFormIndex === 0) {
-                formData = data;
-                isFormFlag = false;
-            } else {
-                formData = data.forms[currentFormIndex - 1];
-                isFormFlag = true;
-            }
-            
-            const newContent = createSpellContent(formData, isFormFlag);
-            spellContent.innerHTML = newContent.innerHTML;
+
+        const updateForm = newIdx => {
+            idx = newIdx;
+            progressBar.querySelectorAll('.progress-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+            leftArrow.disabled  = idx === 0;
+            rightArrow.disabled = idx === data.forms.length;
+            const formData   = idx === 0 ? data : data.forms[idx - 1];
+            const isFormFlag = idx !== 0;
+            spellContent.innerHTML = createSpellContent(formData, isFormFlag).innerHTML;
             setupTabListeners(spellContent);
         };
-        
-        leftArrow.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (currentFormIndex > 0) updateForm(currentFormIndex - 1);
-        });
-        
-        rightArrow.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (currentFormIndex < data.forms.length) updateForm(currentFormIndex + 1);
-        });
-        
+
+        leftArrow.addEventListener('click',  e => { e.stopPropagation(); if (idx > 0)               updateForm(idx - 1); });
+        rightArrow.addEventListener('click', e => { e.stopPropagation(); if (idx < data.forms.length) updateForm(idx + 1); });
+
         card.appendChild(multiControls);
-    } 
-    // Simple spell (no multi)
-    else {
+    } else {
         const spellContent = createSpellContent(data, false);
         card.appendChild(spellContent);
         setupTabListeners(spellContent);
@@ -1109,110 +869,78 @@ function createSpellCard(data) {
 
 // ── EVENT LİSTENERLƏRİ (Spells) ──────────────────
 
-if (showSpellsBtn) {
-    showSpellsBtn.addEventListener('click', showSpells);
-}
-if (backToMenuFromSpells) {
-    backToMenuFromSpells.addEventListener('click', showMenu_fromSpells);
-}
+if (showSpellsBtn)        showSpellsBtn.addEventListener('click', showSpells);
+if (backToMenuFromSpells) backToMenuFromSpells.addEventListener('click', showMenu_fromSpells);
 
-// Type filtr
 spellTypeButtons.forEach(btn => {
     if (!btn) return;
     btn.addEventListener('click', () => {
         spellTypeButtons.forEach(b => b && b.classList.remove('active'));
         btn.classList.add('active');
-        activeSpellType = btn.id.split('-').pop(); // all | normal | building
+        activeSpellType = btn.id.split('-').pop();
         filterAndRenderSpells();
     });
 });
 
-// Rarity filtr
 spellRarityButtons.forEach(btn => {
     if (!btn) return;
     btn.addEventListener('click', () => {
         spellRarityButtons.forEach(b => b && b.classList.remove('active'));
         btn.classList.add('active');
-        activeSpellRarity = btn.id.split('-').pop(); // all | common | epic | legendary
+        activeSpellRarity = btn.id.split('-').pop();
         filterAndRenderSpells();
     });
 });
 
-// Axtar
-if (spellSearchInput) {
-    spellSearchInput.addEventListener('input', filterAndRenderSpells);
-}
+if (spellSearchInput) spellSearchInput.addEventListener('input', filterAndRenderSpells);
 
 // ─────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
     showMenu();
-    updateTeamStats(); 
+    updateTeamStats();
     updateTeamPanel();
-    if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden'); 
+    if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
 });
 
 // Info düyməsinə klikləmə
 if (showInfoBtn) {
-  showInfoBtn.addEventListener('click', async () => {
-    mainMenu.classList.add('hidden');
-    infoSection.classList.remove('hidden');
-    
-    // info.json faylından məlumatları yüklə
-    try {
-      const response = await fetch('info.json');
-      if (!response.ok) {
-        throw new Error('Məlumat yüklənə bilmədi');
-      }
-      const data = await response.json();
-      
-      // Məlumatları göstər
-      displayInfo(data);
-    } catch (error) {
-      infoContent.innerHTML = `<p style="color: #ff6b6b;">Xəta: ${error.message}</p>`;
-    }
-  });
-}
-
-// Geri düyməsi
-if (backToMenuFromInfoBtn) {
-  backToMenuFromInfoBtn.addEventListener('click', () => {
-    infoSection.classList.add('hidden');
-    mainMenu.classList.remove('hidden');
-  });
-}
-
-// Məlumatları göstərən funksiya
-function displayInfo(data) {
-  let html = '';
-  
-  if (data.title) {
-    html += `<h2 style="margin-bottom: 20px;">${data.title}</h2>`;
-  }
-  
-  if (data.description) {
-    html += `<p style="margin-bottom: 20px; line-height: 1.6;">${data.description}</p>`;
-  }
-  
-  if (data.sections && Array.isArray(data.sections)) {
-    data.sections.forEach(section => {
-      html += `<div style="margin-bottom: 30px;">`;
-      if (section.heading) {
-        html += `<h3 style="margin-bottom: 10px; color: #4a9eff;">${section.heading}</h3>`;
-      }
-      if (section.content) {
-        html += `<p style="line-height: 1.6;">${section.content}</p>`;
-      }
-      if (section.list && Array.isArray(section.list)) {
-        html += `<ul style="margin-top: 10px; padding-left: 20px;">`;
-        section.list.forEach(item => {
-          html += `<li style="margin-bottom: 8px;">${item}</li>`;
-        });
-        html += `</ul>`;
-      }
-      html += `</div>`;
+    showInfoBtn.addEventListener('click', async () => {
+        mainMenu.classList.add('hidden');
+        infoSection.classList.remove('hidden');
+        try {
+            const response = await fetch('info.json');
+            if (!response.ok) throw new Error('Məlumat yüklənə bilmədi');
+            displayInfo(await response.json());
+        } catch (error) {
+            infoContent.innerHTML = `<p style="color: #ff6b6b;">Xəta: ${error.message}</p>`;
+        }
     });
-  }
-  
-  infoContent.innerHTML = html;
+}
+
+if (backToMenuFromInfoBtn) {
+    backToMenuFromInfoBtn.addEventListener('click', () => {
+        infoSection.classList.add('hidden');
+        mainMenu.classList.remove('hidden');
+    });
+}
+
+function displayInfo(data) {
+    let html = '';
+    if (data.title)       html += `<h2 style="margin-bottom: 20px;">${data.title}</h2>`;
+    if (data.description) html += `<p style="margin-bottom: 20px; line-height: 1.6;">${data.description}</p>`;
+    if (data.sections && Array.isArray(data.sections)) {
+        data.sections.forEach(section => {
+            html += `<div style="margin-bottom: 30px;">`;
+            if (section.heading) html += `<h3 style="margin-bottom: 10px; color: #4a9eff;">${section.heading}</h3>`;
+            if (section.content) html += `<p style="line-height: 1.6;">${section.content}</p>`;
+            if (section.list && Array.isArray(section.list)) {
+                html += `<ul style="margin-top: 10px; padding-left: 20px;">`;
+                section.list.forEach(item => { html += `<li style="margin-bottom: 8px;">${item}</li>`; });
+                html += `</ul>`;
+            }
+            html += `</div>`;
+        });
+    }
+    infoContent.innerHTML = html;
 }
