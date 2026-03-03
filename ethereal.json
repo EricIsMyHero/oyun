@@ -38,9 +38,10 @@
       "story": "Taxtını itirəndə King'in içindəki qaranlıq oyanır. O artıq sağaltmır — qisas alır." },
       "type2": {
         "name": "King",
-      "note": "Summoner",
-      "type": ["İnsan"],
-      "stats": {
+        "note": "Summoner",
+        "type": ["İnsan"],
+        "isMulti": true,
+        "stats": {
         "health": 80,
         "shield": 10,
         "damage": 20,
