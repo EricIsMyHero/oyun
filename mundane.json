@@ -9,8 +9,8 @@
     "stats": {
       "health": "70",
       "shield": "0",
-      "damage": "25",
-      "sps": "23",
+      "damage": "19",
+      "sps": "17",
       "attackSpeed": "1,10s",
       "delay": "-",
       "mana": "3",
@@ -28,8 +28,8 @@
       "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+10% Can  |  70 » 77",
-      "level2": "+8% Hasar  |  25 » 27",
+      "level1": "+16% Can  |  70 » 81",
+      "level2": "+16% Hasar  |  19 » 22",
       "level3": "+10% Öz. Hız Bonusu  |  20% » 30%"
       },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
@@ -78,8 +78,8 @@
     "stats": {
       "health": "90",
       "shield": "0",
-      "damage": "20",
-      "sps": "20",
+      "damage": "16",
+      "sps": "16",
       "attackSpeed": "1,00s",
       "delay": "-",
       "mana": "4",
@@ -108,13 +108,12 @@
     "type": ["Robot"],
     "rarity": "Mundane",
     "note": "Support/Buffer",
-    "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "80",
       "shield": "20",
-      "damage": "16",
-      "sps": "20",
+      "damage": "17",
+      "sps": "21",
       "attackSpeed": "0,80s",
       "delay": "-",
       "mana": "5",
@@ -134,7 +133,7 @@
     "showlevels": {
       "level1": "+3% Öz. Saldırı Hızı  |  12% » 15%",
       "level2": "+5% Menzil  |  2400 » 2520",
-      "level3": "+12% Hasar  |  16 » 18"
+      "level3": "+18% Hasar  |  17 » 20"
       },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
@@ -218,14 +217,14 @@
     "stats": {
       "health": "400",
       "shield": "0",
-      "damage": "80",
-      "sps": "62",
-      "attackSpeed": "1,30s",
+      "damage": "62",
+      "sps": "50",
+      "attackSpeed": "1,25s",
       "delay": "-",
       "mana": "10",
       "number": "1"
     },
-    "trait": "<b>*Heyvan*</b> tipli kartlara ekstra <b>+25%</b> Hasar bonusu verər",
+    "trait": "<b>*Heyvan*</b> tipli kartlara ekstra <b>+26%</b> Hasar bonusu verər",
     "additionalStats": {
       "range": "1200",
       "speed": "800",
@@ -237,7 +236,7 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+3% Can  |  400 » 412",
+      "level1": "+4% Can  |  400 » 416",
       "level2": "+10% Vuruş Genişliyi  |  1100 » 1210",
       "level3": "+5% Hız  |  800 » 840"
       },
@@ -461,14 +460,14 @@
     "stats": {
       "health": "90",
       "shield": "0",
-      "damage": "40",
-      "sps": "27",
-      "attackSpeed": "1,50s",
+      "damage": "37",
+      "sps": "26",
+      "attackSpeed": "1,40s",
       "delay": "-",
       "mana": "5",
       "number": "1"
     },
-    "trait": "İlk <b>15</b> saniyə görünməz olaraq <b>+50%</b> Hasar bonusu qazanar.",
+    "trait": "İlk <b>15</b> saniyə görünməz olaraq <b>+50%</b> Hız bonusu qazanar.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -482,7 +481,7 @@
     "showlevels": {
       "level1": "+6% Saldırı Hızı  |  1,5s » 1,425s",
       "level2": "+10% Can  |  90 » 99",
-      "level3": "+12% Hasar  |  40 » 45"
+      "level3": "+14% Hasar  |  37 » 42"
       },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
@@ -496,8 +495,8 @@
     "stats": {
       "health": "50",
       "shield": "20",
-      "damage": "25",
-      "sps": "28",
+      "damage": "21",
+      "sps": "23",
       "attackSpeed": "0,90s",
       "delay": "-",
       "mana": "8",
@@ -517,7 +516,7 @@
     "showlevels": {
       "level1": "+5% Critic Chance  |  5% » 10%",
       "level2": "+4% Speed  |  1150 » 1200",
-      "level3": "+10% Range  |  1000% » 1100"
+      "level3": "+10% Range  |  1000 » 1100"
       },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
@@ -671,8 +670,8 @@
     "stats": {
       "health": "250",
       "shield": "80",
-      "damage": "45",
-      "sps": "30",
+      "damage": "44",
+      "sps": "29",
       "attackSpeed": "1,50s",
       "delay": "-",
       "mana": "11",
@@ -809,11 +808,11 @@
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": "400",
+      "health": "300",
       "shield": "0",
-      "damage": "48",
-      "sps": "27",
-      "attackSpeed": "1,80s",
+      "damage": "41",
+      "sps": "24",
+      "attackSpeed": "1,70s",
       "delay": "-",
       "mana": "11",
       "number": "1"
@@ -830,7 +829,7 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+4% Can  |  400 » 416",
+      "level1": "+5% Can  |  300 » 315",
       "level2": "+10% Hız  |  900 » 990",
       "level3": "+5% Saldırı Hızı  |  1,80s » 1,62s"
       },
