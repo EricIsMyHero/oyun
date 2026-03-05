@@ -9,14 +9,14 @@
     "stats": {
       "health": "240",
       "shield": "10",
-      "damage": "90",
-      "sps": "53",
+      "damage": "71",
+      "sps": "42",
       "attackSpeed": "1,70s",
       "delay": "-",
       "mana": "15",
       "number": "1"
     },
-    "trait": "<b>*İnsan*</b> tipli kartlara ekstra <b>+10%</b> Hasar bonusu",
+    "trait": "<b>*İnsan*</b> tipli kartlara ekstra <b>+16%</b> Hasar bonusu",
     "additionalStats": {
       "range": "1200",
       "speed": "900",
@@ -79,7 +79,7 @@
     "stats": {
       "health": "100",
       "shield": "50",
-      "damage": "2x10",
+      "damage": "2x11",
       "sps": "20",
       "attackSpeed": "0,1s",
       "delay": "1,2s",
@@ -184,14 +184,14 @@
     "stats": {
       "health": "50",
       "shield": "150",
-      "damage": "10-50",
-      "sps": "10-50",
+      "damage": "16",
+      "sps": "16",
       "attackSpeed": "1,00s",
       "delay": "-",
       "mana": "5",
       "number": "1"
     },
-    "trait": "Hasar vermədikcə <b>20</b> saniyə ərzində enerji yığar və ardınca <b>10</b> saniyə sonra partlayar",
+    "trait": "Hər 2 saniyədə +5% Hasar bonusu qazanar, hasar verəndə bu bonus silinər",
     "additionalStats": {
       "range": "1000",
       "speed": "1200",
@@ -219,8 +219,8 @@
     "stats": {
       "health": "110",
       "shield": "90",
-      "damage": "16",
-      "sps": "20",
+      "damage": "19",
+      "sps": "24",
       "attackSpeed": "0,80s",
       "delay": "-",
       "mana": "7",
@@ -296,7 +296,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Qalxanı qırıldıqdan sonrakı <b>3</b> saniyə ərzində hasar almazsa <b>+50</b> Qalxan qazanar",
+    "trait": "Qalxanı qırıldıqdan sonrakı <b>3</b> saniyə ərzində <b>+75</b> Qalxan qazanar",
     "additionalStats": {
       "range": "800",
       "speed": "700",
