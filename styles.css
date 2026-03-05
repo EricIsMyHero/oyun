@@ -424,10 +424,11 @@ button.active {
   color: #CCCCCC;
   opacity: 0.7;
   margin-left: 3px;
+  background: none;
+  -webkit-text-fill-color: initial;
 }
 
 /* EVOLUTION VƏ SUMMONER SİSTEMİ */
-
 /* Progress Bar Konteyner */
 .evolution-controls {
   position: absolute;      /* relative-dən absolute-ə */
