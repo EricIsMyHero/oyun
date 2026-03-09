@@ -4,6 +4,7 @@
     "type": ["İnsan"],
     "rarity": "Ascendant",
     "note": "Tank",
+    "group": "mission-1",
     "isAscendant": true,
     "isMulti": false,
     "stats": {
