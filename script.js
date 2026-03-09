@@ -983,11 +983,78 @@ document.addEventListener('DOMContentLoaded', () => {
     if (teamBuilderPanel) teamBuilderPanel.classList.add('hidden');
 });
 
+// ─────────────────────────────────────────────
+// INFO & GROUPS SEKSİYASI
+// ─────────────────────────────────────────────
+
+const infoTabGeneral  = document.getElementById('info-tab-general');
+const infoTabGroups   = document.getElementById('info-tab-groups');
+const groupsContent   = document.getElementById('groups-content');
+
+let groupsDataCache = null;
+
+// Tab keçidi
+function switchInfoTab(tab) {
+    const isGeneral = tab === 'general';
+    infoContent.classList.toggle('hidden', !isGeneral);
+    groupsContent.classList.toggle('hidden', isGeneral);
+    infoTabGeneral.classList.toggle('active', isGeneral);
+    infoTabGroups.classList.toggle('active', !isGeneral);
+    if (!isGeneral) loadGroups();
+}
+
+if (infoTabGeneral) infoTabGeneral.addEventListener('click', () => switchInfoTab('general'));
+if (infoTabGroups)  infoTabGroups.addEventListener('click',  () => switchInfoTab('groups'));
+
+// Qrupları yüklə
+async function loadGroups() {
+    if (groupsDataCache) {
+        displayGroups(groupsDataCache);
+        return;
+    }
+    groupsContent.innerHTML = '<p style="color:var(--muted); padding:20px;">Qrup məlumatları yüklənir...</p>';
+    try {
+        const res = await fetch('groups.json');
+        if (!res.ok) throw new Error('groups.json tapılmadı');
+        groupsDataCache = await res.json();
+        displayGroups(groupsDataCache);
+    } catch (err) {
+        groupsContent.innerHTML = `<p style="color:#ff6b6b; padding:20px;">Xəta: ${err.message}</p>`;
+    }
+}
+
+function displayGroups(groups) {
+    let html = '<div class="groups-grid">';
+    groups.forEach(group => {
+        const colorStyle = group.color ? `border-color: ${group.color}; --g-color: ${group.color};` : '';
+        html += `
+        <div class="group-card" style="${colorStyle}">
+            <div class="group-card-header">
+                <div class="group-icon-wrap" style="${group.color ? `background: ${group.color}22; border-color: ${group.color}55;` : ''}">
+                    <i class="fa-solid ${group.icon || 'fa-users'}"></i>
+                </div>
+                <div class="group-title-block">
+                    <h3 class="group-name">${group.name}</h3>
+                    ${group.description ? `<p class="group-desc">${group.description}</p>` : ''}
+                </div>
+                <span class="group-count">${group.members.length} kart</span>
+            </div>
+            <div class="group-members">
+                ${group.members.map(m => `<span class="group-member-tag">${m}</span>`).join('')}
+            </div>
+        </div>`;
+    });
+    html += '</div>';
+    groupsContent.innerHTML = html;
+}
+
 // Info düyməsinə klikləmə
 if (showInfoBtn) {
     showInfoBtn.addEventListener('click', async () => {
         mainMenu.classList.add('hidden');
         infoSection.classList.remove('hidden');
+        // Default ümumi tab
+        switchInfoTab('general');
         try {
             const response = await fetch('info.json');
             if (!response.ok) throw new Error('Məlumat yüklənə bilmədi');
@@ -1002,6 +1069,8 @@ if (backToMenuFromInfoBtn) {
     backToMenuFromInfoBtn.addEventListener('click', () => {
         infoSection.classList.add('hidden');
         mainMenu.classList.remove('hidden');
+        // Tabı sıfırla
+        switchInfoTab('general');
     });
 }
 
