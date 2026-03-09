@@ -500,7 +500,7 @@
       "attackSpeed": "0,90s",
       "delay": "-",
       "mana": "8",
-      "number": "1"
+      "number": "2"
     },
     "trait": "Biri ölərsə digəri <b>+200%</b> Can və <b>+100%</b> Hasar bonusu qazanar",
     "additionalStats": {
@@ -525,7 +525,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Assassin",
-    "isHybrid": false,
+    "group": "mission-1"
     "isMulti": false,
     "stats": {
       "health": "120",
@@ -595,7 +595,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Marksman/Burst",
-    "isHybrid": false,
+    "group": "mission-1"
     "isMulti": false,
     "stats": {
       "health": "120",
@@ -840,7 +840,7 @@
     "type": ["Varlıq"],
     "rarity": "Mundane",
     "note": "Tank/Protector",
-    "isHybrid": false,
+    "group": "mission-1"
     "isMulti": false,
     "stats": {
       "health": "400",
