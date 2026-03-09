@@ -1,3 +1,19 @@
+// ─── GitHub Şəkil Base URL ───────────────────────────────────────────────────
+const GITHUB_IMG_BASE = 'https://raw.githubusercontent.com/EricIsMyHero/oyun/main';
+
+// Kartın şəkil URL-ini qaytarır: group/name.jpg
+// Format: https://raw.githubusercontent.com/EricIsMyHero/oyun/main/mission-1/soldier.jpg
+function getCardImageUrl(data) {
+    const group = (data.group || '').toLowerCase().replace(/\s+/g, '-');
+    const name  = (data.name  || 'unknown').toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^a-z0-9\-]/g, '');
+    if (group) {
+        return `${GITHUB_IMG_BASE}/${group}/${name}.jpg`;
+    }
+    return `${GITHUB_IMG_BASE}/${name}.jpg`;
+}
+
 // DOM Elementləri
 const mainMenu = document.getElementById('main-menu');
 const cardsSection = document.getElementById('cards-section');
@@ -352,7 +368,7 @@ function createCardContent(data) {
                 <!-- CARD PANELİ — ilk açılan, şəkil burada -->
                 <div class="new-panel visible" data-panel-id="card-panel">
                     <div class="new-card-image-wrap">
-                        <img src="${rarityLower}.jpg" alt="${data.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img src="${getCardImageUrl(data)}" alt="${data.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="new-card-image-placeholder" style="display:none;">
                             <i class="fa-solid fa-user" style="font-size:64px; color:#8a92b2;"></i>
                         </div>
