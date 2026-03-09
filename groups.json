@@ -7,17 +7,17 @@
     "members": ["Soldier", "Bethe", "Blocker", "Aegis Guard", "Sniper", "Reacher", "Leila"]
   },
   {
-    "name": "Qrup adı 2",
+    "name": "UnderWorlds",
     "description": "İkinci qrupun təsviri burada olacaq.",
     "icon": "fa-skull",
     "color": "#ff6b6b",
-    "members": ["Kart 1", "Kart 2", "Kart 3"]
+    "members": ["Lord", "King", "Malvaris", "Dark Necromancer", "Nightfang", "Shadow Reaper"]
   },
   {
-    "name": "Qrup adı 3",
+    "name": "Magicians",
     "description": "Üçüncü qrupun təsviri.",
     "icon": "fa-wand-sparkles",
     "color": "#b39ddb",
-    "members": ["Kart A", "Kart B"]
+    "members": ["Chrono Mage", "Naar"]
   }
 ]
