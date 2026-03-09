@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Mission-1",
+    "description": "İlk missiyada bir araya gələn döyüşçü qrupu.",
+    "icon": "fa-shield-halved",
+    "color": "#4a9eff",
+    "members": ["Soldier", "Bethe", "Blocker", "Aegis Guard", "Reacher", "Sniper"]
+  },
+  {
+    "name": "Qrup adı 2",
+    "description": "İkinci qrupun təsviri burada olacaq.",
+    "icon": "fa-skull",
+    "color": "#ff6b6b",
+    "members": ["Kart 1", "Kart 2", "Kart 3"]
+  },
+  {
+    "name": "Qrup adı 3",
+    "description": "Üçüncü qrupun təsviri.",
+    "icon": "fa-wand-sparkles",
+    "color": "#b39ddb",
+    "members": ["Kart A", "Kart B"]
+  }
+]
