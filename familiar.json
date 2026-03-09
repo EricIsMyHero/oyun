@@ -249,7 +249,7 @@
     "type": ["İnsan"],
     "rarity": "Familiar",
     "note": "Marksman/Sharpshooter",
-    "isHybrid": false,
+    "group": "mission-1",
     "isMulti": false,
     "stats": {
       "health": "30",
