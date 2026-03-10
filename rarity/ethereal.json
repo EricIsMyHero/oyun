@@ -1,5 +1,148 @@
 [
   {
+    "name": "Ase",
+    "note": "Marksman",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "isDual": true,
+    "type1": {
+      "name": "Ase",
+      "note": "Marksman",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
+      "isMulti": true,
+      "stats": {
+        "health": "100",
+        "shield": "0",
+        "damage": "8",
+        "sps": "8",
+        "attackSpeed": "1,00s",
+        "delay": "-",
+        "mana": "5",
+        "number": "1"
+      },
+      "trait": "Hər 7 saniyədə bir parça qazanar 4 parça olduqda bir böyük robot yaradar",
+      "additionalStats": {
+        "range": "2500",
+        "speed": "1050",
+        "criticalChance": "15%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "0%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Giga-R",
+          "note": "Tank",
+          "type": ["Robot"],
+          "stats": {
+            "health": "500",
+            "shield": "500",
+            "damage": "42",
+            "sps": "35",
+            "attackSpeed": "1,20s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "İlk 22 saniyə 10% Hasar Azaltma qazanar",
+          "additionalStats": {
+            "range": "1000",
+            "speed": "800",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-"
+        }
+      ]
+    },
+    "type2": {
+      "name": "Ase",
+      "note": "Marksman",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
+      "isMulti": true,
+      "stats": {
+        "health": "100",
+        "shield": "0",
+        "damage": "8",
+        "sps": "8",
+        "attackSpeed": "1,00s",
+        "delay": "-",
+        "mana": "5",
+        "number": "1"
+      },
+      "trait": "Hər 7 saniyədə bir parça qazanar 4 parça olduqda bir böyük robot yaradar",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "800",
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Giga-R",
+          "note": "Marksman",
+          "type": ["Robot"],
+          "stats": {
+            "health": "300",
+            "shield": "300",
+            "damage": "72",
+            "sps": "40",
+            "attackSpeed": "1,80s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Hər kart öldürdükdə +3% Saldırı Hızı bonusu (Max:30%)",
+          "additionalStats": {
+            "range": "3500",
+            "speed": "800",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-"
+        }
+      ]
+    }
+  },
+  {
     "name": "King",
     "note": "Tank",
     "type": ["İnsan"],
