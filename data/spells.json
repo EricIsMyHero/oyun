@@ -1,0 +1,415 @@
+[
+  {
+    "name": "Giga Bomb",
+    "type": "Normal",
+    "rarity": "Legendary",
+    "treat": "Düşdüyü yerə ekstra 10x25/10x5 Yanma Hasarı verər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "1000",
+      "damageToCastle": "500",
+      "timeBetweenDamage": "-",
+      "range": "4000x4000",
+      "size": "2",
+      "energy": "10"
+    }
+  },
+  {
+    "name": "Spirit Of The Wild",
+    "type": "Normal",
+    "rarity": "Legendary",
+    "treat": "10 saniyəlik olduğu yerdəki kartların Can Yeniləmə, Can Çalma, Kritik Şansı və Qalxan yeniləmə etkilərini 100% azaldar",
+    "story": "-",
+    "stats": {
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "7000x7000",
+      "size": "1",
+      "energy": "4"
+    }
+  },
+  {
+    "name": "Illustration Spell",
+    "type": "Normal",
+    "rarity": "Epic",
+    "treat": "Rəqib kartları 20 saniyəlik dost kartlara çevirər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "4000x4000",
+      "size": "2",
+      "energy": "8"
+    }
+  },
+  {
+    "name": "Laser",
+    "type": "Normal",
+    "rarity": "Epic",
+    "treat": "2 və daha az kart varsa ekstra +50/+25 Hasar bonusu",
+    "story": "-",
+    "stats": {
+      "damageToCard": "250",
+      "damageToCastle": "125",
+      "timeBetweenDamage": "-",
+      "range": "3000x6000",
+      "size": "2",
+      "energy": "6"
+    }
+  },
+  {
+    "name": "Ember Strike",
+    "type": "Normal",
+    "rarity": "Epic",
+    "treat": "Vurulan kartlar -10% daha az Can qazanarlar",
+    "story": "-",
+    "stats": {
+      "damageToCard": "4x40",
+      "damageToCastle": "x25",
+      "timeBetweenDamage": "1,20s",
+      "range": "7000x7000",
+      "size": "2",
+      "energy": "6"
+    }
+  },
+  {
+    "name": "Nightfall Curse",
+    "type": "Normal",
+    "rarity": "Epic",
+    "treat": "İçindəki kartlar +40% daha çox hasar alar",
+    "story": "-",
+    "stats": {
+      "damageToCard": "7x12",
+      "damageToCastle": "7x5",
+      "timeBetweenDamage": "0,90s",
+      "range": "6000x6000",
+      "size": "2",
+      "energy": "5"
+    }
+  },
+  {
+    "name": "Present",
+    "type": "Normal",
+    "rarity": "Epic",
+    "treat": "Rəqib karta ekstra 10%-150% Hasar bonusu, 1% Şansla isə anında öldürər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "50",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "2000x2000",
+      "size": "1",
+      "energy": "2"
+    }
+  },
+  {
+    "name": "Meteor",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Nə qədər uzağa atılarsa -20%-80% daha az hasar verər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "500",
+      "damageToCastle": "100",
+      "timeBetweenDamage": "-",
+      "range": "4000x4000",
+      "size": "2",
+      "energy": "5"
+    }
+  },
+  {
+    "name": "Roots",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Rəqib kartları 15% Yavaşladar",
+    "story": "-",
+    "stats": {
+      "damageToCard": "15x10",
+      "damageToCastle": "15x4",
+      "timeBetweenDamage": "0,80s",
+      "range": "6000x6000",
+      "size": "1",
+      "energy": "4"
+    }
+  },
+  {
+    "name": "Lunar Mirrage",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "-",
+    "story": "Olduğu yerdə dost kartların kopyalarını çıxardar, kartların ömrü 27 saniyə olar",
+    "stats": {
+      "damageToCard": "140",
+      "damageToCastle": "55",
+      "timeBetweenDamage": "-",
+      "range": "4000x4000",
+      "size": "1",
+      "energy": "3"
+    }
+  },
+  {
+    "name": "Shock Bomb",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Rəqib kartları 1,5 saniyəlik sərsəmlətər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "75",
+      "damageToCastle": "25",
+      "timeBetweenDamage": "-",
+      "range": "2500x2500",
+      "size": "1",
+      "energy": "3"
+    }
+  },
+  {
+    "name": "Shield Of Serenity",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Dost kartlara ekstra +20% Qalxan verər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "6000x6000",
+      "size": "1",
+      "energy": "2"
+    }
+  },
+  {
+    "name": "Healing Light",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Dost kartları 30% sağaldar, bütün mənfi etkiləri silər",
+    "story": "-",
+    "stats": {
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "-",
+      "range": "8000x8000",
+      "size": "1",
+      "energy": "1"
+    }
+  },
+  {
+    "name": "Crystalline Prison",
+    "type": "Normal",
+    "rarity": "Common",
+    "treat": "Rəqib kartları 8 saniyəlik həbs edər, rəqib kart hasar almaz və verməz",
+    "story": "-",
+    "stats": {
+      "damageToCard": "8x5",
+      "damageToCastle": "-",
+      "timeBetweenDamage": "1,00s",
+      "range": "2000x2000",
+      "size": "1",
+      "energy": "1"
+    }
+  },
+  {
+    "name": "Dark Orb",
+    "type": "Building",
+    "rarity": "Legendary",
+    "treat": "Qırıldıqda bütün rəqib kartlara hasar verər",
+    "story": "-",
+    "stats": {
+      "health": "100",
+      "lifetime": "100s",
+      "damageToCard": "500",
+      "damageToCastle": "250",
+      "attackSpeed": "-",
+      "range": "100000x100000",
+      "size": "2",
+      "energy": "10"
+    }
+  },
+  {
+    "name": "Reflector",
+    "type": "Building",
+    "rarity": "Epic",
+    "treat": "Alınan hasarın 60%-ni rəqibə ötürər",
+    "story": "-",
+    "stats": {
+      "health": "1500",
+      "lifetime": "100s",
+      "damageToCard": "60%",
+      "damageToCastle": "40%",
+      "attackSpeed": "-",
+      "range": "15000x15000",
+      "size": "2",
+      "energy": "5"
+    }
+  },
+  {
+    "name": "Guard Post",
+    "type": "Building",
+    "rarity": "Common",
+    "treat": "-",
+    "story": "Kənd qoruycuları çox uzun vaxt böyük savaşlara qaldı.",
+    "stats": {
+      "health": "150",
+      "lifetime": "35s",
+      "damageToCard": "30",
+      "damageToCastle": "5",
+      "attackSpeed": "0,80s",
+      "range": "1500",
+      "size": "2",
+      "energy": "4"
+    }
+  },
+  {
+    "name": "Watchtower",
+    "type": "Building",
+    "rarity": "Common",
+    "treat": "Işarə: +10% Dostlar Hasar",
+    "story": "Qara dağlardan uzaq görülə bilir. Qalanın gözləri.",
+    "stats": {
+      "health": "100",
+      "lifetime": "50s",
+      "damageToCard": "10",
+      "damageToCastle": "0",
+      "attackSpeed": "2,00s",
+      "range": "5000",
+      "size": "2",
+      "energy": "3"
+    }
+  },
+  {
+    "name": "Ice Tower",
+    "type": "Building",
+    "rarity": "Epic",
+    "treat": "Rəqib kartları 25% Yavaşladar",
+    "story": "-",
+    "stats": {
+      "health": "800",
+      "lifetime": "100s",
+      "damageToCard": "22",
+      "damageToCastle": "-",
+      "attackSpeed": "1,40s",
+      "range": "6000x6000",
+      "size": "1",
+      "energy": "4"
+    }
+  },
+  {
+    "name": "Stone Wall",
+    "type": "Building",
+    "rarity": "Epic",
+    "treat": "Bir kolidoru bağlayar",
+    "story": "Qadim məbəd — sehrəvi enerjinin ocağı.",
+    "stats": {
+      "health": "4000",
+      "lifetime": "200s",
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "attackSpeed": "-",
+      "range": "-",
+      "size": "1",
+      "energy": "3"
+    }
+  },
+  {
+    "name": "Dragon Nest",
+    "type": "Building",
+    "rarity": "Legendary",
+    "treat": "Hər 30 saniyədə bir əjdarha çıxardar. (Fire Dragon-60%, Shadow Dragon-40%)",
+    "story": "-",
+    "stats": {
+      "health": "880",
+      "lifetime": "110s",
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "attackSpeed": "-",
+      "range": "-",
+      "size": "3x3",
+      "energy": "11"
+    },
+    "isMulti": true,
+    "forms": [
+      {
+        "name": "Fire Dragon",
+        "type": "Heyvan",
+        "note": "Specialist",
+        "stats": {
+          "health": "450",
+          "shield": "0",
+          "damage": "4x12",
+          "sps": "48",
+          "attackSpeed": "0,20s",
+          "delay": "1,40s",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Hər hücumda <b>2x4</b> Yanma hasarı verir. (2s, 4 hasar/s).",
+        "additionalStats": {
+          "range": "2500",
+          "speed": "900",
+          "criticalChance": "10%",
+          "criticDamage": "1.5x",
+          "lifestealChance": "0%",
+          "lifesteal": "0%",
+          "damageminimiser": "0%",
+          "dodge": "10%"
+        },
+        "showlevels": {
+          "level1": "+15% Hasar  |  85 » 98",
+          "level2": "+20% Yanma Hasarı  |  15/s » 18/s",
+          "level3": "+5% Kritik Şans  |  10% » 15%"
+        },
+        "story": "Yuvadan çıxan ilk əjdaha — alov nəfəsi ilə düşmənləri yandırır. Göylərdə sərbəst uçaraq qarşısına çıxan hər şeyi məhv edir."
+      },
+      {
+        "name": "Shadow Dragon",
+        "type": "Heyvan",
+        "note": "Specialist",
+        "stats": {
+          "health": "380",
+          "shield": "0",
+          "damage": "90",
+          "sps": "60",
+          "attackSpeed": "1,50s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "İlk 5 saniyə <b>görünməz</b>dir. Hücumlarında 30% şansla <b>Dondurma</b> (2s).",
+        "additionalStats": {
+          "range": "2800",
+          "speed": "1100",
+          "criticalChance": "15%",
+          "criticDamage": "2.0x",
+          "lifestealChance": "10%",
+          "lifesteal": "25%",
+          "damageminimiser": "10%",
+          "dodge": "20%"
+        },
+        "showlevels": {
+          "level1": "+10% Dondurma Şansı  |  30% » 40%",
+          "level2": "+100 Can  |  380 » 480",
+          "level3": "+2s Görünməzlik  |  5s » 7s"
+        },
+        "story": "İkinci əjdaha — kölgələrdə gizlənərək düşmənlərə sürpriz hücum edir. Onun qaranlıq gücü heç kimi sağ buraxmır."
+      }
+    ]
+  },
+  {
+    "name": "Obsidian Fortress",
+    "type": "Building",
+    "rarity": "Legendary",
+    "treat": "Yaxınındakı kartlar büyülərdən 50% daha az hasar alar.",
+    "story": "-",
+    "stats": {
+      "health": "400",
+      "lifetime": "80s",
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "attackSpeed": "-",
+      "range": "5000x5000",
+      "size": "2",
+      "energy": "5"
+    }
+  }
+]

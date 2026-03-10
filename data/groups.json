@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Mission-1",
+    "description": "İlk missiyada bir araya gələn döyüşçü qrupu.",
+    "icon": "fa-shield-halved",
+    "color": "#4a9eff",
+    "members": ["Soldier", "Bethe", "Blocker", "Aegis Guard", "Sniper", "Reacher", "Leila"]
+  },
+  {
+    "name": "UnderWorlds",
+    "description": "İkinci qrupun təsviri burada olacaq.",
+    "icon": "fa-skull",
+    "color": "#ff6b6b",
+    "members": ["Lord", "King", "Malvaris", "Dark Necromancer", "Nightfang", "Shadow Reaper"]
+  },
+  {
+    "name": "Magicians",
+    "description": "Üçüncü qrupun təsviri.",
+    "icon": "fa-wand-sparkles",
+    "color": "#b39ddb",
+    "members": ["Chrono Mage", "Naar"]
+  }
+]
