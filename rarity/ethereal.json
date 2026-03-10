@@ -1,106 +1,108 @@
 [
   {
     "name": "King",
-    "note": "Summoner",
+    "note": "Tank",
     "type": ["İnsan"],
     "rarity": "Ethereal",
     "isDual": true,
     "type1": {
       "name": "King",
-      "note": "Summoner",
-      "type": ["İnsan"],
+      "note": "Tank",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
       "stats": {
-        "health": "80",
-        "shield": "10",
-        "damage": "20",
-        "sps": "22",
+        "health": "370",
+        "shield": "160",
+        "damage": "30",
+        "sps": "30",
         "attackSpeed": "1,00s",
-        "delay": "2,00s",
-        "mana": "12",
+        "delay": "-",
+        "mana": "15",
         "number": "1"
       },
-      "trait": "Aktivasiya olduqda <b>4</b> Gardiyan çağırır. Hər Gardiyan <b>+8</b> Hasar verir.",
+      "trait": "Yanındakı kartlara +25% Saldırı Hızı bonusu verər",
       "additionalStats": {
-        "range": "900",
-        "speed": "1400",
-        "criticalChance": "3%",
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "5%",
         "criticDamage": "1.5x",
         "lifestealChance": "0%",
         "lifesteal": "0%",
-        "damageminimiser": "5%",
+        "damageminimiser": "0%",
         "dodge": "0%"
       },
       "showlevels": {
-        "level1": "+5% Can  |  80 » 84",
-        "level2": "+1 Əlavə Gardiyan",
-        "level3": "+15% Gardiyan Hasarı"
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
       },
-      "story": "Taxtını itirəndə King'in içindəki qaranlıq oyanır. O artıq sağaltmır — qisas alır."
+      "story": "-"
     },
     "type2": {
       "name": "King",
-      "note": "Summoner",
-      "type": ["İnsan"],
+      "note": "Tank",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
-        "health": "80",
-        "shield": "10",
-        "damage": "20",
-        "sps": "22",
+        "health": "370",
+        "shield": "160",
+        "damage": "30",
+        "sps": "30",
         "attackSpeed": "1,00s",
-        "delay": "2,00s",
-        "mana": "12",
+        "delay": "-",
+        "mana": "15",
         "number": "1"
       },
-      "trait": "Aktivasiya olduqda <b>4</b> Gardiyan çağırır. Hər Gardiyan <b>+8</b> Hasar verir.",
+      "trait": "Hər 12 saniyədə bir *Guard* çağırar və 2 saniyəlik +5% Hasar azaltma qazanar",
       "additionalStats": {
-        "range": "900",
-        "speed": "1400",
-        "criticalChance": "3%",
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "5%",
         "criticDamage": "1.5x",
         "lifestealChance": "0%",
-        "lifesteal": "0%",
-        "damageminimiser": "5%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
         "dodge": "0%"
       },
       "showlevels": {
-        "level1": "+5% Can  |  80 » 84",
-        "level2": "+1 Əlavə Gardiyan",
-        "level3": "+15% Gardiyan Hasarı"
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
       },
-      "story": "Taxtını itirəndə King'in içindəki qaranlıq oyanır. O artıq sağaltmır — qisas alır.",
+      "story": "-",
       "forms": [
         {
-          "name": "King — Gardiyan II",
+          "name": "Guard",
           "note": "Elite Summoner",
-          "type": ["İnsan"],
+          "type": ["Spirit"],
           "stats": {
-            "health": "95",
-            "shield": "15",
-            "damage": "28",
-            "sps": "30",
-            "attackSpeed": "0,90s",
-            "delay": "1,50s",
-            "mana": "15",
+            "health": "80",
+            "shield": "80",
+            "damage": "10",
+            "sps": "13",
+            "attackSpeed": "0,80s",
+            "delay": "-",
+            "mana": "-",
             "number": "1"
           },
-          "trait": "Aktivasiya olduqda <b>4</b> Elite Gardiyan çağırır. Hər Elite Gardiyan <b>+15</b> Hasar verir.",
+          "trait": "Qalxana ekstra +30% Hasar bonusu",
           "additionalStats": {
-            "range": "900",
-            "speed": "1400",
-            "criticalChance": "5%",
-            "criticDamage": "1.75x",
+            "range": "1000",
+            "speed": "1100",
+            "criticalChance": "0%",
+            "criticDamage": "1.5x",
             "lifestealChance": "0%",
             "lifesteal": "0%",
-            "damageminimiser": "10%",
-            "dodge": "5%"
+            "damageminimiser": "0%",
+            "dodge": "0%"
           },
           "showlevels": {
-            "level1": "+5% Can  |  95 » 100",
-            "level2": "+2 Əlavə Elite Gardiyan",
-            "level3": "+20% Gardiyan Hasarı"
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
           },
-          "story": "Gardiyanlar evolyusiya keçirdi. Artıq onlar sıradan mühafizəçi deyil — ölüm mələkləridir."
+          "story": "-"
         }
       ]
     }
