@@ -69,6 +69,98 @@ function toggleCardButtons(isVisible) {
 }
 
 // ─────────────────────────────────────────────
+// KART VERİLƏRİNİ YÜKLƏ VƏ RENDER ET
+// ─────────────────────────────────────────────
+
+async function fetchAndRender(rarity) {
+    if (!cardsContainer) return;
+
+    cardsContainer.innerHTML = '<p style="color:var(--muted); padding:20px;">Kartlar yüklənir...</p>';
+
+    try {
+        if (allCardsData.length === 0) {
+            const response = await fetch('data/cards.json');
+            if (!response.ok) throw new Error('cards.json tapılmadı');
+            allCardsData = await response.json();
+        }
+        activeRarity = rarity || 'all';
+        filterAndRender();
+    } catch (error) {
+        cardsContainer.innerHTML = `<p style="color:#ff6b6b; padding:20px;">Xəta: ${error.message}</p>`;
+    }
+}
+
+function filterAndRender() {
+    if (!cardsContainer) return;
+
+    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+    let filtered = allCardsData;
+
+    // Nadirlik filtri
+    if (activeRarity !== 'all') {
+        filtered = filtered.filter(card =>
+            card.rarity && card.rarity.toLowerCase() === activeRarity.toLowerCase()
+        );
+    }
+
+    // Axtarış filtri
+    if (searchTerm) {
+        filtered = filtered.filter(card =>
+            card.name && card.name.toLowerCase().includes(searchTerm)
+        );
+    }
+
+    renderCards(filtered);
+}
+
+function renderCards(cards) {
+    if (!cardsContainer) return;
+
+    cardsContainer.innerHTML = '';
+
+    if (cards.length === 0) {
+        cardsContainer.innerHTML = '<p style="color:var(--muted); padding:20px;">Kart tapılmadı.</p>';
+        return;
+    }
+
+    const isTeamMode = cardsSection.classList.contains('team-mode-active');
+
+    cards.forEach(card => {
+        const cardEl = document.createElement('div');
+        cardEl.className = `card rarity-${(card.rarity || 'common').toLowerCase()}`;
+
+        const stats = card.stats || {};
+
+        cardEl.innerHTML = `
+            <div class="card-header">
+                <h3 class="card-name">${card.name || 'Bilinməyən'}</h3>
+                <span class="card-rarity">${card.rarity || ''}</span>
+            </div>
+            ${card.image ? `<img class="card-image" src="${card.image}" alt="${card.name}" loading="lazy">` : ''}
+            <div class="card-stats">
+                ${stats.health  !== undefined ? `<div class="stat"><span class="stat-label">❤️ HP</span><span class="stat-value">${stats.health}</span></div>`  : ''}
+                ${stats.shield  !== undefined ? `<div class="stat"><span class="stat-label">🛡️ Shield</span><span class="stat-value">${stats.shield}</span></div>`  : ''}
+                ${stats.damage  !== undefined ? `<div class="stat"><span class="stat-label">⚔️ DMG</span><span class="stat-value">${stats.damage}</span></div>`  : ''}
+                ${stats.sps     !== undefined ? `<div class="stat"><span class="stat-label">💥 DPS</span><span class="stat-value">${stats.sps}</span></div>`     : ''}
+                ${stats.mana    !== undefined ? `<div class="stat"><span class="stat-label">🔮 Mana</span><span class="stat-value">${stats.mana}</span></div>`    : ''}
+            </div>
+            ${card.description ? `<p class="card-description">${card.description}</p>` : ''}
+            <button class="add-to-team-btn ${isTeamMode ? '' : 'hidden-team-btn'}" data-card-name="${card.name}">
+                + Komandaya Əlavə Et
+            </button>
+        `;
+
+        const addBtn = cardEl.querySelector('.add-to-team-btn');
+        if (addBtn) {
+            addBtn.addEventListener('click', () => addToTeam(card));
+        }
+
+        cardsContainer.appendChild(cardEl);
+    });
+}
+
+// ─────────────────────────────────────────────
 // TEAM BUILDER
 // ─────────────────────────────────────────────
 
