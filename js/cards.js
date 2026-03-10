@@ -319,7 +319,7 @@ function createCardContent(data) {
                             <div class="stat-item"><b><i class="fa-solid fa-shield-halved"></i> Shield</b><span>${data.stats.shield || 0}</span></div>
                             <div class="stat-item"><b><i class="fa-solid fa-hand-fist"></i> DMG</b><span>${data.stats.damage || 0}</span></div>
                             <div class="stat-item"><b><i class="fa-solid fa-bolt"></i> DPS</b><span>${data.stats.sps || 0}</span></div>
-                            <div class="stat-item"><b><i class="fa-solid fa-tachometer-alt"></i> Atk Spd</b><span>${data.stats.attackSpeed || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-tachometer-alt"></i> Attack Speed</b><span>${data.stats.attackSpeed || '-'}</span></div>
                             <div class="stat-item"><b><i class="fa-solid fa-clock"></i> Delay</b><span>${data.stats.delay || '-'}</span></div>
                             <div class="stat-item"><b><i class="fa-solid fa-certificate"></i> Mana</b><span>${data.stats.mana || 0}</span></div>
                             <div class="stat-item"><b><i class="fa-solid fa-user"></i> Count</b><span>${data.stats.number || 0}</span></div>
@@ -327,12 +327,12 @@ function createCardContent(data) {
                         <div class="stats-sub-panel" data-stats-panel="other">
                             <div class="stat-item"><b><i class="fa-solid fa-road"></i> Range</b><span>${data.additionalStats?.range || '-'}</span></div>
                             <div class="stat-item"><b><i class="fa-solid fa-person-running"></i> Speed</b><span>${data.additionalStats?.speed || '-'}</span></div>
-                            <div class="stat-item"><b><i class="fa-solid fa-percent"></i> Crit%</b><span>${data.additionalStats?.criticalChance || '-'}</span></div>
-                            <div class="stat-item"><b><i class="fa-solid fa-crosshairs"></i> Crit DMG</b><span>${data.additionalStats?.criticDamage || '-'}</span></div>
-                            <div class="stat-item"><b><i class="fa-solid fa-percent"></i> LS%</b><span>${data.additionalStats?.lifestealChance || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-percent"></i> Critical Chance</b><span>${data.additionalStats?.criticalChance || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-crosshairs"></i> Critical DMG</b><span>${data.additionalStats?.criticDamage || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-percent"></i> Lifesteal Chance</b><span>${data.additionalStats?.lifestealChance || '-'}</span></div>
                             <div class="stat-item"><b><i class="fa-solid fa-skull-crossbones"></i> Lifesteal</b><span>${data.additionalStats?.lifesteal || '-'}</span></div>
-                            <div class="stat-item"><b><i class="fa-solid fa-helmet-un"></i> DMG Red</b><span>${data.additionalStats?.damageminimiser || '-'}</span></div>
-                            <div class="stat-item"><b><i class="fa-solid fa-wind"></i> Dodge</b><span>${data.additionalStats?.dodge || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-helmet-un"></i> DMG Reduction</b><span>${data.additionalStats?.damageminimiser || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-wind"></i> Dodge Chance</b><span>${data.additionalStats?.dodge || '-'}</span></div>
                         </div>
                     </div>
                 </div>
