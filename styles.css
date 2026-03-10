@@ -1,0 +1,1316 @@
+:root {
+  --bg: #0f1220;
+  --card: #151934;
+  --muted: #8a92b2;
+  --text: #eaf0ff;
+  --ring: #ffffff20;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  /* Nadirlik rəngləri */
+  --mundane: #CCCCCC;
+  --familiar: #4CAF50;
+  --arcane: #7E57C2;
+  --relic: #E53935;
+  --ascendant: #ff9800;
+  --apex: #FBC02D;
+  --ethereal: #ff007f;
+}
+
+* { box-sizing: border-box }
+
+html, body { 
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 700px at 20% 0%, #1a1f3f, #0f1220 60%);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, Segoe UI, Roboto;
+  overflow-x: hidden;
+}
+
+.wrap { 
+  max-width: 1364px; 
+  margin: 32px auto; 
+  padding: 16px;
+  transition: margin-right 0.3s ease;
+}
+
+header { 
+  display: flex; 
+  gap: 16px; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 30px; 
+}
+
+h1 { 
+  font-size: 28px; 
+  margin: 0; 
+  letter-spacing: .2px; 
+}
+
+.hint { 
+  color: var(--muted); 
+  font-size: 14px; 
+}
+
+.controls { 
+  display: flex; 
+  gap: 10px; 
+  flex-wrap: wrap; 
+  margin-bottom: 8px; 
+}
+
+button {
+  background: #22284f; 
+  color: var(--text);
+  border: 1px solid #2f3769; 
+  border-radius: 12px;
+  padding: 10px 14px; 
+  cursor: pointer;
+  box-shadow: var(--shadow); 
+  transition: .25s ease;
+}
+
+button:hover { 
+  transform: translateY(-1px); 
+  box-shadow: 0 14px 40px rgba(0,0,0,.45); 
+}
+
+button.active { 
+  background: #394073; 
+  border-color: #5d66a2; 
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  justify-items: center;
+  padding-bottom: 40px;
+  overflow: visible;
+}
+
+/* VAHİD KART ÖLÇÜLƏRİ - Vizual eynilik üçün əsas */
+.card-container,
+.card-single {
+  width: 100%;
+  height: 360px;
+  border-radius: 8px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-container {
+  border-radius: 8px;
+  position: relative;
+}
+
+/* İKİÜZLÜ KARTIN DAXİLİ STRUKTURU */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.card-container.is-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* ÖN, ARXA VƏ TƏKÜZLÜ KARTLARIN VAHİD GÖRÜNÜŞÜ */
+.card-front,
+.card-back,
+.card-single {
+  background: var(--card);
+  border: 1px solid #2a2f57;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  height: 100%;
+}
+
+/* Evolution controls position:absolute float edir, padding lazım deyil */
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0; /* width/height 100% yerinə tam oturması üçün */
+  backface-visibility: hidden;
+  margin: 0;
+}
+
+.card-back { 
+  transform: rotateY(180deg); 
+}
+
+/* KARTIN MƏZMUNU */
+.card-content-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* center əvəzinə */
+  margin: 8px 0 12px;          /* yuxarı yaxınlaşdı */
+}
+
+
+/* BAŞLIQ VƏ ETİKETLƏR */
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 24px;
+}
+
+.name { 
+  font-weight: 700; 
+  letter-spacing: .3px; 
+}
+
+.badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #bfc7ff;
+}
+
+/* FİRLATMA DÜYMƏSİ */
+.flip-button {
+  position: absolute;
+  right: 12px;
+  bottom: 12px; 
+  z-index: 20;
+  background: rgba(43, 50, 100, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* ASCENDANT TRANSFORM DÜYMƏSİ */
+.transform-button {
+  position: absolute;
+  right: 50px;
+  bottom: 12px; 
+  z-index: 20;
+  background: linear-gradient(135deg, #ff9800, #ff6f00);
+  border: 1px solid rgba(255, 152, 0, 0.5);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.4);
+}
+
+.transform-button:hover { 
+  transform: scale(1.1); 
+  background: linear-gradient(135deg, #ff6f00, #ff9800);
+  box-shadow: 0 0 15px rgba(255, 152, 0, 0.6);
+}
+
+.transform-button::before {
+  content: '⚡';
+  font-size: 18px;
+  color: white;
+}
+
+/* Transform aktiv olduqda */
+.card-container.is-upgraded .transform-button {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  border-color: rgba(76, 175, 80, 0.5);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+}
+
+.card-container.is-upgraded .transform-button::before {
+  content: '↺';
+}
+
+.flip-button:hover { 
+  transform: scale(1.1); 
+  background: #394073;
+}
+
+.flip-button::before {
+  content: '⇌';
+  font-size: 18px;
+  color: white;
+}
+
+/* STATİSTİKALAR */
+.card-tabs { 
+  display: flex; 
+  justify-content: center; 
+  margin-bottom: 6px;
+  margin-top: 8px;
+  gap: 6px; 
+}
+
+.card-tabs button {
+  background: #1e244a; 
+  color: #c9d3ff; 
+  border: 1px solid #2b3264;
+  font-size: 10px; 
+  padding: 4px 10px; 
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.card-tabs button.active { 
+  background: #2b3264; 
+  color: #fff; 
+  border-color: #5d66a2;
+}
+
+.stats-section {
+  display: none;
+  border-radius: 10px;
+  padding: 8px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.stats-section.visible {
+    display: grid;
+    margin-bottom: 8px;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.stats-section[data-section-id="trait"].visible,
+.stats-section[data-section-id="showlevels"].visible,
+.stats-section[data-section-id="story-section"].visible {
+    display: block;
+}
+
+.stat-item b { 
+  display: block; 
+  font-size: 12px; 
+  color: #c6ceff; 
+  margin-bottom: 3px; 
+}
+
+.stat-item span { 
+  font-size: 13px; 
+}
+
+.story-content {
+    font-size: 13px;
+    line-height: 1.5;
+    max-height: 160px;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+/* NADİRLİK RƏNGLƏRİ VƏ EFFEKTLƏRİ */
+.r-mundane { --glow: var(--mundane); }
+.r-familiar { --glow: var(--familiar); }
+.r-arcane { --glow: var(--arcane); }
+.r-relic { --glow: var(--relic); }
+.r-ascendant { --glow: var(--ascendant); }
+.r-apex { --glow: var(--apex); }
+.r-ethereal { --glow: var(--ethereal); }
+
+.card-container:hover, .card-single:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px var(--glow);
+  border-color: var(--glow);
+}
+
+/* ADLARIN RƏNGLƏRİ */
+.r-mundane .name { color: var(--mundane); }
+.r-familiar .name { color: var(--familiar); }
+.r-arcane .name { color: var(--arcane); }
+.r-relic .name { color: var(--relic); }
+.r-ascendant .name { color: var(--ascendant); }
+.r-apex .name { color: var(--apex); }
+
+/* ETHEREAL ÜÇÜN XÜSUSİ EFFEKT */
+.r-ethereal .name {
+  color: var(--ethereal);
+  background: linear-gradient(90deg, #ff007f, #ff9a9e, #fad0c4, #ffd1ff, #ff007f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 600% 100%;
+  animation: ethereal-animate 10s linear infinite;
+}
+
+@keyframes ethereal-animate {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* HALO EFFEKTLƏRİ */
+.card-front::after,
+.card-single::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 12px;
+  pointer-events: none;
+  border: 1px solid var(--ring);
+  z-index: -1;
+}
+
+/* MENYU */
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.main-menu h1 {
+  font-size: 48px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 15px rgba(255,255,255,.2);
+}
+
+.menu-buttons { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  width: 80%; 
+  max-width: 300px; 
+}
+
+.back-button {
+  background: #22284f; 
+  border: 1px solid var(--muted);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  color: var(--text);
+  border-color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* ETHEREAL PARILTISI */
+.card-glow {
+  position: absolute;
+  inset: -8px;
+  border-radius: 16px;
+  pointer-events: none;
+  background: radial-gradient(120px 80px at 80% 0%, rgba(255,0,127,.35), transparent 70%),
+              radial-gradient(120px 80px at 0% 100%, rgba(255,220,120,.25), transparent 70%);
+  filter: blur(8px);
+  opacity: .9;
+  z-index: -1;
+}
+
+.name .note {
+  font-size: 0.75em;
+  color: #CCCCCC;
+  opacity: 0.7;
+  margin-left: 3px;
+  background: none;
+  -webkit-text-fill-color: initial;
+}
+
+/* EVOLUTION VƏ SUMMONER SİSTEMİ */
+/* Progress Bar Konteyner */
+.evolution-controls {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.85);
+  transform-origin: center bottom;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(10, 14, 38, 0.88);
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.18);
+  z-index: 10;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.evolution-controls:hover {
+  opacity: 1;
+  transform: translateX(-50%) scale(0.9);
+}
+
+/* Ox Düymələri */
+.evolution-arrow {
+  background: rgba(76, 175, 80, 0.55);
+  border: 1px solid rgba(100, 220, 100, 0.7);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #ccffcc;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 0;
+  box-shadow: 0 0 6px rgba(76, 200, 80, 0.4);
+}
+
+.evolution-arrow:hover {
+  background: rgba(76, 200, 80, 0.80);
+  box-shadow: 0 0 10px rgba(76, 200, 80, 0.65);
+  transform: scale(1.12);
+}
+
+.evolution-arrow:disabled {
+  background: rgba(100, 100, 100, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Progress Bar */
+.evolution-progress {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.progress-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.30);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.progress-dot.active {
+  background: #5dde60;
+  border-color: #88f08a;
+  box-shadow: 0 0 6px rgba(93, 222, 96, 0.85);
+  transform: scale(1.35);
+}
+
+/* Stage Info */
+.stage-info {
+  font-size: 11px;
+  color: #c9d3ff;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+/* Summoner üçün fərqli rəng */
+.card-container.is-summoner .evolution-arrow {
+  background: linear-gradient(135deg, #9C27B0, #BA68C8);
+  border-color: rgba(156, 39, 176, 0.5);
+  box-shadow: 0 0 8px rgba(156, 39, 176, 0.3);
+}
+
+.card-container.is-summoner .evolution-arrow:hover {
+  box-shadow: 0 0 12px rgba(156, 39, 176, 0.5);
+}
+
+.card-container.is-summoner .progress-dot.active {
+  background: linear-gradient(135deg, #9C27B0, #BA68C8);
+  border-color: #9C27B0;
+  box-shadow: 0 0 10px rgba(156, 39, 176, 0.6);
+}
+#cards-layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* TEAM MODE AKTİV OLDUQDA LAYOUT */
+#cards-section.team-mode-active #cards-layout-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+/* KOMANDA PANELİ */
+#team-builder-panel {
+    width: 300px;
+    min-width: 300px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+/* KARTLARIN OLDUĞU ƏSAS HİSSƏ */
+#cards-wrapper { 
+    flex-grow: 1; 
+    min-width: 0;
+}
+
+/* TEAM MODE AKTİV OLDUQDA KART QRİPİNİ DƏYİŞDİR */
+#cards-section.team-mode-active #cards.grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+}
+
+#team-builder-panel h2 {
+    font-size: 20px;
+    border-bottom: 2px solid var(--ring);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.team-cards-list {
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.team-card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--ring);
+}
+
+.team-card-item:last-child {
+  border-bottom: none;
+}
+
+.remove-from-team-btn {
+  background: #e53935;
+  color: var(--text);
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background .2s;
+}
+
+.remove-from-team-btn:hover {
+  background: #c62828;
+}
+
+.stats-summary {
+  padding-top: 15px;
+  border-top: 2px solid var(--ring);
+}
+
+.stats-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+#clear-team-btn {
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* DÜYMƏLƏRİN YERLƏŞMƏSİ */
+.card-buttons-container {
+    position: absolute;
+    bottom: 12px;
+    left: 12px; /* Sol tərəfə çəkildi ki, fırlatma düyməsi ilə toqquşmasın */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 10; 
+}
+
+/* Ümumi Düymə Stili */
+.add-to-team-btn {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.add-to-team-btn:hover {
+    background-color: #c42c2c;
+}
+
+.hidden { 
+  display: none !important; 
+}
+
+.hidden-team-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ÜMUMİ XƏTA QARŞISININ ALINMASI */
+body, .wrap { 
+  overflow-x: hidden; 
+}
+
+
+/* ─────────────────────────────────────
+   SPELLS SEKSİYA STİLLƏRİ
+   ───────────────────────────────────── */
+
+/* Spell card base — mirrors .card-single / .card-front */
+.spell-card {
+  background: var(--card);
+  border: 1px solid #2a2f57;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  height: 320px;
+  width: 100%;
+  position: relative;
+}
+
+/* spell-treat & spell-story sections must be block, not grid */
+.stats-section[data-section-id="spell-treat"].visible,
+.stats-section[data-section-id="spell-story"].visible {
+  display: block;
+}
+
+/* Filtr bar separator */
+.spell-separator {
+  color: var(--muted);
+  font-size: 18px;
+  align-self: center;
+  user-select: none;
+}
+
+/* Type badge (Normal / Building) */
+.spell-type-badge {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  margin-left: 6px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.spell-type-normal {
+  background: rgba(126, 87, 194, 0.25);
+  color: #b39ddb;
+  border-color: rgba(126, 87, 194, 0.4);
+}
+
+.spell-type-building {
+  background: rgba(229, 57, 53, 0.22);
+  color: #ef9a9a;
+  border-color: rgba(229, 57, 53, 0.4);
+}
+
+/* Rarity badge inside spell head */
+.spell-rarity-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.spell-card.r-familiar .spell-rarity-badge {
+  background: rgba(76, 175, 80, 0.2);
+  color: #a5d6a7;
+  border-color: rgba(76, 175, 80, 0.35);
+}
+
+.spell-card.r-arcane .spell-rarity-badge {
+  background: rgba(126, 87, 194, 0.2);
+  color: #ce93d8;
+  border-color: rgba(126, 87, 194, 0.35);
+}
+
+.spell-card.r-apex .spell-rarity-badge {
+  background: rgba(251, 192, 45, 0.2);
+  color: #fff176;
+  border-color: rgba(251, 192, 45, 0.35);
+}
+
+/* Legendary glow aura */
+.spell-legendary-glow {
+  position: relative;
+}
+
+.spell-legendary-glow::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 16px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 30% 0%, rgba(251,192,45,.28), transparent 55%),
+              radial-gradient(ellipse at 80% 100%, rgba(255,152,0,.22), transparent 55%);
+  filter: blur(7px);
+  opacity: .85;
+  z-index: -1;
+}
+
+/* Trait-center re-use: make sure it works inside spell cards */
+.spell-card .trait-center {
+  text-align: center;
+  padding: 12px 8px;
+  line-height: 1.5;
+  font-size: 14px;
+  color: #c9d3ff;
+}
+
+/* Spell content wrapper for multi spells */
+.spell-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+/* Spell cards with multi controls — evolution controls normal flow-dadır */
+
+/* ETHEREAL DUAL MODE DÜYMƏSİ */
+.dual-mode-button {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 20;
+  background: linear-gradient(135deg, #b026ff, #6a0dad);
+  border: 1px solid rgba(176, 38, 255, 0.6);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 12px rgba(176, 38, 255, 0.5);
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+}
+
+.dual-mode-button::before {
+  content: 'II';
+  font-size: 12px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.dual-mode-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(176, 38, 255, 0.8);
+  background: linear-gradient(135deg, #cc44ff, #8800cc);
+}
+
+.card-container.dual-active .dual-mode-button {
+  background: linear-gradient(135deg, #ff6eb0, #b026ff);
+  box-shadow: 0 0 14px rgba(255, 110, 176, 0.7);
+}
+
+.card-container.dual-active .dual-mode-button::before {
+  content: 'I';
+  letter-spacing: 0;
+}
+
+.dual-multi-controls.hidden {
+  display: none;
+}
+
+.dual-multi-controls {
+  display: flex;
+}
+
+/* ═══════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════
+   YENİ KART LAYOUT — Məzmun paneli | Sağ tablar
+   ═══════════════════════════════════════════════════ */
+
+.card-container,
+.card-single {
+  height: 360px;
+}
+
+.new-card-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+/* HEADER: Ad + Nadir */
+.new-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+
+.new-card-name {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .3px;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.new-card-rarity {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  font-weight: 700;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* Nadir badge rəngləri */
+.r-badge-mundane   { color: var(--mundane);   border-color: var(--mundane); }
+.r-badge-familiar  { color: var(--familiar);  border-color: var(--familiar); }
+.r-badge-arcane    { color: var(--arcane);    border-color: var(--arcane); }
+.r-badge-relic     { color: var(--relic);     border-color: var(--relic); }
+.r-badge-ascendant { color: var(--ascendant); border-color: var(--ascendant); }
+.r-badge-apex      { color: var(--apex);      border-color: var(--apex); }
+.r-badge-ethereal  { color: var(--ethereal);  border-color: var(--ethereal); }
+
+/* BODY: Sol panel + Sağ tablar */
+.new-card-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── SAĞ TABLAR ── */
+.new-card-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 6px;
+  width: 60px;
+  flex-shrink: 0;
+  justify-content: center;
+  border-left: 1px solid rgba(255,255,255,0.06);
+}
+
+.new-tab-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 2px;
+  background: rgba(34, 40, 79, 0.5);
+  border: 1px solid rgba(47, 55, 105, 0.7);
+  border-radius: 10px;
+  color: #8a92b2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  min-height: 44px;
+}
+
+.new-tab-btn i {
+  font-size: 12px;
+}
+
+.new-tab-btn span {
+  font-size: 10px;
+  letter-spacing: 0.2px;
+}
+
+.new-tab-btn:hover {
+  background: rgba(57, 64, 115, 0.8);
+  color: #c9d3ff;
+  transform: none;
+  box-shadow: none;
+}
+
+.new-tab-btn.active {
+  background: #394073;
+  border-color: #5d66a2;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(93,102,162,0.4);
+}
+
+/* ── SOL PANEL ── */
+.new-card-panel-area {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-panel {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.new-panel.visible {
+  display: flex;
+}
+
+/* CARD PANELİ — şəkil tam dolu */
+.new-panel[data-panel-id="card-panel"] {
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.new-card-image-wrap {
+  width: 100%;
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 190px;
+}
+
+.new-card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.new-card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 27, 58, 0.6);
+}
+
+.new-card-type-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #bfc7ff;
+  text-align: center;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.type-note-line {
+  font-size: 12px;
+  color: #d0d8ff;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.type-main-line {
+  font-size: 13px;
+  color: #bfc7ff;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* STATS PANELİ */
+.stats-sub-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.stats-sub-btn {
+  flex: 1;
+  padding: 5px 6px;
+  font-size: 12px;
+  background: rgba(34, 40, 79, 0.7);
+  border: 1px solid rgba(47, 55, 105, 0.8);
+  border-radius: 8px;
+  color: #8a92b2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  text-align: center;
+}
+
+.stats-sub-btn:hover {
+  color: #c9d3ff;
+  background: rgba(57, 64, 115, 0.8);
+  transform: none;
+  box-shadow: none;
+}
+
+.stats-sub-btn.active {
+  background: #394073;
+  border-color: #5d66a2;
+  color: #fff;
+}
+
+.stats-sub-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.stats-sub-panel {
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-right: 2px;
+}
+
+.stats-sub-panel.visible {
+  display: flex;
+}
+
+.stats-sub-panel .stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 6px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.stats-sub-panel .stat-item b {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #c6ceff;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.stats-sub-panel .stat-item span {
+  font-size: 13px;
+  color: #eaf0ff;
+}
+
+/* Ability paneli */
+.new-panel[data-panel-id="ability-panel"] .trait-center {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #c9d3ff;
+  padding: 4px;
+  overflow-y: auto;
+  flex: 1;
+  text-align: center;
+}
+
+/* Levels paneli */
+.new-panel[data-panel-id="levels-panel"] .stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 6px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 6px;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.new-panel[data-panel-id="levels-panel"] .stat-item b {
+  font-size: 11px;
+  color: #c6ceff;
+  margin-bottom: 0;
+}
+
+/* Story paneli */
+.new-panel[data-panel-id="story-panel"] .story-content {
+  font-size: 11px;
+  line-height: 1.5;
+  overflow-y: auto;
+  flex: 1;
+  padding: 4px;
+  color: #bfc7ff;
+  max-height: 100%;
+}
+
+/* Stripe yox olsun */
+.new-card-layout .stripe { display: none; }
+
+/* ═══════════════════════════════════════════════════
+   INFO SEKSİYASI — Tab bar + Qrup kartları
+   ═══════════════════════════════════════════════════ */
+
+.info-tab-bar {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px 0;
+  max-width: 800px;
+  margin: 12px auto 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding-bottom: 0;
+}
+
+.info-tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px 12px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-tab-btn:hover {
+  color: var(--text);
+  transform: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.info-tab-btn.active {
+  color: #4a9eff;
+  border-bottom-color: #4a9eff;
+  background: transparent;
+}
+
+.info-tab-btn i {
+  font-size: 15px;
+}
+
+/* QRUP KARTLARI GRİDİ */
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.group-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border-left: 3px solid var(--g-color, #4a9eff);
+}
+
+.group-card:hover {
+  border-color: var(--g-color, #4a9eff);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+}
+
+.group-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.group-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(74, 158, 255, 0.12);
+  border: 1px solid rgba(74, 158, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--g-color, #4a9eff);
+}
+
+.group-title-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.group-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 4px;
+  letter-spacing: 0.2px;
+}
+
+.group-desc {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.group-count {
+  font-size: 11px;
+  color: var(--muted);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.group-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.group-member-tag {
+  font-size: 12px;
+  color: #c9d3ff;
+  background: rgba(74, 158, 255, 0.10);
+  border: 1px solid rgba(74, 158, 255, 0.22);
+  border-radius: 6px;
+  padding: 4px 10px;
+  transition: background 0.15s ease;
+}
+
+.group-member-tag:hover {
+  background: rgba(74, 158, 255, 0.22);
+}
