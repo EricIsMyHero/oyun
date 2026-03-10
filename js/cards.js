@@ -1,5 +1,5 @@
 // ─── GitHub Şəkil Base URL ───────────────────────────────────────────────────
-const GITHUB_IMG_BASE = 'https://raw.githubusercontent.com/EricIsMyHero/oyun/main';
+const GITHUB_IMG_BASE = 'https://raw.githubusercontent.com/EricIsMyHero/oyun/main/assets';
 
 // Kartın şəkil URL-ini qaytarır: group/name.jpg
 function getCardImageUrl(data) {
