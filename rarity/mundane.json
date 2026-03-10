@@ -4,7 +4,6 @@
     "type": ["Heyvan"],
     "rarity": "Mundane",
     "note": "Fighter",
-    "isHybrid": false,
     "isMulti": false,
     "stats": {
       "health": "70",
@@ -837,7 +836,7 @@
   },
   {
     "name": "Aegis Guard",
-    "type": ["Varlıq"],
+    "type": ["Robot"],
     "rarity": "Mundane",
     "note": "Tank/Protector",
     "group": "mission-1",
