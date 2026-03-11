@@ -8,7 +8,7 @@
     "type1": {
       "name": "Ase",
       "note": "Marksman",
-      "type": ["Dead"],
+      "type": ["Human"],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
@@ -28,7 +28,7 @@
         "criticalChance": "15%",
         "criticDamage": "1.5x",
         "lifestealChance": "0%",
-        "lifesteal": "0%",
+        "lifesteal": "25%",
         "damageminimiser": "0%",
         "dodge": "0%"
       },
@@ -76,7 +76,7 @@
     "type2": {
       "name": "Ase",
       "note": "Marksman",
-      "type": ["Dead"],
+      "type": ["Human"],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
@@ -93,7 +93,7 @@
       "additionalStats": {
         "range": "1000",
         "speed": "800",
-        "criticalChance": "5%",
+        "criticalChance": "15%",
         "criticDamage": "1.5x",
         "lifestealChance": "0%",
         "lifesteal": "25%",
@@ -140,6 +140,79 @@
           "story": "-"
         }
       ]
+    }
+  },
+  {
+    "name": "Leno",
+    "note": "Marksman",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "isDual": true,
+    "type1": {
+      "name": "Leno",
+      "note": "Marksman",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "220",
+        "shield": "120",
+        "damage": "4",
+        "sps": "20",
+        "attackSpeed": "0,20s",
+        "delay": "-",
+        "mana": "5",
+        "number": "12"
+      },
+      "trait": "İlk 25 saniyə +45% Kritik Şansı daha sonra +15% Kritik şansı qazanar",
+      "additionalStats": {
+        "range": "2100",
+        "speed": "1100",
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-"
+      },
+    "type2": {
+      "name": "Leno",
+      "note": "Marksman",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "190",
+        "shield": "90",
+        "damage": "50",
+        "sps": "25",
+        "attackSpeed": "2,00s",
+        "delay": "-",
+        "mana": "5",
+        "number": "12"
+      },
+      "trait": "(Heyvan,Robot,Ölü,Ruh,Uzaylı,Varlıq) tipli kartlara ekstra +40% Hasar verir",
+      "additionalStats": {
+        "range": "3200",
+        "speed": "1000",
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-"
     }
   },
   {
