@@ -170,7 +170,7 @@
       "level2": "+10% Hız  |  850 » 935",
       "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
   },
-    "story": "-",
+    "story": "Malvaris is an undead monster with a deceptive human-like form. This medium-sized creature strikes with lethal precision, wielding twin daggers in both hands. Like his King, he wears dark purple and black garments that blend into the shadows of the deep. He is a swift assassin who moves in silence, seeking the gaps in enemy armor. His gaze is cold and hollow, focused only on the kill. Within the UnderWorld, he serves as the unseen blade that removes obstacles before they even notice his presence.",
     "forms": [
       {
       "name": "Ghost",
@@ -589,7 +589,7 @@
           "level2": "-",
           "level3": "-"
         },
-        "story": "-",
+        "story": "Once a powerful mage, the Dark Necromancer was cursed for practicing forbidden arts. Now a restless spirit, he channels his corruption to summon the fallen. He brings forth three spectral entities: the Warrior, the Archer, and the Tank. These summons are the ghosts of former royalty, bound to his will by dark magic. He does not fight directly; instead, he manipulates the battlefield from the rear. His existence is a haunting reminder that even the most noble souls can be enslaved by darkness.",
      "forms": [
       {
         "name": "Warrior",
