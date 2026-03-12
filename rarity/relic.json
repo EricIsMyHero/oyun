@@ -140,11 +140,10 @@
   },
   {
     "name": "Malvaris",
-    "type": ["Ölü"],
+    "type": ["Dead"],
     "rarity": "Relic",
     "note": "Special/Summoner",
-    "isAscendant": false,
-    "isMulti": true,
+    "group": "underworld",
     "stats": {
       "health": "220",
       "shield": "130",
@@ -562,6 +561,7 @@
     "type": ["Ruh"],
     "rarity": "Relic",
     "note": "Fighter",
+    "group": "underworld",
     "isMulti": true,
         "stats": {
           "health": "180",
