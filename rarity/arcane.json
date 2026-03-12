@@ -722,10 +722,10 @@
   },
   {
     "name": "Nightfang",
-    "type": ["Ruh"],
+    "type": ["Spirit"],
     "rarity": "Arcane",
     "note": "Marksman/Sharpshooter",
-    "group": "UnderWorld",
+    "group": "underworld",
     "stats": {
       "health": "140",
       "shield": "0",
