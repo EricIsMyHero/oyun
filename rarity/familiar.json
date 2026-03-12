@@ -559,10 +559,10 @@
   },
   {
     "name": "Shadow Reaper",
-    "type": ["Ölü"],
+    "type": ["Dead"],
     "rarity": "Familiar",
     "note": "Assassin",
-    "isMulti": false,
+    "group": "underworld",
     "stats": {
       "health": "310",
       "shield": "140",
