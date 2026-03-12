@@ -369,6 +369,7 @@
       "note": "Fighter",
       "type": ["Human"],
       "rarity": "Ethereal",
+      "isMulti": true
       "stats": {
         "health": "210",
         "shield": "0",
@@ -395,7 +396,41 @@
         "level2": "-",
         "level3": "-"
       },
-      "story": "-"
+      "story": "-",
+      "forms": [
+        {
+          "name": "Bats",
+          "note": "Marksman",
+          "type": ["Robot"],
+          "stats": {
+            "health": "10",
+            "shield": "-",
+            "damage": "5",
+            "sps": "4",
+            "attackSpeed": "1,25s",
+            "delay": "-",
+            "mana": "-",
+            "number": "10"
+          },
+          "trait": "İlk vuruşu ekstra +40% Hasar verər",
+          "additionalStats": {
+            "range": "900",
+            "speed": "1300",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-"
+        }
+      ]
     }
   },
   {
