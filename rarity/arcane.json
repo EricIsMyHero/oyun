@@ -725,8 +725,7 @@
     "type": ["Ruh"],
     "rarity": "Arcane",
     "note": "Marksman/Sharpshooter",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "UnderWorld",
     "stats": {
       "health": "140",
       "shield": "0",
@@ -741,8 +740,8 @@
     "additionalStats": {
       "range": "12,000",
       "speed": "1,000",
-      "criticalChance": "0%",
-      "criticDamage": "1.5x",
+      "criticalChance": "10%",
+      "criticDamage": "2x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
