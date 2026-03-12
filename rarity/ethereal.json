@@ -369,7 +369,7 @@
       "note": "Fighter",
       "type": ["Human"],
       "rarity": "Ethereal",
-      "isMulti": true
+      "isMulti": true,
       "stats": {
         "health": "210",
         "shield": "0",
