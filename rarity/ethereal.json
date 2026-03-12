@@ -160,8 +160,8 @@
         "sps": "20",
         "attackSpeed": "0,20s",
         "delay": "-",
-        "mana": "5",
-        "number": "12"
+        "mana": "12",
+        "number": "1"
       },
       "trait": "İlk 25 saniyə +45% Kritik Şansı daha sonra +15% Kritik şansı qazanar",
       "additionalStats": {
@@ -193,8 +193,8 @@
         "sps": "25",
         "attackSpeed": "2,00s",
         "delay": "-",
-        "mana": "5",
-        "number": "12"
+        "mana": "12",
+        "number": "1"
       },
       "trait": "(Heyvan,Robot,Ölü,Ruh,Uzaylı,Varlıq) tipli kartlara ekstra +40% Hasar verir",
       "additionalStats": {
@@ -226,6 +226,7 @@
       "note": "Tank",
       "type": ["Dead"],
       "rarity": "Ethereal",
+      "group": "underworld",
       "stats": {
         "health": "370",
         "shield": "160",
@@ -259,6 +260,7 @@
       "note": "Tank",
       "type": ["Dead"],
       "rarity": "Ethereal",
+      "group": "underworld",
       "isMulti": true,
       "stats": {
         "health": "370",
@@ -290,7 +292,7 @@
       "forms": [
         {
           "name": "Guard",
-          "note": "Elite Summoner",
+          "note": "Fighter",
           "type": ["Spirit"],
           "stats": {
             "health": "80",
@@ -321,6 +323,79 @@
           "story": "-"
         }
       ]
+    }
+  },
+  {
+    "name": "Dracula",
+    "note": "Fighter",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "isDual": true,
+    "type1": {
+      "name": "Dracula",
+      "note": "Fighter",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "280",
+        "shield": "60",
+        "damage": "40",
+        "sps": "36",
+        "attackSpeed": "1,10s",
+        "delay": "-",
+        "mana": "16",
+        "number": "1"
+      },
+      "trait": "Hər vuruşda ekstra +1% Can Çalma Şansı qazanar (Max:25%)",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "15%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "25%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-"
+      },
+    "type2": {
+      "name": "Dracula",
+      "note": "Fighter",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "210",
+        "shield": "0",
+        "damage": "20",
+        "sps": "15",
+        "attackSpeed": "1,30s",
+        "delay": "-",
+        "mana": "16",
+        "number": "1"
+      },
+      "trait": "İtirdiyi hər 10% Can üçün ekstra +5% Hasar Azaltma qazanar, Öləndə içindən *Bats* çıxar",
+      "additionalStats": {
+        "range": "900",
+        "speed": "1300",
+        "criticalChance": "15%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "15%",
+        "lifesteal": "25%",
+        "damageminimiser": "5%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-"
     }
   },
   {
