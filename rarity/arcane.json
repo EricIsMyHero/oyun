@@ -4,7 +4,6 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Mage/Nuker",
-    "isMulti": false,
     "stats": {
       "health": "50",
       "shield": "50",
@@ -31,14 +30,13 @@
       "level2": "+40% Can | 50 » 70",
       "level3": "+10% Saldırı Hızı | 1,10s » 0,99s"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "*"
   },
   {
     "name": "Leafshade",
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Assassin/Executioner",
-    "isMulti": false,
     "stats": {
       "health": "220",
       "shield": "0",
@@ -65,7 +63,7 @@
       "level2": "+5% Kritik Şansı | 5% » 10%",
       "level3": "+5% Max Can Çalma | 25% » 30%"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "-"
   },
   {
   "name": "Clown",
