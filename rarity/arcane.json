@@ -225,7 +225,7 @@
         },
         "showlevels": {
           "level1": "+20% Hasar | 14 » 17",
-          "level2": "+5% Saldırı Hızı | 0,90s » 0,855",
+          "level2": "+5% Saldırı Hızı | 0,90s » 0,855s",
           "level3": "+10% Can Çalma Şansı | 0% » 10%"
         },
         "story": "-"
@@ -260,10 +260,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+22% Hasar | 18 » 22",
-      "level2": "+10% Hız | 850 » 935",
-      "level3": "+1 Öz. Parçalanma Sayı | 2 » 3"
-    },
+    "level1": "+6% Health | 250 » 265",
+    "level2": "+10% DMG | 30 » 33",
+    "level3": "+10% Dodge Chance | 0% » 10%"
+},
     "story": "-",
     "forms": [
       {
@@ -281,23 +281,23 @@
         "mana": "-",
         "number": "2"
       },
-      "trait": "Hər 6 saniyədə +0,01 Menzil bonusu qazanar",
+      "trait": "Hər 6 saniyədə +0,010 Menzil bonusu qazanar",
       "additionalStats": {
         "range": "2500",
         "speed": "1000",
-        "criticalChance": "-",
-        "criticDamage": "-",
-        "lifestealChance": "-",
-        "lifesteal": "-",
-        "damageminimiser": "-",
-        "dodge": "-"
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
       },
       "showlevels": {
-        "level1": "-",
-        "level2": "-",
-        "level3": "-"
-      },
-      "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+      "level1": "+8% Attack Speed | 1,50s » 1,38s",
+      "level2": "+9% Range | 2500 » 2725",
+      "level3": "+10% Critical Chance | 5% » 15%"
+},
+      "story": "-"
     }]
   },
   {
@@ -327,11 +327,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı | 5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
-      "level3": "+12% Qalxan | 50 » 56"
-    },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "level1": "+7% Shield | 200 » 214",
+    "level2": "+0.15x Critical DMG | 1.5x » 1.65x",
+    "level3": "+0,2% Ability Attack Speed Bonus | 0,5% » 0,7%%"
+},
+    "story": "-"
   },
   {
     "name": "Toxic",
@@ -362,11 +362,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı | 5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
-      "level3": "+12% Qalxan | 50 » 56"
-    },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "level1": "+0.15x Critical DMG | 1.5x » 1.65x",
+    "level2": "+10% Range | 2650 » 2915",
+    "level3": "+2 Ability Poison DMG | 2x3 » 2x5"
+},
+    "story": "-"
   },
   {
     "name": "Aura girl",
@@ -397,11 +397,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı | 5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
-      "level3": "+12% Qalxan | 50 » 56"
-    },
-    "story": "k."
+    "level1": "+7% Shield | 500 » 535",
+    "level2": "+10% DMG Reduction | 0% » 10%",
+    "level3": "+50% Ability Aura DMG | 2 » 3"
+  },
+    "story": "-"
   },
   {
     "name": "Hell boy",
@@ -432,9 +432,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+2% Öz. Şansı | 5% » 7%",
-      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
-      "level3": "+12% Qalxan | 50 » 56"
+      "level1": "+20% Ability DMG | +40% » +60%",
+      "level2": "+10% Lifesteal Chance | 0% » 10%",
+      "level3": "+8% Attack Speed | 2,00s » 1,84s"
     },
     "story": "-"
   },
@@ -467,9 +467,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Kritik Şansı | 5% » 10%",
-      "level2": "+100% Öz. Hasar Bonusu | 100% » 200%",
-      "level3": "+12% Qalxan | 50 » 56"
+      "level1": "+10% Shield | 20 » 22",
+      "level2": "+2% Base Trait Chance | 1% » 3%",
+      "level3": "+10% HP| 110 » 121"
     },
     "story": "k."
   },
@@ -502,11 +502,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+25% Öz. Hasar Bonusu | 25% » 50%",
-      "level2": "+50% Qalxan | 40 » 60",
-      "level3": "+12% Menzil | 2500 » 2800"
+      "level1": "+12% Range | 2500 » 2800",
+      "level2": "+5% Critical Chance | 5% » 10%",
+      "level3": "+33% Marked Targets | 6 » 8"
     },
-    "story": "k."
+    "story": "-"
   },
   {
     "name": "Nurse",
@@ -525,10 +525,10 @@
       "mana": "3",
       "number": "1"
     },
-    "trait": "Hər Can Çalanda 20 saniyəlik +1 Hasar bonusu (Max: 28)",
+    "trait": "Hər Can Çalanda 20 saniyəlik +1 Hasar bonusu qazanar (Max: 20)",
     "additionalStats": {
-      "range": "1,000",
-      "speed": "1,100",
+      "range": "1000",
+      "speed": "1100",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "50%",
@@ -537,9 +537,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
+      "level1": "+15% Speed | 1100 » 1265",
+      "level2": "+11% HP | 90 » 100",
+      "level3": "+40% Ability DMG Bonus Limit | 20 » 28"
     },
     "story": "-"
   },
@@ -562,8 +562,8 @@
     },
     "trait": "Hər 12 saniyədə uzaqdan atış edərək +300% Hasar verər",
     "additionalStats": {
-      "range": "3,700 / 1,000",
-      "speed": "1,000",
+      "range": "1000 / 3500",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -572,10 +572,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
-    },
+    "level1": "+15% Critic Damage | 1.5x » 1.65x",
+    "level2": "-16% Ability Cooldown | 12s » 10s",
+    "level3": "+20% Shield | 70 » 84"
+  },
     "story": "-"
   },
   {
@@ -597,8 +597,8 @@
     },
     "trait": "25% Şansla rəqib kartları 1,2 saniyə sərsəmlətər",
     "additionalStats": {
-      "range": "2,400",
-      "speed": "1,100",
+      "range": "2400",
+      "speed": "1100",
       "criticalChance": "15%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -607,10 +607,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
-    },
+    "level1": "+10% Stun Chance | 25% » 35%",
+    "level2": "+10% Range | 2,400 » 2,640",
+    "level3": "+25% Stun Duration | 1,2s » 1,5s"
+  },
     "story": "-"
   },
   {
@@ -632,7 +632,7 @@
     },
     "trait": "Rəqibin içinə girərək 14+(Kritik Şansı) saniyə onu idarə edər və yox olar",
     "additionalStats": {
-      "range": "0,800",
+      "range": "1,800",
       "speed": "1,000",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
@@ -642,10 +642,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
-    },
+    "level1": "+5% Critical Chance | 0% » 5%",
+    "level2": "+15% Speed | 1,000 » 1,150",
+    "level3": "+21%s Control Duration | 14s » 17s"
+  },
     "story": "-"
   },
   {
@@ -667,8 +667,8 @@
     },
     "trait": "Alınan hasarın 50%-ni 2 saniyə sonra qalxana çevirər",
     "additionalStats": {
-      "range": "1,000",
-      "speed": "1,000",
+      "range": "1000",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -677,10 +677,10 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
-    },
+    "level1": "+15% HP | 340 » 391",
+    "level2": "+20% Damage to Shield | 50% » 70%",
+    "level3": "+10% DMG Reduction | 0% » 10%"
+  },
     "story": "-"
   },
   {
