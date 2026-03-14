@@ -632,11 +632,10 @@
   },
   {
     "name": "Rockback",
-    "type": ["Heyvan"],
+    "type": ["Animal"],
     "rarity": "Apex",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "twisted-farm",
     "stats": {
       "health": "140",
       "shield": "180",
