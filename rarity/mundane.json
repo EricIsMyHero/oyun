@@ -211,7 +211,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Fighter/Berserker",
-    "isHybrid": false,
+    "group": "twisted-farm",
     "isMulti": false,
     "stats": {
       "health": "400",
@@ -235,11 +235,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+4% Can  |  400 » 416",
-      "level2": "+10% Vuruş Genişliyi  |  1100 » 1210",
-      "level3": "+5% Hız  |  800 » 840"
+      "level1": "+4% Health  |  400 » 416",
+      "level2": "+10% Attack Size  |  1100 » 1210",
+      "level3": "+5% Speed  |  800 » 840"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "Henry was once a brilliant researcher, but after several failed experiments, he retreated to a secluded farm. To the outside world, he is just a friendly farmer with orange hair and a thick beard, leaning on his pitchfork. However, beneath his welcoming smile lies a dangerous obsession. He uses his scientific expertise to transform ordinary livestock into lethal weapons. He treats his farm like a laboratory, seeing his animals not as living beings, but as subjects for his dark, evolutionary projects."
   },
   {
     "name": "Hydra",
@@ -629,7 +629,7 @@
     "type": ["Heyvan"],
     "rarity": "Mundane",
     "note": "Assassin/Suicide",
-    "isHybrid": false,
+    "group": "twisted-farm",
     "isMulti": false,
     "stats": {
       "health": "40",
@@ -657,7 +657,7 @@
       "level2": "+5% Dodge Chance |  20% » 25%",
       "level3": "+10% Range  |  800 » 880"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "The Bees are a swarming nightmare born from Henry’s relentless experimentation. He pushed their biology to the limit, turning them into a hyper-aggressive cloud of stingers. However, despite all the effort and sweat Henry poured into them, he could not prevent their ultimate fate: they are highly volatile and fragile. They strike with overwhelming force, but their lives are short, burning out quickly after they unleash their fury. They represent the tragic, unstable perfection of Henry’s failed genius."
   },
   {
     "name": "Hailey",
