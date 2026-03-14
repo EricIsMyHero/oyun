@@ -19,5 +19,12 @@
     "icon": "fa-wand-sparkles",
     "color": "#b39ddb",
     "members": ["Chrono Mage", "Naar"]
+  },
+  {
+    "name": "Twisted-Farm",
+    "description": "Üçüncü qrupun təsviri.",
+    "icon": "fa-farm",
+    "color": "#b39ddb",
+    "members": ["Henry", "Chicken", "Bees", "Venomspikes", "Rockback", "Worms"]
   }
 ]
