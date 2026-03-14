@@ -39,8 +39,7 @@
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "note": "Assassin/Suicide",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "twisted-farm",
     "stats": {
       "health": "50",
       "shield": "0",
@@ -63,11 +62,11 @@
       "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+28% Can | 50 » 64",
-      "level2": "+100% Öz. Hasarı | 400% » 500%",
-      "level3": "+10% Hız | 1300 » 1430"
+      "level1": "+28% Health | 50 » 64",
+      "level2": "+100% Ability DMG Bonus | 400% » 500%",
+      "level3": "+10% Speed | 1300 » 1430"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "The Chicken is no longer a simple farm bird. Under Henry’s intervention, this wild white fowl has gained incredible, supernatural speed. It darts across the battlefield like a blur, making it almost impossible to catch. Strapped to its back is a powerful C4 explosive, turning this frantic creature into a high-speed suicide bomber. It is a chaotic result of Henry's madness—a loyal, feathered weapon that delivers a devastating blast before the enemy even realizes what hit them."
   },
   {
     "name": "Snowballer",
@@ -736,8 +735,7 @@
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "note": "Assassin/Poisoner",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "twisted-farm",
     "stats": {
       "health": "170",
       "shield": "30",
@@ -760,9 +758,9 @@
       "dodge": "10%"
     },
     "showlevels": {
-      "level1": "+50% Qalxan  |  30 » 45",
-      "level2": "+20% Hasar  |  15 » 18",
-      "level3": "+10% Sıyrılma  |  10% » 20%"
+      "level1": "+50% Shield  |  30 » 45",
+      "level2": "+20% DMG  |  15 » 18",
+      "level3": "+10% Dodge Chance  |  10% » 20%"
       },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
   },
