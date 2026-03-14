@@ -705,8 +705,8 @@
     },
     "trait": "Ətrafındakı kartlara hər saniyə +1 M.Can verər (Max:50)",
     "additionalStats": {
-      "range": "1,000",
-      "speed": "1,000",
+      "range": "1000",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -775,8 +775,8 @@
     },
     "trait": "7,500 Karo qabaqdakı canı ən yüksək rəqibi seçər və alınan hər hasarın 20%-ni ona ötürər",
     "additionalStats": {
-      "range": "1,100",
-      "speed": "1,050",
+      "range": "1100",
+      "speed": "1050",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -796,22 +796,21 @@
     "type": ["Heyvan"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "twisted-farm",
     "stats": {
       "health": "30",
       "shield": "0",
       "damage": "8",
       "sps": "6",
-      "attackSpeed": "1,30",
+      "attackSpeed": "1,30s",
       "delay": "-",
       "mana": "5",
       "number": "6"
     },
     "trait": "İlk vuruşda yerin altından çıxaraq kartları 0,5 saniyəlik sarsəmlətər",
     "additionalStats": {
-      "range": "0,800",
-      "speed": "1,300",
+      "range": "800",
+      "speed": "1300",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -824,6 +823,6 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "These are not the harmless creatures found in common soil. Henry’s bio-engineering transformed these tiny worms into aggressive, flesh-eating scavengers. They move in writhing masses, hidden beneath the earth until they detect a vibration. Once they emerge, their hunger is insatiable. They are the farm's underground security, small enough to bypass most defenses but fierce enough to tear through leather and bone. For Henry, they are the perfect disposal system for his failed experiments."
   }
 ]
