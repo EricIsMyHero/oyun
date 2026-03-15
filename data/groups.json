@@ -23,8 +23,8 @@
   {
     "name": "Twisted-Farm",
     "description": "Üçüncü qrupun təsviri.",
-    "icon": "fa-farm",
-    "color": "#b39ddb",
+    "icon": "fa-building-wheat",
+    "color": "#FF2B00",
     "members": ["Henry", "Chicken", "Bees", "Venomspikes", "Rockback", "Worms"]
   }
 ]
