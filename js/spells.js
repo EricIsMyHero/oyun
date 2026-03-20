@@ -83,116 +83,161 @@ function createSpellCard(data) {
     card.className = `card-container card ${rarityClass} spell-card`;
     if (data.rarity.toLowerCase() === 'legendary') card.classList.add('spell-legendary-glow');
 
+    const rarityLower = (data.rarity || '').toLowerCase();
+
+    // ── Spell məzmununu yeni layout ilə yarat ──────────────────────────────
     const createSpellContent = (spellData, isForm = false) => {
         const content = document.createElement('div');
-        content.className = 'spell-content-wrapper';
+        content.className = 'new-card-layout';
 
         const isCardLike = isForm || (spellData.stats.hasOwnProperty('health') && spellData.stats.hasOwnProperty('shield'));
 
+        let panelsHTML = '';
+        let tabsHTML   = '';
+
         if (isCardLike) {
+            // Kart kimi spell (health + shield olan) — stats/ability/levels/story
             const typeText = Array.isArray(spellData.type) ? spellData.type.join('/') : spellData.type;
-            content.innerHTML = `
-                <div class="stripe"></div>
-                <div class="head">
-                    <div class="name">
-                        ${spellData.name || data.name || 'Unknown'}
-                        ${spellData.note ? `<span class="note">${spellData.note}</span>` : ''}
+            panelsHTML = `
+                <div class="new-panel visible" data-panel-id="sp-stats">
+                    <div class="stats-sub-tabs">
+                        <button class="stats-sub-btn active" data-stats-tab="main">Main</button>
+                        <button class="stats-sub-btn" data-stats-tab="other">Other</button>
                     </div>
-                    <span class="badge">${typeText || 'Unknown'}</span>
+                    <div class="stats-sub-content">
+                        <div class="stats-sub-panel visible" data-stats-panel="main">
+                            <div class="stat-item"><b><i class="fa-solid fa-heart"></i> HP</b><span>${spellData.stats.health || 0}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-shield-halved"></i> Shield</b><span>${spellData.stats.shield || 0}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-hand-fist"></i> DMG</b><span>${spellData.stats.damage || 0}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-bolt"></i> DPS</b><span>${spellData.stats.sps || 0}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-tachometer-alt"></i> Atk Speed</b><span>${spellData.stats.attackSpeed || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-clock"></i> Delay</b><span>${spellData.stats.delay || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-certificate"></i> Mana</b><span>${spellData.stats.mana || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-user"></i> Number</b><span>${spellData.stats.number || 0}</span></div>
+                        </div>
+                        <div class="stats-sub-panel" data-stats-panel="other">
+                            <div class="stat-item"><b><i class="fa-solid fa-road"></i> Range</b><span>${spellData.additionalStats?.range || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-person-running"></i> Speed</b><span>${spellData.additionalStats?.speed || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-percent"></i> Crit Chance</b><span>${spellData.additionalStats?.criticalChance || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-crosshairs"></i> Crit DMG</b><span>${spellData.additionalStats?.criticDamage || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-percent"></i> LS Chance</b><span>${spellData.additionalStats?.lifestealChance || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-skull-crossbones"></i> Lifesteal</b><span>${spellData.additionalStats?.lifesteal || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-helmet-un"></i> DMG Reduct</b><span>${spellData.additionalStats?.damageminimiser || '-'}</span></div>
+                            <div class="stat-item"><b><i class="fa-solid fa-wind"></i> Dodge</b><span>${spellData.additionalStats?.dodge || '-'}</span></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-tabs">
-                    <button class="active" data-section="main-stats">Main</button>
-                    <button data-section="additional-stats">Other</button>
-                    <button data-section="trait">Ability</button>
-                    <button data-section="showlevels">Levels</button>
-                    <button data-section="story-section">Story</button>
+                <div class="new-panel" data-panel-id="sp-ability">
+                    <div class="trait trait-center">${spellData.trait || '-'}</div>
                 </div>
-                <div class="card-content-area">
-                    <div class="stats-section visible" data-section-id="main-stats">
-                        <div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${spellData.stats.health || 0}</span></div>
-                        <div class="stat-item"><b>Shield <i class="fa-solid fa-shield-halved"></i></b><span>${spellData.stats.shield || 0}</span></div>
-                        <div class="stat-item"><b>Damage <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damage || 0}</span></div>
-                        <div class="stat-item"><b>D.P.S <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.sps || 0}</span></div>
-                        <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${spellData.stats.attackSpeed || '-'}</span></div>
-                        <div class="stat-item"><b>Delay <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.delay || '-'}</span></div>
-                        <div class="stat-item"><b>Mana <i class="fa-solid fa-certificate"></i></b><span>${spellData.stats.mana || '-'}</span></div>
-                        <div class="stat-item"><b>Number <i class="fa-solid fa-user"></i></b><span>${spellData.stats.number || 0}</span></div>
-                    </div>
-                    <div class="stats-section" data-section-id="additional-stats">
-                        <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.additionalStats?.range || '-'}</span></div>
-                        <div class="stat-item"><b>Speed <i class="fa-solid fa-person-running"></i></b><span>${spellData.additionalStats?.speed || '-'}</span></div>
-                        <div class="stat-item"><b>Critical Chance <i class="fa-solid fa-percent"></i></b><span>${spellData.additionalStats?.criticalChance || '-'}</span></div>
-                        <div class="stat-item"><b>Critical Damage <i class="fa-solid fa-crosshairs"></i></b><span>${spellData.additionalStats?.criticDamage || '-'}</span></div>
-                        <div class="stat-item"><b>Life Steal Chance <i class="fa-solid fa-percent"></i></b><span>${spellData.additionalStats?.lifestealChance || '-'}</span></div>
-                        <div class="stat-item"><b>Life Steal <i class="fa-solid fa-skull-crossbones"></i></b><span>${spellData.additionalStats?.lifesteal || '-'}</span></div>
-                        <div class="stat-item"><b>Damage Reduction <i class="fa-solid fa-helmet-un"></i></b><span>${spellData.additionalStats?.damageminimiser || '-'}</span></div>
-                        <div class="stat-item"><b>Dodge Chance <i class="fa-solid fa-wind"></i></b><span>${spellData.additionalStats?.dodge || '-'}</span></div>
-                    </div>
-                    <div class="stats-section" data-section-id="trait">
-                        <div class="trait trait-center">${spellData.trait || '-'}</div>
-                    </div>
-                    <div class="stats-section" data-section-id="showlevels">
-                        <div class="stat-item"><b>Level 1</b><span>${spellData.showlevels?.level1 || '-'}</span></div>
-                        <div class="stat-item"><b>Level 2</b><span>${spellData.showlevels?.level2 || '-'}</span></div>
-                        <div class="stat-item"><b>Level 3</b><span>${spellData.showlevels?.level3 || '-'}</span></div>
-                    </div>
-                    <div class="stats-section" data-section-id="story-section">
-                        <div class="story-content">${spellData.story || '-'}</div>
-                    </div>
+                <div class="new-panel" data-panel-id="sp-levels">
+                    <div class="stat-item"><b>Level 1</b><span>${spellData.showlevels?.level1 || '-'}</span></div>
+                    <div class="stat-item"><b>Level 2</b><span>${spellData.showlevels?.level2 || '-'}</span></div>
+                    <div class="stat-item"><b>Level 3</b><span>${spellData.showlevels?.level3 || '-'}</span></div>
+                </div>
+                <div class="new-panel" data-panel-id="sp-story">
+                    <div class="story-content">${spellData.story || '-'}</div>
                 </div>`;
+            tabsHTML = `
+                <button class="new-tab-btn active" data-section="sp-stats">
+                    <i class="fa-solid fa-chart-bar"></i><span>Stats</span>
+                </button>
+                <button class="new-tab-btn" data-section="sp-ability">
+                    <i class="fa-solid fa-wand-sparkles"></i><span>Ability</span>
+                </button>
+                <button class="new-tab-btn" data-section="sp-levels">
+                    <i class="fa-solid fa-arrow-up"></i><span>Levels</span>
+                </button>
+                <button class="new-tab-btn" data-section="sp-story">
+                    <i class="fa-solid fa-book-open"></i><span>Story</span>
+                </button>`;
         } else {
+            // Normal / Building spell
             const isBuildingType = data.type === 'Building';
             const mainStatsHTML = isBuildingType
-                ? `<div class="stat-item"><b>Health <i class="fa-solid fa-heart"></i></b><span>${spellData.stats.health || '0'}</span></div>
-                   <div class="stat-item"><b>Lifetime <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.lifetime || '-'}</span></div>
-                   <div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damageToCard || '0'}</span></div>
-                   <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${spellData.stats.damageToCastle || '0'}</span></div>
-                   <div class="stat-item"><b>Attack Speed <i class="fa-solid fa-tachometer-alt"></i></b><span>${spellData.stats.attackSpeed || '-'}</span></div>
-                   <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.stats.range || '-'}</span></div>
-                   <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${spellData.stats.size || '-'}</span></div>
-                   <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.energy || '0'}</span></div>`
-                : `<div class="stat-item"><b>Dmg to Card <i class="fa-solid fa-hand-fist"></i></b><span>${spellData.stats.damageToCard || '0'}</span></div>
-                   <div class="stat-item"><b>Dmg to Castle <i class="fa-solid fa-castle"></i></b><span>${spellData.stats.damageToCastle || '0'}</span></div>
-                   <div class="stat-item"><b>Interval <i class="fa-solid fa-clock"></i></b><span>${spellData.stats.timeBetweenDamage || '-'}</span></div>
-                   <div class="stat-item"><b>Range <i class="fa-solid fa-road"></i></b><span>${spellData.stats.range || '-'}</span></div>
-                   <div class="stat-item"><b>Size <i class="fa-solid fa-expand"></i></b><span>${spellData.stats.size || '-'}</span></div>
-                   <div class="stat-item"><b>Energy <i class="fa-solid fa-bolt"></i></b><span>${spellData.stats.energy || '0'}</span></div>`;
+                ? `<div class="stat-item"><b><i class="fa-solid fa-heart"></i> Health</b><span>${spellData.stats.health || '0'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-clock"></i> Lifetime</b><span>${spellData.stats.lifetime || '-'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-hand-fist"></i> Dmg→Card</b><span>${spellData.stats.damageToCard || '0'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-castle"></i> Dmg→Castle</b><span>${spellData.stats.damageToCastle || '0'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-tachometer-alt"></i> Atk Speed</b><span>${spellData.stats.attackSpeed || '-'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-road"></i> Range</b><span>${spellData.stats.range || '-'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-expand"></i> Size</b><span>${spellData.stats.size || '-'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-bolt"></i> Energy</b><span>${spellData.stats.energy || '0'}</span></div>`
+                : `<div class="stat-item"><b><i class="fa-solid fa-hand-fist"></i> Dmg→Card</b><span>${spellData.stats.damageToCard || '0'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-castle"></i> Dmg→Castle</b><span>${spellData.stats.damageToCastle || '0'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-clock"></i> Interval</b><span>${spellData.stats.timeBetweenDamage || '-'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-road"></i> Range</b><span>${spellData.stats.range || '-'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-expand"></i> Size</b><span>${spellData.stats.size || '-'}</span></div>
+                   <div class="stat-item"><b><i class="fa-solid fa-bolt"></i> Energy</b><span>${spellData.stats.energy || '0'}</span></div>`;
 
-            content.innerHTML = `
-                <div class="stripe"></div>
-                <div class="head">
-                    <div class="name">
-                        ${spellData.name || data.name || 'Unknown'}
-                        <span class="badge spell-type-badge spell-type-${data.type.toLowerCase()}">${data.type}</span>
+            panelsHTML = `
+                <div class="new-panel visible" data-panel-id="sp-stats">
+                    <div class="stats-sub-content" style="margin-top:0;">
+                        <div class="stats-sub-panel visible" data-stats-panel="main">
+                            ${mainStatsHTML}
+                        </div>
                     </div>
-                    <span class="badge spell-rarity-badge">${data.rarity}</span>
                 </div>
-                <div class="card-tabs">
-                    <button class="active" data-section="spell-main">Stats</button>
-                    <button data-section="spell-treat">Treat</button>
-                    <button data-section="spell-story">Story</button>
+                <div class="new-panel" data-panel-id="sp-treat">
+                    <div class="trait trait-center">${data.treat || '-'}</div>
                 </div>
-                <div class="card-content-area">
-                    <div class="stats-section visible" data-section-id="spell-main">${mainStatsHTML}</div>
-                    <div class="stats-section" data-section-id="spell-treat">
-                        <div class="trait trait-center">${data.treat || '-'}</div>
-                    </div>
-                    <div class="stats-section" data-section-id="spell-story">
-                        <div class="story-content">${data.story || '-'}</div>
-                    </div>
+                <div class="new-panel" data-panel-id="sp-story">
+                    <div class="story-content">${data.story || '-'}</div>
                 </div>`;
+            tabsHTML = `
+                <button class="new-tab-btn active" data-section="sp-stats">
+                    <i class="fa-solid fa-chart-bar"></i><span>Stats</span>
+                </button>
+                <button class="new-tab-btn" data-section="sp-treat">
+                    <i class="fa-solid fa-wand-sparkles"></i><span>Treat</span>
+                </button>
+                <button class="new-tab-btn" data-section="sp-story">
+                    <i class="fa-solid fa-book-open"></i><span>Story</span>
+                </button>`;
         }
+
+        const spellTypeText = Array.isArray(data.type) ? data.type.join('/') : data.type;
+
+        content.innerHTML = `
+            <div class="new-card-header">
+                <div class="new-card-name">${spellData.name || data.name || 'Unknown'}</div>
+                <span class="new-card-rarity r-badge-${rarityLower}">${data.rarity || ''}</span>
+            </div>
+            <div class="new-card-body">
+                <div class="new-card-panel-area">
+                    ${panelsHTML}
+                </div>
+                <div class="new-card-tabs">
+                    ${tabsHTML}
+                </div>
+            </div>`;
+
         return content;
     };
 
+    // Tab listener-lər (new-tab-btn + stats-sub-btn)
     const setupTabListeners = container => {
-        container.querySelectorAll('.card-tabs button').forEach(btn => {
+        // Əsas sağ tablar
+        container.querySelectorAll('.new-tab-btn').forEach(btn => {
             btn.addEventListener('click', e => {
                 e.stopPropagation();
-                container.querySelectorAll('.card-tabs button').forEach(b => b.classList.remove('active'));
+                container.querySelectorAll('.new-tab-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                container.querySelectorAll('.stats-section').forEach(sec => sec.classList.remove('visible'));
-                container.querySelector(`[data-section-id="${btn.dataset.section}"]`).classList.add('visible');
+                container.querySelectorAll('.new-panel').forEach(p => p.classList.remove('visible'));
+                const target = container.querySelector(`[data-panel-id="${btn.dataset.section}"]`);
+                if (target) target.classList.add('visible');
+            });
+        });
+        // Stats alt tablar
+        container.querySelectorAll('.stats-sub-btn').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const area = btn.closest('.new-panel');
+                area.querySelectorAll('.stats-sub-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                area.querySelectorAll('.stats-sub-panel').forEach(p => p.classList.remove('visible'));
+                const target = area.querySelector(`[data-stats-panel="${btn.dataset.statsTab}"]`);
+                if (target) target.classList.add('visible');
             });
         });
     };
@@ -243,7 +288,7 @@ function createSpellCard(data) {
             setupTabListeners(spellContent);
         };
 
-        leftArrow.addEventListener('click',  e => { e.stopPropagation(); if (idx > 0)               updateForm(idx - 1); });
+        leftArrow.addEventListener('click',  e => { e.stopPropagation(); if (idx > 0)                updateForm(idx - 1); });
         rightArrow.addEventListener('click', e => { e.stopPropagation(); if (idx < data.forms.length) updateForm(idx + 1); });
 
         card.appendChild(multiControls);
