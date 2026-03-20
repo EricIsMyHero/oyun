@@ -687,15 +687,19 @@ body, .wrap {
 .spell-card {
   background: var(--card);
   border: 1px solid #2a2f57;
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 8px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   box-shadow: var(--shadow);
-  height: 320px;
+  height: 360px;
   width: 100%;
   position: relative;
+}
+
+/* spell-card içindəki new-card-layout tam hündürlük tutsun */
+.spell-card .new-card-layout {
+  height: 100%;
 }
 
 /* spell-treat & spell-story sections must be block, not grid */
