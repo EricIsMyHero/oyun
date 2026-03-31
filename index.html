@@ -8,7 +8,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> 
 </head>
 <body>
-  <div class="wrap" id="main-content">
+  <!-- INTRO OVERLAY -->
+  <div id="intro-overlay">
+    <div id="intro-bg-particles"></div>
+    <div id="intro-box">
+      <div id="intro-logo">CLASH-A-MANA</div>
+      <div id="intro-subtitle">Stagnantia: The Story of the Infinite Cycle</div>
+      <div id="intro-scroll-area">
+        <div id="intro-text"></div>
+      </div>
+      <div id="intro-progress-wrap">
+        <div id="intro-progress-bar"></div>
+      </div>
+    </div>
+    <button id="intro-skip-btn"><i class="fa-solid fa-forward-step"></i> Skip</button>
+  </div>
+
+  <div class="wrap" id="main-content" style="display:none;">
     <section class="main-menu" id="main-menu">
       <h1>Clash-A-Mana: Real-Time Card Arena</h1>
       <div class="menu-buttons">
@@ -140,7 +156,8 @@
     </section>
 
   </div>
-  <script src="js/main.js"></script>
+  <script src="js/intro.js"></script>
+</body>
   <script src="js/cards.js"></script>
   <script src="js/spells.js"></script>
 </body>
