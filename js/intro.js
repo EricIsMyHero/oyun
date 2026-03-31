@@ -9,20 +9,21 @@ const END_BUFFER     = 8000;                  // son 8s sonda saxla
 const USABLE_MS      = AUDIO_DURATION - END_BUFFER; // 162000ms
 
 const SEGMENTS = [
-  { head:      true,  text: "Stagnantia: The Story of the Infinite Cycle" },
-  { para:      true,  text: "The year is 2467. Humanity has reached the pinnacle of technological development, but is spiritually exhausted. Diseases have been cured, resource problems have been solved. However, this perfection has brought a great misfortune — a period of stagnation in Stagnantia. People no longer enjoy anything, they do not create anything new. To eliminate this mass boredom, a ruthless project is launched: Clash-A-Mana." },
-  { para:      true,  text: "The world is divided into two sharp poles:" },
-  { bullet:    true,  text: "The Crimson Crown: This class is the rulers and the wealthy of the world. They are the architects of Stagnantia. They live in comfort and their only goal is entertainment. For them, life is just a control panel." },
-  { bullet:    true,  text: "The Azure Core: The rest of society — the workforce and ordinary people. They are the cogs in the system created by the Crimson Crown. The Azure Core is always fighting, but this fighting never lifts them to the top." },
-  { para:      true,  text: "Scientists have invented portals that pierce reality to entertain the bored masses. These portals bring beings from different times and dimensions — ancient knights, robots of the future, mythological monsters and wild beasts — to Stagnantia." },
-  { para:      true,  text: "Huge, symmetrical arenas are built for battles. At one end stands a red tower representing The Crimson Crown, at the other a blue tower representing The Azure Core. In each battle, a player from The Crimson Crown kidnaps a person from The Azure Core for fun and forces him to fight in the arena." },
+  { head:      true,  text: "Stagnantia: The Tale of the Endless Cycle" },
+  { para:      true,  text: "The year is 2467. Humanity has reached the pinnacle of technological advancement, but is spiritually exhausted. Diseases have been cured, and resource problems solved. However, this perfection has brought about a great curse: a period of stagnation in Stagnantia. People no longer enjoy anything or create anything new. To combat this mass feeling of boredom, a ruthless project is launched: Clash-A-Mana." },
+  { para:      true,  text: "The world is divided into two stark poles:" },
+  { bullet:    true,  text: "The Crimson Crown: This tier consists of the world's rulers and the wealthy. They are the architects of Stagnantia. They live in comfort, and their sole purpose is entertainment. For them, life is just a control panel." },
+  { bullet:    true,  text: "The Azure Core: The rest of society, the working class and ordinary people. They are the cogs in the system created by the Crimson Crown. The Azure Core is always struggling, but this struggle never lifts them to the upper class." },
+  { para:      true,  text: "Scientists discovered reality-warping portals to entertain the bored masses. These portals bring beings from different times and dimensions-ancient knights, robots of the future, mythological monsters, and wild beasts-to Stagnantia." },
+  { para:      true,  text: "Giant, symmetrical arenas are built for the battles. At one end of the arena, a red castle representing The Crimson Crown towers, and at the other, a blue one representing The Azure Core." },
+  { para:      true,  text: "In each battle, a player from The Crimson Crown faction kidnaps a person from The Azure Core faction for entertainment and forces them to fight in the arena." },
   { highlight: true,  text: "You are one of those kidnapped." },
-  { para:      true,  text: "You are given digital cards. These cards are the only means to control the beings brought through the portals. You have only one goal:" },
-  { highlight: true,  text: '"Destroy the opposing side\'s castle and be free."' },
-  { para:      true,  text: "You win by strategically playing each card you are given, advancing your troops and defending the castle. This struggle, fought in the dust and at the cost of your life, promises you freedom." },
-  { para:      true,  text: "But the reality is different from what you're told. Clash-A-Mana games are designed to last, not to end. Each victory leads you not to freedom, but to the next, more difficult battle. In Stagnantia, time has stopped. You are trapped in an endless cycle. Your heroism is just entertainment for The Crimson Crown." },
-  { highlight: true,  text: "The only way to freedom is not to win the game — but to destroy the system itself." },
-  { para:      true,  text: "But the portals keep opening. The cards keep being dealt." },
+  { para:      true,  text: "You are dealt digital cards. These cards are the only way to control the beings brought through portals. You have only one objective:" },
+  { highlight: true,  text: '"Destroy the opponent tower and be free."' },
+  { para:      true,  text: "You win by strategically playing each card you are dealt, advancing your troops and defending your tower. This struggle you fight in the dust and dirt, at the cost of your soul, promises you freedom." },
+  { para:      true,  text: "But the reality is different from what you've been told. Clash-A-Mana games are not meant to end, but to continue. Every victory you achieve leads you not to freedom, but to the next, more difficult battle. In Stagnantia, time has stood still. You are trapped in an endless cycle. Your heroism is just an evening's show for The Crimson Crown." },
+  { highlight: true,  text: "The only way to freedom is not to win the game, but to destroy the system itself." },
+  { para:      true,  text: "Yet the portals continue to open, and the cards keep on being dealt." },
 ];
 
 const TOTAL_CHARS = SEGMENTS.reduce((a, s) => a + s.text.length, 0);
