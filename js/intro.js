@@ -5,8 +5,8 @@
 
 const AUDIO_SRC      = 'assets/intro.mp3';   // audio faylın yolu
 const AUDIO_DURATION = 170000;                // ms (170s)
-const END_BUFFER     = 35000;                 // son 35s sonda saxla (mətn daha tez bitir)
-const USABLE_MS      = AUDIO_DURATION - END_BUFFER; // 135000ms
+const END_BUFFER     = 1000;                 // son 1s sonda saxla (mətn daha gec bitir)
+const USABLE_MS      = AUDIO_DURATION - END_BUFFER; // 160000ms
 
 const SEGMENTS = [
   { head:      true,  text: "Stagnantia: The Tale of the Endless Cycle" },
