@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────
 // INTRO SEQUENCE — Audio ilə sinxronizasiya
-// Audio: 2 dəq 50 san = 170 saniyə
+// Audio: 2 dəq 40 san = 160 saniyə
 // ─────────────────────────────────────────────
 
 const AUDIO_SRC      = 'assets/intro.mp3';   // audio faylın yolu
