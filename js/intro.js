@@ -36,10 +36,34 @@ const skipBtn     = document.getElementById('intro-skip-btn');
 const progressBar = document.getElementById('intro-progress-bar');
 const mainContent = document.getElementById('main-content');
  
-// ── Audio ─────────────────────────────────────────────────────────────────────
-const audio = new Audio(AUDIO_SRC);
-audio.volume = 1.0;
-audio.preload = 'auto';
+// ── Audio (opsional — fayl olmasa xətasız keçir) ─────────────────────────────
+let audio = null;
+ 
+function initAudio() {
+    const a = new Audio();
+    a.volume = 1.0;
+    a.preload = 'auto';
+ 
+    // Fayl tapılmasa xəta yox, sadəcə audio olmadan davam et
+    a.onerror = () => { audio = null; };
+ 
+    a.src = AUDIO_SRC; // src-i onerror qurulandan SONRA set et
+    audio = a;
+}
+ 
+function playAudio() {
+    if (!audio) return;
+    audio.play().catch(() => {
+        // Autoplay bloklandı və ya fayl yoxdur — mətn hər halda gedir
+    });
+}
+ 
+function pauseAudio() {
+    if (!audio) return;
+    try { audio.pause(); } catch (_) {}
+}
+ 
+initAudio();
  
 // ── Vəziyyət ──────────────────────────────────────────────────────────────────
 let stopped   = false;
@@ -114,7 +138,7 @@ function endIntro() {
     if (stopped) return;
     stopped = true;
     clearAllTimers();
-    audio.pause();
+    pauseAudio();
     fadeOut();
 }
  
@@ -131,7 +155,7 @@ skipBtn.addEventListener('click', () => {
     if (stopped) return;
     stopped = true;
     clearAllTimers();
-    audio.pause();
+    pauseAudio();
  
     // Bütün mətni dərhal yaz
     introTextEl.innerHTML = '';
@@ -147,6 +171,5 @@ skipBtn.addEventListener('click', () => {
  
 // ── Başlat ────────────────────────────────────────────────────────────────────
 scheduleAll();
-audio.play().catch(() => {
-    console.warn('Audio autoplay blocked — text continues without audio.');
-});
+playAudio();
+ 
