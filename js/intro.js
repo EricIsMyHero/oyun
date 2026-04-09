@@ -28,33 +28,33 @@ const SEGMENTS = [
 
 const TOTAL_CHARS = SEGMENTS.reduce((a, s) => a + s.text.length, 0);
 const MS_PER_CHAR = USABLE_MS / TOTAL_CHARS;
-
+ 
 // ── DOM ───────────────────────────────────────────────────────────────────────
 const overlay     = document.getElementById('intro-overlay');
 const introTextEl = document.getElementById('intro-text');
 const skipBtn     = document.getElementById('intro-skip-btn');
 const progressBar = document.getElementById('intro-progress-bar');
 const mainContent = document.getElementById('main-content');
-
+ 
 // ── Audio ─────────────────────────────────────────────────────────────────────
 const audio = new Audio(AUDIO_SRC);
 audio.volume = 1.0;
 audio.preload = 'auto';
-
+ 
 // ── Vəziyyət ──────────────────────────────────────────────────────────────────
 let stopped   = false;
 let charCount = 0;
 let timers    = [];
-
+ 
 function clearAllTimers() {
     timers.forEach(clearTimeout);
     timers = [];
 }
-
+ 
 function at(fn, ms) {
     timers.push(setTimeout(fn, ms));
 }
-
+ 
 // ── Blok yarat ────────────────────────────────────────────────────────────────
 function createBlock(seg) {
     const el = document.createElement('p');
@@ -64,28 +64,42 @@ function createBlock(seg) {
     else                    el.className = 'intro-para';
     return el;
 }
-
+ 
 // ── Segment cədvəli ───────────────────────────────────────────────────────────
+const scrollArea = document.getElementById('intro-scroll-area');
+ 
+function smoothScrollTo(targetY) {
+    // scrollArea-nın scrollTop-unu birbaşa set et (ani, smooth brauzerdən asılı olmadan)
+    scrollArea.scrollTop = targetY;
+}
+ 
 function scheduleSegment(seg, segStartMs) {
     const block = createBlock(seg);
     at(() => {
         if (!stopped) introTextEl.appendChild(block);
     }, segStartMs);
-
+ 
     for (let ci = 0; ci < seg.text.length; ci++) {
         const ch       = seg.text[ci];
         const charTime = segStartMs + (ci + 1) * MS_PER_CHAR;
-
+ 
         at(() => {
             if (stopped) return;
             block.textContent += ch;
             charCount++;
             progressBar.style.width = (charCount / TOTAL_CHARS * 100) + '%';
-            block.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+ 
+            // Son yazılan bloku həmişə görüntüdə saxla
+            // scrollArea hündürlüyünün 60%-nin aşağısına düşəndə scroll et
+            const blockBottom = block.offsetTop + block.offsetHeight;
+            const visibleBottom = scrollArea.scrollTop + scrollArea.clientHeight * 0.75;
+            if (blockBottom > visibleBottom) {
+                scrollArea.scrollTop = blockBottom - scrollArea.clientHeight * 0.75;
+            }
         }, charTime);
     }
 }
-
+ 
 function scheduleAll() {
     let elapsed = 0;
     SEGMENTS.forEach(seg => {
@@ -94,7 +108,7 @@ function scheduleAll() {
     });
     at(endIntro, AUDIO_DURATION + 500);
 }
-
+ 
 // ── İntro sonu ────────────────────────────────────────────────────────────────
 function endIntro() {
     if (stopped) return;
@@ -103,7 +117,7 @@ function endIntro() {
     audio.pause();
     fadeOut();
 }
-
+ 
 function fadeOut() {
     overlay.classList.add('intro-fade-out');
     overlay.addEventListener('animationend', () => {
@@ -111,14 +125,14 @@ function fadeOut() {
         mainContent.style.display = '';
     }, { once: true });
 }
-
+ 
 // ── Skip ──────────────────────────────────────────────────────────────────────
 skipBtn.addEventListener('click', () => {
     if (stopped) return;
     stopped = true;
     clearAllTimers();
     audio.pause();
-
+ 
     // Bütün mətni dərhal yaz
     introTextEl.innerHTML = '';
     SEGMENTS.forEach(seg => {
@@ -127,10 +141,10 @@ skipBtn.addEventListener('click', () => {
         introTextEl.appendChild(block);
     });
     progressBar.style.width = '100%';
-
+ 
     setTimeout(fadeOut, 600);
 });
-
+ 
 // ── Başlat ────────────────────────────────────────────────────────────────────
 scheduleAll();
 audio.play().catch(() => {
