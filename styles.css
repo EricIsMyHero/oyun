@@ -1333,6 +1333,7 @@ body, .wrap {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: 40px 20px 80px; /* altda progress bar + skip üçün yer */
 }
 
 /* Arxa fon parıltısı */
@@ -1351,12 +1352,12 @@ body, .wrap {
   position: relative;
   z-index: 2;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   flex-shrink: 0;
 }
 
 #intro-logo {
-  font-size: clamp(26px, 5vw, 44px);
+  font-size: clamp(24px, 4.5vw, 40px);
   font-weight: 900;
   letter-spacing: 5px;
   text-align: center;
@@ -1365,12 +1366,12 @@ body, .wrap {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 0 22px rgba(220, 60, 40, 0.5));
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   line-height: 1.1;
 }
 
 #intro-subtitle {
-  font-size: 12px;
+  font-size: 11px;
   color: #4a5480;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -1383,47 +1384,56 @@ body, .wrap {
   width: min(760px, 90vw);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
 }
 
-/* Scroll sahəsi — tam görünüş üçün böyük */
+/* Scroll sahəsi — bütün mövcud yeri tutur */
 #intro-scroll-area {
-  height: clamp(280px, 48vh, 440px);
-  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+  overflow-y: scroll;
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE/Edge */
   position: relative;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 82%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
+}
+
+#intro-scroll-area::-webkit-scrollbar {
+  display: none;               /* Chrome/Safari */
 }
 
 #intro-text {
   display: flex;
   flex-direction: column;
-  padding: 28px 6px 52px;
+  padding: 24px 6px 40px;
 }
 
 /* ── Mətn tipləri ── */
 .intro-head {
-  font-size: clamp(14px, 2.2vw, 17px);
+  font-size: clamp(13px, 2vw, 16px);
   font-weight: 800;
   letter-spacing: .4px;
   color: #dde5ff;
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   line-height: 1.35;
 }
 
 .intro-para {
-  font-size: clamp(12px, 1.7vw, 13.5px);
+  font-size: clamp(11.5px, 1.6vw, 13px);
   color: #a0aece;
   line-height: 1.8;
-  margin: 0 0 14px;
+  margin: 0 0 12px;
 }
 
 .intro-bullet {
-  font-size: clamp(12px, 1.7vw, 13.5px);
+  font-size: clamp(11.5px, 1.6vw, 13px);
   color: #a0aece;
   line-height: 1.75;
-  margin: 0 0 10px;
-  padding-left: 22px;
+  margin: 0 0 8px;
+  padding-left: 20px;
   position: relative;
 }
 
@@ -1436,22 +1446,24 @@ body, .wrap {
 }
 
 .intro-highlight {
-  font-size: clamp(13px, 1.9vw, 15px);
+  font-size: clamp(12px, 1.8vw, 14.5px);
   font-weight: 700;
   color: #f0c040;
   line-height: 1.6;
-  margin: 8px 0 16px;
+  margin: 6px 0 14px;
   text-align: center;
   letter-spacing: .3px;
   filter: drop-shadow(0 0 10px rgba(240, 192, 64, 0.35));
 }
 
-/* ── Proqres xətti ── */
+/* ── Proqres xətti — scroll sahəsinin altında ── */
 #intro-progress-wrap {
   height: 2px;
   background: rgba(255,255,255,0.05);
   border-radius: 2px;
   overflow: hidden;
+  margin-top: 14px;
+  flex-shrink: 0;
 }
 
 #intro-progress-bar {
@@ -1465,8 +1477,8 @@ body, .wrap {
 /* ── Skip düyməsi — sağ alt ── */
 #intro-skip-btn {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
+  bottom: 24px;
+  right: 24px;
   z-index: 10000;
   background: rgba(15, 20, 50, 0.88);
   border: 1px solid rgba(255,255,255,0.11);
