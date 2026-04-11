@@ -19,6 +19,11 @@ const spellRarityEpic      = document.getElementById('spell-rarity-epic');
 const spellRarityLegendary = document.getElementById('spell-rarity-legendary');
 const spellRarityButtons   = [spellRarityAll, spellRarityCommon, spellRarityEpic, spellRarityLegendary];
 
+// main.js-dəki dəyişənlərə təhlükəsiz giriş (lazy lookup)
+const getMainMenu    = () => document.getElementById('main-menu');
+const getCardsSection = () => document.getElementById('cards-section');
+const getInfoSection  = () => document.getElementById('info-section');
+
 let allSpellsData     = [];
 let activeSpellType   = 'all';
 let activeSpellRarity = 'all';
@@ -31,13 +36,13 @@ const SPELL_RARITY_CSS = {
 
 function showMenu_fromSpells() {
     spellsSection.classList.add('hidden');
-    mainMenu.classList.remove('hidden');
+    getMainMenu().classList.remove('hidden');
 }
 
 function showSpells() {
-    mainMenu.classList.add('hidden');
-    cardsSection.classList.add('hidden');
-    infoSection.classList.add('hidden');
+    getMainMenu().classList.add('hidden');
+    const cs = getCardsSection(); if (cs) cs.classList.add('hidden');
+    const is = getInfoSection();  if (is) is.classList.add('hidden');
     spellsSection.classList.remove('hidden');
     fetchAndRenderSpells();
     if (spellSearchInput) spellSearchInput.value = '';
