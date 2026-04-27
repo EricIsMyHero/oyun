@@ -12,13 +12,13 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 /* ── Stat definitions for the bar chart inside the modal ── */
 const STAT_DEFS = [
-  { key: 'health', label: 'Health', icon: '❤', max: 5000, color: '#f87171' },
-  { key: 'shield', label: 'Shield', icon: '🛡', max: 3000, color: '#60a5fa' },
-  { key: 'damage', label: 'Damage', icon: '⚔', max: 500,  color: '#fb923c' },
+  { key: 'health', label: 'Health', icon: '❤', max: 1000, color: '#f87171' },
+  { key: 'shield', label: 'Shield', icon: '🛡', max: 1000, color: '#60a5fa' },
+  { key: 'damage', label: 'Damage', icon: '⚔', max: 200,  color: '#fb923c' },
   { key: 'sps',    label: 'DPS',    icon: '💥', max: 300,  color: '#f472b6' },
-  { key: 'mana',   label: 'Mana',   icon: '🔮', max: 10,   color: '#a78bfa' },
-  { key: 'speed',  label: 'Speed',  icon: '⚡', max: 500,  color: '#4ade80' },
-  { key: 'range',  label: 'Range',  icon: '🎯', max: 3000, color: '#fbbf24' },
+  { key: 'mana',   label: 'Mana',   icon: '🔮', max: 20,   color: '#a78bfa' },
+  { key: 'speed',  label: 'Speed',  icon: '⚡', max: 3000,  color: '#4ade80' },
+  { key: 'range',  label: 'Range',  icon: '🎯', max: 30000, color: '#fbbf24' },
 ];
 
 /* ── Open the modal for a given card object ── */
