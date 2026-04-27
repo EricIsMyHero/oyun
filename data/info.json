@@ -1,0 +1,45 @@
+{
+  "sections": [
+    {
+      "heading": "How to Play",
+      "content": "Clash-A-Mana is a real-time card battle game. Deploy cards to the arena using mana, destroy the opponent's tower to win. Each card costs mana — manage your resources wisely.",
+      "list": [
+        "Mana - The energy resource used to deploy cards. Regenerates over time.",
+        "Tower - Your base. If destroyed, you lose the match.",
+        "Arena - The battlefield split into two lanes.",
+        "Cycle - Your deck of 8 cards cycles continuously during battle."
+      ]
+    },
+    {
+      "heading": "Rarity System",
+      "content": "Every entity in Clash-A-Mana has a rarity tier that reflects its power, scarcity, and role in the Stagnantia project. Higher rarity cards are harder to obtain but significantly more powerful.",
+      "list": [
+        "Mundane - Common workers and basic constructs. Easy to deploy, reliable.",
+        "Familiar - Trained soldiers and tamed beasts. Good synergy potential.",
+        "Arcane - Mystic entities infused with portal energy. Unique abilities.",
+        "Relic - Ancient warriors of legend. High cost, high impact.",
+        "Ascendant - Evolved beings beyond normal classification.",
+        "Apex - The pinnacle of combat power. Extremely rare.",
+        "Ethereal - Beings that exist between dimensions. Unpredictable and devastating."
+      ]
+    },
+    {
+      "heading": "Factions",
+      "content": "Stagnantia is divided into two opposing factions, locked in perpetual conflict for the entertainment of the Crimson Crown. Every card wielder belongs to one side — but the true enemy is the system itself.",
+      "list": [
+        "The Crimson Crown - The ruling elite who architect and profit from the conflict.",
+        "The Azure Core - The working class, forced into the arena as entertainment."
+      ]
+    },
+    {
+      "heading": "Win Conditions",
+      "content": "Destroy the enemy tower before the timer runs out. If both towers survive, the player who dealt more tower damage wins. In case of a tie, sudden death overtime begins with accelerated mana regeneration.",
+      "list": [
+        "Tower Destruction - Instantly win by destroying the opponent's tower.",
+        "Higher Damage - Win on timer if your tower has less damage taken.",
+        "Overtime - Sudden death with doubled mana regeneration.",
+        "Perfect Victory - Destroy tower without taking any damage yourself."
+      ]
+    }
+  ]
+}

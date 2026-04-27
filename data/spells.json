@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mana Surge",
+    "rarity": "common",
+    "type": "normal",
+    "treat": "Channels raw mana into a devastating forward blast that damages all units in its path.",
+    "stats": {
+      "energy": 3,
+      "damageToCard": "250",
+      "damageToCastle": "100",
+      "range": "800"
+    }
+  },
+  {
+    "name": "Arcane Shield",
+    "rarity": "rare",
+    "type": "building",
+    "treat": "Summons a crystalline barrier that absorbs damage for friendly units behind it.",
+    "stats": {
+      "energy": 4,
+      "damageToCard": "-",
+      "damageToCastle": "-",
+      "range": "600"
+    }
+  },
+  {
+    "name": "Void Rift",
+    "rarity": "epic",
+    "type": "normal",
+    "treat": "Tears a hole in reality, pulling all nearby enemies toward the epicentre before detonating.",
+    "stats": {
+      "energy": 6,
+      "damageToCard": "500",
+      "damageToCastle": "300",
+      "range": "1000"
+    }
+  },
+  {
+    "name": "Stagnantia's Wrath",
+    "rarity": "legendary",
+    "type": "normal",
+    "treat": "The full weight of a bored civilisation, channelled into one catastrophic strike.",
+    "stats": {
+      "energy": 9,
+      "damageToCard": "1200",
+      "damageToCastle": "600",
+      "range": "Global"
+    }
+  }
+]

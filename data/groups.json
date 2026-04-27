@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Constructs",
+    "description": "Machine soldiers built in the underground workshops of Stagnantia. Reliable, mass-produced, and expendable.",
+    "color": "#60a5fa",
+    "icon": "fa-gear",
+    "members": ["Iron Golem", "Scrap Drone", "Steam Knight", "Volt Sentinel"]
+  },
+  {
+    "name": "Beasts",
+    "description": "Wild creatures dragged through mana portals from prehistoric dimensions. Unpredictable but ferocious.",
+    "color": "#4ade80",
+    "icon": "fa-paw",
+    "members": ["Feral Wolf", "Stone Troll", "Venom Drake", "Mire Hound"]
+  },
+  {
+    "name": "Ancients",
+    "description": "Warriors pulled from history's greatest battles. Each carries the weight of a lost civilisation.",
+    "color": "#e8c95a",
+    "icon": "fa-shield-halved",
+    "members": ["Legion Centurion", "Samurai Echo", "Viking Wraith", "Pharaoh's Guard"]
+  },
+  {
+    "name": "Void Walkers",
+    "description": "Beings that exist between dimensions. They do not belong to any time or place — only the arena.",
+    "color": "#f472b6",
+    "icon": "fa-eye",
+    "members": ["Rift Shade", "Null Priest", "Phase Assassin", "Void Empress"]
+  }
+]
