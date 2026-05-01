@@ -885,3 +885,35 @@ body {
   .section-wrap { padding: 60px 20px; }
   #site-nav { padding: 0 20px; }
 }
+
+/* ── Stat tab buttons (modal) ── */
+.stat-tab-row {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0 12px;
+}
+
+.stat-tab {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.2s ease;
+}
+
+.stat-tab:hover { border-color: var(--border-glow); color: var(--text); }
+.stat-tab.active { background: rgba(100,140,255,0.15); border-color: var(--accent); color: var(--accent); }
+
+.no-stat-msg {
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding: 20px 0;
+  letter-spacing: 0.1em;
+}
