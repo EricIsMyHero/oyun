@@ -74,8 +74,7 @@
     "type": ["Uzaylı"],
     "rarity": "Apex",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "royal-blood",
     "stats": {
       "health": "320",
       "shield": "0",
@@ -102,7 +101,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "UnTouch is the younger sister of Aza, but her power is legendary throughout the kingdom. She wears heavy, golden armor and carries a pair of specialized golden gauntlets on both hands. When she strikes the earth with these gauntlets, she triggers massive earthquakes that can split mountains in two. Despite her overwhelming physical strength, her heart beats for her people, and she fights to protect their homes from any threat. She is the kingdom's ultimate force of nature, a girl whose kindness is as deep as her strikes are shattering."
   },
   {
     "name": "Lover",
@@ -601,8 +600,7 @@
     "type": ["İnsan"],
     "rarity": "Apex",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "royal-blood",
     "stats": {
       "health": "180",
       "shield": "50",
@@ -629,7 +627,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "SkyHunter is a veteran warrior of immense talent, serving as the kingdom's silent guardian from above. Clad in golden armor designed for stealth, he is a master of invisibility who believes that being seen is a failure. He uses a custom-built weapon specifically engineered to obliterate any flying creature or threat within seconds. Stealth is his primary tool; he moves through the shadows of the clouds, ensuring that the skies remain clear for the Royal Blood. He is the unseen predator that enemies never hear coming until it is too late."
   },
   {
     "name": "Rockback",
