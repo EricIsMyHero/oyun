@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLASH-A-MANA — Official Codex</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (group icons in Codex) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+<!-- ═══ AMBIENT PARTICLES ═══ -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- ═══════════════════════════════════════════════════════
+     INTRO / HERO SCREEN
+═══════════════════════════════════════════════════════ -->
+<section id="intro-screen">
+  <div class="intro-bg"></div>
+  <div class="intro-grid"></div>
+  <div class="intro-orb orb1"></div>
+  <div class="intro-orb orb2"></div>
+  <div class="intro-orb orb3"></div>
+
+  <div class="intro-content">
+    <p class="intro-eyebrow">Official Lore Codex &amp; Card Database</p>
+    <h1 class="intro-title">Clash-A-Mana</h1>
+    <div class="intro-divider"></div>
+    <p class="intro-subtitle">Stagnantia: The Tale of the Endless Cycle</p>
+
+    <div class="intro-story-preview">
+      <p>
+        The year is 2467. Humanity has reached the pinnacle of technological advancement —
+        yet is spiritually exhausted. To combat mass stagnation, a ruthless project was
+        launched. You are a card. You are a soldier. You are entertainment.
+      </p>
+    </div>
+
+    <div class="intro-cta-group">
+      <button class="btn-primary" id="explore-btn">Explore Cards</button>
+      <button class="btn-secondary" id="lore-btn">Read the Lore</button>
+    </div>
+  </div>
+
+  <div class="intro-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN PORTAL
+═══════════════════════════════════════════════════════ -->
+<div id="main-portal">
+
+  <!-- Sticky navigation -->
+  <nav id="site-nav">
+    <div class="nav-logo" id="nav-logo">CAM</div>
+    <ul class="nav-links">
+      <li><button class="nav-btn" data-section="lore">Lore</button></li>
+      <li><button class="nav-btn" data-section="cards">Cards</button></li>
+      <li><button class="nav-btn" data-section="spells">Spells</button></li>
+      <li><button class="nav-btn" data-section="info">Codex</button></li>
+    </ul>
+  </nav>
+
+  <!-- ── LORE ── -->
+  <section id="lore-section">
+    <div class="section-wrap">
+      <p class="section-eyebrow reveal">Chapter I — The World of Stagnantia</p>
+      <h2 class="section-title reveal">The Endless Cycle</h2>
+      <div class="section-divider reveal"></div>
+
+      <div class="lore-intro-block reveal">
+        <div class="lore-text-side">
+          <p>The year is 2467. Humanity has reached the pinnacle of technological advancement, but is
+            spiritually exhausted. Diseases have been cured, resource problems solved. However, this
+            perfection has brought about a great curse — a period of stagnation in Stagnantia. People
+            no longer enjoy anything or create anything new.</p>
+          <p>To combat this mass feeling of boredom, a ruthless project is launched: <strong>Clash-A-Mana.</strong>
+            Scientists discovered reality-warping portals that bring beings from different times and
+            dimensions — ancient knights, robots of the future, mythological monsters, and wild beasts —
+            into the arena.</p>
+          <div class="lore-highlight-quote">
+            "The only way to freedom is not to win the game, but to destroy the system itself."
+          </div>
+          <p>You are dealt digital cards. These cards are the only way to control the beings brought
+            through portals. You have only one objective — destroy the opponent tower and be free.
+            But freedom is a lie they tell you.</p>
+        </div>
+
+        <div class="lore-visual-side">
+          <div class="lore-faction-card faction-crimson">
+            <span class="faction-badge">Ruling Class</span>
+            <div class="faction-name">⚔ The Crimson Crown</div>
+            <p class="faction-desc">The world's rulers and the wealthy. Architects of Stagnantia who
+              live in comfort. For them, life is just a control panel. They watch the battles as
+              entertainment, always from above.</p>
+          </div>
+          <div class="lore-faction-card faction-azure">
+            <span class="faction-badge">Working Class</span>
+            <div class="faction-name">🌊 The Azure Core</div>
+            <p class="faction-desc">The rest of society — the working class, ordinary people. They are
+              the cogs in the system created by the Crimson Crown. The Azure Core is always struggling,
+              but this struggle never lifts them to the upper class.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lore chapters -->
+      <div class="lore-chapters">
+        <p class="section-eyebrow reveal">World Codex</p>
+        <h2 class="section-title reveal">Lore Archives</h2>
+
+        <div class="chapter-grid reveal">
+          <div class="chapter-card">
+            <div class="chapter-num">01</div>
+            <span class="chapter-icon">🌍</span>
+            <div class="chapter-title">The World of Stagnantia</div>
+            <p class="chapter-text">A dystopian 2467 where perfection became a curse. Technological
+              utopia gave rise to spiritual emptiness, and from that void — Clash-A-Mana was born.</p>
+          </div>
+          <div class="chapter-card">
+            <div class="chapter-num">02</div>
+            <span class="chapter-icon">🔮</span>
+            <div class="chapter-title">The Mana Portals</div>
+            <p class="chapter-text">Reality-warping gateways that tear through time and dimension,
+              dragging warriors, monsters, and mythological entities into the arena against their will.</p>
+          </div>
+          <div class="chapter-card">
+            <div class="chapter-num">03</div>
+            <span class="chapter-icon">⚡</span>
+            <div class="chapter-title">The Clash System</div>
+            <p class="chapter-text">Giant symmetrical arenas house the battles. Red castle for the
+              Crimson Crown, blue for the Azure Core. Destroy the enemy tower — but freedom is always
+              one battle away.</p>
+          </div>
+          <div class="chapter-card">
+            <div class="chapter-num">04</div>
+            <span class="chapter-icon">🃏</span>
+            <div class="chapter-title">The Card Wielders</div>
+            <p class="chapter-text">Kidnapped from the Azure Core, forced to fight. Each card wielder
+              controls beings through digital mana bonds — strategy is survival, not sport.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CARDS DATABASE ── -->
+  <section id="cards-section">
+    <div class="section-wrap">
+      <div class="db-header">
+        <div>
+          <p class="section-eyebrow">Entity Registry</p>
+          <h2 class="section-title">Card Database</h2>
+          <div class="db-stats">Showing <span id="card-count">0</span> entities</div>
+        </div>
+        <div class="db-controls">
+          <div class="filter-row">
+            <span class="filter-label">Rarity</span>
+            <button class="filter-btn active" data-rarity="all">All</button>
+            <button class="filter-btn" data-rarity="mundane">Mundane</button>
+            <button class="filter-btn" data-rarity="familiar">Familiar</button>
+            <button class="filter-btn" data-rarity="arcane">Arcane</button>
+            <button class="filter-btn" data-rarity="relic">Relic</button>
+            <button class="filter-btn" data-rarity="ascendant">Ascendant</button>
+            <button class="filter-btn" data-rarity="apex">Apex</button>
+            <button class="filter-btn" data-rarity="ethereal">Ethereal</button>
+          </div>
+          <div class="filter-row">
+            <div class="search-box">
+              <span class="search-icon">⌕</span>
+              <input type="text" id="card-search" placeholder="Search entities…">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cards-grid" id="cards-grid">
+        <div class="no-results">Loading entity registry…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SPELLS ── -->
+  <section id="spells-section">
+    <div class="section-wrap">
+      <div class="db-header">
+        <div>
+          <p class="section-eyebrow">Arcane Arsenal</p>
+          <h2 class="section-title">Spell Archive</h2>
+          <div class="db-stats">Showing <span id="spell-count">0</span> spells</div>
+        </div>
+        <div class="db-controls">
+          <div class="filter-row">
+            <span class="filter-label">Rarity</span>
+            <button class="filter-btn spell-filter active" data-filter="all">All</button>
+            <button class="filter-btn spell-filter" data-filter="legendary">Legendary</button>
+            <button class="filter-btn spell-filter" data-filter="epic">Epic</button>
+            <button class="filter-btn spell-filter" data-filter="rare">Rare</button>
+            <button class="filter-btn spell-filter" data-filter="common">Common</button>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">Type</span>
+            <button class="filter-btn spell-type active" data-type="all">All</button>
+            <button class="filter-btn spell-type" data-type="normal">Normal</button>
+            <button class="filter-btn spell-type" data-type="building">Building</button>
+          </div>
+        </div>
+      </div>
+      <div class="spells-grid" id="spells-grid">
+        <div class="no-results">Loading arcane archive…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CODEX / INFO ── -->
+  <section id="info-section">
+    <div class="section-wrap">
+      <p class="section-eyebrow">Game Mechanics</p>
+      <h2 class="section-title">The Codex</h2>
+      <div class="section-divider"></div>
+      <div class="codex-layout">
+        <nav class="codex-nav" id="codex-nav"></nav>
+        <div class="codex-content" id="codex-content"></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#main-portal -->
+
+<!-- ═══════════════════════════════════════════════════════
+     CARD DETAIL MODAL
+═══════════════════════════════════════════════════════ -->
+<div id="modal-overlay">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="modal-img-col" id="modal-img-col">
+      <div class="modal-img-rarity" id="modal-img-rarity"></div>
+      <img id="modal-img" src="" alt="" style="display:none">
+      <div class="modal-img-placeholder" id="modal-placeholder">⚔</div>
+      <div class="modal-img-gradient"></div>
+    </div>
+    <div class="modal-content-col" id="modal-content"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCRIPTS  (order matters — core first, then modules)
+═══════════════════════════════════════════════════════ -->
+<script src="js/core/particles.js"></script>
+<script src="js/modules/cards.js"></script>
+<script src="js/modules/spells.js"></script>
+<script src="js/modules/info.js"></script>
+<script src="js/core/modal.js"></script>
+<script src="js/core/navigation.js"></script>
+
+</body>
+</html>
