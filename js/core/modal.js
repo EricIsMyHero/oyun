@@ -11,26 +11,26 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 /* ── Primary stats ── */
 const STAT_DEFS = [
-{ key: 'health', label: 'Health', icon: '❤️', max: 1000, color: '#f87171' },
-{ key: 'shield', label: 'Shield', icon: '🛡️', max: 1000, color: '#60a5fa' },
-{ key: 'damage', label: 'Damage', icon: '💥', max: 200, color: '#fb923c' },
-{ key: 'attackSpeed', label: 'Attack Speed', icon: '⏳', max: 5, color: '#fb923c' },
-{ key: 'delay', label: 'Delay', icon: '⏱️', max: 200, color: '#fb923c' },
-{ key: 'sps', label: 'DPS', icon: '🔥', max: 500, color: '#f472b6' },
-{ key: 'mana', label: 'Mana', icon: '💧', max: 20, color: '#a78bfa' },
-{ key: 'number', label: 'Count', icon: '🔢', max: 15, color: '#a78bfa' },
+  { key: 'health', label: 'Health',  icon: '❤', max: 1000, color: '#f87171' },
+  { key: 'shield', label: 'Shield',  icon: '🛡', max: 1000, color: '#60a5fa' },
+  { key: 'damage', label: 'Damage',  icon: '⚔', max: 200,  color: '#fb923c' },
+  { key: 'attackSpeed', label: 'Attack Speed',  icon: '⚔', max: 5,  color: '#fb923c' },
+  { key: 'delay', label: 'Delay',  icon: '⚔', max: 200,  color: '#fb923c' },
+  { key: 'sps',    label: 'DPS',     icon: '💥', max: 500,  color: '#f472b6' },
+  { key: 'mana',   label: 'Mana',    icon: '🔮', max: 20,   color: '#a78bfa' },
+  { key: 'number',   label: 'Count',    icon: '🔮', max: 15,   color: '#a78bfa' },
 ];
 
 /* ── Secondary / additional stats ── */
 const ADD_STAT_DEFS = [
-{ key: 'range', label: 'Range', icon: '🏹', max: 30000, color: '#f87171', suffix: '' },
-{ key: 'speed', label: 'Speed', icon: '👟', max: 5000, color: '#60a5fa', suffix: '' },
-{ key: 'criticalChance', label: 'Critical Chance', icon: '🎯', max: 100, color: '#fb923c', suffix: '%' },
-{ key: 'criticDamage', label: 'Critical Damage', icon: '🧨', max: 5, color: '#f472b6', suffix: 'x' },
-{ key: 'lifestealChance', label: 'Lifesteal Chance', icon: '🧛', max: 100, color: '#a78bfa', suffix: '%' },
-{ key: 'lifesteal', label: 'Lifesteal', icon: '🩸', max: 100, color: '#4ade80', suffix: '%' },
-{ key: 'damageminimiser', label: 'Damage Reduction', icon: '🔰', max: 90, color: '#fbbf24', suffix: '%' },
-{ key: 'dodge', label: 'Dodge Chance', icon: '💨', max: 70, color: '#c084fc', suffix: '%' },
+  { key: 'range',           label: 'Range',            icon: '🎯', max: 30000, color: '#f87171',  suffix: ''  },
+  { key: 'speed',           label: 'Speed',            icon: '⚡', max: 5000,  color: '#60a5fa',  suffix: ''  },
+  { key: 'criticalChance',  label: 'Critical Chance',  icon: '🗡', max: 100,   color: '#fb923c',  suffix: '%' },
+  { key: 'criticDamage',    label: 'Critical Damage',  icon: '💥', max: 5,     color: '#f472b6',  suffix: 'x' },
+  { key: 'lifestealChance', label: 'Lifesteal Chance', icon: '🩸', max: 100,   color: '#a78bfa',  suffix: '%' },
+  { key: 'lifesteal',       label: 'Lifesteal',        icon: '💚', max: 100,   color: '#4ade80',  suffix: '%' },
+  { key: 'damageminimiser', label: 'Damage Reduction', icon: '🛡', max: 90,    color: '#fbbf24',  suffix: '%' },
+  { key: 'dodge',           label: 'Dodge Chance',     icon: '👁', max: 70,    color: '#c084fc',  suffix: '%' },
 ];
 
 /* ── Build stat bar rows ── */
@@ -92,35 +92,86 @@ function buildStarLevels(levels) {
   }).join('');
 }
 
-/* ── Build ascended form banner (upgradedsecondForm) ── */
-function buildAscendedBanner(rootCard, isAscended) {
-  const secondForm = rootCard.upgradedsecondForm;
-  if (!secondForm) return '';
-  if (isAscended) {
+/* ── Build ethereal dual-type selector ── */
+function buildDualTypeSelector(card) {
+  const t1 = card.type1;
+  const t2 = card.type2;
+  const rarColor = getComputedStyle(document.documentElement)
+    .getPropertyValue('--ethereal').trim() || '#f472b6';
+
+  /* Quick stat preview helper */
+  function statPreview(c) {
+    const s = c.stats || {};
     return `
-      <div class="ascended-banner ascended-banner--active">
-        <div class="ascended-banner-info">
-          <span class="ascended-banner-icon">⚡</span>
-          <div>
-            <div class="ascended-banner-title">Ascended Form</div>
-            <div class="ascended-banner-sub">Partnyor bonusu aktiv — ${secondForm.name}</div>
-          </div>
-        </div>
-        <button class="ascended-toggle-btn ascended-toggle-btn--revert"
-                id="ascended-toggle">↩ Base Form</button>
-      </div>`;
+      <div class="dual-stat-row"><span>❤ HP</span><span>${s.health || '—'}</span></div>
+      <div class="dual-stat-row"><span>🛡 Shield</span><span>${s.shield || '—'}</span></div>
+      <div class="dual-stat-row"><span>⚔ DMG</span><span>${s.damage || '—'}</span></div>
+      <div class="dual-stat-row"><span>💥 DPS</span><span>${s.sps || '—'}</span></div>`;
   }
-  return `
-    <div class="ascended-banner">
-      <div class="ascended-banner-info">
-        <span class="ascended-banner-icon">⚡</span>
-        <div>
-          <div class="ascended-banner-title">Ascended Form mövcuddur</div>
-          <div class="ascended-banner-sub">Partnyor ilə → ${secondForm.name}</div>
-        </div>
+
+  /* Sub-form tag (shows spawned form name if isMulti) */
+  function spawnTag(c) {
+    if (!c.forms || !c.forms.length) return '';
+    return `<div class="dual-spawn-tag">🃏 ${c.forms.map(f => f.name).join(', ')}</div>`;
+  }
+
+  document.getElementById('modal-content').innerHTML = `
+    <span class="modal-rarity-badge"
+          style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
+      Ethereal
+    </span>
+    <div class="modal-card-name">${card.name || 'Unknown'}</div>
+    <div class="modal-card-group">✦ ${card.group || 'Stagnantia'} ✦</div>
+
+    <div class="dual-selector-header">
+      <span class="dual-selector-icon">🌀</span>
+      <div>
+        <div class="dual-selector-title">Dual Form Kartı</div>
+        <div class="dual-selector-sub">Oyuna başlamazdan əvvəl bir forma seçin</div>
       </div>
-      <button class="ascended-toggle-btn" id="ascended-toggle">⚡ Etki</button>
-    </div>`;
+    </div>
+
+    <div class="dual-type-grid">
+      <!-- Type 1 -->
+      <button class="dual-type-card" id="dual-pick-1">
+        <div class="dual-type-badge" style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
+          Type I
+        </div>
+        <div class="dual-type-name">${t1.note || '—'}</div>
+        <div class="dual-type-stats">${statPreview(t1)}</div>
+        ${spawnTag(t1)}
+        <div class="dual-type-cta">Seç →</div>
+      </button>
+
+      <!-- Type 2 -->
+      <button class="dual-type-card" id="dual-pick-2">
+        <div class="dual-type-badge" style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
+          Type II
+        </div>
+        <div class="dual-type-name">${t2.note || '—'}</div>
+        <div class="dual-type-stats">${statPreview(t2)}</div>
+        ${spawnTag(t2)}
+        <div class="dual-type-cta">Seç →</div>
+      </button>
+    </div>
+  `;
+
+  /* Pick handlers */
+  document.getElementById('dual-pick-1').addEventListener('click', () => {
+    const chosen = { ...t1, group: card.group, _dualRoot: card };
+    renderDualForm(chosen);
+  });
+  document.getElementById('dual-pick-2').addEventListener('click', () => {
+    const chosen = { ...t2, group: card.group, _dualRoot: card };
+    renderDualForm(chosen);
+  });
+}
+
+/* ── Render a chosen dual form (with back button + optional multi-form switcher) ── */
+function renderDualForm(typeCard) {
+  const activeFormIndex = typeCard.isMulti && typeCard.forms && typeCard.forms.length ? -1 : null;
+  renderModalContent(typeCard, typeCard, activeFormIndex, typeCard._dualRoot);
+  updateModalImage(typeCard, typeCard._dualRoot);
 }
 
 /* ── Build multi-form switcher row (forms[]) ── */
@@ -128,7 +179,6 @@ function buildFormSwitcher(rootCard, activeIndex) {
   const forms = rootCard.forms;
   if (!forms || !forms.length) return '';
 
-  /* activeIndex: -1 = base card, 0..n = forms[i] */
   const baseActive = activeIndex === -1;
   const buttons = [
     `<button class="form-switch-btn ${baseActive ? 'form-switch-btn--active' : ''}"
@@ -145,11 +195,12 @@ function buildFormSwitcher(rootCard, activeIndex) {
     </div>`;
 }
 
-/* ── Render modal content ── */
-/* rootCard  : always the top-level card from JSON
-   card      : the card whose stats are currently shown (base or a form)
-   activeFormIndex : -1 = base, 0..n = forms[i], null = not a multi card   */
-function renderModalContent(card, rootCard, activeFormIndex) {
+/* ── Render modal content ──
+   card            : card whose stats are shown
+   rootCard        : top-level card (for group, forms[], upgradedsecondForm)
+   activeFormIndex : -1=base, 0..n=forms[i], null=not multi
+   dualRoot        : if came from a isDual card, the original dual card (for back btn)  */
+function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
   const rarity   = (card.rarity || 'mundane').toLowerCase();
   const stats    = card.stats || {};
   const addStats = card.additionalStats || {};
@@ -165,11 +216,14 @@ function renderModalContent(card, rootCard, activeFormIndex) {
   const trait = card.trait || card.note || null;
   const story = card.story && card.story !== '-' ? card.story : null;
 
-  /* Ascended: rootCard has upgradedsecondForm, activeFormIndex is null */
   const isAscended = (rootCard !== null && activeFormIndex === null && card !== rootCard);
+  const root       = rootCard || card;
 
-  /* The actual root to use for group/faction display */
-  const root = rootCard || card;
+  /* Back-to-type-selector button for dual forms */
+  const backBtn = dualRoot ? `
+    <button class="dual-back-btn" id="dual-back">
+      ← Forma seçiminə qayıt
+    </button>` : '';
 
   document.getElementById('modal-content').innerHTML = `
     <span class="modal-rarity-badge"
@@ -179,6 +233,7 @@ function renderModalContent(card, rootCard, activeFormIndex) {
     <div class="modal-card-name">${card.name || 'Unknown'}</div>
     <div class="modal-card-group">✦ ${card.group || root.group || 'Stagnantia'} ✦</div>
 
+    ${backBtn}
     ${buildAscendedBanner(root, isAscended)}
     ${activeFormIndex !== null ? buildFormSwitcher(root, activeFormIndex) : ''}
 
@@ -189,17 +244,12 @@ function renderModalContent(card, rootCard, activeFormIndex) {
       <button class="stat-tab" data-tab="levels">⭐ Star Levels</button>
     </div>
 
-    <!-- Primary stats panel -->
     <div class="stat-panel" id="panel-primary">
       ${primaryBars || '<p class="no-stat-msg">No stats available.</p>'}
     </div>
-
-    <!-- Secondary stats panel -->
     <div class="stat-panel" id="panel-secondary" style="display:none">
       ${secondaryBars || '<p class="no-stat-msg">No advanced stats available.</p>'}
     </div>
-
-    <!-- Star Levels panel -->
     <div class="stat-panel" id="panel-levels" style="display:none">
       ${buildStarLevels(card.showlevels)}
     </div>
@@ -229,16 +279,25 @@ function renderModalContent(card, rootCard, activeFormIndex) {
     });
   });
 
+  /* ── Back to dual selector ── */
+  const backEl = document.getElementById('dual-back');
+  if (backEl) {
+    backEl.addEventListener('click', () => {
+      buildDualTypeSelector(dualRoot);
+      updateModalImage(dualRoot);
+    });
+  }
+
   /* ── Ascended toggle ── */
   const ascBtn = document.getElementById('ascended-toggle');
   if (ascBtn) {
     ascBtn.addEventListener('click', () => {
       if (isAscended) {
-        renderModalContent(root, root, null);
+        renderModalContent(root, root, null, dualRoot);
         updateModalImage(root);
       } else {
         const form = { ...root.upgradedsecondForm, group: root.group };
-        renderModalContent(form, root, null);
+        renderModalContent(form, root, null, dualRoot);
         updateModalImage(form, root);
       }
     });
@@ -249,12 +308,11 @@ function renderModalContent(card, rootCard, activeFormIndex) {
     btn.addEventListener('click', () => {
       const idx = parseInt(btn.dataset.formIndex, 10);
       if (idx === -1) {
-        /* Back to base */
-        renderModalContent(root, root, -1);
+        renderModalContent(root, root, -1, dualRoot);
         updateModalImage(root);
       } else {
         const form = { ...root.forms[idx], group: root.group };
-        renderModalContent(form, root, idx);
+        renderModalContent(form, root, idx, dualRoot);
         updateModalImage(form, root);
       }
     });
@@ -275,9 +333,16 @@ function updateModalImage(card, fallbackCard) {
 /* ── Open modal ── */
 function openModal(card) {
   updateModalImage(card);
-  /* isMulti cards start on base (-1), non-multi pass null */
-  const activeFormIndex = card.isMulti && card.forms && card.forms.length ? -1 : null;
-  renderModalContent(card, card, activeFormIndex);
+
+  if (card.isDual) {
+    /* Ethereal dual-type: show type selector first */
+    buildDualTypeSelector(card);
+  } else {
+    /* Normal / ascendant / multi */
+    const activeFormIndex = card.isMulti && card.forms && card.forms.length ? -1 : null;
+    renderModalContent(card, card, activeFormIndex, null);
+  }
+
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
