@@ -699,8 +699,7 @@
     "type": ["Varlıq"],
     "rarity": "Mundane",
     "note": "Specialist/Swarm",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "royal-blood",
     "stats": {
       "health": "10",
       "shield": "6",
@@ -723,11 +722,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+15% Hasar  |  7 » 8",
-      "level2": "+1 Angel Sayı  |  10 » 11",
-      "level3": "+5% Hız  |  1100 » 1155"
+      "level1": "+15% DMG  |  7 » 8",
+      "level2": "+1 Angel Number  |  10 » 11",
+      "level3": "+5% Speed  |  1100 » 1155"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "The Angels are the restless spirits of ancient nobles who once served the throne with unwavering loyalty. Even in death, they refuse to leave the kingdom they loved. These ethereal guardians float above the battlefield, draped in shimmering white robes, acting as the ultimate shield for the royal lineage. They are not mere ghosts; they are the divine manifestation of the kingdom's history. Their presence inspires the living, ensuring that the legacy of the Royal Blood remains untouched by the corruption of the outside world."
   },
   {
     "name": "BOOMera",
