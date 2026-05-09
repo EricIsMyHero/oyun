@@ -388,8 +388,7 @@
     "type": ["İnsan"],
     "rarity": "Familiar",
     "note": "Tank/Brawler",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "royal-blood",
     "stats": {
       "health": "700",
       "shield": "300",
@@ -412,11 +411,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+3% Can  |  700 » 721",
-      "level2": "+13% Öz. Hasar Alma  |  24 » 21",
-      "level3": "+15% Hasar  |  12 » 14"
+      "level1": "+3% Health  |  700 » 721",
+      "level2": "+13% Abilty DMG Taken  |  24 » 21",
+      "level3": "+15% DMG  |  12 » 14"
       },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    "story": "Trac is the legendary champion of the realm, a man whose name is synonymous with victory. He has defended the kingdom’s borders countless times, becoming a living symbol of hope for his people. He wears a suit of brilliant, golden armor that shines so brightly it dazzles the eyes of any foe who dares to look at him. With his massive sword and unshakable courage, Trac stands at the front of every charge. He is not just a warrior; he is the golden pillar holding the entire kingdom together."
   },
   {
     "name": "Tornado",
@@ -526,8 +525,7 @@
     "type": ["İnsan"],
     "rarity": "Familiar",
     "note": "Marksman/Burst",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "royal-blood",
     "stats": {
       "health": "100",
       "shield": "50",
@@ -550,11 +548,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+10% Öz. Saldırı Hızı  |  70% » 80%",
-      "level2": "+10% Kritik Şansı  |  5% » 20%",
-      "level3": "+4% Menzil  |  2500 » 2600"
+      "level1": "+10% Ability Attack Speed  |  70% » 80%",
+      "level2": "+10% Critical chance  |  5% » 20%",
+      "level3": "+4% Range  |  2500 » 2600"
       },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    "story": "Fire Archer wears brilliant, golden armor that matches the splendor of Trac’s own gear. For years, he has stood as Trac’s most trusted shadow, covering his back in countless battles across the realm. He is a savior of many, having pulled the kingdom back from the brink of destruction multiple times. His arrows are not mere wood and steel; they are conduits of divine flame. Once he releases a shot, the fire pursues its target with a will of its own. No enemy can outrun his blazing reach, as he turns the battlefield into a wall of protecting light."
   },
   {
     "name": "Shadow Reaper",
@@ -700,8 +698,7 @@
     "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Tank/Pure",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "royal-blood",
     "stats": {
       "health": "500",
       "shield": "150",
@@ -724,11 +721,11 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+15% Kritik Şansı  |  5% » 205%",
-      "level2": "+5% Hız  |  800 » 840",
-      "level3": "+15 Öz. Qalxan  |  25 » 40"
+      "level1": "+15% Critical Chance  |  5% » 205%",
+      "level2": "+5% Speed  |  800 » 840",
+      "level3": "+15 Ability Shield  |  25 » 40"
      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    "story": "Mecha Shield serves as the mechanical mother of the kingdom. Standing two meters tall, this massive robot was created with a dual purpose: to hold the front lines as an impenetrable wall and to provide vital medical aid to the wounded. She is an engine of protection, ready for any type of combat while her internal systems work to heal those she guards. Unlike the aggressive machines of the farm, she is a nurturing giant, ensuring that every soldier returns home from the field."
   },
   {
     "name": "Venomspikes",
