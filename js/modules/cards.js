@@ -12,12 +12,26 @@ let allCards    = [];
 let activeRarity = 'all';
 let filtersReady = false;
 
-/* ── Build the image URL for a card ── */
-function getCardImg(card) {
-  const group = (card.group || '').toLowerCase().replace(/\s+/g, '-');
-  const name  = (card.name  || '').toLowerCase()
+/* ── Transliterate non-ASCII characters for file paths ── */
+function slugify(str) {
+  return (str || '')
+    .toLowerCase()
+    .replace(/İ/g, 'i').replace(/ı/g, 'i')
+    .replace(/Ğ/g, 'g').replace(/ğ/g, 'g')
+    .replace(/Ü/g, 'u').replace(/ü/g, 'u')
+    .replace(/Ş/g, 's').replace(/ş/g, 's')
+    .replace(/Ö/g, 'o').replace(/ö/g, 'o')
+    .replace(/Ç/g, 'c').replace(/ç/g, 'c')
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9\-]/g, '');
+}
+
+/* ── Build the image URL for a card ── */
+function getCardImg(card) {
+  /* isDual cards carry group on type1; fall back gracefully */
+  const src   = (card.isDual && card.type1) ? card.type1 : card;
+  const group = slugify(src.group || card.group || '');
+  const name  = slugify(src.name  || card.name  || '');
   return group
     ? `${GITHUB_BASE}/${group}/${name}.jpg`
     : `${GITHUB_BASE}/${name}.jpg`;
