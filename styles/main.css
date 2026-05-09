@@ -1083,3 +1083,133 @@ body {
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* ── Ethereal Dual-Type Selector ── */
+.dual-selector-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid rgba(244,114,182,0.3);
+  border-radius: 4px;
+  background: rgba(244,114,182,0.06);
+  margin-bottom: 16px;
+}
+.dual-selector-icon {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 6px rgba(244,114,182,0.7));
+}
+.dual-selector-title {
+  font-family: var(--font-head);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ethereal);
+  margin-bottom: 2px;
+}
+.dual-selector-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.dual-type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.dual-type-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.02);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+.dual-type-card:hover {
+  border-color: var(--ethereal);
+  background: rgba(244,114,182,0.07);
+  box-shadow: 0 0 16px rgba(244,114,182,0.1);
+}
+.dual-type-badge {
+  font-family: var(--font-head);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid;
+  border-radius: 2px;
+  display: inline-block;
+  width: fit-content;
+}
+.dual-type-name {
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--text);
+}
+.dual-type-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.dual-stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.dual-stat-row span:last-child {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.dual-spawn-tag {
+  font-family: var(--font-head);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-top: 2px;
+}
+.dual-type-cta {
+  font-family: var(--font-head);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ethereal);
+  margin-top: auto;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Back button (dual → type selector) ── */
+.dual-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-head);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 6px 14px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+.dual-back-btn:hover {
+  color: var(--ethereal);
+  border-color: rgba(244,114,182,0.4);
+  background: rgba(244,114,182,0.05);
+}
+
+/* ── Responsive: dual grid stacks on narrow modal ── */
+@media (max-width: 500px) {
+  .dual-type-grid { grid-template-columns: 1fr; }
+}
