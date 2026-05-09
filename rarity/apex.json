@@ -4,6 +4,7 @@
     "type": ["İnsan"],
     "rarity": "Apex",
     "note": "-",
+    "group": "royal-blood",
     "isMulti": true,
     "stats": {
       "health": "240",
@@ -31,7 +32,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "Aza is the brilliant and courageous commander who leads the royal army from the front. Her golden armor shines with authority, complemented by a striking red cloak that flows behind her like a river of blood. In her right hand, she wields a sword of legendary status, while her left hand grips a massive red flag. This banner is more than a symbol; it is said to grant her supernatural strength. She is a scholar of war, guiding her troops with both unmatched intellect and fearless power.",
   "forms": [
     {
     "name": "Flag",
