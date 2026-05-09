@@ -11,26 +11,26 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 /* ── Primary stats ── */
 const STAT_DEFS = [
-  { key: 'health', label: 'Health',  icon: '❤', max: 1000, color: '#f87171' },
-  { key: 'shield', label: 'Shield',  icon: '🛡', max: 1000, color: '#60a5fa' },
-  { key: 'damage', label: 'Damage',  icon: '⚔', max: 200,  color: '#fb923c' },
-  { key: 'attackSpeed', label: 'Attack Speed',  icon: '⚔', max: 5,  color: '#fb923c' },
-  { key: 'delay', label: 'Delay',  icon: '⚔', max: 200,  color: '#fb923c' },
-  { key: 'sps',    label: 'DPS',     icon: '💥', max: 500,  color: '#f472b6' },
-  { key: 'mana',   label: 'Mana',    icon: '🔮', max: 20,   color: '#a78bfa' },
-  { key: 'number',   label: 'Count',    icon: '🔮', max: 15,   color: '#a78bfa' },
+{ key: 'health', label: 'Health', icon: '❤️', max: 1000, color: '#f87171' },
+{ key: 'shield', label: 'Shield', icon: '🛡️', max: 1000, color: '#60a5fa' },
+{ key: 'damage', label: 'Damage', icon: '💥', max: 200, color: '#fb923c' },
+{ key: 'attackSpeed', label: 'Attack Speed', icon: '⏳', max: 5, color: '#fb923c' },
+{ key: 'delay', label: 'Delay', icon: '⏱️', max: 200, color: '#fb923c' },
+{ key: 'sps', label: 'DPS', icon: '🔥', max: 500, color: '#f472b6' },
+{ key: 'mana', label: 'Mana', icon: '💧', max: 20, color: '#a78bfa' },
+{ key: 'number', label: 'Count', icon: '🔢', max: 15, color: '#a78bfa' },
 ];
 
 /* ── Secondary / additional stats ── */
 const ADD_STAT_DEFS = [
-  { key: 'range',           label: 'Range',            icon: '🎯', max: 30000, color: '#f87171',  suffix: ''  },
-  { key: 'speed',           label: 'Speed',            icon: '⚡', max: 5000,  color: '#60a5fa',  suffix: ''  },
-  { key: 'criticalChance',  label: 'Critical Chance',  icon: '🗡', max: 100,   color: '#fb923c',  suffix: '%' },
-  { key: 'criticDamage',    label: 'Critical Damage',  icon: '💥', max: 5,     color: '#f472b6',  suffix: 'x' },
-  { key: 'lifestealChance', label: 'Lifesteal Chance', icon: '🩸', max: 100,   color: '#a78bfa',  suffix: '%' },
-  { key: 'lifesteal',       label: 'Lifesteal',        icon: '💚', max: 100,   color: '#4ade80',  suffix: '%' },
-  { key: 'damageminimiser', label: 'Damage Reduction', icon: '🛡', max: 90,    color: '#fbbf24',  suffix: '%' },
-  { key: 'dodge',           label: 'Dodge Chance',     icon: '👁', max: 70,    color: '#c084fc',  suffix: '%' },
+{ key: 'range', label: 'Range', icon: '🏹', max: 30000, color: '#f87171', suffix: '' },
+{ key: 'speed', label: 'Speed', icon: '👟', max: 5000, color: '#60a5fa', suffix: '' },
+{ key: 'criticalChance', label: 'Critical Chance', icon: '🎯', max: 100, color: '#fb923c', suffix: '%' },
+{ key: 'criticDamage', label: 'Critical Damage', icon: '🧨', max: 5, color: '#f472b6', suffix: 'x' },
+{ key: 'lifestealChance', label: 'Lifesteal Chance', icon: '🧛', max: 100, color: '#a78bfa', suffix: '%' },
+{ key: 'lifesteal', label: 'Lifesteal', icon: '🩸', max: 100, color: '#4ade80', suffix: '%' },
+{ key: 'damageminimiser', label: 'Damage Reduction', icon: '🔰', max: 90, color: '#fbbf24', suffix: '%' },
+{ key: 'dodge', label: 'Dodge Chance', icon: '💨', max: 70, color: '#c084fc', suffix: '%' },
 ];
 
 /* ── Build stat bar rows ── */
