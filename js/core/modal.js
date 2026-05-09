@@ -92,8 +92,9 @@ function buildStarLevels(levels) {
   }).join('');
 }
 
-/* ── Build ascended form toggle button ── */
-function buildAscendedBanner(baseCard, secondForm, isAscended) {
+/* ── Build ascended form banner (upgradedsecondForm) ── */
+function buildAscendedBanner(rootCard, isAscended) {
+  const secondForm = rootCard.upgradedsecondForm;
   if (!secondForm) return '';
   if (isAscended) {
     return `
@@ -122,8 +123,33 @@ function buildAscendedBanner(baseCard, secondForm, isAscended) {
     </div>`;
 }
 
-/* ── Render modal content (shared between base & ascended) ── */
-function renderModalContent(card, baseCard) {
+/* ── Build multi-form switcher row (forms[]) ── */
+function buildFormSwitcher(rootCard, activeIndex) {
+  const forms = rootCard.forms;
+  if (!forms || !forms.length) return '';
+
+  /* activeIndex: -1 = base card, 0..n = forms[i] */
+  const baseActive = activeIndex === -1;
+  const buttons = [
+    `<button class="form-switch-btn ${baseActive ? 'form-switch-btn--active' : ''}"
+             data-form-index="-1">${rootCard.name}</button>`,
+    ...forms.map((f, i) =>
+      `<button class="form-switch-btn ${activeIndex === i ? 'form-switch-btn--active' : ''}"
+               data-form-index="${i}">${f.name}</button>`)
+  ].join('');
+
+  return `
+    <div class="form-switcher">
+      <div class="form-switcher-label">🃏 Formlar</div>
+      <div class="form-switcher-btns">${buttons}</div>
+    </div>`;
+}
+
+/* ── Render modal content ── */
+/* rootCard  : always the top-level card from JSON
+   card      : the card whose stats are currently shown (base or a form)
+   activeFormIndex : -1 = base, 0..n = forms[i], null = not a multi card   */
+function renderModalContent(card, rootCard, activeFormIndex) {
   const rarity   = (card.rarity || 'mundane').toLowerCase();
   const stats    = card.stats || {};
   const addStats = card.additionalStats || {};
@@ -136,11 +162,14 @@ function renderModalContent(card, baseCard) {
   const primaryBars   = buildStatBars(STAT_DEFS, stats);
   const secondaryBars = buildStatBars(ADD_STAT_DEFS, addStats);
 
-  const trait      = card.trait || card.note || null;
-  const story      = card.story && card.story !== '-' ? card.story : null;
-  const isAscended = (baseCard !== null);
-  const secondForm = baseCard ? null : (card.upgradedsecondForm || null);
-  const rootCard   = baseCard || card;
+  const trait = card.trait || card.note || null;
+  const story = card.story && card.story !== '-' ? card.story : null;
+
+  /* Ascended: rootCard has upgradedsecondForm, activeFormIndex is null */
+  const isAscended = (rootCard !== null && activeFormIndex === null && card !== rootCard);
+
+  /* The actual root to use for group/faction display */
+  const root = rootCard || card;
 
   document.getElementById('modal-content').innerHTML = `
     <span class="modal-rarity-badge"
@@ -148,11 +177,12 @@ function renderModalContent(card, baseCard) {
       ${card.rarity || ''}
     </span>
     <div class="modal-card-name">${card.name || 'Unknown'}</div>
-    <div class="modal-card-group">✦ ${card.group || rootCard.group || 'Stagnantia'} ✦</div>
+    <div class="modal-card-group">✦ ${card.group || root.group || 'Stagnantia'} ✦</div>
 
-    ${buildAscendedBanner(rootCard, rootCard.upgradedsecondForm, isAscended)}
+    ${buildAscendedBanner(root, isAscended)}
+    ${activeFormIndex !== null ? buildFormSwitcher(root, activeFormIndex) : ''}
 
-    <!-- Tab buttons -->
+    <!-- Stat tabs -->
     <div class="stat-tab-row">
       <button class="stat-tab active" data-tab="primary">⚔ Combat Stats</button>
       <button class="stat-tab" data-tab="secondary">📊 Advanced Stats</button>
@@ -183,11 +213,11 @@ function renderModalContent(card, baseCard) {
       <div class="modal-story-box">${story}</div>` : ''}
 
     <button class="modal-lore-link">
-      ✦ This entity belongs to the ${card.group || rootCard.group || 'Stagnantia'} faction
+      ✦ This entity belongs to the ${card.group || root.group || 'Stagnantia'} faction
     </button>
   `;
 
-  /* Tab switching */
+  /* ── Stat tab switching ── */
   document.querySelectorAll('.stat-tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.stat-tab').forEach(b => b.classList.remove('active'));
@@ -199,22 +229,36 @@ function renderModalContent(card, baseCard) {
     });
   });
 
-  /* Ascended form toggle */
-  const toggleBtn = document.getElementById('ascended-toggle');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
+  /* ── Ascended toggle ── */
+  const ascBtn = document.getElementById('ascended-toggle');
+  if (ascBtn) {
+    ascBtn.addEventListener('click', () => {
       if (isAscended) {
-        /* Revert to base form */
-        renderModalContent(rootCard, null);
-        updateModalImage(rootCard);
+        renderModalContent(root, root, null);
+        updateModalImage(root);
       } else {
-        /* Switch to ascended form — inherit group & image from base */
-        const form = { ...rootCard.upgradedsecondForm, group: rootCard.group };
-        renderModalContent(form, rootCard);
-        updateModalImage(form, rootCard);
+        const form = { ...root.upgradedsecondForm, group: root.group };
+        renderModalContent(form, root, null);
+        updateModalImage(form, root);
       }
     });
   }
+
+  /* ── Multi-form switcher ── */
+  document.querySelectorAll('.form-switch-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.formIndex, 10);
+      if (idx === -1) {
+        /* Back to base */
+        renderModalContent(root, root, -1);
+        updateModalImage(root);
+      } else {
+        const form = { ...root.forms[idx], group: root.group };
+        renderModalContent(form, root, idx);
+        updateModalImage(form, root);
+      }
+    });
+  });
 }
 
 /* ── Update modal image ── */
@@ -230,11 +274,10 @@ function updateModalImage(card, fallbackCard) {
 
 /* ── Open modal ── */
 function openModal(card) {
-  /* Image */
   updateModalImage(card);
-  /* Content */
-  renderModalContent(card, null);
-
+  /* isMulti cards start on base (-1), non-multi pass null */
+  const activeFormIndex = card.isMulti && card.forms && card.forms.length ? -1 : null;
+  renderModalContent(card, card, activeFormIndex);
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
