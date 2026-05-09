@@ -523,11 +523,10 @@
   },
   {
     "name": "Aeralis",
-    "type": ["Varlıq"],
+    "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "group": "royal-blood"
     "stats": {
       "health": "50",
       "shield": "0",
@@ -538,7 +537,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Rəqibləri atış başına 0,1 geri atar, 12% Şansla 4x geri atar",
+    "trait": "Rəqibləri hər atış başına 0,1 geri atar, 12% Şansla 4x geri atar",
     "additionalStats": {
       "range": "2,500",
       "speed": "1,000",
@@ -554,7 +553,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Aeralis chose the path of magic over science since his early childhood, mastering the invisible currents of the world. His power to bend the air is so immense that no creature can withstand his gales. However, this divine strength is a double-edged sword; controlling the violent winds requires his absolute focus and spiritual discipline. On the battlefield, he is a storm in human form, clearing entire paths for the Royal Blood with a single wave of his hand."
   },
   {
     "name": "Dark Necromancer",
