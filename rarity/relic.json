@@ -526,7 +526,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "group": "royal-blood"
+    "group": "royal-blood",
     "stats": {
       "health": "50",
       "shield": "0",
