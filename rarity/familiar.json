@@ -422,8 +422,7 @@
     "type": ["Uzaylı"],
     "rarity": "Familiar",
     "note": "Specialist/Disruptor",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "ancients",
     "stats": {
       "health": "350",
       "shield": "0",
@@ -450,7 +449,7 @@
       "level2": "+5% Hız  |  900 » 945",
       "level3": "+10% Öz. Can Düşmə  |  50% » 60%"
       },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    "story": "Tornado was once a merciful and gentle spirit, but over centuries, his compassion was replaced by a cold, relentless rage. Now, he uses his immense magical power only for destruction, leveling everything in his path. The winds that once brought life now carry only fury and chaos. He has become a sentient storm that seeks to erase the world he once cared for, leaving nothing behind but desolate ruins and the echoing sound of his wrath."
   },
   {
     "name": "Dino",
