@@ -1,6 +1,6 @@
 [
   {
-    "name": "Aza",
+    "name": "Azrith",
     "type": ["İnsan"],
     "rarity": "Apex",
     "note": "-",
@@ -16,7 +16,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Qalxanı qırılana qədər ətrafındakı kartlara +10% Hasar bonusu, Qalxanı qırıldıqda olduğu yerə \"Flag\" buraxar",
+    "trait": "Qalxanı qırılana qədər ətrafındakı kartlara +10% Hasar bonusu, Qalxanı qırıldıqda olduğu yerə \"Bannerox\" buraxar",
     "additionalStats": {
       "range": "1300",
       "speed": "1000",
@@ -35,7 +35,7 @@
     "story": "Aza is the brilliant and courageous commander who leads the royal army from the front. Her golden armor shines with authority, complemented by a striking red cloak that flows behind her like a river of blood. In her right hand, she wields a sword of legendary status, while her left hand grips a massive red flag. This banner is more than a symbol; it is said to grant her supernatural strength. She is a scholar of war, guiding her troops with both unmatched intellect and fearless power.",
   "forms": [
     {
-    "name": "Flag",
+    "name": "Bannerox",
     "type": ["-"],
     "rarity": "Apex",
     "note": "-",
@@ -104,7 +104,7 @@
     "story": "UnTouch is the younger sister of Aza, but her power is legendary throughout the kingdom. She wears heavy, golden armor and carries a pair of specialized golden gauntlets on both hands. When she strikes the earth with these gauntlets, she triggers massive earthquakes that can split mountains in two. Despite her overwhelming physical strength, her heart beats for her people, and she fights to protect their homes from any threat. She is the kingdom's ultimate force of nature, a girl whose kindness is as deep as her strikes are shattering."
   },
   {
-    "name": "Lover",
+    "name": "Heartix",
     "type": ["İnsan"],
     "rarity": "Apex",
     "note": "-",
@@ -278,7 +278,7 @@
     "story": "-",
   "forms": [
     {
-    "name": "Octopus",
+    "name": "Octarion",
     "type": ["Heyvan"],
     "rarity": "Apex",
     "note": "-",
@@ -455,7 +455,7 @@
     "story": "-"
   },
   {
-    "name": "Zomboids",
+    "name": "Rotlings",
     "type": ["Ölü"],
     "rarity": "Apex",
     "note": "-",
@@ -489,7 +489,7 @@
     "story": "-",
   "forms": [
     {
-    "name": "Mini zombies",
+    "name": "Mini Rotters",
     "type": ["Ölü"],
     "rarity": "Apex",
     "note": "-",
