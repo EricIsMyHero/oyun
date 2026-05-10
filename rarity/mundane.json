@@ -176,8 +176,7 @@
     "type": ["Uzaylı"],
     "rarity": "Mundane",
     "note": "Tank/Pure",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "ancients",
     "stats": {
       "health": "900",
       "shield": "0",
@@ -204,7 +203,7 @@
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
       "level3": "+20% Ömür  |  150s » 180s"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "Gloop is a massive, green, slime-like entity that haunts the depths of the Dreadful Swamp. It waits in the stagnant waters for unsuspecting travelers, pulling them into its viscous body to face a slow and agonizing end. Legend says that those who enter its territory never return, becoming part of the swamp's eternal rot. It is a mindless consumer, a living trap that turns the murky waters into a graveyard. To face Gloop is to face an inescapable, suffocating death."
   },
   {
     "name": "Henry",
@@ -386,6 +385,7 @@
     "type": ["Uzaylı"],
     "rarity": "Mundane",
     "note": "Specialist/Splitter",
+    "group": "ancients",
     "isMulti": true,
     "stats": {
       "health": "230",
@@ -413,7 +413,7 @@
       "level2": "+10% Hız  |  850 » 935",
       "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
   },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "story": "Freak is so horrifying that even the bravest knights tremble and flee at the sight of him. He finds a twisted pleasure in absorbing the remains of his victims into his own grotesque form, growing more deformed with every kill. Stories warn that death is not his end; when struck down, he splits into two separate entities, spreading terror twice as fast. He is an unending nightmare that feeds on fear, ensuring that the cycle of horror never truly breaks.",
     "forms": [
       {
       "name": "Mini Freaks",
