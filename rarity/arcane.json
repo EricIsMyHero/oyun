@@ -66,7 +66,7 @@
     "story": "-"
   },
   {
-  "name": "Clown",
+  "name": "Jestro",
   "type": ["İnsan"],
   "rarity": "Arcane",
   "note": "Specialist/Distruptor",
@@ -100,7 +100,7 @@
   "story": "-",
   "forms": [
     {
-      "name": "Box",
+      "name": "Cratex",
       "type": ["Robot"],
       "rarity": "Arcane",
       "note": "Fighter",
@@ -369,7 +369,7 @@
     "story": "-"
   },
   {
-    "name": "Aura girl",
+    "name": "Lumina",
     "type": ["Uzaylı"],
     "rarity": "Arcane",
     "note": "Tank/Pure",
@@ -439,7 +439,7 @@
     "story": "-"
   },
   {
-    "name": "Killer",
+    "name": "SlasherX",
     "type": ["İnsan"],
     "rarity": "Arcane",
     "note": "Assassin",
@@ -649,7 +649,7 @@
     "story": "-"
   },
   {
-    "name": "Bad Boy",
+    "name": "RogueX",
     "type": ["Robot"],
     "rarity": "Arcane",
     "note": "Tank",
