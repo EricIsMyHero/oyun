@@ -139,6 +139,7 @@
     "type": ["İnsan"],
     "rarity": "Arcane",
     "note": "Fighter",
+    "group": "ancients",
     "isMulti": true,
         "stats": {
           "health": "400",
@@ -166,7 +167,7 @@
           "level2": "+10% Hız | 1000 » 1100",
           "level3": "+5% Kaçınma Şansı | 0% » 5%"
         },
-        "story": "-",
+        "story": "Tphoenix is the unique result of a legendary Phoenix transforming into a human form. Unlike the other Ancients, his heart remains pure and good, driven by a desire to protect rather than destroy. He stands in constant opposition to the dark forces of the world, using his celestial flames to fight back the shadows. Though he belongs to a group of terrifying beings, he is their greatest rival, serving as a beacon of hope in an age of ancient monsters.",
      "forms": [
       {
         "name": "Fire Egg",
@@ -618,8 +619,7 @@
     "type": ["Ruh"],
     "rarity": "Arcane",
     "note": "Specialist",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "ancients",
     "stats": {
       "health": "50",
       "shield": "0",
@@ -646,7 +646,7 @@
     "level2": "+15% Speed | 1,000 » 1,150",
     "level3": "+21%s Control Duration | 14s » 17s"
   },
-    "story": "-"
+    "story": "Whisper is a terrifying phantom that every person is said to glimpse at least once as they approach the end of their life. He is a predator of the soul, waiting for a moment of weakness to strike. If you are not quick enough to escape his gaze, he will merge with your form and steal every ounce of your vital energy. He leaves behind only a hollow shell, a silent thief who thrives on the life force of those who cannot outrun their own shadows."
   },
   {
     "name": "RogueX",
