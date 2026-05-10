@@ -103,7 +103,7 @@
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
-    "name": "Turbo",
+    "name": "Nitrox",
     "type": ["Robot"],
     "rarity": "Mundane",
     "note": "Support/Buffer",
@@ -137,7 +137,7 @@
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
-    "name": "Srox",
+    "name": "Vortex",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
     "note": "Marksman",
@@ -172,7 +172,7 @@
    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
   },
   {
-    "name": "Slimey",
+    "name": "Gloop",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
     "note": "Tank/Pure",
@@ -242,7 +242,7 @@
     "story": "Henry was once a brilliant researcher, but after several failed experiments, he retreated to a secluded farm. To the outside world, he is just a friendly farmer with orange hair and a thick beard, leaning on his pitchfork. However, beneath his welcoming smile lies a dangerous obsession. He uses his scientific expertise to transform ordinary livestock into lethal weapons. He treats his farm like a laboratory, seeing his animals not as living beings, but as subjects for his dark, evolutionary projects."
   },
   {
-    "name": "Hydra",
+    "name": "Venomora",
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Mage/Controller",
@@ -729,7 +729,7 @@
     "story": "The Angels are the restless spirits of ancient nobles who once served the throne with unwavering loyalty. Even in death, they refuse to leave the kingdom they loved. These ethereal guardians float above the battlefield, draped in shimmering white robes, acting as the ultimate shield for the royal lineage. They are not mere ghosts; they are the divine manifestation of the kingdom's history. Their presence inspires the living, ensuring that the legacy of the Royal Blood remains untouched by the corruption of the outside world."
   },
   {
-    "name": "BOOMera",
+    "name": "Boomix",
     "type": ["Varlıq"],
     "rarity": "Mundane",
     "note": "Marksman/Piercer",
