@@ -69,7 +69,7 @@
     "story": "The Chicken is no longer a simple farm bird. Under Henry’s intervention, this wild white fowl has gained incredible, supernatural speed. It darts across the battlefield like a blur, making it almost impossible to catch. Strapped to its back is a powerful C4 explosive, turning this frantic creature into a high-speed suicide bomber. It is a chaotic result of Henry's madness—a loyal, feathered weapon that delivers a devastating blast before the enemy even realizes what hit them."
   },
   {
-    "name": "Snowballer",
+    "name": "Frostshot",
     "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Marksman",
@@ -139,7 +139,7 @@
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
   },
   {
-    "name": "Warnborn",
+    "name": "Warborn",
     "type": ["İnsan"],
     "rarity": "Familiar",
     "note": "Fighter/Brawler",
@@ -209,7 +209,7 @@
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
   },
   {
-    "name": "Etta",
+    "name": "Nyra",
     "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Marksman",
@@ -244,7 +244,7 @@
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
   },
   {
-    "name": "Sniper",
+    "name": "Deadscope",
     "type": ["İnsan"],
     "rarity": "Familiar",
     "note": "Marksman/Sharpshooter",
@@ -762,7 +762,7 @@
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
   },
   {
-    "name": "Starcaller",
+    "name": "Astranova",
     "type": ["Varlıq"],
     "rarity": "Familiar",
     "note": "Mage/Nuker",
