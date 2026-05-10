@@ -348,11 +348,10 @@
   },
   {
     "name": "Demotron",
-    "type": ["Robot"],
+    "type": ["Varlıq"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "group": "ancients",
     "stats": {
       "health": "120",
       "shield": "60",
@@ -379,7 +378,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Demotron is an ancient titan made of living stone and obsidian, powered by a dying sun’s core. It is the architect of the Ancients' fortresses, a massive construct that serves as a mobile siege engine. Every step it takes shakes the foundation of the earth, and its eyes emit beams of pure, concentrated energy. Demotron is slow, but its durability is unmatched. It is a relic of a time when giants ruled the world, and it has returned to crush the tiny kingdoms of the modern era."
   },
   {
     "name": "Format",
@@ -760,8 +759,7 @@
     "type": ["Varlıq"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "ancients",
     "stats": {
       "health": "270",
       "shield": "160",
@@ -788,7 +786,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Fallen Angel was once a high-ranking member of the Royal Blood's ancestors, but she was cast out for seeking the forbidden power of the Ancients. Her wings are now tattered and stained with shadow, and her golden armor has turned to a rusted, cursed bronze. She retains her celestial grace but uses it to deliver merciless destruction. She despises the current Royal Blood line and leads the Ancients with a cold, calculated vengeance, seeking to reclaim the throne that she believes is rightfully hers."
   },
   {
     "name": "Worms",
