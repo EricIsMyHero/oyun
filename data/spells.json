@@ -11,7 +11,8 @@
       "timeBetweenDamage": "-",
       "range": "2000",
       "size": "2",
-      "energy": "10"
+      "energy": "10",
+      "charge": 3
     }
   },
   {
@@ -26,7 +27,8 @@
       "timeBetweenDamage": "-",
       "range": "3500",
       "size": "1",
-      "energy": "4"
+      "energy": "4",
+      "charge": 2
     }
   },
   {
@@ -41,7 +43,8 @@
       "timeBetweenDamage": "-",
       "range": "2000",
       "size": "2",
-      "energy": "8"
+      "energy": "8",
+      "charge": 3
     }
   },
   {
@@ -56,7 +59,8 @@
       "timeBetweenDamage": "-",
       "range": "1500x3000",
       "size": "2",
-      "energy": "6"
+      "energy": "6",
+      "charge": 2
     }
   },
   {
@@ -71,7 +75,8 @@
       "timeBetweenDamage": "1,20s",
       "range": "3500",
       "size": "2",
-      "energy": "6"
+      "energy": "6",
+      "charge": 2
     }
   },
   {
@@ -86,7 +91,8 @@
       "timeBetweenDamage": "0,90s",
       "range": "2750",
       "size": "2",
-      "energy": "5"
+      "energy": "5",
+      "charge": 2
     }
   },
   {
@@ -101,7 +107,8 @@
       "timeBetweenDamage": "-",
       "range": "1750",
       "size": "1",
-      "energy": "2"
+      "energy": "2",
+      "charge": 1
     }
   },
   {
@@ -116,7 +123,8 @@
       "timeBetweenDamage": "-",
       "range": "2250",
       "size": "2",
-      "energy": "5"
+      "energy": "5",
+      "charge": 2
     }
   },
   {
@@ -131,7 +139,8 @@
       "timeBetweenDamage": "0,80s",
       "range": "3000",
       "size": "1",
-      "energy": "4"
+      "energy": "4",
+      "charge": 1
     }
   },
   {
@@ -146,7 +155,8 @@
       "timeBetweenDamage": "-",
       "range": "2000",
       "size": "1",
-      "energy": "3"
+      "energy": "3",
+      "charge": 1
     }
   },
   {
@@ -161,7 +171,8 @@
       "timeBetweenDamage": "-",
       "range": "1250",
       "size": "1",
-      "energy": "3"
+      "energy": "3",
+      "charge": 1
     }
   },
   {
@@ -176,7 +187,8 @@
       "timeBetweenDamage": "-",
       "range": "3000",
       "size": "1",
-      "energy": "2"
+      "energy": "2",
+      "charge": 1
     }
   },
   {
@@ -191,7 +203,8 @@
       "timeBetweenDamage": "-",
       "range": "3200",
       "size": "1",
-      "energy": "1"
+      "energy": "1",
+      "charge": 1
     }
   },
   {
@@ -206,7 +219,8 @@
       "timeBetweenDamage": "1,00s",
       "range": "1250",
       "size": "1",
-      "energy": "1"
+      "energy": "1",
+      "charge": 1
     }
   },
   {
@@ -223,7 +237,8 @@
       "attackSpeed": "-",
       "range": "Global",
       "size": "2",
-      "energy": "10"
+      "energy": "10",
+      "charge": 3
     }
   },
   {
@@ -240,7 +255,8 @@
       "attackSpeed": "-",
       "range": "15000",
       "size": "2",
-      "energy": "5"
+      "energy": "5",
+      "charge": 2
     }
   },
   {
@@ -257,7 +273,8 @@
       "attackSpeed": "0,80s",
       "range": "1500",
       "size": "2",
-      "energy": "4"
+      "energy": "4",
+      "charge": 1
     }
   },
   {
@@ -274,7 +291,8 @@
       "attackSpeed": "2,00s",
       "range": "5000",
       "size": "2",
-      "energy": "3"
+      "energy": "3",
+      "charge": 1
     }
   },
   {
@@ -291,7 +309,8 @@
       "attackSpeed": "1,40s",
       "range": "3350",
       "size": "1",
-      "energy": "4"
+      "energy": "4",
+      "charge": 2
     }
   },
   {
@@ -308,7 +327,8 @@
       "attackSpeed": "-",
       "range": "-",
       "size": "1",
-      "energy": "3"
+      "energy": "3",
+      "charge": 1
     }
   },
   {
@@ -325,7 +345,8 @@
       "attackSpeed": "-",
       "range": "-",
       "size": "3x3",
-      "energy": "11"
+      "energy": "11",
+      "charge": 3
     },
     "isMulti": true,
     "forms": [
@@ -409,7 +430,8 @@
       "attackSpeed": "-",
       "range": "3000",
       "size": "2",
-      "energy": "5"
+      "energy": "5",
+      "charge": 2
     }
   },
   {
@@ -421,7 +443,8 @@
       "energy": 3,
       "damageToCard": "250",
       "damageToCastle": "100",
-      "range": "800"
+      "range": "800",
+      "charge": 1
     }
   },
   {
@@ -433,7 +456,8 @@
       "energy": 4,
       "damageToCard": "-",
       "damageToCastle": "-",
-      "range": "600"
+      "range": "600",
+      "charge": 2
     }
   },
   {
@@ -445,7 +469,8 @@
       "energy": 6,
       "damageToCard": "500",
       "damageToCastle": "300",
-      "range": "1000"
+      "range": "1000",
+      "charge": 2
     }
   },
   {
@@ -457,7 +482,8 @@
       "energy": 9,
       "damageToCard": "1200",
       "damageToCastle": "600",
-      "range": "Global"
+      "range": "Global",
+      "charge": 3
     }
   }
 ]
