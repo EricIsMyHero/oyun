@@ -14,11 +14,11 @@
     "members": ["Lord", "King", "Malvaris", "Dark Necromancer", "Nightfang", "Shadow Reaper"]
   },
   {
-    "name": "Magicians",
+    "name": "The Spellbound",
     "description": "Üçüncü qrupun təsviri.",
     "icon": "fa-wand-sparkles",
     "color": "#b39ddb",
-    "members": ["Chrono Mage", "Naar"]
+    "members": ["Chrono Mage", "Naar", "Arcanyx", "Unara", "Laura",]
   },
   {
     "name": "Twisted-Farm",
