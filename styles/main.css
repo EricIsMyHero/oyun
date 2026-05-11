@@ -759,6 +759,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 24px;
+  padding-top: 56px; /* room for top-left badges */
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -774,9 +775,94 @@ body {
 
 .spell-item:hover { transform: translateY(-4px); border-color: var(--border-glow); }
 
-.spell-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
-.spell-name { font-family: var(--font-head); font-size: 1rem; font-weight: 600; color: var(--text); }
+/* ── Top-left badges (energy + charge) ── */
+.spell-top-left-badges {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
 
+.spell-energy-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  color: #c4b5fd;
+  background: rgba(139,92,246,0.18);
+  border: 1px solid rgba(139,92,246,0.35);
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+.spell-energy-pill strong { color: #e9d5ff; font-size: 0.8rem; }
+
+.spell-charge-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-head);
+  font-size: 0.68rem;
+  color: #fbbf24;
+  background: rgba(251,191,36,0.1);
+  border: 1px solid rgba(251,191,36,0.25);
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+
+.spell-charge-dots {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.spell-charge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: rgba(251,191,36,0.2);
+  border: 1px solid rgba(251,191,36,0.3);
+  transform: rotate(45deg);
+  transition: background 0.2s;
+}
+.spell-charge-dot.filled {
+  background: #fbbf24;
+  border-color: #f59e0b;
+  box-shadow: 0 0 5px rgba(251,191,36,0.5);
+}
+
+.spell-charge-num {
+  font-size: 0.65rem;
+  color: #fcd34d;
+  letter-spacing: 0.05em;
+}
+
+/* ── Multi badge ── */
+.spell-multi-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-head);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f472b6;
+  background: rgba(244,114,182,0.1);
+  border: 1px solid rgba(244,114,182,0.25);
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.spell-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+.spell-name { font-family: var(--font-head); font-size: 1rem; font-weight: 600; color: var(--text); display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+/* Legacy badge kept for backward compat */
 .spell-energy-badge {
   display: flex;
   align-items: center;
@@ -803,6 +889,89 @@ body {
 .spell-stat { display: flex; flex-direction: column; gap: 2px; padding: 8px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 2px; }
 .spell-stat-label { font-family: var(--font-head); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 .spell-stat-val { font-family: var(--font-head); font-size: 0.85rem; color: var(--text); font-weight: 600; }
+
+/* ── Spell modal badges ── */
+.spell-modal-badges {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 18px;
+  flex-wrap: wrap;
+}
+.spell-modal-energy {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  color: #c4b5fd;
+  background: rgba(139,92,246,0.15);
+  border: 1px solid rgba(139,92,246,0.3);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+.spell-modal-energy span { font-size: 1rem; font-weight: 700; color: #e9d5ff; }
+
+.spell-modal-charge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  color: #fbbf24;
+  background: rgba(251,191,36,0.1);
+  border: 1px solid rgba(251,191,36,0.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+.spell-modal-charge span { font-size: 1rem; font-weight: 700; color: #fde68a; }
+
+/* ── isMulti form switcher for spells ── */
+.spell-form-switcher { margin: 14px 0; }
+
+.spell-form-btn {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.spell-form-btn:hover { border-color: var(--border-glow); color: var(--text); }
+.spell-form-btn.active {
+  background: rgba(244,114,182,0.1);
+  border-color: rgba(244,114,182,0.4);
+  color: #f472b6;
+}
+
+/* ── Spell modal form card ── */
+.spell-modal-form-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  margin-top: 8px;
+}
+.spell-modal-form-name {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.spell-modal-form-type {
+  font-family: var(--font-head);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.spell-form-stat-bars { margin-bottom: 14px; }
 
 /* ═══════════════════════════════════════════════════════
    CODEX / INFO SECTION
