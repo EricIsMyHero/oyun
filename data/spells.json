@@ -10,9 +10,8 @@
       "damageToCastle": "500",
       "timeBetweenDamage": "-",
       "range": "2000",
-      "size": "2",
       "energy": "10",
-      "charge": 3
+      "charge": 5
     }
   },
   {
@@ -26,9 +25,8 @@
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
       "range": "3500",
-      "size": "1",
       "energy": "4",
-      "charge": 2
+      "charge": 3
     }
   },
   {
@@ -42,7 +40,6 @@
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
       "range": "2000",
-      "size": "2",
       "energy": "8",
       "charge": 3
     }
@@ -58,7 +55,6 @@
       "damageToCastle": "125",
       "timeBetweenDamage": "-",
       "range": "1500x3000",
-      "size": "2",
       "energy": "6",
       "charge": 2
     }
@@ -74,9 +70,8 @@
       "damageToCastle": "4x25",
       "timeBetweenDamage": "1,20s",
       "range": "3500",
-      "size": "2",
       "energy": "6",
-      "charge": 2
+      "charge": 3
     }
   },
   {
@@ -90,9 +85,8 @@
       "damageToCastle": "7x5",
       "timeBetweenDamage": "0,90s",
       "range": "2750",
-      "size": "2",
       "energy": "5",
-      "charge": 2
+      "charge": 3 
     }
   },
   {
@@ -106,7 +100,6 @@
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
       "range": "1750",
-      "size": "1",
       "energy": "2",
       "charge": 1
     }
@@ -122,9 +115,8 @@
       "damageToCastle": "100",
       "timeBetweenDamage": "-",
       "range": "2250",
-      "size": "2",
       "energy": "5",
-      "charge": 2
+      "charge": 3
     }
   },
   {
@@ -134,11 +126,10 @@
     "treat": "Rəqib kartları 15% Yavaşladar",
     "story": "-",
     "stats": {
-      "damageToCard": "15x10",
+      "damageToCard": "15x8",
       "damageToCastle": "15x4",
       "timeBetweenDamage": "0,80s",
       "range": "3000",
-      "size": "1",
       "energy": "4",
       "charge": 1
     }
@@ -154,9 +145,8 @@
       "damageToCastle": "55",
       "timeBetweenDamage": "-",
       "range": "2000",
-      "size": "1",
       "energy": "3",
-      "charge": 1
+      "charge": 2
     }
   },
   {
@@ -170,7 +160,6 @@
       "damageToCastle": "25",
       "timeBetweenDamage": "-",
       "range": "1250",
-      "size": "1",
       "energy": "3",
       "charge": 1
     }
@@ -186,7 +175,6 @@
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
       "range": "3000",
-      "size": "1",
       "energy": "2",
       "charge": 1
     }
@@ -202,7 +190,6 @@
       "damageToCastle": "-",
       "timeBetweenDamage": "-",
       "range": "3200",
-      "size": "1",
       "energy": "1",
       "charge": 1
     }
@@ -218,9 +205,8 @@
       "damageToCastle": "-",
       "timeBetweenDamage": "1,00s",
       "range": "1250",
-      "size": "1",
       "energy": "1",
-      "charge": 1
+      "charge": 2
     }
   },
   {
@@ -236,9 +222,8 @@
       "damageToCastle": "250",
       "attackSpeed": "-",
       "range": "Global",
-      "size": "2",
       "energy": "10",
-      "charge": 3
+      "charge": 5
     }
   },
   {
@@ -254,7 +239,6 @@
       "damageToCastle": "40%",
       "attackSpeed": "-",
       "range": "15000",
-      "size": "2",
       "energy": "5",
       "charge": 2
     }
@@ -272,7 +256,6 @@
       "damageToCastle": "5",
       "attackSpeed": "0,80s",
       "range": "1500",
-      "size": "2",
       "energy": "4",
       "charge": 1
     }
@@ -290,9 +273,8 @@
       "damageToCastle": "0",
       "attackSpeed": "2,00s",
       "range": "5000",
-      "size": "2",
       "energy": "3",
-      "charge": 1
+      "charge": 2
     }
   },
   {
@@ -308,7 +290,6 @@
       "damageToCastle": "-",
       "attackSpeed": "1,40s",
       "range": "3350",
-      "size": "1",
       "energy": "4",
       "charge": 2
     }
@@ -326,7 +307,6 @@
       "damageToCastle": "-",
       "attackSpeed": "-",
       "range": "-",
-      "size": "1",
       "energy": "3",
       "charge": 1
     }
@@ -344,8 +324,7 @@
       "damageToCastle": "-",
       "attackSpeed": "-",
       "range": "-",
-      "size": "3x3",
-      "energy": "11",
+      "energy": "10",
       "charge": 3
     },
     "isMulti": true,
@@ -429,7 +408,6 @@
       "damageToCastle": "-",
       "attackSpeed": "-",
       "range": "3000",
-      "size": "2",
       "energy": "5",
       "charge": 2
     }
