@@ -455,8 +455,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "group": "the-spellbound",
     "stats": {
       "health": "150",
       "shield": "40",
@@ -469,8 +468,8 @@
     },
     "trait": "Rəqib ölərsə ətrafdakı rəqiblərə 40 Hasar verər",
     "additionalStats": {
-      "range": "6,000",
-      "speed": "0,800",
+      "range": "6000",
+      "speed": "800",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -483,7 +482,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Naar is a botanical sorcerer with a peculiar obsession: the pomegranate. He finds beauty and lethal potential in nature, using magically enhanced fruits as his primary weapons. He can command vines to entangle foes or launch explosive pomegranate seeds that shatter on impact. For Naar, the garden is a battlefield, and every plant is a soldier waiting for his command. His neutral stance stems from his loyalty to the earth, caring more for the health of his grove than the politics of men."
   },
   {
     "name": "Lyra",
@@ -821,5 +820,39 @@
       "level3": "-"
     },
     "story": "These are not the harmless creatures found in common soil. Henry’s bio-engineering transformed these tiny worms into aggressive, flesh-eating scavengers. They move in writhing masses, hidden beneath the earth until they detect a vibration. Once they emerge, their hunger is insatiable. They are the farm's underground security, small enough to bypass most defenses but fierce enough to tear through leather and bone. For Henry, they are the perfect disposal system for his failed experiments."
+  }
+  {
+    "name": "Unara",
+    "type": ["İnsan"],
+    "rarity": "Relic",
+    "note": "-",
+    "group": "the-spellbound",
+    "stats": {
+      "health": "30",
+      "shield": "0",
+      "damage": "8",
+      "sps": "6",
+      "attackSpeed": "1,30s",
+      "delay": "-",
+      "mana": "5",
+      "number": "6"
+    },
+    "trait": "İlk vuruşda yerin altından çıxaraq kartları 0,5 saniyəlik sarsəmlətər",
+    "additionalStats": {
+      "range": "800",
+      "speed": "1300",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "Unara is the mother of Laura, but she possesses a much darker and more guarded nature. Unlike her daughter, she trusts no one and uses her magic strictly for self-preservation. She surrounds herself with impenetrable arcane barriers, keeping the world at a distance to ensure her own safety. Her neutral outlook is driven by survival; she will neither help nor hinder others unless they threaten her solitude. She is a solitary fortress of magic, cold and unyielding to those who seek her aid."
   }
 ]
