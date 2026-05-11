@@ -803,8 +803,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Mage/Debuffer",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "the-spellbound",
     "stats": {
       "health": "300",
       "shield": "0",
@@ -815,7 +814,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hər <b>2</b>-ci atışda rəqibin hasarını <b>1,6</b> saniyəlik <b>-25%</b> azaldar",
+    "trait": "Hər <b>2</b>-ci atışda rəqibin hasarını <b>1,6</b> saniyəlik <b>-25%</b> azaldaraq 33% yavaşladar",
     "additionalStats": {
       "range": "4000",
       "speed": "900",
@@ -831,7 +830,7 @@
       "level2": "+10% Hız  |  900 » 990",
       "level3": "+5% Saldırı Hızı  |  1,80s » 1,62s"
       },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "Chrono Mage is a master of the temporal arts, possessing the rare ability to manipulate the flow of time itself. He exists between seconds, watching the past and future unfold simultaneously. He is neither good nor evil, acting only as a neutral observer of history’s clock. His power allows him to freeze enemies in their tracks or accelerate his own movements to a blur. As the mentor and guardian of Laura, he carries the weight of ages on his shoulders, ensuring that the timeline remains unbroken."
   },
   {
     "name": "Aegis Guard",
