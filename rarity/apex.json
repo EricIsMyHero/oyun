@@ -769,7 +769,7 @@
     "story": "-"
   },
   {
-    "name": "Whisper",
+    "name": "Mixela",
     "type": ["Ruh"],
     "rarity": "Apex",
     "note": "-",
@@ -802,5 +802,39 @@
       "level3": "-"
     },
     "story": "-"
+  },
+  {
+    "name": "Laura",
+    "type": ["İnsan"],
+    "rarity": "Apex",
+    "note": "-",
+    "group": "the-spellbound",
+    "stats": {
+      "health": "100",
+      "shield": "0",
+      "damage": "6x8",
+      "sps": "48",
+      "attackSpeed": "0,15",
+      "delay": "0,50",
+      "mana": "5",
+      "number": "1"
+    },
+    "trait": "Hər saniyə +8 yük qazanar. 100 yükdə ətrafındakı dost kartların statistikalarını +25% artırar",
+    "additionalStats": {
+      "range": "1,750",
+      "speed": "1,000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "Laura has dedicated her life to the art of healing, focusing her magical energy on mending wounds and restoring life. Raised and educated by the Chrono Mage, she views the world with a patient, timeless perspective. She moves through the battlefield as a beacon of restoration, shielding her allies from the brink of death. Despite her immense power, she refuses to use it for harm, believing that her true purpose is to preserve the fragile balance of life around her."
   }
 ]
