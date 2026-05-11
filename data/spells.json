@@ -67,7 +67,7 @@
     "story": "-",
     "stats": {
       "damageToCard": "4x40",
-      "damageToCastle": "x25",
+      "damageToCastle": "4x25",
       "timeBetweenDamage": "1,20s",
       "range": "3500",
       "size": "2",
