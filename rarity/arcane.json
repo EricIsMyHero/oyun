@@ -4,6 +4,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Mage/Nuker",
+    "group": "the-spellbound",
     "stats": {
       "health": "50",
       "shield": "50",
@@ -30,7 +31,7 @@
       "level2": "+40% Can | 50 » 70",
       "level3": "+10% Saldırı Hızı | 1,10s » 0,99s"
     },
-    "story": "*"
+    "story": "Arcanyx is as elegant as she is formidable, embodying a perfect balance of grace and power. She carries herself with a noble air, but beneath her calm exterior lies a volatile temper. If provoked or angered, she does not hesitate to unleash her signature explosive seeds, which burst with arcane fury upon contact. She is a delicate force of nature that demands respect. While she prefers peace, those who mistake her beauty for weakness quickly learn the destructive cost of her wrath."
   },
   {
     "name": "Leafshade",
