@@ -238,7 +238,8 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
 
   const primaryBars   = buildStatBars(STAT_DEFS, stats);
   const secondaryBars = buildStatBars(ADD_STAT_DEFS, addStats);
-  const trait = card.trait || card.note || null;
+  const trait       = card.trait || card.note || null;
+  const abilityName = card.abilityName && card.abilityName !== '—' ? card.abilityName : null;
   const story = card.story && card.story !== '-' ? card.story : null;
 
   const isAscended = (rootCard !== null && activeFormIndex === null && card !== rootCard);
@@ -277,6 +278,7 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
 
     ${trait ? `
       <div class="modal-section-label">Ability</div>
+      ${abilityName ? `<div class="modal-ability-name">⚔ ${abilityName}</div>` : ''}
       <div class="modal-trait-box">${trait}</div>` : ''}
 
     ${story ? `
