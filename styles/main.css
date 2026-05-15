@@ -581,7 +581,26 @@ body {
 
 .card-body { padding: 16px; }
 .card-name { font-family: var(--font-head); font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 4px; letter-spacing: 0.03em; }
-.card-group-tag { font-family: var(--font-head); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.card-group-tag { font-family: var(--font-head); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+
+.card-ability-tag {
+  font-family: var(--font-head);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: #f59e0b;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 3px;
+  padding: 2px 7px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 10px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .card-mini-stats { display: flex; gap: 8px; flex-wrap: wrap; }
 
@@ -704,6 +723,24 @@ body {
 .stat-bar-track { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
 .stat-bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); width: 0; }
 .stat-val-sm { font-family: var(--font-head); font-size: 0.8rem; color: var(--text); text-align: right; font-weight: 600; }
+
+.modal-ability-name {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fbbf24;
+  background: rgba(251,191,36,0.07);
+  border: 1px solid rgba(251,191,36,0.2);
+  border-left: 3px solid #fbbf24;
+  border-radius: 3px;
+  padding: 8px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .modal-trait-box {
   background: rgba(100,140,255,0.05);
