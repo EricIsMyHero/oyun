@@ -808,7 +808,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hər 5-ci atışda ətrafındakı dost kartların sürətini və saldırı hızını +25% artıraraq eyni zamanda ətrafındakı kartların sürətini və hızını -25% azaldar",
+    "trait": "Chrono Mage zamanın axınını manipulyasiya edərək hər beçinci atışında bir dalğa yaradar. Bu dalğa dost kartlar üçün zamanı sürətləndirərək onlara +25% sürət və hücum bonusu verer, rəqiblər üçün isə zamanı ağırlaşdıraraq onları -25% yavaşladar.",
     "additionalStats": {
       "range": "4000",
       "speed": "900",
