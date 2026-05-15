@@ -4,8 +4,7 @@
     "type": ["İnsan"],
     "rarity": "Familiar",
     "note": "Fighter/Berserker",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "240",
       "shield": "10",
@@ -40,6 +39,7 @@
     "rarity": "Familiar",
     "note": "Assassin/Suicide",
     "group": "twisted-farm",
+    "abilityName": "",
     "stats": {
       "health": "50",
       "shield": "0",
@@ -73,8 +73,7 @@
     "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Marksman",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "100",
       "shield": "50",
@@ -108,8 +107,7 @@
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "note": "Fighter",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "130",
       "shield": "20",
@@ -143,8 +141,7 @@
     "type": ["İnsan"],
     "rarity": "Familiar",
     "note": "Fighter/Brawler",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "100",
       "shield": "300",
@@ -178,8 +175,7 @@
     "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Fighter/Brawler",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "50",
       "shield": "150",
@@ -213,8 +209,7 @@
     "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Marksman",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "110",
       "shield": "90",
@@ -249,7 +244,7 @@
     "rarity": "Familiar",
     "note": "Marksman/Sharpshooter",
     "group": "mission-1",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "30",
       "shield": "20",
@@ -283,8 +278,8 @@
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "note": "Tank",
-    "isHybrid": false,
     "isMulti": true,
+    "abilityName": "",
     "stats": {
       "health": "240",
       "shield": "110",
@@ -318,7 +313,7 @@
       "type": ["Heyvan"],
       "rarity": "Familiar",
       "note": "Fighter",
-      "isHybrid": false,
+      "abilityName": "",
       "stats": {
         "health": "120",
         "shield": "80",
@@ -353,8 +348,7 @@
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "note": "Assassin",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "80",
       "shield": "0",
@@ -389,6 +383,7 @@
     "rarity": "Familiar",
     "note": "Tank/Brawler",
     "group": "royal-blood",
+    "abilityName": "",
     "stats": {
       "health": "700",
       "shield": "300",
@@ -423,6 +418,7 @@
     "rarity": "Familiar",
     "note": "Specialist/Disruptor",
     "group": "ancients",
+    "abilityName": "",
     "stats": {
       "health": "350",
       "shield": "0",
@@ -456,7 +452,7 @@
     "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Fighter",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "190",
       "shield": "210",
@@ -490,7 +486,7 @@
     "type": ["Uzaylı"],
     "rarity": "Familiar",
     "note": "Specialist",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "180",
       "shield": "50",
@@ -525,6 +521,7 @@
     "rarity": "Familiar",
     "note": "Marksman/Burst",
     "group": "royal-blood",
+    "abilityName": "",
     "stats": {
       "health": "100",
       "shield": "50",
@@ -559,6 +556,7 @@
     "rarity": "Familiar",
     "note": "Assassin",
     "group": "underworld",
+    "abilityName": "",
     "stats": {
       "health": "310",
       "shield": "140",
@@ -592,8 +590,7 @@
     "type": ["Robot"],
     "rarity": "Familiar",
     "note": "Mage/Nuker",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "150",
       "shield": "80",
@@ -627,8 +624,7 @@
     "type": ["Heyvan"],
     "rarity": "Familiar",
     "note": "Fighter",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "260",
       "shield": "0",
@@ -662,8 +658,7 @@
     "type": ["Uzaylı"],
     "rarity": "Familiar",
     "note": "Mage/Controller",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "140",
       "shield": "9",
@@ -698,6 +693,7 @@
     "rarity": "Familiar",
     "note": "Tank/Pure",
     "group": "royal-blood",
+    "abilityName": "",
     "stats": {
       "health": "500",
       "shield": "150",
@@ -732,6 +728,7 @@
     "rarity": "Familiar",
     "note": "Assassin/Poisoner",
     "group": "twisted-farm",
+    "abilityName": "",
     "stats": {
       "health": "170",
       "shield": "30",
@@ -765,8 +762,7 @@
     "type": ["Varlıq"],
     "rarity": "Familiar",
     "note": "Mage/Nuker",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "280",
       "shield": "70",
