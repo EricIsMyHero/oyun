@@ -4,7 +4,7 @@
     "type": ["Heyvan"],
     "rarity": "Mundane",
     "note": "Fighter",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "70",
       "shield": "0",
@@ -38,7 +38,7 @@
     "type": ["Heyvan"],
     "rarity": "Mundane",
     "note": "Tank/Brawler",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "310",
       "shield": "0",
@@ -72,8 +72,7 @@
     "type": ["Robot"],
     "rarity": "Mundane",
     "note": "Marksman/Piercer",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "90",
       "shield": "0",
@@ -107,7 +106,7 @@
     "type": ["Robot"],
     "rarity": "Mundane",
     "note": "Support/Buffer",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "80",
       "shield": "20",
@@ -141,8 +140,7 @@
     "type": ["Uzaylı"],
     "rarity": "Mundane",
     "note": "Marksman",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "70",
       "shield": "50",
@@ -177,6 +175,7 @@
     "rarity": "Mundane",
     "note": "Tank/Pure",
     "group": "ancients",
+    "abilityName": "",
     "stats": {
       "health": "900",
       "shield": "0",
@@ -211,7 +210,7 @@
     "rarity": "Mundane",
     "note": "Fighter/Berserker",
     "group": "twisted-farm",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "400",
       "shield": "0",
@@ -245,8 +244,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Mage/Controller",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "200",
       "shield": "0",
@@ -281,7 +279,7 @@
     "rarity": "Mundane",
     "note": "Tank/Protector",
     "group": "mission-1",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "210",
       "shield": "90",
@@ -315,8 +313,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Fighter",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "170",
       "shield": "30",
@@ -350,8 +347,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Fighter",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "200",
       "shield": "50",
@@ -386,6 +382,7 @@
     "rarity": "Mundane",
     "note": "Specialist/Splitter",
     "group": "ancients",
+    "abilityName": "",
     "isMulti": true,
     "stats": {
       "health": "230",
@@ -420,6 +417,7 @@
       "type": ["Uzaylı"],
       "rarity": "Mundane",
       "note": "Assassin/Suicide",
+      "abilityName": "",
       "stats": {
         "health": "100",
         "shield": "0",
@@ -454,8 +452,7 @@
     "type": ["Ruh"],
     "rarity": "Mundane",
     "note": "Assassin/Executioner",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "90",
       "shield": "0",
@@ -489,8 +486,7 @@
     "type": ["Ruh"],
     "rarity": "Mundane",
     "note": "Fighter/Berserker",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "50",
       "shield": "20",
@@ -525,7 +521,7 @@
     "rarity": "Mundane",
     "note": "Assassin",
     "group": "mission-1",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "120",
       "shield": "30",
@@ -559,8 +555,7 @@
     "type": ["Heyvan"],
     "rarity": "Mundane",
     "note": "Assassin/Poisoner",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "50",
       "shield": "0",
@@ -595,7 +590,7 @@
     "rarity": "Mundane",
     "note": "Marksman/Burst",
     "group": "mission-1",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "120",
       "shield": "120",
@@ -630,7 +625,7 @@
     "rarity": "Mundane",
     "note": "Assassin/Suicide",
     "group": "twisted-farm",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "40",
       "shield": "0",
@@ -664,8 +659,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Fighter/Berserker",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "250",
       "shield": "80",
@@ -700,6 +694,7 @@
     "rarity": "Mundane",
     "note": "Specialist/Swarm",
     "group": "royal-blood",
+    "abilityName": "",
     "stats": {
       "health": "10",
       "shield": "6",
@@ -733,8 +728,7 @@
     "type": ["Varlıq"],
     "rarity": "Mundane",
     "note": "Marksman/Piercer",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "110",
       "shield": "40",
@@ -768,8 +762,7 @@
     "type": ["İnsan"],
     "rarity": "Mundane",
     "note": "Marksman",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "180",
       "shield": "50",
@@ -804,6 +797,7 @@
     "rarity": "Mundane",
     "note": "Mage/Debuffer",
     "group": "the-spellbound",
+    "abilityName": "Temporal Resonance",
     "stats": {
       "health": "300",
       "shield": "0",
@@ -814,7 +808,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hər <b>2</b>-ci atışda rəqibin hasarını <b>1,6</b> saniyəlik <b>-25%</b> azaldaraq onu 33% yavaşladar",
+    "trait": "Hər 5-ci atışda ətrafındakı dost kartların sürətini və saldırı hızını +25% artıraraq eyni zamanda ətrafındakı kartların sürətini və hızını -25% azaldar",
     "additionalStats": {
       "range": "4000",
       "speed": "900",
@@ -838,7 +832,7 @@
     "rarity": "Mundane",
     "note": "Tank/Protector",
     "group": "mission-1",
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "400",
       "shield": "60",
@@ -872,8 +866,7 @@
     "type": ["Robot"],
     "rarity": "Mundane",
     "note": "Assassin",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "270",
       "shield": "50",
@@ -907,8 +900,7 @@
     "type": ["Robot"],
     "rarity": "Mundane",
     "note": "Support/Resourcer",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "130",
       "shield": "20",
