@@ -16,7 +16,7 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "Arcanyx-in atdığı hər bir toxum hədəfə dəydikdə partlayış törədir və əlavə +60% hasar verir. Eyni zamanda, bu partlayışdan yayılan zərif enerji yaxınlıqdakı dost kartları 5 saniyə ərzində hər saniyə +4 Can bərpa edərək sağaldır.",
+    "trait": "Arcanyx-in atdığı hər bir toxum hədəfə dəydikdə partlayış törədər və əlavə +60% hasar verir. Eyni zamanda, bu partlayışdan yayılan zərif enerji yaxınlıqdakı dost kartları 5 saniyə ərzində hər saniyə +4 Can bərpa edərək sağaldır.",
     "additionalStats": {
       "range": "2100",
       "speed": "1000",
