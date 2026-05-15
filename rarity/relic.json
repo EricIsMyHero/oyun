@@ -454,8 +454,9 @@
     "name": "Naar",
     "type": ["İnsan"],
     "rarity": "Relic",
-    "note": "-",
+    "note": "Mage/Nuker",
     "group": "the-spellbound",
+    "abilityName": "Pomegranate Detonation",
     "stats": {
       "health": "150",
       "shield": "40",
@@ -466,7 +467,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Rəqib ölərsə ətrafdakı rəqiblərə 40 Hasar verər",
+    "trait": "Naar-ın canı 40%-in altına düşdükdə hiddətlənərək ətrafına 10 saniyə boyunca 20 ədəd nar atar. Bu narlar hər biri 4 hasar verər. Bu hücum nəticəsində ölən rəqib kartlar partlayaraq yaxınlıqdakı digər düşmənlərə 40 hasar verər.",
     "additionalStats": {
       "range": "6000",
       "speed": "800",
@@ -827,21 +828,22 @@
     "rarity": "Relic",
     "note": "-",
     "group": "the-spellbound",
+    "abilityName": "Reclusive Outburst",
     "stats": {
-      "health": "30",
-      "shield": "0",
-      "damage": "8",
-      "sps": "6",
-      "attackSpeed": "1,30s",
+      "health": "220",
+      "shield": "40",
+      "damage": "5",
+      "sps": "8",
+      "attackSpeed": "0,60s",
       "delay": "-",
-      "mana": "5",
-      "number": "6"
+      "mana": "8",
+      "number": "1"
     },
-    "trait": "İlk vuruşda yerin altından çıxaraq kartları 0,5 saniyəlik sarsəmlətər",
+    "trait": "Unara hər uğurlu zərbəsində 9 yük toplayar. 100 yükə çatdıqda ultisi aktivləşər: Ətrafındakı rəqibləri 2 karo geriyə itələyərərək və onlara ardıcıl olaraq 30 ədəd sehrli orb atar, hər bir orb 2 hasar verər. (Hücum sürəti: 0,1).",
     "additionalStats": {
-      "range": "800",
-      "speed": "1300",
-      "criticalChance": "5%",
+      "range": "2100",
+      "speed": "1000",
+      "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
