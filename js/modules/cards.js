@@ -135,6 +135,7 @@ function createCardEl(card, idx) {
     <div class="card-body">
       <div class="card-name">${card.name || 'Unknown'}</div>
       <div class="card-group-tag">${card.group || 'Stagnantia'}</div>
+      ${card.abilityName && card.abilityName !== '—' ? `<div class="card-ability-tag">⚔ ${card.abilityName}</div>` : ''}
       <div class="card-mini-stats">
         ${stats.health !== undefined ? `<div class="mini-stat"><span class="mini-stat-icon">❤</span><span class="mini-stat-val">${stats.health}</span></div>` : ''}
         ${stats.damage !== undefined ? `<div class="mini-stat"><span class="mini-stat-icon">⚔</span><span class="mini-stat-val">${stats.damage}</span></div>` : ''}
