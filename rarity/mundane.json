@@ -697,8 +697,8 @@
     "abilityName": "",
     "stats": {
       "health": "10",
-      "shield": "6",
-      "damage": "7",
+      "shield": "0",
+      "damage": "6",
       "sps": "7",
       "attackSpeed": "0,90s",
       "delay": "-",
