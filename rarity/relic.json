@@ -4,8 +4,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "140",
       "shield": "60",
@@ -39,8 +38,7 @@
     "type": ["Ölü"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "200",
       "shield": "50",
@@ -74,7 +72,7 @@
     "type": ["Varlıq"],
     "rarity": "Relic",
     "note": "Special/Summoner",
-    "isAscendant": false,
+    "abilityName": "",
     "isMulti": true,
     "stats": {
       "health": "70",
@@ -109,6 +107,7 @@
       "type": ["Heyvan"],
       "rarity": "Relic",
       "note": "Suicide Assassin",
+      "abilityName": "",
       "stats": {
         "health": "30",
         "shield": "0",
@@ -144,6 +143,7 @@
     "rarity": "Relic",
     "note": "Special/Summoner",
     "group": "underworld",
+    "abilityName": "",
     "stats": {
       "health": "220",
       "shield": "130",
@@ -177,6 +177,7 @@
       "type": ["Ruh"],
       "rarity": "Relic",
       "note": "Suicide Assassin",
+      "abilityName": "",
       "stats": {
         "health": "50",
         "shield": "20",
@@ -211,8 +212,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "120",
       "shield": "500",
@@ -246,8 +246,7 @@
     "type": ["Uzaylı"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "800",
       "shield": "200",
@@ -281,8 +280,7 @@
     "type": ["Varlıq"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "230",
       "shield": "0",
@@ -316,8 +314,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "100",
       "shield": "20",
@@ -352,6 +349,7 @@
     "rarity": "Relic",
     "note": "-",
     "group": "ancients",
+    "abilityName": "",
     "stats": {
       "health": "120",
       "shield": "60",
@@ -385,8 +383,7 @@
     "type": ["Uzaylı"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "30",
       "shield": "30",
@@ -420,8 +417,7 @@
     "type": ["Uzaylı"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "90",
       "shield": "210",
@@ -490,8 +486,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isAscendant": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "190",
       "shield": "30",
@@ -526,6 +521,7 @@
     "rarity": "Relic",
     "note": "-",
     "group": "royal-blood",
+    "abilityName": "",
     "stats": {
       "health": "50",
       "shield": "0",
@@ -560,6 +556,7 @@
     "rarity": "Relic",
     "note": "Fighter",
     "group": "underworld",
+    "abilityName": "",
     "isMulti": true,
         "stats": {
           "health": "180",
@@ -592,6 +589,7 @@
       {
         "name": "Bladeknight",
         "note": "Ölü",
+        "abilityName": "",
         "stats": {
           "health": "220",
           "shield": "160",
@@ -623,6 +621,7 @@
       {
         "name": "Stormbow",
         "note": "Ölü",
+        "abilityName": "",
         "stats": {
           "health": "120",
           "shield": "40",
@@ -654,6 +653,7 @@
        {
         "name": "Ironhide",
         "note": "Ölü",
+        "abilityName": "",
         "stats": {
           "health": "400",
           "shield": "200",
@@ -689,8 +689,7 @@
     "type": ["İnsan"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "160",
       "shield": "60",
@@ -724,8 +723,7 @@
     "type": ["Varlıq"],
     "rarity": "Relic",
     "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "300",
       "shield": "120",
@@ -760,6 +758,7 @@
     "rarity": "Relic",
     "note": "-",
     "group": "ancients",
+    "abilityName": "",
     "stats": {
       "health": "270",
       "shield": "160",
@@ -794,6 +793,7 @@
     "rarity": "Relic",
     "note": "-",
     "group": "twisted-farm",
+    "abilityName": "",
     "stats": {
       "health": "30",
       "shield": "0",
