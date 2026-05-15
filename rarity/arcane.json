@@ -39,6 +39,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Assassin/Executioner",
+    "abilityName": "",
     "stats": {
       "health": "220",
       "shield": "0",
@@ -72,6 +73,7 @@
   "type": ["İnsan"],
   "rarity": "Arcane",
   "note": "Specialist/Distruptor",
+  "abilityName": "",
   "isMulti": true,
   "stats": {
     "health": "80",
@@ -106,6 +108,7 @@
       "type": ["Robot"],
       "rarity": "Arcane",
       "note": "Fighter",
+      "abilityName": "",
       "stats": {
         "health": "50",
         "shield": "50",
@@ -142,6 +145,7 @@
     "rarity": "Arcane",
     "note": "Fighter",
     "group": "ancients",
+    "abilityName": "",
     "isMulti": true,
         "stats": {
           "health": "400",
@@ -174,6 +178,7 @@
       {
         "name": "Fire Egg",
         "note": "Tank",
+        "abilityName": "",
         "stats": {
           "health": "260",
           "shield": "0",
@@ -205,6 +210,7 @@
       {
         "name": "Phoenix",
         "note": "Fighter",
+        "abilityName": "",
         "stats": {
           "health": "200",
           "shield": "0",
@@ -240,6 +246,7 @@
     "type": ["İnsan"],
     "rarity": "Arcane",
     "note": "Fighter",
+    "abilityName": "",
     "isMulti": true,
     "stats": {
       "health": "250",
@@ -274,6 +281,7 @@
       "type": ["İnsan"],
       "rarity": "Arcane",
       "note": "Marksman",
+      "abilityName": "",
       "stats": {
         "health": "120",
         "shield": "0",
@@ -308,6 +316,7 @@
     "type": ["Robot"],
     "rarity": "Arcane",
     "note": "Marksman/Burst",
+    "abilityName": "",
     "stats": {
       "health": "100",
       "shield": "200",
@@ -341,8 +350,7 @@
     "type": ["Uzaylı"],
     "rarity": "Arcane",
     "note": "Marksman/Sharpshooter",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "50",
       "shield": "30",
@@ -376,8 +384,7 @@
     "type": ["Uzaylı"],
     "rarity": "Arcane",
     "note": "Tank/Pure",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "500",
       "shield": "500",
@@ -411,8 +418,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Fighter/Brawler",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "170",
       "shield": "30",
@@ -446,8 +452,7 @@
     "type": ["İnsan"],
     "rarity": "Arcane",
     "note": "Assassin",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "110",
       "shield": "20",
@@ -481,15 +486,14 @@
     "type": ["İnsan"],
     "rarity": "Arcane",
     "note": "Marksman",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "210",
       "shield": "40",
       "damage": "12x4",
       "sps": "40",
       "attackSpeed": "0,10s",
-      "delay": "1,60",
+      "delay": "1,60s",
       "mana": "13",
       "number": "1"
     },
@@ -516,8 +520,7 @@
     "type": ["Ölü"],
     "rarity": "Arcane",
     "note": "Assassin",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "90",
       "shield": "30",
@@ -551,8 +554,7 @@
     "type": ["İnsan"],
     "rarity": "Arcane",
     "note": "Fighter",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "90",
       "shield": "70",
@@ -586,8 +588,7 @@
     "type": ["Ölü"],
     "rarity": "Arcane",
     "note": "Marksman",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "50",
       "shield": "20",
@@ -622,6 +623,7 @@
     "rarity": "Arcane",
     "note": "Specialist",
     "group": "ancients",
+    "abilityName": "",
     "stats": {
       "health": "50",
       "shield": "0",
@@ -655,8 +657,7 @@
     "type": ["Robot"],
     "rarity": "Arcane",
     "note": "Tank",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "340",
       "shield": "40",
@@ -690,8 +691,7 @@
     "type": ["Ruh"],
     "rarity": "Arcane",
     "note": "Fighter/Berserker",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "260",
       "shield": "180",
@@ -726,6 +726,7 @@
     "rarity": "Arcane",
     "note": "Marksman/Sharpshooter",
     "group": "underworld",
+    "abilityName": "",
     "stats": {
       "health": "140",
       "shield": "0",
@@ -759,8 +760,7 @@
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "note": "Fighter",
-    "isHybrid": false,
-    "isMulti": false,
+    "abilityName": "",
     "stats": {
       "health": "90",
       "shield": "90",
