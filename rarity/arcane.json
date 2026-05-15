@@ -5,6 +5,7 @@
     "rarity": "Arcane",
     "note": "Mage/Nuker",
     "group": "the-spellbound",
+    "abilityName": "Arcane Harvest",
     "stats": {
       "health": "50",
       "shield": "50",
@@ -15,7 +16,7 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "Atışları sonda partlayaraq +60% Hasar verər, yaxındakı kartlara hər 5 saniyədə +8 M.Can verər",
+    "trait": "Arcanyx-in atdığı hər bir toxum hədəfə dəydikdə partlayış törədir və əlavə +60% hasar verir. Eyni zamanda, bu partlayışdan yayılan zərif enerji yaxınlıqdakı dost kartları 5 saniyə ərzində hər saniyə +4 Can bərpa edərək sağaldır.",
     "additionalStats": {
       "range": "2100",
       "speed": "1000",
@@ -27,9 +28,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+4 Öz. Can | 8 » 12",
-      "level2": "+40% Can | 50 » 70",
-      "level3": "+10% Saldırı Hızı | 1,10s » 0,99s"
+      "level1": "+4 Ability Heal | 4 » 8",
+      "level2": "+42% Health | 50 » 71",
+      "level3": "+10% Attack Speed | 1,10s » 0,99s"
     },
     "story": "Arcanyx is as elegant as she is formidable, embodying a perfect balance of grace and power. She carries herself with a noble air, but beneath her calm exterior lies a volatile temper. If provoked or angered, she does not hesitate to unleash her signature explosive seeds, which burst with arcane fury upon contact. She is a delicate force of nature that demands respect. While she prefers peace, those who mistake her beauty for weakness quickly learn the destructive cost of her wrath."
   },
