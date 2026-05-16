@@ -3,7 +3,6 @@
     "name": "Hammies",
     "type": ["Heyvan"],
     "rarity": "Mundane",
-    "note": "Fighter",
     "abilityName": "",
     "stats": {
       "health": "70",
@@ -30,14 +29,14 @@
       "level1": "+16% Can  |  70 » 81",
       "level2": "+16% Hasar  |  18 » 21",
       "level3": "+10% Öz. Hız Bonusu  |  20% » 30%"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Fighter"
   },
   {
     "name": "B-B",
     "type": ["Heyvan"],
     "rarity": "Mundane",
-    "note": "Tank/Brawler",
     "abilityName": "",
     "stats": {
       "health": "310",
@@ -64,14 +63,15 @@
       "level1": "+5% Saldırı Hızı  |  1,1s » 1,045s",
       "level2": "+5% Kritik Şansı  |  15% » 20%",
       "level3": "+10% Hasar  |  20 » 22"
-      },
-    "story": "-"
+    },
+    "story": "-",
+    "class": "Tank",
+    "subclass": "Brawler"
   },
   {
     "name": "Scrapy",
     "type": ["Robot"],
     "rarity": "Mundane",
-    "note": "Marksman/Piercer",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -98,14 +98,15 @@
       "level1": "+4% Menzil  |  2500 » 2600",
       "level2": "+10% Hız  |  1000 » 1100",
       "level3": "+10% Can  |  90 » 99"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Marksman",
+    "subclass": "Piercer"
   },
   {
     "name": "Nitrox",
     "type": ["Robot"],
     "rarity": "Mundane",
-    "note": "Support/Buffer",
     "abilityName": "",
     "stats": {
       "health": "80",
@@ -132,14 +133,15 @@
       "level1": "+3% Öz. Saldırı Hızı  |  12% » 15%",
       "level2": "+5% Menzil  |  2400 » 2520",
       "level3": "+20% Hasar  |  15 » 20"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Support",
+    "subclass": "Buffer"
   },
   {
     "name": "Vortex",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
-    "note": "Marksman",
     "abilityName": "",
     "stats": {
       "health": "70",
@@ -166,14 +168,14 @@
       "level1": "+10% Gecikmə  |  1,10s » 0,99s",
       "level2": "+10% Öz. Hasar Bonusu  |  40% » 50%",
       "level3": "+5% Hız  |  1000 » 1050"
-      },
-   "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Marksman"
   },
   {
     "name": "Gloop",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
-    "note": "Tank/Pure",
     "group": "ancients",
     "abilityName": "",
     "stats": {
@@ -201,14 +203,15 @@
       "level1": "+10% Hasar  |  10 » 11",
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
       "level3": "+20% Ömür  |  150s » 180s"
-      },
-    "story": "Gloop is a massive, green, slime-like entity that haunts the depths of the Dreadful Swamp. It waits in the stagnant waters for unsuspecting travelers, pulling them into its viscous body to face a slow and agonizing end. Legend says that those who enter its territory never return, becoming part of the swamp's eternal rot. It is a mindless consumer, a living trap that turns the murky waters into a graveyard. To face Gloop is to face an inescapable, suffocating death."
+    },
+    "story": "Gloop is a massive, green, slime-like entity that haunts the depths of the Dreadful Swamp. It waits in the stagnant waters for unsuspecting travelers, pulling them into its viscous body to face a slow and agonizing end. Legend says that those who enter its territory never return, becoming part of the swamp's eternal rot. It is a mindless consumer, a living trap that turns the murky waters into a graveyard. To face Gloop is to face an inescapable, suffocating death.",
+    "class": "Tank",
+    "subclass": "Pure"
   },
   {
     "name": "Henry",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Fighter/Berserker",
     "group": "twisted-farm",
     "abilityName": "Butcher’s Authority",
     "stats": {
@@ -236,22 +239,23 @@
       "level1": "+4% Health  |  400 » 416",
       "level2": "+10% Attack Size  |  1100 » 1210",
       "level3": "+5% Speed  |  800 » 840"
-      },
-    "story": "Henry was once a brilliant researcher, but after several failed experiments, he retreated to a secluded farm. To the outside world, he is just a friendly farmer with orange hair and a thick beard, leaning on his pitchfork. However, beneath his welcoming smile lies a dangerous obsession. He uses his scientific expertise to transform ordinary livestock into lethal weapons. He treats his farm like a laboratory, seeing his animals not as living beings, but as subjects for his dark, evolutionary projects."
+    },
+    "story": "Henry was once a brilliant researcher, but after several failed experiments, he retreated to a secluded farm. To the outside world, he is just a friendly farmer with orange hair and a thick beard, leaning on his pitchfork. However, beneath his welcoming smile lies a dangerous obsession. He uses his scientific expertise to transform ordinary livestock into lethal weapons. He treats his farm like a laboratory, seeing his animals not as living beings, but as subjects for his dark, evolutionary projects.",
+    "class": "Fighter",
+    "subclass": "Berserker"
   },
   {
     "name": "Venomora",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Mage/Controller",
     "abilityName": "",
     "stats": {
       "health": "200",
       "shield": "0",
       "damage": "4x5",
       "sps": "14",
-      "attackSpeed": "0,35s",
-      "delay": "1,45s",
+      "attackSpeed": "0.35s",
+      "delay": "1.45s",
       "mana": "6",
       "number": "1"
     },
@@ -265,19 +269,20 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Öz. Yavaşlatma  |  25% » 30%",
       "level2": "+5% Can  |  200% » 210%",
       "level3": "+5% Kritik Şansı  |  5% » 10%"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Mage",
+    "subclass": "Controller"
   },
   {
     "name": "Blocker",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Tank/Protector",
     "group": "mission-1",
     "abilityName": "Ballistic Suppression",
     "stats": {
@@ -300,19 +305,20 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+50% Ability Range  |  20,000 » 30,000",
       "level2": "+10% Shield  |  90 » 99",
       "level3": "+5% Range  |  1000 » 1050"
-      },
-    "story": "Blocker is the heart of Mission 1. This 30-year-old Black man carries a heavy riot shield to deflect every incoming threat. While others focus on the gravity of war, his good-natured humor keeps the squad's spirits high. He is the funniest member of the group, often cracking jokes in the heat of battle. Behind his smile lies a relentless wall of defense. He stands firm against any impact, ensuring his friends remain safe. To him, protecting the team is a duty he performs with a grin."
+    },
+    "story": "Blocker is the heart of Mission 1. This 30-year-old Black man carries a heavy riot shield to deflect every incoming threat. While others focus on the gravity of war, his good-natured humor keeps the squad's spirits high. He is the funniest member of the group, often cracking jokes in the heat of battle. Behind his smile lies a relentless wall of defense. He stands firm against any impact, ensuring his friends remain safe. To him, protecting the team is a duty he performs with a grin.",
+    "class": "Tank",
+    "subclass": "Protector"
   },
   {
     "name": "Fen",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Fighter",
     "abilityName": "",
     "stats": {
       "health": "170",
@@ -339,14 +345,14 @@
       "level1": "+20% Qalxan  |  30 » 36",
       "level2": "+1 Ekstra Atış  |  3x5 » 4x5",
       "level3": "+5% Menzil  |  3600 » 3780"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Fighter"
   },
   {
     "name": "Ben",
     "type": ["İnsan"],
     "rarity": "Mundane",
-    "note": "Fighter",
     "abilityName": "",
     "stats": {
       "health": "200",
@@ -373,14 +379,14 @@
       "level1": "+2% Öz. Şansı  |  5% » 7%",
       "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
       "level3": "+12% Qalxan  |  50 » 56"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Fighter"
   },
   {
     "name": "Freak",
     "type": ["Uzaylı"],
     "rarity": "Mundane",
-    "note": "Specialist/Splitter",
     "group": "ancients",
     "abilityName": "",
     "isMulti": true,
@@ -409,49 +415,54 @@
       "level1": "+22% Hasar  |  18 » 22",
       "level2": "+10% Hız  |  850 » 935",
       "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
-  },
+    },
     "story": "Freak is so horrifying that even the bravest knights tremble and flee at the sight of him. He finds a twisted pleasure in absorbing the remains of his victims into his own grotesque form, growing more deformed with every kill. Stories warn that death is not his end; when struck down, he splits into two separate entities, spreading terror twice as fast. He is an unending nightmare that feeds on fear, ensuring that the cycle of horror never truly breaks.",
     "forms": [
       {
-      "name": "Mini Freaks",
-      "type": ["Uzaylı"],
-      "rarity": "Mundane",
-      "note": "Assassin/Suicide",
-      "abilityName": "",
-      "stats": {
-        "health": "100",
-        "shield": "0",
-        "damage": "10",
-        "sps": "13",
-        "attackSpeed": "0,80s",
-        "delay": "-",
-        "mana": "-",
-        "number": "2"
-      },
-      "trait": "Öləndə partlayaraq <b>50</b> Hasar verər",
-      "additionalStats": {
-        "range": "1000",
-        "speed": "1000",
-        "criticalChance": "-",
-        "criticDamage": "-",
-        "lifestealChance": "-",
-        "lifesteal": "-",
-        "damageminimiser": "-",
-        "dodge": "-"
-      },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-" 
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-      }]
+        "name": "Mini Freaks",
+        "type": ["Uzaylı"],
+        "rarity": "Mundane",
+        "abilityName": "",
+        "stats": {
+          "health": "100",
+          "shield": "0",
+          "damage": "10",
+          "sps": "13",
+          "attackSpeed": "0,80s",
+          "delay": "-",
+          "mana": "-",
+          "number": "2"
+        },
+        "trait": "Öləndə partlayaraq <b>50</b> Hasar verər",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1000",
+          "criticalChance": "-",
+          "criticDamage": "-",
+          "lifestealChance": "-",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+        "class": "Assassin",
+        "subclass": "Suicide"
+      }
+    ],
+    "class": "Specialist",
+    "subclass": "Splitter"
   },
   {
     "name": "Nightprowler",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Mundane",
-    "note": "Assassin/Executioner",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -478,14 +489,17 @@
       "level1": "+6% Saldırı Hızı  |  1,5s » 1,425s",
       "level2": "+10% Can  |  90 » 99",
       "level3": "+16% Hasar  |  38 » 44"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Assassin",
+    "subclass": "Executioner"
   },
   {
     "name": "Twins",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Mundane",
-    "note": "Fighter/Berserker",
     "abilityName": "",
     "stats": {
       "health": "50",
@@ -512,14 +526,17 @@
       "level1": "+5% Critical Chance  |  5% » 10%",
       "level2": "+4% Speed  |  1150 » 1200",
       "level3": "+10% Range  |  1000 » 1100"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Fighter",
+    "subclass": "Berserker"
   },
   {
     "name": "Bethe",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
-    "note": "Assassin",
     "group": "mission-1",
     "abilityName": "Overdrive Harvest",
     "stats": {
@@ -547,14 +564,16 @@
       "level1": "+10% Range  |  1000 » 1100",
       "level2": "+20% Damage  |  2x20 » 2x24",
       "level3": "+5% Dodge Chance  |  5% » 10%"
-      },
-    "story": "Bethe spent her childhood surrounded by mechanical sounds, not gunfire. Growing up surrounded by technology from a young age, this girl joined Mission 1 with her own hand-built Bio Mech. Although she is 23 years old, the systems she has built seem much older than her. It is no coincidence that she stands by the Soldier - it is not just tactics that keep him afloat in battle, but Bethe's intelligence. There is talk of something between them, but questions are not asked on the front lines. Because the answers must remain hidden during battle."
+    },
+    "story": "Bethe spent her childhood surrounded by mechanical sounds, not gunfire. Growing up surrounded by technology from a young age, this girl joined Mission 1 with her own hand-built Bio Mech. Although she is 23 years old, the systems she has built seem much older than her. It is no coincidence that she stands by the Soldier - it is not just tactics that keep him afloat in battle, but Bethe's intelligence. There is talk of something between them, but questions are not asked on the front lines. Because the answers must remain hidden during battle.",
+    "class": "Assassin"
   },
   {
     "name": "Snaykies",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Mundane",
-    "note": "Assassin/Poisoner",
     "abilityName": "",
     "stats": {
       "health": "50",
@@ -581,14 +600,17 @@
       "level1": "+12% Hasar  |  15 » 17",
       "level2": "+1 Öz. Hasar Bonusu  |  2x4 » 2x5",
       "level3": "+5% Hız  |  1100 » 1155"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Assassin",
+    "subclass": "Poisoner"
   },
   {
     "name": "Soldier",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
-    "note": "Marksman/Burst",
     "group": "mission-1",
     "abilityName": "Anti-Air Caliber",
     "stats": {
@@ -616,14 +638,17 @@
       "level1": "+3% Range  |  4000 » 4120",
       "level2": "+15% Shield  |  120 » 138",
       "level3": "+33% Ability DMG Bonus  |  33% » 66%"
-      },
-    "story": "Soldier did not watch the war from the outside since he was a child, he wanted to experience it. This young man, who dreamed of following his father into the battlefields, turned his dream into a responsibility over time. Although he is only 25 years old, his combat experience is heavier than his age. He stands on the front line with an M16A4 rifle, and his decisions determine the fate of those behind him. Mission 1 is not his first mission - it is the first mission he has been responsible for as a leader."
+    },
+    "story": "Soldier did not watch the war from the outside since he was a child, he wanted to experience it. This young man, who dreamed of following his father into the battlefields, turned his dream into a responsibility over time. Although he is only 25 years old, his combat experience is heavier than his age. He stands on the front line with an M16A4 rifle, and his decisions determine the fate of those behind him. Mission 1 is not his first mission - it is the first mission he has been responsible for as a leader.",
+    "class": "Marksman",
+    "subclass": "Burst"
   },
   {
     "name": "Bees",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Mundane",
-    "note": "Assassin/Suicide",
     "group": "twisted-farm",
     "abilityName": "Toxic Sacrifice",
     "stats": {
@@ -651,14 +676,17 @@
       "level1": "+10% Damage  |  70 » 77",
       "level2": "+5% Dodge Chance |  20% » 25%",
       "level3": "+10% Range  |  800 » 880"
-      },
-    "story": "The Bees are a swarming nightmare born from Henry’s relentless experimentation. He pushed their biology to the limit, turning them into a hyper-aggressive cloud of stingers. However, despite all the effort and sweat Henry poured into them, he could not prevent their ultimate fate: they are highly volatile and fragile. They strike with overwhelming force, but their lives are short, burning out quickly after they unleash their fury. They represent the tragic, unstable perfection of Henry’s failed genius."
+    },
+    "story": "The Bees are a swarming nightmare born from Henry’s relentless experimentation. He pushed their biology to the limit, turning them into a hyper-aggressive cloud of stingers. However, despite all the effort and sweat Henry poured into them, he could not prevent their ultimate fate: they are highly volatile and fragile. They strike with overwhelming force, but their lives are short, burning out quickly after they unleash their fury. They represent the tragic, unstable perfection of Henry’s failed genius.",
+    "class": "Assassin",
+    "subclass": "Suicide"
   },
   {
     "name": "Hailey",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
-    "note": "Fighter/Berserker",
     "abilityName": "",
     "stats": {
       "health": "250",
@@ -685,14 +713,17 @@
       "level1": "+15% Qalxan  |  80 » 92",
       "level2": "+0,5% Öz. Kritik Şansı  |  0,5% » 1%",
       "level3": "+6% Saldırı Hızı  |  1,50s » 1,41s"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Fighter",
+    "subclass": "Berserker"
   },
   {
     "name": "Angels",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Mundane",
-    "note": "Specialist/Swarm",
     "group": "royal-blood",
     "abilityName": "",
     "stats": {
@@ -720,14 +751,17 @@
       "level1": "+15% DMG  |  7 » 8",
       "level2": "+1 Angel Number  |  10 » 11",
       "level3": "+5% Speed  |  1100 » 1155"
-      },
-    "story": "The Angels are the restless spirits of ancient nobles who once served the throne with unwavering loyalty. Even in death, they refuse to leave the kingdom they loved. These ethereal guardians float above the battlefield, draped in shimmering white robes, acting as the ultimate shield for the royal lineage. They are not mere ghosts; they are the divine manifestation of the kingdom's history. Their presence inspires the living, ensuring that the legacy of the Royal Blood remains untouched by the corruption of the outside world."
+    },
+    "story": "The Angels are the restless spirits of ancient nobles who once served the throne with unwavering loyalty. Even in death, they refuse to leave the kingdom they loved. These ethereal guardians float above the battlefield, draped in shimmering white robes, acting as the ultimate shield for the royal lineage. They are not mere ghosts; they are the divine manifestation of the kingdom's history. Their presence inspires the living, ensuring that the legacy of the Royal Blood remains untouched by the corruption of the outside world.",
+    "class": "Specialist",
+    "subclass": "Swarm"
   },
   {
     "name": "Boomix",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Mundane",
-    "note": "Marksman/Piercer",
     "abilityName": "",
     "stats": {
       "health": "110",
@@ -754,14 +788,17 @@
       "level1": "+10% Saldırı Hızı  |  2,4s » 2,16s",
       "level2": "+4% Hız  |  1000 » 1040",
       "level3": "+25% Qalxan  |  40 » 50"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Marksman",
+    "subclass": "Piercer"
   },
   {
     "name": "PhewPhew",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
-    "note": "Marksman",
     "abilityName": "",
     "stats": {
       "health": "180",
@@ -788,14 +825,16 @@
       "level1": "+5% Menzil  |  2700 » 2835",
       "level2": "+5% Kritik Şansı  |  5% » 10%",
       "level3": "+25% Hasar  |  2x8 » 2x10"
-      },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Marksman"
   },
   {
     "name": "Chrono Mage",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
-    "note": "Mage/Debuffer",
     "group": "the-spellbound",
     "abilityName": "Temporal Resonance",
     "stats": {
@@ -823,14 +862,17 @@
       "level1": "+5% Can  |  300 » 315",
       "level2": "+10% Hız  |  900 » 990",
       "level3": "+5% Saldırı Hızı  |  1,80s » 1,62s"
-      },
-    "story": "Chrono Mage is a master of the temporal arts, possessing the rare ability to manipulate the flow of time itself. He exists between seconds, watching the past and future unfold simultaneously. He is neither good nor evil, acting only as a neutral observer of history’s clock. His power allows him to freeze enemies in their tracks or accelerate his own movements to a blur. As the mentor and guardian of Laura, he carries the weight of ages on his shoulders, ensuring that the timeline remains unbroken."
+    },
+    "story": "Chrono Mage is a master of the temporal arts, possessing the rare ability to manipulate the flow of time itself. He exists between seconds, watching the past and future unfold simultaneously. He is neither good nor evil, acting only as a neutral observer of history’s clock. His power allows him to freeze enemies in their tracks or accelerate his own movements to a blur. As the mentor and guardian of Laura, he carries the weight of ages on his shoulders, ensuring that the timeline remains unbroken.",
+    "class": "Mage",
+    "subclass": "Debuffer"
   },
   {
     "name": "Aegis Guard",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
-    "note": "Tank/Protector",
     "group": "mission-1",
     "abilityName": "Tactical Escort",
     "stats": {
@@ -858,14 +900,17 @@
       "level1": "+5% Critical Chance  |  5% » 10%",
       "level2": "+20% Shield  |  60 » 72",
       "level3": "+5% Range  |  1200 » 1260"
-      },
-    "story": "Aegis Guard is a masterpiece of Bethe’s mechanical genius. This autonomous protector operates without a human pilot, relying on complex algorithms to identify incoming threats. While Soldier leads the team, Aegis Guard stands as an unbreakable wall between the squad and certain death. Its primary protocol is the preservation of Mission 1 members at any cost. It does not feel fear or fatigue. Every movement serves a single purpose: to ensure that the team lives to see the next sunrise."
+    },
+    "story": "Aegis Guard is a masterpiece of Bethe’s mechanical genius. This autonomous protector operates without a human pilot, relying on complex algorithms to identify incoming threats. While Soldier leads the team, Aegis Guard stands as an unbreakable wall between the squad and certain death. Its primary protocol is the preservation of Mission 1 members at any cost. It does not feel fear or fatigue. Every movement serves a single purpose: to ensure that the team lives to see the next sunrise.",
+    "class": "Tank",
+    "subclass": "Protector"
   },
   {
     "name": "Ironjaw",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
-    "note": "Assassin",
     "abilityName": "",
     "stats": {
       "health": "270",
@@ -887,19 +932,21 @@
       "lifesteal": "33%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Kritik Şansı |  5% » 10%",
       "level2": "+5% Can Çalma Şansı  |  25% » 30%",
       "level3": "+33% Can Çalma  |  33% » 66%"
-      },
-    "story": "-"
+    },
+    "story": "-",
+    "class": "Assassin"
   },
   {
     "name": "M-Manager",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
-    "note": "Support/Resourcer",
     "abilityName": "",
     "stats": {
       "health": "130",
@@ -926,7 +973,9 @@
       "level1": "-1 Öz. Vaxtı  |  9 » 8",
       "level2": "+11% Can  |  130 » 144",
       "level3": "+10% Sıyrılma  |  0% » 10%"
-      },
-    "story": "-"
+    },
+    "story": "-",
+    "class": "Support",
+    "subclass": "Resourcer"
   }
 ]
