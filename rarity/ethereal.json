@@ -1,14 +1,16 @@
 [
   {
     "name": "Ase",
-    "note": "Marksman",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
     "isDual": true,
     "type1": {
       "name": "Ase",
-      "note": "Marksman",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
@@ -41,8 +43,9 @@
       "forms": [
         {
           "name": "Giga-R",
-          "note": "Tank",
-          "type": ["Robot"],
+          "type": [
+            "Robot"
+          ],
           "stats": {
             "health": "500",
             "shield": "500",
@@ -69,14 +72,17 @@
             "level2": "-",
             "level3": "-"
           },
-          "story": "-"
+          "story": "-",
+          "class": "Tank"
         }
-      ]
+      ],
+      "class": "Marksman"
     },
     "type2": {
       "name": "Ase",
-      "note": "Marksman",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
@@ -109,8 +115,9 @@
       "forms": [
         {
           "name": "Giga-R",
-          "note": "Marksman",
-          "type": ["Robot"],
+          "type": [
+            "Robot"
+          ],
           "stats": {
             "health": "300",
             "shield": "300",
@@ -137,21 +144,26 @@
             "level2": "-",
             "level3": "-"
           },
-          "story": "-"
+          "story": "-",
+          "class": "Marksman"
         }
-      ]
-    }
+      ],
+      "class": "Marksman"
+    },
+    "class": "Marksman"
   },
   {
     "name": "Leno",
-    "note": "Marksman",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
     "isDual": true,
     "type1": {
       "name": "Leno",
-      "note": "Marksman",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "stats": {
         "health": "220",
@@ -179,12 +191,14 @@
         "level2": "-",
         "level3": "-"
       },
-      "story": "-"
-      },
+      "story": "-",
+      "class": "Marksman"
+    },
     "type2": {
       "name": "Leno",
-      "note": "Marksman",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "stats": {
         "health": "190",
@@ -212,19 +226,23 @@
         "level2": "-",
         "level3": "-"
       },
-      "story": "-"
-    }
+      "story": "-",
+      "class": "Marksman"
+    },
+    "class": "Marksman"
   },
   {
     "name": "King",
-    "note": "Tank",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Ethereal",
     "isDual": true,
     "type1": {
       "name": "King",
-      "note": "Tank",
-      "type": ["Dead"],
+      "type": [
+        "Dead"
+      ],
       "rarity": "Ethereal",
       "group": "underworld",
       "stats": {
@@ -253,12 +271,14 @@
         "level2": "-",
         "level3": "-"
       },
-      "story": "The King is a skeletal monarch who commands the dead with absolute authority. Unlike the Lord, he wears bright, polished dark iron armor infused with deep purple and crimson hues, reflecting his ancient status. His skull holds piercing crimson eyes that blaze with undying malice. He grips a greatsword in his bony hands, ready to strike down anyone who defies his rule. While the Lord is a simple destroyer, the King is a ruler of the UnderWorld, a chilling specter of a lost kingdom that refuses to fade into dust."
+      "story": "The King is a skeletal monarch who commands the dead with absolute authority. Unlike the Lord, he wears bright, polished dark iron armor infused with deep purple and crimson hues, reflecting his ancient status. His skull holds piercing crimson eyes that blaze with undying malice. He grips a greatsword in his bony hands, ready to strike down anyone who defies his rule. While the Lord is a simple destroyer, the King is a ruler of the UnderWorld, a chilling specter of a lost kingdom that refuses to fade into dust.",
+      "class": "Tank"
     },
     "type2": {
       "name": "King",
-      "note": "Tank",
-      "type": ["Dead"],
+      "type": [
+        "Dead"
+      ],
       "rarity": "Ethereal",
       "group": "underworld",
       "isMulti": true,
@@ -292,8 +312,9 @@
       "forms": [
         {
           "name": "Guard",
-          "note": "Fighter",
-          "type": ["Spirit"],
+          "type": [
+            "Spirit"
+          ],
           "stats": {
             "health": "80",
             "shield": "80",
@@ -320,21 +341,26 @@
             "level2": "-",
             "level3": "-"
           },
-          "story": "-"
+          "story": "-",
+          "class": "Fighter"
         }
-      ]
-    }
+      ],
+      "class": "Tank"
+    },
+    "class": "Tank"
   },
   {
     "name": "Dracula",
-    "note": "Fighter",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
     "isDual": true,
     "type1": {
       "name": "Dracula",
-      "note": "Fighter",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "stats": {
         "health": "280",
@@ -362,12 +388,14 @@
         "level2": "-",
         "level3": "-"
       },
-      "story": "-"
-      },
+      "story": "-",
+      "class": "Fighter"
+    },
     "type2": {
       "name": "Dracula",
-      "note": "Fighter",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
@@ -400,8 +428,9 @@
       "forms": [
         {
           "name": "Bats",
-          "note": "Marksman",
-          "type": ["Robot"],
+          "type": [
+            "Robot"
+          ],
           "stats": {
             "health": "10",
             "shield": "-",
@@ -428,16 +457,20 @@
             "level2": "-",
             "level3": "-"
           },
-          "story": "-"
+          "story": "-",
+          "class": "Marksman"
         }
-      ]
-    }
+      ],
+      "class": "Fighter"
+    },
+    "class": "Fighter"
   },
   {
     "name": "M-M",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Ethereal",
-    "note": "Tank",
     "isHybrid": false,
     "isMulti": false,
     "isDual": false,
@@ -467,6 +500,7 @@
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
     },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Tank"
   }
 ]
