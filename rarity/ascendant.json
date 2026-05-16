@@ -5,7 +5,7 @@
     "rarity": "Ascendant",
     "note": "Tank",
     "group": "mission-1",
-    "abilityName": "Tactical Cohesion"
+    "abilityName": "Tactical Cohesion",
     "isAscendant": true,
     "stats": {
       "health": "270",
@@ -39,7 +39,7 @@
       "type": ["İnsan"],
       "rarity": "Ascendant",
       "note": "Suicide Assassin",
-      "abilityName": "Tactical Cohesion"
+      "abilityName": "Tactical Cohesion",
       "stats": {
         "health": "360",
         "shield": "240",
