@@ -1,9 +1,10 @@
 [
   {
     "name": "Albert",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Familiar",
-    "note": "Fighter/Berserker",
     "abilityName": "",
     "stats": {
       "health": "240",
@@ -31,13 +32,16 @@
       "level2": "+5% Hız | 900 » 945",
       "level3": "+4% Can | 240 » 250"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Fighter",
+    "subclass": "Berserker"
   },
   {
     "name": "Chicken",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
-    "note": "Assassin/Suicide",
     "group": "twisted-farm",
     "abilityName": "Volatile Mutation",
     "stats": {
@@ -66,13 +70,16 @@
       "level2": "+100% Ability DMG Bonus | 400% » 500%",
       "level3": "+10% Speed | 1300 » 1430"
     },
-    "story": "The Chicken is no longer a simple farm bird. Under Henry’s intervention, this wild white fowl has gained incredible, supernatural speed. It darts across the battlefield like a blur, making it almost impossible to catch. Strapped to its back is a powerful C4 explosive, turning this frantic creature into a high-speed suicide bomber. It is a chaotic result of Henry's madness—a loyal, feathered weapon that delivers a devastating blast before the enemy even realizes what hit them."
+    "story": "The Chicken is no longer a simple farm bird. Under Henry’s intervention, this wild white fowl has gained incredible, supernatural speed. It darts across the battlefield like a blur, making it almost impossible to catch. Strapped to its back is a powerful C4 explosive, turning this frantic creature into a high-speed suicide bomber. It is a chaotic result of Henry's madness—a loyal, feathered weapon that delivers a devastating blast before the enemy even realizes what hit them.",
+    "class": "Assassin",
+    "subclass": "Suicide"
   },
   {
     "name": "Frostshot",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
-    "note": "Marksman",
     "abilityName": "",
     "stats": {
       "health": "100",
@@ -100,13 +107,15 @@
       "level2": "+26% Qalxan | 50 » 63",
       "level3": "+5% Öz. Yavaşlatma | 25% » 30%"
     },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Marksman"
   },
   {
     "name": "Wild Bees",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
-    "note": "Fighter",
     "abilityName": "",
     "stats": {
       "health": "130",
@@ -134,13 +143,15 @@
       "level2": "+10% Sıyrılma | 10% » 20%",
       "level3": "+5% Kritik Şansı | 5% » 10%"
     },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Fighter"
   },
   {
     "name": "Warborn",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Familiar",
-    "note": "Fighter/Brawler",
     "abilityName": "",
     "stats": {
       "health": "100",
@@ -162,19 +173,22 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Menzil  |  1300 » 1365",
       "level2": "+2 Öz. Qalxan  |  8 » 10",
       "level3": "+0.5x Kritik Hasar  |  1.5x » 2x"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Fighter",
+    "subclass": "Brawler"
   },
   {
     "name": "X-Bot",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
-    "note": "Fighter/Brawler",
     "abilityName": "",
     "stats": {
       "health": "50",
@@ -201,14 +215,17 @@
       "level1": "+20% Öz. Vaxt  |  10 » 12",
       "level2": "+10% Can Çalma Şansı  |  0% » 10%",
       "level3": "+50% Can  |  50 » 75"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Fighter",
+    "subclass": "Brawler"
   },
   {
     "name": "Nyra",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
-    "note": "Marksman",
     "abilityName": "",
     "stats": {
       "health": "110",
@@ -235,14 +252,16 @@
       "level1": "+50% Öz. Hasar Bonusu  |  100% » 150%",
       "level2": "+5% Menzil  |  2100 » 2205",
       "level3": "+5% Kritik Şansı  |  5% » 10%"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Marksman"
   },
   {
     "name": "Deadscope",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Familiar",
-    "note": "Marksman/Sharpshooter",
     "group": "mission-1",
     "abilityName": "Momentum Reload",
     "stats": {
@@ -270,14 +289,17 @@
       "level1": "+5% Speed  |  900 » 945",
       "level2": "+10% Ability DMG SPD Bonus  |  20% » 30%",
       "level3": "+5% Range  |  8000 » 8400"
-      },
-    "story": "Deadscope has given his years to wars, and in return he has earned respect, not words. He is the oldest in the group, and this is measured not by age, but by the paths he has traveled. Even though he is in middle age, his gaze still searches for a target. So far, not a single shot has been wasted - this is not a legend, but a statistic. In Mission 1, he is here not only to shoot from a distance, but to pass on what he knows to the Soldier. Because a leader must know not only how to fight alone, but also how to shoot accurately."
+    },
+    "story": "Deadscope has given his years to wars, and in return he has earned respect, not words. He is the oldest in the group, and this is measured not by age, but by the paths he has traveled. Even though he is in middle age, his gaze still searches for a target. So far, not a single shot has been wasted - this is not a legend, but a statistic. In Mission 1, he is here not only to shoot from a distance, but to pass on what he knows to the Soldier. Because a leader must know not only how to fight alone, but also how to shoot accurately.",
+    "class": "Marksman",
+    "subclass": "Sharpshooter"
   },
   {
     "name": "Turtle",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
-    "note": "Tank",
     "isMulti": true,
     "abilityName": "",
     "stats": {
@@ -309,45 +331,50 @@
     "story": "Turtle-ın hekayəsi buradadır. Kartın tarixi haqqında mətn yazın.",
     "forms": [
       {
-      "name": "Mini Turtles",
-      "type": ["Heyvan"],
-      "rarity": "Familiar",
-      "note": "Fighter",
-      "abilityName": "",
-      "stats": {
-        "health": "120",
-        "shield": "80",
-        "damage": "6",
-        "sps": "5",
-        "attackSpeed": "1,20s",
-        "delay": "-",
-        "mana": "-",
-        "number": "4"
-      },
-      "trait": "<b>*Turtle*</b> ölərsə <b>+100%</b> Hasar bonusu qazanar, <b>*Turtle*</b>-nın arxasında gələrlər",
-      "additionalStats": {
-        "range": "800",
-        "speed": "700",
-        "criticalChance": "-",
-        "criticDamage": "-",
-        "lifestealChance": "-",
-        "lifesteal": "-",
-        "damageminimiser": "-",
-        "dodge": "-"
-      },
-      "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-" 
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
-      }]
+        "name": "Mini Turtles",
+        "type": [
+          "Heyvan"
+        ],
+        "rarity": "Familiar",
+        "abilityName": "",
+        "stats": {
+          "health": "120",
+          "shield": "80",
+          "damage": "6",
+          "sps": "5",
+          "attackSpeed": "1,20s",
+          "delay": "-",
+          "mana": "-",
+          "number": "4"
+        },
+        "trait": "<b>*Turtle*</b> ölərsə <b>+100%</b> Hasar bonusu qazanar, <b>*Turtle*</b>-nın arxasında gələrlər",
+        "additionalStats": {
+          "range": "800",
+          "speed": "700",
+          "criticalChance": "-",
+          "criticDamage": "-",
+          "lifestealChance": "-",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+        "class": "Fighter"
+      }
+    ],
+    "class": "Tank"
   },
   {
     "name": "Sar-1",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
-    "note": "Assassin",
     "abilityName": "",
     "stats": {
       "health": "80",
@@ -374,14 +401,16 @@
       "level1": "+10% Sıyrılma  |  10% » 20%",
       "level2": "+12% Öz. Vaxtı  |  16 » 18",
       "level3": "+5% Saldırı Hızı  |  0,95s » 0,9s"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Assassin"
   },
   {
     "name": "Trac",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Familiar",
-    "note": "Tank/Brawler",
     "group": "royal-blood",
     "abilityName": "",
     "stats": {
@@ -409,14 +438,17 @@
       "level1": "+3% Health  |  700 » 721",
       "level2": "+13% Abilty DMG Taken  |  24 » 21",
       "level3": "+15% DMG  |  12 » 14"
-      },
-    "story": "Trac is the legendary champion of the realm, a man whose name is synonymous with victory. He has defended the kingdom’s borders countless times, becoming a living symbol of hope for his people. He wears a suit of brilliant, golden armor that shines so brightly it dazzles the eyes of any foe who dares to look at him. With his massive sword and unshakable courage, Trac stands at the front of every charge. He is not just a warrior; he is the golden pillar holding the entire kingdom together."
+    },
+    "story": "Trac is the legendary champion of the realm, a man whose name is synonymous with victory. He has defended the kingdom’s borders countless times, becoming a living symbol of hope for his people. He wears a suit of brilliant, golden armor that shines so brightly it dazzles the eyes of any foe who dares to look at him. With his massive sword and unshakable courage, Trac stands at the front of every charge. He is not just a warrior; he is the golden pillar holding the entire kingdom together.",
+    "class": "Tank",
+    "subclass": "Brawler"
   },
   {
     "name": "Tornado",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Familiar",
-    "note": "Specialist/Disruptor",
     "group": "ancients",
     "abilityName": "",
     "stats": {
@@ -444,14 +476,17 @@
       "level1": "+25% Hasar  |  4 » 5",
       "level2": "+5% Hız  |  900 » 945",
       "level3": "+10% Öz. Can Düşmə  |  50% » 60%"
-      },
-    "story": "Tornado was once a merciful and gentle spirit, but over centuries, his compassion was replaced by a cold, relentless rage. Now, he uses his immense magical power only for destruction, leveling everything in his path. The winds that once brought life now carry only fury and chaos. He has become a sentient storm that seeks to erase the world he once cared for, leaving nothing behind but desolate ruins and the echoing sound of his wrath."
+    },
+    "story": "Tornado was once a merciful and gentle spirit, but over centuries, his compassion was replaced by a cold, relentless rage. Now, he uses his immense magical power only for destruction, leveling everything in his path. The winds that once brought life now carry only fury and chaos. He has become a sentient storm that seeks to erase the world he once cared for, leaving nothing behind but desolate ruins and the echoing sound of his wrath.",
+    "class": "Specialist",
+    "subclass": "Disruptor"
   },
   {
     "name": "Dino",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
-    "note": "Fighter",
     "abilityName": "",
     "stats": {
       "health": "190",
@@ -473,19 +508,21 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "5%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Hasar Azaltma  |  0% » 5%",
       "level2": "+5% Kritik Şansı  |  5% » 10%",
       "level3": "+10% Saldırı Hızı  |  1,00s » 0,90s"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Fighter"
   },
   {
     "name": "Tenta",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Familiar",
-    "note": "Specialist",
     "abilityName": "",
     "stats": {
       "health": "180",
@@ -512,14 +549,16 @@
       "level1": "+15% Hasar  |  52 » 60",
       "level2": "+10% Qalxan  |  50 » 55",
       "level3": "+5% Menzil  |  2000 » 2100"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Specialist"
   },
   {
     "name": "Fire Archer",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Familiar",
-    "note": "Marksman/Burst",
     "group": "royal-blood",
     "abilityName": "",
     "stats": {
@@ -547,14 +586,17 @@
       "level1": "+10% Ability Attack Speed  |  70% » 80%",
       "level2": "+10% Critical chance  |  5% » 20%",
       "level3": "+4% Range  |  2500 » 2600"
-      },
-    "story": "Fire Archer wears brilliant, golden armor that matches the splendor of Trac’s own gear. For years, he has stood as Trac’s most trusted shadow, covering his back in countless battles across the realm. He is a savior of many, having pulled the kingdom back from the brink of destruction multiple times. His arrows are not mere wood and steel; they are conduits of divine flame. Once he releases a shot, the fire pursues its target with a will of its own. No enemy can outrun his blazing reach, as he turns the battlefield into a wall of protecting light."
+    },
+    "story": "Fire Archer wears brilliant, golden armor that matches the splendor of Trac’s own gear. For years, he has stood as Trac’s most trusted shadow, covering his back in countless battles across the realm. He is a savior of many, having pulled the kingdom back from the brink of destruction multiple times. His arrows are not mere wood and steel; they are conduits of divine flame. Once he releases a shot, the fire pursues its target with a will of its own. No enemy can outrun his blazing reach, as he turns the battlefield into a wall of protecting light.",
+    "class": "Marksman",
+    "subclass": "Burst"
   },
   {
     "name": "Shadow Reaper",
-    "type": ["Dead"],
+    "type": [
+      "Dead"
+    ],
     "rarity": "Familiar",
-    "note": "Assassin",
     "group": "underworld",
     "abilityName": "",
     "stats": {
@@ -582,14 +624,16 @@
       "level1": "+5% Saldırı Hızı  |  1,40s » 1,33s",
       "level2": "+5% Hız  |  1100 » 1155",
       "level3": "+10% Qalxan  |  140 » 154"
-      },
-    "story": "The Shadow Reaper was once a simple farmer, but his cruelty toward animals led to a terrifying eternal punishment. Now a vengeful spirit, he wanders in tattered black robes, gripping a massive, razor-sharp scythe. His glowing green eyes pierce through the darkness, searching for his next harvest. He treats the battlefield like his old fields, reaping souls with the same cold indifference he once showed his livestock. He is the grim reminder that every sin carries a heavy price in the afterlife."
+    },
+    "story": "The Shadow Reaper was once a simple farmer, but his cruelty toward animals led to a terrifying eternal punishment. Now a vengeful spirit, he wanders in tattered black robes, gripping a massive, razor-sharp scythe. His glowing green eyes pierce through the darkness, searching for his next harvest. He treats the battlefield like his old fields, reaping souls with the same cold indifference he once showed his livestock. He is the grim reminder that every sin carries a heavy price in the afterlife.",
+    "class": "Assassin"
   },
   {
     "name": "Volt Striker",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
-    "note": "Mage/Nuker",
     "abilityName": "",
     "stats": {
       "health": "150",
@@ -611,19 +655,22 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+3 Öz. Sekme  |  3 » 6",
       "level2": "+50% Öz. Menzil  |  3x3 » 4,5x4,5",
       "level3": "+10% Can  |  150 » 165"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Mage",
+    "subclass": "Nuker"
   },
   {
     "name": "Frostmaw",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
-    "note": "Fighter",
     "abilityName": "",
     "stats": {
       "health": "260",
@@ -650,14 +697,16 @@
       "level1": "+5% Menzil  |  1100 » 1155",
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
       "level3": "+42% Hasar  |  14 » 20"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Fighter"
   },
   {
     "name": "Hexon",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Familiar",
-    "note": "Mage/Controller",
     "abilityName": "",
     "stats": {
       "health": "140",
@@ -684,14 +733,17 @@
       "level1": "+5% Can  |  140 » 147",
       "level2": "+0,3 Öz. Sərsəmlətmə  |  0,6s » 0,9s",
       "level3": "+7% Hız  |  1000 » 1070"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Mage",
+    "subclass": "Controller"
   },
   {
     "name": "Mecha Shield",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
-    "note": "Tank/Pure",
     "group": "royal-blood",
     "abilityName": "",
     "stats": {
@@ -719,14 +771,17 @@
       "level1": "+15% Critical Chance  |  5% » 205%",
       "level2": "+5% Speed  |  800 » 840",
       "level3": "+15 Ability Shield  |  25 » 40"
-     },
-    "story": "Mecha Shield serves as the mechanical mother of the kingdom. Standing two meters tall, this massive robot was created with a dual purpose: to hold the front lines as an impenetrable wall and to provide vital medical aid to the wounded. She is an engine of protection, ready for any type of combat while her internal systems work to heal those she guards. Unlike the aggressive machines of the farm, she is a nurturing giant, ensuring that every soldier returns home from the field."
+    },
+    "story": "Mecha Shield serves as the mechanical mother of the kingdom. Standing two meters tall, this massive robot was created with a dual purpose: to hold the front lines as an impenetrable wall and to provide vital medical aid to the wounded. She is an engine of protection, ready for any type of combat while her internal systems work to heal those she guards. Unlike the aggressive machines of the farm, she is a nurturing giant, ensuring that every soldier returns home from the field.",
+    "class": "Tank",
+    "subclass": "Pure"
   },
   {
     "name": "Venomspikes",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
-    "note": "Assassin/Poisoner",
     "group": "twisted-farm",
     "abilityName": "",
     "stats": {
@@ -754,14 +809,17 @@
       "level1": "+50% Shield  |  30 » 45",
       "level2": "+20% DMG  |  15 » 18",
       "level3": "+10% Dodge Chance  |  10% » 20%"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Assassin",
+    "subclass": "Poisoner"
   },
   {
     "name": "Astranova",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Familiar",
-    "note": "Mage/Nuker",
     "abilityName": "",
     "stats": {
       "health": "280",
@@ -788,7 +846,9 @@
       "level1": "+100% Öz. Hasar bonusu  |  400% » 500%",
       "level2": "+10% Hız  |  900 » 990",
       "level3": "+15% Kritik Şansı  |  15% » 30%"
-      },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın."
+    },
+    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "class": "Mage",
+    "subclass": "Nuker"
   }
 ]
