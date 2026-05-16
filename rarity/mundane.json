@@ -181,7 +181,7 @@
       "shield": "0",
       "damage": "10",
       "sps": "10",
-      "attackSpeed": "1,00s",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "9",
       "number": "1"
@@ -210,7 +210,7 @@
     "rarity": "Mundane",
     "note": "Fighter/Berserker",
     "group": "twisted-farm",
-    "abilityName": "",
+    "abilityName": "Butcher’s Authority",
     "stats": {
       "health": "400",
       "shield": "0",
@@ -221,7 +221,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "<b>*Heyvan*</b> tipli kartlara ekstra <b>+26%</b> Hasar bonusu verər",
+    "trait": "Fermadakı dəhşətlərin yaradıcısı olan Henry, öz yaratdıqlarını və digər vəhşi heyvanları necə idarə edəcəyini yaxşı bilir. O, \"Heyvan\" tipli bütün rəqib kartlara qarşı əlavə +40% hasar verər. Bu xüsusiyyət onu heyvan mənşəli varlıqlara qarşı ən qorxulu ovçuya çevirir.",
     "additionalStats": {
       "range": "1200",
       "speed": "800",
@@ -353,8 +353,8 @@
       "shield": "50",
       "damage": "5x9",
       "sps": "45",
-      "attackSpeed": "0,20s",
-      "delay": "1,10s",
+      "attackSpeed": "0.20s",
+      "delay": "1.10s",
       "mana": "10",
       "number": "1"
     },
@@ -509,7 +509,7 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Critic Chance  |  5% » 10%",
+      "level1": "+5% Critical Chance  |  5% » 10%",
       "level2": "+4% Speed  |  1150 » 1200",
       "level3": "+10% Range  |  1000 » 1100"
       },
@@ -601,7 +601,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Soldier döyüş meydanındakı hava təhlükələrini zərərsizləşdirmək üçün xüsusi sursatdan istifadə edir. Göydə uçan bütün rəqib kartlara qarşı əlavə +33% hasar bonusu verər.",
+    "trait": "Soldier döyüş meydanındakı hava təhlükələrini zərərsizləşdirmək üçün xüsusi sursatdan istifadə edir. Göydə uçan bütün rəqib kartlara qarşı əlavə +33% hasar verər.",
     "additionalStats": {
       "range": "4000",
       "speed": "1050",
@@ -625,18 +625,18 @@
     "rarity": "Mundane",
     "note": "Assassin/Suicide",
     "group": "twisted-farm",
-    "abilityName": "",
+    "abilityName": "Toxic Sacrifice",
     "stats": {
       "health": "40",
       "shield": "0",
       "damage": "70",
       "sps": "70",
-      "attackSpeed": "0,60s",
+      "attackSpeed": "0.60s",
       "delay": "-",
       "mana": "3",
       "number": "5"
     },
-    "trait": "Vuruşları ekstra <b>10x3</b> Hasar verər, ilk vuruşu etdikdən sonra ölər",
+    "trait": "Bu mutasiya olunmuş arı sürüsü intihar hücumu həyata keçirir. Onların ilk vuruşu rəqib kartı dərhal zəhərləyər və əlavə 10x3 hasar verər. Lakin bu ölümcül zərbədən sonra arılar özləri də tələf olurlar. Bu kart rəqib kartların ən güclü döyüşçülərini zəiflətmək üçün strateji bir \"fəda\" kartıdır.",
     "additionalStats": {
       "range": "800",
       "speed": "1150",
