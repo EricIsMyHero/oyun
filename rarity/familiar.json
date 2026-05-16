@@ -39,7 +39,7 @@
     "rarity": "Familiar",
     "note": "Assassin/Suicide",
     "group": "twisted-farm",
-    "abilityName": "",
+    "abilityName": "Volatile Mutation",
     "stats": {
       "health": "50",
       "shield": "0",
@@ -50,7 +50,7 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "Öləndə İnsan, Robot, Ölü, Ruh, Uzaylı tipli kartlara ekstra <b>+400%</b> Hasar bonusu verər",
+    "trait": "Chicken öldüyü an daxilindəki mutasiya olunmuş hüceyrələr kəskin reaksiya verərək partlayar. Bu partlayış 80% şansla daha geniş bir sahəyə yayılar və rəqiblərə əlavə +400% hasar verər. Henry-nin laboratoriyasından çıxan ən təhlükəli canlı bəlkə də budur.",
     "additionalStats": {
       "range": "800",
       "speed": "1300",
