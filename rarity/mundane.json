@@ -279,18 +279,18 @@
     "rarity": "Mundane",
     "note": "Tank/Protector",
     "group": "mission-1",
-    "abilityName": "",
+    "abilityName": "Ballistic Suppression",
     "stats": {
       "health": "210",
       "shield": "90",
-      "damage": "75",
-      "sps": "39",
-      "attackSpeed": "1,90s",
+      "damage": "74",
+      "sps": "37",
+      "attackSpeed": "2,00s",
       "delay": "-",
       "mana": "10",
       "number": "1"
     },
-    "trait": "Gələn bütün büyüləri bloklayar <b>(Menzil: 20,000 Karo)</b>, sadəcə <b>Qalxana</b> hasar verər",
+    "trait": "Müasir ağır qalxan və zirehlə təchiz olunmuş Blocker qarşıdan gələn bütün birbaşa hasarları -30% azaldar. Onun yaratdığı texnoloji maneə yaxınlıqdakı dost kartları qoruyaraq, büyülərdən -20% daha az hasar almalarını təmin edər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
@@ -521,18 +521,18 @@
     "rarity": "Mundane",
     "note": "Assassin",
     "group": "mission-1",
-    "abilityName": "",
+    "abilityName": "Overdrive Harvest",
     "stats": {
       "health": "120",
       "shield": "30",
       "damage": "2x20",
       "sps": "40",
-      "attackSpeed": "0,25s",
-      "delay": "0,90s",
+      "attackSpeed": "0.45s",
+      "delay": "0.75s",
       "mana": "8",
       "number": "1"
     },
-    "trait": "Hər rəqib kartı öldürdükdə <b>+5%</b> Hız Bonusu qazanar <b>(Max: 50%)</b>",
+    "trait": "Texnoloji dahi olan Bethe döyüş meydanında məhv edilən hər bir rəqib kartın enerjisini öz sisteminə inteqrasiya edir. Öldürdüyü hər bir rəqib kartdan sonra 10 saniyəlik +5% kritik hasar şansı qazanar. Bu effekt üst-üstə yığıla bildiyi üçün, kütləvi döyüşlərdə Bethe getdikcə daha ölümcül bir qüvvəyə çevrilir.",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
@@ -544,7 +544,7 @@
       "dodge": "5%"
     },
     "showlevels": {
-      "level1": "-5% Delay  |  0,90s » 0,855s",
+      "level1": "+10% Range  |  1000 » 1100",
       "level2": "+20% Damage  |  2x20 » 2x24",
       "level3": "+5% Dodge Chance  |  5% » 10%"
       },
@@ -590,18 +590,18 @@
     "rarity": "Mundane",
     "note": "Marksman/Burst",
     "group": "mission-1",
-    "abilityName": "",
+    "abilityName": "Anti-Air Caliber",
     "stats": {
       "health": "120",
       "shield": "120",
       "damage": "15x3",
       "sps": "15",
       "attackSpeed": "0,20s",
-      "delay": "1,60s",
+      "delay": "1,75s",
       "mana": "9",
       "number": "1"
     },
-    "trait": "Uçan kartlara ekstra <b>+33%</b> Hasar bonusu verər",
+    "trait": "Soldier döyüş meydanındakı hava təhlükələrini zərərsizləşdirmək üçün xüsusi sursatdan istifadə edir. Göydə uçan bütün rəqib kartlara qarşı əlavə +33% hasar bonusu verər.",
     "additionalStats": {
       "range": "4000",
       "speed": "1050",
@@ -614,7 +614,7 @@
     },
     "showlevels": {
       "level1": "+3% Range  |  4000 » 4120",
-      "level2": "+10% Shield  |  120 » 132",
+      "level2": "+15% Shield  |  120 » 138",
       "level3": "+33% Ability DMG Bonus  |  33% » 66%"
       },
     "story": "Soldier did not watch the war from the outside since he was a child, he wanted to experience it. This young man, who dreamed of following his father into the battlefields, turned his dream into a responsibility over time. Although he is only 25 years old, his combat experience is heavier than his age. He stands on the front line with an M16A4 rifle, and his decisions determine the fate of those behind him. Mission 1 is not his first mission - it is the first mission he has been responsible for as a leader."
@@ -832,7 +832,7 @@
     "rarity": "Mundane",
     "note": "Tank/Protector",
     "group": "mission-1",
-    "abilityName": "",
+    "abilityName": "Tactical Escort",
     "stats": {
       "health": "400",
       "shield": "60",
@@ -843,7 +843,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "<b>3x3</b> yaxındakı kartlar <b>-20%</b> daha az hasar alar",
+    "trait": "Aegis Guard ön xətt qoruyucusu kimi yaxınlıqdakı dost kartların -15% daha az hasar almasını təmin edər. Bu taktiki mövqe komandanın döyüş meydanında itkisiz irəliləməsinə şərait yaradar.",
     "additionalStats": {
       "range": "1200",
       "speed": "900",
