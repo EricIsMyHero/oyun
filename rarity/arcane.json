@@ -1,9 +1,10 @@
 [
   {
     "name": "Arcanyx",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Arcane",
-    "note": "Mage/Nuker",
     "group": "the-spellbound",
     "abilityName": "Arcane Harvest",
     "stats": {
@@ -32,13 +33,16 @@
       "level2": "+42% Health | 50 » 71",
       "level3": "+10% Attack Speed | 1,10s » 0,99s"
     },
-    "story": "Arcanyx is as elegant as she is formidable, embodying a perfect balance of grace and power. She carries herself with a noble air, but beneath her calm exterior lies a volatile temper. If provoked or angered, she does not hesitate to unleash her signature explosive seeds, which burst with arcane fury upon contact. She is a delicate force of nature that demands respect. While she prefers peace, those who mistake her beauty for weakness quickly learn the destructive cost of her wrath."
+    "story": "Arcanyx is as elegant as she is formidable, embodying a perfect balance of grace and power. She carries herself with a noble air, but beneath her calm exterior lies a volatile temper. If provoked or angered, she does not hesitate to unleash her signature explosive seeds, which burst with arcane fury upon contact. She is a delicate force of nature that demands respect. While she prefers peace, those who mistake her beauty for weakness quickly learn the destructive cost of her wrath.",
+    "class": "Mage",
+    "subclass": "Nuker"
   },
   {
     "name": "Leafshade",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Arcane",
-    "note": "Assassin/Executioner",
     "abilityName": "",
     "stats": {
       "health": "220",
@@ -66,102 +70,68 @@
       "level2": "+5% Kritik Şansı | 5% » 10%",
       "level3": "+5% Max Can Çalma | 25% » 30%"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Assassin",
+    "subclass": "Executioner"
   },
   {
-  "name": "Jestro",
-  "type": ["İnsan"],
-  "rarity": "Arcane",
-  "note": "Specialist/Distruptor",
-  "abilityName": "",
-  "isMulti": true,
-  "stats": {
-    "health": "80",
-    "shield": "80",
-    "damage": "14",
-    "sps": "14",
-    "attackSpeed": "1,00s",
-    "delay": "-",
-    "mana": "8",
-    "number": "1"
-  },
-  "trait": "6% Şansla rəqibi 5 saniyəlik susturar. Canı 75%-dən aşağı olduqda *Box* buraxar",
-  "additionalStats": {
-    "range": "3000",
-    "speed": "1100",
-    "criticalChance": "5%",
-    "criticDamage": "1.5x",
-    "lifestealChance": "0%",
-    "lifesteal": "25%",
-    "damageminimiser": "0%",
-    "dodge": "0%"
-  },
-  "showlevels": {
-    "level1": "+20% Can | 80 » 96",
-    "level2": "+4% Öz. Şans | 6% » 10%",
-    "level3": "+5% Menzil | 3000 » 3150"
-  },
-  "story": "-",
-  "forms": [
-    {
-      "name": "Cratex",
-      "type": ["Robot"],
-      "rarity": "Arcane",
-      "note": "Fighter",
-      "abilityName": "",
-      "stats": {
-        "health": "50",
-        "shield": "50",
-        "damage": "30",
-        "sps": "13",
-        "attackSpeed": "2,40s",
-        "delay": "-",
-        "mana": "-",
-        "number": "1"
-      },
-      "trait": "Rəqib kart yaxına gələrsə açılaraq hasar verər və 1,3 saniyə sərsəmlətər",
-      "additionalStats": {
-        "range": "1500",
-        "speed": "-",
-        "criticalChance": "0%",
-        "criticDamage": "1.5x",
-        "lifestealChance": "0%",
-        "lifesteal": "25%",
-        "damageminimiser": "0%",
-        "dodge": "0%"
-      },
-      "showlevels": {
-        "level1": "+0,2s Sərsəmlətmə | 1,30s » 1,50s",
-        "level2": "+5% Saldırı Hızı | 2,40s » 2,28s",
-        "level3": "+5% Hasar Azaltma | 0% » 5%"
-      },
-      "story": "-"
-    }
-  ]
-},
-  {
-    "name": "Tphoenix",
-    "type": ["İnsan"],
+    "name": "Jestro",
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Arcane",
-    "note": "Fighter",
-    "group": "ancients",
     "abilityName": "",
     "isMulti": true,
+    "stats": {
+      "health": "80",
+      "shield": "80",
+      "damage": "14",
+      "sps": "14",
+      "attackSpeed": "1,00s",
+      "delay": "-",
+      "mana": "8",
+      "number": "1"
+    },
+    "trait": "6% Şansla rəqibi 5 saniyəlik susturar. Canı 75%-dən aşağı olduqda *Box* buraxar",
+    "additionalStats": {
+      "range": "3000",
+      "speed": "1100",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+20% Can | 80 » 96",
+      "level2": "+4% Öz. Şans | 6% » 10%",
+      "level3": "+5% Menzil | 3000 » 3150"
+    },
+    "story": "-",
+    "forms": [
+      {
+        "name": "Cratex",
+        "type": [
+          "Robot"
+        ],
+        "rarity": "Arcane",
+        "abilityName": "",
         "stats": {
-          "health": "400",
-          "shield": "0",
-          "damage": "15",
-          "sps": "19",
-          "attackSpeed": "0,80s",
+          "health": "50",
+          "shield": "50",
+          "damage": "30",
+          "sps": "13",
+          "attackSpeed": "2,40s",
           "delay": "-",
-          "mana": "15",
+          "mana": "-",
           "number": "1"
         },
-        "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər.",
+        "trait": "Rəqib kart yaxına gələrsə açılaraq hasar verər və 1,3 saniyə sərsəmlətər",
         "additionalStats": {
-          "range": "1000",
-          "speed": "1000",
-          "criticalChance": "5%",
+          "range": "1500",
+          "speed": "-",
+          "criticalChance": "0%",
           "criticDamage": "1.5x",
           "lifestealChance": "0%",
           "lifesteal": "25%",
@@ -169,15 +139,56 @@
           "dodge": "0%"
         },
         "showlevels": {
-          "level1": "+5% Kritik Şansı | 5% » 10%",
-          "level2": "+10% Hız | 1000 » 1100",
-          "level3": "+5% Kaçınma Şansı | 0% » 5%"
+          "level1": "+0,2s Sərsəmlətmə | 1,30s » 1,50s",
+          "level2": "+5% Saldırı Hızı | 2,40s » 2,28s",
+          "level3": "+5% Hasar Azaltma | 0% » 5%"
         },
-        "story": "Tphoenix is the unique result of a legendary Phoenix transforming into a human form. Unlike the other Ancients, his heart remains pure and good, driven by a desire to protect rather than destroy. He stands in constant opposition to the dark forces of the world, using his celestial flames to fight back the shadows. Though he belongs to a group of terrifying beings, he is their greatest rival, serving as a beacon of hope in an age of ancient monsters.",
-     "forms": [
+        "story": "-",
+        "class": "Fighter"
+      }
+    ],
+    "class": "Specialist",
+    "subclass": "Distruptor"
+  },
+  {
+    "name": "Tphoenix",
+    "type": [
+      "İnsan"
+    ],
+    "rarity": "Arcane",
+    "group": "ancients",
+    "abilityName": "",
+    "isMulti": true,
+    "stats": {
+      "health": "400",
+      "shield": "0",
+      "damage": "15",
+      "sps": "19",
+      "attackSpeed": "0,80s",
+      "delay": "-",
+      "mana": "15",
+      "number": "1"
+    },
+    "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər.",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "+5% Kritik Şansı | 5% » 10%",
+      "level2": "+10% Hız | 1000 » 1100",
+      "level3": "+5% Kaçınma Şansı | 0% » 5%"
+    },
+    "story": "Tphoenix is the unique result of a legendary Phoenix transforming into a human form. Unlike the other Ancients, his heart remains pure and good, driven by a desire to protect rather than destroy. He stands in constant opposition to the dark forces of the world, using his celestial flames to fight back the shadows. Though he belongs to a group of terrifying beings, he is their greatest rival, serving as a beacon of hope in an age of ancient monsters.",
+    "forms": [
       {
         "name": "Fire Egg",
-        "note": "Tank",
         "abilityName": "",
         "stats": {
           "health": "260",
@@ -205,11 +216,11 @@
           "level2": "-1 Öz. Saniyə | 10 » 9",
           "level3": "+5% Kaçınma Şansı | 0% » 5%"
         },
-        "story": "-"
+        "story": "-",
+        "class": "Tank"
       },
       {
         "name": "Phoenix",
-        "note": "Fighter",
         "abilityName": "",
         "stats": {
           "health": "200",
@@ -237,15 +248,18 @@
           "level2": "+5% Saldırı Hızı | 0,90s » 0,855s",
           "level3": "+10% Can Çalma Şansı | 0% » 10%"
         },
-        "story": "-"
+        "story": "-",
+        "class": "Fighter"
       }
-    ]
+    ],
+    "class": "Fighter"
   },
   {
     "name": "Pirate Boy",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Arcane",
-    "note": "Fighter",
     "abilityName": "",
     "isMulti": true,
     "stats": {
@@ -270,52 +284,57 @@
       "dodge": "0%"
     },
     "showlevels": {
-    "level1": "+6% Health | 250 » 265",
-    "level2": "+10% DMG | 30 » 33",
-    "level3": "+10% Dodge Chance | 0% » 10%"
-},
+      "level1": "+6% Health | 250 » 265",
+      "level2": "+10% DMG | 30 » 33",
+      "level3": "+10% Dodge Chance | 0% » 10%"
+    },
     "story": "-",
     "forms": [
       {
-      "name": "Pirate Girls",
-      "type": ["İnsan"],
-      "rarity": "Arcane",
-      "note": "Marksman",
-      "abilityName": "",
-      "stats": {
-        "health": "120",
-        "shield": "0",
-        "damage": "16",
-        "sps": "11",
-        "attackSpeed": "1,50s",
-        "delay": "-",
-        "mana": "-",
-        "number": "2"
-      },
-      "trait": "Hər 6 saniyədə +0,010 Menzil bonusu qazanar",
-      "additionalStats": {
-        "range": "2500",
-        "speed": "1000",
-        "criticalChance": "5%",
-        "criticDamage": "1.5x",
-        "lifestealChance": "0%",
-        "lifesteal": "25%",
-        "damageminimiser": "0%",
-        "dodge": "0%"
-      },
-      "showlevels": {
-      "level1": "+8% Attack Speed | 1,50s » 1,38s",
-      "level2": "+9% Range | 2500 » 2725",
-      "level3": "+10% Critical Chance | 5% » 15%"
-},
-      "story": "-"
-    }]
+        "name": "Pirate Girls",
+        "type": [
+          "İnsan"
+        ],
+        "rarity": "Arcane",
+        "abilityName": "",
+        "stats": {
+          "health": "120",
+          "shield": "0",
+          "damage": "16",
+          "sps": "11",
+          "attackSpeed": "1,50s",
+          "delay": "-",
+          "mana": "-",
+          "number": "2"
+        },
+        "trait": "Hər 6 saniyədə +0,010 Menzil bonusu qazanar",
+        "additionalStats": {
+          "range": "2500",
+          "speed": "1000",
+          "criticalChance": "5%",
+          "criticDamage": "1.5x",
+          "lifestealChance": "0%",
+          "lifesteal": "25%",
+          "damageminimiser": "0%",
+          "dodge": "0%"
+        },
+        "showlevels": {
+          "level1": "+8% Attack Speed | 1,50s » 1,38s",
+          "level2": "+9% Range | 2500 » 2725",
+          "level3": "+10% Critical Chance | 5% » 15%"
+        },
+        "story": "-",
+        "class": "Marksman"
+      }
+    ],
+    "class": "Fighter"
   },
   {
     "name": "Canoballer",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Arcane",
-    "note": "Marksman/Burst",
     "abilityName": "",
     "stats": {
       "health": "100",
@@ -339,17 +358,20 @@
       "dodge": "0%"
     },
     "showlevels": {
-    "level1": "+7% Shield | 200 » 214",
-    "level2": "+0.15x Critical DMG | 1.5x » 1.65x",
-    "level3": "+0,2% Ability Attack Speed Bonus | 0,5% » 0,7%%"
-},
-    "story": "-"
+      "level1": "+7% Shield | 200 » 214",
+      "level2": "+0.15x Critical DMG | 1.5x » 1.65x",
+      "level3": "+0,2% Ability Attack Speed Bonus | 0,5% » 0,7%%"
+    },
+    "story": "-",
+    "class": "Marksman",
+    "subclass": "Burst"
   },
   {
     "name": "Toxic",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Arcane",
-    "note": "Marksman/Sharpshooter",
     "abilityName": "",
     "stats": {
       "health": "50",
@@ -373,17 +395,20 @@
       "dodge": "0%"
     },
     "showlevels": {
-    "level1": "+0.15x Critical DMG | 1.5x » 1.65x",
-    "level2": "+10% Range | 2650 » 2915",
-    "level3": "+2 Ability Poison DMG | 2x3 » 2x5"
-},
-    "story": "-"
+      "level1": "+0.15x Critical DMG | 1.5x » 1.65x",
+      "level2": "+10% Range | 2650 » 2915",
+      "level3": "+2 Ability Poison DMG | 2x3 » 2x5"
+    },
+    "story": "-",
+    "class": "Marksman",
+    "subclass": "Sharpshooter"
   },
   {
     "name": "Lumina",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Arcane",
-    "note": "Tank/Pure",
     "abilityName": "",
     "stats": {
       "health": "500",
@@ -407,17 +432,20 @@
       "dodge": "0%"
     },
     "showlevels": {
-    "level1": "+7% Shield | 500 » 535",
-    "level2": "+10% DMG Reduction | 0% » 10%",
-    "level3": "+50% Ability Aura DMG | 2 » 3"
-  },
-    "story": "-"
+      "level1": "+7% Shield | 500 » 535",
+      "level2": "+10% DMG Reduction | 0% » 10%",
+      "level3": "+50% Ability Aura DMG | 2 » 3"
+    },
+    "story": "-",
+    "class": "Tank",
+    "subclass": "Pure"
   },
   {
     "name": "Hell boy",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Arcane",
-    "note": "Fighter/Brawler",
     "abilityName": "",
     "stats": {
       "health": "170",
@@ -445,13 +473,16 @@
       "level2": "+10% Lifesteal Chance | 0% » 10%",
       "level3": "+8% Attack Speed | 2,00s » 1,84s"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Fighter",
+    "subclass": "Brawler"
   },
   {
     "name": "SlasherX",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Arcane",
-    "note": "Assassin",
     "abilityName": "",
     "stats": {
       "health": "110",
@@ -479,13 +510,15 @@
       "level2": "+2% Base Trait Chance | 1% » 3%",
       "level3": "+10% HP| 110 » 121"
     },
-    "story": "k."
+    "story": "k.",
+    "class": "Assassin"
   },
   {
     "name": "Sheriff",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Arcane",
-    "note": "Marksman",
     "abilityName": "",
     "stats": {
       "health": "210",
@@ -513,13 +546,15 @@
       "level2": "+5% Critical Chance | 5% » 10%",
       "level3": "+33% Marked Targets | 6 » 8"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Marksman"
   },
   {
     "name": "Nurse",
-    "type": ["Ölü"],
+    "type": [
+      "Ölü"
+    ],
     "rarity": "Arcane",
-    "note": "Assassin",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -547,13 +582,15 @@
       "level2": "+11% HP | 90 » 100",
       "level3": "+40% Ability DMG Bonus Limit | 20 » 28"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Assassin"
   },
   {
     "name": "Tribe",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Arcane",
-    "note": "Fighter",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -577,17 +614,19 @@
       "dodge": "0%"
     },
     "showlevels": {
-    "level1": "+15% Critic Damage | 1.5x » 1.65x",
-    "level2": "-16% Ability Cooldown | 12s » 10s",
-    "level3": "+20% Shield | 70 » 84"
-  },
-    "story": "-"
+      "level1": "+15% Critic Damage | 1.5x » 1.65x",
+      "level2": "-16% Ability Cooldown | 12s » 10s",
+      "level3": "+20% Shield | 70 » 84"
+    },
+    "story": "-",
+    "class": "Fighter"
   },
   {
     "name": "Stunners",
-    "type": ["Ölü"],
+    "type": [
+      "Ölü"
+    ],
     "rarity": "Arcane",
-    "note": "Marksman",
     "abilityName": "",
     "stats": {
       "health": "50",
@@ -611,17 +650,19 @@
       "dodge": "0%"
     },
     "showlevels": {
-    "level1": "+10% Stun Chance | 25% » 35%",
-    "level2": "+10% Range | 2,400 » 2,640",
-    "level3": "+25% Stun Duration | 1,2s » 1,5s"
-  },
-    "story": "-"
+      "level1": "+10% Stun Chance | 25% » 35%",
+      "level2": "+10% Range | 2,400 » 2,640",
+      "level3": "+25% Stun Duration | 1,2s » 1,5s"
+    },
+    "story": "-",
+    "class": "Marksman"
   },
   {
     "name": "Whisper",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Arcane",
-    "note": "Specialist",
     "group": "ancients",
     "abilityName": "",
     "stats": {
@@ -646,17 +687,19 @@
       "dodge": "0%"
     },
     "showlevels": {
-    "level1": "+5% Critical Chance | 0% » 5%",
-    "level2": "+15% Speed | 1,000 » 1,150",
-    "level3": "+21%s Control Duration | 14s » 17s"
-  },
-    "story": "Whisper is a terrifying phantom that every person is said to glimpse at least once as they approach the end of their life. He is a predator of the soul, waiting for a moment of weakness to strike. If you are not quick enough to escape his gaze, he will merge with your form and steal every ounce of your vital energy. He leaves behind only a hollow shell, a silent thief who thrives on the life force of those who cannot outrun their own shadows."
+      "level1": "+5% Critical Chance | 0% » 5%",
+      "level2": "+15% Speed | 1,000 » 1,150",
+      "level3": "+21%s Control Duration | 14s » 17s"
+    },
+    "story": "Whisper is a terrifying phantom that every person is said to glimpse at least once as they approach the end of their life. He is a predator of the soul, waiting for a moment of weakness to strike. If you are not quick enough to escape his gaze, he will merge with your form and steal every ounce of your vital energy. He leaves behind only a hollow shell, a silent thief who thrives on the life force of those who cannot outrun their own shadows.",
+    "class": "Specialist"
   },
   {
     "name": "RogueX",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Arcane",
-    "note": "Tank",
     "abilityName": "",
     "stats": {
       "health": "340",
@@ -680,17 +723,19 @@
       "dodge": "0%"
     },
     "showlevels": {
-    "level1": "+15% HP | 340 » 391",
-    "level2": "+20% Damage to Shield | 50% » 70%",
-    "level3": "+10% DMG Reduction | 0% » 10%"
-  },
-    "story": "-"
+      "level1": "+15% HP | 340 » 391",
+      "level2": "+20% Damage to Shield | 50% » 70%",
+      "level3": "+10% DMG Reduction | 0% » 10%"
+    },
+    "story": "-",
+    "class": "Tank"
   },
   {
     "name": "Void Striker",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Arcane",
-    "note": "Fighter/Berserker",
     "abilityName": "",
     "stats": {
       "health": "260",
@@ -718,13 +763,16 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Fighter",
+    "subclass": "Berserker"
   },
   {
     "name": "Nightfang",
-    "type": ["Spirit"],
+    "type": [
+      "Spirit"
+    ],
     "rarity": "Arcane",
-    "note": "Marksman/Sharpshooter",
     "group": "underworld",
     "abilityName": "",
     "stats": {
@@ -753,13 +801,16 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "Nightfang is a unique spiritual entity specialized in long-range devastation. He strikes with incredible speed, hitting targets before they can react. From his back, he unleashes the wailing souls he has imprisoned over centuries. These spirits act as his weapons, swarming enemies with ghostly fury. He is a master of distance, keeping his foes at bay while his spectral captives drain their life force. Nightfang is the predator of the UnderWorld, ensuring that no soul ever truly escapes his grasp."
+    "story": "Nightfang is a unique spiritual entity specialized in long-range devastation. He strikes with incredible speed, hitting targets before they can react. From his back, he unleashes the wailing souls he has imprisoned over centuries. These spirits act as his weapons, swarming enemies with ghostly fury. He is a master of distance, keeping his foes at bay while his spectral captives drain their life force. Nightfang is the predator of the UnderWorld, ensuring that no soul ever truly escapes his grasp.",
+    "class": "Marksman",
+    "subclass": "Sharpshooter"
   },
   {
     "name": "Sunrise",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Arcane",
-    "note": "Fighter",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -787,6 +838,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Fighter"
   }
 ]
