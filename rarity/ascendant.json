@@ -1,9 +1,10 @@
 [
   {
     "name": "Reacher",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Ascendant",
-    "note": "Tank",
     "group": "mission-1",
     "abilityName": "Tactical Cohesion",
     "isAscendant": true,
@@ -27,18 +28,19 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
-      },
-    "story": "-", 
+    },
+    "story": "-",
     "upgradedsecondForm": {
       "name": "Reachy",
-      "type": ["İnsan"],
+      "type": [
+        "İnsan"
+      ],
       "rarity": "Ascendant",
-      "note": "Suicide Assassin",
       "abilityName": "Tactical Cohesion",
       "stats": {
         "health": "360",
@@ -61,19 +63,22 @@
         "damageminimiser": "0%",
         "dodge": "0%"
       },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-" 
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
       },
-    "story": "Reacher is a veteran soldier who spent years on various battlefields. Now in his later years, he provides essential support to the Soldier within Mission 1. His experience bridges the gap between raw talent and seasoned strategy. When he stands beside the Soldier, they become an unstoppable force that no enemy can withstand. He does not seek the spotlight or leadership for himself. Instead, he uses his tactical knowledge to clear the path forward. His presence ensures the mission remains on track."
-      }
+      "story": "Reacher is a veteran soldier who spent years on various battlefields. Now in his later years, he provides essential support to the Soldier within Mission 1. His experience bridges the gap between raw talent and seasoned strategy. When he stands beside the Soldier, they become an unstoppable force that no enemy can withstand. He does not seek the spotlight or leadership for himself. Instead, he uses his tactical knowledge to clear the path forward. His presence ensures the mission remains on track.",
+      "class": "Suicide Assassin"
+    },
+    "class": "Tank"
   },
   {
     "name": "M-M",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Ascendant",
-    "note": "Tank",
     "isAscendant": false,
     "isMulti": false,
     "stats": {
@@ -96,19 +101,21 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Can",
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
-     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Tank"
   },
   {
     "name": "M-M",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Ascendant",
-    "note": "Tank",
     "isAscendant": false,
     "isMulti": false,
     "stats": {
@@ -131,19 +138,21 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Can",
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
-     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Tank"
   },
   {
     "name": "M-M",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Ascendant",
-    "note": "Tank",
     "isAscendant": false,
     "isMulti": false,
     "stats": {
@@ -166,12 +175,13 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%"
-   },
+    },
     "showlevels": {
       "level1": "+5% Can",
       "level2": "+7% Hız",
       "level3": "+7% Hasar"
-     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər."
+    },
+    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "class": "Tank"
   }
 ]
