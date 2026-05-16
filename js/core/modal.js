@@ -170,14 +170,14 @@ function buildDualTypeSelector(card) {
   }
 
   document.getElementById('modal-content').innerHTML = `
-    <div class="modal-rarity-class-row">
-      <span class="modal-rarity-badge"
-            style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
-        Ethereal
-      </span>
+    <span class="modal-rarity-badge"
+          style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
+      Ethereal
+    </span>
+    <div class="modal-name-class-row">
+      <div class="modal-card-name">${card.name || 'Unknown'}</div>
       ${card.class ? `<span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}` : ''}
     </div>
-    <div class="modal-card-name">${card.name || 'Unknown'}</div>
     <div class="modal-card-group">✦ ${card.group || 'Stagnantia'} ✦</div>
 
     <div class="dual-selector-header">
@@ -252,14 +252,14 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
     <button class="dual-back-btn" id="dual-back">← Forma seçiminə qayıt</button>` : '';
 
   document.getElementById('modal-content').innerHTML = `
-    <div class="modal-rarity-class-row">
-      <span class="modal-rarity-badge"
-            style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
-        ${card.rarity || ''}
-      </span>
+    <span class="modal-rarity-badge"
+          style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
+      ${card.rarity || ''}
+    </span>
+    <div class="modal-name-class-row">
+      <div class="modal-card-name">${card.name || 'Unknown'}</div>
       ${card.class ? `<span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}` : ''}
     </div>
-    <div class="modal-card-name">${card.name || 'Unknown'}</div>
     <div class="modal-card-group">✦ ${card.group || root.group || 'Stagnantia'} ✦</div>
 
     ${backBtn}
