@@ -789,22 +789,22 @@
   },
   {
     "name": "Worms",
-    "type": ["Heyvan"],
+    "type": ["Animal"],
     "rarity": "Relic",
     "note": "-",
     "group": "twisted-farm",
-    "abilityName": "",
+    "abilityName": "Subterranean Ambush",
     "stats": {
       "health": "30",
       "shield": "0",
       "damage": "8",
       "sps": "6",
-      "attackSpeed": "1,30s",
+      "attackSpeed": "1.30s",
       "delay": "-",
       "mana": "5",
       "number": "6"
     },
-    "trait": "İlk vuruşda yerin altından çıxaraq kartları 0,5 saniyəlik sarsəmlətər",
+    "trait": "Worms döyüş meydanında hərəkət edərkən yerin altında gizlənir. İlk vuruşunu etmək üçün qəfildən yerin altından çıxar və bu gözlənilməz hücum hədəf aldığı rəqib kartları 0,8 saniyəlik sarsıdar. Düşmən müdafiəsini iflic etmək üçün mükəmməl bir başlanğıc kartıdır.",
     "additionalStats": {
       "range": "800",
       "speed": "1300",
@@ -813,7 +813,7 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "20%"
     },
     "showlevels": {
       "level1": "-",
