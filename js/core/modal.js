@@ -176,6 +176,7 @@ function buildDualTypeSelector(card) {
     </span>
     <div class="modal-card-name">${card.name || 'Unknown'}</div>
     <div class="modal-card-group">✦ ${card.group || 'Stagnantia'} ✦</div>
+    ${card.class ? `<div class="modal-card-class"><span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}</div>` : ''}
 
     <div class="dual-selector-header">
       <span class="dual-selector-icon">🌀</span>
@@ -189,7 +190,7 @@ function buildDualTypeSelector(card) {
       <button class="dual-type-card" id="dual-pick-1">
         <div class="dual-type-badge"
              style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">Type I</div>
-        <div class="dual-type-name">${t1.note || '—'}</div>
+        <div class="dual-type-name">${t1.class ? (t1.subclass ? `${t1.class} / ${t1.subclass}` : t1.class) : '—'}</div>
         <div class="dual-type-stats">${statPreview(t1)}</div>
         ${spawnTag(t1)}
         <div class="dual-type-cta">Seç →</div>
@@ -197,7 +198,7 @@ function buildDualTypeSelector(card) {
       <button class="dual-type-card" id="dual-pick-2">
         <div class="dual-type-badge"
              style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">Type II</div>
-        <div class="dual-type-name">${t2.note || '—'}</div>
+        <div class="dual-type-name">${t2.class ? (t2.subclass ? `${t2.class} / ${t2.subclass}` : t2.class) : '—'}</div>
         <div class="dual-type-stats">${statPreview(t2)}</div>
         ${spawnTag(t2)}
         <div class="dual-type-cta">Seç →</div>
@@ -238,7 +239,7 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
 
   const primaryBars   = buildStatBars(STAT_DEFS, stats);
   const secondaryBars = buildStatBars(ADD_STAT_DEFS, addStats);
-  const trait       = card.trait || card.note || null;
+  const trait       = card.trait || null;
   const abilityName = card.abilityName && card.abilityName !== '—' ? card.abilityName : null;
   const story = card.story && card.story !== '-' ? card.story : null;
 
@@ -255,6 +256,7 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
     </span>
     <div class="modal-card-name">${card.name || 'Unknown'}</div>
     <div class="modal-card-group">✦ ${card.group || root.group || 'Stagnantia'} ✦</div>
+    ${card.class ? `<div class="modal-card-class"><span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}</div>` : ''}
 
     ${backBtn}
     ${buildAscendedBanner(root, isAscended)}
