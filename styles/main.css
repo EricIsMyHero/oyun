@@ -700,6 +700,7 @@ body {
 .modal-img-rarity { position: absolute; top: 0; left: 0; right: 0; height: 4px; }
 
 .modal-content-col { padding: 40px 40px 40px 32px; }
+.modal-content-col .modal-rarity-badge { display: inline-block; }
 
 .modal-rarity-badge {
   display: inline-block;
@@ -713,9 +714,9 @@ body {
   border: 1px solid currentColor;
 }
 
-.modal-card-name { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 900; color: var(--text); margin-bottom: 4px; line-height: 1.2; }
-.modal-card-group { font-family: var(--font-head); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-.modal-name-class-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.modal-card-name { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 900; color: var(--text); margin-bottom: 4px; line-height: 1.2; text-align: left; }
+.modal-card-group { font-family: var(--font-head); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; text-align: left; }
+.modal-name-class-row { display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
 .modal-class-badge { font-family: var(--font-head); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 12px; border-radius: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: var(--text); }
 .modal-subclass-badge { font-family: var(--font-head); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 12px; border-radius: 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); color: var(--muted); }
 
