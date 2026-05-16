@@ -1,9 +1,10 @@
 [
   {
     "name": "Azrith",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "group": "royal-blood",
     "isMulti": true,
     "stats": {
@@ -33,47 +34,49 @@
       "level3": "-"
     },
     "story": "Aza is the brilliant and courageous commander who leads the royal army from the front. Her golden armor shines with authority, complemented by a striking red cloak that flows behind her like a river of blood. In her right hand, she wields a sword of legendary status, while her left hand grips a massive red flag. This banner is more than a symbol; it is said to grant her supernatural strength. She is a scholar of war, guiding her troops with both unmatched intellect and fearless power.",
-  "forms": [
-    {
-    "name": "Bannerox",
-    "type": ["-"],
-    "rarity": "Apex",
-    "note": "-",
-    "stats": {
-      "health": "80",
-      "shield": "-",
-      "damage": "-",
-      "sps": "-",
-      "attackSpeed": "-",
-      "delay": "-",
-      "mana": "-",
-      "number": "1"
-    },
-    "trait": "4x4 yaxındakı kartlara +10% Saldırı Hızı bonusu",
-    "additionalStats": {
-      "range": "-",
-      "speed": "-",
-      "criticalChance": "-",
-      "criticDamage": "1.5x",
-      "lifestealChance": "-",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%"
-    },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
-    },
-    "story": "-"
-  }
-  ]
-},
+    "forms": [
+      {
+        "name": "Bannerox",
+        "type": [
+          "-"
+        ],
+        "rarity": "Apex",
+        "stats": {
+          "health": "80",
+          "shield": "-",
+          "damage": "-",
+          "sps": "-",
+          "attackSpeed": "-",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "4x4 yaxındakı kartlara +10% Saldırı Hızı bonusu",
+        "additionalStats": {
+          "range": "-",
+          "speed": "-",
+          "criticalChance": "-",
+          "criticDamage": "1.5x",
+          "lifestealChance": "-",
+          "lifesteal": "25%",
+          "damageminimiser": "0%",
+          "dodge": "0%"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-"
+      }
+    ]
+  },
   {
     "name": "Untouch",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "group": "royal-blood",
     "stats": {
       "health": "320",
@@ -105,9 +108,10 @@
   },
   {
     "name": "Heartix",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -140,9 +144,10 @@
   },
   {
     "name": "R-1",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -175,9 +180,10 @@
   },
   {
     "name": "Blank",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -210,9 +216,10 @@
   },
   {
     "name": "Magmara",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -245,9 +252,10 @@
   },
   {
     "name": "Willowshade",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isMulti": true,
     "stats": {
       "health": "150",
@@ -276,49 +284,51 @@
       "level3": "-"
     },
     "story": "-",
-  "forms": [
-    {
-    "name": "Octarion",
-    "type": ["Heyvan"],
-    "rarity": "Apex",
-    "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
-    "stats": {
-      "health": "75",
-      "shield": "0",
-      "damage": "15",
-      "sps": "12",
-      "attackSpeed": "1,30",
-      "delay": "-",
-      "mana": "-",
-      "number": "1"
-    },
-    "trait": "Ölən zaman olduğu yerə 3x5 Zəhər hasarı verər",
-    "additionalStats": {
-      "range": "1100",
-      "speed": "900",
-      "criticalChance": "-",
-      "criticDamage": "1.5x",
-      "lifestealChance": "-",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%"
-    },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
-    },
-    "story": "-"
-  }
-  ]
-},
+    "forms": [
+      {
+        "name": "Octarion",
+        "type": [
+          "Heyvan"
+        ],
+        "rarity": "Apex",
+        "isHybrid": false,
+        "isMulti": false,
+        "stats": {
+          "health": "75",
+          "shield": "0",
+          "damage": "15",
+          "sps": "12",
+          "attackSpeed": "1,30",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Ölən zaman olduğu yerə 3x5 Zəhər hasarı verər",
+        "additionalStats": {
+          "range": "1100",
+          "speed": "900",
+          "criticalChance": "-",
+          "criticDamage": "1.5x",
+          "lifestealChance": "-",
+          "lifesteal": "25%",
+          "damageminimiser": "0%",
+          "dodge": "0%"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-"
+      }
+    ]
+  },
   {
     "name": "Collector",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -351,9 +361,10 @@
   },
   {
     "name": "Sushu",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -386,9 +397,10 @@
   },
   {
     "name": "Umbra",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -421,9 +433,10 @@
   },
   {
     "name": "Thief",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -456,9 +469,10 @@
   },
   {
     "name": "Rotlings",
-    "type": ["Ölü"],
+    "type": [
+      "Ölü"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isMulti": true,
     "stats": {
       "health": "70",
@@ -487,49 +501,51 @@
       "level3": "-"
     },
     "story": "-",
-  "forms": [
-    {
-    "name": "Mini Rotters",
-    "type": ["Ölü"],
-    "rarity": "Apex",
-    "note": "-",
-    "isHybrid": false,
-    "isMulti": false,
-    "stats": {
-      "health": "30",
-      "shield": "60",
-      "damage": "10",
-      "sps": "10",
-      "attackSpeed": "1,00",
-      "delay": "-",
-      "mana": "-",
-      "number": "2"
-    },
-    "trait": "45 saniyə ərzində Zomboidsa çevrilər",
-    "additionalStats": {
-      "range": "1000",
-      "speed": "1000",
-      "criticalChance": "-",
-      "criticDamage": "1.5x",
-      "lifestealChance": "-",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%"
-    },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
-    },
-    "story": "-"
-  }
-  ]
-},
+    "forms": [
+      {
+        "name": "Mini Rotters",
+        "type": [
+          "Ölü"
+        ],
+        "rarity": "Apex",
+        "isHybrid": false,
+        "isMulti": false,
+        "stats": {
+          "health": "30",
+          "shield": "60",
+          "damage": "10",
+          "sps": "10",
+          "attackSpeed": "1,00",
+          "delay": "-",
+          "mana": "-",
+          "number": "2"
+        },
+        "trait": "45 saniyə ərzində Zomboidsa çevrilər",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1000",
+          "criticalChance": "-",
+          "criticDamage": "1.5x",
+          "lifestealChance": "-",
+          "lifesteal": "25%",
+          "damageminimiser": "0%",
+          "dodge": "0%"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-"
+      }
+    ]
+  },
   {
     "name": "Stormblade",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -562,9 +578,10 @@
   },
   {
     "name": "Venom Fangs",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -597,9 +614,10 @@
   },
   {
     "name": "Skyhunter",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "group": "royal-blood",
     "stats": {
       "health": "180",
@@ -631,9 +649,10 @@
   },
   {
     "name": "Rockback",
-    "type": ["Animal"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "group": "twisted-farm",
     "abilityName": "Kinetic Rebound",
     "stats": {
@@ -666,9 +685,10 @@
   },
   {
     "name": "Neon Droid",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -701,9 +721,10 @@
   },
   {
     "name": "Void Wraith",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -736,9 +757,10 @@
   },
   {
     "name": "Bio Mech",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -771,9 +793,10 @@
   },
   {
     "name": "Mixela",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
@@ -806,9 +829,10 @@
   },
   {
     "name": "Laura",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Apex",
-    "note": "-",
     "group": "the-spellbound",
     "abilityName": "Chrono Blessing",
     "stats": {
