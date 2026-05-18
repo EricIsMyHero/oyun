@@ -769,23 +769,21 @@
   },
   {
     "name": "Nightfang",
-    "type": [
-      "Spirit"
-    ],
+    "type": ["Spirit"],
     "rarity": "Arcane",
     "group": "underworld",
-    "abilityName": "",
+    "abilityName": "Eternal Shroud",
     "stats": {
       "health": "140",
       "shield": "0",
       "damage": "1",
       "sps": "10",
-      "attackSpeed": "0,10s",
+      "attackSpeed": "0.10s",
       "delay": "-",
       "mana": "15",
       "number": "1"
     },
-    "trait": "İlk 24 saniyə görünməz olar, hər 45-ci vuruşda 3 saniyəlik görünməz olar",
+    "trait": "Döyüş meydanının gizli qatili olan Nightfang, qarşıdurma başlayan kimi ilk 12 saniyə ərzində tamamilə görünməz olar. O, sürətli zərbələri ilə kölgələrdə qalmağı bacarır; döyüş ərzində etdiyi hər 60-cı vuruşda yenidən ekstra 3 saniyəlik görünməzlik statusu qazanar. Bu mexanika onu tutulması qeyri-mümkün olan bir təhlükəyə çevirir.",
     "additionalStats": {
       "range": "12,000",
       "speed": "1,000",
