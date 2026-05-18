@@ -578,24 +578,22 @@
   },
   {
     "name": "Dark Necromancer",
-    "type": [
-      "Ruh"
-    ],
+    "type": ["Spirit"],
     "rarity": "Relic",
     "group": "underworld",
-    "abilityName": "",
+    "abilityName": "Forbidden Grimoire",
     "isMulti": true,
     "stats": {
       "health": "180",
-      "shield": "100",
+      "shield": "180",
       "damage": "12",
       "sps": "8",
-      "attackSpeed": "1,50s",
+      "attackSpeed": "1.50s",
       "delay": "-",
       "mana": "15",
       "number": "1"
     },
-    "trait": "Hər 14 saniyədə bir karakter çıxardar (W-40%, A-35%, T-25%)",
+    "trait": "Dark Necromancer-in etdiyi uzaq məsafəli atışlar qaranlıq enerji daşıyır və hədəf aldığı rəqib kartları 17% şansla 10 saniyəlik susturar. Ölülər dünyası ilə birbaşa əlaqəsi olan bu sehrbaz, döyüş meydanında tək qalmır. O, hər 14 saniyədə bir kölgələrdən yeni bir döyüşçü vahid yaradar. Çağırılan kartların şans göstəriciləri aşağıdakı kimidir:Bladeknight: 40%,Stormbow: 35%,Ironhide: 25%",
     "additionalStats": {
       "range": "2500",
       "speed": "1000",
@@ -615,18 +613,21 @@
     "forms": [
       {
         "name": "Bladeknight",
-        "abilityName": "",
+        "type": ["Dead"],
+        "rarity": "Relic",
+        "group": "underworld",
+        "abilityName": "Phase Strike",
         "stats": {
           "health": "220",
-          "shield": "160",
-          "damage": "24",
-          "sps": "20",
-          "attackSpeed": "1,20s",
+          "shield": "140",
+          "damage": "27",
+          "sps": "23",
+          "attackSpeed": "1.20s",
           "delay": "-",
           "mana": "-",
           "number": "1"
         },
-        "trait": "Vuruşları qalxandan keçər.",
+        "trait": "Bu qaranlıq cəngavərin qılıncı mistik bir enerji ilə yüklənib. Onun etdiyi bütün zərbələr rəqib kartların aktiv qalxanlarını tamamilə görməzdən gələrək birbaşa onların canına hasar vurar. Qalxan arxasında gizlənən tankları sıradan çıxarmaq üçün idealdır.",
         "additionalStats": {
           "range": "1000",
           "speed": "1000",
@@ -643,22 +644,25 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "Ölü"
+        "class": "-"
       },
       {
         "name": "Stormbow",
-        "abilityName": "",
+        "type": ["Dead"],
+        "rarity": "Relic",
+        "group": "underworld",
+        "abilityName": "Searing Arrow",
         "stats": {
           "health": "120",
           "shield": "40",
-          "damage": "16",
+          "damage": "17",
           "sps": "12",
-          "attackSpeed": "1,30s",
+          "attackSpeed": "1.40s",
           "delay": "-",
           "mana": "-",
           "number": "1"
         },
-        "trait": "35% Şansla 2x4 ekstra hasar verər.",
+        "trait": "Kölgə oxçusu hər atışında rəqib xətlərini atəşə tutmağa çalışır. O, 35% şansla hədəfə doğru alovlu ox ataraq düşmən kartı yandırar və zamanla ona əlavə 2x4 hasar verər.",
         "additionalStats": {
           "range": "2250",
           "speed": "1100",
@@ -679,18 +683,21 @@
       },
       {
         "name": "Ironhide",
-        "abilityName": "",
+        "type": ["Dead"],
+        "rarity": "Relic",
+        "group": "underworld",
+        "abilityName": "Spectral Fortitude",
         "stats": {
           "health": "400",
           "shield": "200",
-          "damage": "44",
-          "sps": "24",
-          "attackSpeed": "1,80s",
+          "damage": "47",
+          "sps": "29",
+          "attackSpeed": "1,60s",
           "delay": "-",
           "mana": "-",
           "number": "1"
         },
-        "trait": "*İnsan* tipli kartlardan -20% daha az hasar alar.",
+        "trait": "Qrupun ən ağır və dözümlü qoruyucusu olan Ironhide, bədənini bürüyən qaranlıq zireh sayəsində rəqibdən gələn hər 4-cü hasarı tamamilə görməzdən gələr. Ön xətdə vaxt qazanmaq və hücumları sormaq üçün mükəmməl bir sipərdir.",
         "additionalStats": {
           "range": "1200",
           "speed": "800",
