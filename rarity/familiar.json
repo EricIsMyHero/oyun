@@ -593,23 +593,21 @@
   },
   {
     "name": "Shadow Reaper",
-    "type": [
-      "Dead"
-    ],
+    "type": ["Dead"],
     "rarity": "Familiar",
     "group": "underworld",
-    "abilityName": "",
+    "abilityName": "Soul Harvest",
     "stats": {
       "health": "310",
       "shield": "140",
       "damage": "28",
       "sps": "20",
-      "attackSpeed": "1,40s",
+      "attackSpeed": "1.40s",
       "delay": "-",
       "mana": "17",
       "number": "1"
     },
-    "trait": "<b>10</b> saniyə hasar almazsa ilk vuruş <b>+100%</b> Kritik Şans",
+    "trait": "Shadow Reaper döyüşə kölgələrin arasından qəfil bir zərbə ilə başlayır və onun ilk vuruşu hər zaman kritik hasar vurər. Üstəlik, o, hər hansı bir rəqib kartı məhv etdikdə qurbanının ruhunu udar. Bu enerji sayəsində onun növbəti vuruşu hədəfinə rəqibin maksimum canının 15%-i qədər əlavə hasar verər. Tank xarakterləri sürətlə əritmək üçün mükəmməl passiv qabiliyyətdir.",
     "additionalStats": {
       "range": "1400",
       "speed": "1100",
@@ -621,9 +619,9 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Saldırı Hızı  |  1,40s » 1,33s",
+      "level1": "+5% Saldırı Hızı  |  1.40s » 1.33s",
       "level2": "+5% Hız  |  1100 » 1155",
-      "level3": "+10% Qalxan  |  140 » 154"
+      "level3": "+13% Qalxan  |  140 » 158"
     },
     "story": "The Shadow Reaper was once a simple farmer, but his cruelty toward animals led to a terrifying eternal punishment. Now a vengeful spirit, he wanders in tattered black robes, gripping a massive, razor-sharp scythe. His glowing green eyes pierce through the darkness, searching for his next harvest. He treats the battlefield like his old fields, reaping souls with the same cold indifference he once showed his livestock. He is the grim reminder that every sin carries a heavy price in the afterlife.",
     "class": "Assassin"
