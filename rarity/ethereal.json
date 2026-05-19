@@ -1,16 +1,12 @@
 [
   {
     "name": "Ase",
-    "type": [
-      "Human"
-    ],
+    "type": ["Human"],
     "rarity": "Ethereal",
     "isDual": true,
     "type1": {
       "name": "Ase",
-      "type": [
-        "Human"
-      ],
+      "type": ["Human"],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
@@ -18,7 +14,7 @@
         "shield": "0",
         "damage": "8",
         "sps": "8",
-        "attackSpeed": "1,00s",
+        "attackSpeed": "1.00s",
         "delay": "-",
         "mana": "5",
         "number": "1"
@@ -43,15 +39,13 @@
       "forms": [
         {
           "name": "Giga-R",
-          "type": [
-            "Robot"
-          ],
+          "type": ["Robot"],
           "stats": {
             "health": "500",
             "shield": "500",
             "damage": "42",
             "sps": "35",
-            "attackSpeed": "1,20s",
+            "attackSpeed": "1.20s",
             "delay": "-",
             "mana": "-",
             "number": "1"
@@ -80,9 +74,7 @@
     },
     "type2": {
       "name": "Ase",
-      "type": [
-        "Human"
-      ],
+      "type": ["Human"],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
@@ -90,7 +82,7 @@
         "shield": "0",
         "damage": "8",
         "sps": "8",
-        "attackSpeed": "1,00s",
+        "attackSpeed": "1.00s",
         "delay": "-",
         "mana": "5",
         "number": "1"
@@ -115,15 +107,13 @@
       "forms": [
         {
           "name": "Giga-R",
-          "type": [
-            "Robot"
-          ],
+          "type": ["Robot"],
           "stats": {
             "health": "300",
             "shield": "300",
             "damage": "72",
             "sps": "40",
-            "attackSpeed": "1,80s",
+            "attackSpeed": "1.80s",
             "delay": "-",
             "mana": "-",
             "number": "1"
@@ -154,16 +144,12 @@
   },
   {
     "name": "Leno",
-    "type": [
-      "Human"
-    ],
+    "type": ["Human"],
     "rarity": "Ethereal",
     "isDual": true,
     "type1": {
       "name": "Leno",
-      "type": [
-        "Human"
-      ],
+      "type": ["Human"],
       "rarity": "Ethereal",
       "stats": {
         "health": "220",
@@ -196,9 +182,7 @@
     },
     "type2": {
       "name": "Leno",
-      "type": [
-        "Human"
-      ],
+      "type": ["Human"],
       "rarity": "Ethereal",
       "stats": {
         "health": "190",
@@ -233,29 +217,27 @@
   },
   {
     "name": "King",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Dead"],
     "rarity": "Ethereal",
+    "group": "underworld",
     "isDual": true,
     "type1": {
       "name": "King",
-      "type": [
-        "Dead"
-      ],
+      "type": ["Dead"],
       "rarity": "Ethereal",
       "group": "underworld",
+      "abilityName": "Royal Warcry",
       "stats": {
         "health": "370",
         "shield": "160",
         "damage": "30",
         "sps": "30",
-        "attackSpeed": "1,00s",
+        "attackSpeed": "1.00s",
         "delay": "-",
         "mana": "15",
         "number": "1"
       },
-      "trait": "Yanındakı kartlara +25% Saldırı Hızı bonusu verər",
+      "trait": "King döyüş meydanında əsl orxu kimi çıxış edir. Onun varlığı ətrafındakı bütün dost kartları ruhlandıraraq onlara +25% hücum sürəti bonusu bəxş edər.",
       "additionalStats": {
         "range": "1000",
         "speed": "1000",
@@ -276,23 +258,22 @@
     },
     "type2": {
       "name": "King",
-      "type": [
-        "Dead"
-      ],
+      "type": ["Dead"],
       "rarity": "Ethereal",
       "group": "underworld",
+      "abilityName": "Iron Domain",
       "isMulti": true,
       "stats": {
         "health": "370",
         "shield": "160",
         "damage": "30",
         "sps": "30",
-        "attackSpeed": "1,00s",
+        "attackSpeed": "1.00s",
         "delay": "-",
         "mana": "15",
         "number": "1"
       },
-      "trait": "Hər 12 saniyədə bir *Guard* çağırar və 2 saniyəlik +5% Hasar azaltma qazanar",
+      "trait": "King ikinci formasına keçdikdə müdafiə taktikasına üstünlük verir. O, döyüş meydanında sabit qalaraq hər 12 saniyədə bir Guard çağırar. Eyni zamanda, bu çağırış anında özünə 2 saniyəlik 15% hasar azaltma qalxanı qazandırar.",
       "additionalStats": {
         "range": "1000",
         "speed": "1000",
@@ -312,20 +293,19 @@
       "forms": [
         {
           "name": "Guard",
-          "type": [
-            "Spirit"
-          ],
+          "type": ["Spirit"],
+          "abilityName": "Shield Breaker"
           "stats": {
             "health": "80",
             "shield": "80",
             "damage": "10",
             "sps": "13",
-            "attackSpeed": "0,80s",
+            "attackSpeed": "0.80s",
             "delay": "-",
             "mana": "-",
             "number": "1"
           },
-          "trait": "Qalxana ekstra +30% Hasar bonusu",
+          "trait": "King-in sadiq mühafizəçisi rəqiblərin müdafiə xətlərini yarmaq üçün proqramlaşdırılıb. Onun etdiyi bütün zərbələr aktiv qalxanı olan rəqib kartlara qarşı ekstra +30% hasar bonusu qazanar. Bu xüsusiyyət onu ön cəbhədə böyük qalxanlarla gizlənən tankları və müdafiə vahidlərini sürətlə zərərsizləşdirmək üçün effektiv bir köməkçi karta çevirir.",
           "additionalStats": {
             "range": "1000",
             "speed": "1100",
@@ -351,16 +331,12 @@
   },
   {
     "name": "Dracula",
-    "type": [
-      "Human"
-    ],
+    "type": ["Human"],
     "rarity": "Ethereal",
     "isDual": true,
     "type1": {
       "name": "Dracula",
-      "type": [
-        "Human"
-      ],
+      "type": ["Human"],
       "rarity": "Ethereal",
       "stats": {
         "health": "280",
@@ -466,41 +442,117 @@
     "class": "Fighter"
   },
   {
-    "name": "M-M",
-    "type": [
-      "Robot"
-    ],
+    "name": "Lord",
+    "type": ["Dead"],
     "rarity": "Ethereal",
-    "isHybrid": false,
-    "isMulti": false,
-    "isDual": false,
-    "stats": {
-      "health": "95",
-      "shield": "15",
-      "damage": "28",
-      "sps": "30",
-      "attackSpeed": "0,90s",
-      "delay": "1,50s",
-      "mana": "15",
-      "number": "1"
+    "group": "underworld",
+    "isDual": true,
+    "type1": {
+      "name": "Lord",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
+      "group": "underworld",
+      "abilityName": "Death Defiance",
+      "stats": {
+        "health": "720",
+        "shield": "0",
+        "damage": "41",
+        "sps": "22",
+        "attackSpeed": "1.85s",
+        "delay": "-",
+        "mana": "18",
+        "number": "1"
+      },
+      "trait": "Lord-un canı 5%-in altına düşdükdə daxilindəki qaranlıq güc aktivləşər və o, 5 saniyəlik tam ölümsüzlük statusu qazanar. Bu müddət ərzində o, döyüş boyu itirdiyi ümumi canın 25%-nə qədərini sürətlə yenidən bərpa edər.",
+      "additionalStats": {
+        "range": "1200",
+        "speed": "800",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "25%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "The Lord is a terrifying spectacle of death in motion. He is a reanimated human clad in heavy, forged black iron armor that seems to absorb the light. His skeletal frame, concealed beneath the metal, is animated by a dark force. In his iron grip, he wields a massive, wicked mace. He does not speak, but his horrific presence commands the spirits of the deep. A true dread lord of the UnderWorld, he walks without fear, crushing all life beneath his merciless feet.",
+      "class": "Tank"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
-    "additionalStats": {
-      "range": "1000",
-      "speed": "950",
-      "criticalChance": "0%",
-      "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%"
+    "type2": {
+      "name": "King",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
+      "group": "underworld",
+      "abilityName": "Sovereign of the Damned",
+      "isMulti": true,
+      "stats": {
+        "health": "420",
+        "shield": "220",
+        "damage": "41",
+        "sps": "22",
+        "attackSpeed": "1.85s",
+        "delay": "-",
+        "mana": "18",
+        "number": "1"
+      },
+      "trait": "Transformasiyadan sonra Lord daha dayanıqlı formaya keçər və hər saniyə +1 can yeniləyər. Üstəlik, onun canı hər 10% düşdükdə kölgələrdən onu qorumaq üçün bir Rider çağırar (Maksimum: 5 Rider çağırıla bilər).",
+      "additionalStats": {
+        "range": "1200",
+        "speed": "800",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "25%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "The Lord is a terrifying spectacle of death in motion. He is a reanimated human clad in heavy, forged black iron armor that seems to absorb the light. His skeletal frame, concealed beneath the metal, is animated by a dark force. In his iron grip, he wields a massive, wicked mace. He does not speak, but his horrific presence commands the spirits of the deep. A true dread lord of the UnderWorld, he walks without fear, crushing all life beneath his merciless feet.",
+      "forms": [
+        {
+          "name": "Rider",
+          "type": ["Dead"],
+          "abilityName": "Desperate Fury"
+          "stats": {
+            "health": "130",
+            "shield": "100",
+            "damage": "12",
+            "sps": "10",
+            "attackSpeed": "1.20s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Rider müdafiəsini itirdikdə daha ölümcül bir qüvvəyə çevrilər. Öz qoruyucu qalxanı tam qırıldıqdan sonra hücum gücünü kəskin şəkildə artıraraq əlavə +50% hasar qazanar. Bu qabiliyyət onu müdafiəsiz qaldığı anlarda belə rəqib üçün ciddi bir təhlükəyə çevirir.",
+          "additionalStats": {
+            "range": "1300",
+            "speed": "1500",
+            "criticalChance": "0%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "0%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Fighter"
+        }
+      ],
+      "class": "Tank"
     },
-    "showlevels": {
-      "level1": "+5% Can",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
-    },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
     "class": "Tank"
   }
 ]
