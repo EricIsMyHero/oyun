@@ -294,7 +294,7 @@
         {
           "name": "Guard",
           "type": ["Spirit"],
-          "abilityName": "Shield Breaker"
+          "abilityName": "Shield Breaker",
           "stats": {
             "health": "80",
             "shield": "80",
@@ -483,7 +483,7 @@
       "class": "Tank"
     },
     "type2": {
-      "name": "King",
+      "name": "Lord",
       "type": ["Dead"],
       "rarity": "Ethereal",
       "group": "underworld",
@@ -520,7 +520,7 @@
         {
           "name": "Rider",
           "type": ["Dead"],
-          "abilityName": "Desperate Fury"
+          "abilityName": "Desperate Fury",
           "stats": {
             "health": "130",
             "shield": "100",
