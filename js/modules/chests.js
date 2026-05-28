@@ -45,8 +45,8 @@ const CHEST_DEFS = [
     priceUSD: '$0.58',
     desc: 'Başlanğıc səviyyəsi. Əsas resurslara sahib ol.',
     rewards: {
-      gold:          [25,   125],
-      cardPiece:     [50,   250],
+      gold:          [125,   250],
+      cardPiece:     [250,   500],
       rubyPiece:     [1,    5  ],
       towerGearPiece:[3,    5  ],
       cardShard:     [0,    10 ],
@@ -64,8 +64,8 @@ const CHEST_DEFS = [
     priceUSD: '$1.18',
     desc: 'Tanış resurslara daha güclü giriş.',
     rewards: {
-      gold:          [125,  250],
-      cardPiece:     [250,  500],
+      gold:          [250,  375],
+      cardPiece:     [500,  750],
       rubyPiece:     [3,    7  ],
       towerGearPiece:[5,    7  ],
       cardShard:     [0,    15 ],
@@ -83,8 +83,8 @@ const CHEST_DEFS = [
     priceUSD: '$2.88',
     desc: 'Sehrli aura. Zindana açar ehtimalı başlayır.',
     rewards: {
-      gold:          [250,  625],
-      cardPiece:     [500,  1250],
+      gold:          [375,  625],
+      cardPiece:     [750,  1250],
       rubyPiece:     [5,    10 ],
       towerGearPiece:[7,    9  ],
       cardShard:     [0,    20 ],
@@ -249,7 +249,7 @@ const CHEST_DEFS = [
 
 /* ── Reward meta (label, icon, wallet key) ── */
 const REWARD_META = {
-  gold:           { label: 'Gold',             icon: '🪙',  walletKey: 'gold'      },
+  gold:           { label: 'Gold',              icon: '🪙',  walletKey: 'gold'      },
   cardPiece:      { label: 'Card Piece',        icon: '🃏',  walletKey: 'cardPiece' },
   rubyPiece:      { label: 'Ruby Piece',        icon: '🔴',  walletKey: 'rubyPiece' },
   towerGearPiece: { label: 'Tower Gear Piece',  icon: '⚙️',  walletKey: 'gear'      },
