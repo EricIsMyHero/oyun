@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Mission-1",
+    "description": "İlk missiyada bir araya gələn döyüşçü qrupu.",
+    "icon": "fa-shield-halved",
+    "color": "#4a9eff",
+    "members": ["Soldier", "Bethe", "Blocker", "Aegis Guard", "Sniper", "Reacher", "Leila"]
+  },
+  {
+    "name": "UnderWorlds",
+    "description": "İkinci qrupun təsviri burada olacaq.",
+    "icon": "fa-skull",
+    "color": "#ff6b6b",
+    "members": ["Lord", "King", "Malvaris", "Dark Necromancer", "Nightfang", "Shadow Reaper"]
+  },
+  {
+    "name": "The Spellbound",
+    "description": "Üçüncü qrupun təsviri.",
+    "icon": "fa-wand-sparkles",
+    "color": "#b39ddb",
+    "members": ["Chrono Mage", "Naar", "Arcanyx", "Unara", "Laura"]
+  },
+  {
+    "name": "Twisted-Farm",
+    "description": "Üçüncü qrupun təsviri.",
+    "icon": "fa-building-wheat",
+    "color": "#FF2B00",
+    "members": ["Henry", "Chicken", "Bees", "Venomspikes", "Rockback", "Worms"]
+  },
+  {
+    "name": "Royal Blood",
+    "description": "-",
+    "color": "#ffff00",
+    "icon": "fa-gopuram",
+    "members": ["Aza", "UnTouch", "SkyHunter", "Aeralis", "Mecha Shield", "Fire Archer", "Trac", "Angels"]
+  },
+  {
+    "name": "Constructs",
+    "description": "Machine soldiers built in the underground workshops of Stagnantia. Reliable, mass-produced, and expendable.",
+    "color": "#60a5fa",
+    "icon": "fa-gear",
+    "members": ["Iron Golem", "Scrap Drone", "Steam Knight", "Volt Sentinel"]
+  },
+  {
+    "name": "Beasts",
+    "description": "Wild creatures dragged through mana portals from prehistoric dimensions. Unpredictable but ferocious.",
+    "color": "#4ade80",
+    "icon": "fa-paw",
+    "members": ["Feral Wolf", "Stone Troll", "Venom Drake", "Mire Hound"]
+  },
+  {
+    "name": "Ancients",
+    "description": "Warriors pulled from history's greatest battles. Each carries the weight of a lost civilisation.",
+    "color": "#e8c95a",
+    "icon": "fa-shield-halved",
+    "members": ["Gloop", "Freak", "Tornado", "Tphoenix", "Whisper", "Demotron", "Fallen Angel"]
+  },
+  {
+    "name": "Void Walkers",
+    "description": "Beings that exist between dimensions. They do not belong to any time or place — only the arena.",
+    "color": "#f472b6",
+    "icon": "fa-eye",
+    "members": ["Rift Shade", "Null Priest", "Phase Assassin", "Void Empress"]
+  }
+]
