@@ -41,8 +41,8 @@ const CHEST_DEFS = [
     name: 'Mundane',
     icon: '📦',
     rarity: 'mundane',
-    priceRuby: 6,
-    priceUSD: '$0.58',
+    priceRuby: 10,
+    priceUSD: '$0.40',
     desc: 'Başlanğıc səviyyəsi. Əsas resurslara sahib ol.',
     rewards: {
       gold:          [125,   250],
@@ -60,8 +60,8 @@ const CHEST_DEFS = [
     name: 'Familiar',
     icon: '🟢',
     rarity: 'familiar',
-    priceRuby: 12,
-    priceUSD: '$1.18',
+    priceRuby: 25,
+    priceUSD: '$1.15',
     desc: 'Tanış resurslara daha güclü giriş.',
     rewards: {
       gold:          [250,  375],
@@ -79,8 +79,8 @@ const CHEST_DEFS = [
     name: 'Arcane',
     icon: '🔮',
     rarity: 'arcane',
-    priceRuby: 30,
-    priceUSD: '$2.88',
+    priceRuby: 50,
+    priceUSD: '$2.40',
     desc: 'Sehrli aura. Zindana açar ehtimalı başlayır.',
     rewards: {
       gold:          [375,  625],
@@ -98,8 +98,8 @@ const CHEST_DEFS = [
     name: 'Relic',
     icon: '🔴',
     rarity: 'relic',
-    priceRuby: 55,
-    priceUSD: '$4.98',
+    priceRuby: 80,
+    priceUSD: '$3.90',
     desc: 'Qədim əşyalar. Daha çox açar, daha çox güc.',
     rewards: {
       gold:          [625,  875],
@@ -117,8 +117,8 @@ const CHEST_DEFS = [
     name: 'Ascendant',
     icon: '🟠',
     rarity: 'ascendant',
-    priceRuby: 110,
-    priceUSD: '$9.08',
+    priceRuby: 150,
+    priceUSD: '$7.40',
     desc: 'Yüksək dərəcə. Qızıl kart və parça kart şansı!',
     rewards: {
       gold:          [875,  1250],
@@ -136,8 +136,8 @@ const CHEST_DEFS = [
     name: 'Apex',
     icon: '⚡',
     rarity: 'apex',
-    priceRuby: 175,
-    priceUSD: '$14.48',
+    priceRuby: 250,
+    priceUSD: '$12.39',
     desc: 'Zirvə gücü. Elite mükafatlar.',
     rewards: {
       gold:          [1250, 1625],
@@ -155,8 +155,8 @@ const CHEST_DEFS = [
     name: 'Ethereal',
     icon: '👻',
     rarity: 'ethereal',
-    priceRuby: 250,
-    priceUSD: '$19.18',
+    priceRuby: 400,
+    priceUSD: '$19.89',
     desc: 'Saf enerjinin mükafatı. Ən yüksək tier.',
     rewards: {
       gold:          [1625, 2125],
@@ -175,7 +175,7 @@ const CHEST_DEFS = [
     icon: '🍀',
     rarity: 'ascendant',
     priceRuby: 30,
-    priceUSD: '$2.96',
+    priceUSD: '$1.95',
     desc: 'Sürpriz sandıq. Geniş aralıq, tam şanslı!',
     rewards: {
       gold:          [100,  1000],
@@ -194,7 +194,7 @@ const CHEST_DEFS = [
     icon: '🌠',
     rarity: 'apex',
     priceRuby: 80,
-    priceUSD: '$7.16',
+    priceUSD: '$5.28',
     desc: 'Böyük şans sandığı. Kəskin mükafat potensialı.',
     rewards: {
       gold:          [250,  2500],
@@ -213,7 +213,7 @@ const CHEST_DEFS = [
     icon: '💎',
     rarity: 'relic',
     priceRuby: 50,
-    priceUSD: '$4.46',
+    priceUSD: '$3.28',
     desc: 'Ruby parçaları üçün xüsusi sandıq. Min. 10 parça!',
     rewards: {
       gold:          [25,   50 ],
@@ -232,7 +232,7 @@ const CHEST_DEFS = [
     icon: '🧩',
     rarity: 'familiar',
     priceRuby: 25,
-    priceUSD: '$2.46',
+    priceUSD: '$1.62',
     desc: 'Yalnız kart parçası verir. Dəstə qurmaq üçün ideal.',
     rewards: {
       gold:          null,
