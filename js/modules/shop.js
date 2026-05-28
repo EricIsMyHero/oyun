@@ -7,16 +7,16 @@ let shopInitialized = false;
 
 /* Player wallet state */
 const wallet = {
-  gold:       4200,
-  cardPiece:  320,
-  ruby:       85,
-  rubyPiece:  14,
-  gear:       7,
-  cardShard:  45,
-  mana:       12,
-  key:        3,
-  goldCard:   1,
-  pieceCard:  0,
+  gold:       5000,
+  cardPiece:  10000,
+  ruby:       1000,
+  rubyPiece:  10000,
+  gear:       100,
+  cardShard:  1000,
+  mana:       100,
+  key:        10,
+  goldCard:   10,
+  pieceCard:  10,
 };
 
 /* Wallet field → DOM id map */
