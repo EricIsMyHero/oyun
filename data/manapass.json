@@ -393,7 +393,7 @@
     {
       "tier": 65,
       "free": { "qty": 10, "item": "Ruby Piece" },
-      "pass": { "qty": 1, "item": "Arcane Chest" },
+      "pass": { "qty": 1, "item": "Arcane chest" },
       "plus": { "qty": 1, "item": "Relic chest" }
     },
     {
@@ -502,7 +502,7 @@
       "tier": 83,
       "free": { "qty": 2, "item": "Card Shard" },
       "pass": { "qty": 2, "item": "Tower Gear Piece" },
-      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+      "plus": { "qty": 1, "item": "Arcane chest" }
     },
     {
       "tier": 84,
@@ -514,7 +514,7 @@
       "tier": 85,
       "free": { "qty": 1, "item": "Dungeon Key" },
       "pass": { "qty": 1, "item": "Arcane chest" },
-      "plus": { "qty": 1, "item": "Arcane chest" }
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
     },
     {
       "tier": 86,
