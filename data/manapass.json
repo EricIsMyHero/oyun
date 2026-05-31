@@ -286,13 +286,13 @@
       "tier": 47,
       "free": { "qty": 50, "item": "Gold" },
       "pass": { "qty": 100, "item": "Gold" },
-      "plus": { "qty": 100, "item": "Gold" }
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
     },
     {
       "tier": 48,
       "free": { "qty": 2, "item": "Card Shard" },
       "pass": { "qty": 4, "item": "Tower Gear Piece" },
-      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+      "plus": { "qty": 100, "item": "Gold" }
     },
     {
       "tier": 49,
@@ -310,7 +310,7 @@
       "tier": 51,
       "free": { "qty": 75, "item": "Card Piece" },
       "pass": { "qty": 200, "item": "Card Piece" },
-      "plus": { "qty": 250, "item": "Card Piece" }
+      "plus": { "qty": 5, "item": "Card Shard" }
     },
     {
       "tier": 52,
@@ -328,7 +328,7 @@
       "tier": 54,
       "free": { "qty": 2, "item": "Tower Gear Piece" },
       "pass": { "qty": 3, "item": "Card Shard" },
-      "plus": { "qty": 5, "item": "Card Shard" }
+      "plus": { "qty": 250, "item": "Card Piece" }
     },
     {
       "tier": 55,
@@ -393,7 +393,7 @@
     {
       "tier": 65,
       "free": { "qty": 10, "item": "Ruby Piece" },
-      "pass": { "qty": 1, "item": "arcane sandıq" },
+      "pass": { "qty": 1, "item": "Arcane Chest" },
       "plus": { "qty": 1, "item": "Relic chest" }
     },
     {
@@ -453,7 +453,7 @@
     {
       "tier": 75,
       "free": { "qty": 1, "item": "Familiar chest" },
-      "pass": { "qty": 1, "item": "arcane sandıq" },
+      "pass": { "qty": 1, "item": "Arcane chest" },
       "plus": { "qty": 1, "item": "Relic chest" }
     },
     {
@@ -513,8 +513,8 @@
     {
       "tier": 85,
       "free": { "qty": 1, "item": "Dungeon Key" },
-      "pass": { "qty": 1, "item": "arcane sandıq" },
-      "plus": { "qty": 1, "item": "arcane sandıq" }
+      "pass": { "qty": 1, "item": "Arcane chest" },
+      "plus": { "qty": 1, "item": "Arcane chest" }
     },
     {
       "tier": 86,
@@ -573,7 +573,7 @@
     {
       "tier": 95,
       "free": { "qty": 1, "item": "Dungeon Key" },
-      "pass": { "qty": 1, "item": "arcane sandıq" },
+      "pass": { "qty": 1, "item": "Arcane chest" },
       "plus": { "qty": 1, "item": "Relic chest" }
     },
     {
@@ -591,13 +591,13 @@
     {
       "tier": 98,
       "free": { "qty": 2, "item": "Card Shard" },
-      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "pass": { "qty": 200, "item": "Card Piece" },
       "plus": { "qty": 5, "item": "Ruby Piece" }
     },
     {
       "tier": 99,
       "free": { "qty": 175, "item": "Card Piece" },
-      "pass": { "qty": 200, "item": "Card Piece" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
       "plus": { "qty": 200, "item": "Card Piece" }
     },
     {
@@ -609,11 +609,11 @@
   ],
   "bonus": {
     "label": "Every 1000 Mana Points",
-    "free": { "qty": 250, "item": "kart parçası" },
-    "pass": { "qty": 500, "item": "kart parçası" },
-    "plus": { "qty": 750, "item": "kart parçası" },
-    "free2": { "qty": 125, "item": "altın" },
-    "pass2": { "qty": 250, "item": "altın" },
-    "plus2": { "qty": 375, "item": "altın" }
+    "free": { "qty": 250, "item": "Card Piece" },
+    "pass": { "qty": 500, "item": "Card Piece" },
+    "plus": { "qty": 750, "item": "Card Piece" },
+    "free2": { "qty": 125, "item": "Gold" },
+    "pass2": { "qty": 250, "item": "Gold" },
+    "plus2": { "qty": 375, "item": "Gold" }
   }
 }
