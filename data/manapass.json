@@ -1,0 +1,619 @@
+{
+  "tiers": [
+    {
+      "tier": 0,
+      "free": { "qty": 10, "item": "Ruby Piece" },
+      "pass": { "qty": 25, "item": "Ruby Piece" },
+      "plus": { "qty": 50, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 1,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 100, "item": "Card Piece" },
+      "plus": { "qty": 125, "item": "Card Piece" }
+    },
+    {
+      "tier": 2,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 125, "item": "Gold" }
+    },
+    {
+      "tier": 3,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 4,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 5,
+      "free": { "qty": 1, "item": "Dungeon Key" },
+      "pass": { "qty": 1, "item": "Mundane chest" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 6,
+      "free": { "qty": 75, "item": "Gold" },
+      "pass": { "qty": 100, "item": "Card Piece" },
+      "plus": { "qty": 125, "item": "Card Piece" }
+    },
+    {
+      "tier": 7,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 125, "item": "Gold" }
+    },
+    {
+      "tier": 8,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 4, "item": "Tower Gear Piece" },
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 9,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 10,
+      "free": { "qty": 1, "item": "Mundane chest" },
+      "pass": { "qty": 1, "item": "Dungeon Key" },
+      "plus": { "qty": 1, "item": "Dungeon Key" }
+    },
+    {
+      "tier": 11,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 100, "item": "Card Piece" },
+      "plus": { "qty": 125, "item": "Card Piece" }
+    },
+    {
+      "tier": 12,
+      "free": { "qty": 75, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 125, "item": "Gold" }
+    },
+    {
+      "tier": 13,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 14,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 15,
+      "free": { "qty": 5, "item": "Ruby Piece" },
+      "pass": { "qty": 1, "item": "Mundane chest" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 16,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 100, "item": "Card Piece" },
+      "plus": { "qty": 100, "item": "Card Piece" }
+    },
+    {
+      "tier": 17,
+      "free": { "qty": 100, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 18,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 4, "item": "Tower Gear Piece" },
+      "plus": { "qty": 2, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 19,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 20,
+      "free": { "qty": 1, "item": "Mundane chest" },
+      "pass": { "qty": 1, "item": "Power Up Piece" },
+      "plus": { "qty": 1, "item": "Power Up Piece" }
+    },
+    {
+      "tier": 21,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 100, "item": "Card Piece" },
+      "plus": { "qty": 100, "item": "Card Piece" }
+    },
+    {
+      "tier": 22,
+      "free": { "qty": 100, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 23,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 24,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 25,
+      "free": { "qty": 1, "item": "Power Up Piece" },
+      "pass": { "qty": 1, "item": "Familiar chest" },
+      "plus": { "qty": 75, "item": "Card Piece" }
+    },
+    {
+      "tier": 26,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 100, "item": "Card Piece" },
+      "plus": { "qty": 125, "item": "Card Piece" }
+    },
+    {
+      "tier": 27,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 28,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 4, "item": "Tower Gear Piece" },
+      "plus": { "qty": 4, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 29,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 30,
+      "free": { "qty": 5, "item": "Ruby Piece" },
+      "pass": { "qty": 1, "item": "Dungeon Key" },
+      "plus": { "qty": 1, "item": "Dungeon Key" }
+    },
+    {
+      "tier": 31,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 125, "item": "Card Piece" },
+      "plus": { "qty": 125, "item": "Card Piece" }
+    },
+    {
+      "tier": 32,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 33,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 34,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 35,
+      "free": { "qty": 1, "item": "Dungeon Key" },
+      "pass": { "qty": 1, "item": "Familiar chest" },
+      "plus": { "qty": 1, "item": "Relic chest" }
+    },
+    {
+      "tier": 36,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 100, "item": "Card Piece" },
+      "plus": { "qty": 125, "item": "Card Piece" }
+    },
+    {
+      "tier": 37,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 100, "item": "Gold" }
+    },
+    {
+      "tier": 38,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 4, "item": "Tower Gear Piece" },
+      "plus": { "qty": 2, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 39,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 40,
+      "free": { "qty": 1, "item": "Mundane chest" },
+      "pass": { "qty": 1, "item": "Power Up Piece" },
+      "plus": { "qty": 1, "item": "Power Up Piece" }
+    },
+    {
+      "tier": 41,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 125, "item": "Card Piece" },
+      "plus": { "qty": 150, "item": "Card Piece" }
+    },
+    {
+      "tier": 42,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 100, "item": "Gold" },
+      "plus": { "qty": 125, "item": "Gold" }
+    },
+    {
+      "tier": 43,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 44,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 1, "item": "Dungeon Key" },
+      "plus": { "qty": 1, "item": "Dungeon Key" }
+    },
+    {
+      "tier": 45,
+      "free": { "qty": 1, "item": "Power Up Piece" },
+      "pass": { "qty": 1, "item": "Familiar chest" },
+      "plus": { "qty": 1, "item": "Relic chest" }
+    },
+    {
+      "tier": 46,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 125, "item": "Card Piece" },
+      "plus": { "qty": 125, "item": "Card Piece" }
+    },
+    {
+      "tier": 47,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 100, "item": "Gold" },
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 48,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 4, "item": "Tower Gear Piece" },
+      "plus": { "qty": 100, "item": "Gold" }
+    },
+    {
+      "tier": 49,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 50,
+      "free": { "qty": 10, "item": "Ruby Piece" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 10, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 51,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 200, "item": "Card Piece" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 52,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 53,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 2, "item": "Tower Gear Piece" },
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 54,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 250, "item": "Card Piece" }
+    },
+    {
+      "tier": 55,
+      "free": { "qty": 1, "item": "Dungeon Key" },
+      "pass": { "qty": 1, "item": "Dungeon Key" },
+      "plus": { "qty": 1, "item": "Dungeon Key" }
+    },
+    {
+      "tier": 56,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 175, "item": "Card Piece" },
+      "plus": { "qty": 200, "item": "Card Piece" }
+    },
+    {
+      "tier": 57,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 58,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 59,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 5, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 60,
+      "free": { "qty": 1, "item": "Familiar chest" },
+      "pass": { "qty": 1, "item": "Power Up Piece" },
+      "plus": { "qty": 1, "item": "Power Up Piece" }
+    },
+    {
+      "tier": 61,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 150, "item": "Card Piece" },
+      "plus": { "qty": 175, "item": "Card Piece" }
+    },
+    {
+      "tier": 62,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 63,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 2, "item": "Tower Gear Piece" },
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 64,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 3, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 65,
+      "free": { "qty": 10, "item": "Ruby Piece" },
+      "pass": { "qty": 1, "item": "Arcane chest" },
+      "plus": { "qty": 1, "item": "Relic chest" }
+    },
+    {
+      "tier": 66,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 150, "item": "Card Piece" },
+      "plus": { "qty": 175, "item": "Card Piece" }
+    },
+    {
+      "tier": 67,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 68,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 69,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 5, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 70,
+      "free": { "qty": 1, "item": "Power Up Piece" },
+      "pass": { "qty": 1, "item": "Power Up Piece" },
+      "plus": { "qty": 1, "item": "Power Up Piece" }
+    },
+    {
+      "tier": 71,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 225, "item": "Card Piece" },
+      "plus": { "qty": 250, "item": "Card Piece" }
+    },
+    {
+      "tier": 72,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 73,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 2, "item": "Tower Gear Piece" },
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 74,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 5, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 75,
+      "free": { "qty": 1, "item": "Familiar chest" },
+      "pass": { "qty": 1, "item": "Arcane chest" },
+      "plus": { "qty": 1, "item": "Relic chest" }
+    },
+    {
+      "tier": 76,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 225, "item": "Card Piece" },
+      "plus": { "qty": 250, "item": "Card Piece" }
+    },
+    {
+      "tier": 77,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 78,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 79,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 5, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 80,
+      "free": { "qty": 5, "item": "Ruby Piece" },
+      "pass": { "qty": 1, "item": "Dungeon Key" },
+      "plus": { "qty": 1, "item": "Dungeon Key" }
+    },
+    {
+      "tier": 81,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 225, "item": "Card Piece" },
+      "plus": { "qty": 250, "item": "Card Piece" }
+    },
+    {
+      "tier": 82,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 100, "item": "Gold" }
+    },
+    {
+      "tier": 83,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 2, "item": "Tower Gear Piece" },
+      "plus": { "qty": 1, "item": "Arcane chest" }
+    },
+    {
+      "tier": 84,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 5, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 85,
+      "free": { "qty": 1, "item": "Dungeon Key" },
+      "pass": { "qty": 1, "item": "Arcane chest" },
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 86,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 225, "item": "Card Piece" },
+      "plus": { "qty": 250, "item": "Card Piece" }
+    },
+    {
+      "tier": 87,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 100, "item": "Gold" }
+    },
+    {
+      "tier": 88,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 89,
+      "free": { "qty": 2, "item": "Tower Gear Piece" },
+      "pass": { "qty": 5, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 90,
+      "free": { "qty": 5, "item": "Ruby Piece" },
+      "pass": { "qty": 1, "item": "Power Up Piece" },
+      "plus": { "qty": 1, "item": "Power Up Piece" }
+    },
+    {
+      "tier": 91,
+      "free": { "qty": 75, "item": "Card Piece" },
+      "pass": { "qty": 150, "item": "Card Piece" },
+      "plus": { "qty": 175, "item": "Card Piece" }
+    },
+    {
+      "tier": 92,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 93,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 2, "item": "Tower Gear Piece" },
+      "plus": { "qty": 6, "item": "Tower Gear Piece" }
+    },
+    {
+      "tier": 94,
+      "free": { "qty": 125, "item": "Card Piece" },
+      "pass": { "qty": 5, "item": "Card Shard" },
+      "plus": { "qty": 5, "item": "Card Shard" }
+    },
+    {
+      "tier": 95,
+      "free": { "qty": 1, "item": "Dungeon Key" },
+      "pass": { "qty": 1, "item": "Arcane chest" },
+      "plus": { "qty": 1, "item": "Relic chest" }
+    },
+    {
+      "tier": 96,
+      "free": { "qty": 175, "item": "Card Piece" },
+      "pass": { "qty": 250, "item": "Card Piece" },
+      "plus": { "qty": 275, "item": "Card Piece" }
+    },
+    {
+      "tier": 97,
+      "free": { "qty": 100, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    },
+    {
+      "tier": 98,
+      "free": { "qty": 2, "item": "Card Shard" },
+      "pass": { "qty": 200, "item": "Card Piece" },
+      "plus": { "qty": 5, "item": "Ruby Piece" }
+    },
+    {
+      "tier": 99,
+      "free": { "qty": 175, "item": "Card Piece" },
+      "pass": { "qty": 5, "item": "Ruby Piece" },
+      "plus": { "qty": 200, "item": "Card Piece" }
+    },
+    {
+      "tier": 100,
+      "free": { "qty": 50, "item": "Gold" },
+      "pass": { "qty": 75, "item": "Gold" },
+      "plus": { "qty": 75, "item": "Gold" }
+    }
+  ],
+  "bonus": {
+    "label": "Every 1000 Mana Points",
+    "free": { "qty": 250, "item": "Card Piece" },
+    "pass": { "qty": 500, "item": "Card Piece" },
+    "plus": { "qty": 750, "item": "Card Piece" },
+    "free2": { "qty": 125, "item": "Gold" },
+    "pass2": { "qty": 250, "item": "Gold" },
+    "plus2": { "qty": 375, "item": "Gold" }
+  }
+}
