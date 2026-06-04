@@ -445,23 +445,21 @@
   },
   {
     "name": "Tornado",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Familiar",
     "group": "ancients",
-    "abilityName": "",
+    "abilityName": "Aero Vortex",
     "stats": {
       "health": "350",
       "shield": "0",
       "damage": "10x4",
       "sps": "40",
-      "attackSpeed": "0,10s",
-      "delay": "2,7s",
+      "attackSpeed": "0.10s",
+      "delay": "2.70s",
       "mana": "16",
       "number": "1"
     },
-    "trait": "Rəqibi içinə alaraq hasar verər və <b>3500</b> karo uzağa atar, canı <b>50%</b>-ə düşdükdə ekstra <b>+3</b> Hasar bonusu",
+    "trait": "Tornado hədəf aldığı rəqib kartı öz burulğanının içinə çəkərək hərəkətsiz qoyur və ona davamlı zərər vurar. Burulğanın enerjisi bitdikdə rəqibi 3,5 karo uzağa fırladıb atar. Öz canı 50%-ə düşdükdə güclənər və etdiyi hər vuruş üçün ekstra +2 hasar bonusu qazanar.",
     "additionalStats": {
       "range": "1200",
       "speed": "900",
