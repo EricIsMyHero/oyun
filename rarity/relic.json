@@ -363,23 +363,21 @@
   },
   {
     "name": "Demotron",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Uzaylı"],
     "rarity": "Relic",
     "group": "ancients",
-    "abilityName": "",
+    "abilityName": "Core Restructuring",
     "stats": {
-      "health": "120",
+      "health": "660",
       "shield": "60",
       "damage": "12",
       "sps": "15",
-      "attackSpeed": "0,80",
+      "attackSpeed": "0.80s",
       "delay": "-",
-      "mana": "6",
+      "mana": "16",
       "number": "1"
     },
-    "trait": "Hər 16 saniyədə itirilən canı qədər M.Can qazanar",
+    "trait": "Demotron döyüş meydanında zərər gördükcə daxili strukturu avtomatik olaraq bərpa olunmağa başlayar. O, hər 10 saniyədə bir itirdiyi ümumi can miqdarının 10%-i qədərini dərhal bərpa edər. Bu xüsusiyyət sayəsində o, nə qədər çox hasar alsa, bir o qədər yüksək bərpa effekti nümayiş etdirərək döyüşdə qalma müddətini uzadar.",
     "additionalStats": {
       "range": "2,100",
       "speed": "1,000",
@@ -791,12 +789,10 @@
   },
   {
     "name": "Fallen Angel",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Relic",
     "group": "ancients",
-    "abilityName": "",
+    "abilityName": "Predatory Focus",
     "stats": {
       "health": "270",
       "shield": "160",
@@ -807,7 +803,7 @@
       "mana": "14",
       "number": "1"
     },
-    "trait": "7,500 Karo qabaqdakı canı ən yüksək rəqibi seçər və alınan hər hasarın 20%-ni ona ötürər",
+    "trait": "Fallen Angel döyüşə başladığı an önündəki 7,500 karo məsafədə yerləşən və canı ən yüksək olan rəqib kartı özünə əsas hədəf seçər. Bu seçilmiş hədəfə vurduğu hər bir uğurlu zərbə ona +1% hücum sürəti qazandırar.Bu sürət bonusu maksimum 80%-ə qədər yüksələ bilər. Təyin olunan hədəf dəyişənə və ya məhv edilənə qədər Fallen Angel getdikcə daha sürətli və amansız hücumlar edər.",
     "additionalStats": {
       "range": "1100",
       "speed": "1050",
