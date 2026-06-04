@@ -177,7 +177,7 @@
     "type": ["Uzaylı"],
     "rarity": "Mundane",
     "group": "ancients",
-    "abilityName": "",
+    "abilityName": "Devouring Abyss",
     "stats": {
       "health": "900",
       "shield": "0",
@@ -188,7 +188,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Toxunduğu kartlara içinə çəkər, <b>150</b> saniyəlik ömrü olar",
+    "trait": "Gloop toxunduğu bütün rəqib kartları öz yapışqan kütləsinin içinə çəkərək onları hərəkətsiz qoyar və davamlı hasar verər. Bu qədim varlığın döyüş meydanında 150 saniyəlik məhdud ömrü var. Ömrü başa çatdıqda və ya məhv edildikdə daxili enerjisi partlayar, ətrafındakı bütün rəqiblərə 220 hasar yetirərək tamamilə yox olar.",
     "additionalStats": {
       "range": "1000",
       "speed": "800",
@@ -307,8 +307,8 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+50% Ability Range  |  20,000 » 30,000",
-      "level2": "+10% Shield  |  90 » 99",
+      "level1": "+20% Ability DMG Reduction  |  -30% » -50%",
+      "level2": "+30% Shield  |  90 » 117",
       "level3": "+5% Range  |  1000 » 1050"
     },
     "story": "Blocker is the heart of Mission 1. This 30-year-old Black man carries a heavy riot shield to deflect every incoming threat. While others focus on the gravity of war, his good-natured humor keeps the squad's spirits high. He is the funniest member of the group, often cracking jokes in the heat of battle. Behind his smile lies a relentless wall of defense. He stands firm against any impact, ensuring his friends remain safe. To him, protecting the team is a duty he performs with a grin.",
@@ -388,7 +388,7 @@
     "type": ["Uzaylı"],
     "rarity": "Mundane",
     "group": "ancients",
-    "abilityName": "",
+    "abilityName": "Cellular Mitosis",
     "isMulti": true,
     "stats": {
       "health": "230",
@@ -400,7 +400,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hər saniyə <b>+1</b> Can yeniləyər, öləndə <b>2</b> yerə parçalanar.",
+    "trait": "Freak qeyri-adi regenerasiya qabiliyyətinə malikdir və döyüş boyu hər saniyə +1 can bərpa edər. Bu bədheybət ölümcül zərbə aldıqda tamamilə məhv olmur; bədəni iki yerə parçalanaraq döyüşü davam etdirmək üçün iki yeni Mini Freak formalaşdırar.",
     "additionalStats": {
       "range": "1000",
       "speed": "850",
@@ -422,7 +422,7 @@
         "name": "Mini Freaks",
         "type": ["Uzaylı"],
         "rarity": "Mundane",
-        "abilityName": "",
+        "abilityName": "Volatile Remnants",
         "stats": {
           "health": "100",
           "shield": "0",
@@ -433,7 +433,7 @@
           "mana": "-",
           "number": "2"
         },
-        "trait": "Öləndə partlayaraq <b>50</b> Hasar verər",
+        "trait": "Freak-in parçalanmasından yaranan bu kiçik varlıqlar olduqca aqressiv və qeyri-sabitdir. Onlar döyüş meydanında məhv edildiyi an partlayar və yaxınlıqdakı rəqib kartlara birbaşa 50 hasar verərlər.",
         "additionalStats": {
           "range": "1000",
           "speed": "1000",
