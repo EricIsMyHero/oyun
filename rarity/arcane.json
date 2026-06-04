@@ -1,9 +1,7 @@
 [
   {
     "name": "Arcanyx",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Arcane",
     "group": "the-spellbound",
     "abilityName": "Arcane Harvest",
@@ -39,9 +37,7 @@
   },
   {
     "name": "Leafshade",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
@@ -152,12 +148,10 @@
   },
   {
     "name": "Tphoenix",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["İnsan"],
     "rarity": "Arcane",
     "group": "ancients",
-    "abilityName": "",
+    "abilityName": "Molten Rebound",
     "isMulti": true,
     "stats": {
       "health": "400",
@@ -169,7 +163,7 @@
       "mana": "15",
       "number": "1"
     },
-    "trait": "Canı 25%-in altına düşdükdə *Fire Egg*-ə dönüşər.",
+    "trait": "Bu qədim insan bədənini bürüyən alovlar sayəsində döyüş boyu aldığı hasarın 10%-ni eynilə hücum edən rəqibə geri ötürər.Canı 25%-in altına düşdükdə ölümdən qaçmaq üçün özünü alovlu bir barama daxilinə salaraq Fire Egg formasına dönüşər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -189,7 +183,10 @@
     "forms": [
       {
         "name": "Fire Egg",
-        "abilityName": "",
+        "type": ["Heyvan"],
+        "rarity": "Arcane",
+        "group": "ancients",
+        "abilityName": "Rebirth Cycle",
         "stats": {
           "health": "260",
           "shield": "0",
@@ -200,7 +197,7 @@
           "mana": "0",
           "number": "1"
         },
-        "trait": "10 saniyə ərzində qırılmazsa Phoenix-ə, qırılarsa Tphoenix-ə dönüşər.",
+        "trait": "Fire Egg formasında kart müdafiə mövqeyinə keçir və döyüş meydanında 10 saniyə boyunca sağ qalmağa çalışar. Əgər bu 10 saniyə ərzində rəqiblər tərəfindən qırılmazsa, daha güclü olan Phoenix formasına keçid edər. Əgər bu müddət bitmədən qırılarsa, yenidən əvvəlki Tphoenix formasına geri qayıdar.",
         "additionalStats": {
           "range": "-",
           "speed": "-",
@@ -221,7 +218,10 @@
       },
       {
         "name": "Phoenix",
-        "abilityName": "",
+        "type": ["Heyvan"],
+        "rarity": "Arcane",
+        "group": "ancients",
+        "abilityName": "Eternal Flare",
         "stats": {
           "health": "200",
           "shield": "0",
@@ -232,7 +232,7 @@
           "mana": "0",
           "number": "1"
         },
-        "trait": "Güclənmiş forma",
+        "trait": "Yenidən doğulan əfsanəvi Phoenix-in odlu hücumları rəqiblərin aktiv qalxanlarını tamamilə görməzdən gələr və birbaşa cana işləyər. O, döyüş meydanında qaldığı müddətcə hər uğurlu zərbəsində öz hücum gücünü daha da artıraraq əlavə +1 hasar qazanar.",
         "additionalStats": {
           "range": "1000",
           "speed": "1000",
@@ -659,12 +659,10 @@
   },
   {
     "name": "Whisper",
-    "type": [
-      "Ruh"
-    ],
+    "type": ["Ruh"],
     "rarity": "Arcane",
     "group": "ancients",
-    "abilityName": "",
+    "abilityName": "Mind Parasite",
     "stats": {
       "health": "50",
       "shield": "0",
@@ -675,7 +673,7 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "Rəqibin içinə girərək 14+(Kritik Şansı) saniyə onu idarə edər və yox olar",
+    "trait": "Whisper fiziki bədənini itirərək birbaşa hədəf aldığı rəqib kartın daxilinə sızar. Kartın daxili kritik şans göstəricisindən asılı olaraq, rəqibi 14 + (Kritik Şansı) saniyə boyunca tamamilə öz idarəsinə keçirər. Bu nəzarət müddəti başa çatdıqda Whisper döyüş meydanından tamamilə silinərək yox olar.",
     "additionalStats": {
       "range": "1,800",
       "speed": "1,000",
@@ -689,7 +687,7 @@
     "showlevels": {
       "level1": "+5% Critical Chance | 0% » 5%",
       "level2": "+15% Speed | 1,000 » 1,150",
-      "level3": "+21%s Control Duration | 14s » 17s"
+      "level3": "+3s Control Duration | 14s » 17s"
     },
     "story": "Whisper is a terrifying phantom that every person is said to glimpse at least once as they approach the end of their life. He is a predator of the soul, waiting for a moment of weakness to strike. If you are not quick enough to escape his gaze, he will merge with your form and steal every ounce of your vital energy. He leaves behind only a hollow shell, a silent thief who thrives on the life force of those who cannot outrun their own shadows.",
     "class": "Specialist"
