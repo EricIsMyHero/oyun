@@ -1,23 +1,22 @@
 [
   {
     "name": "Azrith",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Apex",
-    "group": "royal-blood",
+    "group": "royal-blood", 
+    "abilityName": "Sovereign Aura",
     "isMulti": true,
     "stats": {
       "health": "240",
       "shield": "80",
       "damage": "26",
       "sps": "17",
-      "attackSpeed": "1,50",
+      "attackSpeed": "1.50s",
       "delay": "-",
       "mana": "11",
       "number": "1"
     },
-    "trait": "Qalxanı qırılana qədər ətrafındakı kartlara +10% Hasar bonusu, Qalxanı qırıldıqda olduğu yerə \"Bannerox\" buraxar",
+    "trait": "Azrith döyüş meydanında sağ qaldığı və öz qalxanıqırılmadığı müddətcə ətrafındakı bütün dost kartlara +10% hasar bonusu təmin edər. Düşmən hücumları nəticəsində onun qalxanı qırıldıqda, Azrith geri çəkilmir və olduğu koordinata müqəddəs bir \"Bannerox\" sancar.",
     "additionalStats": {
       "range": "1300",
       "speed": "1000",
@@ -37,10 +36,9 @@
     "forms": [
       {
         "name": "Bannerox",
-        "type": [
-          "-"
-        ],
+        "type": ["Object"],
         "rarity": "Apex",
+        "abilityName": "Royal Heist",
         "stats": {
           "health": "80",
           "shield": "-",
@@ -51,7 +49,7 @@
           "mana": "-",
           "number": "1"
         },
-        "trait": "4x4 yaxındakı kartlara +10% Saldırı Hızı bonusu",
+        "trait": "Meydanda qalan bu bayraq strateji bir nöqtə rolunu oynayır və onun yaxınlığındakı bütün dost kartlara +10% hücum sürəti bonusu bəxş edərək ordunun döyüş əzmini artırar.",
         "additionalStats": {
           "range": "-",
           "speed": "-",
@@ -75,7 +73,8 @@
     "name": "Untouch",
     "type": ["Human"],
     "rarity": "Apex",
-    "group": "royal-blood",
+    "group": "royal-blood", 
+    "abilityName": "Absolute Sanctuary",
     "stats": {
       "health": "160",
       "shield": "320",
@@ -86,7 +85,7 @@
       "mana": "18",
       "number": "1"
     },
-    "trait": "Canı hər 20% azaldıqda 3 saniyəlik toxunulmaz olar və ilk vuruşu ekstra +20% Hasar verər",
+    "trait": "Bu dözümlü döyüşçünün canı hər 20% azaldıqda o, bədənini qoruyan xüsusi bir fazaya keçər və 2 saniyəlik tam toxunulmazlıq statusu qazanar. Bu toxunulmazlıq müddəti bitdikdən sonra edəcəyi ilk vuruşu rəqibə əlavə +20% hasar yetirər. Bu qabiliyyət onu kritik anlarda həm qoruyur, həm də əks-hücum üçün gücləndirir.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
