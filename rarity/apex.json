@@ -73,22 +73,20 @@
   },
   {
     "name": "Untouch",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Human"],
     "rarity": "Apex",
     "group": "royal-blood",
     "stats": {
-      "health": "320",
-      "shield": "0",
+      "health": "160",
+      "shield": "320",
       "damage": "56",
       "sps": "40",
-      "attackSpeed": "1,40",
+      "attackSpeed": "1.40s",
       "delay": "-",
       "mana": "18",
       "number": "1"
     },
-    "trait": "Canı hər 20% azaldıqda 3 saniyəlik ölümsüz olar və ilk vuruşu ekstra +200% Hasar verər",
+    "trait": "Canı hər 20% azaldıqda 3 saniyəlik toxunulmaz olar və ilk vuruşu ekstra +20% Hasar verər",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
