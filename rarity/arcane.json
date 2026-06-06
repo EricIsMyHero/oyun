@@ -45,7 +45,7 @@
       "shield": "0",
       "damage": "50",
       "sps": "33",
-      "attackSpeed": "1,50s",
+      "attackSpeed": "1.50s",
       "delay": "-",
       "mana": "15",
       "number": "1"
