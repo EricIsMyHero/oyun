@@ -540,23 +540,21 @@
   },
   {
     "name": "Aeralis",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Relic",
     "group": "royal-blood",
-    "abilityName": "",
+    "abilityName": "Kinetic Repulsion",
     "stats": {
       "health": "50",
       "shield": "0",
       "damage": "10x7",
       "sps": "70",
-      "attackSpeed": "0,10",
-      "delay": "2,6",
+      "attackSpeed": "0.10s",
+      "delay": "1.60s",
       "mana": "8",
       "number": "1"
     },
-    "trait": "Rəqibləri hər atış başına 0,1 geri atar, 12% Şansla 4x geri atar",
+    "trait": "Aeralis etdiyi hər bir uzaq məsafəli atışla hədəf aldığı rəqibləri 0,1 karo geri itələyər. O, yüksək konsentrasiya sayəsində 12% şansla bu effekti gücləndirərək rəqibi normal məsafədən 4 dəfə daha çox, yəni birbaşa 0,4 karo geri fırladar. Bu mexanika yaxın məsafəli döyüşçüləri uzaqda saxlamaq üçün əvəzsizdir.",
     "additionalStats": {
       "range": "2,500",
       "speed": "1,000",
