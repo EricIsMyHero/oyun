@@ -407,12 +407,10 @@
   },
   {
     "name": "Trac",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Familiar",
     "group": "royal-blood",
-    "abilityName": "",
+    "abilityName": "Resilient Vanguard",
     "stats": {
       "health": "700",
       "shield": "300",
@@ -423,7 +421,7 @@
       "mana": "16",
       "number": "1"
     },
-    "trait": "Hər <b>24</b> Hasar alanda <b>+1%</b> Saldırı Hızı bonusu qazanar",
+    "trait": "Trac döyüş meydanında aldığı hər bir zərbə ilə daha da təhlükəli və dayanıqlı bir döyüşçüyə çevrilir. O, aldığı hər 24 hasardan sonra daimi olaraq +0,5% hasar azaltma və +0,5% hücum sürəti qazanar. Uzunmüddətli qarşıdurmalarda Trac həm keçilməz bir sipərə, həm də sürətli bir hücumçuya çevrilər.",
     "additionalStats": {
       "range": "1000",
       "speed": "900",
@@ -553,12 +551,10 @@
   },
   {
     "name": "Fire Archer",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Familiar",
     "group": "royal-blood",
-    "abilityName": "",
+    "abilityName": "Rapid Ignition",
     "stats": {
       "health": "100",
       "shield": "50",
@@ -569,7 +565,7 @@
       "mana": "4",
       "number": "1"
     },
-    "trait": "Hər <b>4</b>-cü atışdan sonra <b>3</b> saniyəlik <b>+70%</b> Saldırı Hızı qazanar",
+    "trait": "Royal Blood qrupunun bu uzaq məsafəli nişançısı hər atışında yayını daha da qızışdırır. Etdiyi hər 4-cü atışdan sonra onun silahı tam alovlanır və ona 3 saniyəlik +70% hücum sürəti qazandırar. Bu qısamüddətli partlayış mexanikası rəqib xətlərini ox yağışına tutmaq üçün mükəmməldir.",
     "additionalStats": {
       "range": "2500",
       "speed": "1000",
@@ -736,23 +732,21 @@
   },
   {
     "name": "Mecha Shield",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Familiar",
     "group": "royal-blood",
-    "abilityName": "",
+    "abilityName": "Aegis Pulse",
     "stats": {
       "health": "500",
       "shield": "150",
       "damage": "20",
       "sps": "17",
-      "attackSpeed": "1,20s",
+      "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "13",
       "number": "1"
     },
-    "trait": "Hər <b>3x3</b> yaxınındakı kartlara <b>+25</b> Qalxan qazandırar",
+    "trait": "Bu mexaniki qoruyucu ətrafındakı müttəfiqlərini qorumaq üçün təyin olunub. O, özünə yaxın məsafədə yerləşən bütün dost kartlara hər 21 saniyədə bir +25 Qalxan bəxş edər.Bu periodik enerji dalğası ön cəbhədəki döyüşçülərin (xüsusilə Angels və Trac kimi kartların) sağ qalma şansını kəskin şəkildə artırır.",
     "additionalStats": {
       "range": "2900",
       "speed": "800",
@@ -764,7 +758,7 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+15% Critical Chance  |  5% » 205%",
+      "level1": "+5% Critical Chance  |  5% » 10%",
       "level2": "+5% Speed  |  800 » 840",
       "level3": "+15 Ability Shield  |  25 » 40"
     },
