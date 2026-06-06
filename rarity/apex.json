@@ -611,24 +611,23 @@
   },
   {
     "name": "Skyhunter",
-    "type": [
-      "Human"
-    ],
+    "type": ["Human"],
     "rarity": "Apex",
     "group": "royal-blood",
+    "abilityName": "Long-Range Precision",
     "stats": {
       "health": "180",
       "shield": "50",
-      "damage": "22",
-      "sps": "31",
-      "attackSpeed": "0.70s",
+      "damage": "50",
+      "sps": "40",
+      "attackSpeed": "1.25s",
       "delay": "-",
       "mana": "11",
       "number": "1"
     },
-    "trait": "Uçan kartlara +27% Hasar bonusu",
+    "trait": "Skyhunter rəqibləri ilə arasındakı məsafəni öz xeyrinə istifadə edən peşəkar bir ovçudur. O, hədəf aldığı rəqib kart ilə öz arasındakı hər karo üçün +10% hasar bonusu qazanar. Rəqib ondan nə qədər uzaq olarsa, Skyhunter-in oxları bir o qədər dağıdıcı gücə sahib olur. Bu xüsusiyyət onu arxa cəbhədən düşmənin əsas qüvvələrini zərərsizləşdirmək üçün mükəmməl bir uzaq məsafəli karta çevirir.",
     "additionalStats": {
-      "range": "1,500",
+      "range": "5,000",
       "speed": "1,000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
