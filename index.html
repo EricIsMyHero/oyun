@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLASH-A-MANA - Official Codex</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (group icons in Codex) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+<!-- ═══ AMBIENT PARTICLES ═══ -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- ═══════════════════════════════════════════════════════
+     INTRO / HERO SCREEN
+═══════════════════════════════════════════════════════ -->
+<section id="intro-screen">
+  <div class="intro-bg"></div>
+  <div class="intro-grid"></div>
+  <div class="intro-orb orb1"></div>
+  <div class="intro-orb orb2"></div>
+  <div class="intro-orb orb3"></div>
+
+  <div class="intro-content">
+    <p class="intro-eyebrow">Official Lore Codex &amp; Card Database</p>
+    <h1 class="intro-title">Clash-A-Mana</h1>
+    <div class="intro-divider"></div>
+    <p class="intro-subtitle">Stagnantia: The Tale of the Endless Cycle</p>
+
+    <div class="intro-story-preview">
+      <p>
+        The year is 2467. Humanity has reached the pinnacle of technological advancement —
+        yet is spiritually exhausted. To combat mass stagnation, a ruthless project was
+        launched. You are a card. You are a soldier. You are entertainment.
+      </p>
+    </div>
+
+    <div class="intro-cta-group">
+      <button class="btn-primary" id="explore-btn">Explore Cards</button>
+      <button class="btn-secondary" id="lore-btn">Read the Lore</button>
+    </div>
+  </div>
+
+  <div class="intro-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN PORTAL
+═══════════════════════════════════════════════════════ -->
+<div id="main-portal">
+
+  <!-- Sticky navigation -->
+  <nav id="site-nav">
+    <div class="nav-logo" id="nav-logo">CAM</div>
+    <ul class="nav-links">
+      <li><button class="nav-btn" data-section="lore">Lore</button></li>
+      <li><button class="nav-btn" data-section="cards">Cards</button></li>
+      <li><button class="nav-btn" data-section="spells">Spells</button></li>
+      <li><button class="nav-btn" data-section="info">Codex</button></li>
+      <li><button class="nav-btn nav-btn--shop" data-section="shop">⚡ Shop</button></li>
+      <li><button class="nav-btn nav-btn--pass" data-section="manapass">🌀 Mana Pass</button></li>
+      <li><button class="nav-btn nav-btn--trophy" data-section="trophyroad">🏆 Trophy Road</button></li>
+    </ul>
+  </nav>
+
+  <!-- ── LORE ── -->
+  <section id="lore-section">
+    <div class="section-wrap">
+      <p class="section-eyebrow reveal">Chapter I — The World of Stagnantia</p>
+      <h2 class="section-title reveal">The Endless Cycle</h2>
+      <div class="section-divider reveal"></div>
+
+      <div class="lore-intro-block reveal">
+        <div class="lore-text-side">
+          <p>The year is 2467. Humanity has reached the pinnacle of technological advancement, but is
+            spiritually exhausted. Diseases have been cured, resource problems solved. However, this
+            perfection has brought about a great curse — a period of stagnation in Stagnantia. People
+            no longer enjoy anything or create anything new.</p>
+          <p>To combat this mass feeling of boredom, a ruthless project is launched: <strong>Clash-A-Mana.</strong>
+            Scientists discovered reality-warping portals that bring beings from different times and
+            dimensions — ancient knights, robots of the future, mythological monsters, and wild beasts —
+            into the arena.</p>
+          <div class="lore-highlight-quote">
+            "The only way to freedom is not to win the game, but to destroy the system itself."
+          </div>
+          <p>You are dealt digital cards. These cards are the only way to control the beings brought
+            through portals. You have only one objective — destroy the opponent tower and be free.
+            But freedom is a lie they tell you.</p>
+        </div>
+
+        <div class="lore-visual-side">
+          <div class="lore-faction-card faction-crimson">
+            <span class="faction-badge">Ruling Class</span>
+            <div class="faction-name">⚔ The Crimson Crown</div>
+            <p class="faction-desc">The world's rulers and the wealthy. Architects of Stagnantia who
+              live in comfort. For them, life is just a control panel. They watch the battles as
+              entertainment, always from above.</p>
+          </div>
+          <div class="lore-faction-card faction-azure">
+            <span class="faction-badge">Working Class</span>
+            <div class="faction-name">🌊 The Azure Core</div>
+            <p class="faction-desc">The rest of society — the working class, ordinary people. They are
+              the cogs in the system created by the Crimson Crown. The Azure Core is always struggling,
+              but this struggle never lifts them to the upper class.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lore chapters -->
+      <div class="lore-chapters">
+        <p class="section-eyebrow reveal">World Codex</p>
+        <h2 class="section-title reveal">Lore Archives</h2>
+
+        <div class="chapter-grid reveal">
+          <div class="chapter-card">
+            <div class="chapter-num">01</div>
+            <span class="chapter-icon">🌍</span>
+            <div class="chapter-title">The World of Stagnantia</div>
+            <p class="chapter-text">A dystopian 2467 where perfection became a curse. Technological
+              utopia gave rise to spiritual emptiness, and from that void — Clash-A-Mana was born.</p>
+          </div>
+          <div class="chapter-card">
+            <div class="chapter-num">02</div>
+            <span class="chapter-icon">🔮</span>
+            <div class="chapter-title">The Mana Portals</div>
+            <p class="chapter-text">Reality-warping gateways that tear through time and dimension,
+              dragging warriors, monsters, and mythological entities into the arena against their will.</p>
+          </div>
+          <div class="chapter-card">
+            <div class="chapter-num">03</div>
+            <span class="chapter-icon">⚡</span>
+            <div class="chapter-title">The Clash System</div>
+            <p class="chapter-text">Giant symmetrical arenas house the battles. Red castle for the
+              Crimson Crown, blue for the Azure Core. Destroy the enemy tower — but freedom is always
+              one battle away.</p>
+          </div>
+          <div class="chapter-card">
+            <div class="chapter-num">04</div>
+            <span class="chapter-icon">🃏</span>
+            <div class="chapter-title">The Card Wielders</div>
+            <p class="chapter-text">Kidnapped from the Azure Core, forced to fight. Each card wielder
+              controls beings through digital mana bonds — strategy is survival, not sport.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CARDS DATABASE ── -->
+  <section id="cards-section">
+    <div class="section-wrap">
+      <div class="db-header">
+        <div>
+          <p class="section-eyebrow">Entity Registry</p>
+          <h2 class="section-title">Card Database</h2>
+          <div class="db-stats">Showing <span id="card-count">0</span> entities</div>
+        </div>
+        <div class="db-controls">
+          <div class="filter-row">
+            <span class="filter-label">Rarity</span>
+            <button class="filter-btn active" data-rarity="all">All</button>
+            <button class="filter-btn" data-rarity="mundane">Mundane</button>
+            <button class="filter-btn" data-rarity="familiar">Familiar</button>
+            <button class="filter-btn" data-rarity="arcane">Arcane</button>
+            <button class="filter-btn" data-rarity="relic">Relic</button>
+            <button class="filter-btn" data-rarity="ascendant">Ascendant</button>
+            <button class="filter-btn" data-rarity="apex">Apex</button>
+            <button class="filter-btn" data-rarity="ethereal">Ethereal</button>
+          </div>
+          <div class="filter-row">
+            <div class="search-box">
+              <span class="search-icon">⌕</span>
+              <input type="text" id="card-search" placeholder="Search entities…">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cards-grid" id="cards-grid">
+        <div class="no-results">Loading entity registry…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SPELLS ── -->
+  <section id="spells-section">
+    <div class="section-wrap">
+      <div class="db-header">
+        <div>
+          <p class="section-eyebrow">Arcane Arsenal</p>
+          <h2 class="section-title">Spell Archive</h2>
+          <div class="db-stats">Showing <span id="spell-count">0</span> spells</div>
+        </div>
+        <div class="db-controls">
+          <div class="filter-row">
+            <span class="filter-label">Rarity</span>
+            <button class="filter-btn spell-filter active" data-filter="all">All</button>
+            <button class="filter-btn spell-filter" data-filter="legendary">Legendary</button>
+            <button class="filter-btn spell-filter" data-filter="epic">Epic</button>
+            <button class="filter-btn spell-filter" data-filter="rare">Rare</button>
+            <button class="filter-btn spell-filter" data-filter="common">Common</button>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">Type</span>
+            <button class="filter-btn spell-type active" data-type="all">All</button>
+            <button class="filter-btn spell-type" data-type="normal">Normal</button>
+            <button class="filter-btn spell-type" data-type="building">Building</button>
+          </div>
+        </div>
+      </div>
+      <div class="spells-grid" id="spells-grid">
+        <div class="no-results">Loading arcane archive…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CODEX / INFO ── -->
+  <section id="info-section">
+    <div class="section-wrap">
+      <p class="section-eyebrow">Game Mechanics</p>
+      <h2 class="section-title">The Codex</h2>
+      <div class="section-divider"></div>
+      <div class="codex-layout">
+        <nav class="codex-nav" id="codex-nav"></nav>
+        <div class="codex-content" id="codex-content"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SHOP ── -->
+  <section id="shop-section">
+    <div class="section-wrap">
+
+      <!-- Header -->
+      <p class="section-eyebrow reveal">Mana Exchange</p>
+      <h2 class="section-title reveal">The Arcane Shop</h2>
+      <div class="section-divider reveal"></div>
+      <p class="shop-tagline reveal">Power your deck. Dominate the arena. Spend wisely — freedom has a price.</p>
+
+      <!-- Player Wallet Bar -->
+      <div class="wallet-bar wallet-bar--full reveal">
+        <div class="wallet-item">
+          <span class="wallet-icon">🪙</span>
+          <span class="wallet-label">Gold</span>
+          <span class="wallet-amount wallet-c--gold" id="wallet-gold">4,200</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">🃏</span>
+          <span class="wallet-label">Card Piece</span>
+          <span class="wallet-amount wallet-c--cardpiece" id="wallet-cardpiece">320</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">💎</span>
+          <span class="wallet-label">Ruby</span>
+          <span class="wallet-amount wallet-c--ruby" id="wallet-ruby">85</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">🔴</span>
+          <span class="wallet-label">Ruby Piece</span>
+          <span class="wallet-amount wallet-c--rubypiece" id="wallet-rubypiece">14</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">⚙️</span>
+          <span class="wallet-label">Tower Gear</span>
+          <span class="wallet-amount wallet-c--gear" id="wallet-gear">7</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">✨</span>
+          <span class="wallet-label">Card Shard</span>
+          <span class="wallet-amount wallet-c--cardshard" id="wallet-cardshard">45</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">⚡</span>
+          <span class="wallet-label">Mana Shard</span>
+          <span class="wallet-amount wallet-c--mana" id="wallet-mana">12</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">🗝️</span>
+          <span class="wallet-label">Dungeon Key</span>
+          <span class="wallet-amount wallet-c--key" id="wallet-key">3</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">🌟</span>
+          <span class="wallet-label">Gold Card</span>
+          <span class="wallet-amount wallet-c--goldcard" id="wallet-goldcard">1</span>
+        </div>
+        <div class="wallet-item">
+          <span class="wallet-icon">🧩</span>
+          <span class="wallet-label">Piece Card</span>
+          <span class="wallet-amount wallet-c--piececard" id="wallet-piececard">0</span>
+        </div>
+        <button class="wallet-topup-btn" id="topup-btn">+ Top Up</button>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="shop-tabs reveal">
+        <button class="shop-tab active" data-shop-tab="currency">💰 Currency</button>
+        <button class="shop-tab" data-shop-tab="packs">📦 Card Packs</button>
+        <button class="shop-tab" data-shop-tab="boosters">⚗️ Boosters</button>
+        <button class="shop-tab" data-shop-tab="cosmetics">✨ Cosmetics</button>
+        <button class="shop-tab" data-shop-tab="bundles">🔥 Bundles</button>
+        <button class="shop-tab shop-tab--chests" data-shop-tab="chests">🗝️ Sandıqlar</button>
+      </div>
+
+      <!-- === CURRENCY TAB === -->
+      <div class="shop-panel active" id="shop-currency">
+        <p class="shop-panel-desc">Convert real currency into in-game resources. Gems are the premium currency — use them to unlock powerful cards, exclusive cosmetics, and special events.</p>
+        <div class="currency-grid">
+          <div class="currency-card">
+            <div class="currency-card__glow" style="--clr:#e8c95a"></div>
+            <div class="currency-icon">🪙</div>
+            <div class="currency-name">Pocket Gold</div>
+            <div class="currency-amount">1,000 Gold</div>
+            <div class="currency-bonus"></div>
+            <div class="currency-price">Free</div>
+            <button class="shop-buy-btn" onclick="handlePurchase('1,000 Gold', 'free')">Claim</button>
+          </div>
+          <div class="currency-card">
+            <div class="currency-card__glow" style="--clr:#a78bfa"></div>
+            <div class="currency-icon">♦️</div>
+            <div class="currency-name">Ruby Pouch</div>
+            <div class="currency-amount">10 Rubies</div>
+            <div class="currency-bonus">+ 2 Bonus Rubies</div>
+            <div class="currency-bonus"></div>
+            <div class="currency-price">$0.99</div>
+            <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('12 Rubies', '$0.99')">Buy</button>
+          </div>
+          <div class="currency-card">
+            <div class="currency-card__glow" style="--clr:#f87171"></div>
+            <div class="currency-icon">♦️♦️</div>
+            <div class="currency-name">Ruby Satchel</div>
+            <div class="currency-amount">50 Rubies</div>
+            <div class="currency-bonus">+ 15 Bonus Rubies</div>
+            <div class="currency-price">$4.99</div>
+            <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('65 Rubies', '$4.99')">Buy</button>
+          </div>
+          <div class="currency-card">
+            <div class="currency-card__glow" style="--clr:#f87171"></div>
+            <div class="currency-icon">♦️♦️♦️</div>
+            <div class="currency-name">Ruby Hoard 1</div>
+            <div class="currency-amount">120 Rubies</div>
+            <div class="currency-bonus">+ 30 Bonus Rubies</div>
+            <div class="currency-price">$9.99</div>
+            <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('150 Rubies', '$9.99')">Buy</button>
+          </div>
+          <div class="currency-card currency-card--popular">
+            <div class="currency-card__glow" style="--clr:#7b9cff"></div>
+            <div class="currency-badge">Most Popular</div>
+            <div class="currency-icon">♦️🌟♦️</div>
+            <div class="currency-name">Ruby Hoard 2</div>
+            <div class="currency-amount">240 Rubies</div>
+            <div class="currency-bonus">+ 160 Bonus Rubies</div>
+            <div class="currency-price">$19.99</div>
+            <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('400 Rubies', '$19.99')">Buy</button>
+          </div>
+          <div class="currency-card">
+            <div class="currency-card__glow" style="--clr:#f87171"></div>
+            <div class="currency-icon">🌟♦️🌟</div>
+            <div class="currency-name">Ruby Hoard 3</div>
+            <div class="currency-amount">520 Rubies</div>
+            <div class="currency-bonus">+ 480 Bonus Rubies</div>
+            <div class="currency-price">$39.99</div>
+            <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('1,000 Rubies', '$39.99')">Buy</button>
+          </div>
+          <div class="currency-card">
+            <div class="currency-card__glow" style="--clr:#fb923c"></div>
+            <div class="currency-icon">⚡</div>
+            <div class="currency-name">Mana Shards</div>
+            <div class="currency-amount">10 Shards</div>
+            <div class="currency-bonus"></div>
+            <div class="currency-price">1000 Gold</div>
+            <button class="shop-buy-btn" onclick="handlePurchase('10 Mana Shards', '1000 Gold')">Buy</button>
+          </div>
+          <div class="currency-card currency-card--best">
+            <div class="currency-card__glow" style="--clr:#f472b6"></div>
+            <div class="currency-badge currency-badge--best">Best Value</div>
+            <div class="currency-icon">👑</div>
+            <div class="currency-name">Arcane Vault</div>
+            <div class="currency-amount">5,000 Rubies</div>
+            <div class="currency-bonus">+ 1,500 Bonus · Exclusive Avatar</div>
+            <div class="currency-price">$99.99</div>
+            <button class="shop-buy-btn shop-buy-btn--premium" onclick="handlePurchase('6,500 Rubies + Avatar', '$99.99')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- === CARD PACKS TAB === -->
+      <div class="shop-panel" id="shop-packs">
+        <p class="shop-panel-desc">Each pack contains a set of cards drawn from the entity registry. Higher tier packs guarantee rarer cards.</p>
+        <div class="packs-grid">
+          <div class="pack-card pack-card--mundane">
+            <div class="pack-shimmer"></div>
+            <div class="pack-icon">📦</div>
+            <div class="pack-rarity-tag">Mundane Pack</div>
+            <div class="pack-name">Soldier's Cache</div>
+            <p class="pack-desc">5 cards — guaranteed 1 Familiar or higher. Good starting point for new players.</p>
+            <div class="pack-odds">
+              <span>Familiar 40%</span><span>Arcane 25%</span><span>Relic 15%</span>
+            </div>
+            <div class="pack-footer">
+              <span class="pack-price">💎 100</span>
+              <button class="shop-buy-btn" onclick="handlePurchase('Soldier\'s Cache Pack', '100 Gems')">Open Pack</button>
+            </div>
+          </div>
+          <div class="pack-card pack-card--arcane">
+            <div class="pack-shimmer"></div>
+            <div class="pack-icon">🔮</div>
+            <div class="pack-rarity-tag" style="color:var(--arcane)">Arcane Pack</div>
+            <div class="pack-name">Mage's Tome</div>
+            <p class="pack-desc">7 cards — guaranteed 1 Relic or higher. Ideal for mid-game deck building.</p>
+            <div class="pack-odds">
+              <span>Relic 35%</span><span>Ascendant 20%</span><span>Apex 8%</span>
+            </div>
+            <div class="pack-footer">
+              <span class="pack-price">💎 250</span>
+              <button class="shop-buy-btn shop-buy-btn--gem" onclick="handlePurchase('Mage\'s Tome Pack', '250 Gems')">Open Pack</button>
+            </div>
+          </div>
+          <div class="pack-card pack-card--apex">
+            <div class="pack-shimmer"></div>
+            <div class="currency-badge">Limited</div>
+            <div class="pack-icon">⚡</div>
+            <div class="pack-rarity-tag" style="color:var(--apex)">Apex Pack</div>
+            <div class="pack-name">Warlord's Chest</div>
+            <p class="pack-desc">10 cards — guaranteed 2 Ascendant+ and 1 Apex or higher. Elite tier.</p>
+            <div class="pack-odds">
+              <span>Ascendant 30%</span><span>Apex 15%</span><span>Ethereal 5%</span>
+            </div>
+            <div class="pack-footer">
+              <span class="pack-price">💎 600</span>
+              <button class="shop-buy-btn shop-buy-btn--premium" onclick="handlePurchase('Warlord\'s Chest Pack', '600 Gems')">Open Pack</button>
+            </div>
+          </div>
+          <div class="pack-card pack-card--ethereal">
+            <div class="pack-shimmer"></div>
+            <div class="currency-badge currency-badge--best">Exclusive</div>
+            <div class="pack-icon">👻</div>
+            <div class="pack-rarity-tag" style="color:var(--ethereal)">Ethereal Pack</div>
+            <div class="pack-name">Void Reliquary</div>
+            <p class="pack-desc">12 cards — one guaranteed Ethereal card. For collectors and competitive players only.</p>
+            <div class="pack-odds">
+              <span>Apex 20%</span><span>Ethereal 100%¹</span>
+            </div>
+            <div class="pack-footer">
+              <span class="pack-price">⚡ 5 Shards</span>
+              <button class="shop-buy-btn shop-buy-btn--mana" onclick="handlePurchase('Void Reliquary Pack', '5 Mana Shards')">Open Pack</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === BOOSTERS TAB === -->
+      <div class="shop-panel" id="shop-boosters">
+        <p class="shop-panel-desc">Temporary enhancements that give you an edge in battle. Active until consumed or the session ends.</p>
+        <div class="booster-list">
+          <div class="booster-row">
+            <div class="booster-icon" style="background:rgba(123,156,255,0.15);color:var(--accent)">⚡</div>
+            <div class="booster-info">
+              <div class="booster-name">Mana Surge</div>
+              <p class="booster-desc">+1 Mana regeneration per turn for 10 battles</p>
+              <div class="booster-duration">⏱ 10 battles</div>
+            </div>
+            <div class="booster-price-col">
+              <span class="pack-price">💎 50</span>
+              <button class="shop-buy-btn" onclick="handlePurchase('Mana Surge', '50 Gems')">Buy</button>
+            </div>
+          </div>
+          <div class="booster-row">
+            <div class="booster-icon" style="background:rgba(248,113,113,0.15);color:var(--relic)">🗡️</div>
+            <div class="booster-info">
+              <div class="booster-name">Battle Fury</div>
+              <p class="booster-desc">+15% damage for all units for 5 battles</p>
+              <div class="booster-duration">⏱ 5 battles</div>
+            </div>
+            <div class="booster-price-col">
+              <span class="pack-price">💎 80</span>
+              <button class="shop-buy-btn" onclick="handlePurchase('Battle Fury', '80 Gems')">Buy</button>
+            </div>
+          </div>
+          <div class="booster-row booster-row--featured">
+            <div class="booster-icon" style="background:rgba(250,204,21,0.15);color:var(--gold)">⭐</div>
+            <div class="booster-info">
+              <div class="booster-name">Fortune's Blessing <span class="booster-tag">Popular</span></div>
+              <p class="booster-desc">Double Gold and XP earned from battles for 24 hours</p>
+              <div class="booster-duration">⏱ 24 hours</div>
+            </div>
+            <div class="booster-price-col">
+              <span class="pack-price">💎 120</span>
+              <button class="shop-buy-btn shop-buy-btn--gem" onclick="handlePurchase('Fortune\'s Blessing', '120 Gems')">Buy</button>
+            </div>
+          </div>
+          <div class="booster-row">
+            <div class="booster-icon" style="background:rgba(167,139,250,0.15);color:var(--arcane)">🛡️</div>
+            <div class="booster-info">
+              <div class="booster-name">Iron Ward</div>
+              <p class="booster-desc">+20% tower HP at the start of each battle for 7 battles</p>
+              <div class="booster-duration">⏱ 7 battles</div>
+            </div>
+            <div class="booster-price-col">
+              <span class="pack-price">🪙 500</span>
+              <button class="shop-buy-btn" onclick="handlePurchase('Iron Ward', '500 Gold')">Buy</button>
+            </div>
+          </div>
+          <div class="booster-row">
+            <div class="booster-icon" style="background:rgba(244,114,182,0.15);color:var(--ethereal)">🔮</div>
+            <div class="booster-info">
+              <div class="booster-name">Spell Amplifier</div>
+              <p class="booster-desc">All spells deal 25% more damage for 3 battles</p>
+              <div class="booster-duration">⏱ 3 battles</div>
+            </div>
+            <div class="booster-price-col">
+              <span class="pack-price">⚡ 1 Shard</span>
+              <button class="shop-buy-btn shop-buy-btn--mana" onclick="handlePurchase('Spell Amplifier', '1 Mana Shard')">Buy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === COSMETICS TAB === -->
+      <div class="shop-panel" id="shop-cosmetics">
+        <p class="shop-panel-desc">Purely cosmetic — no gameplay advantage. Stand out in the arena with exclusive visual flair.</p>
+        <div class="cosm-grid">
+          <div class="cosm-card">
+            <div class="cosm-preview cosm-preview--avatar">👑</div>
+            <div class="cosm-type">Profile Avatar</div>
+            <div class="cosm-name">Crimson Crown</div>
+            <div class="cosm-price">💎 200</div>
+            <button class="shop-buy-btn" onclick="handlePurchase('Crimson Crown Avatar', '200 Gems')">Equip</button>
+          </div>
+          <div class="cosm-card">
+            <div class="cosm-preview cosm-preview--frame">🔵</div>
+            <div class="cosm-type">Card Frame</div>
+            <div class="cosm-name">Azure Core Border</div>
+            <div class="cosm-price">💎 150</div>
+            <button class="shop-buy-btn" onclick="handlePurchase('Azure Core Border', '150 Gems')">Equip</button>
+          </div>
+          <div class="cosm-card cosm-card--owned">
+            <div class="cosm-preview cosm-preview--emote">⚡</div>
+            <div class="cosm-type">Battle Emote</div>
+            <div class="cosm-name">Mana Crackle</div>
+            <div class="cosm-owned-badge">Owned</div>
+            <button class="shop-buy-btn shop-buy-btn--owned" disabled>Equipped</button>
+          </div>
+          <div class="cosm-card">
+            <div class="cosm-preview cosm-preview--board">🌑</div>
+            <div class="cosm-type">Arena Skin</div>
+            <div class="cosm-name">Void Coliseum</div>
+            <div class="cosm-price">⚡ 3 Shards</div>
+            <button class="shop-buy-btn shop-buy-btn--mana" onclick="handlePurchase('Void Coliseum Arena', '3 Mana Shards')">Unlock</button>
+          </div>
+          <div class="cosm-card">
+            <div class="cosm-preview cosm-preview--title">📜</div>
+            <div class="cosm-type">Player Title</div>
+            <div class="cosm-name">"Stagnantia's Chosen"</div>
+            <div class="cosm-price">💎 350</div>
+            <button class="shop-buy-btn shop-buy-btn--gem" onclick="handlePurchase('Stagnantia\'s Chosen Title', '350 Gems')">Unlock</button>
+          </div>
+          <div class="cosm-card cosm-card--exclusive">
+            <div class="currency-badge currency-badge--best">Rare</div>
+            <div class="cosm-preview cosm-preview--effect">🌟</div>
+            <div class="cosm-type">Card Effect</div>
+            <div class="cosm-name">Ethereal Shimmer</div>
+            <div class="cosm-price">⚡ 8 Shards</div>
+            <button class="shop-buy-btn shop-buy-btn--mana" onclick="handlePurchase('Ethereal Shimmer Effect', '8 Mana Shards')">Unlock</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- === BUNDLES TAB === -->
+      <div class="shop-panel" id="shop-bundles">
+        <p class="shop-panel-desc">Limited time offers that combine cards, currency, and cosmetics at a discounted rate. Bundles rotate weekly.</p>
+        <div class="bundles-grid">
+          <div class="bundle-card bundle-card--starter">
+            <div class="bundle-timer">⏳ Ends in 3d 14h</div>
+            <div class="bundle-icon">🌱</div>
+            <div class="bundle-name">Starter's Arsenal</div>
+            <p class="bundle-desc">Everything a new warrior needs to enter the arena.</p>
+            <div class="bundle-contents">
+              <div class="bundle-item">📦 3× Soldier's Cache</div>
+              <div class="bundle-item">🪙 2,000 Gold</div>
+              <div class="bundle-item">⚡ Mana Surge Booster</div>
+            </div>
+            <div class="bundle-pricing">
+              <span class="bundle-original">$7.99</span>
+              <span class="bundle-sale">$3.99</span>
+              <span class="bundle-save">Save 50%</span>
+            </div>
+            <button class="shop-buy-btn shop-buy-btn--bundle" onclick="handlePurchase('Starter\'s Arsenal Bundle', '$3.99')">Buy Bundle</button>
+          </div>
+          <div class="bundle-card bundle-card--warrior">
+            <div class="bundle-timer">⏳ Ends in 1d 08h</div>
+            <div class="currency-badge">Hot Deal</div>
+            <div class="bundle-icon">⚔️</div>
+            <div class="bundle-name">Warlord's Compact</div>
+            <p class="bundle-desc">Mid-tier deck upgrade with a bonus cosmetic included.</p>
+            <div class="bundle-contents">
+              <div class="bundle-item">🔮 2× Mage's Tome</div>
+              <div class="bundle-item">💎 300 Gems</div>
+              <div class="bundle-item">🎨 Crimson Crown Avatar</div>
+              <div class="bundle-item">⭐ Fortune's Blessing ×2</div>
+            </div>
+            <div class="bundle-pricing">
+              <span class="bundle-original">$19.99</span>
+              <span class="bundle-sale">$11.99</span>
+              <span class="bundle-save">Save 40%</span>
+            </div>
+            <button class="shop-buy-btn shop-buy-btn--bundle" onclick="handlePurchase('Warlord\'s Compact Bundle', '$11.99')">Buy Bundle</button>
+          </div>
+          <div class="bundle-card bundle-card--eternal">
+            <div class="bundle-timer">⏳ Ends in 6d 00h</div>
+            <div class="currency-badge currency-badge--best">Ultimate</div>
+            <div class="bundle-icon">👑</div>
+            <div class="bundle-name">Eternal Conqueror</div>
+            <p class="bundle-desc">The definitive collection for veteran players seeking total dominance.</p>
+            <div class="bundle-contents">
+              <div class="bundle-item">👻 1× Void Reliquary</div>
+              <div class="bundle-item">⚡ 1× Warlord's Chest</div>
+              <div class="bundle-item">💎 1,000 Gems</div>
+              <div class="bundle-item">🌑 Void Coliseum Arena</div>
+              <div class="bundle-item">🌟 Ethereal Shimmer Effect</div>
+              <div class="bundle-item">📜 "Stagnantia's Chosen" Title</div>
+            </div>
+            <div class="bundle-pricing">
+              <span class="bundle-original">$79.99</span>
+              <span class="bundle-sale">$49.99</span>
+              <span class="bundle-save">Save 37%</span>
+            </div>
+            <button class="shop-buy-btn shop-buy-btn--premium" onclick="handlePurchase('Eternal Conqueror Bundle', '$49.99')">Buy Bundle</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.section-wrap -->
+
+      <!-- === CHESTS TAB === -->
+      <div class="shop-panel" id="shop-chests">
+        <div class="section-wrap chests-wrap">
+          <p class="shop-panel-desc">Hər sandıq açıldıqda unikal miqdar resurs qazanırsınız. Mükafat dəyərləri xətti çəki sistemi ilə 40%→10% şans paylanması əsasında hesablanır — kiçik dəyərlər daha çox, böyük dəyərlər isə nadirdir.</p>
+
+          <!-- Chest Grid -->
+          <div class="chests-grid" id="chests-grid">
+            <!-- JS ilə doldurulacaq -->
+          </div>
+
+          <!-- Open Result Modal -->
+          <div class="chest-result-overlay" id="chest-result-overlay">
+            <div class="chest-result-box" id="chest-result-box">
+              <div class="chest-result-close" id="chest-result-close">✕</div>
+              <div class="chest-result-icon" id="chest-result-icon">📦</div>
+              <div class="chest-result-chest-name" id="chest-result-chest-name">Mundane Chest</div>
+              <h3 class="chest-result-title">Sandıq Açıldı!</h3>
+              <div class="chest-result-rewards" id="chest-result-rewards"></div>
+              <button class="chest-open-again-btn" id="chest-open-again-btn">Yenidən Aç</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Purchase Toast -->
+    <div class="shop-toast" id="shop-toast"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       MANA PASS SECTION — JS tərəfindən doldurulur
+  ══════════════════════════════════════════════════════ -->
+  <section id="manapass-section" style="display:none">
+    <!-- initManaPass() bütün HTML-i buraya inject edir -->
+  </section>
+
+  <section id="trophyroad-section" style="display:none">
+    <!-- initTrophyRoad() bütün HTML-i buraya inject edir -->
+  </section>
+
+</div><!-- /#main-portal -->
+
+<!-- ═══════════════════════════════════════════════════════
+     CARD DETAIL MODAL
+═══════════════════════════════════════════════════════ -->
+<div id="modal-overlay">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="modal-img-col" id="modal-img-col">
+      <div class="modal-img-rarity" id="modal-img-rarity"></div>
+      <img id="modal-img" src="" alt="" style="display:none">
+      <div class="modal-img-placeholder" id="modal-placeholder">⚔</div>
+      <div class="modal-img-gradient"></div>
+    </div>
+    <div class="modal-content-col" id="modal-content"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCRIPTS  (order matters — core first, then modules)
+═══════════════════════════════════════════════════════ -->
+<script src="js/core/particles.js"></script>
+<script src="js/modules/cards.js"></script>
+<script src="js/modules/spells.js"></script>
+<script src="js/modules/info.js"></script>
+<script src="js/modules/shop.js"></script>
+<script src="js/modules/chests.js"></script>
+<script src="js/modules/manapass.js"></script>
+<script src="js/modules/trophyroad.js"></script>
+<script src="js/core/modal.js"></script>
+<script src="js/core/navigation.js"></script>
+
+</body>
+</html>
