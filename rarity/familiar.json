@@ -768,23 +768,21 @@
   },
   {
     "name": "Venomspikes",
-    "type": [
-      "Heyvan"
-    ],
+    "type": ["Animal"],
     "rarity": "Familiar",
     "group": "twisted-farm",
-    "abilityName": "",
+    "abilityName": "Toxic Accumulation",
     "stats": {
       "health": "170",
       "shield": "30",
       "damage": "15",
       "sps": "12",
-      "attackSpeed": "1,30s",
+      "attackSpeed": "1.30s",
       "delay": "-",
       "mana": "10",
       "number": "4"
     },
-    "trait": "Hər vuruşda rəqibi zəhərləyər 5 dəfə zəhərlədikdə rəqib maksimum canının 8%-i qədər hasar alar.",
+    "trait": "Venomspikes hər uğurlu vuruşunda rəqib kartın bədəninə xüsusi bir toksin yeridərək onu zəhərləyər. Bu zəhər effekti eyni hədəf üzərində üst-üstə yığılar. Rəqib kart tam 5 dəfə zəhərləndikdə bədəndəki toksinlər reaksiyaya girərək partlayış törədər. Bu an rəqib öz maksimum canının 8%-i qədər birbaşa böyük hasar alar. Yüksək cana malik olan dözümlü tankları və böyük vahidləri zamanla əritmək üçün mükəmməl bir passiv mexanikadır.",
     "additionalStats": {
       "range": "1000",
       "speed": "950",
