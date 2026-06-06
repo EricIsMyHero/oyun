@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════════════════════
+/* ═══════════════════════════════════.═══════════════════
    js/modules/cards.js
    Card database – fetch, filter, render
 ═══════════════════════════════════════════════════════ */
@@ -44,20 +44,36 @@ function _toNum(v) {
   const n = parseFloat(s);
   return isNaN(n) ? 0 : n;
 }
-function _aspd(v) {
-  if (!v || v === '-') return 1;
+
+function _parseSec(v) {
+  if (!v || v === '-') return 0;
   const s = String(v).split('/')[0].replace(',', '.').replace('s', '').trim();
   const n = parseFloat(s);
-  return (isNaN(n) || n <= 0) ? 1 : n;
+  return (isNaN(n) || n < 0) ? 0 : n;
 }
-function _dmg(v) {
-  if (!v || v === '-') return 0;
+
+function _parseDmg(v) {
+  // Returns { count, perHit }
+  if (!v || v === '-') return { count: 1, perHit: 0 };
   const first = String(v).split('/')[0].trim();
   if (first.includes('x')) {
     const [a, b] = first.split('x');
-    return (parseFloat(a) || 1) * (parseFloat(b) || 1);
+    return { count: parseFloat(a) || 1, perHit: parseFloat(b) || 0 };
   }
-  return _toNum(first);
+  const n = parseFloat(first.replace(',', '.'));
+  return { count: 1, perHit: isNaN(n) ? 0 : n };
+}
+
+function _calcDPS(stats) {
+  const { count, perHit } = _parseDmg(stats.damage);
+  const aspd  = _parseSec(stats.attackSpeed);  // saniyə / güllə
+  const delay = _parseSec(stats.delay);          // hücumlar arası gözləmə
+
+  const totalDmg       = count * perHit;
+  const attackDuration = count * aspd;           // bütün güllələrin vaxtı
+  const fullCycle      = attackDuration + delay;  // tam hücum dövrü
+
+  return fullCycle > 0 ? totalDmg / fullCycle : totalDmg;
 }
 
 function calcCardPower(card) {
@@ -65,10 +81,8 @@ function calcCardPower(card) {
   const as = card.additionalStats || {};
   const hp      = _toNum(s.health);
   const shield  = _toNum(s.shield);
-  const atk     = _dmg(s.damage);
-  const aspd    = _aspd(s.attackSpeed);
   const count   = _toNum(s.number) || 1;
-  const dps     = aspd > 0 ? atk / aspd : 0;
+  const dps     = _calcDPS(s);
   const range   = _toNum(as.range);
   const speed   = _toNum(as.speed);
   const crit    = _toNum(as.criticalChance);
