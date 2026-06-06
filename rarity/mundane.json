@@ -720,12 +720,10 @@
   },
   {
     "name": "Angels",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Mundane",
     "group": "royal-blood",
-    "abilityName": "",
+    "abilityName": "Martyrdom Blessing",
     "stats": {
       "health": "10",
       "shield": "0",
@@ -736,7 +734,7 @@
       "mana": "8",
       "number": "10"
     },
-    "trait": "Hər <b>0,4</b> saniyədə çıxarlar, hər ölən <b>*Angel*</b> üçün <b>+1</b> Hasar bonusu qazanarlar",
+    "trait": "Angels döyüş meydanında davamlı bir axın yaradır və hər 0,4 saniyədə bir yenisi ön xəttə daxil olar. Meydandakı hər bir Angels vahidi məhv edildikdə, onun ruhu geridə qalan digər bütün mələk kartlarını gücləndirər və onlara daimi +2 hasar bonusu qazandırar.",
     "additionalStats": {
       "range": "900",
       "speed": "1100",
@@ -749,7 +747,7 @@
     },
     "showlevels": {
       "level1": "+15% DMG  |  7 » 8",
-      "level2": "+1 Angel Number  |  10 » 11",
+      "level2": "+2 Angel Number  |  10 » 12",
       "level3": "+5% Speed  |  1100 » 1155"
     },
     "story": "The Angels are the restless spirits of ancient nobles who once served the throne with unwavering loyalty. Even in death, they refuse to leave the kingdom they loved. These ethereal guardians float above the battlefield, draped in shimmering white robes, acting as the ultimate shield for the royal lineage. They are not mere ghosts; they are the divine manifestation of the kingdom's history. Their presence inspires the living, ensuring that the legacy of the Royal Blood remains untouched by the corruption of the outside world.",
