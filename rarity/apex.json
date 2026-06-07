@@ -121,7 +121,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Hər 40 saniyədə qarşıdakı rəqibi öz tərəfinə çəkər",
+    "trait": "Hər 40 saniyədə qarşıdakı rəqibi 20 saniyəlik öz tərəfinə çəkər",
     "additionalStats": {
       "range": "6000",
       "speed": "900",
@@ -132,6 +132,8 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "mechanic": "mind-control",
+    "mechanicStats": { "controlDuration": 20 },
     "showlevels": {
       "level1": "-",
       "level2": "-",
