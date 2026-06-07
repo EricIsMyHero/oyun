@@ -65,11 +65,11 @@ function calcEffectBonus(card) {
   if (Array.isArray(card.effects)) {
     for (const eff of card.effects) {
       const dur    = toNum(eff.duration)       || 1;
-      const cln    = toNum(eff.cooldown)       || 1;
       const pct    = toNum(eff.percentage)     || 1;
       const dps    = toNum(eff.damagePerSecond)|| 0;
       const chance = toNum(eff.chance)         || 100;
       const amount = toNum(eff.amount)         || 0;
+      const cln    = toNum(eff.cooldown)       || 1;
       const cm     = chance / 100;
 
       // damage sahəsi AxB formatında ola bilər: "2x5" → 10
@@ -112,10 +112,10 @@ function calcEffectBonus(card) {
           bonus += dps > 0 ? dps * dur * 0.5 : amount * 0.5;
           break;
         case "stat-reduction":
-          bonus += cln * amount * 0.6 * cm;
+          bonus += amount * 0.6 * cm;
           break;
         case "shield-grant":
-          bonus += cln * amount * 0.4;
+          bonus += (amount / cln) * 0.4;
           break;
       }
     }
