@@ -684,6 +684,8 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "mechanic": "mind-control",
+    "mechanicStats": { "controlDuration": 14 },
     "showlevels": {
       "level1": "+5% Critical Chance | 0% » 5%",
       "level2": "+15% Speed | 1,000 » 1,150",
