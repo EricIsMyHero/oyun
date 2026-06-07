@@ -270,6 +270,9 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+    { "type": "slow", "percentage": 25, "duration": 2 }
+  ],
     "showlevels": {
       "level1": "+5% Öz. Yavaşlatma  |  25% » 30%",
       "level2": "+5% Can  |  200% » 210%",
@@ -459,9 +462,7 @@
   },
   {
     "name": "Nightprowler",
-    "type": [
-      "Ruh"
-    ],
+    "type": ["Ruh"],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -496,9 +497,7 @@
   },
   {
     "name": "Twins",
-    "type": [
-      "Ruh"
-    ],
+    "type": ["Ruh"],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -527,15 +526,13 @@
       "level2": "+4% Speed  |  1150 » 1200",
       "level3": "+10% Range  |  1000 » 1100"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "",
     "class": "Fighter",
     "subclass": "Berserker"
   },
   {
     "name": "Bethe",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Mundane",
     "group": "mission-1",
     "abilityName": "Overdrive Harvest",
@@ -570,9 +567,7 @@
   },
   {
     "name": "Snaykies",
-    "type": [
-      "Heyvan"
-    ],
+    "type": ["Heyvan"],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -580,14 +575,14 @@
       "shield": "0",
       "damage": "15",
       "sps": "17",
-      "attackSpeed": "0,90s",
+      "attackSpeed": "0.90s",
       "delay": "-",
       "mana": "4",
       "number": "2"
     },
     "trait": "Vuruşları qalxandan keçər, vuruşları ekstra <b>2x4</b> Zəhər Hasarı verər",
     "additionalStats": {
-      "range": "2050",
+      "range": "950",
       "speed": "1100",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -596,20 +591,21 @@
       "damageminimiser": "0%",
       "dodge": "10%"
     },
+    "effects": [
+    { "type": "poison", "damagePerSecond": 4, "duration": 2 }
+  ],
     "showlevels": {
       "level1": "+12% Hasar  |  15 » 17",
       "level2": "+1 Öz. Hasar Bonusu  |  2x4 » 2x5",
       "level3": "+5% Hız  |  1100 » 1155"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "",
     "class": "Assassin",
     "subclass": "Poisoner"
   },
   {
     "name": "Soldier",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Mundane",
     "group": "mission-1",
     "abilityName": "Anti-Air Caliber",
@@ -645,9 +641,7 @@
   },
   {
     "name": "Bees",
-    "type": [
-      "Heyvan"
-    ],
+    "type": ["Heyvan"],
     "rarity": "Mundane",
     "group": "twisted-farm",
     "abilityName": "Toxic Sacrifice",
@@ -672,6 +666,9 @@
       "damageminimiser": "0%",
       "dodge": "20%"
     },
+    "effects": [
+    { "type": "poison", "damagePerSecond": 3, "duration": 10 }
+  ],
     "showlevels": {
       "level1": "+10% Damage  |  70 » 77",
       "level2": "+5% Dodge Chance |  20% » 25%",
@@ -683,9 +680,7 @@
   },
   {
     "name": "Hailey",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -693,7 +688,7 @@
       "shield": "80",
       "damage": "44",
       "sps": "29",
-      "attackSpeed": "1,50s",
+      "attackSpeed": "1.50s",
       "delay": "-",
       "mana": "11",
       "number": "1"
@@ -756,9 +751,7 @@
   },
   {
     "name": "Boomix",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -845,7 +838,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Chrono Mage zamanın axınını manipulyasiya edərək hər beçinci atışında bir dalğa yaradar. Bu dalğa dost kartlar üçün zamanı sürətləndirərək onlara +25% sürət və hücum bonusu verer, rəqiblər üçün isə zamanı ağırlaşdıraraq onları -25% yavaşladar.",
+    "trait": "Chrono Mage zamanın axınını manipulyasiya edərək hər beçinci atışında bir dalğa yaradar. Bu dalğa dost kartlar üçün zamanı sürətləndirərək onlara 5 saniyəlik +25% sürət və hücum bonusu verər, rəqiblər üçün isə zamanı ağırlaşdıraraq onları 8 saniyəlik -25% yavaşladar.",
     "additionalStats": {
       "range": "4000",
       "speed": "900",
@@ -856,6 +849,9 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+    { "type": "slow", "percentage": 25, "duration": 8 }
+  ],
     "showlevels": {
       "level1": "+5% Can  |  300 » 315",
       "level2": "+10% Hız  |  900 » 990",
