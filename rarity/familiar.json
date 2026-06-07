@@ -38,9 +38,7 @@
   },
   {
     "name": "Chicken",
-    "type": [
-      "Heyvan"
-    ],
+    "type": ["Heyvan"],
     "rarity": "Familiar",
     "group": "twisted-farm",
     "abilityName": "Volatile Mutation",
@@ -65,6 +63,8 @@
       "damageminimiser": "0%",
       "dodge": "10%"
     },
+    "mechanic": "burst",
+    "mechanicStats": { "minBurstDamage": 100, "maxBurstDamage": 500 },
     "showlevels": {
       "level1": "+28% Health | 50 » 64",
       "level2": "+100% Ability DMG Bonus | 400% » 500%",
