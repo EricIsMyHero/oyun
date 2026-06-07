@@ -80,13 +80,14 @@ function _calcEffectBonus(card) {
   let bonus = 0;
   if (Array.isArray(card.effects)) {
     for (const eff of card.effects) {
-      const dur    = _toNum(eff.duration)        || 1;
-      const pct    = _toNum(eff.percentage)      || 1;
-      const dps    = _toNum(eff.damagePerSecond) || 0;
-      const chance = _toNum(eff.chance)          || 100;
-      const amount = _toNum(eff.amount)          || 0;
-      const cm     = chance / 100;
-
+      const dur    = toNum(eff.duration)       || 1;
+      const cln    = toNum(eff.cooldown)       || 1;
+      const pct    = toNum(eff.percentage)     || 1;
+      const dps    = toNum(eff.damagePerSecond)|| 0;
+      const chance = toNum(eff.chance)         || 100;
+      const amount = toNum(eff.amount)         || 0;
+      const cm     = chance / 100; 
+       
       // damage sahəsi AxB formatında ola bilər: "2x5" → 10
       let effDmg = 0;
       if (eff.damage) {
