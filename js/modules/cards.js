@@ -113,7 +113,7 @@ function _calcEffectBonus(card) {
         case 'curse':          bonus += pct * dur * 2.0 * cm; break;
         case 'heal':           bonus += dps > 0 ? dps * dur * 0.5 : amount * 0.5; break;
         case 'stat-reduction': bonus += amount * 0.6 * cm; break;
-        case 'shield-grant':   bonus += amount * 0.4; break;
+        case 'shield-grant':   bonus += cln * amount * 0.4; break;
       }
     }
   }
