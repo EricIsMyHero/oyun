@@ -75,16 +75,16 @@ function calcEffectBonus(card) {
           bonus += toNum(eff.percentage) * dur * 1.5;
           break;
         case "silence":
-          bonus += dur * 40;
+          bonus += toNum(eff.percentage) * dur * 3.0;
           break;
         case "blind":
-          bonus += dur * 30;
+          bonus += toNum(eff.percentage) * dur * 1.7;
           break;
         case "curse":
           bonus += toNum(eff.percentage) * dur * 2.0;
           break;
         case "stun":
-          bonus += dur * 50;
+          bonus += toNum(eff.percentage) * dur * 2.5;
           break;
         case "heal":
           bonus += toNum(eff.amount) * 0.5;
