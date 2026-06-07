@@ -132,22 +132,6 @@ function _calcEffectBonus(card) {
   }
   return bonus;
 }
-  const mech  = card.mechanic || '';
-  const mstat = card.mechanicStats || {};
-  switch (mech) {
-    case 'mind-control': bonus += 200 + _toNum(mstat.controlDuration) * 35; break;
-    case 'suicide': case 'burst': {
-      const minD = _toNum(mstat.minBurstDamage);
-      const maxD = _toNum(mstat.maxBurstDamage) || minD;
-      bonus += ((maxD > minD ? (minD + maxD) / 2 : minD)) * 3.5; break;
-    }
-    case 'summon': bonus += (60 / (_toNum(mstat.intervalSeconds) || 14)) * (_toNum(mstat.summonCount) || 1) * 25; break;
-    case 'transform': bonus += _toNum(mstat.transformPower) || 80; break;
-    case 'stealth':   bonus += _toNum(mstat.stealthDuration) * 20; break;
-    case 'area-denial': bonus += _toNum(mstat.burstDamage) * 2 + _toNum(mstat.duration) * 10; break;
-  }
-  return bonus;
-}
 
 function calcCardPower(card) {
   const s  = card.stats || {};
