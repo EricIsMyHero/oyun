@@ -683,27 +683,25 @@
   },
   {
     "name": "Neon Droid",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "construct",
+    "abilityName": "",
     "stats": {
       "health": "200",
       "shield": "40",
       "damage": "16",
-      "sps": "16",
-      "attackSpeed": "1,00",
+      "sps": "13",
+      "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hasar verdikcə 3 saniyəlik +15% Saldırı Hızı qazanar",
+    "trait": "Hasar verdikcə 3 saniyəlik +20% Saldırı Hızı qazanar (Max: 60%)",
     "additionalStats": {
-      "range": "2,500",
-      "speed": "1,050",
-      "criticalChance": "5%",
+      "range": "2750",
+      "speed": "1150",
+      "criticalChance": "15%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
