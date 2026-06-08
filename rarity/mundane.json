@@ -72,13 +72,14 @@
     "name": "Scrapy",
     "type": ["Robot"],
     "rarity": "Mundane",
+    "group": "constructs",
     "abilityName": "",
     "stats": {
       "health": "90",
       "shield": "0",
       "damage": "16",
       "sps": "16",
-      "attackSpeed": "1,00s",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "4",
       "number": "1"
@@ -99,7 +100,7 @@
       "level2": "+10% Hız  |  1000 » 1100",
       "level3": "+10% Can  |  90 » 99"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "Scrapy is a rusted robot that once helped build the arena. Lately, a dark glitch has taken over its programming, and it prefers absolute destruction over creation. Rolling into battle on a single wheel, it ready to tear down everything it once built. It strikes fear into enemies with a massive, scrap-firing weapon fused directly into its left arm.",
     "class": "Marksman",
     "subclass": "Piercer"
   },
@@ -937,17 +938,16 @@
   },
   {
     "name": "M-Manager",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Mundane",
+    "group": "constructs",
     "abilityName": "",
     "stats": {
       "health": "130",
-      "shield": "20",
-      "damage": "4",
-      "sps": "8",
-      "attackSpeed": "0,50s",
+      "shield": "40",
+      "damage": "6",
+      "sps": "7",
+      "attackSpeed": "0.90s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -968,7 +968,7 @@
       "level2": "+11% Can  |  130 » 144",
       "level3": "+10% Sıyrılma  |  0% » 10%"
     },
-    "story": "-",
+    "story": "M-Manager serves as the backbone of the underground facility, tirelessly overseeing mana production deep beneath the arena. He carries a massive, glowing tank on his back that generates a continuous flow of pure energy. While his subordinates toil in the dirt, he ensures the core never runs dry. His calculated movements and cold, mechanical efficiency keep the Constructs' machinery alive, fueling every battle that takes place above.",
     "class": "Support",
     "subclass": "Resourcer"
   }
