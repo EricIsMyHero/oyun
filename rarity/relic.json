@@ -1,25 +1,24 @@
 [
   {
     "name": "Stacy",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Relic",
+    "group": "constructs",
     "abilityName": "",
     "stats": {
-      "health": "140",
-      "shield": "60",
-      "damage": "4x20",
+      "health": "150",
+      "shield": "80",
+      "damage": "12x6",
       "sps": "80",
-      "attackSpeed": "0,20",
-      "delay": "2,4",
+      "attackSpeed": "0.20s",
+      "delay": "2.40s",
       "mana": "17",
       "number": "1"
     },
-    "trait": "Atışları ekstra 3x10 Hasar verər",
+    "trait": "Canı 15%-in altına düşdükdə menzili +10% artar. Atışları ekstra 4x8 Hasar verər",
     "additionalStats": {
-      "range": "2,600",
-      "speed": "1,400",
+      "range": "2600",
+      "speed": "1400",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -32,7 +31,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Losing her parents at a young age, Stacy was raised by Ase. To survive in this harsh underground world, she threw herself into the flames and learned to master fire. The desire to fly never left her. She built a powerful jetpack device out of scraps. Now, this young girl with glasses and ginger hair soars through the darkness of the underground caves, spreading flames and becoming the bravest scout of the Constructs team."
   },
   {
     "name": "Death",
