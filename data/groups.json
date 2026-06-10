@@ -1,28 +1,28 @@
 [
   {
     "name": "Mission-1",
-    "description": "İlk missiyada bir araya gələn döyüşçü qrupu.",
+    "description": "-",
     "icon": "fa-shield-halved",
     "color": "#4a9eff",
     "members": ["Soldier", "Bethe", "Blocker", "Aegis Guard", "Sniper", "Reacher", "Leila"]
   },
   {
     "name": "UnderWorlds",
-    "description": "İkinci qrupun təsviri burada olacaq.",
+    "description": "-",
     "icon": "fa-skull",
     "color": "#ff6b6b",
     "members": ["Lord", "King", "Malvaris", "Dark Necromancer", "Nightfang", "Shadow Reaper"]
   },
   {
     "name": "The Spellbound",
-    "description": "Üçüncü qrupun təsviri.",
+    "description": "-",
     "icon": "fa-wand-sparkles",
     "color": "#b39ddb",
     "members": ["Chrono Mage", "Naar", "Arcanyx", "Unara", "Laura"]
   },
   {
     "name": "Twisted-Farm",
-    "description": "Üçüncü qrupun təsviri.",
+    "description": "-",
     "icon": "fa-building-wheat",
     "color": "#FF2B00",
     "members": ["Henry", "Chicken", "Bees", "Venomspikes", "Rockback", "Worms"]
@@ -36,10 +36,10 @@
   },
   {
     "name": "Constructs",
-    "description": "Machine soldiers built in the underground workshops of Stagnantia. Reliable, mass-produced, and expendable.",
+    "description": "-",
     "color": "#60a5fa",
     "icon": "fa-gear",
-    "members": ["Iron Golem", "Scrap Drone", "Steam Knight", "Volt Sentinel"]
+    "members": ["Ase", "Neon Droid", "Stacy", "M-Manager", "Scrapy"]
   },
   {
     "name": "Beasts",
