@@ -470,7 +470,7 @@
     "name": "Rotlings",
     "type": ["Dead"],
     "rarity": "Apex",
-    "group": "void walkers",
+    "group": "void-walkers",
     "abilityName": "",
     "isMulti": true,
     "stats": {
@@ -507,8 +507,8 @@
           "Ölü"
         ],
         "rarity": "Apex",
-        "isHybrid": false,
-        "isMulti": false,
+        "group": "void-walkers",
+        "abilityName": "",
         "stats": {
           "health": "30",
           "shield": "60",
@@ -719,7 +719,7 @@
     "name": "Void Wraith",
     "type": ["Spirit"],
     "rarity": "Apex",
-    "group": "void walkers",
+    "group": "void-walkers",
     "abilityName": "",
     "stats": {
       "health": "250",
