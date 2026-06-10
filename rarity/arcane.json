@@ -732,25 +732,24 @@
   },
   {
     "name": "Void Striker",
-    "type": [
-      "Ruh"
-    ],
+    "type": ["Spirit"],
     "rarity": "Arcane",
+    "group": "void-walkers",
     "abilityName": "",
     "stats": {
       "health": "260",
       "shield": "180",
       "damage": "2x45",
       "sps": "75",
-      "attackSpeed": "0,60s",
-      "delay": "1,30s",
+      "attackSpeed": "0.60s",
+      "delay": "1.30s",
       "mana": "17",
       "number": "1"
     },
     "trait": "Hər 18 saniyədə bir növbəti atışı +20% Saldırı Hızı ilə vurar və rəqibi 0,8 saniyəlik 10% yavaşladar",
     "additionalStats": {
-      "range": "1,300",
-      "speed": "1,050",
+      "range": "1300",
+      "speed": "1050",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -763,7 +762,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "Bound to no timeline, the Void Striker is an interdimensional horror wielding a lethal spear. Obsessed with sharp weaponry, this entity inflicts pure terror upon its prey. In combat, it hurls sharp, javelin-like projectiles infused with a volatile void orb at its core. This fusion of piercing metal and unstable cosmic energy dismantles reality with every strike. It leaves nothing but panic and absolute emptiness in its wake, fighting only to drag the arena into the abyss.",
     "class": "Fighter",
     "subclass": "Berserker"
   },
