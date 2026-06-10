@@ -468,22 +468,22 @@
   },
   {
     "name": "Rotlings",
-    "type": [
-      "Ölü"
-    ],
+    "type": ["Dead"],
     "rarity": "Apex",
+    "group": "void walkers",
+    "abilityName": "",
     "isMulti": true,
     "stats": {
-      "health": "70",
-      "shield": "140",
-      "damage": "20",
-      "sps": "20",
-      "attackSpeed": "1,00",
+      "health": "170",
+      "shield": "40",
+      "damage": "14",
+      "sps": "14",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "9",
       "number": "3"
     },
-    "trait": "Hər ölən rəqib kart üçün +5% Hasar bonusu",
+    "trait": "Hər ölən rəqib kart üçün +1 Hasar bonusu",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -499,7 +499,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "The Rotlings are decaying zombies enwrapped in foul roots and cosmic filth. Moving through dimensions, these wretched beings multiply constantly, leaving total devastation in their wake. They erode the fabric of every reality they touch, consumed by an endless hunger to rot the arena. Yet, despite their spreading plague, they harbor one absolute fear: flying entities. Vulnerable to threats from above, these ground-bound horrors crawl forward, desperate to corrupt everything before the skies open.",
     "forms": [
       {
         "name": "Mini Rotters",
@@ -717,26 +717,24 @@
   },
   {
     "name": "Void Wraith",
-    "type": [
-      "Ruh"
-    ],
+    "type": ["Spirit"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "void walkers",
+    "abilityName": "",
     "stats": {
-      "health": "150",
-      "shield": "30",
-      "damage": "4x12",
-      "sps": "30",
-      "attackSpeed": "0,40",
-      "delay": "0,9",
+      "health": "250",
+      "shield": "130",
+      "damage": "6x4",
+      "sps": "8",
+      "attackSpeed": "0.50s",
+      "delay": "1.25s",
       "mana": "12",
       "number": "1"
     },
-    "trait": "İlk 32 saniyə +50% Hız bonusu qazanar",
+    "trait": "Ətrafındakı rəqib kartların hasarlarının 20%-ni özünə çəkər (Max: 16)",
     "additionalStats": {
-      "range": "1,800",
-      "speed": "0,950",
+      "range": "1800",
+      "speed": "950",
       "criticalChance": "10%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -749,7 +747,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Emerging from a timeless void, the Void Wraith is an interdimensional phantom that exists outside reality. This entity commands a terrifying aura, continuously draining the vital energy of every living being in its vicinity. It feeds on this stolen essence, growing stronger as its victims wither into empty husks. Bound to no specific era, it drifts through the arena as a silent, inescapable siphon, reducing champions to powerless dust to fuel its own eternal, hollow existence."
   },
   {
     "name": "Bio Mech",
