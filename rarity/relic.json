@@ -885,5 +885,39 @@
       "level3": "-"
     },
     "story": "Unara is the mother of Laura, but she possesses a much darker and more guarded nature. Unlike her daughter, she trusts no one and uses her magic strictly for self-preservation. She surrounds herself with impenetrable arcane barriers, keeping the world at a distance to ensure her own safety. Her neutral outlook is driven by survival; she will neither help nor hinder others unless they threaten her solitude. She is a solitary fortress of magic, cold and unyielding to those who seek her aid."
+  },
+  {
+    "name": "Unara",
+    "type": ["Alien"],
+    "rarity": "Relic",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "180",
+      "shield": "40",
+      "damage": "45",
+      "sps": "24",
+      "attackSpeed": "1.90s",
+      "delay": "-",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "Yaxında dost kart varsa hər bir kart başına hər saniyə 4 yük qazanar. 100 yük olduqda özü və ətrafındakı dost kartlar 3 saniyəlik toxunulmaz olar",
+    "additionalStats": {
+      "range": "4500",
+      "speed": "900",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": ""
   }
 ]
