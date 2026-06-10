@@ -3,13 +3,13 @@
     "name": "Ase",
     "type": ["Human"],
     "rarity": "Ethereal",
-    "group": "construct",
+    "group": "constructs",
     "isDual": true,
     "type1": {
       "name": "Ase",
       "type": ["Human"],
       "rarity": "Ethereal",
-      "group": "construct",
+      "group": "constructs",
       "isMulti": true,
       "stats": {
         "health": "100",
@@ -42,7 +42,7 @@
         {
           "name": "Giga-R",
           "type": ["Robot"],
-          "group": "construct",
+          "group": "constructs",
           "stats": {
             "health": "500",
             "shield": "500",
@@ -79,7 +79,7 @@
       "name": "Ase",
       "type": ["Human"],
       "rarity": "Ethereal",
-      "group": "construct",
+      "group": "constructs",
       "isMulti": true,
       "stats": {
         "health": "100",
@@ -112,7 +112,7 @@
         {
           "name": "Giga-R",
           "type": ["Robot"],
-          "group": "construct",
+          "group": "constructs",
           "stats": {
             "health": "300",
             "shield": "300",
