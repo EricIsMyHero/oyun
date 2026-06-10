@@ -971,5 +971,76 @@
     "story": "M-Manager serves as the backbone of the underground facility, tirelessly overseeing mana production deep beneath the arena. He carries a massive, glowing tank on his back that generates a continuous flow of pure energy. While his subordinates toil in the dirt, he ensures the core never runs dry. His calculated movements and cold, mechanical efficiency keep the Constructs' machinery alive, fueling every battle that takes place above.",
     "class": "Support",
     "subclass": "Resourcer"
-  }
+  },
+  {
+    "name": "Srail",
+    "type": ["Human"],
+    "rarity": "Mundane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "290",
+      "shield": "120",
+      "damage": "32",
+      "sps": "19",
+      "attackSpeed": "1.65s",
+      "delay": "-",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "Qarşısındakı hər bir rəqib kart üçün +8% Kritik Şansı qazanar (Max:80%)",
+    "additionalStats": {
+      "range": "3450",
+      "speed": "950",
+      "criticalChance": "20%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "Marksman",
+    "subclass": "Sharpshooter"
+  },
+  {
+    "name": "Cryon",
+    "type": ["Alien"],
+    "rarity": "Mundane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "30",
+      "shield": "300",
+      "damage": "12",
+      "sps": "12",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "7",
+      "number": "1"
+    },
+    "trait": "Canı qarşısındakı ən çox canlı rəqib karta bərabər olar, hərəkət etdikdə hər saniyə +10 yük qazanar. 100 yük olduqda 25% Can yeniləyər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1050",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "10%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "",
+    "class": "Specialist"
+  },
 ]
