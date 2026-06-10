@@ -144,10 +144,10 @@
     "class": "Tank"
   },
   {
-    "name": "Maap",
+    "name": "Maapp",
     "type": ["İnsan"],
     "rarity": "Ascendant",
-    "group": "",
+    "group": "the-joy-of-the-zenith-city",
     "abilityName": "",
     "isAscendant": true,
     "stats": {
@@ -178,22 +178,20 @@
     },
     "story": "-",
     "upgradedsecondForm": {
-      "name": "Reachy",
-      "type": [
-        "İnsan"
-      ],
+      "name": "Maapp",
+      "type": ["İnsan"],
       "rarity": "Ascendant",
-    "group": "",
-    "abilityName": "",
-    "isAscendant": true,
-    "stats": {
-      "health": "100",
-      "shield": "100",
-      "damage": "3",
-      "sps": "12",
-      "attackSpeed": "0.25s",
-      "delay": "-",
-      "mana": "7",
+      "group": "the-joy-of-the-zenith-city",
+      "abilityName": "",
+      "isAscendant": true,
+      "stats": {
+        "health": "100",
+        "shield": "100",
+       "damage": "3",
+        "sps": "12",
+        "attackSpeed": "0.25s",
+        "delay": "-",
+        "mana": "7",
       "number": "1"
     },
     "trait": "17% şansla rəqibin hasarını 5 saniyəlik -90% azaldar",
@@ -221,7 +219,7 @@
     "name": "Avara",
     "type": ["İnsan"],
     "rarity": "Ascendant",
-    "group": "",
+    "group": "the-joy-of-the-zenith-city",
     "abilityName": "",
     "isAscendant": true,
     "stats": {
@@ -255,7 +253,7 @@
       "name": "Avara",
       "type": ["İnsan"],
       "rarity": "Ascendant",
-      "group": "",
+      "group": "the-joy-of-the-zenith-city",
       "abilityName": "",
       "isAscendant": true,
       "stats": {
