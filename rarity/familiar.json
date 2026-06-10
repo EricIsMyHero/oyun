@@ -843,5 +843,40 @@
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
     "class": "Mage",
     "subclass": "Nuker"
+  },
+  {
+    "name": "Kai",
+    "type": ["Human"],
+    "rarity": "Familiar",
+    "abilityName": "",
+    "stats": {
+      "health": "180",
+      "shield": "90",
+      "damage": "2x9/21",
+      "sps": "18",
+      "attackSpeed": "0.50s",
+      "delay": "-",
+      "mana": "13",
+      "number": "1"
+    },
+    "trait": "Hər 3-cü vuruşu ətrafdakı rəqibləri 0,8 saniyəlik sərsəmlətər, Hər 10 hasar aldıqda 20 yük qazanar. 100 yükdə ilk vuruşu +60% ekstra hasar verər və rəqibi 3 karo geri itər",
+    "additionalStats": {
+      "range": "1100",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "",
+    "class": "Fighter",
+    "subclass": "Brawler"
   }
 ]
