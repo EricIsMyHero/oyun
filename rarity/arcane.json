@@ -837,5 +837,107 @@
     },
     "story": "-",
     "class": "Fighter"
-  }
+  },
+  {
+    "name": "Sunrise",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "abilityName": "",
+    "stats": {
+      "health": "90",
+      "shield": "90",
+      "damage": "26",
+      "sps": "24",
+      "attackSpeed": "1,10s",
+      "delay": "-",
+      "mana": "11",
+      "number": "1"
+    },
+    "trait": "Hərəkət etdikcə hər 0,6 saniyə ərzində +1 Can qazanar (Max: 210)",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "25%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "Fighter"
+  },
+  {
+    "name": "Shellbyte",
+    "type": ["Varlıq"],
+    "rarity": "Arcane",
+    "abilityName": "",
+    "stats": {
+      "health": "130",
+      "shield": "100",
+      "damage": "14",
+      "sps": "22",
+      "attackSpeed": "0.65s",
+      "delay": "-",
+      "mana": "7",
+      "number": "1"
+    },
+    "trait": "Ətrafında rəqib kart yoxdursa hər 0,2 saniyədə 4 yük qazanar, 100 yük olduqda ən az canlı rəqibin üstünə hoppanar və ilk vuruşu ekstra +150% Hasar verər (Menzil: 6000)",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1200",
+      "criticalChance": "50%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "Fighter"
+  },
+  {
+    "name": "Wong",
+    "type": ["İnsan"],
+    "rarity": "Arcane",
+    "abilityName": "",
+    "stats": {
+      "health": "310",
+      "shield": "10",
+      "damage": "16",
+      "sps": "15",
+      "attackSpeed": "1.10s",
+      "delay": "-",
+      "mana": "17",
+      "number": "1"
+    },
+    "trait": "Hasar verdikdə 25 yük qazanar. 100 yükdə ilk vuruşu rəqibi 3 karo geri ataraq 1 saniyəlik sərsəmlətər. Canı 40%-in altına düşdükdə bir tekme ataraq ətrafındakı bütün rəqibləri 5 karo geri atar və silahını çıxaraq ardıcıl 8x8 dəfə hasar verər (SH:0,4)",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1050",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "Fighter"
+  },
 ]
