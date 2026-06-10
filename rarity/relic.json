@@ -35,25 +35,24 @@
   },
   {
     "name": "Death",
-    "type": [
-      "Ölü"
-    ],
+    "type": ["Dead"],
     "rarity": "Relic",
+    "group": "void-walkers",
     "abilityName": "",
     "stats": {
       "health": "200",
       "shield": "50",
       "damage": "20",
       "sps": "17",
-      "attackSpeed": "1,20",
+      "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "11",
       "number": "1"
     },
     "trait": "Ölən hər kart üçün +2 Hasar bonusu qazanar. (Max: 80)",
     "additionalStats": {
-      "range": "1,200",
-      "speed": "1,000",
+      "range": "1200",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -66,7 +65,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Bound to no realm, Death is the ultimate interdimensional horror within the Void Walkers. It brings absolute demise wherever it steps, drawing dark pleasure from every fading life. No entity can withstand the terrifying power of the strange orb held in its hands. This cosmic artifact drains the vital energy of its prey, converting their final moments into pure strength for the wielder. Death walks the arena not for glory, but to feed on the expiration of existence itself."
   },
   {
     "name": "Sylviana",
@@ -749,25 +748,24 @@
   },
   {
     "name": "Bloodraider",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Relic",
+    "group": "void-walkers",
     "abilityName": "",
     "stats": {
       "health": "300",
       "shield": "120",
       "damage": "40",
       "sps": "33",
-      "attackSpeed": "1,20",
+      "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "16",
       "number": "1"
     },
     "trait": "Hər hasar verdikcə M.Canının 4%-ni itirər və hasarı +20% artar",
     "additionalStats": {
-      "range": "5,000",
-      "speed": "1,000",
+      "range": "2000",
+      "speed": "1000",
       "criticalChance": "15%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -780,7 +778,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Driven by a dark oath, the Bloodraider destroys opponents at the cost of its own life. Blood flowing from its head signals grim determination to every foe. This entity wields the Blood Reaper, a lethal scythe forged entirely from its own vital blood. With this crimson blade, it executes absolute destruction. Bound to no timeline, it craves no survival, only the total annihilation of its prey before its own end."
   },
   {
     "name": "Fallen Angel",
