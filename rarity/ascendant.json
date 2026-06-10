@@ -1,9 +1,7 @@
 [
   {
     "name": "Reacher",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["İnsan"],
     "rarity": "Ascendant",
     "group": "mission-1",
     "abilityName": "Tactical Cohesion",
@@ -36,7 +34,7 @@
     },
     "story": "-",
     "upgradedsecondForm": {
-      "name": "Reachy",
+      "name": "Reacher",
       "type": [
         "İnsan"
       ],
@@ -74,28 +72,27 @@
     "class": "Tank"
   },
   {
-    "name": "M-M",
-    "type": [
-      "Robot"
-    ],
+    "name": "Bastra",
+    "type": ["İnsan"],
     "rarity": "Ascendant",
-    "isAscendant": false,
-    "isMulti": false,
+    "group": "",
+    "abilityName": "",
+    "isAscendant": true,
     "stats": {
-      "health": 110,
-      "shield": 20,
-      "damage": 5,
-      "sps": 11,
-      "attackSpeed": "0,95s",
+      "health": "110",
+      "shield": "40",
+      "damage": "70",
+      "sps": "35",
+      "attackSpeed": "2.00s",
       "delay": "-",
-      "mana": 10,
-      "number": 1
+      "mana": "9",
+      "number": "1"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +2% Saldırı Hızı qazanar",
     "additionalStats": {
-      "range": 1000,
-      "speed": 950,
-      "criticalChance": "0%",
+      "range": "3500",
+      "speed": "1000",
+      "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
@@ -103,35 +100,70 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "-",
+    "upgradedsecondForm": {
+      "name": "Reachy",
+      "type": ["İnsan"],
+      "rarity": "Ascendant",
+    "group": "",
+    "abilityName": "",
+    "isAscendant": true,
+    "stats": {
+      "health": "110",
+      "shield": "40",
+      "damage": "70",
+      "sps": "35",
+      "attackSpeed": "2.00s",
+      "delay": "-",
+      "mana": "11",
+      "number": "1"
+    },
+    "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +3% Saldırı Hızı qazanar",
+    "additionalStats": {
+      "range": "3500",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+      },
+      "story": "-",
+      "class": "Suicide Assassin"
+    },
     "class": "Tank"
   },
   {
-    "name": "M-M",
-    "type": [
-      "Robot"
-    ],
+    "name": "Maap",
+    "type": ["İnsan"],
     "rarity": "Ascendant",
-    "isAscendant": false,
-    "isMulti": false,
+    "group": "",
+    "abilityName": "",
+    "isAscendant": true,
     "stats": {
-      "health": 110,
-      "shield": 20,
-      "damage": 5,
-      "sps": 11,
-      "attackSpeed": "0,95s",
+      "health": "80",
+      "shield": "80",
+      "damage": "2",
+      "sps": "8",
+      "attackSpeed": "0.25s",
       "delay": "-",
-      "mana": 10,
-      "number": 1
+      "mana": "4",
+      "number": "1"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "trait": "15% şansla rəqibin hasarını 4 saniyəlik -90% azaldar",
     "additionalStats": {
-      "range": 1000,
-      "speed": 950,
+      "range": "5000",
+      "speed": "1100",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -140,35 +172,72 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "-",
+    "upgradedsecondForm": {
+      "name": "Reachy",
+      "type": [
+        "İnsan"
+      ],
+      "rarity": "Ascendant",
+    "group": "",
+    "abilityName": "",
+    "isAscendant": true,
+    "stats": {
+      "health": "100",
+      "shield": "100",
+      "damage": "3",
+      "sps": "12",
+      "attackSpeed": "0.25s",
+      "delay": "-",
+      "mana": "7",
+      "number": "1"
+    },
+    "trait": "17% şansla rəqibin hasarını 5 saniyəlik -90% azaldar",
+    "additionalStats": {
+      "range": "5000",
+      "speed": "1100",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+      },
+      "story": "-",
+      "class": "Suicide Assassin"
+    },
     "class": "Tank"
   },
   {
-    "name": "M-M",
-    "type": [
-      "Robot"
-    ],
+    "name": "Avara",
+    "type": ["İnsan"],
     "rarity": "Ascendant",
-    "isAscendant": false,
-    "isMulti": false,
+    "group": "",
+    "abilityName": "",
+    "isAscendant": true,
     "stats": {
-      "health": 110,
-      "shield": 20,
-      "damage": 5,
-      "sps": 11,
-      "attackSpeed": "0,95s",
-      "delay": "-",
-      "mana": 10,
-      "number": 1
+      "health": "140",
+      "shield": "80",
+      "damage": "22/44/64/92",
+      "sps": "22/44/64/92",
+      "attackSpeed": "1.35s/0.75s/0.85s/1.75s",
+      "delay": "1.45s",
+      "mana": "15",
+      "number": "1"
     },
-    "trait": "Həyatda qaldığı hər <b>6</b> saniyə üçün <b>+1</b> Mana verər.",
+    "trait": "İlk atış rəqibləri 2,5 saniyəlik 40% yavaşladar, İkinci atış rəqibi 2,5 karo geri itər, Üçüncü atış rəqibi 0,75 saniyəlik sərsəmlətər, Dördüncü atış bir xətdəki bütün rəqiblərə hasar verər",
     "additionalStats": {
-      "range": 1000,
-      "speed": 950,
+      "range": "2200/2400/4200/5000",
+      "speed": "1000",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -177,11 +246,47 @@
       "dodge": "0%"
     },
     "showlevels": {
-      "level1": "+5% Can",
-      "level2": "+7% Hız",
-      "level3": "+7% Hasar"
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "-",
+    "upgradedsecondForm": {
+      "name": "Avara",
+      "type": ["İnsan"],
+      "rarity": "Ascendant",
+      "group": "",
+      "abilityName": "",
+      "isAscendant": true,
+      "stats": {
+        "health": "140",
+        "shield": "80",
+        "damage": "26/52/76/108",
+        "sps": "26/52/76/108",
+        "attackSpeed": "1.35s/0.75s/0.85s/1.75s",
+        "delay": "1.45s",
+        "mana": "18",
+        "number": "1"
+    },
+      "trait": "İlk atış rəqibləri 2,75 saniyəlik 50% yavaşladar, İkinci atış rəqibi 3 karo geri itər, Üçüncü atış rəqibi 1,25 saniyəlik sərsəmlətər, Dördüncü atış bir xətdəki bütün rəqiblərə hasar verər",
+      "additionalStats": {
+        "range": "2200/2400/4200/5000",
+        "speed": "1000",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+    },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+        "story": "Reacher is a veteran soldier who spent years on various battlefields. Now in his later years, he provides essential support to the Soldier within Mission 1. His experience bridges the gap between raw talent and seasoned strategy. When he stands beside the Soldier, they become an unstoppable force that no enemy can withstand. He does not seek the spotlight or leadership for himself. Instead, he uses his tactical knowledge to clear the path forward. His presence ensures the mission remains on track.",
+        "class": "Suicide Assassin"
+    },
     "class": "Tank"
   }
 ]
