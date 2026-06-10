@@ -685,7 +685,7 @@
     "name": "Neon Droid",
     "type": ["Robot"],
     "rarity": "Apex",
-    "group": "construct",
+    "group": "constructs",
     "abilityName": "",
     "stats": {
       "health": "200",
@@ -713,7 +713,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "Neon Droid floats through the dark caverns as the ultimate security asset for the Constructs. From a distance, this sleek guardian resembles a metallic, floating ball gliding silently through the air. Do not let its shape fool you; despite having only a single central eye, its advanced sensors see absolutely everything, leaving no blind spots for intruders. It scans the shadows constantly, ready to eliminate any threat to the facility with mechanical precision."
   },
   {
     "name": "Void Wraith",
