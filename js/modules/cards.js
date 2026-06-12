@@ -12,7 +12,7 @@ let allCards     = [];
 let activeRarity  = 'all';
 let activeClass   = 'all';
 let activeCType   = 'all';
-let activeSort    = 'power-desc';
+let activeSort    = 'default';
 let filtersReady  = false;
 
 /* ── Transliterate non-ASCII characters for file paths ── */
@@ -308,6 +308,7 @@ function renderCards() {
   // Sort
   filtered = [...filtered].sort((a, b) => {
     switch (activeSort) {
+      case 'default':    return 0; // JSON sırası qorunur
       case 'power-desc': return scaledPower(b) - scaledPower(a);
       case 'power-asc':  return scaledPower(a) - scaledPower(b);
       case 'name-asc':   return (a.name || '').localeCompare(b.name || '');
