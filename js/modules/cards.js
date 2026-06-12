@@ -8,9 +8,12 @@ const GITHUB_BASE = 'assets';
 
 const RARITY_FILES = ['mundane', 'familiar', 'arcane', 'relic', 'ascendant', 'apex', 'ethereal'];
 
-let allCards    = [];
-let activeRarity = 'all';
-let filtersReady = false;
+let allCards     = [];
+let activeRarity  = 'all';
+let activeClass   = 'all';
+let activeCType   = 'all';
+let activeSort    = 'power-desc';
+let filtersReady  = false;
 
 /* ── Transliterate non-ASCII characters for file paths ── */
 function slugify(str) {
@@ -243,29 +246,77 @@ async function initCards() {
 
 /* ── Wire up filter buttons & search ── */
 function setupCardFilters() {
-  document.querySelectorAll('.filter-btn[data-rarity]').forEach(btn => {
-    btn.onclick = () => {
-      document.querySelectorAll('.filter-btn[data-rarity]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeRarity = btn.dataset.rarity;
-      renderCards();
-    };
-  });
+
+  function bindGroup(attr, setter) {
+    document.querySelectorAll(`.filter-btn[${attr}]`).forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll(`.filter-btn[${attr}]`).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        setter(btn.getAttribute(attr));
+        renderCards();
+      };
+    });
+  }
+
+  bindGroup('data-rarity', v => activeRarity = v);
+  bindGroup('data-class',  v => activeClass  = v);
+  bindGroup('data-ctype',  v => activeCType  = v);
+  bindGroup('data-sort',   v => activeSort   = v);
 
   document.getElementById('card-search').oninput = () => renderCards();
 }
 
-/* ── Render filtered card list ── */
+/* ── Normalise type list for a card ── */
+function cardTypes(card) {
+  const src = card.isDual && card.type1 ? card.type1 : card;
+  const t = src.type || card.type || [];
+  const arr = Array.isArray(t) ? t : [t];
+  // normalise Az→En synonyms
+  return arr.map(s => {
+    const m = { 'İnsan':'Human','Heyvan':'Animal','Ölü':'Dead','Uzaylı':'Alien','Ruh':'Spirit','Varlıq':'Spirit' };
+    return m[s] || s;
+  });
+}
+
+/* ── Render filtered + sorted card list ── */
 function renderCards() {
   const grid   = document.getElementById('cards-grid');
   const search = document.getElementById('card-search').value.toLowerCase().trim();
   const count  = document.getElementById('card-count');
 
   let filtered = allCards;
+
+  // Rarity
   if (activeRarity !== 'all')
     filtered = filtered.filter(c => (c.rarity || '').toLowerCase() === activeRarity);
+
+  // Class
+  if (activeClass !== 'all')
+    filtered = filtered.filter(c => {
+      const src = c.isDual && c.type1 ? c.type1 : c;
+      return (src.class || c.class || '') === activeClass;
+    });
+
+  // Type
+  if (activeCType !== 'all')
+    filtered = filtered.filter(c => cardTypes(c).includes(activeCType));
+
+  // Search
   if (search)
     filtered = filtered.filter(c => (c.name || '').toLowerCase().includes(search));
+
+  // Sort
+  filtered = [...filtered].sort((a, b) => {
+    switch (activeSort) {
+      case 'power-desc': return scaledPower(b) - scaledPower(a);
+      case 'power-asc':  return scaledPower(a) - scaledPower(b);
+      case 'name-asc':   return (a.name || '').localeCompare(b.name || '');
+      case 'name-desc':  return (b.name || '').localeCompare(a.name || '');
+      case 'mana-asc':   return _toNum((a.stats||{}).mana) - _toNum((b.stats||{}).mana);
+      case 'mana-desc':  return _toNum((b.stats||{}).mana) - _toNum((a.stats||{}).mana);
+      default: return 0;
+    }
+  });
 
   count.textContent = filtered.length;
 
