@@ -50,10 +50,10 @@
   },
   {
     "name": "Beasts",
-    "description": "Wild creatures dragged through mana portals from prehistoric dimensions. Unpredictable but ferocious.",
+    "description": "-",
     "color": "#4ade80",
     "icon": "fa-paw",
-    "members": ["Feral Wolf", "Stone Troll", "Venom Drake", "Mire Hound"]
+    "members": ["Feral Wolf", "Frostmaw", "Tenta", "Dino", "Turtle", "Hornets", "Snaykies", "Hammies"]
   },
   {
     "name": "Ancients",
