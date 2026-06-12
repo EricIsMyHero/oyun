@@ -3,13 +3,14 @@
     "name": "Hammies",
     "type": ["Heyvan"],
     "rarity": "Mundane",
+    "group": "beasts",
     "abilityName": "",
     "stats": {
       "health": "70",
       "shield": "0",
       "damage": "18",
       "sps": "16",
-      "attackSpeed": "1,10s",
+      "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "3",
       "number": "1"
@@ -30,7 +31,7 @@
       "level2": "+16% Hasar  |  18 » 21",
       "level3": "+10% Öz. Hız Bonusu  |  20% » 30%"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "The Golden Horde, a massive swarm of small prehistoric rodent-like creatures dragged through a mana portal from an ancient forgotten dimension. At first glance they appear harmless and adorable, with round bodies, soft golden fur, bright curious eyes, and compact animal-like features. However, beneath their deceptively cute appearance lies a relentless and highly destructive pack mentality. Thousands of Hammies flood across the battlefield as a living tide. Their fur ranges from warm golden-yellow to amber tones, creating the appearance of a moving golden horde. Despite their small size, each creature possesses surprisingly sharp claws, powerful jaws, and rows of tiny predatory teeth adapted for gnawing through nearly anything they encounter. The creatures move with extreme speed and chaotic energy. Some climb over rocks, others leap across debris, while countless more swarm together in coordinated waves. Their unpredictable behavior creates a sense of constant motion, making the battlefield feel completely overrun. Dust, dirt, and debris are kicked into the air as the horde advances. Their bright eyes are filled with wild curiosity and primal instinct. Individual Hammies may appear cute, but the sheer number of creatures transforms them into an overwhelming force of nature. Their collective movement resembles a golden flood consuming everything in its path. Behind the swarm, a gigantic unstable mana portal tears through reality, revealing glimpses of their prehistoric homeland. Vast grasslands, ancient forests, towering ferns, and strange extinct wildlife can be seen through the dimensional rift. Golden mana energy crackles around the portal, illuminating the creatures with a mystical glow. The environment shows clear signs of being overwhelmed. Broken equipment, damaged structures, scattered debris, and disturbed terrain emphasize the destructive effect of the advancing horde. The atmosphere is energetic, chaotic, and surprisingly intimidating despite the creatures' outwardly cute appearance. The overall composition focuses on contrast: individually adorable creatures forming a terrifying, unstoppable swarm through sheer numbers, speed, and group ferocity.",
     "class": "Fighter"
   },
   {
@@ -570,6 +571,7 @@
     "name": "Snaykies",
     "type": ["Heyvan"],
     "rarity": "Mundane",
+    "group": "beasts",
     "abilityName": "",
     "stats": {
       "health": "50",
@@ -600,7 +602,7 @@
       "level2": "+1 Öz. Hasar Bonusu  |  2x4 » 2x5",
       "level3": "+5% Hız  |  1100 » 1155"
     },
-    "story": "",
+    "story": "The Slithering Brood, a horrifying mass of prehistoric serpents dragged through a mana portal from an ancient primordial swamp dimension. Rather than a single snake, this creature appears as a living nest of intertwined venomous serpents, their bodies endlessly twisting, coiling, and overlapping into one terrifying collective organism. Dozens of snake heads emerge from the writhing mass, each possessing unique patterns, scars, horns, ridges, and predatory features. Their glowing eyes lock onto prey from every direction, creating the impression that escape is impossible. Long forked tongues flick through the air while their scales shimmer with ancient swamp moisture and traces of mana energy. The serpents' bodies are covered in highly detailed scales ranging from dark emerald green to muddy black, blending perfectly with their prehistoric wetland origins. Mana-infused markings pulse faintly across portions of their skin, revealing the supernatural influence of their dimensional journey. The enormous serpent mass coils around fallen trees, ancient roots, and swamp terrain, creating a complex and intimidating silhouette. Multiple heads rise above the body at different heights, each prepared to strike independently. Their movements appear coordinated despite the chaos, resembling a single predatory intelligence controlling dozens of deadly mouths. Behind them, a gigantic unstable mana portal tears through reality, revealing glimpses of their ancient homeland. Vast prehistoric swamps stretch into the distance, filled with colossal ferns, towering mangrove-like trees, dense fog, stagnant waters, and strange extinct wildlife hidden within the mist. Arcane energy crackles around the portal, blending magical and prehistoric elements together. The atmosphere is thick with humidity, swamp fog, and floating particles. Water ripples around the creature's coils while twisted roots and ancient vegetation dominate the environment. The scene feels oppressive, primal, and dangerous, emphasizing the creature's role as an ambush predator of forgotten ages. The overall composition highlights the overwhelming number of serpent heads, the complexity of their intertwined bodies, and the terrifying feeling of being surrounded from every angle.",
     "class": "Assassin",
     "subclass": "Poisoner"
   },
