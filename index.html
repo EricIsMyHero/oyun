@@ -169,6 +169,16 @@
           <div class="db-stats">Showing <span id="card-count">0</span> entities</div>
         </div>
         <div class="db-controls">
+
+          <!-- Search -->
+          <div class="filter-row">
+            <div class="search-box">
+              <span class="search-icon">⌕</span>
+              <input type="text" id="card-search" placeholder="Search entities…">
+            </div>
+          </div>
+
+          <!-- Rarity -->
           <div class="filter-row">
             <span class="filter-label">Rarity</span>
             <button class="filter-btn active" data-rarity="all">All</button>
@@ -180,12 +190,44 @@
             <button class="filter-btn" data-rarity="apex">Apex</button>
             <button class="filter-btn" data-rarity="ethereal">Ethereal</button>
           </div>
+
+          <!-- Class -->
           <div class="filter-row">
-            <div class="search-box">
-              <span class="search-icon">⌕</span>
-              <input type="text" id="card-search" placeholder="Search entities…">
-            </div>
+            <span class="filter-label">Class</span>
+            <button class="filter-btn active" data-class="all">All</button>
+            <button class="filter-btn" data-class="Tank">Tank</button>
+            <button class="filter-btn" data-class="Fighter">Fighter</button>
+            <button class="filter-btn" data-class="Assassin">Assassin</button>
+            <button class="filter-btn" data-class="Mage">Mage</button>
+            <button class="filter-btn" data-class="Marksman">Marksman</button>
+            <button class="filter-btn" data-class="Support">Support</button>
+            <button class="filter-btn" data-class="Special">Special</button>
+            <button class="filter-btn" data-class="Specialist">Specialist</button>
           </div>
+
+          <!-- Type -->
+          <div class="filter-row">
+            <span class="filter-label">Type</span>
+            <button class="filter-btn active" data-ctype="all">All</button>
+            <button class="filter-btn" data-ctype="Human">Human</button>
+            <button class="filter-btn" data-ctype="Animal">Animal</button>
+            <button class="filter-btn" data-ctype="Dead">Dead</button>
+            <button class="filter-btn" data-ctype="Robot">Robot</button>
+            <button class="filter-btn" data-ctype="Spirit">Spirit</button>
+            <button class="filter-btn" data-ctype="Alien">Alien</button>
+          </div>
+
+          <!-- Sort -->
+          <div class="filter-row">
+            <span class="filter-label">Sort</span>
+            <button class="filter-btn active" data-sort="power-desc">PWR ↓</button>
+            <button class="filter-btn" data-sort="power-asc">PWR ↑</button>
+            <button class="filter-btn" data-sort="name-asc">A → Z</button>
+            <button class="filter-btn" data-sort="name-desc">Z → A</button>
+            <button class="filter-btn" data-sort="mana-asc">Mana ↑</button>
+            <button class="filter-btn" data-sort="mana-desc">Mana ↓</button>
+          </div>
+
         </div>
       </div>
       <div class="cards-grid" id="cards-grid">
