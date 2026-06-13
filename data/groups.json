@@ -64,9 +64,9 @@
   },
   {
     "name": "Void Walkers",
-    "description": "Beings that exist between dimensions. They do not belong to any time or place — only the arena.",
+    "description": -",
     "color": "#f472b6",
     "icon": "fa-eye",
-    "members": ["Rift Shade", "Null Priest", "Phase Assassin", "Void Empress"]
+    "members": ["Void Striker", "Death", "Bloodraider", "Rotlings", "Void Wraith"]
   }
 ]
