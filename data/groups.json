@@ -64,7 +64,7 @@
   },
   {
     "name": "Void Walkers",
-    "description": -",
+    "description": "-",
     "color": "#f472b6",
     "icon": "fa-eye",
     "members": ["Void Striker", "Death", "Bloodraider", "Rotlings", "Void Wraith"]
