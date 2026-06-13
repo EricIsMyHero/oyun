@@ -6,7 +6,7 @@
     "group": "the-spellbound",
     "abilityName": "Arcane Harvest",
     "stats": {
-      "health": "50",
+      "health": "80",
       "shield": "50",
       "damage": "15",
       "sps": "14",
@@ -41,7 +41,7 @@
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
-      "health": "220",
+      "health": "260",
       "shield": "0",
       "damage": "50",
       "sps": "33",
@@ -72,14 +72,12 @@
   },
   {
     "name": "Jestro",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Arcane",
     "abilityName": "",
     "isMulti": true,
     "stats": {
-      "health": "80",
+      "health": "100",
       "shield": "80",
       "damage": "14",
       "sps": "14",
@@ -108,17 +106,15 @@
     "forms": [
       {
         "name": "Cratex",
-        "type": [
-          "Robot"
-        ],
+        "type": ["Robot"],
         "rarity": "Arcane",
         "abilityName": "",
         "stats": {
-          "health": "50",
+          "health": "60",
           "shield": "50",
           "damage": "30",
           "sps": "13",
-          "attackSpeed": "2,40s",
+          "attackSpeed": "2.40s",
           "delay": "-",
           "mana": "-",
           "number": "1"
@@ -148,17 +144,17 @@
   },
   {
     "name": "Tphoenix",
-    "type": ["İnsan"],
+    "type": ["Human"],
     "rarity": "Arcane",
     "group": "ancients",
     "abilityName": "Molten Rebound",
     "isMulti": true,
     "stats": {
-      "health": "400",
+      "health": "410",
       "shield": "0",
       "damage": "15",
       "sps": "19",
-      "attackSpeed": "0,80s",
+      "attackSpeed": "0.80s",
       "delay": "-",
       "mana": "15",
       "number": "1"
@@ -188,7 +184,7 @@
         "group": "ancients",
         "abilityName": "Rebirth Cycle",
         "stats": {
-          "health": "260",
+          "health": "250",
           "shield": "0",
           "damage": "0",
           "sps": "0",
@@ -223,11 +219,11 @@
         "group": "ancients",
         "abilityName": "Eternal Flare",
         "stats": {
-          "health": "200",
+          "health": "220",
           "shield": "0",
           "damage": "14",
           "sps": "16",
-          "attackSpeed": "0,90s",
+          "attackSpeed": "0.90s",
           "delay": "-",
           "mana": "0",
           "number": "1"
@@ -256,9 +252,7 @@
   },
   {
     "name": "Pirate Boy",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Arcane",
     "abilityName": "",
     "isMulti": true,
@@ -292,9 +286,7 @@
     "forms": [
       {
         "name": "Pirate Girls",
-        "type": [
-          "İnsan"
-        ],
+        "type": ["Human"],
         "rarity": "Arcane",
         "abilityName": "",
         "stats": {
@@ -307,7 +299,7 @@
           "mana": "-",
           "number": "2"
         },
-        "trait": "Hər 6 saniyədə +0,010 Menzil bonusu qazanar",
+        "trait": "Hər 16 saniyədə +0,025 Menzil bonusu qazanar",
         "additionalStats": {
           "range": "2500",
           "speed": "1000",
@@ -331,13 +323,11 @@
   },
   {
     "name": "Canoballer",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
-      "health": "100",
+      "health": "130",
       "shield": "200",
       "damage": "50",
       "sps": "29",
@@ -368,17 +358,15 @@
   },
   {
     "name": "Toxic",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Uzaylı"],
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
-      "health": "50",
+      "health": "90",
       "shield": "30",
       "damage": "70",
       "sps": "42",
-      "attackSpeed": "1,65s",
+      "attackSpeed": "1.65s",
       "delay": "-",
       "mana": "14",
       "number": "1"
@@ -405,9 +393,7 @@
   },
   {
     "name": "Lumina",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Uzaylı"],
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
@@ -415,7 +401,7 @@
       "shield": "500",
       "damage": "120",
       "sps": "48",
-      "attackSpeed": "2,50s",
+      "attackSpeed": "2.50s",
       "delay": "-",
       "mana": "18",
       "number": "1"
@@ -442,13 +428,11 @@
   },
   {
     "name": "Hell boy",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
-      "health": "170",
+      "health": "180",
       "shield": "30",
       "damage": "50",
       "sps": "25",
@@ -479,17 +463,15 @@
   },
   {
     "name": "SlasherX",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
-      "health": "110",
+      "health": "120",
       "shield": "20",
       "damage": "25",
       "sps": "29",
-      "attackSpeed": "0,85s",
+      "attackSpeed": "0.85s",
       "delay": "-",
       "mana": "3",
       "number": "1"
@@ -557,11 +539,11 @@
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
-      "health": "90",
+      "health": "140",
       "shield": "30",
       "damage": "12",
       "sps": "17",
-      "attackSpeed": "0,70s",
+      "attackSpeed": "0.70s",
       "delay": "-",
       "mana": "3",
       "number": "1"
@@ -604,7 +586,7 @@
     },
     "trait": "Hər 12 saniyədə uzaqdan atış edərək +300% Hasar verər",
     "additionalStats": {
-      "range": "1000 / 3500",
+      "range": "1000/3500",
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -623,13 +605,11 @@
   },
   {
     "name": "Stunners",
-    "type": [
-      "Ölü"
-    ],
+    "type": ["Dead"],
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
-      "health": "50",
+      "health": "60",
       "shield": "20",
       "damage": "10",
       "sps": "8",
@@ -696,9 +676,7 @@
   },
   {
     "name": "RogueX",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Arcane",
     "abilityName": "",
     "stats": {
@@ -706,7 +684,7 @@
       "shield": "40",
       "damage": "16",
       "sps": "13",
-      "attackSpeed": "1,20s",
+      "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "9",
       "number": "1"
