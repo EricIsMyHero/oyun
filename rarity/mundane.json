@@ -6,7 +6,7 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "70",
+      "health": "80",
       "shield": "0",
       "damage": "18",
       "sps": "16",
@@ -40,7 +40,7 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "310",
+      "health": "320",
       "shield": "0",
       "damage": "20",
       "sps": "18",
@@ -76,7 +76,7 @@
     "group": "constructs",
     "abilityName": "",
     "stats": {
-      "health": "90",
+      "health": "120",
       "shield": "0",
       "damage": "16",
       "sps": "16",
@@ -111,8 +111,8 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "80",
-      "shield": "20",
+      "health": "100",
+      "shield": "40",
       "damage": "15",
       "sps": "19",
       "attackSpeed": "0,80s",
@@ -146,12 +146,12 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "70",
+      "health": "90",
       "shield": "50",
       "damage": "3x5",
       "sps": "15",
-      "attackSpeed": "0,30s",
-      "delay": "1,10s",
+      "attackSpeed": "0.30s",
+      "delay": "1.10s",
       "mana": "8",
       "number": "1"
     },
@@ -181,7 +181,7 @@
     "group": "ancients",
     "abilityName": "Devouring Abyss",
     "stats": {
-      "health": "900",
+      "health": "1000",
       "shield": "0",
       "damage": "10",
       "sps": "10",
@@ -190,7 +190,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Gloop toxunduğu bütün rəqib kartları öz yapışqan kütləsinin içinə çəkərək onları hərəkətsiz qoyar və davamlı hasar verər. Bu qədim varlığın döyüş meydanında 150 saniyəlik məhdud ömrü var. Ömrü başa çatdıqda və ya məhv edildikdə daxili enerjisi partlayar, ətrafındakı bütün rəqiblərə 220 hasar yetirərək tamamilə yox olar.",
+    "trait": "Gloop toxunduğu bütün rəqib kartları öz yapışqan kütləsinin içinə çəkərək onları hərəkətsiz qoyar və davamlı hasar verər. Bu qədim varlığın döyüş meydanında 125 saniyəlik məhdud ömrü var. Ömrü başa çatdıqda və ya məhv edildikdə daxili enerjisi partlayar, ətrafındakı bütün rəqiblərə 220 hasar yetirərək tamamilə yox olar.",
     "additionalStats": {
       "range": "1000",
       "speed": "800",
@@ -217,11 +217,11 @@
     "group": "twisted-farm",
     "abilityName": "Butcher’s Authority",
     "stats": {
-      "health": "400",
+      "health": "440",
       "shield": "0",
       "damage": "62",
       "sps": "50",
-      "attackSpeed": "1,25s",
+      "attackSpeed": "1.25s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -252,7 +252,7 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "200",
+      "health": "250",
       "shield": "0",
       "damage": "4x5",
       "sps": "14",
@@ -291,7 +291,7 @@
     "group": "mission-1",
     "abilityName": "Ballistic Suppression",
     "stats": {
-      "health": "210",
+      "health": "250",
       "shield": "90",
       "damage": "74",
       "sps": "37",
@@ -326,7 +326,7 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "170",
+      "health": "180",
       "shield": "30",
       "damage": "3x5",
       "sps": "15",
@@ -360,7 +360,7 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "200",
+      "health": "210",
       "shield": "50",
       "damage": "5x9",
       "sps": "45",
@@ -396,11 +396,11 @@
     "abilityName": "Cellular Mitosis",
     "isMulti": true,
     "stats": {
-      "health": "230",
+      "health": "240",
       "shield": "0",
       "damage": "18",
       "sps": "18",
-      "attackSpeed": "1,00s",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -468,11 +468,11 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "90",
+      "health": "130",
       "shield": "0",
       "damage": "38",
       "sps": "27",
-      "attackSpeed": "1,40s",
+      "attackSpeed": "1.40s",
       "delay": "-",
       "mana": "5",
       "number": "1"
@@ -503,11 +503,11 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "50",
+      "health": "60",
       "shield": "20",
       "damage": "21",
       "sps": "23",
-      "attackSpeed": "0,90s",
+      "attackSpeed": "0.90s",
       "delay": "-",
       "mana": "8",
       "number": "2"
@@ -539,7 +539,7 @@
     "group": "mission-1",
     "abilityName": "Overdrive Harvest",
     "stats": {
-      "health": "120",
+      "health": "130",
       "shield": "30",
       "damage": "2x20",
       "sps": "40",
@@ -574,7 +574,7 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "50",
+      "health": "80",
       "shield": "0",
       "damage": "15",
       "sps": "17",
@@ -613,12 +613,12 @@
     "group": "mission-1",
     "abilityName": "Anti-Air Caliber",
     "stats": {
-      "health": "120",
+      "health": "140",
       "shield": "120",
       "damage": "15x3",
       "sps": "15",
-      "attackSpeed": "0,20s",
-      "delay": "1,75s",
+      "attackSpeed": "0.20s",
+      "delay": "1.75s",
       "mana": "9",
       "number": "1"
     },
@@ -649,7 +649,7 @@
     "group": "twisted-farm",
     "abilityName": "Toxic Sacrifice",
     "stats": {
-      "health": "40",
+      "health": "50",
       "shield": "0",
       "damage": "70",
       "sps": "70",
@@ -687,7 +687,7 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "250",
+      "health": "270",
       "shield": "80",
       "damage": "44",
       "sps": "29",
@@ -723,11 +723,11 @@
     "group": "royal-blood",
     "abilityName": "Martyrdom Blessing",
     "stats": {
-      "health": "10",
+      "health": "20",
       "shield": "0",
       "damage": "6",
       "sps": "7",
-      "attackSpeed": "0,90s",
+      "attackSpeed": "0.90s",
       "delay": "-",
       "mana": "8",
       "number": "10"
@@ -758,7 +758,7 @@
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "110",
+      "health": "140",
       "shield": "40",
       "damage": "14",
       "sps": "6",
@@ -789,18 +789,16 @@
   },
   {
     "name": "PhewPhew",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["İnsan"],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "180",
+      "health": "210",
       "shield": "50",
       "damage": "2x8",
       "sps": "16",
-      "attackSpeed": "0,50s",
-      "delay": "0,25s",
+      "attackSpeed": "0.50s",
+      "delay": "0.25s",
       "mana": "6",
       "number": "1"
     },
@@ -820,23 +818,21 @@
       "level2": "+5% Kritik Şansı  |  5% » 10%",
       "level3": "+25% Hasar  |  2x8 » 2x10"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "",
     "class": "Marksman"
   },
   {
     "name": "Chrono Mage",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Mundane",
     "group": "the-spellbound",
     "abilityName": "Temporal Resonance",
     "stats": {
-      "health": "300",
+      "health": "330",
       "shield": "0",
       "damage": "41",
       "sps": "24",
-      "attackSpeed": "1,70s",
+      "attackSpeed": "1.70s",
       "delay": "-",
       "mana": "11",
       "number": "1"
@@ -866,9 +862,7 @@
   },
   {
     "name": "Aegis Guard",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Mundane",
     "group": "mission-1",
     "abilityName": "Tactical Escort",
@@ -877,7 +871,7 @@
       "shield": "60",
       "damage": "22",
       "sps": "20",
-      "attackSpeed": "1,10s",
+      "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "9",
       "number": "1"
@@ -904,18 +898,16 @@
   },
   {
     "name": "Ironjaw",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
-      "health": "270",
+      "health": "290",
       "shield": "50",
       "damage": "18x3",
       "sps": "12",
-      "attackSpeed": "0,25s",
-      "delay": "0,90s",
+      "attackSpeed": "0.25s",
+      "delay": "0.90s",
       "mana": "11",
       "number": "1"
     },
@@ -1017,7 +1009,7 @@
     "group": "",
     "abilityName": "",
     "stats": {
-      "health": "30",
+      "health": "50",
       "shield": "300",
       "damage": "12",
       "sps": "12",
