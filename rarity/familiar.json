@@ -1,13 +1,11 @@
 [
   {
     "name": "Albert",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
-      "health": "240",
+      "health": "250",
       "shield": "10",
       "damage": "71",
       "sps": "42",
@@ -76,9 +74,7 @@
   },
   {
     "name": "Frostshot",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
@@ -120,7 +116,7 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "130",
+      "health": "170",
       "shield": "20",
       "damage": "25",
       "sps": "31",
@@ -150,17 +146,15 @@
   },
   {
     "name": "Warborn",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
-      "health": "100",
+      "health": "140",
       "shield": "300",
       "damage": "20",
       "sps": "17",
-      "attackSpeed": "1,15s",
+      "attackSpeed": "1.15s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -187,17 +181,15 @@
   },
   {
     "name": "X-Bot",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
-      "health": "50",
+      "health": "70",
       "shield": "150",
       "damage": "16",
       "sps": "16",
-      "attackSpeed": "1,00s",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "5",
       "number": "1"
@@ -224,17 +216,15 @@
   },
   {
     "name": "Nyra",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
-      "health": "110",
+      "health": "130",
       "shield": "90",
       "damage": "18",
       "sps": "23",
-      "attackSpeed": "0,80s",
+      "attackSpeed": "0.80s",
       "delay": "-",
       "mana": "7",
       "number": "1"
@@ -265,7 +255,7 @@
     "group": "mission-1",
     "abilityName": "Momentum Reload",
     "stats": {
-      "health": "30",
+      "health": "60",
       "shield": "20",
       "damage": "150",
       "sps": "50",
@@ -374,7 +364,7 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "80",
+      "health": "100",
       "shield": "0",
       "damage": "20",
       "sps": "21",
@@ -409,11 +399,11 @@
     "group": "royal-blood",
     "abilityName": "Resilient Vanguard",
     "stats": {
-      "health": "700",
+      "health": "770",
       "shield": "300",
       "damage": "12",
       "sps": "7",
-      "attackSpeed": "1,80s",
+      "attackSpeed": "1.80s",
       "delay": "-",
       "mana": "16",
       "number": "1"
@@ -481,8 +471,8 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "190",
-      "shield": "210",
+      "health": "320",
+      "shield": "10",
       "damage": "11",
       "sps": "11",
       "attackSpeed": "1.00s",
@@ -516,8 +506,8 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "180",
-      "shield": "50",
+      "health": "200",
+      "shield": "20",
       "damage": "52",
       "sps": "42",
       "attackSpeed": "1.25s",
@@ -554,11 +544,11 @@
     "group": "royal-blood",
     "abilityName": "Rapid Ignition",
     "stats": {
-      "health": "100",
+      "health": "150",
       "shield": "50",
       "damage": "12",
       "sps": "11",
-      "attackSpeed": "1,10s",
+      "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "4",
       "number": "1"
@@ -590,7 +580,7 @@
     "group": "underworld",
     "abilityName": "Soul Harvest",
     "stats": {
-      "health": "310",
+      "health": "320",
       "shield": "140",
       "damage": "28",
       "sps": "20",
@@ -620,13 +610,11 @@
   },
   {
     "name": "Volt Striker",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
-      "health": "150",
+      "health": "160",
       "shield": "80",
       "damage": "22",
       "sps": "24",
@@ -699,7 +687,7 @@
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
-      "health": "140",
+      "health": "150",
       "shield": "0",
       "damage": "9",
       "sps": "18",
@@ -708,7 +696,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Hər <b>4</b>-cü vuruş <b>0.6</b> saniyəlik rəqibləri sərsəmlətər",
+    "trait": "Hər <b>4</b>-cü vuruş <b>0.60s</b> saniyəlik rəqibləri sərsəmlətər",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -738,7 +726,7 @@
     "group": "royal-blood",
     "abilityName": "Aegis Pulse",
     "stats": {
-      "health": "500",
+      "health": "520",
       "shield": "150",
       "damage": "20",
       "sps": "17",
@@ -777,7 +765,7 @@
     "group": "twisted-farm",
     "abilityName": "Toxic Accumulation",
     "stats": {
-      "health": "170",
+      "health": "190",
       "shield": "30",
       "damage": "15",
       "sps": "12",
