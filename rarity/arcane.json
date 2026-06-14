@@ -782,42 +782,6 @@
   },
   {
     "name": "Sunrise",
-    "type": [
-      "Varlıq"
-    ],
-    "rarity": "Arcane",
-    "abilityName": "",
-    "stats": {
-      "health": "90",
-      "shield": "90",
-      "damage": "26",
-      "sps": "24",
-      "attackSpeed": "1,10s",
-      "delay": "-",
-      "mana": "11",
-      "number": "1"
-    },
-    "trait": "Hərəkət etdikcə hər 0,6 saniyə ərzində +1 Can qazanar (Max: 210)",
-    "additionalStats": {
-      "range": "1,000",
-      "speed": "1,000",
-      "criticalChance": "25%",
-      "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%"
-    },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
-    },
-    "story": "-",
-    "class": "Fighter"
-  },
-  {
-    "name": "Sunrise",
     "type": ["Varlıq"],
     "rarity": "Arcane",
     "abilityName": "",
@@ -826,7 +790,7 @@
       "shield": "90",
       "damage": "26",
       "sps": "24",
-      "attackSpeed": "1,10s",
+      "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "11",
       "number": "1"
