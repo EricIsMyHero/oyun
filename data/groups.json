@@ -57,7 +57,7 @@
   },
   {
     "name": "Ancients",
-    "description": "Warriors pulled from history's greatest battles. Each carries the weight of a lost civilisation.",
+    "description": "-",
     "color": "#e8c95a",
     "icon": "fa-shield-halved",
     "members": ["Gloop", "Freak", "Tornado", "Tphoenix", "Whisper", "Demotron", "Fallen Angel"]
