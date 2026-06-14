@@ -709,5 +709,79 @@
       "class": "Marksman"
     },
     "class": "Marksman"
+  },
+  {
+    "name": "Soul Master",
+    "type": ["Spirit"],
+    "rarity": "Ethereal",
+    "isDual": true,
+    "stats": {"mana": "7"},
+    "type1": {
+      "name": "Soul Master",
+      "type": ["Spirit"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "140",
+        "shield": "100",
+        "damage": "16",
+        "sps": "13",
+        "attackSpeed": "1.20s",
+        "delay": "-",
+        "mana": "7",
+        "number": "1"
+      },
+      "trait": "Ölən hər kart ruh buraxar, hər 10 ruhda +25% Hasar bonusu",
+      "additionalStats": {
+        "range": "2000",
+        "speed": "1100",
+        "criticalChance": "50%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "Soul Master",
+      "type": ["Spirit"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "140",
+        "shield": "100",
+        "damage": "21",
+        "sps": "16",
+        "attackSpeed": "1.20s",
+        "delay": "-",
+        "mana": "7",
+        "number": "1"
+      },
+      "trait": "Ölən hər kart ruh buraxar, hər 8 ruhda qarşıdakı ən yaxın ilk rəqib M.Canının 10%-i qədər hasar alar",
+      "additionalStats": {
+        "range": "2000",
+        "speed": "1100",
+        "criticalChance": "50%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Marksman"
+    },
+    "class": "Marksman"
   }
 ]
