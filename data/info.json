@@ -83,7 +83,8 @@
         "Blind: Restricts an enemy card's vision and attack range by a specified percentage (minimum 10%).",
         "Stat Reduction: Lowers the base stats of an enemy card by a specified amount.",
         "Curse: Amplifies the damage an enemy card receives from all sources.",
-        "Stun: Immobilizes an enemy card for a set duration, preventing movement and attacks."
+        "Stun: Immobilizes an enemy card for a set duration, preventing movement and attacks.",
+        "Bleeding: Deals continuous damage to an enemy card every second equal to 1% of their maximum health and completely blocks all forms of healing for the duration."
       ]
     }
   ]
