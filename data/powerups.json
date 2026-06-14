@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Drill",
+    "name": "Drills",
     "icon": "fa-solid fa-screwdriver-wrench",
     "capacity": "0,3",
     "levels": [
