@@ -12,7 +12,7 @@ async function initPowerUps() {
   const wrap = document.getElementById('powerups-table-wrap');
 
   /* Already initialised – skip */
-  if (wrap.children.length > 0) return;
+  if (powerUpsData) return;
 
   try {
     const res = await fetch('data/powerups.json');
