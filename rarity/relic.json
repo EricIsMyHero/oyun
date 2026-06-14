@@ -69,14 +69,12 @@
   },
   {
     "name": "Sylviana",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Relic",
     "abilityName": "",
     "isMulti": true,
     "stats": {
-      "health": "70",
+      "health": "90",
       "shield": "30",
       "damage": "30",
       "sps": "22",
@@ -105,9 +103,7 @@
     "forms": [
       {
         "name": "Butterflies",
-        "type": [
-          "Heyvan"
-        ],
+        "type": ["Heyvan"],
         "rarity": "Relic",
         "abilityName": "",
         "stats": {
@@ -151,7 +147,7 @@
     "abilityName": "Soul Reaper",
     "isMulti": true,
     "stats": {
-      "health": "220",
+      "health": "230",
       "shield": "130",
       "damage": "3x18",
       "sps": "36",
@@ -185,7 +181,7 @@
         "group": "underworld",
         "abilityName": "Echoing Horde",
         "stats": {
-          "health": "50",
+          "health": "60",
           "shield": "20",
           "damage": "10",
           "sps": "7",
@@ -225,19 +221,19 @@
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
-      "health": "120",
+      "health": "130",
       "shield": "500",
       "damage": "10",
       "sps": "10",
-      "attackSpeed": "1,00",
+      "attackSpeed": "1.00",
       "delay": "-",
       "mana": "6",
       "number": "1"
     },
     "trait": "Qalxan alınan hasarın 30%-ni rəqibə ötürər",
     "additionalStats": {
-      "range": "1,000",
-      "speed": "1,000",
+      "range": "1000",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -254,25 +250,23 @@
   },
   {
     "name": "Magma",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Alien"],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
-      "health": "800",
+      "health": "880",
       "shield": "200",
       "damage": "100",
       "sps": "40",
-      "attackSpeed": "2,50",
+      "attackSpeed": "2.50",
       "delay": "-",
       "mana": "18",
       "number": "1"
     },
     "trait": "-5 Can hər saniyə, arxasındakı kartlar ekstra 2x5 Yanma Hasarı verər",
     "additionalStats": {
-      "range": "1,000",
-      "speed": "0,800",
+      "range": "1000",
+      "speed": "800",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -289,25 +283,23 @@
   },
   {
     "name": "Avalith",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
-      "health": "230",
+      "health": "240",
       "shield": "0",
       "damage": "32",
       "sps": "40",
-      "attackSpeed": "0,80",
-      "delay": "1,2",
+      "attackSpeed": "0.80s",
+      "delay": "1.20s",
       "mana": "14",
       "number": "1"
     },
     "trait": "33% Şansa hasar almaz, menzilə görə Saldırı Hızı, Gecikmə Vaxtı 80%-ə qədər azalar",
     "additionalStats": {
-      "range": "3,500",
-      "speed": "1,000",
+      "range": "3500",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -324,25 +316,23 @@
   },
   {
     "name": "Far",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
-      "health": "100",
+      "health": "110",
       "shield": "20",
       "damage": "3x7",
       "sps": "21",
-      "attackSpeed": "0,20",
-      "delay": "0,4",
+      "attackSpeed": "0.20s",
+      "delay": "0.40s",
       "mana": "6",
       "number": "1"
     },
     "trait": "13% Şansla rəqibləri 2 saniyəlik sərsəmlətər",
     "additionalStats": {
-      "range": "3,200",
-      "speed": "1,000",
+      "range": "3200",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -365,7 +355,7 @@
     "abilityName": "Core Restructuring",
     "stats": {
       "health": "660",
-      "shield": "60",
+      "shield": "20",
       "damage": "12",
       "sps": "15",
       "attackSpeed": "0.80s",
@@ -375,8 +365,8 @@
     },
     "trait": "Demotron döyüş meydanında zərər gördükcə daxili strukturu avtomatik olaraq bərpa olunmağa başlayar. O, hər 10 saniyədə bir itirdiyi ümumi can miqdarının 10%-i qədərini dərhal bərpa edər. Bu xüsusiyyət sayəsində o, nə qədər çox hasar alsa, bir o qədər yüksək bərpa effekti nümayiş etdirərək döyüşdə qalma müddətini uzadar.",
     "additionalStats": {
-      "range": "2,100",
-      "speed": "1,000",
+      "range": "1400",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -393,13 +383,11 @@
   },
   {
     "name": "Format",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Alien"],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
-      "health": "30",
+      "health": "40",
       "shield": "30",
       "damage": "-",
       "sps": "-",
@@ -411,7 +399,7 @@
     "trait": "15,000 Karo qabaqdakı ən güclü rəqibə dönüşər (3 saniyə ərzində)",
     "additionalStats": {
       "range": "-",
-      "speed": "1,050",
+      "speed": "1050",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -428,9 +416,7 @@
   },
   {
     "name": "Pyhsic",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Alien"],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
@@ -438,15 +424,15 @@
       "shield": "210",
       "damage": "24",
       "sps": "12",
-      "attackSpeed": "2,00",
+      "attackSpeed": "2.00s",
       "delay": "-",
       "mana": "10",
       "number": "1"
     },
     "trait": "Hər 34 saniyədə 5,000 Karo qarşıdakı rəqibi yox edər",
     "additionalStats": {
-      "range": "4,000",
-      "speed": "1,150",
+      "range": "4000",
+      "speed": "1150",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -463,18 +449,16 @@
   },
   {
     "name": "Naar",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Relic",
     "group": "the-spellbound",
     "abilityName": "Pomegranate Detonation",
     "stats": {
-      "health": "150",
+      "health": "170",
       "shield": "40",
       "damage": "120",
       "sps": "40",
-      "attackSpeed": "3,00",
+      "attackSpeed": "3.00s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -501,25 +485,23 @@
   },
   {
     "name": "Lyra",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
-      "health": "190",
+      "health": "200",
       "shield": "30",
       "damage": "6",
       "sps": "12",
-      "attackSpeed": "0,50",
+      "attackSpeed": "0.50s",
       "delay": "-",
       "mana": "3",
       "number": "1"
     },
     "trait": "Hər 3-cü vuruşu ekstra 2 dəfə təkrarlanar (3x6)",
     "additionalStats": {
-      "range": "1,000",
-      "speed": "1,100",
+      "range": "1000",
+      "speed": "1100",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -541,7 +523,7 @@
     "group": "royal-blood",
     "abilityName": "Kinetic Repulsion",
     "stats": {
-      "health": "50",
+      "health": "70",
       "shield": "0",
       "damage": "10x7",
       "sps": "70",
@@ -552,8 +534,8 @@
     },
     "trait": "Aeralis etdiyi hər bir uzaq məsafəli atışla hədəf aldığı rəqibləri 0,1 karo geri itələyər. O, yüksək konsentrasiya sayəsində 12% şansla bu effekti gücləndirərək rəqibi normal məsafədən 4 dəfə daha çox, yəni birbaşa 0,4 karo geri fırladar. Bu mexanika yaxın məsafəli döyüşçüləri uzaqda saxlamaq üçün əvəzsizdir.",
     "additionalStats": {
-      "range": "2,500",
-      "speed": "1,000",
+      "range": "2500",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -684,7 +666,7 @@
           "shield": "200",
           "damage": "47",
           "sps": "29",
-          "attackSpeed": "1,60s",
+          "attackSpeed": "1.60s",
           "delay": "-",
           "mana": "-",
           "number": "1"
@@ -713,17 +695,15 @@
   },
   {
     "name": "Shine",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["İnsan"],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
-      "health": "160",
+      "health": "180",
       "shield": "60",
       "damage": "10",
       "sps": "9",
-      "attackSpeed": "1,10",
+      "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "12",
       "number": "1"
@@ -753,7 +733,7 @@
     "group": "void-walkers",
     "abilityName": "",
     "stats": {
-      "health": "300",
+      "health": "350",
       "shield": "120",
       "damage": "40",
       "sps": "33",
@@ -762,7 +742,7 @@
       "mana": "16",
       "number": "1"
     },
-    "trait": "Hər hasar verdikcə M.Canının 4%-ni itirər və hasarı +20% artar",
+    "trait": "Hər hasar verdikcə M.Canının 4%-ni itirər və hasarı +10% artar",
     "additionalStats": {
       "range": "2000",
       "speed": "1000",
@@ -791,7 +771,7 @@
       "shield": "160",
       "damage": "10",
       "sps": "13",
-      "attackSpeed": "0,80",
+      "attackSpeed": "0.80s",
       "delay": "-",
       "mana": "14",
       "number": "1"
@@ -816,14 +796,12 @@
   },
   {
     "name": "Worms",
-    "type": [
-      "Animal"
-    ],
+    "type": ["Animal"],
     "rarity": "Relic",
     "group": "twisted-farm",
     "abilityName": "Subterranean Ambush",
     "stats": {
-      "health": "30",
+      "health": "40",
       "shield": "0",
       "damage": "8",
       "sps": "6",
@@ -852,9 +830,7 @@
   },
   {
     "name": "Unara",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Relic",
     "group": "the-spellbound",
     "abilityName": "Reclusive Outburst",
@@ -863,7 +839,7 @@
       "shield": "40",
       "damage": "5",
       "sps": "8",
-      "attackSpeed": "0,60s",
+      "attackSpeed": "0.60s",
       "delay": "-",
       "mana": "8",
       "number": "1"
