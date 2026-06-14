@@ -450,12 +450,14 @@
     "name": "Leila",
     "type": ["Human"],
     "rarity": "Ethereal",
+    "group": "mission-1",
     "isDual": true,
     "stats": {"mana": "8"},
     "type1": {
       "name": "Leila",
       "type": ["Human"],
       "rarity": "Ethereal",
+      "group": "mission-1",
       "stats": {
         "health": "90",
         "shield": "120",
@@ -489,6 +491,7 @@
       "name": "Leila",
       "type": ["Human"],
       "rarity": "Ethereal",
+      "group": "mission-1",
       "stats": {
         "health": "90",
         "shield": "60",
