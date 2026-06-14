@@ -5,6 +5,7 @@
     "rarity": "Ethereal",
     "group": "constructs",
     "isDual": true,
+    "stats": {"mana": "5"},
     "type1": {
       "name": "Ase",
       "type": ["Human"],
@@ -152,6 +153,7 @@
     "type": ["Human"],
     "rarity": "Ethereal",
     "isDual": true,
+    "stats": {"mana": "12"},
     "type1": {
       "name": "Leno",
       "type": ["Human"],
@@ -161,7 +163,7 @@
         "shield": "120",
         "damage": "4",
         "sps": "20",
-        "attackSpeed": "0,20s",
+        "attackSpeed": "0.20s",
         "delay": "-",
         "mana": "12",
         "number": "1"
@@ -194,7 +196,7 @@
         "shield": "90",
         "damage": "50",
         "sps": "25",
-        "attackSpeed": "2,00s",
+        "attackSpeed": "2.00s",
         "delay": "-",
         "mana": "12",
         "number": "1"
@@ -226,6 +228,7 @@
     "rarity": "Ethereal",
     "group": "underworld",
     "isDual": true,
+    "stats": {"mana": "15"},
     "type1": {
       "name": "King",
       "type": ["Dead"],
@@ -339,6 +342,7 @@
     "type": ["Human"],
     "rarity": "Ethereal",
     "isDual": true,
+    "stats": {"mana": "16"},
     "type1": {
       "name": "Dracula",
       "type": ["Human"],
@@ -348,7 +352,7 @@
         "shield": "60",
         "damage": "40",
         "sps": "36",
-        "attackSpeed": "1,10s",
+        "attackSpeed": "1.10s",
         "delay": "-",
         "mana": "16",
         "number": "1"
@@ -374,17 +378,15 @@
     },
     "type2": {
       "name": "Dracula",
-      "type": [
-        "Human"
-      ],
+      "type": ["Animal"],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
-        "health": "210",
+        "health": "180",
         "shield": "0",
         "damage": "20",
         "sps": "15",
-        "attackSpeed": "1,30s",
+        "attackSpeed": "1.30s",
         "delay": "-",
         "mana": "16",
         "number": "1"
@@ -409,15 +411,13 @@
       "forms": [
         {
           "name": "Bats",
-          "type": [
-            "Robot"
-          ],
+          "type": ["Animal"],
           "stats": {
-            "health": "10",
+            "health": "30",
             "shield": "-",
             "damage": "5",
             "sps": "4",
-            "attackSpeed": "1,25s",
+            "attackSpeed": "1.25s",
             "delay": "-",
             "mana": "-",
             "number": "10"
@@ -452,6 +452,7 @@
     "rarity": "Ethereal",
     "group": "underworld",
     "isDual": true,
+    "stats": {"mana": "18"},
     "type1": {
       "name": "Lord",
       "type": ["Dead"],
@@ -495,8 +496,8 @@
       "abilityName": "Sovereign of the Damned",
       "isMulti": true,
       "stats": {
-        "health": "420",
-        "shield": "220",
+        "health": "360",
+        "shield": "180",
         "damage": "41",
         "sps": "22",
         "attackSpeed": "1.85s",
@@ -527,7 +528,7 @@
           "type": ["Dead"],
           "abilityName": "Desperate Fury",
           "stats": {
-            "health": "130",
+            "health": "100",
             "shield": "100",
             "damage": "12",
             "sps": "10",
@@ -559,5 +560,154 @@
       "class": "Tank"
     },
     "class": "Tank"
+  },
+  {
+    "name": "Hunter",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "group": "",
+    "isDual": true,
+    "stats": {"mana": "6"},
+    "type1": {
+      "name": "Hunter",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "",
+      "isMulti": true,
+      "stats": {
+        "health": "120",
+        "shield": "60",
+        "damage": "12",
+        "sps": "12",
+        "attackSpeed": "1.00s",
+        "delay": "-",
+        "mana": "6",
+        "number": "1"
+      },
+      "trait": "Heyvan tipli kartlara +60% Hasar bonusu, öləndə dönüşər",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1100",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "25%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Wolf",
+          "type": ["Animal"],
+          "group": "",
+          "stats": {
+            "health": "200",
+            "shield": "0",
+            "damage": "2x5",
+            "sps": "15",
+            "attackSpeed": "0.25s",
+            "delay": "0.25s",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Qalxana ekstra +50% Hasar bonusu",
+          "additionalStats": {
+            "range": "800",
+            "speed": "1200",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Tank"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "Hunter",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "",
+      "isMulti": true,
+      "stats": {
+        "health": "80",
+        "shield": "0",
+        "damage": "20",
+        "sps": "17",
+        "attackSpeed": "1.20s",
+        "delay": "-",
+        "mana": "6",
+        "number": "1"
+      },
+      "trait": "İnsan tipli kartlara +50% Hasar bonusu, öləndə dönüşər",
+      "additionalStats": {
+        "range": "2500",
+        "speed": "1000",
+        "criticalChance": "25%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Eagle",
+          "type": ["Animal"],
+          "group": "",
+          "stats": {
+            "health": "180",
+            "shield": "0",
+            "damage": "16",
+            "sps": "20",
+           "attackSpeed": "0.80s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Vuruşları qalxandan keçər",
+          "additionalStats": {
+            "range": "800",
+            "speed": "1300",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Marksman"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "class": "Marksman"
   }
 ]
