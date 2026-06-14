@@ -105,18 +105,14 @@
   },
   {
     "name": "Heartix",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["İnsan"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
-      "health": "60",
+      "health": "70",
       "shield": "60",
       "damage": "6",
       "sps": "5",
-      "attackSpeed": "1,25",
+      "attackSpeed": "1.25s",
       "delay": "-",
       "mana": "8",
       "number": "1"
@@ -143,19 +139,15 @@
   },
   {
     "name": "R-1",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
       "health": "390",
       "shield": "180",
       "damage": "3x70",
       "sps": "88",
-      "attackSpeed": "0,80",
-      "delay": "9,00",
+      "attackSpeed": "0.80s",
+      "delay": "9.00s",
       "mana": "16",
       "number": "1"
     },
@@ -179,19 +171,15 @@
   },
   {
     "name": "Blank",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Alien"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
       "health": "100",
       "shield": "200",
       "damage": "5x40",
       "sps": "80",
-      "attackSpeed": "0,50",
-      "delay": "2,50",
+      "attackSpeed": "0.50s",
+      "delay": "2.50s",
       "mana": "18",
       "number": "1"
     },
@@ -215,18 +203,14 @@
   },
   {
     "name": "Magmara",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Alien"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
       "health": "350",
       "shield": "150",
       "damage": "40",
       "sps": "25",
-      "attackSpeed": "1,60",
+      "attackSpeed": "1.60s",
       "delay": "-",
       "mana": "16",
       "number": "1"
@@ -251,22 +235,20 @@
   },
   {
     "name": "Willowshade",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Apex",
     "isMulti": true,
     "stats": {
-      "health": "150",
+      "health": "190",
       "shield": "50",
       "damage": "25",
       "sps": "25",
-      "attackSpeed": "1,00",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "9",
       "number": "1"
     },
-    "trait": "Vuruşları qalxandan keçər, öləndə \"Octopus\"-a dönüşər",
+    "trait": "Vuruşları qalxandan keçər, öləndə \"Octarion\"-a dönüşər",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -286,18 +268,14 @@
     "forms": [
       {
         "name": "Octarion",
-        "type": [
-          "Heyvan"
-        ],
+        "type": ["Animal"],
         "rarity": "Apex",
-        "isHybrid": false,
-        "isMulti": false,
         "stats": {
-          "health": "75",
+          "health": "80",
           "shield": "0",
           "damage": "15",
           "sps": "12",
-          "attackSpeed": "1,30",
+          "attackSpeed": "1.30s",
           "delay": "-",
           "mana": "-",
           "number": "1"
@@ -324,18 +302,14 @@
   },
   {
     "name": "Collector",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
-      "health": "100",
+      "health": "120",
       "shield": "100",
       "damage": "60",
       "sps": "40",
-      "attackSpeed": "1,50",
+      "attackSpeed": "1.50s",
       "delay": "-",
       "mana": "16",
       "number": "1"
@@ -360,18 +334,14 @@
   },
   {
     "name": "Sushu",
-    "type": [
-      "Ruh"
-    ],
+    "type": ["Spirit"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
-      "health": "30",
+      "health": "50",
       "shield": "0",
       "damage": "8",
       "sps": "8",
-      "attackSpeed": "1,00",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "5",
       "number": "1"
@@ -396,9 +366,7 @@
   },
   {
     "name": "Umbra",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Apex",
     "isHybrid": false,
     "isMulti": false,
@@ -407,8 +375,8 @@
       "shield": "40",
       "damage": "2x25",
       "sps": "50",
-      "attackSpeed": "0,25",
-      "delay": "0,50",
+      "attackSpeed": "0.25s",
+      "delay": "0.50s",
       "mana": "12",
       "number": "1"
     },
@@ -432,25 +400,21 @@
   },
   {
     "name": "Thief",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
-      "health": "180",
+      "health": "190",
       "shield": "30",
       "damage": "12",
       "sps": "12",
-      "attackSpeed": "1,00",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "12",
       "number": "1"
     },
     "trait": "15,000 Karo qabaqdakı ilk rəqibin özəlliyini oğurlayar",
     "additionalStats": {
-      "range": "1000 / 2500",
+      "range": "1000/2500",
       "speed": "1000",
       "criticalChance": "35%",
       "criticDamage": "1.5x",
@@ -474,8 +438,8 @@
     "abilityName": "",
     "isMulti": true,
     "stats": {
-      "health": "170",
-      "shield": "40",
+      "health": "140",
+      "shield": "20",
       "damage": "14",
       "sps": "14",
       "attackSpeed": "1.00s",
@@ -503,15 +467,13 @@
     "forms": [
       {
         "name": "Mini Rotters",
-        "type": [
-          "Ölü"
-        ],
+        "type": ["Dead"],
         "rarity": "Apex",
         "group": "void-walkers",
         "abilityName": "",
         "stats": {
-          "health": "30",
-          "shield": "60",
+          "health": "40",
+          "shield": "20",
           "damage": "10",
           "sps": "10",
           "attackSpeed": "1,00",
@@ -541,18 +503,14 @@
   },
   {
     "name": "Stormblade",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
     "stats": {
       "health": "160",
       "shield": "40",
       "damage": "26",
       "sps": "33",
-      "attackSpeed": "0,80",
+      "attackSpeed": "0.80s",
       "delay": "-",
       "mana": "11",
       "number": "1"
@@ -577,18 +535,16 @@
   },
   {
     "name": "Venom Fangs",
-    "type": [
-      "Varlıq"
-    ],
+    "type": ["Varlıq"],
     "rarity": "Apex",
     "isHybrid": false,
     "isMulti": false,
     "stats": {
-      "health": "60",
+      "health": "80",
       "shield": "240",
       "damage": "12",
       "sps": "9",
-      "attackSpeed": "1,30",
+      "attackSpeed": "1.30s",
       "delay": "-",
       "mana": "9",
       "number": "2"
@@ -629,8 +585,8 @@
     },
     "trait": "Skyhunter rəqibləri ilə arasındakı məsafəni öz xeyrinə istifadə edən peşəkar bir ovçudur. O, hədəf aldığı rəqib kart ilə öz arasındakı hər karo üçün +10% hasar bonusu qazanar. Rəqib ondan nə qədər uzaq olarsa, Skyhunter-in oxları bir o qədər dağıdıcı gücə sahib olur. Bu xüsusiyyət onu arxa cəbhədən düşmənin əsas qüvvələrini zərərsizləşdirmək üçün mükəmməl bir uzaq məsafəli karta çevirir.",
     "additionalStats": {
-      "range": "5,000",
-      "speed": "1,000",
+      "range": "5000",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -647,15 +603,13 @@
   },
   {
     "name": "Rockback",
-    "type": [
-      "Animal"
-    ],
+    "type": ["Animal"],
     "rarity": "Apex",
     "group": "twisted-farm",
     "abilityName": "Kinetic Rebound",
     "stats": {
-      "health": "140",
-      "shield": "180",
+      "health": "160",
+      "shield": "220",
       "damage": "14",
       "sps": "19",
       "attackSpeed": "0.75s",
@@ -689,7 +643,7 @@
     "abilityName": "",
     "stats": {
       "health": "200",
-      "shield": "40",
+      "shield": "60",
       "damage": "16",
       "sps": "13",
       "attackSpeed": "1.20s",
@@ -751,9 +705,7 @@
   },
   {
     "name": "Bio Mech",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Apex",
     "isHybrid": false,
     "isMulti": false,
@@ -762,15 +714,15 @@
       "shield": "60",
       "damage": "60",
       "sps": "75",
-      "attackSpeed": "0,80",
+      "attackSpeed": "0.80s",
       "delay": "-",
       "mana": "18",
       "number": "1"
     },
     "trait": "Hər hasar aldıqda ətrafdakı kartlar +1% Qalxan qazanar",
     "additionalStats": {
-      "range": "2,000",
-      "speed": "0,950",
+      "range": "2000",
+      "speed": "950",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -787,9 +739,7 @@
   },
   {
     "name": "Mixela",
-    "type": [
-      "Ruh"
-    ],
+    "type": ["Spirit"],
     "rarity": "Apex",
     "isHybrid": false,
     "isMulti": false,
@@ -798,15 +748,15 @@
       "shield": "0",
       "damage": "6x8",
       "sps": "48",
-      "attackSpeed": "0,15",
-      "delay": "0,50",
+      "attackSpeed": "0.15s",
+      "delay": "0.50s",
       "mana": "5",
       "number": "1"
     },
     "trait": "3x3 Yaxınında ölən kartların canlarının 60%-ni özünə qatar",
     "additionalStats": {
-      "range": "1,750",
-      "speed": "1,000",
+      "range": "1750",
+      "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -823,9 +773,7 @@
   },
   {
     "name": "Laura",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Human"],
     "rarity": "Apex",
     "group": "the-spellbound",
     "abilityName": "Chrono Blessing",
@@ -834,15 +782,15 @@
       "shield": "100",
       "damage": "8",
       "sps": "8",
-      "attackSpeed": "1,00s",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "4",
       "number": "1"
     },
     "trait": "Laura hər saniyə +8 yük qazanar. 100 yükə çatdıqda daxili enerjisini sərbəst buraxaraq ətrafa enerji dalğası yayar, Bu enerji dalğası ətrafındakı bütün dost kartların statistikalarını (hücum, müdafiə, sürət) +25% artırar.",
     "additionalStats": {
-      "range": "2,000",
-      "speed": "1,000",
+      "range": "2000",
+      "speed": "1000",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
