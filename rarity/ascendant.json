@@ -7,8 +7,8 @@
     "abilityName": "Tactical Cohesion",
     "isAscendant": true,
     "stats": {
-      "health": "270",
-      "shield": "130",
+      "health": "170",
+      "shield": "170",
       "damage": "24/2x8",
       "sps": "20/16",
       "attackSpeed": "1.20s/0.20s",
@@ -41,8 +41,8 @@
       "rarity": "Ascendant",
       "abilityName": "Tactical Cohesion",
       "stats": {
-        "health": "360",
-        "shield": "240",
+        "health": "250",
+        "shield": "250",
         "damage": "32/2x12",
         "sps": "29/24",
         "attackSpeed": "1.10s/0.40s",
@@ -113,8 +113,8 @@
       "abilityName": "",
       "isAscendant": true,
       "stats": {
-        "health": "110",
-        "shield": "40",
+        "health": "140",
+        "shield": "100",
         "damage": "70",
         "sps": "35",
         "attackSpeed": "2.00s",
@@ -223,7 +223,7 @@
     "abilityName": "",
     "isAscendant": true,
     "stats": {
-      "health": "140",
+      "health": "150",
       "shield": "80",
       "damage": "22/44/64/92",
       "sps": "22/44/64/92",
@@ -257,8 +257,8 @@
       "abilityName": "",
       "isAscendant": true,
       "stats": {
-        "health": "140",
-        "shield": "80",
+        "health": "180",
+        "shield": "110",
         "damage": "26/52/76/108",
         "sps": "26/52/76/108",
         "attackSpeed": "1.35s/0.75s/0.85s/1.75s",
