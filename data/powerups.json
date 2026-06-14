@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Drill",
+    "icon": "fa-solid fa-screwdriver-wrench",
+    "capacity": "0,3",
+    "levels": [
+      "Hər 12 saniyədə bir rəqib karta 15 Hasar verər (Qalxana ekstra +100% Hasar verər)",
+      "Hər 10 saniyədə bir rəqib karta 15 Hasar verər (Qalxana ekstra +110% Hasar verər)",
+      "Hər 8 saniyədə bir rəqib karta 15 Hasar verər (Qalxana ekstra +120% Hasar verər)",
+      "Hər 8 saniyədə bir rəqib karta 15 Hasar verər (Qalxana ekstra +120% Hasar verər), əgər hasar verilən kartın qalxanı qırılarsa bir sonraki \"Drill\" hasarı +20% artar"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Critic Aura",
+    "icon": "fa-solid fa-bullseye",
+    "capacity": "0,3",
+    "levels": [
+      "Bütün kartlar ekstra +3% Kritik Şansı və +0.1 Kritik Hasar qazanar",
+      "Bütün kartlar ekstra +4% Kritik Şansı və +0.2 Kritik Hasar qazanar",
+      "Bütün kartlar ekstra +5% Kritik Şansı və +0.3 Kritik Hasar qazanar",
+      "Bütün kartlar ekstra +5% Kritik Şansı və +0.3 Kritik Hasar qazanar, kritik vuruş etdikdə kartlar 5% can yeniləyər"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Satallite Laser",
+    "icon": "fa-solid fa-satellite",
+    "capacity": "0,3",
+    "levels": [
+      "Hər 25 saniyədə bir rəqib karta 28 Hasar verər və 1,5 saniyəlik sərsəmlətər",
+      "Hər 23 saniyədə bir rəqib karta 28 Hasar verər və 2 saniyəlik sərsəmlətər",
+      "Hər 21 saniyədə bir rəqib karta 28 Hasar verər və 2,5 saniyəlik sərsəmlətər",
+      "Hər 21 saniyədə bir rəqib karta 28 Hasar verər və 2,5 saniyəlik sərsəmlətər, sərsəmlənən kart +20% daha çox hasar alar"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Tsunami",
+    "icon": "fa-solid fa-water",
+    "capacity": "0,3",
+    "levels": [
+      "Hər 48 saniyədə 10 saniyəlik Tsunami gələrək rəqib kartların hızını 15% Yavaşladar",
+      "Hər 45 saniyədə 10 saniyəlik Tsunami gələrək rəqib kartların hızını 20% Yavaşladar",
+      "Hər 42 saniyədə 10 saniyəlik Tsunami gələrək rəqib kartların hızını 25% Yavaşladar",
+      "Hər 42 saniyədə 10 saniyəlik Tsunami gələrək rəqib kartların hızını 25% Yavaşladar və dost kartlara +15% Hız verər"
+    ]
+  }
+]

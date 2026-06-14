@@ -1,0 +1,90 @@
+{
+  "sections": [
+    {
+      "heading": "How to Play",
+      "content": "Clash-A-Mana is a real-time card battle game. Deploy cards to the arena using mana, destroy the opponent's tower to win. Each card costs mana — manage your resources wisely.",
+      "list": [
+        "Mana - The energy resource used to deploy cards. Regenerates over time.",
+        "Tower - Your base. If destroyed, you lose the match.",
+        "Arena - The battlefield split into two lanes.",
+        "Cycle - Your deck of 8 cards cycles continuously during battle."
+      ]
+    },
+    {
+      "heading": "Rarity System",
+      "content": "Every entity in Clash-A-Mana has a rarity tier that reflects its power, scarcity, and role in the Stagnantia project. Higher rarity cards are harder to obtain but significantly more powerful.",
+      "list": [
+        "Mundane - Common workers and basic constructs. Easy to deploy, reliable.",
+        "Familiar - Trained soldiers and tamed beasts. Good synergy potential.",
+        "Arcane - Mystic entities infused with portal energy. Unique abilities.",
+        "Relic - Ancient warriors of legend. High cost, high impact.",
+        "Ascendant - Evolved beings beyond normal classification.",
+        "Apex - The pinnacle of combat power. Extremely rare.",
+        "Ethereal - Beings that exist between dimensions. Unpredictable and devastating."
+      ]
+    },
+    {
+      "heading": "Sides",
+      "content": "Stagnantia is divided into two opposing sides, locked in perpetual conflict for the entertainment of the Crimson Crown. Every card wielder belongs to one side - but the true enemy is the system itself.",
+      "list": [
+        "The Crimson Crown - The ruling elite who architect and profit from the conflict.",
+        "The Azure Core - The working class, forced into the arena as entertainment."
+      ]
+    },
+    {
+      "heading": "Win Conditions",
+      "content": "Destroy the enemy tower before the timer runs out. If both towers survive, the player who dealt more tower damage wins. In case of a tie, sudden death overtime begins with accelerated mana regeneration.",
+      "list": [
+        "Tower Destruction - Instantly win by destroying the opponent's tower.",
+        "Higher Damage - Win on timer if your tower has less damage taken.",
+        "Overtime - Sudden death with doubled mana regeneration.",
+        "Perfect Victory - Destroy tower without taking any damage yourself."
+      ]
+    },
+    {
+    "heading": "Card Stats",
+      "content": "Oyunda bir çox əsas özəllik mövcuddur:",
+      "list": [
+        "Health - The total amount of life your card has. When it reaches zero, your character dies.",
+        "Shield - A protective shield that absorbs 70 percent of incoming damage.",
+        "Damage - The amount of harm dealt to an enemy per hit or action.",
+        "Attack Speed - How fast your card performs attacks within a given time.",
+        "Range - The maximum distance from which your card attacks or uses abilities.",
+        "Speed - How fast your card moves across the game world.",
+        "D.P.S. - Damage per second. The average damage your card deals each second over time.",
+        "Critical Damage - The extra damage dealt when a critical hit occurs.",
+        "Critical Chance - The percentage chance for an attack to become a critical hit.",
+        "Life Steal - A mechanic where a portion of dealt damage restores your health.",
+        "Life Steal Chance - The probability that an attack triggers life steal.",
+        "Damage Reduction - A stat that lowers incoming damage before it affects health.",
+        "Dodge - A chance-based mechanic that avoids incoming attacks completely."
+      ]
+    },
+    {
+      "heading": "Positive Status Effects",
+      "content": "Buffs (Positive Effects)",
+      "list": [
+        "Heal: Restores a specific amount of health to an ally card over a set duration.",
+        "Untouchable: Grants an ally card complete immunity to all incoming damage for a limited time.",
+        "Immortal: Prevents an ally card from dying for a set duration; their health cannot drop below 0.",
+        "Predominance: Grants an ally card total immunity to all negative status effects for a limited time.",
+        "Fearless: Grants damage reduction to an ally card when no other ally cards are nearby, or when surrounded by more than 5 enemy cards.",
+        "Taunt: Forces nearby enemy cards to focus their attacks exclusively on the casting ally card for a set duration."
+      ]
+    },
+    {
+      "heading": "Negative Status Effects",
+      "content": "Debuffs (Negative Effects)",
+      "list": [
+        "Burn: Deals continuous damage to an enemy card over time and reduces their healing received by 20%.",
+        "Poison: Inflicts continuous damage to an enemy card over time and reduces their movement speed by 10%.",
+        "Slow: Decreases an enemy card's movement speed and attack speed by a specified percentage (minimum 10%).",
+        "Silence: Prevents an enemy card from activating or using any abilities.",
+        "Blind: Restricts an enemy card's vision and attack range by a specified percentage (minimum 10%).",
+        "Stat Reduction: Lowers the base stats of an enemy card by a specified amount.",
+        "Curse: Amplifies the damage an enemy card receives from all sources.",
+        "Stun: Immobilizes an enemy card for a set duration, preventing movement and attacks."
+      ]
+    }
+  ]
+}
