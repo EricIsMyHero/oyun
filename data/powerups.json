@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Drills",
+    "name": "Armor Piercer",
     "icon": "fa-solid fa-screwdriver-wrench",
     "capacity": "0,3",
     "levels": [
@@ -13,7 +13,7 @@
   },
   {
     "id": 2,
-    "name": "Critic Aura",
+    "name": "Battle Instinc",
     "icon": "fa-solid fa-bullseye",
     "capacity": "0,3",
     "levels": [
@@ -25,7 +25,7 @@
   },
   {
     "id": 3,
-    "name": "Satallite Laser",
+    "name": "Orbital Strike",
     "icon": "fa-solid fa-satellite",
     "capacity": "0,3",
     "levels": [
@@ -37,7 +37,7 @@
   },
   {
     "id": 4,
-    "name": "Tsunami",
+    "name": "Ocean's Wrath",
     "icon": "fa-solid fa-water",
     "capacity": "0,3",
     "levels": [
@@ -45,6 +45,318 @@
       "Hər 45 saniyədə 10 saniyəlik Tsunami gələrək rəqib kartların hızını 20% Yavaşladar",
       "Hər 42 saniyədə 10 saniyəlik Tsunami gələrək rəqib kartların hızını 25% Yavaşladar",
       "Hər 42 saniyədə 10 saniyəlik Tsunami gələrək rəqib kartların hızını 25% Yavaşladar və dost kartlara +15% Hız verər"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Momentum Surge",
+    "icon": "fa-solid fa-bolt",
+    "capacity": "0,3",
+    "levels": [
+      "Kartlar hər 17 saniyədə 5 saniyəlik +10% Hız qazanar",
+      "Kartlar hər 15 saniyədə 5 saniyəlik +15% Hız qazanar",
+      "Kartlar hər 13 saniyədə 5 saniyəlik +20% Hız qazanar",
+      "Kartlar hər 13 saniyədə 5 saniyəlik +20% Hız qazanar, bu etki hər 0,5 saniyəlik mənzilli +12% artar, bu etki hər 30 saniyədə +3% artar"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Eagle Eye",
+    "icon": "fa-solid fa-eye",
+    "capacity": "0,3",
+    "levels": [
+      "Qala silahının mənzili +6% artar",
+      "Qala silahının mənzili +9% artar",
+      "Qala silahının mənzili +12% artar",
+      "Qala silahının mənzili +12% artar, bu etki hər 30 saniyədə +3% artar"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Deathburst",
+    "icon": "fa-solid fa-bomb",
+    "capacity": "0,4",
+    "levels": [
+      "Ölən kartlar partlayaraq 32 Hasar verər (Toplu kartlar -75% daha az hasar verər)",
+      "Ölən kartlar partlayaraq 40 Hasar verər (Toplu kartlar -75% daha az hasar verər)",
+      "Ölən kartlar partlayaraq 48 Hasar verər (Toplu kartlar -75% daha az hasar verər)",
+      "Ölən kartlar partlayaraq 48 Hasar verər (Toplu kartlar -75% daha az hasar verər), partlayan yerdə kart ölərsə oda partlayaraq ətrafdakı"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Vengeful Spirit",
+    "icon": "fa-solid fa-ghost",
+    "capacity": "0,4",
+    "levels": [
+      "Ölən kartın 3x3 yanındakı kartlar 3 saniyəlik +15% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
+      "Ölən kartın 3x3 yanındakı kartlar 4 saniyəlik +15% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
+      "Ölən kartın 3x3 yanındakı kartlar 5 saniyəlik +15% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
+      "Ölən kartın 3x3 yanındakı kartlar 5 saniyəlik +15% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər), hasar bonusu hər"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Pure Energy",
+    "icon": "fa-solid fa-battery-full",
+    "capacity": "0,4",
+    "levels": [
+      "Qazanılan hər bir enerjini +10% artırar",
+      "Qazanılan hər bir enerjini +15% artırar",
+      "Qazanılan hər bir enerjini +20% artırar",
+      "Qazanılan hər bir enerjini +20% artırar, maksimum enerji limiti +1"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Rapid Deployment",
+    "icon": "fa-solid fa-clock",
+    "capacity": "0,4",
+    "levels": [
+      "Qoyulan hər bir kart 4% daha tez taxtaya qoyular",
+      "Qoyulan hər bir kart 7% daha tez taxtaya qoyular",
+      "Qoyulan hər bir kart 10% daha tez taxtaya qoyular",
+      "Qoyulan hər bir kart 10% daha tez taxtaya qoyular, bu etki hər dəfə"
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Phantom Reflexes",
+    "icon": "fa-solid fa-running",
+    "capacity": "0,4",
+    "levels": [
+      "Qaçınma şansını +3% artırar və hər qaçındıqda 2 saniyəlik +15% Saldırı Hızı qazanar",
+      "Qaçınma şansını +4% artırar və hər qaçındıqda 2,5 saniyəlik +15% Saldırı Hızı qazanar",
+      "Qaçınma şansını +5% artırar və hər qaçındıqda 3 saniyəlik +15% Saldırı Hızı qazanar",
+      "Qaçınma şansını +5% artırar və hər qaçındıqda 3 saniyəlik +15% Saldırı Hızı qazanar, bu etki ətrafındakı dost kartlara keçər"
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Ice Shot",
+    "icon": "fa-solid fa-snowflake",
+    "capacity": "0,4",
+    "levels": [
+      "Mənzilli kartlar 10% şansla qarşısındakı rəqib kartı 1 saniyəlik dondurar",
+      "Mənzilli kartlar 12% şansla qarşısındakı rəqib kartı 1,5 saniyəlik dondurar",
+      "Mənzilli kartlar 14% şansla qarşısındakı rəqib kartı 2 saniyəlik dondurar",
+      "Mənzilli kartlar 14% şansla qarşısındakı rəqib kartı 2 saniyəlik dondurar, dondurulan kart ölərsə ətrafındakı rəqib kartlarıda dondurar"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "First Upgrade",
+    "icon": "fa-solid fa-arrow-up-trending-smart",
+    "capacity": "0,5",
+    "levels": [
+      "Bütün kartlar ilk 22 saniyə +10% Hız, +10% Hasar bonusu qazanar",
+      "Bütün kartlar ilk 27 saniyə +10% Hız, +10% Hasar bonusu qazanar",
+      "Bütün kartlar ilk 32 saniyə +10% Hız, +10% Hasar bonusu qazanar",
+      "Bütün kartlar ilk 32 saniyə +10% Hız, +10% Hasar bonusu qazanar, bu bonuslar hər saniyə +1% artar"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Radiant Pulse",
+    "icon": "fa-solid fa-wave-square",
+    "capacity": "0,5",
+    "levels": [
+      "Dost kartlar hər 1 saniyədə 3x3 yaxındakı rəqib kartlara 2 hasar verər",
+      "Dost kartlar hər 0,75 saniyədə 3x3 yaxındakı rəqib kartlara 2 hasar verər",
+      "Dost kartlar hər 0,5 saniyədə 3x3 yaxındakı rəqib kartlara 2 hasar verər",
+      "Dost kartlar hər 0,5 saniyədə 3x3 yaxındakı rəqib kartlara 2 hasar verər, bu hasar kritik ola bilər və 3 qat hasar verər"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Blood Pact",
+    "icon": "fa-solid fa-droplet",
+    "capacity": "0,5",
+    "levels": [
+      "Bir Kart öldükdə 3x3 yanındakı kartlar +6% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
+      "Bir Kart öldükdə 3x3 yanındakı kartlar +8% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
+      "Bir Kart öldükdə 3x3 yanındakı kartlar +10% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
+      "Bir Kart öldükdə 3x3 yanındakı kartlar +10% Can yeniləyər (Toplu kartlar +1% Can yeniləyər), dost kartların canı 90%-in üstündədirsə eyni"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Last Chance",
+    "icon": "fa-solid fa-skull-crossbones",
+    "capacity": "0,5",
+    "levels": [
+      "Kartlar öldükdə 6% şansla qarşısındakı rəqibidə öldürər",
+      "Kartlar öldükdə 7% şansla qarşısındakı rəqibidə öldürər",
+      "Kartlar öldükdə 8% şansla qarşısındakı rəqibidə öldürər",
+      "Kartlar öldükdə 8% şansla qarşısındakı rəqibidə öldürər, rəqib kart"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Heart Candy",
+    "icon": "fa-solid fa-heart",
+    "capacity": "0,5",
+    "levels": [
+      "Bütün dost kartların canı ən çox canı olan kartın canının 8%-i qədər artar",
+      "Bütün dost kartların canı ən çox canı olan kartın canının 9%-i qədər artar",
+      "Bütün dost kartların canı ən çox canı olan kartın canının 10%-i qədər artar",
+      "Bütün dost kartların canı ən çox canı olan kartın canının 10%-i qədər artar, qazanılan can 25-in üstündədirsə ekstra +5% Hasar bonusu"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Warrior's Training",
+    "icon": "fa-solid fa-dumbbell",
+    "capacity": "0,6",
+    "levels": [
+      "Bütün kartlar +6% Saldırı Hızı qazanar",
+      "Bütün kartlar +7% Saldırı Hızı qazanar",
+      "Bütün kartlar +8% Saldırı Hızı qazanar",
+      "Bütün kartlar +8% Saldırı Hızı qazanar, dost kartlar yerində durduqda hər 0,1 saniyədə 1% Saldırı Hızı qazanar (Max:20%)"
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Arcane Reserve",
+    "icon": "fa-solid fa-gem",
+    "capacity": "0,6",
+    "levels": [
+      "Hər 72 saniyədə ən çox manalı kart tək səfərlik pulsuz olar",
+      "Hər 66 saniyədə ən çox manalı kart tək səfərlik pulsuz olar",
+      "Hər 60 saniyədə ən çox manalı kart tək səfərlik pulsuz olar",
+      "Hər 60 saniyədə ən çox manalı kart tək səfərlik pulsuz olar, əgər kartı 3 saniyə ərzində oynarsan mövcud manasının 50%-ni qazanarsan"
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Magic Echo",
+    "icon": "fa-solid fa-wand-magic-sparkles",
+    "capacity": "0,6",
+    "levels": [
+      "Hər 50 saniyədə təsadüfi bir dost kartın özelliynin etkisi +50% artar",
+      "Hər 5 saniyədə təsadüfi bir dost kartın özelliynin etkisi +75% artar",
+      "Hər 40 saniyədə təsadüfi bir dost kartın özelliynin etkisi +100% artar",
+      "Hər 40 saniyədə təsadüfi bir dost kartın özelliynin etkisi +100% artar, bu etki eyni zamanda bütün rəqib kartları 1 saniyəlik susturar"
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Tower Renovation",
+    "icon": "fa-solid fa-shield-halved",
+    "capacity": "0,6",
+    "levels": [
+      "Qala hər 70 saniyədə +20 Can yeniləyər",
+      "Qala hər 60 saniyədə +20 Can yeniləyər",
+      "Qala hər 50 saniyədə +20 Can yeniləyər",
+      "Qala hər 50 saniyədə +20 Can yeniləyər, qalanın canı doludursa ekstra +10 can qazanar (Max:100)"
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Mystic Hit",
+    "icon": "fa-solid fa-hand-fist",
+    "capacity": "0,6",
+    "levels": [
+      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1 saniyəlik susturar",
+      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,3 saniyəlik susturar",
+      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,6 saniyəlik susturar",
+      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,6 saniyəlik susturar, susturulan rəqib kart eyni zamanda hərəkət edə bilməz"
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Lilys nightmare",
+    "icon": "fa-solid fa-skull",
+    "capacity": "0,7",
+    "levels": [
+      "Hər 180 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +200% Hasar bonusu verər, Bu bonus hər vuruşda -5% azalar. Canavarın 60 canı və 20 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +400% Hasar bonusu verər.",
+      "Hər 160 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +250% Hasar bonusu verər, Bu bonus hər vuruşda -5% azalar. Canavarın 75 canı və 25 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +500% Hasar bonusu verər.",
+      "Hər 150 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +300% Hasar bonusu verər, Bu bonus hər vuruşda -5% azalar. Canavarın 90 canı və 30 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +600% Hasar bonusu verər.",
+      "Hər 150 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +300% Hasar bonusu verər, Bu bonus hər vuruşda -5% azalar. Canavarın 90 canı və 30 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +600% Hasar bonusu verər, əgər dost kartlar bu bonus ərzində rəqib kart öldürərsə hər"
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Guardian Aura",
+    "icon": "fa-solid fa-user-shield",
+    "capacity": "0,7",
+    "levels": [
+      "Bütün dost kartlar -6% daha az hasar alar",
+      "Bütün dost kartlar -8% daha az hasar alar",
+      "Bütün dost kartlar -10% daha az hasar alar",
+      "Bütün dost kartlar -10% daha az hasar alar, alınan hasarı 2% şansla"
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Toxic Soul",
+    "icon": "fa-solid fa-biohazard",
+    "capacity": "0,7",
+    "levels": [
+      "Vurulan rəqib kartlar ekstra 2x3 Zəhərlənmə hasarı alar",
+      "Vurulan rəqib kartlar ekstra 2x4 Zəhərlənmə hasarı alar",
+      "Vurulan rəqib kartlar ekstra 2x5 Zəhərlənmə hasarı alar",
+      "Vurulan rəqib kartlar ekstra 2x5 Zəhərlənmə hasarı alar, bu zəhər 5% şansla kritik vurar və 2 qat hasar verər"
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Mirror Shield",
+    "icon": "fa-solid fa-shield",
+    "capacity": "0,7",
+    "levels": [
+      "Qalxan qırılana qədər gələn hasarın 6%-ni rəqibə ötürər",
+      "Qalxan qırılana qədər gələn hasarın 8%-ni rəqibə ötürər",
+      "Qalxan qırılana qədər gələn hasarın 10%-ni rəqibə ötürər",
+      "Qalxan qırılana qədər gələn hasarın 10%-ni rəqibə ötürər, qalxan qırıldıqda 4% şansla yenidən yaranar"
+    ]
+  },
+  {
+    "id": 27,
+    "name": "King Crown",
+    "icon": "fa-solid fa-crown",
+    "capacity": "0,7",
+    "levels": [
+      "Hər 40 saniyədə ən güclü kart +40% M.Can və +15% Hasar bonusu qazanar",
+      "Hər 37 saniyədə ən güclü kart +45% M.Can və +20% Hasar bonusu qazanar",
+      "Hər 34 saniyədə ən güclü kart +50% M.Can və +25% Hasar bonusu qazanar",
+      "Hər 34 saniyədə ən güclü kart +50% M.Can və +25% Hasar bonusu qazanar, bu kart öldükdə bu bonuslar ən yaxın dost karta 5 saniyəlik"
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Mana Reactor",
+    "icon": "fa-solid fa-atom",
+    "capacity": "0,7",
+    "levels": [
+      "Mana yeniləmə hızı 2% artar",
+      "Mana yeniləmə hızı 4% artar",
+      "Mana yeniləmə hızı 6% artar",
+      "Mana yeniləmə hızı 6% artar, mana limitini +1 artırar"
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Iron Will",
+    "icon": "fa-solid fa-heart-pulse",
+    "capacity": "0,7",
+    "levels": [
+      "Kartlar öldükdə 1 saniyə daha yaşayar",
+      "Kartlar öldükdə 1,5 saniyə daha yaşayar",
+      "Kartlar öldükdə 2 saniyə daha yaşayar",
+      "Kartlar öldükdə 2 saniyə daha yaşayar, +10% Saldırı Hızı qazanarlar"
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Demon Crown",
+    "icon": "fa-solid fa-hat-cowboy",
+    "capacity": "0,7",
+    "levels": [
+      "Hər 38 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +150% Hasar bonusu və +10% Hız qazanar və yox olar",
+      "Hər 35 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +175% Hasar bonusu və +10% Hız qazanar və yox olar",
+      "Hər 32 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +200% Hasar bonusu və +10% Hız qazanar və yox olar",
+      "Hər 32 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +200% Hasar bonusu və +10% Hız qazanar və yox olar, əgər rəqib kart öldürərsə"
     ]
   }
 ]
