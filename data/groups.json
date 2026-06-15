@@ -68,5 +68,20 @@
     "color": "#f472b6",
     "icon": "fa-eye",
     "members": ["Void Striker", "Death", "Bloodraider", "Rotlings", "Void Wraith"]
+  },
+  {
+    "name": "The Ghost Town",
+    "description": "-",
+    "color": "#9c9b9a",
+    "icon": "fa-eye",
+    "members": ["Sheriff", "SlasherX", "Nurse", "Twins"]
+  },
+  {
+    "name": "Vampire Family",
+    "description": "-",
+    "color": "#5e0e08",
+    "icon": "fa-eye",
+    "members": ["Dracula", "Marcy", "Servant", "Cow"]
   }
+   
 ]
