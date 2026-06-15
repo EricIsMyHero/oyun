@@ -73,15 +73,35 @@
     "name": "The Ghost Town",
     "description": "-",
     "color": "#9c9b9a",
-    "icon": "fa-eye",
+    "icon": "fa-ghost",
     "members": ["Sheriff", "SlasherX", "Nurse", "Twins"]
   },
   {
     "name": "Vampire Family",
     "description": "-",
     "color": "#5e0e08",
-    "icon": "fa-eye",
+    "icon": "fa-droplet",
     "members": ["Dracula", "Marcy", "Servant", "Cow"]
+  },
+  {
+    "name": "Botanical Gardens",
+    "description": "-",
+    "color": "#02FF00",
+    "icon": "fa-leaf",
+    "members": ["Sylviana", "Willowshade", "Leafshade"]
+  },
+  {
+    "name": "The Amazing Circus",
+    "description": "-",
+    "color": "#FFE600",
+    "icon": "fa-spiral",
+    "members": ["B-B", "PhewPhew", "Jestro"]
+  },
+   {
+    "name": "Barber Brothers",
+    "description": "-",
+    "color": "#333333",
+    "icon": "fa-scissors",
+    "members": ["Fen", "Ben", "Clara"]
   }
-   
 ]
