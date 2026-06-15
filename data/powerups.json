@@ -32,7 +32,7 @@
       "Hər 25 saniyədə bir rəqib karta 28 Hasar verər və 1,5 saniyəlik sərsəmlətər",
       "Hər 23 saniyədə bir rəqib karta 28 Hasar verər və 2 saniyəlik sərsəmlətər",
       "Hər 21 saniyədə bir rəqib karta 28 Hasar verər və 2,5 saniyəlik sərsəmlətər",
-      "Hər 21 saniyədə bir rəqib karta 28 Hasar verər və 2,5 saniyəlik sərsəmlətər, sərsəmlənən kart +20% daha çox hasar alar"
+      "Hər 21 saniyədə bir rəqib karta 28 Hasar verər və 2,5 saniyəlik sərsəmlətər, sərsəmlənən kart 2,5 saniyəlik+20% daha çox hasar alar"
     ]
   },
   {
@@ -56,7 +56,7 @@
       "Kartlar hər 17 saniyədə 5 saniyəlik +10% Hız qazanar",
       "Kartlar hər 15 saniyədə 5 saniyəlik +15% Hız qazanar",
       "Kartlar hər 13 saniyədə 5 saniyəlik +20% Hız qazanar",
-      "Kartlar hər 13 saniyədə 5 saniyəlik +20% Hız qazanar, bu etki hər 0,5 saniyəlik mənzilli +12% artar, bu etki hər 30 saniyədə +3% artar"
+      "Kartlar hər 13 saniyədə 5 saniyəlik +20% Hız qazanar, bu etki hər 0,5 saniyədə +2% artar"
     ]
   },
   {
@@ -68,7 +68,7 @@
       "Qala silahının mənzili +6% artar",
       "Qala silahının mənzili +9% artar",
       "Qala silahının mənzili +12% artar",
-      "Qala silahının mənzili +12% artar, bu etki hər 30 saniyədə +3% artar"
+      "Qala silahının menzili +12% artar, bu etki hər 45 saniyədə +3% artar (Max: 18%)"
     ]
   },
   {
@@ -80,7 +80,7 @@
       "Ölən kartlar partlayaraq 32 Hasar verər (Toplu kartlar -75% daha az hasar verər)",
       "Ölən kartlar partlayaraq 40 Hasar verər (Toplu kartlar -75% daha az hasar verər)",
       "Ölən kartlar partlayaraq 48 Hasar verər (Toplu kartlar -75% daha az hasar verər)",
-      "Ölən kartlar partlayaraq 48 Hasar verər (Toplu kartlar -75% daha az hasar verər), partlayan yerdə kart ölərsə oda partlayaraq ətrafdakı"
+      "Ölən kartlar partlayaraq 48 Hasar verər (Toplu kartlar -75% daha az hasar verər), partlayan yerdə kart ölərsə oda partlayaraq ətrafdakı rəqib kartlara 24 Hasar verər"
     ]
   },
   {
@@ -89,10 +89,10 @@
     "icon": "fa-solid fa-ghost",
     "capacity": "0,4",
     "levels": [
-      "Ölən kartın 3x3 yanındakı kartlar 3 saniyəlik +15% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
-      "Ölən kartın 3x3 yanındakı kartlar 4 saniyəlik +15% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
-      "Ölən kartın 3x3 yanındakı kartlar 5 saniyəlik +15% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
-      "Ölən kartın 3x3 yanındakı kartlar 5 saniyəlik +15% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər), hasar bonusu hər"
+      "Ölən kartın 3x3 yanındakı kartlar 5 saniyəlik +10% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
+      "Ölən kartın 3x3 yanındakı kartlar 7 saniyəlik +10% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
+      "Ölən kartın 3x3 yanındakı kartlar 9 saniyəlik +10% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər)",
+      "Ölən kartın 3x3 yanındakı kartlar 9 saniyəlik +10% Hasar bonusu qazanar (Toplu kartlar +3% hasar bonusu verər), hasar bonusu hər saniyə +5% artar"
     ]
   },
   {
@@ -104,7 +104,7 @@
       "Qazanılan hər bir enerjini +10% artırar",
       "Qazanılan hər bir enerjini +15% artırar",
       "Qazanılan hər bir enerjini +20% artırar",
-      "Qazanılan hər bir enerjini +20% artırar, maksimum enerji limiti +1"
+      "Qazanılan hər bir enerjini +20% artırar, maksimum enerji limitini +1 artırar"
     ]
   },
   {
@@ -116,7 +116,7 @@
       "Qoyulan hər bir kart 4% daha tez taxtaya qoyular",
       "Qoyulan hər bir kart 7% daha tez taxtaya qoyular",
       "Qoyulan hər bir kart 10% daha tez taxtaya qoyular",
-      "Qoyulan hər bir kart 10% daha tez taxtaya qoyular, bu etki hər dəfə"
+      "Qoyulan hər bir kart 10% daha tez taxtaya qoyular, bu etki hər dəfə +0,5% artar (Max: 5%)"
     ]
   },
   {
@@ -161,10 +161,10 @@
     "icon": "fa-solid fa-wave-square",
     "capacity": "0,5",
     "levels": [
-      "Dost kartlar hər 1 saniyədə 3x3 yaxındakı rəqib kartlara 2 hasar verər",
-      "Dost kartlar hər 0,75 saniyədə 3x3 yaxındakı rəqib kartlara 2 hasar verər",
-      "Dost kartlar hər 0,5 saniyədə 3x3 yaxındakı rəqib kartlara 2 hasar verər",
-      "Dost kartlar hər 0,5 saniyədə 3x3 yaxındakı rəqib kartlara 2 hasar verər, bu hasar kritik ola bilər və 3 qat hasar verər"
+      "Dost kartlar hər 1 saniyədə yaxındakı rəqib kartlara 2 hasar verər",
+      "Dost kartlar hər 0,75 saniyədə yaxındakı rəqib kartlara 2 hasar verər",
+      "Dost kartlar hər 0,50 saniyədə yaxındakı rəqib kartlara 2 hasar verər",
+      "Dost kartlar hər 0,50 saniyədə yaxındakı rəqib kartlara 2 hasar verər, bu hasar kritik ola bilər və 3 qat hasar verər"
     ]
   },
   {
@@ -173,10 +173,10 @@
     "icon": "fa-solid fa-droplet",
     "capacity": "0,5",
     "levels": [
-      "Bir Kart öldükdə 3x3 yanındakı kartlar +6% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
-      "Bir Kart öldükdə 3x3 yanındakı kartlar +8% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
-      "Bir Kart öldükdə 3x3 yanındakı kartlar +10% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
-      "Bir Kart öldükdə 3x3 yanındakı kartlar +10% Can yeniləyər (Toplu kartlar +1% Can yeniləyər), dost kartların canı 90%-in üstündədirsə eyni"
+      "Bir dost kart öldükdə yaxınındakı kartlar +6% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
+      "Bir dost kart öldükdə yaxınındakı kartlar +8% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
+      "Bir dost kart öldükdə yaxınındakı kartlar +10% Can yeniləyər (Toplu kartlar +1% Can yeniləyər)",
+      "Bir dost kart öldükdə yaxınındakı kartlar +10% Can yeniləyər (Toplu kartlar +1% Can yeniləyər), dost kartların canı 90%-in üstündədirsə eyni zamanda 5% qalxan yeniləyər"
     ]
   },
   {
@@ -185,10 +185,10 @@
     "icon": "fa-solid fa-skull-crossbones",
     "capacity": "0,5",
     "levels": [
-      "Kartlar öldükdə 6% şansla qarşısındakı rəqibidə öldürər",
-      "Kartlar öldükdə 7% şansla qarşısındakı rəqibidə öldürər",
-      "Kartlar öldükdə 8% şansla qarşısındakı rəqibidə öldürər",
-      "Kartlar öldükdə 8% şansla qarşısındakı rəqibidə öldürər, rəqib kart"
+      "Dost kart öldükdə 6% şansla qarşısındakı rəqibidə öldürər",
+      "Dost kart öldükdə 7% şansla qarşısındakı rəqibidə öldürər",
+      "Dost kart öldükdə 8% şansla qarşısındakı rəqibidə öldürər",
+      "Dost kart öldükdə 8% şansla qarşısındakı rəqibidə öldürər, rəqib kart öldükdə 2 mana verər"
     ]
   },
   {
@@ -200,7 +200,7 @@
       "Bütün dost kartların canı ən çox canı olan kartın canının 8%-i qədər artar",
       "Bütün dost kartların canı ən çox canı olan kartın canının 9%-i qədər artar",
       "Bütün dost kartların canı ən çox canı olan kartın canının 10%-i qədər artar",
-      "Bütün dost kartların canı ən çox canı olan kartın canının 10%-i qədər artar, qazanılan can 25-in üstündədirsə ekstra +5% Hasar bonusu"
+      "Bütün dost kartların canı ən çox canı olan kartın canının 10%-i qədər artar, qazanılan can 25-in üstündədirsə ekstra +5% Hasar bonusu qazanarlar"
     ]
   },
   {
@@ -209,10 +209,10 @@
     "icon": "fa-solid fa-dumbbell",
     "capacity": "0,6",
     "levels": [
-      "Bütün kartlar +6% Saldırı Hızı qazanar",
-      "Bütün kartlar +7% Saldırı Hızı qazanar",
-      "Bütün kartlar +8% Saldırı Hızı qazanar",
-      "Bütün kartlar +8% Saldırı Hızı qazanar, dost kartlar yerində durduqda hər 0,1 saniyədə 1% Saldırı Hızı qazanar (Max:20%)"
+      "Bütün dost kartlar +6% Saldırı Hızı qazanar",
+      "Bütün dost kartlar +7% Saldırı Hızı qazanar",
+      "Bütün dost kartlar +8% Saldırı Hızı qazanar",
+      "Bütün dost kartlar +8% Saldırı Hızı qazanar, dost kartlar yerində durduqda hər 0,2 saniyədə 7 saniyəlik 1% Saldırı Hızı qazanar (Max:20%)"
     ]
   },
   {
@@ -221,10 +221,10 @@
     "icon": "fa-solid fa-gem",
     "capacity": "0,6",
     "levels": [
-      "Hər 72 saniyədə ən çox manalı kart tək səfərlik pulsuz olar",
-      "Hər 66 saniyədə ən çox manalı kart tək səfərlik pulsuz olar",
-      "Hər 60 saniyədə ən çox manalı kart tək səfərlik pulsuz olar",
-      "Hər 60 saniyədə ən çox manalı kart tək səfərlik pulsuz olar, əgər kartı 3 saniyə ərzində oynarsan mövcud manasının 50%-ni qazanarsan"
+      "Hər 72 saniyədə ən çox manalı dost kart tək səfərlik pulsuz olar",
+      "Hər 66 saniyədə ən çox manalı dost kart tək səfərlik pulsuz olar",
+      "Hər 60 saniyədə ən çox manalı dost kart tək səfərlik pulsuz olar",
+      "Hər 60 saniyədə ən çox manalı dost kart tək səfərlik pulsuz olar, kartı 3 saniyə ərzində oynadıqda mövcud manasının 20%-ni geri verər"
     ]
   },
   {
@@ -233,10 +233,10 @@
     "icon": "fa-solid fa-wand-magic-sparkles",
     "capacity": "0,6",
     "levels": [
-      "Hər 50 saniyədə təsadüfi bir dost kartın özelliynin etkisi +50% artar",
-      "Hər 5 saniyədə təsadüfi bir dost kartın özelliynin etkisi +75% artar",
-      "Hər 40 saniyədə təsadüfi bir dost kartın özelliynin etkisi +100% artar",
-      "Hər 40 saniyədə təsadüfi bir dost kartın özelliynin etkisi +100% artar, bu etki eyni zamanda bütün rəqib kartları 1 saniyəlik susturar"
+      "Hər 50 saniyədə təsadüfi bir dost kartın özəlliyinin etkisi +50% artar",
+      "Hər 5 saniyədə təsadüfi bir dost kartın özəlliyinin etkisi +75% artar",
+      "Hər 40 saniyədə təsadüfi bir dost kartın özəlliyinin etkisi +100% artar",
+      "Hər 40 saniyədə təsadüfi bir dost kartın özəlliyinin etkisi +100% artar, bu etki eyni zamanda bütün rəqib kartları 1 saniyəlik susturar"
     ]
   },
   {
@@ -248,7 +248,7 @@
       "Qala hər 70 saniyədə +20 Can yeniləyər",
       "Qala hər 60 saniyədə +20 Can yeniləyər",
       "Qala hər 50 saniyədə +20 Can yeniləyər",
-      "Qala hər 50 saniyədə +20 Can yeniləyər, qalanın canı doludursa ekstra +10 can qazanar (Max:100)"
+      "Qala hər 50 saniyədə +20 Can yeniləyər, qalanın canı doludursa ekstra +10 Maksimum Can qazanar (Max:100)"
     ]
   },
   {
@@ -258,9 +258,9 @@
     "capacity": "0,6",
     "levels": [
       "Dost kartların ilk vuruşu hər zaman rəqib kartı 1 saniyəlik susturar",
-      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,3 saniyəlik susturar",
-      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,6 saniyəlik susturar",
-      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,6 saniyəlik susturar, susturulan rəqib kart eyni zamanda hərəkət edə bilməz"
+      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,25 saniyəlik susturar",
+      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,5 saniyəlik susturar",
+      "Dost kartların ilk vuruşu hər zaman rəqib kartı 1,5 saniyəlik susturar, susturulan rəqib kart eyni zamanda 1,5 saniyəlik lənətlənər"
     ]
   },
   {
@@ -269,10 +269,10 @@
     "icon": "fa-solid fa-skull",
     "capacity": "0,7",
     "levels": [
-      "Hər 180 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +200% Hasar bonusu verər, Bu bonus hər vuruşda -5% azalar. Canavarın 60 canı və 20 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +400% Hasar bonusu verər.",
-      "Hər 160 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +250% Hasar bonusu verər, Bu bonus hər vuruşda -5% azalar. Canavarın 75 canı və 25 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +500% Hasar bonusu verər.",
-      "Hər 150 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +300% Hasar bonusu verər, Bu bonus hər vuruşda -5% azalar. Canavarın 90 canı və 30 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +600% Hasar bonusu verər.",
-      "Hər 150 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +300% Hasar bonusu verər, Bu bonus hər vuruşda -5% azalar. Canavarın 90 canı və 30 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +600% Hasar bonusu verər, əgər dost kartlar bu bonus ərzində rəqib kart öldürərsə hər"
+      "Hər 180 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +100% Hasar bonusu verər, Bu bonus hər vuruşda -50% azalar. Canavarın 60 canı və 20 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +200% Hasar bonusu verər.",
+      "Hər 160 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +150% Hasar bonusu verər, Bu bonus hər vuruşda -50% azalar. Canavarın 75 canı və 25 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +300% Hasar bonusu verər.",
+      "Hər 150 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +200% Hasar bonusu verər, Bu bonus hər vuruşda -50% azalar. Canavarın 90 canı və 30 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +400% Hasar bonusu verər.",
+      "Hər 150 saniyədə qalanın qarşısından bir canavar çıxaraq bütün dost kartlara +200% Hasar bonusu verər, Bu bonus hər vuruşda -50% azalar. Canavarın 90 canı və 30 saniyəlik ömrü var, ya rəqib kartlar öldürərsə yada özü ölərsə bütün rəqib kartlara 5 saniyəlik +400% Hasar bonusu verər, əgər dost kartlar bu bonus ərzində rəqib kart öldürərsə hər bir rəqib kart üçün cooldown 3 saniyə azalar, rəqiblər dost kart öldürərsə 2 saniyə artar. (Max: 15/20 saniyə)"
     ]
   },
   {
@@ -284,7 +284,7 @@
       "Bütün dost kartlar -6% daha az hasar alar",
       "Bütün dost kartlar -8% daha az hasar alar",
       "Bütün dost kartlar -10% daha az hasar alar",
-      "Bütün dost kartlar -10% daha az hasar alar, alınan hasarı 2% şansla"
+      "Bütün dost kartlar -10% daha az hasar alar, alınan hasarı 2% şansla cana dönüşdürər"
     ]
   },
   {
@@ -320,7 +320,7 @@
       "Hər 40 saniyədə ən güclü kart +40% M.Can və +15% Hasar bonusu qazanar",
       "Hər 37 saniyədə ən güclü kart +45% M.Can və +20% Hasar bonusu qazanar",
       "Hər 34 saniyədə ən güclü kart +50% M.Can və +25% Hasar bonusu qazanar",
-      "Hər 34 saniyədə ən güclü kart +50% M.Can və +25% Hasar bonusu qazanar, bu kart öldükdə bu bonuslar ən yaxın dost karta 5 saniyəlik"
+      "Hər 34 saniyədə ən güclü kart +50% M.Can və +25% Hasar bonusu qazanar, bu kart öldükdə bu bonuslar ən yaxın dost karta 5 saniyəlik keçər"
     ]
   },
   {
@@ -353,10 +353,10 @@
     "icon": "fa-solid fa-hat-cowboy",
     "capacity": "0,7",
     "levels": [
-      "Hər 38 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +150% Hasar bonusu və +10% Hız qazanar və yox olar",
-      "Hər 35 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +175% Hasar bonusu və +10% Hız qazanar və yox olar",
-      "Hər 32 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +200% Hasar bonusu və +10% Hız qazanar və yox olar",
-      "Hər 32 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +200% Hasar bonusu və +10% Hız qazanar və yox olar, əgər rəqib kart öldürərsə"
+      "Hər 45 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +150% Hasar bonusu və +10% Hız qazanar və yox olar",
+      "Hər 42 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +175% Hasar bonusu və +10% Hız qazanar və yox olar",
+      "Hər 39 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +200% Hasar bonusu və +10% Hız qazanar və yox olar",
+      "Hər 39 saniyədə ən zəif kart 12 saniyəlik ölümsüz olar və +200% Hasar bonusu və +10% Hız qazanar və yox olar, əgər bir rəqib kart öldürərsə +1 saniyə daha çox yaşayar (Max: 3 saniyə)"
     ]
   }
 ]
