@@ -273,7 +273,7 @@ function cardTypes(card) {
   const arr = Array.isArray(t) ? t : [t];
   // normalise Az→En synonyms
   return arr.map(s => {
-    const m = { 'İnsan':'Human','Heyvan':'Animal','Ölü':'Dead','Uzaylı':'Alien','Ruh':'Spirit','Varlıq':'Spirit' };
+    const m = { 'İnsan':'Human','Heyvan':'Animal','Ölü':'Dead','Uzaylı':'Alien','Ruh':'Spirit','Varlıq':'Entity' };
     return m[s] || s;
   });
 }
@@ -322,7 +322,7 @@ function renderCards() {
   count.textContent = filtered.length;
 
   if (!filtered.length) {
-    grid.innerHTML = '<div class="no-results">No entities found matching your filters.</div>';
+    grid.innerHTML = '<div class="no-results">No Cards found matching your filters.</div>';
     return;
   }
 
