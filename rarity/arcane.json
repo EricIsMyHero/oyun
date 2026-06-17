@@ -39,6 +39,7 @@
     "name": "Leafshade",
     "type": ["Varlıq"],
     "rarity": "Arcane",
+    "group": "botanical-gardens",
     "abilityName": "",
     "stats": {
       "health": "260",
@@ -66,7 +67,7 @@
       "level2": "+5% Kritik Şansı | 5% » 10%",
       "level3": "+5% Max Can Çalma | 25% » 30%"
     },
-    "story": "-",
+    "story": "The Ivy Hermit, a mysterious female elf from the hidden botanical gardens, known for her reclusive nature and unmatched ability to disappear into dense vegetation. Unlike many heroic warriors, Leafshade prefers solitude, spending countless hours nurturing plants and studying the intricate growth of ivy, vines, and forest ecosystems. She is a true guardian of nature's hidden corners. Leafshade possesses refined elven features, pointed ears, and a calm, thoughtful expression. Her appearance reflects a life spent among ancient forests rather than bustling civilizations. Her eyes glow with soft emerald-green hues, carrying quiet intelligence and a deep connection to nature. She wears a large dark green cloak that almost completely conceals her body. The cloak appears alive, covered with crawling ivy, twisting vines, moss, and small leaves that continuously grow and move across its surface. Living tendrils weave around her shoulders, arms, and cloak edges, creating the impression that the forest itself has embraced her. The vegetation feels organic and natural rather than aggressive. Some vines extend outward from the cloak, coiling around nearby branches, roots, and stones. These living plants appear ready to entangle trespassers or form protective barriers at a moment's notice. Small leaves, ivy strands, and glowing green particles drift gently around her, enhancing his mystical connection to plant life. Leafshade is partially hidden within dense foliage, blending almost perfectly into her surroundings. Thick bushes, ancient roots, hanging vines, and lush vegetation surround her, making it difficult to distinguish where the elf ends and the forest begins. Only portions of her face and glowing eyes remain clearly visible through the greenery. The environment is a breathtaking botanical sanctuary filled with towering ancient trees, emerald vegetation, winding ivy-covered pathways, glowing plants, and hidden forest clearings. Sunlight filters through the canopy, creating beautiful rays of light that illuminate sections of the dense foliage. The atmosphere feels peaceful, secretive, and deeply connected to nature. The overall composition should emphasize stealth, natural camouflage, and harmony with living plants. Leafshade appears less like a warrior and more like a living extension of the forest itself.",
     "class": "Assassin",
     "subclass": "Executioner"
   },
@@ -81,7 +82,7 @@
       "shield": "80",
       "damage": "14",
       "sps": "14",
-      "attackSpeed": "1,00s",
+      "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "8",
       "number": "1"
