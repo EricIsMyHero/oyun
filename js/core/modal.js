@@ -292,7 +292,7 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
       <div class="modal-story-box">${story}</div>` : ''}
 
     <button class="modal-lore-link">
-      ✦ This entity belongs to the ${card.group || root.group || 'Stagnantia'} faction
+      ✦ This Card belongs to the ${card.group || root.group || 'Stagnantia'} faction
     </button>
   `;
 
