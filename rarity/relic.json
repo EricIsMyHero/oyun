@@ -71,6 +71,7 @@
     "name": "Sylviana",
     "type": ["Varlıq"],
     "rarity": "Relic",
+    "group": "botanical-gardens",
     "abilityName": "",
     "isMulti": true,
     "stats": {
@@ -78,7 +79,7 @@
       "shield": "30",
       "damage": "30",
       "sps": "22",
-      "attackSpeed": "1,35s",
+      "attackSpeed": "1.35s",
       "delay": "-",
       "mana": "5",
       "number": "1"
@@ -99,12 +100,13 @@
       "level2": "+10% Hız  |  850 » 935",
       "level3": "+1 Öz. Parçalanma Sayı  |  2 » 3"
     },
-    "story": "-",
+    "story": "The Luminous Elf, a breathtakingly beautiful high elf from a hidden botanical realm untouched by time and corruption. She embodies the pure essence of nature itself, radiating serenity, life, and sacred beauty. Her elegant appearance reflects her deep connection to flowers, forests, and the natural world. Sylviana has long, flowing hair with a luminous, ethereal quality, cascading gracefully around her shoulders and back. Her delicate elven features, pointed ears, and graceful posture give her an otherworldly presence. Her eyes glow softly with the energy of nature, appearing like living emeralds infused with ancient wisdom and compassion. She wears an exquisite nature-inspired outfit resembling a blend of elven nobility and sacred botanical priestess attire. Flowing fabrics, intricate leaf patterns, floral embroidery, and elegant organic designs are woven throughout her clothing. The outfit feels refined, magical, and deeply connected to the natural world, with no harsh or mechanical elements. Countless vibrant flowers bloom around her presence, creating a living garden wherever she stands. Delicate butterflies of various colors gently flutter around her, drawn to her radiant life energy. Flower petals drift through the air alongside glowing particles of natural magic, creating a peaceful yet powerful atmosphere. A soft, luminous aura constantly emanates from her body, illuminating the surrounding darkness with warm, natural light. The glow is neither harsh nor artificial; instead, it resembles sunlight filtered through ancient forest canopies. The light highlights nearby flowers, butterflies, and vegetation while pushing back the shadows around her. Behind Sylviana stretches a mystical botanical sanctuary hidden within a magical realm. Towering ancient trees, luminous flowers, enchanted vines, crystal-clear streams, and glowing plants create a breathtaking environment. The landscape feels sacred and untouched, as though nature itself is alive and protecting its guardian. The overall atmosphere should feel majestic, magical, and serene. Sylviana appears as a living embodiment of hope, beauty, and nature's resilience against darkness.",
     "forms": [
       {
         "name": "Butterflies",
         "type": ["Heyvan"],
         "rarity": "Relic",
+        "group": "botanical-gardens",
         "abilityName": "",
         "stats": {
           "health": "30",
