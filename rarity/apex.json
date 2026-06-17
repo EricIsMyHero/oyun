@@ -237,6 +237,8 @@
     "name": "Willowshade",
     "type": ["Human"],
     "rarity": "Apex",
+    "group": "botanical-gardens", 
+    "abilityName": "",
     "isMulti": true,
     "stats": {
       "health": "190",
@@ -264,12 +266,14 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "The Abyssal Elf, a mesmerizing high elf from the same hidden botanical realm as Sylviana, yet drawn toward the mysterious depths of ancient oceans rather than blooming gardens. She embodies the beauty, elegance, and unpredictability of the sea, merging elven grace with abyssal marine power. Willowshade possesses long, flowing hair with deep ocean-inspired hues, blending dark blue, teal, and subtle violet tones. Her delicate elven features and pointed ears remain unmistakably noble, but her appearance carries an enigmatic aura unlike the warmth of her sister. Her eyes glow with the colors of deep ocean waters, reflecting intelligence, curiosity, and hidden power. She wears an elegant fantasy outfit inspired by marine life and elven nobility. Flowing fabrics resemble moving water, while intricate patterns evoke coral structures, ocean currents, and the graceful forms of sea creatures. Decorative elements inspired by octopuses subtly appear throughout her attire, including tentacle-like embroidery, organic curves, and aquatic motifs that feel sophisticated rather than monstrous. Around her swirl beautiful currents of magical water suspended in midair. The water forms elegant spirals, floating droplets, and fluid ribbons that continuously move around her body. Emerging from these currents are translucent spectral tentacles composed entirely of glowing oceanic energy. These ethereal appendages move gracefully through the air like living currents, creating a striking and mystical visual effect. Several small luminous sea creatures made of magical water swim through the floating currents around her. Tiny jellyfish-like spirits, glowing fish, and aquatic particles enhance the oceanic atmosphere. Her presence feels adaptable, intelligent, and endlessly fluid, much like the creatures she admires. The environment combines elven beauty with abyssal mystery. Behind her lies a breathtaking coastal sanctuary where ancient elven architecture merges with crystal-clear waters, glowing coral formations, bioluminescent marine plants, and hidden underwater ruins visible through magical portals. Moonlight reflects across the water, creating a dreamlike and enchanting atmosphere. The overall composition should emphasize elegance, mystery, and oceanic magic rather than darkness or horror. Willowshade appears as a graceful master of the sea's hidden wonders, commanding the beauty and power of marine life through refined elven magic.",
     "forms": [
       {
         "name": "Octarion",
         "type": ["Animal"],
         "rarity": "Apex",
+        "group": "botanical-gardens", 
+        "abilityName": "",
         "stats": {
           "health": "80",
           "shield": "0",
