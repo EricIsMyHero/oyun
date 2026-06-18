@@ -75,6 +75,7 @@
     "name": "Jestro",
     "type": ["Human"],
     "rarity": "Arcane",
+    "group": "the-amazing-circus",
     "abilityName": "",
     "isMulti": true,
     "stats": {
@@ -87,7 +88,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "6% Şansla rəqibi 5 saniyəlik susturar. Canı 75%-dən aşağı olduqda *Box* buraxar",
+    "trait": "6% Şansla rəqibi 5 saniyəlik susturar. Canı 75%-dən aşağı olduqda *Cratex* buraxar",
     "additionalStats": {
       "range": "3000",
       "speed": "1100",
@@ -103,12 +104,13 @@
       "level2": "+4% Öz. Şans | 6% » 10%",
       "level3": "+5% Menzil | 3000 » 3150"
     },
-    "story": "-",
+    "story": "The Fractured Illusion, a disturbed circus performer and unstable clone created solely for the spotlight of The Amazing Circus. The cloning process left his mind fractured, turning him into a deeply unpredictable figure who hides his psychological instability behind exaggerated performances and unsettling theatrical behavior. Jestro resembles an ancient royal court jester who once served kings and nobles in forgotten ages. His outfit is elaborate and theatrical, inspired by medieval court jesters, featuring layered fabrics, ornate patterns, bells, decorative stitching, and weathered royal details. The costume appears elegant at first glance but reveals signs of age, decay, and neglect upon closer inspection. Dark reds, faded golds, and worn fabrics contribute to his unsettling appearance. Covering his face is a terrifying theatrical mask, designed to appear disturbing and unnatural. The mask features exaggerated expressions, unsettling details, and an eerie smile that conceals his true emotions. The contrast between the fixed expression of the mask and his unpredictable body language creates an unnerving presence. Beside him stands his signature performance box, a customized stage prop that serves as part of his act. The box is open, revealing another frightening theatrical mask emerging from within. The interior of the box is dark and mysterious, with strange mechanisms, decorative carvings, and circus-inspired details suggesting years of bizarre performances. The second mask appears equally unsettling, almost as if it possesses its own presence. Jestro stands in an abandoned circus environment filled with worn stage equipment, faded banners, torn curtains, broken props, and dim carnival lights. The atmosphere is eerie and theatrical, resembling a forgotten performance frozen in time. Dust drifts through the air while distorted shadows stretch across the stage, reinforcing the feeling of a fractured reality. His pose is dramatic and theatrical, as though he is presenting his next act to an invisible audience. One hand gestures toward the open box while the other is raised in a performer’s flourish. His body language radiates instability, confidence, and a disturbing sense of amusement. The overall composition should emphasize psychological mystery, theatrical horror, and circus tragedy rather than graphic violence. Jestro appears as a broken entertainer trapped between performance and madness.",
     "forms": [
       {
         "name": "Cratex",
-        "type": ["Robot"],
+        "type": ["Object"],
         "rarity": "Arcane",
+        "group": "the-amazing-circus",
         "abilityName": "",
         "stats": {
           "health": "60",
