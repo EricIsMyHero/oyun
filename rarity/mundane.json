@@ -38,13 +38,14 @@
     "name": "B-B",
     "type": ["Heyvan"],
     "rarity": "Mundane",
+    "group": "the-amazing-circus",
     "abilityName": "",
     "stats": {
       "health": "320",
       "shield": "0",
       "damage": "20",
       "sps": "18",
-      "attackSpeed": "1,10s",
+      "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "12",
       "number": "1"
@@ -65,7 +66,7 @@
       "level2": "+5% Kritik Şansı  |  15% » 20%",
       "level3": "+10% Hasar  |  20 » 22"
     },
-    "story": "-",
+    "story": "The Caged Giant, a massive albino bear from The Amazing Circus, once a helpless cub stolen from the deep wilderness and condemned to a lifetime of forced performances. Though years of captivity have blurred his memories of the forest, a deep instinct remains within him, constantly reminding him that he does not belong among the bright lights and artificial smiles of the circus. B-B is an enormous, muscular albino bear with thick snow-white fur, towering over the circus grounds with an intimidating presence. His most striking feature is his pair of piercing crimson-red eyes, glowing with suppressed anger, sorrow, and a longing for freedom. Despite years of captivity, he retains the appearance of a truly wild predator rather than a domesticated performer. He wears a worn and damaged circus-themed outfit, designed for performances but stretched and torn by his immense size. The costume includes elements of a traditional circus performer uniform, decorated with faded gold details, weathered fabrics, and signs of years of forced use. The clothing appears restrictive and unnatural on such a powerful beast, emphasizing his imprisonment rather than celebration. Heavy circus chains wrap around parts of his body, hanging from his wrists, shoulders, and torso. Some chains appear broken or strained, suggesting the immense strength barely being contained beneath the surface. His posture conveys a mixture of reluctant obedience and growing rebellion, as if he is only moments away from breaking free. The environment is a dark and unsettling circus arena. Torn circus tents, abandoned performance props, flickering carnival lights, drifting dust, and worn wooden structures create a haunting atmosphere. The cheerful colors of the circus have faded into something eerie and oppressive. In the distance, fragments of a mysterious forest can be faintly seen beyond the circus grounds, symbolizing the home he barely remembers. His expression carries both tragedy and danger. Beneath the appearance of a trained show animal lies a wild creature yearning for freedom. The contrast between the circus costume and the untamed beast creates a powerful visual narrative of captivity and resistance.",
     "class": "Tank",
     "subclass": "Brawler"
   },
@@ -791,6 +792,7 @@
     "name": "PhewPhew",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "group": "the-amazing-circus",
     "abilityName": "",
     "stats": {
       "health": "210",
@@ -818,7 +820,7 @@
       "level2": "+5% Kritik Şansı  |  5% » 10%",
       "level3": "+25% Hasar  |  2x8 » 2x10"
     },
-    "story": "",
+    "story": "The Silent Echo, a mysterious mime performer from The Amazing Circus, known for never speaking a single word. Silent and unreadable, he communicates entirely through elegant gestures, precise movements, and subtle expressions. His presence is unsettling because nobody knows whether his abilities are performance tricks or something far more supernatural. PhewPhew wears a refined classic monochrome mime outfit, featuring a tailored black-and-white costume inspired by traditional European pantomime performers. His attire includes elegant gloves, detailed buttons, layered fabrics, and subtle circus-inspired elements. The costume is immaculate and theatrical, yet carries an eerie sense of isolation. His face is painted with sophisticated mime makeup, emphasizing expression despite his complete silence. He stands in the center of the scene performing an invisible act. His hands are pressed against a transparent, unseen wall, while shimmering distortions reveal the existence of a mysterious force field. Multiple invisible barriers surround him, visible only through subtle refractions, faint glowing outlines, and distortions in the surrounding air. The effect should feel magical, believable, and physically present. Around PhewPhew, objects react to these unseen forces. Dust particles stop midair, loose circus props appear suspended by invisible pressure, and subtle waves ripple through space itself. The battlefield seems to bend around his silent performance, suggesting mastery over mysterious forces that others cannot perceive. His expression remains calm, focused, and emotionally distant. Unlike loud circus performers, PhewPhew radiates quiet confidence and control. Every movement appears deliberate and graceful, transforming simple mime gestures into something genuinely powerful and intimidating. The environment is a haunting section of The Amazing Circus, featuring dim carnival lights, abandoned stages, faded curtains, empty audience seats, drifting fog, and worn performance props. Shadows stretch unnaturally across the ground, creating an atmosphere of mystery and tension. The circus feels frozen in time, as though the entire world is holding its breath during his performance. The overall composition should emphasize silence, invisible power, elegance, and mystery. PhewPhew appears less like an entertainer and more like a performer whose imagination has somehow become reality.",
     "class": "Marksman"
   },
   {
