@@ -332,7 +332,7 @@
       "shield": "30",
       "damage": "3x5",
       "sps": "20",
-      "attackSpeed": "0,20s",
+      "attackSpeed": "0.20s",
       "delay": "1.40s",
       "mana": "5",
       "number": "1"
