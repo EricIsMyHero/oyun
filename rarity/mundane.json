@@ -325,18 +325,19 @@
     "name": "Fen",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "group": "barber-brothers",
     "abilityName": "",
     "stats": {
-      "health": "180",
+      "health": "200",
       "shield": "30",
       "damage": "3x5",
-      "sps": "15",
+      "sps": "20",
       "attackSpeed": "0,20s",
-      "delay": "1,50s",
+      "delay": "1.40s",
       "mana": "5",
       "number": "1"
     },
-    "trait": "<b>*İnsan*</b> tipli kartlara ekstra <b>+20%</b> Hasar bonusu verər",
+    "trait": "Atışları rəqib kartları 7 saniyəlik kor edər",
     "additionalStats": {
       "range": "3600",
       "speed": "1000",
@@ -352,27 +353,28 @@
       "level2": "+1 Ekstra Atış  |  3x5 » 4x5",
       "level3": "+5% Menzil  |  3600 » 3780"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "The Hurricane Stylist, a 23-year-old barber prodigy and the youngest member of the Barber Brothers. Energetic, confident, and exceptionally talented, Fen has transformed the tools of his profession into powerful instruments of precision and control. His youthful enthusiasm and lightning-fast reflexes make him one of the most dynamic stylists in both the barbershop and the arena. Fen is a handsome young man with a modern, fashionable appearance befitting a master barber. His hairstyle is impeccably styled, featuring sharp cuts, clean lines, and a trendy look that showcases his professional expertise. His expression is confident and focused, carrying the charisma of someone who genuinely loves his craft. He wears a stylish barber-inspired outfit that blends professional fashion with fantasy action aesthetics. The outfit includes a modern barber vest, rolled sleeves, utility belts for grooming tools, premium fabrics, and sleek design details. The clothing appears practical for movement while maintaining the polished appearance of a high-end stylist. In his hands, Fen wields a powerful professional hairdryer enhanced with extraordinary technology. The device generates massive streams of compressed wind that spiral around him like miniature hurricanes. Powerful currents of air twist through the battlefield, lifting loose objects, dust, and hair strands into dynamic vortexes. The wind effects are visually impressive yet elegant, emphasizing control rather than destruction. His hairdryer emits visible streams of swirling air, creating circular gusts and tornado-like formations around his body. Flying strands of hair, floating particles, and flowing fabrics react realistically to the intense airflow. The atmosphere feels energetic and constantly in motion. The setting combines elements of a luxury modern barbershop with a fantasy arena. Premium barber chairs, mirrors, styling stations, and salon equipment blend seamlessly with a dramatic battleground environment. The scene showcases Fen's ability to transform everyday barber tools into extraordinary sources of power. His pose should be dynamic and action-oriented, as though he is directing a powerful gust of wind while maintaining complete precision. Despite the intensity of the airflow, he appears relaxed and in total control, embodying both creativity and mastery.",
     "class": "Fighter"
   },
   {
     "name": "Ben",
     "type": ["İnsan"],
     "rarity": "Mundane",
+    "group": "barber-brothers",
     "abilityName": "",
     "stats": {
-      "health": "210",
-      "shield": "50",
-      "damage": "5x9",
-      "sps": "45",
-      "attackSpeed": "0.20s",
-      "delay": "1.10s",
-      "mana": "10",
+      "health": "200",
+      "shield": "30",
+      "damage": "8x2",
+      "sps": "8",
+      "attackSpeed": "0.25s",
+      "delay": "1.00s",
+      "mana": "6",
       "number": "1"
     },
-    "trait": "Vuruşları qalxandan keçər, <b>5%</b> şansla ilk vuruşu <b>+100%</b> Hasar bonusu verər",
+    "trait": "Atışları rəqib kartları yaralayar, hər 4-cü yarada 2 saniyəlik qanama effekti verər",
     "additionalStats": {
-      "range": "1000",
+      "range": "3400",
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -386,7 +388,7 @@
       "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
       "level3": "+12% Qalxan  |  50 » 56"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "The Razor Edge, the 25-year-old middle brother of the Barber Brothers, a calm, disciplined, and exceptionally skilled master barber whose precision borders on perfection. Unlike the energetic Fen, Ben is quiet, focused, and methodical, approaching every task with unwavering concentration. Every movement is calculated, every cut intentional, and every action executed with flawless accuracy. Ben has a mature and professional appearance, with a perfectly groomed hairstyle that reflects his dedication to his craft. His sharp facial features, focused eyes, and composed expression convey the confidence of a true master craftsman. He rarely shows emotion, maintaining complete concentration regardless of the situation. He wears an elegant, high-end barber outfit combining modern professional fashion with fantasy combat aesthetics. A tailored barber vest, rolled sleeves, premium gloves, utility straps, and sophisticated grooming accessories give him the appearance of a professional artisan rather than a traditional warrior. Every detail of his clothing reflects precision, organization, and professionalism. In his hands are a pair of massive professional barber shears and razor-sharp styling scissors, crafted with exceptional detail. The polished metal blades gleam under dramatic lighting, appearing almost impossibly sharp. As he moves, silver cutting arcs trace through the air, visualizing the speed and accuracy of his techniques. His scissors are not oversized fantasy weapons, but refined professional tools elevated to extraordinary levels of mastery. Tiny metallic reflections, floating hair strands, and subtle cutting effects surround him, emphasizing his unparalleled precision. His stance is controlled and balanced, as though he is analyzing the perfect angle before executing a single decisive movement. Every aspect of his posture radiates discipline and mastery. The environment blends a luxury modern barbershop with an elite combat arena. Elegant mirrors, styling stations, barber chairs, polished floors, and professional equipment coexist with a dramatic battleground atmosphere. The scene showcases Ben's philosophy that perfection and craftsmanship can become powerful weapons. The overall composition should emphasize precision, focus, professionalism, and mastery. Ben appears less like a fighter and more like an artist whose skill has reached extraordinary levels.",
     "class": "Fighter"
   },
   {
