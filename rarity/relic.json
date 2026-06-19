@@ -880,7 +880,7 @@
       "mana": "14",
       "number": "1"
     },
-    "trait": "Yaxında dost kart varsa hər bir kart başına hər saniyə 4 yük qazanar. 100 yük olduqda özü və ətrafındakı dost kartlar 3 saniyəlik toxunulmaz olar",
+    "trait": "Yaxında dost kart varsa hər bir kart üçün hər saniyə 4 yük qazanar. 100 yük olduqda özü və ətrafındakı dost kartlar 3 saniyəlik toxunulmaz olar",
     "additionalStats": {
       "range": "4500",
       "speed": "900",
@@ -897,5 +897,39 @@
       "level3": "-"
     },
     "story": ""
+  },
+  {
+    "name": "Clara",
+    "type": ["İnsan"],
+    "rarity": "Relic",
+    "group": "barber-brothers",
+    "abilityName": "",
+    "stats": {
+      "health": "210",
+      "shield": "170",
+      "damage": "12",
+      "sps": "15",
+      "attackSpeed": "0.80s",
+      "delay": "-",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "Yaxındakı hər bir rəqib üçün hər saniyə 20 yük qazanar. 100 yükə çatdıqda ətrafındakı rəqib kartları 7 saniyəlik qışqırdar və hər 0.25 saniyədə 3 can yeniləyər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "The Auburn Artist, the 27-year-old eldest sibling of the Barber Brothers, a graceful and highly respected master stylist known for her elegance, creativity, and flawless technique. While her brothers rely on speed and precision, Clara excels through artistry, transforming every hairstyle into a masterpiece. She serves as the calm and sophisticated center of the family business, balancing the energetic personalities of Fen and Ben. Clara is a beautiful young woman with long, luxurious auburn hair that cascades elegantly around her shoulders. Her hair is impeccably styled, featuring intricate braids, flowing layers, and refined details that showcase her extraordinary talent. Her warm, intelligent eyes and composed expression radiate confidence, professionalism, and creativity. She wears a sophisticated stylist outfit that blends modern salon fashion with elegant fantasy aesthetics. Her attire includes tailored fabrics, refined accessories, stylish gloves, decorative ribbons, and subtle beauty-inspired motifs. The outfit feels professional, fashionable, and artistic rather than combat-oriented, emphasizing her role as a master designer and creator. In her hands are beautifully crafted professional styling scissors, combs, and hairstyling tools, all designed with exceptional elegance. Around her float strands of shimmering hair-like energy, decorative ribbons, and graceful swirling patterns that resemble intricate hairstyle designs brought to life. The visual effects should feel artistic and refined rather than aggressive. Her pose is calm and deliberate, as though she is carefully crafting a masterpiece. Delicate streams of flowing auburn-colored energy weave through the air around her, forming elegant curves and patterns inspired by sophisticated hairstyles. Every movement reflects precision, beauty, and years of experience. The environment combines a luxurious high-end salon with a fantasy-inspired creative studio. Elegant mirrors, premium styling stations, decorative lighting, floral arrangements, and artistic design elements surround her. The atmosphere feels welcoming, refined, and professional while still carrying the grandeur of a fantasy card illustration. The overall composition should emphasize beauty, artistry, elegance, and mastery. Clara appears not as a warrior, but as an elite stylist whose creativity has become a powerful force. She embodies sophistication, professionalism, and the flawless reputation of the Barber Brothers."
   }
 ]
