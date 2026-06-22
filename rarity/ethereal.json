@@ -43,6 +43,7 @@
         {
           "name": "Giga-R",
           "type": ["Robot"],
+          "rarity": "Ethereal",
           "group": "constructs",
           "stats": {
             "health": "500",
@@ -113,6 +114,7 @@
         {
           "name": "Giga-R",
           "type": ["Robot"],
+          "rarity": "Ethereal",
           "group": "constructs",
           "stats": {
             "health": "300",
@@ -302,6 +304,7 @@
         {
           "name": "Guard",
           "type": ["Spirit"],
+          "rarity": "Ethereal",
           "abilityName": "Shield Breaker",
           "stats": {
             "health": "80",
@@ -412,6 +415,7 @@
         {
           "name": "Bats",
           "type": ["Animal"],
+          "rarity": "Ethereal",
           "stats": {
             "health": "30",
             "shield": "-",
@@ -603,6 +607,7 @@
         {
           "name": "Rider",
           "type": ["Dead"],
+          "rarity": "Ethereal",
           "abilityName": "Desperate Fury",
           "stats": {
             "health": "100",
@@ -682,6 +687,7 @@
         {
           "name": "Wolf",
           "type": ["Animal"],
+          "rarity": "Ethereal",
           "group": "",
           "stats": {
             "health": "200",
@@ -752,6 +758,7 @@
         {
           "name": "Eagle",
           "type": ["Animal"],
+          "rarity": "Ethereal",
           "group": "",
           "stats": {
             "health": "180",
@@ -830,6 +837,7 @@
       "name": "Soul Master",
       "type": ["Spirit"],
       "rarity": "Ethereal",
+      "rarity": "Ethereal",
       "stats": {
         "health": "140",
         "shield": "100",
@@ -905,6 +913,7 @@
         {
           "name": "Mrs. Ray",
           "type": ["Human"],
+          "rarity": "Ethereal",
           "group": "the-last-academy",
           "stats": {
             "health": "260",
@@ -975,6 +984,7 @@
         {
           "name": "Mrs. Ray",
           "type": ["Human"],
+          "rarity": "Ethereal",
           "group": "the-last-academy",
           "stats": {
             "health": "320",
