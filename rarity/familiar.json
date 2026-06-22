@@ -865,5 +865,41 @@
     "story": "",
     "class": "Fighter",
     "subclass": "Brawler"
+  },
+  {
+    "name": "Cassandra",
+    "type": ["Human"],
+    "rarity": "Familiar",
+    "group": "the-last-academy",
+    "abilityName": "",
+    "stats": {
+      "health": "100",
+      "shield": "100",
+      "damage": "14",
+      "sps": "13",
+      "attackSpeed": "1.10s",
+      "delay": "-",
+      "mana": "10",
+      "number": "1"
+    },
+    "trait": "Özünə və ətrafındakı dost kartlara üstünlük effekti verər, ətrafına hər saniyə musiqi yayar, bu musiqi dost kartlara hər saniyə +1 M. Can verər (Max: 50), eyni zamanda rəqib kartlara 1 hasar verər",
+    "additionalStats": {
+      "range": "2250",
+      "speed": "950",
+      "criticalChance": "0%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "The Blind Symphony, a breathtaking fantasy musician from The Last Academy, an alternate dystopian world where music and every form of artistic expression are forbidden. Once celebrated as an extraordinary singer and harp virtuoso, Cassandra became a symbol of hope and resistance before the regime cruelly stole her sight. Yet even in darkness, her music found a new path, leading her into the mystical realm of the Botanical Gardens, where nature itself became her audience. Cassandra is a graceful young woman with long, flowing silver-blonde hair gently moving with an invisible breeze. Covering her empty eyes is an elegant deep crimson silk blindfold, beautifully wrapped around her head and trailing behind her like flowing ribbons. Her expression is peaceful and serene, radiating unwavering determination rather than sorrow. In her left hand, she carries an exquisite ornate golden harp, intricately carved with intertwining vines, flowers, and delicate butterflies that seem almost alive. The strings emit faint emerald and golden light, creating visible waves of musical energy that ripple through the surrounding environment. In her right hand, she holds a small antique balance scale, crafted from polished brass and decorated with botanical engravings. The scale glows softly, symbolizing harmony, justice, and the balance between silence and music, oppression and freedom. As Cassandra performs, countless glowing musical notes transform into natural phenomena. Waves of sound become streams of emerald light flowing across endless fields of tall grass. Flowers bloom wherever her melodies travel, butterflies gather around her, birds perch nearby, and gentle woodland creatures emerge without fear. The entire Botanical Gardens appears to breathe in perfect synchronization with her music. Long, lush grass surrounds her feet, swaying rhythmically despite the absence of wind. Ancient trees covered with luminous flowers rise into the sky, while crystal-clear streams reflect floating musical symbols made of living light. Deer, rabbits, foxes, birds, and countless butterflies quietly gather around her performance, creating an atmosphere of absolute harmony between art and nature. Soft emerald, gold, and pale white particles drift through the air like visible melodies. Rays of sunlight filter through the forest canopy, illuminating Cassandra as though the Botanical Gardens itself recognizes her as one of its own. Her blindness is not portrayed as weakness but as transcendence—she perceives the world entirely through sound, life, and emotion. The overall composition should evoke elegance, hope, tranquility, and quiet rebellion. Cassandra stands at the center of a living symphony, where every blade of grass, every butterfly, and every bird becomes part of her eternal performance.",
+    "class": "Fighter",
+    "subclass": "Brawler"
   }
 ]
