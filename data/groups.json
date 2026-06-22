@@ -91,6 +91,13 @@
     "members": ["Sylviana", "Willowshade", "Leafshade"]
   },
   {
+    "name": "The Last Academy",
+    "description": "-",
+    "color": "#333333",
+    "icon": "fa-academy",
+    "members": ["Artist", "Cassandra", "Mr. & Mrs. Ray"]
+  },
+  {
     "name": "The Amazing Circus",
     "description": "-",
     "color": "#FFE600",
