@@ -875,7 +875,7 @@
     "rarity": "Ethereal",
     "group": "the-last-academy",
     "isDual": true,
-    "stats": {"mana": "5"},
+    "stats": {"mana": "17"},
     "type1": {
       "name": "Mr. Ray",
       "type": ["Human"],
