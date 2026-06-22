@@ -931,5 +931,79 @@
       "level3": "-"
     },
     "story": "The Auburn Artist, the 27-year-old eldest sibling of the Barber Brothers, a graceful and highly respected master stylist known for her elegance, creativity, and flawless technique. While her brothers rely on speed and precision, Clara excels through artistry, transforming every hairstyle into a masterpiece. She serves as the calm and sophisticated center of the family business, balancing the energetic personalities of Fen and Ben. Clara is a beautiful young woman with long, luxurious auburn hair that cascades elegantly around her shoulders. Her hair is impeccably styled, featuring intricate braids, flowing layers, and refined details that showcase her extraordinary talent. Her warm, intelligent eyes and composed expression radiate confidence, professionalism, and creativity. She wears a sophisticated stylist outfit that blends modern salon fashion with elegant fantasy aesthetics. Her attire includes tailored fabrics, refined accessories, stylish gloves, decorative ribbons, and subtle beauty-inspired motifs. The outfit feels professional, fashionable, and artistic rather than combat-oriented, emphasizing her role as a master designer and creator. In her hands are beautifully crafted professional styling scissors, combs, and hairstyling tools, all designed with exceptional elegance. Around her float strands of shimmering hair-like energy, decorative ribbons, and graceful swirling patterns that resemble intricate hairstyle designs brought to life. The visual effects should feel artistic and refined rather than aggressive. Her pose is calm and deliberate, as though she is carefully crafting a masterpiece. Delicate streams of flowing auburn-colored energy weave through the air around her, forming elegant curves and patterns inspired by sophisticated hairstyles. Every movement reflects precision, beauty, and years of experience. The environment combines a luxurious high-end salon with a fantasy-inspired creative studio. Elegant mirrors, premium styling stations, decorative lighting, floral arrangements, and artistic design elements surround her. The atmosphere feels welcoming, refined, and professional while still carrying the grandeur of a fantasy card illustration. The overall composition should emphasize beauty, artistry, elegance, and mastery. Clara appears not as a warrior, but as an elite stylist whose creativity has become a powerful force. She embodies sophistication, professionalism, and the flawless reputation of the Barber Brothers."
+  },
+  {
+    "name": "Artist",
+    "type": ["İnsan"],
+    "rarity": "Relic",
+    "group": "the-last-academy",
+    "abilityName": "",
+    "isMulti": true,
+    "stats": {
+      "health": "290",
+      "shield": "120",
+      "damage": "3x3",
+      "sps": "18",
+      "attackSpeed": "0.10s",
+      "delay": "0.30s",
+      "mana": "17",
+      "number": "1"
+    },
+    "trait": "Rəqib kartlara mürəkkəb atar və bu mürəkkəblər rəqib kartın üstündə qalar. Hər bir mürəkkəb rəqib kartı 2% yavaşladar, 18 mürəkkəb bulaşdırdıqdan sonra rəqib kartı lənətləyər. Lənətlənən kart öldükdə ətrafa 3 mürəkkəb bulaşdırar. Lənətlənən hər bir kart başına Artist 25 yük qazanar. Artist öldükdə Quzğun sürüsünə dönüşər. Hər 25 yük Quzğun sürüsünü +2 artırar.",
+    "additionalStats": {
+      "range": "3000",
+      "speed": "1000",
+      "criticalChance": "10%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "10%",
+      "lifesteal": "66%",
+      "damageminimiser": "0%",
+      "dodge": "0%"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "The Ink Reborn, a young underground painter from The Last Academy, an alternate dystopian world where every form of art, creativity, painting, sculpture, music, and expression has been outlawed by an oppressive regime. Once celebrated in secret as a legendary street artist, Alice became the symbol of silent rebellion, covering abandoned buildings with magnificent murals of ravens—a powerful metaphor representing death, freedom, and the inevitable fall of tyranny. Alice is a striking young woman with slightly messy jet-black hair streaked with subtle ink-blue highlights. Her face is calm yet determined, carrying the quiet resilience of someone who has survived unimaginable loss. Traces of black ink lightly stain her cheeks and clothing, giving her the appearance of a living masterpiece. Instead of ordinary hands, both of her forearms dissolve into living spectral ink. The ink continuously flows, twists, and reforms into elegant human hands made entirely of liquid darkness. The fingers constantly drip and reconstruct themselves, yet remain perfectly controlled, as though the ink possesses a consciousness connected directly to Alice's emotions. Small droplets float upward instead of falling, defying gravity. Around her, countless floating black ravens made entirely of liquid ink emerge from swirling brush strokes and splashes suspended in the air. Some ravens are fully formed while others dissolve into elegant calligraphic strokes and abstract shapes before reforming again. The birds circle her like loyal spirits born from forbidden creativity. Behind Alice stretches a haunting fusion of a dystopian city and the mysterious UnderWorld. Towering concrete structures covered in faded propaganda merge into impossible architecture made of black stone and endless darkness. Gigantic murals appear across broken walls, depicting ravens, shattered chains, abstract brush strokes, and symbols of artistic rebellion. Rivers of flowing ink replace water, reflecting dim light like liquid obsidian. Spectral ink ribbons spiral around her body, transforming into paint splashes, brush strokes, feathers, and elegant artistic patterns before dissolving back into darkness. The atmosphere feels melancholic yet inspiring—a world where forbidden creativity has become supernatural power. Her clothing combines modern street artist fashion with gothic elegance: a long black coat covered in paint stains, layered fabrics, utility straps for brushes she no longer physically needs, and subtle artistic motifs inspired by ink splatters and calligraphy. The design emphasizes resilience, rebellion, and creativity rather than combat. She stands confidently in front of a massive unfinished mural, her living ink hands actively painting impossible shapes directly into reality itself. Every movement leaves behind elegant black strokes that float in midair like living artwork.",
+    "forms": [
+      {
+        "name": "Flock of Ravens",
+        "type": ["Heyvan"],
+        "rarity": "Relic",
+        "group": "the-last-academy",
+        "abilityName": "",
+        "stats": {
+          "health": "-",
+          "shield": "-",
+          "damage": "4",
+          "sps": "5",
+          "attackSpeed": "0.90s",
+          "delay": "-",
+          "mana": "-",
+          "number": "6"
+        },
+        "trait": "-",
+        "additionalStats": {
+          "range": "800",
+          "speed": "1200",
+          "criticalChance": "-",
+          "criticDamage": "-",
+          "lifestealChance": "-",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "7 saniyəlik ömrü olar, hər öldürülən rəqib kart üçün +2 saniyə daha yaşayarlar.",
+        "class": "Suicide Assassin"
+      }
+    ],
+    "class": "Specialist",
+    "subclass": "Summoner"
   }
 ]
