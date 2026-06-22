@@ -860,5 +860,154 @@
       "class": "Marksman"
     },
     "class": "Marksman"
+  },
+  {
+    "name": "Mr. & Mrs. Ray",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "group": "the-last-academy",
+    "isDual": true,
+    "stats": {"mana": "5"},
+    "type1": {
+      "name": "Mr. Ray",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "the-last-academy",
+      "isMulti": true,
+      "stats": {
+        "health": "260",
+        "shield": "30",
+        "damage": "14",
+        "sps": "9",
+        "attackSpeed": "1.60s",
+        "delay": "-",
+        "mana": "17",
+        "number": "1"
+      },
+      "trait": "360 dərəcə hasar verər, Birlikdə durduqca hər saniyə 4 yük qazanarlar. 100 yük olduqda birləşərək sürətlə dönməyə başlayarlar və 5 saniyə ərzində hər 0.25 saniyədə 5 hasar verərlər. Bu müddətdə 25% hasar azaltma qazanaraq, hər 0.25 saniyədə 3 can yeniləyərlər",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1200",
+        "criticalChance": "10%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "10%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Mrs. Ray",
+          "type": ["Human"],
+          "group": "the-last-academy",
+          "stats": {
+            "health": "260",
+            "shield": "30",
+            "damage": "10",
+            "sps": "6",
+            "attackSpeed": "1.60s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "360 dərəcə hasar verər, Birlikdə durduqca hər saniyə 4 yük qazanarlar. 100 yük olduqda birləşərək sürətlə dönməyə başlayarlar və 5 saniyə ərzində hər 0.25 saniyədə 5 hasar verərlər. Bu müddətdə 25% hasar azaltma qazanaraq, hər 0.25 saniyədə 3 can yeniləyərlər",
+          "additionalStats": {
+            "range": "1000",
+            "speed": "1200",
+            "criticalChance": "10%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "10%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Tank"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "Mr. Ray",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "the-last-academy",
+      "isMulti": true,
+      "stats": {
+        "health": "320",
+        "shield": "60",
+        "damage": "24",
+        "sps": "21",
+        "attackSpeed": "1.15s",
+        "delay": "-",
+        "mana": "17",
+        "number": "1"
+      },
+      "trait": "Sadəcə bir rəqibə hasar verər, Birlikdə durduqca hər saniyə 2 yük qazanarlar. 100 yük olduqda hər ikisi 5 karo boyunca düz gedər və yol üstündəki rəqib kartlara 75 hasar verərlər. Eyni zamanda 75% hasar azaltma qazanarlar, əgər canları 20%-in altına düşərsə itirilmiş canın 75%-i qədər can yeniləyərlər",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1100",
+        "criticalChance": "10%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "10%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Mrs. Ray",
+          "type": ["Human"],
+          "group": "the-last-academy",
+          "stats": {
+            "health": "320",
+            "shield": "60",
+            "damage": "20",
+            "sps": "17",
+            "attackSpeed": "1.15s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Sadəcə bir rəqibə hasar verər, Birlikdə durduqca hər saniyə 2 yük qazanarlar. 100 yük olduqda hər ikisi 5 karo boyunca düz gedər və yol üstündəki rəqib kartlara 75 hasar verərlər. Eyni zamanda 75% hasar azaltma qazanarlar, əgər canları 20%-in altına düşərsə itirilmiş canın 75%-i qədər can yeniləyərlər",
+          "additionalStats": {
+            "range": "1000",
+            "speed": "1100",
+            "criticalChance": "10%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "10%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Marksman"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "class": "Marksman"
   }
 ]
