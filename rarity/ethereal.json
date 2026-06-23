@@ -877,7 +877,7 @@
     "isDual": true,
     "stats": {"mana": "17"},
     "type1": {
-      "name": "Mr. and Mrs. Ray",
+      "name": "The Rays",
       "type": ["Human"],
       "rarity": "Ethereal",
       "group": "the-last-academy",
@@ -911,7 +911,7 @@
       "story": "-",
       "forms": [
         {
-          "name": "Mr. and Mrs. Ray",
+          "name": "The Rays",
           "type": ["Human"],
           "rarity": "Ethereal",
           "group": "the-last-academy",
@@ -948,7 +948,7 @@
       "class": "Marksman"
     },
     "type2": {
-      "name": "Mr. and Mrs. Ray",
+      "name": "The Rays",
       "type": ["Human"],
       "rarity": "Ethereal",
       "group": "the-last-academy",
@@ -982,7 +982,7 @@
       "story": "-",
       "forms": [
         {
-          "name": "Mr. and Mrs. Ray",
+          "name": "The Rays",
           "type": ["Human"],
           "rarity": "Ethereal",
           "group": "the-last-academy",
