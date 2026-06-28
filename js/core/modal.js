@@ -29,8 +29,23 @@ const ADD_STAT_DEFS = [
   { key: 'criticDamage',    label: 'Critical Damage',  icon: '🧨',  max: 5,     color: '#f472b6', suffix: 'x' },
   { key: 'lifestealChance', label: 'Lifesteal Chance', icon: '🧛',  max: 100,   color: '#a78bfa', suffix: '%' },
   { key: 'lifesteal',       label: 'Lifesteal',        icon: '🩸',  max: 100,   color: '#4ade80', suffix: '%' },
-  { key: 'damageminimiser', label: 'Damage Reduction', icon: '🔰',  max: 90,    color: '#fbbf24', suffix: '%' },
   { key: 'dodge',           label: 'Dodge Chance',     icon: '💨',  max: 70,    color: '#c084fc', suffix: '%' },
+  { key: 'vision',          label: 'Vision',           icon: '👁️',  max: 8000,  color: '#c084fc', suffix: ''  },
+];
+
+/* ── Tertiary / bonus stats ──
+   These still live inside card.additionalStats in the JSON data —
+   they're just a separate display bucket in the modal so the
+   "Advanced Stats" tab doesn't get overcrowded. */
+const EXTRA_STAT_DEFS = [
+  { key: 'healBonus',             label: 'Healing Bonus',       icon: '💖',  max: 100, color: '#fb7185', suffix: '%' },
+  { key: 'healrecovery',          label: 'Rejuvenation',        icon: '🌱',  max: 10,  color: '#4ade80', suffix: '/s' },
+  { key: 'shieldrecovery',        label: 'Fortification',       icon: '🏰',  max: 10,  color: '#38bdf8', suffix: '/s' },
+  { key: 'criticdamageminimiser', label: 'Critical Resistance', icon: '🧱',  max: 90,  color: '#fbbf24', suffix: '%' },
+  { key: 'damageminimiser',       label: 'Damage Reduction',    icon: '🔰',  max: 90,  color: '#fbbf24', suffix: '%' },
+  { key: 'flexibility',           label: 'Flexibility',         icon: '🤸',  max: 80,  color: '#5eead4', suffix: '%' },
+  { key: 'shieldtakendamage',     label: 'Shield Depletion',    icon: '🔻',  max: 100, color: '#f87171', suffix: '%' },
+  { key: 'life',                  label: 'Life',                icon: '⌛',  max: 200, color: '#facc15', suffix: 's' },
 ];
 
 /* ════════════════════════════════════════════════════════
@@ -241,6 +256,7 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
 
   const primaryBars   = buildStatBars(STAT_DEFS, stats);
   const secondaryBars = buildStatBars(ADD_STAT_DEFS, addStats);
+  const extraBars     = buildStatBars(EXTRA_STAT_DEFS, addStats);
   const trait       = card.trait || null;
   const abilityName = card.abilityName && card.abilityName !== '—' ? card.abilityName : null;
   const story = card.story && card.story !== '-' ? card.story : null;
@@ -269,6 +285,7 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
     <div class="stat-tab-row">
       <button class="stat-tab active" data-tab="primary">⚔ Combat Stats</button>
       <button class="stat-tab" data-tab="secondary">📊 Advanced Stats</button>
+      <button class="stat-tab" data-tab="extra">✨ Bonus Stats</button>
       <button class="stat-tab" data-tab="levels">⭐ Star Levels</button>
     </div>
 
@@ -277,6 +294,9 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
     </div>
     <div class="stat-panel" id="panel-secondary" style="display:none">
       ${secondaryBars || '<p class="no-stat-msg">No advanced stats available.</p>'}
+    </div>
+    <div class="stat-panel" id="panel-extra" style="display:none">
+      ${extraBars || '<p class="no-stat-msg">No bonus stats available.</p>'}
     </div>
     <div class="stat-panel" id="panel-levels" style="display:none">
       ${buildStarLevels(card.showlevels)}
@@ -304,6 +324,7 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
       const tab = btn.dataset.tab;
       document.getElementById('panel-primary').style.display   = tab === 'primary'   ? 'block' : 'none';
       document.getElementById('panel-secondary').style.display = tab === 'secondary' ? 'block' : 'none';
+      document.getElementById('panel-extra').style.display     = tab === 'extra'     ? 'block' : 'none';
       document.getElementById('panel-levels').style.display    = tab === 'levels'    ? 'block' : 'none';
     });
   });
