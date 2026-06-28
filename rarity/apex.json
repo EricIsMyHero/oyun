@@ -3,12 +3,15 @@
     "name": "Azrith",
     "type": ["Human"],
     "rarity": "Apex",
-    "group": "royal-blood", 
+    "group": "royal-blood",
+    "class": "",
+    "subclass": "",
     "abilityName": "Sovereign Aura",
+    "trait": "Azrith döyüş meydanında sağ qaldığı və öz qalxanıqırılmadığı müddətcə ətrafındakı bütün dost kartlara +10% hasar bonusu təmin edər. Düşmən hücumları nəticəsində onun qalxanı qırıldıqda, Azrith geri çəkilmir və olduğu koordinata müqəddəs bir \"Bannerox\" sancar.",
     "isMulti": true,
     "stats": {
-      "health": "240",
-      "shield": "80",
+      "health": "237",
+      "shield": "77",
       "damage": "26",
       "sps": "17",
       "attackSpeed": "1.50s",
@@ -16,7 +19,6 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Azrith döyüş meydanında sağ qaldığı və öz qalxanıqırılmadığı müddətcə ətrafındakı bütün dost kartlara +10% hasar bonusu təmin edər. Düşmən hücumları nəticəsində onun qalxanı qırıldıqda, Azrith geri çəkilmir və olduğu koordinata müqəddəs bir \"Bannerox\" sancar.",
     "additionalStats": {
       "range": "1300",
       "speed": "1000",
@@ -25,7 +27,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -38,9 +41,13 @@
         "name": "Bannerox",
         "type": ["Object"],
         "rarity": "Apex",
+        "group": "",
+        "class": "",
+        "subclass": "",
         "abilityName": "Royal Heist",
+        "trait": "Meydanda qalan bu bayraq strateji bir nöqtə rolunu oynayır və onun yaxınlığındakı bütün dost kartlara +10% hücum sürəti bonusu bəxş edərək ordunun döyüş əzmini artırar.",
         "stats": {
-          "health": "80",
+          "health": "77",
           "shield": "-",
           "damage": "-",
           "sps": "-",
@@ -49,16 +56,16 @@
           "mana": "-",
           "number": "1"
         },
-        "trait": "Meydanda qalan bu bayraq strateji bir nöqtə rolunu oynayır və onun yaxınlığındakı bütün dost kartlara +10% hücum sürəti bonusu bəxş edərək ordunun döyüş əzmini artırar.",
         "additionalStats": {
           "range": "-",
           "speed": "-",
-          "criticalChance": "-",
+          "criticalChance": "0%",
           "criticDamage": "1.5x",
-          "lifestealChance": "-",
+          "lifestealChance": "0%",
           "lifesteal": "25%",
           "damageminimiser": "0%",
-          "dodge": "0%"
+          "dodge": "0%",
+          "vision": "8000"
         },
         "showlevels": {
           "level1": "-",
@@ -73,19 +80,21 @@
     "name": "Untouch",
     "type": ["Human"],
     "rarity": "Apex",
-    "group": "royal-blood", 
+    "group": "royal-blood",
+    "class": "",
+    "subclass": "",
     "abilityName": "Absolute Sanctuary",
+    "trait": "Bu dözümlü döyüşçünün canı hər 20% azaldıqda o, bədənini qoruyan xüsusi bir fazaya keçər və 2 saniyəlik tam toxunulmazlıq statusu qazanar. Bu toxunulmazlıq müddəti bitdikdən sonra edəcəyi ilk vuruşu rəqibə əlavə +20% hasar yetirər. Bu qabiliyyət onu kritik anlarda həm qoruyur, həm də əks-hücum üçün gücləndirir.",
     "stats": {
-      "health": "160",
-      "shield": "320",
+      "health": "157",
+      "shield": "317",
       "damage": "56",
-      "sps": "40",
+      "sps": "37",
       "attackSpeed": "1.40s",
       "delay": "-",
       "mana": "18",
       "number": "1"
     },
-    "trait": "Bu dözümlü döyüşçünün canı hər 20% azaldıqda o, bədənini qoruyan xüsusi bir fazaya keçər və 2 saniyəlik tam toxunulmazlıq statusu qazanar. Bu toxunulmazlıq müddəti bitdikdən sonra edəcəyi ilk vuruşu rəqibə əlavə +20% hasar yetirər. Bu qabiliyyət onu kritik anlarda həm qoruyur, həm də əks-hücum üçün gücləndirir.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -94,7 +103,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -107,9 +117,14 @@
     "name": "Heartix",
     "type": ["İnsan"],
     "rarity": "Apex",
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Hər 40 saniyədə qarşıdakı rəqibi 20 saniyəlik öz tərəfinə çəkər",
     "stats": {
-      "health": "70",
-      "shield": "60",
+      "health": "67",
+      "shield": "57",
       "damage": "6",
       "sps": "5",
       "attackSpeed": "1.25s",
@@ -117,7 +132,6 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Hər 40 saniyədə qarşıdakı rəqibi 20 saniyəlik öz tərəfinə çəkər",
     "additionalStats": {
       "range": "6000",
       "speed": "900",
@@ -126,10 +140,13 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "mechanic": "mind-control",
-    "mechanicStats": { "controlDuration": 20 },
+    "mechanicStats": {
+      "controlDuration": 20
+    },
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -141,17 +158,21 @@
     "name": "R-1",
     "type": ["Robot"],
     "rarity": "Apex",
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Atışları qalxandan keçər, \"İnsan\" tipli kartlara -50% daha az hasar verər",
     "stats": {
-      "health": "390",
-      "shield": "180",
-      "damage": "3x70",
+      "health": "387",
+      "shield": "177",
+      "damage": "3x67",
       "sps": "88",
       "attackSpeed": "0.80s",
       "delay": "9.00s",
       "mana": "16",
       "number": "1"
     },
-    "trait": "Atışları qalxandan keçər, \"İnsan\" tipli kartlara -50% daha az hasar verər",
     "additionalStats": {
       "range": "2300",
       "speed": "800",
@@ -160,7 +181,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -173,17 +195,21 @@
     "name": "Blank",
     "type": ["Alien"],
     "rarity": "Apex",
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Hər rəqib kart öldürdükdə +1 Hasar bonusu (Max: 5)",
     "stats": {
-      "health": "100",
-      "shield": "200",
-      "damage": "5x40",
-      "sps": "80",
+      "health": "97",
+      "shield": "197",
+      "damage": "5x37",
+      "sps": "77",
       "attackSpeed": "0.50s",
       "delay": "2.50s",
       "mana": "18",
       "number": "1"
     },
-    "trait": "Hər rəqib kart öldürdükdə +1 Hasar bonusu (Max: 5)",
     "additionalStats": {
       "range": "3800",
       "speed": "1000",
@@ -192,7 +218,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -205,17 +232,21 @@
     "name": "Magmara",
     "type": ["Alien"],
     "rarity": "Apex",
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Rəqib kartlara ekstra 3x10 Yanma Hasarı verər",
     "stats": {
-      "health": "350",
-      "shield": "150",
-      "damage": "40",
+      "health": "347",
+      "shield": "147",
+      "damage": "37",
       "sps": "25",
       "attackSpeed": "1.60s",
       "delay": "-",
       "mana": "16",
       "number": "1"
     },
-    "trait": "Rəqib kartlara ekstra 3x10 Yanma Hasarı verər",
     "additionalStats": {
       "range": "1100",
       "speed": "1000",
@@ -224,7 +255,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -237,12 +269,15 @@
     "name": "Willowshade",
     "type": ["Human"],
     "rarity": "Apex",
-    "group": "botanical-gardens", 
+    "group": "botanical-gardens",
+    "class": "",
+    "subclass": "",
     "abilityName": "",
+    "trait": "Vuruşları qalxandan keçər, öləndə \"Octarion\"-a dönüşər",
     "isMulti": true,
     "stats": {
-      "health": "190",
-      "shield": "50",
+      "health": "187",
+      "shield": "47",
       "damage": "25",
       "sps": "25",
       "attackSpeed": "1.00s",
@@ -250,7 +285,6 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Vuruşları qalxandan keçər, öləndə \"Octarion\"-a dönüşər",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -259,7 +293,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -272,10 +307,13 @@
         "name": "Octarion",
         "type": ["Animal"],
         "rarity": "Apex",
-        "group": "botanical-gardens", 
+        "group": "botanical-gardens",
+        "class": "",
+        "subclass": "",
         "abilityName": "",
+        "trait": "Ölən zaman olduğu yerə 3x5 Zəhər hasarı verər",
         "stats": {
-          "health": "80",
+          "health": "77",
           "shield": "0",
           "damage": "15",
           "sps": "12",
@@ -284,16 +322,16 @@
           "mana": "-",
           "number": "1"
         },
-        "trait": "Ölən zaman olduğu yerə 3x5 Zəhər hasarı verər",
         "additionalStats": {
           "range": "1100",
           "speed": "900",
-          "criticalChance": "-",
+          "criticalChance": "0%",
           "criticDamage": "1.5x",
-          "lifestealChance": "-",
+          "lifestealChance": "0%",
           "lifesteal": "25%",
           "damageminimiser": "0%",
-          "dodge": "0%"
+          "dodge": "0%",
+          "vision": "8000"
         },
         "showlevels": {
           "level1": "-",
@@ -308,17 +346,21 @@
     "name": "Collector",
     "type": ["Robot"],
     "rarity": "Apex",
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Öldürdüyü hər rəqib kart üçün +2 Mana qazanar",
     "stats": {
-      "health": "120",
-      "shield": "100",
-      "damage": "60",
-      "sps": "40",
+      "health": "117",
+      "shield": "97",
+      "damage": "57",
+      "sps": "37",
       "attackSpeed": "1.50s",
       "delay": "-",
       "mana": "16",
       "number": "1"
     },
-    "trait": "Öldürdüyü hər rəqib kart üçün +2 Mana qazanar",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -327,7 +369,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -340,8 +383,13 @@
     "name": "Sushu",
     "type": ["Spirit"],
     "rarity": "Apex",
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Görünməz olar, rəqibin içinə girərək öləndə qədər hasar verər",
     "stats": {
-      "health": "50",
+      "health": "47",
       "shield": "0",
       "damage": "8",
       "sps": "8",
@@ -350,16 +398,16 @@
       "mana": "5",
       "number": "1"
     },
-    "trait": "Görünməz olar, rəqibin içinə girərək öləndə qədər hasar verər",
     "additionalStats": {
       "range": "800",
       "speed": "1100",
-      "criticalChance": "-",
+      "criticalChance": "0%",
       "criticDamage": "1.5x",
-      "lifestealChance": "-",
+      "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -372,19 +420,22 @@
     "name": "Umbra",
     "type": ["Varlıq"],
     "rarity": "Apex",
-    "isHybrid": false,
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Canı 75% olduqda 3 saniyəlik görünməz olar, 50% olduqda 7,500 Karo geriyə gedər",
     "isMulti": false,
     "stats": {
-      "health": "140",
-      "shield": "40",
+      "health": "137",
+      "shield": "37",
       "damage": "2x25",
-      "sps": "50",
+      "sps": "47",
       "attackSpeed": "0.25s",
       "delay": "0.50s",
       "mana": "12",
       "number": "1"
     },
-    "trait": "Canı 75% olduqda 3 saniyəlik görünməz olar, 50% olduqda 7,500 Karo geriyə gedər",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -393,7 +444,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -406,9 +458,14 @@
     "name": "Thief",
     "type": ["Human"],
     "rarity": "Apex",
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "15,000 Karo qabaqdakı ilk rəqibin özəlliyini oğurlayar",
     "stats": {
-      "health": "190",
-      "shield": "30",
+      "health": "187",
+      "shield": "27",
       "damage": "12",
       "sps": "12",
       "attackSpeed": "1.00s",
@@ -416,7 +473,6 @@
       "mana": "12",
       "number": "1"
     },
-    "trait": "15,000 Karo qabaqdakı ilk rəqibin özəlliyini oğurlayar",
     "additionalStats": {
       "range": "1000/2500",
       "speed": "1000",
@@ -425,7 +481,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -439,11 +496,14 @@
     "type": ["Dead"],
     "rarity": "Apex",
     "group": "void-walkers",
+    "class": "",
+    "subclass": "",
     "abilityName": "",
+    "trait": "Hər ölən rəqib kart üçün +1 Hasar bonusu",
     "isMulti": true,
     "stats": {
-      "health": "140",
-      "shield": "20",
+      "health": "137",
+      "shield": "17",
       "damage": "14",
       "sps": "14",
       "attackSpeed": "1.00s",
@@ -451,7 +511,6 @@
       "mana": "9",
       "number": "3"
     },
-    "trait": "Hər ölən rəqib kart üçün +1 Hasar bonusu",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -460,7 +519,8 @@
       "lifestealChance": "10%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -474,27 +534,30 @@
         "type": ["Dead"],
         "rarity": "Apex",
         "group": "void-walkers",
+        "class": "",
+        "subclass": "",
         "abilityName": "",
+        "trait": "45 saniyə ərzində Zomboidsa çevrilər",
         "stats": {
-          "health": "40",
-          "shield": "20",
-          "damage": "10",
-          "sps": "10",
+          "health": "37",
+          "shield": "17",
+          "damage": "7",
+          "sps": "13",
           "attackSpeed": "1,00",
           "delay": "-",
           "mana": "-",
           "number": "2"
         },
-        "trait": "45 saniyə ərzində Zomboidsa çevrilər",
         "additionalStats": {
           "range": "1000",
           "speed": "1000",
-          "criticalChance": "-",
+          "criticalChance": "0%",
           "criticDamage": "1.5x",
-          "lifestealChance": "-",
+          "lifestealChance": "0%",
           "lifesteal": "25%",
           "damageminimiser": "0%",
-          "dodge": "0%"
+          "dodge": "0%",
+          "vision": "8000"
         },
         "showlevels": {
           "level1": "-",
@@ -509,9 +572,14 @@
     "name": "Stormblade",
     "type": ["Human"],
     "rarity": "Apex",
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Hasarı yaxındakı rəqiblərə sıçrayar",
     "stats": {
-      "health": "160",
-      "shield": "40",
+      "health": "157",
+      "shield": "37",
       "damage": "26",
       "sps": "33",
       "attackSpeed": "0.80s",
@@ -519,7 +587,6 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hasarı yaxındakı rəqiblərə sıçrayar",
     "additionalStats": {
       "range": "2600",
       "speed": "1000",
@@ -528,7 +595,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -541,11 +609,15 @@
     "name": "Venom Fangs",
     "type": ["Varlıq"],
     "rarity": "Apex",
-    "isHybrid": false,
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Vuruşları ekstra 3x1 hasar verər və rəqib kartdan +0,5% Kritik Şansı oğurlayar",
     "isMulti": false,
     "stats": {
-      "health": "80",
-      "shield": "240",
+      "health": "77",
+      "shield": "237",
       "damage": "12",
       "sps": "9",
       "attackSpeed": "1.30s",
@@ -553,7 +625,6 @@
       "mana": "9",
       "number": "2"
     },
-    "trait": "Vuruşları ekstra 3x1 hasar verər və rəqib kartdan +0,5% Kritik Şansı oğurlayar",
     "additionalStats": {
       "range": "1,000",
       "speed": "1,000",
@@ -562,7 +633,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -576,18 +648,20 @@
     "type": ["Human"],
     "rarity": "Apex",
     "group": "royal-blood",
+    "class": "",
+    "subclass": "",
     "abilityName": "Long-Range Precision",
+    "trait": "Skyhunter rəqibləri ilə arasındakı məsafəni öz xeyrinə istifadə edən peşəkar bir ovçudur. O, hədəf aldığı rəqib kart ilə öz arasındakı hər karo üçün +10% hasar bonusu qazanar. Rəqib ondan nə qədər uzaq olarsa, Skyhunter-in oxları bir o qədər dağıdıcı gücə sahib olur. Bu xüsusiyyət onu arxa cəbhədən düşmənin əsas qüvvələrini zərərsizləşdirmək üçün mükəmməl bir uzaq məsafəli karta çevirir.",
     "stats": {
-      "health": "180",
-      "shield": "50",
-      "damage": "50",
-      "sps": "40",
+      "health": "177",
+      "shield": "47",
+      "damage": "53",
+      "sps": "37",
       "attackSpeed": "1.25s",
       "delay": "-",
       "mana": "11",
       "number": "1"
     },
-    "trait": "Skyhunter rəqibləri ilə arasındakı məsafəni öz xeyrinə istifadə edən peşəkar bir ovçudur. O, hədəf aldığı rəqib kart ilə öz arasındakı hər karo üçün +10% hasar bonusu qazanar. Rəqib ondan nə qədər uzaq olarsa, Skyhunter-in oxları bir o qədər dağıdıcı gücə sahib olur. Bu xüsusiyyət onu arxa cəbhədən düşmənin əsas qüvvələrini zərərsizləşdirmək üçün mükəmməl bir uzaq məsafəli karta çevirir.",
     "additionalStats": {
       "range": "5000",
       "speed": "1000",
@@ -596,7 +670,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -610,10 +685,13 @@
     "type": ["Animal"],
     "rarity": "Apex",
     "group": "twisted-farm",
+    "class": "",
+    "subclass": "",
     "abilityName": "Kinetic Rebound",
+    "trait": "Rockback rəqib karta doğru irəliləyərkən böyük bir impuls yığar və hədəfə yaxınlaşana qədər +50% sürət qazanar. Bu sürətlə etdiyi ilk vuruşu düşmənə əlavə +150% hasar vurar. Üstəlik, onun qoruyucu qalxanı qırıldıqdan sonrakı 6 saniyə ərzində etdiyi hər bir vuruş ona +10 Qalxan bərpa edər.",
     "stats": {
-      "health": "160",
-      "shield": "220",
+      "health": "157",
+      "shield": "217",
       "damage": "14",
       "sps": "19",
       "attackSpeed": "0.75s",
@@ -621,7 +699,6 @@
       "mana": "13",
       "number": "1"
     },
-    "trait": "Rockback rəqib karta doğru irəliləyərkən böyük bir impuls yığar və hədəfə yaxınlaşana qədər +50% sürət qazanar. Bu sürətlə etdiyi ilk vuruşu düşmənə əlavə +150% hasar vurar. Üstəlik, onun qoruyucu qalxanı qırıldıqdan sonrakı 6 saniyə ərzində etdiyi hər bir vuruş ona +10 Qalxan bərpa edər.",
     "additionalStats": {
       "range": "1200",
       "speed": "900",
@@ -630,7 +707,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -644,18 +722,20 @@
     "type": ["Robot"],
     "rarity": "Apex",
     "group": "constructs",
+    "class": "",
+    "subclass": "",
     "abilityName": "",
+    "trait": "Hasar verdikcə 3 saniyəlik +20% Saldırı Hızı qazanar (Max: 60%)",
     "stats": {
-      "health": "200",
-      "shield": "60",
+      "health": "197",
+      "shield": "57",
       "damage": "16",
       "sps": "13",
       "attackSpeed": "1.20s",
       "delay": "-",
-      "mana": "10",
+      "mana": "7",
       "number": "1"
     },
-    "trait": "Hasar verdikcə 3 saniyəlik +20% Saldırı Hızı qazanar (Max: 60%)",
     "additionalStats": {
       "range": "2750",
       "speed": "1150",
@@ -664,7 +744,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -678,10 +759,13 @@
     "type": ["Spirit"],
     "rarity": "Apex",
     "group": "void-walkers",
+    "class": "",
+    "subclass": "",
     "abilityName": "",
+    "trait": "Ətrafındakı rəqib kartların hasarlarının 20%-ni özünə çəkər (Max: 16)",
     "stats": {
-      "health": "250",
-      "shield": "130",
+      "health": "247",
+      "shield": "127",
       "damage": "6x4",
       "sps": "8",
       "attackSpeed": "0.50s",
@@ -689,7 +773,6 @@
       "mana": "12",
       "number": "1"
     },
-    "trait": "Ətrafındakı rəqib kartların hasarlarının 20%-ni özünə çəkər (Max: 16)",
     "additionalStats": {
       "range": "1800",
       "speed": "950",
@@ -698,7 +781,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -711,19 +795,22 @@
     "name": "Bio Mech",
     "type": ["Robot"],
     "rarity": "Apex",
-    "isHybrid": false,
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "Hər hasar aldıqda ətrafdakı kartlar +1% Qalxan qazanar",
     "isMulti": false,
     "stats": {
-      "health": "220",
-      "shield": "60",
-      "damage": "60",
+      "health": "217",
+      "shield": "57",
+      "damage": "63",
       "sps": "75",
       "attackSpeed": "0.80s",
       "delay": "-",
       "mana": "18",
       "number": "1"
     },
-    "trait": "Hər hasar aldıqda ətrafdakı kartlar +1% Qalxan qazanar",
     "additionalStats": {
       "range": "2000",
       "speed": "950",
@@ -732,7 +819,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -745,10 +833,14 @@
     "name": "Mixela",
     "type": ["Spirit"],
     "rarity": "Apex",
-    "isHybrid": false,
+    "group": "",
+    "class": "",
+    "subclass": "",
+    "abilityName": "",
+    "trait": "3x3 Yaxınında ölən kartların canlarının 60%-ni özünə qatar",
     "isMulti": false,
     "stats": {
-      "health": "100",
+      "health": "97",
       "shield": "0",
       "damage": "6x8",
       "sps": "48",
@@ -757,7 +849,6 @@
       "mana": "5",
       "number": "1"
     },
-    "trait": "3x3 Yaxınında ölən kartların canlarının 60%-ni özünə qatar",
     "additionalStats": {
       "range": "1750",
       "speed": "1000",
@@ -766,7 +857,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -780,10 +872,13 @@
     "type": ["Human"],
     "rarity": "Apex",
     "group": "the-spellbound",
+    "class": "",
+    "subclass": "",
     "abilityName": "Chrono Blessing",
+    "trait": "Laura hər saniyə +8 yük qazanar. 100 yükə çatdıqda daxili enerjisini sərbəst buraxaraq ətrafa enerji dalğası yayar, Bu enerji dalğası ətrafındakı bütün dost kartların statistikalarını (hücum, müdafiə, sürət) +25% artırar.",
     "stats": {
-      "health": "100",
-      "shield": "100",
+      "health": "97",
+      "shield": "103",
       "damage": "8",
       "sps": "8",
       "attackSpeed": "1.00s",
@@ -791,7 +886,6 @@
       "mana": "4",
       "number": "1"
     },
-    "trait": "Laura hər saniyə +8 yük qazanar. 100 yükə çatdıqda daxili enerjisini sərbəst buraxaraq ətrafa enerji dalğası yayar, Bu enerji dalğası ətrafındakı bütün dost kartların statistikalarını (hücum, müdafiə, sürət) +25% artırar.",
     "additionalStats": {
       "range": "2000",
       "speed": "1000",
@@ -800,7 +894,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
