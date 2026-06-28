@@ -4,19 +4,21 @@
     "type": ["İnsan"],
     "rarity": "Ascendant",
     "group": "mission-1",
+    "class": "Tank",
+    "subclass": "",
     "abilityName": "Tactical Cohesion",
+    "trait": "Reacher komanda işinə fokuslanmış bir döyüşçüdür. Yanında olan hər bir dost kart üçün +2% hasar azaltma qazanar. Bu effekt maksimum 16%-ə qədər yüksələ bilər. O, ətrafında nə qədər çox müttəfiq olarsa, bir o qədər sarsılmaz bir qüvvəyə çevrilir.",
     "isAscendant": true,
     "stats": {
-      "health": "170",
-      "shield": "170",
+      "health": "167",
+      "shield": "173",
       "damage": "24/2x8",
-      "sps": "20/16",
+      "sps": "17/16",
       "attackSpeed": "1.20s/0.20s",
       "delay": "-/0.80s",
       "mana": "11",
       "number": "1"
     },
-    "trait": "Reacher komanda işinə fokuslanmış bir döyüşçüdür. Yanında olan hər bir dost kart üçün +2% hasar azaltma qazanar. Bu effekt maksimum 16%-ə qədər yüksələ bilər. O, ətrafında nə qədər çox müttəfiq olarsa, bir o qədər sarsılmaz bir qüvvəyə çevrilir.",
     "additionalStats": {
       "range": "1000/2200",
       "speed": "1000",
@@ -25,7 +27,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -35,14 +38,16 @@
     "story": "-",
     "upgradedsecondForm": {
       "name": "Reacher",
-      "type": [
-        "İnsan"
-      ],
+      "type": ["İnsan"],
       "rarity": "Ascendant",
+      "group": "",
+      "class": "Suicide Assassin",
+      "subclass": "",
       "abilityName": "Tactical Cohesion",
+      "trait": "Reacher komanda işinə fokuslanmış bir döyüşçüdür. Yanında olan hər bir dost kart üçün +3% hasar azaltma qazanar. Bu effekt maksimum 24%-ə qədər yüksələ bilər. O, ətrafında nə qədər çox müttəfiq olarsa xüsusilədə Soldier, bir o qədər sarsılmaz bir qüvvəyə çevrilir.",
       "stats": {
-        "health": "250",
-        "shield": "250",
+        "health": "247",
+        "shield": "253",
         "damage": "32/2x12",
         "sps": "29/24",
         "attackSpeed": "1.10s/0.40s",
@@ -50,7 +55,6 @@
         "mana": "15",
         "number": "1"
       },
-      "trait": "Reacher komanda işinə fokuslanmış bir döyüşçüdür. Yanında olan hər bir dost kart üçün +3% hasar azaltma qazanar. Bu effekt maksimum 24%-ə qədər yüksələ bilər. O, ətrafında nə qədər çox müttəfiq olarsa xüsusilədə Soldier, bir o qədər sarsılmaz bir qüvvəyə çevrilir.",
       "additionalStats": {
         "range": "1000/2200",
         "speed": "1000",
@@ -59,36 +63,37 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000"
       },
       "showlevels": {
         "level1": "-",
         "level2": "-",
         "level3": "-"
       },
-      "story": "Reacher is a veteran soldier who spent years on various battlefields. Now in his later years, he provides essential support to the Soldier within Mission 1. His experience bridges the gap between raw talent and seasoned strategy. When he stands beside the Soldier, they become an unstoppable force that no enemy can withstand. He does not seek the spotlight or leadership for himself. Instead, he uses his tactical knowledge to clear the path forward. His presence ensures the mission remains on track.",
-      "class": "Suicide Assassin"
-    },
-    "class": "Tank"
+      "story": "Reacher is a veteran soldier who spent years on various battlefields. Now in his later years, he provides essential support to the Soldier within Mission 1. His experience bridges the gap between raw talent and seasoned strategy. When he stands beside the Soldier, they become an unstoppable force that no enemy can withstand. He does not seek the spotlight or leadership for himself. Instead, he uses his tactical knowledge to clear the path forward. His presence ensures the mission remains on track."
+    }
   },
   {
     "name": "Bastra",
     "type": ["İnsan"],
     "rarity": "Ascendant",
     "group": "the-joy-of-the-zenith-city",
+    "class": "Tank",
+    "subclass": "",
     "abilityName": "",
+    "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +2% Saldırı Hızı qazanar",
     "isAscendant": true,
     "stats": {
-      "health": "110",
-      "shield": "40",
-      "damage": "70",
+      "health": "107",
+      "shield": "37",
+      "damage": "67",
       "sps": "35",
       "attackSpeed": "2.00s",
       "delay": "-",
       "mana": "9",
       "number": "1"
     },
-    "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +2% Saldırı Hızı qazanar",
     "additionalStats": {
       "range": "3500",
       "speed": "1000",
@@ -97,7 +102,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -110,49 +116,53 @@
       "type": ["İnsan"],
       "rarity": "Ascendant",
       "group": "the-joy-of-the-zenith-city",
+      "class": "Suicide Assassin",
+      "subclass": "",
       "abilityName": "",
+      "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +3% Saldırı Hızı qazanar",
       "isAscendant": true,
       "stats": {
-        "health": "140",
-        "shield": "100",
-        "damage": "70",
+        "health": "137",
+        "shield": "97",
+        "damage": "73",
         "sps": "35",
         "attackSpeed": "2.00s",
         "delay": "-",
         "mana": "11",
         "number": "1"
       },
-      "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +3% Saldırı Hızı qazanar",
       "additionalStats": {
         "range": "3500",
-       "speed": "1000",
+        "speed": "1000",
         "criticalChance": "5%",
         "criticDamage": "1.5x",
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000"
       },
       "showlevels": {
         "level1": "-",
         "level2": "-",
         "level3": "-"
-        },
-        "story": "The Sweet Protector, a 22-year-old anime heroine from The Joy of The Zenith City. She is a beautiful hybrid of banana and strawberry, possessing vibrant pink hair that flows dynamically around her. Her most recognizable feature is a precious hair clip decorated with two strawberries, carefully placed in her hair as a symbol of her family and origins. Bastra stands confidently in a protective stance, embodying courage, warmth, and determination. Her appearance combines youthful elegance with athletic agility. Subtle design elements inspired by bananas and strawberries are integrated into her outfit, including soft fruit-themed patterns, natural color accents, and organic shapes that feel stylish rather than literal. Her large expressive anime eyes radiate kindness while revealing an unwavering resolve to protect those she loves. The scene takes place within a terrifying and ominous environment. Behind her lies a dark, abandoned district of Zenith City engulfed by supernatural darkness. Twisted shadows crawl across ruined streets, strange fog drifts through the air, and distant silhouettes disappear into the gloom. The sky is filled with storm clouds and unnatural light, creating an atmosphere of looming danger. Despite the frightening surroundings, Bastra remains fearless, standing as a beacon of hope against the darkness. Her pose suggests she is preparing to defend her younger sister Maapp and older brother Avara from an unseen threat. Wind sweeps through her hair and clothing, emphasizing movement and heroic energy. The contrast between her cheerful, colorful appearance and the horrifying environment creates a striking visual composition.",
-        "class": "Suicide Assassin"
       },
-      "class": "Tank"
-    },
+      "story": "The Sweet Protector, a 22-year-old anime heroine from The Joy of The Zenith City. She is a beautiful hybrid of banana and strawberry, possessing vibrant pink hair that flows dynamically around her. Her most recognizable feature is a precious hair clip decorated with two strawberries, carefully placed in her hair as a symbol of her family and origins. Bastra stands confidently in a protective stance, embodying courage, warmth, and determination. Her appearance combines youthful elegance with athletic agility. Subtle design elements inspired by bananas and strawberries are integrated into her outfit, including soft fruit-themed patterns, natural color accents, and organic shapes that feel stylish rather than literal. Her large expressive anime eyes radiate kindness while revealing an unwavering resolve to protect those she loves. The scene takes place within a terrifying and ominous environment. Behind her lies a dark, abandoned district of Zenith City engulfed by supernatural darkness. Twisted shadows crawl across ruined streets, strange fog drifts through the air, and distant silhouettes disappear into the gloom. The sky is filled with storm clouds and unnatural light, creating an atmosphere of looming danger. Despite the frightening surroundings, Bastra remains fearless, standing as a beacon of hope against the darkness. Her pose suggests she is preparing to defend her younger sister Maapp and older brother Avara from an unseen threat. Wind sweeps through her hair and clothing, emphasizing movement and heroic energy. The contrast between her cheerful, colorful appearance and the horrifying environment creates a striking visual composition."
+    }
+  },
   {
     "name": "Maapp",
     "type": ["İnsan"],
     "rarity": "Ascendant",
     "group": "the-joy-of-the-zenith-city",
+    "class": "Tank",
+    "subclass": "",
     "abilityName": "",
+    "trait": "15% şansla rəqibin hasarını 4 saniyəlik -90% azaldar",
     "isAscendant": true,
     "stats": {
-      "health": "80",
-      "shield": "80",
+      "health": "77",
+      "shield": "83",
       "damage": "2",
       "sps": "8",
       "attackSpeed": "0.25s",
@@ -160,7 +170,6 @@
       "mana": "4",
       "number": "1"
     },
-    "trait": "15% şansla rəqibin hasarını 4 saniyəlik -90% azaldar",
     "additionalStats": {
       "range": "5000",
       "speed": "1100",
@@ -169,7 +178,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -182,49 +192,53 @@
       "type": ["İnsan"],
       "rarity": "Ascendant",
       "group": "the-joy-of-the-zenith-city",
+      "class": "Suicide Assassin",
+      "subclass": "",
       "abilityName": "",
+      "trait": "17% şansla rəqibin hasarını 5 saniyəlik -90% azaldar",
       "isAscendant": true,
       "stats": {
-        "health": "100",
-        "shield": "100",
-       "damage": "3",
+        "health": "97",
+        "shield": "103",
+        "damage": "3",
         "sps": "12",
         "attackSpeed": "0.25s",
         "delay": "-",
         "mana": "7",
-      "number": "1"
-    },
-    "trait": "17% şansla rəqibin hasarını 5 saniyəlik -90% azaldar",
-    "additionalStats": {
-      "range": "5000",
-      "speed": "1100",
-      "criticalChance": "0%",
-      "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%"
-    },
-    "showlevels": {
-      "level1": "-",
-      "level2": "-",
-      "level3": "-"
+        "number": "1"
       },
-      "story": "The Melody of Hope, a young anime girl from The Joy of The Zenith City, a hybrid of mango and apple. She has soft, light pink hair that flows gently around her, creating an innocent and heartwarming appearance. Her hairstyle shares a similar aesthetic to her older sister Bastra, featuring elegant anime styling and subtle fruit-inspired design elements, while maintaining a younger and more delicate look. Maapp wears a modest, Japanese-inspired outfit that complements her gentle personality. The clothing features layered fabrics, flowing sleeves, decorative ribbons, and subtle mango and apple motifs woven into the design. Her attire feels soft, comfortable, and refined, emphasizing warmth, purity, and optimism. Small ornamental details inspired by Zenith City culture decorate her outfit without overwhelming the design. A beautiful translucent pink mist surrounds her body, drifting gracefully through the air like a magical aura. The fog is semi-transparent and luminous, creating a dreamlike atmosphere around her. Tiny glowing particles float within the mist, resembling musical notes and fragments of hope carried by the wind. The pink haze appears soothing and protective, reflecting the emotional comfort she brings to those around her. Her large anime eyes are filled with kindness and gentle uncertainty. Although naturally shy, her expression carries quiet determination whenever she sings. She stands with a soft, reserved posture, holding her hands close while radiating warmth and innocence. The atmosphere around her feels uplifting despite the darkness surrounding the world. Behind her stretches a frightening and ominous section of Zenith City. Twisted shadows crawl across abandoned streets, supernatural fog blankets distant buildings, and dark clouds loom overhead. However, the soft pink mist around Maapp pushes back the darkness, creating a striking contrast between hope and despair.",
-      "class": "Suicide Assassin"
-    },
-    "class": "Tank"
+      "additionalStats": {
+        "range": "5000",
+        "speed": "1100",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%",
+        "vision": "8000"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "The Melody of Hope, a young anime girl from The Joy of The Zenith City, a hybrid of mango and apple. She has soft, light pink hair that flows gently around her, creating an innocent and heartwarming appearance. Her hairstyle shares a similar aesthetic to her older sister Bastra, featuring elegant anime styling and subtle fruit-inspired design elements, while maintaining a younger and more delicate look. Maapp wears a modest, Japanese-inspired outfit that complements her gentle personality. The clothing features layered fabrics, flowing sleeves, decorative ribbons, and subtle mango and apple motifs woven into the design. Her attire feels soft, comfortable, and refined, emphasizing warmth, purity, and optimism. Small ornamental details inspired by Zenith City culture decorate her outfit without overwhelming the design. A beautiful translucent pink mist surrounds her body, drifting gracefully through the air like a magical aura. The fog is semi-transparent and luminous, creating a dreamlike atmosphere around her. Tiny glowing particles float within the mist, resembling musical notes and fragments of hope carried by the wind. The pink haze appears soothing and protective, reflecting the emotional comfort she brings to those around her. Her large anime eyes are filled with kindness and gentle uncertainty. Although naturally shy, her expression carries quiet determination whenever she sings. She stands with a soft, reserved posture, holding her hands close while radiating warmth and innocence. The atmosphere around her feels uplifting despite the darkness surrounding the world. Behind her stretches a frightening and ominous section of Zenith City. Twisted shadows crawl across abandoned streets, supernatural fog blankets distant buildings, and dark clouds loom overhead. However, the soft pink mist around Maapp pushes back the darkness, creating a striking contrast between hope and despair."
+    }
   },
   {
     "name": "Avara",
     "type": ["İnsan"],
     "rarity": "Ascendant",
     "group": "the-joy-of-the-zenith-city",
+    "class": "Tank",
+    "subclass": "",
     "abilityName": "",
+    "trait": "İlk atış rəqibləri 2,5 saniyəlik 40% yavaşladar, İkinci atış rəqibi 2,5 karo geri itər, Üçüncü atış rəqibi 0,75 saniyəlik sərsəmlətər, Dördüncü atış bir xətdəki bütün rəqiblərə hasar verər",
     "isAscendant": true,
     "stats": {
-      "health": "150",
-      "shield": "80",
+      "health": "147",
+      "shield": "77",
       "damage": "22/44/64/92",
       "sps": "22/44/64/92",
       "attackSpeed": "1.35s/0.75s/0.85s/1.75s",
@@ -232,7 +246,6 @@
       "mana": "15",
       "number": "1"
     },
-    "trait": "İlk atış rəqibləri 2,5 saniyəlik 40% yavaşladar, İkinci atış rəqibi 2,5 karo geri itər, Üçüncü atış rəqibi 0,75 saniyəlik sərsəmlətər, Dördüncü atış bir xətdəki bütün rəqiblərə hasar verər",
     "additionalStats": {
       "range": "2200/2400/4200/5000",
       "speed": "1000",
@@ -241,7 +254,8 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000"
     },
     "showlevels": {
       "level1": "-",
@@ -254,19 +268,21 @@
       "type": ["İnsan"],
       "rarity": "Ascendant",
       "group": "the-joy-of-the-zenith-city",
+      "class": "Suicide Assassin",
+      "subclass": "",
       "abilityName": "",
+      "trait": "İlk atış rəqibləri 2,75 saniyəlik 50% yavaşladar, İkinci atış rəqibi 3 karo geri itər, Üçüncü atış rəqibi 1,25 saniyəlik sərsəmlətər, Dördüncü atış bir xətdəki bütün rəqiblərə hasar verər",
       "isAscendant": true,
       "stats": {
-        "health": "180",
-        "shield": "110",
+        "health": "177",
+        "shield": "107",
         "damage": "26/52/76/108",
         "sps": "26/52/76/108",
         "attackSpeed": "1.35s/0.75s/0.85s/1.75s",
         "delay": "1.45s",
         "mana": "18",
         "number": "1"
-    },
-      "trait": "İlk atış rəqibləri 2,75 saniyəlik 50% yavaşladar, İkinci atış rəqibi 3 karo geri itər, Üçüncü atış rəqibi 1,25 saniyəlik sərsəmlətər, Dördüncü atış bir xətdəki bütün rəqiblərə hasar verər",
+      },
       "additionalStats": {
         "range": "2200/2400/4200/5000",
         "speed": "1000",
@@ -275,16 +291,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
-    },
+        "dodge": "0%",
+        "vision": "8000"
+      },
       "showlevels": {
         "level1": "-",
         "level2": "-",
         "level3": "-"
       },
-        "story": "The Violet Vanguard, a mature anime character from The Joy of The Zenith City, a hybrid of avocado and raspberry. At 25 years old, he is the calm and dependable protector of his family, carrying himself with quiet confidence and unwavering determination. His design matches the elegant, refined anime aesthetic of Bastra and Maapp, featuring detailed clothing, soft shading, expressive anime features, and a strong fantasy atmosphere. Avara has long, rich violet hair with subtle raspberry-inspired tones and carefully styled layers that flow naturally in the wind. His appearance is handsome, mature, and composed, with sharp anime eyes that convey intelligence, discipline, and responsibility. Unlike many aggressive warriors, his expression remains calm and serious, as if constantly evaluating every situation before acting. He wears an elegant and relatively modest Japanese-inspired outfit, similar in style to Bastra's clothing. The outfit combines traditional kimono influences with fantasy anime fashion, featuring layered fabrics, long sleeves, decorative sashes, intricate embroidery, and subtle motifs inspired by avocado leaves and raspberry vines. The clothing appears noble, sophisticated, and practical rather than heavily armored. Around him drifts a beautiful mixture of violet and emerald-green mist, moving gracefully like living energy. The translucent fog curls around his arms, shoulders, and body, creating a mystical aura. Tiny glowing particles float within the mist, giving the impression of controlled power and resilience. The energy feels protective and disciplined rather than destructive. Behind him stretches a dark and terrifying section of Zenith City. Massive shadows cover the streets, supernatural fog fills abandoned pathways, and eerie silhouettes can be seen in the distance. A storm-darkened sky looms overhead, creating a sense of danger and uncertainty. Despite the ominous environment, Avara remains completely composed, standing as a guardian against the darkness. The overall artwork should feel visually consistent with Bastra and Maapp: beautiful anime aesthetics, elegant fantasy design, emotional storytelling, detailed character rendering, and a strong contrast between the hopeful characters and the frightening world around them.",
-        "class": "Suicide Assassin"
-    },
-    "class": "Tank"
+      "story": "The Violet Vanguard, a mature anime character from The Joy of The Zenith City, a hybrid of avocado and raspberry. At 25 years old, he is the calm and dependable protector of his family, carrying himself with quiet confidence and unwavering determination. His design matches the elegant, refined anime aesthetic of Bastra and Maapp, featuring detailed clothing, soft shading, expressive anime features, and a strong fantasy atmosphere. Avara has long, rich violet hair with subtle raspberry-inspired tones and carefully styled layers that flow naturally in the wind. His appearance is handsome, mature, and composed, with sharp anime eyes that convey intelligence, discipline, and responsibility. Unlike many aggressive warriors, his expression remains calm and serious, as if constantly evaluating every situation before acting. He wears an elegant and relatively modest Japanese-inspired outfit, similar in style to Bastra's clothing. The outfit combines traditional kimono influences with fantasy anime fashion, featuring layered fabrics, long sleeves, decorative sashes, intricate embroidery, and subtle motifs inspired by avocado leaves and raspberry vines. The clothing appears noble, sophisticated, and practical rather than heavily armored. Around him drifts a beautiful mixture of violet and emerald-green mist, moving gracefully like living energy. The translucent fog curls around his arms, shoulders, and body, creating a mystical aura. Tiny glowing particles float within the mist, giving the impression of controlled power and resilience. The energy feels protective and disciplined rather than destructive. Behind him stretches a dark and terrifying section of Zenith City. Massive shadows cover the streets, supernatural fog fills abandoned pathways, and eerie silhouettes can be seen in the distance. A storm-darkened sky looms overhead, creating a sense of danger and uncertainty. Despite the ominous environment, Avara remains completely composed, standing as a guardian against the darkness. The overall artwork should feel visually consistent with Bastra and Maapp: beautiful anime aesthetics, elegant fantasy design, emotional storytelling, detailed character rendering, and a strong contrast between the hopeful characters and the frightening world around them."
+    }
   }
 ]
