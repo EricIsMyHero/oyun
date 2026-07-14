@@ -76,6 +76,7 @@
     "name": "Frostshot",
     "type": ["Robot"],
     "rarity": "Familiar",
+    "group": "steam-alliance", 
     "abilityName": "",
     "stats": {
       "health": "100",
@@ -87,7 +88,7 @@
       "mana": "7",
       "number": "1"
     },
-    "trait": "Atışları rəqib kartı <b>3</b> saniyəlik <b>40%</b> yavaşladar, <b>12</b> saniyə hasar verməzsə hasarı <b>+400%</b> artar",
+    "trait": "Atışları rəqib kartı <b>3</b> saniyəlik <b>40%</b> yavaşladar, <b>18</b> saniyə hasar verməzsə hasarı <b>+275%</b> artar",
     "additionalStats": {
       "range": "6000",
       "speed": "850",
@@ -106,7 +107,7 @@
       "level2": "+26% Qalxan | 50 » 63",
       "level3": "+5% Öz. Yavaşlatma | 25% » 30%"
     },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "story": "The Cryogenic Marksman, a highly advanced combat automaton developed by the Steam Alliance, engineered exclusively for long-range precision eliminations. Instead of conventional ammunition, Frostshot operates using an innovative mixture of liquid nitrogen and high-pressure steam, allowing it to fire devastating cryogenic projectiles capable of freezing enemies where they stand. Every shot is carefully calculated, turning the battlefield into a frozen hunting ground. Frostshot is a sleek yet heavily engineered bipedal combat robot, designed for stability and extreme precision rather than brute force. Its chassis is constructed from forged steel, polished brass, reinforced iron plating, copper tubing, exposed gears, precision pistons, and intricate clockwork mechanisms. The design feels industrial and mechanical, faithfully representing advanced steampunk engineering rather than futuristic technology. Its head features a single glowing icy-blue optical lens surrounded by precision targeting mechanisms and rotating sensor arrays. Frost constantly forms around the lens and nearby metal surfaces, while small vents release cold vapor instead of ordinary steam. Held firmly in both mechanical hands is a massive steam-powered cryogenic sniper rifle. The weapon combines polished brass engineering with reinforced steel construction, featuring pressurized liquid nitrogen tanks, insulated copper pipelines, pressure gauges, rotating cooling valves, precision scope optics, and an exceptionally long barrel designed for extreme-range accuracy. Frost accumulates across the weapon's surface while icy vapor continuously escapes from cooling vents. Inside transparent reinforced tubes, glowing cryogenic coolant flows through the rifle toward the firing chamber. The barrel emits freezing mist, while snow crystals and tiny ice particles drift through the surrounding air. The rifle appears capable of launching a single devastating cryogenic bolt powerful enough to instantly immobilize its target. The robot stands atop an elevated industrial platform overlooking a vast battlefield. Behind it stretches a colossal Steam Alliance factory, filled with giant gears, pressure boilers, towering smokestacks, copper pipelines, cranes, and enormous steam engines. The warm industrial environment contrasts beautifully with the freezing aura surrounding Frostshot, creating dramatic visual tension. Ice spreads beneath its feet and across nearby machinery. Metal surfaces become coated with frost, frozen steam hangs in the air, and crystalline ice formations grow naturally around the robot as its cooling systems operate. White vapor constantly escapes from vents throughout its body, emphasizing the immense cryogenic power stored within. Its stance is perfectly still and disciplined, like an elite sniper patiently waiting for the ideal shot. Every mechanical component reflects precision, patience, and lethal efficiency.",
     "class": "Marksman"
   },
   {
@@ -183,6 +184,7 @@
     "name": "X-Bot",
     "type": ["Robot"],
     "rarity": "Familiar",
+    "group": "steam-alliance", 
     "abilityName": "",
     "stats": {
       "health": "70",
@@ -210,7 +212,7 @@
       "level2": "+10% Can Çalma Şansı  |  0% » 10%",
       "level3": "+50% Can  |  50 » 75"
     },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "story": "The Steam Assassin, an experimental high-speed infiltration robot developed by the Steam Alliance for reconnaissance, sabotage, and silent elimination. Unlike bulky industrial automatons, X-Bot is engineered for unmatched agility, relying on lightweight construction, miniature steam turbines, and lightning-fast reflexes to strike before disappearing into clouds of steam. X-Bot is a sleek, humanoid assassin robot built from forged steel, dark iron, and weathered copper components. Its body is slim, athletic, and highly articulated, designed for speed and acrobatic movement rather than brute strength. Every joint is exposed with intricate gears, pistons, cables, and rotating mechanical assemblies, emphasizing realistic industrial engineering. No brass or gold, only steel, iron, copper, and dark metallic finishes. Its head is streamlined with a narrow visor-like faceplate and two glowing icy-blue optical sensors that give it a cold, calculating appearance. Small exhaust vents around the head release thin streams of steam as internal pressure constantly adjusts. The robot is posed like a predatory assassin, with both feet firmly planted on the ground while both hands are lowered close to the ground, similar to a stalking panther preparing to sprint. The pose is low, balanced, and aggressive, emphasizing explosive speed and stealth rather than raw strength. Attached to each forearm is a razor-sharp copper combat blade, designed as integrated weapons rather than oversized swords. The blades are sleek, polished, and optimized for quick slashing attacks. Fine scratches and wear marks indicate years of combat use. Miniature steam turbines are mounted on its back, calves, and hips, feeding power through exposed pipes and pressure valves. High-pressure exhaust ports continuously release bursts of white steam, creating a cloak of vapor that obscures the robot's movements. Rotating turbine blades and pressure gauges indicate the engines are constantly operating at maximum efficiency. The environment is an abandoned industrial district belonging to the Steam Alliance, filled with steel bridges, rail tracks, factory machinery, pipes, gears, warehouses, and drifting steam. The ground is wet from condensed vapor, reflecting the robot beneath dramatic industrial lighting. Motion blur is subtly suggested through swirling steam trails, disturbed dust, and flowing vapor around the robot, making it appear moments away from launching into an impossibly fast attack. The overall aesthetic should emphasize speed, stealth, precision, and lethal efficiency, creating the appearance of an industrial assassin built for silent kills rather than open warfare.",
     "class": "Fighter",
     "subclass": "Brawler"
   },
