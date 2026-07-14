@@ -1,7 +1,9 @@
 [
   {
     "name": "Albert",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
@@ -36,7 +38,9 @@
   },
   {
     "name": "Chicken",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
     "group": "twisted-farm",
     "abilityName": "Volatile Mutation",
@@ -62,7 +66,10 @@
       "dodge": "10%"
     },
     "mechanic": "burst",
-    "mechanicStats": { "minBurstDamage": 100, "maxBurstDamage": 500 },
+    "mechanicStats": {
+      "minBurstDamage": 100,
+      "maxBurstDamage": 500
+    },
     "showlevels": {
       "level1": "+28% Health | 50 » 64",
       "level2": "+100% Ability DMG Bonus | 400% » 500%",
@@ -74,9 +81,11 @@
   },
   {
     "name": "Frostshot",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
-    "group": "steam-alliance", 
+    "group": "steam-alliance",
     "abilityName": "",
     "stats": {
       "health": "100",
@@ -100,8 +109,12 @@
       "dodge": "0%"
     },
     "effects": [
-    { "type": "slow", "percentage": 40, "duration": 3 }
-  ],
+      {
+        "type": "slow",
+        "percentage": 40,
+        "duration": 3
+      }
+    ],
     "showlevels": {
       "level1": "-2 Öz. Saniyə | 12 » 10",
       "level2": "+26% Qalxan | 50 » 63",
@@ -112,7 +125,9 @@
   },
   {
     "name": "Hornets",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
     "group": "beasts",
     "abilityName": "",
@@ -147,7 +162,9 @@
   },
   {
     "name": "Warborn",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
@@ -171,6 +188,13 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "shield-grant",
+        "amount": 8,
+        "cooldown": 6
+      }
+    ],
     "showlevels": {
       "level1": "+5% Menzil  |  1300 » 1365",
       "level2": "+2 Öz. Qalxan  |  8 » 10",
@@ -182,9 +206,11 @@
   },
   {
     "name": "X-Bot",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
-    "group": "steam-alliance", 
+    "group": "steam-alliance",
     "abilityName": "",
     "stats": {
       "health": "70",
@@ -218,7 +244,9 @@
   },
   {
     "name": "Nyra",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
@@ -252,7 +280,9 @@
   },
   {
     "name": "Deadscope",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Familiar",
     "group": "mission-1",
     "abilityName": "Momentum Reload",
@@ -288,7 +318,9 @@
   },
   {
     "name": "Turtle",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
     "isMulti": true,
     "group": "beasts",
@@ -314,6 +346,13 @@
       "damageminimiser": "0%",
       "dodge": "10%"
     },
+    "effects": [
+      {
+        "type": "shield-grant",
+        "amount": 75,
+        "duration": 3
+      }
+    ],
     "showlevels": {
       "level1": "+10% Qalxan | 110 » 121",
       "level2": "+7% Hız | 700 » 750",
@@ -323,7 +362,9 @@
     "forms": [
       {
         "name": "Mini Turtles",
-        "type": ["Heyvan"],
+        "type": [
+          "Heyvan"
+        ],
         "rarity": "Familiar",
         "group": "beasts",
         "abilityName": "",
@@ -361,7 +402,9 @@
   },
   {
     "name": "Feral Wolf",
-    "type": ["Animal"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Familiar",
     "group": "beasts",
     "abilityName": "",
@@ -396,7 +439,9 @@
   },
   {
     "name": "Trac",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Familiar",
     "group": "royal-blood",
     "abilityName": "Resilient Vanguard",
@@ -432,7 +477,9 @@
   },
   {
     "name": "Tornado",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Familiar",
     "group": "ancients",
     "abilityName": "Aero Vortex",
@@ -468,7 +515,9 @@
   },
   {
     "name": "Dino",
-    "type": ["Animal"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Familiar",
     "group": "beasts",
     "abilityName": "",
@@ -503,7 +552,9 @@
   },
   {
     "name": "Tenta",
-    "type": ["Animal"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Familiar",
     "group": "beasts",
     "abilityName": "",
@@ -529,8 +580,12 @@
       "dodge": "0%"
     },
     "effects": [
-    { "type": "slow", "percentage": 25, "duration": 1 }
-  ],
+      {
+        "type": "slow",
+        "percentage": 25,
+        "duration": 1
+      }
+    ],
     "showlevels": {
       "level1": "+15% Hasar  |  52 » 60",
       "level2": "+10% Qalxan  |  50 » 55",
@@ -541,7 +596,9 @@
   },
   {
     "name": "Fire Archer",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Familiar",
     "group": "royal-blood",
     "abilityName": "Rapid Ignition",
@@ -577,7 +634,9 @@
   },
   {
     "name": "Shadow Reaper",
-    "type": ["Dead"],
+    "type": [
+      "Dead"
+    ],
     "rarity": "Familiar",
     "group": "underworld",
     "abilityName": "Soul Harvest",
@@ -612,7 +671,9 @@
   },
   {
     "name": "Volt Striker",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
@@ -647,7 +708,9 @@
   },
   {
     "name": "Frostmaw",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Familiar",
     "group": "beasts",
     "abilityName": "",
@@ -673,8 +736,12 @@
       "dodge": "10%"
     },
     "effects": [
-    { "type": "silence", "percentage": 8, "duration": 5 }
-  ],
+      {
+        "type": "silence",
+        "percentage": 8,
+        "duration": 5
+      }
+    ],
     "showlevels": {
       "level1": "+5% Menzil  |  1100 » 1155",
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
@@ -685,7 +752,9 @@
   },
   {
     "name": "Hexon",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
@@ -710,8 +779,11 @@
       "dodge": "0%"
     },
     "effects": [
-    { "type": "stun", "duration": 0.6 }
-  ],
+      {
+        "type": "stun",
+        "duration": 0.6
+      }
+    ],
     "showlevels": {
       "level1": "+5% Can  |  140 » 147",
       "level2": "+0.3 Öz. Sərsəmlətmə  |  0.6s » 0.9s",
@@ -723,7 +795,9 @@
   },
   {
     "name": "Mecha Shield",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Familiar",
     "group": "royal-blood",
     "abilityName": "Aegis Pulse",
@@ -749,8 +823,11 @@
       "dodge": "0%"
     },
     "effects": [
-    { "type": "shield-grant", "amount": 25 }
-  ],
+      {
+        "type": "shield-grant",
+        "amount": 25
+      }
+    ],
     "showlevels": {
       "level1": "+5% Critical Chance  |  5% » 10%",
       "level2": "+5% Speed  |  800 » 840",
@@ -762,7 +839,9 @@
   },
   {
     "name": "Venomspikes",
-    "type": ["Animal"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Familiar",
     "group": "twisted-farm",
     "abilityName": "Toxic Accumulation",
@@ -787,6 +866,12 @@
       "damageminimiser": "0%",
       "dodge": "10%"
     },
+    "effects": [
+      {
+        "type": "poison",
+        "percentage": 8
+      }
+    ],
     "showlevels": {
       "level1": "+50% Shield  |  30 » 45",
       "level2": "+20% DMG  |  15 » 18",
@@ -835,7 +920,9 @@
   },
   {
     "name": "Kai",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Familiar",
     "abilityName": "",
     "stats": {
@@ -859,6 +946,12 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "stun",
+        "duration": 0.8
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -870,7 +963,9 @@
   },
   {
     "name": "Cassandra",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Familiar",
     "group": "the-last-academy",
     "abilityName": "",
