@@ -1,7 +1,9 @@
 [
   {
     "name": "Hammies",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Mundane",
     "group": "beasts",
     "abilityName": "",
@@ -44,7 +46,9 @@
   },
   {
     "name": "B-B",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Mundane",
     "group": "the-amazing-circus",
     "abilityName": "",
@@ -73,7 +77,6 @@
       "healrecovery": "0/s",
       "shieldrecovery": "0/s",
       "criticdamageminimiser": "0%",
-      "damageminimiser": "0%",
       "flexibility": "0%",
       "shieldtakendamage": "70%",
       "life": "-"
@@ -89,7 +92,9 @@
   },
   {
     "name": "Scrapy",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
     "group": "constructs",
     "abilityName": "",
@@ -118,7 +123,6 @@
       "healrecovery": "0/s",
       "shieldrecovery": "0/s",
       "criticdamageminimiser": "0%",
-      "damageminimiser": "0%",
       "flexibility": "0%",
       "shieldtakendamage": "70%",
       "life": "-"
@@ -134,9 +138,11 @@
   },
   {
     "name": "Nitrox",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
-    "group": "steam-alliance", 
+    "group": "steam-alliance",
     "abilityName": "",
     "stats": {
       "health": "100",
@@ -178,7 +184,9 @@
   },
   {
     "name": "Vortex",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -212,7 +220,9 @@
   },
   {
     "name": "Gloop",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Mundane",
     "group": "ancients",
     "abilityName": "Devouring Abyss",
@@ -248,7 +258,9 @@
   },
   {
     "name": "Henry",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
     "group": "twisted-farm",
     "abilityName": "Butcher’s Authority",
@@ -284,7 +296,9 @@
   },
   {
     "name": "Venomora",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -309,8 +323,12 @@
       "dodge": "0%"
     },
     "effects": [
-    { "type": "slow", "percentage": 25, "duration": 2 }
-  ],
+      {
+        "type": "slow",
+        "percentage": 25,
+        "duration": 2
+      }
+    ],
     "showlevels": {
       "level1": "+5% Öz. Yavaşlatma  |  25% » 30%",
       "level2": "+5% Can  |  200% » 210%",
@@ -322,7 +340,9 @@
   },
   {
     "name": "Blocker",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
     "group": "mission-1",
     "abilityName": "Ballistic Suppression",
@@ -358,7 +378,9 @@
   },
   {
     "name": "Fen",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
     "group": "barber-brothers",
     "abilityName": "",
@@ -383,6 +405,12 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "blind",
+        "duration": 7
+      }
+    ],
     "showlevels": {
       "level1": "+20% Qalxan  |  30 » 36",
       "level2": "+1 Ekstra Atış  |  3x5 » 4x5",
@@ -393,7 +421,9 @@
   },
   {
     "name": "Ben",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
     "group": "barber-brothers",
     "abilityName": "",
@@ -418,6 +448,13 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "poison",
+        "chance": 5,
+        "duration": 2
+      }
+    ],
     "showlevels": {
       "level1": "+2% Öz. Şansı  |  5% » 7%",
       "level2": "+100% Öz. Hasar Bonusu  |  100% » 200%",
@@ -428,7 +465,9 @@
   },
   {
     "name": "Freak",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Mundane",
     "group": "ancients",
     "abilityName": "Cellular Mitosis",
@@ -463,7 +502,9 @@
     "forms": [
       {
         "name": "Mini Freaks",
-        "type": ["Uzaylı"],
+        "type": [
+          "Uzaylı"
+        ],
         "rarity": "Mundane",
         "abilityName": "Volatile Remnants",
         "stats": {
@@ -502,7 +543,9 @@
   },
   {
     "name": "Nightprowler",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -537,7 +580,9 @@
   },
   {
     "name": "Twins",
-    "type": ["Ruh"],
+    "type": [
+      "Ruh"
+    ],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -572,7 +617,9 @@
   },
   {
     "name": "Bethe",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Mundane",
     "group": "mission-1",
     "abilityName": "Overdrive Harvest",
@@ -607,7 +654,9 @@
   },
   {
     "name": "Snaykies",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Mundane",
     "group": "beasts",
     "abilityName": "",
@@ -633,8 +682,12 @@
       "dodge": "10%"
     },
     "effects": [
-    { "type": "poison", "damagePerSecond": 4, "duration": 2 }
-  ],
+      {
+        "type": "poison",
+        "damagePerSecond": 4,
+        "duration": 2
+      }
+    ],
     "showlevels": {
       "level1": "+12% Hasar  |  15 » 17",
       "level2": "+1 Öz. Hasar Bonusu  |  2x4 » 2x5",
@@ -646,7 +699,9 @@
   },
   {
     "name": "Soldier",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Mundane",
     "group": "mission-1",
     "abilityName": "Anti-Air Caliber",
@@ -682,7 +737,9 @@
   },
   {
     "name": "Bees",
-    "type": ["Heyvan"],
+    "type": [
+      "Heyvan"
+    ],
     "rarity": "Mundane",
     "group": "twisted-farm",
     "abilityName": "Toxic Sacrifice",
@@ -708,8 +765,12 @@
       "dodge": "20%"
     },
     "effects": [
-    { "type": "poison", "damagePerSecond": 3, "duration": 10 }
-  ],
+      {
+        "type": "poison",
+        "damagePerSecond": 3,
+        "duration": 10
+      }
+    ],
     "showlevels": {
       "level1": "+10% Damage  |  70 » 77",
       "level2": "+5% Dodge Chance |  20% » 25%",
@@ -721,7 +782,9 @@
   },
   {
     "name": "Hailey",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -756,7 +819,9 @@
   },
   {
     "name": "Angels",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Mundane",
     "group": "royal-blood",
     "abilityName": "Martyrdom Blessing",
@@ -792,7 +857,9 @@
   },
   {
     "name": "Boomix",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Mundane",
     "abilityName": "",
     "stats": {
@@ -827,7 +894,9 @@
   },
   {
     "name": "PhewPhew",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Mundane",
     "group": "the-amazing-circus",
     "abilityName": "",
@@ -862,7 +931,9 @@
   },
   {
     "name": "Chrono Mage",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Mundane",
     "group": "the-spellbound",
     "abilityName": "Temporal Resonance",
@@ -888,8 +959,12 @@
       "dodge": "0%"
     },
     "effects": [
-    { "type": "slow", "percentage": 25, "duration": 8 }
-  ],
+      {
+        "type": "slow",
+        "percentage": 25,
+        "duration": 8
+      }
+    ],
     "showlevels": {
       "level1": "+5% Can  |  300 » 315",
       "level2": "+10% Hız  |  900 » 990",
@@ -901,7 +976,9 @@
   },
   {
     "name": "Aegis Guard",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
     "group": "mission-1",
     "abilityName": "Tactical Escort",
@@ -937,9 +1014,11 @@
   },
   {
     "name": "Ironjaw",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
-    "group": "steam-alliance", 
+    "group": "steam-alliance",
     "abilityName": "",
     "stats": {
       "health": "290",
@@ -972,7 +1051,9 @@
   },
   {
     "name": "M-Manager",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
     "group": "constructs",
     "abilityName": "",
@@ -1008,9 +1089,11 @@
   },
   {
     "name": "Srail",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Mundane",
-    "group": "steam-alliance", 
+    "group": "steam-alliance",
     "abilityName": "",
     "stats": {
       "health": "290",
@@ -1044,7 +1127,9 @@
   },
   {
     "name": "Cryon",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Mundane",
     "group": "",
     "abilityName": "",
