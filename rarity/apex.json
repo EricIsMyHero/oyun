@@ -141,6 +141,7 @@
     "name": "R-1",
     "type": ["Robot"],
     "rarity": "Apex",
+    "group": "steam-alliance", 
     "stats": {
       "health": "390",
       "shield": "180",
