@@ -1,14 +1,20 @@
 [
   {
     "name": "Ase",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
     "group": "constructs",
     "isDual": true,
-    "stats": {"mana": "5"},
+    "stats": {
+      "mana": "5"
+    },
     "type1": {
       "name": "Ase",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "group": "constructs",
       "isMulti": true,
@@ -42,7 +48,9 @@
       "forms": [
         {
           "name": "Giga-R",
-          "type": ["Robot"],
+          "type": [
+            "Robot"
+          ],
           "rarity": "Ethereal",
           "group": "constructs",
           "stats": {
@@ -79,7 +87,9 @@
     },
     "type2": {
       "name": "Ase",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "group": "constructs",
       "isMulti": true,
@@ -113,7 +123,9 @@
       "forms": [
         {
           "name": "Giga-R",
-          "type": ["Robot"],
+          "type": [
+            "Robot"
+          ],
           "rarity": "Ethereal",
           "group": "constructs",
           "stats": {
@@ -152,16 +164,22 @@
   },
   {
     "name": "Leno",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
-    "group": "steam-alliance", 
+    "group": "steam-alliance",
     "isDual": true,
-    "stats": {"mana": "12"},
+    "stats": {
+      "mana": "12"
+    },
     "type1": {
       "name": "Leno",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
-      "group": "steam-alliance", 
+      "group": "steam-alliance",
       "stats": {
         "health": "220",
         "shield": "120",
@@ -193,9 +211,11 @@
     },
     "type2": {
       "name": "Leno",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
-      "group": "steam-alliance", 
+      "group": "steam-alliance",
       "stats": {
         "health": "190",
         "shield": "90",
@@ -229,14 +249,20 @@
   },
   {
     "name": "King",
-    "type": ["Dead"],
+    "type": [
+      "Dead"
+    ],
     "rarity": "Ethereal",
     "group": "underworld",
     "isDual": true,
-    "stats": {"mana": "15"},
+    "stats": {
+      "mana": "15"
+    },
     "type1": {
       "name": "King",
-      "type": ["Dead"],
+      "type": [
+        "Dead"
+      ],
       "rarity": "Ethereal",
       "group": "underworld",
       "abilityName": "Royal Warcry",
@@ -271,7 +297,9 @@
     },
     "type2": {
       "name": "King",
-      "type": ["Dead"],
+      "type": [
+        "Dead"
+      ],
       "rarity": "Ethereal",
       "group": "underworld",
       "abilityName": "Iron Domain",
@@ -306,7 +334,9 @@
       "forms": [
         {
           "name": "Guard",
-          "type": ["Spirit"],
+          "type": [
+            "Spirit"
+          ],
           "rarity": "Ethereal",
           "abilityName": "Shield Breaker",
           "stats": {
@@ -345,13 +375,19 @@
   },
   {
     "name": "Dracula",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
     "isDual": true,
-    "stats": {"mana": "16"},
+    "stats": {
+      "mana": "16"
+    },
     "type1": {
       "name": "Dracula",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "stats": {
         "health": "280",
@@ -384,7 +420,9 @@
     },
     "type2": {
       "name": "Dracula",
-      "type": ["Animal"],
+      "type": [
+        "Animal"
+      ],
       "rarity": "Ethereal",
       "isMulti": true,
       "stats": {
@@ -417,7 +455,9 @@
       "forms": [
         {
           "name": "Bats",
-          "type": ["Animal"],
+          "type": [
+            "Animal"
+          ],
           "rarity": "Ethereal",
           "stats": {
             "health": "30",
@@ -455,14 +495,20 @@
   },
   {
     "name": "Leila",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
     "group": "mission-1",
     "isDual": true,
-    "stats": {"mana": "8"},
+    "stats": {
+      "mana": "8"
+    },
     "type1": {
       "name": "Leila",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "group": "mission-1",
       "stats": {
@@ -486,6 +532,12 @@
         "damageminimiser": "0%",
         "dodge": "0%"
       },
+      "effects": [
+        {
+          "type": "blind",
+          "duration": 4
+        }
+      ],
       "showlevels": {
         "level1": "-",
         "level2": "-",
@@ -496,7 +548,9 @@
     },
     "type2": {
       "name": "Leila",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "group": "mission-1",
       "stats": {
@@ -520,6 +574,12 @@
         "damageminimiser": "0%",
         "dodge": "0%"
       },
+      "effects": [
+        {
+          "type": "poison",
+          "duration": 8
+        }
+      ],
       "showlevels": {
         "level1": "-",
         "level2": "-",
@@ -532,14 +592,20 @@
   },
   {
     "name": "Lord",
-    "type": ["Dead"],
+    "type": [
+      "Dead"
+    ],
     "rarity": "Ethereal",
     "group": "underworld",
     "isDual": true,
-    "stats": {"mana": "18"},
+    "stats": {
+      "mana": "18"
+    },
     "type1": {
       "name": "Lord",
-      "type": ["Dead"],
+      "type": [
+        "Dead"
+      ],
       "rarity": "Ethereal",
       "group": "underworld",
       "abilityName": "Death Defiance",
@@ -574,7 +640,9 @@
     },
     "type2": {
       "name": "Lord",
-      "type": ["Dead"],
+      "type": [
+        "Dead"
+      ],
       "rarity": "Ethereal",
       "group": "underworld",
       "abilityName": "Sovereign of the Damned",
@@ -609,7 +677,9 @@
       "forms": [
         {
           "name": "Rider",
-          "type": ["Dead"],
+          "type": [
+            "Dead"
+          ],
           "rarity": "Ethereal",
           "abilityName": "Desperate Fury",
           "stats": {
@@ -648,14 +718,20 @@
   },
   {
     "name": "Hunter",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
     "group": "",
     "isDual": true,
-    "stats": {"mana": "6"},
+    "stats": {
+      "mana": "6"
+    },
     "type1": {
       "name": "Hunter",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "group": "",
       "isMulti": true,
@@ -689,7 +765,9 @@
       "forms": [
         {
           "name": "Wolf",
-          "type": ["Animal"],
+          "type": [
+            "Animal"
+          ],
           "rarity": "Ethereal",
           "group": "",
           "stats": {
@@ -726,7 +804,9 @@
     },
     "type2": {
       "name": "Hunter",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "group": "",
       "isMulti": true,
@@ -760,7 +840,9 @@
       "forms": [
         {
           "name": "Eagle",
-          "type": ["Animal"],
+          "type": [
+            "Animal"
+          ],
           "rarity": "Ethereal",
           "group": "",
           "stats": {
@@ -768,7 +850,7 @@
             "shield": "0",
             "damage": "16",
             "sps": "20",
-           "attackSpeed": "0.80s",
+            "attackSpeed": "0.80s",
             "delay": "-",
             "mana": "-",
             "number": "1"
@@ -799,13 +881,19 @@
   },
   {
     "name": "Soul Master",
-    "type": ["Spirit"],
+    "type": [
+      "Spirit"
+    ],
     "rarity": "Ethereal",
     "isDual": true,
-    "stats": {"mana": "7"},
+    "stats": {
+      "mana": "7"
+    },
     "type1": {
       "name": "Soul Master",
-      "type": ["Spirit"],
+      "type": [
+        "Spirit"
+      ],
       "rarity": "Ethereal",
       "stats": {
         "health": "140",
@@ -838,8 +926,9 @@
     },
     "type2": {
       "name": "Soul Master",
-      "type": ["Spirit"],
-      "rarity": "Ethereal",
+      "type": [
+        "Spirit"
+      ],
       "rarity": "Ethereal",
       "stats": {
         "health": "140",
@@ -874,14 +963,20 @@
   },
   {
     "name": "Mr. and Mrs. Ray",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Ethereal",
     "group": "the-last-academy",
     "isDual": true,
-    "stats": {"mana": "17"},
+    "stats": {
+      "mana": "17"
+    },
     "type1": {
       "name": "The Rays",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "group": "the-last-academy",
       "isMulti": true,
@@ -906,6 +1001,13 @@
         "damageminimiser": "0%",
         "dodge": "0%"
       },
+      "effects": [
+        {
+          "type": "heal",
+          "damagePerSecond": 12,
+          "duration": 5
+        }
+      ],
       "showlevels": {
         "level1": "-",
         "level2": "-",
@@ -915,7 +1017,9 @@
       "forms": [
         {
           "name": "The Rays",
-          "type": ["Human"],
+          "type": [
+            "Human"
+          ],
           "rarity": "Ethereal",
           "group": "the-last-academy",
           "stats": {
@@ -939,6 +1043,13 @@
             "damageminimiser": "0%",
             "dodge": "0%"
           },
+          "effects": [
+            {
+              "type": "heal",
+              "damagePerSecond": 12,
+              "duration": 5
+            }
+          ],
           "showlevels": {
             "level1": "-",
             "level2": "-",
@@ -952,7 +1063,9 @@
     },
     "type2": {
       "name": "The Rays",
-      "type": ["Human"],
+      "type": [
+        "Human"
+      ],
       "rarity": "Ethereal",
       "group": "the-last-academy",
       "isMulti": true,
@@ -986,7 +1099,9 @@
       "forms": [
         {
           "name": "The Rays",
-          "type": ["Human"],
+          "type": [
+            "Human"
+          ],
           "rarity": "Ethereal",
           "group": "the-last-academy",
           "stats": {
