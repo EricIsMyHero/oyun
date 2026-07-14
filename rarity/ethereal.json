@@ -1,0 +1,1023 @@
+[
+  {
+    "name": "Ase",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "group": "constructs",
+    "isDual": true,
+    "stats": {"mana": "5"},
+    "type1": {
+      "name": "Ase",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "constructs",
+      "isMulti": true,
+      "stats": {
+        "health": "100",
+        "shield": "0",
+        "damage": "8",
+        "sps": "8",
+        "attackSpeed": "1.00s",
+        "delay": "-",
+        "mana": "5",
+        "number": "1"
+      },
+      "trait": "Hər 7 saniyədə bir parça qazanar 4 parça olduqda bir böyük robot yaradar",
+      "additionalStats": {
+        "range": "2500",
+        "speed": "1050",
+        "criticalChance": "15%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Giga-R",
+          "type": ["Robot"],
+          "rarity": "Ethereal",
+          "group": "constructs",
+          "stats": {
+            "health": "500",
+            "shield": "500",
+            "damage": "42",
+            "sps": "35",
+            "attackSpeed": "1.20s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "İlk 22 saniyə 10% Hasar Azaltma qazanar",
+          "additionalStats": {
+            "range": "1000",
+            "speed": "800",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Tank"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "Ase",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "constructs",
+      "isMulti": true,
+      "stats": {
+        "health": "100",
+        "shield": "0",
+        "damage": "8",
+        "sps": "8",
+        "attackSpeed": "1.00s",
+        "delay": "-",
+        "mana": "5",
+        "number": "1"
+      },
+      "trait": "Hər 7 saniyədə bir parça qazanar 4 parça olduqda bir böyük robot yaradar",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "800",
+        "criticalChance": "15%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Giga-R",
+          "type": ["Robot"],
+          "rarity": "Ethereal",
+          "group": "constructs",
+          "stats": {
+            "health": "300",
+            "shield": "300",
+            "damage": "72",
+            "sps": "40",
+            "attackSpeed": "1.80s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Hər kart öldürdükdə +3% Saldırı Hızı bonusu (Max:30%)",
+          "additionalStats": {
+            "range": "3500",
+            "speed": "800",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Marksman"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "class": "Marksman"
+  },
+  {
+    "name": "Leno",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "isDual": true,
+    "stats": {"mana": "12"},
+    "type1": {
+      "name": "Leno",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "220",
+        "shield": "120",
+        "damage": "4",
+        "sps": "20",
+        "attackSpeed": "0.20s",
+        "delay": "-",
+        "mana": "12",
+        "number": "1"
+      },
+      "trait": "İlk 25 saniyə +45% Kritik Şansı daha sonra +15% Kritik şansı qazanar",
+      "additionalStats": {
+        "range": "2100",
+        "speed": "1100",
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "Leno",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "190",
+        "shield": "90",
+        "damage": "50",
+        "sps": "25",
+        "attackSpeed": "2.00s",
+        "delay": "-",
+        "mana": "12",
+        "number": "1"
+      },
+      "trait": "(Heyvan,Robot,Ölü,Ruh,Uzaylı,Varlıq) tipli kartlara ekstra +40% Hasar verir",
+      "additionalStats": {
+        "range": "3200",
+        "speed": "1000",
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Marksman"
+    },
+    "class": "Marksman"
+  },
+  {
+    "name": "King",
+    "type": ["Dead"],
+    "rarity": "Ethereal",
+    "group": "underworld",
+    "isDual": true,
+    "stats": {"mana": "15"},
+    "type1": {
+      "name": "King",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
+      "group": "underworld",
+      "abilityName": "Royal Warcry",
+      "stats": {
+        "health": "370",
+        "shield": "160",
+        "damage": "30",
+        "sps": "30",
+        "attackSpeed": "1.00s",
+        "delay": "-",
+        "mana": "15",
+        "number": "1"
+      },
+      "trait": "King döyüş meydanında əsl orxu kimi çıxış edir. Onun varlığı ətrafındakı bütün dost kartları ruhlandıraraq onlara +25% hücum sürəti bonusu bəxş edər.",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "0%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "The King is a skeletal monarch who commands the dead with absolute authority. Unlike the Lord, he wears bright, polished dark iron armor infused with deep purple and crimson hues, reflecting his ancient status. His skull holds piercing crimson eyes that blaze with undying malice. He grips a greatsword in his bony hands, ready to strike down anyone who defies his rule. While the Lord is a simple destroyer, the King is a ruler of the UnderWorld, a chilling specter of a lost kingdom that refuses to fade into dust.",
+      "class": "Tank"
+    },
+    "type2": {
+      "name": "King",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
+      "group": "underworld",
+      "abilityName": "Iron Domain",
+      "isMulti": true,
+      "stats": {
+        "health": "370",
+        "shield": "160",
+        "damage": "30",
+        "sps": "30",
+        "attackSpeed": "1.00s",
+        "delay": "-",
+        "mana": "15",
+        "number": "1"
+      },
+      "trait": "King ikinci formasına keçdikdə müdafiə taktikasına üstünlük verir. O, döyüş meydanında sabit qalaraq hər 12 saniyədə bir Guard çağırar. Eyni zamanda, bu çağırış anında özünə 2 saniyəlik 15% hasar azaltma qalxanı qazandırar.",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "The King is a skeletal monarch who commands the dead with absolute authority. Unlike the Lord, he wears bright, polished dark iron armor infused with deep purple and crimson hues, reflecting his ancient status. His skull holds piercing crimson eyes that blaze with undying malice. He grips a greatsword in his bony hands, ready to strike down anyone who defies his rule. While the Lord is a simple destroyer, the King is a ruler of the UnderWorld, a chilling specter of a lost kingdom that refuses to fade into dust.",
+      "forms": [
+        {
+          "name": "Guard",
+          "type": ["Spirit"],
+          "rarity": "Ethereal",
+          "abilityName": "Shield Breaker",
+          "stats": {
+            "health": "80",
+            "shield": "80",
+            "damage": "10",
+            "sps": "13",
+            "attackSpeed": "0.80s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "King-in sadiq mühafizəçisi rəqiblərin müdafiə xətlərini yarmaq üçün proqramlaşdırılıb. Onun etdiyi bütün zərbələr aktiv qalxanı olan rəqib kartlara qarşı ekstra +30% hasar bonusu qazanar. Bu xüsusiyyət onu ön cəbhədə böyük qalxanlarla gizlənən tankları və müdafiə vahidlərini sürətlə zərərsizləşdirmək üçün effektiv bir köməkçi karta çevirir.",
+          "additionalStats": {
+            "range": "1000",
+            "speed": "1100",
+            "criticalChance": "0%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "0%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Fighter"
+        }
+      ],
+      "class": "Tank"
+    },
+    "class": "Tank"
+  },
+  {
+    "name": "Dracula",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "isDual": true,
+    "stats": {"mana": "16"},
+    "type1": {
+      "name": "Dracula",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "280",
+        "shield": "60",
+        "damage": "40",
+        "sps": "36",
+        "attackSpeed": "1.10s",
+        "delay": "-",
+        "mana": "16",
+        "number": "1"
+      },
+      "trait": "Hər vuruşda ekstra +1% Can Çalma Şansı qazanar (Max:25%)",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "15%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "25%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Fighter"
+    },
+    "type2": {
+      "name": "Dracula",
+      "type": ["Animal"],
+      "rarity": "Ethereal",
+      "isMulti": true,
+      "stats": {
+        "health": "180",
+        "shield": "0",
+        "damage": "20",
+        "sps": "15",
+        "attackSpeed": "1.30s",
+        "delay": "-",
+        "mana": "16",
+        "number": "1"
+      },
+      "trait": "İtirdiyi hər 10% Can üçün ekstra +5% Hasar Azaltma qazanar, Öləndə içindən *Bats* çıxar",
+      "additionalStats": {
+        "range": "900",
+        "speed": "1300",
+        "criticalChance": "15%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "15%",
+        "lifesteal": "25%",
+        "damageminimiser": "5%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Bats",
+          "type": ["Animal"],
+          "rarity": "Ethereal",
+          "stats": {
+            "health": "30",
+            "shield": "-",
+            "damage": "5",
+            "sps": "4",
+            "attackSpeed": "1.25s",
+            "delay": "-",
+            "mana": "-",
+            "number": "10"
+          },
+          "trait": "İlk vuruşu ekstra +40% Hasar verər",
+          "additionalStats": {
+            "range": "900",
+            "speed": "1300",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Marksman"
+        }
+      ],
+      "class": "Fighter"
+    },
+    "class": "Fighter"
+  },
+  {
+    "name": "Leila",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "group": "mission-1",
+    "isDual": true,
+    "stats": {"mana": "8"},
+    "type1": {
+      "name": "Leila",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "mission-1",
+      "stats": {
+        "health": "90",
+        "shield": "120",
+        "damage": "8x5",
+        "sps": "40",
+        "attackSpeed": "0.10s",
+        "delay": "1.20s",
+        "mana": "8",
+        "number": "1"
+      },
+      "trait": "Hər 24-cü vuruşdan sonra bir bomba atar və rəqib kartları 4 saniyəlik kor edər",
+      "additionalStats": {
+        "range": "4000",
+        "speed": "1100",
+        "criticalChance": "5%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "Leila",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "mission-1",
+      "stats": {
+        "health": "90",
+        "shield": "60",
+        "damage": "66",
+        "sps": "40",
+        "attackSpeed": "1.65s",
+        "delay": "-",
+        "mana": "8",
+        "number": "1"
+      },
+      "trait": "Hər 5-ci vuruşu +20% daha geniş bir əraziyə yayılar və rəqib kartları 8 saniyəlik qanadar",
+      "additionalStats": {
+        "range": "4500",
+        "speed": "800",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Marksman"
+    },
+    "class": "Marksman"
+  },
+  {
+    "name": "Lord",
+    "type": ["Dead"],
+    "rarity": "Ethereal",
+    "group": "underworld",
+    "isDual": true,
+    "stats": {"mana": "18"},
+    "type1": {
+      "name": "Lord",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
+      "group": "underworld",
+      "abilityName": "Death Defiance",
+      "stats": {
+        "health": "720",
+        "shield": "0",
+        "damage": "41",
+        "sps": "22",
+        "attackSpeed": "1.85s",
+        "delay": "-",
+        "mana": "18",
+        "number": "1"
+      },
+      "trait": "Lord-un canı 5%-in altına düşdükdə daxilindəki qaranlıq güc aktivləşər və o, 5 saniyəlik tam ölümsüzlük statusu qazanar. Bu müddət ərzində o, döyüş boyu itirdiyi ümumi canın 25%-nə qədərini sürətlə yenidən bərpa edər.",
+      "additionalStats": {
+        "range": "1200",
+        "speed": "800",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "25%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "The Lord is a terrifying spectacle of death in motion. He is a reanimated human clad in heavy, forged black iron armor that seems to absorb the light. His skeletal frame, concealed beneath the metal, is animated by a dark force. In his iron grip, he wields a massive, wicked mace. He does not speak, but his horrific presence commands the spirits of the deep. A true dread lord of the UnderWorld, he walks without fear, crushing all life beneath his merciless feet.",
+      "class": "Tank"
+    },
+    "type2": {
+      "name": "Lord",
+      "type": ["Dead"],
+      "rarity": "Ethereal",
+      "group": "underworld",
+      "abilityName": "Sovereign of the Damned",
+      "isMulti": true,
+      "stats": {
+        "health": "360",
+        "shield": "180",
+        "damage": "41",
+        "sps": "22",
+        "attackSpeed": "1.85s",
+        "delay": "-",
+        "mana": "18",
+        "number": "1"
+      },
+      "trait": "Transformasiyadan sonra Lord daha dayanıqlı formaya keçər və hər saniyə +1 can yeniləyər. Üstəlik, onun canı hər 10% düşdükdə kölgələrdən onu qorumaq üçün bir Rider çağırar (Maksimum: 5 Rider çağırıla bilər).",
+      "additionalStats": {
+        "range": "1200",
+        "speed": "800",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "25%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "The Lord is a terrifying spectacle of death in motion. He is a reanimated human clad in heavy, forged black iron armor that seems to absorb the light. His skeletal frame, concealed beneath the metal, is animated by a dark force. In his iron grip, he wields a massive, wicked mace. He does not speak, but his horrific presence commands the spirits of the deep. A true dread lord of the UnderWorld, he walks without fear, crushing all life beneath his merciless feet.",
+      "forms": [
+        {
+          "name": "Rider",
+          "type": ["Dead"],
+          "rarity": "Ethereal",
+          "abilityName": "Desperate Fury",
+          "stats": {
+            "health": "100",
+            "shield": "100",
+            "damage": "12",
+            "sps": "10",
+            "attackSpeed": "1.20s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Rider müdafiəsini itirdikdə daha ölümcül bir qüvvəyə çevrilər. Öz qoruyucu qalxanı tam qırıldıqdan sonra hücum gücünü kəskin şəkildə artıraraq əlavə +50% hasar qazanar. Bu qabiliyyət onu müdafiəsiz qaldığı anlarda belə rəqib üçün ciddi bir təhlükəyə çevirir.",
+          "additionalStats": {
+            "range": "1300",
+            "speed": "1500",
+            "criticalChance": "0%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "0%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Fighter"
+        }
+      ],
+      "class": "Tank"
+    },
+    "class": "Tank"
+  },
+  {
+    "name": "Hunter",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "group": "",
+    "isDual": true,
+    "stats": {"mana": "6"},
+    "type1": {
+      "name": "Hunter",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "",
+      "isMulti": true,
+      "stats": {
+        "health": "120",
+        "shield": "60",
+        "damage": "12",
+        "sps": "12",
+        "attackSpeed": "1.00s",
+        "delay": "-",
+        "mana": "6",
+        "number": "1"
+      },
+      "trait": "Heyvan tipli kartlara +60% Hasar bonusu, öləndə dönüşər",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1100",
+        "criticalChance": "0%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "25%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Wolf",
+          "type": ["Animal"],
+          "rarity": "Ethereal",
+          "group": "",
+          "stats": {
+            "health": "200",
+            "shield": "0",
+            "damage": "2x5",
+            "sps": "15",
+            "attackSpeed": "0.25s",
+            "delay": "0.25s",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Qalxana ekstra +50% Hasar bonusu",
+          "additionalStats": {
+            "range": "800",
+            "speed": "1200",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Tank"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "Hunter",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "",
+      "isMulti": true,
+      "stats": {
+        "health": "80",
+        "shield": "0",
+        "damage": "20",
+        "sps": "17",
+        "attackSpeed": "1.20s",
+        "delay": "-",
+        "mana": "6",
+        "number": "1"
+      },
+      "trait": "İnsan tipli kartlara +50% Hasar bonusu, öləndə dönüşər",
+      "additionalStats": {
+        "range": "2500",
+        "speed": "1000",
+        "criticalChance": "25%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "Eagle",
+          "type": ["Animal"],
+          "rarity": "Ethereal",
+          "group": "",
+          "stats": {
+            "health": "180",
+            "shield": "0",
+            "damage": "16",
+            "sps": "20",
+           "attackSpeed": "0.80s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Vuruşları qalxandan keçər",
+          "additionalStats": {
+            "range": "800",
+            "speed": "1300",
+            "criticalChance": "5%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "0%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Marksman"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "class": "Marksman"
+  },
+  {
+    "name": "Soul Master",
+    "type": ["Spirit"],
+    "rarity": "Ethereal",
+    "isDual": true,
+    "stats": {"mana": "7"},
+    "type1": {
+      "name": "Soul Master",
+      "type": ["Spirit"],
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "140",
+        "shield": "100",
+        "damage": "16",
+        "sps": "13",
+        "attackSpeed": "1.20s",
+        "delay": "-",
+        "mana": "7",
+        "number": "1"
+      },
+      "trait": "Ölən hər kart ruh buraxar, hər 10 ruhda +25% Hasar bonusu",
+      "additionalStats": {
+        "range": "2000",
+        "speed": "1100",
+        "criticalChance": "50%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "Soul Master",
+      "type": ["Spirit"],
+      "rarity": "Ethereal",
+      "rarity": "Ethereal",
+      "stats": {
+        "health": "140",
+        "shield": "100",
+        "damage": "21",
+        "sps": "16",
+        "attackSpeed": "1.20s",
+        "delay": "-",
+        "mana": "7",
+        "number": "1"
+      },
+      "trait": "Ölən hər kart ruh buraxar, hər 8 ruhda qarşıdakı ən yaxın ilk rəqib M.Canının 10%-i qədər hasar alar",
+      "additionalStats": {
+        "range": "2000",
+        "speed": "1100",
+        "criticalChance": "50%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "0%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "Marksman"
+    },
+    "class": "Marksman"
+  },
+  {
+    "name": "Mr. and Mrs. Ray",
+    "type": ["Human"],
+    "rarity": "Ethereal",
+    "group": "the-last-academy",
+    "isDual": true,
+    "stats": {"mana": "17"},
+    "type1": {
+      "name": "The Rays",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "the-last-academy",
+      "isMulti": true,
+      "stats": {
+        "health": "260",
+        "shield": "30",
+        "damage": "14",
+        "sps": "9",
+        "attackSpeed": "1.60s",
+        "delay": "-",
+        "mana": "17",
+        "number": "1"
+      },
+      "trait": "Mr. Ray 360 dərəcə hasar verər, Birlikdə durduqca hər saniyə 4 yük qazanarlar. 100 yük olduqda birləşərək sürətlə dönməyə başlayarlar və 5 saniyə ərzində hər 0.25 saniyədə 5 hasar verərlər. Bu müddətdə 25% hasar azaltma qazanaraq, hər 0.25 saniyədə 3 can yeniləyərlər",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1200",
+        "criticalChance": "10%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "10%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "The Rays",
+          "type": ["Human"],
+          "rarity": "Ethereal",
+          "group": "the-last-academy",
+          "stats": {
+            "health": "260",
+            "shield": "30",
+            "damage": "10",
+            "sps": "6",
+            "attackSpeed": "1.60s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Mrs. Ray 360 dərəcə hasar verər, Birlikdə durduqca hər saniyə 4 yük qazanarlar. 100 yük olduqda birləşərək sürətlə dönməyə başlayarlar və 5 saniyə ərzində hər 0.25 saniyədə 5 hasar verərlər. Bu müddətdə 25% hasar azaltma qazanaraq, hər 0.25 saniyədə 3 can yeniləyərlər",
+          "additionalStats": {
+            "range": "1000",
+            "speed": "1200",
+            "criticalChance": "10%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "10%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Tank"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "type2": {
+      "name": "The Rays",
+      "type": ["Human"],
+      "rarity": "Ethereal",
+      "group": "the-last-academy",
+      "isMulti": true,
+      "stats": {
+        "health": "320",
+        "shield": "60",
+        "damage": "24",
+        "sps": "21",
+        "attackSpeed": "1.15s",
+        "delay": "-",
+        "mana": "17",
+        "number": "1"
+      },
+      "trait": "Mr. Ray Sadəcə bir rəqibə hasar verər, Birlikdə durduqca hər saniyə 2 yük qazanarlar. 100 yük olduqda hər ikisi 5 karo boyunca düz gedər və yol üstündəki rəqib kartlara 75 hasar verərlər. Eyni zamanda 75% hasar azaltma qazanarlar, əgər canları 20%-in altına düşərsə itirilmiş canın 75%-i qədər can yeniləyərlər",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1100",
+        "criticalChance": "10%",
+        "criticDamage": "1.5x",
+        "lifestealChance": "10%",
+        "lifesteal": "25%",
+        "damageminimiser": "0%",
+        "dodge": "0%"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "forms": [
+        {
+          "name": "The Rays",
+          "type": ["Human"],
+          "rarity": "Ethereal",
+          "group": "the-last-academy",
+          "stats": {
+            "health": "320",
+            "shield": "60",
+            "damage": "20",
+            "sps": "17",
+            "attackSpeed": "1.15s",
+            "delay": "-",
+            "mana": "-",
+            "number": "1"
+          },
+          "trait": "Mrs. Ray Sadəcə bir rəqibə hasar verər, Birlikdə durduqca hər saniyə 2 yük qazanarlar. 100 yük olduqda hər ikisi 5 karo boyunca düz gedər və yol üstündəki rəqib kartlara 75 hasar verərlər. Eyni zamanda 75% hasar azaltma qazanarlar, əgər canları 20%-in altına düşərsə itirilmiş canın 75%-i qədər can yeniləyərlər",
+          "additionalStats": {
+            "range": "1000",
+            "speed": "1100",
+            "criticalChance": "10%",
+            "criticDamage": "1.5x",
+            "lifestealChance": "10%",
+            "lifesteal": "25%",
+            "damageminimiser": "0%",
+            "dodge": "0%"
+          },
+          "showlevels": {
+            "level1": "-",
+            "level2": "-",
+            "level3": "-"
+          },
+          "story": "-",
+          "class": "Marksman"
+        }
+      ],
+      "class": "Marksman"
+    },
+    "class": "Marksman"
+  }
+]
