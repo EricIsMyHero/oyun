@@ -1,9 +1,11 @@
 [
   {
     "name": "Azrith",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Apex",
-    "group": "royal-blood", 
+    "group": "royal-blood",
     "abilityName": "Sovereign Aura",
     "isMulti": true,
     "stats": {
@@ -36,7 +38,9 @@
     "forms": [
       {
         "name": "Bannerox",
-        "type": ["Object"],
+        "type": [
+          "Object"
+        ],
         "rarity": "Apex",
         "abilityName": "Royal Heist",
         "stats": {
@@ -71,9 +75,11 @@
   },
   {
     "name": "Untouch",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Apex",
-    "group": "royal-blood", 
+    "group": "royal-blood",
     "abilityName": "Absolute Sanctuary",
     "stats": {
       "health": "160",
@@ -105,7 +111,9 @@
   },
   {
     "name": "Heartix",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Apex",
     "stats": {
       "health": "70",
@@ -129,7 +137,9 @@
       "dodge": "0%"
     },
     "mechanic": "mind-control",
-    "mechanicStats": { "controlDuration": 20 },
+    "mechanicStats": {
+      "controlDuration": 20
+    },
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -139,9 +149,11 @@
   },
   {
     "name": "R-1",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Apex",
-    "group": "steam-alliance", 
+    "group": "steam-alliance",
     "stats": {
       "health": "390",
       "shield": "180",
@@ -172,7 +184,9 @@
   },
   {
     "name": "Blank",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Apex",
     "stats": {
       "health": "100",
@@ -204,7 +218,9 @@
   },
   {
     "name": "Magmara",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Apex",
     "stats": {
       "health": "350",
@@ -227,6 +243,13 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "burn",
+        "damagePerSecond": 10,
+        "duration": 3
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -236,9 +259,11 @@
   },
   {
     "name": "Willowshade",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Apex",
-    "group": "botanical-gardens", 
+    "group": "botanical-gardens",
     "abilityName": "",
     "isMulti": true,
     "stats": {
@@ -271,9 +296,11 @@
     "forms": [
       {
         "name": "Octarion",
-        "type": ["Animal"],
+        "type": [
+          "Animal"
+        ],
         "rarity": "Apex",
-        "group": "botanical-gardens", 
+        "group": "botanical-gardens",
         "abilityName": "",
         "stats": {
           "health": "80",
@@ -307,7 +334,9 @@
   },
   {
     "name": "Collector",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Apex",
     "stats": {
       "health": "120",
@@ -339,7 +368,9 @@
   },
   {
     "name": "Sushu",
-    "type": ["Spirit"],
+    "type": [
+      "Spirit"
+    ],
     "rarity": "Apex",
     "stats": {
       "health": "50",
@@ -371,7 +402,9 @@
   },
   {
     "name": "Umbra",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Apex",
     "isHybrid": false,
     "isMulti": false,
@@ -405,7 +438,9 @@
   },
   {
     "name": "Thief",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Apex",
     "stats": {
       "health": "190",
@@ -437,7 +472,9 @@
   },
   {
     "name": "Rotlings",
-    "type": ["Dead"],
+    "type": [
+      "Dead"
+    ],
     "rarity": "Apex",
     "group": "void-walkers",
     "abilityName": "",
@@ -472,7 +509,9 @@
     "forms": [
       {
         "name": "Mini Rotters",
-        "type": ["Dead"],
+        "type": [
+          "Dead"
+        ],
         "rarity": "Apex",
         "group": "void-walkers",
         "abilityName": "",
@@ -508,7 +547,9 @@
   },
   {
     "name": "Stormblade",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Apex",
     "stats": {
       "health": "160",
@@ -540,7 +581,9 @@
   },
   {
     "name": "Venom Fangs",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Apex",
     "isHybrid": false,
     "isMulti": false,
@@ -565,6 +608,12 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "stat-reduction",
+        "amount": 0.5
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -574,7 +623,9 @@
   },
   {
     "name": "Skyhunter",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Apex",
     "group": "royal-blood",
     "abilityName": "Long-Range Precision",
@@ -608,7 +659,9 @@
   },
   {
     "name": "Rockback",
-    "type": ["Animal"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Apex",
     "group": "twisted-farm",
     "abilityName": "Kinetic Rebound",
@@ -633,6 +686,13 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "shield-grant",
+        "amount": 10,
+        "duration": 6
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -642,7 +702,9 @@
   },
   {
     "name": "Neon Droid",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Apex",
     "group": "constructs",
     "abilityName": "",
@@ -676,7 +738,9 @@
   },
   {
     "name": "Void Wraith",
-    "type": ["Spirit"],
+    "type": [
+      "Spirit"
+    ],
     "rarity": "Apex",
     "group": "void-walkers",
     "abilityName": "",
@@ -710,7 +774,9 @@
   },
   {
     "name": "Bio Mech",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Apex",
     "isHybrid": false,
     "isMulti": false,
@@ -744,7 +810,9 @@
   },
   {
     "name": "Mixela",
-    "type": ["Spirit"],
+    "type": [
+      "Spirit"
+    ],
     "rarity": "Apex",
     "isHybrid": false,
     "isMulti": false,
@@ -778,7 +846,9 @@
   },
   {
     "name": "Laura",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Apex",
     "group": "the-spellbound",
     "abilityName": "Chrono Blessing",
