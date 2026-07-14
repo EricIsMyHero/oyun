@@ -1,7 +1,9 @@
 [
   {
     "name": "Stacy",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Relic",
     "group": "constructs",
     "abilityName": "",
@@ -35,7 +37,9 @@
   },
   {
     "name": "Death",
-    "type": ["Dead"],
+    "type": [
+      "Dead"
+    ],
     "rarity": "Relic",
     "group": "void-walkers",
     "abilityName": "",
@@ -69,7 +73,9 @@
   },
   {
     "name": "Sylviana",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Relic",
     "group": "botanical-gardens",
     "abilityName": "",
@@ -104,7 +110,9 @@
     "forms": [
       {
         "name": "Butterflies",
-        "type": ["Heyvan"],
+        "type": [
+          "Heyvan"
+        ],
         "rarity": "Relic",
         "group": "botanical-gardens",
         "abilityName": "",
@@ -143,7 +151,9 @@
   },
   {
     "name": "Malvaris",
-    "type": ["Dead"],
+    "type": [
+      "Dead"
+    ],
     "rarity": "Relic",
     "group": "underworld",
     "abilityName": "Soul Reaper",
@@ -169,6 +179,12 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "curse",
+        "duration": 2
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -178,7 +194,9 @@
     "forms": [
       {
         "name": "Phantomis",
-        "type": ["Spirit"],
+        "type": [
+          "Spirit"
+        ],
         "rarity": "Relic",
         "group": "underworld",
         "abilityName": "Echoing Horde",
@@ -252,7 +270,9 @@
   },
   {
     "name": "Magma",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
@@ -276,6 +296,13 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "burn",
+        "damagePerSecond": 5,
+        "duration": 2
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -285,7 +312,9 @@
   },
   {
     "name": "Avalith",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
@@ -318,7 +347,9 @@
   },
   {
     "name": "Far",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
@@ -342,6 +373,13 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "stun",
+        "chance": 13,
+        "duration": 2
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -351,7 +389,9 @@
   },
   {
     "name": "Demotron",
-    "type": ["Uzaylı"],
+    "type": [
+      "Uzaylı"
+    ],
     "rarity": "Relic",
     "group": "ancients",
     "abilityName": "Core Restructuring",
@@ -385,7 +425,9 @@
   },
   {
     "name": "Format",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
@@ -418,7 +460,9 @@
   },
   {
     "name": "Pyhsic",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
@@ -451,7 +495,9 @@
   },
   {
     "name": "Naar",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Relic",
     "group": "the-spellbound",
     "abilityName": "Pomegranate Detonation",
@@ -487,7 +533,9 @@
   },
   {
     "name": "Lyra",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
@@ -520,7 +568,9 @@
   },
   {
     "name": "Aeralis",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Relic",
     "group": "royal-blood",
     "abilityName": "Kinetic Repulsion",
@@ -554,7 +604,9 @@
   },
   {
     "name": "Dark Necromancer",
-    "type": ["Spirit"],
+    "type": [
+      "Spirit"
+    ],
     "rarity": "Relic",
     "group": "underworld",
     "abilityName": "Forbidden Grimoire",
@@ -580,6 +632,13 @@
       "damageminimiser": "0%",
       "dodge": "10%"
     },
+    "effects": [
+      {
+        "type": "silence",
+        "chance": 17,
+        "duration": 10
+      }
+    ],
     "showlevels": {
       "level1": "-2",
       "level2": "-",
@@ -589,7 +648,9 @@
     "forms": [
       {
         "name": "Bladeknight",
-        "type": ["Dead"],
+        "type": [
+          "Dead"
+        ],
         "rarity": "Relic",
         "group": "underworld",
         "abilityName": "Phase Strike",
@@ -624,7 +685,9 @@
       },
       {
         "name": "Stormbow",
-        "type": ["Dead"],
+        "type": [
+          "Dead"
+        ],
         "rarity": "Relic",
         "group": "underworld",
         "abilityName": "Searing Arrow",
@@ -659,7 +722,9 @@
       },
       {
         "name": "Ironhide",
-        "type": ["Dead"],
+        "type": [
+          "Dead"
+        ],
         "rarity": "Relic",
         "group": "underworld",
         "abilityName": "Spectral Fortitude",
@@ -697,7 +762,9 @@
   },
   {
     "name": "Shine",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Relic",
     "abilityName": "",
     "stats": {
@@ -721,6 +788,12 @@
       "damageminimiser": "0%",
       "dodge": "0%"
     },
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 50
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -730,7 +803,9 @@
   },
   {
     "name": "Bloodraider",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Relic",
     "group": "void-walkers",
     "abilityName": "",
@@ -764,7 +839,9 @@
   },
   {
     "name": "Fallen Angel",
-    "type": ["Varlıq"],
+    "type": [
+      "Varlıq"
+    ],
     "rarity": "Relic",
     "group": "ancients",
     "abilityName": "Predatory Focus",
@@ -798,7 +875,9 @@
   },
   {
     "name": "Worms",
-    "type": ["Animal"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Relic",
     "group": "twisted-farm",
     "abilityName": "Subterranean Ambush",
@@ -823,6 +902,12 @@
       "damageminimiser": "0%",
       "dodge": "20%"
     },
+    "effects": [
+      {
+        "type": "stun",
+        "duration": 0.8
+      }
+    ],
     "showlevels": {
       "level1": "-",
       "level2": "-",
@@ -832,7 +917,9 @@
   },
   {
     "name": "Unara",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Relic",
     "group": "the-spellbound",
     "abilityName": "Reclusive Outburst",
@@ -866,7 +953,9 @@
   },
   {
     "name": "Ali",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Relic",
     "group": "",
     "abilityName": "",
@@ -900,7 +989,9 @@
   },
   {
     "name": "Clara",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Relic",
     "group": "barber-brothers",
     "abilityName": "",
@@ -934,7 +1025,9 @@
   },
   {
     "name": "Artist",
-    "type": ["İnsan"],
+    "type": [
+      "İnsan"
+    ],
     "rarity": "Relic",
     "group": "the-last-academy",
     "abilityName": "",
@@ -969,7 +1062,9 @@
     "forms": [
       {
         "name": "Flock of Ravens",
-        "type": ["Heyvan"],
+        "type": [
+          "Heyvan"
+        ],
         "rarity": "Relic",
         "group": "the-last-academy",
         "abilityName": "",
