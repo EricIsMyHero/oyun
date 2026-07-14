@@ -154,12 +154,14 @@
     "name": "Leno",
     "type": ["Human"],
     "rarity": "Ethereal",
+    "group": "steam-alliance", 
     "isDual": true,
     "stats": {"mana": "12"},
     "type1": {
       "name": "Leno",
       "type": ["Human"],
       "rarity": "Ethereal",
+      "group": "steam-alliance", 
       "stats": {
         "health": "220",
         "shield": "120",
@@ -186,13 +188,14 @@
         "level2": "-",
         "level3": "-"
       },
-      "story": "-",
+      "story": "The Iron Engineer, a talented Latina engineer from the Steam Alliance, renowned for her resilience, intelligence, and mechanical genius. After losing her right arm in a catastrophic factory accident, she refused to give up and engineered a sophisticated steam-powered prosthetic arm, transforming tragedy into her greatest invention. Leno is a completely normal human with a fit, athletic physique from years of industrial labor. Only her right arm is mechanical—the rest of her body is entirely human. She has warm tan skin, expressive brown eyes, and dark brown hair tied back for practicality. Around her head she wears a yellow, red, and black bandana, giving her a bold industrial look. She wears a practical mechanic's outfit consisting of a sleeveless work shirt, durable denim shorts, a heavy leather tool belt filled with engineering tools, knee pads, sturdy work boots, and a protective glove on her left hand. Brass goggles rest around her neck, while her clothing is lightly stained with grease and soot from years of factory work. Her right arm is a masterpiece of steam engineering, beginning naturally at the shoulder and seamlessly replacing the missing limb. The prosthetic is constructed from forged steel, polished brass, exposed gears, pistons, hydraulic cylinders, copper pipes, pressure valves, and rotating mechanical components. Small vents release bursts of steam while pressure gauges glow softly, showcasing its immense engineering complexity. The arm looks powerful yet realistically proportioned, clearly functioning as a prosthetic rather than replacing her entire body. The mechanical arm is transformed into a versatile combat tool, featuring deployable engineering attachments, reinforced gauntlets, and mechanical mechanisms designed for both close-range combat and long-range engagements. Steam escapes from the arm's vents while gears rotate continuously during operation. The background is an enormous steampunk industrial factory, filled with towering boilers, giant gears, conveyor systems, copper pipelines, massive steam engines, and glowing furnaces. White steam fills the air while sparks fly from active machinery. Warm industrial lighting reflects beautifully from brass and steel surfaces, creating a dramatic cinematic atmosphere. Leno stands confidently with her human left arm resting naturally while proudly raising or presenting her mechanical right arm, emphasizing that it is her greatest invention. Her expression is determined, confident, and resourceful—the face of someone who solved her greatest hardship through engineering alone.",
       "class": "Marksman"
     },
     "type2": {
       "name": "Leno",
       "type": ["Human"],
       "rarity": "Ethereal",
+      "group": "steam-alliance", 
       "stats": {
         "health": "190",
         "shield": "90",
@@ -219,7 +222,7 @@
         "level2": "-",
         "level3": "-"
       },
-      "story": "-",
+      "story": "The Iron Engineer, a talented Latina engineer from the Steam Alliance, renowned for her resilience, intelligence, and mechanical genius. After losing her right arm in a catastrophic factory accident, she refused to give up and engineered a sophisticated steam-powered prosthetic arm, transforming tragedy into her greatest invention. Leno is a completely normal human with a fit, athletic physique from years of industrial labor. Only her right arm is mechanical—the rest of her body is entirely human. She has warm tan skin, expressive brown eyes, and dark brown hair tied back for practicality. Around her head she wears a yellow, red, and black bandana, giving her a bold industrial look. She wears a practical mechanic's outfit consisting of a sleeveless work shirt, durable denim shorts, a heavy leather tool belt filled with engineering tools, knee pads, sturdy work boots, and a protective glove on her left hand. Brass goggles rest around her neck, while her clothing is lightly stained with grease and soot from years of factory work. Her right arm is a masterpiece of steam engineering, beginning naturally at the shoulder and seamlessly replacing the missing limb. The prosthetic is constructed from forged steel, polished brass, exposed gears, pistons, hydraulic cylinders, copper pipes, pressure valves, and rotating mechanical components. Small vents release bursts of steam while pressure gauges glow softly, showcasing its immense engineering complexity. The arm looks powerful yet realistically proportioned, clearly functioning as a prosthetic rather than replacing her entire body. The mechanical arm is transformed into a versatile combat tool, featuring deployable engineering attachments, reinforced gauntlets, and mechanical mechanisms designed for both close-range combat and long-range engagements. Steam escapes from the arm's vents while gears rotate continuously during operation. The background is an enormous steampunk industrial factory, filled with towering boilers, giant gears, conveyor systems, copper pipelines, massive steam engines, and glowing furnaces. White steam fills the air while sparks fly from active machinery. Warm industrial lighting reflects beautifully from brass and steel surfaces, creating a dramatic cinematic atmosphere. Leno stands confidently with her human left arm resting naturally while proudly raising or presenting her mechanical right arm, emphasizing that it is her greatest invention. Her expression is determined, confident, and resourceful—the face of someone who solved her greatest hardship through engineering alone.",
       "class": "Marksman"
     },
     "class": "Marksman"
