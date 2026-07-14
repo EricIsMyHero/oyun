@@ -6,14 +6,14 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "80",
+      "health": "40",
       "shield": "0",
-      "damage": "18",
-      "sps": "16",
+      "damage": "8",
+      "sps": "6",
       "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "3",
-      "number": "1"
+      "number": "3"
     },
     "trait": "<b>İlk 12</b> saniyə <b>+20%</b> Hız bonusu qazanar",
     "additionalStats": {
