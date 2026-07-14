@@ -136,6 +136,7 @@
     "name": "Nitrox",
     "type": ["Robot"],
     "rarity": "Mundane",
+    "group": "steam-alliance", 
     "abilityName": "",
     "stats": {
       "health": "100",
@@ -171,7 +172,7 @@
       "level2": "+5% Menzil  |  2400 » 2520",
       "level3": "+20% Hasar  |  15 » 20"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "The Volatile Inferno, a highly unstable combat automaton developed by the Steam Alliance, engineered to overwhelm enemies with devastating bursts of chemically pressurized fire. Built around an experimental combustion system, Nitrox constantly operates on the edge of catastrophic failure, making it as dangerous to approach as it is to fight. Every component vibrates under immense pressure as volatile fuel races through its mechanical body. Nitrox is a humanoid industrial combat robot with a normal upper body, but instead of legs it moves on two massive reinforced industrial wheels. The wheels are constructed from forged steel with heavy iron rims, allowing incredible speed and stability across the battlefield. Hydraulic suspension, rotating axles, and exposed mechanical linkages connect the wheels to its armored torso, giving the machine a rugged industrial appearance. Its body is built from dark forged steel, cast iron, weathered copper pipes, and reinforced metal plating. The chassis is covered with pressure gauges, rivets, fuel lines, cooling vents, heavy bolts, and rotating mechanical components. Every detail emphasizes realistic industrial engineering rather than futuristic technology. Its head features a reinforced armored faceplate with two glowing fiery orange eyes, while small exhaust vents release smoke and heat distortion around its head. The robot constantly emits subtle heat waves, making the surrounding air shimmer. Mounted on both forearms are industrial flamethrower projectors, connected to large pressurized chemical tanks integrated into its back and torso. Thick reinforced pipes carry volatile fuel throughout the machine, while pressure valves release bursts of steam and burning gas. The flamethrowers produce massive torrents of blazing fire mixed with sparks, smoke, and expanding waves of superheated air. The reactor inside Nitrox glows with an intense orange-red light visible through reinforced ventilation grilles. Pressure gauges approach dangerous levels, warning lights flash across the chassis, and occasional sparks erupt from overloaded mechanical components, emphasizing the machine's unstable nature. The battlefield is an enormous Steam Alliance industrial complex, filled with steel factories, blast furnaces, smokestacks, rail systems, giant gears, pipelines, cranes, and heavy machinery. Flames reflect across steel surfaces while smoke and steam fill the atmosphere. Scorched ground, burning debris, and molten metal surround Nitrox, reinforcing its role as a walking inferno. The overall design should emphasize industrial engineering, volatile combustion, overwhelming heat, and relentless firepower, creating the appearance of a dangerous machine barely containing its own destructive energy.",
     "class": "Support",
     "subclass": "Buffer"
   },
@@ -938,20 +939,21 @@
     "name": "Ironjaw",
     "type": ["Robot"],
     "rarity": "Mundane",
+    "group": "steam-alliance", 
     "abilityName": "",
     "stats": {
       "health": "290",
       "shield": "50",
-      "damage": "18x3",
+      "damage": "6",
       "sps": "12",
-      "attackSpeed": "0.25s",
-      "delay": "0.90s",
+      "attackSpeed": "0.50s",
+      "delay": "-",
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hər hasar verdikdə Can Çalma şansı <b>+0,5%</b> artar <b>(Max:20%)</b>",
+    "trait": "Hər hasar verdikdə Can Çalma şansı <b>+0,5%</b> artar <b>(Max:25%)</b>",
     "additionalStats": {
-      "range": "1200",
+      "range": "1000",
       "speed": "950",
       "criticalChance": "20%",
       "criticDamage": "2x",
@@ -965,7 +967,7 @@
       "level2": "+5% Can Çalma Şansı  |  25% » 30%",
       "level3": "+33% Can Çalma  |  33% » 66%"
     },
-    "story": "-",
+    "story": "The Steel Devourer, a colossal industrial war machine of the Steam Alliance, originally built as a massive waste-disposal and metal recycling automaton before being reprogrammed into a devastating frontline siege unit. Designed to consume scrap metal, broken machinery, and industrial waste, Ironjaw now feeds on the armor and weapons of fallen enemies, converting everything it crushes into fuel for its powerful steam engines. Ironjaw is an enormous heavily armored bipedal industrial robot, built from forged steel, cast iron, and reinforced mechanical components. Its body is bulky, rugged, and incredibly durable, with thick armor plating covered in scratches, dents, rivets, and years of industrial wear. Every component looks functional and engineered for relentless heavy-duty labor rather than elegant design. Its most terrifying feature is an enormous mechanical crushing jaw occupying most of its upper torso and head. The jaw is constructed from massive serrated steel teeth driven by gigantic exposed gears, rotating drive shafts, reinforced hydraulic pistons, and powerful mechanical actuators. As the jaw opens, countless gears rotate together while steam erupts from pressure vents. The crushing mechanism appears capable of effortlessly pulverizing steel beams, armored vehicles, and heavy machinery. Behind the jaw sits a massive industrial furnace, visible through reinforced vents. Inside, glowing orange fire burns intensely as shredded metal debris is converted into steam power. Conveyor mechanisms, rotating grinders, crushing rollers, and internal furnaces feed the machine's enormous boiler, making Ironjaw appear like a walking industrial recycling plant. Its broad shoulders carry enormous exhaust stacks releasing dense white steam into the air. Thick iron pipes snake throughout the body, connecting pressure tanks, boilers, turbines, and piston systems. Massive gears rotate continuously on its back and hips, reinforcing the impression of unstoppable industrial machinery. The robot's arms are gigantic hydraulic manipulators ending in reinforced steel claws designed to seize enemy machines and feed them directly into the crushing jaws. Every movement feels immensely heavy and powerful, with pistons compressing and gears turning under incredible force. The environment is a vast Steam Alliance industrial scrapyard, filled with abandoned locomotives, broken machinery, twisted steel beams, crushed vehicles, conveyor belts, smokestacks, blast furnaces, cranes, and mountains of scrap metal. Sparks fly through the air while steam, smoke, and glowing embers create a dramatic industrial atmosphere. Ironjaw stands triumphantly among piles of crushed metal, with fragments of steel, gears, pipes, and armor scattered around its feet. The overall scene should communicate overwhelming strength, relentless industrial efficiency, and mechanical brutality.",
     "class": "Assassin"
   },
   {
@@ -1008,7 +1010,7 @@
     "name": "Srail",
     "type": ["Human"],
     "rarity": "Mundane",
-    "group": "",
+    "group": "steam-alliance", 
     "abilityName": "",
     "stats": {
       "health": "290",
@@ -1036,7 +1038,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "The Crimson Alchemist, a brilliant young inventor from the Steam Alliance, born into immense wealth but choosing the life of an engineer over luxury. Despite growing up as the youngest child in an influential family and being born with albinism, Srail never desired status or privilege. Instead, he devoted himself to invention, engineering, and industrial innovation, eventually becoming one of the greatest mechanical minds of the Steam Alliance. Srail is a handsome young man with very pale skin, snow-white hair, and crimson red eyes, unmistakable traits of his albinism. His appearance is refined yet practical, showing the confidence of a genius engineer rather than a noble heir. His expression is calm, intelligent, and focused, always observing the world as if calculating his next invention.He wears an elegant steampunk engineer outfit consisting of a fitted work vest over a rolled-sleeve shirt, reinforced leather gloves, utility belts filled with precision tools, mechanical pouches, protective trousers, sturdy industrial boots, and brass goggles resting around his neck. His clothing is clean but marked with subtle oil stains and scorch marks from years of experimentation.Mounted securely across his back is a massive experimental steam-powered rocket pack, nearly as tall as he is. The rocket is constructed from polished brass, forged steel, copper pipes, rotating pressure valves, exposed gears, glowing pressure gauges, reinforced exhaust nozzles, and intricate mechanical mechanisms. Thick pipes connect the rocket to a compact steam pressure system integrated into a mechanical harness worn across his shoulders and waist.The rocket continuously emits gentle bursts of white steam from pressure vents while glowing red pressure chambers pulse with stored energy. Small rotating turbines and spinning flywheels indicate that the machine is constantly active, ready for launch or powerful propulsion. The rocket should look like an advanced industrial invention rather than futuristic technology, remaining faithful to a high-quality steampunk aesthetic. The background is a colossal Steam Alliance industrial complex filled with towering smokestacks, giant steam engines, enormous gears, copper pipelines, suspended cranes, pressure boilers, and glowing furnaces. Thick steam fills the atmosphere while sparks fly from massive machines operating throughout the factory. Warm orange industrial lighting reflects beautifully from polished brass and steel surfaces. Srail stands proudly in the center of the factory, one hand adjusting a mechanical control on the rocket harness while the other confidently holds a precision engineering tool. His posture reflects intelligence, confidence, and endless curiosity—the look of someone who revolutionized industry through pure creativity rather than inherited wealth.",
     "class": "Marksman",
     "subclass": "Sharpshooter"
   },
