@@ -160,7 +160,7 @@ function renderSpellModal(spell, activeFormIndex) {
           ${buildSpellStatBars(fStats) || '<p class="no-stat-msg">Stat yoxdur.</p>'}
         </div>
         ${form.trait ? `<div class="modal-section-label">Xüsusiyyət</div><div class="modal-trait-box">${form.trait}</div>` : ''}
-        ${form.story && form.story !== '-' ? `<div class="modal-section-label">Lore</div><div class="modal-story-box">${form.story}</div>` : ''}
+        ${buildLoreBlock(form.story && form.story !== '-' ? form.story : null)}
       </div>`;
   } else {
     bodyHtml = `
@@ -168,7 +168,7 @@ function renderSpellModal(spell, activeFormIndex) {
         ${buildSpellStatBars(stats) || '<p class="no-stat-msg">Stat məlumatı yoxdur.</p>'}
       </div>
       ${treat ? `<div class="modal-section-label">Xüsusiyyət</div><div class="modal-trait-box">${treat}</div>` : ''}
-      ${story ? `<div class="modal-section-label">Lore</div><div class="modal-story-box">${story}</div>` : ''}`;
+      ${buildLoreBlock(story)}`;
   }
 
   document.getElementById('modal-content').innerHTML = `
@@ -188,6 +188,13 @@ function renderSpellModal(spell, activeFormIndex) {
 
     ${bodyHtml}
   `;
+
+  const activeLoreName = (spell.isMulti && spell.forms && spell.forms.length && activeFormIndex >= 0)
+    ? spell.forms[activeFormIndex].name : spell.name;
+  const activeLoreText = (spell.isMulti && spell.forms && spell.forms.length && activeFormIndex >= 0)
+    ? (spell.forms[activeFormIndex].story && spell.forms[activeFormIndex].story !== '-' ? spell.forms[activeFormIndex].story : null)
+    : story;
+  wireLoreExpand(document.getElementById('modal-content'), activeLoreName, activeLoreText);
 
   /* Wire form switcher buttons */
   document.querySelectorAll('.spell-form-btn').forEach(btn => {
