@@ -7,7 +7,47 @@ const modalClose = document.getElementById('modal-close');
 
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+const loreOverlay = document.getElementById('lore-fullscreen-overlay');
+const loreClose   = document.getElementById('lore-fullscreen-close');
+loreClose.addEventListener('click', closeLoreFullscreen);
+loreOverlay.addEventListener('click', e => { if (e.target === loreOverlay) closeLoreFullscreen(); });
+
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (loreOverlay.classList.contains('open')) { closeLoreFullscreen(); return; }
+  closeModal();
+});
+
+/* ── Lore fullscreen ── */
+function openLoreFullscreen(name, text) {
+  document.getElementById('lore-fullscreen-name').textContent = name || '';
+  document.getElementById('lore-fullscreen-text').innerHTML   = text || '';
+  loreOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLoreFullscreen() {
+  loreOverlay.classList.remove('open');
+  document.body.style.overflow = modal.classList.contains('open') ? 'hidden' : '';
+}
+
+/* Builds a lore section with an inline scroll box + expand button.
+   Call wireLoreExpand() after injecting this into the DOM. */
+function buildLoreBlock(text) {
+  if (!text) return '';
+  return `
+    <div class="modal-section-label">Lore</div>
+    <div class="modal-story-wrap">
+      <div class="modal-story-box">${text}</div>
+      <button class="modal-story-expand-btn" type="button" title="Böyüt">⤢</button>
+    </div>`;
+}
+
+function wireLoreExpand(root, name, text) {
+  const btn = root.querySelector('.modal-story-expand-btn');
+  if (btn) btn.addEventListener('click', () => openLoreFullscreen(name, text));
+}
 
 /* ── Primary stats ── */
 const STAT_DEFS = [
@@ -307,14 +347,14 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
       ${abilityName ? `<div class="modal-ability-name">⚔ ${abilityName}</div>` : ''}
       <div class="modal-trait-box">${trait}</div>` : ''}
 
-    ${story ? `
-      <div class="modal-section-label">Lore</div>
-      <div class="modal-story-box">${story}</div>` : ''}
+    ${buildLoreBlock(story)}
 
     <button class="modal-lore-link">
       ✦ This Card belongs to the ${card.group || root.group || 'Stagnantia'} faction
     </button>
   `;
+
+  wireLoreExpand(document.getElementById('modal-content'), card.name || root.name, story);
 
   /* Stat tab switching */
   document.querySelectorAll('.stat-tab').forEach(btn => {
