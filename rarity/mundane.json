@@ -1,7 +1,9 @@
 [
   {
     "name": "Hammies",
-    "type": ["Heyvan"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Mundane",
     "group": "beasts",
     "abilityName": "",
@@ -23,13 +25,13 @@
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
+      "damageminimiser": "0%",
       "dodge": "10%",
       "vision": "8000",
       "healBonus": "0%",
       "healrecovery": "0/s",
       "shieldrecovery": "0/s",
       "criticdamageminimiser": "0%",
-      "damageminimiser": "0%",
       "flexibility": "0%",
       "shieldtakendamage": "70%",
       "life": "-"
@@ -40,11 +42,14 @@
       "level3": "+10% Öz. Hız Bonusu  |  20% » 30%"
     },
     "story": "The Golden Horde, a massive swarm of small prehistoric rodent-like creatures dragged through a mana portal from an ancient forgotten dimension. At first glance they appear harmless and adorable, with round bodies, soft golden fur, bright curious eyes, and compact animal-like features. However, beneath their deceptively cute appearance lies a relentless and highly destructive pack mentality. Thousands of Hammies flood across the battlefield as a living tide. Their fur ranges from warm golden-yellow to amber tones, creating the appearance of a moving golden horde. Despite their small size, each creature possesses surprisingly sharp claws, powerful jaws, and rows of tiny predatory teeth adapted for gnawing through nearly anything they encounter. The creatures move with extreme speed and chaotic energy. Some climb over rocks, others leap across debris, while countless more swarm together in coordinated waves. Their unpredictable behavior creates a sense of constant motion, making the battlefield feel completely overrun. Dust, dirt, and debris are kicked into the air as the horde advances. Their bright eyes are filled with wild curiosity and primal instinct. Individual Hammies may appear cute, but the sheer number of creatures transforms them into an overwhelming force of nature. Their collective movement resembles a golden flood consuming everything in its path. Behind the swarm, a gigantic unstable mana portal tears through reality, revealing glimpses of their prehistoric homeland. Vast grasslands, ancient forests, towering ferns, and strange extinct wildlife can be seen through the dimensional rift. Golden mana energy crackles around the portal, illuminating the creatures with a mystical glow. The environment shows clear signs of being overwhelmed. Broken equipment, damaged structures, scattered debris, and disturbed terrain emphasize the destructive effect of the advancing horde. The atmosphere is energetic, chaotic, and surprisingly intimidating despite the creatures' outwardly cute appearance. The overall composition focuses on contrast: individually adorable creatures forming a terrifying, unstoppable swarm through sheer numbers, speed, and group ferocity.",
-    "class": "Fighter"
+    "class": "Fighter",
+    "subclass": "Skirmisher"
   },
   {
     "name": "B-B",
-    "type": ["Heyvan"],
+    "type": [
+      "Animal"
+    ],
     "rarity": "Mundane",
     "group": "the-amazing-circus",
     "abilityName": "",
@@ -88,7 +93,9 @@
   },
   {
     "name": "Scrapy",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Mundane",
     "group": "constructs",
     "abilityName": "",
@@ -156,13 +163,13 @@
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
+      "damageminimiser": "0%",
       "dodge": "0%",
       "vision": "8000",
       "healBonus": "0%",
       "healrecovery": "0/s",
       "shieldrecovery": "0/s",
       "criticdamageminimiser": "0%",
-      "damageminimiser": "0%",
       "flexibility": "0%",
       "shieldtakendamage": "70%",
       "life": "-"
@@ -178,7 +185,9 @@
   },
   {
     "name": "Nortex",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Mundane",
     "group": "the-stellar-alliance",
     "abilityName": "",
@@ -201,7 +210,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+10% Gecikmə  |  1,10s » 0,99s",
@@ -209,11 +226,14 @@
       "level3": "+5% Hız  |  1000 » 1050"
     },
     "story": "The Arctic Sentinel, the fearless leader of the Light Guardians in Alien World: The Binary Divide. Born on the frozen polar regions of the planet's Light Layer, Nortex has mastered the ancient power of arctic energy. Rather than seeking destruction, he freezes enemy advances, protects his allies, and stands as an unbreakable shield against the forces of darkness. Wherever Nortex walks, the battlefield becomes a realm of crystal ice and absolute tranquility. Nortex is a noble male alien warrior with a tall, athletic, and powerful physique. His body is completely organic, covered in smooth white and pale ice-blue alien skin that naturally emits a soft frozen glow. Thin crystalline patterns spread across his body like naturally grown frost instead of armor. His face is calm, heroic, and wise, with glowing cyan-blue eyes that radiate hope and determination. Elegant crystalline horns sweep backward from his head, resembling naturally grown ice formations. His expression reflects absolute confidence and compassion rather than aggression. He wears living crystalline armor grown from pure arctic minerals rather than forged metal. The armor is formed from translucent white and blue ice crystals, covering his shoulders, chest, forearms, and legs while remaining elegant and lightweight. Sharp frozen crystal formations decorate the armor without making it bulky. In his hands he channels pure arctic energy, creating swirling streams of snow, frost, and glowing icy particles. Large floating ice crystals orbit around his arms while waves of freezing mist spread outward with every movement. His powers appear magical and natural rather than technological. Beneath his feet, the ground instantly freezes into beautifully detailed crystal ice. Jagged ice spikes emerge naturally from the frozen terrain, while intricate snowflake patterns spread across the battlefield wherever his energy flows. Behind him rises the magnificent landscape of the Light Layer's frozen kingdom—towering glaciers, crystal mountains, frozen waterfalls, shimmering ice caves, snow-covered forests, and brilliant auroras dancing across the night sky. Massive floating ice formations drift silently above the landscape, bathed in celestial blue light. The atmosphere is peaceful yet immensely powerful. Fine snowflakes drift through the air alongside sparkling frost particles and cold mist. Soft rays of light shine through the icy environment, creating an inspiring contrast to the darkness of the opposing faction. Nortex stands proudly with one hand extended forward, releasing a wave of freezing energy, while the other controls floating crystalline ice around him. His posture communicates leadership, protection, and unwavering resolve—the true guardian of the Light Layer. The overall composition should portray Nortex as a legendary protector whose frozen power symbolizes hope, resilience, and absolute control over the arctic elements.",
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Stacker"
   },
   {
     "name": "Gloop",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Mundane",
     "group": "ancients",
     "abilityName": "Devouring Abyss",
@@ -236,7 +256,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+10% Hasar  |  10 » 11",
@@ -250,7 +278,7 @@
   {
     "name": "Henry",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Mundane",
     "group": "twisted-farm",
@@ -274,7 +302,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+4% Health  |  400 » 416",
@@ -287,7 +323,9 @@
   },
   {
     "name": "Venomora",
-    "type": ["Alien"],
+    "type": [
+      "Alien"
+    ],
     "rarity": "Mundane",
     "group": "the-nether-flux",
     "abilityName": "",
@@ -310,7 +348,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -331,7 +377,7 @@
   {
     "name": "Blocker",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Mundane",
     "group": "mission-1",
@@ -355,7 +401,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+20% Ability DMG Reduction  |  -30% » -50%",
@@ -369,7 +423,7 @@
   {
     "name": "Fen",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Mundane",
     "group": "barber-brothers",
@@ -393,7 +447,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -407,12 +469,13 @@
       "level3": "+5% Menzil  |  3600 » 3780"
     },
     "story": "The Hurricane Stylist, a 23-year-old barber prodigy and the youngest member of the Barber Brothers. Energetic, confident, and exceptionally talented, Fen has transformed the tools of his profession into powerful instruments of precision and control. His youthful enthusiasm and lightning-fast reflexes make him one of the most dynamic stylists in both the barbershop and the arena. Fen is a handsome young man with a modern, fashionable appearance befitting a master barber. His hairstyle is impeccably styled, featuring sharp cuts, clean lines, and a trendy look that showcases his professional expertise. His expression is confident and focused, carrying the charisma of someone who genuinely loves his craft. He wears a stylish barber-inspired outfit that blends professional fashion with fantasy action aesthetics. The outfit includes a modern barber vest, rolled sleeves, utility belts for grooming tools, premium fabrics, and sleek design details. The clothing appears practical for movement while maintaining the polished appearance of a high-end stylist. In his hands, Fen wields a powerful professional hairdryer enhanced with extraordinary technology. The device generates massive streams of compressed wind that spiral around him like miniature hurricanes. Powerful currents of air twist through the battlefield, lifting loose objects, dust, and hair strands into dynamic vortexes. The wind effects are visually impressive yet elegant, emphasizing control rather than destruction. His hairdryer emits visible streams of swirling air, creating circular gusts and tornado-like formations around his body. Flying strands of hair, floating particles, and flowing fabrics react realistically to the intense airflow. The atmosphere feels energetic and constantly in motion. The setting combines elements of a luxury modern barbershop with a fantasy arena. Premium barber chairs, mirrors, styling stations, and salon equipment blend seamlessly with a dramatic battleground environment. The scene showcases Fen's ability to transform everyday barber tools into extraordinary sources of power. His pose should be dynamic and action-oriented, as though he is directing a powerful gust of wind while maintaining complete precision. Despite the intensity of the airflow, he appears relaxed and in total control, embodying both creativity and mastery.",
-    "class": "Fighter"
+    "class": "Fighter",
+    "subclass": "Blinder"
   },
   {
     "name": "Ben",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Mundane",
     "group": "barber-brothers",
@@ -436,7 +499,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -451,12 +522,13 @@
       "level3": "+12% Qalxan  |  50 » 56"
     },
     "story": "The Razor Edge, the 25-year-old middle brother of the Barber Brothers, a calm, disciplined, and exceptionally skilled master barber whose precision borders on perfection. Unlike the energetic Fen, Ben is quiet, focused, and methodical, approaching every task with unwavering concentration. Every movement is calculated, every cut intentional, and every action executed with flawless accuracy. Ben has a mature and professional appearance, with a perfectly groomed hairstyle that reflects his dedication to his craft. His sharp facial features, focused eyes, and composed expression convey the confidence of a true master craftsman. He rarely shows emotion, maintaining complete concentration regardless of the situation. He wears an elegant, high-end barber outfit combining modern professional fashion with fantasy combat aesthetics. A tailored barber vest, rolled sleeves, premium gloves, utility straps, and sophisticated grooming accessories give him the appearance of a professional artisan rather than a traditional warrior. Every detail of his clothing reflects precision, organization, and professionalism. In his hands are a pair of massive professional barber shears and razor-sharp styling scissors, crafted with exceptional detail. The polished metal blades gleam under dramatic lighting, appearing almost impossibly sharp. As he moves, silver cutting arcs trace through the air, visualizing the speed and accuracy of his techniques. His scissors are not oversized fantasy weapons, but refined professional tools elevated to extraordinary levels of mastery. Tiny metallic reflections, floating hair strands, and subtle cutting effects surround him, emphasizing his unparalleled precision. His stance is controlled and balanced, as though he is analyzing the perfect angle before executing a single decisive movement. Every aspect of his posture radiates discipline and mastery. The environment blends a luxury modern barbershop with an elite combat arena. Elegant mirrors, styling stations, barber chairs, polished floors, and professional equipment coexist with a dramatic battleground atmosphere. The scene showcases Ben's philosophy that perfection and craftsmanship can become powerful weapons. The overall composition should emphasize precision, focus, professionalism, and mastery. Ben appears less like a fighter and more like an artist whose skill has reached extraordinary levels.",
-    "class": "Fighter"
+    "class": "Fighter",
+    "subclass": "Bleeder"
   },
   {
     "name": "Freak",
     "type": [
-      "Uzaylı"
+      "Alien"
     ],
     "rarity": "Mundane",
     "group": "ancients",
@@ -481,7 +553,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+22% Hasar  |  18 » 22",
@@ -534,7 +614,7 @@
   {
     "name": "Nightprowler",
     "type": [
-      "Ruh"
+      "Spirit"
     ],
     "rarity": "Mundane",
     "abilityName": "",
@@ -557,7 +637,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+6% Saldırı Hızı  |  1,5s » 1,425s",
@@ -571,7 +659,7 @@
   {
     "name": "Twins",
     "type": [
-      "Ruh"
+      "Spirit"
     ],
     "rarity": "Mundane",
     "abilityName": "",
@@ -594,7 +682,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+5% Critical Chance  |  5% » 10%",
@@ -632,7 +728,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "5%"
+      "dodge": "5%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+10% Range  |  1000 » 1100",
@@ -640,12 +744,13 @@
       "level3": "+5% Dodge Chance  |  5% » 10%"
     },
     "story": "Bethe spent her childhood surrounded by mechanical sounds, not gunfire. Growing up surrounded by technology from a young age, this girl joined Mission 1 with her own hand-built Bio Mech. Although she is 23 years old, the systems she has built seem much older than her. It is no coincidence that she stands by the Soldier - it is not just tactics that keep him afloat in battle, but Bethe's intelligence. There is talk of something between them, but questions are not asked on the front lines. Because the answers must remain hidden during battle.",
-    "class": "Assassin"
+    "class": "Assassin",
+    "subclass": "Ravager"
   },
   {
     "name": "Snaykies",
     "type": [
-      "Heyvan"
+      "Animal"
     ],
     "rarity": "Mundane",
     "group": "beasts",
@@ -669,7 +774,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "10%"
+      "dodge": "10%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -714,7 +827,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+3% Range  |  4000 » 4120",
@@ -728,7 +849,7 @@
   {
     "name": "Bees",
     "type": [
-      "Heyvan"
+      "Animal"
     ],
     "rarity": "Mundane",
     "group": "twisted-farm",
@@ -752,7 +873,15 @@
       "lifestealChance": "-",
       "lifesteal": "-",
       "damageminimiser": "0%",
-      "dodge": "20%"
+      "dodge": "20%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -796,7 +925,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+15% Qalxan  |  80 » 92",
@@ -810,7 +947,7 @@
   {
     "name": "Angels",
     "type": [
-      "Varlıq"
+      "Entity"
     ],
     "rarity": "Mundane",
     "group": "royal-blood",
@@ -834,7 +971,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "20%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+15% DMG  |  7 » 8",
@@ -848,7 +993,7 @@
   {
     "name": "Boomix",
     "type": [
-      "Varlıq"
+      "Entity"
     ],
     "rarity": "Mundane",
     "abilityName": "",
@@ -871,7 +1016,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+10% Saldırı Hızı  |  2,4s » 2,16s",
@@ -885,7 +1038,7 @@
   {
     "name": "PhewPhew",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Mundane",
     "group": "the-amazing-circus",
@@ -909,7 +1062,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+5% Menzil  |  2700 » 2835",
@@ -917,7 +1078,8 @@
       "level3": "+25% Hasar  |  2x8 » 2x10"
     },
     "story": "The Silent Echo, a mysterious mime performer from The Amazing Circus, known for never speaking a single word. Silent and unreadable, he communicates entirely through elegant gestures, precise movements, and subtle expressions. His presence is unsettling because nobody knows whether his abilities are performance tricks or something far more supernatural. PhewPhew wears a refined classic monochrome mime outfit, featuring a tailored black-and-white costume inspired by traditional European pantomime performers. His attire includes elegant gloves, detailed buttons, layered fabrics, and subtle circus-inspired elements. The costume is immaculate and theatrical, yet carries an eerie sense of isolation. His face is painted with sophisticated mime makeup, emphasizing expression despite his complete silence. He stands in the center of the scene performing an invisible act. His hands are pressed against a transparent, unseen wall, while shimmering distortions reveal the existence of a mysterious force field. Multiple invisible barriers surround him, visible only through subtle refractions, faint glowing outlines, and distortions in the surrounding air. The effect should feel magical, believable, and physically present. Around PhewPhew, objects react to these unseen forces. Dust particles stop midair, loose circus props appear suspended by invisible pressure, and subtle waves ripple through space itself. The battlefield seems to bend around his silent performance, suggesting mastery over mysterious forces that others cannot perceive. His expression remains calm, focused, and emotionally distant. Unlike loud circus performers, PhewPhew radiates quiet confidence and control. Every movement appears deliberate and graceful, transforming simple mime gestures into something genuinely powerful and intimidating. The environment is a haunting section of The Amazing Circus, featuring dim carnival lights, abandoned stages, faded curtains, empty audience seats, drifting fog, and worn performance props. Shadows stretch unnaturally across the ground, creating an atmosphere of mystery and tension. The circus feels frozen in time, as though the entire world is holding its breath during his performance. The overall composition should emphasize silence, invisible power, elegance, and mystery. PhewPhew appears less like an entertainer and more like a performer whose imagination has somehow become reality.",
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Breaker"
   },
   {
     "name": "Chrono Mage",
@@ -946,7 +1108,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -991,7 +1161,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "10%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+5% Critical Chance  |  5% » 10%",
@@ -1029,7 +1207,15 @@
       "lifestealChance": "25%",
       "lifesteal": "33%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+5% Kritik Şansı |  5% » 10%",
@@ -1037,7 +1223,8 @@
       "level3": "+33% Can Çalma  |  33% » 66%"
     },
     "story": "The Steel Devourer, a colossal industrial war machine of the Steam Alliance, originally built as a massive waste-disposal and metal recycling automaton before being reprogrammed into a devastating frontline siege unit. Designed to consume scrap metal, broken machinery, and industrial waste, Ironjaw now feeds on the armor and weapons of fallen enemies, converting everything it crushes into fuel for its powerful steam engines. Ironjaw is an enormous heavily armored bipedal industrial robot, built from forged steel, cast iron, and reinforced mechanical components. Its body is bulky, rugged, and incredibly durable, with thick armor plating covered in scratches, dents, rivets, and years of industrial wear. Every component looks functional and engineered for relentless heavy-duty labor rather than elegant design. Its most terrifying feature is an enormous mechanical crushing jaw occupying most of its upper torso and head. The jaw is constructed from massive serrated steel teeth driven by gigantic exposed gears, rotating drive shafts, reinforced hydraulic pistons, and powerful mechanical actuators. As the jaw opens, countless gears rotate together while steam erupts from pressure vents. The crushing mechanism appears capable of effortlessly pulverizing steel beams, armored vehicles, and heavy machinery. Behind the jaw sits a massive industrial furnace, visible through reinforced vents. Inside, glowing orange fire burns intensely as shredded metal debris is converted into steam power. Conveyor mechanisms, rotating grinders, crushing rollers, and internal furnaces feed the machine's enormous boiler, making Ironjaw appear like a walking industrial recycling plant. Its broad shoulders carry enormous exhaust stacks releasing dense white steam into the air. Thick iron pipes snake throughout the body, connecting pressure tanks, boilers, turbines, and piston systems. Massive gears rotate continuously on its back and hips, reinforcing the impression of unstoppable industrial machinery. The robot's arms are gigantic hydraulic manipulators ending in reinforced steel claws designed to seize enemy machines and feed them directly into the crushing jaws. Every movement feels immensely heavy and powerful, with pistons compressing and gears turning under incredible force. The environment is a vast Steam Alliance industrial scrapyard, filled with abandoned locomotives, broken machinery, twisted steel beams, crushed vehicles, conveyor belts, smokestacks, blast furnaces, cranes, and mountains of scrap metal. Sparks fly through the air while steam, smoke, and glowing embers create a dramatic industrial atmosphere. Ironjaw stands triumphantly among piles of crushed metal, with fragments of steel, gears, pipes, and armor scattered around its feet. The overall scene should communicate overwhelming strength, relentless industrial efficiency, and mechanical brutality.",
-    "class": "Assassin"
+    "class": "Assassin",
+    "subclass": "Vampire"
   },
   {
     "name": "M-Manager",
@@ -1066,7 +1253,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-1 Öz. Vaxtı  |  9 » 8",
@@ -1104,7 +1299,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
@@ -1142,7 +1345,15 @@
       "lifestealChance": "10%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
@@ -1150,6 +1361,7 @@
       "level3": "-"
     },
     "story": "",
-    "class": "Specialist"
+    "class": "Specialist",
+    "subclass": "Mirror"
   }
 ]
