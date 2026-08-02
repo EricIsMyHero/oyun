@@ -37,7 +37,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -72,7 +80,15 @@
             "lifestealChance": "0%",
             "lifesteal": "25%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "showlevels": {
             "level1": "-",
@@ -80,10 +96,12 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Tank"
+          "class": "Tank",
+          "subclass": "Bulwark"
         }
       ],
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Constructor"
     },
     "type2": {
       "name": "Ase",
@@ -112,7 +130,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -147,7 +173,15 @@
             "lifestealChance": "0%",
             "lifesteal": "25%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "showlevels": {
             "level1": "-",
@@ -155,12 +189,15 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Marksman"
+          "class": "Marksman",
+          "subclass": "Ravager"
         }
       ],
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Constructor"
     },
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Constructor"
   },
   {
     "name": "Leno",
@@ -199,7 +236,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -207,7 +252,8 @@
         "level3": "-"
       },
       "story": "The Iron Engineer, a talented Latina engineer from the Steam Alliance, renowned for her resilience, intelligence, and mechanical genius. After losing her right arm in a catastrophic factory accident, she refused to give up and engineered a sophisticated steam-powered prosthetic arm, transforming tragedy into her greatest invention. Leno is a completely normal human with a fit, athletic physique from years of industrial labor. Only her right arm is mechanical—the rest of her body is entirely human. She has warm tan skin, expressive brown eyes, and dark brown hair tied back for practicality. Around her head she wears a yellow, red, and black bandana, giving her a bold industrial look. She wears a practical mechanic's outfit consisting of a sleeveless work shirt, durable denim shorts, a heavy leather tool belt filled with engineering tools, knee pads, sturdy work boots, and a protective glove on her left hand. Brass goggles rest around her neck, while her clothing is lightly stained with grease and soot from years of factory work. Her right arm is a masterpiece of steam engineering, beginning naturally at the shoulder and seamlessly replacing the missing limb. The prosthetic is constructed from forged steel, polished brass, exposed gears, pistons, hydraulic cylinders, copper pipes, pressure valves, and rotating mechanical components. Small vents release bursts of steam while pressure gauges glow softly, showcasing its immense engineering complexity. The arm looks powerful yet realistically proportioned, clearly functioning as a prosthetic rather than replacing her entire body. The mechanical arm is transformed into a versatile combat tool, featuring deployable engineering attachments, reinforced gauntlets, and mechanical mechanisms designed for both close-range combat and long-range engagements. Steam escapes from the arm's vents while gears rotate continuously during operation. The background is an enormous steampunk industrial factory, filled with towering boilers, giant gears, conveyor systems, copper pipelines, massive steam engines, and glowing furnaces. White steam fills the air while sparks fly from active machinery. Warm industrial lighting reflects beautifully from brass and steel surfaces, creating a dramatic cinematic atmosphere. Leno stands confidently with her human left arm resting naturally while proudly raising or presenting her mechanical right arm, emphasizing that it is her greatest invention. Her expression is determined, confident, and resourceful—the face of someone who solved her greatest hardship through engineering alone.",
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Sharpshooter"
     },
     "type2": {
       "name": "Leno",
@@ -235,7 +281,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -243,9 +297,11 @@
         "level3": "-"
       },
       "story": "The Iron Engineer, a talented Latina engineer from the Steam Alliance, renowned for her resilience, intelligence, and mechanical genius. After losing her right arm in a catastrophic factory accident, she refused to give up and engineered a sophisticated steam-powered prosthetic arm, transforming tragedy into her greatest invention. Leno is a completely normal human with a fit, athletic physique from years of industrial labor. Only her right arm is mechanical—the rest of her body is entirely human. She has warm tan skin, expressive brown eyes, and dark brown hair tied back for practicality. Around her head she wears a yellow, red, and black bandana, giving her a bold industrial look. She wears a practical mechanic's outfit consisting of a sleeveless work shirt, durable denim shorts, a heavy leather tool belt filled with engineering tools, knee pads, sturdy work boots, and a protective glove on her left hand. Brass goggles rest around her neck, while her clothing is lightly stained with grease and soot from years of factory work. Her right arm is a masterpiece of steam engineering, beginning naturally at the shoulder and seamlessly replacing the missing limb. The prosthetic is constructed from forged steel, polished brass, exposed gears, pistons, hydraulic cylinders, copper pipes, pressure valves, and rotating mechanical components. Small vents release bursts of steam while pressure gauges glow softly, showcasing its immense engineering complexity. The arm looks powerful yet realistically proportioned, clearly functioning as a prosthetic rather than replacing her entire body. The mechanical arm is transformed into a versatile combat tool, featuring deployable engineering attachments, reinforced gauntlets, and mechanical mechanisms designed for both close-range combat and long-range engagements. Steam escapes from the arm's vents while gears rotate continuously during operation. The background is an enormous steampunk industrial factory, filled with towering boilers, giant gears, conveyor systems, copper pipelines, massive steam engines, and glowing furnaces. White steam fills the air while sparks fly from active machinery. Warm industrial lighting reflects beautifully from brass and steel surfaces, creating a dramatic cinematic atmosphere. Leno stands confidently with her human left arm resting naturally while proudly raising or presenting her mechanical right arm, emphasizing that it is her greatest invention. Her expression is determined, confident, and resourceful—the face of someone who solved her greatest hardship through engineering alone.",
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Slayer"
     },
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Sharpshooter"
   },
   {
     "name": "King",
@@ -285,7 +341,15 @@
         "lifestealChance": "0%",
         "lifesteal": "0%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -293,7 +357,8 @@
         "level3": "-"
       },
       "story": "The King is a skeletal monarch who commands the dead with absolute authority. Unlike the Lord, he wears bright, polished dark iron armor infused with deep purple and crimson hues, reflecting his ancient status. His skull holds piercing crimson eyes that blaze with undying malice. He grips a greatsword in his bony hands, ready to strike down anyone who defies his rule. While the Lord is a simple destroyer, the King is a ruler of the UnderWorld, a chilling specter of a lost kingdom that refuses to fade into dust.",
-      "class": "Tank"
+      "class": "Tank",
+      "subclass": "Monarch"
     },
     "type2": {
       "name": "King",
@@ -323,7 +388,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -358,7 +431,15 @@
             "lifestealChance": "0%",
             "lifesteal": "0%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "showlevels": {
             "level1": "-",
@@ -366,12 +447,15 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Fighter"
+          "class": "Fighter",
+          "subclass": "Breaker"
         }
       ],
-      "class": "Tank"
+      "class": "Tank",
+      "subclass": "Warden"
     },
-    "class": "Tank"
+    "class": "Tank",
+    "subclass": "Monarch"
   },
   {
     "name": "Dracula",
@@ -408,7 +492,15 @@
         "lifestealChance": "25%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -416,7 +508,8 @@
         "level3": "-"
       },
       "story": "-",
-      "class": "Fighter"
+      "class": "Fighter",
+      "subclass": "Vampire"
     },
     "type2": {
       "name": "Dracula",
@@ -444,7 +537,15 @@
         "lifestealChance": "15%",
         "lifesteal": "25%",
         "damageminimiser": "5%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -478,7 +579,15 @@
             "lifestealChance": "0%",
             "lifesteal": "25%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "showlevels": {
             "level1": "-",
@@ -486,12 +595,15 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Marksman"
+          "class": "Marksman",
+          "subclass": "Swarmer"
         }
       ],
-      "class": "Fighter"
+      "class": "Fighter",
+      "subclass": "Undying"
     },
-    "class": "Fighter"
+    "class": "Fighter",
+    "subclass": "Vampire"
   },
   {
     "name": "Leila",
@@ -530,7 +642,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "effects": [
         {
@@ -544,7 +664,8 @@
         "level3": "-"
       },
       "story": "-",
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Trapper"
     },
     "type2": {
       "name": "Leila",
@@ -572,7 +693,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "effects": [
         {
@@ -586,9 +715,11 @@
         "level3": "-"
       },
       "story": "-",
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Bleeder"
     },
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Trapper"
   },
   {
     "name": "Lord",
@@ -628,7 +759,15 @@
         "lifestealChance": "25%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -636,7 +775,8 @@
         "level3": "-"
       },
       "story": "The Lord is a terrifying spectacle of death in motion. He is a reanimated human clad in heavy, forged black iron armor that seems to absorb the light. His skeletal frame, concealed beneath the metal, is animated by a dark force. In his iron grip, he wields a massive, wicked mace. He does not speak, but his horrific presence commands the spirits of the deep. A true dread lord of the UnderWorld, he walks without fear, crushing all life beneath his merciless feet.",
-      "class": "Tank"
+      "class": "Tank",
+      "subclass": "Immortal"
     },
     "type2": {
       "name": "Lord",
@@ -666,7 +806,15 @@
         "lifestealChance": "25%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -701,7 +849,15 @@
             "lifestealChance": "0%",
             "lifesteal": "0%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "showlevels": {
             "level1": "-",
@@ -709,12 +865,15 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Fighter"
+          "class": "Fighter",
+          "subclass": "Berserker"
         }
       ],
-      "class": "Tank"
+      "class": "Tank",
+      "subclass": "Warlord"
     },
-    "class": "Tank"
+    "class": "Tank",
+    "subclass": "Immortal"
   },
   {
     "name": "Hunter",
@@ -754,7 +913,15 @@
         "lifestealChance": "25%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -789,7 +956,15 @@
             "lifestealChance": "0%",
             "lifesteal": "25%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "showlevels": {
             "level1": "-",
@@ -797,10 +972,12 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Tank"
+          "class": "Tank",
+          "subclass": "Ripper"
         }
       ],
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Tracker"
     },
     "type2": {
       "name": "Hunter",
@@ -829,7 +1006,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -864,7 +1049,15 @@
             "lifestealChance": "0%",
             "lifesteal": "25%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "showlevels": {
             "level1": "-",
@@ -872,12 +1065,15 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Marksman"
+          "class": "Marksman",
+          "subclass": "Piercer"
         }
       ],
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Tracker"
     },
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Tracker"
   },
   {
     "name": "Soul Master",
@@ -914,7 +1110,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -922,7 +1126,8 @@
         "level3": "-"
       },
       "story": "-",
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Reaper"
     },
     "type2": {
       "name": "Soul Master",
@@ -949,7 +1154,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -957,9 +1170,11 @@
         "level3": "-"
       },
       "story": "-",
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Harvester"
     },
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Reaper"
   },
   {
     "name": "Mr. and Mrs. Ray",
@@ -999,7 +1214,15 @@
         "lifestealChance": "10%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "effects": [
         {
@@ -1041,7 +1264,15 @@
             "lifestealChance": "10%",
             "lifesteal": "25%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "effects": [
             {
@@ -1056,10 +1287,12 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Tank"
+          "class": "Tank",
+          "subclass": "Twinshot"
         }
       ],
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Twinshot"
     },
     "type2": {
       "name": "The Rays",
@@ -1088,7 +1321,15 @@
         "lifestealChance": "10%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -1123,7 +1364,15 @@
             "lifestealChance": "10%",
             "lifesteal": "25%",
             "damageminimiser": "0%",
-            "dodge": "0%"
+            "dodge": "0%",
+            "vision": "8000",
+            "healBonus": "0%",
+            "healrecovery": "0/s",
+            "shieldrecovery": "0/s",
+            "criticdamageminimiser": "0%",
+            "flexibility": "0%",
+            "shieldtakendamage": "70%",
+            "life": "-"
           },
           "showlevels": {
             "level1": "-",
@@ -1131,11 +1380,14 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Marksman"
+          "class": "Marksman",
+          "subclass": "Twinshot"
         }
       ],
-      "class": "Marksman"
+      "class": "Marksman",
+      "subclass": "Twinshot"
     },
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Twinshot"
   }
 ]
