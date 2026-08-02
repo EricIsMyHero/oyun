@@ -188,6 +188,8 @@
       "Alien"
     ],
     "rarity": "Apex",
+    "group": "the-nether-flux",
+    "abilityName": "",
     "stats": {
       "health": "100",
       "shield": "200",
@@ -214,7 +216,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "The Endless Null, the most terrifying entity of the Dark Layer in Alien World: The Binary Divide. Unlike every other alien, Blank possesses no true physical form. It is a living absence—a cosmic anomaly that erases existence itself. Wherever Blank appears, light vanishes, memories fade, colors lose their meaning, and reality begins to collapse into absolute nothingness. It does not kill through violence; it simply removes everything from existence. Blank manifests as a humanoid silhouette composed entirely of living darkness, with no visible skin, armor, or biological features. Its body appears to be an endless void that absorbs all surrounding light, making it impossible to determine where its form truly begins or ends. The edges of its silhouette constantly dissolve into drifting black particles and shadow-like smoke. Its face is almost featureless. Instead of eyes, there are two deep glowing white voids that radiate an unnatural, emotionless gaze. The rest of the face remains hidden beneath shifting darkness, occasionally revealing impossible distortions that immediately disappear again. Looking directly at Blank creates the sensation that reality itself is breaking apart. Its arms and hands stretch unnaturally, fading into black mist toward the fingertips. Small fragments of darkness continuously detach from its body before dissolving into nothingness. Around its hands, floating pieces of shattered reality, broken light, and fragmented space orbit silently before being consumed by the void. The entire area surrounding Blank is engulfed in an enormous sphere of absolute darkness. Light bends unnaturally toward the entity before disappearing completely. Stars, glowing particles, and even reflections are swallowed by the surrounding void. The darkness feels infinitely deep, as though it leads directly into another dimension. The battlefield itself is collapsing. Alien ruins, mountains, floating rocks, and technological structures break apart into black geometric fragments before dissolving into emptiness. Portions of the landscape simply cease to exist, leaving impossible holes where reality has been erased. The sky above is filled with fractured space-time anomalies, shattered stars, gravitational distortions, and enormous cracks in reality revealing an endless black cosmic abyss beyond the universe itself. Strange gravitational waves warp the environment, bending light and space around Blank. The atmosphere is silent, cold, and unsettling. Black mist, floating ash-like particles, distorted gravitational lensing, and subtle white energy fragments drift through the void. Every visual element should communicate cosmic horror rather than traditional darkness. Blank stands completely motionless in the center of the collapsing battlefield. It does not appear aggressive—it simply exists, and reality dies around it. The overall composition should portray Blank as an incomprehensible cosmic entity beyond life, death, matter, or energy—the physical embodiment of absolute nothingness."
   },
   {
     "name": "Magmara",
@@ -222,6 +224,8 @@
       "Alien"
     ],
     "rarity": "Apex",
+    "group": "the-nether-flux",
+    "abilityName": "",
     "stats": {
       "health": "350",
       "shield": "150",
@@ -255,7 +259,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "The Molten Matriarch, the supreme ruler of the Dark Layer of Alien World: The Binary Divide, an ancient alien queen born from the planet's molten core. She is the embodiment of planetary destruction, commanding oceans of magma and volcanic fury. Entire civilizations vanish beneath her wrath as she reshapes continents with rivers of living lava. Every eruption on the planet is merely an extension of her will. Magmara is a towering, regal alien female with an intimidating yet elegant appearance. Her body is composed of dark volcanic obsidian covered with glowing crimson-orange magma veins that pulse like molten blood beneath her rocky skin. Cracks across her body reveal intense lava flowing underneath, radiating immense heat. Her face is majestic and fearsome, featuring sharp alien facial structures, glowing molten-orange eyes without visible pupils, and an expression of absolute authority. A magnificent crown-like formation of volcanic crystal and obsidian horns grows naturally from her head, resembling cooled lava spikes emerging from an active volcano. She wears naturally formed volcanic armor rather than manufactured clothing. Jagged obsidian plates cover parts of her body while streams of molten lava flow between the armor's fractures. Her shoulders and back are adorned with massive volcanic crystal formations glowing with internal heat. Both hands manipulate enormous spheres and streams of molten magma. Lava coils around her arms like living serpents before crashing into the ground as explosive rivers of fire. Floating volcanic rocks orbit around her, suspended by immense planetary energy. Every movement causes lava droplets, sparks, ash, and molten debris to erupt into the surrounding air. Behind her rises a gigantic volcanic landscape filled with erupting supervolcanoes, flowing lava rivers, collapsing mountains, burning craters, black volcanic cliffs, and ash-filled skies. Massive lava waterfalls pour into glowing magma oceans while volcanic lightning flashes through towering clouds of smoke and ash. The ground beneath her fractures with glowing cracks, releasing molten energy from deep beneath the planet's crust. Heat distortion warps the surrounding air, while embers, smoke, volcanic ash, and burning debris fill the atmosphere. The environment feels apocalyptic, as if the planet itself obeys her commands. The overall composition should portray Magmara as the unquestioned queen of destruction—majestic, unstoppable, and terrifyingly beautiful. She is not merely controlling lava; she is the living heart of the planet's molten core."
   },
   {
     "name": "Willowshade",
@@ -406,8 +410,8 @@
       "Varlıq"
     ],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "the-stellar-alliance",
+    "abilityName": "",
     "stats": {
       "health": "140",
       "shield": "40",
@@ -434,7 +438,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "The Twilight Warden, a mysterious female alien guardian who watches over the border between light and darkness in Alien World: The Binary Divide. Unlike the warriors of either faction, Umbra commands the ancient power of twilight—the perfect balance between light and shadow. She manipulates living shadows not to spread fear, but to protect the innocent and imprison the darkness before it can consume the world. Her presence is silent, graceful, and almost supernatural, making her one of the most enigmatic protectors of the Light Layer. Umbra is a tall, elegant female alien with a slender yet athletic physique. Her smooth skin fades seamlessly from luminous pearl-white into deep violet and midnight black, creating a natural twilight gradient across her body. Delicate glowing indigo energy veins flow beneath her skin like rivers of starlight. Her face is beautiful, calm, and mysterious, with graceful alien features and glowing violet eyes that seem to contain entire galaxies. Her expression is gentle yet unreadable, radiating wisdom, serenity, and quiet authority. Long flowing hair transitions from silver-white near the crown into deep violet and finally black at the tips, floating weightlessly around her. She wears living twilight crystal armor, organically grown from rare celestial minerals. The armor combines translucent white crystal with deep violet obsidian-like crystal, creating a perfect harmony between light and shadow. Elegant crystalline shoulder pieces, forearm guards, and leg armor emit a soft violet glow, while flowing shadow-like energy ribbons drift behind her like an ethereal cloak. Around Umbra orbit several floating shadow crystals, suspended effortlessly in the air. These crystalline shards emit faint violet light while releasing streams of living shadow that swirl gracefully around her without appearing evil or corrupted. Both of her hands command powerful twilight energy. One hand creates glowing violet shadow ribbons that form elegant protective barriers, while the other shapes luminous white energy capable of purifying corruption. Between her hands, both energies merge into a mesmerizing sphere of balanced cosmic power. Behind Umbra floats an enormous crescent-shaped twilight halo, formed from intertwined rings of radiant white light and deep violet shadow energy. Small stars, glowing particles, and fragments of cosmic dust slowly orbit within the halo, reinforcing her role as guardian of the boundary between day and night. The battlefield lies within the sacred Twilight Zone, where the Light Layer meets the edge of darkness. Crystal forests glow beneath an eternal sunset, while floating islands drift across a sky painted with brilliant shades of gold, lavender, indigo, and deep blue. Giant luminous trees, glowing flowers, crystal rivers, and distant celestial mountains create an environment that feels magical and peaceful. Soft twilight mist flows across the ground while luminous butterflies, floating stardust, and glowing flower petals drift gently through the air. Long beams of warm sunset light blend naturally with cool violet shadows, creating breathtaking cinematic contrast. Umbra gracefully hovers just above the ground, one hand extending protective shadow magic while the other radiates gentle celestial light. Her posture is elegant, composed, and protective, symbolizing harmony rather than conflict. The overall composition should portray Umbra as the divine guardian of twilight—a celestial female alien whose mastery of balanced light and shadow protects the universe from falling into eternal darkness."
   },
   {
     "name": "Thief",
@@ -548,9 +552,11 @@
   {
     "name": "Stormblade",
     "type": [
-      "Human"
+      "Alien"
     ],
     "rarity": "Apex",
+    "group": "the-nether-flux",
+    "abilityName": "",
     "stats": {
       "health": "160",
       "shield": "40",
@@ -577,7 +583,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "The Tempest Executioner, one of the deadliest warriors of the Dark Layer in Alien World: The Binary Divide. A relentless alien speedster born beneath endless planetary superstorms, Stormblade transforms lightning into a weapon of absolute destruction. Every movement generates violent electrical discharges, allowing this merciless hunter to strike faster than the eye can follow. Victims rarely see Stormblade—they only witness flashes of lightning before everything goes dark. Stormblade is a tall, athletic alien warrior with a sleek, aerodynamic body built entirely for speed. Its armor is formed from dark obsidian-like alien alloy, featuring razor-sharp edges and smooth organic curves that reduce air resistance. Thin glowing veins of electric blue and violet energy race beneath the armor like living lightning, constantly pulsing across its body. Its helmet-like head has an aggressive, angular design with two piercing electric-blue eyes that radiate pure energy. Sharp horn-like energy conductors extend backward from the head, continuously attracting arcs of planetary lightning. Small bolts of electricity jump between the horns and surrounding air. Mounted on both forearms are dual plasma blades, each formed from condensed high-voltage energy contained within advanced alien emitters. The blades glow with brilliant blue-white plasma, surrounded by violent electrical arcs and streams of ionized energy. They appear impossibly sharp, capable of slicing through armored targets in a single high-speed strike. Stormblade's limbs are exceptionally lean and powerful, designed for explosive acceleration. Along its legs and back are streamlined energy conduits and electromagnetic propulsion vents that release bursts of blue plasma whenever it changes direction. Trails of crackling electricity remain suspended in the air behind every movement. The battlefield is a hostile alien wasteland beneath an enormous planetary electrical storm. Towering black rock formations, shattered alien structures, floating metallic debris, and enormous crystalline energy conductors surround the battlefield. Above, massive thunderclouds churn continuously while colossal bolts of blue lightning strike the landscape. Electricity constantly dances across the ground around Stormblade's feet, creating glowing fractures and ionized scorch marks. Floating rocks levitate as electromagnetic energy distorts gravity nearby. The atmosphere is filled with blue plasma particles, sparks, ozone mist, and swirling storm winds. Stormblade stands in an aggressive combat stance, one plasma blade held low and the other raised, while lightning repeatedly crashes directly into its body without causing any damage. The electrical energy is visibly absorbed into its armor, making the glowing energy veins intensify with every strike. The overall composition should portray Stormblade as the living embodiment of a planetary thunderstorm—merciless, impossibly fast, and overwhelmingly powerful."
   },
   {
     "name": "Venom Fangs",
