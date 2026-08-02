@@ -670,11 +670,12 @@
     "class": "Assassin"
   },
   {
-    "name": "Volt Striker",
+    "name": "Voltriker",
     "type": [
-      "Robot"
+      "Alien"
     ],
     "rarity": "Familiar",
+    "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
       "health": "160",
@@ -702,7 +703,7 @@
       "level2": "+50% Öz. Menzil  |  3x3 » 4,5x4,5",
       "level3": "+10% Can  |  150 » 165"
     },
-    "story": "",
+    "story": "The Thunder Vanguard, one of the strongest defenders of the Light Guardians in Alien World: The Binary Divide. Born within the world's immense electromagnetic storms, Voltriker possesses complete mastery over natural electricity. Unlike the ruthless lightning of the Dark Layer, his power is disciplined, serving as both a devastating weapon and a protective force that energizes planetary defenses and shields his allies from destruction. Voltriker is a tall, muscular male alien with an athletic, heroic physique. His body is entirely organic, featuring smooth white skin accented by glowing electric-blue energy veins that pulse beneath the surface like living lightning. Every movement sends small arcs of electricity dancing across his body. His face is noble and determined, with brilliant glowing blue-white eyes and sharp, elegant alien features. His expression conveys courage, confidence, and unwavering resolve. Flowing backward from his head are several crystalline energy fins resembling naturally grown lightning crystals, continuously crackling with electricity. His body is protected by living crystalline energy armor, formed from translucent blue-white mineral structures naturally grown from his own body. The armor is sleek and elegant, covering his shoulders, chest, forearms, and legs while allowing full mobility. The crystalline surfaces constantly pulse with stored electrical energy. Both of his hands are surrounded by enormous spheres of concentrated lightning. Brilliant electrical arcs leap between his fingers, forearms, shoulders, and the surrounding environment. Streams of blue plasma spiral around his arms while countless sparks illuminate the air. Floating around Voltriker are several glowing energy conductors—crystalline shards suspended by electromagnetic forces. Lightning repeatedly jumps between these floating crystals and his body, creating an intricate network of radiant electrical energy. The battlefield is a breathtaking high-altitude alien plateau within the Light Layer, surrounded by towering crystal mountains, floating islands, luminous vegetation, and massive natural energy pillars. Above him, brilliant storm clouds filled with blue and white lightning stretch across the sky, while shafts of sunlight break through the clouds, symbolizing hope overcoming darkness. Electricity spreads harmlessly across the ground beneath his feet, forming glowing geometric energy patterns instead of destruction. Small rocks levitate as electromagnetic fields distort the surrounding space, while blue plasma particles drift through the atmosphere. Voltriker stands confidently with one arm raised toward the heavens as an enormous bolt of lightning descends directly into his hand, while the other arm channels the energy outward to protect the battlefield. His stance reflects both overwhelming offensive power and steadfast guardianship. The overall composition should portray Voltriker as the living embodiment of controlled lightning—an inspiring celestial guardian whose immense electrical power exists to defend life rather than destroy it.",
     "class": "Mage",
     "subclass": "Nuker"
   },
@@ -753,9 +754,10 @@
   {
     "name": "Hexon",
     "type": [
-      "Uzaylı"
+      "Alien"
     ],
     "rarity": "Familiar",
+    "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
       "health": "150",
@@ -789,7 +791,7 @@
       "level2": "+0.3 Öz. Sərsəmlətmə  |  0.6s » 0.9s",
       "level3": "+7% Hız  |  1000 » 1070"
     },
-    "story": "",
+    "story": "The Quantum Architect, the supreme tactical genius of the Light Guardians in Alien World: The Binary Divide. Rather than relying on overwhelming strength, Hexon dominates battle through intelligence, creating massive energy shields, defensive grids, and complex force-field networks that redirect enemy attacks back toward their source. Every movement is carefully calculated, making him the ultimate battlefield strategist. Hexon is a tall, lean male alien with a refined athletic physique. His body is completely organic, covered in smooth white skin with glowing cyan and sapphire-blue energy veins flowing beneath the surface like living circuitry. His appearance is elegant, intelligent, and composed rather than intimidating. His face is calm and analytical, with sharp alien facial features and glowing blue eyes that constantly scan the battlefield. Thin crystalline structures extend backward from his head, resembling naturally grown energy crystals instead of horns. His expression reflects absolute confidence and strategic brilliance. He wears living crystalline armor formed naturally from translucent blue-white alien minerals. The armor is sleek and lightweight, covering his shoulders, chest, forearms, and legs with smooth geometric patterns inspired by hexagonal symmetry. The armor glows softly from within as energy flows continuously through its crystalline structure. Floating around Hexon are dozens of transparent hexagonal energy panels, forming an enormous defensive network. The panels vary in size and orientation, constantly shifting and rotating around him like an intelligent shield system. Brilliant cyan energy pulses through every hexagonal segment, creating intricate patterns of light. Both of his hands manipulate glowing energy grids suspended in midair. Streams of blue-white energy connect countless floating hexagons into enormous defensive barriers stretching across the battlefield. Small beams of light travel rapidly through the network, visualizing the movement of energy and tactical calculations. Several floating crystalline drones orbit around Hexon, projecting additional hexagonal shields and energy structures. These devices appear entirely organic, grown from the same crystal material as his armor rather than mechanical technology. The battlefield is a magnificent alien sanctuary within the Light Layer, featuring floating crystal platforms, towering luminous formations, pristine white cliffs, glowing vegetation, waterfalls flowing between floating islands, and vast geometric energy structures integrated into the natural landscape. Sunlight passes beautifully through the transparent energy barriers, creating realistic refraction, reflections, and glowing caustic light across the environment. Floating particles of blue energy drift peacefully through the air while geometric light patterns illuminate the ground. Hexon stands calmly at the center of a massive defensive formation, one hand extended as countless hexagonal barriers assemble around him, while the other controls a glowing tactical energy grid suspended before him. His posture is composed and authoritative, embodying perfect control and flawless battlefield strategy. The overall composition should portray Hexon as the ultimate protector and master tactician—a guardian whose intelligence and energy manipulation make him the foundation of the Light Guardians' defense.",
     "class": "Mage",
     "subclass": "Controller"
   },
@@ -887,13 +889,14 @@
       "Varlıq"
     ],
     "rarity": "Familiar",
+    "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
       "health": "280",
       "shield": "70",
       "damage": "10x2",
       "sps": "8",
-      "attackSpeed": "0,25s",
+      "attackSpeed": "0.25s",
       "delay": "1,4s",
       "mana": "3",
       "number": "1"
@@ -914,7 +917,7 @@
       "level2": "+10% Hız  |  900 » 990",
       "level3": "+15% Kritik Şansı  |  15% » 30%"
     },
-    "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
+    "story": "The Stellar Sovereign, a celestial female alien and one of the most powerful guardians of the Light Layer in Alien World: The Binary Divide. Gifted with the ability to manipulate gravity itself, Astranova draws limitless energy directly from the stars. She bends space around her, summons miniature celestial phenomena, and controls the movement of entire battlefields without lifting a weapon. To her allies she is a symbol of hope; to the Dark Layer, she is an unstoppable cosmic force. Astranova is an elegant, tall female alien with a graceful athletic physique. Her skin is luminous pearl-white with subtle iridescent reflections, giving the impression that she is formed from starlight itself. Across her body flow delicate glowing constellations and cosmic energy patterns that slowly shimmer like the night sky. Her face is beautiful, serene, and majestic, with glowing silver-blue eyes that resemble miniature galaxies. Her expression radiates wisdom, kindness, and absolute confidence. Long flowing silver-white hair drifts weightlessly as though suspended in space, filled with tiny glowing particles resembling distant stars. She wears an elegant suit of living celestial crystal armor, organically grown rather than manufactured. The armor is composed of translucent white, sapphire-blue, and violet crystalline structures, with smooth flowing lines inspired by constellations and nebulae. Long ethereal fabric-like energy ribbons float gracefully behind her, moving as if unaffected by gravity. Around both of her hands orbit miniature stars, glowing planets, cosmic dust, and gravitational energy spheres. Tiny fragments of space bend around her fingertips while rings of starlight rotate around her wrists. The surrounding air visibly warps due to intense gravitational manipulation. Behind Astranova floats an enormous gravitational halo resembling a luminous galaxy. Several glowing celestial rings slowly rotate around her body at different angles, while fragments of meteorites, crystal debris, and floating rocks remain suspended by her gravitational field. The battlefield is an awe-inspiring celestial landscape within the Light Layer. Floating islands drift above endless clouds, enormous crystal mountains reach toward the heavens, waterfalls flow into the sky, and brilliant nebulae illuminate the horizon. Countless stars, distant planets, glowing moons, and colorful galaxies fill the cosmic sky, creating a breathtaking balance between fantasy and science fiction. Soft cosmic light surrounds her while tiny stars drift through the air. Gravity distortions subtly bend light around her, creating realistic lensing effects. Pieces of the environment levitate effortlessly within her gravitational influence, emphasizing her complete mastery over space. Astranova floats several feet above the ground with perfect elegance, one hand gently controlling a miniature star while the other shapes a glowing gravitational field. Her pose is calm, regal, and effortless—as though manipulating the universe itself requires no exertion. The overall composition should portray Astranova as the divine protector of the cosmos—an ethereal celestial queen whose command over gravity and starlight makes her one of the greatest champions of the Light Layer.",
     "class": "Mage",
     "subclass": "Nuker"
   },
