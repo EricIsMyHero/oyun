@@ -274,6 +274,7 @@
       "Alien"
     ],
     "rarity": "Relic",
+    "group": "the-nether-flux",
     "abilityName": "",
     "stats": {
       "health": "880",
@@ -308,7 +309,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "The Living Cataclysm, a colossal alien titan born deep beneath the molten crust of the Dark Layer in Alien World: The Binary Divide. Created by Magmara herself, this towering living siege beast is forged from ancient volcanic rock and an ever-burning core of liquid magma. Every footstep causes earthquakes, while its overwhelming strength crushes anything unfortunate enough to stand before it. Magma is an enormous humanoid alien golem, standing like a walking volcano. Its body is composed of gigantic slabs of black volcanic basalt, obsidian, and fractured igneous rock, held together by rivers of glowing molten lava flowing through every crack. The lava pulses like blood, illuminating the creature from within with intense orange, crimson, and yellow light. Its head is massive and intimidating, featuring a rugged rocky face with glowing molten eyes and a wide jaw filled with jagged volcanic stone teeth. Thick obsidian horns emerge from the sides of its head, resembling cooled lava formations. Smoke and sparks continuously rise from its mouth and shoulders. Its arms are gigantic, ending in massive stone fists capable of crushing armored vehicles or entire buildings. Every movement sends fragments of rock, molten debris, and volcanic ash flying through the air. The forearms are reinforced with thick obsidian plates, while streams of lava drip from its hands onto the ground below. The creature's broad back is covered with towering volcanic crystal formations and open magma vents that constantly release dense black smoke, fire, glowing embers, and bursts of molten rock. The interior heat is so intense that the surrounding air visibly shimmers with heat distortion. Its legs resemble enormous volcanic pillars, each step shattering the ground beneath them. Lava leaks from beneath its feet, leaving behind glowing footprints and rivers of molten rock. Cracks spread across the battlefield wherever it walks. The environment is a devastated volcanic wasteland beneath Magmara's domain. Endless lava rivers flow between shattered mountains, active volcanoes erupt violently in the distance, volcanic lightning flashes through towering ash clouds, and the ground is covered with black obsidian, burning rocks, and glowing fissures leading deep into the planet's core. The atmosphere is filled with thick smoke, volcanic ash, flying embers, molten boulders, and intense heat distortion. The entire battlefield appears to be collapsing beneath the sheer weight and power of this living catastrophe. The overall composition should portray Magma as an unstoppable living natural disaster—not an intelligent warrior, but a walking volcanic apocalypse driven only by destruction."
   },
   {
     "name": "Avalith",
@@ -316,6 +317,7 @@
       "Varlıq"
     ],
     "rarity": "Relic",
+    "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
       "health": "240",
@@ -957,7 +959,7 @@
       "Alien"
     ],
     "rarity": "Relic",
-    "group": "",
+    "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
       "health": "180",
@@ -985,7 +987,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": ""
+    "story": "The Adaptive Vanguard, a versatile female alien hero and elite guardian of the Light Layer in Alien World: The Binary Divide. Unlike the other guardians who dedicate themselves to mastering a single element, Ali excels through adaptation. Her advanced living alien technology continuously analyzes the battlefield, allowing her to instantly evolve her combat style, weapons, and defenses to counter any threat. Brilliant, fearless, and compassionate, she is often the first guardian to enter battle and the last to retreat. Ali is a tall, elegant female alien with an athletic yet graceful physique. Her smooth pearl-white skin naturally glows with flowing cyan and turquoise energy veins that pulse softly beneath the surface. She possesses refined feminine features, giving her a noble yet approachable appearance. Her face is beautiful and intelligent, with luminous turquoise-blue eyes that constantly scan her surroundings. Her expression is calm, confident, and focused, reflecting both wisdom and courage. Long flowing white hair with subtle cyan highlights drifts gently as if influenced by invisible energy currents. She wears a living adaptive bio-crystal armor, organically grown from alien crystalline minerals rather than forged metal. The armor is sleek, elegant, and feminine, composed of smooth white, silver, and cyan crystal plates that continuously reshape themselves as her adaptive abilities respond to changing combat situations. Soft streams of glowing energy travel across the armor's surface like living circuitry. Floating around Ali are several adaptive crystalline constructs made entirely of pure energy. These elegant floating crystals continuously transform into different forms—energy blades, defensive shields, hovering drones, and support devices—demonstrating the limitless adaptability of her alien technology. In her right hand she projects a magnificent hard-light energy blade formed from concentrated cyan energy, while her left hand generates a large transparent hexagonal energy shield shimmering with intricate geometric patterns. Delicate streams of glowing energy spiral around both weapons as they evolve in real time. Behind Ali floats a large adaptive energy halo, composed of rotating crystalline rings and floating geometric fragments that slowly orbit around her body. Small shards of luminous crystal remain suspended in the air, constantly shifting position in response to her thoughts. The battlefield is a breathtaking sanctuary within the Light Layer, where advanced alien civilization exists in harmony with nature. Towering crystalline structures, floating islands, glowing waterfalls, radiant forests, luminous rivers, and elegant energy bridges stretch toward the horizon beneath an endless celestial sky filled with stars and distant planets. Soft rays of sunlight illuminate the environment while floating particles of blue and white energy drift peacefully through the air. The atmosphere feels hopeful, advanced, and alive, emphasizing the harmony between technology and nature. Ali stands confidently at the center of the battlefield, her adaptive blade ready while her energy shield protects those behind her. Her posture is graceful yet battle-ready, embodying intelligence, versatility, and unwavering determination to defend the Light Layer. The overall composition should portray Ali as the ultimate adaptable guardian—a heroic female alien whose living technology evolves alongside her, making her prepared for any challenge."
   },
   {
     "name": "Clara",
