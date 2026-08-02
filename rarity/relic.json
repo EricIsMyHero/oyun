@@ -26,14 +26,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "Losing her parents at a young age, Stacy was raised by Ase. To survive in this harsh underground world, she threw herself into the flames and learned to master fire. The desire to fly never left her. She built a powerful jetpack device out of scraps. Now, this young girl with glasses and ginger hair soars through the darkness of the underground caves, spreading flames and becoming the bravest scout of the Constructs team."
+    "story": "Losing her parents at a young age, Stacy was raised by Ase. To survive in this harsh underground world, she threw herself into the flames and learned to master fire. The desire to fly never left her. She built a powerful jetpack device out of scraps. Now, this young girl with glasses and ginger hair soars through the darkness of the underground caves, spreading flames and becoming the bravest scout of the Constructs team.",
+    "class": "Marksman",
+    "subclass": "Burst"
   },
   {
     "name": "Death",
@@ -62,19 +72,29 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "Death, the ultimate interdimensional horror of the Void Walkers, standing in a dark cosmic arena shrouded by an overwhelming sea of dense black mist. The figure appears as a dead, ancient entity wrapped in long, tattered pitch-black robes that blend into the surrounding darkness. Its body is partially hidden, with only fragments of a skeletal, lifeless form visible through the fog. Death's presence radiates absolute dread, as if reality itself is decaying around it. In its hands, Death holds a mysterious dark-black orb, an ancient cosmic artifact glowing with sinister void energy. The orb emits faint streams of shadow and absorbs surrounding light, creating a gravitational feeling of despair and extinction. Wisps of stolen life energy spiral into the orb from the darkness, suggesting countless souls consumed by its power. The environment is almost entirely concealed by thick supernatural mist. The fog is so dense that most of Death's body remains obscured, revealing only vague silhouettes and glimpses of its terrifying form. Shadows twist within the mist, making it impossible to determine where the creature truly begins or ends. The atmosphere is oppressive, eerie, and apocalyptic."
+    "story": "Death, the ultimate interdimensional horror of the Void Walkers, standing in a dark cosmic arena shrouded by an overwhelming sea of dense black mist. The figure appears as a dead, ancient entity wrapped in long, tattered pitch-black robes that blend into the surrounding darkness. Its body is partially hidden, with only fragments of a skeletal, lifeless form visible through the fog. Death's presence radiates absolute dread, as if reality itself is decaying around it. In its hands, Death holds a mysterious dark-black orb, an ancient cosmic artifact glowing with sinister void energy. The orb emits faint streams of shadow and absorbs surrounding light, creating a gravitational feeling of despair and extinction. Wisps of stolen life energy spiral into the orb from the darkness, suggesting countless souls consumed by its power. The environment is almost entirely concealed by thick supernatural mist. The fog is so dense that most of Death's body remains obscured, revealing only vague silhouettes and glimpses of its terrifying form. Shadows twist within the mist, making it impossible to determine where the creature truly begins or ends. The atmosphere is oppressive, eerie, and apocalyptic.",
+    "class": "Fighter",
+    "subclass": "Harvester"
   },
   {
     "name": "Sylviana",
     "type": [
-      "Varlıq"
+      "Entity"
     ],
     "rarity": "Relic",
     "group": "botanical-gardens",
@@ -99,7 +119,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+22% Hasar  |  18 » 22",
@@ -177,7 +205,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -236,7 +272,7 @@
   {
     "name": "Etheris",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Relic",
     "abilityName": "",
@@ -259,14 +295,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Tank",
+    "subclass": "Reflector"
   },
   {
     "name": "Magma",
@@ -295,7 +341,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -309,12 +363,14 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "The Living Cataclysm, a colossal alien titan born deep beneath the molten crust of the Dark Layer in Alien World: The Binary Divide. Created by Magmara herself, this towering living siege beast is forged from ancient volcanic rock and an ever-burning core of liquid magma. Every footstep causes earthquakes, while its overwhelming strength crushes anything unfortunate enough to stand before it. Magma is an enormous humanoid alien golem, standing like a walking volcano. Its body is composed of gigantic slabs of black volcanic basalt, obsidian, and fractured igneous rock, held together by rivers of glowing molten lava flowing through every crack. The lava pulses like blood, illuminating the creature from within with intense orange, crimson, and yellow light. Its head is massive and intimidating, featuring a rugged rocky face with glowing molten eyes and a wide jaw filled with jagged volcanic stone teeth. Thick obsidian horns emerge from the sides of its head, resembling cooled lava formations. Smoke and sparks continuously rise from its mouth and shoulders. Its arms are gigantic, ending in massive stone fists capable of crushing armored vehicles or entire buildings. Every movement sends fragments of rock, molten debris, and volcanic ash flying through the air. The forearms are reinforced with thick obsidian plates, while streams of lava drip from its hands onto the ground below. The creature's broad back is covered with towering volcanic crystal formations and open magma vents that constantly release dense black smoke, fire, glowing embers, and bursts of molten rock. The interior heat is so intense that the surrounding air visibly shimmers with heat distortion. Its legs resemble enormous volcanic pillars, each step shattering the ground beneath them. Lava leaks from beneath its feet, leaving behind glowing footprints and rivers of molten rock. Cracks spread across the battlefield wherever it walks. The environment is a devastated volcanic wasteland beneath Magmara's domain. Endless lava rivers flow between shattered mountains, active volcanoes erupt violently in the distance, volcanic lightning flashes through towering ash clouds, and the ground is covered with black obsidian, burning rocks, and glowing fissures leading deep into the planet's core. The atmosphere is filled with thick smoke, volcanic ash, flying embers, molten boulders, and intense heat distortion. The entire battlefield appears to be collapsing beneath the sheer weight and power of this living catastrophe. The overall composition should portray Magma as an unstoppable living natural disaster—not an intelligent warrior, but a walking volcanic apocalypse driven only by destruction."
+    "story": "The Living Cataclysm, a colossal alien titan born deep beneath the molten crust of the Dark Layer in Alien World: The Binary Divide. Created by Magmara herself, this towering living siege beast is forged from ancient volcanic rock and an ever-burning core of liquid magma. Every footstep causes earthquakes, while its overwhelming strength crushes anything unfortunate enough to stand before it. Magma is an enormous humanoid alien golem, standing like a walking volcano. Its body is composed of gigantic slabs of black volcanic basalt, obsidian, and fractured igneous rock, held together by rivers of glowing molten lava flowing through every crack. The lava pulses like blood, illuminating the creature from within with intense orange, crimson, and yellow light. Its head is massive and intimidating, featuring a rugged rocky face with glowing molten eyes and a wide jaw filled with jagged volcanic stone teeth. Thick obsidian horns emerge from the sides of its head, resembling cooled lava formations. Smoke and sparks continuously rise from its mouth and shoulders. Its arms are gigantic, ending in massive stone fists capable of crushing armored vehicles or entire buildings. Every movement sends fragments of rock, molten debris, and volcanic ash flying through the air. The forearms are reinforced with thick obsidian plates, while streams of lava drip from its hands onto the ground below. The creature's broad back is covered with towering volcanic crystal formations and open magma vents that constantly release dense black smoke, fire, glowing embers, and bursts of molten rock. The interior heat is so intense that the surrounding air visibly shimmers with heat distortion. Its legs resemble enormous volcanic pillars, each step shattering the ground beneath them. Lava leaks from beneath its feet, leaving behind glowing footprints and rivers of molten rock. Cracks spread across the battlefield wherever it walks. The environment is a devastated volcanic wasteland beneath Magmara's domain. Endless lava rivers flow between shattered mountains, active volcanoes erupt violently in the distance, volcanic lightning flashes through towering ash clouds, and the ground is covered with black obsidian, burning rocks, and glowing fissures leading deep into the planet's core. The atmosphere is filled with thick smoke, volcanic ash, flying embers, molten boulders, and intense heat distortion. The entire battlefield appears to be collapsing beneath the sheer weight and power of this living catastrophe. The overall composition should portray Magma as an unstoppable living natural disaster—not an intelligent warrior, but a walking volcanic apocalypse driven only by destruction.",
+    "class": "Tank",
+    "subclass": "Igniter"
   },
   {
     "name": "Avalith",
     "type": [
-      "Varlıq"
+      "Entity"
     ],
     "rarity": "Relic",
     "group": "the-stellar-alliance",
@@ -338,14 +394,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Marksman",
+    "subclass": "Evader"
   },
   {
     "name": "Far",
@@ -373,7 +439,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -387,12 +461,14 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Marksman",
+    "subclass": "Disabler"
   },
   {
     "name": "Demotron",
     "type": [
-      "Uzaylı"
+      "Alien"
     ],
     "rarity": "Relic",
     "group": "ancients",
@@ -416,14 +492,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "Demotron is an ancient titan made of living stone and obsidian, powered by a dying sun’s core. It is the architect of the Ancients' fortresses, a massive construct that serves as a mobile siege engine. Every step it takes shakes the foundation of the earth, and its eyes emit beams of pure, concentrated energy. Demotron is slow, but its durability is unmatched. It is a relic of a time when giants ruled the world, and it has returned to crush the tiny kingdoms of the modern era."
+    "story": "Demotron is an ancient titan made of living stone and obsidian, powered by a dying sun’s core. It is the architect of the Ancients' fortresses, a massive construct that serves as a mobile siege engine. Every step it takes shakes the foundation of the earth, and its eyes emit beams of pure, concentrated energy. Demotron is slow, but its durability is unmatched. It is a relic of a time when giants ruled the world, and it has returned to crush the tiny kingdoms of the modern era.",
+    "class": "Tank",
+    "subclass": "Regenerator"
   },
   {
     "name": "Format",
@@ -451,14 +537,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Specialist",
+    "subclass": "Mimic"
   },
   {
     "name": "Pyhsic",
@@ -486,14 +582,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Mage",
+    "subclass": "Deathcaller"
   },
   {
     "name": "Naar",
@@ -522,7 +628,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
@@ -559,14 +673,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Fighter",
+    "subclass": "Flurry"
   },
   {
     "name": "Aeralis",
@@ -595,14 +719,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "Aeralis chose the path of magic over science since his early childhood, mastering the invisible currents of the world. His power to bend the air is so immense that no creature can withstand his gales. However, this divine strength is a double-edged sword; controlling the violent winds requires his absolute focus and spiritual discipline. On the battlefield, he is a storm in human form, clearing entire paths for the Royal Blood with a single wave of his hand."
+    "story": "Aeralis chose the path of magic over science since his early childhood, mastering the invisible currents of the world. His power to bend the air is so immense that no creature can withstand his gales. However, this divine strength is a double-edged sword; controlling the violent winds requires his absolute focus and spiritual discipline. On the battlefield, he is a storm in human form, clearing entire paths for the Royal Blood with a single wave of his hand.",
+    "class": "Marksman",
+    "subclass": "Repeller"
   },
   {
     "name": "Dark Necromancer",
@@ -632,7 +766,15 @@
       "lifestealChance": "15%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "10%"
+      "dodge": "10%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -760,12 +902,13 @@
         "class": "Ölü"
       }
     ],
-    "class": "Fighter"
+    "class": "Fighter",
+    "subclass": "Summoner"
   },
   {
     "name": "Shine",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Relic",
     "abilityName": "",
@@ -788,7 +931,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -801,12 +952,14 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "class": "Support",
+    "subclass": "Healer"
   },
   {
     "name": "Bloodraider",
     "type": [
-      "Varlıq"
+      "Entity"
     ],
     "rarity": "Relic",
     "group": "void-walkers",
@@ -830,19 +983,29 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "Bloodraider, a cursed dark fantasy warrior driven by a self-destructive oath, standing in a battlefield engulfed by shadows and crimson energy. Its body appears damaged and exhausted, yet fueled by relentless determination. Streams of glowing red life essence flow from its head and body, creating the impression that its own vitality is constantly escaping while sustaining its power. Unlike a traditional executioner weapon, the Blood Reaper is a relatively small but extremely deadly scythe forged entirely from condensed crimson life energy. The blade is sharp, curved, and made of swirling red energy that resembles liquid crystal. Heavy dark chains are permanently attached and wrapped around the scythe's handle, linking the weapon directly to Bloodraider. The chains appear ancient, worn, and partially infused with the same crimson energy as the weapon. Bloodraider firmly holds the smaller Blood Reaper in one hand, while its other hand grips a long length of chain extending from the weapon. The chains hang, coil, and sway around the character, creating a menacing silhouette and emphasizing the bond between wielder and weapon. Crimson energy continuously flows through the chains like glowing veins. Red life essence leaks from cracks in its armor, from its head, arms, and chest, drifting through the air as luminous particles and flowing streams. The surrounding atmosphere is filled with dark mist, floating crimson embers, and traces of supernatural energy. The character radiates sacrifice, destruction, and unwavering aggression. Ultra-realistic dark fantasy character design, photorealistic materials, highly detailed chains, realistic metal textures, cinematic lighting, volumetric fog, realistic cloth physics, glowing crimson energy effects, intimidating stance, dark atmosphere, AAA game card art, Unreal Engine 5, physically based rendering, hyper-detailed textures, masterpiece quality, 8K, dramatic shadows, realistic anatomy, epic fantasy illustration."
+    "story": "Bloodraider, a cursed dark fantasy warrior driven by a self-destructive oath, standing in a battlefield engulfed by shadows and crimson energy. Its body appears damaged and exhausted, yet fueled by relentless determination. Streams of glowing red life essence flow from its head and body, creating the impression that its own vitality is constantly escaping while sustaining its power. Unlike a traditional executioner weapon, the Blood Reaper is a relatively small but extremely deadly scythe forged entirely from condensed crimson life energy. The blade is sharp, curved, and made of swirling red energy that resembles liquid crystal. Heavy dark chains are permanently attached and wrapped around the scythe's handle, linking the weapon directly to Bloodraider. The chains appear ancient, worn, and partially infused with the same crimson energy as the weapon. Bloodraider firmly holds the smaller Blood Reaper in one hand, while its other hand grips a long length of chain extending from the weapon. The chains hang, coil, and sway around the character, creating a menacing silhouette and emphasizing the bond between wielder and weapon. Crimson energy continuously flows through the chains like glowing veins. Red life essence leaks from cracks in its armor, from its head, arms, and chest, drifting through the air as luminous particles and flowing streams. The surrounding atmosphere is filled with dark mist, floating crimson embers, and traces of supernatural energy. The character radiates sacrifice, destruction, and unwavering aggression. Ultra-realistic dark fantasy character design, photorealistic materials, highly detailed chains, realistic metal textures, cinematic lighting, volumetric fog, realistic cloth physics, glowing crimson energy effects, intimidating stance, dark atmosphere, AAA game card art, Unreal Engine 5, physically based rendering, hyper-detailed textures, masterpiece quality, 8K, dramatic shadows, realistic anatomy, epic fantasy illustration.",
+    "class": "Assassin",
+    "subclass": "Bloodpact"
   },
   {
     "name": "Fallen Angel",
     "type": [
-      "Varlıq"
+      "Entity"
     ],
     "rarity": "Relic",
     "group": "ancients",
@@ -866,14 +1029,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "Fallen Angel was once a high-ranking member of the Royal Blood's ancestors, but she was cast out for seeking the forbidden power of the Ancients. Her wings are now tattered and stained with shadow, and her golden armor has turned to a rusted, cursed bronze. She retains her celestial grace but uses it to deliver merciless destruction. She despises the current Royal Blood line and leads the Ancients with a cold, calculated vengeance, seeking to reclaim the throne that she believes is rightfully hers."
+    "story": "Fallen Angel was once a high-ranking member of the Royal Blood's ancestors, but she was cast out for seeking the forbidden power of the Ancients. Her wings are now tattered and stained with shadow, and her golden armor has turned to a rusted, cursed bronze. She retains her celestial grace but uses it to deliver merciless destruction. She despises the current Royal Blood line and leads the Ancients with a cold, calculated vengeance, seeking to reclaim the throne that she believes is rightfully hers.",
+    "class": "Assassin",
+    "subclass": "Hunter"
   },
   {
     "name": "Worms",
@@ -902,7 +1075,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "20%"
+      "dodge": "20%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -915,7 +1096,9 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "These are not the harmless creatures found in common soil. Henry’s bio-engineering transformed these tiny worms into aggressive, flesh-eating scavengers. They move in writhing masses, hidden beneath the earth until they detect a vibration. Once they emerge, their hunger is insatiable. They are the farm's underground security, small enough to bypass most defenses but fierce enough to tear through leather and bone. For Henry, they are the perfect disposal system for his failed experiments."
+    "story": "These are not the harmless creatures found in common soil. Henry’s bio-engineering transformed these tiny worms into aggressive, flesh-eating scavengers. They move in writhing masses, hidden beneath the earth until they detect a vibration. Once they emerge, their hunger is insatiable. They are the farm's underground security, small enough to bypass most defenses but fierce enough to tear through leather and bone. For Henry, they are the perfect disposal system for his failed experiments.",
+    "class": "Assassin",
+    "subclass": "Ambusher"
   },
   {
     "name": "Unara",
@@ -944,14 +1127,24 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "Unara is the mother of Laura, but she possesses a much darker and more guarded nature. Unlike her daughter, she trusts no one and uses her magic strictly for self-preservation. She surrounds herself with impenetrable arcane barriers, keeping the world at a distance to ensure her own safety. Her neutral outlook is driven by survival; she will neither help nor hinder others unless they threaten her solitude. She is a solitary fortress of magic, cold and unyielding to those who seek her aid."
+    "story": "Unara is the mother of Laura, but she possesses a much darker and more guarded nature. Unlike her daughter, she trusts no one and uses her magic strictly for self-preservation. She surrounds herself with impenetrable arcane barriers, keeping the world at a distance to ensure her own safety. Her neutral outlook is driven by survival; she will neither help nor hinder others unless they threaten her solitude. She is a solitary fortress of magic, cold and unyielding to those who seek her aid.",
+    "class": "Mage",
+    "subclass": "Bomber"
   },
   {
     "name": "Ali",
@@ -980,19 +1173,29 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "The Adaptive Vanguard, a versatile female alien hero and elite guardian of the Light Layer in Alien World: The Binary Divide. Unlike the other guardians who dedicate themselves to mastering a single element, Ali excels through adaptation. Her advanced living alien technology continuously analyzes the battlefield, allowing her to instantly evolve her combat style, weapons, and defenses to counter any threat. Brilliant, fearless, and compassionate, she is often the first guardian to enter battle and the last to retreat. Ali is a tall, elegant female alien with an athletic yet graceful physique. Her smooth pearl-white skin naturally glows with flowing cyan and turquoise energy veins that pulse softly beneath the surface. She possesses refined feminine features, giving her a noble yet approachable appearance. Her face is beautiful and intelligent, with luminous turquoise-blue eyes that constantly scan her surroundings. Her expression is calm, confident, and focused, reflecting both wisdom and courage. Long flowing white hair with subtle cyan highlights drifts gently as if influenced by invisible energy currents. She wears a living adaptive bio-crystal armor, organically grown from alien crystalline minerals rather than forged metal. The armor is sleek, elegant, and feminine, composed of smooth white, silver, and cyan crystal plates that continuously reshape themselves as her adaptive abilities respond to changing combat situations. Soft streams of glowing energy travel across the armor's surface like living circuitry. Floating around Ali are several adaptive crystalline constructs made entirely of pure energy. These elegant floating crystals continuously transform into different forms—energy blades, defensive shields, hovering drones, and support devices—demonstrating the limitless adaptability of her alien technology. In her right hand she projects a magnificent hard-light energy blade formed from concentrated cyan energy, while her left hand generates a large transparent hexagonal energy shield shimmering with intricate geometric patterns. Delicate streams of glowing energy spiral around both weapons as they evolve in real time. Behind Ali floats a large adaptive energy halo, composed of rotating crystalline rings and floating geometric fragments that slowly orbit around her body. Small shards of luminous crystal remain suspended in the air, constantly shifting position in response to her thoughts. The battlefield is a breathtaking sanctuary within the Light Layer, where advanced alien civilization exists in harmony with nature. Towering crystalline structures, floating islands, glowing waterfalls, radiant forests, luminous rivers, and elegant energy bridges stretch toward the horizon beneath an endless celestial sky filled with stars and distant planets. Soft rays of sunlight illuminate the environment while floating particles of blue and white energy drift peacefully through the air. The atmosphere feels hopeful, advanced, and alive, emphasizing the harmony between technology and nature. Ali stands confidently at the center of the battlefield, her adaptive blade ready while her energy shield protects those behind her. Her posture is graceful yet battle-ready, embodying intelligence, versatility, and unwavering determination to defend the Light Layer. The overall composition should portray Ali as the ultimate adaptable guardian—a heroic female alien whose living technology evolves alongside her, making her prepared for any challenge."
+    "story": "The Adaptive Vanguard, a versatile female alien hero and elite guardian of the Light Layer in Alien World: The Binary Divide. Unlike the other guardians who dedicate themselves to mastering a single element, Ali excels through adaptation. Her advanced living alien technology continuously analyzes the battlefield, allowing her to instantly evolve her combat style, weapons, and defenses to counter any threat. Brilliant, fearless, and compassionate, she is often the first guardian to enter battle and the last to retreat. Ali is a tall, elegant female alien with an athletic yet graceful physique. Her smooth pearl-white skin naturally glows with flowing cyan and turquoise energy veins that pulse softly beneath the surface. She possesses refined feminine features, giving her a noble yet approachable appearance. Her face is beautiful and intelligent, with luminous turquoise-blue eyes that constantly scan her surroundings. Her expression is calm, confident, and focused, reflecting both wisdom and courage. Long flowing white hair with subtle cyan highlights drifts gently as if influenced by invisible energy currents. She wears a living adaptive bio-crystal armor, organically grown from alien crystalline minerals rather than forged metal. The armor is sleek, elegant, and feminine, composed of smooth white, silver, and cyan crystal plates that continuously reshape themselves as her adaptive abilities respond to changing combat situations. Soft streams of glowing energy travel across the armor's surface like living circuitry. Floating around Ali are several adaptive crystalline constructs made entirely of pure energy. These elegant floating crystals continuously transform into different forms—energy blades, defensive shields, hovering drones, and support devices—demonstrating the limitless adaptability of her alien technology. In her right hand she projects a magnificent hard-light energy blade formed from concentrated cyan energy, while her left hand generates a large transparent hexagonal energy shield shimmering with intricate geometric patterns. Delicate streams of glowing energy spiral around both weapons as they evolve in real time. Behind Ali floats a large adaptive energy halo, composed of rotating crystalline rings and floating geometric fragments that slowly orbit around her body. Small shards of luminous crystal remain suspended in the air, constantly shifting position in response to her thoughts. The battlefield is a breathtaking sanctuary within the Light Layer, where advanced alien civilization exists in harmony with nature. Towering crystalline structures, floating islands, glowing waterfalls, radiant forests, luminous rivers, and elegant energy bridges stretch toward the horizon beneath an endless celestial sky filled with stars and distant planets. Soft rays of sunlight illuminate the environment while floating particles of blue and white energy drift peacefully through the air. The atmosphere feels hopeful, advanced, and alive, emphasizing the harmony between technology and nature. Ali stands confidently at the center of the battlefield, her adaptive blade ready while her energy shield protects those behind her. Her posture is graceful yet battle-ready, embodying intelligence, versatility, and unwavering determination to defend the Light Layer. The overall composition should portray Ali as the ultimate adaptable guardian—a heroic female alien whose living technology evolves alongside her, making her prepared for any challenge.",
+    "class": "Support",
+    "subclass": "Guardian"
   },
   {
     "name": "Clara",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Relic",
     "group": "barber-brothers",
@@ -1016,19 +1219,29 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
       "level2": "-",
       "level3": "-"
     },
-    "story": "The Auburn Artist, the 27-year-old eldest sibling of the Barber Brothers, a graceful and highly respected master stylist known for her elegance, creativity, and flawless technique. While her brothers rely on speed and precision, Clara excels through artistry, transforming every hairstyle into a masterpiece. She serves as the calm and sophisticated center of the family business, balancing the energetic personalities of Fen and Ben. Clara is a beautiful young woman with long, luxurious auburn hair that cascades elegantly around her shoulders. Her hair is impeccably styled, featuring intricate braids, flowing layers, and refined details that showcase her extraordinary talent. Her warm, intelligent eyes and composed expression radiate confidence, professionalism, and creativity. She wears a sophisticated stylist outfit that blends modern salon fashion with elegant fantasy aesthetics. Her attire includes tailored fabrics, refined accessories, stylish gloves, decorative ribbons, and subtle beauty-inspired motifs. The outfit feels professional, fashionable, and artistic rather than combat-oriented, emphasizing her role as a master designer and creator. In her hands are beautifully crafted professional styling scissors, combs, and hairstyling tools, all designed with exceptional elegance. Around her float strands of shimmering hair-like energy, decorative ribbons, and graceful swirling patterns that resemble intricate hairstyle designs brought to life. The visual effects should feel artistic and refined rather than aggressive. Her pose is calm and deliberate, as though she is carefully crafting a masterpiece. Delicate streams of flowing auburn-colored energy weave through the air around her, forming elegant curves and patterns inspired by sophisticated hairstyles. Every movement reflects precision, beauty, and years of experience. The environment combines a luxurious high-end salon with a fantasy-inspired creative studio. Elegant mirrors, premium styling stations, decorative lighting, floral arrangements, and artistic design elements surround her. The atmosphere feels welcoming, refined, and professional while still carrying the grandeur of a fantasy card illustration. The overall composition should emphasize beauty, artistry, elegance, and mastery. Clara appears not as a warrior, but as an elite stylist whose creativity has become a powerful force. She embodies sophistication, professionalism, and the flawless reputation of the Barber Brothers."
+    "story": "The Auburn Artist, the 27-year-old eldest sibling of the Barber Brothers, a graceful and highly respected master stylist known for her elegance, creativity, and flawless technique. While her brothers rely on speed and precision, Clara excels through artistry, transforming every hairstyle into a masterpiece. She serves as the calm and sophisticated center of the family business, balancing the energetic personalities of Fen and Ben. Clara is a beautiful young woman with long, luxurious auburn hair that cascades elegantly around her shoulders. Her hair is impeccably styled, featuring intricate braids, flowing layers, and refined details that showcase her extraordinary talent. Her warm, intelligent eyes and composed expression radiate confidence, professionalism, and creativity. She wears a sophisticated stylist outfit that blends modern salon fashion with elegant fantasy aesthetics. Her attire includes tailored fabrics, refined accessories, stylish gloves, decorative ribbons, and subtle beauty-inspired motifs. The outfit feels professional, fashionable, and artistic rather than combat-oriented, emphasizing her role as a master designer and creator. In her hands are beautifully crafted professional styling scissors, combs, and hairstyling tools, all designed with exceptional elegance. Around her float strands of shimmering hair-like energy, decorative ribbons, and graceful swirling patterns that resemble intricate hairstyle designs brought to life. The visual effects should feel artistic and refined rather than aggressive. Her pose is calm and deliberate, as though she is carefully crafting a masterpiece. Delicate streams of flowing auburn-colored energy weave through the air around her, forming elegant curves and patterns inspired by sophisticated hairstyles. Every movement reflects precision, beauty, and years of experience. The environment combines a luxurious high-end salon with a fantasy-inspired creative studio. Elegant mirrors, premium styling stations, decorative lighting, floral arrangements, and artistic design elements surround her. The atmosphere feels welcoming, refined, and professional while still carrying the grandeur of a fantasy card illustration. The overall composition should emphasize beauty, artistry, elegance, and mastery. Clara appears not as a warrior, but as an elite stylist whose creativity has become a powerful force. She embodies sophistication, professionalism, and the flawless reputation of the Barber Brothers.",
+    "class": "Specialist",
+    "subclass": "Screamer"
   },
   {
     "name": "Artist",
     "type": [
-      "İnsan"
+      "Human"
     ],
     "rarity": "Relic",
     "group": "the-last-academy",
@@ -1053,7 +1266,15 @@
       "lifestealChance": "10%",
       "lifesteal": "66%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
