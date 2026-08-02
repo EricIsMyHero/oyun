@@ -1,9 +1,7 @@
 [
   {
     "name": "Hammies",
-    "type": [
-      "Heyvan"
-    ],
+    "type": ["Heyvan"],
     "rarity": "Mundane",
     "group": "beasts",
     "abilityName": "",
@@ -46,9 +44,7 @@
   },
   {
     "name": "B-B",
-    "type": [
-      "Heyvan"
-    ],
+    "type": ["Heyvan"],
     "rarity": "Mundane",
     "group": "the-amazing-circus",
     "abilityName": "",
@@ -92,9 +88,7 @@
   },
   {
     "name": "Scrapy",
-    "type": [
-      "Robot"
-    ],
+    "type": ["Robot"],
     "rarity": "Mundane",
     "group": "constructs",
     "abilityName": "",
@@ -183,11 +177,10 @@
     "subclass": "Buffer"
   },
   {
-    "name": "Vortex",
-    "type": [
-      "Uzaylı"
-    ],
+    "name": "Nortex",
+    "type": ["Alien"],
     "rarity": "Mundane",
+    "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -215,14 +208,12 @@
       "level2": "+10% Öz. Hasar Bonusu  |  40% » 50%",
       "level3": "+5% Hız  |  1000 » 1050"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "The Arctic Sentinel, the fearless leader of the Light Guardians in Alien World: The Binary Divide. Born on the frozen polar regions of the planet's Light Layer, Nortex has mastered the ancient power of arctic energy. Rather than seeking destruction, he freezes enemy advances, protects his allies, and stands as an unbreakable shield against the forces of darkness. Wherever Nortex walks, the battlefield becomes a realm of crystal ice and absolute tranquility. Nortex is a noble male alien warrior with a tall, athletic, and powerful physique. His body is completely organic, covered in smooth white and pale ice-blue alien skin that naturally emits a soft frozen glow. Thin crystalline patterns spread across his body like naturally grown frost instead of armor. His face is calm, heroic, and wise, with glowing cyan-blue eyes that radiate hope and determination. Elegant crystalline horns sweep backward from his head, resembling naturally grown ice formations. His expression reflects absolute confidence and compassion rather than aggression. He wears living crystalline armor grown from pure arctic minerals rather than forged metal. The armor is formed from translucent white and blue ice crystals, covering his shoulders, chest, forearms, and legs while remaining elegant and lightweight. Sharp frozen crystal formations decorate the armor without making it bulky. In his hands he channels pure arctic energy, creating swirling streams of snow, frost, and glowing icy particles. Large floating ice crystals orbit around his arms while waves of freezing mist spread outward with every movement. His powers appear magical and natural rather than technological. Beneath his feet, the ground instantly freezes into beautifully detailed crystal ice. Jagged ice spikes emerge naturally from the frozen terrain, while intricate snowflake patterns spread across the battlefield wherever his energy flows. Behind him rises the magnificent landscape of the Light Layer's frozen kingdom—towering glaciers, crystal mountains, frozen waterfalls, shimmering ice caves, snow-covered forests, and brilliant auroras dancing across the night sky. Massive floating ice formations drift silently above the landscape, bathed in celestial blue light. The atmosphere is peaceful yet immensely powerful. Fine snowflakes drift through the air alongside sparkling frost particles and cold mist. Soft rays of light shine through the icy environment, creating an inspiring contrast to the darkness of the opposing faction. Nortex stands proudly with one hand extended forward, releasing a wave of freezing energy, while the other controls floating crystalline ice around him. His posture communicates leadership, protection, and unwavering resolve—the true guardian of the Light Layer. The overall composition should portray Nortex as a legendary protector whose frozen power symbolizes hope, resilience, and absolute control over the arctic elements.",
     "class": "Marksman"
   },
   {
     "name": "Gloop",
-    "type": [
-      "Uzaylı"
-    ],
+    "type": ["Alien"],
     "rarity": "Mundane",
     "group": "ancients",
     "abilityName": "Devouring Abyss",
@@ -296,10 +287,9 @@
   },
   {
     "name": "Venomora",
-    "type": [
-      "İnsan"
-    ],
+    "type": ["Alien"],
     "rarity": "Mundane",
+    "group": "the-nether-flux",
     "abilityName": "",
     "stats": {
       "health": "250",
@@ -334,7 +324,7 @@
       "level2": "+5% Can  |  200% » 210%",
       "level3": "+5% Kritik Şansı  |  5% » 10%"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "The Silent Venom, an elite alien assassin of the Dark Layer in Alien World: The Binary Divide. She is a nearly invisible predator that stalks her victims without making the slightest sound. Feared throughout the planet for her lightning-fast strikes and lethal neurotoxin, Venomora paralyzes her prey long before they realize she is there. She never wastes movement, never speaks, and never misses. Venomora is a tall, elegant female alien with an athletic, agile physique designed for speed and stealth. Her body is covered in sleek obsidian-black exoskeletal armor with smooth organic curves, accented by glowing emerald-green bioluminescent veins that pulse faintly beneath the surface. Her silhouette is graceful yet intimidating, resembling the perfect apex hunter. Her face is sharp and alien, with glowing toxic-green eyes that pierce through darkness. Her expression is cold and emotionless, while subtle venom glands along her jaw emit faint wisps of emerald vapor. Small blade-like protrusions extend backward from her head, giving her an aerodynamic appearance. Both forearms end in long, razor-sharp venomous claws, coated with glowing neurotoxic venom. Thick droplets of luminous green poison slowly slide from the claws before evaporating into toxic mist. Every movement leaves faint trails of poisonous particles suspended in the air. Her long segmented tail ends in a deadly scorpion-like stinger, filled with pulsating emerald venom visible beneath a translucent crystalline chamber. The tail curves gracefully behind her, poised to strike with terrifying speed. Around her body flows a subtle camouflage field that partially bends light, making sections of her body fade into the surrounding environment. Wisps of green toxic mist drift around her feet while glowing spores float silently through the air, enhancing the illusion that she is emerging from nowhere. The battlefield is a dense alien jungle within the Dark Layer, filled with towering bioluminescent plants, enormous poisonous fungi, black alien trees, glowing vines, toxic swamps, and luminous spores. Thick emerald fog blankets the forest floor while faint alien moons illuminate the environment from above. She crouches atop a massive twisted branch or alien rock formation, ready to ambush her prey. Her posture resembles a hunting predator moments before striking, balancing elegance with explosive speed. The atmosphere is tense, silent, and predatory. The environment should communicate that every living creature fears entering her territory, where one unseen strike is enough to end the hunt before it begins. The overall composition should portray Venomora as the perfect alien assassin—beautiful, silent, highly intelligent, and lethally efficient.",
     "class": "Mage",
     "subclass": "Controller"
   },
