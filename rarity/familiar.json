@@ -25,7 +25,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+5% Saldırı Hızı | 1,70s » 1,615s",
@@ -39,7 +47,7 @@
   {
     "name": "Chicken",
     "type": [
-      "Heyvan"
+      "Animal"
     ],
     "rarity": "Familiar",
     "group": "twisted-farm",
@@ -63,7 +71,15 @@
       "lifestealChance": "-",
       "lifesteal": "-",
       "damageminimiser": "0%",
-      "dodge": "10%"
+      "dodge": "10%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "mechanic": "burst",
     "mechanicStats": {
@@ -106,7 +122,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -121,12 +145,13 @@
       "level3": "+5% Öz. Yavaşlatma | 25% » 30%"
     },
     "story": "The Cryogenic Marksman, a highly advanced combat automaton developed by the Steam Alliance, engineered exclusively for long-range precision eliminations. Instead of conventional ammunition, Frostshot operates using an innovative mixture of liquid nitrogen and high-pressure steam, allowing it to fire devastating cryogenic projectiles capable of freezing enemies where they stand. Every shot is carefully calculated, turning the battlefield into a frozen hunting ground. Frostshot is a sleek yet heavily engineered bipedal combat robot, designed for stability and extreme precision rather than brute force. Its chassis is constructed from forged steel, polished brass, reinforced iron plating, copper tubing, exposed gears, precision pistons, and intricate clockwork mechanisms. The design feels industrial and mechanical, faithfully representing advanced steampunk engineering rather than futuristic technology. Its head features a single glowing icy-blue optical lens surrounded by precision targeting mechanisms and rotating sensor arrays. Frost constantly forms around the lens and nearby metal surfaces, while small vents release cold vapor instead of ordinary steam. Held firmly in both mechanical hands is a massive steam-powered cryogenic sniper rifle. The weapon combines polished brass engineering with reinforced steel construction, featuring pressurized liquid nitrogen tanks, insulated copper pipelines, pressure gauges, rotating cooling valves, precision scope optics, and an exceptionally long barrel designed for extreme-range accuracy. Frost accumulates across the weapon's surface while icy vapor continuously escapes from cooling vents. Inside transparent reinforced tubes, glowing cryogenic coolant flows through the rifle toward the firing chamber. The barrel emits freezing mist, while snow crystals and tiny ice particles drift through the surrounding air. The rifle appears capable of launching a single devastating cryogenic bolt powerful enough to instantly immobilize its target. The robot stands atop an elevated industrial platform overlooking a vast battlefield. Behind it stretches a colossal Steam Alliance factory, filled with giant gears, pressure boilers, towering smokestacks, copper pipelines, cranes, and enormous steam engines. The warm industrial environment contrasts beautifully with the freezing aura surrounding Frostshot, creating dramatic visual tension. Ice spreads beneath its feet and across nearby machinery. Metal surfaces become coated with frost, frozen steam hangs in the air, and crystalline ice formations grow naturally around the robot as its cooling systems operate. White vapor constantly escapes from vents throughout its body, emphasizing the immense cryogenic power stored within. Its stance is perfectly still and disciplined, like an elite sniper patiently waiting for the ideal shot. Every mechanical component reflects precision, patience, and lethal efficiency.",
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Sniper"
   },
   {
     "name": "Hornets",
     "type": [
-      "Heyvan"
+      "Animal"
     ],
     "rarity": "Familiar",
     "group": "beasts",
@@ -150,7 +175,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "10%"
+      "dodge": "10%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+10% Can | 130 » 143",
@@ -158,7 +191,8 @@
       "level3": "+5% Kritik Şansı | 5% » 10%"
     },
     "story": "The Swarm of Stingers, a colossal airborne swarm of prehistoric hornets dragged through a mana portal from an ancient forgotten ecosystem. These are not ordinary insects but massive, highly aggressive hornets infused with raw mana energy, transformed into a terrifying living storm of wings, armored bodies, and deadly stingers. Thousands of gigantic prehistoric hornets fill the sky in a dense, synchronized swarm. Their bodies feature rugged exoskeletons reinforced by evolution and mana, with sharp segmented armor plates, powerful mandibles, glowing compound eyes, and long spear-like stingers designed for relentless attacks. Their appearance is intimidating and predatory, resembling apex hunters of the insect world rather than simple pollinators. Raw mana energy courses through their bodies as glowing veins of golden, amber, and pale blue light beneath their dark exoskeletons. Every movement leaves behind faint trails of magical energy, making the swarm appear like a supernatural storm crossing the battlefield. The hornets move with perfect coordination, forming enormous swirling clouds that blot out portions of the sky. Their countless wings generate violent turbulence, scattering dust, leaves, and debris across the landscape. The air is filled with a deafening buzzing roar created by thousands of wings beating in unison. Each hornet possesses an elongated stinger coated with volatile mana-infused venom. Glowing droplets of toxic energy trail behind their attacks, creating an atmosphere of constant danger. The swarm behaves as a single devastating force, overwhelming everything through numbers, speed, and coordination. Behind them, a massive unstable mana portal tears through reality, revealing glimpses of a prehistoric world dominated by giant insects, towering ancient plants, colossal ferns, and untamed wilderness. Magical lightning and dimensional distortions surround the portal, emphasizing their unnatural arrival. Below the swarm, the battlefield bears signs of devastation. Vegetation has been stripped away, terrain is scarred by repeated assaults, and clouds of dust, pollen, mana particles, and atmospheric haze fill the environment. The composition emphasizes overwhelming aerial dominance and relentless predatory behavior.",
-    "class": "Fighter"
+    "class": "Fighter",
+    "subclass": "Bulwark"
   },
   {
     "name": "Warborn",
@@ -186,7 +220,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -231,7 +273,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+20% Öz. Vaxt  |  10 » 12",
@@ -268,7 +318,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+50% Öz. Hasar Bonusu  |  100% » 150%",
@@ -276,7 +334,8 @@
       "level3": "+5% Kritik Şansı  |  5% » 10%"
     },
     "story": "",
-    "class": "Marksman"
+    "class": "Marksman",
+    "subclass": "Wanderer"
   },
   {
     "name": "Deadscope",
@@ -305,7 +364,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+5% Speed  |  900 » 945",
@@ -319,7 +386,7 @@
   {
     "name": "Turtle",
     "type": [
-      "Heyvan"
+      "Animal"
     ],
     "rarity": "Familiar",
     "isMulti": true,
@@ -344,7 +411,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "10%"
+      "dodge": "10%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -398,7 +473,8 @@
         "class": "Fighter"
       }
     ],
-    "class": "Tank"
+    "class": "Tank",
+    "subclass": "Regenerator"
   },
   {
     "name": "Feral Wolf",
@@ -427,7 +503,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "10%"
+      "dodge": "10%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+10% Sıyrılma  |  10% » 20%",
@@ -435,7 +519,8 @@
       "level3": "+5% Saldırı Hızı  |  0,95s » 0,9s"
     },
     "story": "The Pack Alpha, a gigantic prehistoric wolf dragged through a mana portal from an ancient untamed dimension. This apex pack hunter is far larger than any modern wolf, built entirely for speed, endurance, and ruthless pursuit. Its powerful body is covered in dense shadow-dark fur, creating the impression of a living predator emerging from the darkness of forgotten forests. The wolf possesses a lean yet heavily muscular frame designed for explosive acceleration. Powerful legs, broad shoulders, and razor-sharp claws allow it to move with terrifying speed across any terrain. Its massive jaws are filled with predatory fangs capable of tearing through prey with relentless efficiency. Scars across its body tell the story of countless battles fought in the brutal prehistoric wilderness. Its glowing eyes radiate primal intelligence and untamed aggression. The creature stands ready to strike at any moment, muscles tense and body lowered into a hunting stance. Every aspect of its appearance communicates danger, speed, and lethal instinct. Dark mist and drifting shadows swirl through its fur as it moves through an ancient forest environment. The battlefield is surrounded by towering prehistoric trees, enormous roots, dense vegetation, and remnants of forgotten ecosystems. Broken branches, claw marks, and disturbed earth reveal the path of a predator that dominates everything within its territory. Behind the beast, a crackling mana portal remains open, revealing glimpses of its original world—vast primeval forests stretching endlessly beneath storm-filled skies. Ancient wildlife can be faintly seen in the distance while magical energy distorts the edges of reality around the portal. The scene captures a moment of imminent attack. Dust, leaves, and debris are thrown into the air by the wolf's explosive movement, emphasizing its incredible speed and unpredictability. The atmosphere feels tense, primal, and dangerous, showcasing a creature that survives purely through instinct and relentless aggression.",
-    "class": "Assassin"
+    "class": "Assassin",
+    "subclass": "Ambusher"
   },
   {
     "name": "Trac",
@@ -464,7 +549,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+3% Health  |  700 » 721",
@@ -478,7 +571,7 @@
   {
     "name": "Tornado",
     "type": [
-      "Varlıq"
+      "Entity"
     ],
     "rarity": "Familiar",
     "group": "ancients",
@@ -502,7 +595,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+25% Hasar  |  4 » 5",
@@ -540,7 +641,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "5%"
+      "dodge": "5%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+5% Hasar Azaltma  |  0% » 5%",
@@ -548,7 +657,8 @@
       "level3": "+10% Saldırı Hızı  |  1,00s » 0,90s"
     },
     "story": "The Apex Prime, a massive prehistoric apex predator dragged through a mana portal from a forgotten primordial dimension. This ferocious bipedal carnivore embodies pure survival instinct, standing at the top of the ancient food chain. Its powerful body is covered in thick, battle-scarred leathery hide, showing countless signs of survival in a brutal prehistoric world. The creature possesses an enormous muscular frame supported by powerful hind legs capable of explosive movement. Its massive tail balances its body while helping it maintain agility despite its immense size. Rows of razor-sharp teeth fill its gigantic jaws, each tooth showing realistic wear from years of hunting prehistoric prey. Its claws are thick, deadly, and perfectly adapted for tearing through enemies. Dino stands in a dominant pose, unleashing a terrifying roar that echoes across the battlefield. The force of the roar visibly disturbs the environment, creating shockwaves through dust, debris, and the surrounding air. Smaller creatures in the distance appear intimidated by its overwhelming presence, emphasizing its role as the ultimate predator. Its eyes burn with primal intelligence and relentless aggression. Unlike supernatural monsters, Dino radiates the terrifying realism of a creature shaped solely by evolution, instinct, and survival. Every muscle, scar, and movement reflects raw prehistoric power. Behind the beast, an unstable mana portal remains open, revealing glimpses of its original prehistoric world. Ancient jungles, volcanic landscapes, colossal ferns, and distant extinct creatures can be seen through the dimensional rift. Blue and violet mana energy crackles around the portal, contrasting with the creature's natural and primitive appearance. The battlefield itself bears signs of devastation caused by its arrival. Broken stone, shattered trees, deep claw marks, and scattered debris surround the predator. Dust and atmospheric particles fill the air, creating a cinematic sense of scale and danger.",
-    "class": "Fighter"
+    "class": "Fighter",
+    "subclass": "Rampager"
   },
   {
     "name": "Tenta",
@@ -577,7 +687,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -592,7 +710,8 @@
       "level3": "+5% Menzil  |  2000 » 2100"
     },
     "story": "The Abyssal Leviathan, an ancient multi-tentacled sea horror dragged through a mana portal from the deepest primordial oceans of a forgotten prehistoric dimension. This colossal creature is a living nightmare of the abyss, possessing an enormous central body surrounded by massive, powerful tentacles covered in ancient armor-like scales, scars, and bioluminescent markings from the depths where sunlight never existed. Recently torn from its underwater realm, Tenta is enveloped in swirling mana energy that allows it to survive and move effortlessly on dry land. Streams of glowing blue-violet mana flow through its body, forming luminous veins beneath its thick hide. The magical energy constantly shifts around the creature, adapting its physiology to the unfamiliar environment. Its gigantic tentacles dominate the scene, twisting and coiling through the battlefield with overwhelming force. Each limb is covered with intricate textures, prehistoric patterns, and powerful suction structures, emphasizing its immense strength. The tentacles extend in every direction, creating an intimidating silhouette that fills the landscape. The creature's eyes glow with confusion, rage, and primal instinct. It appears driven into madness by its sudden displacement from the ancient oceans, lashing out at everything around it. Fragments of shattered terrain, debris, and uprooted structures scatter across the battlefield as evidence of its destructive arrival. Behind Tenta, a massive unstable mana portal tears open reality itself. Through the portal, glimpses of an endless prehistoric ocean can be seen—towering waves, ancient sea creatures, abyssal trenches, and mysterious underwater ruins illuminated by eerie deep-sea light. Magical distortions ripple outward from the portal, blending oceanic and terrestrial environments together. The battlefield is drenched with moisture, mist, and supernatural energy. Water streams from the creature's body while mana-infused fog fills the air. The atmosphere feels chaotic, ancient, and overwhelming, as though an impossible deep-sea predator has invaded a world where it does not belong. Ultra-realistic prehistoric sea monster, photorealistic creature design, highly detailed tentacles, realistic marine textures, ancient abyssal horror, cinematic lighting, volumetric mist, glowing mana energy, massive scale, realistic anatomy, environmental destruction, AAA game card art, Unreal Engine 5 quality, physically based rendering, hyper-detailed textures, masterpiece quality, 8K resolution, epic creature concept art, dynamic action scene, terrifying leviathan presence, atmospheric depth.",
-    "class": "Specialist"
+    "class": "Specialist",
+    "subclass": "Multistriker"
   },
   {
     "name": "Fire Archer",
@@ -621,7 +740,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+10% Ability Attack Speed  |  70% » 80%",
@@ -659,7 +786,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+5% Saldırı Hızı  |  1.40s » 1.33s",
@@ -667,7 +802,8 @@
       "level3": "+13% Qalxan  |  140 » 158"
     },
     "story": "The Shadow Reaper was once a simple farmer, but his cruelty toward animals led to a terrifying eternal punishment. Now a vengeful spirit, he wanders in tattered black robes, gripping a massive, razor-sharp scythe. His glowing green eyes pierce through the darkness, searching for his next harvest. He treats the battlefield like his old fields, reaping souls with the same cold indifference he once showed his livestock. He is the grim reminder that every sin carries a heavy price in the afterlife.",
-    "class": "Assassin"
+    "class": "Assassin",
+    "subclass": "Executioner"
   },
   {
     "name": "Voltriker",
@@ -696,7 +832,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+3 Öz. Sekme  |  3 » 6",
@@ -710,7 +854,7 @@
   {
     "name": "Frostmaw",
     "type": [
-      "Heyvan"
+      "Animal"
     ],
     "rarity": "Familiar",
     "group": "beasts",
@@ -734,7 +878,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "10%"
+      "dodge": "10%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -749,7 +901,8 @@
       "level3": "+42% Hasar  |  14 » 20"
     },
     "story": "The Glacial Terror, a colossal prehistoric apex predator pulled into the arena through an unstable mana portal from a frozen ancient dimension. This massive beast towers over the icy landscape, radiating primal dominance and overwhelming power. Its enormous body is covered in thick, rugged fur heavily coated with frost, snow, and jagged ice formations accumulated over countless ages in a prehistoric frozen wilderness. The creature possesses a powerful muscular build, enormous limbs, and massive claws capable of tearing through ancient forests and frozen terrain. Its gigantic jaw is lined with brutal prehistoric fangs, large enough to crush solid stone with ease. Frost hangs from its teeth and fur, while freezing breath escapes from its mouth in dense clouds of icy mist. Around the beast swirl violent glacial winds under its command. Snowstorms spiral around its body, carrying shards of ice and frozen particles through the air. The atmosphere bends beneath its presence as freezing currents spread across the battlefield, coating the ground with ice wherever it steps. Its eyes glow with ancient predatory intelligence, reflecting the untamed brutality of a creature that existed long before modern civilizations. Despite its immense size, Frostmaw appears unpredictable and ferocious, ready to lunge at any moment with explosive speed. Behind the creature, a massive unstable mana portal tears through reality, revealing glimpses of its original prehistoric frozen world. Through the portal, ancient glaciers, snow-covered mountains, and colossal extinct creatures can be faintly seen in the distance. Blue magical energy crackles around the dimensional rift, emphasizing its unnatural arrival. The environment is a frozen battlefield engulfed by blizzards, icy winds, and shattered glaciers. Snow and frost dominate the landscape, creating a dramatic and hostile atmosphere worthy of an ancient apex predator.",
-    "class": "Fighter"
+    "class": "Fighter",
+    "subclass": "Silencer"
   },
   {
     "name": "Hexon",
@@ -778,7 +931,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -822,7 +983,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -866,7 +1035,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "10%"
+      "dodge": "10%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -886,7 +1063,7 @@
   {
     "name": "Astranova",
     "type": [
-      "Varlıq"
+      "Entity"
     ],
     "rarity": "Familiar",
     "group": "the-stellar-alliance",
@@ -910,7 +1087,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "+100% Öz. Hasar bonusu  |  400% » 500%",
@@ -947,7 +1132,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "effects": [
       {
@@ -991,7 +1184,15 @@
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
-      "dodge": "0%"
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
     },
     "showlevels": {
       "level1": "-",
