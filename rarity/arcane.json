@@ -403,9 +403,10 @@
   {
     "name": "Toxic",
     "type": [
-      "Uzaylı"
+      "Alien"
     ],
     "rarity": "Arcane",
+    "group": "the-nether-flux",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -440,7 +441,7 @@
       "level2": "+10% Range | 2650 » 2915",
       "level3": "+2 Ability Poison DMG | 2x3 » 2x5"
     },
-    "story": "-",
+    "story": "The Corrosive Plague, a terrifying bio-engineered alien from the Dark Layer of Alien World: The Binary Divide. Created to contaminate entire ecosystems, Toxic is a living biological weapon whose body continuously produces highly corrosive acids and poisonous gases. Wherever it travels, life withers, metal dissolves, and even the atmosphere becomes lethal. Toxic is a tall, slender, insectoid-reptilian alien with an unsettling silhouette. Its body is covered in dark charcoal-black exoskeletal armor, fractured by glowing veins of toxic neon-green bioluminescent fluid. The armor appears partially corroded, as though its own acidic secretions are constantly eating away at its surface. Its elongated head features glowing toxic-green eyes without visible pupils and a horrifying mouth lined with multiple rows of razor-sharp crystalline teeth. Small breathing vents along its neck and shoulders continuously release thick clouds of poisonous green gas that spread around its body. Across its back grow several large organic chemical sacs filled with glowing corrosive liquid. Transparent membranes reveal swirling radioactive-green acid inside. Thick tubes and biological veins connect these sacs to its arms, mouth, and claws, supplying an endless flow of toxic chemicals. Its long arms end in razor-sharp claws dripping with highly corrosive acid. Every droplet burns into the ground, producing smoke and sizzling chemical reactions. Streams of green acid continuously flow from its fingertips, leaving trails of melted rock and dissolved metal wherever it moves. Dense clouds of glowing poisonous gas surround the creature, partially obscuring its body. The gas contains floating acidic particles, chemical vapor, and toxic spores that distort visibility. The atmosphere around Toxic feels contaminated and impossible to breathe. The battlefield has been completely corrupted. Dead forests, melted rocks, corroded metal structures, pools of bubbling acid, shattered alien machinery, and blackened ground surround the creature. Trees have dissolved into skeletal remains, while rivers have transformed into glowing toxic sludge. Acid rain falls from dark green storm clouds overhead. The ground beneath Toxic constantly bubbles and melts as corrosive fluids spread outward. Small alien plants decay instantly upon contact, while abandoned armor and weapons dissolve into rust and sludge. The overall composition should portray Toxic as a living environmental catastrophe—an unstoppable biological nightmare whose mere presence transforms thriving worlds into lifeless wastelands.",
     "class": "Marksman",
     "subclass": "Sharpshooter"
   },
@@ -868,9 +869,10 @@
   {
     "name": "Sunrise",
     "type": [
-      "Varlıq"
+      "Alien"
     ],
     "rarity": "Arcane",
+    "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -882,7 +884,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hərəkət etdikcə hər 0,6 saniyə ərzində +1 Can qazanar (Max: 210)",
+    "trait": "Hərəkət etdikcə hər 0,6 saniyə ərzində +1 M. Can qazanar (Max: 210)",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -904,15 +906,16 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "The Dawnbringer, a radiant female alien and one of the most beloved guardians of the Light Layer in Alien World: The Binary Divide. She is the living embodiment of hope, capable of healing allies with pure solar energy while burning away darkness and corruption with the light of a newborn sun. Wherever Sunrise appears, despair fades, life flourishes, and even the darkest battlefield is illuminated by her presence. Sunrise is an elegant female alien with a graceful, athletic physique. Her skin radiates a warm golden-white glow, appearing almost translucent as though sunlight flows beneath it. Delicate streams of luminous energy travel across her body like living rays of dawn. Her face is serene, compassionate, and beautiful, with soft glowing amber-gold eyes that resemble miniature suns. She constantly wears a gentle expression filled with kindness and determination. Her long flowing hair is made of brilliant golden light mixed with soft white strands, drifting weightlessly as if moved by a warm celestial breeze. She wears living solar crystal armor, naturally grown from radiant celestial minerals rather than forged metal. The armor consists of elegant white and gold crystalline plates with smooth organic curves. Thin glowing crystal feathers extend from her shoulders and waist, giving her an angelic yet alien appearance without resembling human wings. Behind her floats a magnificent solar halo, a massive radiant ring of glowing golden energy resembling the surface of a miniature sun. Smaller concentric rings slowly rotate around the halo while streams of warm light spiral outward into the environment. Both of her hands channel pure solar energy. One hand creates a glowing sphere of golden healing light surrounded by floating particles of life energy, while the other projects brilliant radiant beams capable of dissolving darkness and corruption. Golden ribbons of energy flow gracefully around her arms, illuminating everything nearby. The battlefield is transformed by her presence. Flowers bloom across the ground, crystal plants emit warm light, and corrupted terrain gradually returns to life. Broken alien vegetation regenerates while glowing golden vines and luminous blossoms spread through the landscape. The environment is an extraordinary paradise within the Light Layer, featuring floating crystal islands, waterfalls of liquid light, radiant forests, blooming alien flowers, glowing rivers, towering white crystal formations, and an endless sunrise stretching across the horizon. Warm sunlight pours through scattered clouds while countless luminous particles float peacefully through the air. Soft god rays, volumetric lighting, lens flares, and atmospheric bloom emphasize the overwhelming warmth and hope surrounding her. The entire scene should feel uplifting, divine, and full of life without appearing religious. Sunrise gently hovers above the ground, one hand extending healing energy toward unseen allies while the other raises radiant light against the darkness. Her posture is calm, protective, and inspiring, embodying the eternal victory of hope over despair. The overall composition should portray Sunrise as the ultimate symbol of life, healing, and light—a celestial guardian whose radiant power restores worlds consumed by darkness.",
     "class": "Fighter"
   },
   {
     "name": "Shellbyte",
     "type": [
-      "Varlıq"
+      "Alien"
     ],
     "rarity": "Arcane",
+    "group": "the-nether-flux",
     "abilityName": "",
     "stats": {
       "health": "130",
@@ -940,7 +943,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "The Living Bastion, a colossal four-legged reptilian alien beast from the Dark Layer of Alien World: The Binary Divide. Unlike mechanical creatures or cybernetic organisms, Shellbyte is a completely living biological organism that evolved an almost impenetrable natural armor over millions of years on one of the harshest planets in the galaxy. It serves as the unstoppable frontline fortress of the Dark Layer, smashing through enemy defenses using its immense weight and indestructible shell. Shellbyte resembles a gigantic prehistoric reptile, combining the proportions of an ankylosaur, giant tortoise, and alien behemoth. Its body is extremely muscular and low to the ground, supported by four massive pillar-like legs covered in thick natural armor. Every movement feels heavy and powerful, as if the ground itself trembles beneath its weight. Its neck is almost completely hidden, making the head appear to emerge directly from the front of the shell. The head sits low to the ground and is protected by overlapping armored scales, giving enemies almost no vulnerable target. The transition between the shell and head is seamless, emphasizing its role as a living fortress. The enormous shell covers nearly its entire body, composed of overlapping layers of dark obsidian-colored biological armor plates, naturally grown rather than manufactured. The shell is rough, scarred, cracked, and weathered from countless battles. Massive spikes and ridges protrude across its surface, making it impossible for enemies to climb or strike effectively. Its skin consists of thick reptilian scales in charcoal black and dark gray, with subtle glowing crimson-orange veins visible only between the armored plates, suggesting powerful internal energy without making the creature appear mechanical. No circuitry, metal, or cybernetic components are present. Its face is intimidating yet primitive, featuring glowing deep crimson eyes, a broad armored skull, heavy bone ridges, and a powerful jaw lined with thick crushing teeth capable of shattering stone and armor alike. Large nostrils release slow streams of hot vapor with every breath. Its enormous claws dig into the ground as it slowly advances, while dust and shattered rocks scatter beneath its immense weight. The battlefield is a volcanic alien wasteland within the Dark Layer, filled with jagged black rock formations, rivers of lava, burning craters, ash-covered cliffs, and enormous alien stone structures. Smoke, ash, glowing embers, and heat distortion fill the atmosphere, making the environment feel hostile and ancient. The overall composition should portray Shellbyte as a living biological fortress—an ancient reptilian monster whose natural armor rivals mountains, relying on overwhelming durability and raw strength rather than technology.",
     "class": "Fighter"
   },
   {
