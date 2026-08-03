@@ -3,8 +3,8 @@
    Card database – fetch, filter, render
 ═══════════════════════════════════════════════════════ */
 
-/* Local asset base – no GitHub raw needed when running from ZIP */
-const GITHUB_BASE = 'assets';
+/* Card images now served from Cloudflare R2 */
+const GITHUB_BASE = 'https://pub-ebf8690f3ea54a55853e5e920cb6903a.r2.dev';
 
 const RARITY_FILES = ['mundane', 'familiar', 'arcane', 'relic', 'ascendant', 'apex', 'ethereal'];
 
