@@ -74,19 +74,25 @@ function renderPicker() {
   grid.innerHTML = '';
   allCards.forEach(card => {
     const bs = getBattleStats(card);
+    const rarity = (card.rarity || 'mundane').toLowerCase();
+    const mana = (card.stats || {}).mana !== undefined ? card.stats.mana : '?';
     const el = document.createElement('div');
-    el.className = 'card-item battle-pick-item';
+    el.className = `card-item battle-pick-item r-${rarity}`;
     el.innerHTML = `
+      <div class="card-rarity-bar"></div>
       <div class="card-img-wrap">
         <img src="${getCardImg(card)}" alt="${card.name}" loading="lazy"
              onerror="this.style.display='none'">
+        <div class="card-img-overlay"></div>
+        <div class="card-mana-badge">${mana}</div>
       </div>
       <div class="card-body">
         <div class="card-name">${card.name || 'Unknown'}</div>
         <div class="battle-pick-stats">
           <span>❤ ${bs.maxHp}</span><span>⚔ ${bs.atk}</span><span>➤ ${bs.move}</span><span>◎ ${bs.range}</span>
         </div>
-      </div>`;
+      </div>
+      <div class="card-rarity-tag">${card.rarity || ''}</div>`;
     el.addEventListener('click', () => togglePick(card, el));
     grid.appendChild(el);
   });
@@ -142,7 +148,7 @@ function buildUnits(cards, side) {
 function startBattle() {
   if (battlePicked.length !== SQUAD_SIZE) return;
   const units = [...buildUnits(battlePicked, 'p'), ...buildUnits(pickAiSquad(), 'e')];
-  battle = { units, order: [], turnIdx: -1, active: null, awaitingInput: false, reachable: [], attackable: [], over: false };
+  battle = { units, order: [], turnIdx: -1, active: null, awaitingInput: false, reachable: [], attackable: [], flash: null, over: false };
 
   document.getElementById('battle-picker').style.display = 'none';
   document.getElementById('battle-arena').style.display  = 'block';
@@ -180,6 +186,7 @@ function nextUnit() {
   unit.hasActed = false;
   battle.active = unit;
   updateTurnInfo(unit);
+  showUnitInfo(unit);
 
   if (unit.side === 'p') {
     battle.reachable  = computeReachable(unit);
@@ -249,6 +256,9 @@ function moveUnit(unit, x, y) { unit.x = x; unit.y = y; }
 function resolveAttack(attacker, defender) {
   defender.hp = Math.max(0, defender.hp - attacker.atk);
   logMsg(`${attacker.card.name} → ${defender.card.name} (-${attacker.atk})`);
+  battle.flash = { id: defender.id, text: `-${attacker.atk}` };
+  setTimeout(() => { if (battle && battle.flash && battle.flash.id === defender.id) { battle.flash = null; renderBoard(); } }, 700);
+  showUnitInfo(defender);
   if (defender.hp <= 0) {
     defender.alive = false;
     logMsg(`${defender.card.name} məğlub oldu.`);
@@ -259,11 +269,14 @@ function resolveAttack(attacker, defender) {
    PLAYER INPUT
 ═══════════════════════════════════════════════════════ */
 function onCellClick(x, y) {
+  const clicked = getUnitAt(x, y);
+  if (clicked) showUnitInfo(clicked);
+
   if (!battle || !battle.awaitingInput) return;
   const unit = battle.active;
   if (!unit || unit.side !== 'p' || unit.hasActed) return;
 
-  const target = getUnitAt(x, y);
+  const target = clicked;
 
   // Attack an enemy currently in range
   if (target && target.side !== unit.side && battle.attackable.some(p => p.x === x && p.y === y)) {
@@ -342,6 +355,33 @@ function updateTurnInfo(unit) {
   const el = document.getElementById('battle-turn-info');
   const faction = unit.side === 'p' ? 'Azure Core' : 'Crimson Crown';
   el.textContent = `${faction} növbəsi: ${unit.card.name}`;
+  el.className = unit.side === 'p' ? 'side-p' : 'side-e';
+}
+
+function showUnitInfo(unit) {
+  const panel = document.getElementById('battle-info-panel');
+  if (!unit) { panel.innerHTML = '<div class="info-empty">Kartın üstünə klik et</div>'; return; }
+  const pct = Math.max(0, Math.round((unit.hp / unit.maxHp) * 100));
+  const faction = unit.side === 'p' ? 'Azure Core' : 'Crimson Crown';
+  panel.innerHTML = `
+    <div class="info-card side-${unit.side}">
+      <div class="info-card-img">
+        <img src="${getCardImg(unit.card)}" alt="${unit.card.name}" onerror="this.style.display='none'">
+      </div>
+      <div class="info-card-body">
+        <div class="info-name">${unit.card.name}${!unit.alive ? ' (məğlub)' : ''}</div>
+        <div class="info-faction">${faction}</div>
+        <div class="info-hp-row">
+          <span class="info-hp-label">❤ ${unit.hp}/${unit.maxHp}</span>
+          <div class="info-hp-bar"><div class="info-hp-fill" style="width:${pct}%"></div></div>
+        </div>
+        <div class="info-stats-row">
+          <span title="Hasar">⚔ ${unit.atk}</span>
+          <span title="Hərəkət">➤ ${unit.move}</span>
+          <span title="Mənzil">◎ ${unit.range}</span>
+        </div>
+      </div>
+    </div>`;
 }
 
 function logMsg(text) {
@@ -365,11 +405,14 @@ function renderBoard() {
 
       const unit = getUnitAt(x, y);
       if (unit) {
+        const isFlash = battle.flash && battle.flash.id === unit.id;
         const u = document.createElement('div');
-        u.className = `battle-unit side-${unit.side}${unit === battle.active ? ' active' : ''}`;
+        u.className = `battle-unit side-${unit.side}${unit === battle.active ? ' active' : ''}${isFlash ? ' hit' : ''}`;
         u.innerHTML = `
           <img src="${getCardImg(unit.card)}" alt="${unit.card.name}" onerror="this.style.display='none'">
-          <div class="battle-hp-bar"><div class="battle-hp-fill" style="width:${(unit.hp/unit.maxHp)*100}%"></div></div>`;
+          <div class="battle-hp-bar"><div class="battle-hp-fill" style="width:${(unit.hp/unit.maxHp)*100}%"></div></div>
+          <div class="battle-hp-num">${unit.hp}</div>
+          ${isFlash ? `<div class="dmg-float">${battle.flash.text}</div>` : ''}`;
         cell.appendChild(u);
       }
 
