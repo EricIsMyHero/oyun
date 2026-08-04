@@ -1,0 +1,99 @@
+/* ═══════════════════════════════════════════════════════
+   Battle Arena
+═══════════════════════════════════════════════════════ */
+
+.battle-picker-hint {
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+}
+
+.battle-pick-item { cursor: pointer; transition: outline .15s, transform .15s; }
+.battle-pick-item.picked {
+  outline: 3px solid var(--gold);
+  outline-offset: -3px;
+  transform: translateY(-2px);
+}
+.battle-pick-stats {
+  display: flex;
+  gap: 10px;
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+#battle-start-btn { margin-top: 20px; }
+#battle-start-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+.battle-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+#battle-turn-info {
+  font-family: var(--font-head);
+  color: var(--gold2);
+  font-size: 1.05rem;
+}
+
+#battle-board {
+  display: grid;
+  gap: 4px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.battle-cell {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.battle-cell.reachable  { outline: 2px solid var(--familiar); cursor: pointer; }
+.battle-cell.attackable { outline: 2px solid var(--relic);    cursor: pointer; }
+
+.battle-unit {
+  position: absolute;
+  inset: 2px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  background: var(--surface);
+}
+.battle-unit.side-p { border-color: var(--accent); }
+.battle-unit.side-e { border-color: var(--relic); }
+.battle-unit.active { box-shadow: 0 0 0 2px var(--gold2); }
+.battle-unit img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.battle-hp-bar {
+  position: absolute;
+  left: 2px; right: 2px; bottom: 2px;
+  height: 4px;
+  background: rgba(0,0,0,.6);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.battle-hp-fill { height: 100%; background: var(--familiar); }
+
+.battle-log {
+  margin: 16px auto 0;
+  max-width: 560px;
+  max-height: 130px;
+  overflow-y: auto;
+  font-size: .82rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+
+#battle-result { text-align: center; padding: 60px 0; }
+#battle-result-title {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  color: var(--gold2);
+  margin-bottom: 20px;
+}
