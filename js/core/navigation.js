@@ -8,6 +8,7 @@ const mainPortal  = document.getElementById('main-portal');
 
 const sections = {
   lore:   document.getElementById('lore-section'),
+  battle: document.getElementById('battle-section'),
   cards:  document.getElementById('cards-section'),
   spells: document.getElementById('spells-section'),
   info:   document.getElementById('info-section'),
@@ -39,6 +40,7 @@ function switchSection(name) {
   });
 
   /* Lazy-load section data */
+  if (name === 'battle') initBattle();
   if (name === 'cards')  initCards();
   if (name === 'spells') initSpells();
   if (name === 'info')   initInfo();
