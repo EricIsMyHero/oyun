@@ -15,6 +15,7 @@
 
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/battle.css">
 </head>
 <body>
 
@@ -68,6 +69,7 @@
     <ul class="nav-links">
       <li><button class="nav-btn" data-section="lore">Lore</button></li>
       <li><button class="nav-btn" data-section="cards">Cards</button></li>
+      <li><button class="nav-btn nav-btn--powerup" data-section="battle">⚔ Battle Arena</button></li>
       <li><button class="nav-btn" data-section="spells">Spells</button></li>
       <li><button class="nav-btn" data-section="info">Codex</button></li>
       <li><button class="nav-btn nav-btn--powerup" data-section="powerups">⚙ Power Up</button></li>
@@ -156,6 +158,35 @@
               controls beings through digital mana bonds — strategy is survival, not sport.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BATTLE ARENA ── -->
+  <section id="battle-section">
+    <div class="section-wrap">
+      <p class="section-eyebrow reveal">Arena</p>
+      <h2 class="section-title reveal">Battle Arena</h2>
+      <div class="section-divider reveal"></div>
+
+      <div id="battle-picker">
+        <p class="battle-picker-hint">Döyüş üçün 5 kart seç (<span id="battle-pick-count">0</span>/5)</p>
+        <div id="battle-picker-grid" class="cards-grid"></div>
+        <button id="battle-start-btn" class="btn-primary" disabled>Döyüşə Başla</button>
+      </div>
+
+      <div id="battle-arena" style="display:none">
+        <div class="battle-hud">
+          <div id="battle-turn-info"></div>
+          <button id="battle-end-turn-btn" class="btn-secondary">Növbəni Bitir</button>
+        </div>
+        <div id="battle-board"></div>
+        <div id="battle-log"></div>
+      </div>
+
+      <div id="battle-result" style="display:none">
+        <h3 id="battle-result-title"></h3>
+        <button id="battle-restart-btn" class="btn-primary">Yenidən Başla</button>
       </div>
     </div>
   </section>
@@ -783,6 +814,7 @@
 <script src="js/core/modal.js"></script>
 <script src="js/core/navigation.js"></script>
 <script src="js/modules/cards.js"></script>
+<script src="js/modules/battle.js"></script>
 <script src="js/modules/spells.js"></script>
 <script src="js/modules/info.js"></script>
 <script src="js/modules/powerups.js"></script>
