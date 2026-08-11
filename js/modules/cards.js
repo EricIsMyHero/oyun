@@ -6,7 +6,7 @@
 /* Card images now served from Cloudflare R2 */
 const GITHUB_BASE = 'https://pub-ebf8690f3ea54a55853e5e920cb6903a.r2.dev';
 
-const RARITY_FILES = ['mundane', 'familiar', 'arcane', 'relic', 'ascendant', 'apex', 'ethereal'];
+const RARITY_FILES = ['mundane', 'familiar', 'arcane', 'relic', 'ascendant', 'apex', 'emergent', 'ethereal'];
 
 let allCards     = [];
 let activeRarity  = 'all';
@@ -29,10 +29,27 @@ function slugify(str) {
     .replace(/[^a-z0-9\-]/g, '');
 }
 
+/* ── Sorted turn keys for an Emergent card (numeric ascending) ── */
+function emergentTurnKeys(card) {
+  return Object.keys(card.turns || {}).sort((a, b) => parseFloat(a) - parseFloat(b));
+}
+
+/* ── Resolve the "primary" nested form used for fallbacks
+      (image, type list) when a card isn't rendered as itself:
+      isDual  → type1
+      isEmergent → earliest turn form ── */
+function _primaryFormSource(card) {
+  if (card.isDual && card.type1) return card.type1;
+  if (card.isEmergent && card.turns) {
+    const keys = emergentTurnKeys(card);
+    if (keys.length) return card.turns[keys[0]];
+  }
+  return card;
+}
+
 /* ── Build the image URL for a card ── */
 function getCardImg(card) {
-  /* isDual cards carry group on type1; fall back gracefully */
-  const src   = (card.isDual && card.type1) ? card.type1 : card;
+  const src   = _primaryFormSource(card);
   const group = slugify(src.group || card.group || '');
   const name  = slugify(src.name  || card.name  || '');
   return group
@@ -170,12 +187,14 @@ function calcCardPower(card) {
 let _minPow = 0, _maxPow = 1;
 
 function computeAllPowerScores(cards) {
-  /* Flatten: normal cards + forms inside dual cards */
+  /* Flatten: normal cards + forms inside dual cards + turns inside emergent cards */
   const flat = [];
   for (const c of cards) {
     if (c.isDual) {
       if (c.type1) flat.push(c.type1);
       if (c.type2) flat.push(c.type2);
+    } else if (c.isEmergent && c.turns) {
+      Object.values(c.turns).forEach(f => flat.push(f));
     } else {
       flat.push(c);
     }
@@ -191,6 +210,10 @@ function scaledPower(card) {
     const p1 = card.type1 ? calcCardPower(card.type1) : 0;
     const p2 = card.type2 ? calcCardPower(card.type2) : 0;
     raw = Math.round((p1 + p2) / 2);
+  } else if (card.isEmergent && card.turns) {
+    const forms = Object.values(card.turns);
+    const total = forms.reduce((sum, f) => sum + calcCardPower(f), 0);
+    raw = forms.length ? Math.round(total / forms.length) : 0;
   } else {
     raw = calcCardPower(card);
   }
@@ -209,7 +232,7 @@ function powerColor(score) {
 /* ── Rarity emoji map ── */
 function getRarityEmoji(r) {
   return { mundane:'⚙', familiar:'🌿', arcane:'🔮', relic:'📿',
-           ascendant:'🔥', apex:'👑', ethereal:'✨' }[(r||'').toLowerCase()] || '⚔';
+           ascendant:'🔥', apex:'👑', emergent:'🌱', ethereal:'✨' }[(r||'').toLowerCase()] || '⚔';
 }
 
 /* ── Entry point called by navigation.js ── */
@@ -268,7 +291,7 @@ function setupCardFilters() {
 
 /* ── Normalise type list for a card ── */
 function cardTypes(card) {
-  const src = card.isDual && card.type1 ? card.type1 : card;
+  const src = _primaryFormSource(card);
   const t = src.type || card.type || [];
   const arr = Array.isArray(t) ? t : [t];
   // normalise Az→En synonyms
