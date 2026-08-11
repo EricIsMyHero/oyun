@@ -34,16 +34,12 @@ function emergentTurnKeys(card) {
   return Object.keys(card.turns || {}).sort((a, b) => parseFloat(a) - parseFloat(b));
 }
 
-/* ── Resolve the "primary" nested form used for fallbacks
-      (image, type list) when a card isn't rendered as itself:
-      isDual  → type1
-      isEmergent → earliest turn form ── */
+/* ── Resolve the "primary" nested form used for image/type
+      fallbacks when a card isn't rendered as itself:
+      isDual → type1 (Emergent cards keep their stats at root
+      level, so they don't need this fallback). ── */
 function _primaryFormSource(card) {
   if (card.isDual && card.type1) return card.type1;
-  if (card.isEmergent && card.turns) {
-    const keys = emergentTurnKeys(card);
-    if (keys.length) return card.turns[keys[0]];
-  }
   return card;
 }
 
@@ -187,14 +183,12 @@ function calcCardPower(card) {
 let _minPow = 0, _maxPow = 1;
 
 function computeAllPowerScores(cards) {
-  /* Flatten: normal cards + forms inside dual cards + turns inside emergent cards */
+  /* Flatten: normal cards + forms inside dual cards */
   const flat = [];
   for (const c of cards) {
     if (c.isDual) {
       if (c.type1) flat.push(c.type1);
       if (c.type2) flat.push(c.type2);
-    } else if (c.isEmergent && c.turns) {
-      Object.values(c.turns).forEach(f => flat.push(f));
     } else {
       flat.push(c);
     }
@@ -210,10 +204,6 @@ function scaledPower(card) {
     const p1 = card.type1 ? calcCardPower(card.type1) : 0;
     const p2 = card.type2 ? calcCardPower(card.type2) : 0;
     raw = Math.round((p1 + p2) / 2);
-  } else if (card.isEmergent && card.turns) {
-    const forms = Object.values(card.turns);
-    const total = forms.reduce((sum, f) => sum + calcCardPower(f), 0);
-    raw = forms.length ? Math.round(total / forms.length) : 0;
   } else {
     raw = calcCardPower(card);
   }
