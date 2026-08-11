@@ -203,26 +203,28 @@ function updateModalImage(card, fallbackCard) {
   img.onerror = () => { img.style.display = 'none'; pholder.style.display = 'flex'; };
 }
 
+/* Shared preview helpers — used by the Ethereal dual selector
+   and the Emergent turn selector */
+function statPreview(c) {
+  const s = c.stats || {};
+  return `
+    <div class="dual-stat-row"><span>❤️ HP</span><span>${s.health || '—'}</span></div>
+    <div class="dual-stat-row"><span>🛡️ Shield</span><span>${s.shield || '—'}</span></div>
+    <div class="dual-stat-row"><span>💥 DMG</span><span>${s.damage || '—'}</span></div>
+    <div class="dual-stat-row"><span>🔥 DPS</span><span>${s.sps || '—'}</span></div>`;
+}
+
+function spawnTag(c) {
+  if (!c.forms || !c.forms.length) return '';
+  return `<div class="dual-spawn-tag">🃏 ${c.forms.map(f => f.name).join(', ')}</div>`;
+}
+
 /* Ethereal: dual-type selector screen */
 function buildDualTypeSelector(card) {
   const t1       = card.type1;
   const t2       = card.type2;
   const rarColor = getComputedStyle(document.documentElement)
     .getPropertyValue('--ethereal').trim() || '#f472b6';
-
-  function statPreview(c) {
-    const s = c.stats || {};
-    return `
-      <div class="dual-stat-row"><span>❤️ HP</span><span>${s.health || '—'}</span></div>
-      <div class="dual-stat-row"><span>🛡️ Shield</span><span>${s.shield || '—'}</span></div>
-      <div class="dual-stat-row"><span>💥 DMG</span><span>${s.damage || '—'}</span></div>
-      <div class="dual-stat-row"><span>🔥 DPS</span><span>${s.sps || '—'}</span></div>`;
-  }
-
-  function spawnTag(c) {
-    if (!c.forms || !c.forms.length) return '';
-    return `<div class="dual-spawn-tag">🃏 ${c.forms.map(f => f.name).join(', ')}</div>`;
-  }
 
   document.getElementById('modal-content').innerHTML = `
     <span class="modal-rarity-badge"
@@ -264,27 +266,86 @@ function buildDualTypeSelector(card) {
   `;
 
   document.getElementById('dual-pick-1').addEventListener('click', () => {
-    renderDualForm({ ...t1, group: card.group, _dualRoot: card });
+    renderDualForm({ ...t1, group: card.group }, card);
   });
   document.getElementById('dual-pick-2').addEventListener('click', () => {
-    renderDualForm({ ...t2, group: card.group, _dualRoot: card });
+    renderDualForm({ ...t2, group: card.group }, card);
   });
 }
 
 /* Render a chosen dual type */
-function renderDualForm(typeCard) {
+function renderDualForm(typeCard, dualRootCard) {
   const activeFormIndex = typeCard.isMulti && typeCard.forms && typeCard.forms.length ? -1 : null;
-  renderModalContent(typeCard, typeCard, activeFormIndex, typeCard._dualRoot);
-  updateModalImage(typeCard, typeCard._dualRoot);
+  renderModalContent(typeCard, typeCard, activeFormIndex, { kind: 'dual', root: dualRootCard });
+  updateModalImage(typeCard, dualRootCard);
+}
+
+/* Emergent: turn-based form selector screen.
+   Turn keys are arbitrary and chosen per-card in the JSON
+   (e.g. "1", "2", "3", "5" — not required to be sequential or capped at 5). */
+function buildEmergentSelector(card) {
+  const turnKeys = emergentTurnKeys(card);
+  const rarColor = getComputedStyle(document.documentElement)
+    .getPropertyValue('--emergent').trim() || '#2dd4bf';
+
+  const cards = turnKeys.map(k => {
+    const c = card.turns[k];
+    return `
+      <button class="emergent-type-card" data-turn-key="${k}">
+        <div class="emergent-type-badge"
+             style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">Tur ${k}</div>
+        <div class="emergent-type-name">${c.class ? (c.subclass ? `${c.class} / ${c.subclass}` : c.class) : '—'}</div>
+        <div class="emergent-type-stats">${statPreview(c)}</div>
+        ${spawnTag(c)}
+        <div class="emergent-type-cta" style="color:${rarColor}">Seç →</div>
+      </button>`;
+  }).join('');
+
+  document.getElementById('modal-content').innerHTML = `
+    <span class="modal-rarity-badge"
+          style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
+      Emergent
+    </span>
+    <div class="modal-name-class-row">
+      <div class="modal-card-name">${card.name || 'Unknown'}</div>
+      ${card.class ? `<span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}` : ''}
+    </div>
+    <div class="modal-card-group">✦ ${card.group || 'Stagnantia'} ✦</div>
+
+    <div class="emergent-selector-header">
+      <span class="emergent-selector-icon">🌱</span>
+      <div>
+        <div class="emergent-selector-title">Emergent Kartı</div>
+        <div class="emergent-selector-sub">İstifadə sayına görə forma seçin (${turnKeys.length} tur)</div>
+      </div>
+    </div>
+
+    <div class="emergent-type-grid">${cards}</div>
+  `;
+
+  document.querySelectorAll('.emergent-type-card').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const k = btn.dataset.turnKey;
+      renderEmergentForm({ ...card.turns[k], group: card.group }, card, k);
+    });
+  });
+}
+
+/* Render a chosen Emergent turn form */
+function renderEmergentForm(turnCard, rootCard, turnKey) {
+  const activeFormIndex = turnCard.isMulti && turnCard.forms && turnCard.forms.length ? -1 : null;
+  renderModalContent(turnCard, turnCard, activeFormIndex, { kind: 'emergent', root: rootCard, turnKey });
+  updateModalImage(turnCard, rootCard);
 }
 
 /* ── Main content renderer ──────────────────────────────
    card            : card whose stats are currently shown
    rootCard        : top-level card (owns forms[], upgradedsecondForm)
    activeFormIndex : -1=base  0..n=forms[i]  null=not-multi
-   dualRoot        : original isDual card (back button); null otherwise
+   backOrigin      : { kind: 'dual'|'emergent', root, turnKey? } when this
+                     card was reached via a selector screen; null otherwise
 ──────────────────────────────────────────────────────── */
-function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
+function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
   const rarity   = (card.rarity || 'mundane').toLowerCase();
   const stats    = card.stats    || {};
   const addStats = card.additionalStats || {};
@@ -304,8 +365,10 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
   const isAscended = (rootCard !== null && activeFormIndex === null && card !== rootCard);
   const root       = rootCard || card;
 
-  const backBtn = dualRoot ? `
-    <button class="dual-back-btn" id="dual-back">← Forma seçiminə qayıt</button>` : '';
+  const backBtnLabel = backOrigin && backOrigin.kind === 'emergent'
+    ? '← Tur seçiminə qayıt' : '← Forma seçiminə qayıt';
+  const backBtn = backOrigin ? `
+    <button class="dual-back-btn" id="origin-back">${backBtnLabel}</button>` : '';
 
   document.getElementById('modal-content').innerHTML = `
     <span class="modal-rarity-badge"
@@ -369,12 +432,16 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
     });
   });
 
-  /* Back to dual selector */
-  const backEl = document.getElementById('dual-back');
-  if (backEl) {
+  /* Back to the origin selector (Ethereal dual pick / Emergent turn pick) */
+  const backEl = document.getElementById('origin-back');
+  if (backEl && backOrigin) {
     backEl.addEventListener('click', () => {
-      buildDualTypeSelector(dualRoot);
-      updateModalImage(dualRoot);
+      if (backOrigin.kind === 'emergent') {
+        buildEmergentSelector(backOrigin.root);
+      } else {
+        buildDualTypeSelector(backOrigin.root);
+      }
+      updateModalImage(backOrigin.root);
     });
   }
 
@@ -383,11 +450,11 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
   if (ascBtn) {
     ascBtn.addEventListener('click', () => {
       if (isAscended) {
-        renderModalContent(root, root, null, dualRoot);
+        renderModalContent(root, root, null, backOrigin);
         updateModalImage(root);
       } else {
         const form = { ...root.upgradedsecondForm, group: root.group };
-        renderModalContent(form, root, null, dualRoot);
+        renderModalContent(form, root, null, backOrigin);
         updateModalImage(form, root);
       }
     });
@@ -398,11 +465,11 @@ function renderModalContent(card, rootCard, activeFormIndex, dualRoot) {
     btn.addEventListener('click', () => {
       const idx = parseInt(btn.dataset.formIndex, 10);
       if (idx === -1) {
-        renderModalContent(root, root, -1, dualRoot);
+        renderModalContent(root, root, -1, backOrigin);
         updateModalImage(root);
       } else {
         const form = { ...root.forms[idx], group: root.group };
-        renderModalContent(form, root, idx, dualRoot);
+        renderModalContent(form, root, idx, backOrigin);
         updateModalImage(form, root);
       }
     });
@@ -416,6 +483,8 @@ function openModal(card) {
   updateModalImage(card);
   if (card.isDual) {
     buildDualTypeSelector(card);
+  } else if (card.isEmergent) {
+    buildEmergentSelector(card);
   } else {
     const activeFormIndex = card.isMulti && card.forms && card.forms.length ? -1 : null;
     renderModalContent(card, card, activeFormIndex, null);
