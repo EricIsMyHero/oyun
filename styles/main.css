@@ -24,7 +24,7 @@
   --relic:      #f87171;
   --ascendant:  #fb923c;
   --apex:       #facc15;
-  --emergent:   #2dd4bf;
+  --emergent:   #00BCD4;
   --ethereal:   #f472b6;
 
   --font-display: 'Cinzel Decorative', serif;
@@ -521,7 +521,7 @@ body {
 .filter-btn[data-rarity="relic"].active      { border-color: var(--relic);     color: var(--relic);     background: rgba(248,113,113,0.08); }
 .filter-btn[data-rarity="ascendant"].active  { border-color: var(--ascendant); color: var(--ascendant); background: rgba(251,146,60,0.08); }
 .filter-btn[data-rarity="apex"].active       { border-color: var(--apex);      color: var(--apex);      background: rgba(250,204,21,0.08); }
-.filter-btn[data-rarity="emergent"].active   { border-color: var(--emergent);  color: var(--emergent);  background: rgba(45,212,191,0.08); }
+.filter-btn[data-rarity="emergent"].active   { border-color: var(--emergent);  color: var(--emergent);  background: rgba(0,188,212,0.08); }
 .filter-btn[data-rarity="ethereal"].active   { border-color: var(--ethereal);  color: var(--ethereal);  background: rgba(244,114,182,0.08); }
 
 /* divider between filter rows */
@@ -1523,9 +1523,9 @@ body {
 .emergent-trait-switcher {
   margin-bottom: 6px;
   padding: 14px 16px;
-  border: 1px solid rgba(45,212,191,0.15);
+  border: 1px solid rgba(0,188,212,0.15);
   border-radius: 10px;
-  background: rgba(45,212,191,0.03);
+  background: rgba(0,188,212,0.03);
 }
 .emergent-trait-label {
   font-family: var(--font-head);
@@ -1554,12 +1554,12 @@ body {
   transition: all 0.2s;
 }
 .emergent-trait-btn:hover {
-  border-color: rgba(45,212,191,0.35);
+  border-color: rgba(0,188,212,0.35);
   color: var(--text);
 }
 .emergent-trait-btn--active {
-  background: rgba(45,212,191,0.1);
-  border-color: rgba(45,212,191,0.4);
+  background: rgba(0,188,212,0.1);
+  border-color: rgba(0,188,212,0.4);
   color: var(--emergent);
 }
 
