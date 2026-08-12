@@ -2588,6 +2588,7 @@ body {
 .chest-card--relic:hover    { border-color: rgba(248,113,113,0.5); box-shadow: 0 12px 36px rgba(248,113,113,0.1); }
 .chest-card--ascendant:hover{ border-color: rgba(251,146,60,0.5);  box-shadow: 0 12px 36px rgba(251,146,60,0.12); }
 .chest-card--apex:hover     { border-color: rgba(250,204,21,0.55); box-shadow: 0 12px 36px rgba(250,204,21,0.14); }
+.chest-card--emergent:hover { border-color: rgba(0,188,212,0.55);  box-shadow: 0 12px 36px rgba(0,188,212,0.14); }
 .chest-card--ethereal:hover { border-color: rgba(244,114,182,0.55);box-shadow: 0 12px 36px rgba(244,114,182,0.14); }
 
 .chest-card__bg-glow {
@@ -2602,6 +2603,7 @@ body {
 .chest-card--relic    .chest-card__bg-glow { background: radial-gradient(ellipse 90% 40% at 50% 0%, rgba(248,113,113,0.10),transparent 70%); }
 .chest-card--ascendant.chest-card__bg-glow { background: radial-gradient(ellipse 90% 40% at 50% 0%, rgba(251,146,60,0.12),transparent 70%); }
 .chest-card--apex     .chest-card__bg-glow { background: radial-gradient(ellipse 90% 40% at 50% 0%, rgba(250,204,21,0.12),transparent 70%); }
+.chest-card--emergent .chest-card__bg-glow { background: radial-gradient(ellipse 90% 40% at 50% 0%, rgba(0,188,212,0.12),transparent 70%); }
 .chest-card--ethereal .chest-card__bg-glow { background: radial-gradient(ellipse 90% 40% at 50% 0%, rgba(244,114,182,0.12),transparent 70%); }
 
 .chest-card__icon {
@@ -2629,6 +2631,7 @@ body {
 .chest-rarity--relic     { color: var(--relic);     border-color: rgba(248,113,113,0.3); background: rgba(248,113,113,0.06); }
 .chest-rarity--ascendant { color: var(--ascendant); border-color: rgba(251,146,60,0.3);  background: rgba(251,146,60,0.06);  }
 .chest-rarity--apex      { color: var(--apex);      border-color: rgba(250,204,21,0.3);  background: rgba(250,204,21,0.06);  }
+.chest-rarity--emergent  { color: var(--emergent);  border-color: rgba(0,188,212,0.3);   background: rgba(0,188,212,0.06);   }
 .chest-rarity--ethereal  { color: var(--ethereal);  border-color: rgba(244,114,182,0.3); background: rgba(244,114,182,0.06); }
 
 .chest-name {
