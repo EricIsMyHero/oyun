@@ -2184,8 +2184,12 @@ body {
   box-shadow: 0 12px 40px rgba(100,140,255,0.12);
 }
 .pack-card--mundane { border-color: rgba(156,163,175,0.3); }
+.pack-card--familiar { border-color: rgba(74,222,128,0.3); }
 .pack-card--arcane { border-color: rgba(167,139,250,0.3); }
+.pack-card--relic { border-color: rgba(248,113,113,0.3); }
+.pack-card--ascendant { border-color: rgba(251,146,60,0.4); box-shadow: 0 0 20px rgba(251,146,60,0.1); }
 .pack-card--apex { border-color: rgba(250,204,21,0.4); box-shadow: 0 0 20px rgba(250,204,21,0.1); }
+.pack-card--emergent { border-color: rgba(0,188,212,0.4); box-shadow: 0 0 20px rgba(0,188,212,0.1); }
 .pack-card--ethereal { border-color: rgba(244,114,182,0.4); box-shadow: 0 0 20px rgba(244,114,182,0.1); }
 .pack-shimmer {
   position: absolute;
