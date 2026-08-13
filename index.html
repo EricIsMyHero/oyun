@@ -423,22 +423,13 @@
             <div class="currency-price">Free</div>
             <button class="shop-buy-btn" onclick="handlePurchase('1,000 Gold', 'free')">Claim</button>
           </div>
-           <div class="currency-card">
-            <div class="currency-card__glow" style="--clr:#fb923c"></div>
-            <div class="currency-icon">⚡</div>
-            <div class="currency-name">Mana Shards</div>
-            <div class="currency-amount">10 Shards</div>
-            <div class="currency-bonus"></div>
-            <div class="currency-price">1000 Gold</div>
-            <button class="shop-buy-btn" onclick="handlePurchase('10 Mana Shards', '1000 Gold')">Buy</button>
-          </div>
           <div class="currency-card">
             <div class="currency-card__glow" style="--clr:#a78bfa"></div>
             <div class="currency-icon">♦️</div>
             <div class="currency-name">Ruby Pouch</div>
             <div class="currency-amount">20 Rubies</div>
-            <div class="currency-bonus">+2 Weekend Bonus</div>
-            <div class="currency-bonus">+10 First Purchase Bonus</div>
+            <div class="currency-bonus">+2% Weekend Bonus</div>
+            <div class="currency-bonus">+10% First Purchase Bonus</div>
             <div class="currency-price">$0.99</div>
             <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('20 Rubies', '$0.99')">Buy</button>
           </div>
@@ -447,8 +438,8 @@
             <div class="currency-icon">♦️♦️</div>
             <div class="currency-name">Ruby Satchel</div>
             <div class="currency-amount">105 Rubies</div>
-            <div class="currency-bonus">+5 Weekend Bonus</div>
-            <div class="currency-bonus">+25 First Purchase Bonus</div>
+            <div class="currency-bonus">+5% Weekend Bonus</div>
+            <div class="currency-bonus">+15% First Purchase Bonus</div>
             <div class="currency-price">$4.99</div>
             <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('105 Rubies', '$4.99')">Buy</button>
           </div>
@@ -457,8 +448,8 @@
             <div class="currency-icon">♦️♦️♦️</div>
             <div class="currency-name">Ruby Hoard 1</div>
             <div class="currency-amount">235 Rubies</div>
-            <div class="currency-bonus">+10 Weekend Bonus</div>
-            <div class="currency-bonus">+45 First Purchase Bonus</div>
+            <div class="currency-bonus">+10% Weekend Bonus</div>
+            <div class="currency-bonus">+25% First Purchase Bonus</div>
             <div class="currency-price">$9.99</div>
             <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('235 Rubies', '$9.99')">Buy</button>
           </div>
@@ -468,8 +459,8 @@
             <div class="currency-icon">♦️🌟♦️</div>
             <div class="currency-name">Ruby Hoard 2</div>
             <div class="currency-amount">530 Rubies</div>
-            <div class="currency-bonus">+20 Weekend Bonus</div>
-            <div class="currency-bonus">+80 First Purchase Bonus</div>
+            <div class="currency-bonus">+20% Weekend Bonus</div>
+            <div class="currency-bonus">+50% First Purchase Bonus</div>
             <div class="currency-price">$19.99</div>
             <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('530 Rubies', '$19.99')">Buy</button>
           </div>
@@ -478,10 +469,19 @@
             <div class="currency-icon">🌟♦️🌟</div>
             <div class="currency-name">Ruby Hoard 3</div>
             <div class="currency-amount">1,185 Rubies</div>
-            <div class="currency-bonus">+35 Weekend Bonus</div>
-            <div class="currency-bonus">+145 First Purchase Bonus</div>
+            <div class="currency-bonus">+35% Weekend Bonus</div>
+            <div class="currency-bonus">+75% First Purchase Bonus</div>
             <div class="currency-price">$39.99</div>
             <button class="shop-buy-btn shop-buy-btn--rubypiece" onclick="handlePurchase('1,185 Rubies', '$39.99')">Buy</button>
+          </div>
+          <div class="currency-card">
+            <div class="currency-card__glow" style="--clr:#fb923c"></div>
+            <div class="currency-icon">⚡</div>
+            <div class="currency-name">Mana Shards</div>
+            <div class="currency-amount">10 Shards</div>
+            <div class="currency-bonus"></div>
+            <div class="currency-price">1000 Gold</div>
+            <button class="shop-buy-btn" onclick="handlePurchase('10 Mana Shards', '1000 Gold')">Buy</button>
           </div>
           <div class="currency-card currency-card--best">
             <div class="currency-card__glow" style="--clr:#f472b6"></div>
@@ -489,8 +489,8 @@
             <div class="currency-icon">👑</div>
             <div class="currency-name">Arcane Vault</div>
             <div class="currency-amount">3,205 Rubies</div>
-            <div class="currency-bonus">+45 Weekend Bonus</div>
-            <div class="currency-bonus">+245 First Purchase Bonus · Exclusive Avatar</div>
+            <div class="currency-bonus">+45% Weekend Bonus</div>
+            <div class="currency-bonus">+125% First Purchase Bonus · Exclusive Avatar</div>
             <div class="currency-price">$99.99</div>
             <button class="shop-buy-btn shop-buy-btn--premium" onclick="handlePurchase('3,205 Rubies + Avatar', '$99.99')">Buy</button>
           </div>
@@ -515,6 +515,20 @@
               <button class="shop-buy-btn" onclick="handlePurchase('Soldier\'s Cache Pack', '100 Gems')">Open Pack</button>
             </div>
           </div>
+          <div class="pack-card pack-card--familiar">
+            <div class="pack-shimmer"></div>
+            <div class="pack-icon">🐺</div>
+            <div class="pack-rarity-tag" style="color:var(--familiar)">Familiar Pack</div>
+            <div class="pack-name">Ranger's Kit</div>
+            <p class="pack-desc">6 cards — guaranteed 1 Arcane or higher. A solid mid-game boost.</p>
+            <div class="pack-odds">
+              <span>Arcane 32%</span><span>Relic 16%</span><span>Ascendant 5%</span>
+            </div>
+            <div class="pack-footer">
+              <span class="pack-price">💎 160</span>
+              <button class="shop-buy-btn shop-buy-btn--gem" onclick="handlePurchase('Ranger\'s Kit Pack', '160 Gems')">Open Pack</button>
+            </div>
+          </div>
           <div class="pack-card pack-card--arcane">
             <div class="pack-shimmer"></div>
             <div class="pack-icon">🔮</div>
@@ -527,6 +541,34 @@
             <div class="pack-footer">
               <span class="pack-price">💎 250</span>
               <button class="shop-buy-btn shop-buy-btn--gem" onclick="handlePurchase('Mage\'s Tome Pack', '250 Gems')">Open Pack</button>
+            </div>
+          </div>
+          <div class="pack-card pack-card--relic">
+            <div class="pack-shimmer"></div>
+            <div class="pack-icon">📿</div>
+            <div class="pack-rarity-tag" style="color:var(--relic)">Relic Pack</div>
+            <div class="pack-name">Ancient Vault</div>
+            <p class="pack-desc">8 cards — guaranteed 1 Ascendant or higher. Rewards for committed players.</p>
+            <div class="pack-odds">
+              <span>Ascendant 28%</span><span>Apex 12%</span><span>Emergent 4%</span>
+            </div>
+            <div class="pack-footer">
+              <span class="pack-price">💎 380</span>
+              <button class="shop-buy-btn shop-buy-btn--gem" onclick="handlePurchase('Ancient Vault Pack', '380 Gems')">Open Pack</button>
+            </div>
+          </div>
+          <div class="pack-card pack-card--ascendant">
+            <div class="pack-shimmer"></div>
+            <div class="pack-icon">🔥</div>
+            <div class="pack-rarity-tag" style="color:var(--ascendant)">Ascendant Pack</div>
+            <div class="pack-name">Synergy Forge</div>
+            <p class="pack-desc">9 cards — guaranteed 1 Ascendant or higher. Built for players stacking deck synergy.</p>
+            <div class="pack-odds">
+              <span>Ascendant 45%</span><span>Apex 18%</span><span>Emergent 6%</span>
+            </div>
+            <div class="pack-footer">
+              <span class="pack-price">💎 480</span>
+              <button class="shop-buy-btn shop-buy-btn--premium" onclick="handlePurchase('Synergy Forge Pack', '480 Gems')">Open Pack</button>
             </div>
           </div>
           <div class="pack-card pack-card--apex">
@@ -542,6 +584,21 @@
             <div class="pack-footer">
               <span class="pack-price">💎 600</span>
               <button class="shop-buy-btn shop-buy-btn--premium" onclick="handlePurchase('Warlord\'s Chest Pack', '600 Gems')">Open Pack</button>
+            </div>
+          </div>
+          <div class="pack-card pack-card--emergent">
+            <div class="pack-shimmer"></div>
+            <div class="currency-badge">New</div>
+            <div class="pack-icon">🌱</div>
+            <div class="pack-rarity-tag" style="color:var(--emergent)">Emergent Pack</div>
+            <div class="pack-name">Growth Cache</div>
+            <p class="pack-desc">11 cards — one guaranteed Emergent card. Evolves in your hands as you play it.</p>
+            <div class="pack-odds">
+              <span>Apex 18%</span><span>Emergent 100%¹</span><span>Ethereal 6%</span>
+            </div>
+            <div class="pack-footer">
+              <span class="pack-price">⚡ 3 Shards</span>
+              <button class="shop-buy-btn shop-buy-btn--mana" onclick="handlePurchase('Growth Cache Pack', '3 Mana Shards')">Open Pack</button>
             </div>
           </div>
           <div class="pack-card pack-card--ethereal">
