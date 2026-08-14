@@ -10,7 +10,7 @@
     "name": "UnderWorlds",
     "description": "-",
     "icon": "fa-skull",
-    "color": "#ff6b6b",
+    "color": "#c62828",
     "members": ["Lord", "King", "Malvaris", "Dark Necromancer", "Nightfang", "Shadow Reaper"]
   },
   {
@@ -30,15 +30,15 @@
   {
     "name": "Royal Blood",
     "description": "-",
-    "color": "#ffff00",
-    "icon": "fa-gopuram",
+    "color": "#ffd700",
+    "icon": "fa-crown",
     "members": ["Azrith", "UnTouch", "SkyHunter", "Aeralis", "Mecha Shield", "Fire Archer", "Trac", "Angels"]
   },
   {
     "name": "The Joy Of The Zenith City",
     "description": "-",
     "icon": "fa-sun",
-    "color": "#fc0fc0",
+    "color": "#ffb703",
     "members": ["Bastra", "Maapp", "Avara"]
   },
   {
@@ -59,13 +59,13 @@
     "name": "Ancients",
     "description": "-",
     "color": "#e8c95a",
-    "icon": "fa-shield-halved",
+    "icon": "fa-landmark",
     "members": ["Gloop", "Freak", "Tornado", "Tphoenix", "Whisper", "Demotron", "Fallen Angel"]
   },
   {
     "name": "Void Walkers",
     "description": "-",
-    "color": "#f472b6",
+    "color": "#4c1d95",
     "icon": "fa-eye",
     "members": ["Void Striker", "Death", "Bloodraider", "Rotlings", "Void Wraith"]
   },
@@ -86,15 +86,15 @@
   {
     "name": "Botanical Gardens",
     "description": "-",
-    "color": "#02FF00",
+    "color": "#84cc16",
     "icon": "fa-leaf",
     "members": ["Sylviana", "Willowshade", "Leafshade"]
   },
   {
     "name": "The Last Academy",
     "description": "-",
-    "color": "#333333",
-    "icon": "fa-academy",
+    "color": "#1e3a5f",
+    "icon": "fa-graduation-cap",
     "members": ["Artist", "Cassandra", "Mr. & Mrs. Ray"]
   },
   {
@@ -104,11 +104,25 @@
     "icon": "fa-tent",
     "members": ["B-B", "PhewPhew", "Jestro"]
   },
-   {
+  {
     "name": "Barber Brothers",
     "description": "-",
     "color": "#333333",
     "icon": "fa-scissors",
     "members": ["Fen", "Ben", "Clara"]
+  },
+  {
+    "name": "The Nether-Flux",
+    "description": "-",
+    "color": "#ff4500",
+    "icon": "fa-fire",
+    "members": ["Magmara", "Magma", "Toxic", "Shellbyte", "Venomora", "Stormblade", "Blank"]
+  },
+  {
+    "name": "The Stellar Alliance",
+    "description": "-",
+    "color": "#fbbf24",
+    "icon": "fa-star",
+    "members": ["Nortex", "Voltriker", "Astranova", "Hexon", "Sunrise", "Avalith", "Ali", "Umbra"]
   }
 ]
