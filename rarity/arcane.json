@@ -599,6 +599,7 @@
       "Human"
     ],
     "rarity": "Arcane",
+    "group": "the-ghost-town",
     "abilityName": "",
     "stats": {
       "health": "120",
@@ -634,7 +635,7 @@
       "level2": "+2% Base Trait Chance | 1% » 3%",
       "level3": "+10% HP| 110 » 121"
     },
-    "story": "k.",
+    "story": "The Silent Butcher, a terrifying masked outlaw lurking within The Ghost Town. Unlike a traditional gunslinger, SlasherX never announces his presence and never gives his victims a chance to fight back. He stalks isolated travelers through abandoned streets, silently following them through darkness before striking with a razor-sharp hunting blade. His reputation has transformed him into an urban legend whispered about by anyone foolish enough to enter the Ghost Town alone. SlasherX is a tall, lean, physically powerful adult male outlaw with a predatory posture. His body is covered in dark, weathered clothing designed for stealth. He wears a long, heavily worn black-brown coat with torn edges, dark trousers, rugged leather boots, and a variety of old leather straps and utility pouches. His entire face is concealed beneath a disturbing handmade mask made from aged, weathered material. The mask has an unsettling, crude appearance, with an expressionless face and narrow dark eye openings that reveal almost nothing about the person underneath. Scratches, stains, cracks, and signs of long-term use cover its surface. His eyes are barely visible through the mask, appearing as two faint, cold points of light in the darkness. His identity remains completely unknowable. SlasherX carries a large hunting knife as his primary weapon. The blade is long, heavy, and extremely sharp, with a worn steel surface covered in subtle scratches from countless hunts. The handle is wrapped in aged leather for a secure grip. He holds the blade low beside his body, ready to strike with a sudden, explosive movement. A second smaller utility blade is concealed along his belt, reinforcing his preparation as a professional hunter rather than a reckless killer. His clothing is specifically designed around stealth and mobility. The coat is loose enough to conceal his movements but fitted enough to prevent unnecessary noise. Several dark leather straps cross his torso, carrying hunting equipment, rope, small tools, and worn pouches. The environment is a deserted Ghost Town at night. Abandoned wooden buildings surround a narrow dirt street, with broken windows, collapsing balconies, old wagons, rotten fences, and forgotten lanterns. A single flickering lantern hangs outside an abandoned saloon, creating a small pool of warm light surrounded by deep darkness. Thick fog crawls along the ground, partially obscuring SlasherX's legs. Moonlight cuts through the clouds above, creating long shadows between the buildings. Tumbleweeds move silently through the empty street while loose wooden signs creak in the wind. SlasherX stands partially hidden in the darkness between two abandoned buildings, his body mostly concealed by shadow. Only part of his mask, one eye, and the reflective edge of his hunting blade are illuminated by moonlight. His posture should communicate absolute patience—he is not charging, shouting, or posing dramatically. He is waiting. The composition should create the feeling that the viewer has unknowingly become the next target. SlasherX should feel like a predator that belongs to the darkness of the Ghost Town itself.",
     "class": "Assassin",
     "subclass": "Reaper"
   },
@@ -644,14 +645,15 @@
       "Human"
     ],
     "rarity": "Arcane",
+    "group": "the-ghost-town",
     "abilityName": "",
     "stats": {
       "health": "210",
       "shield": "40",
       "damage": "12x4",
       "sps": "40",
-      "attackSpeed": "0,10s",
-      "delay": "1,60s",
+      "attackSpeed": "0.10s",
+      "delay": "1.60s",
       "mana": "13",
       "number": "1"
     },
@@ -679,7 +681,7 @@
       "level2": "+5% Critical Chance | 5% » 10%",
       "level3": "+33% Marked Targets | 6 » 8"
     },
-    "story": "-",
+    "story": "The Last Lawman, a lonely gunslinger from The Ghost Town, an abandoned settlement swallowed by silence and forgotten by civilization. Once the town's protector, Sheriff remained behind when every citizen fled, refusing to abandon the streets he swore to defend. Years of isolation transformed him into a hardened, haunted lawman who continues patrolling the empty town as though justice itself still lives there. Sheriff is a rugged adult male gunslinger with a lean, weathered physique and a stern, exhausted presence. His skin is sunburned and dusty, covered with subtle scars and signs of years spent surviving in the harsh desert. He has a rough beard and tired, piercing eyes that suggest a man who has seen his entire world disappear but refuses to give up his duty. He wears a classic old Western sheriff outfit: a worn dark-brown leather coat, weathered black vest, dusty beige shirt, rugged trousers, heavy leather boots, and a wide-brimmed cowboy hat. A faded rusty sheriff badge is pinned visibly to his chest, scratched and oxidized after years of neglect. His clothing is torn and covered with dust, emphasizing that he has lived in the abandoned town for years. Sheriff carries two old quick-draw revolvers, one in each hand, with worn wooden grips, scratched steel barrels, and leather holsters hanging at his hips. The revolvers look heavily used but meticulously maintained, suggesting that despite the town's abandonment, he still prepares for the next threat every day. His stance is low and ready, both revolvers drawn and aimed in slightly different directions as though he is defending the empty streets from an unseen enemy. His fingers remain close to the triggers, demonstrating the lightning-fast reflexes that made him legendary. The environment is a completely abandoned 19th-century Western ghost town. Empty wooden buildings line a wide dirt street, with broken saloon signs swinging slowly in the wind, shattered windows, abandoned wagons, rotten fences, and scattered debris. Tumbleweeds roll through the deserted streets while thick dust drifts through the air. Behind Sheriff stands an old, decaying sheriff's office and jail, its wooden sign barely hanging from rusty chains. Nearby, an abandoned saloon has broken doors and dark windows. The entire town feels as though everyone left only moments ago, yet decades of decay clearly reveal the truth. The sky is dark and overcast with a dramatic orange sunset breaking through distant clouds. Long shadows stretch across the empty street while a thin layer of dust and desert fog creates an eerie atmosphere. Sheriff stands alone in the center of the abandoned street, revolvers drawn, staring directly into the distance as though he can hear an enemy approaching despite the complete silence. The overall composition should portray Sheriff as a tragic, relentless lawman who has become the final remaining soul of a forgotten town—still protecting streets that no longer have anyone left to protect.",
     "class": "Marksman",
     "subclass": "Marker"
   },
@@ -689,18 +691,19 @@
       "Dead"
     ],
     "rarity": "Arcane",
+    "group": "the-ghost-town",
     "abilityName": "",
     "stats": {
       "health": "140",
       "shield": "30",
-      "damage": "12",
-      "sps": "17",
-      "attackSpeed": "0.70s",
+      "damage": "8",
+      "sps": "12",
+      "attackSpeed": "0.65s",
       "delay": "-",
       "mana": "3",
       "number": "1"
     },
-    "trait": "Hər Can Çalanda 20 saniyəlik +1 Hasar bonusu qazanar (Max: 20)",
+    "trait": "Hər Can Çalanda 10 saniyəlik +2 Hasar bonusu qazanar (Max: 20)",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
@@ -720,11 +723,11 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+15% Speed | 1100 » 1265",
-      "level2": "+11% HP | 90 » 100",
+      "level1": "+10% Speed | 1100 » 1210",
+      "level2": "+15% HP | 140 » 161",
       "level3": "+40% Ability DMG Bonus Limit | 20 » 28"
     },
-    "story": "-",
+    "story": "The Restless Medic, the ghostly spirit of a deceased woman whose soul remains trapped within The Ghost Town. Once the town's dedicated medic, she spent her life treating injured outlaws, travelers, and townsfolk. After her death and the town's abandonment, her spirit refused to leave. Now she silently wanders the deserted streets, still carrying her medical tools and continuing her twisted version of the healer's duty. Nurse is an adult female ghost, visibly deceased yet retaining an elegant, human appearance. Her body is slightly translucent, with a pale, desaturated complexion and a faint bluish spectral glow. Parts of her lower body gradually dissolve into wisps of ghostly mist, making her appear as though she is floating just above the ground. Her face is beautiful but lifeless, with pale skin, sunken features, and cold faintly glowing blue eyes. Her expression is calm and emotionless, creating an unsettling contrast with her former profession as a caring medic. Long, slightly tangled dark hair falls around her shoulders and moves gently despite the absence of wind. She wears a 19th-century Western frontier nurse uniform, heavily aged and damaged by time. A faded, dusty white medical dress with a worn apron covers her body, with subtle dark stains and frayed fabric around the edges. The clothing looks authentic to the old frontier setting rather than modern medical clothing. In her right hand, Nurse holds a single old medical syringe, gripping it carefully between her fingers. The syringe is made of aged glass and metal, containing a faintly glowing chemical solution. The needle is long, sharp, and visibly polished despite the age of the object. Several additional medical supplies hang from a worn leather medical pouch around her waist: old glass medicine bottles, bandages, small metal instruments, and sealed chemical vials. Everything appears old, abandoned, and partially covered in dust. A small collection of chemical darts is attached to a leather holder on her hip. The darts contain different colored liquids, subtly suggesting that some are designed to heal while others are poisonous. Her supernatural abilities are subtly represented by faint spectral energy surrounding the syringe. Soft blue-white particles drift from her fingers and mix with thin trails of green chemical vapor escaping from the syringe. The environment is the interior of an abandoned frontier medical clinic within The Ghost Town. Wooden walls are cracked and covered with dust, broken medicine cabinets line the room, old bottles cover wooden shelves, and rusty medical instruments remain scattered across an abandoned examination table. A broken window allows pale moonlight to enter the room, illuminating Nurse's translucent body. Dust particles float through the beam of light while faint ghostly mist spreads across the wooden floor. Behind her, several abandoned medical beds remain untouched, covered in dusty white sheets. Old medical records and empty medicine bottles are scattered across the room, creating the feeling that the clinic was abandoned suddenly many years ago. Nurse stands completely still in the center of the clinic, staring directly toward the viewer while holding the syringe upright in one hand. Her expression remains calm and emotionless, creating an eerie sense that she is waiting for her next patient. The overall composition should portray Nurse as a tragic undead medic trapped between her duty and death, retaining the appearance and tools of a healer while possessing an unsettling supernatural presence.",
     "class": "Assassin",
     "subclass": "Vampire"
   },
@@ -878,12 +881,13 @@
   {
     "name": "RogueX",
     "type": [
-      "Robot"
+      "İnsan"
     ],
     "rarity": "Arcane",
+    "group": "the-ghost-town",
     "abilityName": "",
     "stats": {
-      "health": "340",
+      "health": "240",
       "shield": "40",
       "damage": "16",
       "sps": "13",
@@ -892,9 +896,9 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Alınan hasarın 50%-ni 2 saniyə sonra qalxana çevirər",
+    "trait": "Verdiyi hasar 50% şansla rəqib kartı 7 saniyəlik kor edər.",
     "additionalStats": {
-      "range": "1000",
+      "range": "3000",
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -912,12 +916,12 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+15% HP | 340 » 391",
-      "level2": "+20% Damage to Shield | 50% » 70%",
+      "level1": "+10% HP | 340 » 374",
+      "level2": "+25% Damage to Shield | 100% » 125%",
       "level3": "+10% DMG Reduction | 0% » 10%"
     },
     "story": "-",
-    "class": "Tank",
+    "class": "Marksman",
     "subclass": "Absorber"
   },
   {
