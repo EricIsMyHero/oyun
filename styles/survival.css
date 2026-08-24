@@ -1,0 +1,144 @@
+/* ═══════════════════════════════════════════════════════
+   Survival Arena (Brotato / Vampire Survivors style)
+═══════════════════════════════════════════════════════ */
+
+.nav-btn--survival { color: var(--relic) !important; }
+.nav-btn--survival:hover, .nav-btn--survival.active {
+  background: rgba(248,113,113,0.12) !important;
+  color: #fca5a5 !important;
+}
+
+/* ── Character picker ── */
+.survival-char-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+}
+.survival-char-card {
+  cursor: pointer;
+  width: 200px;
+  padding: 22px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.survival-char-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--char-color, var(--accent));
+  box-shadow: 0 0 24px var(--char-color, var(--glow-blue));
+}
+.survival-char-emoji { font-size: 2.6rem; margin-bottom: 8px; }
+.survival-char-name {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  color: var(--char-color, var(--accent));
+  margin-bottom: 6px;
+}
+.survival-char-desc { font-size: .85rem; color: var(--muted); min-height: 2.4em; margin-bottom: 10px; }
+.survival-char-hp { font-size: .85rem; color: var(--text); }
+
+/* ── HUD ── */
+#survival-hud {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  max-width: 960px;
+  margin: 0 auto 14px;
+  padding: 10px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.survival-hud-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-size: .95rem;
+  color: var(--text);
+}
+.survival-hp-bar {
+  width: 160px;
+  height: 14px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+}
+#survival-hp-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #f87171, #facc15);
+  transition: width .15s;
+}
+
+/* ── Arena / canvas ── */
+.survival-arena-wrap {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+}
+#survival-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #080b18;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  touch-action: none;
+}
+
+/* ── Virtual joystick (touch + mouse drag) ── */
+#survival-joystick {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid var(--border);
+  touch-action: none;
+}
+#survival-joystick-knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--glow-blue);
+  pointer-events: none;
+}
+
+/* ── Game over ── */
+#survival-gameover {
+  text-align: center;
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+#survival-gameover h3 {
+  font-family: var(--font-head);
+  color: var(--relic);
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+#survival-final-stats { color: var(--muted); margin-bottom: 22px; }
+#survival-gameover .btn-secondary { margin-left: 10px; }
+
+@media (max-width: 640px) {
+  .survival-hp-bar { width: 110px; }
+  #survival-joystick { width: 84px; height: 84px; left: 16px; bottom: 16px; }
+}
