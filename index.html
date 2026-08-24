@@ -16,6 +16,7 @@
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/battle.css">
+  <link rel="stylesheet" href="styles/survival.css">
 </head>
 <body>
 
@@ -70,6 +71,7 @@
       <li><button class="nav-btn" data-section="lore">Lore</button></li>
       <li><button class="nav-btn" data-section="cards">Cards</button></li>
       <li><button class="nav-btn nav-btn--powerup" data-section="battle">⚔ Battle Arena</button></li>
+      <li><button class="nav-btn nav-btn--survival" data-section="survival">🧟 Survival</button></li>
       <li><button class="nav-btn" data-section="spells">Spells</button></li>
       <li><button class="nav-btn" data-section="info">Codex</button></li>
       <li><button class="nav-btn nav-btn--powerup" data-section="powerups">⚙ Power Up</button></li>
@@ -188,6 +190,39 @@
       <div id="battle-result" style="display:none">
         <h3 id="battle-result-title"></h3>
         <button id="battle-restart-btn" class="btn-primary">Yenidən Başla</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SURVIVAL ARENA ── -->
+  <section id="survival-section">
+    <div class="section-wrap">
+      <p class="section-eyebrow reveal">Horda</p>
+      <h2 class="section-title reveal">Survival Arena</h2>
+      <div class="section-divider reveal"></div>
+
+      <div id="survival-picker">
+        <p class="battle-picker-hint">Xarakter seç</p>
+        <div id="survival-picker-grid" class="survival-char-grid"></div>
+      </div>
+
+      <div id="survival-game" style="display:none">
+        <div id="survival-hud">
+          <div class="survival-hud-item">❤ <div class="survival-hp-bar"><div id="survival-hp-fill"></div></div></div>
+          <div class="survival-hud-item" id="survival-timer">00:00</div>
+          <div class="survival-hud-item" id="survival-kills">0 öldürmə</div>
+        </div>
+        <div class="survival-arena-wrap">
+          <canvas id="survival-canvas"></canvas>
+          <div id="survival-joystick"><div id="survival-joystick-knob"></div></div>
+        </div>
+      </div>
+
+      <div id="survival-gameover" style="display:none">
+        <h3>Öldün</h3>
+        <p id="survival-final-stats"></p>
+        <button id="survival-restart-btn" class="btn-primary">Yenidən Başla</button>
+        <button id="survival-menu-btn" class="btn-secondary">Xarakter Seç</button>
       </div>
     </div>
   </section>
@@ -879,6 +914,7 @@
 <script src="js/core/navigation.js"></script>
 <script src="js/modules/cards.js"></script>
 <script src="js/modules/battle.js"></script>
+<script src="js/modules/survival.js"></script>
 <script src="js/modules/spells.js"></script>
 <script src="js/modules/info.js"></script>
 <script src="js/modules/powerups.js"></script>
