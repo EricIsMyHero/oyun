@@ -22,11 +22,11 @@ const SURVIVAL_CHARACTERS = {
     emoji: '🪖',
     color: '#7b9cff',
     glow: 'rgba(123,156,255,0.55)',
-    desc: '3 güllə / 2s · Güllə başına 5 hasar',
+    desc: '3 güllə ardıcıl / 2s · Güllə başına 5 hasar',
     maxHealth: 100,
     speed: 230,
     radius: 18,
-    attack: { kind: 'multishot', count: 3, interval: 2000, damage: 5, bulletSpeed: 560, bulletRadius: 5, range: 480 },
+    attack: { kind: 'burst', count: 3, shotGap: 120, interval: 2000, damage: 5, bulletSpeed: 560, bulletRadius: 5, range: 480 },
   },
   henry: {
     id: 'henry',
@@ -48,6 +48,10 @@ function survivalSpawnInterval(elapsed){ return Math.max(300, 1400 - elapsed * 8
 function survivalEnemySpeed(elapsed)   { return Math.min(150, 70 + elapsed * 0.6); }
 const SURVIVAL_CONTACT_DMG = 8;
 const SURVIVAL_CONTACT_CD  = 600;
+
+/* ── XP / leveling: xp per kill = 1, threshold grows per level ── */
+const SURVIVAL_XP_PER_KILL = 1;
+function survivalXpToNext(level) { return 5 + level * 3; }
 
 let survivalPickerBuilt = false;
 let survivalState = null;
@@ -130,7 +134,8 @@ document.addEventListener('click', e => {
    RUN LIFECYCLE
 ═══════════════════════════════════════════════════════ */
 function startSurvivalRun(charId) {
-  const cfg = SURVIVAL_CHARACTERS[charId];
+  /* clone so per-run level-up buffs never leak into the next run */
+  const cfg = JSON.parse(JSON.stringify(SURVIVAL_CHARACTERS[charId]));
   document.getElementById('survival-picker').style.display   = 'none';
   document.getElementById('survival-gameover').style.display = 'none';
   document.getElementById('survival-game').style.display     = 'block';
@@ -141,8 +146,13 @@ function startSurvivalRun(charId) {
 
   survivalState = {
     charId, cfg,
-    player: { x: SURVIVAL_W / 2, y: SURVIVAL_H / 2, hp: cfg.maxHealth, contactCd: 0 },
+    player: {
+      x: SURVIVAL_W / 2, y: SURVIVAL_H / 2,
+      hp: cfg.maxHealth, contactCd: 0,
+      level: 1, xp: 0, xpToNext: survivalXpToNext(1),
+    },
     attackCd: 0,
+    burst: null,          // { shotsLeft, timer } — soldier's burst-fire
     enemies: [],
     bullets: [],
     strikes: [],
@@ -195,11 +205,21 @@ function survivalUpdate(dt) {
     st.spawnCd = survivalSpawnInterval(st.elapsed);
   }
 
-  /* character attack */
+  /* character attack (starts a burst for soldier, fires instantly for henry) */
   st.attackCd -= dt * 1000;
   if (st.attackCd <= 0) {
     survivalDoAttack();
     st.attackCd = cfg.attack.interval;
+  }
+
+  /* tick soldier's burst — 3 bullets fired one after another, same target */
+  if (st.burst && st.burst.shotsLeft > 0) {
+    st.burst.timer -= dt * 1000;
+    if (st.burst.timer <= 0) {
+      survivalFireBurstShot();
+      st.burst.shotsLeft--;
+      st.burst.timer = cfg.attack.shotGap;
+    }
   }
 
   /* bullets travel */
@@ -239,38 +259,70 @@ function survivalUpdate(dt) {
     }
   });
 
-  /* remove dead enemies, count kills */
+  /* remove dead enemies, count kills, award xp */
   const before = st.enemies.length;
   st.enemies = st.enemies.filter(e => e.hp > 0);
-  st.kills += before - st.enemies.length;
+  const killedNow = before - st.enemies.length;
+  st.kills += killedNow;
+  if (killedNow > 0) {
+    p.xp += killedNow * SURVIVAL_XP_PER_KILL;
+    while (p.xp >= p.xpToNext) {
+      p.xp -= p.xpToNext;
+      p.level++;
+      p.xpToNext = survivalXpToNext(p.level);
+      survivalLevelUp();
+    }
+  }
 
   updateSurvivalHUD();
   if (p.hp <= 0) survivalGameOver();
 }
 
-function survivalDoAttack() {
-  const st = survivalState, cfg = st.cfg, p = st.player, atk = cfg.attack;
-  const inRange = st.enemies
-    .filter(e => Math.hypot(e.x - p.x, e.y - p.y) <= atk.range)
-    .sort((a, b) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y));
+/* ── Level up: small, permanent-for-this-run buff ── */
+function survivalLevelUp() {
+  const st = survivalState, cfg = st.cfg, p = st.player;
+  cfg.attack.damage += 1;                                  // bullets/strike hit harder
+  cfg.maxHealth += 10;
+  p.hp = Math.min(cfg.maxHealth, p.hp + 20);                // partial heal on level up
+}
 
-  if (atk.kind === 'multishot') {
-    inRange.slice(0, atk.count).forEach(t => {
-      const dx = t.x - p.x, dy = t.y - p.y;
-      const d = Math.hypot(dx, dy) || 1;
-      st.bullets.push({
-        x: p.x, y: p.y,
-        vx: (dx / d) * atk.bulletSpeed, vy: (dy / d) * atk.bulletSpeed,
-        radius: atk.bulletRadius, damage: atk.damage, hit: false,
-      });
-    });
+function survivalNearestEnemy() {
+  const st = survivalState, p = st.player, atk = st.cfg.attack;
+  let best = null, bestDist = atk.range;
+  st.enemies.forEach(e => {
+    const d = Math.hypot(e.x - p.x, e.y - p.y);
+    if (d <= bestDist) { best = e; bestDist = d; }
+  });
+  return best;
+}
+
+function survivalDoAttack() {
+  const st = survivalState, cfg = st.cfg, atk = cfg.attack;
+
+  if (atk.kind === 'burst') {
+    /* start a 3-shot burst — each shot re-targets the current nearest enemy */
+    st.burst = { shotsLeft: atk.count, timer: 0 };
   } else if (atk.kind === 'strike') {
-    const t = inRange[0];
+    const t = survivalNearestEnemy();
     if (t) {
+      const p = st.player;
       t.hp -= atk.damage;
       st.strikes.push({ x1: p.x, y1: p.y, x2: t.x, y2: t.y, life: 0.15 });
     }
   }
+}
+
+function survivalFireBurstShot() {
+  const st = survivalState, p = st.player, atk = st.cfg.attack;
+  const t = survivalNearestEnemy();
+  if (!t) return;
+  const dx = t.x - p.x, dy = t.y - p.y;
+  const d = Math.hypot(dx, dy) || 1;
+  st.bullets.push({
+    x: p.x, y: p.y,
+    vx: (dx / d) * atk.bulletSpeed, vy: (dy / d) * atk.bulletSpeed,
+    radius: atk.bulletRadius, damage: atk.damage, hit: false,
+  });
 }
 
 function survivalSpawnEnemy() {
@@ -335,6 +387,9 @@ function updateSurvivalHUD() {
   const st = survivalState, cfg = st.cfg, p = st.player;
   const pct = Math.max(0, (p.hp / cfg.maxHealth) * 100);
   document.getElementById('survival-hp-fill').style.width = pct + '%';
+  const xpPct = Math.max(0, (p.xp / p.xpToNext) * 100);
+  document.getElementById('survival-xp-fill').style.width = xpPct + '%';
+  document.getElementById('survival-level').textContent = p.level;
   const mm = String(Math.floor(st.elapsed / 60)).padStart(2, '0');
   const ss = String(Math.floor(st.elapsed % 60)).padStart(2, '0');
   document.getElementById('survival-timer').textContent = `${mm}:${ss}`;
@@ -350,5 +405,5 @@ function survivalGameOver() {
   const mm = String(Math.floor(st.elapsed / 60)).padStart(2, '0');
   const ss = String(Math.floor(st.elapsed % 60)).padStart(2, '0');
   document.getElementById('survival-final-stats').textContent =
-    `${st.cfg.name} · ${mm}:${ss} sağ qaldı · ${st.kills} öldürmə`;
+    `${st.cfg.name} · Lvl ${st.player.level} · ${mm}:${ss} sağ qaldı · ${st.kills} öldürmə`;
 }
