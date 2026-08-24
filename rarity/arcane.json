@@ -738,22 +738,23 @@
       "Human"
     ],
     "rarity": "Arcane",
+    "group": "the-primal-vanguard",
     "abilityName": "",
     "stats": {
       "health": "90",
       "shield": "70",
-      "damage": "6",
-      "sps": "6",
-      "attackSpeed": "1,00",
+      "damage": "6/10",
+      "sps": "6/8",
+      "attackSpeed": "1.00s/1.25s",
       "delay": "-",
       "mana": "12",
       "number": "5"
     },
-    "trait": "Hər 12 saniyədə uzaqdan atış edərək +300% Hasar verər",
+    "trait": "Hər saniyə 8 yük qazanarlar. 100 yükdə eyni hədəfə xəncərlilər bıçaqlarını atar və ekstra +100% Hasar verərlər. Əgər rəqib kartın canı 70%-dən azdırsa 5 saniyəlik qanayar, mızraqlılar isə mızraqlarını fırladar və ekstra +200% Hasar verərək rəqib kartı 0.5 karo geri itələyər.",
     "additionalStats": {
       "range": "1000/3500",
       "speed": "1000",
-      "criticalChance": "5%",
+      "criticalChance": "10%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
@@ -769,11 +770,11 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+15% Critic Damage | 1.5x » 1.65x",
-      "level2": "-16% Ability Cooldown | 12s » 10s",
-      "level3": "+20% Shield | 70 » 84"
+      "level1": "+0.15x Critical Damage | 1.5x » 1.65x",
+      "level2": "+5% Ability Percentage | 70% » 75%",
+      "level3": "+5% Critical Chance | 10% » 15%"
     },
-    "story": "-",
+    "story": "The Primal Vanguard, a formidable five-warrior tribal combat unit from an ancient warrior civilization, fighting as a single coordinated squad rather than as individual soldiers. These warriors come from a brutal prehistoric culture where survival, loyalty, and collective strength define their entire way of life. The card depicts exactly five distinct tribal warriors standing together as one unified formation in front of an enormous ancient stone totem. The three warriors in the back and center are Spear Warriors, while the two warriors at the front are Dagger Warriors. The three Spear Warriors are strong, rugged adult tribal men with athletic, battle-hardened physiques. They stand prominently behind the formation, holding long primitive spears with sharpened stone or bone spearheads. Their posture is disciplined and coordinated, clearly showing that they fight as a group rather than independently. Their clothing consists of animal hides, rough furs, woven primitive fabrics, leather straps, bone ornaments, and tribal paint. Their bodies have realistic scars, dirt, small wounds, and faded ritual markings from years of combat and hunting. Their equipment should look handcrafted using materials naturally available to a prehistoric civilization. The two Dagger Warriors are positioned lower in the formation, kneeling or crouching, ready to rapidly attack enemies at close range. They are smaller and more agile than the spear warriors, with athletic physiques and predatory body language. Each Dagger Warrior holds two primitive flint daggers, one in each hand. The blades are crude but extremely sharp, made from chipped black and gray flint with wrapped leather handles. Their faces show intense concentration and aggression, while the spear warriors remain calm and disciplined. Every warrior should have a distinct face, hairstyle, scars, body markings, and clothing details while still clearly belonging to the same tribe. The five warriors form a tight tactical formation, standing close enough that their bodies and weapons visually overlap slightly. They should look like a single battlefield unit rather than five unrelated characters. At the center of the formation is an enormous ancient stone tribal totem, covered with primitive carvings depicting spears, animals, warriors, and symbols representing unity and strength. The totem is weathered, cracked, and partially covered with moss. The visual composition should strongly communicate collective strength. All five warriors are preparing for their signature ability, “Tribal Throw.” The warriors have just identified the same enemy target outside the frame. All five turn their attention toward the exact same direction. The two Dagger Warriors are simultaneously throwing their flint daggers, while the three Spear Warriors are performing a powerful synchronized spear throw. Their projectiles travel toward a single invisible target in the same direction, creating a visually coherent coordinated attack. The three spear warriors should appear to generate enormous physical force as they throw. Their spears are surrounded by subtle motion trails and flying dust, emphasizing the +150% damage impact and powerful knockback of the attack. The two daggers move with much greater speed and precision, surrounded by faint dark-red energy particles representing Bleed. All five attacks visually converge toward one single impact point, representing the mechanic where their individual damage is combined into one massive attack. At the point of convergence, create a dramatic burst of dust, shattered stone fragments, and primitive combat energy. The effect should feel physical and brutal rather than magical. The formation should visually communicate that the strength of Tribe comes from acting together. The warriors should not look like modern soldiers, fantasy barbarians, or generic cavemen. They are a highly organized ancient tribal warrior unit, with their own combat discipline, hierarchy, traditions, and coordinated battlefield tactics. Their weapons are entirely primitive: stone, flint, bone, wood, leather, and rope. No metal, firearms, modern equipment, futuristic technology, or advanced armor. The environment is an ancient prehistoric tribal battlefield, surrounded by massive weathered stones, primitive wooden structures, animal bones, burning torches, tribal banners, and dense wilderness. The ground is muddy and covered with footprints, broken branches, scattered stones, and traces of previous battles. Behind the warriors stands the massive stone totem, creating a strong silhouette and giving the card a recognizable visual identity. The lighting is dramatic and cinematic: warm sunlight breaks through dense clouds and trees, illuminating the five warriors from behind while atmospheric dust floats through the air. The overall atmosphere should feel primitive, brutal, disciplined, powerful, and ancient. The card should immediately communicate: Five warriors. One formation. One target. One devastating attack.",
     "class": "Fighter",
     "subclass": "Burst"
   },
@@ -783,21 +784,22 @@
       "Dead"
     ],
     "rarity": "Arcane",
+    "group": "the-primal-vanguard",
     "abilityName": "",
     "stats": {
-      "health": "60",
-      "shield": "20",
-      "damage": "10",
-      "sps": "8",
-      "attackSpeed": "1,30s",
+      "health": "260",
+      "shield": "120",
+      "damage": "32",
+      "sps": "18",
+      "attackSpeed": "1.75s",
       "delay": "-",
-      "mana": "4",
+      "mana": "14",
       "number": "2"
     },
-    "trait": "25% Şansla rəqib kartları 1,2 saniyə sərsəmlətər",
+    "trait": "Hər 4-cü zərbədə ağır gürzlərini yerə çırpırlar. Bu zərbə 3x3 ərazidəki bütün rəqibləri 1,5 saniyəlik sərsəmlədir. Vurulan rəqiblərin hərəkət sürəti sonrakı 2 saniyə ərzində 30% azalar.",
     "additionalStats": {
-      "range": "2400",
-      "speed": "1100",
+      "range": "1250",
+      "speed": "900",
       "criticalChance": "15%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -816,17 +818,16 @@
     "effects": [
       {
         "type": "stun",
-        "chance": 25,
-        "duration": 1.2
+        "duration": 1.5
       }
     ],
     "showlevels": {
-      "level1": "+10% Stun Chance | 25% » 35%",
-      "level2": "+10% Range | 2,400 » 2,640",
-      "level3": "+25% Stun Duration | 1,2s » 1,5s"
+      "level1": "+10% Stun Area Size | 3000 » 3300",
+      "level2": "+8% Range | 1,250 » 1,350",
+      "level3": "+20% Stun Duration | 1,5s » 1,8s"
     },
-    "story": "-",
-    "class": "Marksman",
+    "story": "The Primal Crushers, a brutal tribe of savage prehistoric warriors from a wild, untamed world. They are feral tribal humanoids, built for raw physical strength and close-range destruction. Their entire appearance reflects a primitive culture where survival, strength, and dominance determine everything. The Earthshakers are a small group of powerful tribal warriors, each with a massive, muscular physique, thick arms, broad shoulders, and rugged bodies covered with dirt, scars, scratches, and tribal markings. They should look wild and battle-hardened rather than civilized. Their faces are intimidating and primitive, with fierce expressions, prominent brows, rough facial features, unkempt hair, and wild beards. Some have long messy hair, while others have braided sections decorated with small bones, teeth, feathers, and primitive ornaments. They wear primitive tribal clothing made from rough animal hides, leather strips, woven fibers, and fur. Their clothing is minimal but practical, covering the important areas while leaving their muscular arms and legs exposed. Their bodies are decorated with dark tribal paint, scars, and primitive symbols representing strength and their connection to the earth. Each warrior carries an enormous primitive weapon: Massive stone clubs made from irregular boulders attached to thick wooden handles. Huge bone clubs crafted from the bones of gigantic prehistoric creatures. Some weapons are reinforced with crude leather bindings, rope, teeth, and smaller stones. The clubs should be extremely large and heavy, emphasizing that these warriors rely entirely on overwhelming physical force. One Earthshaker is captured in the middle of a devastating downward swing, smashing his enormous stone club into the ground. The impact creates a powerful earth-shattering shockwave, sending dust, rocks, and chunks of earth flying outward. Other Earthshakers stand behind him in aggressive combat positions, raising their enormous bone and stone clubs and preparing to charge. The ground beneath them is cracked and fractured from repeated impacts. Large rocks are scattered throughout the battlefield, with dust clouds surrounding the warriors. Their environment is a primitive prehistoric tribal settlement, surrounded by enormous cliffs, ancient forests, giant bones, primitive wooden structures, stone totems, fire pits, hanging animal hides, and crude tribal decorations. Huge prehistoric animal bones are scattered throughout the area, reinforcing the ancient and savage atmosphere. The lighting is dramatic and cinematic, with warm sunlight breaking through dense clouds and illuminating the warriors from behind. Dust particles float through the air while smoke from distant tribal fires creates atmospheric depth. The overall appearance should communicate raw strength, primitive brutality, tribal unity, and devastating physical power.",
+    "class": "Tank",
     "subclass": "Stunner"
   },
   {
