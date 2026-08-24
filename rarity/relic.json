@@ -275,18 +275,19 @@
       "Human"
     ],
     "rarity": "Relic",
+    "group": "solar-order",
     "abilityName": "",
     "stats": {
-      "health": "130",
-      "shield": "500",
+      "health": "200",
+      "shield": "100",
       "damage": "10",
       "sps": "10",
       "attackSpeed": "1.00",
       "delay": "-",
       "mana": "6",
-      "number": "1"
+      "number": "2"
     },
-    "trait": "Qalxan alınan hasarın 30%-ni rəqibə ötürər",
+    "trait": "Bir-birləri və yaxındakı bir dost kartla bağ qurarlar. Hər ikisinin və dost kartın canı və qalxanı (can və qalxanın 90%-i) birləşər və biri hasar aldıqda digərinində canı gedər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -310,7 +311,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "The Bound Radiance, a mysterious and beautiful female warriors of the Solar Order whose power are based on an unbreakable bond between allies. Rather than simply protecting their companions, Etheris literally links their life force with a nearby ally, causing their vitality to become one shared existence. Etheris are two young adult women with an elegant, graceful, athletic physique. She has long flowing silver-white hair with subtle golden highlights, softly illuminated by solar energy. Her eyes glow with a brilliant pale-gold light, and her expression is calm, serious, and deeply devoted. She wears an elegant white, ivory, and gold Solar Order battle outfit, combining ceremonial clothing with lightweight protective armor. Her armor features intricate circular patterns resembling celestial orbits and solar rings. Thin golden lines run across her armor like channels carrying energy. At the center of her chest is a small radiant solar core, but unlike ordinary Solar Order warriors, the core is visibly divided into two interconnected halves. One half glows within Etheris while the other projects outward toward her chosen ally. Etheris's defining ability is visually represented by a spectacular golden life-force connection between her and a nearby allied warrior. A luminous golden thread emerges from Etheris's chest and connects directly to the ally's chest. Around both characters are two enormous translucent circular energy rings that overlap in the center, symbolizing that their lives have become one. The connection should look physical and powerful rather than like a simple beam. Thousands of tiny golden particles travel continuously in both directions through the bond, carrying their shared life energy. Both characters have a single combined health-energy aura surrounding them. Their individual energy fields overlap completely, making it visually clear that damage dealt to one is simultaneously transferred to the other. To represent the mechanic, the ally has just been struck by an enemy attack. A small portion of golden energy violently leaves both characters simultaneously, showing that the damage is shared between their life pools. Etheris reacts with a brief expression of pain even though she was not directly attacked. The connection should communicate that neither partner can remain untouched while the other suffers. Etheris stands close beside her bonded ally, almost shoulder-to-shoulder, with one hand extended toward them. Their golden energy connection forms a large circular symbol behind them resembling two intertwined solar rings. Her weapon is a slender golden ceremonial blade, kept lowered at her side. It should not dominate the composition; Etheris's bond ability is the main visual focus. The environment is a magnificent Solar Order sanctuary, filled with white marble, golden pillars, enormous sun symbols, floating crystals, and warm divine sunlight. Behind the pair is a gigantic circular solar emblem split into two interconnected halves, mirroring the bond between Etheris and her ally. The atmosphere should feel beautiful, emotional, powerful, and slightly tragic. Etheris's ability is not merely protection—it is a commitment to share both strength and suffering with another warrior.",
     "class": "Tank",
     "subclass": "Reflector"
   },
@@ -911,6 +912,7 @@
       "Human"
     ],
     "rarity": "Relic",
+    "group": "solar-order",
     "abilityName": "",
     "stats": {
       "health": "180",
@@ -922,7 +924,7 @@
       "mana": "12",
       "number": "1"
     },
-    "trait": "Ətrafındakı kartlara hər saniyə +1 M.Can verər (Max:50)",
+    "trait": "Ətrafındakı kartlara hər 5 saniyədə +4% M.Can verər (Max:20%)",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -952,7 +954,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-",
+    "story": "The Vital Radiance, a beautiful female support warrior of the sacred Solar Order. Unlike frontline warriors, Shine exists to strengthen and sustain those around her. She continuously radiates a gentle solar aura that restores and expands the vitality of nearby allies, making them stronger and harder to defeat the longer they remain within her presence. Shine is a young adult woman with a graceful, elegant, athletic physique. She has long, silky pale-golden hair that softly glows under the sunlight, with individual strands illuminated like fine threads of gold. Her eyes are bright amber-gold, warm and compassionate, yet filled with confidence. Her expression is peaceful and reassuring, giving her the appearance of someone who inspires courage simply by standing nearby. She wears an elegant white-and-gold Solar Order ceremonial outfit, designed specifically for a support role. Her clothing consists of layered white fabric, delicate golden armor plates, a fitted golden-white chest piece, flowing sleeves, and a long radiant sash that floats gently around her body. The armor is lightweight and graceful rather than heavy, decorated with intricate sun and life motifs. Small golden crystals are embedded throughout the outfit, constantly glowing with stored solar energy. At the center of her chest is a small radiant solar crystal, pulsing rhythmically like a living heart. Every pulse sends a wave of warm golden energy outward from her body. Shine's defining ability is represented by a large circular aura of golden-white life energy surrounding her. The aura extends several meters around her and continuously flows outward in gentle waves. Inside this aura, several nearby allies are visibly receiving energy from Shine. Thin golden streams of light connect Shine to their bodies, flowing into their chests and creating luminous protective symbols. Small golden vitality sigils appear above the allies, representing their increasing maximum health. Each pulse of Shine's aura creates another subtle layer of glowing energy around them, visually representing the continuous +4% Maximum Health per 5 second, with the accumulation eventually reaching its maximum potential. The energy should feel like life force rather than healing magic. Instead of wounds instantly disappearing, the allies become surrounded by increasingly dense golden vitality energy, making their bodies look stronger and more resilient. Shine stands calmly at the center of the group, surrounded by her allies. She does not attack. Her entire purpose is to maintain the radiant aura and empower everyone nearby. The environment is a magnificent Solar Order sanctuary, filled with white marble architecture, enormous golden sun symbols, radiant crystal pillars, floating golden particles, and warm sunlight pouring through the ceiling. A massive circular symbol is carved into the floor beneath Shine, resembling a stylized sun with multiple concentric rings. The symbol glows brighter each time her aura pulses. Soft golden light fills the entire environment. The atmosphere should feel warm, hopeful, sacred, and empowering, contrasting with the destructive nature of other Solar Order warriors. Shine should visually communicate support, vitality, growth, and endless endurance. She is not the strongest warrior on the battlefield—she is the reason everyone around her becomes stronger.",
     "class": "Support",
     "subclass": "Healer"
   },
