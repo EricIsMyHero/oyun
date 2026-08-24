@@ -506,23 +506,24 @@
   {
     "name": "Lumina",
     "type": [
-      "Alien"
+      "Entity"
     ],
     "rarity": "Arcane",
+    "group": "solar-order",
     "abilityName": "",
     "stats": {
       "health": "500",
       "shield": "500",
       "damage": "120",
-      "sps": "48",
-      "attackSpeed": "2.50s",
+      "sps": "38",
+      "attackSpeed": "3.20s",
       "delay": "-",
       "mana": "18",
       "number": "1"
     },
-    "trait": "3x3 yaxındakı rəqib kartlara hər 0,2 saniyə ərzində 2 Hasar verər",
+    "trait": "Yaxındakı rəqib kartlara hər 0,25 saniyə ərzində maksimum canlarının 1%-i  Hasar verər",
     "additionalStats": {
-      "range": "1000",
+      "range": "1250",
       "speed": "800",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -540,11 +541,11 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+7% Shield | 500 » 535",
-      "level2": "+10% DMG Reduction | 0% » 10%",
-      "level3": "+50% Ability Aura DMG | 2 » 3"
+      "level1": "+6% Shield | 500 » 530",
+      "level2": "+50% Aura Area Size | 2000 » 3000",
+      "level3": "+25% Ability Aura DMG | 1% » 1,25%"
     },
-    "story": "-",
+    "story": "The Solar Sentinel, a powerful female warrior belonging to the sacred Solar Order, an elite order devoted to the power of sunlight. Lumina constantly radiates an immense protective field of solar energy around herself, turning the battlefield into a zone of blinding golden light. Her presence feels like standing directly beneath an eternal sun. Lumina is a beautiful adult woman with an elegant yet powerful athletic physique. She has long flowing golden-white hair, illuminated naturally by the intense solar energy surrounding her. Her eyes glow with brilliant warm golden light, and her expression is calm, disciplined, and unwavering. She wears ornate white and gold ceremonial battle armor, combining elegant Solar Order aesthetics with practical combat protection. The armor is made from polished white metal and radiant golden material, with intricate sun-inspired engravings across the chest, shoulders, arms, and legs. A long white-and-gold fabric mantle flows behind her, constantly illuminated by the energy around her. At the center of her chest is a bright solar core, resembling a miniature sun enclosed within a crystalline structure. Golden energy continuously flows outward from this core and travels across the armor. Lumina carries a long elegant solar spear in one hand. The weapon has a white-metal shaft with golden details and a spearhead made from condensed sunlight. The blade emits intense but controlled golden radiance. Around Lumina is her defining ability: a gigantic continuous solar barrier surrounding her entire body. Instead of looking like a simple circular shield, the barrier appears as a multilayered sphere of radiant golden energy, composed of concentric rings, flowing solar particles, and translucent walls of light. The barrier constantly emits waves of sunlight outward. Every few moments, powerful golden pulses expand from Lumina, illuminating everything around her. The closer an enemy gets, the more intense the light becomes. The solar field should visibly affect the environment: nearby stones glow from the heat, dust particles become illuminated, shadows disappear beneath the intense radiance, and the ground beneath her feet develops subtle glowing cracks from concentrated solar energy. The battlefield is a magnificent sacred Solar Order temple, constructed from white stone and golden crystalline architecture. Massive pillars resemble rays of sunlight, enormous circular sun symbols are carved into the floor, and floating golden crystals orbit around the sanctuary. Behind Lumina is a gigantic artificial sun, suspended above the temple like a miniature star. Its radiance merges with Lumina's own energy field, making it difficult to distinguish where the warrior ends and the sunlight begins. She stands at the center of the battlefield in a confident defensive stance, spear held vertically beside her while the enormous solar barrier surrounds her and protects everything nearby. The atmosphere should feel holy, powerful, majestic, and overwhelming, portraying Lumina as a living source of sunlight and an immovable guardian of the Solar Order.",
     "class": "Tank",
     "subclass": "Pure"
   },
