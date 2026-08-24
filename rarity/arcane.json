@@ -1087,14 +1087,14 @@
     "stats": {
       "health": "130",
       "shield": "100",
-      "damage": "14",
-      "sps": "22",
-      "attackSpeed": "0.65s",
+      "damage": "36",
+      "sps": "25",
+      "attackSpeed": "1.45s",
       "delay": "-",
       "mana": "7",
       "number": "1"
     },
-    "trait": "Ətrafında rəqib kart yoxdursa hər 0,2 saniyədə 4 yük qazanar, 100 yük olduqda ən az canlı rəqibin üstünə hoppanar və ilk vuruşu ekstra +150% Hasar verər (Menzil: 6000)",
+    "trait": "Ətrafında rəqib kart yoxdursa hər 0,225 saniyədə 3 yük qazanar, 100 yük olduqda ən az canlı rəqibin üstünə hoppanar və ilk vuruşu ekstra +50% Hasar verər (Menzil: 4500)",
     "additionalStats": {
       "range": "1000",
       "speed": "1200",
