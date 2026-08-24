@@ -779,9 +779,9 @@
     "subclass": "Burst"
   },
   {
-    "name": "Stunners",
+    "name": "Earthshakers",
     "type": [
-      "Dead"
+      "Human"
     ],
     "rarity": "Arcane",
     "group": "the-primal-vanguard",
