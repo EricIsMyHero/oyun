@@ -194,7 +194,7 @@
   {
     "name": "Tphoenix",
     "type": [
-      "Human"
+      "Entity"
     ],
     "rarity": "Arcane",
     "group": "ancients",
@@ -315,24 +315,25 @@
     "subclass": "Reborn"
   },
   {
-    "name": "Pirate Boy",
+    "name": "Corsair Crew",
     "type": [
       "Human"
     ],
     "rarity": "Arcane",
+    "group": "corsair-bay",
     "abilityName": "",
     "isMulti": true,
     "stats": {
       "health": "250",
       "shield": "0",
-      "damage": "30",
-      "sps": "25",
-      "attackSpeed": "1,20s",
+      "damage": "24",
+      "sps": "20",
+      "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "12",
       "number": "1"
     },
-    "trait": "Hər 7 saniyədə +5 Can yeniləyər",
+    "trait": "5+(Kaçınma şansı+Kritik Şansı)% şansla rəqibin güllələrindən hasar almayaraq ona geri ötürər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -351,19 +352,12 @@
       "shieldtakendamage": "70%",
       "life": "-"
     },
-    "effects": [
-      {
-        "type": "heal",
-        "amount": 5,
-        "cooldown": 7
-      }
-    ],
     "showlevels": {
       "level1": "+6% Health | 250 » 265",
-      "level2": "+10% DMG | 30 » 33",
-      "level3": "+10% Dodge Chance | 0% » 10%"
+      "level2": "+12% DMG | 24 » 27",
+      "level3": "+5% Dodge Chance | 0% » 5%"
     },
-    "story": "-",
+    "story": "The Threefold Raiders, a dangerous trio of pirate warriors consisting of one male pirate and two female pirates from the ruthless waters of Corsair Bay. The male pirate must have a completely original appearance and must NOT resemble Jack Sparrow or any famous fictional pirate character. He is a young adult man with a strong, athletic build, broad shoulders, a clean and angular face, sharp cheekbones, and a serious, determined expression. He has short, messy dark-brown hair, with no dreadlocks, beads, or elaborate pirate hairstyle. He has either very light stubble or a short, neatly trimmed beard, giving him a rugged but disciplined appearance. He wears a practical historical corsair outfit inspired by Mediterranean and North African sailors rather than the stereotypical Caribbean pirate aesthetic. His clothing consists of a dark navy-blue long coat, cream-colored linen shirt, fitted dark trousers, a wide leather belt, worn leather boots, and a simple dark cloth head covering. His outfit is weathered from years at sea but remains functional and military-like. He carries no excessive jewelry, no decorative beads, no dreadlocks, no colorful scarves, and no flamboyant accessories. In his right hand he holds a long, narrow, sharply pointed cutlass, designed for fast and precise attacks. The weapon has a realistic steel blade, simple guard, and dark wooden handle. It should look like a practical historical weapon rather than a fantasy sword. Beside him stand two female pirate warriors, both young adult women with distinct appearances. They wear historically inspired corsair clothing and each carries an antique flintlock pistol with wooden grips and aged metal mechanisms. The three pirates stand together in a coordinated combat formation: the male swordsman at the front, slightly turned sideways in a defensive stance, while the two women stand behind him on opposite sides with their flintlock pistols raised. Their expressions are serious and confident, portraying them as experienced professional corsairs rather than theatrical or comedic pirates. The scene takes place on the deck of a large wooden corsair ship in Corsair Bay, surrounded by massive wooden masts, dark sails, ropes, barrels, crates, cannons, and maritime equipment. The deck is wet from seawater and covered with realistic scratches and weathering. A violent ocean surrounds the ship, with enormous waves crashing against the hull. Dark storm clouds cover the sky while a narrow beam of sunlight illuminates the three crew members.",
     "forms": [
       {
         "name": "Pirate Girls",
@@ -371,20 +365,21 @@
           "Human"
         ],
         "rarity": "Arcane",
+        "group": "corsair-bay",
         "abilityName": "",
         "stats": {
           "health": "120",
           "shield": "0",
           "damage": "16",
           "sps": "11",
-          "attackSpeed": "1,50s",
+          "attackSpeed": "1.50s",
           "delay": "-",
           "mana": "-",
           "number": "2"
         },
-        "trait": "Hər 16 saniyədə +0,025 Menzil bonusu qazanar",
+        "trait": "Rəqib kart nə qədər uzaqdadırsa ona o qədər çox hasar verərlər. (Max: 75%)",
         "additionalStats": {
-          "range": "2500",
+          "range": "2750",
           "speed": "1000",
           "criticalChance": "5%",
           "criticDamage": "1.5x",
@@ -394,8 +389,8 @@
           "dodge": "0%"
         },
         "showlevels": {
-          "level1": "+8% Attack Speed | 1,50s » 1,38s",
-          "level2": "+9% Range | 2500 » 2725",
+          "level1": "+8% Attack Speed | 1.50s » 1.38s",
+          "level2": "+10% Range | 2750 » 3025",
           "level3": "+10% Critical Chance | 5% » 15%"
         },
         "story": "-",
@@ -406,23 +401,24 @@
     "subclass": "Survivor"
   },
   {
-    "name": "Canoballer",
+    "name": "Ship Cannoneer",
     "type": [
-      "Robot"
+      "Human"
     ],
     "rarity": "Arcane",
+    "group": "corsair-bay",
     "abilityName": "",
     "stats": {
-      "health": "130",
-      "shield": "200",
-      "damage": "50",
-      "sps": "29",
-      "attackSpeed": "1,70s",
+      "health": "120",
+      "shield": "400",
+      "damage": "58",
+      "sps": "26",
+      "attackSpeed": "2.25s",
       "delay": "-",
       "mana": "14",
       "number": "1"
     },
-    "trait": "Sahib olduğu hər 20 qalxan üçün +0,5% Saldırı Hızı qazanar",
+    "trait": "İtirdiyi qalxanının 10%-i qədər saldırı hızı qazanar.",
     "additionalStats": {
       "range": "3200",
       "speed": "900",
@@ -438,15 +434,15 @@
       "shieldrecovery": "0/s",
       "criticdamageminimiser": "0%",
       "flexibility": "0%",
-      "shieldtakendamage": "70%",
+      "shieldtakendamage": "100%",
       "life": "-"
     },
     "showlevels": {
-      "level1": "+7% Shield | 200 » 214",
+      "level1": "+6% Shield | 400 » 424",
       "level2": "+0.15x Critical DMG | 1.5x » 1.65x",
-      "level3": "+0,2% Ability Attack Speed Bonus | 0,5% » 0,7%%"
+      "level3": "+2.5% Ability Attack Speed Bonus | 10% » 12.5%"
     },
-    "story": "-",
+    "story": "The Shieldbreaker, a heavily armed corsair artillery warrior from Corsair Bay who specializes in sustained cannon fire. He operates a massive historical ship cannon, the kind traditionally mounted on wooden pirate ships, transforming it into a devastating battlefield weapon. Ship Cannoneer is a powerful adult male pirate with a broad, muscular build, thick arms, and a weathered face shaped by years of working aboard ships. He has a rugged but serious appearance, with short dark hair, a trimmed beard, and focused eyes. He looks like a veteran naval gunner rather than a flamboyant pirate. He wears practical historical corsair clothing: a dark weathered coat, thick linen shirt, reinforced trousers, leather boots, heavy gloves, and a wide ammunition belt. His clothing is covered with traces of gunpowder, soot, salt, and dust from constant cannon operation. His primary weapon is an enormous traditional wooden naval cannon, mounted on a sturdy two-wheeled wooden carriage. The cannon is made from heavy dark iron and aged wood, with realistic rivets, scratches, dents, and gunpowder residue. It should unmistakably resemble a large historical pirate ship cannon, not a modern artillery weapon. The cannon is positioned directly beside Canoballer, with his hands gripping the firing mechanism and carriage. Several heavy cannonballs and wooden ammunition crates are scattered around him. Ship Cannoneer's defining feature is his large reinforced shield, mounted prominently on his body and protecting him from incoming attacks. The shield is constructed from thick dark metal reinforced with wooden layers and heavy iron brackets. It looks like something designed to survive direct cannon fire. The shield is visibly damaged from repeated enemy attacks: large dents, scratches, cracks, and impact marks cover its surface. Small fragments of metal and dust are falling from it. As the shield loses durability, Canoballer's cannon begins firing increasingly rapidly. This should be represented visually through multiple overlapping muzzle flashes, smoke trails, spent cannonballs, and a rapidly rotating loading mechanism. The visual concept should communicate his gameplay mechanic: The more shield he loses, the faster his cannon fires. A large enemy projectile has just struck his shield, creating a powerful impact. The shield absorbs the blow while Canoballer remains firmly planted behind it. At the same time, his cannon fires another devastating shot toward an unseen enemy. His stance is defensive and stationary, emphasizing that he is designed to hold important positions and withstand sustained enemy fire. The battlefield is a fortified section of a pirate ship, with wooden barricades, cannon emplacements, ropes, barrels, ammunition crates, damaged sails, and ocean waves visible behind him. Dark storm clouds dominate the sky. Smoke from cannon fire fills the air, while flashes from distant naval artillery illuminate the battlefield.",
     "class": "Marksman",
     "subclass": "Burst"
   },
