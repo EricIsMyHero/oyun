@@ -1,7 +1,9 @@
 [
   {
     "name": "XII Josh",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Emergent",
     "stats": {
       "health": "220",
@@ -32,12 +34,18 @@
       "shieldtakendamage": "-",
       "life": "-"
     },
-    "showlevels": { "level1": "-", "level2": "-", "level3": "-" },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
     "story": "-"
   },
   {
     "name": "Dumpsy",
-    "type": ["Robot"],
+    "type": [
+      "Robot"
+    ],
     "rarity": "Emergent",
     "stats": {
       "health": "350",
@@ -68,12 +76,18 @@
       "shieldtakendamage": "-",
       "life": "-"
     },
-    "showlevels": { "level1": "-", "level2": "-", "level3": "-" },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
     "story": "-"
   },
   {
     "name": "Blesser",
-    "type": ["Entity"],
+    "type": [
+      "Entity"
+    ],
     "rarity": "Emergent",
     "stats": {
       "health": "100",
@@ -104,12 +118,18 @@
       "shieldtakendamage": "-",
       "life": "-"
     },
-    "showlevels": { "level1": "-", "level2": "-", "level3": "-" },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
     "story": "-"
   },
   {
     "name": "JS",
-    "type": ["Human"],
+    "type": [
+      "Human"
+    ],
     "rarity": "Emergent",
     "stats": {
       "health": "240",
@@ -140,12 +160,18 @@
       "shieldtakendamage": "-",
       "life": "-"
     },
-    "showlevels": { "level1": "-", "level2": "-", "level3": "-" },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
     "story": "-"
   },
   {
     "name": "Mimic",
-    "type": ["Entity"],
+    "type": [
+      "Entity"
+    ],
     "rarity": "Emergent",
     "stats": {
       "health": "70",
@@ -176,7 +202,375 @@
       "shieldtakendamage": "-",
       "life": "-"
     },
-    "showlevels": { "level1": "-", "level2": "-", "level3": "-" },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
     "story": "-"
+  },
+  {
+    "id": "the-seven-sins",
+    "name": "The Seven Sins",
+    "type": [
+      "Entity"
+    ],
+    "rarity": "Emergent",
+    "manifestation": "random_on_deploy",
+    "isMulti": true,
+    "stats": {
+      "health": "150",
+      "shield": "30",
+      "damage": "8",
+      "sps": "5",
+      "attackSpeed": "1.20s",
+      "delay": "-",
+      "mana": "6",
+      "number": "1"
+    },
+    "trait": "Taxtaya hər qoyuluşda 7 ölümcül günahdan biri təsadüfi seçilir və kart həmin formaya çevrilir. Eyni günah ardıcıl iki dəfə gələ bilər.",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "Specialist",
+    "subclass": "Emergent Vessel",
+    "forms": [
+      {
+        "id": "pride",
+        "name": "Pride",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Emergent",
+        "stats": {
+          "health": "220",
+          "shield": "80",
+          "damage": "14",
+          "sps": "10",
+          "attackSpeed": "1.00s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Yaxınlığında heç bir müttəfiq yoxdursa, +25% Hücum qazanar. Özündən zəif düşmənlərə qarşı əlavə hasar verər.",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1000",
+          "criticalChance": "10%",
+          "criticDamage": "1.5x",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "Tank",
+        "subclass": "Prideful"
+      },
+      {
+        "id": "greed",
+        "name": "Greed",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Emergent",
+        "stats": {
+          "health": "160",
+          "shield": "40",
+          "damage": "8",
+          "sps": "7",
+          "attackSpeed": "1.10s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Öldürdüyü hər kartla daimi +10% Hücum qazanar. Nə qədər çox öldürsə, bir o qədər güclənər.",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1000",
+          "criticalChance": "0%",
+          "criticDamage": "-",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "Marksman",
+        "subclass": "Hoarder"
+      },
+      {
+        "id": "lust",
+        "name": "Lust",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Emergent",
+        "stats": {
+          "health": "110",
+          "shield": "20",
+          "damage": "10",
+          "sps": "9",
+          "attackSpeed": "0.90s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Ən yaxın rəqibi özünə cəlb edir, onu müəyyən müddət başqa kartlara hücum etməkdən yayındırır.",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1150",
+          "criticalChance": "0%",
+          "criticDamage": "-",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "15%",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "Support",
+        "subclass": "Enthraller"
+      },
+      {
+        "id": "envy",
+        "name": "Envy",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Emergent",
+        "stats": {
+          "health": "160",
+          "shield": "40",
+          "damage": "12",
+          "sps": "10",
+          "attackSpeed": "1.00s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Qarşısındakı rəqibin ən üstün statını (Hücum və ya Can) müvəqqəti olaraq kopyalayır.",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1000",
+          "criticalChance": "0%",
+          "criticDamage": "-",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "Assassin",
+        "subclass": "Mirror"
+      },
+      {
+        "id": "gluttony",
+        "name": "Gluttony",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Emergent",
+        "stats": {
+          "health": "320",
+          "shield": "60",
+          "damage": "6",
+          "sps": "5",
+          "attackSpeed": "1.30s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Vurduqca və düşmən öldürdükdə canını bərpa edir. Çoxlu rəqib arasında daha güclüdür.",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1000",
+          "criticalChance": "0%",
+          "criticDamage": "-",
+          "lifestealChance": "20%",
+          "lifesteal": "15%",
+          "damageminimiser": "-",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "Tank",
+        "subclass": "Devourer"
+      },
+      {
+        "id": "wrath",
+        "name": "Wrath",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Emergent",
+        "stats": {
+          "health": "90",
+          "shield": "10",
+          "damage": "22",
+          "sps": "18",
+          "attackSpeed": "0.70s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Canı azaldıqca Hücumu artır. (50% canda +25% Hücum, 25% canda +60% Hücum)",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1150",
+          "criticalChance": "5%",
+          "criticDamage": "-",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      {
+        "id": "sloth",
+        "name": "Sloth",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Emergent",
+        "stats": {
+          "health": "380",
+          "shield": "100",
+          "damage": "5",
+          "sps": "3",
+          "attackSpeed": "2.20s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Çox yavaş hərəkət edir, lakin hücum etdikdə güclü zərbə vurur. Uzun müddət hasar almadıqda Qalxan qazanır.",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "600",
+          "criticalChance": "0%",
+          "criticDamage": "-",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "20%",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "5/s",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "Tank",
+        "subclass": "Dormant"
+      }
+    ]
   }
 ]
