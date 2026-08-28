@@ -31,7 +31,14 @@
   border-color: var(--char-color, var(--accent));
   box-shadow: 0 0 24px var(--char-color, var(--glow-blue));
 }
-.survival-char-emoji { font-size: 2.6rem; margin-bottom: 8px; }
+.survival-char-img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--char-color, var(--accent));
+  margin-bottom: 10px;
+}
 .survival-char-name {
   font-family: var(--font-head);
   font-size: 1.15rem;
