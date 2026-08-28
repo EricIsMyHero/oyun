@@ -216,6 +216,7 @@
       "Entity"
     ],
     "rarity": "Emergent",
+    "group": "The Condemned",
     "manifestation": "random_on_deploy",
     "isMulti": true,
     "stats": {
@@ -263,9 +264,10 @@
           "Entity"
         ],
         "rarity": "Emergent",
+        "group": "The Condemned",
         "stats": {
-          "health": "400",
-          "shield": "80",
+          "health": "320",
+          "shield": "60",
           "damage": "16",
           "sps": "16",
           "attackSpeed": "1.00s",
@@ -308,6 +310,7 @@
           "Entity"
         ],
         "rarity": "Emergent",
+        "group": "The Condemned",
         "stats": {
           "health": "100",
           "shield": "50",
@@ -326,8 +329,8 @@
           "criticDamage": "1.5x",
           "lifestealChance": "0%",
           "lifesteal": "-",
-          "damageminimiser": "-",
-          "dodge": "-",
+          "damageminimiser": "5%",
+          "dodge": "0%",
           "vision": "-",
           "healBonus": "-",
           "healrecovery": "-",
@@ -353,6 +356,7 @@
           "Entity"
         ],
         "rarity": "Emergent",
+        "group": "The Condemned",
         "stats": {
           "health": "160",
           "shield": "100",
@@ -398,6 +402,7 @@
           "Entity"
         ],
         "rarity": "Emergent",
+        "group": "The Condemned",
         "stats": {
           "health": "160",
           "shield": "40",
@@ -439,13 +444,14 @@
       {
         "id": "gluttony",
         "name": "Gluttony",
+        "group": "The Condemned",
         "type": [
           "Entity"
         ],
         "rarity": "Emergent",
         "stats": {
-          "health": "320",
-          "shield": "60",
+          "health": "400",
+          "shield": "80",
           "damage": "6",
           "sps": "8",
           "attackSpeed": "0.75s",
@@ -462,14 +468,14 @@
           "lifestealChance": "80%",
           "lifesteal": "66%",
           "damageminimiser": "-",
-          "dodge": "-",
-          "vision": "-",
+          "dodge": "0%",
+          "vision": "8000",
           "healBonus": "-",
           "healrecovery": "-",
           "shieldrecovery": "-",
           "criticdamageminimiser": "-",
           "flexibility": "-",
-          "shieldtakendamage": "-",
+          "shieldtakendamage": "70%",
           "life": "-"
         },
         "showlevels": {
@@ -488,11 +494,12 @@
           "Entity"
         ],
         "rarity": "Emergent",
+        "group": "The Condemned",
         "stats": {
-          "health": "140",
-          "shield": "10",
-          "damage": "12",
-          "sps": "16",
+          "health": "160",
+          "shield": "100",
+          "damage": "20",
+          "sps": "27",
           "attackSpeed": "0.75s",
           "delay": "-",
           "mana": "-",
@@ -533,9 +540,10 @@
           "Entity"
         ],
         "rarity": "Emergent",
+        "group": "The Condemned",
         "stats": {
-          "health": "210",
-          "shield": "300",
+          "health": "230",
+          "shield": "210",
           "damage": "42",
           "sps": "19",
           "attackSpeed": "2.20s",
@@ -553,7 +561,7 @@
           "lifesteal": "-",
           "damageminimiser": "20%",
           "dodge": "-",
-          "vision": "-",
+          "vision": "8000",
           "healBonus": "-",
           "healrecovery": "-",
           "shieldrecovery": "10/12s",
