@@ -20,6 +20,8 @@ const SURVIVAL_CHARACTERS = {
     id: 'soldier',
     name: 'Soldier',
     emoji: '🪖',
+    cardGroup: 'mission-1',
+    cardName: 'Soldier',
     color: '#7b9cff',
     glow: 'rgba(123,156,255,0.55)',
     desc: '3 güllə ardıcıl / 2s · Güllə başına 5 hasar',
@@ -32,6 +34,8 @@ const SURVIVAL_CHARACTERS = {
     id: 'henry',
     name: 'Henry',
     emoji: '🧔',
+    cardGroup: 'twisted-farm',
+    cardName: 'Henry',
     color: '#f87171',
     glow: 'rgba(248,113,113,0.55)',
     desc: 'Tək hədəf / 1.25s · 10 hasar',
@@ -58,6 +62,16 @@ let survivalState = null;
 let survivalRAF   = null;
 let survivalInput = { x: 0, y: 0 };
 let survivalKeys  = {};
+const survivalImgCache = {};   // charId -> HTMLImageElement (card art, reused across runs)
+
+/* ── Preload each character's card art (uses getCardImg from cards.js) ── */
+function survivalPreloadImages() {
+  Object.values(SURVIVAL_CHARACTERS).forEach(ch => {
+    const img = new Image();
+    img.src = getCardImg({ group: ch.cardGroup, name: ch.cardName });
+    survivalImgCache[ch.id] = img;
+  });
+}
 
 /* ═══════════════════════════════════════════════════════
    ENTRY POINT (called by navigation.js)
@@ -65,6 +79,7 @@ let survivalKeys  = {};
 function initSurvival() {
   if (survivalPickerBuilt) return;
   survivalPickerBuilt = true;
+  survivalPreloadImages();
   buildSurvivalPicker();
   setupSurvivalControls();
 }
@@ -77,7 +92,7 @@ function buildSurvivalPicker() {
     card.className = 'survival-char-card';
     card.style.setProperty('--char-color', ch.color);
     card.innerHTML = `
-      <div class="survival-char-emoji">${ch.emoji}</div>
+      <img class="survival-char-img" src="${getCardImg({ group: ch.cardGroup, name: ch.cardName })}" alt="${ch.name}">
       <div class="survival-char-name">${ch.name}</div>
       <div class="survival-char-desc">${ch.desc}</div>
       <div class="survival-char-hp">❤ ${ch.maxHealth}</div>
@@ -374,13 +389,30 @@ function survivalRender(ctx) {
     ctx.fillStyle = '#f87171';         ctx.fillRect(e.x - w / 2, e.y - e.radius - 12, w * (e.hp / e.maxHp), 4);
   });
 
-  /* player */
+  /* player — card art clipped to a circle, falls back to emoji until image loads */
+  const img = survivalImgCache[st.charId];
   ctx.beginPath();
   ctx.fillStyle = cfg.glow;
   ctx.arc(p.x, p.y, cfg.radius + 6, 0, Math.PI * 2);
   ctx.fill();
-  ctx.font = '30px serif';
-  ctx.fillText(cfg.emoji, p.x, p.y);
+
+  if (img && img.complete && img.naturalWidth > 0) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, cfg.radius, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
+    ctx.drawImage(img, p.x - cfg.radius, p.y - cfg.radius, cfg.radius * 2, cfg.radius * 2);
+    ctx.restore();
+    ctx.beginPath();
+    ctx.strokeStyle = cfg.color;
+    ctx.lineWidth = 2;
+    ctx.arc(p.x, p.y, cfg.radius, 0, Math.PI * 2);
+    ctx.stroke();
+  } else {
+    ctx.font = '30px serif';
+    ctx.fillText(cfg.emoji, p.x, p.y);
+  }
 }
 
 function updateSurvivalHUD() {
