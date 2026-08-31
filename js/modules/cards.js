@@ -45,12 +45,12 @@ function _primaryFormSource(card) {
 
 /* ── Build the image URL for a card ── */
 function getCardImg(card) {
-  const src   = _primaryFormSource(card);
-  const group = slugify(src.group || card.group || '');
-  const name  = slugify(src.name  || card.name  || '');
+  const src     = _primaryFormSource(card);
+  const group   = slugify(src.group || card.group || '');
+  const imgKey  = slugify(src.id || card.id || src.name || card.name || '');
   return group
-    ? `${GITHUB_BASE}/${group}/${name}.jpg`
-    : `${GITHUB_BASE}/${name}.jpg`;
+    ? `${GITHUB_BASE}/${group}/${imgKey}.jpg`
+    : `${GITHUB_BASE}/${imgKey}.jpg`;
 }
 
 /* ── Power Score helpers ── */
