@@ -1,5 +1,6 @@
 [
   {
+    "id": "albert",
     "name": "Albert",
     "type": [
       "Human"
@@ -45,6 +46,7 @@
     "subclass": "Berserker"
   },
   {
+    "id": "chicken",
     "name": "Chicken",
     "type": [
       "Animal"
@@ -96,6 +98,7 @@
     "subclass": "Suicide"
   },
   {
+    "id": "frostshot",
     "name": "Frostshot",
     "type": [
       "Robot"
@@ -149,6 +152,7 @@
     "subclass": "Sniper"
   },
   {
+    "id": "hornets",
     "name": "Hornets",
     "type": [
       "Animal"
@@ -195,6 +199,7 @@
     "subclass": "Bulwark"
   },
   {
+    "id": "warborn",
     "name": "Warborn",
     "type": [
       "Human"
@@ -247,6 +252,7 @@
     "subclass": "Brawler"
   },
   {
+    "id": "x-bot",
     "name": "X-Bot",
     "type": [
       "Robot"
@@ -293,6 +299,7 @@
     "subclass": "Brawler"
   },
   {
+    "id": "nyra",
     "name": "Nyra",
     "type": [
       "Robot"
@@ -338,6 +345,7 @@
     "subclass": "Wanderer"
   },
   {
+    "id": "deadscope",
     "name": "Deadscope",
     "type": [
       "Human"
@@ -384,6 +392,7 @@
     "subclass": "Sharpshooter"
   },
   {
+    "id": "turtle",
     "name": "Turtle",
     "type": [
       "Animal"
@@ -477,6 +486,7 @@
     "subclass": "Regenerator"
   },
   {
+    "id": "feral-wolf",
     "name": "Feral Wolf",
     "type": [
       "Animal"
@@ -523,6 +533,7 @@
     "subclass": "Ambusher"
   },
   {
+    "id": "trac",
     "name": "Trac",
     "type": [
       "Human"
@@ -569,6 +580,7 @@
     "subclass": "Brawler"
   },
   {
+    "id": "tornado",
     "name": "Tornado",
     "type": [
       "Entity"
@@ -615,6 +627,7 @@
     "subclass": "Disruptor"
   },
   {
+    "id": "dino",
     "name": "Dino",
     "type": [
       "Animal"
@@ -661,6 +674,7 @@
     "subclass": "Rampager"
   },
   {
+    "id": "tenta",
     "name": "Tenta",
     "type": [
       "Animal"
@@ -714,6 +728,7 @@
     "subclass": "Multistriker"
   },
   {
+    "id": "fire-archer",
     "name": "Fire Archer",
     "type": [
       "Human"
@@ -760,6 +775,7 @@
     "subclass": "Burst"
   },
   {
+    "id": "shadow-reaper",
     "name": "Shadow Reaper",
     "type": [
       "Dead"
@@ -806,6 +822,7 @@
     "subclass": "Executioner"
   },
   {
+    "id": "voltriker",
     "name": "Voltriker",
     "type": [
       "Alien"
@@ -852,6 +869,7 @@
     "subclass": "Nuker"
   },
   {
+    "id": "frostmaw",
     "name": "Frostmaw",
     "type": [
       "Animal"
@@ -905,6 +923,7 @@
     "subclass": "Silencer"
   },
   {
+    "id": "hexon",
     "name": "Hexon",
     "type": [
       "Alien"
@@ -957,6 +976,7 @@
     "subclass": "Controller"
   },
   {
+    "id": "mecha-shield",
     "name": "Mecha Shield",
     "type": [
       "Robot"
@@ -1009,6 +1029,7 @@
     "subclass": "Pure"
   },
   {
+    "id": "venomspikes",
     "name": "Venomspikes",
     "type": [
       "Animal"
@@ -1061,6 +1082,7 @@
     "subclass": "Poisoner"
   },
   {
+    "id": "astranova",
     "name": "Astranova",
     "type": [
       "Entity"
@@ -1107,6 +1129,7 @@
     "subclass": "Nuker"
   },
   {
+    "id": "kai",
     "name": "Kai",
     "type": [
       "Human"
@@ -1159,6 +1182,7 @@
     "subclass": "Brawler"
   },
   {
+    "id": "cassandra",
     "name": "Cassandra",
     "type": [
       "Human"
