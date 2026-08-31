@@ -1,6 +1,7 @@
 [
   {
-    "name": "Hammies",
+    "id": "hammies",
+    "name": "Pammies",
     "type": [
       "Animal"
     ],
@@ -46,6 +47,7 @@
     "subclass": "Skirmisher"
   },
   {
+    "id": "b-b",
     "name": "B-B",
     "type": [
       "Animal"
@@ -92,6 +94,7 @@
     "subclass": "Brawler"
   },
   {
+    "id": "scrapy",
     "name": "Scrapy",
     "type": [
       "Robot"
@@ -138,6 +141,7 @@
     "subclass": "Piercer"
   },
   {
+    "id": "nitrox",
     "name": "Nitrox",
     "type": [
       "Robot"
@@ -184,6 +188,7 @@
     "subclass": "Buffer"
   },
   {
+    "id": "nortex",
     "name": "Nortex",
     "type": [
       "Alien"
@@ -230,6 +235,7 @@
     "subclass": "Stacker"
   },
   {
+    "id": "gloop",
     "name": "Gloop",
     "type": [
       "Alien"
@@ -276,6 +282,7 @@
     "subclass": "Pure"
   },
   {
+    "id": "henry",
     "name": "Henry",
     "type": [
       "Human"
@@ -322,6 +329,7 @@
     "subclass": "Berserker"
   },
   {
+    "id": "venomora",
     "name": "Venomora",
     "type": [
       "Alien"
@@ -375,6 +383,7 @@
     "subclass": "Controller"
   },
   {
+    "id": "blocker",
     "name": "Blocker",
     "type": [
       "Human"
@@ -421,6 +430,7 @@
     "subclass": "Protector"
   },
   {
+    "id": "fen",
     "name": "Fen",
     "type": [
       "Human"
@@ -473,6 +483,7 @@
     "subclass": "Blinder"
   },
   {
+    "id": "ben",
     "name": "Ben",
     "type": [
       "Human"
@@ -526,6 +537,7 @@
     "subclass": "Bleeder"
   },
   {
+    "id": "freak",
     "name": "Freak",
     "type": [
       "Alien"
@@ -612,6 +624,7 @@
     "subclass": "Splitter"
   },
   {
+    "id": "nightprowler",
     "name": "Nightprowler",
     "type": [
       "Spirit"
@@ -657,6 +670,7 @@
     "subclass": "Executioner"
   },
   {
+    "id": "twins",
     "name": "Twins",
     "type": [
       "Spirit"
@@ -703,6 +717,7 @@
     "subclass": "Berserker"
   },
   {
+    "id": "bethe",
     "name": "Bethe",
     "type": [
       "Human"
@@ -749,6 +764,7 @@
     "subclass": "Ravager"
   },
   {
+    "id": "snaykies",
     "name": "Snaykies",
     "type": [
       "Animal"
@@ -802,6 +818,7 @@
     "subclass": "Poisoner"
   },
   {
+    "id": "soldier",
     "name": "Soldier",
     "type": [
       "Human"
@@ -848,6 +865,7 @@
     "subclass": "Burst"
   },
   {
+    "id": "bees",
     "name": "Bees",
     "type": [
       "Animal"
@@ -901,6 +919,7 @@
     "subclass": "Suicide"
   },
   {
+    "id": "hailey",
     "name": "Hailey",
     "type": [
       "Human"
@@ -946,6 +965,7 @@
     "subclass": "Berserker"
   },
   {
+    "id": "angels",
     "name": "Angels",
     "type": [
       "Entity"
@@ -992,6 +1012,7 @@
     "subclass": "Swarm"
   },
   {
+    "id": "boomix",
     "name": "Boomix",
     "type": [
       "Entity"
@@ -1037,6 +1058,7 @@
     "subclass": "Piercer"
   },
   {
+    "id": "phewphew",
     "name": "PhewPhew",
     "type": [
       "Human"
@@ -1083,6 +1105,7 @@
     "subclass": "Breaker"
   },
   {
+    "id": "chrono-mage",
     "name": "Chrono Mage",
     "type": [
       "Human"
@@ -1136,6 +1159,7 @@
     "subclass": "Debuffer"
   },
   {
+    "id": "aegis-guard",
     "name": "Aegis Guard",
     "type": [
       "Robot"
@@ -1182,6 +1206,7 @@
     "subclass": "Protector"
   },
   {
+    "id": "ironjaw",
     "name": "Ironjaw",
     "type": [
       "Robot"
@@ -1228,6 +1253,7 @@
     "subclass": "Vampire"
   },
   {
+    "id": "m-manager",
     "name": "M-Manager",
     "type": [
       "Robot"
@@ -1274,6 +1300,7 @@
     "subclass": "Resourcer"
   },
   {
+    "id": "srail",
     "name": "Srail",
     "type": [
       "Human"
@@ -1320,6 +1347,7 @@
     "subclass": "Sharpshooter"
   },
   {
+    "id": "cryon",
     "name": "Cryon",
     "type": [
       "Alien"
