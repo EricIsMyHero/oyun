@@ -1221,7 +1221,7 @@
     },
     "type1": {
       "id": "the-rays",
-      "name": "The Rays",
+      "name": "Mr. Ray",
       "type": [
         "Human"
       ],
@@ -1238,7 +1238,7 @@
         "mana": "17",
         "number": "1"
       },
-      "trait": "Mr. Ray 360 dərəcə hasar verər, Birlikdə durduqca hər saniyə 4 yük qazanarlar. 100 yük olduqda birləşərək sürətlə dönməyə başlayarlar və 5 saniyə ərzində hər 0.25 saniyədə 5 hasar verərlər. Bu müddətdə 25% hasar azaltma qazanaraq, hər 0.25 saniyədə 3 can yeniləyərlər",
+      "trait": "Mr. Ray 360 dərəcə hasar verər, birlikdə durduqca hər biri hər saniyə 3 yük qazanarlar. 100 yük olduqda birləşərək sürətlə dönməyə başlayarlar və 5 saniyə ərzində hər 0.25 saniyədə 5 hasar verərlər. Bu müddətdə 25% hasar azaltma qazanaraq, hər 0.25 saniyədə 3 can yeniləyərlər",
       "additionalStats": {
         "range": "1000",
         "speed": "1200",
@@ -1273,7 +1273,7 @@
       "forms": [
         {
           "id": "the-rays-form",
-          "name": "The Rays",
+          "name": "Mrs. Ray",
           "type": [
             "Human"
           ],
@@ -1289,7 +1289,7 @@
             "mana": "-",
             "number": "1"
           },
-          "trait": "Mrs. Ray 360 dərəcə hasar verər, Birlikdə durduqca hər saniyə 4 yük qazanarlar. 100 yük olduqda birləşərək sürətlə dönməyə başlayarlar və 5 saniyə ərzində hər 0.25 saniyədə 5 hasar verərlər. Bu müddətdə 25% hasar azaltma qazanaraq, hər 0.25 saniyədə 3 can yeniləyərlər",
+          "trait": "Mrs. Ray 360 dərəcə hasar verər, birlikdə durduqca hər biri hər saniyə 3 yük qazanarlar. 100 yük olduqda birləşərək sürətlə dönməyə başlayarlar və 5 saniyə ərzində hər 0.25 saniyədə 5 hasar verərlər. Bu müddətdə 25% hasar azaltma qazanaraq, hər 0.25 saniyədə 3 can yeniləyərlər",
           "additionalStats": {
             "range": "1000",
             "speed": "1200",
@@ -1330,7 +1330,7 @@
     },
     "type2": {
       "id": "the-rays-2",
-      "name": "The Rays",
+      "name": "Mr. Ray",
       "type": [
         "Human"
       ],
@@ -1347,7 +1347,7 @@
         "mana": "17",
         "number": "1"
       },
-      "trait": "Mr. Ray Sadəcə bir rəqibə hasar verər, Birlikdə durduqca hər saniyə 2 yük qazanarlar. 100 yük olduqda hər ikisi 5 karo boyunca düz gedər və yol üstündəki rəqib kartlara 75 hasar verərlər. Eyni zamanda 75% hasar azaltma qazanarlar, əgər canları 20%-in altına düşərsə itirilmiş canın 75%-i qədər can yeniləyərlər",
+      "trait": "Mr. Ray Sadəcə bir rəqibə hasar verər, birlikdə durduqca hər biri hər saniyə 2 yük qazanarlar. 100 yük olduqda hər ikisi 5 karo boyunca düz gedər və yol üstündəki rəqib kartlara 75 hasar verərlər. Eyni zamanda 75% hasar azaltma qazanarlar, əgər canları 20%-in altına düşərsə itirilmiş canın 75%-i qədər can yeniləyərlər",
       "additionalStats": {
         "range": "1000",
         "speed": "1100",
@@ -1375,7 +1375,7 @@
       "forms": [
         {
           "id": "the-rays-form-2",
-          "name": "The Rays",
+          "name": "Mrs. Ray",
           "type": [
             "Human"
           ],
@@ -1391,7 +1391,7 @@
             "mana": "-",
             "number": "1"
           },
-          "trait": "Mrs. Ray Sadəcə bir rəqibə hasar verər, Birlikdə durduqca hər saniyə 2 yük qazanarlar. 100 yük olduqda hər ikisi 5 karo boyunca düz gedər və yol üstündəki rəqib kartlara 75 hasar verərlər. Eyni zamanda 75% hasar azaltma qazanarlar, əgər canları 20%-in altına düşərsə itirilmiş canın 75%-i qədər can yeniləyərlər",
+          "trait": "Mrs. Ray Sadəcə bir rəqibə hasar verər, birlikdə durduqca hər biri hər saniyə 2 yük qazanarlar. 100 yük olduqda hər ikisi 5 karo boyunca düz gedər və yol üstündəki rəqib kartlara 75 hasar verərlər. Eyni zamanda 75% hasar azaltma qazanarlar, əgər canları 20%-in altına düşərsə itirilmiş canın 75%-i qədər can yeniləyərlər",
           "additionalStats": {
             "range": "1000",
             "speed": "1100",
