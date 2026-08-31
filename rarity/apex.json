@@ -1,5 +1,6 @@
 [
   {
+    "id": "azrith",
     "name": "Azrith",
     "type": [
       "Human"
@@ -84,6 +85,7 @@
     "subclass": "Banner"
   },
   {
+    "id": "untouch",
     "name": "Untouch",
     "type": [
       "Human"
@@ -130,6 +132,7 @@
     "subclass": "Phaser"
   },
   {
+    "id": "heartix",
     "name": "Heartix",
     "type": [
       "Human"
@@ -178,6 +181,7 @@
     "subclass": "Enthraller"
   },
   {
+    "id": "r-1",
     "name": "R-1",
     "type": [
       "Robot"
@@ -223,6 +227,7 @@
     "subclass": "Piercer"
   },
   {
+    "id": "blank",
     "name": "Blank",
     "type": [
       "Alien"
@@ -269,6 +274,7 @@
     "subclass": "Snowballer"
   },
   {
+    "id": "magmara",
     "name": "Magmara",
     "type": [
       "Alien"
@@ -322,6 +328,7 @@
     "subclass": "Igniter"
   },
   {
+    "id": "willowshade",
     "name": "Willowshade",
     "type": [
       "Human"
@@ -407,6 +414,7 @@
     "subclass": "Reborn"
   },
   {
+    "id": "collector",
     "name": "Collector",
     "type": [
       "Robot"
@@ -451,6 +459,7 @@
     "subclass": "Scavenger"
   },
   {
+    "id": "sushu",
     "name": "Sushu",
     "type": [
       "Spirit"
@@ -496,6 +505,7 @@
     "subclass": "Infiltrator"
   },
   {
+    "id": "umbra",
     "name": "Umbra",
     "type": [
       "Entity"
@@ -542,6 +552,7 @@
     "subclass": "Phantom"
   },
   {
+    "id": "thief",
     "name": "Thief",
     "type": [
       "Human"
@@ -587,6 +598,7 @@
     "subclass": "Trickster"
   },
   {
+    "id": "rotlings",
     "name": "Rotlings",
     "type": [
       "Dead"
@@ -672,6 +684,7 @@
     "subclass": "Harvester"
   },
   {
+    "id": "stormblade",
     "name": "Stormblade",
     "type": [
       "Alien"
@@ -718,6 +731,7 @@
     "subclass": "Splasher"
   },
   {
+    "id": "venom-fangs",
     "name": "Venom Fangs",
     "type": [
       "Entity"
@@ -770,6 +784,7 @@
     "subclass": "Siphon"
   },
   {
+    "id": "skyhunter",
     "name": "Skyhunter",
     "type": [
       "Human"
@@ -816,6 +831,7 @@
     "subclass": "Sniper"
   },
   {
+    "id": "rockback",
     "name": "Rockback",
     "type": [
       "Animal"
@@ -869,6 +885,7 @@
     "subclass": "Charger"
   },
   {
+    "id": "neon-droid",
     "name": "Neon Droid",
     "type": [
       "Robot"
@@ -915,6 +932,7 @@
     "subclass": "Overclocker"
   },
   {
+    "id": "void-wraith",
     "name": "Void Wraith",
     "type": [
       "Spirit"
@@ -961,6 +979,7 @@
     "subclass": "Absorber"
   },
   {
+    "id": "bio-mech",
     "name": "Bio Mech",
     "type": [
       "Robot"
@@ -1007,6 +1026,7 @@
     "subclass": "Shieldbearer"
   },
   {
+    "id": "mixela",
     "name": "Mixela",
     "type": [
       "Spirit"
@@ -1053,6 +1073,7 @@
     "subclass": "Lifedrainer"
   },
   {
+    "id": "laura",
     "name": "Laura",
     "type": [
       "Human"
