@@ -1,5 +1,6 @@
 [
   {
+    "id": "arcanyx",
     "name": "Arcanyx",
     "type": [
       "Entity"
@@ -53,6 +54,7 @@
     "subclass": "Nuker"
   },
   {
+    "id": "leafshade",
     "name": "Leafshade",
     "type": [
       "Entity"
@@ -99,6 +101,7 @@
     "subclass": "Executioner"
   },
   {
+    "id": "jestro",
     "name": "Jestro",
     "type": [
       "Human"
@@ -192,6 +195,7 @@
     "subclass": "Disruptor"
   },
   {
+    "id": "tphoenix",
     "name": "Tphoenix",
     "type": [
       "Entity"
@@ -315,6 +319,7 @@
     "subclass": "Reborn"
   },
   {
+    "id": "corsair-crew",
     "name": "Corsair Crew",
     "type": [
       "Human"
@@ -401,6 +406,7 @@
     "subclass": "Survivor"
   },
   {
+    "id": "ship-cannoneer",
     "name": "Ship Cannoneer",
     "type": [
       "Human"
@@ -447,6 +453,7 @@
     "subclass": "Burst"
   },
   {
+    "id": "toxic",
     "name": "Toxic",
     "type": [
       "Alien"
@@ -500,6 +507,7 @@
     "subclass": "Sharpshooter"
   },
   {
+    "id": "lumina",
     "name": "Lumina",
     "type": [
       "Entity"
@@ -546,6 +554,7 @@
     "subclass": "Pure"
   },
   {
+    "id": "hell-boy",
     "name": "Hell boy",
     "type": [
       "Entity"
@@ -591,6 +600,7 @@
     "subclass": "Brawler"
   },
   {
+    "id": "slasherx",
     "name": "SlasherX",
     "type": [
       "Human"
@@ -637,6 +647,7 @@
     "subclass": "Reaper"
   },
   {
+    "id": "sheriff",
     "name": "Sheriff",
     "type": [
       "Human"
@@ -683,6 +694,7 @@
     "subclass": "Marker"
   },
   {
+    "id": "nurse",
     "name": "Nurse",
     "type": [
       "Dead"
@@ -729,6 +741,7 @@
     "subclass": "Vampire"
   },
   {
+    "id": "tribe",
     "name": "Tribe",
     "type": [
       "Human"
@@ -775,6 +788,7 @@
     "subclass": "Burst"
   },
   {
+    "id": "earthshakers",
     "name": "Earthshakers",
     "type": [
       "Human"
@@ -827,6 +841,7 @@
     "subclass": "Stunner"
   },
   {
+    "id": "whisper",
     "name": "Whisper",
     "type": [
       "Spirit"
@@ -877,6 +892,7 @@
     "subclass": "Possessor"
   },
   {
+    "id": "roguex",
     "name": "RogueX",
     "type": [
       "İnsan"
@@ -923,6 +939,7 @@
     "subclass": "Absorber"
   },
   {
+    "id": "void-striker",
     "name": "Void Striker",
     "type": [
       "Spirit"
@@ -976,6 +993,7 @@
     "subclass": "Berserker"
   },
   {
+    "id": "nightfang",
     "name": "Nightfang",
     "type": [
       "Spirit"
@@ -1022,6 +1040,7 @@
     "subclass": "Sharpshooter"
   },
   {
+    "id": "sunrise",
     "name": "Sunrise",
     "type": [
       "Alien"
@@ -1074,6 +1093,7 @@
     "subclass": "Regenerator"
   },
   {
+    "id": "shellbyte",
     "name": "Shellbyte",
     "type": [
       "Alien"
@@ -1120,6 +1140,7 @@
     "subclass": "Ambusher"
   },
   {
+    "id": "wong",
     "name": "Wong",
     "type": [
       "Human"
