@@ -1,5 +1,6 @@
 [
   {
+    "id": "reacher",
     "name": "Reacher",
     "type": [
       "Human"
@@ -83,6 +84,7 @@
     "subclass": "Anchor"
   },
   {
+    "id": "bastra",
     "name": "Bastra",
     "type": [
       "Human"
@@ -168,6 +170,7 @@
     "subclass": "Vanguard"
   },
   {
+    "id": "maapp",
     "name": "Maapp",
     "type": [
       "Human"
@@ -261,6 +264,7 @@
     "subclass": "Warden"
   },
   {
+    "id": "avara",
     "name": "Avara",
     "type": [
       "Human"
@@ -357,6 +361,7 @@
     "subclass": "Controller"
   },
   {
+    "id": "john-reynolds",
     "name": "John Reynolds",
     "type": [
       "Human"
@@ -400,7 +405,7 @@
       "level3": "-"
     },
     "story": "The Forgotten Bounty Hunter, a ruthless and relentless bounty hunter riding through the desolate streets of The Ghost Town, hunting down targets whose forgotten bounties remain unpaid. John is a rugged adult male with a tall, muscular, weathered physique. He has a hardened face, short beard, visible scars, sharp focused eyes, and a cold, intimidating expression. He wears a classic dark Western outfit: a long weathered black leather coat, dark vest, dusty shirt, reinforced trousers, heavy boots, leather gloves, and a wide-brimmed black cowboy hat. His belt carries ammunition pouches, rope, handcuffs, and other bounty-hunting equipment. Instead of carrying revolvers in his hands, John wields a large, rugged Western longsword in his right hand. The sword has a broad, heavy steel blade with visible scratches, small dents, and signs of extensive use. Its leather-wrapped grip is worn and weathered, while the simple metal guard has a practical frontier design. The sword should look like a brutal, realistic weapon designed for a bounty hunter, not an elegant medieval fantasy sword. John holds the sword firmly in one hand, with the blade angled downward beside his body, ready to strike. His other hand controls the reins of his horse. His posture is calm, confident, and threatening, suggesting that he does not need firearms to intimidate his targets. John rides a large, powerful armored war horse with a realistic dark-brown coat. The horse has a muscular build, thick mane, strong legs, and an intimidating presence. Its body is protected by heavy Western-style armor made from aged dark steel and thick leather. The horse's armor covers its chest, neck, head, and sides. The metal plates are scratched, dented, dusty, and heavily weathered from countless battles. Thick leather straps hold the armor securely around the animal's body. A rugged armored headpiece protects the horse's forehead while leaving its eyes exposed. John's long leather coat flows behind him as the armored horse moves through the dusty street. The horse's hooves kick up clouds of desert dust, while the rider's sword catches a subtle reflection of the fading sunlight. The environment is an abandoned Wild West ghost town, filled with ruined wooden buildings, broken saloons, abandoned wagons, collapsed fences, rusty signs, dusty streets, and forgotten bounty posters. The sky is dark and dramatic, with a fading orange sunset breaking through heavy clouds. Long cinematic shadows stretch across the street while dust particles float through the warm light. John and his armored horse dominate the composition, presenting the image of a ruthless frontier bounty hunter armed with a brutal sword and mounted on a battle-hardened armored horse.",
-      "upgradedsecondForm": {
+    "upgradedsecondForm": {
       "name": "John Reynolds",
       "type": [
         "İnsan"
