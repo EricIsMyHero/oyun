@@ -1,5 +1,6 @@
 [
   {
+    "id": "stacy",
     "name": "Stacy",
     "type": [
       "Human"
@@ -46,6 +47,7 @@
     "subclass": "Burst"
   },
   {
+    "id": "death",
     "name": "Death",
     "type": [
       "Dead"
@@ -92,6 +94,7 @@
     "subclass": "Harvester"
   },
   {
+    "id": "sylviana",
     "name": "Sylviana",
     "type": [
       "Entity"
@@ -178,6 +181,7 @@
     "subclass": "Summoner"
   },
   {
+    "id": "malvaris",
     "name": "Malvaris",
     "type": [
       "Dead"
@@ -270,6 +274,7 @@
     "subclass": "Summoner"
   },
   {
+    "id": "etheris",
     "name": "Etheris",
     "type": [
       "Human"
@@ -316,6 +321,7 @@
     "subclass": "Reflector"
   },
   {
+    "id": "magma",
     "name": "Magma",
     "type": [
       "Alien"
@@ -369,6 +375,7 @@
     "subclass": "Igniter"
   },
   {
+    "id": "avalith",
     "name": "Avalith",
     "type": [
       "Entity"
@@ -415,6 +422,7 @@
     "subclass": "Evader"
   },
   {
+    "id": "far",
     "name": "Far",
     "type": [
       "Human"
@@ -467,6 +475,7 @@
     "subclass": "Disabler"
   },
   {
+    "id": "demotron",
     "name": "Demotron",
     "type": [
       "Alien"
@@ -513,6 +522,7 @@
     "subclass": "Regenerator"
   },
   {
+    "id": "format",
     "name": "Format",
     "type": [
       "Alien"
@@ -558,6 +568,7 @@
     "subclass": "Mimic"
   },
   {
+    "id": "pyhsic",
     "name": "Pyhsic",
     "type": [
       "Alien"
@@ -603,6 +614,7 @@
     "subclass": "Deathcaller"
   },
   {
+    "id": "naar",
     "name": "Naar",
     "type": [
       "Human"
@@ -649,6 +661,7 @@
     "subclass": "Nuker"
   },
   {
+    "id": "lyra",
     "name": "Lyra",
     "type": [
       "Human"
@@ -694,6 +707,7 @@
     "subclass": "Flurry"
   },
   {
+    "id": "aeralis",
     "name": "Aeralis",
     "type": [
       "Human"
@@ -740,6 +754,7 @@
     "subclass": "Repeller"
   },
   {
+    "id": "dark-necromancer",
     "name": "Dark Necromancer",
     "type": [
       "Spirit"
@@ -907,6 +922,7 @@
     "subclass": "Summoner"
   },
   {
+    "id": "shine",
     "name": "Shine",
     "type": [
       "Human"
@@ -959,6 +975,7 @@
     "subclass": "Healer"
   },
   {
+    "id": "bloodraider",
     "name": "Bloodraider",
     "type": [
       "Entity"
@@ -1005,6 +1022,7 @@
     "subclass": "Bloodpact"
   },
   {
+    "id": "fallen-angel",
     "name": "Fallen Angel",
     "type": [
       "Entity"
@@ -1051,6 +1069,7 @@
     "subclass": "Hunter"
   },
   {
+    "id": "worms",
     "name": "Worms",
     "type": [
       "Animal"
@@ -1103,6 +1122,7 @@
     "subclass": "Ambusher"
   },
   {
+    "id": "unara",
     "name": "Unara",
     "type": [
       "Human"
@@ -1149,6 +1169,7 @@
     "subclass": "Bomber"
   },
   {
+    "id": "ali",
     "name": "Ali",
     "type": [
       "Alien"
@@ -1195,6 +1216,7 @@
     "subclass": "Guardian"
   },
   {
+    "id": "clara",
     "name": "Clara",
     "type": [
       "Human"
@@ -1241,6 +1263,7 @@
     "subclass": "Screamer"
   },
   {
+    "id": "artist",
     "name": "Artist",
     "type": [
       "Human"
