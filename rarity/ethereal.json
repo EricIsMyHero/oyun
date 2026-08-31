@@ -1,5 +1,6 @@
 [
   {
+    "id": "ase",
     "name": "Ase",
     "type": [
       "Human"
@@ -11,6 +12,7 @@
       "mana": "5"
     },
     "type1": {
+      "id": "ase-type1",
       "name": "Ase",
       "type": [
         "Human"
@@ -55,6 +57,7 @@
       "story": "-",
       "forms": [
         {
+          "id": "giga-r",
           "name": "Giga-R",
           "type": [
             "Robot"
@@ -104,6 +107,7 @@
       "subclass": "Constructor"
     },
     "type2": {
+      "id": "ase-type2",
       "name": "Ase",
       "type": [
         "Human"
@@ -148,6 +152,7 @@
       "story": "-",
       "forms": [
         {
+          "id": "giga-r-2",
           "name": "Giga-R",
           "type": [
             "Robot"
@@ -200,6 +205,7 @@
     "subclass": "Constructor"
   },
   {
+    "id": "leno",
     "name": "Leno",
     "type": [
       "Human"
@@ -211,6 +217,7 @@
       "mana": "12"
     },
     "type1": {
+      "id": "leno-type1",
       "name": "Leno",
       "type": [
         "Human"
@@ -256,6 +263,7 @@
       "subclass": "Sharpshooter"
     },
     "type2": {
+      "id": "leno-type2",
       "name": "Leno",
       "type": [
         "Human"
@@ -304,6 +312,7 @@
     "subclass": "Sharpshooter"
   },
   {
+    "id": "king",
     "name": "King",
     "type": [
       "Dead"
@@ -315,6 +324,7 @@
       "mana": "15"
     },
     "type1": {
+      "id": "king-type1",
       "name": "King",
       "type": [
         "Dead"
@@ -361,6 +371,7 @@
       "subclass": "Monarch"
     },
     "type2": {
+      "id": "king-type2",
       "name": "King",
       "type": [
         "Dead"
@@ -406,6 +417,7 @@
       "story": "The King is a skeletal monarch who commands the dead with absolute authority. Unlike the Lord, he wears bright, polished dark iron armor infused with deep purple and crimson hues, reflecting his ancient status. His skull holds piercing crimson eyes that blaze with undying malice. He grips a greatsword in his bony hands, ready to strike down anyone who defies his rule. While the Lord is a simple destroyer, the King is a ruler of the UnderWorld, a chilling specter of a lost kingdom that refuses to fade into dust.",
       "forms": [
         {
+          "id": "guard",
           "name": "Guard",
           "type": [
             "Spirit"
@@ -458,6 +470,7 @@
     "subclass": "Monarch"
   },
   {
+    "id": "dracula",
     "name": "Dracula",
     "type": [
       "Human"
@@ -468,6 +481,7 @@
       "mana": "16"
     },
     "type1": {
+      "id": "dracula-type1",
       "name": "Dracula",
       "type": [
         "Human"
@@ -512,6 +526,7 @@
       "subclass": "Vampire"
     },
     "type2": {
+      "id": "dracula-type2",
       "name": "Dracula",
       "type": [
         "Animal"
@@ -555,6 +570,7 @@
       "story": "-",
       "forms": [
         {
+          "id": "bats",
           "name": "Bats",
           "type": [
             "Animal"
@@ -606,6 +622,7 @@
     "subclass": "Vampire"
   },
   {
+    "id": "leila",
     "name": "Leila",
     "type": [
       "Human"
@@ -617,6 +634,7 @@
       "mana": "8"
     },
     "type1": {
+      "id": "leila-type1",
       "name": "Leila",
       "type": [
         "Human"
@@ -668,6 +686,7 @@
       "subclass": "Trapper"
     },
     "type2": {
+      "id": "leila-type2",
       "name": "Leila",
       "type": [
         "Human"
@@ -722,6 +741,7 @@
     "subclass": "Trapper"
   },
   {
+    "id": "lord",
     "name": "Lord",
     "type": [
       "Dead"
@@ -733,6 +753,7 @@
       "mana": "18"
     },
     "type1": {
+      "id": "lord-type1",
       "name": "Lord",
       "type": [
         "Dead"
@@ -779,6 +800,7 @@
       "subclass": "Immortal"
     },
     "type2": {
+      "id": "lord-type2",
       "name": "Lord",
       "type": [
         "Dead"
@@ -824,6 +846,7 @@
       "story": "The Lord is a terrifying spectacle of death in motion. He is a reanimated human clad in heavy, forged black iron armor that seems to absorb the light. His skeletal frame, concealed beneath the metal, is animated by a dark force. In his iron grip, he wields a massive, wicked mace. He does not speak, but his horrific presence commands the spirits of the deep. A true dread lord of the UnderWorld, he walks without fear, crushing all life beneath his merciless feet.",
       "forms": [
         {
+          "id": "rider",
           "name": "Rider",
           "type": [
             "Dead"
@@ -876,6 +899,7 @@
     "subclass": "Immortal"
   },
   {
+    "id": "hunter",
     "name": "Hunter",
     "type": [
       "Human"
@@ -887,6 +911,7 @@
       "mana": "6"
     },
     "type1": {
+      "id": "hunter-type1",
       "name": "Hunter",
       "type": [
         "Human"
@@ -931,6 +956,7 @@
       "story": "-",
       "forms": [
         {
+          "id": "wolf",
           "name": "Wolf",
           "type": [
             "Animal"
@@ -980,6 +1006,7 @@
       "subclass": "Tracker"
     },
     "type2": {
+      "id": "hunter-type2",
       "name": "Hunter",
       "type": [
         "Human"
@@ -1024,6 +1051,7 @@
       "story": "-",
       "forms": [
         {
+          "id": "eagle",
           "name": "Eagle",
           "type": [
             "Animal"
@@ -1076,6 +1104,7 @@
     "subclass": "Tracker"
   },
   {
+    "id": "soul-master",
     "name": "Soul Master",
     "type": [
       "Spirit"
@@ -1086,6 +1115,7 @@
       "mana": "7"
     },
     "type1": {
+      "id": "soul-master-type1",
       "name": "Soul Master",
       "type": [
         "Spirit"
@@ -1130,6 +1160,7 @@
       "subclass": "Reaper"
     },
     "type2": {
+      "id": "soul-master-type2",
       "name": "Soul Master",
       "type": [
         "Spirit"
@@ -1177,6 +1208,7 @@
     "subclass": "Reaper"
   },
   {
+    "id": "mr-and-mrs-ray",
     "name": "Mr. and Mrs. Ray",
     "type": [
       "Human"
@@ -1188,6 +1220,7 @@
       "mana": "17"
     },
     "type1": {
+      "id": "the-rays",
       "name": "The Rays",
       "type": [
         "Human"
@@ -1239,6 +1272,7 @@
       "story": "-",
       "forms": [
         {
+          "id": "the-rays-form",
           "name": "The Rays",
           "type": [
             "Human"
@@ -1295,6 +1329,7 @@
       "subclass": "Twinshot"
     },
     "type2": {
+      "id": "the-rays-2",
       "name": "The Rays",
       "type": [
         "Human"
@@ -1339,6 +1374,7 @@
       "story": "-",
       "forms": [
         {
+          "id": "the-rays-form-2",
           "name": "The Rays",
           "type": [
             "Human"
