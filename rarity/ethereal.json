@@ -12,7 +12,7 @@
       "mana": "5"
     },
     "type1": {
-      "id": "ase-type1",
+      "id": "ase",
       "name": "Ase",
       "type": [
         "Human"
@@ -107,7 +107,7 @@
       "subclass": "Constructor"
     },
     "type2": {
-      "id": "ase-type2",
+      "id": "ase",
       "name": "Ase",
       "type": [
         "Human"
@@ -217,7 +217,7 @@
       "mana": "12"
     },
     "type1": {
-      "id": "leno-type1",
+      "id": "leno",
       "name": "Leno",
       "type": [
         "Human"
@@ -263,7 +263,7 @@
       "subclass": "Sharpshooter"
     },
     "type2": {
-      "id": "leno-type2",
+      "id": "leno",
       "name": "Leno",
       "type": [
         "Human"
@@ -324,7 +324,7 @@
       "mana": "15"
     },
     "type1": {
-      "id": "king-type1",
+      "id": "king",
       "name": "King",
       "type": [
         "Dead"
@@ -371,7 +371,7 @@
       "subclass": "Monarch"
     },
     "type2": {
-      "id": "king-type2",
+      "id": "king",
       "name": "King",
       "type": [
         "Dead"
@@ -481,7 +481,7 @@
       "mana": "16"
     },
     "type1": {
-      "id": "dracula-type1",
+      "id": "dracula",
       "name": "Dracula",
       "type": [
         "Human"
@@ -526,7 +526,7 @@
       "subclass": "Vampire"
     },
     "type2": {
-      "id": "dracula-type2",
+      "id": "dracula",
       "name": "Dracula",
       "type": [
         "Animal"
@@ -634,7 +634,7 @@
       "mana": "8"
     },
     "type1": {
-      "id": "leila-type1",
+      "id": "leila",
       "name": "Leila",
       "type": [
         "Human"
@@ -686,7 +686,7 @@
       "subclass": "Trapper"
     },
     "type2": {
-      "id": "leila-type2",
+      "id": "leila",
       "name": "Leila",
       "type": [
         "Human"
@@ -753,7 +753,7 @@
       "mana": "18"
     },
     "type1": {
-      "id": "lord-type1",
+      "id": "lord",
       "name": "Lord",
       "type": [
         "Dead"
@@ -800,7 +800,7 @@
       "subclass": "Immortal"
     },
     "type2": {
-      "id": "lord-type2",
+      "id": "lord",
       "name": "Lord",
       "type": [
         "Dead"
@@ -911,7 +911,7 @@
       "mana": "6"
     },
     "type1": {
-      "id": "hunter-type1",
+      "id": "hunter",
       "name": "Hunter",
       "type": [
         "Human"
@@ -1006,7 +1006,7 @@
       "subclass": "Tracker"
     },
     "type2": {
-      "id": "hunter-type2",
+      "id": "hunter",
       "name": "Hunter",
       "type": [
         "Human"
@@ -1115,7 +1115,7 @@
       "mana": "7"
     },
     "type1": {
-      "id": "soul-master-type1",
+      "id": "soul-master",
       "name": "Soul Master",
       "type": [
         "Spirit"
@@ -1160,7 +1160,7 @@
       "subclass": "Reaper"
     },
     "type2": {
-      "id": "soul-master-type2",
+      "id": "soul-master",
       "name": "Soul Master",
       "type": [
         "Spirit"
