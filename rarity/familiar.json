@@ -10,16 +10,16 @@
     "stats": {
       "health": "250",
       "shield": "10",
-      "damage": "71",
-      "sps": "42",
-      "attackSpeed": "1.70s",
-      "delay": "-",
+      "damage": "12x7",
+      "sps": "28",
+      "attackSpeed": "0.25s",
+      "delay": "1.25s",
       "mana": "15",
       "number": "1"
     },
-    "trait": "<b>*İnsan*</b> tipli kartlara ekstra <b>+16%</b> Hasar bonusu",
+    "trait": "Atışları eyni rəqib karta dəyərsə yavaşca artar (max: +3)",
     "additionalStats": {
-      "range": "1200",
+      "range": "1,500",
       "speed": "900",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -37,9 +37,9 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+5% Saldırı Hızı | 1,70s » 1,615s",
+      "level1": "+5% Menzil | 1500 » 1590",
       "level2": "+5% Hız | 900 » 945",
-      "level3": "+4% Can | 240 » 250"
+      "level3": "+4% Can | 250 » 260"
     },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
     "class": "Fighter",
