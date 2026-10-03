@@ -560,20 +560,21 @@
       "Entity"
     ],
     "rarity": "Arcane",
+    "group": "the-infernals",
     "abilityName": "",
     "stats": {
       "health": "180",
       "shield": "30",
       "damage": "50",
       "sps": "25",
-      "attackSpeed": "2,00s",
+      "attackSpeed": "2.00s",
       "delay": "-",
       "mana": "8",
       "number": "1"
     },
-    "trait": "Hər 5-ci atış ekstra +40% Hasar verər",
+    "trait": "Hər 5-ci vuruşda 3 saniyə qəzəblənər və vuruşları ekstra rəqib kartın maksimum canının 5%-i qədər hasar verər",
     "additionalStats": {
-      "range": "3750",
+      "range": "1150",
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
