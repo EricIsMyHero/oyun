@@ -74,7 +74,7 @@
     "description": "-",
     "color": "#9c9b9a",
     "icon": "fa-ghost",
-    "members": ["Sheriff", "SlasherX", "Nurse", "Twins", "John Reynolds"]
+    "members": ["Sheriff", "SlasherX", "Nurse", "Twins", "Albert", "John Reynolds"]
   },
   {
     "name": "Vampire Family",
@@ -102,7 +102,7 @@
     "description": "-",
     "color": "#FFE600",
     "icon": "fa-tent",
-    "members": ["B-B", "PhewPhew", "Jestro"]
+    "members": ["B-B", "PhewPhew", "Jestro", "Hailey"]
   },
   {
     "name": "Barber Brothers",
@@ -110,6 +110,20 @@
     "color": "#333333",
     "icon": "fa-scissors",
     "members": ["Fen", "Ben", "Clara"]
+  },
+  {
+    "name": "The Iron Legion",
+    "description": "-",
+    "icon": "fa-chess-rook",
+    "color": "#71717a",
+    "members": ["Warborn"]
+  },
+  {
+    "name": "The Unseen",
+    "description": "-",
+    "icon": "fa-user-ninja",
+    "color": "#1a202c",
+    "members": ["Nightprowler"]
   },
   {
     "name": "The Nether-Flux",
