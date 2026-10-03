@@ -627,9 +627,10 @@
     "id": "nightprowler",
     "name": "Nightprowler",
     "type": [
-      "Spirit"
+      "Human"
     ],
     "rarity": "Mundane",
+    "group": "the-unseen",
     "abilityName": "",
     "stats": {
       "health": "130",
@@ -641,10 +642,10 @@
       "mana": "5",
       "number": "1"
     },
-    "trait": "İlk <b>15</b> saniyə görünməz olaraq <b>+50%</b> Hız bonusu qazanar.",
+    "trait": "Hasar vermədikdə 2 saniyə ərzində görünməz olar. Görünməz olduqda ilk vuruşu rəqib karta bədbəxtlik effekti verər.",
     "additionalStats": {
       "range": "1000",
-      "speed": "1000",
+      "speed": "1200",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -925,6 +926,7 @@
       "Human"
     ],
     "rarity": "Mundane",
+    "group": "the-amazing-circus",
     "abilityName": "",
     "stats": {
       "health": "270",
@@ -1015,28 +1017,29 @@
     "id": "boomix",
     "name": "Boomix",
     "type": [
-      "Entity"
+      "Robot"
     ],
     "rarity": "Mundane",
+    "group": "chrono-mechanics",
     "abilityName": "",
     "stats": {
       "health": "140",
       "shield": "40",
       "damage": "14",
       "sps": "6",
-      "attackSpeed": "2,40s",
+      "attackSpeed": "2.40s",
       "delay": "-",
       "mana": "4",
       "number": "1"
     },
-    "trait": "Atışı <b>3,500</b> Karo getdikdə atışları geri qayıdar.",
+    "trait": "Atışları gedib-geri qayıdar. Atış müddətində 20% hasar azaltma qazanar",
     "additionalStats": {
-      "range": "3500",
+      "range": "3750",
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
+      "lifestealChance": "5%",
+      "lifesteal": "50%",
       "damageminimiser": "0%",
       "dodge": "0%",
       "vision": "8000",
@@ -1053,7 +1056,7 @@
       "level2": "+4% Hız  |  1000 » 1040",
       "level3": "+25% Qalxan  |  40 » 50"
     },
-    "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
+    "story": "",
     "class": "Marksman",
     "subclass": "Piercer"
   },
