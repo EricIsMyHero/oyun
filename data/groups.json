@@ -63,6 +63,13 @@
     "members": ["Gloop", "Freak", "Tornado", "Tphoenix", "Whisper", "Demotron", "Fallen Angel"]
   },
   {
+    "name": "Chrono Mechanics",
+    "description": "-",
+    "icon": "fa-gears",
+    "color": "#06b6d4",
+    "members": ["Boomix"]
+  },
+  {
     "name": "Void Walkers",
     "description": "-",
     "color": "#4c1d95",
