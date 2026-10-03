@@ -580,5 +580,48 @@
         "subclass": "Dormant"
       }
     ]
+  },
+  {
+    "name": "Stella",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Emergent",
+    "group": "the-nomads",
+    "stats": {
+      "health": "180",
+      "shield": "80",
+      "damage": "7x7",
+      "sps": "14",
+      "attackSpeed": "0.50s",
+      "delay": "1.50s",
+      "mana": "13",
+      "number": "1"
+    },
+    "trait": "Taxtaya hər qoyuluşda olduğu yerlə planör ilə enərək 1,5x1,5x alana 20 hasar verər, ardınca planör 2x3 alana qədər gedər və 12 hasar verər. Taxtaya hər qoyuluşda planör hasarı və menzili +10% artar. (Max:50%)",
+    "additionalStats": {
+      "range": "3000",
+      "speed": "1050",
+      "criticalChance": "5%",
+      "criticDamage": "2x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "8500",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "25%",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-"
   }
 ]
