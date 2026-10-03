@@ -6,6 +6,7 @@
       "Human"
     ],
     "rarity": "Familiar",
+    "group" "the-ghost-town",
     "abilityName": "",
     "stats": {
       "health": "250",
@@ -205,6 +206,7 @@
       "Human"
     ],
     "rarity": "Familiar",
+    "group": "the-iron-legion",
     "abilityName": "",
     "stats": {
       "health": "140",
@@ -216,7 +218,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hər <b>6</b> saniyədə ekstra <b>+8</b> Qalxan qazanar",
+    "trait": "Hər 6 saniyədə itirilmiş qalxan miqdarının 20%-ni yeniləyər",
     "additionalStats": {
       "range": "1300",
       "speed": "1000",
@@ -302,9 +304,10 @@
     "id": "nyra",
     "name": "Nyra",
     "type": [
-      "Robot"
+      "Human"
     ],
     "rarity": "Familiar",
+    "group": "the-nomads",
     "abilityName": "",
     "stats": {
       "health": "130",
