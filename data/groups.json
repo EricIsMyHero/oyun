@@ -77,6 +77,20 @@
     "members": ["Sheriff", "SlasherX", "Nurse", "Twins", "Albert", "John Reynolds"]
   },
   {
+    "name": "The Infernals",
+    "description": "-",
+    "icon": "fa-fire-flame-curved",
+    "color": "#8b0000",
+    "members": ["Hell boy"]
+  },
+  {
+    "name": "The Nomads",
+    "description": "-",
+    "icon": "fa-compass",
+    "color": "#d97706",
+    "members": ["Nyra"]
+  },
+  {
     "name": "Vampire Family",
     "description": "-",
     "color": "#5e0e08",
