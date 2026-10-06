@@ -428,6 +428,7 @@
       "Human"
     ],
     "rarity": "Relic",
+    "group": "the-extraterrestrials",
     "abilityName": "",
     "stats": {
       "health": "110",
@@ -439,9 +440,9 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "13% Şansla rəqibləri 2 saniyəlik sərsəmlətər",
+    "trait": "8% şansla rəqibi mistik bir boyuta ışınlayar. Rəqib kart orada 10 saniyə qalar. Daha sonra başqa bir yerdən çıxar, çıxdıqda maksimum canının 12%-i qədər hasar alar.",
     "additionalStats": {
-      "range": "3200",
+      "range": "1000",
       "speed": "1000",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -528,6 +529,7 @@
       "Alien"
     ],
     "rarity": "Relic",
+    "group": "the-faceless",
     "abilityName": "",
     "stats": {
       "health": "40",
@@ -539,7 +541,7 @@
       "mana": "3",
       "number": "1"
     },
-    "trait": "15,000 Karo qabaqdakı ən güclü rəqibə dönüşər (3 saniyə ərzində)",
+    "trait": "15,000 Karo qabaqdakı ən güclü rəqib karta 3 saniyə ərzində dönüşər. Əgər həmin rəqib kartı öldürərsə bütün statları yenilənər və +100% artar.",
     "additionalStats": {
       "range": "-",
       "speed": "1050",
@@ -574,6 +576,7 @@
       "Alien"
     ],
     "rarity": "Relic",
+    "group": "the-extraterrestrials",
     "abilityName": "",
     "stats": {
       "health": "90",
@@ -585,7 +588,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hər 34 saniyədə 5,000 Karo qarşıdakı rəqibi yox edər",
+    "trait": "Hər 22 saniyədə 7,500 Karo qarşıdakı rəqibə 50 hasar verər. Onu 20+(Rəqib kartın maksimum canının 10%)%-i şansla yox edər",
     "additionalStats": {
       "range": "4000",
       "speed": "1150",
