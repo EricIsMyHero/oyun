@@ -670,18 +670,19 @@
       "Human"
     ],
     "rarity": "Relic",
+    "group": "the-street-brawlers",
     "abilityName": "",
     "stats": {
       "health": "200",
       "shield": "30",
       "damage": "6",
-      "sps": "12",
-      "attackSpeed": "0.50s",
+      "sps": "9",
+      "attackSpeed": "0.65s",
       "delay": "-",
       "mana": "3",
       "number": "1"
     },
-    "trait": "Hər 3-cü vuruşu ekstra 2 dəfə təkrarlanar (3x6)",
+    "trait": "Canı hər 10% azaldıqda +8% bonus hasar və saldırı hızı qazanar (Max 40%). Hər 3-cü vuruşu ekstra 2 dəfə təkrarlanar (3x6)",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
