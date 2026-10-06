@@ -159,5 +159,27 @@
     "color": "#fbbf24",
     "icon": "fa-star",
     "members": ["Nortex", "Voltriker", "Astranova", "Hexon", "Sunrise", "Avalith", "Ali", "Umbra"]
+  },
+  ,
+  {
+    "name": "The Faceless",
+    "description": "Qəribə görünüşlü və maska arxasında gizlənən mistik varlıqlar.",
+    "icon": "fa-masks-theater",
+    "color": "#475569",
+    "members": ["Cryon", "Format"]
+  },
+  {
+    "name": "The Extraterrestrials",
+    "description": "Başqa planetlərdən və ölçülərdən gələn yadplanetlilər.",
+    "icon": "fa-meteor",
+    "color": "#22d3ee",
+    "members": ["Far", "Pyhsic"]
+  },
+  {
+    "name": "The Street Brawlers",
+    "description": "Yeraltı arenaların və küçələrin amansız döyüşçüləri.",
+    "icon": "fa-hand-fist",
+    "color": "#8b4513",
+    "members": ["Lyra"]
   }
 ]
