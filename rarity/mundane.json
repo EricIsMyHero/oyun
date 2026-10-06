@@ -1356,7 +1356,7 @@
       "Alien"
     ],
     "rarity": "Mundane",
-    "group": "",
+    "group": "the-faceless",
     "abilityName": "",
     "stats": {
       "health": "50",
@@ -1368,7 +1368,7 @@
       "mana": "7",
       "number": "1"
     },
-    "trait": "Canı qarşısındakı ən çox canlı rəqib karta bərabər olar, hərəkət etdikdə hər saniyə +10 yük qazanar. 100 yük olduqda 25% Can yeniləyər",
+    "trait": "Canı 20%-in altına düşdükdə masqasını çıxarar və yaxınında olan bütün kartları 12 saniyəlik sərsəmlədər",
     "additionalStats": {
       "range": "1000",
       "speed": "1050",
@@ -1394,6 +1394,6 @@
     },
     "story": "",
     "class": "Specialist",
-    "subclass": "Mirror"
+    "subclass": "Stunner"
   }
 ]
