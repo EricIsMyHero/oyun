@@ -877,17 +877,17 @@
     "stats": {
       "health": "50",
       "shield": "0",
-      "damage": "70",
-      "sps": "70",
-      "attackSpeed": "0.60s",
+      "damage": "48",
+      "sps": "48",
+      "attackSpeed": "0.75s",
       "delay": "-",
       "mana": "3",
       "number": "5"
     },
-    "trait": "Bu mutasiya olunmuş arı sürüsü intihar hücumu həyata keçirir. Onların ilk vuruşu rəqib kartı dərhal zəhərləyər və əlavə 10x3 hasar verər. Lakin bu ölümcül zərbədən sonra arılar özləri də tələf olurlar. Bu kart rəqib kartların ən güclü döyüşçülərini zəiflətmək üçün strateji bir \"fəda\" kartıdır.",
+    "trait": "Bu mutasiya olunmuş arı sürüsü intihar hücumu həyata keçirir. Onların ilk vuruşu rəqib kartı dərhal zəhərləyər və əlavə 8x2 hasar verər. Lakin bu ölümcül zərbədən sonra arılar özləri də tələf olurlar. Bu kart rəqib kartların ən güclü döyüşçülərini zəiflətmək üçün strateji bir \"fəda\" kartıdır.",
     "additionalStats": {
       "range": "800",
-      "speed": "1150",
+      "speed": "1000",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "-",
@@ -906,8 +906,8 @@
     "effects": [
       {
         "type": "poison",
-        "damagePerSecond": 3,
-        "duration": 10
+        "damagePerSecond": 2,
+        "duration": 8
       }
     ],
     "showlevels": {
