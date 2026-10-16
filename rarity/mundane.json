@@ -38,8 +38,8 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+16% Can  |  70 » 81",
-      "level2": "+16% Hasar  |  18 » 21",
+      "level1": "+16% Can  |  40 » 46",
+      "level2": "+16% Hasar  |  8 » 9",
       "level3": "+10% Öz. Hız Bonusu  |  20% » 30%"
     },
     "story": "The Golden Horde, a massive swarm of small prehistoric rodent-like creatures dragged through a mana portal from an ancient forgotten dimension. At first glance they appear harmless and adorable, with round bodies, soft golden fur, bright curious eyes, and compact animal-like features. However, beneath their deceptively cute appearance lies a relentless and highly destructive pack mentality. Thousands of Hammies flood across the battlefield as a living tide. Their fur ranges from warm golden-yellow to amber tones, creating the appearance of a moving golden horde. Despite their small size, each creature possesses surprisingly sharp claws, powerful jaws, and rows of tiny predatory teeth adapted for gnawing through nearly anything they encounter. The creatures move with extreme speed and chaotic energy. Some climb over rocks, others leap across debris, while countless more swarm together in coordinated waves. Their unpredictable behavior creates a sense of constant motion, making the battlefield feel completely overrun. Dust, dirt, and debris are kicked into the air as the horde advances. Their bright eyes are filled with wild curiosity and primal instinct. Individual Hammies may appear cute, but the sheer number of creatures transforms them into an overwhelming force of nature. Their collective movement resembles a golden flood consuming everything in its path. Behind the swarm, a gigantic unstable mana portal tears through reality, revealing glimpses of their prehistoric homeland. Vast grasslands, ancient forests, towering ferns, and strange extinct wildlife can be seen through the dimensional rift. Golden mana energy crackles around the portal, illuminating the creatures with a mystical glow. The environment shows clear signs of being overwhelmed. Broken equipment, damaged structures, scattered debris, and disturbed terrain emphasize the destructive effect of the advancing horde. The atmosphere is energetic, chaotic, and surprisingly intimidating despite the creatures' outwardly cute appearance. The overall composition focuses on contrast: individually adorable creatures forming a terrifying, unstoppable swarm through sheer numbers, speed, and group ferocity.",
@@ -103,7 +103,7 @@
     "group": "constructs",
     "abilityName": "",
     "stats": {
-      "health": "120",
+      "health": "160",
       "shield": "0",
       "damage": "16",
       "sps": "16",
@@ -134,7 +134,7 @@
     "showlevels": {
       "level1": "+4% Menzil  |  2500 » 2600",
       "level2": "+10% Hız  |  1000 » 1100",
-      "level3": "+10% Can  |  90 » 99"
+      "level3": "+10% Can  |  160 » 176"
     },
     "story": "Scrapy is a rusted robot that once helped build the arena. Lately, a dark glitch has taken over its programming, and it prefers absolute destruction over creation. Rolling into battle on a single wheel, it ready to tear down everything it once built. It strikes fear into enemies with a massive, scrap-firing weapon fused directly into its left arm.",
     "class": "Marksman",
@@ -150,7 +150,7 @@
     "group": "steam-alliance",
     "abilityName": "",
     "stats": {
-      "health": "100",
+      "health": "120",
       "shield": "40",
       "damage": "15",
       "sps": "19",
@@ -197,7 +197,7 @@
     "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
-      "health": "90",
+      "health": "110",
       "shield": "50",
       "damage": "3x5",
       "sps": "15",
@@ -253,7 +253,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Gloop toxunduğu bütün rəqib kartları öz yapışqan kütləsinin içinə çəkərək onları hərəkətsiz qoyar və davamlı hasar verər. Bu qədim varlığın döyüş meydanında 125 saniyəlik məhdud ömrü var. Ömrü başa çatdıqda və ya məhv edildikdə daxili enerjisi partlayar, ətrafındakı bütün rəqiblərə 220 hasar yetirərək tamamilə yox olar.",
+    "trait": "Gloop toxunduğu bütün rəqib kartları öz yapışqan kütləsinin içinə çəkərək onları hərəkətsiz qoyar və davamlı hasar verər. Bu qədim varlığın döyüş meydanında 125 saniyəlik məhdud ömrü var. Ömrü başa çatdıqda və ya məhv edildikdə daxili enerjisi partlayar, ətrafındakı bütün rəqiblərə 150 hasar yetirərək tamamilə yox olar.",
     "additionalStats": {
       "range": "1000",
       "speed": "800",
@@ -293,9 +293,9 @@
     "stats": {
       "health": "440",
       "shield": "0",
-      "damage": "62",
+      "damage": "45",
       "sps": "50",
-      "attackSpeed": "1.25s",
+      "attackSpeed": "0.90s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -320,7 +320,7 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+4% Health  |  400 » 416",
+      "level1": "+4% Health  |  440 » 458",
       "level2": "+10% Attack Size  |  1100 » 1210",
       "level3": "+5% Speed  |  800 » 840"
     },
@@ -375,7 +375,7 @@
     ],
     "showlevels": {
       "level1": "+5% Öz. Yavaşlatma  |  25% » 30%",
-      "level2": "+5% Can  |  200% » 210%",
+      "level2": "+5% Can  |  250 » 263",
       "level3": "+5% Kritik Şansı  |  5% » 10%"
     },
     "story": "The Silent Venom, an elite alien assassin of the Dark Layer in Alien World: The Binary Divide. She is a nearly invisible predator that stalks her victims without making the slightest sound. Feared throughout the planet for her lightning-fast strikes and lethal neurotoxin, Venomora paralyzes her prey long before they realize she is there. She never wastes movement, never speaks, and never misses. Venomora is a tall, elegant female alien with an athletic, agile physique designed for speed and stealth. Her body is covered in sleek obsidian-black exoskeletal armor with smooth organic curves, accented by glowing emerald-green bioluminescent veins that pulse faintly beneath the surface. Her silhouette is graceful yet intimidating, resembling the perfect apex hunter. Her face is sharp and alien, with glowing toxic-green eyes that pierce through darkness. Her expression is cold and emotionless, while subtle venom glands along her jaw emit faint wisps of emerald vapor. Small blade-like protrusions extend backward from her head, giving her an aerodynamic appearance. Both forearms end in long, razor-sharp venomous claws, coated with glowing neurotoxic venom. Thick droplets of luminous green poison slowly slide from the claws before evaporating into toxic mist. Every movement leaves faint trails of poisonous particles suspended in the air. Her long segmented tail ends in a deadly scorpion-like stinger, filled with pulsating emerald venom visible beneath a translucent crystalline chamber. The tail curves gracefully behind her, poised to strike with terrifying speed. Around her body flows a subtle camouflage field that partially bends light, making sections of her body fade into the surrounding environment. Wisps of green toxic mist drift around her feet while glowing spores float silently through the air, enhancing the illusion that she is emerging from nowhere. The battlefield is a dense alien jungle within the Dark Layer, filled with towering bioluminescent plants, enormous poisonous fungi, black alien trees, glowing vines, toxic swamps, and luminous spores. Thick emerald fog blankets the forest floor while faint alien moons illuminate the environment from above. She crouches atop a massive twisted branch or alien rock formation, ready to ambush her prey. Her posture resembles a hunting predator moments before striking, balancing elegance with explosive speed. The atmosphere is tense, silent, and predatory. The environment should communicate that every living creature fears entering her territory, where one unseen strike is enough to end the hunt before it begins. The overall composition should portray Venomora as the perfect alien assassin—beautiful, silent, highly intelligent, and lethally efficient.",
@@ -394,9 +394,9 @@
     "stats": {
       "health": "250",
       "shield": "90",
-      "damage": "74",
-      "sps": "37",
-      "attackSpeed": "2,00s",
+      "damage": "45",
+      "sps": "38",
+      "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -441,7 +441,7 @@
     "stats": {
       "health": "200",
       "shield": "30",
-      "damage": "3x5",
+      "damage": "12x4",
       "sps": "20",
       "attackSpeed": "0.20s",
       "delay": "1.40s",
@@ -475,7 +475,7 @@
     ],
     "showlevels": {
       "level1": "+20% Qalxan  |  30 » 36",
-      "level2": "+1 Ekstra Atış  |  3x5 » 4x5",
+      "level2": "+4 Ekstra Atış  |  12x4 » 14x4",
       "level3": "+5% Menzil  |  3600 » 3780"
     },
     "story": "The Hurricane Stylist, a 23-year-old barber prodigy and the youngest member of the Barber Brothers. Energetic, confident, and exceptionally talented, Fen has transformed the tools of his profession into powerful instruments of precision and control. His youthful enthusiasm and lightning-fast reflexes make him one of the most dynamic stylists in both the barbershop and the arena. Fen is a handsome young man with a modern, fashionable appearance befitting a master barber. His hairstyle is impeccably styled, featuring sharp cuts, clean lines, and a trendy look that showcases his professional expertise. His expression is confident and focused, carrying the charisma of someone who genuinely loves his craft. He wears a stylish barber-inspired outfit that blends professional fashion with fantasy action aesthetics. The outfit includes a modern barber vest, rolled sleeves, utility belts for grooming tools, premium fabrics, and sleek design details. The clothing appears practical for movement while maintaining the polished appearance of a high-end stylist. In his hands, Fen wields a powerful professional hairdryer enhanced with extraordinary technology. The device generates massive streams of compressed wind that spiral around him like miniature hurricanes. Powerful currents of air twist through the battlefield, lifting loose objects, dust, and hair strands into dynamic vortexes. The wind effects are visually impressive yet elegant, emphasizing control rather than destruction. His hairdryer emits visible streams of swirling air, creating circular gusts and tornado-like formations around his body. Flying strands of hair, floating particles, and flowing fabrics react realistically to the intense airflow. The atmosphere feels energetic and constantly in motion. The setting combines elements of a luxury modern barbershop with a fantasy arena. Premium barber chairs, mirrors, styling stations, and salon equipment blend seamlessly with a dramatic battleground environment. The scene showcases Fen's ability to transform everyday barber tools into extraordinary sources of power. His pose should be dynamic and action-oriented, as though he is directing a powerful gust of wind while maintaining complete precision. Despite the intensity of the airflow, he appears relaxed and in total control, embodying both creativity and mastery.",
@@ -594,7 +594,7 @@
           "shield": "0",
           "damage": "10",
           "sps": "13",
-          "attackSpeed": "0,80s",
+          "attackSpeed": "0.80s",
           "delay": "-",
           "mana": "-",
           "number": "2"
@@ -633,7 +633,7 @@
     "group": "the-unseen",
     "abilityName": "",
     "stats": {
-      "health": "130",
+      "health": "160",
       "shield": "0",
       "damage": "38",
       "sps": "27",
@@ -662,8 +662,8 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+6% Saldırı Hızı  |  1,5s » 1,425s",
-      "level2": "+10% Can  |  90 » 99",
+      "level1": "+6% Saldırı Hızı  |  1,4s » 1,316s",
+      "level2": "+10% Can  |  160 » 176",
       "level3": "+16% Hasar  |  38 » 44"
     },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
@@ -877,8 +877,8 @@
     "stats": {
       "health": "50",
       "shield": "0",
-      "damage": "48",
-      "sps": "48",
+      "damage": "36",
+      "sps": "36",
       "attackSpeed": "0.75s",
       "delay": "-",
       "mana": "3",
@@ -911,7 +911,7 @@
       }
     ],
     "showlevels": {
-      "level1": "+10% Damage  |  70 » 77",
+      "level1": "+10% Damage  |  36 » 40",
       "level2": "+5% Dodge Chance |  20% » 25%",
       "level3": "+10% Range  |  800 » 880"
     },
@@ -1153,9 +1153,9 @@
       }
     ],
     "showlevels": {
-      "level1": "+5% Can  |  300 » 315",
+      "level1": "+5% Can  |  330 » 347",
       "level2": "+10% Hız  |  900 » 990",
-      "level3": "+5% Saldırı Hızı  |  1,80s » 1,62s"
+      "level3": "+5% Saldırı Hızı  |  1,70s » 1,615s"
     },
     "story": "Chrono Mage is a master of the temporal arts, possessing the rare ability to manipulate the flow of time itself. He exists between seconds, watching the past and future unfold simultaneously. He is neither good nor evil, acting only as a neutral observer of history’s clock. His power allows him to freeze enemies in their tracks or accelerate his own movements to a blur. As the mentor and guardian of Laura, he carries the weight of ages on his shoulders, ensuring that the timeline remains unbroken.",
     "class": "Mage",
@@ -1359,8 +1359,8 @@
     "group": "the-faceless",
     "abilityName": "",
     "stats": {
-      "health": "50",
-      "shield": "300",
+      "health": "150",
+      "shield": "200",
       "damage": "12",
       "sps": "12",
       "attackSpeed": "1.00s",
