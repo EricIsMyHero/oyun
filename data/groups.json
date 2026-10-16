@@ -137,7 +137,7 @@
     "description": "-",
     "icon": "fa-chess-rook",
     "color": "#71717a",
-    "members": ["Warborn"]
+    "members": ["Warborn", "Bio Mech"]
   },
   {
     "name": "The Unseen",
@@ -180,5 +180,26 @@
     "icon": "fa-hand-fist",
     "color": "#8b4513",
     "members": ["Lyra"]
+  },
+  {
+    "name": "The Far East",
+    "description": "-",
+    "icon": "fa-yin-yang",
+    "color": "#dc2626",
+    "members": ["Kai", "Wong"]
+  },
+  {
+    "name": "The Charmers",
+    "description": "Rəqibləri ovsunlayaraq öz iradəsinə tabe edən manipulyatorlar.",
+    "icon": "fa-heart",
+    "color": "#ec4899",
+    "members": ["Heartix"]
+  },
+  {
+    "name": "The Bounty Hunters",
+    "description": "Qənimət və mükafat arxasınca qaçan, resurs toplayan muzdlular.",
+    "icon": "fa-sack-dollar",
+    "color": "#b8860b",
+    "members": ["Collector"]
   }
 ]
