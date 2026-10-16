@@ -138,19 +138,21 @@
       "Human"
     ],
     "rarity": "Apex",
+    "group": "the-charmers",
+    "abilityName": "",
     "stats": {
-      "health": "70",
+      "health": "90",
       "shield": "60",
-      "damage": "6",
-      "sps": "5",
-      "attackSpeed": "1.25s",
+      "damage": "17",
+      "sps": "14",
+      "attackSpeed": "1.40s",
       "delay": "-",
       "mana": "8",
       "number": "1"
     },
-    "trait": "Hər 40 saniyədə qarşıdakı rəqibi 20 saniyəlik öz tərəfinə çəkər",
+    "trait": "Hər 24 saniyədə bir sonrakı atışı qarşıdakı rəqib kartı 8 saniyəlik öz tərəfinə çəkər",
     "additionalStats": {
-      "range": "6000",
+      "range": "4250",
       "speed": "900",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
@@ -169,7 +171,7 @@
     },
     "mechanic": "mind-control",
     "mechanicStats": {
-      "controlDuration": 20
+      "controlDuration": 8
     },
     "showlevels": {
       "level1": "-",
@@ -417,15 +419,17 @@
     "id": "collector",
     "name": "Collector",
     "type": [
-      "Robot"
+      "Human"
     ],
     "rarity": "Apex",
+    "group": "the-bounty-hunters",
+    "abilityName": "",
     "stats": {
-      "health": "120",
-      "shield": "100",
+      "health": "180",
+      "shield": "70",
       "damage": "60",
-      "sps": "40",
-      "attackSpeed": "1.50s",
+      "sps": "46",
+      "attackSpeed": "1.30s",
       "delay": "-",
       "mana": "16",
       "number": "1"
@@ -737,22 +741,22 @@
       "Entity"
     ],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "the-vampire-family",
+    "abilityName": "",
     "stats": {
-      "health": "80",
-      "shield": "240",
-      "damage": "12",
-      "sps": "9",
-      "attackSpeed": "1.30s",
+      "health": "240",
+      "shield": "80",
+      "damage": "13",
+      "sps": "10",
+      "attackSpeed": "1.35s",
       "delay": "-",
       "mana": "9",
       "number": "2"
     },
-    "trait": "Vuruşları ekstra 3x1 hasar verər və rəqib kartdan +0,5% Kritik Şansı oğurlayar",
+    "trait": "Vuruşları qalxandan keçər və rəqib kartdan +0,5% Kritik Şansı oğurlayarlar",
     "additionalStats": {
-      "range": "1,000",
-      "speed": "1,000",
+      "range": "1000",
+      "speed": "1100",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -985,8 +989,8 @@
       "Robot"
     ],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "the-iron-legion",
+    "abilityName": "",
     "stats": {
       "health": "220",
       "shield": "60",
@@ -997,12 +1001,12 @@
       "mana": "18",
       "number": "1"
     },
-    "trait": "Hər hasar aldıqda ətrafdakı kartlar +1% Qalxan qazanar",
+    "trait": "Hər hasar aldıqda ətrafdakı dost kartlar +3% Qalxan qazanar",
     "additionalStats": {
-      "range": "2000",
+      "range": "1050",
       "speed": "950",
-      "criticalChance": "5%",
-      "criticDamage": "1.5x",
+      "criticalChance": "20%",
+      "criticDamage": "1.25x",
       "lifestealChance": "0%",
       "lifesteal": "25%",
       "damageminimiser": "0%",
@@ -1032,19 +1036,19 @@
       "Spirit"
     ],
     "rarity": "Apex",
-    "isHybrid": false,
-    "isMulti": false,
+    "group": "the-vampire-family",
+    "abilityName": "",
     "stats": {
       "health": "100",
       "shield": "0",
-      "damage": "6x8",
-      "sps": "48",
+      "damage": "6x6",
+      "sps": "36",
       "attackSpeed": "0.15s",
       "delay": "0.50s",
       "mana": "5",
       "number": "1"
     },
-    "trait": "3x3 Yaxınında ölən kartların canlarının 60%-ni özünə qatar",
+    "trait": "Yaxınında ölən kartların maksimum canlarının 60%-ni özünə çəkər",
     "additionalStats": {
       "range": "1750",
       "speed": "1000",
