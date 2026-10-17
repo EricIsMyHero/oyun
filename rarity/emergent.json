@@ -1,6 +1,6 @@
 [
   {
-    "id": "xıı-josh",
+    "id": "xii-josh",
     "name": "XII Josh",
     "type": [
       "Human"
@@ -8,11 +8,11 @@
     "rarity": "Emergent",
     "group": "the-iron-legion",
     "stats": {
-      "health": "220",
-      "shield": "120",
-      "damage": "15",
-      "sps": "12",
-      "attackSpeed": "1.25s",
+      "health": "105",
+      "shield": "59",
+      "damage": "7",
+      "sps": "6",
+      "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "9",
       "number": "3"
@@ -52,10 +52,10 @@
     "rarity": "Emergent",
     "group": "the-bounty-hunters",
     "stats": {
-      "health": "350",
-      "shield": "50",
-      "damage": "6",
-      "sps": "7",
+      "health": "585",
+      "shield": "84",
+      "damage": "10",
+      "sps": "11",
       "attackSpeed": "0.90s",
       "delay": "-",
       "mana": "12",
@@ -96,10 +96,10 @@
     "rarity": "Emergent",
     "group": "the-holy-sanctuary",
     "stats": {
-      "health": "100",
-      "shield": "20",
-      "damage": "10",
-      "sps": "9",
+      "health": "195",
+      "shield": "39",
+      "damage": "20",
+      "sps": "17",
       "attackSpeed": "1.15s",
       "delay": "-",
       "mana": "17",
@@ -140,10 +140,10 @@
     "rarity": "Emergent",
     "group": "the-cursed-coven",
     "stats": {
-      "health": "240",
-      "shield": "80",
-      "damage": "9",
-      "sps": "8",
+      "health": "290",
+      "shield": "97",
+      "damage": "11",
+      "sps": "9",
       "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "13",
@@ -184,11 +184,11 @@
     "rarity": "Emergent",
     "group": "the-faceless",
     "stats": {
-      "health": "70",
-      "shield": "40",
-      "damage": "40",
-      "sps": "16",
-      "attackSpeed": "2.50s",
+      "health": "125",
+      "shield": "72",
+      "damage": "45",
+      "sps": "29",
+      "attackSpeed": "1.55s",
       "delay": "-",
       "mana": "17",
       "number": "1"
@@ -226,15 +226,15 @@
       "Entity"
     ],
     "rarity": "Emergent",
-    "group": "The Condemned",
+    "group": "the-condemned",
     "manifestation": "random_on_deploy",
     "isMulti": true,
     "stats": {
-      "health": "100",
-      "shield": "100",
-      "damage": "10",
-      "sps": "10",
-      "attackSpeed": "1.00s",
+      "health": "165",
+      "shield": "165",
+      "damage": "16",
+      "sps": "16",
+      "attackSpeed": "0.97s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -274,7 +274,7 @@
           "Entity"
         ],
         "rarity": "Emergent",
-        "group": "The Condemned",
+        "group": "the-condemned",
         "stats": {
           "health": "320",
           "shield": "60",
@@ -320,12 +320,12 @@
           "Entity"
         ],
         "rarity": "Emergent",
-        "group": "The Condemned",
+        "group": "the-condemned",
         "stats": {
-          "health": "100",
-          "shield": "50",
-          "damage": "8",
-          "sps": "7",
+          "health": "225",
+          "shield": "110",
+          "damage": "18",
+          "sps": "16",
           "attackSpeed": "1.10s",
           "delay": "-",
           "mana": "-",
@@ -366,12 +366,12 @@
           "Entity"
         ],
         "rarity": "Emergent",
-        "group": "The Condemned",
+        "group": "the-condemned",
         "stats": {
-          "health": "160",
-          "shield": "100",
-          "damage": "10",
-          "sps": "9",
+          "health": "220",
+          "shield": "135",
+          "damage": "14",
+          "sps": "16",
           "attackSpeed": "0.90s",
           "delay": "-",
           "mana": "-",
@@ -412,12 +412,12 @@
           "Entity"
         ],
         "rarity": "Emergent",
-        "group": "The Condemned",
+        "group": "the-condemned",
         "stats": {
-          "health": "160",
-          "shield": "40",
-          "damage": "12",
-          "sps": "10",
+          "health": "240",
+          "shield": "60",
+          "damage": "18",
+          "sps": "18",
           "attackSpeed": "1.00s",
           "delay": "-",
           "mana": "-",
@@ -454,16 +454,16 @@
       {
         "id": "gluttony",
         "name": "Gluttony",
-        "group": "The Condemned",
+        "group": "the-condemned",
         "type": [
           "Entity"
         ],
         "rarity": "Emergent",
         "stats": {
-          "health": "400",
-          "shield": "80",
-          "damage": "6",
-          "sps": "8",
+          "health": "475",
+          "shield": "95",
+          "damage": "7",
+          "sps": "9",
           "attackSpeed": "0.75s",
           "delay": "-",
           "mana": "-",
@@ -504,12 +504,12 @@
           "Entity"
         ],
         "rarity": "Emergent",
-        "group": "The Condemned",
+        "group": "the-condemned",
         "stats": {
-          "health": "160",
-          "shield": "100",
-          "damage": "20",
-          "sps": "27",
+          "health": "200",
+          "shield": "125",
+          "damage": "25",
+          "sps": "33",
           "attackSpeed": "0.75s",
           "delay": "-",
           "mana": "-",
@@ -550,7 +550,7 @@
           "Entity"
         ],
         "rarity": "Emergent",
-        "group": "The Condemned",
+        "group": "the-condemned",
         "stats": {
           "health": "230",
           "shield": "210",
@@ -599,10 +599,10 @@
     "rarity": "Emergent",
     "group": "the-nomads",
     "stats": {
-      "health": "180",
-      "shield": "80",
-      "damage": "7x7",
-      "sps": "14",
+      "health": "200",
+      "shield": "89",
+      "damage": "7x8",
+      "sps": "16",
       "attackSpeed": "0.50s",
       "delay": "1.50s",
       "mana": "13",
@@ -632,6 +632,7 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "id": "stella"
   }
 ]
