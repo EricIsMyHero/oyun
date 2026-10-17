@@ -9,11 +9,11 @@
     "group": "the-spellbound",
     "abilityName": "Arcane Harvest",
     "stats": {
-      "health": "80",
-      "shield": "50",
-      "damage": "15",
-      "sps": "14",
-      "attackSpeed": "1.10s",
+      "health": "110",
+      "shield": "62",
+      "damage": "11",
+      "sps": "10",
+      "attackSpeed": "1.07s",
       "delay": "-",
       "mana": "6",
       "number": "1"
@@ -47,7 +47,7 @@
     "showlevels": {
       "level1": "+4 Ability Heal | 4 » 8",
       "level2": "+42% Health | 50 » 71",
-      "level3": "+10% Attack Speed | 1,10s » 0,99s"
+      "level3": "+10% Attack Speed  |  1,07s » 0,963s"
     },
     "story": "Arcanyx is as elegant as she is formidable, embodying a perfect balance of grace and power. She carries herself with a noble air, but beneath her calm exterior lies a volatile temper. If provoked or angered, she does not hesitate to unleash her signature explosive seeds, which burst with arcane fury upon contact. She is a delicate force of nature that demands respect. While she prefers peace, those who mistake her beauty for weakness quickly learn the destructive cost of her wrath.",
     "class": "Mage",
@@ -63,11 +63,11 @@
     "group": "botanical-gardens",
     "abilityName": "",
     "stats": {
-      "health": "260",
+      "health": "415",
       "shield": "0",
-      "damage": "50",
-      "sps": "33",
-      "attackSpeed": "1.50s",
+      "damage": "45",
+      "sps": "54",
+      "attackSpeed": "0.84s",
       "delay": "-",
       "mana": "15",
       "number": "1"
@@ -111,10 +111,10 @@
     "abilityName": "",
     "isMulti": true,
     "stats": {
-      "health": "100",
+      "health": "110",
       "shield": "80",
-      "damage": "14",
-      "sps": "14",
+      "damage": "13",
+      "sps": "13",
       "attackSpeed": "1.00s",
       "delay": "-",
       "mana": "8",
@@ -147,7 +147,7 @@
       }
     ],
     "showlevels": {
-      "level1": "+20% Can | 80 » 96",
+      "level1": "+20% Can  |  110 » 132",
       "level2": "+4% Öz. Şans | 6% » 10%",
       "level3": "+5% Menzil | 3000 » 3150"
     },
@@ -205,10 +205,10 @@
     "abilityName": "Molten Rebound",
     "isMulti": true,
     "stats": {
-      "health": "410",
+      "health": "495",
       "shield": "0",
-      "damage": "15",
-      "sps": "19",
+      "damage": "18",
+      "sps": "22",
       "attackSpeed": "0.80s",
       "delay": "-",
       "mana": "15",
@@ -329,10 +329,10 @@
     "abilityName": "",
     "isMulti": true,
     "stats": {
-      "health": "250",
+      "health": "430",
       "shield": "0",
-      "damage": "24",
-      "sps": "20",
+      "damage": "42",
+      "sps": "35",
       "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "12",
@@ -358,8 +358,8 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+6% Health | 250 » 265",
-      "level2": "+12% DMG | 24 » 27",
+      "level1": "+6% Health  |  430 » 456",
+      "level2": "+12% DMG  |  42 » 47",
       "level3": "+5% Dodge Chance | 0% » 5%"
     },
     "story": "The Threefold Raiders, a dangerous trio of pirate warriors consisting of one male pirate and two female pirates from the ruthless waters of Corsair Bay. The male pirate must have a completely original appearance and must NOT resemble Jack Sparrow or any famous fictional pirate character. He is a young adult man with a strong, athletic build, broad shoulders, a clean and angular face, sharp cheekbones, and a serious, determined expression. He has short, messy dark-brown hair, with no dreadlocks, beads, or elaborate pirate hairstyle. He has either very light stubble or a short, neatly trimmed beard, giving him a rugged but disciplined appearance. He wears a practical historical corsair outfit inspired by Mediterranean and North African sailors rather than the stereotypical Caribbean pirate aesthetic. His clothing consists of a dark navy-blue long coat, cream-colored linen shirt, fitted dark trousers, a wide leather belt, worn leather boots, and a simple dark cloth head covering. His outfit is weathered from years at sea but remains functional and military-like. He carries no excessive jewelry, no decorative beads, no dreadlocks, no colorful scarves, and no flamboyant accessories. In his right hand he holds a long, narrow, sharply pointed cutlass, designed for fast and precise attacks. The weapon has a realistic steel blade, simple guard, and dark wooden handle. It should look like a practical historical weapon rather than a fantasy sword. Beside him stand two female pirate warriors, both young adult women with distinct appearances. They wear historically inspired corsair clothing and each carries an antique flintlock pistol with wooden grips and aged metal mechanisms. The three pirates stand together in a coordinated combat formation: the male swordsman at the front, slightly turned sideways in a defensive stance, while the two women stand behind him on opposite sides with their flintlock pistols raised. Their expressions are serious and confident, portraying them as experienced professional corsairs rather than theatrical or comedic pirates. The scene takes place on the deck of a large wooden corsair ship in Corsair Bay, surrounded by massive wooden masts, dark sails, ropes, barrels, crates, cannons, and maritime equipment. The deck is wet from seawater and covered with realistic scratches and weathering. A violent ocean surrounds the ship, with enormous waves crashing against the hull. Dark storm clouds cover the sky while a narrow beam of sunlight illuminates the three crew members.",
@@ -462,11 +462,11 @@
     "group": "the-nether-flux",
     "abilityName": "",
     "stats": {
-      "health": "90",
-      "shield": "30",
-      "damage": "70",
-      "sps": "42",
-      "attackSpeed": "1.65s",
+      "health": "120",
+      "shield": "40",
+      "damage": "45",
+      "sps": "32",
+      "attackSpeed": "1.41s",
       "delay": "-",
       "mana": "14",
       "number": "1"
@@ -516,10 +516,10 @@
     "group": "solar-order",
     "abilityName": "",
     "stats": {
-      "health": "500",
-      "shield": "500",
-      "damage": "120",
-      "sps": "38",
+      "health": "450",
+      "shield": "450",
+      "damage": "108",
+      "sps": "34",
       "attackSpeed": "3.20s",
       "delay": "-",
       "mana": "18",
@@ -545,7 +545,7 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+6% Shield | 500 » 530",
+      "level1": "+6% Shield  |  450 » 477",
       "level2": "+50% Aura Area Size | 2000 » 3000",
       "level3": "+25% Ability Aura DMG | 1% » 1,25%"
     },
@@ -563,11 +563,11 @@
     "group": "the-infernals",
     "abilityName": "",
     "stats": {
-      "health": "180",
-      "shield": "30",
+      "health": "210",
+      "shield": "35",
       "damage": "50",
-      "sps": "25",
-      "attackSpeed": "2.00s",
+      "sps": "29",
+      "attackSpeed": "1.71s",
       "delay": "-",
       "mana": "8",
       "number": "1"
@@ -594,7 +594,7 @@
     "showlevels": {
       "level1": "+20% Ability DMG | +40% » +60%",
       "level2": "+10% Lifesteal Chance | 0% » 10%",
-      "level3": "+8% Attack Speed | 2,00s » 1,84s"
+      "level3": "+8% Attack Speed  |  1,71s » 1,573s"
     },
     "story": "-",
     "class": "Fighter",
@@ -610,11 +610,11 @@
     "group": "the-ghost-town",
     "abilityName": "",
     "stats": {
-      "health": "120",
-      "shield": "20",
-      "damage": "25",
-      "sps": "29",
-      "attackSpeed": "0.85s",
+      "health": "135",
+      "shield": "25",
+      "damage": "15",
+      "sps": "17",
+      "attackSpeed": "0.87s",
       "delay": "-",
       "mana": "3",
       "number": "1"
@@ -639,9 +639,9 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+10% Shield | 20 » 22",
+      "level1": "+10% Shield  |  25 » 28",
       "level2": "+2% Base Trait Chance | 1% » 3%",
-      "level3": "+10% HP| 110 » 121"
+      "level3": "+10% HP  |  135 » 148"
     },
     "story": "The Silent Butcher, a terrifying masked outlaw lurking within The Ghost Town. Unlike a traditional gunslinger, SlasherX never announces his presence and never gives his victims a chance to fight back. He stalks isolated travelers through abandoned streets, silently following them through darkness before striking with a razor-sharp hunting blade. His reputation has transformed him into an urban legend whispered about by anyone foolish enough to enter the Ghost Town alone. SlasherX is a tall, lean, physically powerful adult male outlaw with a predatory posture. His body is covered in dark, weathered clothing designed for stealth. He wears a long, heavily worn black-brown coat with torn edges, dark trousers, rugged leather boots, and a variety of old leather straps and utility pouches. His entire face is concealed beneath a disturbing handmade mask made from aged, weathered material. The mask has an unsettling, crude appearance, with an expressionless face and narrow dark eye openings that reveal almost nothing about the person underneath. Scratches, stains, cracks, and signs of long-term use cover its surface. His eyes are barely visible through the mask, appearing as two faint, cold points of light in the darkness. His identity remains completely unknowable. SlasherX carries a large hunting knife as his primary weapon. The blade is long, heavy, and extremely sharp, with a worn steel surface covered in subtle scratches from countless hunts. The handle is wrapped in aged leather for a secure grip. He holds the blade low beside his body, ready to strike with a sudden, explosive movement. A second smaller utility blade is concealed along his belt, reinforcing his preparation as a professional hunter rather than a reckless killer. His clothing is specifically designed around stealth and mobility. The coat is loose enough to conceal his movements but fitted enough to prevent unnecessary noise. Several dark leather straps cross his torso, carrying hunting equipment, rope, small tools, and worn pouches. The environment is a deserted Ghost Town at night. Abandoned wooden buildings surround a narrow dirt street, with broken windows, collapsing balconies, old wagons, rotten fences, and forgotten lanterns. A single flickering lantern hangs outside an abandoned saloon, creating a small pool of warm light surrounded by deep darkness. Thick fog crawls along the ground, partially obscuring SlasherX's legs. Moonlight cuts through the clouds above, creating long shadows between the buildings. Tumbleweeds move silently through the empty street while loose wooden signs creak in the wind. SlasherX stands partially hidden in the darkness between two abandoned buildings, his body mostly concealed by shadow. Only part of his mask, one eye, and the reflective edge of his hunting blade are illuminated by moonlight. His posture should communicate absolute patience—he is not charging, shouting, or posing dramatically. He is waiting. The composition should create the feeling that the viewer has unknowingly become the next target. SlasherX should feel like a predator that belongs to the darkness of the Ghost Town itself.",
     "class": "Assassin",
@@ -704,10 +704,10 @@
     "group": "the-ghost-town",
     "abilityName": "",
     "stats": {
-      "health": "140",
+      "health": "130",
       "shield": "30",
-      "damage": "8",
-      "sps": "12",
+      "damage": "5",
+      "sps": "8",
       "attackSpeed": "0.65s",
       "delay": "-",
       "mana": "3",
@@ -734,7 +734,7 @@
     },
     "showlevels": {
       "level1": "+10% Speed | 1100 » 1210",
-      "level2": "+15% HP | 140 » 161",
+      "level2": "+15% HP  |  130 » 150",
       "level3": "+40% Ability DMG Bonus Limit | 20 » 28"
     },
     "story": "The Restless Medic, the ghostly spirit of a deceased woman whose soul remains trapped within The Ghost Town. Once the town's dedicated medic, she spent her life treating injured outlaws, travelers, and townsfolk. After her death and the town's abandonment, her spirit refused to leave. Now she silently wanders the deserted streets, still carrying her medical tools and continuing her twisted version of the healer's duty. Nurse is an adult female ghost, visibly deceased yet retaining an elegant, human appearance. Her body is slightly translucent, with a pale, desaturated complexion and a faint bluish spectral glow. Parts of her lower body gradually dissolve into wisps of ghostly mist, making her appear as though she is floating just above the ground. Her face is beautiful but lifeless, with pale skin, sunken features, and cold faintly glowing blue eyes. Her expression is calm and emotionless, creating an unsettling contrast with her former profession as a caring medic. Long, slightly tangled dark hair falls around her shoulders and moves gently despite the absence of wind. She wears a 19th-century Western frontier nurse uniform, heavily aged and damaged by time. A faded, dusty white medical dress with a worn apron covers her body, with subtle dark stains and frayed fabric around the edges. The clothing looks authentic to the old frontier setting rather than modern medical clothing. In her right hand, Nurse holds a single old medical syringe, gripping it carefully between her fingers. The syringe is made of aged glass and metal, containing a faintly glowing chemical solution. The needle is long, sharp, and visibly polished despite the age of the object. Several additional medical supplies hang from a worn leather medical pouch around her waist: old glass medicine bottles, bandages, small metal instruments, and sealed chemical vials. Everything appears old, abandoned, and partially covered in dust. A small collection of chemical darts is attached to a leather holder on her hip. The darts contain different colored liquids, subtly suggesting that some are designed to heal while others are poisonous. Her supernatural abilities are subtly represented by faint spectral energy surrounding the syringe. Soft blue-white particles drift from her fingers and mix with thin trails of green chemical vapor escaping from the syringe. The environment is the interior of an abandoned frontier medical clinic within The Ghost Town. Wooden walls are cracked and covered with dust, broken medicine cabinets line the room, old bottles cover wooden shelves, and rusty medical instruments remain scattered across an abandoned examination table. A broken window allows pale moonlight to enter the room, illuminating Nurse's translucent body. Dust particles float through the beam of light while faint ghostly mist spreads across the wooden floor. Behind her, several abandoned medical beds remain untouched, covered in dusty white sheets. Old medical records and empty medicine bottles are scattered across the room, creating the feeling that the clinic was abandoned suddenly many years ago. Nurse stands completely still in the center of the clinic, staring directly toward the viewer while holding the syringe upright in one hand. Her expression remains calm and emotionless, creating an eerie sense that she is waiting for her next patient. The overall composition should portray Nurse as a tragic undead medic trapped between her duty and death, retaining the appearance and tools of a healer while possessing an unsettling supernatural presence.",
@@ -751,10 +751,10 @@
     "group": "the-primal-vanguard",
     "abilityName": "",
     "stats": {
-      "health": "90",
-      "shield": "70",
-      "damage": "6/10",
-      "sps": "6/8",
+      "health": "57",
+      "shield": "44",
+      "damage": "4/6",
+      "sps": "4/5",
       "attackSpeed": "1.00s/1.25s",
       "delay": "-",
       "mana": "12",
@@ -798,10 +798,10 @@
     "group": "the-primal-vanguard",
     "abilityName": "",
     "stats": {
-      "health": "260",
-      "shield": "120",
-      "damage": "32",
-      "sps": "18",
+      "health": "215",
+      "shield": "100",
+      "damage": "27",
+      "sps": "15",
       "attackSpeed": "1.75s",
       "delay": "-",
       "mana": "14",
@@ -851,7 +851,7 @@
     "group": "ancients",
     "abilityName": "Mind Parasite",
     "stats": {
-      "health": "50",
+      "health": "160",
       "shield": "0",
       "damage": "-",
       "sps": "-",
@@ -862,8 +862,8 @@
     },
     "trait": "Whisper fiziki bədənini itirərək birbaşa hədəf aldığı rəqib kartın daxilinə sızar. Kartın daxili kritik şans göstəricisindən asılı olaraq, rəqibi 14 + (Kritik Şansı) saniyə boyunca tamamilə öz idarəsinə keçirər. Bu nəzarət müddəti başa çatdıqda Whisper döyüş meydanından tamamilə silinərək yox olar.",
     "additionalStats": {
-      "range": "1,800",
-      "speed": "1,000",
+      "range": "1800",
+      "speed": "1000",
       "criticalChance": "0%",
       "criticDamage": "1.5x",
       "lifestealChance": "0%",
@@ -949,8 +949,8 @@
     "group": "void-walkers",
     "abilityName": "",
     "stats": {
-      "health": "260",
-      "shield": "180",
+      "health": "300",
+      "shield": "210",
       "damage": "2x45",
       "sps": "75",
       "attackSpeed": "0.60s",
@@ -1003,10 +1003,10 @@
     "group": "underworld",
     "abilityName": "Eternal Shroud",
     "stats": {
-      "health": "140",
+      "health": "255",
       "shield": "0",
-      "damage": "1",
-      "sps": "10",
+      "damage": "2",
+      "sps": "20",
       "attackSpeed": "0.10s",
       "delay": "-",
       "mana": "15",
@@ -1014,8 +1014,8 @@
     },
     "trait": "Döyüş meydanının gizli qatili olan Nightfang, qarşıdurma başlayan kimi ilk 12 saniyə ərzində tamamilə görünməz olar. O, sürətli zərbələri ilə kölgələrdə qalmağı bacarır; döyüş ərzində etdiyi hər 60-cı vuruşda yenidən ekstra 3 saniyəlik görünməzlik statusu qazanar. Bu mexanika onu tutulması qeyri-mümkün olan bir təhlükəyə çevirir.",
     "additionalStats": {
-      "range": "12,000",
-      "speed": "1,000",
+      "range": "12000",
+      "speed": "1000",
       "criticalChance": "10%",
       "criticDamage": "2x",
       "lifestealChance": "0%",
@@ -1050,10 +1050,10 @@
     "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
-      "health": "90",
-      "shield": "90",
-      "damage": "26",
-      "sps": "24",
+      "health": "155",
+      "shield": "155",
+      "damage": "45",
+      "sps": "41",
       "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "11",
@@ -1150,10 +1150,10 @@
     "group": "the-far-east",
     "abilityName": "",
     "stats": {
-      "health": "310",
-      "shield": "10",
-      "damage": "16",
-      "sps": "15",
+      "health": "540",
+      "shield": "17",
+      "damage": "28",
+      "sps": "25",
       "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "17",
