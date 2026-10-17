@@ -4,202 +4,360 @@
     "description": "-",
     "icon": "fa-shield-halved",
     "color": "#4a9eff",
-    "members": ["Soldier", "Bethe", "Blocker", "Aegis Guard", "Sniper", "Reacher", "Leila"]
+    "members": [
+      "Soldier",
+      "Bethe",
+      "Blocker",
+      "Aegis Guard",
+      "Sniper",
+      "Reacher",
+      "Leila",
+      "Deadscope"
+    ]
   },
   {
     "name": "UnderWorlds",
     "description": "-",
     "icon": "fa-skull",
     "color": "#c62828",
-    "members": ["Lord", "King", "Malvaris", "Dark Necromancer", "Nightfang", "Shadow Reaper"]
+    "members": [
+      "Lord",
+      "King",
+      "Malvaris",
+      "Dark Necromancer",
+      "Nightfang",
+      "Shadow Reaper"
+    ]
   },
   {
     "name": "The Spellbound",
     "description": "-",
     "icon": "fa-wand-sparkles",
     "color": "#b39ddb",
-    "members": ["Chrono Mage", "Naar", "Arcanyx", "Unara", "Laura"]
+    "members": [
+      "Chrono Mage",
+      "Naar",
+      "Arcanyx",
+      "Unara",
+      "Laura"
+    ]
   },
   {
     "name": "Twisted-Farm",
     "description": "-",
     "icon": "fa-building-wheat",
     "color": "#FF2B00",
-    "members": ["Henry", "Chicken", "Bees", "Venomspikes", "Rockback", "Worms"]
+    "members": [
+      "Henry",
+      "Chicken",
+      "Bees",
+      "Venomspikes",
+      "Rockback",
+      "Worms"
+    ]
   },
   {
     "name": "Royal Blood",
     "description": "-",
     "color": "#ffd700",
     "icon": "fa-crown",
-    "members": ["Azrith", "UnTouch", "SkyHunter", "Aeralis", "Mecha Shield", "Fire Archer", "Trac", "Angels"]
+    "members": [
+      "Azrith",
+      "UnTouch",
+      "SkyHunter",
+      "Aeralis",
+      "Mecha Shield",
+      "Fire Archer",
+      "Trac",
+      "Angels"
+    ]
   },
   {
     "name": "The Joy Of The Zenith City",
     "description": "-",
     "icon": "fa-sun",
     "color": "#ffb703",
-    "members": ["Bastra", "Maapp", "Avara"]
+    "members": [
+      "Bastra",
+      "Maapp",
+      "Avara"
+    ]
   },
   {
     "name": "Constructs",
     "description": "-",
     "color": "#60a5fa",
     "icon": "fa-gear",
-    "members": ["Ase", "Neon Droid", "Stacy", "M-Manager", "Scrapy"]
+    "members": [
+      "Ase",
+      "Neon Droid",
+      "Stacy",
+      "M-Manager",
+      "Scrapy"
+    ]
   },
   {
     "name": "Beasts",
     "description": "-",
     "color": "#4ade80",
     "icon": "fa-paw",
-    "members": ["Feral Wolf", "Frostmaw", "Tenta", "Dino", "Turtle", "Hornets", "Snaykies", "Hammies"]
+    "members": [
+      "Feral Wolf",
+      "Frostmaw",
+      "Tenta",
+      "Dino",
+      "Turtle",
+      "Hornets",
+      "Snaykies",
+      "Hammies"
+    ]
   },
   {
     "name": "Ancients",
     "description": "-",
     "color": "#e8c95a",
     "icon": "fa-landmark",
-    "members": ["Gloop", "Freak", "Tornado", "Tphoenix", "Whisper", "Demotron", "Fallen Angel"]
+    "members": [
+      "Gloop",
+      "Freak",
+      "Tornado",
+      "Tphoenix",
+      "Whisper",
+      "Demotron",
+      "Fallen Angel"
+    ]
   },
   {
     "name": "Chrono Mechanics",
     "description": "-",
     "icon": "fa-gears",
     "color": "#06b6d4",
-    "members": ["Boomix"]
+    "members": [
+      "Boomix"
+    ]
   },
   {
     "name": "Void Walkers",
     "description": "-",
     "color": "#4c1d95",
     "icon": "fa-eye",
-    "members": ["Void Striker", "Death", "Bloodraider", "Rotlings", "Void Wraith"]
+    "members": [
+      "Void Striker",
+      "Death",
+      "Bloodraider",
+      "Rotlings",
+      "Void Wraith"
+    ]
   },
   {
     "name": "The Ghost Town",
     "description": "-",
     "color": "#9c9b9a",
     "icon": "fa-ghost",
-    "members": ["Sheriff", "SlasherX", "Nurse", "Twins", "Albert", "John Reynolds"]
+    "members": [
+      "Sheriff",
+      "SlasherX",
+      "Nurse",
+      "Twins",
+      "Albert",
+      "John Reynolds"
+    ]
   },
   {
     "name": "The Infernals",
     "description": "-",
     "icon": "fa-fire-flame-curved",
     "color": "#8b0000",
-    "members": ["Hell boy"]
+    "members": [
+      "Hell boy"
+    ]
   },
   {
     "name": "The Nomads",
     "description": "-",
     "icon": "fa-compass",
     "color": "#d97706",
-    "members": ["Nyra", "Stella"]
+    "members": [
+      "Nyra",
+      "Stella"
+    ]
   },
   {
     "name": "Vampire Family",
     "description": "-",
     "color": "#5e0e08",
     "icon": "fa-droplet",
-    "members": ["Dracula", "Marcy", "Mixela", "Servant", "Cow"]
+    "members": [
+      "Dracula",
+      "Marcy",
+      "Mixela",
+      "Servant",
+      "Cow"
+    ]
   },
   {
     "name": "Botanical Gardens",
     "description": "-",
     "color": "#84cc16",
     "icon": "fa-leaf",
-    "members": ["Sylviana", "Willowshade", "Leafshade"]
+    "members": [
+      "Sylviana",
+      "Willowshade",
+      "Leafshade"
+    ]
   },
   {
     "name": "The Last Academy",
     "description": "-",
     "color": "#1e3a5f",
     "icon": "fa-graduation-cap",
-    "members": ["Artist", "Cassandra", "Mr. & Mrs. Ray"]
+    "members": [
+      "Artist",
+      "Cassandra",
+      "Mr. & Mrs. Ray"
+    ]
   },
   {
     "name": "The Amazing Circus",
     "description": "-",
     "color": "#FFE600",
     "icon": "fa-tent",
-    "members": ["B-B", "PhewPhew", "Jestro", "Hailey"]
+    "members": [
+      "B-B",
+      "PhewPhew",
+      "Jestro",
+      "Hailey"
+    ]
   },
   {
     "name": "Barber Brothers",
     "description": "-",
     "color": "#333333",
     "icon": "fa-scissors",
-    "members": ["Fen", "Ben", "Clara"]
+    "members": [
+      "Fen",
+      "Ben",
+      "Clara"
+    ]
   },
   {
     "name": "The Iron Legion",
     "description": "-",
     "icon": "fa-chess-rook",
     "color": "#71717a",
-    "members": ["Warborn", "Bio Mech"]
+    "members": [
+      "Warborn",
+      "Bio Mech"
+    ]
   },
   {
     "name": "The Unseen",
     "description": "-",
     "icon": "fa-user-ninja",
     "color": "#1a202c",
-    "members": ["Nightprowler"]
+    "members": [
+      "Nightprowler"
+    ]
   },
   {
     "name": "The Nether-Flux",
     "description": "-",
     "color": "#ff4500",
     "icon": "fa-fire",
-    "members": ["Magmara", "Magma", "Toxic", "Shellbyte", "Venomora", "Stormblade", "Blank"]
+    "members": [
+      "Magmara",
+      "Magma",
+      "Toxic",
+      "Shellbyte",
+      "Venomora",
+      "Stormblade",
+      "Blank"
+    ]
   },
   {
     "name": "The Stellar Alliance",
     "description": "-",
     "color": "#fbbf24",
     "icon": "fa-star",
-    "members": ["Nortex", "Voltriker", "Astranova", "Hexon", "Sunrise", "Avalith", "Ali", "Umbra"]
+    "members": [
+      "Nortex",
+      "Voltriker",
+      "Astranova",
+      "Hexon",
+      "Sunrise",
+      "Avalith",
+      "Ali",
+      "Umbra"
+    ]
   },
   {
     "name": "The Faceless",
     "description": "Qəribə görünüşlü və maska arxasında gizlənən mistik varlıqlar.",
     "icon": "fa-masks-theater",
     "color": "#475569",
-    "members": ["Cryon", "Format"]
+    "members": [
+      "Cryon",
+      "Format"
+    ]
   },
   {
     "name": "The Extraterrestrials",
     "description": "Başqa planetlərdən və ölçülərdən gələn yadplanetlilər.",
     "icon": "fa-meteor",
     "color": "#22d3ee",
-    "members": ["Far", "Pyhsic"]
+    "members": [
+      "Far",
+      "Pyhsic"
+    ]
   },
   {
     "name": "The Street Brawlers",
     "description": "Yeraltı arenaların və küçələrin amansız döyüşçüləri.",
     "icon": "fa-hand-fist",
     "color": "#8b4513",
-    "members": ["Lyra"]
+    "members": [
+      "Lyra"
+    ]
   },
   {
     "name": "The Far East",
     "description": "-",
     "icon": "fa-yin-yang",
     "color": "#dc2626",
-    "members": ["Kai", "Wong"]
+    "members": [
+      "Kai",
+      "Wong"
+    ]
   },
   {
     "name": "The Charmers",
     "description": "Rəqibləri ovsunlayaraq öz iradəsinə tabe edən manipulyatorlar.",
     "icon": "fa-heart",
     "color": "#ec4899",
-    "members": ["Heartix"]
+    "members": [
+      "Heartix"
+    ]
   },
   {
     "name": "The Bounty Hunters",
     "description": "Qənimət və mükafat arxasınca qaçan, resurs toplayan muzdlular.",
     "icon": "fa-sack-dollar",
     "color": "#b8860b",
-    "members": ["Collector"]
+    "members": [
+      "Collector"
+    ]
+  },
+  {
+    "name": "Steam Alliance",
+    "description": "-",
+    "icon": "fa-industry",
+    "color": "#cd7f32",
+    "members": [
+      "Nitrox",
+      "Ironjaw",
+      "Srail",
+      "Frostshot",
+      "X-Bot"
+    ]
   }
 ]
