@@ -160,7 +160,8 @@
       "Nurse",
       "Twins",
       "Albert",
-      "John Reynolds"
+      "John Reynolds",
+      "RogueX"
     ]
   },
   {
@@ -379,6 +380,35 @@
     "color": "#f59e0b",
     "members": [
       "Blesser"
+    ]
+  },
+  {
+    "name": "Corsair Bay",
+    "description": "-",
+    "icon": "fa-skull-crossbones",
+    "color": "#0e7490",
+    "members": [
+      "Corsair Crew",
+      "Ship Cannoneer"
+    ]
+  },
+  {
+    "name": "Solar Order",
+    "description": "-",
+    "icon": "fa-solar-panel",
+    "color": "#f97316",
+    "members": [
+      "Lumina"
+    ]
+  },
+  {
+    "name": "The Primal Vanguard",
+    "description": "-",
+    "icon": "fa-mountain",
+    "color": "#a16207",
+    "members": [
+      "Tribe",
+      "Earthshakers"
     ]
   }
 ]
