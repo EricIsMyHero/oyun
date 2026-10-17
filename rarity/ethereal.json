@@ -476,6 +476,7 @@
       "Human"
     ],
     "rarity": "Ethereal",
+    "group": "the-vampire-family",
     "isDual": true,
     "stats": {
       "mana": "16"
@@ -487,6 +488,7 @@
         "Human"
       ],
       "rarity": "Ethereal",
+      "group": "the-vampire-family",
       "stats": {
         "health": "280",
         "shield": "60",
@@ -532,6 +534,7 @@
         "Animal"
       ],
       "rarity": "Ethereal",
+      "group": "the-vampire-family",
       "isMulti": true,
       "stats": {
         "health": "180",
@@ -576,6 +579,7 @@
             "Animal"
           ],
           "rarity": "Ethereal",
+          "group": "the-vampire-family",
           "stats": {
             "health": "30",
             "shield": "-",
@@ -905,7 +909,7 @@
       "Human"
     ],
     "rarity": "Ethereal",
-    "group": "",
+    "group": "the-nomads",
     "isDual": true,
     "stats": {
       "mana": "6"
@@ -917,7 +921,7 @@
         "Human"
       ],
       "rarity": "Ethereal",
-      "group": "",
+      "group": "the-nomads",
       "isMulti": true,
       "stats": {
         "health": "120",
@@ -962,7 +966,7 @@
             "Animal"
           ],
           "rarity": "Ethereal",
-          "group": "",
+          "group": "the-nomads",
           "stats": {
             "health": "200",
             "shield": "0",
@@ -1012,7 +1016,7 @@
         "Human"
       ],
       "rarity": "Ethereal",
-      "group": "",
+      "group": "the-nomads",
       "isMulti": true,
       "stats": {
         "health": "80",
@@ -1057,7 +1061,7 @@
             "Animal"
           ],
           "rarity": "Ethereal",
-          "group": "",
+          "group": "the-nomads",
           "stats": {
             "health": "180",
             "shield": "0",
@@ -1111,6 +1115,7 @@
     ],
     "rarity": "Ethereal",
     "isDual": true,
+    "group": "void-walkers",
     "stats": {
       "mana": "7"
     },
@@ -1121,6 +1126,7 @@
         "Spirit"
       ],
       "rarity": "Ethereal",
+      "group": "void-walkers",
       "stats": {
         "health": "140",
         "shield": "100",
@@ -1166,6 +1172,7 @@
         "Spirit"
       ],
       "rarity": "Ethereal",
+      "group": "void-walkers",
       "stats": {
         "health": "140",
         "shield": "100",
