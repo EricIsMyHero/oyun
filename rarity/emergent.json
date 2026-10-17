@@ -1,10 +1,12 @@
 [
   {
+    "id": "xıı-josh",
     "name": "XII Josh",
     "type": [
       "Human"
     ],
     "rarity": "Emergent",
+    "group": "the-iron-legion",
     "stats": {
       "health": "220",
       "shield": "120",
@@ -15,7 +17,7 @@
       "mana": "9",
       "number": "3"
     },
-    "trait": "Yaxındakı kartların manasının 50%-i qədər saldırı hızı qazanar, bu qazandığı saldırı hızıyla etdiyi vuruşlardan 20% can oğurlayar. Taxtaya hər 3-cü qoyuluşda vuruşları 33% şansla rəqib kartlara bədbəxtlik effekti verər",
+    "trait": "Yaxındakı kartların manasının 50%-i qədər saldırı hızı qazanar. Canı 10%-in altına düşdükdə 10 saniyəlik uçar və yerə enərək olduğu 24 hasar verər Taxtaya hər 3-cü qoyuluşda vuruşları 33% şansla rəqib kartlara bədbəxtlik effekti verər",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
@@ -42,11 +44,13 @@
     "story": "-"
   },
   {
+    "id": "dumpsy",
     "name": "Dumpsy",
     "type": [
-      "Robot"
+      "Human"
     ],
     "rarity": "Emergent",
+    "group": "the-bounty-hunters",
     "stats": {
       "health": "350",
       "shield": "50",
@@ -84,11 +88,13 @@
     "story": "-"
   },
   {
+    "id": "blesser",
     "name": "Blesser",
     "type": [
       "Entity"
     ],
     "rarity": "Emergent",
+    "group": "the-holy-sanctuary",
     "stats": {
       "health": "100",
       "shield": "20",
@@ -126,11 +132,13 @@
     "story": "-"
   },
   {
+    "id": "js"
     "name": "JS",
     "type": [
       "Human"
     ],
     "rarity": "Emergent",
+    "group": "the-cursed-coven",
     "stats": {
       "health": "240",
       "shield": "80",
@@ -168,11 +176,13 @@
     "story": "-"
   },
   {
+    "id": "mimic",
     "name": "Mimic",
     "type": [
       "Entity"
     ],
     "rarity": "Emergent",
+    "group": "the-faceless",
     "stats": {
       "health": "70",
       "shield": "40",
