@@ -1041,11 +1041,11 @@
     "group": "twisted-farm",
     "abilityName": "Toxic Accumulation",
     "stats": {
-      "health": "140",
-      "shield": "22",
-      "damage": "5",
-      "sps": "4",
-      "attackSpeed": "1.23s",
+      "health": "97",
+      "shield": "15",
+      "damage": "8",
+      "sps": "6",
+      "attackSpeed": "1.36s",
       "delay": "-",
       "mana": "10",
       "number": "4"
@@ -1076,8 +1076,8 @@
       }
     ],
     "showlevels": {
-      "level1": "+50% Shield  |  22 » 33",
-      "level2": "+20% DMG  |  5 » 6",
+      "level1": "+50% Shield  |  15 » 22",
+      "level2": "+20% DMG  |  8 » 10",
       "level3": "+10% Dodge Chance  |  10% » 20%"
     },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
@@ -1143,8 +1143,8 @@
     "stats": {
       "health": "240",
       "shield": "120",
-      "damage": "2x12/21",
-      "sps": "24",
+      "damage": "2x9/21",
+      "sps": "18",
       "attackSpeed": "0.50s",
       "delay": "-",
       "mana": "13",
