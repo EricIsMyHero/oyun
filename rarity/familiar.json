@@ -20,7 +20,7 @@
     },
     "trait": "Atışları eyni rəqib karta dəyərsə yavaşca artar (max: +3)",
     "additionalStats": {
-      "range": "1,500",
+      "range": "1500",
       "speed": "900",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -108,7 +108,7 @@
     "group": "steam-alliance",
     "abilityName": "",
     "stats": {
-      "health": "100",
+      "health": "110",
       "shield": "50",
       "damage": "2x11",
       "sps": "20",
@@ -263,7 +263,7 @@
     "group": "steam-alliance",
     "abilityName": "",
     "stats": {
-      "health": "70",
+      "health": "110",
       "shield": "150",
       "damage": "16",
       "sps": "16",
@@ -294,7 +294,7 @@
     "showlevels": {
       "level1": "+20% Öz. Vaxt  |  10 » 12",
       "level2": "+10% Can Çalma Şansı  |  0% » 10%",
-      "level3": "+50% Can  |  50 » 75"
+      "level3": "+50% Can  |  110 » 165"
     },
     "story": "The Steam Assassin, an experimental high-speed infiltration robot developed by the Steam Alliance for reconnaissance, sabotage, and silent elimination. Unlike bulky industrial automatons, X-Bot is engineered for unmatched agility, relying on lightweight construction, miniature steam turbines, and lightning-fast reflexes to strike before disappearing into clouds of steam. X-Bot is a sleek, humanoid assassin robot built from forged steel, dark iron, and weathered copper components. Its body is slim, athletic, and highly articulated, designed for speed and acrobatic movement rather than brute strength. Every joint is exposed with intricate gears, pistons, cables, and rotating mechanical assemblies, emphasizing realistic industrial engineering. No brass or gold, only steel, iron, copper, and dark metallic finishes. Its head is streamlined with a narrow visor-like faceplate and two glowing icy-blue optical sensors that give it a cold, calculating appearance. Small exhaust vents around the head release thin streams of steam as internal pressure constantly adjusts. The robot is posed like a predatory assassin, with both feet firmly planted on the ground while both hands are lowered close to the ground, similar to a stalking panther preparing to sprint. The pose is low, balanced, and aggressive, emphasizing explosive speed and stealth rather than raw strength. Attached to each forearm is a razor-sharp copper combat blade, designed as integrated weapons rather than oversized swords. The blades are sleek, polished, and optimized for quick slashing attacks. Fine scratches and wear marks indicate years of combat use. Miniature steam turbines are mounted on its back, calves, and hips, feeding power through exposed pipes and pressure valves. High-pressure exhaust ports continuously release bursts of white steam, creating a cloak of vapor that obscures the robot's movements. Rotating turbine blades and pressure gauges indicate the engines are constantly operating at maximum efficiency. The environment is an abandoned industrial district belonging to the Steam Alliance, filled with steel bridges, rail tracks, factory machinery, pipes, gears, warehouses, and drifting steam. The ground is wet from condensed vapor, reflecting the robot beneath dramatic industrial lighting. Motion blur is subtly suggested through swirling steam trails, disturbed dust, and flowing vapor around the robot, making it appear moments away from launching into an impossibly fast attack. The overall aesthetic should emphasize speed, stealth, precision, and lethal efficiency, creating the appearance of an industrial assassin built for silent kills rather than open warfare.",
     "class": "Fighter",
@@ -357,11 +357,11 @@
     "group": "mission-1",
     "abilityName": "Momentum Reload",
     "stats": {
-      "health": "60",
+      "health": "140",
       "shield": "20",
       "damage": "150",
-      "sps": "50",
-      "attackSpeed": "3.00s",
+      "sps": "30",
+      "attackSpeed": "5.00s",
       "delay": "-",
       "mana": "8",
       "number": "1"
@@ -460,7 +460,7 @@
           "shield": "80",
           "damage": "6",
           "sps": "5",
-          "attackSpeed": "1,20s",
+          "attackSpeed": "1.20s",
           "delay": "-",
           "mana": "-",
           "number": "4"
@@ -498,11 +498,11 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "100",
+      "health": "160",
       "shield": "0",
       "damage": "20",
       "sps": "21",
-      "attackSpeed": "0,95s",
+      "attackSpeed": "0.95s",
       "delay": "-",
       "mana": "7",
       "number": "1"
@@ -688,9 +688,9 @@
     "stats": {
       "health": "200",
       "shield": "20",
-      "damage": "52",
-      "sps": "42",
-      "attackSpeed": "1.25s",
+      "damage": "31",
+      "sps": "41",
+      "attackSpeed": "0.75s",
       "delay": "-",
       "mana": "13",
       "number": "1"
@@ -722,8 +722,8 @@
       }
     ],
     "showlevels": {
-      "level1": "+15% Hasar  |  52 » 60",
-      "level2": "+10% Qalxan  |  50 » 55",
+      "level1": "+16% Hasar  |  31 » 36",
+      "level2": "+10% Esneklik  |  0% » 10%",
       "level3": "+5% Menzil  |  2000 » 2100"
     },
     "story": "The Abyssal Leviathan, an ancient multi-tentacled sea horror dragged through a mana portal from the deepest primordial oceans of a forgotten prehistoric dimension. This colossal creature is a living nightmare of the abyss, possessing an enormous central body surrounded by massive, powerful tentacles covered in ancient armor-like scales, scars, and bioluminescent markings from the depths where sunlight never existed. Recently torn from its underwater realm, Tenta is enveloped in swirling mana energy that allows it to survive and move effortlessly on dry land. Streams of glowing blue-violet mana flow through its body, forming luminous veins beneath its thick hide. The magical energy constantly shifts around the creature, adapting its physiology to the unfamiliar environment. Its gigantic tentacles dominate the scene, twisting and coiling through the battlefield with overwhelming force. Each limb is covered with intricate textures, prehistoric patterns, and powerful suction structures, emphasizing its immense strength. The tentacles extend in every direction, creating an intimidating silhouette that fills the landscape. The creature's eyes glow with confusion, rage, and primal instinct. It appears driven into madness by its sudden displacement from the ancient oceans, lashing out at everything around it. Fragments of shattered terrain, debris, and uprooted structures scatter across the battlefield as evidence of its destructive arrival. Behind Tenta, a massive unstable mana portal tears open reality itself. Through the portal, glimpses of an endless prehistoric ocean can be seen—towering waves, ancient sea creatures, abyssal trenches, and mysterious underwater ruins illuminated by eerie deep-sea light. Magical distortions ripple outward from the portal, blending oceanic and terrestrial environments together. The battlefield is drenched with moisture, mist, and supernatural energy. Water streams from the creature's body while mana-infused fog fills the air. The atmosphere feels chaotic, ancient, and overwhelming, as though an impossible deep-sea predator has invaded a world where it does not belong. Ultra-realistic prehistoric sea monster, photorealistic creature design, highly detailed tentacles, realistic marine textures, ancient abyssal horror, cinematic lighting, volumetric mist, glowing mana energy, massive scale, realistic anatomy, environmental destruction, AAA game card art, Unreal Engine 5 quality, physically based rendering, hyper-detailed textures, masterpiece quality, 8K resolution, epic creature concept art, dynamic action scene, terrifying leviathan presence, atmospheric depth.",
@@ -890,7 +890,7 @@
       "mana": "7",
       "number": "1"
     },
-    "trait": "Vuruşları 8% şansla <b>5</b> saniyəlik rəqibi susturar",
+    "trait": "Vuruşları 2 saniyəlik rəqibin 20% Hızını azaldar",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
@@ -911,15 +911,15 @@
     },
     "effects": [
       {
-        "type": "silence",
-        "percentage": 8,
-        "duration": 5
+        "type": "slow",
+        "percentage": 20,
+        "duration": 2
       }
     ],
     "showlevels": {
       "level1": "+5% Menzil  |  1100 » 1155",
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
-      "level3": "+42% Hasar  |  14 » 20"
+      "level3": "+22% Hasar  |  14 » 17"
     },
     "story": "The Glacial Terror, a colossal prehistoric apex predator pulled into the arena through an unstable mana portal from a frozen ancient dimension. This massive beast towers over the icy landscape, radiating primal dominance and overwhelming power. Its enormous body is covered in thick, rugged fur heavily coated with frost, snow, and jagged ice formations accumulated over countless ages in a prehistoric frozen wilderness. The creature possesses a powerful muscular build, enormous limbs, and massive claws capable of tearing through ancient forests and frozen terrain. Its gigantic jaw is lined with brutal prehistoric fangs, large enough to crush solid stone with ease. Frost hangs from its teeth and fur, while freezing breath escapes from its mouth in dense clouds of icy mist. Around the beast swirl violent glacial winds under its command. Snowstorms spiral around its body, carrying shards of ice and frozen particles through the air. The atmosphere bends beneath its presence as freezing currents spread across the battlefield, coating the ground with ice wherever it steps. Its eyes glow with ancient predatory intelligence, reflecting the untamed brutality of a creature that existed long before modern civilizations. Despite its immense size, Frostmaw appears unpredictable and ferocious, ready to lunge at any moment with explosive speed. Behind the creature, a massive unstable mana portal tears through reality, revealing glimpses of its original prehistoric frozen world. Through the portal, ancient glaciers, snow-covered mountains, and colossal extinct creatures can be faintly seen in the distance. Blue magical energy crackles around the dimensional rift, emphasizing its unnatural arrival. The environment is a frozen battlefield engulfed by blizzards, icy winds, and shattered glaciers. Snow and frost dominate the landscape, creating a dramatic and hostile atmosphere worthy of an ancient apex predator.",
     "class": "Fighter",
@@ -935,7 +935,7 @@
     "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
-      "health": "150",
+      "health": "160",
       "shield": "0",
       "damage": "9",
       "sps": "18",
@@ -970,7 +970,7 @@
       }
     ],
     "showlevels": {
-      "level1": "+5% Can  |  140 » 147",
+      "level1": "+5% Can  |  160 » 168",
       "level2": "+0.3 Öz. Sərsəmlətmə  |  0.6s » 0.9s",
       "level3": "+7% Hız  |  1000 » 1070"
     },
@@ -1099,7 +1099,7 @@
       "damage": "10x2",
       "sps": "8",
       "attackSpeed": "0.25s",
-      "delay": "1,4s",
+      "delay": "1.4s",
       "mana": "3",
       "number": "1"
     },
@@ -1138,7 +1138,7 @@
       "Human"
     ],
     "rarity": "Familiar",
-    "group": "far-east",
+    "group": "the-far-east",
     "abilityName": "",
     "stats": {
       "health": "180",
@@ -1194,7 +1194,7 @@
     "group": "the-last-academy",
     "abilityName": "",
     "stats": {
-      "health": "100",
+      "health": "110",
       "shield": "100",
       "damage": "14",
       "sps": "13",
