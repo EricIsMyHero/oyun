@@ -152,7 +152,7 @@
           "shield": "0",
           "damage": "5",
           "sps": "5",
-          "attackSpeed": "1,00s",
+          "attackSpeed": "1.00s",
           "delay": "-",
           "mana": "-",
           "number": "4"
