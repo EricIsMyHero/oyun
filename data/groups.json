@@ -16,7 +16,7 @@
     ]
   },
   {
-    "name": "UnderWorld",
+    "name": "UnderWorlds",
     "description": "-",
     "icon": "fa-skull",
     "color": "#c62828",
@@ -298,7 +298,8 @@
     "color": "#475569",
     "members": [
       "Cryon",
-      "Format"
+      "Format",
+      "Mimic"
     ]
   },
   {
@@ -360,6 +361,24 @@
       "Srail",
       "Frostshot",
       "X-Bot"
+    ]
+  },
+  {
+    "name": "The Cursed Coven",
+    "description": "Lənət, cadu və uzaq mənzilli qaranlıq sehrdən istifadə edən varlıqlar.",
+    "icon": "fa-hat-wizard",
+    "color": "#a855f7",
+    "members": [
+      "JS"
+    ]
+  },
+  {
+    "name": "The Holy Sanctuary",
+    "description": "Müqəddəs güc, xeyir-dua və müttəfiqlərə dəstək verən varlıqlar.",
+    "icon": "fa-hands-praying",
+    "color": "#f59e0b",
+    "members": [
+      "Blesser"
     ]
   }
 ]
