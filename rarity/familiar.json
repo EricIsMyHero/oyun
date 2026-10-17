@@ -9,10 +9,10 @@
     "group": "the-ghost-town",
     "abilityName": "",
     "stats": {
-      "health": "250",
-      "shield": "10",
-      "damage": "12x7",
-      "sps": "28",
+      "health": "505",
+      "shield": "20",
+      "damage": "12x14",
+      "sps": "56",
       "attackSpeed": "0.25s",
       "delay": "1.25s",
       "mana": "15",
@@ -40,7 +40,7 @@
     "showlevels": {
       "level1": "+5% Menzil | 1500 » 1590",
       "level2": "+5% Hız | 900 » 945",
-      "level3": "+4% Can | 250 » 260"
+      "level3": "+4% Can  |  505 » 525"
     },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
     "class": "Fighter",
@@ -162,10 +162,10 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "170",
-      "shield": "20",
-      "damage": "25",
-      "sps": "31",
+      "health": "145",
+      "shield": "17",
+      "damage": "12",
+      "sps": "15",
       "attackSpeed": "0.80s",
       "delay": "-",
       "mana": "6",
@@ -191,7 +191,7 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+10% Can | 130 » 143",
+      "level1": "+10% Can  |  145 » 160",
       "level2": "+10% Sıyrılma | 10% » 20%",
       "level3": "+5% Kritik Şansı | 5% » 10%"
     },
@@ -264,10 +264,10 @@
     "abilityName": "",
     "stats": {
       "health": "110",
-      "shield": "150",
-      "damage": "16",
-      "sps": "16",
-      "attackSpeed": "1.00s",
+      "shield": "130",
+      "damage": "13",
+      "sps": "13",
+      "attackSpeed": "1.03s",
       "delay": "-",
       "mana": "5",
       "number": "1"
@@ -405,10 +405,10 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "240",
-      "shield": "110",
-      "damage": "35",
-      "sps": "32",
+      "health": "255",
+      "shield": "120",
+      "damage": "37",
+      "sps": "34",
       "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "11",
@@ -441,7 +441,7 @@
       }
     ],
     "showlevels": {
-      "level1": "+10% Qalxan | 110 » 121",
+      "level1": "+10% Qalxan  |  120 » 132",
       "level2": "+7% Hız | 700 » 750",
       "level3": "+5% Hasar Azaltma | 0% » 5%"
     },
@@ -498,10 +498,10 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "160",
+      "health": "205",
       "shield": "0",
-      "damage": "20",
-      "sps": "21",
+      "damage": "26",
+      "sps": "27",
       "attackSpeed": "0.95s",
       "delay": "-",
       "mana": "7",
@@ -545,10 +545,10 @@
     "group": "royal-blood",
     "abilityName": "Resilient Vanguard",
     "stats": {
-      "health": "770",
-      "shield": "300",
-      "damage": "12",
-      "sps": "7",
+      "health": "1025",
+      "shield": "400",
+      "damage": "16",
+      "sps": "9",
       "attackSpeed": "1.80s",
       "delay": "-",
       "mana": "16",
@@ -574,9 +574,9 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+3% Health  |  700 » 721",
+      "level1": "+3% Health  |  1025 » 1056",
       "level2": "+13% Abilty DMG Taken  |  24 » 21",
-      "level3": "+15% DMG  |  12 » 14"
+      "level3": "+15% DMG  |  16 » 18"
     },
     "story": "Trac is the legendary champion of the realm, a man whose name is synonymous with victory. He has defended the kingdom’s borders countless times, becoming a living symbol of hope for his people. He wears a suit of brilliant, golden armor that shines so brightly it dazzles the eyes of any foe who dares to look at him. With his massive sword and unshakable courage, Trac stands at the front of every charge. He is not just a warrior; he is the golden pillar holding the entire kingdom together.",
     "class": "Tank",
@@ -592,10 +592,10 @@
     "group": "ancients",
     "abilityName": "Aero Vortex",
     "stats": {
-      "health": "350",
+      "health": "630",
       "shield": "0",
-      "damage": "10x4",
-      "sps": "40",
+      "damage": "10x7",
+      "sps": "70",
       "attackSpeed": "0.10s",
       "delay": "2.70s",
       "mana": "16",
@@ -621,7 +621,7 @@
       "life": "-"
     },
     "showlevels": {
-      "level1": "+25% Hasar  |  4 » 5",
+      "level1": "+25% Hasar  |  7 » 9",
       "level2": "+5% Hız  |  900 » 945",
       "level3": "+10% Öz. Can Düşmə  |  50% » 60%"
     },
@@ -639,11 +639,11 @@
     "group": "beasts",
     "abilityName": "",
     "stats": {
-      "health": "320",
-      "shield": "10",
-      "damage": "11",
-      "sps": "11",
-      "attackSpeed": "1.00s",
+      "health": "390",
+      "shield": "12",
+      "damage": "13",
+      "sps": "13",
+      "attackSpeed": "0.97s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -670,7 +670,7 @@
     "showlevels": {
       "level1": "+5% Hasar Azaltma  |  0% » 5%",
       "level2": "+5% Kritik Şansı  |  5% » 10%",
-      "level3": "+10% Saldırı Hızı  |  1,00s » 0,90s"
+      "level3": "+10% Saldırı Hızı  |  0,97s » 0,873s"
     },
     "story": "The Apex Prime, a massive prehistoric apex predator dragged through a mana portal from a forgotten primordial dimension. This ferocious bipedal carnivore embodies pure survival instinct, standing at the top of the ancient food chain. Its powerful body is covered in thick, battle-scarred leathery hide, showing countless signs of survival in a brutal prehistoric world. The creature possesses an enormous muscular frame supported by powerful hind legs capable of explosive movement. Its massive tail balances its body while helping it maintain agility despite its immense size. Rows of razor-sharp teeth fill its gigantic jaws, each tooth showing realistic wear from years of hunting prehistoric prey. Its claws are thick, deadly, and perfectly adapted for tearing through enemies. Dino stands in a dominant pose, unleashing a terrifying roar that echoes across the battlefield. The force of the roar visibly disturbs the environment, creating shockwaves through dust, debris, and the surrounding air. Smaller creatures in the distance appear intimidated by its overwhelming presence, emphasizing its role as the ultimate predator. Its eyes burn with primal intelligence and relentless aggression. Unlike supernatural monsters, Dino radiates the terrifying realism of a creature shaped solely by evolution, instinct, and survival. Every muscle, scar, and movement reflects raw prehistoric power. Behind the beast, an unstable mana portal remains open, revealing glimpses of its original prehistoric world. Ancient jungles, volcanic landscapes, colossal ferns, and distant extinct creatures can be seen through the dimensional rift. Blue and violet mana energy crackles around the portal, contrasting with the creature's natural and primitive appearance. The battlefield itself bears signs of devastation caused by its arrival. Broken stone, shattered trees, deep claw marks, and scattered debris surround the predator. Dust and atmospheric particles fill the air, creating a cinematic sense of scale and danger.",
     "class": "Fighter",
@@ -688,9 +688,9 @@
     "stats": {
       "health": "200",
       "shield": "20",
-      "damage": "31",
-      "sps": "41",
-      "attackSpeed": "0.75s",
+      "damage": "33",
+      "sps": "42",
+      "attackSpeed": "0.79s",
       "delay": "-",
       "mana": "13",
       "number": "1"
@@ -722,8 +722,8 @@
       }
     ],
     "showlevels": {
-      "level1": "+16% Hasar  |  31 » 36",
-      "level2": "+10% Esneklik  |  0% » 10%",
+      "level1": "+15% Hasar  |  33 » 38",
+      "level2": "+10% Qalxan  |  50 » 55",
       "level3": "+5% Menzil  |  2000 » 2100"
     },
     "story": "The Abyssal Leviathan, an ancient multi-tentacled sea horror dragged through a mana portal from the deepest primordial oceans of a forgotten prehistoric dimension. This colossal creature is a living nightmare of the abyss, possessing an enormous central body surrounded by massive, powerful tentacles covered in ancient armor-like scales, scars, and bioluminescent markings from the depths where sunlight never existed. Recently torn from its underwater realm, Tenta is enveloped in swirling mana energy that allows it to survive and move effortlessly on dry land. Streams of glowing blue-violet mana flow through its body, forming luminous veins beneath its thick hide. The magical energy constantly shifts around the creature, adapting its physiology to the unfamiliar environment. Its gigantic tentacles dominate the scene, twisting and coiling through the battlefield with overwhelming force. Each limb is covered with intricate textures, prehistoric patterns, and powerful suction structures, emphasizing its immense strength. The tentacles extend in every direction, creating an intimidating silhouette that fills the landscape. The creature's eyes glow with confusion, rage, and primal instinct. It appears driven into madness by its sudden displacement from the ancient oceans, lashing out at everything around it. Fragments of shattered terrain, debris, and uprooted structures scatter across the battlefield as evidence of its destructive arrival. Behind Tenta, a massive unstable mana portal tears open reality itself. Through the portal, glimpses of an endless prehistoric ocean can be seen—towering waves, ancient sea creatures, abyssal trenches, and mysterious underwater ruins illuminated by eerie deep-sea light. Magical distortions ripple outward from the portal, blending oceanic and terrestrial environments together. The battlefield is drenched with moisture, mist, and supernatural energy. Water streams from the creature's body while mana-infused fog fills the air. The atmosphere feels chaotic, ancient, and overwhelming, as though an impossible deep-sea predator has invaded a world where it does not belong. Ultra-realistic prehistoric sea monster, photorealistic creature design, highly detailed tentacles, realistic marine textures, ancient abyssal horror, cinematic lighting, volumetric mist, glowing mana energy, massive scale, realistic anatomy, environmental destruction, AAA game card art, Unreal Engine 5 quality, physically based rendering, hyper-detailed textures, masterpiece quality, 8K resolution, epic creature concept art, dynamic action scene, terrifying leviathan presence, atmospheric depth.",
@@ -740,10 +740,10 @@
     "group": "royal-blood",
     "abilityName": "Rapid Ignition",
     "stats": {
-      "health": "150",
-      "shield": "50",
-      "damage": "12",
-      "sps": "11",
+      "health": "135",
+      "shield": "45",
+      "damage": "11",
+      "sps": "10",
       "attackSpeed": "1.10s",
       "delay": "-",
       "mana": "4",
@@ -784,13 +784,13 @@
       "Dead"
     ],
     "rarity": "Familiar",
-    "group": "underworld",
+    "group": "underworlds",
     "abilityName": "Soul Harvest",
     "stats": {
-      "health": "320",
-      "shield": "140",
-      "damage": "28",
-      "sps": "20",
+      "health": "395",
+      "shield": "175",
+      "damage": "35",
+      "sps": "25",
       "attackSpeed": "1.40s",
       "delay": "-",
       "mana": "17",
@@ -818,7 +818,7 @@
     "showlevels": {
       "level1": "+5% Saldırı Hızı  |  1.40s » 1.33s",
       "level2": "+5% Hız  |  1100 » 1155",
-      "level3": "+13% Qalxan  |  140 » 158"
+      "level3": "+13% Qalxan  |  175 » 198"
     },
     "story": "The Shadow Reaper was once a simple farmer, but his cruelty toward animals led to a terrifying eternal punishment. Now a vengeful spirit, he wanders in tattered black robes, gripping a massive, razor-sharp scythe. His glowing green eyes pierce through the darkness, searching for his next harvest. He treats the battlefield like his old fields, reaping souls with the same cold indifference he once showed his livestock. He is the grim reminder that every sin carries a heavy price in the afterlife.",
     "class": "Assassin",
@@ -834,10 +834,10 @@
     "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
-      "health": "160",
-      "shield": "80",
-      "damage": "22",
-      "sps": "24",
+      "health": "275",
+      "shield": "135",
+      "damage": "38",
+      "sps": "42",
       "attackSpeed": "0.90s",
       "delay": "-",
       "mana": "13",
@@ -865,7 +865,7 @@
     "showlevels": {
       "level1": "+3 Öz. Sekme  |  3 » 6",
       "level2": "+50% Öz. Menzil  |  3x3 » 4,5x4,5",
-      "level3": "+10% Can  |  150 » 165"
+      "level3": "+10% Can  |  275 » 302"
     },
     "story": "The Thunder Vanguard, one of the strongest defenders of the Light Guardians in Alien World: The Binary Divide. Born within the world's immense electromagnetic storms, Voltriker possesses complete mastery over natural electricity. Unlike the ruthless lightning of the Dark Layer, his power is disciplined, serving as both a devastating weapon and a protective force that energizes planetary defenses and shields his allies from destruction. Voltriker is a tall, muscular male alien with an athletic, heroic physique. His body is entirely organic, featuring smooth white skin accented by glowing electric-blue energy veins that pulse beneath the surface like living lightning. Every movement sends small arcs of electricity dancing across his body. His face is noble and determined, with brilliant glowing blue-white eyes and sharp, elegant alien features. His expression conveys courage, confidence, and unwavering resolve. Flowing backward from his head are several crystalline energy fins resembling naturally grown lightning crystals, continuously crackling with electricity. His body is protected by living crystalline energy armor, formed from translucent blue-white mineral structures naturally grown from his own body. The armor is sleek and elegant, covering his shoulders, chest, forearms, and legs while allowing full mobility. The crystalline surfaces constantly pulse with stored electrical energy. Both of his hands are surrounded by enormous spheres of concentrated lightning. Brilliant electrical arcs leap between his fingers, forearms, shoulders, and the surrounding environment. Streams of blue plasma spiral around his arms while countless sparks illuminate the air. Floating around Voltriker are several glowing energy conductors—crystalline shards suspended by electromagnetic forces. Lightning repeatedly jumps between these floating crystals and his body, creating an intricate network of radiant electrical energy. The battlefield is a breathtaking high-altitude alien plateau within the Light Layer, surrounded by towering crystal mountains, floating islands, luminous vegetation, and massive natural energy pillars. Above him, brilliant storm clouds filled with blue and white lightning stretch across the sky, while shafts of sunlight break through the clouds, symbolizing hope overcoming darkness. Electricity spreads harmlessly across the ground beneath his feet, forming glowing geometric energy patterns instead of destruction. Small rocks levitate as electromagnetic fields distort the surrounding space, while blue plasma particles drift through the atmosphere. Voltriker stands confidently with one arm raised toward the heavens as an enormous bolt of lightning descends directly into his hand, while the other arm channels the energy outward to protect the battlefield. His stance reflects both overwhelming offensive power and steadfast guardianship. The overall composition should portray Voltriker as the living embodiment of controlled lightning—an inspiring celestial guardian whose immense electrical power exists to defend life rather than destroy it.",
     "class": "Mage",
@@ -890,7 +890,7 @@
       "mana": "7",
       "number": "1"
     },
-    "trait": "Vuruşları 2 saniyəlik rəqibin 20% Hızını azaldar",
+    "trait": "Vuruşları 8% şansla <b>5</b> saniyəlik rəqibi susturar",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",
@@ -911,15 +911,15 @@
     },
     "effects": [
       {
-        "type": "slow",
-        "percentage": 20,
-        "duration": 2
+        "type": "silence",
+        "percentage": 8,
+        "duration": 5
       }
     ],
     "showlevels": {
       "level1": "+5% Menzil  |  1100 » 1155",
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
-      "level3": "+22% Hasar  |  14 » 17"
+      "level3": "+42% Hasar  |  14 » 20"
     },
     "story": "The Glacial Terror, a colossal prehistoric apex predator pulled into the arena through an unstable mana portal from a frozen ancient dimension. This massive beast towers over the icy landscape, radiating primal dominance and overwhelming power. Its enormous body is covered in thick, rugged fur heavily coated with frost, snow, and jagged ice formations accumulated over countless ages in a prehistoric frozen wilderness. The creature possesses a powerful muscular build, enormous limbs, and massive claws capable of tearing through ancient forests and frozen terrain. Its gigantic jaw is lined with brutal prehistoric fangs, large enough to crush solid stone with ease. Frost hangs from its teeth and fur, while freezing breath escapes from its mouth in dense clouds of icy mist. Around the beast swirl violent glacial winds under its command. Snowstorms spiral around its body, carrying shards of ice and frozen particles through the air. The atmosphere bends beneath its presence as freezing currents spread across the battlefield, coating the ground with ice wherever it steps. Its eyes glow with ancient predatory intelligence, reflecting the untamed brutality of a creature that existed long before modern civilizations. Despite its immense size, Frostmaw appears unpredictable and ferocious, ready to lunge at any moment with explosive speed. Behind the creature, a massive unstable mana portal tears through reality, revealing glimpses of its original prehistoric frozen world. Through the portal, ancient glaciers, snow-covered mountains, and colossal extinct creatures can be faintly seen in the distance. Blue magical energy crackles around the dimensional rift, emphasizing its unnatural arrival. The environment is a frozen battlefield engulfed by blizzards, icy winds, and shattered glaciers. Snow and frost dominate the landscape, creating a dramatic and hostile atmosphere worthy of an ancient apex predator.",
     "class": "Fighter",
@@ -935,10 +935,10 @@
     "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
-      "health": "160",
+      "health": "280",
       "shield": "0",
-      "damage": "9",
-      "sps": "18",
+      "damage": "16",
+      "sps": "32",
       "attackSpeed": "0.50s",
       "delay": "-",
       "mana": "9",
@@ -970,7 +970,7 @@
       }
     ],
     "showlevels": {
-      "level1": "+5% Can  |  160 » 168",
+      "level1": "+5% Can  |  280 » 294",
       "level2": "+0.3 Öz. Sərsəmlətmə  |  0.6s » 0.9s",
       "level3": "+7% Hız  |  1000 » 1070"
     },
@@ -988,10 +988,10 @@
     "group": "royal-blood",
     "abilityName": "Aegis Pulse",
     "stats": {
-      "health": "520",
-      "shield": "150",
-      "damage": "20",
-      "sps": "17",
+      "health": "505",
+      "shield": "145",
+      "damage": "19",
+      "sps": "16",
       "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "13",
@@ -1041,11 +1041,11 @@
     "group": "twisted-farm",
     "abilityName": "Toxic Accumulation",
     "stats": {
-      "health": "190",
-      "shield": "30",
-      "damage": "15",
-      "sps": "12",
-      "attackSpeed": "1.30s",
+      "health": "140",
+      "shield": "22",
+      "damage": "5",
+      "sps": "4",
+      "attackSpeed": "1.23s",
       "delay": "-",
       "mana": "10",
       "number": "4"
@@ -1076,8 +1076,8 @@
       }
     ],
     "showlevels": {
-      "level1": "+50% Shield  |  30 » 45",
-      "level2": "+20% DMG  |  15 » 18",
+      "level1": "+50% Shield  |  22 » 33",
+      "level2": "+20% DMG  |  5 » 6",
       "level3": "+10% Dodge Chance  |  10% » 20%"
     },
     "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
@@ -1094,8 +1094,8 @@
     "group": "the-stellar-alliance",
     "abilityName": "",
     "stats": {
-      "health": "280",
-      "shield": "70",
+      "health": "220",
+      "shield": "56",
       "damage": "10x2",
       "sps": "8",
       "attackSpeed": "0.25s",
@@ -1141,10 +1141,10 @@
     "group": "the-far-east",
     "abilityName": "",
     "stats": {
-      "health": "180",
-      "shield": "90",
-      "damage": "2x9/21",
-      "sps": "18",
+      "health": "240",
+      "shield": "120",
+      "damage": "2x12/21",
+      "sps": "24",
       "attackSpeed": "0.50s",
       "delay": "-",
       "mana": "13",
