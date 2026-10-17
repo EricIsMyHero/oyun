@@ -146,7 +146,8 @@
       "Death",
       "Bloodraider",
       "Rotlings",
-      "Void Wraith"
+      "Void Wraith",
+      "Soul Master"
     ]
   },
   {
@@ -161,7 +162,9 @@
       "Twins",
       "Albert",
       "John Reynolds",
-      "RogueX"
+      "RogueX",
+      "Sushu",
+      "Thief"
     ]
   },
   {
@@ -180,11 +183,12 @@
     "color": "#d97706",
     "members": [
       "Nyra",
-      "Stella"
+      "Stella",
+      "Hunter"
     ]
   },
   {
-    "name": "Vampire Family",
+    "name": "The Vampire Family",
     "description": "-",
     "color": "#5e0e08",
     "icon": "fa-droplet",
@@ -193,7 +197,8 @@
       "Marcy",
       "Mixela",
       "Servant",
-      "Cow"
+      "Cow",
+      "Venom Fangs"
     ]
   },
   {
@@ -361,7 +366,8 @@
       "Ironjaw",
       "Srail",
       "Frostshot",
-      "X-Bot"
+      "X-Bot",
+      "R-1"
     ]
   },
   {
@@ -398,7 +404,9 @@
     "icon": "fa-solar-panel",
     "color": "#f97316",
     "members": [
-      "Lumina"
+      "Lumina",
+      "Etheris",
+      "Shine"
     ]
   },
   {
@@ -408,7 +416,17 @@
     "color": "#a16207",
     "members": [
       "Tribe",
-      "Earthshakers"
+      "Earthshakers",
+      "Spiritcaller"
+    ]
+  },
+  {
+    "name": "The Condemned",
+    "description": "-",
+    "icon": "fa-book-skull",
+    "color": "#7f1d1d",
+    "members": [
+      "The Seven Sins"
     ]
   }
 ]
