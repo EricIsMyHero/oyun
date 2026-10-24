@@ -72,7 +72,10 @@
         "Fearless: Grants damage reduction to an ally card when no other ally cards are nearby, or when surrounded by more than 5 enemy cards.",
         "Taunt: Forces nearby enemy cards to focus their attacks exclusively on the casting ally card for a set duration.",
         "Cleanse: Removes all current negative effects.",
-        "Berserk: Increases attack speed or attack damage when health falls below a threshold."
+        "Berserk: Increases attack speed or attack damage when health falls below a threshold.",
+        "Invisibility: For a set duration and under certain conditions, an ally card cannot be targeted by any enemy card. The effect ends immediately if the card takes damage from spells or any other source.",
+        "Untargetable: For a set duration and under certain conditions, an ally card can neither be targeted nor damaged by enemy cards.",
+        "Reflection: For a set duration and under certain conditions, an ally card sends all damage of any type it receives from enemy cards back to the attacking card."
       ]
     },
     {
@@ -88,7 +91,11 @@
         "Curse: Amplifies the damage an enemy card receives from all sources.",
         "Stun: Immobilizes an enemy card for a set duration, preventing movement and attacks.",
         "Bleeding: Deals continuous damage to an enemy card every second equal to 1% of their maximum health and completely blocks all forms of healing for the duration.",
-        "Misfortune: Reduces the target's accuracy. All basic attacks and abilities have a specified chance to miss (minumum 10%). Missed attacks deal no damage and apply no effects."
+        "Misfortune: Reduces the target's accuracy. All basic attacks and abilities have a specified chance to miss (minumum 10%). Missed attacks deal no damage and apply no effects.",
+        "Imprisonment: For a set duration and under certain conditions, an enemy card can neither be targeted nor take damage, and it also cannot deal damage.",
+        "Root: For a set duration and under certain conditions, an enemy card cannot move.",
+        "Airborne: For a set duration and under certain conditions, enemy cards are launched into the air; during this time they can neither deal damage nor move.",
+        "Betrayal: For a set duration and under certain conditions, enemy cards deal damage to their own allies."
       ]
     }
   ]
