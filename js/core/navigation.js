@@ -12,6 +12,7 @@ const sections = {
   survival: document.getElementById('survival-section'),
   cards:  document.getElementById('cards-section'),
   spells: document.getElementById('spells-section'),
+  towerguns: document.getElementById('towerguns-section'),
   info:   document.getElementById('info-section'),
   powerups: document.getElementById('powerups-section'),
   shop:     document.getElementById('shop-section'),
@@ -39,12 +40,15 @@ function switchSection(name) {
   document.querySelectorAll('.nav-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.section === name);
   });
+  updateNavGroups();
+  closeNavGroups();
 
   /* Lazy-load section data */
   if (name === 'battle') initBattle();
   if (name === 'survival') initSurvival();
   if (name === 'cards')  initCards();
   if (name === 'spells') initSpells();
+  if (name === 'towerguns') initTowerGuns();
   if (name === 'info')   initInfo();
   if (name === 'powerups') initPowerUps();
   if (name === 'shop')     initShop();
@@ -70,6 +74,49 @@ document.getElementById('nav-logo').addEventListener('click', () => {
 /* ── Sticky nav buttons ── */
 document.querySelectorAll('.nav-btn').forEach(btn => {
   btn.addEventListener('click', () => switchSection(btn.dataset.section));
+});
+
+/* ═══════════════════════════════════════════════════════
+   NAV PACKAGES (dropdown groups: Archive / Game)
+═══════════════════════════════════════════════════════ */
+const navGroups = document.querySelectorAll('.nav-group');
+
+/* Highlight the group that owns the active section and show its name */
+function updateNavGroups() {
+  navGroups.forEach(g => {
+    const active = g.querySelector('.nav-btn.active');
+    g.classList.toggle('has-active', !!active);
+    const cur = g.querySelector('.nav-group-current');
+    if (cur) cur.textContent = active ? (active.dataset.label || active.textContent.trim()) : '';
+  });
+}
+
+function closeNavGroups(except) {
+  navGroups.forEach(g => {
+    if (g === except) return;
+    g.classList.remove('open');
+    const t = g.querySelector('.nav-group-btn');
+    if (t) t.setAttribute('aria-expanded', 'false');
+  });
+}
+
+navGroups.forEach(g => {
+  const trigger = g.querySelector('.nav-group-btn');
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    const willOpen = !g.classList.contains('open');
+    closeNavGroups(g);
+    g.classList.toggle('open', willOpen);
+    trigger.setAttribute('aria-expanded', String(willOpen));
+  });
+});
+
+/* Click outside / Escape closes any open menu */
+document.addEventListener('click', e => {
+  if (!e.target.closest('.nav-group')) closeNavGroups();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeNavGroups();
 });
 
 /* ═══════════════════════════════════════════════════════
