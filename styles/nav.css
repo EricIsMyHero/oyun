@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════════════
+   styles/nav.css
+   Navigation packages: two dropdown groups (Archive / Game)
+   Loaded after main.css so it overrides the old flat nav row.
+═══════════════════════════════════════════════════════ */
+
+.nav-links { gap: 14px; align-items: center; }
+.nav-links > li { position: relative; }
+
+/* ── Group trigger ── */
+.nav-links .nav-group-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+}
+.nav-links .nav-group-btn:hover,
+.nav-group.open .nav-group-btn {
+  color: var(--text);
+  border-color: var(--border-glow);
+  background: rgba(100,140,255,0.08);
+}
+.nav-group.has-active .nav-group-btn {
+  color: var(--accent);
+  border-color: var(--border-glow);
+}
+
+/* Name of the section currently open inside this package */
+.nav-group-current {
+  color: var(--gold);
+  letter-spacing: 0.12em;
+}
+.nav-group-current:not(:empty)::before { content: '· '; color: var(--muted); }
+
+.nav-caret {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+.nav-group.open .nav-caret { transform: rotate(180deg); }
+
+/* ── Dropdown panel ── */
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 230px;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+  padding: 6px;
+  background: rgba(8,11,24,0.97);
+  border: 1px solid var(--border-glow);
+  border-radius: 4px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+  z-index: 110;
+}
+.nav-group:last-child .nav-menu { left: auto; right: 0; }
+
+/* invisible bridge so the menu doesn't close while the cursor crosses the gap */
+.nav-menu::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: 0; right: 0;
+  height: 10px;
+}
+
+.nav-group.open .nav-menu { display: flex; }
+
+/* hover also opens the menu on devices that support hover */
+@media (hover: hover) and (min-width: 769px) {
+  .nav-group:hover .nav-menu { display: flex; }
+  .nav-group:hover .nav-caret { transform: rotate(180deg); }
+}
+
+.nav-menu li { width: 100%; }
+.nav-menu .nav-btn {
+  width: 100%;
+  text-align: left;
+  padding: 11px 14px;
+  border: 1px solid transparent;
+  letter-spacing: 0.12em;
+}
+
+/* ── Small screens ── */
+@media (max-width: 768px) {
+  .nav-links { gap: 8px; }
+  .nav-links .nav-group-btn { padding: 8px 12px; font-size: 0.68rem; }
+  .nav-group-current { display: none; }
+  .nav-menu { min-width: 210px; }
+}
