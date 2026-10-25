@@ -3,6 +3,9 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
+const modal = fs.readFileSync(path.join(__dirname, '../js/core/modal.js'), 'utf8');
+const schema = modal.slice(modal.indexOf('const STAT_DEFS'), modal.indexOf('/* ════════════════════════════════════════════════════════\n   BUILDER HELPERS'));
+const metadata = fs.readFileSync(path.join(__dirname, '../js/modules/survival-data.js'), 'utf8');
 const source = fs.readFileSync(path.join(__dirname, '../js/modules/survival.js'), 'utf8');
 
 // The game runs unmodified in a VM. Only browser surfaces are stubbed; combat,
@@ -16,12 +19,19 @@ function game(character = 'soldier') {
     window: { matchMedia: () => ({ matches: false }), addEventListener() {} },
     document: { hidden: false, addEventListener() {}, createElement: element,
       querySelector() { return null; }, getElementById(id) { if (!elements.has(id)) elements.set(id, element()); return elements.get(id); } },
+    Image: class {}, getCardImg: () => 'art.jpg',
     performance: { now: () => 0 }, requestAnimationFrame: () => 1, cancelAnimationFrame() {},
   });
-  vm.runInContext(source, context);
+  vm.runInContext(schema + metadata + source, context);
   const run = code => vm.runInContext(code, context);
-  run(`survivalVisible = true; startSurvivalRun('${character}');`);
-  return { run, state: () => run('survivalState'), elements };
+  // Explicit balanced fixtures isolate combat assertions from future Codex edits.
+  run(`for (const [id, hp, damage, speed, range, interval] of [['soldier',100,5,1150,4800,2], ['henry',130,10,975,1500,1.25]]) {
+    const cfg = SURVIVAL_CHARACTERS[id];
+    Object.assign(cfg.stats, {health:hp, shield:0, damage, speed, range, attackSpeed:interval, criticalChance:0, criticDamage:2});
+    cfg.maxHealth = hp;
+  }
+  survivalVisible = true; startSurvivalRun('${character}');`);
+  return { run, context, state: () => run('survivalState'), elements };
 }
 function offer(g, key) {
   g.run(`survivalState.choosing = true; survivalState.choices = [survivalUpgradePool().find(c => c.key === '${key}')]; survivalChooseUpgrade(0);`);
@@ -40,7 +50,7 @@ test('starting weapon counts toward four slots for both characters; runs reset b
     assert.equal(g.state().passives.length, 1);
     g.run(`startSurvivalRun('${ch}')`);
     assert.equal(g.state().passives.length, 0);
-    assert.equal(g.state().stats.health, 0);
+    assert.equal(g.state().stats.health, ch === 'soldier' ? 100 : 130);
     assert.equal(g.state().player.hp, ch === 'soldier' ? 100 : 130);
     assert.equal(g.run(`SURVIVAL_CHARACTERS.${ch}.maxHealth`), ch === 'soldier' ? 100 : 130);
   }
@@ -96,19 +106,22 @@ test('four weapon/passive slots block new items but retain upgrades', () => {
 test('all stat caps clamp, disappear from offers, and cannot be exceeded', () => {
   const g = game();
   for (const [id, def] of Object.entries(g.run('SURVIVAL_STAT_DEFS'))) {
-    g.run(`survivalState.stats.${id} = ${def.cap - def.step / 2}`);
+    if (def.derived) continue;
+    if (id === 'attackSpeed') g.run('survivalState.haste = 85');
+    else g.run(`survivalState.stats.${id} = ${def.lower ? def.min + def.step / 2 : def.cap - def.step / 2}`);
     offer(g, `stat:${id}`);
-    assert.equal(g.state().stats[id], def.cap);
+    if (id === 'attackSpeed') assert.equal(g.state().haste, 90);
+    else assert.equal(g.state().stats[id], def.lower ? def.min : def.cap);
     assert.ok(!g.run('survivalUpgradePool()').some(c => c.key === `stat:${id}`));
   }
-  assert.equal(g.state().stats.attackSpeed, 90);
+  assert.equal(g.state().haste, 90);
 });
 
 test('full progression still gives 3 selectable, distinct supplies', () => {
   const g = game();
   g.run(`survivalState.weapons = ['rifle','axe','wand','orbit'].map(id => ({...survivalCreateWeapon(id), level: 8}));
     survivalState.passives = ['venomora','toxic','magmara','clara'].map(id => ({id, level: 5}));
-    for (const [id,def] of Object.entries(SURVIVAL_STAT_DEFS)) survivalState.stats[id] = def.cap;
+    for (const [id,def] of Object.entries(SURVIVAL_STAT_DEFS)) survivalState.stats[id] = def.lower ? def.min : def.cap; survivalState.haste = 90;
     survivalState.player.xp = 8; survivalLevelUp();`);
   assert.equal(g.state().choices.length, 3);
   assert.deepEqual(Array.from(g.state().choices, c => c.id).sort(), ['barrier', 'blast', 'heal']);
@@ -193,10 +206,10 @@ test('projectiles cannot tunnel through enemies, hit twice, or exceed range', ()
 
 test('damage, armor, attack-speed and regeneration bonuses affect combat', () => {
   const g = game(); const e = enemy(g);
-  offer(g, 'stat:damage'); offer(g, 'stat:armor'); offer(g, 'stat:regen');
+  offer(g, 'stat:damage'); offer(g, 'stat:damageminimiser'); offer(g, 'stat:healrecovery');
   g.run("survivalDamageEnemy(survivalState.enemies[0], 10, '#fff')");
-  assert.equal(e.hp, 88.5);
-  g.run('survivalState.stats.attackSpeed = 90; survivalState.player.hp = 50; survivalUpdate(0.05)');
+  assert.equal(e.hp, 84);
+  g.run('survivalState.haste = 90; survivalState.player.hp = 50; survivalUpdate(0.05)');
   assert.ok(Math.abs(g.state().weapons[0].cd - 2000 / 1.9) < 1e-9);
   assert.equal(g.state().player.hp, 50.025);
   e.x = g.state().player.x; e.y = g.state().player.y;
@@ -269,13 +282,194 @@ test('a real kill awards XP once and opens the level-up selection', () => {
 test('health and movement bonuses use the character base; critical hits double damage', () => {
   const g = game('henry'); quiet(g);
   offer(g, 'stat:health'); offer(g, 'stat:health');
-  assert.equal(g.state().cfg.maxHealth, 182); assert.equal(g.state().player.hp, 182);
+  assert.equal(g.state().cfg.maxHealth, 180); assert.equal(g.state().player.hp, 180);
   offer(g, 'stat:speed');
   const x = g.state().player.x;
   g.run('survivalKeys.d = true; survivalUpdate(0.05)');
-  assert.ok(Math.abs(g.state().player.x - x - 195 * 1.1 * 0.05) < 1e-9);
+  assert.ok(Math.abs(g.state().player.x - x - (975 + 150) / 5 * 0.05) < 1e-9);
   const e = enemy(g);
-  offer(g, 'stat:crit');
+  offer(g, 'stat:criticalChance');
   g.run("Math.random = () => 0; survivalDamageEnemy(survivalState.enemies[0], 10, '#fff')");
   assert.equal(e.hp, 80);
+});
+
+test('all 24 Codex keys, units and caps are reused; measured DPS is not an upgrade', () => {
+  const g = game();
+  const defs = g.run('SURVIVAL_STAT_DEFS');
+  const modalDefs = g.run('[...STAT_DEFS,...ADD_STAT_DEFS,...EXTRA_STAT_DEFS]');
+  assert.equal(Object.keys(defs).length, 24);
+  for (const def of modalDefs) {
+    assert.equal(defs[def.key].cap, def.max);
+    assert.equal(defs[def.key].name, def.label);
+  }
+  assert.ok(!g.run('survivalUpgradePool()').some(c => c.key === 'stat:sps'));
+});
+
+test('all 138 repository cards can start and simulate; forms and raw data are preserved', () => {
+  const g = game();
+  const cards = fs.readdirSync(path.join(__dirname,'../rarity')).flatMap(name => JSON.parse(fs.readFileSync(path.join(__dirname,'../rarity',name),'utf8')));
+  assert.equal(cards.length, 138);
+  const snapshot = JSON.stringify(cards);
+  g.context.cards = cards;
+  g.run('for (const card of cards) SURVIVAL_CHARACTERS[card.id] = survivalCardConfig(card)');
+  assert.equal(g.run('Object.keys(SURVIVAL_CHARACTERS).length'), 138);
+  for (const card of cards) {
+    g.context.characterId = card.id;
+    g.run('startSurvivalRun(characterId); for(let i=0;i<5;i++) survivalUpdate(0.05)');
+    const st = g.state();
+    for (const [id, value] of Object.entries(st.stats)) {
+      assert.ok(Number.isFinite(value) && value >= 0 && value <= g.run('SURVIVAL_STAT_DEFS')[id].cap, `${card.id}: ${id}`);
+    }
+    assert.equal(st.weapons.length, 1);
+    assert.ok(st.passives.length <= 1);
+    assert.equal(st.player.hp, st.stats.health);
+    assert.ok(st.player.shield <= st.stats.shield);
+  }
+  assert.equal(g.run('SURVIVAL_CHARACTERS.ase.stats.health'), 140);
+  assert.equal(g.run('SURVIVAL_CHARACTERS.soldier.stats.shield'), 120);
+  assert.equal(JSON.stringify(cards), snapshot);
+});
+
+test('shield absorbs damage before health with correct overflow and depletion efficiency', () => {
+  const g = game();
+  g.run('survivalState.stats.shield = 10; survivalState.player.shield = 10; survivalState.stats.shieldtakendamage = 100; survivalTakeDamage({damage:8})');
+  assert.equal(g.state().player.shield, 2); assert.equal(g.state().player.hp, 100);
+  g.run('survivalState.player.contactCd = 0; survivalTakeDamage({damage:8})');
+  assert.equal(g.state().player.shield, 0); assert.equal(g.state().player.hp, 94);
+  g.run('survivalState.player.contactCd = 0; survivalState.player.shield = 10; survivalState.stats.shieldtakendamage = 50; survivalTakeDamage({damage:8})');
+  assert.equal(g.state().player.shield, 6); assert.equal(g.state().player.hp, 94);
+});
+
+test('fortification waits 3 seconds, healing bonus scales recovery and respects caps', () => {
+  const g = game(); quiet(g);
+  g.run('survivalState.stats.shield = 10; survivalState.stats.shieldrecovery = 2; survivalState.stats.healrecovery = 1; survivalState.stats.healBonus = 100; survivalState.player.hp = 50; survivalState.player.lastDamage = 0; survivalUpdate(0.05)');
+  assert.equal(g.state().player.shield, 0); assert.equal(g.state().player.hp, 50.1);
+  g.run('survivalState.elapsed = 3; survivalUpdate(0.05)');
+  assert.equal(g.state().player.shield, 0.1);
+  g.run('survivalHeal(1e6); survivalRestoreShield(1e6)');
+  assert.equal(g.state().player.hp, 100); assert.equal(g.state().player.shield, 10);
+});
+
+test('lifesteal heals only actual health damage, including critical and healing bonuses', () => {
+  const g = game(); const e = enemy(g, 'hp: 2, shield: 6');
+  g.run("survivalState.player.hp = 50; survivalState.stats.lifestealChance = 100; survivalState.stats.healBonus = 100; survivalDamageEnemy(survivalState.enemies[0], 10, '#fff')");
+  assert.equal(e.hp, 0); assert.equal(e.shield, 0);
+  assert.equal(g.state().player.hp, 51); // 2 HP damage * 25% * 2 healing
+  assert.equal(g.state().stats.sps, 8); // actual shield + health damage, no overkill
+});
+
+test('DPS includes all damage, never exceeds 500, and resets after a rolling second', () => {
+  const g = game(); const e = enemy(g, 'hp: 10000, maxHp: 10000'); quiet(g);
+  g.run("survivalDamageEnemy(survivalState.enemies[0], 900, '#fff', false)");
+  assert.equal(e.hp, 9500); assert.equal(g.state().stats.sps, 500);
+  g.run("survivalDamageEnemy(survivalState.enemies[0], 50, '#fff', false)");
+  assert.equal(e.hp, 9500);
+  for (let i = 0; i < 20; i++) g.run('survivalUpdate(0.05)');
+  assert.equal(g.state().stats.sps, 0);
+  g.run("survivalDamageEnemy(survivalState.enemies[0], 20, '#fff', false)");
+  assert.equal(e.hp, 9480); assert.equal(g.state().stats.sps, 20);
+});
+
+test('range and vision govern real target acquisition; count adds projectiles and orbitals', () => {
+  const g = game(); enemy(g, 'x: 780');
+  g.run('survivalState.stats.range = 2000; survivalShoot(survivalState.weapons[0])');
+  assert.equal(g.state().bullets.length, 0);
+  g.run('survivalState.stats.range = 6000; survivalState.stats.vision = 1000; survivalShoot(survivalState.weapons[0])');
+  assert.equal(g.state().bullets.length, 0);
+  g.run('survivalState.stats.vision = 8000; survivalState.stats.number = 3; survivalShoot(survivalState.weapons[0])');
+  assert.equal(g.state().bullets.length, 3);
+  assert.equal(g.run('survivalOrbitPositions(survivalCreateWeapon("orbit")).length'), 4);
+});
+
+test('dodge, critical resistance, damage reduction and flexibility mitigate enemy attacks', () => {
+  const g = game();
+  g.run('survivalState.stats.criticdamageminimiser = 90; survivalState.stats.damageminimiser = 90; survivalTakeDamage({damage:8,criticalChance:100,criticDamage:2})');
+  assert.ok(Math.abs(g.state().player.hp - 99.12) < 1e-9);
+  g.run('survivalState.player.contactCd = 0; survivalState.stats.dodge = 70; Math.random = () => 0; survivalTakeDamage({damage:100})');
+  assert.ok(Math.abs(g.state().player.hp - 99.12) < 1e-9);
+  g.run('survivalState.player.contactCd = 0; survivalState.stats.dodge = 0; survivalState.stats.flexibility = 80; survivalTakeDamage({damage:1,chill:true})');
+  assert.ok(Math.abs(g.state().player.slowTime - 0.4) < 1e-9);
+});
+
+test('mana ability spends mana, uses life duration, respects pause and regenerates', () => {
+  const g = game(); quiet(g);
+  g.run('survivalState.stats.mana = 6; survivalState.player.mana = 6; survivalState.stats.life = 15; survivalCastMana()');
+  assert.equal(g.state().player.mana, 3); assert.equal(g.state().manaBuff, 15);
+  g.run('survivalCastMana()'); assert.equal(g.state().player.mana, 3); // cooldown
+  g.run('survivalTogglePause(); survivalUpdate(0.05); survivalCastMana()');
+  assert.equal(g.state().manaBuff, 15); assert.equal(g.state().player.mana, 3);
+  g.run('survivalTogglePause(); survivalUpdate(0.05)');
+  assert.equal(g.state().manaBuff, 14.95); assert.equal(g.state().player.mana, 3.025);
+});
+
+test('delay is a real wind-up, improves downward, and haste cannot exceed +90%', () => {
+  const g = game(); enemy(g);
+  g.run('survivalState.stats.delay = 200; survivalUpdate(0.05)');
+  assert.equal(g.state().bullets.length, 0);
+  g.run('survivalUpdate(0.05); survivalUpdate(0.05); survivalUpdate(0.05)');
+  assert.ok(g.state().bullets.length > 0);
+  offer(g,'stat:delay'); assert.equal(g.state().stats.delay, 180);
+  g.run("survivalState.haste = 85; survivalAddPassive('neon-droid'); survivalState.neonTime = 3");
+  assert.equal(g.run('survivalHaste()'), 90);
+});
+
+test('Stormblade splash does not recursively trigger other hits or steal life', () => {
+  const g = game(); enemy(g); offer(g,'passive:stormblade');
+  g.run("survivalState.enemies.push({x:600,y:270,hp:100,maxHp:100,radius:16}); survivalDamageEnemy(survivalState.enemies[0],10,'#fff')");
+  assert.equal(g.state().enemies[0].hp, 90);
+  assert.equal(g.state().enemies[1].hp, 98);
+});
+
+test('Frostshot freezes, Artist curses, and Neon Droid grants temporary haste', () => {
+  const g = game(); const e = enemy(g);
+  offer(g,'passive:frostshot'); offer(g,'passive:artist'); offer(g,'passive:neon-droid');
+  g.run("Math.random = () => 0; for(let i=0;i<4;i++) survivalDamageEnemy(survivalState.enemies[0],10,'#fff')");
+  assert.equal(e.stunTime, 0.5); assert.equal(e.curseTime, 3);
+  assert.equal(g.state().neonTime, 3); assert.equal(g.run('survivalHaste()'), 10);
+  g.run("survivalDamageEnemy(survivalState.enemies[0],10,'#fff')");
+  assert.equal(e.hp, 49);
+});
+
+test('Collector and Blesser restore resources on kills; passive grants obey shield cap', () => {
+  const g = game(); quiet(g); offer(g,'passive:collector'); offer(g,'passive:blesser');
+  assert.equal(g.state().stats.shield, 20);
+  g.run('survivalState.player.mana = 0; survivalState.player.shield = 0');
+  enemy(g,'hp:0'); g.run('survivalUpdate(0.05)');
+  assert.equal(g.state().player.shield, 2);
+  assert.ok(Math.abs(g.state().player.mana - 0.325) < 1e-9);
+  g.run("survivalState.stats.shield = 990; survivalAddPassive('blesser')");
+  assert.equal(g.state().stats.shield, 1000);
+});
+
+test('Demotron and Ali activate on timers; Untouch has a cooldown', () => {
+  const g = game(); quiet(g);
+  offer(g,'passive:demotron'); offer(g,'passive:ali'); offer(g,'passive:untouch');
+  g.run('survivalState.player.hp = 50; survivalState.passiveTimers.demotron = 0; survivalState.passiveTimers.ali = 0; survivalUpdate(0.05)');
+  assert.equal(g.state().player.hp, 54);
+  assert.ok(g.state().player.contactCd > 1000);
+  g.run('survivalState.player.hp = 20; survivalState.player.contactCd = 0; survivalTakeDamage({damage:1})');
+  assert.equal(g.state().player.contactCd, 2000);
+  assert.equal(g.state().passiveTimers.untouch, 20);
+  g.run('survivalState.player.contactCd = 0; survivalTakeDamage({damage:1})');
+  assert.equal(g.state().player.contactCd, 600);
+});
+
+test('Snaykies pierces shields, Azrith uses shields, Lyra uses missing health, Reacher reduces damage', () => {
+  const g = game(); const e = enemy(g,'shield:100'); offer(g,'passive:snaykies');
+  g.run("survivalDamageEnemy(survivalState.enemies[0],10,'#fff')");
+  assert.equal(e.shield, 92); assert.equal(e.hp, 98);
+  offer(g,'passive:azrith'); offer(g,'passive:lyra'); offer(g,'passive:reacher');
+  g.run("survivalState.player.shield = 10; survivalState.player.hp = 50; survivalDamageEnemy(survivalState.enemies[0],10,'#fff')");
+  assert.ok(e.hp < 98 - 2);
+  g.run('survivalState.player.shield = 0; survivalTakeDamage({damage:10})');
+  assert.equal(g.state().player.hp, 40.3);
+});
+
+test('Skyhunter increases damage with distance and respects the maximum distance bonus', () => {
+  const g = game(); offer(g,'passive:skyhunter'); const e = enemy(g,'x: 980, hp:1000, maxHp:1000');
+  g.run("survivalDamageEnemy(survivalState.enemies[0],10,'#fff')");
+  assert.ok(Math.abs(e.hp - 989.2) < 1e-9);
+  e.x = 1480;
+  g.run("survivalDamageEnemy(survivalState.enemies[0],10,'#fff')");
+  assert.ok(Math.abs(e.hp - 978.4) < 1e-9);
 });

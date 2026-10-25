@@ -2,65 +2,6 @@
 const SURVIVAL_W = 960;
 const SURVIVAL_H = 540;
 
-const SURVIVAL_CHARACTERS = {
-  soldier: {
-    id: 'soldier',
-    name: 'Soldier',
-    emoji: '🪖',
-    cardGroup: 'mission-1',
-    cardName: 'Soldier',
-    color: '#7b9cff',
-    glow: 'rgba(123,156,255,0.55)',
-    desc: '3 güllə ardıcıl / 2s · Güllə başına 5 hasar',
-    maxHealth: 100,
-    speed: 230,
-    radius: 18,
-    attack: { kind: 'burst', count: 3, shotGap: 120, interval: 2000, damage: 5, bulletSpeed: 560, bulletRadius: 5, range: 480 },
-  },
-  henry: {
-    id: 'henry',
-    name: 'Henry',
-    emoji: '🧔',
-    cardGroup: 'twisted-farm',
-    cardName: 'Henry',
-    color: '#f87171',
-    glow: 'rgba(248,113,113,0.55)',
-    desc: 'Tək hədəf / 1.25s · 10 hasar',
-    maxHealth: 130,
-    speed: 195,
-    radius: 20,
-    attack: { kind: 'strike', interval: 1250, damage: 10, range: 150 },
-  },
-};
-
-/* Bonuses are additive to the character's base. Attack speed +90% means
-   1.9 attacks/second for a base of 1, not a 90% cooldown reduction. */
-const SURVIVAL_STAT_DEFS = {
-  damage:      { name: 'Hasar', icon: '⚔', step: 15, cap: 200, unit: '%' },
-  attackSpeed: { name: 'Hücum sürəti', icon: '⚡', step: 10, cap: 90, unit: '%' },
-  speed:       { name: 'Hərəkət sürəti', icon: '👟', step: 10, cap: 60, unit: '%' },
-  health:      { name: 'Maksimum can', icon: '❤', step: 20, cap: 200, unit: '%' },
-  armor:       { name: 'Hasar azaltma', icon: '🛡', step: 5, cap: 60, unit: '%' },
-  crit:        { name: 'Kritik şansı', icon: '✦', step: 5, cap: 60, unit: '%' },
-  regen:       { name: 'Can bərpası', icon: '✚', step: 0.5, cap: 5, unit: '/san' },
-};
-const SURVIVAL_WEAPONS = {
-  rifle: { name: 'Soldier tüfəngi', icon: '🔫', color: '#a5b4fc', kind: 'burst', damage: 5, interval: 2000, range: 480 },
-  axe: { name: 'Henry baltası', icon: '🪓', color: '#fda4af', kind: 'strike', damage: 10, interval: 1250, range: 150 },
-  wand: { name: 'Mana əsası', icon: '✦', color: '#c4b5fd', kind: 'bolt', damage: 9, interval: 1400, range: 520 },
-  orbit: { name: 'Dumpsy orbitləri', icon: '◈', color: '#fcd34d', kind: 'orbit', damage: 6, interval: 450, range: 82 },
-  nova: { name: 'Alov halqası', icon: '🔥', color: '#fb923c', kind: 'nova', damage: 10, interval: 2600, range: 120 },
-  lightning: { name: 'Zəncir şimşək', icon: 'ϟ', color: '#67e8f9', kind: 'chain', damage: 8, interval: 2200, range: 350 },
-};
-/* Adapted for this arena, rather than changing the original Codex card data. */
-const SURVIVAL_PASSIVES = {
-  venomora: { name: 'Venomora', icon: '❄', color: '#67e8f9', desc: l => `Vuruşlar rəqibi 2 saniyə ${25 + (l - 1) * 5}% yavaşladır.` },
-  toxic: { name: 'Toxic', icon: '☠', color: '#a3e635', desc: l => `Vuruşlar 3 saniyə ərzində hər saniyə ${2 * l} zəhər hasarı verir. Təkrar vuruş müddəti yeniləyir.` },
-  magmara: { name: 'Magmara', icon: '♨', color: '#fb923c', desc: l => `Vuruşlar 2 saniyə ərzində hər saniyə ${3 * l} yanma hasarı verir. Təkrar vuruş müddəti yeniləyir.` },
-  aeralis: { name: 'Aeralis', icon: '≋', color: '#c4b5fd', desc: l => `Vuruşlar rəqibi ${12 + (l - 1) * 5} məsafə geri itələyir.` },
-  clara: { name: 'Clara', icon: '✚', color: '#6ee7b7', desc: l => `Hər öldürmə ${l} can bərpa edir.` },
-  venomspikes: { name: 'Venomspikes', icon: '✹', color: '#f0abfc', desc: l => `Eyni rəqibə hər 5-ci vuruş onun maksimum canının ${8 + (l - 1) * 3}%-i qədər əlavə hasar verir.` },
-};
 const SURVIVAL_MAX_WEAPONS = 4;
 const SURVIVAL_MAX_PASSIVES = 4;
 const SURVIVAL_MAX_WEAPON_LEVEL = 8;
@@ -81,34 +22,66 @@ let survivalVisible = false;
 const survivalImgCache = {};
 const survivalReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+let survivalRosterLoading = false;
+let survivalRosterFailed = [];
+async function survivalLoadCharacters() {
+  if (survivalRosterLoading) return;
+  survivalRosterLoading = true;
+  document.getElementById('survival-roster-status').textContent = 'Kartlar yüklənir…';
+  const targets = survivalRosterFailed.length ? survivalRosterFailed : SURVIVAL_RARITIES;
+  const results = await Promise.allSettled(targets.map(async rarity => {
+    const response = await fetch(`rarity/${rarity}.json`);
+    if (!response.ok) throw new Error(`${rarity}: HTTP ${response.status}`);
+    const cards = await response.json();
+    if (!Array.isArray(cards)) throw new Error('Kart siyahısı oxunmadı');
+    cards.forEach(card => {
+      if (card.id && card.name) SURVIVAL_CHARACTERS[card.id] = survivalCardConfig(card);
+    });
+  }));
+  survivalRosterFailed = targets.filter((_, i) => results[i].status === 'rejected');
+  survivalRosterLoading = false;
+  buildSurvivalPicker();
+  document.getElementById('survival-roster-status').textContent = `${Object.keys(SURVIVAL_CHARACTERS).length} xarakter` +
+    (survivalRosterFailed.length ? ` · ${survivalRosterFailed.length} rarity yüklənmədi.` : ' · Bütün rarity-lər hazırdır.');
+  document.getElementById('survival-roster-retry').hidden = !survivalRosterFailed.length;
+}
 function initSurvival() {
   survivalSetVisible(true);
   if (survivalPickerBuilt) return;
   survivalPickerBuilt = true;
-  Object.values(SURVIVAL_CHARACTERS).forEach(ch => {
-    const img = new Image();
-    img.src = getCardImg({ group: ch.cardGroup, name: ch.cardName });
-    survivalImgCache[ch.id] = img;
-  });
   buildSurvivalPicker();
   setupSurvivalControls();
+  document.getElementById('survival-character-search').addEventListener('input', buildSurvivalPicker);
+  document.getElementById('survival-rarity-filter').addEventListener('change', buildSurvivalPicker);
+  document.getElementById('survival-roster-retry').addEventListener('click', survivalLoadCharacters);
+  survivalLoadCharacters();
 }
-
+function survivalEscape(text) {
+  return String(text).replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
+}
 function buildSurvivalPicker() {
   const grid = document.getElementById('survival-picker-grid');
-  grid.innerHTML = '';
-  Object.values(SURVIVAL_CHARACTERS).forEach(ch => {
+  const search = document.getElementById('survival-character-search').value.trim().toLowerCase();
+  const rarity = document.getElementById('survival-rarity-filter').value;
+  grid.replaceChildren();
+  const characters = Object.values(SURVIVAL_CHARACTERS).filter(ch =>
+    ch.name.toLowerCase().includes(search) && (rarity === 'all' || ch.rarity === rarity));
+  characters.forEach(ch => {
     const card = document.createElement('button');
     card.type = 'button';
     card.className = 'survival-char-card';
     card.style.setProperty('--char-color', ch.color);
-    card.innerHTML = `<span class="survival-char-avatar">${ch.emoji}</span>
-      <span class="survival-char-name">${ch.name}</span>
-      <span class="survival-char-desc">${ch.desc}</span>
-      <span class="survival-char-hp">❤ ${ch.maxHealth} · 1 / 4 silah</span>`;
+    card.innerHTML = `<span class="survival-char-avatar"><span>${ch.emoji}</span><img loading="lazy" alt="" src="${survivalEscape(getCardImg({ group: ch.cardGroup, name: ch.cardName }))}"></span>
+      <span class="survival-char-rarity">${survivalEscape(ch.rarity)} · ${survivalEscape(ch.role)}</span>
+      <span class="survival-char-name">${survivalEscape(ch.name)}</span>
+      <span class="survival-char-desc">${survivalEscape(ch.desc)}</span>
+      <span class="survival-char-hp">❤ ${ch.stats.health} · 🛡 ${ch.stats.shield} · 💥 ${ch.stats.damage}</span>`;
+    card.querySelector('img').addEventListener('error', event => { event.target.hidden = true; });
     card.addEventListener('click', () => startSurvivalRun(ch.id));
     grid.appendChild(card);
   });
+  document.getElementById('survival-roster-count').textContent = `${characters.length} / ${Object.keys(SURVIVAL_CHARACTERS).length}`;
+  if (!characters.length) grid.textContent = 'Bu axtarışa uyğun xarakter yoxdur.';
 }
 
 function survivalResetInput() {
@@ -155,6 +128,7 @@ function setupSurvivalControls() {
     }
     if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(key)) e.preventDefault();
     if ((key === 'p' || key === 'escape') && !e.repeat) survivalTogglePause();
+    if (key === ' ' && !e.repeat && e.target.id === 'survival-canvas') survivalCastMana();
     survivalKeys[key] = true;
   });
   window.addEventListener('keyup', e => { delete survivalKeys[e.key.toLowerCase()]; });
@@ -163,6 +137,7 @@ function setupSurvivalControls() {
     if (survivalState && !survivalState.over && !survivalState.paused && !survivalState.choosing) survivalTogglePause();
   });
   document.addEventListener('visibilitychange', survivalResetInput);
+  document.getElementById('survival-mana-btn').addEventListener('click', survivalCastMana);
   document.getElementById('survival-pause-btn').addEventListener('click', survivalTogglePause);
   document.getElementById('survival-resume-btn').addEventListener('click', survivalTogglePause);
   document.getElementById('survival-exit-btn').addEventListener('click', survivalExitRun);
@@ -213,13 +188,19 @@ function startSurvivalRun(charId) {
   const cfg = JSON.parse(JSON.stringify(SURVIVAL_CHARACTERS[charId]));
   survivalState = {
     charId, cfg,
-    player: { x: SURVIVAL_W / 2, y: SURVIVAL_H / 2, hp: cfg.maxHealth, contactCd: 0, level: 1, xp: 0, xpToNext: survivalXpToNext(1) },
-    stats: Object.fromEntries(Object.keys(SURVIVAL_STAT_DEFS).map(key => [key, 0])),
-    weapons: [survivalCreateWeapon(charId === 'soldier' ? 'rifle' : 'axe')],
+    player: { x: SURVIVAL_W / 2, y: SURVIVAL_H / 2, hp: cfg.maxHealth, shield: cfg.stats.shield, mana: cfg.stats.mana, lastDamage: -10, slowTime: 0, contactCd: 0, level: 1, xp: 0, xpToNext: survivalXpToNext(1) },
+    stats: { ...cfg.stats }, haste: 0,
+    weapons: [survivalCreateWeapon(cfg.weapon)],
     passives: [], choices: [], choosing: false, paused: false,
+    damageLog: [], manaBuff: 0, neonTime: 0, pulseCd: 0,
+    passiveTimers: { demotron: 10, ali: 15, untouch: 0 },
     enemies: [], bullets: [], effects: [], particles: [], texts: [],
     elapsed: 0, spawnCd: 500, kills: 0, shake: 0, over: false,
   };
+  if (cfg.innate) survivalAddPassive(cfg.innate);
+  const image = new Image();
+  image.src = getCardImg({ group: cfg.cardGroup, name: cfg.cardName });
+  survivalImgCache[charId] = image;
   document.getElementById('survival-picker').style.display = 'none';
   document.getElementById('survival-gameover').style.display = 'none';
   document.getElementById('survival-game').style.display = 'block';
@@ -260,10 +241,10 @@ function survivalUpgradePool() {
   });
   Object.entries(SURVIVAL_STAT_DEFS).forEach(([id, def]) => {
     const value = st.stats[id];
-    if (value >= def.cap) return;
-    const next = Math.min(def.cap, value + def.step);
-    pool.push({ key: `stat:${id}`, type: 'stat', id, icon: def.icon, name: def.name, color: '#fcd34d', label: 'Stat artımı',
-      desc: `${value}${def.unit} → ${next}${def.unit} · Limit: ${def.cap}${def.unit}${id === 'crit' ? ' · Kritik vuruş 2× hasar verir.' : ''}` });
+    if (def.derived || (id === 'attackSpeed' ? st.haste >= 90 : def.lower ? value <= def.min : value >= def.cap)) return;
+    const next = survivalNextStat(id);
+    pool.push({ key: `stat:${id}`, type: 'stat', id, icon: def.icon, name: def.name, color: def.color, label: 'Stat artımı',
+      desc: `${survivalFormat(value)}${def.unit} → ${survivalFormat(next)}${def.unit} · ${def.info}${id === 'attackSpeed' ? ` Bonus: +${Math.min(90, st.haste + def.step)}% / 90%.` : ` Limit: ${def.cap}${def.unit}.`}` });
   });
   Object.entries(SURVIVAL_PASSIVES).forEach(([id, def]) => {
     const owned = st.passives.find(p => p.id === id);
@@ -283,7 +264,8 @@ function survivalUpgradePool() {
 }
 function survivalWeaponDescription(id, level) {
   const def = SURVIVAL_WEAPONS[id];
-  const damage = +(def.damage * (1 + (level - 1) * 0.3)).toFixed(1);
+  const factor = survivalState ? survivalState.stats.damage / SURVIVAL_WEAPONS[survivalState.cfg.weapon].damage : 1;
+  const damage = +(def.damage * (1 + (level - 1) * 0.3) * factor).toFixed(1);
   const details = {
     rifle: `${3 + Math.floor((level - 1) / 3)} ardıcıl güllə`,
     axe: 'Yaxındakı bir rəqibə balta zərbəsi',
@@ -292,7 +274,10 @@ function survivalWeaponDescription(id, level) {
     nova: 'Ətrafdakı bütün rəqibləri vuran alov halqası',
     lightning: `${3 + Math.floor((level - 1) / 2)} rəqibə qədər sıçrayan şimşək`,
   };
-  return `${details[id]} · ${damage} baza hasarı · ${(def.interval / 1000).toFixed(2)} san. Sv. ${level}/${SURVIVAL_MAX_WEAPON_LEVEL}.`;
+  const weapon = {id, level};
+  const interval = survivalState ? survivalWeaponInterval(weapon) : def.interval;
+  const range = survivalState ? ` · ${Math.round(survivalWeaponRange(weapon) * 10)} mənzil` : '';
+  return `${details[id]} · ${damage} hasar · ${(interval / 1000).toFixed(2)} san${range}. Sv. ${level}/${SURVIVAL_MAX_WEAPON_LEVEL}.`;
 }
 function survivalSample(list) { return list[Math.floor(Math.random() * list.length)]; }
 function survivalLevelUp() {
@@ -353,19 +338,24 @@ function survivalChooseUpgrade(index) {
   if (!survivalUpgradePool().some(c => c.key === choice.key)) return;
   if (choice.type === 'weapon' || choice.type === 'passive') {
     const collection = choice.type === 'weapon' ? st.weapons : st.passives;
-    const owned = collection.find(item => item.id === choice.id);
-    if (owned) owned.level++;
-    else collection.push(choice.type === 'weapon' ? survivalCreateWeapon(choice.id) : { id: choice.id, level: 1 });
-  } else if (choice.type === 'stat') {
-    const def = SURVIVAL_STAT_DEFS[choice.id];
-    st.stats[choice.id] = Math.min(def.cap, st.stats[choice.id] + def.step);
-    if (choice.id === 'health') {
-      const oldMax = st.cfg.maxHealth;
-      st.cfg.maxHealth = SURVIVAL_CHARACTERS[st.charId].maxHealth * (1 + st.stats.health / 100);
-      st.player.hp = Math.min(st.cfg.maxHealth, st.player.hp + st.cfg.maxHealth - oldMax);
+    if (choice.type === 'passive') survivalAddPassive(choice.id);
+    else {
+      const owned = collection.find(item => item.id === choice.id);
+      if (owned) owned.level++;
+      else collection.push(survivalCreateWeapon(choice.id));
     }
+  } else if (choice.type === 'stat') {
+    const oldValue = st.stats[choice.id];
+    st.stats[choice.id] = survivalNextStat(choice.id);
+    if (choice.id === 'attackSpeed') st.haste = Math.min(90, st.haste + SURVIVAL_STAT_DEFS.attackSpeed.step);
+    if (choice.id === 'health') {
+      st.cfg.maxHealth = st.stats.health;
+      st.player.hp = Math.min(st.stats.health, st.player.hp + st.stats.health - oldValue);
+    }
+    if (choice.id === 'shield') st.player.shield = Math.min(st.stats.shield, st.player.shield + st.stats.shield - oldValue);
+    if (choice.id === 'mana') st.player.mana = Math.min(st.stats.mana, st.player.mana + st.stats.mana - oldValue);
   } else if (choice.id === 'heal') {
-    st.player.hp = Math.min(st.cfg.maxHealth, st.player.hp + st.cfg.maxHealth * 0.35);
+    survivalHeal(st.stats.health * 0.35);
   } else if (choice.id === 'barrier') {
     st.player.contactCd = Math.max(st.player.contactCd, 8000);
   } else if (choice.id === 'blast') {
@@ -394,8 +384,111 @@ function survivalUpdateLoadout() {
   document.getElementById('survival-passives').innerHTML = slots(st.passives, SURVIVAL_PASSIVES, 'passive');
   document.getElementById('survival-weapon-count').textContent = `${st.weapons.length}/4`;
   document.getElementById('survival-passive-count').textContent = `${st.passives.length}/4`;
-  document.getElementById('survival-stat-list').innerHTML = Object.entries(SURVIVAL_STAT_DEFS).map(([id, def]) =>
-    `<span class="survival-stat${st.stats[id] >= def.cap ? ' is-max' : ''}">${def.icon} ${def.name} <b>${st.stats[id]}${def.unit}</b><small> / ${def.cap}${def.unit}</small></span>`).join('');
+  document.getElementById('survival-stat-list').innerHTML = SURVIVAL_STAT_GROUPS.map(group =>
+    `<section class="survival-stat-group"><h4>${group.name}</h4>${group.defs.map(({key: id}) => {
+      const def = SURVIVAL_STAT_DEFS[id];
+      return `<span class="survival-stat" title="${survivalEscape(def.info)}">${def.icon} ${def.name}
+        <b id="survival-stat-${id}">${survivalFormat(st.stats[id])}${def.unit}</b><small> / ${def.cap}${def.unit}${def.lower ? ' ↓ yaxşıdır' : ''}</small></span>`;
+    }).join('')}</section>`).join('');
+}
+
+function survivalFormat(value) { return Number(value.toFixed(2)).toString(); }
+function survivalNextStat(id) {
+  const st = survivalState, def = SURVIVAL_STAT_DEFS[id];
+  if (id === 'attackSpeed') return st.cfg.stats.attackSpeed / (1 + Math.min(90, st.haste + def.step) / 100);
+  return def.lower ? Math.max(def.min, st.stats[id] - def.step) : Math.min(def.cap, +(st.stats[id] + def.step).toFixed(4));
+}
+function survivalAddPassive(id) {
+  const st = survivalState, owned = st.passives.find(p => p.id === id);
+  if (owned ? owned.level >= SURVIVAL_MAX_PASSIVE_LEVEL : st.passives.length >= SURVIVAL_MAX_PASSIVES) return;
+  if (owned) owned.level++;
+  else st.passives.push({ id, level: 1 });
+  for (const [key, amount] of Object.entries(SURVIVAL_PASSIVES[id].grant || {})) {
+    const before = st.stats[key];
+    st.stats[key] = survivalClampStat(key, before + amount);
+    if (key === 'shield') st.player.shield = Math.min(st.stats.shield, st.player.shield + st.stats.shield - before);
+  }
+}
+function survivalHeal(amount) {
+  const st = survivalState;
+  if (st.player.hp <= 0) return 0;
+  const healed = Math.min(st.stats.health - st.player.hp, amount * (1 + st.stats.healBonus / 100));
+  st.player.hp += Math.max(0, healed);
+  return healed;
+}
+function survivalRestoreShield(amount) {
+  const st = survivalState;
+  st.player.shield = Math.min(st.stats.shield, st.player.shield + amount);
+}
+function survivalWeaponRange(weapon) {
+  const st = survivalState, def = SURVIVAL_WEAPONS[weapon.id];
+  const base = weapon.id === st.cfg.weapon ? st.cfg.stats.range / 10 : def.range;
+  return Math.min(st.stats.vision / 10, base * st.stats.range / st.cfg.stats.range + (def.kind === 'nova' ? (weapon.level - 1) * 7 : 0));
+}
+function survivalHaste() {
+  const st = survivalState, missing = 1 - st.player.hp / st.stats.health;
+  return Math.min(90, st.haste + (st.neonTime > 0 ? survivalPassiveLevel('neon-droid') * 10 : 0) + survivalPassiveLevel('lyra') * 5 * missing);
+}
+function survivalWeaponInterval(weapon) {
+  const st = survivalState;
+  return Math.max(50, SURVIVAL_WEAPONS[weapon.id].interval / SURVIVAL_WEAPONS[st.cfg.weapon].interval *
+    st.cfg.stats.attackSpeed * 1000 / (1 + survivalHaste() / 100));
+}
+function survivalDamageRate() {
+  const st = survivalState;
+  st.damageLog = st.damageLog.filter(hit => st.elapsed - hit.time < 1 - 1e-9);
+  st.stats.sps = Math.min(500, st.damageLog.reduce((total, hit) => total + hit.damage, 0));
+  return st.stats.sps;
+}
+function survivalCastMana() {
+  const st = survivalState;
+  if (!st || st.over || survivalIsPaused() || st.player.mana < 3 || st.pulseCd > 0) return;
+  st.player.mana -= 3;
+  st.pulseCd = 1;
+  st.manaBuff = st.stats.life;
+  const range = Math.min(st.stats.range / 10, st.stats.vision / 10);
+  survivalRing(st.player.x, st.player.y, '#a78bfa', range, 0.5);
+  st.enemies.forEach(e => {
+    if (Math.hypot(e.x - st.player.x, e.y - st.player.y) <= range) survivalDamageEnemy(e, st.stats.damage, '#a78bfa');
+  });
+  updateSurvivalHUD();
+}
+function survivalTickPassives(dt) {
+  const st = survivalState;
+  for (const key of ['demotron', 'ali', 'untouch']) st.passiveTimers[key] -= dt;
+  if (survivalPassiveLevel('demotron') && st.passiveTimers.demotron <= 0) {
+    survivalHeal((st.stats.health - st.player.hp) * (5 + survivalPassiveLevel('demotron') * 3) / 100);
+    st.passiveTimers.demotron = 10;
+  }
+  if (survivalPassiveLevel('ali') && st.passiveTimers.ali <= 0) {
+    st.player.contactCd = Math.max(st.player.contactCd, (1 + survivalPassiveLevel('ali') * 0.2) * 1000);
+    survivalRing(st.player.x, st.player.y, '#fde68a', 45, 0.4);
+    st.passiveTimers.ali = 15;
+  }
+}
+function survivalTakeDamage(enemy) {
+  const st = survivalState, p = st.player, stats = st.stats;
+  if (p.contactCd > 0 || p.hp <= 0) return;
+  p.contactCd = SURVIVAL_CONTACT_CD;
+  if (Math.random() * 100 < stats.dodge) { survivalText(p.x, p.y - 25, 'YAYINDI', '#c4b5fd'); return; }
+  const critical = Math.random() * 100 < (enemy.criticalChance || 0);
+  const multiplier = critical ? 1 + ((enemy.criticDamage || 1.5) - 1) * (1 - stats.criticdamageminimiser / 100) : 1;
+  const reduction = Math.min(90, stats.damageminimiser + survivalPassiveLevel('reacher') * 3);
+  let damage = (enemy.damage || SURVIVAL_CONTACT_DMG) * multiplier * (1 - reduction / 100);
+  const shieldFactor = Math.max(0.1, stats.shieldtakendamage / 100);
+  const shieldLoss = Math.min(p.shield, damage * shieldFactor);
+  p.shield -= shieldLoss;
+  damage = Math.max(0, damage - shieldLoss / shieldFactor);
+  p.hp = Math.max(0, p.hp - damage);
+  p.lastDamage = st.elapsed;
+  st.shake = 5;
+  survivalText(p.x, p.y - 25, shieldLoss > 0 ? `🛡 −${survivalFormat(shieldLoss)}` : `−${survivalFormat(damage)}`, shieldLoss > 0 ? '#60a5fa' : '#f87171');
+  survivalRing(p.x, p.y, shieldLoss > 0 ? '#60a5fa' : '#f87171', 40, 0.25);
+  if (enemy.chill) p.slowTime = Math.max(p.slowTime, 2 * (1 - stats.flexibility / 100));
+  if (p.hp > 0 && p.hp < stats.health * 0.25 && survivalPassiveLevel('untouch') && st.passiveTimers.untouch <= 0) {
+    p.contactCd = 2000;
+    st.passiveTimers.untouch = 22 - survivalPassiveLevel('untouch') * 2;
+  }
 }
 
 /* ── Combat ── */
@@ -408,16 +501,36 @@ function survivalNearestEnemy(range, x = survivalState.player.x, y = survivalSta
   });
   return best;
 }
-function survivalDamageEnemy(enemy, amount, color, onHit = true) {
-  if (enemy.hp <= 0) return;
-  const st = survivalState;
-  const crit = onHit && Math.random() * 100 < st.stats.crit;
-  const damage = onHit ? amount * (1 + st.stats.damage / 100) * (crit ? 2 : 1) : amount;
-  enemy.hp -= damage;
-  enemy.flash = 0.12;
-  survivalText(enemy.x, enemy.y - 15, `${crit ? '✦ ' : ''}${+damage.toFixed(1)}`, crit ? '#fde68a' : color);
-  survivalParticles(enemy.x, enemy.y, color, crit ? 7 : 3);
-  if (!onHit) return;
+function survivalDamageEnemy(enemy, amount, color, onHit = true, quiet = false) {
+  if (enemy.hp <= 0) return 0;
+  const st = survivalState, stats = st.stats;
+  const crit = onHit && Math.random() * 100 < stats.criticalChance;
+  let damage = amount;
+  if (onHit) {
+    let bonus = st.manaBuff > 0 ? 0.25 : 0;
+    if (st.player.shield > 0) bonus += survivalPassiveLevel('azrith') * 0.1;
+    bonus += survivalPassiveLevel('lyra') * 0.06 * (1 - st.player.hp / stats.health);
+    bonus += survivalPassiveLevel('skyhunter') * 0.08 * Math.min(1, Math.hypot(enemy.x - st.player.x, enemy.y - st.player.y) / 500);
+    damage *= stats.damage / SURVIVAL_WEAPONS[st.cfg.weapon].damage * (1 + bonus) * (crit ? stats.criticDamage : 1);
+  }
+  if (enemy.curseTime > 0) damage *= 1 + survivalPassiveLevel('artist') * 0.1;
+  damage = Math.max(0, Math.min(damage, SURVIVAL_STAT_DEFS.sps.cap - survivalDamageRate()));
+  if (damage <= 0) return 0;
+  const pierce = onHit ? survivalPassiveLevel('snaykies') * 0.2 : 0;
+  const shieldLoss = Math.min(enemy.shield || 0, damage * (1 - pierce));
+  const hpLoss = Math.min(enemy.hp, damage - shieldLoss);
+  enemy.shield = Math.max(0, (enemy.shield || 0) - shieldLoss);
+  enemy.hp -= hpLoss;
+  const actual = hpLoss + shieldLoss;
+  st.damageLog.push({ time: st.elapsed, damage: actual });
+  survivalDamageRate();
+  if (!quiet) {
+    enemy.flash = 0.12;
+    survivalText(enemy.x, enemy.y - 15, `${crit ? '✦ ' : ''}${survivalFormat(actual)}`, crit ? '#fde68a' : color);
+    survivalParticles(enemy.x, enemy.y, color, crit ? 7 : 3);
+  }
+  if (!onHit) return actual;
+  if (hpLoss > 0 && Math.random() * 100 < stats.lifestealChance) survivalHeal(hpLoss * stats.lifesteal / 100);
   const slow = survivalPassiveLevel('venomora');
   if (slow) { enemy.slowTime = 2; enemy.slowAmount = (25 + (slow - 1) * 5) / 100; }
   const poison = survivalPassiveLevel('toxic');
@@ -439,25 +552,49 @@ function survivalDamageEnemy(enemy, amount, color, onHit = true) {
       survivalRing(enemy.x, enemy.y, '#f0abfc', 32, 0.3);
     }
   }
+  const frost = survivalPassiveLevel('frostshot');
+  if (frost && Math.random() * 100 < 10 + frost * 5) enemy.stunTime = 0.5;
+  if (survivalPassiveLevel('neon-droid')) st.neonTime = 3;
+  if (survivalPassiveLevel('artist')) {
+    enemy.inkHits = (enemy.inkHits || 0) + 1;
+    if (enemy.inkHits % 4 === 0) enemy.curseTime = 3;
+  }
+  const storm = survivalPassiveLevel('stormblade');
+  if (storm) {
+    st.enemies.forEach(other => {
+      if (other !== enemy && other.hp > 0 && Math.hypot(other.x - enemy.x, other.y - enemy.y) <= 70 + storm * 10)
+        survivalDamageEnemy(other, actual * (15 + storm * 5) / 100, '#93c5fd', false);
+    });
+    survivalRing(enemy.x, enemy.y, '#93c5fd', 70 + storm * 10, 0.2);
+  }
+  return actual;
 }
+
 function survivalShoot(weapon) {
   const st = survivalState, def = SURVIVAL_WEAPONS[weapon.id], p = st.player;
-  const target = survivalNearestEnemy(def.range);
-  if (!target) return;
-  const dx = target.x - p.x, dy = target.y - p.y, d = Math.hypot(dx, dy) || 1;
-  const speed = weapon.id === 'wand' ? 420 : 560;
-  st.bullets.push({ x: p.x, y: p.y, prevX: p.x, prevY: p.y,
-    vx: dx / d * speed, vy: dy / d * speed, radius: weapon.id === 'wand' ? 7 : 4,
-    damage: def.damage * (1 + (weapon.level - 1) * 0.3), color: def.color,
-    remaining: def.range, speed, pierce: weapon.id === 'wand' ? 2 + Math.floor(weapon.level / 3) : 1, targets: new Set() });
-  survivalParticles(p.x + dx / d * 20, p.y + dy / d * 20, def.color, 3);
+  if (st.bullets.length >= 900) return;
+  const range = survivalWeaponRange(weapon);
+  const targets = st.enemies.filter(e => e.hp > 0 && Math.hypot(e.x - p.x, e.y - p.y) <= range)
+    .sort((a, b) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y));
+  if (!targets.length) return;
+  for (let i = 0; i < st.stats.number && st.bullets.length < 900; i++) {
+    const target = targets[i % targets.length];
+    const dx = target.x - p.x, dy = target.y - p.y, d = Math.hypot(dx, dy) || 1;
+    const speed = weapon.id === 'wand' ? 420 : 560;
+    st.bullets.push({ x: p.x, y: p.y, prevX: p.x, prevY: p.y,
+      vx: dx / d * speed, vy: dy / d * speed, radius: weapon.id === 'wand' ? 7 : 4,
+      damage: def.damage * (1 + (weapon.level - 1) * 0.3), color: def.color,
+      remaining: range, speed, pierce: weapon.id === 'wand' ? 2 + Math.floor(weapon.level / 3) : 1, targets: new Set() });
+  }
+  survivalParticles(p.x, p.y, def.color, 3);
 }
 function survivalOrbitPositions(weapon) {
   const p = survivalState.player, time = survivalState.elapsed;
-  const count = 2 + Math.floor((weapon.level - 1) / 2);
+  const count = Math.min(15, 2 + Math.floor((weapon.level - 1) / 2) + survivalState.stats.number - 1);
+  const radius = survivalWeaponRange(weapon);
   return Array.from({ length: count }, (_, i) => ({
-    x: p.x + Math.cos(time * 2.8 + i * Math.PI * 2 / count) * 82,
-    y: p.y + Math.sin(time * 2.8 + i * Math.PI * 2 / count) * 82,
+    x: p.x + Math.cos(time * 2.8 + i * Math.PI * 2 / count) * radius,
+    y: p.y + Math.sin(time * 2.8 + i * Math.PI * 2 / count) * radius,
   }));
 }
 function survivalAttack(weapon) {
@@ -468,14 +605,16 @@ function survivalAttack(weapon) {
     weapon.shotCd = 0;
   } else if (def.kind === 'bolt') survivalShoot(weapon);
   else if (def.kind === 'strike') {
-    const target = survivalNearestEnemy(def.range);
-    if (!target) return;
-    survivalDamageEnemy(target, damage, def.color);
-    st.effects.push({ kind: 'line', x: p.x, y: p.y, x2: target.x, y2: target.y, color: def.color, life: 0.2, maxLife: 0.2, width: 6 });
+    const targets = st.enemies.filter(e => e.hp > 0 && Math.hypot(e.x - p.x, e.y - p.y) <= survivalWeaponRange(weapon))
+      .sort((a, b) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y)).slice(0, st.stats.number);
+    targets.forEach(target => {
+      survivalDamageEnemy(target, damage, def.color);
+      if (st.effects.length < 100) st.effects.push({ kind: 'line', x: p.x, y: p.y, x2: target.x, y2: target.y, color: def.color, life: 0.2, maxLife: 0.2, width: 6 });
+    });
   } else if (def.kind === 'nova') {
-    const range = def.range + (weapon.level - 1) * 7;
+    const range = survivalWeaponRange(weapon);
     survivalRing(p.x, p.y, def.color, range, 0.45);
-    st.enemies.forEach(e => { if (Math.hypot(e.x - p.x, e.y - p.y) <= range + e.radius) survivalDamageEnemy(e, damage, def.color); });
+    st.enemies.forEach(e => { if (Math.hypot(e.x - p.x, e.y - p.y) <= range + e.radius) survivalDamageEnemy(e, damage * (1 + (st.stats.number - 1) * 0.08), def.color); });
   } else if (def.kind === 'orbit') {
     const orbs = survivalOrbitPositions(weapon);
     st.enemies.forEach(e => {
@@ -484,16 +623,17 @@ function survivalAttack(weapon) {
   } else if (def.kind === 'chain') {
     let x = p.x, y = p.y;
     const hit = new Set();
-    for (let i = 0; i < 3 + Math.floor((weapon.level - 1) / 2); i++) {
-      const target = survivalNearestEnemy(i === 0 ? def.range : 180, x, y, hit);
+    for (let i = 0; i < Math.min(15, 3 + Math.floor((weapon.level - 1) / 2) + st.stats.number - 1); i++) {
+      const target = survivalNearestEnemy(i === 0 ? survivalWeaponRange(weapon) : Math.min(180 * st.stats.range / st.cfg.stats.range, st.stats.vision / 10), x, y, hit);
       if (!target) break;
       hit.add(target);
-      st.effects.push({ kind: 'line', x, y, x2: target.x, y2: target.y, color: def.color, life: 0.22, maxLife: 0.22, width: 3 });
+      if (st.effects.length < 100) st.effects.push({ kind: 'line', x, y, x2: target.x, y2: target.y, color: def.color, life: 0.22, maxLife: 0.22, width: 3 });
       x = target.x; y = target.y;
       survivalDamageEnemy(target, damage, def.color);
     }
   }
 }
+
 function survivalSegmentDistance(px, py, x1, y1, x2, y2) {
   const dx = x2 - x1, dy = y2 - y1;
   const t = Math.max(0, Math.min(1, ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy || 1)));
@@ -507,13 +647,22 @@ function survivalUpdate(dt) {
   if (survivalLevelUp()) return;
   st.elapsed += dt;
   st.shake = Math.max(0, st.shake - dt * 18);
-  p.hp = Math.min(cfg.maxHealth, p.hp + st.stats.regen * dt);
+  survivalDamageRate();
+  st.manaBuff = Math.max(0, st.manaBuff - dt);
+  st.neonTime = Math.max(0, st.neonTime - dt);
+  st.pulseCd = Math.max(0, st.pulseCd - dt);
+  survivalHeal(st.stats.healrecovery * dt);
+  if (st.elapsed - p.lastDamage >= 3) survivalRestoreShield(st.stats.shieldrecovery * dt);
+  p.mana = Math.min(st.stats.mana, p.mana + dt * 0.5);
+  survivalTickPassives(dt);
   let ix = survivalInput.x, iy = survivalInput.y;
   if (survivalKeys.a || survivalKeys.arrowleft) ix -= 1;
   if (survivalKeys.d || survivalKeys.arrowright) ix += 1;
   if (survivalKeys.w || survivalKeys.arrowup) iy -= 1;
   if (survivalKeys.s || survivalKeys.arrowdown) iy += 1;
-  const mag = Math.hypot(ix, iy), speed = cfg.speed * (1 + st.stats.speed / 100);
+  const slowActive = Math.min(dt, p.slowTime);
+  p.slowTime = Math.max(0, p.slowTime - dt);
+  const mag = Math.hypot(ix, iy), speed = st.stats.speed / 5 * (1 - (dt > 0 ? slowActive / dt * 0.25 : 0));
   if (mag > 0.05) {
     p.x += ix / Math.max(1, mag) * speed * dt;
     p.y += iy / Math.max(1, mag) * speed * dt;
@@ -524,12 +673,22 @@ function survivalUpdate(dt) {
   if (st.spawnCd <= 0) { survivalSpawnEnemy(); st.spawnCd = survivalSpawnInterval(st.elapsed); }
 
   st.weapons.forEach(w => {
-    const def = SURVIVAL_WEAPONS[w.id];
     w.cd -= dt * 1000;
-    if (w.cd <= 0) { survivalAttack(w); w.cd = def.interval / (1 + st.stats.attackSpeed / 100); }
+    if (w.cd <= 0 && !w.shotsLeft && w.windup == null) w.windup = st.stats.delay;
+    if (w.windup != null) {
+      w.windup -= dt * 1000;
+      if (w.windup <= 0) {
+        survivalAttack(w);
+        w.windup = null;
+        w.cd = survivalWeaponInterval(w);
+      }
+    }
     if (w.shotsLeft > 0) {
       w.shotCd -= dt * 1000;
-      if (w.shotCd <= 0) { survivalShoot(w); w.shotsLeft--; w.shotCd = 120 / (1 + st.stats.attackSpeed / 100); }
+      if (w.shotCd <= 0) {
+        survivalShoot(w); w.shotsLeft--;
+        w.shotCd = Math.min(120 / (1 + survivalHaste() / 100), survivalWeaponInterval(w) / (4 + Math.floor((w.level - 1) / 3)));
+      }
     }
   });
   st.bullets.forEach(b => {
@@ -556,25 +715,22 @@ function survivalUpdate(dt) {
       const active = Math.min(dt, e[timer] || 0);
       if (active > 0) {
         // Integrate exactly to expiry; show periodic text instead of 60 labels/sec.
-        e.hp -= e[dps] * active;
+        survivalDamageEnemy(e, e[dps] * active, color, false, true);
         e.dotText = (e.dotText || 0) + active;
         if (e.dotText >= 0.5) { survivalText(e.x, e.y - 22, '•', color); e.dotText = 0; }
         e[timer] = Math.max(0, e[timer] - dt);
       }
     }
     if (e.hp <= 0) return;
-    const slowActive = Math.min(dt, e.slowTime || 0);
-    const travel = survivalEnemySpeed(st.elapsed) * (dt - slowActive * (e.slowAmount || 0));
+    const stunned = Math.min(dt, e.stunTime || 0);
+    e.stunTime = Math.max(0, (e.stunTime || 0) - dt);
+    e.curseTime = Math.max(0, (e.curseTime || 0) - dt);
+    const slowActive = Math.min(dt - stunned, e.slowTime || 0);
+    const travel = survivalEnemySpeed(st.elapsed) * (dt - stunned - slowActive * (e.slowAmount || 0));
     e.slowTime = Math.max(0, (e.slowTime || 0) - dt);
     const dx = p.x - e.x, dy = p.y - e.y, dist = Math.hypot(dx, dy) || 1;
     e.x += dx / dist * travel; e.y += dy / dist * travel;
-    if (Math.hypot(p.x - e.x, p.y - e.y) < e.radius + cfg.radius && p.contactCd <= 0) {
-      const damage = SURVIVAL_CONTACT_DMG * (1 - st.stats.armor / 100);
-      p.hp = Math.max(0, p.hp - damage); p.contactCd = SURVIVAL_CONTACT_CD;
-      st.shake = 5;
-      survivalText(p.x, p.y - 25, `−${+damage.toFixed(1)}`, '#f87171');
-      survivalRing(p.x, p.y, '#f87171', 40, 0.25);
-    }
+    if (!e.stunTime && stunned === 0 && Math.hypot(p.x - e.x, p.y - e.y) < e.radius + cfg.radius) survivalTakeDamage(e);
   });
   const dead = st.enemies.filter(e => e.hp <= 0);
   dead.forEach(e => {
@@ -588,8 +744,12 @@ function survivalUpdate(dt) {
   if (p.hp <= 0) { updateSurvivalHUD(); survivalGameOver(); return; }
   const heal = dead.length * survivalPassiveLevel('clara');
   if (heal && p.hp < cfg.maxHealth) {
-    p.hp = Math.min(cfg.maxHealth, p.hp + heal);
+    survivalHeal(heal);
     survivalText(p.x, p.y - 35, `+${heal} ❤`, '#6ee7b7');
+  }
+  if (dead.length) {
+    p.mana = Math.min(st.stats.mana, p.mana + dead.length * survivalPassiveLevel('collector') * 0.3);
+    survivalRestoreShield(dead.length * survivalPassiveLevel('blesser') * 2);
   }
   st.effects.forEach(e => e.life -= dt);
   st.effects = st.effects.filter(e => e.life > 0);
@@ -608,7 +768,10 @@ function survivalSpawnEnemy() {
   else if (edge === 2) { x = Math.random() * SURVIVAL_W; y = SURVIVAL_H + 20; }
   else { x = -20; y = Math.random() * SURVIVAL_H; }
   const hp = survivalEnemyHP(st.elapsed);
-  st.enemies.push({ x, y, radius: 16, hp, maxHp: hp });
+  const armored = st.elapsed > 20 && Math.random() < 0.25;
+  const chill = st.elapsed > 30 && Math.random() < 0.2;
+  st.enemies.push({ x, y, radius: 16, hp, maxHp: hp, shield: armored ? hp * 0.5 : 0, maxShield: armored ? hp * 0.5 : 0,
+    criticalChance: Math.min(25, Math.floor(st.elapsed / 20) * 3), criticDamage: 1.5, chill });
 }
 
 /* ── Bounded effects: no timers or DOM nodes per hit. ── */
@@ -639,6 +802,10 @@ function survivalRender(ctx) {
   for (let x = 0; x < SURVIVAL_W; x += 40) { ctx.moveTo(x, 0); ctx.lineTo(x, SURVIVAL_H); }
   for (let y = 0; y < SURVIVAL_H; y += 40) { ctx.moveTo(0, y); ctx.lineTo(SURVIVAL_W, y); }
   ctx.stroke();
+  ctx.strokeStyle = 'rgba(167,139,250,0.14)';
+  ctx.setLineDash([4, 8]);
+  ctx.beginPath(); ctx.arc(p.x, p.y, survivalWeaponRange(st.weapons[0]), 0, Math.PI * 2); ctx.stroke();
+  ctx.setLineDash([]);
   st.effects.forEach(e => {
     ctx.globalAlpha = Math.max(0, e.life / e.maxLife);
     ctx.strokeStyle = e.color; ctx.lineWidth = e.width || 3;
@@ -666,10 +833,12 @@ function survivalRender(ctx) {
       const status = `${e.slowTime > 0 ? '❄' : ''}${e.poisonTime > 0 ? '☠' : ''}${e.burnTime > 0 ? '♨' : ''}`;
       ctx.fillStyle = '#fff'; ctx.fillText(status, e.x, e.y + 26);
     }
-    ctx.font = '28px serif'; ctx.fillText('🧟', e.x, e.y);
+    ctx.font = '28px serif'; ctx.fillText(e.chill ? '🥶' : e.shield > 0 ? '🛡' : '🧟', e.x, e.y);
     if (e.flash > 0) { ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.beginPath(); ctx.arc(e.x, e.y, 14, 0, Math.PI * 2); ctx.fill(); }
     ctx.fillStyle = '#262435'; ctx.fillRect(e.x - 14, e.y - 28, 28, 4);
     ctx.fillStyle = '#f87171'; ctx.fillRect(e.x - 14, e.y - 28, 28 * Math.max(0, e.hp / e.maxHp), 4);
+    if (e.maxShield > 0) { ctx.fillStyle = '#60a5fa'; ctx.fillRect(e.x - 14, e.y - 34, 28 * Math.max(0, e.shield / e.maxShield), 3); }
+    if (e.stunTime > 0 || e.curseTime > 0) { ctx.font = '12px serif'; ctx.fillStyle = '#e9d5ff'; ctx.fillText(e.stunTime > 0 ? '❅' : '✒', e.x, e.y + 28); }
   });
   const orbit = st.weapons.find(w => w.id === 'orbit');
   if (orbit) survivalOrbitPositions(orbit).forEach(o => {
@@ -685,6 +854,14 @@ function survivalRender(ctx) {
   } else { ctx.font = '30px serif'; ctx.fillText(cfg.emoji, p.x, p.y); }
   ctx.strokeStyle = p.contactCd > 0 ? '#fef3c7' : cfg.color; ctx.lineWidth = p.contactCd > 600 ? 4 : 2;
   ctx.beginPath(); ctx.arc(p.x, p.y, cfg.radius + 2, 0, Math.PI * 2); ctx.stroke();
+  if (p.shield > 0) {
+    ctx.strokeStyle = '#60a5fa'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(p.x, p.y, cfg.radius + 9, 0, Math.PI * 2 * p.shield / Math.max(1, st.stats.shield)); ctx.stroke();
+  }
+  if (st.manaBuff > 0) {
+    ctx.strokeStyle = '#c084fc'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(p.x, p.y, cfg.radius + 14, 0, Math.PI * 2); ctx.stroke();
+  }
   st.particles.forEach(e => {
     ctx.globalAlpha = Math.max(0, e.life / e.maxLife); ctx.fillStyle = e.color; ctx.fillRect(e.x, e.y, 3, 3);
   });
@@ -696,6 +873,15 @@ function survivalRender(ctx) {
 }
 function updateSurvivalHUD() {
   const st = survivalState, p = st.player;
+  document.getElementById('survival-shield-fill').style.width = (st.stats.shield ? p.shield / st.stats.shield * 100 : 0) + '%';
+  document.getElementById('survival-shield-text').textContent = `${Math.ceil(p.shield)} / ${st.stats.shield}`;
+  document.getElementById('survival-mana-text').textContent = `${p.mana.toFixed(1)} / ${st.stats.mana}`;
+  const manaButton = document.getElementById('survival-mana-btn');
+  manaButton.disabled = survivalIsPaused() || p.mana < 3 || st.pulseCd > 0;
+  manaButton.textContent = st.manaBuff > 0 ? `✦ Gücləndirmə ${Math.ceil(st.manaBuff)}s · 3 💧` : '✦ Mana dalğası · 3 💧';
+  const dps = document.getElementById('survival-stat-sps');
+  if (dps) dps.textContent = survivalFormat(st.stats.sps);
+  document.getElementById('survival-haste-text').textContent = `+${survivalFormat(survivalHaste())}% hücum sürəti / 90%`;
   document.getElementById('survival-hp-fill').style.width = Math.max(0, p.hp / st.cfg.maxHealth * 100) + '%';
   document.getElementById('survival-hp-text').textContent = `${Math.ceil(p.hp)} / ${Math.round(st.cfg.maxHealth)}`;
   document.getElementById('survival-xp-fill').style.width = Math.min(100, p.xp / p.xpToNext * 100) + '%';
