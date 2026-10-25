@@ -224,20 +224,48 @@
       <div class="section-divider reveal"></div>
 
       <div id="survival-picker">
-        <p class="battle-picker-hint">Xarakter seç</p>
+        <p class="battle-picker-hint">Xarakter seç · Hərəkət et, sağ qal, öz quruluşunu yarat.</p>
+        <p class="survival-rules">Avtomatik hücum · WASD / ox düymələri və ya joystik<br>Hər səviyyədə 3 təklifdən 1-ni seç · Maksimum 4 silah + 4 passiv</p>
         <div id="survival-picker-grid" class="survival-char-grid"></div>
       </div>
 
       <div id="survival-game" style="display:none">
         <div id="survival-hud">
-          <div class="survival-hud-item">❤ <div class="survival-hp-bar"><div id="survival-hp-fill"></div></div></div>
-          <div class="survival-hud-item">Lvl <span id="survival-level">1</span> <div class="survival-xp-bar"><div id="survival-xp-fill"></div></div></div>
+          <div class="survival-hud-item">❤ <div class="survival-hp-bar"><div id="survival-hp-fill"></div></div><span id="survival-hp-text">100 / 100</span></div>
+          <div class="survival-hud-item">Sv. <span id="survival-level">1</span> <div class="survival-xp-bar"><div id="survival-xp-fill"></div></div><span id="survival-xp-text">0 / 8 XP</span></div>
           <div class="survival-hud-item" id="survival-timer">00:00</div>
           <div class="survival-hud-item" id="survival-kills">0 öldürmə</div>
+          <div class="survival-actions">
+            <button type="button" id="survival-pause-btn">Ⅱ Fasilə</button>
+            <button type="button" id="survival-exit-btn">Menyu</button>
+          </div>
         </div>
         <div class="survival-arena-wrap">
-          <canvas id="survival-canvas"></canvas>
-          <div id="survival-joystick"><div id="survival-joystick-knob"></div></div>
+          <canvas id="survival-canvas" tabindex="0" aria-label="Survival arenası. Hərəkət: WASD və ya ox düymələri. Fasilə: P."></canvas>
+          <div id="survival-joystick" role="group" aria-label="Hərəkət joystiki"><div id="survival-joystick-knob"></div></div>
+          <div id="survival-paused" class="survival-pause-overlay" hidden>
+            <strong>Fasilə</strong><button type="button" id="survival-resume-btn" class="btn-primary">▶ Davam et</button>
+          </div>
+        </div>
+        <p class="survival-controls-hint">WASD / ↑ ↓ ← → · Hücum avtomatikdir · P / Esc: fasilə</p>
+        <div class="survival-loadout">
+          <div><h3>Silahlar <span id="survival-weapon-count">1/4</span></h3><div id="survival-weapons" class="survival-slots"></div></div>
+          <div><h3>Passivlər <span id="survival-passive-count">0/4</span></h3><div id="survival-passives" class="survival-slots"></div></div>
+        </div>
+        <details class="survival-stats-panel" open>
+          <summary>Stat bonusları və limitlər</summary>
+          <div id="survival-stat-list"></div>
+          <p>Bonuslar baza statına əlavə olunur. +90% hücum sürəti = 1,9× tezlik. Silahlar Sv. 8, passivlər Sv. 5-ə qədər güclənir.</p>
+        </details>
+        <div id="survival-levelup" class="survival-levelup-overlay" role="dialog" aria-modal="true" aria-labelledby="survival-levelup-title" aria-describedby="survival-choice-help survival-choice-slots" hidden>
+          <div class="survival-levelup-panel">
+            <p class="survival-levelup-eyebrow">✦ YENİ SƏVİYYƏ ✦</p>
+            <h3 id="survival-levelup-title">Gücünü seç</h3>
+            <p id="survival-choice-help">Döyüş dayanıb. Bir gücləndirmə seç və davam et.</p>
+            <p id="survival-choice-slots"></p>
+            <div id="survival-choices"></div>
+            <p class="survival-choice-hint">Seçmək üçün kliklə və ya 1, 2, 3 düymələrindən istifadə et.</p>
+          </div>
         </div>
       </div>
 

@@ -33,6 +33,7 @@ function showPortal(section) {
 /* ── Switch between sections ── */
 function switchSection(name) {
   currentSection = name;
+  if (typeof survivalSetVisible === 'function') survivalSetVisible(name === 'survival');
 
   Object.values(sections).forEach(s => s.style.display = 'none');
   if (sections[name]) sections[name].style.display = 'block';
@@ -66,6 +67,7 @@ document.getElementById('lore-btn').addEventListener('click',    () => showPorta
 
 /* ── Nav logo → back to intro ── */
 document.getElementById('nav-logo').addEventListener('click', () => {
+  if (typeof survivalSetVisible === 'function') survivalSetVisible(false);
   mainPortal.style.display  = 'none';
   introScreen.style.display = 'flex';
   window.scrollTo({ top: 0 });

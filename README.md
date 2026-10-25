@@ -148,3 +148,53 @@ Then open: `http://localhost:8080`
 
 > ⚠️ Do NOT open `index.html` directly as a file (`file://`).
 > The JSON fetches require a local HTTP server.
+
+## Survival Arena
+
+Open **Game → Survival**, then choose Soldier or Henry. Attacks are automatic;
+move with WASD / arrow keys or the on-screen joystick. Use **P / Esc** or the
+pause button for a break. Leaving Survival or hiding the tab freezes the run.
+
+Each level pauses combat and offers **3 choices; select exactly one** with a
+click, touch, or keys 1–3. Offers include a weapon, a stat bonus and a passive
+while those categories remain available. New passives are prioritized while
+slots remain. Excess XP opens successive selections without discarding XP.
+
+- **4 weapon slots**, including the starting weapon; each weapon upgrades to level 8.
+  Soldier rifle, Henry axe, mana wand, Dumpsy orbits, fire nova, chain lightning.
+- **4 passive slots**, each upgrading to level 5. Arena adaptations inspired by
+  the rarity files: Venomora (25% slow for 2s at level 1), Toxic (poison), Magmara
+  (burn), Aeralis (knockback), Clara (heal on kill), Venomspikes (every fifth hit).
+  Repeated hits refresh poison/burn/slow duration instead of stacking them.
+- Full slots allow upgrades of equipped items but never a fifth item. Maxed
+  items and stats disappear from the offers. At full progression, consumable
+  healing, an 8-second barrier and an arena blast keep selections usable.
+- Click or tap an equipped item to inspect its current effect.
+
+Stat bonuses are additive to the character's base and apply to every weapon:
+
+| Stat | Per selection | Maximum bonus |
+|------|---------------|---------------|
+| Damage | +15% | +200% |
+| Attack speed | +10% | +90% |
+| Movement speed | +10% | +60% |
+| Maximum health | +20% | +200% |
+| Damage reduction | +5% | 60% |
+| Critical chance (2× damage) | +5% | 60% |
+| Health regeneration | +0.5 HP/s | 5 HP/s |
+
+Attack speed +90% means **1.9× attack frequency**, not 90% less cooldown.
+Starting a new run clears the entire loadout and bonuses. Particle effects,
+projectile trails, hit/death flashes, damage numbers and status indicators are
+rendered on the canvas; reduced-motion settings disable particles and shake.
+
+Run the dependency-free progression and combat regression tests with Node.js:
+
+```bash
+node --test tests/survival.test.cjs
+```
+
+Browser smoke check: serve the repository over HTTP, open Survival, choose either
+character, move and wait for kills/XP. Verify the three-choice modal freezes the
+timer and enemies, select an upgrade and inspect the loadout. Also check pause,
+leaving/returning to Survival, restarting after death, and joystick input on mobile.
