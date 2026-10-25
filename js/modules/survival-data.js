@@ -8,7 +8,7 @@ const SURVIVAL_STAT_RULES = {
   delay: { step: 20, initial: 0, unit: 'ms', lower: true, min: 0, info: 'Zərbədən əvvəl hazırlıq vaxtı. Az olması yaxşıdır.' },
   sps: { derived: true, initial: 0, info: 'Son 1 saniyədə real vurulan hasar. Ümumi DPS büdcəsi maksimum 500.' },
   mana: { step: 2, initial: 6, info: 'Mana tutumu. Mana dalğası 3 mana xərcləyir; hər saniyə 0,5 mana bərpa olunur.' },
-  number: { step: 1, initial: 1, info: 'Mərmi sayı, yaxın zərbə hədəfləri, orbit və şimşək sayına təsir edir.' },
+  number: { step: 1, initial: 1, info: 'Tüfəng dəstəsinə əlavə güllə, əsaya əlavə mərmi verir. Orbit və şimşək sayını artırır; sahəvi yaxın silahlara əlavə Count başına +8% hasar verir.' },
   range: { step: 400, initial: 2500, info: '10 mənzil vahidi = 1 arena pikseli. Bütün silahların mənzilini artırır.' },
   speed: { step: 150, initial: 1000, info: '5 sürət vahidi = 1 piksel/saniyə.' },
   criticalChance: { step: 5, initial: 5, info: 'Kritik vuruş ehtimalı.' },
@@ -36,6 +36,13 @@ const SURVIVAL_STAT_DEFS = Object.fromEntries(SURVIVAL_STAT_GROUPS.flatMap(group
     unit: def.suffix || SURVIVAL_STAT_RULES[def.key].unit || '' }])));
 const SURVIVAL_WEAPONS = {
   rifle: { name: 'Soldier tüfəngi', icon: '🔫', color: '#a5b4fc', kind: 'burst', damage: 5, interval: 2000, range: 480 },
+  hammer: { name: 'Ağır çəkic', icon: '🔨', color: '#fbbf24', kind: 'slam', damage: 90, interval: 3000, range: 120, size: 40 },
+  bow: { name: 'Yay və ox', icon: '🏹', color: '#86efac', kind: 'arrow', damage: 8, interval: 800, range: 600 },
+  lightAxe: { name: 'Yüngül balta', icon: '🪓', color: '#fda4af', kind: 'single-strike', damage: 6, interval: 750, range: 130 },
+  sword: { name: 'Qılınc', icon: '⚔', color: '#fcd34d', kind: 'sweep', damage: 12, interval: 1250, range: 150, arc: 135 },
+  dualSwords: { name: 'İkili qılınc', icon: '🗡', color: '#93c5fd', kind: 'twin-sweep', damage: 6, interval: 500, recovery: 750, range: 135, arc: 90 },
+  scythe: { name: 'Oraq', icon: '☽', color: '#e9d5ff', kind: 'sweep', damage: 28, interval: 2000, range: 160, arc: 360 },
+  spear: { name: 'Mızraq', icon: '🔱', color: '#6ee7b7', kind: 'thrust', damage: 20, interval: 1750, range: 240, width: 24 },
   axe: { name: 'Henry baltası', icon: '🪓', color: '#fda4af', kind: 'strike', damage: 10, interval: 1250, range: 150 },
   wand: { name: 'Mana əsası', icon: '✦', color: '#c4b5fd', kind: 'bolt', damage: 9, interval: 1400, range: 520 },
   orbit: { name: 'Dumpsy orbitləri', icon: '◈', color: '#fcd34d', kind: 'orbit', damage: 6, interval: 450, range: 82 },
@@ -73,6 +80,23 @@ function survivalNumber(raw, fallback = 0) {
 function survivalClampStat(id, value) {
   return Math.max(id === 'health' ? 1 : 0, Math.min(SURVIVAL_STAT_DEFS[id].cap, value));
 }
+// Explicit equipment takes precedence over the general range-based archetype.
+const SURVIVAL_MELEE_RANGE = 1500;
+const SURVIVAL_STARTING_WEAPONS = {
+  lord: 'hammer', trac: 'hammer', earthshakers: 'hammer', warborn: 'hammer',
+  hunter: 'bow', js: 'bow', skyhunter: 'bow', 'fire-archer': 'bow', nyra: 'bow',
+  'hell-boy': 'lightAxe', collector: 'lightAxe',
+  king: 'sword', mimic: 'sword', blesser: 'sword', 'xii-josh': 'sword',
+  'bio-mech': 'sword', stormblade: 'sword', azrith: 'sword', 'fallen-angel': 'sword', ali: 'sword', slasherx: 'sword',
+  nightprowler: 'dualSwords', malvaris: 'dualSwords',
+  hailey: 'scythe', 'shadow-reaper': 'scythe', bloodraider: 'scythe',
+  wong: 'spear', 'void-striker': 'spear', tribe: 'spear', lumina: 'spear',
+};
+function survivalChooseStartingWeapon(card, stats, role) {
+  if (SURVIVAL_STARTING_WEAPONS[card.id]) return SURVIVAL_STARTING_WEAPONS[card.id];
+  if (stats.range <= SURVIVAL_MELEE_RANGE) return card.id === 'dumpsy' ? 'orbit' : 'axe';
+  return /mage|support/.test(role) ? 'wand' : 'rifle';
+}
 function survivalCardConfig(card) {
   const form = card.type1 || (card.turns && Object.values(card.turns)[0]) || card;
   const source = { ...form.stats, ...card.stats };
@@ -94,8 +118,18 @@ function survivalCardConfig(card) {
   stats.life = Math.max(5, stats.life);
   stats.sps = 0; // measured damage, never trusted from a theoretical Codex value
   const role = String(card.class || form.class || '').toLowerCase();
-  const weapon = card.id === 'soldier' ? 'rifle' : card.id === 'henry' ? 'axe' : card.id === 'dumpsy' ? 'orbit' :
-    /tank|fighter|assassin/.test(role) ? 'axe' : /mage|support/.test(role) ? 'wand' : 'rifle';
+  const weapon = survivalChooseStartingWeapon(card, stats, role);
+  const equipment = SURVIVAL_WEAPONS[weapon];
+  if (SURVIVAL_STARTING_WEAPONS[card.id]) {
+    // The user's arena loadouts replace these offensive Codex values only.
+    stats.damage = equipment.damage;
+    stats.attackSpeed = equipment.interval / 1000;
+    stats.delay = 0; // twin-sword recovery is separate from stat wind-up
+    stats.number = equipment.kind === 'twin-sweep' ? 2 : 1;
+    stats.range = equipment.range * 10;
+  } else if (weapon === 'rifle') {
+    stats.number = 3; // one projectile per shot, three shots per base volley
+  }
   const rarity = String(card.rarity || 'mundane').toLowerCase();
   const color = SURVIVAL_RARITY_COLORS[SURVIVAL_RARITIES.indexOf(rarity)] || '#a5b4fc';
   const innate = SURVIVAL_PASSIVES[card.id] ? card.id : null;
