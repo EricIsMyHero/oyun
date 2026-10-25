@@ -154,9 +154,10 @@ Then open: `http://localhost:8080`
 Serve the repository over HTTP, open **Game → Survival**, and pick a character.
 The picker loads all **138 Codex cards** from the eight `rarity/*.json` files,
 with search and rarity filters. Failed files can be retried without losing the
-available roster. Multi-form cards start in their first form; class selects an
-arena weapon archetype. These are arena adaptations, not implementations of all
-138 original card traits. The 20 supported names start with their own passive.
+available roster. Multi-form cards start in their first form. Except for the
+explicit loadouts below, Range ≤1500 selects melee (axe / Dumpsy orbits);
+longer range selects a wand for Mage/Support or a rifle for other classes. These are arena adaptations, not implementations of all
+138 original card traits. Cards with a supported passive start with it equipped. There are now **91 passives**; see the full [passive catalog](docs/survival-passives.md).
 
 Move using WASD / arrows or the joystick. Attacks are automatic. **P / Esc**
 pauses; leaving Survival or hiding the tab freezes combat. **Space** with the
@@ -167,13 +168,36 @@ Every level pauses the run and offers **3 upgrades; choose exactly one** by
 click/touch or keys 1–3. Excess XP opens successive choices. A run holds **4
 weapons including the starting weapon**, and **4 passives including any innate
 passive**. Full slots allow equipped upgrades only. Weapons reach level 8 and
-passives level 5; maxed options disappear. Consumable choices remain available
+the 18 scalable passives level 5. The 73 exact-rule passives are single-rank; maxed options disappear. Consumable choices remain available
 at full progression. Inspect an equipped item by clicking or tapping its slot.
 
-Weapons: Soldier rifle, Henry axe, mana wand, Dumpsy orbits, fire nova and chain
-lightning. Passives: Venomora, Toxic, Magmara, Aeralis, Clara, Venomspikes,
+Weapons: Soldier rifle, Henry axe, heavy hammer, bow, light axe, sword, dual swords, scythe, spear, mana wand,
+Dumpsy orbits, fire nova and chain lightning. The rifle fires three sequential
+bullets at a single point locked at volley start; death or movement of the target
+does not redirect later bullets. Count upgrades add shots to that volley, rather
+than spreading each shot among targets. The next volley can select a new point.
+
+| Weapon | Base attack | Timing | Starting cards |
+|--------|-------------|--------|----------------|
+| Sword | 12 damage to all enemies in a 135° sector; 150px range | 1.25s | King, Mimic, Blesser, XII Josh, Bio Mech, Stormblade, Azrith, Fallen Angel, Ali, SlasherX |
+| Dual swords | 2×6 damage in a locked 90° sector; 135px range | First hit, second hit 0.50s later, then 0.75s recovery before the next pair | Nightprowler, Malvaris |
+| Scythe | 28 damage to all enemies within a 360° area; 160px range | 2.00s | Hailey, Shadow Reaper, Bloodraider |
+| Heavy hammer | 90 damage in a 40×40px (1×1) square centered on its target; 120px reach | 3.00s | Lord, Trac, Earthshakers, Warborn |
+| Bow | 8 damage per arrow; 600px range | 0.80s | Hunter, JS, Skyhunter, Fire Archer, Nyra |
+| Light axe | 6 damage, exactly one target; 130px range | 0.75s | Hell boy, Collector |
+| Spear | 20 damage through a narrow 24px-wide thrust; 240px reach | 1.75s | Wong, Void Striker, Tribe, Lumina |
+
+These explicit loadouts replace only the starting offensive stats and range;
+health, shields and additional stats still come from each card. Listed damage is
+base damage before upgrades, critical hits and passive modifiers. Dual-sword
+recovery is a weapon combo timer, separate from the general Delay wind-up stat.
+Haste speeds up both the gap between hits and the recovery; pausing freezes both.
+All enemies intersecting a melee sector/line can be hit. Additional Count upgrades
+add +8% damage per Count to the new melee area weapons.
+
+Passives: Venomora, Toxic, Magmara, Aeralis, Clara, Venomspikes,
 Frostshot, Stormblade, Collector, Blesser, Azrith, Neon Droid, Skyhunter,
-Demotron, Untouch, Artist, Lyra, Ali, Snaykies and Reacher. Passive descriptions
+Demotron, Untouch, Artist, Lyra, Ali, Snaykies and Reacher, plus 71 additional passives listed in the catalog. Passive descriptions
 show exact arena effects. Repeated poison/burn/slow hits refresh their duration;
 splash and damage-over-time do not recursively trigger hit passives or lifesteal.
 
@@ -196,8 +220,9 @@ Arena interpretations:
   reduce it to 0ms. JSON volley gaps are included in the starting interval.
 - Range / Vision use 10 Codex units per canvas pixel; Speed uses 5 units per
   pixel/second. Range improves every weapon; Vision limits target acquisition.
-- Count adds projectiles, melee targets, orbitals and lightning bounces (up to
-  15); nova gains +8% damage per additional Count.
+- Count extends rifle volleys, adds wand projectiles, axe targets, orbitals and
+  lightning bounces (up to 15); nova gains +8% damage per additional Count.
+  The new melee area weapons gain +8% damage per Count above their starting Count.
 - Shield absorbs hits before health with correct overflow. Shield Depletion is
   the percentage of blocked damage spent as shield; upgrades reduce it toward
   10%. Fortification starts 3 seconds after the last non-dodged hit.
@@ -224,3 +249,17 @@ node --test tests/survival.test.cjs
 Browser smoke check: search/filter the roster; start both a normal card and a
 multi-form card; verify movement, natural kills/XP, paused upgrade choices,
 resource HUD, mana ability, shield overflow, restart/menu, and mobile joystick.
+
+The extended passives use per-run counters, expiring stacks, charges, traps and
+companions. Enemy variants include flying units, animals and ranged attackers,
+so anti-air, type resistances, blindness, silence and projectile reflection have
+real combat targets. The HUD shows companions, invisibility, egg timer and active
+charge meters; the stat panel includes temporary critical/lifesteal/damage bonuses.
+Companions and secondary area/DoT effects share the DPS budget but do not trigger
+recursive hit-passive chains. World actors and effect arrays are bounded.
+
+Survival's passive definitions and runtime are included in `js/modules/survival.js`.
+Only `survival-data.js` followed by `survival.js` is needed for this mode, after
+the existing Codex scripts. There is no separate passive-runtime download. The
+HTML versions the engine URL so deployments fetch the corrected script. Replace
+the ZIP contents together, including `index.html`; keep serving them over HTTP.

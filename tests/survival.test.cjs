@@ -6,7 +6,6 @@ const path = require('node:path');
 const modal = fs.readFileSync(path.join(__dirname, '../js/core/modal.js'), 'utf8');
 const schema = modal.slice(modal.indexOf('const STAT_DEFS'), modal.indexOf('/* ════════════════════════════════════════════════════════\n   BUILDER HELPERS'));
 const metadata = fs.readFileSync(path.join(__dirname, '../js/modules/survival-data.js'), 'utf8');
-const traits = fs.readFileSync(path.join(__dirname, '../js/modules/survival-passives.js'), 'utf8');
 const source = fs.readFileSync(path.join(__dirname, '../js/modules/survival.js'), 'utf8');
 
 // The game runs unmodified in a VM. Only browser surfaces are stubbed; combat,
@@ -23,7 +22,7 @@ function game(character = 'soldier') {
     Image: class {}, getCardImg: () => 'art.jpg',
     performance: { now: () => 0 }, requestAnimationFrame: () => 1, cancelAnimationFrame() {},
   });
-  vm.runInContext(schema + metadata + traits + source, context);
+  vm.runInContext(schema + metadata + source, context);
   const run = code => vm.runInContext(code, context);
   // Explicit balanced fixtures isolate combat assertions from future Codex edits.
   run(`for (const [id, hp, damage, speed, range, interval] of [['soldier',100,5,1150,4800,2], ['henry',130,10,975,1500,1.25]]) {
@@ -883,4 +882,19 @@ test('Pirate Girls distance scaling caps at 75%; Ship Cannoneer haste scales wit
 test('a returning Boomix arrow can damage the same enemy once on each pass and then despawns',()=>{
   const g=traitGame('boomix');const e=enemy(g,'x:780,hp:1000,maxHp:1000');g.run('survivalShoot(survivalCreateWeapon("bow"))');
   advance(g,3);assert.equal(e.hp,984);assert.equal(g.state().bullets.length,0);
+});
+
+test('public HTML loads a complete Survival runtime without a separate passive script',()=>{
+  const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
+  const scripts=Array.from(html.matchAll(/<script\s+src="([^"]+)"/g),m=>m[1]).filter(src=>src.includes('/survival'));
+  assert.ok(scripts.length>0);
+  const context=vm.createContext({window:{matchMedia:()=>({matches:false})}});
+  vm.runInContext(schema,context);
+  for(const src of scripts){
+    const pathname=new URL(src,'http://localhost/').pathname.slice(1);
+    vm.runInContext(fs.readFileSync(path.join(__dirname,'..',pathname),'utf8'),context,{filename:pathname});
+  }
+  assert.equal(vm.runInContext('typeof survivalTraitsInit',context),'function');
+  assert.equal(vm.runInContext('Object.keys(survivalTraitsInit().memory).length',context),0);
+  assert.equal(vm.runInContext('Object.keys(SURVIVAL_PASSIVES).length',context),91);
 });
