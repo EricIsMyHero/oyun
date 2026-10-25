@@ -50,8 +50,8 @@ The top bar has two dropdown packages instead of one long row of buttons:
 
 | Package     | Sections                                                                   |
 |-------------|----------------------------------------------------------------------------|
-| **Archive** | Lore, Cards, Spells, Tower Guns                                            |
-| **Game**    | Battle Arena, Survival, Codex, Power Up, Shop, Mana Pass, Trophy Road      |
+| **Archive** | Lore, Cards, Spells, Tower Guns, Codex                                     |
+| **Game**    | Battle Arena, Survival, Power Up, Shop, Mana Pass, Trophy Road             |
 
 To move a section between packages, move its `<li><button class="nav-btn" data-section="...">`
 line inside the other `<ul class="nav-menu">` in `index.html`. Nothing else has to change.
