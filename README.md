@@ -8,7 +8,9 @@ clash-a-mana/
 ├── index.html              ← Main entry point (clean HTML skeleton only)
 │
 ├── styles/
-│   └── main.css            ← All visual styles and CSS variables
+│   ├── main.css            ← All visual styles and CSS variables
+│   ├── nav.css             ← Navigation packages (Archive / Game dropdowns)
+│   └── towerguns.css       ← Tower Guns section
 │
 ├── js/
 │   ├── core/
@@ -19,10 +21,12 @@ clash-a-mana/
 │   └── modules/
 │       ├── cards.js        ← Card database fetch, filter, render
 │       ├── spells.js       ← Spell archive fetch, filter, render
+│       ├── towerguns.js    ← Tower Guns fetch + render
 │       └── info.js         ← Codex / info section
 │
 ├── data/
 │   ├── spells.json         ← All spell cards
+│   ├── towerguns.json      ← All tower guns (empty list until filled in)
 │   ├── info.json           ← Codex sections (rules, mechanics)
 │   └── groups.json         ← Faction / group definitions
 │
@@ -38,6 +42,38 @@ clash-a-mana/
 └── assets/
     └── {group-name}/
         └── {card-name}.jpg ← Card artwork images
+```
+
+## Navigation Packages
+
+The top bar has two dropdown packages instead of one long row of buttons:
+
+| Package     | Sections                                                                   |
+|-------------|----------------------------------------------------------------------------|
+| **Archive** | Lore, Cards, Spells, Tower Guns                                            |
+| **Game**    | Battle Arena, Survival, Codex, Power Up, Shop, Mana Pass, Trophy Road      |
+
+To move a section between packages, move its `<li><button class="nav-btn" data-section="...">`
+line inside the other `<ul class="nav-menu">` in `index.html`. Nothing else has to change.
+
+## Tower Gun JSON Format
+
+`data/towerguns.json` is a list. Any key inside `stats` is shown as a stat row.
+
+```json
+[
+  {
+    "name": "Gun Name",
+    "rarity": "common | rare | epic | legendary",
+    "trait": "What the gun does.",
+    "stats": {
+      "damage": "120",
+      "range": "7500",
+      "attackSpeed": "1.2",
+      "health": "2000"
+    }
+  }
+]
 ```
 
 ## Image Path Convention
