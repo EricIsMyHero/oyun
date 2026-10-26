@@ -2,7 +2,7 @@
 
 The portrait fills the left side of the modal without empty bands. The name,
 class/subclass and faction sit over the artwork, with a dark gradient behind the
-text and an inset angular frame. Creature type and flight status appear at the
+text and an inset angular frame. Creature type and movement type appear at the
 bottom. Rarity colors from `styles/main.css` tint the outer frame; a bright
 highlight travels around it on an eight-second cycle. There is no visible rarity
 text badge. The light and close button remain on the frame while content scrolls;
@@ -36,7 +36,7 @@ the shared fullscreen Lore reader, with Escape returning to the spell first.
 | --- | --- |
 | 1 | Health / Shield; Damage / DPS; Attack Speed / Delay; Mana / Count; Range / Speed; Critical Damage / Critical Chance; Lifesteal / Lifesteal Chance |
 | 2 | Dodge / Vision; Healing Bonus / Rejuvenation; Fortification / Damage Reduction; Critical Resistance / Flexibility; Shield Depletion / Life |
-| 3 | Multiple targets, attack width, attack distance/type, attack shape, flight, weight, targets and creature type |
+| 3 | Range, attack travel distance, projectile width, attack arc/shape/type, multiple targets, target layers, movement, ground-effect immunity, weight, creature type, impact area and endpoint effect |
 
 Zero values are shown. Missing or inapplicable data is displayed as `—`.
 Values keep their original units and burst format, such as `2x6`.
@@ -56,15 +56,26 @@ The profiles are initial design values based on the existing card descriptions
 and the requested weapon assignments. Weight is a design category, not a
 calculation from Health. Edit these values to refine balance.
 
+The updated interface, tooltips and accessible labels are English. Ability names,
+`trait`, Emergent `turns`, star upgrade text and conditional ability descriptions
+stay exactly as authored. Ability content is marked `lang="az"`; do not translate
+it unless the user explicitly requests that change.
+
 ```json
 "combatStats": {
   "attackType": "melee",
-  "multiTarget": true,
-  "maxTargets": null,
-  "attackShape": "cone",
-  "attackWidth": "135°",
-  "flight": "ground",
-  "weight": "medium",
+  "multiTarget": false,
+  "maxTargets": 1,
+  "attackShape": "single",
+  "attackWidth": 1200,
+  "attackDistance": 1250,
+  "attackDistanceMatchesRange": false,
+  "attackAngle": null,
+  "impactSize": null,
+  "projectileEndEffect": null,
+  "movementType": "ground",
+  "groundEffectImmune": false,
+  "weight": "heavy",
   "targets": "ground"
 }
 ```
@@ -72,15 +83,36 @@ calculation from Health. Edit these values to refine balance.
 | Field | Accepted values / meaning |
 | --- | --- |
 | `attackType` | `melee`, `ranged`, `mixed`, `none` |
-| `multiTarget` | Boolean: can the attack damage more than one enemy? |
-| `maxTargets` | `1` for single target, a number such as `5`, `null` for enemies inside the area, `0` for a non-attacker |
-| `multiTargetCondition` | Optional activation rule, e.g. `Hər 4-cü vuruşda.` for a conditional area attack |
+| `multiTarget` | Whether one attack can damage more than one enemy |
+| `maxTargets` | `1` for single target, a count such as `5`, `null` for targets inside an area, `0` for a non-attacker |
+| `multiTargetCondition` | Optional ability activation rule, preserved in its original language |
 | `attackShape` | `single`, `cone`, `circle`, `line`, `square`, `multi`, `none` |
-| `attackWidth` | Readable angle/area, e.g. `90°`, `360°`, `1 × 1 karo`, `Dar xətt` |
-| `flight` | `ground`, `flying`, `conditional` |
-| `flightCondition` | Required explanation for `conditional`, e.g. XII Josh's low-health flight |
+| `attackWidth` | Numeric width of one projectile or strike in tiles; `null` when not specified |
+| `attackDistance` | Numeric maximum travel distance of one attack in tiles; independent of Range; `null` when not specified |
+| `attackDistanceMatchesRange` | Resolves travel distance from the current maximum `additionalStats.range`, including slash-separated variants |
+| `attackAngle` | Sweep angle in degrees, e.g. `135` or `360`; independent of width |
+| `impactSize` | Impact area dimensions such as `1 × 1 tiles`; separate from projectile width |
+| `projectileEndEffect` | `explode` for an explosion at the travel endpoint; `null` when not specified |
+| `movementType` | `ground`, `flying`, `hovering` |
+| `groundEffectImmune` | True for hovering and airborne cards, which are not affected by ground-only effects |
+| `movementCondition` | Optional temporary movement ability description, kept in its original language |
 | `weight` | `very-light`, `light`, `medium`, `heavy`, `very-heavy` |
-| `targets` | `ground`, `air`, `both`, `none` |
+| `targets` | Target layers: `ground`, `air`, `both`, `none`; independent of the attacker's movement |
+
+**Range** controls target acquisition and when a card can start attacking.
+**Attack Distance** is how far a single attack can travel. **Projectile Width**
+is the width of that attack; sweep angles and impact areas have their own fields.
+Henry has a width of **1200 tiles** and travel distance of **1250 tiles**; his
+existing Range stays **1200**. Arcanyx's travel distance follows his current
+maximum Range (**2100** in the current data), and his attack explodes at its
+endpoint. Unspecified dimensions remain `null` instead of being inferred from
+Range or replaced with a sector angle.
+
+**Hovering** cards move on the **ground** layer while ignoring ground-only spells
+and effects: Cryon, Tornado, Astranova, Whisper, Fallen Angel and Void Wraith.
+**Flying** cards use the **air** layer: Bees, Angels, Hornets, Venom Fangs, Bats
+and Butterflies. Every other base form is Ground. Temporary flight remains in
+its original ability description and does not introduce a fourth movement type.
 
 **Count** (`stats.number`) is the number of deployed units. Burst damage such as
 `3x5` describes successive hits. Neither means three simultaneous targets.
@@ -104,4 +136,6 @@ default; override with `CHROMIUM_PATH`). It serves the real app on a temporary
 localhost port, stubs external art/font requests, renders all cards/forms, checks
 eight rarity skins, six viewport sizes, the inline header, right-hand navigation,
 keyboard tabs, Lore, transformations, the travelling light and reduced-motion fallback,
-missing artwork, and the shared spell and Survival entry points.
+missing artwork, and the shared spell and Survival entry points. Additional checks cover English UI labels,
+unchanged ability content, Henry's independent dimensions, Arcanyx's dynamic
+travel limit and the exact hovering/flying rosters.

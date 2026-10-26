@@ -51,7 +51,7 @@ const server = http.createServer(async (req, res) => {
     assert.ok(await page.locator('#stat-page-2 [data-stat="dodge"]').isVisible());
     await page.keyboard.press('ArrowRight');
     assert.equal(await page.locator('[data-stat-page="3"]').getAttribute('aria-selected'), 'true');
-    assert.equal(await page.locator('#stat-page-3 [data-profile]').count(), 8);
+    assert.equal(await page.locator('#stat-page-3 [data-profile]').count(), 14);
     await page.keyboard.press('End');
     assert.equal(await page.locator('[data-stat-page="3"]').getAttribute('aria-selected'), 'true');
     await page.keyboard.press('Home');
@@ -104,7 +104,7 @@ const server = http.createServer(async (req, res) => {
       function check(card, root) {
         renderModalContent(card, root, null, null);
         if (document.querySelectorAll('[data-stat]').length !== 24) throw Error(`${card.name}: missing stats`);
-        if (document.querySelectorAll('[data-profile]').length !== 8) throw Error(`${card.name}: missing combat profile`);
+        if (document.querySelectorAll('[data-profile]').length !== 14) throw Error(`${card.name}: missing combat profile`);
         if (/\p{Extended_Pictographic}|\p{Emoji_Presentation}/u.test(document.querySelector('.modal-frame').textContent)) throw Error(`${card.name}: emoji in modal`);
         forms++;
         for (const form of card.forms || []) check(form, root);
@@ -122,6 +122,35 @@ const server = http.createServer(async (req, res) => {
     });
     assert.equal(rendered.forms, 192);
     assert.equal(new Set(rendered.rarities.map(x => x[1])).size, 8);
+
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='henry')));
+    await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'1200 tiles');
+    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'1250 tiles');
+    assert.equal(await page.locator('[data-profile="range"] strong').textContent(),'1200 tiles');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='arcanyx')));
+    await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'2100 tiles');
+    assert.equal(await page.locator('[data-profile="projectileEndEffect"] strong').textContent(),'Explodes');
+    for (const id of ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith']) {
+      await page.evaluate(id=>openModal(allCards.find(c=>c.id===id)),id);
+      await page.locator('[data-stat-page="3"]').click();
+      assert.equal(await page.locator('[data-profile="movementType"] strong').textContent(),'Hovering');
+      assert.equal(await page.locator('[data-profile="groundEffectImmune"] strong').textContent(),'Yes');
+      const englishUI=await page.locator('#stat-page-3').evaluate(el=>{
+        const copy=el.cloneNode(true); copy.querySelectorAll('[lang="az"]').forEach(n=>n.remove()); return copy.textContent;
+      });
+      assert.doesNotMatch(englishUI,/[ƏəıİşŞçÇğĞüÜöÖ]/);
+    }
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='sylviana')));
+    await page.locator('[data-form-index="0"]').click();
+    await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="movementType"] strong').textContent(),'Flying');
+    assert.equal(await page.locator('[data-profile="type"] strong').textContent(),'Animal');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='nitrox')));
+    await page.locator('[data-card-section="ability"]').click();
+    assert.equal(await page.locator('#card-section-ability .modal-trait-box').getAttribute('lang'),'az');
+    assert.equal(await page.locator('#card-section-ability .modal-trait-box').innerHTML(),await page.evaluate(()=>allCards.find(c=>c.id==='nitrox').trait));
 
     await page.evaluate(() => openModal(allCards.find(c=>c.id==='king')));
     await page.locator('#dual-pick-2').click();

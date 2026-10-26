@@ -178,10 +178,13 @@ function modalIcon(key) {
     shieldtakendamage:'<path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6l8-3ZM12 8v8M9 13l3 3 3-3"/>',
     life:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
     multiTarget:'<circle cx="8" cy="8" r="4"/><circle cx="17" cy="16" r="4"/><path d="m10 12 3 2M12 7h8M16 3l4 4-4 4"/>',
-    attackWidth:'<path d="M4 4v16h16M4 20 17 7M4 11a9 9 0 0 1 9 9"/>',
+    attackWidth:'<path d="M9 7h7a5 5 0 0 1 0 10H9V7ZM4 7v10M2 9l2-2 2 2M2 15l2 2 2-2"/>',
+    attackAngle:'<path d="M4 4v16h16M4 20 17 7M4 11a9 9 0 0 1 9 9"/>',
     attackType:'<path d="m4 4 16 16M20 4 4 20M3 8l5-5M16 21l5-5M3 16l5 5M16 3l5 5"/>',
     attackShape:'<path d="m12 3 9 9-9 9-9-9 9-9Z"/><path d="m12 8 4 4-4 4-4-4 4-4Z"/>',
     flight:'<path d="M12 20v-8M12 13C10 7 5 4 2 4c0 8 4 12 10 9Zm0 0C14 7 19 4 22 4c0 8-4 12-10 9Z"/>',
+    ground:'<path d="M3 20h18M5 16h5v-5h5V6h4"/>',
+    hovering:'<path d="m12 3 5 5-5 5-5-5 5-5ZM4 17h16M7 21h10"/>',
     weight:'<path d="M6 7h12l3 14H3L6 7Z"/><circle cx="12" cy="5" r="3"/>',
     type:'<path d="m12 2 9 5v10l-9 5-9-5V7l9-5ZM3 7l9 5 9-5M12 12v10"/>',
     stats:'<path d="M5 20V10M12 20V4M19 20v-7M2 20h20"/>',
@@ -193,16 +196,16 @@ function modalIcon(key) {
     expand:'<path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/>',
     close:'<path d="m6 6 12 12M18 6 6 18"/>',
   };
-  const aliases = { targets:'criticalChance', star:'criticDamage', entity:'type', damageToCard:'damage', damageToCastle:'shield', timeBetweenDamage:'delay', lifetime:'life', size:'attackWidth' };
+  const aliases = { attackDistance:'range', flying:'flight', movementType:'flight', groundEffectImmune:'shield', impactSize:'attackShape', projectileEndEffect:'sps', targets:'criticalChance', star:'criticDamage', entity:'type', damageToCard:'damage', damageToCastle:'shield', timeBetweenDamage:'delay', lifetime:'life', size:'attackWidth' };
   const body = paths[aliases[key] || key] || paths.type;
   return `<svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${body}</svg>`;
 }
 
 function renderModalIdentity(card, fallback = {}) {
   const name = card.name || fallback.name || 'Unknown';
-  const role = card.class || fallback.class;
-  const subclass = card.subclass || fallback.subclass;
-  const type = Array.isArray(card.type) ? card.type.join(' / ') : card.type || '';
+  const role = modalTerm(card.class || fallback.class);
+  const subclass = modalTerm(card.subclass || fallback.subclass);
+  const type = modalTypes(card.type || fallback.type).join(' / ');
   const group = card.group || fallback.group || (modal.dataset.kind === 'spell' ? 'Spell' : 'Stagnantia');
   document.getElementById('modal-identity').innerHTML = `
     <div class="modal-name-class-row">
@@ -211,8 +214,8 @@ function renderModalIdentity(card, fallback = {}) {
       ${subclass ? `<span class="modal-subclass-badge">${modalEscape(subclass)}</span>` : ''}
     </div>
     <div class="modal-card-group">${modalIcon('type')}<span>${modalEscape(group)}</span></div>`;
-  const flight = {ground:'Yerüstü', flying:'Uçan', conditional:'Şərti uçuş'}[card.combatStats?.flight];
-  document.getElementById('modal-art-meta').innerHTML = `${type ? `<span>${modalIcon('entity')}${modalEscape(type)}</span>` : ''}${flight ? `<span>${modalIcon('flight')}${flight}</span>` : ''}`;
+  const movement = MODAL_MOVEMENT[card.combatStats?.movementType];
+  document.getElementById('modal-art-meta').innerHTML = `${type ? `<span>${modalIcon('entity')}${modalEscape(type)}</span>` : ''}${movement ? `<span title="${modalEscape(movement.hint)}">${modalIcon(card.combatStats.movementType)}${movement.label}</span>` : ''}`;
 }
 
 /* Every render sets the skin, including form changes and the dual picker. */
@@ -230,22 +233,22 @@ function applyModalRarity(rarity, name) {
   box.style.setProperty('--modal-color', color);
   box.dataset.rarity = safeKey;
   // Screen readers retain the rarity information without a visible badge.
-  (box.closest('.modal-frame') || box).setAttribute('aria-label', `${name || 'Kart'} · ${safeKey}`);
+  (box.closest('.modal-frame') || box).setAttribute('aria-label', `${name || 'Card'} · ${safeKey}`);
   document.getElementById('modal-img-rarity').style.background = color;
 }
 
 const MODAL_STAT_HINTS = {
-  health:'Maksimum can.', shield:'Canı qoruyan qalxan.', damage:'Bir vuruşun hasarı. 2x6: iki dəfə 6 hasar.',
-  sps:'Saniyə başına hasar.', attackSpeed:'Vuruşlar arasındakı vaxt. Az olması daha yaxşıdır.',
-  delay:'Hücum dəstələri arasındakı fasilə. Az olması daha yaxşıdır.', mana:'Kartın mana xərci.',
-  number:'Meydana çıxan vahidlərin sayı; eyni vaxtda vurulan hədəf sayı deyil.',
-  range:'Hücum məsafəsi.', speed:'Hərəkət sürəti.', criticDamage:'Kritik vuruşun hasar əmsalı.',
-  criticalChance:'Kritik vuruş ehtimalı.', lifesteal:'Can çalma işə düşəndə bərpa edilən hasar faizi.',
-  lifestealChance:'Can çalma ehtimalı.', dodge:'Zərbədən yayınma ehtimalı.', vision:'Görüş məsafəsi.',
-  healBonus:'Alınan sağaltmanı gücləndirir.', healrecovery:'Saniyə başına can bərpası.',
-  shieldrecovery:'Saniyə başına qalxan bərpası.', criticdamageminimiser:'Alınan kritik hasarı azaldır.',
-  damageminimiser:'Alınan hasarı azaldır.', flexibility:'Mənfi təsirlərə qarşı çeviklik.',
-  shieldtakendamage:'Qalxanın aldığı hasar faizi. Az olması daha yaxşıdır.', life:'Məhdud ömür. Tire: məhdudiyyət göstərilməyib.',
+  health:'Maximum health.', shield:'Protective shield that absorbs incoming damage.', damage:'Damage per hit. 2x6 means two hits for 6 damage each.',
+  sps:'Damage per second.', attackSpeed:'Time between hits. Lower is better.',
+  delay:'Recovery time between volleys. Lower is better.', mana:'Mana cost to deploy the card.',
+  number:'Number of deployed units; separate from the number of simultaneous targets.',
+  range:'Distance at which the card can acquire a target and begin attacking.', speed:'Movement speed.', criticDamage:'Critical hit damage multiplier.',
+  criticalChance:'Chance of a critical hit.', lifesteal:'Percentage of dealt damage restored as health when lifesteal triggers.',
+  lifestealChance:'Chance to trigger lifesteal.', dodge:'Chance to avoid an incoming hit.', vision:'Vision distance.',
+  healBonus:'Increases healing received.', healrecovery:'Health restored per second.',
+  shieldrecovery:'Shield restored per second.', criticdamageminimiser:'Reduces incoming critical damage.',
+  damageminimiser:'Reduces incoming damage.', flexibility:'Resistance to negative effects.',
+  shieldtakendamage:'Percentage of damage taken by the shield. Lower is better.', life:'Limited lifetime. A dash means no lifetime has been specified.',
 };
 
 function modalStatMagnitude(value) {
@@ -271,7 +274,7 @@ function buildStatTiles(defs, source) {
     const value = raw == null || String(raw).trim() === '' || /^[—–-]$/.test(String(raw).trim()) ? '—' : raw;
     const rating = modalStatRating(def, value);
     const hint = MODAL_STAT_HINTS[def.key] || '';
-    const ratingLabel = rating === null ? 'Müqayisə məlumatı yoxdur' : `Müqayisəli göstərici: ${rating}/5`;
+    const ratingLabel = rating === null ? 'No comparison data' : `Relative rating: ${rating}/5`;
     return `<div class="modal-stat-tile${String(value).length > 9 ? ' modal-stat-tile--wide-value' : ''}" data-stat="${def.key}" style="--stat-color:var(--modal-color)" title="${modalEscape(hint)}">
       <span class="modal-stat-label">${modalIcon(def.key)}<span>${def.label}</span></span>
       <strong class="modal-stat-value">${modalEscape(value)}</strong>
@@ -280,30 +283,62 @@ function buildStatTiles(defs, source) {
   }).join('');
 }
 
+// Width, travel distance, targeting range and area geometry are separate values.
+const MODAL_MOVEMENT = {
+  ground: { label:'Ground', layer:'ground', groundEffectImmune:false, hint:'Travels along the ground.' },
+  flying: { label:'Flying', layer:'air', groundEffectImmune:true, hint:'Travels through the air and follows air-targeting rules.' },
+  hovering: { label:'Hovering', layer:'ground', groundEffectImmune:true, hint:'Moves along the ground while remaining immune to ground-only spells and effects.' },
+};
+function modalTerm(value) {
+  return { 'İnsan':'Human', 'Heyvan':'Animal', 'Ölü':'Dead', 'Uzaylı':'Alien', 'Ruh':'Spirit', 'Varlıq':'Entity' }[value] || value || '';
+}
+function modalTypes(value) {
+  return (Array.isArray(value) ? value : value ? [value] : []).map(modalTerm);
+}
+function modalDistance(value) {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 ? `${value} tiles` : '—';
+}
+function modalAttackDistance(card) {
+  const p = card.combatStats || {};
+  if (!p.attackDistanceMatchesRange) return p.attackDistance ?? null;
+  const values = String(card.additionalStats?.range ?? '').split('/').map(part => parseFloat(part.replace(',', '.'))).filter(Number.isFinite);
+  return values.length ? Math.max(...values) : null;
+}
+
 function buildCombatProfile(card) {
   const p = card.combatStats || {};
+  const movement = MODAL_MOVEMENT[p.movementType];
   const labels = {
-    attackType: { melee:'Yaxın', ranged:'Uzaq', mixed:'Yaxın və uzaq', none:'Hücum etmir' },
-    attackShape: { single:'Tək hədəf', cone:'Sektor', circle:'Dairəvi', line:'Xətt', square:'Sahəvi', multi:'Çox hədəf', none:'Yoxdur' },
-    flight: { ground:'Xeyr · yerüstü', flying:'Bəli · uçan', conditional:'Şərti uçuş' },
-    weight: { 'very-light':'Çox yüngül', light:'Yüngül', medium:'Orta', heavy:'Ağır', 'very-heavy':'Çox ağır' },
-    targets: { ground:'Yerüstü', air:'Hava', both:'Yer və hava', none:'Yoxdur' },
+    attackType: { melee:'Melee', ranged:'Ranged', mixed:'Melee & ranged', none:'Does not attack' },
+    attackShape: { single:'Single target', cone:'Sector', circle:'Circular', line:'Line', square:'Area', multi:'Multiple targets', none:'None' },
+    weight: { 'very-light':'Very light', light:'Light', medium:'Medium', heavy:'Heavy', 'very-heavy':'Very heavy' },
+    targets: { ground:'Ground', air:'Air', both:'Ground & air', none:'None' },
   };
-  const multi = p.attackType === 'none' ? 'Hücum etmir' : p.multiTarget === true ? (Number.isFinite(p.maxTargets) ? `Bəli · ${p.maxTargets} hədəf` : 'Bəli · sahədəki rəqiblər') : p.multiTarget === false ? 'Xeyr · tək hədəf' : '—';
+  const multi = p.attackType === 'none' ? 'Does not attack' : p.multiTarget === true ? (Number.isFinite(p.maxTargets) ? `Yes · ${p.maxTargets} targets` : 'Yes · targets in the area') : p.multiTarget === false ? 'No · single target' : '—';
+  const range = modalStatMagnitude(card.additionalStats?.range);
   const fields = [
-    ['multiTarget','Birdən çox rəqibə hasar',multi,'Count-dan fərqli olaraq bir hücumun vura bildiyi hədəflər.'],
-    ['attackWidth','Saldırı genişliyi',p.attackWidth || '—','Hücum sektorunun bucağı və ya sahənin ölçüsü.'],
-    ['attackType','Hücum məsafəsi',labels.attackType[p.attackType] || '—','Əsas hücumun növü.'],
-    ['attackShape','Hücum forması',labels.attackShape[p.attackShape] || '—','Əsas zərbənin yayıldığı forma.'],
-    ['flight','Uça bilirmi?',labels.flight[p.flight] || '—',p.flightCondition || 'Kartın uçuş vəziyyəti.'],
-    ['weight','Çəki',labels.weight[p.weight] || '—','Çox yüngül → yüngül → orta → ağır → çox ağır.'],
-    ['targets','Hədəflər',labels.targets[p.targets] || '—','Hücumun yönələ bildiyi hədəflər.'],
-    ['type','Kart tipi',Array.isArray(card.type) ? card.type.join(' / ') : card.type || '—','Kartın aid olduğu varlıq tipi.'],
+    ['range','Range',modalDistance(range),'Distance at which this card can acquire a target and begin attacking.'],
+    ['attackDistance','Attack Distance',modalDistance(modalAttackDistance(card)),'Maximum distance a single attack or projectile can travel.'],
+    ['attackWidth','Projectile Width',modalDistance(p.attackWidth),'Width of one projectile or strike, measured in tiles.'],
+    ['attackAngle','Attack Arc',typeof p.attackAngle === 'number' ? `${p.attackAngle}°` : '—','Angle covered by a sweeping attack. Separate from projectile width.'],
+    ['attackType','Attack Type',labels.attackType[p.attackType] || '—','How the card delivers its basic attack.'],
+    ['attackShape','Attack Shape',labels.attackShape[p.attackShape] || '—','Shape of the strike or impact area.'],
+    ['multiTarget','Multiple Targets',multi,'Targets hit by one attack. Separate from the number of deployed units.'],
+    ['targets','Targets',labels.targets[p.targets] || '—','Target layers this card can attack.'],
+    ['movementType','Movement',movement?.label || '—',movement?.hint || 'Movement type has not been specified.'],
+    ['groundEffectImmune','Ground Effect Immunity',movement ? movement.groundEffectImmune ? 'Yes' : 'No' : '—','Immunity to spells and effects that only affect the ground. Hovering cards still move on the ground.'],
+    ['weight','Weight',labels.weight[p.weight] || '—','Very light, light, medium, heavy or very heavy.'],
+    ['type','Creature Type',modalTypes(card.type).join(' / ') || '—','The creature category this card belongs to.'],
+    ['impactSize','Impact Area',p.impactSize || '—','Area affected on impact. Separate from projectile width.'],
+    ['projectileEndEffect','End of Attack',p.projectileEndEffect === 'explode' ? 'Explodes' : '—','Effect triggered at the end of the attack distance.'],
   ];
   return fields.map(([key, name, value, hint]) => `<div class="modal-profile-tile" data-profile="${key}" title="${modalEscape(hint)}">
-    <span class="modal-stat-label">${modalIcon(key)}<span>${name}</span></span>
+    <span class="modal-stat-label">${modalIcon(key === 'movementType' ? p.movementType : key)}<span>${name}</span></span>
     <strong>${modalEscape(value)}</strong>
-    ${key === 'flight' && p.flightCondition ? `<small>${modalEscape(p.flightCondition)}</small>` : key === 'multiTarget' && p.multiTargetCondition ? `<small>${modalEscape(p.multiTargetCondition)}</small>` : ''}
+    ${key === 'attackDistance' && p.attackDistanceMatchesRange ? '<small>Matches current Range.</small>' : ''}
+    ${key === 'movementType' && movement ? `<small>${modalEscape(movement.hint)}</small>` : ''}
+    ${key === 'movementType' && p.movementCondition ? `<small lang="az">${modalEscape(p.movementCondition)}</small>` : ''}
+    ${key === 'multiTarget' && p.multiTargetCondition ? `<small lang="az">${modalEscape(p.multiTargetCondition)}</small>` : ''}
   </div>`).join('');
 }
 
@@ -312,7 +347,7 @@ function buildModalStats(card) {
   const ordered = ['health','shield','damage','sps','attackSpeed','delay','mana','number','range','speed','criticDamage','criticalChance','lifesteal','lifestealChance'];
   const remaining = ['dodge','vision','healBonus','healrecovery','shieldrecovery','damageminimiser','criticdamageminimiser','flexibility','shieldtakendamage','life'];
   const values = { ...card.additionalStats, ...card.stats };
-  const names = ['Əsas statlar','Bərpa və müdafiə','Döyüş profili'];
+  const names = ['Primary Stats','Recovery & Defense','Combat Profile'];
   const bodies = [
     `<div class="modal-stat-grid">${buildStatTiles(ordered.map(k => defs[k]), values)}</div>`,
     `<div class="modal-stat-grid">${buildStatTiles(remaining.map(k => defs[k]), values)}</div>`,
@@ -320,8 +355,8 @@ function buildModalStats(card) {
   ];
   return `<div class="modal-stats">
     <div class="modal-stats-body">
-      <div class="modal-stat-pages" role="tablist" aria-label="Stat səhifələri">${names.map((name, i) => `<button type="button" role="tab" id="stat-tab-${i + 1}" aria-controls="stat-page-${i + 1}" aria-selected="${modalStatsPage === i + 1}" tabindex="${modalStatsPage === i + 1 ? 0 : -1}" data-stat-page="${i + 1}" title="${name}">${i + 1}</button>`).join('')}</div>
-      ${bodies.map((body, i) => `<section class="modal-stat-page" id="stat-page-${i + 1}" role="tabpanel" aria-labelledby="stat-tab-${i + 1}" ${modalStatsPage === i + 1 ? '' : 'hidden'}><h3>${names[i]}</h3>${body}${i < 2 ? '<p class="modal-stat-note">Kristallar müqayisəli gücü göstərir. Vaxt, mana xərci və qalxan itkisi azaldıqca göstərici yüksəlir.</p>' : ''}</section>`).join('')}
+      <div class="modal-stat-pages" role="tablist" aria-label="Stat pages">${names.map((name, i) => `<button type="button" role="tab" id="stat-tab-${i + 1}" aria-controls="stat-page-${i + 1}" aria-selected="${modalStatsPage === i + 1}" tabindex="${modalStatsPage === i + 1 ? 0 : -1}" data-stat-page="${i + 1}" title="${name}">${i + 1}</button>`).join('')}</div>
+      ${bodies.map((body, i) => `<section class="modal-stat-page" id="stat-page-${i + 1}" role="tabpanel" aria-labelledby="stat-tab-${i + 1}" ${modalStatsPage === i + 1 ? '' : 'hidden'}><h3>${names[i]}</h3>${body}${i < 2 ? '<p class="modal-stat-note">Crystals show relative strength. Lower attack intervals, mana costs and shield depletion receive higher ratings.</p>' : ''}</section>`).join('')}
     </div>
   </div>`;
 }
@@ -373,7 +408,7 @@ function buildStarLevels(levels) {
         <div class="star-level-icon">${s.number}</div>
         <div class="star-level-info">
           <div class="star-level-label" style="color:${s.color}">${s.label}</div>
-          <div class="star-level-text">${desc}</div>
+          <div class="star-level-text" lang="az">${desc}</div>
           ${range ? `<div class="star-level-range">${range}</div>` : ''}
         </div>
       </div>`;
@@ -386,7 +421,7 @@ function buildCardSections(card, abilityHtml, story) {
     { key:'stats', label:'Stats', body:buildModalStats(card) },
     { key:'ability', label:'Ability', body:abilityHtml },
     { key:'levels', label:'Star Levels', body:buildStarLevels(card.showlevels) },
-    { key:'lore', label:'Lore', body:story ? `<div class="modal-lore-copy">${story}</div>` : '<p class="no-stat-msg">Bu kart üçün Lore əlavə edilməyib.</p>' },
+    { key:'lore', label:'Lore', body:story ? `<div class="modal-lore-copy">${story}</div>` : '<p class="no-stat-msg">No lore has been added for this card.</p>' },
   ];
   return `<div class="modal-card-body">
     <div class="modal-section-panels">${sections.map(section => `
@@ -394,7 +429,7 @@ function buildCardSections(card, abilityHtml, story) {
         <div class="modal-section-label">${modalIcon(section.key)}<span>${section.label}</span></div>${section.body}
       </section>`).join('')}
     </div>
-    <nav class="modal-side-nav" role="tablist" aria-label="Kart bölmələri" aria-orientation="vertical">${sections.map(section => `
+    <nav class="modal-side-nav" role="tablist" aria-label="Card sections" aria-orientation="vertical">${sections.map(section => `
       <button type="button" class="modal-section-tab" id="card-tab-${section.key}" role="tab" data-card-section="${section.key}" aria-controls="card-section-${section.key}" aria-selected="${modalCardSection === section.key}" tabindex="${modalCardSection === section.key ? 0 : -1}">${modalIcon(section.key)}<span>${section.label}</span></button>`).join('')}
     </nav>
   </div>`;
@@ -431,7 +466,7 @@ function buildAscendedBanner(root, isAscended) {
           <span class="ascended-banner-icon">${modalIcon('ability')}</span>
           <div>
             <div class="ascended-banner-title">Ascended Form</div>
-            <div class="ascended-banner-sub">Partnyor bonusu aktiv — ${secondForm.name}</div>
+            <div class="ascended-banner-sub">Partner bonus active — ${secondForm.name}</div>
           </div>
         </div>
         <button class="ascended-toggle-btn ascended-toggle-btn--revert"
@@ -442,11 +477,11 @@ function buildAscendedBanner(root, isAscended) {
       <div class="ascended-banner-info">
         <span class="ascended-banner-icon">${modalIcon('ability')}</span>
         <div>
-          <div class="ascended-banner-title">Ascended Form mövcuddur</div>
-          <div class="ascended-banner-sub">Partnyor ilə → ${secondForm.name}</div>
+          <div class="ascended-banner-title">Ascended Form available</div>
+          <div class="ascended-banner-sub">With partner → ${secondForm.name}</div>
         </div>
       </div>
-      <button class="ascended-toggle-btn" id="ascended-toggle">${modalIcon('ability')} Etki</button>
+      <button class="ascended-toggle-btn" id="ascended-toggle">${modalIcon('ability')} Preview</button>
     </div>`;
 }
 
@@ -462,7 +497,7 @@ function buildFormSwitcher(rootCard, activeIndex) {
   ].join('');
   return `
     <div class="form-switcher">
-      <div class="form-switcher-label">${modalIcon('forms')} Formlar</div>
+      <div class="form-switcher-label">${modalIcon('forms')} Forms</div>
       <div class="form-switcher-btns">${buttons}</div>
     </div>`;
 }
@@ -475,7 +510,7 @@ function updateModalImage(card, fallbackCard) {
   const imgUrl  = getCardImg(card) || (fallbackCard ? getCardImg(fallbackCard) : '');
   const img     = document.getElementById('modal-img');
   const pholder = document.getElementById('modal-placeholder');
-  img.alt = card.name || fallbackCard?.name || 'Kart';
+  img.alt = card.name || fallbackCard?.name || 'Card';
   pholder.innerHTML = modalIcon('entity');
   document.getElementById('modal-artwork-open').hidden = true;
   img.onerror = () => { img.style.display = 'none'; pholder.style.display = 'flex'; document.getElementById('modal-artwork-open').hidden = true; };
@@ -520,8 +555,8 @@ function buildDualTypeSelector(card) {
     <div class="dual-selector-header">
       <span class="dual-selector-icon">${modalIcon('forms')}</span>
       <div>
-        <div class="dual-selector-title">Dual Form Kartı</div>
-        <div class="dual-selector-sub">Oyuna başlamazdan əvvəl bir forma seçin</div>
+        <div class="dual-selector-title">Dual Form Card</div>
+        <div class="dual-selector-sub">Choose a form before entering battle</div>
       </div>
     </div>
 
@@ -532,7 +567,7 @@ function buildDualTypeSelector(card) {
         <div class="dual-type-name">${t1.class ? (t1.subclass ? `${t1.class} / ${t1.subclass}` : t1.class) : '—'}</div>
         <div class="dual-type-stats">${statPreview(t1)}</div>
         ${spawnTag(t1)}
-        <div class="dual-type-cta">Seç →</div>
+        <div class="dual-type-cta">Select →</div>
       </button>
       <button class="dual-type-card" id="dual-pick-2">
         <div class="dual-type-badge"
@@ -540,7 +575,7 @@ function buildDualTypeSelector(card) {
         <div class="dual-type-name">${t2.class ? (t2.subclass ? `${t2.class} / ${t2.subclass}` : t2.class) : '—'}</div>
         <div class="dual-type-stats">${statPreview(t2)}</div>
         ${spawnTag(t2)}
-        <div class="dual-type-cta">Seç →</div>
+        <div class="dual-type-cta">Select →</div>
       </button>
     </div>
   `;
@@ -569,13 +604,13 @@ function buildEmergentTraitTabs(card) {
   if (!keys.length) return '';
   const tabs = keys.map((k, i) =>
     `<button class="emergent-trait-btn ${i === 0 ? 'emergent-trait-btn--active' : ''}"
-             data-turn-key="${k}">Tur ${k}</button>`).join('');
+             data-turn-key="${k}">Turn ${k}</button>`).join('');
   return `
     <div class="emergent-trait-switcher">
-      <div class="emergent-trait-label">${modalIcon('levels')} Tura görə dəyişir</div>
+      <div class="emergent-trait-label">${modalIcon('levels')} Changes by turn</div>
       <div class="emergent-trait-btns">${tabs}</div>
     </div>
-    <div class="modal-trait-box" id="emergent-trait-text">${card.turns[keys[0]]}</div>`;
+    <div class="modal-trait-box" lang="az" id="emergent-trait-text">${card.turns[keys[0]]}</div>`;
 }
 
 function wireEmergentTraitTabs(card) {
@@ -608,7 +643,7 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
   const isAscended = (rootCard !== null && activeFormIndex === null && card !== rootCard);
 
   const backBtn = backOrigin ? `
-    <button class="dual-back-btn" id="origin-back">${modalIcon('back')} Forma seçiminə qayıt</button>` : '';
+    <button class="dual-back-btn" id="origin-back">${modalIcon('back')} Back to form selection</button>` : '';
 
   document.getElementById('modal-content').innerHTML = `
     ${backBtn}
@@ -618,7 +653,7 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
     ${buildCardSections(card, `
       ${(trait || isEmergentCard) ? `
         ${abilityName ? `<div class="modal-ability-name">${modalIcon('ability')} ${abilityName}</div>` : ''}
-        ${isEmergentCard ? buildEmergentTraitTabs(card) : `<div class="modal-trait-box">${trait}</div>`}` : '<p class="no-stat-msg">Xüsusi qabiliyyət göstərilməyib.</p>'}
+        ${isEmergentCard ? buildEmergentTraitTabs(card) : `<div class="modal-trait-box" lang="az">${trait}</div>`}` : '<p class="no-stat-msg">No ability has been specified.</p>'}
     `, story)}
   `;
 

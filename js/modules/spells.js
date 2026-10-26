@@ -79,14 +79,14 @@ function renderSpells() {
 
 /* ── Spell stat bar builder ── */
 const SPELL_STAT_DEFS = [
-  { key: 'damageToCard',      label: 'Karta Hasar',  icon: '💥', max: 1000, color: '#f87171' },
-  { key: 'damageToCastle',    label: 'Qala Hasar',   icon: '🏰', max: 500,  color: '#fb923c' },
-  { key: 'health',            label: 'Can',           icon: '❤️', max: 1000, color: '#4ade80' },
-  { key: 'range',             label: 'Menzil',        icon: '🏹', max: 5000, color: '#60a5fa' },
-  { key: 'attackSpeed',       label: 'Atk Sürəti',   icon: '⏳', max: 5,    color: '#fb923c' },
-  { key: 'timeBetweenDamage', label: 'İnterval',     icon: '⏱️', max: 5,    color: '#fbbf24' },
-  { key: 'lifetime',          label: 'Ömür',          icon: '⌛', max: 200,  color: '#a78bfa' },
-  { key: 'size',              label: 'Ölçü',          icon: '📐', max: 10,   color: '#94a3b8' },
+  { key: 'damageToCard',      label: 'Card Damage',  icon: '💥', max: 1000, color: '#f87171' },
+  { key: 'damageToCastle',    label: 'Tower Damage',   icon: '🏰', max: 500,  color: '#fb923c' },
+  { key: 'health',            label: 'Health',           icon: '❤️', max: 1000, color: '#4ade80' },
+  { key: 'range',             label: 'Range',        icon: '🏹', max: 5000, color: '#60a5fa' },
+  { key: 'attackSpeed',       label: 'Attack Speed',   icon: '⏳', max: 5,    color: '#fb923c' },
+  { key: 'timeBetweenDamage', label: 'Interval',     icon: '⏱️', max: 5,    color: '#fbbf24' },
+  { key: 'lifetime',          label: 'Lifetime',          icon: '⌛', max: 200,  color: '#a78bfa' },
+  { key: 'size',              label: 'Size',          icon: '📐', max: 10,   color: '#94a3b8' },
 ];
 
 function buildSpellStatBars(stats) {
@@ -124,7 +124,7 @@ function buildSpellFormSwitcher(spell, activeIndex) {
 
   return `
     <div class="form-switcher spell-form-switcher">
-      <div class="form-switcher-label">${modalIcon('forms')} Formlar</div>
+      <div class="form-switcher-label">${modalIcon('forms')} Forms</div>
       <div class="form-switcher-btns">${buttons}</div>
     </div>`;
 }
@@ -158,26 +158,26 @@ function renderSpellModal(spell, activeFormIndex) {
     bodyHtml = `
       <div class="spell-modal-form-card">
         <div class="spell-modal-form-name">${modalIcon('forms')} ${form.name}</div>
-        ${form.type ? `<div class="spell-modal-form-type">${form.type}${form.note ? ' · ' + form.note : ''}</div>` : ''}
+        ${form.type ? `<div class="spell-modal-form-type">${modalTypes(form.type).join(' / ')}${form.note ? ' · ' + form.note : ''}</div>` : ''}
         <div class="spell-form-stat-bars">
-          ${buildSpellStatBars(fStats) || '<p class="no-stat-msg">Stat yoxdur.</p>'}
+          ${buildSpellStatBars(fStats) || '<p class="no-stat-msg">No stats available.</p>'}
         </div>
-        ${form.trait ? `<div class="modal-section-label">Xüsusiyyət</div><div class="modal-trait-box">${form.trait}</div>` : ''}
+        ${form.trait ? `<div class="modal-section-label">Ability</div><div class="modal-trait-box" lang="az">${form.trait}</div>` : ''}
         ${buildLoreBlock(form.story && form.story !== '-' ? form.story : null)}
       </div>`;
   } else {
     bodyHtml = `
       <div id="panel-primary">
-        ${buildSpellStatBars(stats) || '<p class="no-stat-msg">Stat məlumatı yoxdur.</p>'}
+        ${buildSpellStatBars(stats) || '<p class="no-stat-msg">No stats available.</p>'}
       </div>
-      ${treat ? `<div class="modal-section-label">Xüsusiyyət</div><div class="modal-trait-box">${treat}</div>` : ''}
+      ${treat ? `<div class="modal-section-label">Ability</div><div class="modal-trait-box" lang="az">${treat}</div>` : ''}
       ${buildLoreBlock(story)}`;
   }
 
   document.getElementById('modal-content').innerHTML = `
     <div class="spell-modal-badges">
-      ${energy ? `<div class="spell-modal-energy">${modalIcon('mana')} <span>${energy}</span> Enerji</div>` : ''}
-      ${charge ? `<div class="spell-modal-charge">${'◆'.repeat(Math.min(charge, 5))} <span>${charge}</span> Yük</div>` : ''}
+      ${energy ? `<div class="spell-modal-energy">${modalIcon('mana')} <span>${energy}</span> Energy</div>` : ''}
+      ${charge ? `<div class="spell-modal-charge">${'◆'.repeat(Math.min(charge, 5))} <span>${charge}</span> ${Number(charge) === 1 ? 'Charge' : 'Charges'}</div>` : ''}
     </div>
 
     ${spell.isMulti && spell.forms ? buildSpellFormSwitcher(spell, activeFormIndex) : ''}
@@ -220,8 +220,8 @@ function createSpellEl(spell, idx) {
 
   const statPairs = [
     ['DMG',    stats.damageToCard],
-    ['Qala',   stats.damageToCastle],
-    ['Menzil', stats.range],
+    ['Tower',   stats.damageToCastle],
+    ['Range', stats.range],
   ].filter(([, v]) => v && v !== '-');
 
   /* Charge dots */
@@ -242,7 +242,7 @@ function createSpellEl(spell, idx) {
       ${energy ? `<div class="spell-energy-pill">${modalIcon('mana')} <strong>${energy}</strong></div>` : ''}
       ${charge ? `<div class="spell-charge-pill">
         <div class="spell-charge-dots">${chargeDots}</div>
-        <span class="spell-charge-num">${charge} Yük</span>
+        <span class="spell-charge-num">${charge} ${Number(charge) === 1 ? 'Charge' : 'Charges'}</span>
       </div>` : ''}
     </div>
     <div class="spell-top">

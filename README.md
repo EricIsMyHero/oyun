@@ -106,7 +106,9 @@ requests show the rarity icon.
   },
   "combatStats": {
     "attackType": "melee", "multiTarget": true, "maxTargets": null,
-    "attackShape": "cone", "attackWidth": "135°", "flight": "ground",
+    "attackShape": "cone", "attackWidth": null, "attackDistance": null,
+    "attackDistanceMatchesRange": false, "attackAngle": 135,
+    "movementType": "ground", "groundEffectImmune": false,
     "weight": "medium", "targets": "ground"
   }
 }
@@ -121,6 +123,12 @@ Five crystals replace bars, and a moving rarity light traces the frame.
 All 138 cards and their forms have editable
 combat profiles. See [the modal and profile guide](docs/card-modal.md) for field
 values, conditional flight/area attacks, stat ordering and validation commands.
+
+The new card interface uses English labels while ability names, descriptions,
+turn abilities and star upgrade text remain in their original language. Range,
+projectile width and attack travel distance are separate values. Movement is
+Ground, Flying or Hovering; hovering follows the ground layer with immunity to
+ground-only spells and effects. See the profile guide for the exact card rosters.
 
 ## Spell JSON Format
 

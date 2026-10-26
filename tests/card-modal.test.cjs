@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const crypto = require('node:crypto');
 const root = path.join(__dirname, '..');
 const modalSource = fs.readFileSync(path.join(root, 'js/core/modal.js'), 'utf8');
 const schema = modalSource.slice(modalSource.indexOf('const STAT_DEFS'), modalSource.indexOf('/* ════════════════════════════════════════════════════════\n   BUILDER HELPERS'));
@@ -10,7 +11,7 @@ const helpers = modalSource.slice(modalSource.indexOf('function modalEscape'), m
 const context = vm.createContext({ modalStatsPage:1, modalCardSection:'stats' });
 vm.runInContext(schema + helpers, context);
 const run = code => vm.runInContext(code, context);
-const files = fs.readdirSync(path.join(root, 'rarity')).filter(f => f.endsWith('.json'));
+const files = fs.readdirSync(path.join(root, 'rarity')).filter(f => f.endsWith('.json')).sort();
 const cards = files.flatMap(f => JSON.parse(fs.readFileSync(path.join(root, 'rarity', f))));
 function allForms(card) {
   return [card, ...(card.forms || []).flatMap(allForms), ...['type1','type2','upgradedsecondForm'].flatMap(k => card[k] ? allForms(card[k]) : [])];
@@ -26,11 +27,11 @@ test('all cards and nested forms have complete, consistent editable combat profi
     assert.ok(['melee','ranged','mixed','none'].includes(p.attackType), card.name);
     assert.equal(typeof p.multiTarget, 'boolean', card.name);
     assert.ok(['single','cone','circle','line','square','multi','none'].includes(p.attackShape), card.name);
-    assert.ok(['ground','flying','conditional'].includes(p.flight), card.name);
+    assert.ok(['ground','flying','hovering'].includes(p.movementType), card.name);
+    assert.equal(p.groundEffectImmune, p.movementType !== 'ground', card.name);
     assert.ok(['very-light','light','medium','heavy','very-heavy'].includes(p.weight), card.name);
     assert.ok(['ground','air','both','none'].includes(p.targets), card.name);
-    assert.equal(typeof p.attackWidth, 'string', card.name);
-    if (p.flight === 'conditional') assert.ok(p.flightCondition, card.name);
+    for (const key of ['attackWidth','attackDistance','attackAngle']) assert.ok(p[key] === null || Number.isFinite(p[key]) && p[key] >= 0, `${card.name}: ${key}`);
     if (p.multiTarget) assert.ok(p.maxTargets === null || p.maxTargets > 1, card.name);
     else assert.ok(p.maxTargets === 0 || p.maxTargets === 1, card.name);
     if (p.attackType === 'none') assert.equal(p.targets, 'none', card.name);
@@ -40,7 +41,8 @@ test('all cards and nested forms have complete, consistent editable combat profi
 test('burst damage is independent from simultaneous target count, including distinct dual forms', () => {
   assert.equal(cards.find(c => c.id === 'soldier').combatStats.maxTargets, 1);
   assert.equal(cards.find(c => c.id === 'tenta').combatStats.maxTargets, 5);
-  assert.equal(cards.find(c => c.id === 'hailey').combatStats.attackWidth, '360°');
+  assert.equal(cards.find(c => c.id === 'hailey').combatStats.attackAngle, 360);
+  assert.equal(cards.find(c => c.id === 'hailey').combatStats.attackWidth, null);
   const ray = cards.find(c => c.id === 'mr-and-mrs-ray');
   assert.equal(ray.type1.combatStats.multiTarget, true);
   assert.equal(ray.type2.combatStats.multiTarget, false);
@@ -94,7 +96,7 @@ test('missing data stays explicit, values are escaped, and a zero stat is never 
   assert.match(html, /&lt;script&gt;/);
   assert.ok(!html.includes('<script>'));
   assert.equal((html.match(/data-stat=/g) || []).length, 8);
-  assert.match(html, /Müqayisə məlumatı yoxdur/);
+  assert.match(html, /No comparison data/);
 });
 
 test('conditional flight and splash damage display their activation rules', () => {
@@ -114,4 +116,60 @@ test('modal stat, profile and level renderers use inline icons without emoji', (
     assert.doesNotMatch(html, /\p{Extended_Pictographic}|\p{Emoji_Presentation}/u);
   }
   assert.match(run('buildModalStats(card)'), /<svg class="modal-icon"/);
+});
+
+
+test('ability texts, names, turn abilities and star upgrades are preserved verbatim', () => {
+  // Change this baseline only when an ability edit is explicitly requested.
+  const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
+  assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
+    'c1816898f72721bb8d2117f018df01434fe6e98cd64b895b3eed681f19a2e794');
+});
+
+test('Henry projectile width and attack travel distance are independent of Range', () => {
+  context.card=cards.find(c=>c.id==='henry');
+  assert.equal(context.card.combatStats.attackWidth,1200);
+  assert.equal(context.card.combatStats.attackDistance,1250);
+  assert.equal(context.card.additionalStats.range,'1200');
+  const html=run('buildCombatProfile(card)');
+  assert.match(html,/Projectile Width/);
+  assert.match(html,/1200 tiles/);
+  assert.match(html,/Attack Distance/);
+  assert.match(html,/1250 tiles/);
+});
+
+test('Arcanyx travel limit follows maximum Range dynamically and explodes at the endpoint', () => {
+  context.card=structuredClone(cards.find(c=>c.id==='arcanyx'));
+  assert.equal(run('modalAttackDistance(card)'),2100);
+  context.card.additionalStats.range='2600/4800';
+  assert.equal(run('modalAttackDistance(card)'),4800);
+  assert.equal(context.card.combatStats.projectileEndEffect,'explode');
+  const html=run('buildCombatProfile(card)');
+  assert.match(html,/4800 tiles/);
+  assert.match(html,/Matches current Range/);
+  assert.match(html,/Explodes/);
+});
+
+test('movement classifications match the provided hovering and flying rosters', () => {
+  const key=c=>c.id || c.name.toLowerCase().replaceAll(' ','-');
+  assert.deepEqual(forms.filter(c=>c.combatStats.movementType==='hovering').map(key).sort(),
+    ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith'].sort());
+  assert.deepEqual(forms.filter(c=>c.combatStats.movementType==='flying').map(key).sort(),
+    ['bees','angels','hornets','venom-fangs','bats','butterflies'].sort());
+  assert.equal(run('MODAL_MOVEMENT.hovering.layer'),'ground');
+  assert.equal(run('MODAL_MOVEMENT.hovering.groundEffectImmune'),true);
+  assert.equal(run('MODAL_MOVEMENT.ground.groundEffectImmune'),false);
+  assert.equal(run('MODAL_MOVEMENT.flying.layer'),'air');
+});
+
+test('new profile and stat labels are English while conditional ability text stays authored', () => {
+  context.card=cards.find(c=>c.id==='cryon');
+  const html=run('buildCombatProfile(card)');
+  assert.match(html,/Hovering/);
+  assert.match(html,/Ground Effect Immunity/);
+  assert.doesNotMatch(html,/[ƏəıİşŞçÇğĞüÜöÖ]/);
+  const stats=run('buildModalStats(card)');
+  assert.match(stats,/Primary Stats/);
+  assert.match(stats,/Recovery &amp; Defense|Recovery & Defense/);
+  assert.doesNotMatch(stats,/[ƏəıİşŞçÇğĞüÜöÖ]/);
 });

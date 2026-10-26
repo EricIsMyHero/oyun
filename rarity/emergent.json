@@ -47,11 +47,17 @@
       "multiTarget": true,
       "maxTargets": null,
       "attackShape": "cone",
-      "attackWidth": "135°",
-      "flight": "conditional",
+      "attackWidth": null,
       "weight": "medium",
       "targets": "ground",
-      "flightCondition": "Canı 10%-dən aşağı düşəndə 10 saniyə uçar."
+      "attackDistance": null,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": 135,
+      "impactSize": null,
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false,
+      "movementCondition": "Canı 10%-dən aşağı düşəndə 10 saniyə uçar."
     }
   },
   {
@@ -102,10 +108,16 @@
       "multiTarget": true,
       "maxTargets": null,
       "attackShape": "circle",
-      "attackWidth": "360°",
-      "flight": "ground",
+      "attackWidth": null,
       "weight": "medium",
-      "targets": "ground"
+      "targets": "ground",
+      "attackDistance": null,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": 360,
+      "impactSize": null,
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false
     }
   },
   {
@@ -156,10 +168,16 @@
       "multiTarget": true,
       "maxTargets": null,
       "attackShape": "cone",
-      "attackWidth": "135°",
-      "flight": "ground",
+      "attackWidth": null,
       "weight": "medium",
-      "targets": "ground"
+      "targets": "ground",
+      "attackDistance": null,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": 135,
+      "impactSize": null,
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false
     }
   },
   {
@@ -210,10 +228,16 @@
       "multiTarget": false,
       "maxTargets": 1,
       "attackShape": "single",
-      "attackWidth": "Tək hədəf",
-      "flight": "ground",
+      "attackWidth": null,
       "weight": "medium",
-      "targets": "both"
+      "targets": "both",
+      "attackDistance": null,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": null,
+      "impactSize": null,
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false
     }
   },
   {
@@ -264,10 +288,16 @@
       "multiTarget": true,
       "maxTargets": null,
       "attackShape": "cone",
-      "attackWidth": "135°",
-      "flight": "ground",
+      "attackWidth": null,
       "weight": "medium",
-      "targets": "ground"
+      "targets": "ground",
+      "attackDistance": null,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": 135,
+      "impactSize": null,
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false
     }
   },
   {
@@ -368,10 +398,16 @@
           "multiTarget": false,
           "maxTargets": 1,
           "attackShape": "single",
-          "attackWidth": "Tək hədəf",
-          "flight": "ground",
+          "attackWidth": null,
           "weight": "heavy",
-          "targets": "ground"
+          "targets": "ground",
+          "attackDistance": null,
+          "attackDistanceMatchesRange": false,
+          "attackAngle": null,
+          "impactSize": null,
+          "projectileEndEffect": null,
+          "movementType": "ground",
+          "groundEffectImmune": false
         }
       },
       {
@@ -424,10 +460,16 @@
           "multiTarget": false,
           "maxTargets": 1,
           "attackShape": "single",
-          "attackWidth": "Tək hədəf",
-          "flight": "ground",
+          "attackWidth": null,
           "weight": "medium",
-          "targets": "ground"
+          "targets": "ground",
+          "attackDistance": null,
+          "attackDistanceMatchesRange": false,
+          "attackAngle": null,
+          "impactSize": null,
+          "projectileEndEffect": null,
+          "movementType": "ground",
+          "groundEffectImmune": false
         }
       },
       {
@@ -480,10 +522,16 @@
           "multiTarget": false,
           "maxTargets": 1,
           "attackShape": "single",
-          "attackWidth": "Tək hədəf",
-          "flight": "ground",
+          "attackWidth": null,
           "weight": "medium",
-          "targets": "ground"
+          "targets": "ground",
+          "attackDistance": null,
+          "attackDistanceMatchesRange": false,
+          "attackAngle": null,
+          "impactSize": null,
+          "projectileEndEffect": null,
+          "movementType": "ground",
+          "groundEffectImmune": false
         }
       },
       {
@@ -536,10 +584,16 @@
           "multiTarget": false,
           "maxTargets": 1,
           "attackShape": "single",
-          "attackWidth": "Tək hədəf",
-          "flight": "ground",
+          "attackWidth": null,
           "weight": "medium",
-          "targets": "ground"
+          "targets": "ground",
+          "attackDistance": null,
+          "attackDistanceMatchesRange": false,
+          "attackAngle": null,
+          "impactSize": null,
+          "projectileEndEffect": null,
+          "movementType": "ground",
+          "groundEffectImmune": false
         }
       },
       {
@@ -592,10 +646,16 @@
           "multiTarget": false,
           "maxTargets": 1,
           "attackShape": "single",
-          "attackWidth": "Tək hədəf",
-          "flight": "ground",
+          "attackWidth": null,
           "weight": "heavy",
-          "targets": "ground"
+          "targets": "ground",
+          "attackDistance": null,
+          "attackDistanceMatchesRange": false,
+          "attackAngle": null,
+          "impactSize": null,
+          "projectileEndEffect": null,
+          "movementType": "ground",
+          "groundEffectImmune": false
         }
       },
       {
@@ -648,10 +708,16 @@
           "multiTarget": false,
           "maxTargets": 1,
           "attackShape": "single",
-          "attackWidth": "Tək hədəf",
-          "flight": "ground",
+          "attackWidth": null,
           "weight": "medium",
-          "targets": "ground"
+          "targets": "ground",
+          "attackDistance": null,
+          "attackDistanceMatchesRange": false,
+          "attackAngle": null,
+          "impactSize": null,
+          "projectileEndEffect": null,
+          "movementType": "ground",
+          "groundEffectImmune": false
         }
       },
       {
@@ -704,10 +770,16 @@
           "multiTarget": false,
           "maxTargets": 1,
           "attackShape": "single",
-          "attackWidth": "Tək hədəf",
-          "flight": "ground",
+          "attackWidth": null,
           "weight": "heavy",
-          "targets": "ground"
+          "targets": "ground",
+          "attackDistance": null,
+          "attackDistanceMatchesRange": false,
+          "attackAngle": null,
+          "impactSize": null,
+          "projectileEndEffect": null,
+          "movementType": "ground",
+          "groundEffectImmune": false
         }
       }
     ],
@@ -716,10 +788,16 @@
       "multiTarget": false,
       "maxTargets": 1,
       "attackShape": "single",
-      "attackWidth": "Tək hədəf",
-      "flight": "ground",
+      "attackWidth": null,
       "weight": "medium",
-      "targets": "ground"
+      "targets": "ground",
+      "attackDistance": null,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": null,
+      "impactSize": null,
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false
     }
   },
   {
@@ -770,12 +848,18 @@
       "multiTarget": true,
       "maxTargets": null,
       "attackShape": "square",
-      "attackWidth": "1,5 × 1,5 karo",
-      "flight": "conditional",
+      "attackWidth": null,
       "weight": "medium",
       "targets": "both",
       "multiTargetCondition": "Meydana enərkən.",
-      "flightCondition": "Meydana planörlə enərkən."
+      "attackDistance": null,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": null,
+      "impactSize": "1,5 × 1,5 tiles",
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false,
+      "movementCondition": "Meydana planörlə enərkən."
     }
   }
 ]
