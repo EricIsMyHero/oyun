@@ -52,20 +52,32 @@ const server = http.createServer(async (req, res) => {
     assert.equal(await page.locator('[data-stat-page="3"]').getAttribute('aria-selected'), 'true');
     assert.equal(await page.locator('#stat-page-3 [data-profile]').count(), 8);
     await page.keyboard.press('End');
-    assert.equal(await page.locator('#stat-page-4 .star-level-row').count(), 3);
+    assert.equal(await page.locator('[data-stat-page="3"]').getAttribute('aria-selected'), 'true');
     await page.keyboard.press('Home');
     assert.equal(await page.locator('[data-stat-page="1"]').getAttribute('aria-selected'), 'true');
-    await page.locator('.modal-lore-button').click();
-    assert.equal(await page.locator('#lore-fullscreen-overlay').getAttribute('aria-hidden'), 'false');
-    assert.ok(await page.locator('#lore-fullscreen-text').textContent());
-    await page.keyboard.press('Escape');
-    assert.equal(await page.locator('#lore-fullscreen-overlay').getAttribute('aria-hidden'), 'true');
-    assert.equal(await page.locator('#modal-overlay').getAttribute('aria-hidden'), 'false');
-    assert.ok(await page.locator('.modal-lore-button').evaluate(el => document.activeElement === el));
-    await page.locator('.modal-stats summary').click();
-    assert.equal(await page.locator('#stat-page-1').isVisible(), false);
-    await page.locator('.modal-lore-button').click();
-    await page.locator('#lore-fullscreen-close').click();
+    const header = await page.locator('.modal-name-class-row').evaluate(el => {
+      const name=el.querySelector('.modal-card-name').getBoundingClientRect();
+      return [...el.querySelectorAll('.modal-class-badge,.modal-subclass-badge')].every(b=>{
+        const r=b.getBoundingClientRect(); return r.left>=name.right && r.top<name.bottom;
+      });
+    });
+    assert.ok(header, 'class and subclass sit beside the card name');
+    assert.ok(await page.locator('.modal-card-body').evaluate(el=>el.querySelector('.modal-side-nav').getBoundingClientRect().left >= el.querySelector('.modal-section-panels').getBoundingClientRect().right), 'section buttons sit on the right');
+    assert.deepEqual(await page.locator('[data-card-section]').allTextContents(), ['Stats','Ability','Star Levels','Lore']);
+    await page.locator('[data-card-section="ability"]').click();
+    assert.ok(await page.locator('#card-section-ability .modal-trait-box').isVisible());
+    assert.equal(await page.locator('#card-section-stats').isVisible(), false);
+    await page.keyboard.press('ArrowDown');
+    assert.equal(await page.locator('#card-section-levels .star-level-row').count(), 3);
+    assert.ok(await page.locator('#card-section-levels').isVisible());
+    await page.keyboard.press('ArrowDown');
+    assert.ok(await page.locator('#card-section-lore .modal-lore-copy').isVisible());
+    assert.ok((await page.locator('#card-section-lore').textContent()).length > 100);
+    await page.locator('[data-card-section="stats"]').click();
+    await page.keyboard.press('Tab');
+    assert.ok(await page.locator('#modal-close').evaluate(el=>el===document.activeElement));
+    await page.keyboard.press('Shift+Tab');
+    assert.ok(await page.locator('[data-card-section="stats"]').evaluate(el=>el===document.activeElement));
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('#modal-overlay').getAttribute('aria-hidden'), 'true');
 
@@ -117,6 +129,7 @@ const server = http.createServer(async (req, res) => {
     assert.equal(await page.locator('#modal-box').getAttribute('data-rarity'), 'ascendant');
     await page.locator('#ascended-toggle').click();
     await page.evaluate(() => openModal(allCards.find(c=>c.id==='xii-josh')));
+    await page.locator('[data-card-section="ability"]').click();
     const turns=page.locator('.emergent-trait-btn');
     if (await turns.count() > 1) {
       await turns.last().click();
@@ -129,15 +142,22 @@ const server = http.createServer(async (req, res) => {
       await page.waitForFunction(() => document.getElementById('modal-img').naturalWidth > 0);
       assert.equal(await page.locator('#modal-img').evaluate(el=>getComputedStyle(el).objectFit), 'contain');
       assert.equal(await page.locator('#modal-img').evaluate(el=>getComputedStyle(el).transform), 'none');
-      for (let n=1;n<=4;n++) {
+      for (let n=1;n<=3;n++) {
         await page.locator(`[data-stat-page="${n}"]`).click();
         const box = await page.locator('#modal-box').evaluate(el => ({w:el.clientWidth, scroll:el.scrollWidth, h:el.clientHeight}));
         assert.ok(box.scroll <= box.w + 1, `${width}x${height}: page ${n} overflows`);
         assert.ok(box.h < height, `${width}x${height}: modal is taller than viewport`);
       }
-      await page.locator('.modal-lore-button').click();
-      await page.keyboard.press('Escape');
-      assert.ok(await page.locator('#modal-close').isVisible());
+      for (const section of ['ability','levels','lore','stats']) {
+        await page.locator(`[data-card-section="${section}"]`).click();
+        assert.ok(await page.locator(`#card-section-${section}`).isVisible());
+      }
+      await page.locator('[data-card-section="lore"]').click();
+      const closeBefore=await page.locator('#modal-close').boundingBox();
+      await page.locator('#modal-box').evaluate(el=>el.scrollTop=el.scrollHeight);
+      const closeAfter=await page.locator('#modal-close').boundingBox();
+      assert.equal(closeAfter.y,closeBefore.y, 'close button stays on the frame while scrolling');
+      assert.ok(closeAfter.y>=0 && closeAfter.y+closeAfter.height<height);
       await page.locator('#modal-close').click();
     }
     await page.setViewportSize({width:320,height:568});
@@ -169,6 +189,21 @@ const server = http.createServer(async (req, res) => {
     assert.equal(await page.locator('#modal-overlay').getAttribute('aria-hidden'), 'false');
     assert.equal(await page.locator('#modal-overlay').evaluate(el=>el.inert), false);
     assert.equal(await page.locator('#modal-box').getAttribute('data-rarity'), 'mundane');
+    if (await page.locator('.modal-lore-button').count()) {
+      await page.locator('.modal-lore-button').click();
+      assert.equal(await page.locator('#lore-fullscreen-overlay').getAttribute('aria-hidden'), 'false');
+      await page.keyboard.press('Escape');
+      assert.equal(await page.locator('#lore-fullscreen-overlay').getAttribute('aria-hidden'), 'true');
+    }
+    await page.locator('#modal-close').click();
+    await page.emulateMedia({reducedMotion:'no-preference'});
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='nitrox')));
+    const orbitBefore=await page.locator('.modal-frame').evaluate(el=>getComputedStyle(el,'::before').getPropertyValue('--modal-orbit'));
+    await page.waitForTimeout(150);
+    const orbitAfter=await page.locator('.modal-frame').evaluate(el=>getComputedStyle(el,'::before').getPropertyValue('--modal-orbit'));
+    assert.notEqual(orbitBefore,orbitAfter, 'rarity light travels around the frame');
+    await page.emulateMedia({reducedMotion:'reduce'});
+    assert.equal(await page.locator('.modal-frame').evaluate(el=>getComputedStyle(el,'::before').animationName), 'none');
     await page.locator('#modal-close').click();
     await page.evaluate(async () => {switchSection('survival'); await initSurvival(); survivalVisible=true; startSurvivalRun('soldier'); });
     assert.equal(await page.evaluate(()=>typeof survivalTraitsInit), 'function');

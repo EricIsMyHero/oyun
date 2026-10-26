@@ -7,7 +7,13 @@ const modalClose = document.getElementById('modal-close');
 let modalReturnFocus = null;
 let loreReturnFocus = null;
 let modalStatsPage = 1;
-let modalStatsOpen = true;
+let modalCardSection = 'stats';
+
+function syncModalNavOrientation() {
+  const nav = document.querySelector('.modal-side-nav');
+  if (nav) nav.setAttribute('aria-orientation', window.matchMedia('(max-width: 760px)').matches ? 'horizontal' : 'vertical');
+}
+window.addEventListener('resize', syncModalNavOrientation);
 
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
@@ -24,7 +30,7 @@ document.addEventListener('keydown', e => {
     if (dialog === loreOverlay) closeLoreFullscreen(); else closeModal();
   }
   if (e.key === 'Tab') {
-    const controls = [...dialog.querySelectorAll('button, summary, [tabindex="0"]')].filter(el => el.getClientRects().length);
+    const controls = [...dialog.querySelectorAll('button, summary, [tabindex="0"]')].filter(el => !el.disabled && el.tabIndex >= 0 && el.getClientRects().length);
     const first = controls[0], last = controls.at(-1);
     if (e.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
       e.preventDefault(); last?.focus();
@@ -129,7 +135,7 @@ function applyModalRarity(rarity, name) {
   box.style.setProperty('--modal-color', color);
   box.dataset.rarity = safeKey;
   // Screen readers retain the rarity information without a visible badge.
-  box.setAttribute('aria-label', `${name || 'Kart'} · ${safeKey}`);
+  (box.closest('.modal-frame') || box).setAttribute('aria-label', `${name || 'Kart'} · ${safeKey}`);
   document.getElementById('modal-img-rarity').style.background = color;
 }
 
@@ -211,26 +217,22 @@ function buildModalStats(card) {
   const ordered = ['health','shield','damage','sps','attackSpeed','delay','mana','number','range','speed','criticDamage','criticalChance','lifesteal','lifestealChance'];
   const remaining = ['dodge','vision','healBonus','healrecovery','shieldrecovery','damageminimiser','criticdamageminimiser','flexibility','shieldtakendamage','life'];
   const values = { ...card.additionalStats, ...card.stats };
-  const names = ['Əsas statlar','Bərpa və müdafiə','Döyüş profili','Ulduz səviyyələri'];
+  const names = ['Əsas statlar','Bərpa və müdafiə','Döyüş profili'];
   const bodies = [
     `<div class="modal-stat-grid">${buildStatTiles(ordered.map(k => defs[k]), values)}</div>`,
     `<div class="modal-stat-grid">${buildStatTiles(remaining.map(k => defs[k]), values)}</div>`,
     `<div class="modal-stat-grid">${buildCombatProfile(card)}</div>`,
-    buildStarLevels(card.showlevels),
   ];
-  return `<details class="modal-stats" ${modalStatsOpen ? 'open' : ''}>
-    <summary><span>Stats</span><span class="modal-stats-chevron" aria-hidden="true">⌄</span></summary>
+  return `<div class="modal-stats">
     <div class="modal-stats-body">
       <div class="modal-stat-pages" role="tablist" aria-label="Stat səhifələri">${names.map((name, i) => `<button type="button" role="tab" id="stat-tab-${i + 1}" aria-controls="stat-page-${i + 1}" aria-selected="${modalStatsPage === i + 1}" tabindex="${modalStatsPage === i + 1 ? 0 : -1}" data-stat-page="${i + 1}" title="${name}">${i + 1}</button>`).join('')}</div>
       ${bodies.map((body, i) => `<section class="modal-stat-page" id="stat-page-${i + 1}" role="tabpanel" aria-labelledby="stat-tab-${i + 1}" ${modalStatsPage === i + 1 ? '' : 'hidden'}><h3>${names[i]}</h3>${body}${i < 2 ? '<p class="modal-stat-note">Kristallar müqayisəli gücü göstərir. Vaxt, mana xərci və qalxan itkisi azaldıqca göstərici yüksəlir.</p>' : ''}</section>`).join('')}
     </div>
-  </details>`;
+  </div>`;
 }
 
 function wireModalStats(root) {
-  const details = root.querySelector('.modal-stats');
-  if (!details) return;
-  details.addEventListener('toggle', () => { modalStatsOpen = details.open; });
+  if (!root.querySelector('.modal-stats')) return;
   const tabs = [...root.querySelectorAll('[data-stat-page]')];
   function select(btn, focus = false) {
     modalStatsPage = Number(btn.dataset.statPage);
@@ -281,6 +283,48 @@ function buildStarLevels(levels) {
         </div>
       </div>`;
   }).join('');
+}
+
+/* The archive keeps its original open typography; navigation lives on the right. */
+function buildCardSections(card, abilityHtml, story) {
+  const sections = [
+    { key:'stats', label:'Stats', body:buildModalStats(card) },
+    { key:'ability', label:'Ability', body:abilityHtml },
+    { key:'levels', label:'Star Levels', body:buildStarLevels(card.showlevels) },
+    { key:'lore', label:'Lore', body:story ? `<div class="modal-lore-copy">${story}</div>` : '<p class="no-stat-msg">Bu kart üçün Lore əlavə edilməyib.</p>' },
+  ];
+  return `<div class="modal-card-body">
+    <div class="modal-section-panels">${sections.map(section => `
+      <section id="card-section-${section.key}" class="modal-card-section" role="tabpanel" aria-labelledby="card-tab-${section.key}" ${modalCardSection === section.key ? '' : 'hidden'}>
+        <div class="modal-section-label">${section.label}</div>${section.body}
+      </section>`).join('')}
+    </div>
+    <nav class="modal-side-nav" role="tablist" aria-label="Kart bölmələri" aria-orientation="vertical">${sections.map(section => `
+      <button type="button" class="modal-section-tab" id="card-tab-${section.key}" role="tab" data-card-section="${section.key}" aria-controls="card-section-${section.key}" aria-selected="${modalCardSection === section.key}" tabindex="${modalCardSection === section.key ? 0 : -1}">${section.label}</button>`).join('')}
+    </nav>
+  </div>`;
+}
+
+function wireCardSections(root) {
+  syncModalNavOrientation();
+  const tabs = [...root.querySelectorAll('[data-card-section]')];
+  function select(btn, focus = false) {
+    modalCardSection = btn.dataset.cardSection;
+    tabs.forEach(tab => {
+      const active = tab === btn;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      root.querySelector(`#card-section-${tab.dataset.cardSection}`).hidden = !active;
+    });
+    if (focus) btn.focus({preventScroll:true});
+  }
+  tabs.forEach((btn, i) => {
+    btn.addEventListener('click', () => select(btn));
+    btn.addEventListener('keydown', e => {
+      const next = ['ArrowDown','ArrowRight'].includes(e.key) ? (i + 1) % tabs.length : ['ArrowUp','ArrowLeft'].includes(e.key) ? (i + tabs.length - 1) % tabs.length : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null;
+      if (next !== null) { e.preventDefault(); select(tabs[next], true); }
+    });
+  });
 }
 
 function buildAscendedBanner(root, isAscended) {
@@ -485,21 +529,16 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
     ${buildAscendedBanner(root, isAscended)}
     ${activeFormIndex !== null ? buildFormSwitcher(root, activeFormIndex) : ''}
 
-    ${buildModalStats(card)}
-
-    ${(trait || isEmergentCard) ? `
-      <div class="modal-section-label">Ability</div>
-      ${abilityName ? `<div class="modal-ability-name">⚔ ${abilityName}</div>` : ''}
-      ${isEmergentCard ? buildEmergentTraitTabs(card) : `<div class="modal-trait-box">${trait}</div>`}` : ''}
-
-    ${buildLoreBlock(story)}
-
+    ${buildCardSections(card, `
+      ${(trait || isEmergentCard) ? `
+        ${abilityName ? `<div class="modal-ability-name">⚔ ${abilityName}</div>` : ''}
+        ${isEmergentCard ? buildEmergentTraitTabs(card) : `<div class="modal-trait-box">${trait}</div>`}` : '<p class="no-stat-msg">Xüsusi qabiliyyət göstərilməyib.</p>'}
+    `, story)}
   `;
 
-  wireLoreExpand(document.getElementById('modal-content'), card.name || root.name, story);
   if (isEmergentCard) wireEmergentTraitTabs(card);
-
   wireModalStats(document.getElementById('modal-content'));
+  wireCardSections(document.getElementById('modal-content'));
 
   /* Back to the Ethereal dual-form picker */
   const backEl = document.getElementById('origin-back');
@@ -546,7 +585,7 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
 ════════════════════════════════════════════════════════ */
 function openModal(card) {
   modalStatsPage = 1;
-  modalStatsOpen = true;
+  modalCardSection = 'stats';
   updateModalImage(card);
   if (card.isDual) {
     buildDualTypeSelector(card);

@@ -15,7 +15,7 @@
 
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/card-modal.css?v=1">
+  <link rel="stylesheet" href="styles/card-modal.css?v=2">
   <link rel="stylesheet" href="styles/battle.css">
   <link rel="stylesheet" href="styles/survival.css">
   <link rel="stylesheet" href="styles/nav.css">
@@ -961,15 +961,17 @@
      CARD DETAIL MODAL
 ═══════════════════════════════════════════════════════ -->
 <div id="modal-overlay" aria-hidden="true" inert>
-  <div class="modal-box" id="modal-box" role="dialog" aria-modal="true" aria-label="Kart məlumatı">
+  <div class="modal-frame" role="dialog" aria-modal="true" aria-label="Kart məlumatı">
     <button class="modal-close" id="modal-close" type="button" aria-label="Bağla">✕</button>
-    <div class="modal-img-col" id="modal-img-col">
-      <div class="modal-img-rarity" id="modal-img-rarity"></div>
-      <img id="modal-img" src="" alt="" style="display:none">
-      <div class="modal-img-placeholder" id="modal-placeholder">⚔</div>
-      <div class="modal-img-gradient"></div>
+    <div class="modal-box" id="modal-box">
+      <div class="modal-img-col" id="modal-img-col">
+        <div class="modal-img-rarity" id="modal-img-rarity"></div>
+        <img id="modal-img" src="" alt="" style="display:none">
+        <div class="modal-img-placeholder" id="modal-placeholder">⚔</div>
+        <div class="modal-img-gradient"></div>
+      </div>
+      <div class="modal-content-col" id="modal-content"></div>
     </div>
-    <div class="modal-content-col" id="modal-content"></div>
   </div>
 </div>
 
@@ -989,7 +991,7 @@
      SCRIPTS  (order matters — core first, then modules)
 ═══════════════════════════════════════════════════════ -->
 <script src="js/core/particles.js"></script>
-<script src="js/core/modal.js?v=3"></script>
+<script src="js/core/modal.js?v=4"></script>
 <script src="js/core/navigation.js"></script>
 <script src="js/modules/cards.js?v=3"></script>
 <script src="js/modules/battle.js"></script>

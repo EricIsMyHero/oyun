@@ -7,7 +7,7 @@ const root = path.join(__dirname, '..');
 const modalSource = fs.readFileSync(path.join(root, 'js/core/modal.js'), 'utf8');
 const schema = modalSource.slice(modalSource.indexOf('const STAT_DEFS'), modalSource.indexOf('/* ════════════════════════════════════════════════════════\n   BUILDER HELPERS'));
 const helpers = modalSource.slice(modalSource.indexOf('function modalEscape'), modalSource.indexOf('function buildAscendedBanner'));
-const context = vm.createContext({ modalStatsPage:1, modalStatsOpen:true });
+const context = vm.createContext({ modalStatsPage:1, modalCardSection:'stats' });
 vm.runInContext(schema + helpers, context);
 const run = code => vm.runInContext(code, context);
 const files = fs.readdirSync(path.join(root, 'rarity')).filter(f => f.endsWith('.json'));
@@ -79,9 +79,13 @@ test('all 24 numeric stats remain visible with the requested first page pairing'
   assert.deepEqual(keys(pages[0]), ['health','shield','damage','sps','attackSpeed','delay','mana','number','range','speed','criticDamage','criticalChance','lifesteal','lifestealChance']);
   assert.equal(keys(pages[1]).length, 10);
   assert.equal(new Set(keys(html)).size, 24);
-  assert.equal(pages.length, 4);
+  assert.equal(pages.length, 3);
   assert.ok(!html.includes('stat-bar'));
-  assert.match(pages[3], /Level 1/);
+  const sections = run("buildCardSections(card, 'Ability text', 'Lore text')");
+  assert.match(sections, /card-section-levels/);
+  assert.match(sections, /Level 1/);
+  assert.match(sections, /card-section-lore/);
+  assert.equal((sections.match(/data-card-section=/g) || []).length, 4);
 });
 
 test('missing data stays explicit, values are escaped, and a zero stat is never hidden', () => {

@@ -1,27 +1,37 @@
 # Card modal and combat profiles
 
-The archive modal uses the rarity colors in `styles/main.css` for its border,
-outer glow and ambient light. No rarity text badge is rendered for cards.
-Rarity remains available in the dialog's accessible label. The same skin is
-updated when choosing an Ethereal type, switching a summoned form, or viewing
-an Ascendant upgrade. Spell dialogs reset the skin using their own rarity.
+The archive keeps the original Codex glass surface, display typography, inline
+name/class/subclass header and open stat rows. Rarity colors from
+`styles/main.css` tint the border and ambient light; a bright highlight travels
+around the frame on an eight-second cycle. The frame surrounds the scroller, so
+the light and close button stay fixed when long content scrolls. Reduced-motion
+preferences stop the animation. Rarity remains in the accessible dialog label;
+there is no visible rarity text badge.
 
 The portrait uses `object-fit: contain` and never zooms or crops. On a wide
 screen it stays visible while the modal scrolls. On a phone it sits above the
-content. **Lore** opens the existing story in a separate reader; Escape returns
-to the card, and a second Escape closes the card. Keyboard focus stays inside
-the active dialog and returns to its opener.
+content. The four section controls sit on the right on desktop and form a
+compact row above the content on phones:
+
+| Button | Contents |
+| --- | --- |
+| Stats | All 24 numeric stats and the combat profile, arranged into three numbered pages |
+| Ability | The passive description, ability name and Emergent turn controls |
+| Star Levels | All three upgrade descriptions and before/after values |
+| Lore | The complete story, read inside the modal |
+
+Arrow keys move between sections, and between numbered Stats pages. Section and
+page selection survive form changes; opening another card starts at Stats page
+1. Escape closes the card and restores focus to its opener. Spell dialogs retain
+the shared fullscreen Lore reader, with Escape returning to the spell first.
 
 ## Stats pages
-
-A single expandable **Stats** control contains four numbered pages:
 
 | Page | Contents |
 | --- | --- |
 | 1 | Health / Shield; Damage / DPS; Attack Speed / Delay; Mana / Count; Range / Speed; Critical Damage / Critical Chance; Lifesteal / Lifesteal Chance |
 | 2 | Dodge / Vision; Healing Bonus / Rejuvenation; Fortification / Damage Reduction; Critical Resistance / Flexibility; Shield Depletion / Life |
 | 3 | Multiple targets, attack width, attack distance/type, attack shape, flight, weight, targets and creature type |
-| 4 | All three star level descriptions and their before/after values |
 
 Zero values are shown. Missing or inapplicable data is displayed as `—`.
 Values keep their original units and burst format, such as `2x6`.
@@ -87,5 +97,6 @@ node tests/card-modal.browser.cjs
 The browser check requires Playwright and Chromium (`/usr/bin/chromium` by
 default; override with `CHROMIUM_PATH`). It serves the real app on a temporary
 localhost port, stubs external art/font requests, renders all cards/forms, checks
-eight rarity skins, six viewport sizes, keyboard tabs, Lore, transformations,
+eight rarity skins, six viewport sizes, the inline header, right-hand navigation,
+keyboard tabs, Lore, transformations, the travelling light and reduced-motion fallback,
 missing artwork, and the shared spell and Survival entry points.

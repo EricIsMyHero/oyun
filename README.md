@@ -112,9 +112,11 @@ requests show the rarity icon.
 }
 ```
 
-The card modal shows all 24 numeric stats and the combat profile inside one
-expandable **Stats** control with pages **1–4**. Five crystals replace bars;
-rarity colors the entire modal frame. All 138 cards and their forms have editable
+The card modal keeps the original Codex style with class/subclass beside the
+name and **Stats / Ability / Star Levels / Lore** controls on the right. Stats
+has three numbered pages covering all 24 numeric stats and the combat profile.
+Five crystals replace bars, and a moving rarity light traces the frame.
+All 138 cards and their forms have editable
 combat profiles. See [the modal and profile guide](docs/card-modal.md) for field
 values, conditional flight/area attacks, stat ordering and validation commands.
 
