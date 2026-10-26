@@ -112,8 +112,10 @@ requests show the rarity icon.
 }
 ```
 
-The card modal keeps the original Codex style with class/subclass beside the
-name and **Stats / Ability / Star Levels / Lore** controls on the right. Stats
+The card modal places the name, class/subclass and faction over framed artwork,
+with **Stats / Ability / Star Levels / Lore** controls on the right. The portrait
+fills its area; an expand control opens the full, uncropped image. Inline SVG
+icons replace emoji in the modal and archive tiles. Stats
 has three numbered pages covering all 24 numeric stats and the combat profile.
 Five crystals replace bars, and a moving rarity light traces the frame.
 All 138 cards and their forms have editable

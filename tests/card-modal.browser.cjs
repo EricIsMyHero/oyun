@@ -34,6 +34,7 @@ const server = http.createServer(async (req, res) => {
     await page.goto(`http://127.0.0.1:${server.address().port}`);
     await page.evaluate(async () => { showPortal('cards'); await initCards(); });
     assert.equal(await page.locator('#cards-grid .card-item').count(), 138);
+    assert.doesNotMatch(await page.locator('#cards-grid').textContent(), /\p{Extended_Pictographic}|\p{Emoji_Presentation}/u);
     await page.locator('#cards-grid .card-item').filter({has:page.getByText('Nitrox', {exact:true})}).click();
     assert.equal(await page.locator('#modal-overlay').getAttribute('aria-hidden'), 'false');
     assert.equal(await page.locator('#modal-content .modal-rarity-badge').count(), 0);
@@ -62,8 +63,19 @@ const server = http.createServer(async (req, res) => {
       });
     });
     assert.ok(header, 'class and subclass sit beside the card name');
+    assert.ok(await page.locator('#modal-img-col').evaluate(el=>el.contains(document.getElementById('modal-identity'))), 'identity lives on the artwork');
+    assert.equal(await page.locator('#modal-content .modal-card-name').count(), 0);
+    assert.ok(await page.locator('#modal-identity').evaluate(el=>{ const a=el.getBoundingClientRect(),b=el.parentElement.getBoundingClientRect(); return a.top>=b.top && a.bottom<=b.bottom; }), 'identity is inside the portrait');
     assert.ok(await page.locator('.modal-card-body').evaluate(el=>el.querySelector('.modal-side-nav').getBoundingClientRect().left >= el.querySelector('.modal-section-panels').getBoundingClientRect().right), 'section buttons sit on the right');
     assert.deepEqual(await page.locator('[data-card-section]').allTextContents(), ['Stats','Ability','Star Levels','Lore']);
+    await page.locator('#modal-artwork-open').click();
+    assert.equal(await page.locator('#artwork-overlay').getAttribute('aria-hidden'), 'false');
+    assert.equal(await page.locator('#artwork-image').evaluate(el=>getComputedStyle(el).objectFit), 'contain');
+    assert.equal(await page.locator('#modal-overlay').evaluate(el=>el.inert), true);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#artwork-overlay').getAttribute('aria-hidden'), 'true');
+    assert.equal(await page.locator('#modal-overlay').getAttribute('aria-hidden'), 'false');
+    assert.ok(await page.locator('#modal-artwork-open').evaluate(el=>el===document.activeElement));
     await page.locator('[data-card-section="ability"]').click();
     assert.ok(await page.locator('#card-section-ability .modal-trait-box').isVisible());
     assert.equal(await page.locator('#card-section-stats').isVisible(), false);
@@ -93,6 +105,7 @@ const server = http.createServer(async (req, res) => {
         renderModalContent(card, root, null, null);
         if (document.querySelectorAll('[data-stat]').length !== 24) throw Error(`${card.name}: missing stats`);
         if (document.querySelectorAll('[data-profile]').length !== 8) throw Error(`${card.name}: missing combat profile`);
+        if (/\p{Extended_Pictographic}|\p{Emoji_Presentation}/u.test(document.querySelector('.modal-frame').textContent)) throw Error(`${card.name}: emoji in modal`);
         forms++;
         for (const form of card.forms || []) check(form, root);
         for (const prop of ['type1','type2','upgradedsecondForm']) if (card[prop]) check(card[prop], root);
@@ -140,7 +153,7 @@ const server = http.createServer(async (req, res) => {
       await page.setViewportSize({width,height});
       await page.evaluate(() => openModal(allCards.find(c=>c.id==='nitrox')));
       await page.waitForFunction(() => document.getElementById('modal-img').naturalWidth > 0);
-      assert.equal(await page.locator('#modal-img').evaluate(el=>getComputedStyle(el).objectFit), 'contain');
+      assert.equal(await page.locator('#modal-img').evaluate(el=>getComputedStyle(el).objectFit), 'cover');
       assert.equal(await page.locator('#modal-img').evaluate(el=>getComputedStyle(el).transform), 'none');
       for (let n=1;n<=3;n++) {
         await page.locator(`[data-stat-page="${n}"]`).click();
@@ -183,12 +196,26 @@ const server = http.createServer(async (req, res) => {
     await page.evaluate(() => openModal({id:'missing-art',name:'Missing art',rarity:'Apex',stats:{health:0},additionalStats:{}}));
     await page.waitForFunction(() => document.getElementById('modal-placeholder').style.display === 'flex');
     assert.equal(await page.locator('#modal-img').isVisible(), false);
+    assert.equal(await page.locator('#modal-artwork-open').isVisible(), false);
+    assert.doesNotMatch(await page.locator('.modal-frame').textContent(), /\p{Extended_Pictographic}|\p{Emoji_Presentation}/u);
     assert.match(await page.locator('[data-stat="health"] .modal-stat-value').textContent(), /0/);
     await page.evaluate(async () => { closeModal(); switchSection('spells'); await initSpells(); });
     await page.locator('#spells-grid .spell-item').filter({has:page.getByText('Meteor', {exact:true})}).click();
     assert.equal(await page.locator('#modal-overlay').getAttribute('aria-hidden'), 'false');
     assert.equal(await page.locator('#modal-overlay').evaluate(el=>el.inert), false);
     assert.equal(await page.locator('#modal-box').getAttribute('data-rarity'), 'mundane');
+    const spellViews = await page.evaluate(() => {
+      let count=0;
+      for (const spell of allSpells) {
+        for (const index of [-1, ...(spell.forms || []).map((_,i)=>i)]) {
+          renderSpellModal(spell,index);
+          if (/\p{Extended_Pictographic}|\p{Emoji_Presentation}/u.test(document.querySelector('.modal-frame').textContent)) throw Error(`${spell.name}: emoji in spell modal`);
+          count++;
+        }
+      }
+      return count;
+    });
+    assert.ok(spellViews>0);
     if (await page.locator('.modal-lore-button').count()) {
       await page.locator('.modal-lore-button').click();
       assert.equal(await page.locator('#lore-fullscreen-overlay').getAttribute('aria-hidden'), 'false');

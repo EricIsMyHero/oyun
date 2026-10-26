@@ -1,17 +1,22 @@
 # Card modal and combat profiles
 
-The archive keeps the original Codex glass surface, display typography, inline
-name/class/subclass header and open stat rows. Rarity colors from
-`styles/main.css` tint the border and ambient light; a bright highlight travels
-around the frame on an eight-second cycle. The frame surrounds the scroller, so
-the light and close button stay fixed when long content scrolls. Reduced-motion
-preferences stop the animation. Rarity remains in the accessible dialog label;
-there is no visible rarity text badge.
+The portrait fills the left side of the modal without empty bands. The name,
+class/subclass and faction sit over the artwork, with a dark gradient behind the
+text and an inset angular frame. Creature type and flight status appear at the
+bottom. Rarity colors from `styles/main.css` tint the outer frame; a bright
+highlight travels around it on an eight-second cycle. There is no visible rarity
+text badge. The light and close button remain on the frame while content scrolls;
+reduced-motion preferences stop the animation.
 
-The portrait uses `object-fit: contain` and never zooms or crops. On a wide
-screen it stays visible while the modal scrolls. On a phone it sits above the
-content. The four section controls sit on the right on desktop and form a
-compact row above the content on phones:
+The portrait uses `object-fit: cover`. Its expand button opens the original image
+in a separate, uncropped `contain` viewer. Escape returns to the card and restores
+focus to the expand button. Broken artwork hides the expand control and shows an
+outline placeholder. The modal, shared spell views and archive tiles use inline
+SVG outline icons instead of emoji or an external icon font. Stat values use a
+clear system font, with the Codex display face retained for the portrait name.
+
+The four section controls sit on the right on desktop and form a compact row
+below the image on phones:
 
 | Button | Contents |
 | --- | --- |

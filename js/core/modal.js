@@ -23,11 +23,41 @@ const loreClose   = document.getElementById('lore-fullscreen-close');
 loreClose.addEventListener('click', closeLoreFullscreen);
 loreOverlay.addEventListener('click', e => { if (e.target === loreOverlay) closeLoreFullscreen(); });
 
+const artworkOverlay = document.getElementById('artwork-overlay');
+const artworkClose = document.getElementById('artwork-close');
+let artworkReturnFocus = null;
+document.getElementById('modal-artwork-open').addEventListener('click', openModalArtwork);
+artworkClose.addEventListener('click', closeModalArtwork);
+artworkOverlay.addEventListener('click', e => { if (e.target === artworkOverlay) closeModalArtwork(); });
+
+function openModalArtwork() {
+  const img = document.getElementById('modal-img');
+  if (!img.naturalWidth || img.style.display === 'none') return;
+  artworkReturnFocus = document.activeElement;
+  document.getElementById('artwork-image').src = img.currentSrc || img.src;
+  document.getElementById('artwork-image').alt = img.alt;
+  document.getElementById('artwork-title').textContent = img.alt;
+  artworkOverlay.inert = false;
+  artworkOverlay.classList.add('open');
+  artworkOverlay.setAttribute('aria-hidden', 'false');
+  modal.inert = true;
+  artworkClose.focus();
+}
+
+function closeModalArtwork() {
+  artworkOverlay.classList.remove('open');
+  artworkOverlay.inert = true;
+  artworkOverlay.setAttribute('aria-hidden', 'true');
+  modal.inert = !modal.classList.contains('open');
+  if (artworkReturnFocus?.isConnected) artworkReturnFocus.focus();
+}
+
 document.addEventListener('keydown', e => {
-  const dialog = loreOverlay.classList.contains('open') ? loreOverlay : modal.classList.contains('open') ? modal : null;
+  const dialog = artworkOverlay.classList.contains('open') ? artworkOverlay : loreOverlay.classList.contains('open') ? loreOverlay : modal.classList.contains('open') ? modal : null;
   if (!dialog) return;
   if (e.key === 'Escape') {
-    if (dialog === loreOverlay) closeLoreFullscreen(); else closeModal();
+    if (dialog === artworkOverlay) closeModalArtwork();
+    else if (dialog === loreOverlay) closeLoreFullscreen(); else closeModal();
   }
   if (e.key === 'Tab') {
     const controls = [...dialog.querySelectorAll('button, summary, [tabindex="0"]')].filter(el => !el.disabled && el.tabIndex >= 0 && el.getClientRects().length);
@@ -120,6 +150,71 @@ function modalEscape(value) {
   return String(value ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 }
 
+/* Inline outline icons keep the modal independent of icon fonts and emoji. */
+function modalIcon(key) {
+  const paths = {
+    health:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',
+    shield:'<path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6l8-3Z"/>',
+    damage:'<path d="m14 4 6-1-1 6L7 21l-4-4L15 5M5 13l6 6M3 21l2-2"/>',
+    attackSpeed:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3M18 6l2-2"/>',
+    delay:'<path d="M5 3h14M5 21h14M7 3v4l5 5-5 5v4M17 3v4l-5 5 5 5v4"/>',
+    sps:'<path d="M13 3c1 5-3 5-2 9 2-1 3-3 3-3s5 4 5 8a7 7 0 0 1-14 0c0-5 4-7 4-7s-1 5 2 5"/>',
+    mana:'<path d="M12 2S5 10 5 15a7 7 0 0 0 14 0C19 10 12 2 12 2Z"/><path d="M8 15a4 4 0 0 0 4 4"/>',
+    number:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+    range:'<path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/><path d="M7 3h10M7 21h10"/>',
+    speed:'<path d="m13 3-8 11h7l-1 7 8-11h-7l1-7Z"/>',
+    criticalChance:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/>',
+    criticDamage:'<path d="m12 2 2.8 6.5L22 9l-5.4 4.7 1.7 7.3-6.3-3.8L5.7 21l1.7-7.3L2 9l7.2-.5L12 2Z"/>',
+    lifesteal:'<path d="M12 3S6 10 6 15a6 6 0 0 0 12 0c0-5-6-12-6-12Z"/><path d="M9 15h6M12 12v6"/>',
+    lifestealChance:'<path d="M8 3S3 9 3 13a5 5 0 0 0 7 4M16 7s5 6 5 10a5 5 0 0 1-10 0c0-4 5-10 5-10Z"/>',
+    dodge:'<path d="M3 7h10a3 3 0 1 0-3-3M2 12h16a3 3 0 1 1-3 3M4 17h3"/>',
+    vision:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+    healBonus:'<path d="M12 3v18M3 12h18"/><path d="m6 4 1 2M18 4l-1 2M4 18l2-1M20 18l-2-1"/>',
+    healrecovery:'<path d="M20 4c-9-1-16 3-15 10 1 7 11 7 14 0 1-3 1-6 1-10ZM4 21l11-11"/>',
+    shieldrecovery:'<path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6l8-3ZM9 12h6M12 9v6"/>',
+    criticdamageminimiser:'<path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6l8-3ZM9 9l6 6M15 9l-6 6"/>',
+    damageminimiser:'<path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6l8-3ZM8 12h8"/>',
+    flexibility:'<path d="M4 8a8 8 0 0 1 14-3l2 3M20 3v5h-5M20 16a8 8 0 0 1-14 3l-2-3M4 21v-5h5"/>',
+    shieldtakendamage:'<path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6l8-3ZM12 8v8M9 13l3 3 3-3"/>',
+    life:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+    multiTarget:'<circle cx="8" cy="8" r="4"/><circle cx="17" cy="16" r="4"/><path d="m10 12 3 2M12 7h8M16 3l4 4-4 4"/>',
+    attackWidth:'<path d="M4 4v16h16M4 20 17 7M4 11a9 9 0 0 1 9 9"/>',
+    attackType:'<path d="m4 4 16 16M20 4 4 20M3 8l5-5M16 21l5-5M3 16l5 5M16 3l5 5"/>',
+    attackShape:'<path d="m12 3 9 9-9 9-9-9 9-9Z"/><path d="m12 8 4 4-4 4-4-4 4-4Z"/>',
+    flight:'<path d="M12 20v-8M12 13C10 7 5 4 2 4c0 8 4 12 10 9Zm0 0C14 7 19 4 22 4c0 8-4 12-10 9Z"/>',
+    weight:'<path d="M6 7h12l3 14H3L6 7Z"/><circle cx="12" cy="5" r="3"/>',
+    type:'<path d="m12 2 9 5v10l-9 5-9-5V7l9-5ZM3 7l9 5 9-5M12 12v10"/>',
+    stats:'<path d="M5 20V10M12 20V4M19 20v-7M2 20h20"/>',
+    ability:'<path d="m13 2-9 12h7l-1 8 10-13h-8l1-7Z"/>',
+    levels:'<path d="M4 20h5v-5h5v-5h6V4M15 4h5v5"/>',
+    lore:'<path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15"/>',
+    forms:'<rect x="3" y="3" width="12" height="15" rx="2"/><path d="M8 21h11a2 2 0 0 0 2-2V8"/>',
+    back:'<path d="m10 5-7 7 7 7M3 12h18"/>',
+    expand:'<path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/>',
+    close:'<path d="m6 6 12 12M18 6 6 18"/>',
+  };
+  const aliases = { targets:'criticalChance', star:'criticDamage', entity:'type', damageToCard:'damage', damageToCastle:'shield', timeBetweenDamage:'delay', lifetime:'life', size:'attackWidth' };
+  const body = paths[aliases[key] || key] || paths.type;
+  return `<svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${body}</svg>`;
+}
+
+function renderModalIdentity(card, fallback = {}) {
+  const name = card.name || fallback.name || 'Unknown';
+  const role = card.class || fallback.class;
+  const subclass = card.subclass || fallback.subclass;
+  const type = Array.isArray(card.type) ? card.type.join(' / ') : card.type || '';
+  const group = card.group || fallback.group || (modal.dataset.kind === 'spell' ? 'Spell' : 'Stagnantia');
+  document.getElementById('modal-identity').innerHTML = `
+    <div class="modal-name-class-row">
+      <h2 class="modal-card-name">${modalEscape(name)}</h2>
+      ${role ? `<span class="modal-class-badge">${modalEscape(role)}</span>` : ''}
+      ${subclass ? `<span class="modal-subclass-badge">${modalEscape(subclass)}</span>` : ''}
+    </div>
+    <div class="modal-card-group">${modalIcon('type')}<span>${modalEscape(group)}</span></div>`;
+  const flight = {ground:'Yerüstü', flying:'Uçan', conditional:'Şərti uçuş'}[card.combatStats?.flight];
+  document.getElementById('modal-art-meta').innerHTML = `${type ? `<span>${modalIcon('entity')}${modalEscape(type)}</span>` : ''}${flight ? `<span>${modalIcon('flight')}${flight}</span>` : ''}`;
+}
+
 /* Every render sets the skin, including form changes and the dual picker. */
 function applyModalRarity(rarity, name) {
   const aliases = { common:'mundane', rare:'familiar', epic:'arcane', legendary:'apex' };
@@ -177,8 +272,8 @@ function buildStatTiles(defs, source) {
     const rating = modalStatRating(def, value);
     const hint = MODAL_STAT_HINTS[def.key] || '';
     const ratingLabel = rating === null ? 'Müqayisə məlumatı yoxdur' : `Müqayisəli göstərici: ${rating}/5`;
-    return `<div class="modal-stat-tile${String(value).length > 9 ? ' modal-stat-tile--wide-value' : ''}" data-stat="${def.key}" style="--stat-color:${def.color}" title="${modalEscape(hint)}">
-      <span class="modal-stat-label"><span aria-hidden="true">${def.icon}</span>${def.label}</span>
+    return `<div class="modal-stat-tile${String(value).length > 9 ? ' modal-stat-tile--wide-value' : ''}" data-stat="${def.key}" style="--stat-color:var(--modal-color)" title="${modalEscape(hint)}">
+      <span class="modal-stat-label">${modalIcon(def.key)}<span>${def.label}</span></span>
       <strong class="modal-stat-value">${modalEscape(value)}</strong>
       <span class="modal-stat-crystals" role="img" aria-label="${ratingLabel}">${Array.from({length:5}, (_, i) => `<i class="${rating !== null && i < rating ? 'lit' : ''}"></i>`).join('')}</span>
     </div>`;
@@ -196,17 +291,17 @@ function buildCombatProfile(card) {
   };
   const multi = p.attackType === 'none' ? 'Hücum etmir' : p.multiTarget === true ? (Number.isFinite(p.maxTargets) ? `Bəli · ${p.maxTargets} hədəf` : 'Bəli · sahədəki rəqiblər') : p.multiTarget === false ? 'Xeyr · tək hədəf' : '—';
   const fields = [
-    ['multiTarget','🎯','Birdən çox rəqibə hasar',multi,'Count-dan fərqli olaraq bir hücumun vura bildiyi hədəflər.'],
-    ['attackWidth','📐','Saldırı genişliyi',p.attackWidth || '—','Hücum sektorunun bucağı və ya sahənin ölçüsü.'],
-    ['attackType','⚔','Hücum məsafəsi',labels.attackType[p.attackType] || '—','Əsas hücumun növü.'],
-    ['attackShape','◈','Hücum forması',labels.attackShape[p.attackShape] || '—','Əsas zərbənin yayıldığı forma.'],
-    ['flight','🪽','Uça bilirmi?',labels.flight[p.flight] || '—',p.flightCondition || 'Kartın uçuş vəziyyəti.'],
-    ['weight','⚖','Çəki',labels.weight[p.weight] || '—','Çox yüngül → yüngül → orta → ağır → çox ağır.'],
-    ['targets','◎','Hədəflər',labels.targets[p.targets] || '—','Hücumun yönələ bildiyi hədəflər.'],
-    ['type','✦','Kart tipi',Array.isArray(card.type) ? card.type.join(' / ') : card.type || '—','Kartın aid olduğu varlıq tipi.'],
+    ['multiTarget','Birdən çox rəqibə hasar',multi,'Count-dan fərqli olaraq bir hücumun vura bildiyi hədəflər.'],
+    ['attackWidth','Saldırı genişliyi',p.attackWidth || '—','Hücum sektorunun bucağı və ya sahənin ölçüsü.'],
+    ['attackType','Hücum məsafəsi',labels.attackType[p.attackType] || '—','Əsas hücumun növü.'],
+    ['attackShape','Hücum forması',labels.attackShape[p.attackShape] || '—','Əsas zərbənin yayıldığı forma.'],
+    ['flight','Uça bilirmi?',labels.flight[p.flight] || '—',p.flightCondition || 'Kartın uçuş vəziyyəti.'],
+    ['weight','Çəki',labels.weight[p.weight] || '—','Çox yüngül → yüngül → orta → ağır → çox ağır.'],
+    ['targets','Hədəflər',labels.targets[p.targets] || '—','Hücumun yönələ bildiyi hədəflər.'],
+    ['type','Kart tipi',Array.isArray(card.type) ? card.type.join(' / ') : card.type || '—','Kartın aid olduğu varlıq tipi.'],
   ];
-  return fields.map(([key, icon, name, value, hint]) => `<div class="modal-profile-tile" data-profile="${key}" title="${modalEscape(hint)}">
-    <span class="modal-stat-label"><span aria-hidden="true">${icon}</span>${name}</span>
+  return fields.map(([key, name, value, hint]) => `<div class="modal-profile-tile" data-profile="${key}" title="${modalEscape(hint)}">
+    <span class="modal-stat-label">${modalIcon(key)}<span>${name}</span></span>
     <strong>${modalEscape(value)}</strong>
     ${key === 'flight' && p.flightCondition ? `<small>${modalEscape(p.flightCondition)}</small>` : key === 'multiTarget' && p.multiTargetCondition ? `<small>${modalEscape(p.multiTargetCondition)}</small>` : ''}
   </div>`).join('');
@@ -256,15 +351,15 @@ function wireModalStats(root) {
 function buildStarLevels(levels) {
   if (!levels) return '<p class="no-stat-msg">No level data available.</p>';
   const stars = [
-    { key: 'level1', icon: '⭐',     label: 'Level 1', color: '#facc15' },
-    { key: 'level2', icon: '⭐⭐',   label: 'Level 2', color: '#f97316' },
-    { key: 'level3', icon: '⭐⭐⭐', label: 'Level 3', color: '#a855f7' },
+    { key: 'level1', number: '01', label: 'Level 1', color: '#facc15' },
+    { key: 'level2', number: '02', label: 'Level 2', color: '#f97316' },
+    { key: 'level3', number: '03', label: 'Level 3', color: '#a855f7' },
   ];
   return stars.map(s => {
     const text = levels[s.key];
     if (!text || text === '-') return `
         <div class="star-level-row star-level-empty">
-          <div class="star-level-icon">${s.icon}</div>
+          <div class="star-level-icon">${s.number}</div>
           <div class="star-level-info">
             <div class="star-level-label" style="color:${s.color}">${s.label}</div>
             <div class="star-level-text">—</div>
@@ -275,7 +370,7 @@ function buildStarLevels(levels) {
     const range = parts[1]?.trim() || '';
     return `
       <div class="star-level-row">
-        <div class="star-level-icon">${s.icon}</div>
+        <div class="star-level-icon">${s.number}</div>
         <div class="star-level-info">
           <div class="star-level-label" style="color:${s.color}">${s.label}</div>
           <div class="star-level-text">${desc}</div>
@@ -296,11 +391,11 @@ function buildCardSections(card, abilityHtml, story) {
   return `<div class="modal-card-body">
     <div class="modal-section-panels">${sections.map(section => `
       <section id="card-section-${section.key}" class="modal-card-section" role="tabpanel" aria-labelledby="card-tab-${section.key}" ${modalCardSection === section.key ? '' : 'hidden'}>
-        <div class="modal-section-label">${section.label}</div>${section.body}
+        <div class="modal-section-label">${modalIcon(section.key)}<span>${section.label}</span></div>${section.body}
       </section>`).join('')}
     </div>
     <nav class="modal-side-nav" role="tablist" aria-label="Kart bölmələri" aria-orientation="vertical">${sections.map(section => `
-      <button type="button" class="modal-section-tab" id="card-tab-${section.key}" role="tab" data-card-section="${section.key}" aria-controls="card-section-${section.key}" aria-selected="${modalCardSection === section.key}" tabindex="${modalCardSection === section.key ? 0 : -1}">${section.label}</button>`).join('')}
+      <button type="button" class="modal-section-tab" id="card-tab-${section.key}" role="tab" data-card-section="${section.key}" aria-controls="card-section-${section.key}" aria-selected="${modalCardSection === section.key}" tabindex="${modalCardSection === section.key ? 0 : -1}">${modalIcon(section.key)}<span>${section.label}</span></button>`).join('')}
     </nav>
   </div>`;
 }
@@ -333,25 +428,25 @@ function buildAscendedBanner(root, isAscended) {
   if (isAscended) return `
       <div class="ascended-banner ascended-banner--active">
         <div class="ascended-banner-info">
-          <span class="ascended-banner-icon">⚡</span>
+          <span class="ascended-banner-icon">${modalIcon('ability')}</span>
           <div>
             <div class="ascended-banner-title">Ascended Form</div>
             <div class="ascended-banner-sub">Partnyor bonusu aktiv — ${secondForm.name}</div>
           </div>
         </div>
         <button class="ascended-toggle-btn ascended-toggle-btn--revert"
-                id="ascended-toggle">↩ Base Form</button>
+                id="ascended-toggle">${modalIcon('back')} Base Form</button>
       </div>`;
   return `
     <div class="ascended-banner">
       <div class="ascended-banner-info">
-        <span class="ascended-banner-icon">⚡</span>
+        <span class="ascended-banner-icon">${modalIcon('ability')}</span>
         <div>
           <div class="ascended-banner-title">Ascended Form mövcuddur</div>
           <div class="ascended-banner-sub">Partnyor ilə → ${secondForm.name}</div>
         </div>
       </div>
-      <button class="ascended-toggle-btn" id="ascended-toggle">⚡ Etki</button>
+      <button class="ascended-toggle-btn" id="ascended-toggle">${modalIcon('ability')} Etki</button>
     </div>`;
 }
 
@@ -367,7 +462,7 @@ function buildFormSwitcher(rootCard, activeIndex) {
   ].join('');
   return `
     <div class="form-switcher">
-      <div class="form-switcher-label">🃏 Formlar</div>
+      <div class="form-switcher-label">${modalIcon('forms')} Formlar</div>
       <div class="form-switcher-btns">${buttons}</div>
     </div>`;
 }
@@ -381,9 +476,10 @@ function updateModalImage(card, fallbackCard) {
   const img     = document.getElementById('modal-img');
   const pholder = document.getElementById('modal-placeholder');
   img.alt = card.name || fallbackCard?.name || 'Kart';
-  pholder.textContent = typeof getRarityEmoji === 'function' ? getRarityEmoji(card.rarity || fallbackCard?.rarity) : '⚔';
-  img.onerror = () => { img.style.display = 'none'; pholder.style.display = 'flex'; };
-  img.onload = () => { img.style.display = 'block'; pholder.style.display = 'none'; };
+  pholder.innerHTML = modalIcon('entity');
+  document.getElementById('modal-artwork-open').hidden = true;
+  img.onerror = () => { img.style.display = 'none'; pholder.style.display = 'flex'; document.getElementById('modal-artwork-open').hidden = true; };
+  img.onload = () => { img.style.display = 'block'; pholder.style.display = 'none'; document.getElementById('modal-artwork-open').hidden = false; };
   if (imgUrl) {
     img.style.display = 'block';
     pholder.style.display = 'none';
@@ -400,19 +496,20 @@ function updateModalImage(card, fallbackCard) {
 function statPreview(c) {
   const s = c.stats || {};
   return `
-    <div class="dual-stat-row"><span>❤️ HP</span><span>${s.health || '—'}</span></div>
-    <div class="dual-stat-row"><span>🛡️ Shield</span><span>${s.shield || '—'}</span></div>
-    <div class="dual-stat-row"><span>💥 DMG</span><span>${s.damage || '—'}</span></div>
-    <div class="dual-stat-row"><span>🔥 DPS</span><span>${s.sps || '—'}</span></div>`;
+    <div class="dual-stat-row"><span>${modalIcon('health')} HP</span><span>${s.health || '—'}</span></div>
+    <div class="dual-stat-row"><span>${modalIcon('shield')} Shield</span><span>${s.shield || '—'}</span></div>
+    <div class="dual-stat-row"><span>${modalIcon('damage')} DMG</span><span>${s.damage || '—'}</span></div>
+    <div class="dual-stat-row"><span>${modalIcon('sps')} DPS</span><span>${s.sps || '—'}</span></div>`;
 }
 
 function spawnTag(c) {
   if (!c.forms || !c.forms.length) return '';
-  return `<div class="dual-spawn-tag">🃏 ${c.forms.map(f => f.name).join(', ')}</div>`;
+  return `<div class="dual-spawn-tag">${modalIcon('forms')} ${c.forms.map(f => f.name).join(', ')}</div>`;
 }
 
 /* Ethereal: dual-type selector screen */
 function buildDualTypeSelector(card) {
+  renderModalIdentity(card);
   applyModalRarity(card.rarity || 'ethereal', card.name);
   const t1       = card.type1;
   const t2       = card.type2;
@@ -420,14 +517,8 @@ function buildDualTypeSelector(card) {
     .getPropertyValue('--ethereal').trim() || '#f472b6';
 
   document.getElementById('modal-content').innerHTML = `
-    <div class="modal-name-class-row">
-      <div class="modal-card-name">${card.name || 'Unknown'}</div>
-      ${card.class ? `<span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}` : ''}
-    </div>
-    <div class="modal-card-group">✦ ${card.group || 'Stagnantia'} ✦</div>
-
     <div class="dual-selector-header">
-      <span class="dual-selector-icon">🌀</span>
+      <span class="dual-selector-icon">${modalIcon('forms')}</span>
       <div>
         <div class="dual-selector-title">Dual Form Kartı</div>
         <div class="dual-selector-sub">Oyuna başlamazdan əvvəl bir forma seçin</div>
@@ -481,7 +572,7 @@ function buildEmergentTraitTabs(card) {
              data-turn-key="${k}">Tur ${k}</button>`).join('');
   return `
     <div class="emergent-trait-switcher">
-      <div class="emergent-trait-label">🌱 Tura görə dəyişir</div>
+      <div class="emergent-trait-label">${modalIcon('levels')} Tura görə dəyişir</div>
       <div class="emergent-trait-btns">${tabs}</div>
     </div>
     <div class="modal-trait-box" id="emergent-trait-text">${card.turns[keys[0]]}</div>`;
@@ -507,6 +598,7 @@ function wireEmergentTraitTabs(card) {
 ──────────────────────────────────────────────────────── */
 function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
   const root = rootCard || card;
+  renderModalIdentity(card, root);
   applyModalRarity(card.rarity || root.rarity || backOrigin?.root.rarity, card.name || root.name);
   const isEmergentCard = !!(card.isEmergent && card.turns && emergentTurnKeys(card).length);
   const trait       = card.trait || null;
@@ -516,22 +608,16 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
   const isAscended = (rootCard !== null && activeFormIndex === null && card !== rootCard);
 
   const backBtn = backOrigin ? `
-    <button class="dual-back-btn" id="origin-back">← Forma seçiminə qayıt</button>` : '';
+    <button class="dual-back-btn" id="origin-back">${modalIcon('back')} Forma seçiminə qayıt</button>` : '';
 
   document.getElementById('modal-content').innerHTML = `
-    <div class="modal-name-class-row">
-      <div class="modal-card-name">${card.name || 'Unknown'}</div>
-      ${card.class ? `<span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}` : ''}
-    </div>
-    <div class="modal-card-group">✦ ${card.group || root.group || 'Stagnantia'} ✦</div>
-
     ${backBtn}
     ${buildAscendedBanner(root, isAscended)}
     ${activeFormIndex !== null ? buildFormSwitcher(root, activeFormIndex) : ''}
 
     ${buildCardSections(card, `
       ${(trait || isEmergentCard) ? `
-        ${abilityName ? `<div class="modal-ability-name">⚔ ${abilityName}</div>` : ''}
+        ${abilityName ? `<div class="modal-ability-name">${modalIcon('ability')} ${abilityName}</div>` : ''}
         ${isEmergentCard ? buildEmergentTraitTabs(card) : `<div class="modal-trait-box">${trait}</div>`}` : '<p class="no-stat-msg">Xüsusi qabiliyyət göstərilməyib.</p>'}
     `, story)}
   `;
@@ -584,6 +670,7 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
    ENTRY POINT
 ════════════════════════════════════════════════════════ */
 function openModal(card) {
+  modal.dataset.kind = 'card';
   modalStatsPage = 1;
   modalCardSection = 'stats';
   updateModalImage(card);
@@ -609,6 +696,7 @@ function showModalDialog() {
 function closeModal() {
   if (!modal.classList.contains('open')) return;
   if (loreOverlay.classList.contains('open')) closeLoreFullscreen();
+  if (artworkOverlay.classList.contains('open')) closeModalArtwork();
   modal.classList.remove('open');
   modal.inert = true;
   modal.setAttribute('aria-hidden', 'true');

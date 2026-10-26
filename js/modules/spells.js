@@ -97,7 +97,7 @@ function buildSpellStatBars(stats) {
       const pct = Math.min(100, (raw / s.max) * 100);
       return `
         <div class="stat-bar-row">
-          <div class="stat-label-sm">${s.icon} ${s.label}</div>
+          <div class="stat-label-sm">${modalIcon(s.key)} ${s.label}</div>
           <div class="stat-bar-track">
             <div class="stat-bar-fill"
                  style="width:${pct}%;background:${s.color};box-shadow:0 0 8px ${s.color}60">
@@ -114,17 +114,17 @@ function buildSpellFormSwitcher(spell, activeIndex) {
   if (!spell.forms || !spell.forms.length) return '';
   const buttons = [
     `<button class="form-switch-btn spell-form-btn ${activeIndex === -1 ? 'active' : ''}"
-             data-spell-form-index="-1">📜 ${spell.name}</button>`
+             data-spell-form-index="-1">${modalIcon('lore')} ${spell.name}</button>`
   ].concat(
     spell.forms.map((f, i) =>
       `<button class="form-switch-btn spell-form-btn ${activeIndex === i ? 'active' : ''}"
-               data-spell-form-index="${i}">🃏 ${f.name}</button>`
+               data-spell-form-index="${i}">${modalIcon('forms')} ${f.name}</button>`
     )
   ).join('');
 
   return `
     <div class="form-switcher spell-form-switcher">
-      <div class="form-switcher-label">🃏 Formlar</div>
+      <div class="form-switcher-label">${modalIcon('forms')} Formlar</div>
       <div class="form-switcher-btns">${buttons}</div>
     </div>`;
 }
@@ -132,6 +132,8 @@ function buildSpellFormSwitcher(spell, activeIndex) {
 /* ── Modal renderer for spells ── */
 function renderSpellModal(spell, activeFormIndex) {
   const rarity = (spell.rarity || 'common').toLowerCase();
+  modal.dataset.kind = 'spell';
+  renderModalIdentity(spell);
   applyModalRarity(rarity, spell.name);
   const stats  = spell.stats || {};
   const energy = stats.energy;
@@ -155,7 +157,7 @@ function renderSpellModal(spell, activeFormIndex) {
     const fStats = { ...(form.stats || {}), ...(form.additionalStats || {}) };
     bodyHtml = `
       <div class="spell-modal-form-card">
-        <div class="spell-modal-form-name">🃏 ${form.name}</div>
+        <div class="spell-modal-form-name">${modalIcon('forms')} ${form.name}</div>
         ${form.type ? `<div class="spell-modal-form-type">${form.type}${form.note ? ' · ' + form.note : ''}</div>` : ''}
         <div class="spell-form-stat-bars">
           ${buildSpellStatBars(fStats) || '<p class="no-stat-msg">Stat yoxdur.</p>'}
@@ -173,15 +175,8 @@ function renderSpellModal(spell, activeFormIndex) {
   }
 
   document.getElementById('modal-content').innerHTML = `
-    <span class="modal-rarity-badge"
-          style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
-      ${spell.rarity || ''}
-    </span>
-    <div class="modal-card-name">${spell.name || 'Unknown'}</div>
-    <div class="modal-card-group">✦ ${spell.type || 'Spell'} ✦</div>
-
     <div class="spell-modal-badges">
-      ${energy ? `<div class="spell-modal-energy">⚡ <span>${energy}</span> Enerji</div>` : ''}
+      ${energy ? `<div class="spell-modal-energy">${modalIcon('mana')} <span>${energy}</span> Enerji</div>` : ''}
       ${charge ? `<div class="spell-modal-charge">${'◆'.repeat(Math.min(charge, 5))} <span>${charge}</span> Yük</div>` : ''}
     </div>
 
@@ -239,12 +234,12 @@ function createSpellEl(spell, idx) {
 
   /* isMulti badge */
   const multiBadge = spell.isMulti
-    ? `<span class="spell-multi-badge">🃏 Multi</span>`
+    ? `<span class="spell-multi-badge">${modalIcon('forms')} Multi</span>`
     : '';
 
   el.innerHTML = `
     <div class="spell-top-left-badges">
-      ${energy ? `<div class="spell-energy-pill">⚡ <strong>${energy}</strong></div>` : ''}
+      ${energy ? `<div class="spell-energy-pill">${modalIcon('mana')} <strong>${energy}</strong></div>` : ''}
       ${charge ? `<div class="spell-charge-pill">
         <div class="spell-charge-dots">${chargeDots}</div>
         <span class="spell-charge-num">${charge} Yük</span>
@@ -277,7 +272,8 @@ function createSpellEl(spell, idx) {
 
     img.style.display = 'none';
     ph.style.display  = 'flex';
-    ph.textContent    = spell.type === 'Building' || spell.type === 'building' ? '🏛️' : '✨';
+    ph.innerHTML = modalIcon(spell.type?.toLowerCase() === 'building' ? 'shield' : 'ability');
+    document.getElementById('modal-artwork-open').hidden = true;
 
     const rarColorMap = {
       legendary: 'var(--apex)',

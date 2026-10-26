@@ -15,7 +15,7 @@
 
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/card-modal.css?v=2">
+  <link rel="stylesheet" href="styles/card-modal.css?v=3">
   <link rel="stylesheet" href="styles/battle.css">
   <link rel="stylesheet" href="styles/survival.css">
   <link rel="stylesheet" href="styles/nav.css">
@@ -962,13 +962,17 @@
 ═══════════════════════════════════════════════════════ -->
 <div id="modal-overlay" aria-hidden="true" inert>
   <div class="modal-frame" role="dialog" aria-modal="true" aria-label="Kart məlumatı">
-    <button class="modal-close" id="modal-close" type="button" aria-label="Bağla">✕</button>
+    <button class="modal-close" id="modal-close" type="button" aria-label="Bağla"><svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     <div class="modal-box" id="modal-box">
       <div class="modal-img-col" id="modal-img-col">
         <div class="modal-img-rarity" id="modal-img-rarity"></div>
         <img id="modal-img" src="" alt="" style="display:none">
-        <div class="modal-img-placeholder" id="modal-placeholder">⚔</div>
-        <div class="modal-img-gradient"></div>
+        <div class="modal-img-placeholder" id="modal-placeholder"></div>
+        <div class="modal-img-gradient" aria-hidden="true"></div>
+        <svg class="modal-portrait-outline" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M2 13V4l2-2h9M87 2h9l2 2v9M98 87v9l-2 2h-9M13 98H4l-2-2v-9" vector-effect="non-scaling-stroke"/></svg>
+        <header class="modal-identity" id="modal-identity"></header>
+        <div class="modal-art-meta" id="modal-art-meta"></div>
+        <button class="modal-artwork-open" id="modal-artwork-open" type="button" aria-label="Rəsmi tam göstər" aria-haspopup="dialog" hidden><svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg></button>
       </div>
       <div class="modal-content-col" id="modal-content"></div>
     </div>
@@ -980,10 +984,20 @@
 ═══════════════════════════════════════════════════════ -->
 <div id="lore-fullscreen-overlay" aria-hidden="true" inert>
   <div class="lore-fullscreen-box" role="dialog" aria-modal="true" aria-labelledby="lore-fullscreen-name">
-    <button class="modal-close" id="lore-fullscreen-close" type="button" aria-label="Lore-u bağla">✕</button>
+    <button class="modal-close" id="lore-fullscreen-close" type="button" aria-label="Lore-u bağla"><svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     <div class="lore-fullscreen-label">Lore</div>
     <div class="lore-fullscreen-name" id="lore-fullscreen-name"></div>
     <div class="lore-fullscreen-text" id="lore-fullscreen-text"></div>
+  </div>
+</div>
+
+<div id="artwork-overlay" aria-hidden="true" inert>
+  <div class="artwork-viewer" role="dialog" aria-modal="true" aria-labelledby="artwork-title">
+    <div class="artwork-toolbar">
+      <span id="artwork-title"></span>
+      <button type="button" id="artwork-close" aria-label="Rəsmi bağla"><svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <img id="artwork-image" alt="">
   </div>
 </div>
 
@@ -991,13 +1005,13 @@
      SCRIPTS  (order matters — core first, then modules)
 ═══════════════════════════════════════════════════════ -->
 <script src="js/core/particles.js"></script>
-<script src="js/core/modal.js?v=4"></script>
+<script src="js/core/modal.js?v=5"></script>
 <script src="js/core/navigation.js"></script>
-<script src="js/modules/cards.js?v=3"></script>
+<script src="js/modules/cards.js?v=4"></script>
 <script src="js/modules/battle.js"></script>
 <script src="js/modules/survival-data.js"></script>
 <script src="js/modules/survival.js?v=2"></script>
-<script src="js/modules/spells.js?v=3"></script>
+<script src="js/modules/spells.js?v=4"></script>
 <script src="js/modules/towerguns.js"></script>
 <script src="js/modules/info.js"></script>
 <script src="js/modules/powerups.js"></script>

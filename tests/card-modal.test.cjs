@@ -105,3 +105,13 @@ test('conditional flight and splash damage display their activation rules', () =
   context.card = { stats:{}, combatStats:{}, type:['Unknown'] };
   assert.doesNotMatch(run('buildCombatProfile(card)'), /undefined|null/);
 });
+
+
+test('modal stat, profile and level renderers use inline icons without emoji', () => {
+  context.card = cards.find(c => c.id === 'nitrox');
+  for (const expr of ['buildModalStats(card)', 'buildCombatProfile(card)', 'buildStarLevels(card.showlevels)']) {
+    const html = run(expr);
+    assert.doesNotMatch(html, /\p{Extended_Pictographic}|\p{Emoji_Presentation}/u);
+  }
+  assert.match(run('buildModalStats(card)'), /<svg class="modal-icon"/);
+});

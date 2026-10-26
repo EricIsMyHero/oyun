@@ -219,10 +219,11 @@ function powerColor(score) {
   return '#6b7280';                      /* grey  – weak */
 }
 
-/* ── Rarity emoji map ── */
-function getRarityEmoji(r) {
-  return { mundane:'⚙', familiar:'🌿', arcane:'🔮', relic:'📿',
-           ascendant:'🔥', apex:'👑', emergent:'🌱', ethereal:'✨' }[(r||'').toLowerCase()] || '⚔';
+/* Outline symbols match the card detail view. */
+function getRarityIcon(r) {
+  const key = {mundane:'entity', familiar:'healrecovery', arcane:'ability', relic:'levels',
+    ascendant:'speed', apex:'star', emergent:'forms', ethereal:'attackShape'}[(r || '').toLowerCase()];
+  return modalIcon(key || 'entity');
 }
 
 /* ── Entry point called by navigation.js ── */
@@ -366,17 +367,17 @@ function createCardEl(card, idx) {
            onerror="this.style.display='none';
                     this.parentElement.querySelector('.card-img-placeholder').style.display='flex';">
       <div class="card-img-overlay"></div>
-      <div class="card-img-placeholder" style="display:none">${getRarityEmoji(rarity)}</div>
+      <div class="card-img-placeholder" style="display:none">${getRarityIcon(rarity)}</div>
       <div class="card-mana-badge">${mana}</div>
     </div>
     <div class="card-body">
       <div class="card-name">${card.name || 'Unknown'}</div>
       <div class="card-group-tag">${card.group || 'Stagnantia'}</div>
-      ${card.abilityName && card.abilityName !== '—' ? `<div class="card-ability-tag">⚔ ${card.abilityName}</div>` : ''}
+      ${card.abilityName && card.abilityName !== '—' ? `<div class="card-ability-tag">${modalIcon('ability')} ${card.abilityName}</div>` : ''}
       <div class="card-mini-stats">
-        ${stats.health !== undefined ? `<div class="mini-stat"><span class="mini-stat-icon">❤</span><span class="mini-stat-val">${stats.health}</span></div>` : ''}
-        ${stats.damage !== undefined ? `<div class="mini-stat"><span class="mini-stat-icon">⚔</span><span class="mini-stat-val">${stats.damage}</span></div>` : ''}
-        ${stats.shield !== undefined ? `<div class="mini-stat"><span class="mini-stat-icon">🛡</span><span class="mini-stat-val">${stats.shield}</span></div>` : ''}
+        ${stats.health !== undefined ? `<div class="mini-stat"><span class="mini-stat-icon">${modalIcon('health')}</span><span class="mini-stat-val">${stats.health}</span></div>` : ''}
+        ${stats.damage !== undefined ? `<div class="mini-stat"><span class="mini-stat-icon">${modalIcon('damage')}</span><span class="mini-stat-val">${stats.damage}</span></div>` : ''}
+        ${stats.shield !== undefined ? `<div class="mini-stat"><span class="mini-stat-icon">${modalIcon('shield')}</span><span class="mini-stat-val">${stats.shield}</span></div>` : ''}
       </div>
       <div class="card-power-wrap">
         <div class="card-power-label">PWR <span class="card-power-num" style="color:${pcol}">${ps}</span><span class="card-power-max">/1000</span></div>
