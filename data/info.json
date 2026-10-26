@@ -95,7 +95,9 @@
         "Imprisonment: For a set duration and under certain conditions, an enemy card can neither be targeted nor take damage, and it also cannot deal damage.",
         "Root: For a set duration and under certain conditions, an enemy card cannot move.",
         "Airborne: For a set duration and under certain conditions, enemy cards are launched into the air; during this time they can neither deal damage nor move.",
-        "Betrayal: For a set duration and under certain conditions, enemy cards deal damage to their own allies."
+        "Betrayal: For a set duration and under certain conditions, enemy cards deal damage to their own allies.",
+        "Knockback: Under certain conditions, enemy cards are pushed backwards.",
+        "Frozen: For a set duration and under certain conditions, enemy cards are frozen; for 3 seconds after thawing they are slowed by 25%."
       ]
     }
   ]
