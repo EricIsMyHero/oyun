@@ -51,7 +51,18 @@
     },
     "story": "Arcanyx is as elegant as she is formidable, embodying a perfect balance of grace and power. She carries herself with a noble air, but beneath her calm exterior lies a volatile temper. If provoked or angered, she does not hesitate to unleash her signature explosive seeds, which burst with arcane fury upon contact. She is a delicate force of nature that demands respect. While she prefers peace, those who mistake her beauty for weakness quickly learn the destructive cost of her wrath.",
     "class": "Mage",
-    "subclass": "Nuker"
+    "subclass": "Nuker",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "circle",
+      "attackWidth": "Partlayış sahəsi",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both",
+      "multiTargetCondition": "Toxum hədəfə dəydikdə."
+    }
   },
   {
     "id": "leafshade",
@@ -98,7 +109,17 @@
     },
     "story": "The Ivy Hermit, a mysterious female elf from the hidden botanical gardens, known for her reclusive nature and unmatched ability to disappear into dense vegetation. Unlike many heroic warriors, Leafshade prefers solitude, spending countless hours nurturing plants and studying the intricate growth of ivy, vines, and forest ecosystems. She is a true guardian of nature's hidden corners. Leafshade possesses refined elven features, pointed ears, and a calm, thoughtful expression. Her appearance reflects a life spent among ancient forests rather than bustling civilizations. Her eyes glow with soft emerald-green hues, carrying quiet intelligence and a deep connection to nature. She wears a large dark green cloak that almost completely conceals her body. The cloak appears alive, covered with crawling ivy, twisting vines, moss, and small leaves that continuously grow and move across its surface. Living tendrils weave around her shoulders, arms, and cloak edges, creating the impression that the forest itself has embraced her. The vegetation feels organic and natural rather than aggressive. Some vines extend outward from the cloak, coiling around nearby branches, roots, and stones. These living plants appear ready to entangle trespassers or form protective barriers at a moment's notice. Small leaves, ivy strands, and glowing green particles drift gently around her, enhancing his mystical connection to plant life. Leafshade is partially hidden within dense foliage, blending almost perfectly into her surroundings. Thick bushes, ancient roots, hanging vines, and lush vegetation surround her, making it difficult to distinguish where the elf ends and the forest begins. Only portions of her face and glowing eyes remain clearly visible through the greenery. The environment is a breathtaking botanical sanctuary filled with towering ancient trees, emerald vegetation, winding ivy-covered pathways, glowing plants, and hidden forest clearings. Sunlight filters through the canopy, creating beautiful rays of light that illuminate sections of the dense foliage. The atmosphere feels peaceful, secretive, and deeply connected to nature. The overall composition should emphasize stealth, natural camouflage, and harmony with living plants. Leafshade appears less like a warrior and more like a living extension of the forest itself.",
     "class": "Assassin",
-    "subclass": "Executioner"
+    "subclass": "Executioner",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "light",
+      "targets": "ground"
+    }
   },
   {
     "id": "jestro",
@@ -188,11 +209,31 @@
           "level3": "+5% Hasar Azaltma | 0% » 5%"
         },
         "story": "-",
-        "class": "Fighter"
+        "class": "Fighter",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "heavy",
+          "targets": "ground"
+        }
       }
     ],
     "class": "Specialist",
-    "subclass": "Disruptor"
+    "subclass": "Disruptor",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "tphoenix",
@@ -275,7 +316,17 @@
           "level3": "+5% Kaçınma Şansı | 0% » 5%"
         },
         "story": "-",
-        "class": "Tank"
+        "class": "Tank",
+        "combatStats": {
+          "attackType": "none",
+          "multiTarget": false,
+          "maxTargets": 0,
+          "attackShape": "none",
+          "attackWidth": "—",
+          "flight": "ground",
+          "weight": "heavy",
+          "targets": "none"
+        }
       },
       {
         "name": "Phoenix",
@@ -312,11 +363,31 @@
           "level3": "+10% Can Çalma Şansı | 0% » 10%"
         },
         "story": "-",
-        "class": "Fighter"
+        "class": "Fighter",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "flying",
+          "weight": "medium",
+          "targets": "both"
+        }
       }
     ],
     "class": "Fighter",
-    "subclass": "Reborn"
+    "subclass": "Reborn",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "corsair-crew",
@@ -399,11 +470,31 @@
           "level3": "+10% Critical Chance | 5% » 15%"
         },
         "story": "-",
-        "class": "Marksman"
+        "class": "Marksman",
+        "combatStats": {
+          "attackType": "ranged",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "medium",
+          "targets": "both"
+        }
       }
     ],
     "class": "Fighter",
-    "subclass": "Survivor"
+    "subclass": "Survivor",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "ship-cannoneer",
@@ -450,7 +541,17 @@
     },
     "story": "The Shieldbreaker, a heavily armed corsair artillery warrior from Corsair Bay who specializes in sustained cannon fire. He operates a massive historical ship cannon, the kind traditionally mounted on wooden pirate ships, transforming it into a devastating battlefield weapon. Ship Cannoneer is a powerful adult male pirate with a broad, muscular build, thick arms, and a weathered face shaped by years of working aboard ships. He has a rugged but serious appearance, with short dark hair, a trimmed beard, and focused eyes. He looks like a veteran naval gunner rather than a flamboyant pirate. He wears practical historical corsair clothing: a dark weathered coat, thick linen shirt, reinforced trousers, leather boots, heavy gloves, and a wide ammunition belt. His clothing is covered with traces of gunpowder, soot, salt, and dust from constant cannon operation. His primary weapon is an enormous traditional wooden naval cannon, mounted on a sturdy two-wheeled wooden carriage. The cannon is made from heavy dark iron and aged wood, with realistic rivets, scratches, dents, and gunpowder residue. It should unmistakably resemble a large historical pirate ship cannon, not a modern artillery weapon. The cannon is positioned directly beside Canoballer, with his hands gripping the firing mechanism and carriage. Several heavy cannonballs and wooden ammunition crates are scattered around him. Ship Cannoneer's defining feature is his large reinforced shield, mounted prominently on his body and protecting him from incoming attacks. The shield is constructed from thick dark metal reinforced with wooden layers and heavy iron brackets. It looks like something designed to survive direct cannon fire. The shield is visibly damaged from repeated enemy attacks: large dents, scratches, cracks, and impact marks cover its surface. Small fragments of metal and dust are falling from it. As the shield loses durability, Canoballer's cannon begins firing increasingly rapidly. This should be represented visually through multiple overlapping muzzle flashes, smoke trails, spent cannonballs, and a rapidly rotating loading mechanism. The visual concept should communicate his gameplay mechanic: The more shield he loses, the faster his cannon fires. A large enemy projectile has just struck his shield, creating a powerful impact. The shield absorbs the blow while Canoballer remains firmly planted behind it. At the same time, his cannon fires another devastating shot toward an unseen enemy. His stance is defensive and stationary, emphasizing that he is designed to hold important positions and withstand sustained enemy fire. The battlefield is a fortified section of a pirate ship, with wooden barricades, cannon emplacements, ropes, barrels, ammunition crates, damaged sails, and ocean waves visible behind him. Dark storm clouds dominate the sky. Smoke from cannon fire fills the air, while flashes from distant naval artillery illuminate the battlefield.",
     "class": "Marksman",
-    "subclass": "Burst"
+    "subclass": "Burst",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "very-heavy",
+      "targets": "both"
+    }
   },
   {
     "id": "toxic",
@@ -504,7 +605,17 @@
     },
     "story": "The Corrosive Plague, a terrifying bio-engineered alien from the Dark Layer of Alien World: The Binary Divide. Created to contaminate entire ecosystems, Toxic is a living biological weapon whose body continuously produces highly corrosive acids and poisonous gases. Wherever it travels, life withers, metal dissolves, and even the atmosphere becomes lethal. Toxic is a tall, slender, insectoid-reptilian alien with an unsettling silhouette. Its body is covered in dark charcoal-black exoskeletal armor, fractured by glowing veins of toxic neon-green bioluminescent fluid. The armor appears partially corroded, as though its own acidic secretions are constantly eating away at its surface. Its elongated head features glowing toxic-green eyes without visible pupils and a horrifying mouth lined with multiple rows of razor-sharp crystalline teeth. Small breathing vents along its neck and shoulders continuously release thick clouds of poisonous green gas that spread around its body. Across its back grow several large organic chemical sacs filled with glowing corrosive liquid. Transparent membranes reveal swirling radioactive-green acid inside. Thick tubes and biological veins connect these sacs to its arms, mouth, and claws, supplying an endless flow of toxic chemicals. Its long arms end in razor-sharp claws dripping with highly corrosive acid. Every droplet burns into the ground, producing smoke and sizzling chemical reactions. Streams of green acid continuously flow from its fingertips, leaving trails of melted rock and dissolved metal wherever it moves. Dense clouds of glowing poisonous gas surround the creature, partially obscuring its body. The gas contains floating acidic particles, chemical vapor, and toxic spores that distort visibility. The atmosphere around Toxic feels contaminated and impossible to breathe. The battlefield has been completely corrupted. Dead forests, melted rocks, corroded metal structures, pools of bubbling acid, shattered alien machinery, and blackened ground surround the creature. Trees have dissolved into skeletal remains, while rivers have transformed into glowing toxic sludge. Acid rain falls from dark green storm clouds overhead. The ground beneath Toxic constantly bubbles and melts as corrosive fluids spread outward. Small alien plants decay instantly upon contact, while abandoned armor and weapons dissolve into rust and sludge. The overall composition should portray Toxic as a living environmental catastrophe—an unstoppable biological nightmare whose mere presence transforms thriving worlds into lifeless wastelands.",
     "class": "Marksman",
-    "subclass": "Sharpshooter"
+    "subclass": "Sharpshooter",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "lumina",
@@ -551,7 +662,17 @@
     },
     "story": "The Solar Sentinel, a powerful female warrior belonging to the sacred Solar Order, an elite order devoted to the power of sunlight. Lumina constantly radiates an immense protective field of solar energy around herself, turning the battlefield into a zone of blinding golden light. Her presence feels like standing directly beneath an eternal sun. Lumina is a beautiful adult woman with an elegant yet powerful athletic physique. She has long flowing golden-white hair, illuminated naturally by the intense solar energy surrounding her. Her eyes glow with brilliant warm golden light, and her expression is calm, disciplined, and unwavering. She wears ornate white and gold ceremonial battle armor, combining elegant Solar Order aesthetics with practical combat protection. The armor is made from polished white metal and radiant golden material, with intricate sun-inspired engravings across the chest, shoulders, arms, and legs. A long white-and-gold fabric mantle flows behind her, constantly illuminated by the energy around her. At the center of her chest is a bright solar core, resembling a miniature sun enclosed within a crystalline structure. Golden energy continuously flows outward from this core and travels across the armor. Lumina carries a long elegant solar spear in one hand. The weapon has a white-metal shaft with golden details and a spearhead made from condensed sunlight. The blade emits intense but controlled golden radiance. Around Lumina is her defining ability: a gigantic continuous solar barrier surrounding her entire body. Instead of looking like a simple circular shield, the barrier appears as a multilayered sphere of radiant golden energy, composed of concentric rings, flowing solar particles, and translucent walls of light. The barrier constantly emits waves of sunlight outward. Every few moments, powerful golden pulses expand from Lumina, illuminating everything around her. The closer an enemy gets, the more intense the light becomes. The solar field should visibly affect the environment: nearby stones glow from the heat, dust particles become illuminated, shadows disappear beneath the intense radiance, and the ground beneath her feet develops subtle glowing cracks from concentrated solar energy. The battlefield is a magnificent sacred Solar Order temple, constructed from white stone and golden crystalline architecture. Massive pillars resemble rays of sunlight, enormous circular sun symbols are carved into the floor, and floating golden crystals orbit around the sanctuary. Behind Lumina is a gigantic artificial sun, suspended above the temple like a miniature star. Its radiance merges with Lumina's own energy field, making it difficult to distinguish where the warrior ends and the sunlight begins. She stands at the center of the battlefield in a confident defensive stance, spear held vertically beside her while the enormous solar barrier surrounds her and protects everything nearby. The atmosphere should feel holy, powerful, majestic, and overwhelming, portraying Lumina as a living source of sunlight and an immovable guardian of the Solar Order.",
     "class": "Tank",
-    "subclass": "Pure"
+    "subclass": "Pure",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "line",
+      "attackWidth": "Dar xətt",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "hell-boy",
@@ -598,7 +719,17 @@
     },
     "story": "-",
     "class": "Fighter",
-    "subclass": "Brawler"
+    "subclass": "Brawler",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "slasherx",
@@ -645,7 +776,17 @@
     },
     "story": "The Silent Butcher, a terrifying masked outlaw lurking within The Ghost Town. Unlike a traditional gunslinger, SlasherX never announces his presence and never gives his victims a chance to fight back. He stalks isolated travelers through abandoned streets, silently following them through darkness before striking with a razor-sharp hunting blade. His reputation has transformed him into an urban legend whispered about by anyone foolish enough to enter the Ghost Town alone. SlasherX is a tall, lean, physically powerful adult male outlaw with a predatory posture. His body is covered in dark, weathered clothing designed for stealth. He wears a long, heavily worn black-brown coat with torn edges, dark trousers, rugged leather boots, and a variety of old leather straps and utility pouches. His entire face is concealed beneath a disturbing handmade mask made from aged, weathered material. The mask has an unsettling, crude appearance, with an expressionless face and narrow dark eye openings that reveal almost nothing about the person underneath. Scratches, stains, cracks, and signs of long-term use cover its surface. His eyes are barely visible through the mask, appearing as two faint, cold points of light in the darkness. His identity remains completely unknowable. SlasherX carries a large hunting knife as his primary weapon. The blade is long, heavy, and extremely sharp, with a worn steel surface covered in subtle scratches from countless hunts. The handle is wrapped in aged leather for a secure grip. He holds the blade low beside his body, ready to strike with a sudden, explosive movement. A second smaller utility blade is concealed along his belt, reinforcing his preparation as a professional hunter rather than a reckless killer. His clothing is specifically designed around stealth and mobility. The coat is loose enough to conceal his movements but fitted enough to prevent unnecessary noise. Several dark leather straps cross his torso, carrying hunting equipment, rope, small tools, and worn pouches. The environment is a deserted Ghost Town at night. Abandoned wooden buildings surround a narrow dirt street, with broken windows, collapsing balconies, old wagons, rotten fences, and forgotten lanterns. A single flickering lantern hangs outside an abandoned saloon, creating a small pool of warm light surrounded by deep darkness. Thick fog crawls along the ground, partially obscuring SlasherX's legs. Moonlight cuts through the clouds above, creating long shadows between the buildings. Tumbleweeds move silently through the empty street while loose wooden signs creak in the wind. SlasherX stands partially hidden in the darkness between two abandoned buildings, his body mostly concealed by shadow. Only part of his mask, one eye, and the reflective edge of his hunting blade are illuminated by moonlight. His posture should communicate absolute patience—he is not charging, shouting, or posing dramatically. He is waiting. The composition should create the feeling that the viewer has unknowingly become the next target. SlasherX should feel like a predator that belongs to the darkness of the Ghost Town itself.",
     "class": "Assassin",
-    "subclass": "Reaper"
+    "subclass": "Reaper",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "135°",
+      "flight": "ground",
+      "weight": "light",
+      "targets": "ground"
+    }
   },
   {
     "id": "sheriff",
@@ -692,7 +833,17 @@
     },
     "story": "The Last Lawman, a lonely gunslinger from The Ghost Town, an abandoned settlement swallowed by silence and forgotten by civilization. Once the town's protector, Sheriff remained behind when every citizen fled, refusing to abandon the streets he swore to defend. Years of isolation transformed him into a hardened, haunted lawman who continues patrolling the empty town as though justice itself still lives there. Sheriff is a rugged adult male gunslinger with a lean, weathered physique and a stern, exhausted presence. His skin is sunburned and dusty, covered with subtle scars and signs of years spent surviving in the harsh desert. He has a rough beard and tired, piercing eyes that suggest a man who has seen his entire world disappear but refuses to give up his duty. He wears a classic old Western sheriff outfit: a worn dark-brown leather coat, weathered black vest, dusty beige shirt, rugged trousers, heavy leather boots, and a wide-brimmed cowboy hat. A faded rusty sheriff badge is pinned visibly to his chest, scratched and oxidized after years of neglect. His clothing is torn and covered with dust, emphasizing that he has lived in the abandoned town for years. Sheriff carries two old quick-draw revolvers, one in each hand, with worn wooden grips, scratched steel barrels, and leather holsters hanging at his hips. The revolvers look heavily used but meticulously maintained, suggesting that despite the town's abandonment, he still prepares for the next threat every day. His stance is low and ready, both revolvers drawn and aimed in slightly different directions as though he is defending the empty streets from an unseen enemy. His fingers remain close to the triggers, demonstrating the lightning-fast reflexes that made him legendary. The environment is a completely abandoned 19th-century Western ghost town. Empty wooden buildings line a wide dirt street, with broken saloon signs swinging slowly in the wind, shattered windows, abandoned wagons, rotten fences, and scattered debris. Tumbleweeds roll through the deserted streets while thick dust drifts through the air. Behind Sheriff stands an old, decaying sheriff's office and jail, its wooden sign barely hanging from rusty chains. Nearby, an abandoned saloon has broken doors and dark windows. The entire town feels as though everyone left only moments ago, yet decades of decay clearly reveal the truth. The sky is dark and overcast with a dramatic orange sunset breaking through distant clouds. Long shadows stretch across the empty street while a thin layer of dust and desert fog creates an eerie atmosphere. Sheriff stands alone in the center of the abandoned street, revolvers drawn, staring directly into the distance as though he can hear an enemy approaching despite the complete silence. The overall composition should portray Sheriff as a tragic, relentless lawman who has become the final remaining soul of a forgotten town—still protecting streets that no longer have anyone left to protect.",
     "class": "Marksman",
-    "subclass": "Marker"
+    "subclass": "Marker",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "nurse",
@@ -739,7 +890,17 @@
     },
     "story": "The Restless Medic, the ghostly spirit of a deceased woman whose soul remains trapped within The Ghost Town. Once the town's dedicated medic, she spent her life treating injured outlaws, travelers, and townsfolk. After her death and the town's abandonment, her spirit refused to leave. Now she silently wanders the deserted streets, still carrying her medical tools and continuing her twisted version of the healer's duty. Nurse is an adult female ghost, visibly deceased yet retaining an elegant, human appearance. Her body is slightly translucent, with a pale, desaturated complexion and a faint bluish spectral glow. Parts of her lower body gradually dissolve into wisps of ghostly mist, making her appear as though she is floating just above the ground. Her face is beautiful but lifeless, with pale skin, sunken features, and cold faintly glowing blue eyes. Her expression is calm and emotionless, creating an unsettling contrast with her former profession as a caring medic. Long, slightly tangled dark hair falls around her shoulders and moves gently despite the absence of wind. She wears a 19th-century Western frontier nurse uniform, heavily aged and damaged by time. A faded, dusty white medical dress with a worn apron covers her body, with subtle dark stains and frayed fabric around the edges. The clothing looks authentic to the old frontier setting rather than modern medical clothing. In her right hand, Nurse holds a single old medical syringe, gripping it carefully between her fingers. The syringe is made of aged glass and metal, containing a faintly glowing chemical solution. The needle is long, sharp, and visibly polished despite the age of the object. Several additional medical supplies hang from a worn leather medical pouch around her waist: old glass medicine bottles, bandages, small metal instruments, and sealed chemical vials. Everything appears old, abandoned, and partially covered in dust. A small collection of chemical darts is attached to a leather holder on her hip. The darts contain different colored liquids, subtly suggesting that some are designed to heal while others are poisonous. Her supernatural abilities are subtly represented by faint spectral energy surrounding the syringe. Soft blue-white particles drift from her fingers and mix with thin trails of green chemical vapor escaping from the syringe. The environment is the interior of an abandoned frontier medical clinic within The Ghost Town. Wooden walls are cracked and covered with dust, broken medicine cabinets line the room, old bottles cover wooden shelves, and rusty medical instruments remain scattered across an abandoned examination table. A broken window allows pale moonlight to enter the room, illuminating Nurse's translucent body. Dust particles float through the beam of light while faint ghostly mist spreads across the wooden floor. Behind her, several abandoned medical beds remain untouched, covered in dusty white sheets. Old medical records and empty medicine bottles are scattered across the room, creating the feeling that the clinic was abandoned suddenly many years ago. Nurse stands completely still in the center of the clinic, staring directly toward the viewer while holding the syringe upright in one hand. Her expression remains calm and emotionless, creating an eerie sense that she is waiting for her next patient. The overall composition should portray Nurse as a tragic undead medic trapped between her duty and death, retaining the appearance and tools of a healer while possessing an unsettling supernatural presence.",
     "class": "Assassin",
-    "subclass": "Vampire"
+    "subclass": "Vampire",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "light",
+      "targets": "ground"
+    }
   },
   {
     "id": "tribe",
@@ -786,7 +947,17 @@
     },
     "story": "The Primal Vanguard, a formidable five-warrior tribal combat unit from an ancient warrior civilization, fighting as a single coordinated squad rather than as individual soldiers. These warriors come from a brutal prehistoric culture where survival, loyalty, and collective strength define their entire way of life. The card depicts exactly five distinct tribal warriors standing together as one unified formation in front of an enormous ancient stone totem. The three warriors in the back and center are Spear Warriors, while the two warriors at the front are Dagger Warriors. The three Spear Warriors are strong, rugged adult tribal men with athletic, battle-hardened physiques. They stand prominently behind the formation, holding long primitive spears with sharpened stone or bone spearheads. Their posture is disciplined and coordinated, clearly showing that they fight as a group rather than independently. Their clothing consists of animal hides, rough furs, woven primitive fabrics, leather straps, bone ornaments, and tribal paint. Their bodies have realistic scars, dirt, small wounds, and faded ritual markings from years of combat and hunting. Their equipment should look handcrafted using materials naturally available to a prehistoric civilization. The two Dagger Warriors are positioned lower in the formation, kneeling or crouching, ready to rapidly attack enemies at close range. They are smaller and more agile than the spear warriors, with athletic physiques and predatory body language. Each Dagger Warrior holds two primitive flint daggers, one in each hand. The blades are crude but extremely sharp, made from chipped black and gray flint with wrapped leather handles. Their faces show intense concentration and aggression, while the spear warriors remain calm and disciplined. Every warrior should have a distinct face, hairstyle, scars, body markings, and clothing details while still clearly belonging to the same tribe. The five warriors form a tight tactical formation, standing close enough that their bodies and weapons visually overlap slightly. They should look like a single battlefield unit rather than five unrelated characters. At the center of the formation is an enormous ancient stone tribal totem, covered with primitive carvings depicting spears, animals, warriors, and symbols representing unity and strength. The totem is weathered, cracked, and partially covered with moss. The visual composition should strongly communicate collective strength. All five warriors are preparing for their signature ability, “Tribal Throw.” The warriors have just identified the same enemy target outside the frame. All five turn their attention toward the exact same direction. The two Dagger Warriors are simultaneously throwing their flint daggers, while the three Spear Warriors are performing a powerful synchronized spear throw. Their projectiles travel toward a single invisible target in the same direction, creating a visually coherent coordinated attack. The three spear warriors should appear to generate enormous physical force as they throw. Their spears are surrounded by subtle motion trails and flying dust, emphasizing the +150% damage impact and powerful knockback of the attack. The two daggers move with much greater speed and precision, surrounded by faint dark-red energy particles representing Bleed. All five attacks visually converge toward one single impact point, representing the mechanic where their individual damage is combined into one massive attack. At the point of convergence, create a dramatic burst of dust, shattered stone fragments, and primitive combat energy. The effect should feel physical and brutal rather than magical. The formation should visually communicate that the strength of Tribe comes from acting together. The warriors should not look like modern soldiers, fantasy barbarians, or generic cavemen. They are a highly organized ancient tribal warrior unit, with their own combat discipline, hierarchy, traditions, and coordinated battlefield tactics. Their weapons are entirely primitive: stone, flint, bone, wood, leather, and rope. No metal, firearms, modern equipment, futuristic technology, or advanced armor. The environment is an ancient prehistoric tribal battlefield, surrounded by massive weathered stones, primitive wooden structures, animal bones, burning torches, tribal banners, and dense wilderness. The ground is muddy and covered with footprints, broken branches, scattered stones, and traces of previous battles. Behind the warriors stands the massive stone totem, creating a strong silhouette and giving the card a recognizable visual identity. The lighting is dramatic and cinematic: warm sunlight breaks through dense clouds and trees, illuminating the five warriors from behind while atmospheric dust floats through the air. The overall atmosphere should feel primitive, brutal, disciplined, powerful, and ancient. The card should immediately communicate: Five warriors. One formation. One target. One devastating attack.",
     "class": "Fighter",
-    "subclass": "Burst"
+    "subclass": "Burst",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "line",
+      "attackWidth": "Dar xətt",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "earthshakers",
@@ -839,7 +1010,17 @@
     },
     "story": "The Primal Crushers, a brutal tribe of savage prehistoric warriors from a wild, untamed world. They are feral tribal humanoids, built for raw physical strength and close-range destruction. Their entire appearance reflects a primitive culture where survival, strength, and dominance determine everything. The Earthshakers are a small group of powerful tribal warriors, each with a massive, muscular physique, thick arms, broad shoulders, and rugged bodies covered with dirt, scars, scratches, and tribal markings. They should look wild and battle-hardened rather than civilized. Their faces are intimidating and primitive, with fierce expressions, prominent brows, rough facial features, unkempt hair, and wild beards. Some have long messy hair, while others have braided sections decorated with small bones, teeth, feathers, and primitive ornaments. They wear primitive tribal clothing made from rough animal hides, leather strips, woven fibers, and fur. Their clothing is minimal but practical, covering the important areas while leaving their muscular arms and legs exposed. Their bodies are decorated with dark tribal paint, scars, and primitive symbols representing strength and their connection to the earth. Each warrior carries an enormous primitive weapon: Massive stone clubs made from irregular boulders attached to thick wooden handles. Huge bone clubs crafted from the bones of gigantic prehistoric creatures. Some weapons are reinforced with crude leather bindings, rope, teeth, and smaller stones. The clubs should be extremely large and heavy, emphasizing that these warriors rely entirely on overwhelming physical force. One Earthshaker is captured in the middle of a devastating downward swing, smashing his enormous stone club into the ground. The impact creates a powerful earth-shattering shockwave, sending dust, rocks, and chunks of earth flying outward. Other Earthshakers stand behind him in aggressive combat positions, raising their enormous bone and stone clubs and preparing to charge. The ground beneath them is cracked and fractured from repeated impacts. Large rocks are scattered throughout the battlefield, with dust clouds surrounding the warriors. Their environment is a primitive prehistoric tribal settlement, surrounded by enormous cliffs, ancient forests, giant bones, primitive wooden structures, stone totems, fire pits, hanging animal hides, and crude tribal decorations. Huge prehistoric animal bones are scattered throughout the area, reinforcing the ancient and savage atmosphere. The lighting is dramatic and cinematic, with warm sunlight breaking through dense clouds and illuminating the warriors from behind. Dust particles float through the air while smoke from distant tribal fires creates atmospheric depth. The overall appearance should communicate raw strength, primitive brutality, tribal unity, and devastating physical power.",
     "class": "Tank",
-    "subclass": "Stunner"
+    "subclass": "Stunner",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "square",
+      "attackWidth": "1 × 1 karo",
+      "flight": "ground",
+      "weight": "heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "whisper",
@@ -890,7 +1071,17 @@
     },
     "story": "Whisper is a terrifying phantom that every person is said to glimpse at least once as they approach the end of their life. He is a predator of the soul, waiting for a moment of weakness to strike. If you are not quick enough to escape his gaze, he will merge with your form and steal every ounce of your vital energy. He leaves behind only a hollow shell, a silent thief who thrives on the life force of those who cannot outrun their own shadows.",
     "class": "Specialist",
-    "subclass": "Possessor"
+    "subclass": "Possessor",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "light",
+      "targets": "both"
+    }
   },
   {
     "id": "roguex",
@@ -937,7 +1128,17 @@
     },
     "story": "-",
     "class": "Marksman",
-    "subclass": "Absorber"
+    "subclass": "Absorber",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "void-striker",
@@ -991,7 +1192,17 @@
     },
     "story": "Bound to no timeline, the Void Striker is an interdimensional horror wielding a lethal spear. Obsessed with sharp weaponry, this entity inflicts pure terror upon its prey. In combat, it hurls sharp, javelin-like projectiles infused with a volatile void orb at its core. This fusion of piercing metal and unstable cosmic energy dismantles reality with every strike. It leaves nothing but panic and absolute emptiness in its wake, fighting only to drag the arena into the abyss.",
     "class": "Fighter",
-    "subclass": "Berserker"
+    "subclass": "Berserker",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "line",
+      "attackWidth": "Dar xətt",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "nightfang",
@@ -1038,7 +1249,17 @@
     },
     "story": "Nightfang is a unique spiritual entity specialized in long-range devastation. He strikes with incredible speed, hitting targets before they can react. From his back, he unleashes the wailing souls he has imprisoned over centuries. These spirits act as his weapons, swarming enemies with ghostly fury. He is a master of distance, keeping his foes at bay while his spectral captives drain their life force. Nightfang is the predator of the UnderWorld, ensuring that no soul ever truly escapes his grasp.",
     "class": "Marksman",
-    "subclass": "Sharpshooter"
+    "subclass": "Sharpshooter",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "light",
+      "targets": "both"
+    }
   },
   {
     "id": "sunrise",
@@ -1091,7 +1312,17 @@
     },
     "story": "The Dawnbringer, a radiant female alien and one of the most beloved guardians of the Light Layer in Alien World: The Binary Divide. She is the living embodiment of hope, capable of healing allies with pure solar energy while burning away darkness and corruption with the light of a newborn sun. Wherever Sunrise appears, despair fades, life flourishes, and even the darkest battlefield is illuminated by her presence. Sunrise is an elegant female alien with a graceful, athletic physique. Her skin radiates a warm golden-white glow, appearing almost translucent as though sunlight flows beneath it. Delicate streams of luminous energy travel across her body like living rays of dawn. Her face is serene, compassionate, and beautiful, with soft glowing amber-gold eyes that resemble miniature suns. She constantly wears a gentle expression filled with kindness and determination. Her long flowing hair is made of brilliant golden light mixed with soft white strands, drifting weightlessly as if moved by a warm celestial breeze. She wears living solar crystal armor, naturally grown from radiant celestial minerals rather than forged metal. The armor consists of elegant white and gold crystalline plates with smooth organic curves. Thin glowing crystal feathers extend from her shoulders and waist, giving her an angelic yet alien appearance without resembling human wings. Behind her floats a magnificent solar halo, a massive radiant ring of glowing golden energy resembling the surface of a miniature sun. Smaller concentric rings slowly rotate around the halo while streams of warm light spiral outward into the environment. Both of her hands channel pure solar energy. One hand creates a glowing sphere of golden healing light surrounded by floating particles of life energy, while the other projects brilliant radiant beams capable of dissolving darkness and corruption. Golden ribbons of energy flow gracefully around her arms, illuminating everything nearby. The battlefield is transformed by her presence. Flowers bloom across the ground, crystal plants emit warm light, and corrupted terrain gradually returns to life. Broken alien vegetation regenerates while glowing golden vines and luminous blossoms spread through the landscape. The environment is an extraordinary paradise within the Light Layer, featuring floating crystal islands, waterfalls of liquid light, radiant forests, blooming alien flowers, glowing rivers, towering white crystal formations, and an endless sunrise stretching across the horizon. Warm sunlight pours through scattered clouds while countless luminous particles float peacefully through the air. Soft god rays, volumetric lighting, lens flares, and atmospheric bloom emphasize the overwhelming warmth and hope surrounding her. The entire scene should feel uplifting, divine, and full of life without appearing religious. Sunrise gently hovers above the ground, one hand extending healing energy toward unseen allies while the other raises radiant light against the darkness. Her posture is calm, protective, and inspiring, embodying the eternal victory of hope over despair. The overall composition should portray Sunrise as the ultimate symbol of life, healing, and light—a celestial guardian whose radiant power restores worlds consumed by darkness.",
     "class": "Fighter",
-    "subclass": "Regenerator"
+    "subclass": "Regenerator",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "shellbyte",
@@ -1138,7 +1369,17 @@
     },
     "story": "The Living Bastion, a colossal four-legged reptilian alien beast from the Dark Layer of Alien World: The Binary Divide. Unlike mechanical creatures or cybernetic organisms, Shellbyte is a completely living biological organism that evolved an almost impenetrable natural armor over millions of years on one of the harshest planets in the galaxy. It serves as the unstoppable frontline fortress of the Dark Layer, smashing through enemy defenses using its immense weight and indestructible shell. Shellbyte resembles a gigantic prehistoric reptile, combining the proportions of an ankylosaur, giant tortoise, and alien behemoth. Its body is extremely muscular and low to the ground, supported by four massive pillar-like legs covered in thick natural armor. Every movement feels heavy and powerful, as if the ground itself trembles beneath its weight. Its neck is almost completely hidden, making the head appear to emerge directly from the front of the shell. The head sits low to the ground and is protected by overlapping armored scales, giving enemies almost no vulnerable target. The transition between the shell and head is seamless, emphasizing its role as a living fortress. The enormous shell covers nearly its entire body, composed of overlapping layers of dark obsidian-colored biological armor plates, naturally grown rather than manufactured. The shell is rough, scarred, cracked, and weathered from countless battles. Massive spikes and ridges protrude across its surface, making it impossible for enemies to climb or strike effectively. Its skin consists of thick reptilian scales in charcoal black and dark gray, with subtle glowing crimson-orange veins visible only between the armored plates, suggesting powerful internal energy without making the creature appear mechanical. No circuitry, metal, or cybernetic components are present. Its face is intimidating yet primitive, featuring glowing deep crimson eyes, a broad armored skull, heavy bone ridges, and a powerful jaw lined with thick crushing teeth capable of shattering stone and armor alike. Large nostrils release slow streams of hot vapor with every breath. Its enormous claws dig into the ground as it slowly advances, while dust and shattered rocks scatter beneath its immense weight. The battlefield is a volcanic alien wasteland within the Dark Layer, filled with jagged black rock formations, rivers of lava, burning craters, ash-covered cliffs, and enormous alien stone structures. Smoke, ash, glowing embers, and heat distortion fill the atmosphere, making the environment feel hostile and ancient. The overall composition should portray Shellbyte as a living biological fortress—an ancient reptilian monster whose natural armor rivals mountains, relying on overwhelming durability and raw strength rather than technology.",
     "class": "Fighter",
-    "subclass": "Ambusher"
+    "subclass": "Ambusher",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "light",
+      "targets": "ground"
+    }
   },
   {
     "id": "wong",
@@ -1191,6 +1432,16 @@
     },
     "story": "The Iron Grandmaster, a stunning female martial arts grandmaster and elite Eastern combat agent. She combines the discipline and devastating physical power of a legendary martial artist with the precision, confidence, and tactical presence of a highly trained secret agent. Wong is a beautiful adult woman with an elegant yet athletic physique, long silky black hair, refined feminine facial features, sharp dark eyes, and a calm, confident expression. She looks highly intelligent and dangerous rather than aggressive. She wears a sleek, elegant deep-crimson red combat outfit inspired by traditional East Asian clothing but adapted for an elite agent. The outfit is fitted enough for unrestricted movement while retaining flowing traditional fabric elements. It features a high collar, subtle dark-red patterns, reinforced sections, a crimson sash, fitted combat trousers, and elegant black combat boots. The clothing is sophisticated, practical, and refined rather than revealing. Her pose should be tactical and agent-like, NOT a martial arts attack pose. Wong stands confidently with her body slightly turned sideways, one leg positioned forward and the other supporting her weight. Her posture is relaxed but ready, as if she has just entered a dangerous operation. One hand holds a modernized traditional combat weapon at her side, while her other hand remains relaxed but prepared to strike. Her weapon should look like a compact, high-quality melee weapon designed specifically for her fighting style, combining traditional East Asian craftsmanship with practical combat engineering. A second weapon is secured visibly beside her, attached to a tactical holster/sheath at her waist or thigh. The weapons should be clearly present but not oversized. Wong's signature inner-focus energy is subtly visible around her body. Faint golden-red energy pulses through her legs, arms, and torso, suggesting enormous physical power held under complete control. The energy should be restrained and realistic, not an exaggerated magical aura. Her expression is cold, composed, and professional, like an elite operative who already knows exactly how the encounter will end. The environment is an ancient mountain monastery transformed into a secret combat training facility. Traditional wooden architecture, stone courtyards, hanging red banners, mist-covered mountains, wooden training structures, and old stone statues surround the area. However, subtle tactical elements are integrated into the environment: weapon racks, training targets, hidden equipment cases, and a few abandoned combat tools. The combination should feel like an ancient martial arts sanctuary secretly used by elite agents. A light mountain wind moves Wong's long black hair and the flowing edges of her crimson outfit. Soft sunlight breaks through the mist behind her, creating a dramatic silhouette and highlighting the red fabric. Important composition: full-body character shot, Wong standing confidently in a tactical agent stance, weapons clearly visible, elegant crimson outfit, calm expression, no exaggerated action pose, no spinning kick, no jumping, no acrobatics.",
     "class": "Fighter",
-    "subclass": "Juggernaut"
+    "subclass": "Juggernaut",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "line",
+      "attackWidth": "Dar xətt",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   }
 ]

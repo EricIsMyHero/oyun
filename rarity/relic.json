@@ -44,7 +44,17 @@
     },
     "story": "Losing her parents at a young age, Stacy was raised by Ase. To survive in this harsh underground world, she threw herself into the flames and learned to master fire. The desire to fly never left her. She built a powerful jetpack device out of scraps. Now, this young girl with glasses and ginger hair soars through the darkness of the underground caves, spreading flames and becoming the bravest scout of the Constructs team.",
     "class": "Marksman",
-    "subclass": "Burst"
+    "subclass": "Burst",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "flying",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "death",
@@ -91,7 +101,17 @@
     },
     "story": "Death, the ultimate interdimensional horror of the Void Walkers, standing in a dark cosmic arena shrouded by an overwhelming sea of dense black mist. The figure appears as a dead, ancient entity wrapped in long, tattered pitch-black robes that blend into the surrounding darkness. Its body is partially hidden, with only fragments of a skeletal, lifeless form visible through the fog. Death's presence radiates absolute dread, as if reality itself is decaying around it. In its hands, Death holds a mysterious dark-black orb, an ancient cosmic artifact glowing with sinister void energy. The orb emits faint streams of shadow and absorbs surrounding light, creating a gravitational feeling of despair and extinction. Wisps of stolen life energy spiral into the orb from the darkness, suggesting countless souls consumed by its power. The environment is almost entirely concealed by thick supernatural mist. The fog is so dense that most of Death's body remains obscured, revealing only vague silhouettes and glimpses of its terrifying form. Shadows twist within the mist, making it impossible to determine where the creature truly begins or ends. The atmosphere is oppressive, eerie, and apocalyptic.",
     "class": "Fighter",
-    "subclass": "Harvester"
+    "subclass": "Harvester",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "sylviana",
@@ -174,11 +194,31 @@
           "level3": "-"
         },
         "story": "Öləndə yaxındakı kartlara +10 M.Can verər.",
-        "class": "Suicide Assassin"
+        "class": "Suicide Assassin",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "flying",
+          "weight": "very-light",
+          "targets": "both"
+        }
       }
     ],
     "class": "Specialist",
-    "subclass": "Summoner"
+    "subclass": "Summoner",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "malvaris",
@@ -267,11 +307,31 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "Suicide Assassin"
+        "class": "Suicide Assassin",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "light",
+          "targets": "ground"
+        }
       }
     ],
     "class": "Fighter",
-    "subclass": "Summoner"
+    "subclass": "Summoner",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "90°",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "etheris",
@@ -318,7 +378,17 @@
     },
     "story": "The Bound Radiance, a mysterious and beautiful female warriors of the Solar Order whose power are based on an unbreakable bond between allies. Rather than simply protecting their companions, Etheris literally links their life force with a nearby ally, causing their vitality to become one shared existence. Etheris are two young adult women with an elegant, graceful, athletic physique. She has long flowing silver-white hair with subtle golden highlights, softly illuminated by solar energy. Her eyes glow with a brilliant pale-gold light, and her expression is calm, serious, and deeply devoted. She wears an elegant white, ivory, and gold Solar Order battle outfit, combining ceremonial clothing with lightweight protective armor. Her armor features intricate circular patterns resembling celestial orbits and solar rings. Thin golden lines run across her armor like channels carrying energy. At the center of her chest is a small radiant solar core, but unlike ordinary Solar Order warriors, the core is visibly divided into two interconnected halves. One half glows within Etheris while the other projects outward toward her chosen ally. Etheris's defining ability is visually represented by a spectacular golden life-force connection between her and a nearby allied warrior. A luminous golden thread emerges from Etheris's chest and connects directly to the ally's chest. Around both characters are two enormous translucent circular energy rings that overlap in the center, symbolizing that their lives have become one. The connection should look physical and powerful rather than like a simple beam. Thousands of tiny golden particles travel continuously in both directions through the bond, carrying their shared life energy. Both characters have a single combined health-energy aura surrounding them. Their individual energy fields overlap completely, making it visually clear that damage dealt to one is simultaneously transferred to the other. To represent the mechanic, the ally has just been struck by an enemy attack. A small portion of golden energy violently leaves both characters simultaneously, showing that the damage is shared between their life pools. Etheris reacts with a brief expression of pain even though she was not directly attacked. The connection should communicate that neither partner can remain untouched while the other suffers. Etheris stands close beside her bonded ally, almost shoulder-to-shoulder, with one hand extended toward them. Their golden energy connection forms a large circular symbol behind them resembling two intertwined solar rings. Her weapon is a slender golden ceremonial blade, kept lowered at her side. It should not dominate the composition; Etheris's bond ability is the main visual focus. The environment is a magnificent Solar Order sanctuary, filled with white marble, golden pillars, enormous sun symbols, floating crystals, and warm divine sunlight. Behind the pair is a gigantic circular solar emblem split into two interconnected halves, mirroring the bond between Etheris and her ally. The atmosphere should feel beautiful, emotional, powerful, and slightly tragic. Etheris's ability is not merely protection—it is a commitment to share both strength and suffering with another warrior.",
     "class": "Tank",
-    "subclass": "Reflector"
+    "subclass": "Reflector",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "magma",
@@ -372,7 +442,17 @@
     },
     "story": "The Living Cataclysm, a colossal alien titan born deep beneath the molten crust of the Dark Layer in Alien World: The Binary Divide. Created by Magmara herself, this towering living siege beast is forged from ancient volcanic rock and an ever-burning core of liquid magma. Every footstep causes earthquakes, while its overwhelming strength crushes anything unfortunate enough to stand before it. Magma is an enormous humanoid alien golem, standing like a walking volcano. Its body is composed of gigantic slabs of black volcanic basalt, obsidian, and fractured igneous rock, held together by rivers of glowing molten lava flowing through every crack. The lava pulses like blood, illuminating the creature from within with intense orange, crimson, and yellow light. Its head is massive and intimidating, featuring a rugged rocky face with glowing molten eyes and a wide jaw filled with jagged volcanic stone teeth. Thick obsidian horns emerge from the sides of its head, resembling cooled lava formations. Smoke and sparks continuously rise from its mouth and shoulders. Its arms are gigantic, ending in massive stone fists capable of crushing armored vehicles or entire buildings. Every movement sends fragments of rock, molten debris, and volcanic ash flying through the air. The forearms are reinforced with thick obsidian plates, while streams of lava drip from its hands onto the ground below. The creature's broad back is covered with towering volcanic crystal formations and open magma vents that constantly release dense black smoke, fire, glowing embers, and bursts of molten rock. The interior heat is so intense that the surrounding air visibly shimmers with heat distortion. Its legs resemble enormous volcanic pillars, each step shattering the ground beneath them. Lava leaks from beneath its feet, leaving behind glowing footprints and rivers of molten rock. Cracks spread across the battlefield wherever it walks. The environment is a devastated volcanic wasteland beneath Magmara's domain. Endless lava rivers flow between shattered mountains, active volcanoes erupt violently in the distance, volcanic lightning flashes through towering ash clouds, and the ground is covered with black obsidian, burning rocks, and glowing fissures leading deep into the planet's core. The atmosphere is filled with thick smoke, volcanic ash, flying embers, molten boulders, and intense heat distortion. The entire battlefield appears to be collapsing beneath the sheer weight and power of this living catastrophe. The overall composition should portray Magma as an unstoppable living natural disaster—not an intelligent warrior, but a walking volcanic apocalypse driven only by destruction.",
     "class": "Tank",
-    "subclass": "Igniter"
+    "subclass": "Igniter",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "very-heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "avalith",
@@ -419,7 +499,17 @@
     },
     "story": "-",
     "class": "Marksman",
-    "subclass": "Evader"
+    "subclass": "Evader",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "far",
@@ -473,7 +563,17 @@
     },
     "story": "-",
     "class": "Marksman",
-    "subclass": "Disabler"
+    "subclass": "Disabler",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "demotron",
@@ -520,7 +620,17 @@
     },
     "story": "Demotron is an ancient titan made of living stone and obsidian, powered by a dying sun’s core. It is the architect of the Ancients' fortresses, a massive construct that serves as a mobile siege engine. Every step it takes shakes the foundation of the earth, and its eyes emit beams of pure, concentrated energy. Demotron is slow, but its durability is unmatched. It is a relic of a time when giants ruled the world, and it has returned to crush the tiny kingdoms of the modern era.",
     "class": "Tank",
-    "subclass": "Regenerator"
+    "subclass": "Regenerator",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "very-heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "format",
@@ -567,7 +677,17 @@
     },
     "story": "-",
     "class": "Specialist",
-    "subclass": "Mimic"
+    "subclass": "Mimic",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "pyhsic",
@@ -614,7 +734,17 @@
     },
     "story": "-",
     "class": "Mage",
-    "subclass": "Deathcaller"
+    "subclass": "Deathcaller",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "naar",
@@ -661,7 +791,18 @@
     },
     "story": "Naar is a botanical sorcerer with a peculiar obsession: the pomegranate. He finds beauty and lethal potential in nature, using magically enhanced fruits as his primary weapons. He can command vines to entangle foes or launch explosive pomegranate seeds that shatter on impact. For Naar, the garden is a battlefield, and every plant is a soldier waiting for his command. His neutral stance stems from his loyalty to the earth, caring more for the health of his grove than the politics of men.",
     "class": "Mage",
-    "subclass": "Nuker"
+    "subclass": "Nuker",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "circle",
+      "attackWidth": "Partlayış sahəsi",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both",
+      "multiTargetCondition": "Canı 40%-dən aşağı olduqda."
+    }
   },
   {
     "id": "lyra",
@@ -708,7 +849,17 @@
     },
     "story": "-",
     "class": "Fighter",
-    "subclass": "Flurry"
+    "subclass": "Flurry",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "aeralis",
@@ -755,7 +906,17 @@
     },
     "story": "Aeralis chose the path of magic over science since his early childhood, mastering the invisible currents of the world. His power to bend the air is so immense that no creature can withstand his gales. However, this divine strength is a double-edged sword; controlling the violent winds requires his absolute focus and spiritual discipline. On the battlefield, he is a storm in human form, clearing entire paths for the Royal Blood with a single wave of his hand.",
     "class": "Marksman",
-    "subclass": "Repeller"
+    "subclass": "Repeller",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "dark-necromancer",
@@ -845,7 +1006,17 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "-"
+        "class": "-",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "medium",
+          "targets": "ground"
+        }
       },
       {
         "name": "Stormbow",
@@ -882,7 +1053,17 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "Ölü"
+        "class": "Ölü",
+        "combatStats": {
+          "attackType": "ranged",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "medium",
+          "targets": "both"
+        }
       },
       {
         "name": "Ironhide",
@@ -919,11 +1100,31 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "Ölü"
+        "class": "Ölü",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "heavy",
+          "targets": "ground"
+        }
       }
     ],
     "class": "Fighter",
-    "subclass": "Summoner"
+    "subclass": "Summoner",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "shine",
@@ -976,7 +1177,17 @@
     },
     "story": "The Vital Radiance, a beautiful female support warrior of the sacred Solar Order. Unlike frontline warriors, Shine exists to strengthen and sustain those around her. She continuously radiates a gentle solar aura that restores and expands the vitality of nearby allies, making them stronger and harder to defeat the longer they remain within her presence. Shine is a young adult woman with a graceful, elegant, athletic physique. She has long, silky pale-golden hair that softly glows under the sunlight, with individual strands illuminated like fine threads of gold. Her eyes are bright amber-gold, warm and compassionate, yet filled with confidence. Her expression is peaceful and reassuring, giving her the appearance of someone who inspires courage simply by standing nearby. She wears an elegant white-and-gold Solar Order ceremonial outfit, designed specifically for a support role. Her clothing consists of layered white fabric, delicate golden armor plates, a fitted golden-white chest piece, flowing sleeves, and a long radiant sash that floats gently around her body. The armor is lightweight and graceful rather than heavy, decorated with intricate sun and life motifs. Small golden crystals are embedded throughout the outfit, constantly glowing with stored solar energy. At the center of her chest is a small radiant solar crystal, pulsing rhythmically like a living heart. Every pulse sends a wave of warm golden energy outward from her body. Shine's defining ability is represented by a large circular aura of golden-white life energy surrounding her. The aura extends several meters around her and continuously flows outward in gentle waves. Inside this aura, several nearby allies are visibly receiving energy from Shine. Thin golden streams of light connect Shine to their bodies, flowing into their chests and creating luminous protective symbols. Small golden vitality sigils appear above the allies, representing their increasing maximum health. Each pulse of Shine's aura creates another subtle layer of glowing energy around them, visually representing the continuous +4% Maximum Health per 5 second, with the accumulation eventually reaching its maximum potential. The energy should feel like life force rather than healing magic. Instead of wounds instantly disappearing, the allies become surrounded by increasingly dense golden vitality energy, making their bodies look stronger and more resilient. Shine stands calmly at the center of the group, surrounded by her allies. She does not attack. Her entire purpose is to maintain the radiant aura and empower everyone nearby. The environment is a magnificent Solar Order sanctuary, filled with white marble architecture, enormous golden sun symbols, radiant crystal pillars, floating golden particles, and warm sunlight pouring through the ceiling. A massive circular symbol is carved into the floor beneath Shine, resembling a stylized sun with multiple concentric rings. The symbol glows brighter each time her aura pulses. Soft golden light fills the entire environment. The atmosphere should feel warm, hopeful, sacred, and empowering, contrasting with the destructive nature of other Solar Order warriors. Shine should visually communicate support, vitality, growth, and endless endurance. She is not the strongest warrior on the battlefield—she is the reason everyone around her becomes stronger.",
     "class": "Support",
-    "subclass": "Healer"
+    "subclass": "Healer",
+    "combatStats": {
+      "attackType": "none",
+      "multiTarget": false,
+      "maxTargets": 0,
+      "attackShape": "none",
+      "attackWidth": "—",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "none"
+    }
   },
   {
     "id": "bloodraider",
@@ -1023,7 +1234,17 @@
     },
     "story": "Bloodraider, a cursed dark fantasy warrior driven by a self-destructive oath, standing in a battlefield engulfed by shadows and crimson energy. Its body appears damaged and exhausted, yet fueled by relentless determination. Streams of glowing red life essence flow from its head and body, creating the impression that its own vitality is constantly escaping while sustaining its power. Unlike a traditional executioner weapon, the Blood Reaper is a relatively small but extremely deadly scythe forged entirely from condensed crimson life energy. The blade is sharp, curved, and made of swirling red energy that resembles liquid crystal. Heavy dark chains are permanently attached and wrapped around the scythe's handle, linking the weapon directly to Bloodraider. The chains appear ancient, worn, and partially infused with the same crimson energy as the weapon. Bloodraider firmly holds the smaller Blood Reaper in one hand, while its other hand grips a long length of chain extending from the weapon. The chains hang, coil, and sway around the character, creating a menacing silhouette and emphasizing the bond between wielder and weapon. Crimson energy continuously flows through the chains like glowing veins. Red life essence leaks from cracks in its armor, from its head, arms, and chest, drifting through the air as luminous particles and flowing streams. The surrounding atmosphere is filled with dark mist, floating crimson embers, and traces of supernatural energy. The character radiates sacrifice, destruction, and unwavering aggression. Ultra-realistic dark fantasy character design, photorealistic materials, highly detailed chains, realistic metal textures, cinematic lighting, volumetric fog, realistic cloth physics, glowing crimson energy effects, intimidating stance, dark atmosphere, AAA game card art, Unreal Engine 5, physically based rendering, hyper-detailed textures, masterpiece quality, 8K, dramatic shadows, realistic anatomy, epic fantasy illustration.",
     "class": "Assassin",
-    "subclass": "Bloodpact"
+    "subclass": "Bloodpact",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "circle",
+      "attackWidth": "360°",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "fallen-angel",
@@ -1070,7 +1291,17 @@
     },
     "story": "Fallen Angel was once a high-ranking member of the Royal Blood's ancestors, but she was cast out for seeking the forbidden power of the Ancients. Her wings are now tattered and stained with shadow, and her golden armor has turned to a rusted, cursed bronze. She retains her celestial grace but uses it to deliver merciless destruction. She despises the current Royal Blood line and leads the Ancients with a cold, calculated vengeance, seeking to reclaim the throne that she believes is rightfully hers.",
     "class": "Assassin",
-    "subclass": "Hunter"
+    "subclass": "Hunter",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "135°",
+      "flight": "flying",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "worms",
@@ -1123,7 +1354,17 @@
     },
     "story": "These are not the harmless creatures found in common soil. Henry’s bio-engineering transformed these tiny worms into aggressive, flesh-eating scavengers. They move in writhing masses, hidden beneath the earth until they detect a vibration. Once they emerge, their hunger is insatiable. They are the farm's underground security, small enough to bypass most defenses but fierce enough to tear through leather and bone. For Henry, they are the perfect disposal system for his failed experiments.",
     "class": "Assassin",
-    "subclass": "Ambusher"
+    "subclass": "Ambusher",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "very-light",
+      "targets": "ground"
+    }
   },
   {
     "id": "unara",
@@ -1170,7 +1411,17 @@
     },
     "story": "Unara is the mother of Laura, but she possesses a much darker and more guarded nature. Unlike her daughter, she trusts no one and uses her magic strictly for self-preservation. She surrounds herself with impenetrable arcane barriers, keeping the world at a distance to ensure her own safety. Her neutral outlook is driven by survival; she will neither help nor hinder others unless they threaten her solitude. She is a solitary fortress of magic, cold and unyielding to those who seek her aid.",
     "class": "Mage",
-    "subclass": "Bomber"
+    "subclass": "Bomber",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "ali",
@@ -1217,7 +1468,17 @@
     },
     "story": "The Adaptive Vanguard, a versatile female alien hero and elite guardian of the Light Layer in Alien World: The Binary Divide. Unlike the other guardians who dedicate themselves to mastering a single element, Ali excels through adaptation. Her advanced living alien technology continuously analyzes the battlefield, allowing her to instantly evolve her combat style, weapons, and defenses to counter any threat. Brilliant, fearless, and compassionate, she is often the first guardian to enter battle and the last to retreat. Ali is a tall, elegant female alien with an athletic yet graceful physique. Her smooth pearl-white skin naturally glows with flowing cyan and turquoise energy veins that pulse softly beneath the surface. She possesses refined feminine features, giving her a noble yet approachable appearance. Her face is beautiful and intelligent, with luminous turquoise-blue eyes that constantly scan her surroundings. Her expression is calm, confident, and focused, reflecting both wisdom and courage. Long flowing white hair with subtle cyan highlights drifts gently as if influenced by invisible energy currents. She wears a living adaptive bio-crystal armor, organically grown from alien crystalline minerals rather than forged metal. The armor is sleek, elegant, and feminine, composed of smooth white, silver, and cyan crystal plates that continuously reshape themselves as her adaptive abilities respond to changing combat situations. Soft streams of glowing energy travel across the armor's surface like living circuitry. Floating around Ali are several adaptive crystalline constructs made entirely of pure energy. These elegant floating crystals continuously transform into different forms—energy blades, defensive shields, hovering drones, and support devices—demonstrating the limitless adaptability of her alien technology. In her right hand she projects a magnificent hard-light energy blade formed from concentrated cyan energy, while her left hand generates a large transparent hexagonal energy shield shimmering with intricate geometric patterns. Delicate streams of glowing energy spiral around both weapons as they evolve in real time. Behind Ali floats a large adaptive energy halo, composed of rotating crystalline rings and floating geometric fragments that slowly orbit around her body. Small shards of luminous crystal remain suspended in the air, constantly shifting position in response to her thoughts. The battlefield is a breathtaking sanctuary within the Light Layer, where advanced alien civilization exists in harmony with nature. Towering crystalline structures, floating islands, glowing waterfalls, radiant forests, luminous rivers, and elegant energy bridges stretch toward the horizon beneath an endless celestial sky filled with stars and distant planets. Soft rays of sunlight illuminate the environment while floating particles of blue and white energy drift peacefully through the air. The atmosphere feels hopeful, advanced, and alive, emphasizing the harmony between technology and nature. Ali stands confidently at the center of the battlefield, her adaptive blade ready while her energy shield protects those behind her. Her posture is graceful yet battle-ready, embodying intelligence, versatility, and unwavering determination to defend the Light Layer. The overall composition should portray Ali as the ultimate adaptable guardian—a heroic female alien whose living technology evolves alongside her, making her prepared for any challenge.",
     "class": "Support",
-    "subclass": "Guardian"
+    "subclass": "Guardian",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "135°",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "clara",
@@ -1264,7 +1525,17 @@
     },
     "story": "The Auburn Artist, the 27-year-old eldest sibling of the Barber Brothers, a graceful and highly respected master stylist known for her elegance, creativity, and flawless technique. While her brothers rely on speed and precision, Clara excels through artistry, transforming every hairstyle into a masterpiece. She serves as the calm and sophisticated center of the family business, balancing the energetic personalities of Fen and Ben. Clara is a beautiful young woman with long, luxurious auburn hair that cascades elegantly around her shoulders. Her hair is impeccably styled, featuring intricate braids, flowing layers, and refined details that showcase her extraordinary talent. Her warm, intelligent eyes and composed expression radiate confidence, professionalism, and creativity. She wears a sophisticated stylist outfit that blends modern salon fashion with elegant fantasy aesthetics. Her attire includes tailored fabrics, refined accessories, stylish gloves, decorative ribbons, and subtle beauty-inspired motifs. The outfit feels professional, fashionable, and artistic rather than combat-oriented, emphasizing her role as a master designer and creator. In her hands are beautifully crafted professional styling scissors, combs, and hairstyling tools, all designed with exceptional elegance. Around her float strands of shimmering hair-like energy, decorative ribbons, and graceful swirling patterns that resemble intricate hairstyle designs brought to life. The visual effects should feel artistic and refined rather than aggressive. Her pose is calm and deliberate, as though she is carefully crafting a masterpiece. Delicate streams of flowing auburn-colored energy weave through the air around her, forming elegant curves and patterns inspired by sophisticated hairstyles. Every movement reflects precision, beauty, and years of experience. The environment combines a luxurious high-end salon with a fantasy-inspired creative studio. Elegant mirrors, premium styling stations, decorative lighting, floral arrangements, and artistic design elements surround her. The atmosphere feels welcoming, refined, and professional while still carrying the grandeur of a fantasy card illustration. The overall composition should emphasize beauty, artistry, elegance, and mastery. Clara appears not as a warrior, but as an elite stylist whose creativity has become a powerful force. She embodies sophistication, professionalism, and the flawless reputation of the Barber Brothers.",
     "class": "Specialist",
-    "subclass": "Screamer"
+    "subclass": "Screamer",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "artist",
@@ -1347,10 +1618,30 @@
           "level3": "-"
         },
         "story": "7 saniyəlik ömrü olar, hər öldürülən rəqib kart üçün +2 saniyə daha yaşayarlar.",
-        "class": "Suicide Assassin"
+        "class": "Suicide Assassin",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "flying",
+          "weight": "very-light",
+          "targets": "both"
+        }
       }
     ],
     "class": "Specialist",
-    "subclass": "Summoner"
+    "subclass": "Summoner",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   }
 ]

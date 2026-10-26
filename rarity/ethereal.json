@@ -100,11 +100,31 @@
           },
           "story": "-",
           "class": "Tank",
-          "subclass": "Bulwark"
+          "subclass": "Bulwark",
+          "combatStats": {
+            "attackType": "melee",
+            "multiTarget": false,
+            "maxTargets": 1,
+            "attackShape": "single",
+            "attackWidth": "Tək hədəf",
+            "flight": "ground",
+            "weight": "very-heavy",
+            "targets": "ground"
+          }
         }
       ],
       "class": "Marksman",
-      "subclass": "Constructor"
+      "subclass": "Constructor",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "type2": {
       "id": "ase",
@@ -195,14 +215,44 @@
           },
           "story": "-",
           "class": "Marksman",
-          "subclass": "Ravager"
+          "subclass": "Ravager",
+          "combatStats": {
+            "attackType": "ranged",
+            "multiTarget": false,
+            "maxTargets": 1,
+            "attackShape": "single",
+            "attackWidth": "Tək hədəf",
+            "flight": "ground",
+            "weight": "very-heavy",
+            "targets": "both"
+          }
         }
       ],
       "class": "Marksman",
-      "subclass": "Constructor"
+      "subclass": "Constructor",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "ground"
+      }
     },
     "class": "Marksman",
-    "subclass": "Constructor"
+    "subclass": "Constructor",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "leno",
@@ -260,7 +310,17 @@
       },
       "story": "The Iron Engineer, a talented Latina engineer from the Steam Alliance, renowned for her resilience, intelligence, and mechanical genius. After losing her right arm in a catastrophic factory accident, she refused to give up and engineered a sophisticated steam-powered prosthetic arm, transforming tragedy into her greatest invention. Leno is a completely normal human with a fit, athletic physique from years of industrial labor. Only her right arm is mechanical—the rest of her body is entirely human. She has warm tan skin, expressive brown eyes, and dark brown hair tied back for practicality. Around her head she wears a yellow, red, and black bandana, giving her a bold industrial look. She wears a practical mechanic's outfit consisting of a sleeveless work shirt, durable denim shorts, a heavy leather tool belt filled with engineering tools, knee pads, sturdy work boots, and a protective glove on her left hand. Brass goggles rest around her neck, while her clothing is lightly stained with grease and soot from years of factory work. Her right arm is a masterpiece of steam engineering, beginning naturally at the shoulder and seamlessly replacing the missing limb. The prosthetic is constructed from forged steel, polished brass, exposed gears, pistons, hydraulic cylinders, copper pipes, pressure valves, and rotating mechanical components. Small vents release bursts of steam while pressure gauges glow softly, showcasing its immense engineering complexity. The arm looks powerful yet realistically proportioned, clearly functioning as a prosthetic rather than replacing her entire body. The mechanical arm is transformed into a versatile combat tool, featuring deployable engineering attachments, reinforced gauntlets, and mechanical mechanisms designed for both close-range combat and long-range engagements. Steam escapes from the arm's vents while gears rotate continuously during operation. The background is an enormous steampunk industrial factory, filled with towering boilers, giant gears, conveyor systems, copper pipelines, massive steam engines, and glowing furnaces. White steam fills the air while sparks fly from active machinery. Warm industrial lighting reflects beautifully from brass and steel surfaces, creating a dramatic cinematic atmosphere. Leno stands confidently with her human left arm resting naturally while proudly raising or presenting her mechanical right arm, emphasizing that it is her greatest invention. Her expression is determined, confident, and resourceful—the face of someone who solved her greatest hardship through engineering alone.",
       "class": "Marksman",
-      "subclass": "Sharpshooter"
+      "subclass": "Sharpshooter",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "type2": {
       "id": "leno",
@@ -306,10 +366,30 @@
       },
       "story": "The Iron Engineer, a talented Latina engineer from the Steam Alliance, renowned for her resilience, intelligence, and mechanical genius. After losing her right arm in a catastrophic factory accident, she refused to give up and engineered a sophisticated steam-powered prosthetic arm, transforming tragedy into her greatest invention. Leno is a completely normal human with a fit, athletic physique from years of industrial labor. Only her right arm is mechanical—the rest of her body is entirely human. She has warm tan skin, expressive brown eyes, and dark brown hair tied back for practicality. Around her head she wears a yellow, red, and black bandana, giving her a bold industrial look. She wears a practical mechanic's outfit consisting of a sleeveless work shirt, durable denim shorts, a heavy leather tool belt filled with engineering tools, knee pads, sturdy work boots, and a protective glove on her left hand. Brass goggles rest around her neck, while her clothing is lightly stained with grease and soot from years of factory work. Her right arm is a masterpiece of steam engineering, beginning naturally at the shoulder and seamlessly replacing the missing limb. The prosthetic is constructed from forged steel, polished brass, exposed gears, pistons, hydraulic cylinders, copper pipes, pressure valves, and rotating mechanical components. Small vents release bursts of steam while pressure gauges glow softly, showcasing its immense engineering complexity. The arm looks powerful yet realistically proportioned, clearly functioning as a prosthetic rather than replacing her entire body. The mechanical arm is transformed into a versatile combat tool, featuring deployable engineering attachments, reinforced gauntlets, and mechanical mechanisms designed for both close-range combat and long-range engagements. Steam escapes from the arm's vents while gears rotate continuously during operation. The background is an enormous steampunk industrial factory, filled with towering boilers, giant gears, conveyor systems, copper pipelines, massive steam engines, and glowing furnaces. White steam fills the air while sparks fly from active machinery. Warm industrial lighting reflects beautifully from brass and steel surfaces, creating a dramatic cinematic atmosphere. Leno stands confidently with her human left arm resting naturally while proudly raising or presenting her mechanical right arm, emphasizing that it is her greatest invention. Her expression is determined, confident, and resourceful—the face of someone who solved her greatest hardship through engineering alone.",
       "class": "Marksman",
-      "subclass": "Slayer"
+      "subclass": "Slayer",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "class": "Marksman",
-    "subclass": "Sharpshooter"
+    "subclass": "Sharpshooter",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "king",
@@ -368,7 +448,17 @@
       },
       "story": "The King is a skeletal monarch who commands the dead with absolute authority. Unlike the Lord, he wears bright, polished dark iron armor infused with deep purple and crimson hues, reflecting his ancient status. His skull holds piercing crimson eyes that blaze with undying malice. He grips a greatsword in his bony hands, ready to strike down anyone who defies his rule. While the Lord is a simple destroyer, the King is a ruler of the UnderWorld, a chilling specter of a lost kingdom that refuses to fade into dust.",
       "class": "Tank",
-      "subclass": "Monarch"
+      "subclass": "Monarch",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": true,
+        "maxTargets": null,
+        "attackShape": "cone",
+        "attackWidth": "135°",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "ground"
+      }
     },
     "type2": {
       "id": "king",
@@ -460,14 +550,44 @@
           },
           "story": "-",
           "class": "Fighter",
-          "subclass": "Breaker"
+          "subclass": "Breaker",
+          "combatStats": {
+            "attackType": "melee",
+            "multiTarget": false,
+            "maxTargets": 1,
+            "attackShape": "single",
+            "attackWidth": "Tək hədəf",
+            "flight": "ground",
+            "weight": "medium",
+            "targets": "ground"
+          }
         }
       ],
       "class": "Tank",
-      "subclass": "Warden"
+      "subclass": "Warden",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": true,
+        "maxTargets": null,
+        "attackShape": "cone",
+        "attackWidth": "135°",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "ground"
+      }
     },
     "class": "Tank",
-    "subclass": "Monarch"
+    "subclass": "Monarch",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "135°",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "dracula",
@@ -525,7 +645,17 @@
       },
       "story": "-",
       "class": "Fighter",
-      "subclass": "Vampire"
+      "subclass": "Vampire",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "ground"
+      }
     },
     "type2": {
       "id": "dracula",
@@ -616,14 +746,44 @@
           },
           "story": "-",
           "class": "Marksman",
-          "subclass": "Swarmer"
+          "subclass": "Swarmer",
+          "combatStats": {
+            "attackType": "melee",
+            "multiTarget": false,
+            "maxTargets": 1,
+            "attackShape": "single",
+            "attackWidth": "Tək hədəf",
+            "flight": "flying",
+            "weight": "very-light",
+            "targets": "both"
+          }
         }
       ],
       "class": "Fighter",
-      "subclass": "Undying"
+      "subclass": "Undying",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "flying",
+        "weight": "light",
+        "targets": "both"
+      }
     },
     "class": "Fighter",
-    "subclass": "Vampire"
+    "subclass": "Vampire",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "leila",
@@ -687,7 +847,17 @@
       },
       "story": "-",
       "class": "Marksman",
-      "subclass": "Trapper"
+      "subclass": "Trapper",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "type2": {
       "id": "leila",
@@ -739,10 +909,30 @@
       },
       "story": "-",
       "class": "Marksman",
-      "subclass": "Bleeder"
+      "subclass": "Bleeder",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "class": "Marksman",
-    "subclass": "Trapper"
+    "subclass": "Trapper",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "lord",
@@ -801,7 +991,17 @@
       },
       "story": "The Lord is a terrifying spectacle of death in motion. He is a reanimated human clad in heavy, forged black iron armor that seems to absorb the light. His skeletal frame, concealed beneath the metal, is animated by a dark force. In his iron grip, he wields a massive, wicked mace. He does not speak, but his horrific presence commands the spirits of the deep. A true dread lord of the UnderWorld, he walks without fear, crushing all life beneath his merciless feet.",
       "class": "Tank",
-      "subclass": "Immortal"
+      "subclass": "Immortal",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": true,
+        "maxTargets": null,
+        "attackShape": "square",
+        "attackWidth": "1 × 1 karo",
+        "flight": "ground",
+        "weight": "very-heavy",
+        "targets": "ground"
+      }
     },
     "type2": {
       "id": "lord",
@@ -893,14 +1093,44 @@
           },
           "story": "-",
           "class": "Fighter",
-          "subclass": "Berserker"
+          "subclass": "Berserker",
+          "combatStats": {
+            "attackType": "melee",
+            "multiTarget": false,
+            "maxTargets": 1,
+            "attackShape": "single",
+            "attackWidth": "Tək hədəf",
+            "flight": "ground",
+            "weight": "heavy",
+            "targets": "ground"
+          }
         }
       ],
       "class": "Tank",
-      "subclass": "Warlord"
+      "subclass": "Warlord",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": true,
+        "maxTargets": null,
+        "attackShape": "square",
+        "attackWidth": "1 × 1 karo",
+        "flight": "ground",
+        "weight": "very-heavy",
+        "targets": "ground"
+      }
     },
     "class": "Tank",
-    "subclass": "Immortal"
+    "subclass": "Immortal",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "square",
+      "attackWidth": "1 × 1 karo",
+      "flight": "ground",
+      "weight": "very-heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "hunter",
@@ -1003,11 +1233,31 @@
           },
           "story": "-",
           "class": "Tank",
-          "subclass": "Ripper"
+          "subclass": "Ripper",
+          "combatStats": {
+            "attackType": "melee",
+            "multiTarget": false,
+            "maxTargets": 1,
+            "attackShape": "single",
+            "attackWidth": "Tək hədəf",
+            "flight": "ground",
+            "weight": "medium",
+            "targets": "ground"
+          }
         }
       ],
       "class": "Marksman",
-      "subclass": "Tracker"
+      "subclass": "Tracker",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "type2": {
       "id": "hunter",
@@ -1098,14 +1348,44 @@
           },
           "story": "-",
           "class": "Marksman",
-          "subclass": "Piercer"
+          "subclass": "Piercer",
+          "combatStats": {
+            "attackType": "melee",
+            "multiTarget": false,
+            "maxTargets": 1,
+            "attackShape": "single",
+            "attackWidth": "Tək hədəf",
+            "flight": "flying",
+            "weight": "medium",
+            "targets": "both"
+          }
         }
       ],
       "class": "Marksman",
-      "subclass": "Tracker"
+      "subclass": "Tracker",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "class": "Marksman",
-    "subclass": "Tracker"
+    "subclass": "Tracker",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "soul-master",
@@ -1163,7 +1443,17 @@
       },
       "story": "-",
       "class": "Marksman",
-      "subclass": "Reaper"
+      "subclass": "Reaper",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "type2": {
       "id": "soul-master",
@@ -1209,10 +1499,30 @@
       },
       "story": "-",
       "class": "Marksman",
-      "subclass": "Harvester"
+      "subclass": "Harvester",
+      "combatStats": {
+        "attackType": "ranged",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "both"
+      }
     },
     "class": "Marksman",
-    "subclass": "Reaper"
+    "subclass": "Reaper",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "mr-and-mrs-ray",
@@ -1329,11 +1639,31 @@
           },
           "story": "-",
           "class": "Tank",
-          "subclass": "Twinshot"
+          "subclass": "Twinshot",
+          "combatStats": {
+            "attackType": "melee",
+            "multiTarget": true,
+            "maxTargets": null,
+            "attackShape": "circle",
+            "attackWidth": "360°",
+            "flight": "ground",
+            "weight": "medium",
+            "targets": "ground"
+          }
         }
       ],
       "class": "Marksman",
-      "subclass": "Twinshot"
+      "subclass": "Twinshot",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": true,
+        "maxTargets": null,
+        "attackShape": "circle",
+        "attackWidth": "360°",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "ground"
+      }
     },
     "type2": {
       "id": "the-rays-2",
@@ -1424,13 +1754,43 @@
           },
           "story": "-",
           "class": "Marksman",
-          "subclass": "Twinshot"
+          "subclass": "Twinshot",
+          "combatStats": {
+            "attackType": "melee",
+            "multiTarget": false,
+            "maxTargets": 1,
+            "attackShape": "single",
+            "attackWidth": "Tək hədəf",
+            "flight": "ground",
+            "weight": "medium",
+            "targets": "ground"
+          }
         }
       ],
       "class": "Marksman",
-      "subclass": "Twinshot"
+      "subclass": "Twinshot",
+      "combatStats": {
+        "attackType": "melee",
+        "multiTarget": false,
+        "maxTargets": 1,
+        "attackShape": "single",
+        "attackWidth": "Tək hədəf",
+        "flight": "ground",
+        "weight": "medium",
+        "targets": "ground"
+      }
     },
     "class": "Marksman",
-    "subclass": "Twinshot"
+    "subclass": "Twinshot",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   }
 ]

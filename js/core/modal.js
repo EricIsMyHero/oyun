@@ -4,6 +4,10 @@
 
 const modal      = document.getElementById('modal-overlay');
 const modalClose = document.getElementById('modal-close');
+let modalReturnFocus = null;
+let loreReturnFocus = null;
+let modalStatsPage = 1;
+let modalStatsOpen = true;
 
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
@@ -14,38 +18,52 @@ loreClose.addEventListener('click', closeLoreFullscreen);
 loreOverlay.addEventListener('click', e => { if (e.target === loreOverlay) closeLoreFullscreen(); });
 
 document.addEventListener('keydown', e => {
-  if (e.key !== 'Escape') return;
-  if (loreOverlay.classList.contains('open')) { closeLoreFullscreen(); return; }
-  closeModal();
+  const dialog = loreOverlay.classList.contains('open') ? loreOverlay : modal.classList.contains('open') ? modal : null;
+  if (!dialog) return;
+  if (e.key === 'Escape') {
+    if (dialog === loreOverlay) closeLoreFullscreen(); else closeModal();
+  }
+  if (e.key === 'Tab') {
+    const controls = [...dialog.querySelectorAll('button, summary, [tabindex="0"]')].filter(el => el.getClientRects().length);
+    const first = controls[0], last = controls.at(-1);
+    if (e.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+      e.preventDefault(); last?.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) {
+      e.preventDefault(); first?.focus();
+    }
+  }
 });
 
 /* ── Lore fullscreen ── */
 function openLoreFullscreen(name, text) {
+  loreReturnFocus = document.activeElement;
   document.getElementById('lore-fullscreen-name').textContent = name || '';
   document.getElementById('lore-fullscreen-text').innerHTML   = text || '';
   loreOverlay.classList.add('open');
+  loreOverlay.inert = false;
+  loreOverlay.setAttribute('aria-hidden', 'false');
+  modal.inert = true;
   document.body.style.overflow = 'hidden';
+  loreClose.focus();
 }
 
 function closeLoreFullscreen() {
   loreOverlay.classList.remove('open');
+  loreOverlay.inert = true;
+  loreOverlay.setAttribute('aria-hidden', 'true');
+  modal.inert = !modal.classList.contains('open');
   document.body.style.overflow = modal.classList.contains('open') ? 'hidden' : '';
+  if (loreReturnFocus?.isConnected) loreReturnFocus.focus();
 }
 
-/* Builds a lore section with an inline scroll box + expand button.
-   Call wireLoreExpand() after injecting this into the DOM. */
+/* Keep the portrait view compact; the story opens in its own reader. */
 function buildLoreBlock(text) {
   if (!text) return '';
-  return `
-    <div class="modal-section-label">Lore</div>
-    <div class="modal-story-wrap">
-      <div class="modal-story-box">${text}</div>
-      <button class="modal-story-expand-btn" type="button" title="Böyüt">⤢</button>
-    </div>`;
+  return '<button class="modal-lore-button" type="button" aria-haspopup="dialog">Lore</button>';
 }
 
 function wireLoreExpand(root, name, text) {
-  const btn = root.querySelector('.modal-story-expand-btn');
+  const btn = root.querySelector('.modal-lore-button');
   if (btn) btn.addEventListener('click', () => openLoreFullscreen(name, text));
 }
 
@@ -92,24 +110,145 @@ const EXTRA_STAT_DEFS = [
    BUILDER HELPERS  (pure — no DOM reads, safe call order)
 ════════════════════════════════════════════════════════ */
 
-function buildStatBars(defs, source) {
-  return defs
-    .filter(s => source[s.key] !== undefined)
-    .map(s => {
-      const raw = parseFloat(String(source[s.key]).replace(/[^0-9.]/g, '')) || 0;
-      const pct = Math.min(100, (raw / s.max) * 100);
-      return `
-        <div class="stat-bar-row">
-          <div class="stat-label-sm">${s.icon} ${s.label}</div>
-          <div class="stat-bar-track">
-            <div class="stat-bar-fill"
-                 style="width:${pct}%;background:${s.color};box-shadow:0 0 8px ${s.color}60">
-            </div>
-          </div>
-          <div class="stat-val-sm">${source[s.key]}</div>
-        </div>`;
-    })
-    .join('');
+function modalEscape(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+/* Every render sets the skin, including form changes and the dual picker. */
+function applyModalRarity(rarity, name) {
+  const aliases = { common:'mundane', rare:'familiar', epic:'arcane', legendary:'apex' };
+  const requested = String(rarity || 'mundane').toLowerCase();
+  const key = aliases[requested] || requested;
+  const allowed = ['mundane','familiar','arcane','relic','ascendant','apex','emergent','ethereal'];
+  const safeKey = allowed.includes(key) ? key : 'mundane';
+  const box = document.getElementById('modal-box');
+  allowed.forEach(r => box.classList.remove(`r-${r}`));
+  box.classList.add(`r-${safeKey}`);
+  const color = getComputedStyle(document.documentElement).getPropertyValue(`--${safeKey}`).trim() || '#9ca3af';
+  modal.style.setProperty('--modal-color', color);
+  box.style.setProperty('--modal-color', color);
+  box.dataset.rarity = safeKey;
+  // Screen readers retain the rarity information without a visible badge.
+  box.setAttribute('aria-label', `${name || 'Kart'} · ${safeKey}`);
+  document.getElementById('modal-img-rarity').style.background = color;
+}
+
+const MODAL_STAT_HINTS = {
+  health:'Maksimum can.', shield:'Canı qoruyan qalxan.', damage:'Bir vuruşun hasarı. 2x6: iki dəfə 6 hasar.',
+  sps:'Saniyə başına hasar.', attackSpeed:'Vuruşlar arasındakı vaxt. Az olması daha yaxşıdır.',
+  delay:'Hücum dəstələri arasındakı fasilə. Az olması daha yaxşıdır.', mana:'Kartın mana xərci.',
+  number:'Meydana çıxan vahidlərin sayı; eyni vaxtda vurulan hədəf sayı deyil.',
+  range:'Hücum məsafəsi.', speed:'Hərəkət sürəti.', criticDamage:'Kritik vuruşun hasar əmsalı.',
+  criticalChance:'Kritik vuruş ehtimalı.', lifesteal:'Can çalma işə düşəndə bərpa edilən hasar faizi.',
+  lifestealChance:'Can çalma ehtimalı.', dodge:'Zərbədən yayınma ehtimalı.', vision:'Görüş məsafəsi.',
+  healBonus:'Alınan sağaltmanı gücləndirir.', healrecovery:'Saniyə başına can bərpası.',
+  shieldrecovery:'Saniyə başına qalxan bərpası.', criticdamageminimiser:'Alınan kritik hasarı azaldır.',
+  damageminimiser:'Alınan hasarı azaldır.', flexibility:'Mənfi təsirlərə qarşı çeviklik.',
+  shieldtakendamage:'Qalxanın aldığı hasar faizi. Az olması daha yaxşıdır.', life:'Məhdud ömür. Tire: məhdudiyyət göstərilməyib.',
+};
+
+function modalStatMagnitude(value) {
+  if (value == null || /^[\s—–-]*$/.test(String(value))) return null;
+  const first = String(value).split('/')[0].trim().replace(/,/g, '.');
+  const product = first.match(/^(\d+(?:\.\d+)?)\s*[x×]\s*(\d+(?:\.\d+)?)/i);
+  const n = product ? Number(product[1]) * Number(product[2]) : parseFloat(first);
+  return Number.isFinite(n) ? n : null;
+}
+
+function modalStatRating(def, value) {
+  const n = modalStatMagnitude(value);
+  if (n === null) return null;
+  const lower = ['attackSpeed','delay','shieldtakendamage','mana'].includes(def.key);
+  const reference = def.key === 'delay' ? 5 : def.max;
+  const ratio = Math.max(0, Math.min(1, n / reference));
+  return Math.ceil((lower ? 1 - ratio : ratio) * 5);
+}
+
+function buildStatTiles(defs, source) {
+  return defs.map(def => {
+    const raw = source[def.key];
+    const value = raw == null || String(raw).trim() === '' || /^[—–-]$/.test(String(raw).trim()) ? '—' : raw;
+    const rating = modalStatRating(def, value);
+    const hint = MODAL_STAT_HINTS[def.key] || '';
+    const ratingLabel = rating === null ? 'Müqayisə məlumatı yoxdur' : `Müqayisəli göstərici: ${rating}/5`;
+    return `<div class="modal-stat-tile${String(value).length > 9 ? ' modal-stat-tile--wide-value' : ''}" data-stat="${def.key}" style="--stat-color:${def.color}" title="${modalEscape(hint)}">
+      <span class="modal-stat-label"><span aria-hidden="true">${def.icon}</span>${def.label}</span>
+      <strong class="modal-stat-value">${modalEscape(value)}</strong>
+      <span class="modal-stat-crystals" role="img" aria-label="${ratingLabel}">${Array.from({length:5}, (_, i) => `<i class="${rating !== null && i < rating ? 'lit' : ''}"></i>`).join('')}</span>
+    </div>`;
+  }).join('');
+}
+
+function buildCombatProfile(card) {
+  const p = card.combatStats || {};
+  const labels = {
+    attackType: { melee:'Yaxın', ranged:'Uzaq', mixed:'Yaxın və uzaq', none:'Hücum etmir' },
+    attackShape: { single:'Tək hədəf', cone:'Sektor', circle:'Dairəvi', line:'Xətt', square:'Sahəvi', multi:'Çox hədəf', none:'Yoxdur' },
+    flight: { ground:'Xeyr · yerüstü', flying:'Bəli · uçan', conditional:'Şərti uçuş' },
+    weight: { 'very-light':'Çox yüngül', light:'Yüngül', medium:'Orta', heavy:'Ağır', 'very-heavy':'Çox ağır' },
+    targets: { ground:'Yerüstü', air:'Hava', both:'Yer və hava', none:'Yoxdur' },
+  };
+  const multi = p.attackType === 'none' ? 'Hücum etmir' : p.multiTarget === true ? (Number.isFinite(p.maxTargets) ? `Bəli · ${p.maxTargets} hədəf` : 'Bəli · sahədəki rəqiblər') : p.multiTarget === false ? 'Xeyr · tək hədəf' : '—';
+  const fields = [
+    ['multiTarget','🎯','Birdən çox rəqibə hasar',multi,'Count-dan fərqli olaraq bir hücumun vura bildiyi hədəflər.'],
+    ['attackWidth','📐','Saldırı genişliyi',p.attackWidth || '—','Hücum sektorunun bucağı və ya sahənin ölçüsü.'],
+    ['attackType','⚔','Hücum məsafəsi',labels.attackType[p.attackType] || '—','Əsas hücumun növü.'],
+    ['attackShape','◈','Hücum forması',labels.attackShape[p.attackShape] || '—','Əsas zərbənin yayıldığı forma.'],
+    ['flight','🪽','Uça bilirmi?',labels.flight[p.flight] || '—',p.flightCondition || 'Kartın uçuş vəziyyəti.'],
+    ['weight','⚖','Çəki',labels.weight[p.weight] || '—','Çox yüngül → yüngül → orta → ağır → çox ağır.'],
+    ['targets','◎','Hədəflər',labels.targets[p.targets] || '—','Hücumun yönələ bildiyi hədəflər.'],
+    ['type','✦','Kart tipi',Array.isArray(card.type) ? card.type.join(' / ') : card.type || '—','Kartın aid olduğu varlıq tipi.'],
+  ];
+  return fields.map(([key, icon, name, value, hint]) => `<div class="modal-profile-tile" data-profile="${key}" title="${modalEscape(hint)}">
+    <span class="modal-stat-label"><span aria-hidden="true">${icon}</span>${name}</span>
+    <strong>${modalEscape(value)}</strong>
+    ${key === 'flight' && p.flightCondition ? `<small>${modalEscape(p.flightCondition)}</small>` : key === 'multiTarget' && p.multiTargetCondition ? `<small>${modalEscape(p.multiTargetCondition)}</small>` : ''}
+  </div>`).join('');
+}
+
+function buildModalStats(card) {
+  const defs = Object.fromEntries([...STAT_DEFS, ...ADD_STAT_DEFS, ...EXTRA_STAT_DEFS].map(d => [d.key, d]));
+  const ordered = ['health','shield','damage','sps','attackSpeed','delay','mana','number','range','speed','criticDamage','criticalChance','lifesteal','lifestealChance'];
+  const remaining = ['dodge','vision','healBonus','healrecovery','shieldrecovery','damageminimiser','criticdamageminimiser','flexibility','shieldtakendamage','life'];
+  const values = { ...card.additionalStats, ...card.stats };
+  const names = ['Əsas statlar','Bərpa və müdafiə','Döyüş profili','Ulduz səviyyələri'];
+  const bodies = [
+    `<div class="modal-stat-grid">${buildStatTiles(ordered.map(k => defs[k]), values)}</div>`,
+    `<div class="modal-stat-grid">${buildStatTiles(remaining.map(k => defs[k]), values)}</div>`,
+    `<div class="modal-stat-grid">${buildCombatProfile(card)}</div>`,
+    buildStarLevels(card.showlevels),
+  ];
+  return `<details class="modal-stats" ${modalStatsOpen ? 'open' : ''}>
+    <summary><span>Stats</span><span class="modal-stats-chevron" aria-hidden="true">⌄</span></summary>
+    <div class="modal-stats-body">
+      <div class="modal-stat-pages" role="tablist" aria-label="Stat səhifələri">${names.map((name, i) => `<button type="button" role="tab" id="stat-tab-${i + 1}" aria-controls="stat-page-${i + 1}" aria-selected="${modalStatsPage === i + 1}" tabindex="${modalStatsPage === i + 1 ? 0 : -1}" data-stat-page="${i + 1}" title="${name}">${i + 1}</button>`).join('')}</div>
+      ${bodies.map((body, i) => `<section class="modal-stat-page" id="stat-page-${i + 1}" role="tabpanel" aria-labelledby="stat-tab-${i + 1}" ${modalStatsPage === i + 1 ? '' : 'hidden'}><h3>${names[i]}</h3>${body}${i < 2 ? '<p class="modal-stat-note">Kristallar müqayisəli gücü göstərir. Vaxt, mana xərci və qalxan itkisi azaldıqca göstərici yüksəlir.</p>' : ''}</section>`).join('')}
+    </div>
+  </details>`;
+}
+
+function wireModalStats(root) {
+  const details = root.querySelector('.modal-stats');
+  if (!details) return;
+  details.addEventListener('toggle', () => { modalStatsOpen = details.open; });
+  const tabs = [...root.querySelectorAll('[data-stat-page]')];
+  function select(btn, focus = false) {
+    modalStatsPage = Number(btn.dataset.statPage);
+    tabs.forEach(tab => {
+      const active = tab === btn;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      root.querySelector(`#stat-page-${tab.dataset.statPage}`).hidden = !active;
+    });
+    if (focus) btn.focus();
+  }
+  tabs.forEach((btn, i) => {
+    btn.addEventListener('click', () => select(btn));
+    btn.addEventListener('keydown', e => {
+      const next = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null;
+      if (next !== null) { e.preventDefault(); select(tabs[next], true); }
+    });
+  });
 }
 
 function buildStarLevels(levels) {
@@ -197,10 +336,19 @@ function updateModalImage(card, fallbackCard) {
   const imgUrl  = getCardImg(card) || (fallbackCard ? getCardImg(fallbackCard) : '');
   const img     = document.getElementById('modal-img');
   const pholder = document.getElementById('modal-placeholder');
-  img.src = imgUrl;
-  img.style.display     = 'block';
-  pholder.style.display = 'none';
+  img.alt = card.name || fallbackCard?.name || 'Kart';
+  pholder.textContent = typeof getRarityEmoji === 'function' ? getRarityEmoji(card.rarity || fallbackCard?.rarity) : '⚔';
   img.onerror = () => { img.style.display = 'none'; pholder.style.display = 'flex'; };
+  img.onload = () => { img.style.display = 'block'; pholder.style.display = 'none'; };
+  if (imgUrl) {
+    img.style.display = 'block';
+    pholder.style.display = 'none';
+    img.src = imgUrl;
+  } else {
+    img.removeAttribute('src');
+    img.style.display = 'none';
+    pholder.style.display = 'flex';
+  }
 }
 
 /* Shared preview helpers — used by the Ethereal dual selector
@@ -221,16 +369,13 @@ function spawnTag(c) {
 
 /* Ethereal: dual-type selector screen */
 function buildDualTypeSelector(card) {
+  applyModalRarity(card.rarity || 'ethereal', card.name);
   const t1       = card.type1;
   const t2       = card.type2;
   const rarColor = getComputedStyle(document.documentElement)
     .getPropertyValue('--ethereal').trim() || '#f472b6';
 
   document.getElementById('modal-content').innerHTML = `
-    <span class="modal-rarity-badge"
-          style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
-      Ethereal
-    </span>
     <div class="modal-name-class-row">
       <div class="modal-card-name">${card.name || 'Unknown'}</div>
       ${card.class ? `<span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}` : ''}
@@ -317,34 +462,19 @@ function wireEmergentTraitTabs(card) {
                      the Ethereal dual-form picker; null otherwise
 ──────────────────────────────────────────────────────── */
 function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
-  const rarity   = (card.rarity || 'mundane').toLowerCase();
-  const stats    = card.stats    || {};
-  const addStats = card.additionalStats || {};
-  const rarColor = getComputedStyle(document.documentElement)
-    .getPropertyValue(`--${rarity}`).trim() || '#7b9cff';
-
-  document.getElementById('modal-img-rarity').style.background =
-    `linear-gradient(90deg, ${rarColor}, transparent)`;
-
-  const primaryBars   = buildStatBars(STAT_DEFS, stats);
-  const secondaryBars = buildStatBars(ADD_STAT_DEFS, addStats);
-  const extraBars     = buildStatBars(EXTRA_STAT_DEFS, addStats);
+  const root = rootCard || card;
+  applyModalRarity(card.rarity || root.rarity || backOrigin?.root.rarity, card.name || root.name);
   const isEmergentCard = !!(card.isEmergent && card.turns && emergentTurnKeys(card).length);
   const trait       = card.trait || null;
   const abilityName = card.abilityName && card.abilityName !== '—' ? card.abilityName : null;
   const story = card.story && card.story !== '-' ? card.story : null;
 
   const isAscended = (rootCard !== null && activeFormIndex === null && card !== rootCard);
-  const root       = rootCard || card;
 
   const backBtn = backOrigin ? `
     <button class="dual-back-btn" id="origin-back">← Forma seçiminə qayıt</button>` : '';
 
   document.getElementById('modal-content').innerHTML = `
-    <span class="modal-rarity-badge"
-          style="color:${rarColor};border-color:${rarColor}40;background:${rarColor}15">
-      ${card.rarity || ''}
-    </span>
     <div class="modal-name-class-row">
       <div class="modal-card-name">${card.name || 'Unknown'}</div>
       ${card.class ? `<span class="modal-class-badge">${card.class}</span>${card.subclass ? `<span class="modal-subclass-badge">${card.subclass}</span>` : ''}` : ''}
@@ -355,25 +485,7 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
     ${buildAscendedBanner(root, isAscended)}
     ${activeFormIndex !== null ? buildFormSwitcher(root, activeFormIndex) : ''}
 
-    <div class="stat-tab-row">
-      <button class="stat-tab active" data-tab="primary">⚔ Combat Stats</button>
-      <button class="stat-tab" data-tab="secondary">📊 Advanced Stats</button>
-      <button class="stat-tab" data-tab="extra">✨ Bonus Stats</button>
-      <button class="stat-tab" data-tab="levels">⭐ Star Levels</button>
-    </div>
-
-    <div class="stat-panel" id="panel-primary">
-      ${primaryBars || '<p class="no-stat-msg">No stats available.</p>'}
-    </div>
-    <div class="stat-panel" id="panel-secondary" style="display:none">
-      ${secondaryBars || '<p class="no-stat-msg">No advanced stats available.</p>'}
-    </div>
-    <div class="stat-panel" id="panel-extra" style="display:none">
-      ${extraBars || '<p class="no-stat-msg">No bonus stats available.</p>'}
-    </div>
-    <div class="stat-panel" id="panel-levels" style="display:none">
-      ${buildStarLevels(card.showlevels)}
-    </div>
+    ${buildModalStats(card)}
 
     ${(trait || isEmergentCard) ? `
       <div class="modal-section-label">Ability</div>
@@ -382,26 +494,12 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
 
     ${buildLoreBlock(story)}
 
-    <button class="modal-lore-link">
-      ✦ This Card belongs to the ${card.group || root.group || 'Stagnantia'} faction
-    </button>
   `;
 
   wireLoreExpand(document.getElementById('modal-content'), card.name || root.name, story);
   if (isEmergentCard) wireEmergentTraitTabs(card);
 
-  /* Stat tab switching */
-  document.querySelectorAll('.stat-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.stat-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      document.getElementById('panel-primary').style.display   = tab === 'primary'   ? 'block' : 'none';
-      document.getElementById('panel-secondary').style.display = tab === 'secondary' ? 'block' : 'none';
-      document.getElementById('panel-extra').style.display     = tab === 'extra'     ? 'block' : 'none';
-      document.getElementById('panel-levels').style.display    = tab === 'levels'    ? 'block' : 'none';
-    });
-  });
+  wireModalStats(document.getElementById('modal-content'));
 
   /* Back to the Ethereal dual-form picker */
   const backEl = document.getElementById('origin-back');
@@ -447,6 +545,8 @@ function renderModalContent(card, rootCard, activeFormIndex, backOrigin) {
    ENTRY POINT
 ════════════════════════════════════════════════════════ */
 function openModal(card) {
+  modalStatsPage = 1;
+  modalStatsOpen = true;
   updateModalImage(card);
   if (card.isDual) {
     buildDualTypeSelector(card);
@@ -454,11 +554,25 @@ function openModal(card) {
     const activeFormIndex = card.isMulti && card.forms && card.forms.length ? -1 : null;
     renderModalContent(card, card, activeFormIndex, null);
   }
+  showModalDialog();
+}
+
+function showModalDialog() {
+  modalReturnFocus = document.activeElement;
+  modal.inert = false;
+  modal.setAttribute('aria-hidden', 'false');
   modal.classList.add('open');
+  document.getElementById('modal-box').scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  modalClose.focus();
 }
 
 function closeModal() {
+  if (!modal.classList.contains('open')) return;
+  if (loreOverlay.classList.contains('open')) closeLoreFullscreen();
   modal.classList.remove('open');
+  modal.inert = true;
+  modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  if (modalReturnFocus?.isConnected) modalReturnFocus.focus();
 }

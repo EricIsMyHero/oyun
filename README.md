@@ -8,7 +8,8 @@ clash-a-mana/
 ├── index.html              ← Main entry point (clean HTML skeleton only)
 │
 ├── styles/
-│   ├── main.css            ← All visual styles and CSS variables
+│   ├── main.css            ← Shared styles and CSS variables
+│   ├── card-modal.css      ← Card portrait, rarity glow and paged stats
 │   ├── nav.css             ← Navigation packages (Archive / Game dropdowns)
 │   └── towerguns.css       ← Tower Guns section
 │
@@ -37,6 +38,7 @@ clash-a-mana/
 │   ├── relic.json          ← Relic tier cards
 │   ├── ascendant.json      ← Ascendant tier cards
 │   ├── apex.json           ← Apex tier cards
+│   ├── emergent.json       ← Emergent tier cards
 │   └── ethereal.json       ← Ethereal tier cards
 │
 └── assets/
@@ -78,39 +80,43 @@ line inside the other `<ul class="nav-menu">` in `index.html`. Nothing else has 
 
 ## Image Path Convention
 
-Images are loaded automatically based on card data:
-
-```
-assets/{group}/{card-name}.jpg
-```
-
-Example: a card with `"group": "Constructs"` and `"name": "Iron Golem"`
-will look for: `assets/constructs/iron-golem.jpg`
-
-- Group and name are lowercased
-- Spaces become hyphens
-- Special characters are stripped
+Card artwork is served from Cloudflare R2. `getCardImg()` in
+`js/modules/cards.js` builds `{R2 base}/{group}/{id}.jpg` using transliterated,
+lowercase slugs. Nested forms fall back to their parent group. Failed artwork
+requests show the rarity icon.
 
 ## Card JSON Format
 
 ```json
 {
+  "id": "example",
   "name": "Card Name",
-  "rarity": "mundane | familiar | arcane | relic | ascendant | apex | ethereal",
+  "rarity": "Mundane",
   "group": "Group Name",
-  "story": "Lore text shown in the modal.",
+  "type": ["Human"],
+  "story": "Lore opened by the Lore button.",
   "trait": "Special ability description.",
   "stats": {
-    "mana": 3,
-    "health": 1000,
-    "damage": 100,
-    "shield": 200,
-    "speed": 150,
-    "range": 500,
-    "sps": 80
+    "health": "120", "shield": "40", "damage": "12", "sps": "10",
+    "attackSpeed": "1.25s", "delay": "-", "mana": "3", "number": "1"
+  },
+  "additionalStats": {
+    "range": "1500", "speed": "1000", "criticDamage": "1.5x",
+    "criticalChance": "5%", "lifesteal": "25%", "lifestealChance": "0%"
+  },
+  "combatStats": {
+    "attackType": "melee", "multiTarget": true, "maxTargets": null,
+    "attackShape": "cone", "attackWidth": "135°", "flight": "ground",
+    "weight": "medium", "targets": "ground"
   }
 }
 ```
+
+The card modal shows all 24 numeric stats and the combat profile inside one
+expandable **Stats** control with pages **1–4**. Five crystals replace bars;
+rarity colors the entire modal frame. All 138 cards and their forms have editable
+combat profiles. See [the modal and profile guide](docs/card-modal.md) for field
+values, conditional flight/area attacks, stat ordering and validation commands.
 
 ## Spell JSON Format
 

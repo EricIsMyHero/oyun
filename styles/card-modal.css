@@ -1,0 +1,224 @@
+/* Card archive detail view. Shared spell components keep their own stat layout. */
+#modal-overlay {
+  --modal-color: var(--mundane);
+  padding: 24px;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--modal-color) 12%, transparent), transparent 72%), rgba(3, 5, 12, .87);
+}
+#modal-overlay .modal-box {
+  max-width: 1280px;
+  max-height: calc(100dvh - 48px);
+  grid-template-columns: minmax(300px, 42%) minmax(0, 1fr);
+  background: #0b101d;
+  border: 1px solid color-mix(in srgb, var(--modal-color) 80%, transparent);
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--modal-color) 18%, transparent),
+    0 0 24px color-mix(in srgb, var(--modal-color) 32%, transparent),
+    0 0 90px color-mix(in srgb, var(--modal-color) 15%, transparent), 0 32px 90px #000b;
+  scrollbar-color: color-mix(in srgb, var(--modal-color) 50%, transparent) transparent;
+}
+#modal-overlay .modal-close {
+  position: sticky;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: start;
+  top: 14px;
+  margin: 14px 14px 0 0;
+  background: #0b101de8;
+  color: #dce5f5;
+  width: 36px;
+  height: 36px;
+}
+#modal-overlay .modal-img-col {
+  position: sticky;
+  top: 0;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100dvh - 50px);
+  min-height: 0;
+  max-height: none;
+  padding: 14px;
+  border-radius: 19px 0 0 19px;
+  border-right: 1px solid color-mix(in srgb, var(--modal-color) 18%, transparent);
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--modal-color) 8%, #080c15), #080c15 80%);
+}
+#modal-overlay .modal-img-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+  border-radius: 10px;
+}
+#modal-overlay .modal-img-col::after,
+#modal-overlay .modal-img-gradient,
+#modal-overlay .modal-img-rarity { display: none; }
+#modal-overlay .modal-img-placeholder {
+  min-height: 220px;
+  opacity: .5;
+  color: var(--modal-color);
+}
+#modal-overlay .modal-content-col {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 38px 32px 28px;
+}
+#modal-overlay .modal-name-class-row { padding-right: 28px; gap: 7px; }
+#modal-overlay .modal-card-name { width: 100%; font-size: clamp(1.5rem, 2.5vw, 2rem); margin-bottom: 4px; overflow-wrap: anywhere; }
+#modal-overlay .modal-card-group { margin: 6px 0 22px; font-size: .65rem; line-height: 1.6; overflow-wrap: anywhere; }
+#modal-overlay .modal-class-badge,
+#modal-overlay .modal-subclass-badge { font-size: .58rem; padding: 4px 10px; }
+#modal-overlay .modal-section-label { margin-top: 24px; }
+#modal-overlay .modal-trait-box { font-size: 1rem; padding: 13px 16px; border-left-color: var(--modal-color); }
+
+.modal-stats {
+  border: 1px solid #ffffff14;
+  background: #ffffff02;
+  border-radius: 12px;
+  margin-top: 4px;
+}
+.modal-stats summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 15px 18px;
+  cursor: pointer;
+  color: #e8eeff;
+  font-family: var(--font-head);
+  font-size: .85rem;
+  letter-spacing: .08em;
+  border-radius: 11px;
+  background: linear-gradient(110deg, color-mix(in srgb, var(--modal-color) 13%, transparent), #ffffff03);
+}
+.modal-stats summary::-webkit-details-marker { display: none; }
+.modal-stats-chevron { transition: transform .2s; font-size: 1.2rem; line-height: 1; }
+.modal-stats[open] .modal-stats-chevron { transform: rotate(180deg); }
+.modal-stats-body { padding: 14px; border-top: 1px solid #ffffff0d; }
+.modal-stat-pages { display: flex; gap: 8px; }
+.modal-stat-pages button {
+  flex: 1;
+  min-height: 40px;
+  cursor: pointer;
+  border: 1px solid #ffffff12;
+  border-radius: 8px;
+  background: #ffffff03;
+  color: #9eacc4;
+  font-family: var(--font-head);
+  font-size: .85rem;
+  transition: background .2s, color .2s;
+}
+.modal-stat-pages button:hover { color: #e8eeff; background: #ffffff08; }
+.modal-stat-pages button[aria-selected="true"] {
+  border-color: color-mix(in srgb, var(--modal-color) 60%, transparent);
+  color: var(--modal-color);
+  background: color-mix(in srgb, var(--modal-color) 12%, transparent);
+}
+.modal-stat-page[hidden] { display: none; }
+.modal-stat-page h3 {
+  font-family: var(--font-head);
+  color: #99a8c1;
+  font-size: .62rem;
+  font-weight: 400;
+  letter-spacing: .14em;
+  margin: 16px 0 12px;
+  text-transform: uppercase;
+}
+.modal-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+.modal-stat-tile {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px 6px;
+  padding: 10px 11px;
+  min-width: 0;
+  border: 1px solid #ffffff09;
+  border-radius: 8px;
+  background: linear-gradient(110deg, color-mix(in srgb, var(--stat-color) 5%, transparent), #ffffff01);
+}
+.modal-stat-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #a7b4cb;
+  font-family: var(--font-head);
+  font-size: .7rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.modal-stat-label > span { font-size: .8rem; flex-shrink: 0; }
+.modal-stat-value { color: #eef3ff; font-size: 1rem; line-height: 1.2; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; text-align: right; }
+.modal-stat-tile--wide-value :is(.modal-stat-label, .modal-stat-value) { grid-column: 1 / -1; text-align: left; }
+.modal-stat-crystals { display: flex; align-items: center; gap: 5px; grid-column: 1 / -1; padding: 0 2px; }
+.modal-stat-crystals i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #ffffff25;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+.modal-stat-crystals i.lit { background: var(--stat-color); border-color: var(--stat-color); box-shadow: 0 0 5px color-mix(in srgb, var(--stat-color) 40%, transparent); }
+.modal-stat-note { margin: 12px 0 0; color: #7f8da7; font-size: .76rem; line-height: 1.5; }
+.modal-profile-tile { border: 1px solid #ffffff0b; border-radius: 8px; padding: 13px 11px; min-width: 0; background: #ffffff03; }
+.modal-profile-tile strong { display: block; margin-top: 8px; color: #e8eeff; font-size: 1rem; font-weight: 600; overflow-wrap: anywhere; }
+.modal-profile-tile small { display: block; margin-top: 6px; color: #8d9db8; font-size: .8rem; line-height: 1.45; }
+.modal-lore-button {
+  display: block;
+  width: 100%;
+  border: 1px solid #e8c95a40;
+  border-radius: 10px;
+  background: linear-gradient(110deg, #e8c95a0e, #e8c95a03);
+  color: var(--gold);
+  font-family: var(--font-head);
+  font-size: .78rem;
+  letter-spacing: .12em;
+  padding: 14px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.modal-lore-button:hover { border-color: #e8c95a80; background: #e8c95a14; }
+#modal-overlay :is(button, summary):focus-visible,
+#lore-fullscreen-overlay button:focus-visible { outline: 2px solid var(--modal-color, var(--gold)); outline-offset: 3px; }
+
+@media (max-width: 1050px) and (min-width: 761px) {
+  #modal-overlay .modal-box { grid-template-columns: minmax(250px, 38%) minmax(0, 1fr); }
+  #modal-overlay .modal-content-col { padding: 35px 20px 24px; }
+  .modal-stat-tile { padding: 9px 8px; }
+}
+@media (max-width: 760px) {
+  #modal-overlay { padding: 12px; }
+  #modal-overlay .modal-box { grid-template-columns: minmax(0, 1fr); max-height: calc(100dvh - 24px); border-radius: 16px; }
+  #modal-overlay .modal-close { grid-column: 1; grid-row: 1; top: 10px; margin: 10px 10px 0 0; }
+  #modal-overlay .modal-img-col {
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+    height: 38dvh;
+    min-height: 180px;
+    max-height: 340px;
+    padding: 10px;
+    border: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--modal-color) 22%, transparent);
+    border-radius: 15px 15px 0 0;
+  }
+  #modal-overlay .modal-content-col { grid-column: 1; grid-row: 2; padding: 22px 18px; }
+  #modal-overlay .modal-name-class-row { padding-right: 0; }
+}
+@media (max-width: 400px) {
+  #modal-overlay .modal-content-col { padding: 20px 12px; }
+  .modal-stats-body { padding: 10px; }
+  .modal-stat-tile { padding: 9px 7px; gap: 6px 4px; }
+  .modal-stat-label { font-size: .64rem; gap: 4px; }
+  .modal-stat-value { font-size: .9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #modal-overlay, #modal-overlay .modal-box, #modal-overlay .modal-close,
+  .modal-stats-chevron, #lore-fullscreen-overlay, .lore-fullscreen-box { transition: none; }
+}
+
+.card-item:focus-visible, .spell-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }

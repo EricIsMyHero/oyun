@@ -15,6 +15,7 @@
 
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/card-modal.css?v=1">
   <link rel="stylesheet" href="styles/battle.css">
   <link rel="stylesheet" href="styles/survival.css">
   <link rel="stylesheet" href="styles/nav.css">
@@ -959,9 +960,9 @@
 <!-- ═══════════════════════════════════════════════════════
      CARD DETAIL MODAL
 ═══════════════════════════════════════════════════════ -->
-<div id="modal-overlay">
-  <div class="modal-box" id="modal-box">
-    <button class="modal-close" id="modal-close">✕</button>
+<div id="modal-overlay" aria-hidden="true" inert>
+  <div class="modal-box" id="modal-box" role="dialog" aria-modal="true" aria-label="Kart məlumatı">
+    <button class="modal-close" id="modal-close" type="button" aria-label="Bağla">✕</button>
     <div class="modal-img-col" id="modal-img-col">
       <div class="modal-img-rarity" id="modal-img-rarity"></div>
       <img id="modal-img" src="" alt="" style="display:none">
@@ -975,9 +976,9 @@
 <!-- ═══════════════════════════════════════════════════════
      LORE FULLSCREEN OVERLAY
 ═══════════════════════════════════════════════════════ -->
-<div id="lore-fullscreen-overlay">
-  <div class="lore-fullscreen-box">
-    <button class="modal-close" id="lore-fullscreen-close">✕</button>
+<div id="lore-fullscreen-overlay" aria-hidden="true" inert>
+  <div class="lore-fullscreen-box" role="dialog" aria-modal="true" aria-labelledby="lore-fullscreen-name">
+    <button class="modal-close" id="lore-fullscreen-close" type="button" aria-label="Lore-u bağla">✕</button>
     <div class="lore-fullscreen-label">Lore</div>
     <div class="lore-fullscreen-name" id="lore-fullscreen-name"></div>
     <div class="lore-fullscreen-text" id="lore-fullscreen-text"></div>
@@ -988,13 +989,13 @@
      SCRIPTS  (order matters — core first, then modules)
 ═══════════════════════════════════════════════════════ -->
 <script src="js/core/particles.js"></script>
-<script src="js/core/modal.js"></script>
+<script src="js/core/modal.js?v=3"></script>
 <script src="js/core/navigation.js"></script>
-<script src="js/modules/cards.js"></script>
+<script src="js/modules/cards.js?v=3"></script>
 <script src="js/modules/battle.js"></script>
 <script src="js/modules/survival-data.js"></script>
 <script src="js/modules/survival.js?v=2"></script>
-<script src="js/modules/spells.js"></script>
+<script src="js/modules/spells.js?v=3"></script>
 <script src="js/modules/towerguns.js"></script>
 <script src="js/modules/info.js"></script>
 <script src="js/modules/powerups.js"></script>

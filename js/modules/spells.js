@@ -132,6 +132,7 @@ function buildSpellFormSwitcher(spell, activeIndex) {
 /* ── Modal renderer for spells ── */
 function renderSpellModal(spell, activeFormIndex) {
   const rarity = (spell.rarity || 'common').toLowerCase();
+  applyModalRarity(rarity, spell.name);
   const stats  = spell.stats || {};
   const energy = stats.energy;
   const charge = stats.charge;
@@ -214,6 +215,12 @@ function createSpellEl(spell, idx) {
 
   const el = document.createElement('div');
   el.className = `spell-item spell-${rarity}`;
+  el.tabIndex = 0;
+  el.setAttribute('role', 'button');
+  el.setAttribute('aria-haspopup', 'dialog');
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+  });
   el.style.animationDelay = `${idx * 0.04}s`;
 
   const statPairs = [
@@ -263,6 +270,7 @@ function createSpellEl(spell, idx) {
 
   /* Click → spell modal */
   el.addEventListener('click', () => {
+    el.focus({preventScroll:true});
     const modal = document.getElementById('modal-overlay');
     const img   = document.getElementById('modal-img');
     const ph    = document.getElementById('modal-placeholder');
@@ -284,8 +292,7 @@ function createSpellEl(spell, idx) {
     const activeFormIndex = spell.isMulti && spell.forms && spell.forms.length ? -1 : null;
     renderSpellModal(spell, activeFormIndex);
 
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    showModalDialog();
   });
 
   return el;

@@ -44,7 +44,17 @@
     },
     "story": "The Golden Horde, a massive swarm of small prehistoric rodent-like creatures dragged through a mana portal from an ancient forgotten dimension. At first glance they appear harmless and adorable, with round bodies, soft golden fur, bright curious eyes, and compact animal-like features. However, beneath their deceptively cute appearance lies a relentless and highly destructive pack mentality. Thousands of Hammies flood across the battlefield as a living tide. Their fur ranges from warm golden-yellow to amber tones, creating the appearance of a moving golden horde. Despite their small size, each creature possesses surprisingly sharp claws, powerful jaws, and rows of tiny predatory teeth adapted for gnawing through nearly anything they encounter. The creatures move with extreme speed and chaotic energy. Some climb over rocks, others leap across debris, while countless more swarm together in coordinated waves. Their unpredictable behavior creates a sense of constant motion, making the battlefield feel completely overrun. Dust, dirt, and debris are kicked into the air as the horde advances. Their bright eyes are filled with wild curiosity and primal instinct. Individual Hammies may appear cute, but the sheer number of creatures transforms them into an overwhelming force of nature. Their collective movement resembles a golden flood consuming everything in its path. Behind the swarm, a gigantic unstable mana portal tears through reality, revealing glimpses of their prehistoric homeland. Vast grasslands, ancient forests, towering ferns, and strange extinct wildlife can be seen through the dimensional rift. Golden mana energy crackles around the portal, illuminating the creatures with a mystical glow. The environment shows clear signs of being overwhelmed. Broken equipment, damaged structures, scattered debris, and disturbed terrain emphasize the destructive effect of the advancing horde. The atmosphere is energetic, chaotic, and surprisingly intimidating despite the creatures' outwardly cute appearance. The overall composition focuses on contrast: individually adorable creatures forming a terrifying, unstoppable swarm through sheer numbers, speed, and group ferocity.",
     "class": "Fighter",
-    "subclass": "Skirmisher"
+    "subclass": "Skirmisher",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "very-light",
+      "targets": "ground"
+    }
   },
   {
     "id": "b-b",
@@ -91,7 +101,17 @@
     },
     "story": "The Caged Giant, a massive albino bear from The Amazing Circus, once a helpless cub stolen from the deep wilderness and condemned to a lifetime of forced performances. Though years of captivity have blurred his memories of the forest, a deep instinct remains within him, constantly reminding him that he does not belong among the bright lights and artificial smiles of the circus. B-B is an enormous, muscular albino bear with thick snow-white fur, towering over the circus grounds with an intimidating presence. His most striking feature is his pair of piercing crimson-red eyes, glowing with suppressed anger, sorrow, and a longing for freedom. Despite years of captivity, he retains the appearance of a truly wild predator rather than a domesticated performer. He wears a worn and damaged circus-themed outfit, designed for performances but stretched and torn by his immense size. The costume includes elements of a traditional circus performer uniform, decorated with faded gold details, weathered fabrics, and signs of years of forced use. The clothing appears restrictive and unnatural on such a powerful beast, emphasizing his imprisonment rather than celebration. Heavy circus chains wrap around parts of his body, hanging from his wrists, shoulders, and torso. Some chains appear broken or strained, suggesting the immense strength barely being contained beneath the surface. His posture conveys a mixture of reluctant obedience and growing rebellion, as if he is only moments away from breaking free. The environment is a dark and unsettling circus arena. Torn circus tents, abandoned performance props, flickering carnival lights, drifting dust, and worn wooden structures create a haunting atmosphere. The cheerful colors of the circus have faded into something eerie and oppressive. In the distance, fragments of a mysterious forest can be faintly seen beyond the circus grounds, symbolizing the home he barely remembers. His expression carries both tragedy and danger. Beneath the appearance of a trained show animal lies a wild creature yearning for freedom. The contrast between the circus costume and the untamed beast creates a powerful visual narrative of captivity and resistance.",
     "class": "Tank",
-    "subclass": "Brawler"
+    "subclass": "Brawler",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "scrapy",
@@ -138,7 +158,17 @@
     },
     "story": "Scrapy is a rusted robot that once helped build the arena. Lately, a dark glitch has taken over its programming, and it prefers absolute destruction over creation. Rolling into battle on a single wheel, it ready to tear down everything it once built. It strikes fear into enemies with a massive, scrap-firing weapon fused directly into its left arm.",
     "class": "Marksman",
-    "subclass": "Piercer"
+    "subclass": "Piercer",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "nitrox",
@@ -185,7 +215,17 @@
     },
     "story": "The Volatile Inferno, a highly unstable combat automaton developed by the Steam Alliance, engineered to overwhelm enemies with devastating bursts of chemically pressurized fire. Built around an experimental combustion system, Nitrox constantly operates on the edge of catastrophic failure, making it as dangerous to approach as it is to fight. Every component vibrates under immense pressure as volatile fuel races through its mechanical body. Nitrox is a humanoid industrial combat robot with a normal upper body, but instead of legs it moves on two massive reinforced industrial wheels. The wheels are constructed from forged steel with heavy iron rims, allowing incredible speed and stability across the battlefield. Hydraulic suspension, rotating axles, and exposed mechanical linkages connect the wheels to its armored torso, giving the machine a rugged industrial appearance. Its body is built from dark forged steel, cast iron, weathered copper pipes, and reinforced metal plating. The chassis is covered with pressure gauges, rivets, fuel lines, cooling vents, heavy bolts, and rotating mechanical components. Every detail emphasizes realistic industrial engineering rather than futuristic technology. Its head features a reinforced armored faceplate with two glowing fiery orange eyes, while small exhaust vents release smoke and heat distortion around its head. The robot constantly emits subtle heat waves, making the surrounding air shimmer. Mounted on both forearms are industrial flamethrower projectors, connected to large pressurized chemical tanks integrated into its back and torso. Thick reinforced pipes carry volatile fuel throughout the machine, while pressure valves release bursts of steam and burning gas. The flamethrowers produce massive torrents of blazing fire mixed with sparks, smoke, and expanding waves of superheated air. The reactor inside Nitrox glows with an intense orange-red light visible through reinforced ventilation grilles. Pressure gauges approach dangerous levels, warning lights flash across the chassis, and occasional sparks erupt from overloaded mechanical components, emphasizing the machine's unstable nature. The battlefield is an enormous Steam Alliance industrial complex, filled with steel factories, blast furnaces, smokestacks, rail systems, giant gears, pipelines, cranes, and heavy machinery. Flames reflect across steel surfaces while smoke and steam fill the atmosphere. Scorched ground, burning debris, and molten metal surround Nitrox, reinforcing its role as a walking inferno. The overall design should emphasize industrial engineering, volatile combustion, overwhelming heat, and relentless firepower, creating the appearance of a dangerous machine barely containing its own destructive energy.",
     "class": "Support",
-    "subclass": "Buffer"
+    "subclass": "Buffer",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "nortex",
@@ -232,7 +272,17 @@
     },
     "story": "The Arctic Sentinel, the fearless leader of the Light Guardians in Alien World: The Binary Divide. Born on the frozen polar regions of the planet's Light Layer, Nortex has mastered the ancient power of arctic energy. Rather than seeking destruction, he freezes enemy advances, protects his allies, and stands as an unbreakable shield against the forces of darkness. Wherever Nortex walks, the battlefield becomes a realm of crystal ice and absolute tranquility. Nortex is a noble male alien warrior with a tall, athletic, and powerful physique. His body is completely organic, covered in smooth white and pale ice-blue alien skin that naturally emits a soft frozen glow. Thin crystalline patterns spread across his body like naturally grown frost instead of armor. His face is calm, heroic, and wise, with glowing cyan-blue eyes that radiate hope and determination. Elegant crystalline horns sweep backward from his head, resembling naturally grown ice formations. His expression reflects absolute confidence and compassion rather than aggression. He wears living crystalline armor grown from pure arctic minerals rather than forged metal. The armor is formed from translucent white and blue ice crystals, covering his shoulders, chest, forearms, and legs while remaining elegant and lightweight. Sharp frozen crystal formations decorate the armor without making it bulky. In his hands he channels pure arctic energy, creating swirling streams of snow, frost, and glowing icy particles. Large floating ice crystals orbit around his arms while waves of freezing mist spread outward with every movement. His powers appear magical and natural rather than technological. Beneath his feet, the ground instantly freezes into beautifully detailed crystal ice. Jagged ice spikes emerge naturally from the frozen terrain, while intricate snowflake patterns spread across the battlefield wherever his energy flows. Behind him rises the magnificent landscape of the Light Layer's frozen kingdom—towering glaciers, crystal mountains, frozen waterfalls, shimmering ice caves, snow-covered forests, and brilliant auroras dancing across the night sky. Massive floating ice formations drift silently above the landscape, bathed in celestial blue light. The atmosphere is peaceful yet immensely powerful. Fine snowflakes drift through the air alongside sparkling frost particles and cold mist. Soft rays of light shine through the icy environment, creating an inspiring contrast to the darkness of the opposing faction. Nortex stands proudly with one hand extended forward, releasing a wave of freezing energy, while the other controls floating crystalline ice around him. His posture communicates leadership, protection, and unwavering resolve—the true guardian of the Light Layer. The overall composition should portray Nortex as a legendary protector whose frozen power symbolizes hope, resilience, and absolute control over the arctic elements.",
     "class": "Marksman",
-    "subclass": "Stacker"
+    "subclass": "Stacker",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "gloop",
@@ -279,7 +329,17 @@
     },
     "story": "Gloop is a massive, green, slime-like entity that haunts the depths of the Dreadful Swamp. It waits in the stagnant waters for unsuspecting travelers, pulling them into its viscous body to face a slow and agonizing end. Legend says that those who enter its territory never return, becoming part of the swamp's eternal rot. It is a mindless consumer, a living trap that turns the murky waters into a graveyard. To face Gloop is to face an inescapable, suffocating death.",
     "class": "Tank",
-    "subclass": "Pure"
+    "subclass": "Pure",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "circle",
+      "attackWidth": "Təmas sahəsi",
+      "flight": "ground",
+      "weight": "very-heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "henry",
@@ -326,7 +386,17 @@
     },
     "story": "Henry was once a brilliant researcher, but after several failed experiments, he retreated to a secluded farm. To the outside world, he is just a friendly farmer with orange hair and a thick beard, leaning on his pitchfork. However, beneath his welcoming smile lies a dangerous obsession. He uses his scientific expertise to transform ordinary livestock into lethal weapons. He treats his farm like a laboratory, seeing his animals not as living beings, but as subjects for his dark, evolutionary projects.",
     "class": "Fighter",
-    "subclass": "Berserker"
+    "subclass": "Berserker",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "venomora",
@@ -380,7 +450,17 @@
     },
     "story": "The Silent Venom, an elite alien assassin of the Dark Layer in Alien World: The Binary Divide. She is a nearly invisible predator that stalks her victims without making the slightest sound. Feared throughout the planet for her lightning-fast strikes and lethal neurotoxin, Venomora paralyzes her prey long before they realize she is there. She never wastes movement, never speaks, and never misses. Venomora is a tall, elegant female alien with an athletic, agile physique designed for speed and stealth. Her body is covered in sleek obsidian-black exoskeletal armor with smooth organic curves, accented by glowing emerald-green bioluminescent veins that pulse faintly beneath the surface. Her silhouette is graceful yet intimidating, resembling the perfect apex hunter. Her face is sharp and alien, with glowing toxic-green eyes that pierce through darkness. Her expression is cold and emotionless, while subtle venom glands along her jaw emit faint wisps of emerald vapor. Small blade-like protrusions extend backward from her head, giving her an aerodynamic appearance. Both forearms end in long, razor-sharp venomous claws, coated with glowing neurotoxic venom. Thick droplets of luminous green poison slowly slide from the claws before evaporating into toxic mist. Every movement leaves faint trails of poisonous particles suspended in the air. Her long segmented tail ends in a deadly scorpion-like stinger, filled with pulsating emerald venom visible beneath a translucent crystalline chamber. The tail curves gracefully behind her, poised to strike with terrifying speed. Around her body flows a subtle camouflage field that partially bends light, making sections of her body fade into the surrounding environment. Wisps of green toxic mist drift around her feet while glowing spores float silently through the air, enhancing the illusion that she is emerging from nowhere. The battlefield is a dense alien jungle within the Dark Layer, filled with towering bioluminescent plants, enormous poisonous fungi, black alien trees, glowing vines, toxic swamps, and luminous spores. Thick emerald fog blankets the forest floor while faint alien moons illuminate the environment from above. She crouches atop a massive twisted branch or alien rock formation, ready to ambush her prey. Her posture resembles a hunting predator moments before striking, balancing elegance with explosive speed. The atmosphere is tense, silent, and predatory. The environment should communicate that every living creature fears entering her territory, where one unseen strike is enough to end the hunt before it begins. The overall composition should portray Venomora as the perfect alien assassin—beautiful, silent, highly intelligent, and lethally efficient.",
     "class": "Mage",
-    "subclass": "Controller"
+    "subclass": "Controller",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "blocker",
@@ -427,7 +507,17 @@
     },
     "story": "Blocker is the heart of Mission 1. This 30-year-old Black man carries a heavy riot shield to deflect every incoming threat. While others focus on the gravity of war, his good-natured humor keeps the squad's spirits high. He is the funniest member of the group, often cracking jokes in the heat of battle. Behind his smile lies a relentless wall of defense. He stands firm against any impact, ensuring his friends remain safe. To him, protecting the team is a duty he performs with a grin.",
     "class": "Tank",
-    "subclass": "Protector"
+    "subclass": "Protector",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "fen",
@@ -480,7 +570,17 @@
     },
     "story": "The Hurricane Stylist, a 23-year-old barber prodigy and the youngest member of the Barber Brothers. Energetic, confident, and exceptionally talented, Fen has transformed the tools of his profession into powerful instruments of precision and control. His youthful enthusiasm and lightning-fast reflexes make him one of the most dynamic stylists in both the barbershop and the arena. Fen is a handsome young man with a modern, fashionable appearance befitting a master barber. His hairstyle is impeccably styled, featuring sharp cuts, clean lines, and a trendy look that showcases his professional expertise. His expression is confident and focused, carrying the charisma of someone who genuinely loves his craft. He wears a stylish barber-inspired outfit that blends professional fashion with fantasy action aesthetics. The outfit includes a modern barber vest, rolled sleeves, utility belts for grooming tools, premium fabrics, and sleek design details. The clothing appears practical for movement while maintaining the polished appearance of a high-end stylist. In his hands, Fen wields a powerful professional hairdryer enhanced with extraordinary technology. The device generates massive streams of compressed wind that spiral around him like miniature hurricanes. Powerful currents of air twist through the battlefield, lifting loose objects, dust, and hair strands into dynamic vortexes. The wind effects are visually impressive yet elegant, emphasizing control rather than destruction. His hairdryer emits visible streams of swirling air, creating circular gusts and tornado-like formations around his body. Flying strands of hair, floating particles, and flowing fabrics react realistically to the intense airflow. The atmosphere feels energetic and constantly in motion. The setting combines elements of a luxury modern barbershop with a fantasy arena. Premium barber chairs, mirrors, styling stations, and salon equipment blend seamlessly with a dramatic battleground environment. The scene showcases Fen's ability to transform everyday barber tools into extraordinary sources of power. His pose should be dynamic and action-oriented, as though he is directing a powerful gust of wind while maintaining complete precision. Despite the intensity of the airflow, he appears relaxed and in total control, embodying both creativity and mastery.",
     "class": "Fighter",
-    "subclass": "Blinder"
+    "subclass": "Blinder",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "ben",
@@ -534,7 +634,17 @@
     },
     "story": "The Razor Edge, the 25-year-old middle brother of the Barber Brothers, a calm, disciplined, and exceptionally skilled master barber whose precision borders on perfection. Unlike the energetic Fen, Ben is quiet, focused, and methodical, approaching every task with unwavering concentration. Every movement is calculated, every cut intentional, and every action executed with flawless accuracy. Ben has a mature and professional appearance, with a perfectly groomed hairstyle that reflects his dedication to his craft. His sharp facial features, focused eyes, and composed expression convey the confidence of a true master craftsman. He rarely shows emotion, maintaining complete concentration regardless of the situation. He wears an elegant, high-end barber outfit combining modern professional fashion with fantasy combat aesthetics. A tailored barber vest, rolled sleeves, premium gloves, utility straps, and sophisticated grooming accessories give him the appearance of a professional artisan rather than a traditional warrior. Every detail of his clothing reflects precision, organization, and professionalism. In his hands are a pair of massive professional barber shears and razor-sharp styling scissors, crafted with exceptional detail. The polished metal blades gleam under dramatic lighting, appearing almost impossibly sharp. As he moves, silver cutting arcs trace through the air, visualizing the speed and accuracy of his techniques. His scissors are not oversized fantasy weapons, but refined professional tools elevated to extraordinary levels of mastery. Tiny metallic reflections, floating hair strands, and subtle cutting effects surround him, emphasizing his unparalleled precision. His stance is controlled and balanced, as though he is analyzing the perfect angle before executing a single decisive movement. Every aspect of his posture radiates discipline and mastery. The environment blends a luxury modern barbershop with an elite combat arena. Elegant mirrors, styling stations, barber chairs, polished floors, and professional equipment coexist with a dramatic battleground atmosphere. The scene showcases Ben's philosophy that perfection and craftsmanship can become powerful weapons. The overall composition should emphasize precision, focus, professionalism, and mastery. Ben appears less like a fighter and more like an artist whose skill has reached extraordinary levels.",
     "class": "Fighter",
-    "subclass": "Bleeder"
+    "subclass": "Bleeder",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "freak",
@@ -617,11 +727,32 @@
         },
         "story": "Snowballer-in hekayəsi buradadır. Bu kartın tarixi haqqında mətn yazın.",
         "class": "Assassin",
-        "subclass": "Suicide"
+        "subclass": "Suicide",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": true,
+          "maxTargets": null,
+          "attackShape": "circle",
+          "attackWidth": "Partlayış sahəsi",
+          "flight": "ground",
+          "weight": "light",
+          "targets": "ground",
+          "multiTargetCondition": "Öldükdə."
+        }
       }
     ],
     "class": "Specialist",
-    "subclass": "Splitter"
+    "subclass": "Splitter",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "nightprowler",
@@ -668,7 +799,17 @@
     },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
     "class": "Assassin",
-    "subclass": "Executioner"
+    "subclass": "Executioner",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "90°",
+      "flight": "ground",
+      "weight": "light",
+      "targets": "ground"
+    }
   },
   {
     "id": "twins",
@@ -715,7 +856,17 @@
     },
     "story": "The Burdened Spirits, a pair of identical twin ghost girls trapped within the abandoned Ghost Town. They are supernatural spirits who wander the deserted streets together, forever bound to one another. Their small bodies appear fragile and innocent, yet the enormous weights attached to their backs make their movements slow and difficult. They carry heavy stones in their hands as if these burdens have become an inseparable part of their existence. The twins are identical in appearance, with small, realistic human physiques and pale, slightly translucent skin. Their bodies emit a subtle cold bluish-white spectral glow, while their lower legs gradually dissolve into thin ghostly mist, clearly establishing that they are spirits. Both girls have long, slightly messy dark hair, pale faces, and realistic youthful facial features. Their expressions are serious, tired, and emotionally empty, as though they have carried their burdens for an eternity. Their eyes have a faint supernatural glow, but they should still look like realistic human eyes rather than exaggerated fantasy eyes. They wear matching old-fashioned Western-era dresses, simple and worn from years of wandering through the Ghost Town. The dresses are faded, dusty, slightly torn, and made from realistic aged fabric. Their clothing should be nearly identical, emphasizing that they are twins. Each twin holds a large heavy stone in both hands. The stones are irregular natural rocks with rough surfaces, cracks, dirt, and realistic geological textures. They should look genuinely heavy and difficult to carry. Their arms and posture should visibly reflect the weight of the stones. Attached to each twin's back is a massive physical weight, resembling an enormous rough stone slab or heavy iron weight secured with thick, worn leather straps and old metal bindings. The weights are disproportionately heavy compared with their small bodies, forcing them to lean slightly forward while walking. The straps cross naturally over their shoulders and around their torsos, visibly supporting the enormous weight. The materials should look aged, scratched, dusty, and realistically worn. The twins stand side by side, almost perfectly synchronized, each holding her stone close to her body. Their posture and positioning should emphasize their connection: they move together, stop together, and face the same direction as if they are mysteriously bound by the same fate. The scene takes place in the abandoned Ghost Town at night. Old wooden buildings, collapsed balconies, broken wagons, abandoned saloons, rusty fences, empty streets, and scattered debris surround them. Dust and thin fog drift slowly across the ground. Weak moonlight illuminates the twins from behind, creating subtle translucent edges around their ghostly bodies. Their shadows should be faint and unnatural, while wisps of spectral mist emerge from their feet and trail behind them. The atmosphere should be quiet, tragic, eerie, and oppressive, rather than action-oriented. The enormous weights and stones should visually communicate the idea of an eternal burden. The twins should look realistic and supernatural, not cartoonish or stylized. Their identical appearance, synchronized posture, ghostly bodies, heavy stones, and enormous back weights should immediately communicate their unique identity.",
     "class": "Fighter",
-    "subclass": "Berserker"
+    "subclass": "Berserker",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "bethe",
@@ -762,7 +913,17 @@
     },
     "story": "Bethe spent her childhood surrounded by mechanical sounds, not gunfire. Growing up surrounded by technology from a young age, this girl joined Mission 1 with her own hand-built Bio Mech. Although she is 23 years old, the systems she has built seem much older than her. It is no coincidence that she stands by the Soldier - it is not just tactics that keep him afloat in battle, but Bethe's intelligence. There is talk of something between them, but questions are not asked on the front lines. Because the answers must remain hidden during battle.",
     "class": "Assassin",
-    "subclass": "Ravager"
+    "subclass": "Ravager",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "light",
+      "targets": "ground"
+    }
   },
   {
     "id": "snaykies",
@@ -816,7 +977,17 @@
     },
     "story": "The Slithering Brood, a horrifying mass of prehistoric serpents dragged through a mana portal from an ancient primordial swamp dimension. Rather than a single snake, this creature appears as a living nest of intertwined venomous serpents, their bodies endlessly twisting, coiling, and overlapping into one terrifying collective organism. Dozens of snake heads emerge from the writhing mass, each possessing unique patterns, scars, horns, ridges, and predatory features. Their glowing eyes lock onto prey from every direction, creating the impression that escape is impossible. Long forked tongues flick through the air while their scales shimmer with ancient swamp moisture and traces of mana energy. The serpents' bodies are covered in highly detailed scales ranging from dark emerald green to muddy black, blending perfectly with their prehistoric wetland origins. Mana-infused markings pulse faintly across portions of their skin, revealing the supernatural influence of their dimensional journey. The enormous serpent mass coils around fallen trees, ancient roots, and swamp terrain, creating a complex and intimidating silhouette. Multiple heads rise above the body at different heights, each prepared to strike independently. Their movements appear coordinated despite the chaos, resembling a single predatory intelligence controlling dozens of deadly mouths. Behind them, a gigantic unstable mana portal tears through reality, revealing glimpses of their ancient homeland. Vast prehistoric swamps stretch into the distance, filled with colossal ferns, towering mangrove-like trees, dense fog, stagnant waters, and strange extinct wildlife hidden within the mist. Arcane energy crackles around the portal, blending magical and prehistoric elements together. The atmosphere is thick with humidity, swamp fog, and floating particles. Water ripples around the creature's coils while twisted roots and ancient vegetation dominate the environment. The scene feels oppressive, primal, and dangerous, emphasizing the creature's role as an ambush predator of forgotten ages. The overall composition highlights the overwhelming number of serpent heads, the complexity of their intertwined bodies, and the terrifying feeling of being surrounded from every angle.",
     "class": "Assassin",
-    "subclass": "Poisoner"
+    "subclass": "Poisoner",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "very-light",
+      "targets": "ground"
+    }
   },
   {
     "id": "soldier",
@@ -863,7 +1034,17 @@
     },
     "story": "Soldier did not watch the war from the outside since he was a child, he wanted to experience it. This young man, who dreamed of following his father into the battlefields, turned his dream into a responsibility over time. Although he is only 25 years old, his combat experience is heavier than his age. He stands on the front line with an M16A4 rifle, and his decisions determine the fate of those behind him. Mission 1 is not his first mission - it is the first mission he has been responsible for as a leader.",
     "class": "Marksman",
-    "subclass": "Burst"
+    "subclass": "Burst",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "bees",
@@ -917,7 +1098,17 @@
     },
     "story": "The Bees are a swarming nightmare born from Henry’s relentless experimentation. He pushed their biology to the limit, turning them into a hyper-aggressive cloud of stingers. However, despite all the effort and sweat Henry poured into them, he could not prevent their ultimate fate: they are highly volatile and fragile. They strike with overwhelming force, but their lives are short, burning out quickly after they unleash their fury. They represent the tragic, unstable perfection of Henry’s failed genius.",
     "class": "Assassin",
-    "subclass": "Suicide"
+    "subclass": "Suicide",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "flying",
+      "weight": "very-light",
+      "targets": "both"
+    }
   },
   {
     "id": "hailey",
@@ -964,7 +1155,17 @@
     },
     "story": "Arı sürüsünün hekayəsi buradadır. Kartın tarixi haqqında daha uzun bir mətn ola bilər.",
     "class": "Fighter",
-    "subclass": "Berserker"
+    "subclass": "Berserker",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "circle",
+      "attackWidth": "360°",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "angels",
@@ -1011,7 +1212,17 @@
     },
     "story": "The Angels are the restless spirits of ancient nobles who once served the throne with unwavering loyalty. Even in death, they refuse to leave the kingdom they loved. These ethereal guardians float above the battlefield, draped in shimmering white robes, acting as the ultimate shield for the royal lineage. They are not mere ghosts; they are the divine manifestation of the kingdom's history. Their presence inspires the living, ensuring that the legacy of the Royal Blood remains untouched by the corruption of the outside world.",
     "class": "Specialist",
-    "subclass": "Swarm"
+    "subclass": "Swarm",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "flying",
+      "weight": "very-light",
+      "targets": "both"
+    }
   },
   {
     "id": "boomix",
@@ -1058,7 +1269,17 @@
     },
     "story": "",
     "class": "Marksman",
-    "subclass": "Piercer"
+    "subclass": "Piercer",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "phewphew",
@@ -1105,7 +1326,17 @@
     },
     "story": "The Silent Echo, a mysterious mime performer from The Amazing Circus, known for never speaking a single word. Silent and unreadable, he communicates entirely through elegant gestures, precise movements, and subtle expressions. His presence is unsettling because nobody knows whether his abilities are performance tricks or something far more supernatural. PhewPhew wears a refined classic monochrome mime outfit, featuring a tailored black-and-white costume inspired by traditional European pantomime performers. His attire includes elegant gloves, detailed buttons, layered fabrics, and subtle circus-inspired elements. The costume is immaculate and theatrical, yet carries an eerie sense of isolation. His face is painted with sophisticated mime makeup, emphasizing expression despite his complete silence. He stands in the center of the scene performing an invisible act. His hands are pressed against a transparent, unseen wall, while shimmering distortions reveal the existence of a mysterious force field. Multiple invisible barriers surround him, visible only through subtle refractions, faint glowing outlines, and distortions in the surrounding air. The effect should feel magical, believable, and physically present. Around PhewPhew, objects react to these unseen forces. Dust particles stop midair, loose circus props appear suspended by invisible pressure, and subtle waves ripple through space itself. The battlefield seems to bend around his silent performance, suggesting mastery over mysterious forces that others cannot perceive. His expression remains calm, focused, and emotionally distant. Unlike loud circus performers, PhewPhew radiates quiet confidence and control. Every movement appears deliberate and graceful, transforming simple mime gestures into something genuinely powerful and intimidating. The environment is a haunting section of The Amazing Circus, featuring dim carnival lights, abandoned stages, faded curtains, empty audience seats, drifting fog, and worn performance props. Shadows stretch unnaturally across the ground, creating an atmosphere of mystery and tension. The circus feels frozen in time, as though the entire world is holding its breath during his performance. The overall composition should emphasize silence, invisible power, elegance, and mystery. PhewPhew appears less like an entertainer and more like a performer whose imagination has somehow become reality.",
     "class": "Marksman",
-    "subclass": "Breaker"
+    "subclass": "Breaker",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "chrono-mage",
@@ -1159,7 +1390,17 @@
     },
     "story": "Chrono Mage is a master of the temporal arts, possessing the rare ability to manipulate the flow of time itself. He exists between seconds, watching the past and future unfold simultaneously. He is neither good nor evil, acting only as a neutral observer of history’s clock. His power allows him to freeze enemies in their tracks or accelerate his own movements to a blur. As the mentor and guardian of Laura, he carries the weight of ages on his shoulders, ensuring that the timeline remains unbroken.",
     "class": "Mage",
-    "subclass": "Debuffer"
+    "subclass": "Debuffer",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "aegis-guard",
@@ -1206,7 +1447,17 @@
     },
     "story": "Aegis Guard is a masterpiece of Bethe’s mechanical genius. This autonomous protector operates without a human pilot, relying on complex algorithms to identify incoming threats. While Soldier leads the team, Aegis Guard stands as an unbreakable wall between the squad and certain death. Its primary protocol is the preservation of Mission 1 members at any cost. It does not feel fear or fatigue. Every movement serves a single purpose: to ensure that the team lives to see the next sunrise.",
     "class": "Tank",
-    "subclass": "Protector"
+    "subclass": "Protector",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "heavy",
+      "targets": "ground"
+    }
   },
   {
     "id": "ironjaw",
@@ -1253,7 +1504,17 @@
     },
     "story": "The Steel Devourer, a colossal industrial war machine of the Steam Alliance, originally built as a massive waste-disposal and metal recycling automaton before being reprogrammed into a devastating frontline siege unit. Designed to consume scrap metal, broken machinery, and industrial waste, Ironjaw now feeds on the armor and weapons of fallen enemies, converting everything it crushes into fuel for its powerful steam engines. Ironjaw is an enormous heavily armored bipedal industrial robot, built from forged steel, cast iron, and reinforced mechanical components. Its body is bulky, rugged, and incredibly durable, with thick armor plating covered in scratches, dents, rivets, and years of industrial wear. Every component looks functional and engineered for relentless heavy-duty labor rather than elegant design. Its most terrifying feature is an enormous mechanical crushing jaw occupying most of its upper torso and head. The jaw is constructed from massive serrated steel teeth driven by gigantic exposed gears, rotating drive shafts, reinforced hydraulic pistons, and powerful mechanical actuators. As the jaw opens, countless gears rotate together while steam erupts from pressure vents. The crushing mechanism appears capable of effortlessly pulverizing steel beams, armored vehicles, and heavy machinery. Behind the jaw sits a massive industrial furnace, visible through reinforced vents. Inside, glowing orange fire burns intensely as shredded metal debris is converted into steam power. Conveyor mechanisms, rotating grinders, crushing rollers, and internal furnaces feed the machine's enormous boiler, making Ironjaw appear like a walking industrial recycling plant. Its broad shoulders carry enormous exhaust stacks releasing dense white steam into the air. Thick iron pipes snake throughout the body, connecting pressure tanks, boilers, turbines, and piston systems. Massive gears rotate continuously on its back and hips, reinforcing the impression of unstoppable industrial machinery. The robot's arms are gigantic hydraulic manipulators ending in reinforced steel claws designed to seize enemy machines and feed them directly into the crushing jaws. Every movement feels immensely heavy and powerful, with pistons compressing and gears turning under incredible force. The environment is a vast Steam Alliance industrial scrapyard, filled with abandoned locomotives, broken machinery, twisted steel beams, crushed vehicles, conveyor belts, smokestacks, blast furnaces, cranes, and mountains of scrap metal. Sparks fly through the air while steam, smoke, and glowing embers create a dramatic industrial atmosphere. Ironjaw stands triumphantly among piles of crushed metal, with fragments of steel, gears, pipes, and armor scattered around its feet. The overall scene should communicate overwhelming strength, relentless industrial efficiency, and mechanical brutality.",
     "class": "Assassin",
-    "subclass": "Vampire"
+    "subclass": "Vampire",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "m-manager",
@@ -1300,7 +1561,17 @@
     },
     "story": "M-Manager serves as the backbone of the underground facility, tirelessly overseeing mana production deep beneath the arena. He carries a massive, glowing tank on his back that generates a continuous flow of pure energy. While his subordinates toil in the dirt, he ensures the core never runs dry. His calculated movements and cold, mechanical efficiency keep the Constructs' machinery alive, fueling every battle that takes place above.",
     "class": "Support",
-    "subclass": "Resourcer"
+    "subclass": "Resourcer",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "srail",
@@ -1347,7 +1618,17 @@
     },
     "story": "The Crimson Alchemist, a brilliant young inventor from the Steam Alliance, born into immense wealth but choosing the life of an engineer over luxury. Despite growing up as the youngest child in an influential family and being born with albinism, Srail never desired status or privilege. Instead, he devoted himself to invention, engineering, and industrial innovation, eventually becoming one of the greatest mechanical minds of the Steam Alliance. Srail is a handsome young man with very pale skin, snow-white hair, and crimson red eyes, unmistakable traits of his albinism. His appearance is refined yet practical, showing the confidence of a genius engineer rather than a noble heir. His expression is calm, intelligent, and focused, always observing the world as if calculating his next invention.He wears an elegant steampunk engineer outfit consisting of a fitted work vest over a rolled-sleeve shirt, reinforced leather gloves, utility belts filled with precision tools, mechanical pouches, protective trousers, sturdy industrial boots, and brass goggles resting around his neck. His clothing is clean but marked with subtle oil stains and scorch marks from years of experimentation.Mounted securely across his back is a massive experimental steam-powered rocket pack, nearly as tall as he is. The rocket is constructed from polished brass, forged steel, copper pipes, rotating pressure valves, exposed gears, glowing pressure gauges, reinforced exhaust nozzles, and intricate mechanical mechanisms. Thick pipes connect the rocket to a compact steam pressure system integrated into a mechanical harness worn across his shoulders and waist.The rocket continuously emits gentle bursts of white steam from pressure vents while glowing red pressure chambers pulse with stored energy. Small rotating turbines and spinning flywheels indicate that the machine is constantly active, ready for launch or powerful propulsion. The rocket should look like an advanced industrial invention rather than futuristic technology, remaining faithful to a high-quality steampunk aesthetic. The background is a colossal Steam Alliance industrial complex filled with towering smokestacks, giant steam engines, enormous gears, copper pipelines, suspended cranes, pressure boilers, and glowing furnaces. Thick steam fills the atmosphere while sparks fly from massive machines operating throughout the factory. Warm orange industrial lighting reflects beautifully from polished brass and steel surfaces. Srail stands proudly in the center of the factory, one hand adjusting a mechanical control on the rocket harness while the other confidently holds a precision engineering tool. His posture reflects intelligence, confidence, and endless curiosity—the look of someone who revolutionized industry through pure creativity rather than inherited wealth.",
     "class": "Marksman",
-    "subclass": "Sharpshooter"
+    "subclass": "Sharpshooter",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "cryon",
@@ -1394,6 +1675,16 @@
     },
     "story": "",
     "class": "Specialist",
-    "subclass": "Stunner"
+    "subclass": "Stunner",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   }
 ]

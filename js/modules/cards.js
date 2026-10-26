@@ -354,6 +354,9 @@ function createCardEl(card, idx) {
 
   const el = document.createElement('div');
   el.className = `card-item r-${rarity}`;
+  el.tabIndex = 0;
+  el.setAttribute('role', 'button');
+  el.setAttribute('aria-haspopup', 'dialog');
   el.style.animationDelay = `${idx * 0.04}s`;
 
   el.innerHTML = `
@@ -383,6 +386,9 @@ function createCardEl(card, idx) {
     <div class="card-rarity-tag">${card.rarity || ''}</div>
   `;
 
-  el.addEventListener('click', () => openModal(card));
+  el.addEventListener('click', () => { el.focus({preventScroll:true}); openModal(card); });
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+  });
   return el;
 }

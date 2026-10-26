@@ -41,7 +41,18 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "135°",
+      "flight": "conditional",
+      "weight": "medium",
+      "targets": "ground",
+      "flightCondition": "Canı 10%-dən aşağı düşəndə 10 saniyə uçar."
+    }
   },
   {
     "id": "dumpsy",
@@ -85,7 +96,17 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "circle",
+      "attackWidth": "360°",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "blesser",
@@ -129,7 +150,17 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "135°",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "js",
@@ -173,7 +204,17 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "both"
+    }
   },
   {
     "id": "mimic",
@@ -217,7 +258,17 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "-"
+    "story": "-",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": "135°",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "id": "the-seven-sins",
@@ -311,7 +362,17 @@
         },
         "story": "-",
         "class": "Tank",
-        "subclass": "Prideful"
+        "subclass": "Prideful",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "heavy",
+          "targets": "ground"
+        }
       },
       {
         "id": "greed",
@@ -357,7 +418,17 @@
         },
         "story": "-",
         "class": "Marksman",
-        "subclass": "Hoarder"
+        "subclass": "Hoarder",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "medium",
+          "targets": "ground"
+        }
       },
       {
         "id": "lust",
@@ -403,7 +474,17 @@
         },
         "story": "-",
         "class": "Support",
-        "subclass": "Enthraller"
+        "subclass": "Enthraller",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "medium",
+          "targets": "ground"
+        }
       },
       {
         "id": "envy",
@@ -449,7 +530,17 @@
         },
         "story": "-",
         "class": "Assassin",
-        "subclass": "Mirror"
+        "subclass": "Mirror",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "medium",
+          "targets": "ground"
+        }
       },
       {
         "id": "gluttony",
@@ -495,7 +586,17 @@
         },
         "story": "-",
         "class": "Tank",
-        "subclass": "Devourer"
+        "subclass": "Devourer",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "heavy",
+          "targets": "ground"
+        }
       },
       {
         "id": "wrath",
@@ -541,7 +642,17 @@
         },
         "story": "-",
         "class": "Fighter",
-        "subclass": "Berserker"
+        "subclass": "Berserker",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "medium",
+          "targets": "ground"
+        }
       },
       {
         "id": "sloth",
@@ -587,9 +698,29 @@
         },
         "story": "-",
         "class": "Tank",
-        "subclass": "Dormant"
+        "subclass": "Dormant",
+        "combatStats": {
+          "attackType": "melee",
+          "multiTarget": false,
+          "maxTargets": 1,
+          "attackShape": "single",
+          "attackWidth": "Tək hədəf",
+          "flight": "ground",
+          "weight": "heavy",
+          "targets": "ground"
+        }
       }
-    ]
+    ],
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": "Tək hədəf",
+      "flight": "ground",
+      "weight": "medium",
+      "targets": "ground"
+    }
   },
   {
     "name": "Stella",
@@ -633,6 +764,18 @@
       "level3": "-"
     },
     "story": "-",
-    "id": "stella"
+    "id": "stella",
+    "combatStats": {
+      "attackType": "ranged",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "square",
+      "attackWidth": "1,5 × 1,5 karo",
+      "flight": "conditional",
+      "weight": "medium",
+      "targets": "both",
+      "multiTargetCondition": "Meydana enərkən.",
+      "flightCondition": "Meydana planörlə enərkən."
+    }
   }
 ]
