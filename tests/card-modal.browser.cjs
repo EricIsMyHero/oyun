@@ -51,7 +51,7 @@ const server = http.createServer(async (req, res) => {
     assert.ok(await page.locator('#stat-page-2 [data-stat="dodge"]').isVisible());
     await page.keyboard.press('ArrowRight');
     assert.equal(await page.locator('[data-stat-page="3"]').getAttribute('aria-selected'), 'true');
-    assert.equal(await page.locator('#stat-page-3 [data-profile]').count(), 14);
+    assert.equal(await page.locator('#stat-page-3 [data-profile]').count(), 13);
     await page.keyboard.press('End');
     assert.equal(await page.locator('[data-stat-page="3"]').getAttribute('aria-selected'), 'true');
     await page.keyboard.press('Home');
@@ -104,7 +104,7 @@ const server = http.createServer(async (req, res) => {
       function check(card, root) {
         renderModalContent(card, root, null, null);
         if (document.querySelectorAll('[data-stat]').length !== 24) throw Error(`${card.name}: missing stats`);
-        if (document.querySelectorAll('[data-profile]').length !== 14) throw Error(`${card.name}: missing combat profile`);
+        if (document.querySelectorAll('[data-profile]').length !== 13) throw Error(`${card.name}: missing combat profile`);
         if (/\p{Extended_Pictographic}|\p{Emoji_Presentation}/u.test(document.querySelector('.modal-frame').textContent)) throw Error(`${card.name}: emoji in modal`);
         forms++;
         for (const form of card.forms || []) check(form, root);
@@ -125,12 +125,24 @@ const server = http.createServer(async (req, res) => {
 
     await page.evaluate(()=>openModal(allCards.find(c=>c.id==='henry')));
     await page.locator('[data-stat-page="3"]').click();
-    assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'1200 tiles');
-    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'1250 tiles');
-    assert.equal(await page.locator('[data-profile="range"] strong').textContent(),'1200 tiles');
+    assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'1.2 tiles');
+    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'1.25 tiles');
+    assert.equal(await page.locator('[data-profile="range"]').count(),0);
+    await page.locator('[data-stat-page="1"]').click();
+    assert.equal(await page.locator('[data-stat="range"] .modal-stat-value').textContent(),'1.2 tiles');
+    assert.equal(await page.locator('[data-stat="speed"] .modal-stat-value').textContent(),'0.8 tiles/s');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='fen')));
+    await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'1 tile');
+    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'3.6 tiles');
+    assert.equal(await page.locator('[data-profile="attackShape"] strong').textContent(),'Cone');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='bethe')));
+    await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="attackAngle"] strong').textContent(),'75°');
+    assert.equal(await page.locator('[data-profile="weight"] strong').textContent(),'Medium');
     await page.evaluate(()=>openModal(allCards.find(c=>c.id==='arcanyx')));
     await page.locator('[data-stat-page="3"]').click();
-    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'2100 tiles');
+    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'2.1 tiles');
     assert.equal(await page.locator('[data-profile="projectileEndEffect"] strong').textContent(),'Explodes');
     for (const id of ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith']) {
       await page.evaluate(id=>openModal(allCards.find(c=>c.id===id)),id);
@@ -164,6 +176,9 @@ const server = http.createServer(async (req, res) => {
     await page.evaluate(() => openModal(allCards.find(c=>c.id==='freak')));
     await page.locator('[data-form-index="0"]').click();
     assert.match(await page.locator('.modal-card-name').textContent(), /Mini Freaks/);
+    await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'0.5 tiles');
+    assert.equal(await page.locator('[data-profile="weight"] strong').textContent(),'Heavy');
     await page.evaluate(() => openModal(allCards.find(c=>c.id==='avara')));
     await page.locator('[data-stat-page="3"]').click();
     await page.locator('#ascended-toggle').click();

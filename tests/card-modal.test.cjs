@@ -42,7 +42,7 @@ test('burst damage is independent from simultaneous target count, including dist
   assert.equal(cards.find(c => c.id === 'soldier').combatStats.maxTargets, 1);
   assert.equal(cards.find(c => c.id === 'tenta').combatStats.maxTargets, 5);
   assert.equal(cards.find(c => c.id === 'hailey').combatStats.attackAngle, 360);
-  assert.equal(cards.find(c => c.id === 'hailey').combatStats.attackWidth, null);
+  assert.equal(cards.find(c => c.id === 'hailey').combatStats.attackWidth, 1000);
   const ray = cards.find(c => c.id === 'mr-and-mrs-ray');
   assert.equal(ray.type1.combatStats.multiTarget, true);
   assert.equal(ray.type2.combatStats.multiTarget, false);
@@ -133,9 +133,9 @@ test('Henry projectile width and attack travel distance are independent of Range
   assert.equal(context.card.additionalStats.range,'1200');
   const html=run('buildCombatProfile(card)');
   assert.match(html,/Projectile Width/);
-  assert.match(html,/1200 tiles/);
+  assert.match(html,/1\.2 tiles/);
   assert.match(html,/Attack Distance/);
-  assert.match(html,/1250 tiles/);
+  assert.match(html,/1\.25 tiles/);
 });
 
 test('Arcanyx travel limit follows maximum Range dynamically and explodes at the endpoint', () => {
@@ -145,7 +145,7 @@ test('Arcanyx travel limit follows maximum Range dynamically and explodes at the
   assert.equal(run('modalAttackDistance(card)'),4800);
   assert.equal(context.card.combatStats.projectileEndEffect,'explode');
   const html=run('buildCombatProfile(card)');
-  assert.match(html,/4800 tiles/);
+  assert.match(html,/4\.8 tiles/);
   assert.match(html,/Matches current Range/);
   assert.match(html,/Explodes/);
 });
@@ -172,4 +172,59 @@ test('new profile and stat labels are English while conditional ability text sta
   assert.match(stats,/Primary Stats/);
   assert.match(stats,/Recovery &amp; Defense|Recovery & Defense/);
   assert.doesNotMatch(stats,/[ƏəıİşŞçÇğĞüÜöÖ]/);
+});
+
+
+test('distance and speed display use 1,000 source points per tile without changing ratings', () => {
+  assert.equal(run('modalDistance(5000)'), '5 tiles');
+  assert.equal(run('modalDistance(500)'), '0.5 tiles');
+  assert.equal(run('modalDistance(1000)'), '1 tile');
+  assert.equal(run('modalDistance(1250)'), '1.25 tiles');
+  assert.equal(run("modalStatDisplay('range', '1000/2500')"), '1 / 2.5 tiles');
+  assert.equal(run("modalStatDisplay('speed', '5000')"), '5 tiles/s');
+  assert.equal(run("modalStatDisplay('speed', '1150')"), '1.15 tiles/s');
+  assert.equal(run("modalStatDisplay('speed', '1000')"), '1 tile/s');
+  assert.equal(run("modalStatDisplay('range', '-')"), '—');
+  assert.equal(run("modalStatDisplay('range', 0)"), '0 tiles');
+  const html=run("buildStatTiles(ADD_STAT_DEFS.filter(d=>d.key==='speed'), {speed:5000})");
+  assert.match(html,/5 tiles\/s/);
+  assert.match(html,/Relative rating: 5\/5/);
+  assert.equal(run("modalStatDisplay('health', 5000)"), 5000);
+});
+
+test('Range only appears as a stat on the first page', () => {
+  context.card=cards.find(c=>c.id==='henry');
+  const html=run('buildModalStats(card)');
+  assert.equal((html.match(/data-stat="range"/g)||[]).length,1);
+  assert.doesNotMatch(html,/data-profile="range"/);
+});
+
+test('single-target width defaults to 500 points while authored widths and non-attackers are preserved', () => {
+  assert.equal(run("modalAttackWidth({combatStats:{multiTarget:false,attackType:'ranged',attackWidth:null}})"),500);
+  assert.equal(run("modalAttackWidth({combatStats:{multiTarget:true,attackType:'ranged',attackWidth:null}})"),null);
+  assert.equal(run("modalAttackWidth({combatStats:{multiTarget:false,attackType:'none',attackWidth:null}})"),null);
+  assert.equal(run("modalAttackWidth({combatStats:{multiTarget:false,attackType:'melee',attackWidth:1200}})"),1200);
+});
+
+test('Mundane projectile geometry follows the requested values, including Mini Freaks', () => {
+  const expected={
+    hammies:[500,500], 'b-b':[500,500], scrapy:[500,500], nitrox:[500,2400], nortex:[500,500], gloop:[1000,500],
+    venomora:[500,500], blocker:[500,500], fen:[1000,3600], ben:[500,500], freak:[500,500], nightprowler:[1250,1000],
+    twins:[1000,500], bethe:[1250,1100], snaykies:[500,500], soldier:[500,500], bees:[500,500], hailey:[1000,1100],
+    angels:[500,500], boomix:[500,500], phewphew:[500,500], 'chrono-mage':[500,500], 'aegis-guard':[500,500],
+    ironjaw:[500,500], 'm-manager':[500,500], srail:[1500,500], cryon:[500,2000],
+  };
+  for (const [id,dimensions] of Object.entries(expected)) {
+    const p=cards.find(c=>c.id===id).combatStats;
+    assert.deepEqual([p.attackWidth,p.attackDistance],dimensions,id);
+  }
+  const profile=id=>cards.find(c=>c.id===id).combatStats;
+  for (const id of ['scrapy','fen']) assert.equal(profile(id).attackShape,'cone');
+  for (const id of ['nitrox','ben']) assert.equal(profile(id).targets,'ground');
+  for (const id of ['freak','ironjaw','m-manager']) assert.equal(profile(id).weight,'heavy');
+  for (const id of ['nightprowler','bethe']) assert.equal(profile(id).attackAngle,75);
+  assert.equal(profile('bethe').weight,'medium');
+  const mini=cards.find(c=>c.id==='freak').forms.find(c=>c.name==='Mini Freaks').combatStats;
+  assert.deepEqual([mini.attackWidth,mini.attackDistance,mini.weight],[500,500,'heavy']);
+  assert.deepEqual([profile('henry').attackWidth,profile('henry').attackDistance],[1200,1250]);
 });

@@ -242,7 +242,7 @@ const MODAL_STAT_HINTS = {
   sps:'Damage per second.', attackSpeed:'Time between hits. Lower is better.',
   delay:'Recovery time between volleys. Lower is better.', mana:'Mana cost to deploy the card.',
   number:'Number of deployed units; separate from the number of simultaneous targets.',
-  range:'Distance at which the card can acquire a target and begin attacking.', speed:'Movement speed.', criticDamage:'Critical hit damage multiplier.',
+  range:'Distance at which the card can acquire a target and begin attacking. 1,000 points = 1 tile.', speed:'Movement speed. 1,000 points = 1 tile per second.', criticDamage:'Critical hit damage multiplier.',
   criticalChance:'Chance of a critical hit.', lifesteal:'Percentage of dealt damage restored as health when lifesteal triggers.',
   lifestealChance:'Chance to trigger lifesteal.', dodge:'Chance to avoid an incoming hit.', vision:'Vision distance.',
   healBonus:'Increases healing received.', healrecovery:'Health restored per second.',
@@ -271,8 +271,8 @@ function modalStatRating(def, value) {
 function buildStatTiles(defs, source) {
   return defs.map(def => {
     const raw = source[def.key];
-    const value = raw == null || String(raw).trim() === '' || /^[—–-]$/.test(String(raw).trim()) ? '—' : raw;
-    const rating = modalStatRating(def, value);
+    const value = modalStatDisplay(def.key, raw);
+    const rating = modalStatRating(def, raw);
     const hint = MODAL_STAT_HINTS[def.key] || '';
     const ratingLabel = rating === null ? 'No comparison data' : `Relative rating: ${rating}/5`;
     return `<div class="modal-stat-tile${String(value).length > 9 ? ' modal-stat-tile--wide-value' : ''}" data-stat="${def.key}" style="--stat-color:var(--modal-color)" title="${modalEscape(hint)}">
@@ -295,8 +295,28 @@ function modalTerm(value) {
 function modalTypes(value) {
   return (Array.isArray(value) ? value : value ? [value] : []).map(modalTerm);
 }
+const MODAL_POINTS_PER_TILE = 1000;
+const MODAL_SINGLE_TARGET_WIDTH = 500;
+
+function modalTiles(value, perSecond = false) {
+  if (value == null || String(value).trim() === '') return '—';
+  const parts = String(value).split('/').map(part => part.trim().replace(',', '.'));
+  if (parts.some(part => !/^\d+(?:\.\d+)?$/.test(part) || !Number.isFinite(Number(part)))) return '—';
+  const tiles = parts.map(part => Number(part) / MODAL_POINTS_PER_TILE);
+  const unit = tiles.length === 1 && tiles[0] === 1 ? 'tile' : 'tiles';
+  return `${tiles.join(' / ')} ${unit}${perSecond ? '/s' : ''}`;
+}
+function modalStatDisplay(key, value) {
+  if (key === 'range' || key === 'speed') return modalTiles(value, key === 'speed');
+  return value == null || String(value).trim() === '' || /^[—–-]$/.test(String(value).trim()) ? '—' : value;
+}
 function modalDistance(value) {
-  return typeof value === 'number' && Number.isFinite(value) && value >= 0 ? `${value} tiles` : '—';
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 ? modalTiles(value) : '—';
+}
+function modalAttackWidth(card) {
+  const p = card.combatStats || {};
+  if (p.attackWidth != null) return p.attackWidth;
+  return p.multiTarget === false && p.attackType !== 'none' ? MODAL_SINGLE_TARGET_WIDTH : null;
 }
 function modalAttackDistance(card) {
   const p = card.combatStats || {};
@@ -310,16 +330,14 @@ function buildCombatProfile(card) {
   const movement = MODAL_MOVEMENT[p.movementType];
   const labels = {
     attackType: { melee:'Melee', ranged:'Ranged', mixed:'Melee & ranged', none:'Does not attack' },
-    attackShape: { single:'Single target', cone:'Sector', circle:'Circular', line:'Line', square:'Area', multi:'Multiple targets', none:'None' },
+    attackShape: { single:'Single target', cone:'Cone', circle:'Circular', line:'Line', square:'Area', multi:'Multiple targets', none:'None' },
     weight: { 'very-light':'Very light', light:'Light', medium:'Medium', heavy:'Heavy', 'very-heavy':'Very heavy' },
     targets: { ground:'Ground', air:'Air', both:'Ground & air', none:'None' },
   };
   const multi = p.attackType === 'none' ? 'Does not attack' : p.multiTarget === true ? (Number.isFinite(p.maxTargets) ? `Yes · ${p.maxTargets} targets` : 'Yes · targets in the area') : p.multiTarget === false ? 'No · single target' : '—';
-  const range = modalStatMagnitude(card.additionalStats?.range);
   const fields = [
-    ['range','Range',modalDistance(range),'Distance at which this card can acquire a target and begin attacking.'],
-    ['attackDistance','Attack Distance',modalDistance(modalAttackDistance(card)),'Maximum distance a single attack or projectile can travel.'],
-    ['attackWidth','Projectile Width',modalDistance(p.attackWidth),'Width of one projectile or strike, measured in tiles.'],
+    ['attackDistance','Attack Distance',modalDistance(modalAttackDistance(card)),'Maximum distance a single attack or projectile can travel. 1,000 points = 1 tile.'],
+    ['attackWidth','Projectile Width',modalDistance(modalAttackWidth(card)),'Width of one projectile or strike. 1,000 points = 1 tile; single-target attacks default to 500 points (0.5 tiles).'],
     ['attackAngle','Attack Arc',typeof p.attackAngle === 'number' ? `${p.attackAngle}°` : '—','Angle covered by a sweeping attack. Separate from projectile width.'],
     ['attackType','Attack Type',labels.attackType[p.attackType] || '—','How the card delivers its basic attack.'],
     ['attackShape','Attack Shape',labels.attackShape[p.attackShape] || '—','Shape of the strike or impact area.'],

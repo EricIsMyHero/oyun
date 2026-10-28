@@ -36,10 +36,19 @@ the shared fullscreen Lore reader, with Escape returning to the spell first.
 | --- | --- |
 | 1 | Health / Shield; Damage / DPS; Attack Speed / Delay; Mana / Count; Range / Speed; Critical Damage / Critical Chance; Lifesteal / Lifesteal Chance |
 | 2 | Dodge / Vision; Healing Bonus / Rejuvenation; Fortification / Damage Reduction; Critical Resistance / Flexibility; Shield Depletion / Life |
-| 3 | Range, attack travel distance, projectile width, attack arc/shape/type, multiple targets, target layers, movement, ground-effect immunity, weight, creature type, impact area and endpoint effect |
+| 3 | Attack travel distance, projectile width, attack arc/shape/type, multiple targets, target layers, movement, ground-effect immunity, weight, creature type, impact area and endpoint effect |
 
 Zero values are shown. Missing or inapplicable data is displayed as `—`.
-Values keep their original units and burst format, such as `2x6`.
+Distance and movement values use **1,000 points = 1 tile**. Range is displayed
+only on page 1: `5000` becomes `5 tiles`. Speed uses the same scale per second:
+`1500` becomes `1.5 tiles/s`. Projectile widths and attack distances use the same
+conversion, so `500` points is `0.5 tiles`. Slash-separated values retain every
+variant, for example `1000/2500` displays as `1 / 2.5 tiles`.
+
+JSON stores the original point values, and crystal ratings still compare those
+raw values against their original caps. Other stats and burst values such as
+`2x6` keep their existing display. Impact areas already authored in tiles and
+attack angles in degrees keep those units.
 Five crystals replace stat bars. Each crystal represents one fifth of the
 reference scale in the existing stat definitions. Attack interval, volley delay,
 mana cost and shield depletion use the inverse scale: lower values rank higher.
@@ -87,8 +96,8 @@ it unless the user explicitly requests that change.
 | `maxTargets` | `1` for single target, a count such as `5`, `null` for targets inside an area, `0` for a non-attacker |
 | `multiTargetCondition` | Optional ability activation rule, preserved in its original language |
 | `attackShape` | `single`, `cone`, `circle`, `line`, `square`, `multi`, `none` |
-| `attackWidth` | Numeric width of one projectile or strike in tiles; `null` when not specified |
-| `attackDistance` | Numeric maximum travel distance of one attack in tiles; independent of Range; `null` when not specified |
+| `attackWidth` | Width of one projectile or strike in source points; an unspecified single-target width defaults to `500` (0.5 tiles). Explicit widths always take precedence. |
+| `attackDistance` | Maximum travel distance of one attack in source points; independent of Range; `null` when not specified |
 | `attackDistanceMatchesRange` | Resolves travel distance from the current maximum `additionalStats.range`, including slash-separated variants |
 | `attackAngle` | Sweep angle in degrees, e.g. `135` or `360`; independent of width |
 | `impactSize` | Impact area dimensions such as `1 × 1 tiles`; separate from projectile width |
@@ -102,11 +111,20 @@ it unless the user explicitly requests that change.
 **Range** controls target acquisition and when a card can start attacking.
 **Attack Distance** is how far a single attack can travel. **Projectile Width**
 is the width of that attack; sweep angles and impact areas have their own fields.
-Henry has a width of **1200 tiles** and travel distance of **1250 tiles**; his
-existing Range stays **1200**. Arcanyx's travel distance follows his current
-maximum Range (**2100** in the current data), and his attack explodes at its
-endpoint. Unspecified dimensions remain `null` instead of being inferred from
-Range or replaced with a sector angle.
+Henry's authored width remains **1200 points (1.2 tiles)** and his travel distance
+**1250 points (1.25 tiles)**. His existing Range stays **1200 points**, shown as
+**1.2 tiles** on page 1. Arcanyx's travel distance follows his current maximum
+Range (**2100 points / 2.1 tiles** in the current data), and his attack explodes
+at its endpoint. Unspecified travel distances remain `null`. Single-target
+attacks without an authored width use **500 points / 0.5 tiles**; non-attackers
+and unknown multi-target widths receive no invented width. Width changes do not
+rewrite `multiTarget`, `maxTargets` or other unspecified combat fields.
+
+The Mundane overrides are stored in `rarity/mundane.json`, including Mini Freaks.
+Scrapy and Fen use the Cone shape; Nitrox and Ben target Ground. Freak, Mini
+Freaks, Ironjaw and M-Manager are Heavy. Nightprowler and Bethe use a 75° arc;
+Bethe uses the final requested weight, Medium. Henry retains his earlier values.
+Unmentioned stats, ability text and level bonuses stay unchanged.
 
 **Hovering** cards move on the **ground** layer while ignoring ground-only spells
 and effects: Cryon, Tornado, Astranova, Whisper, Fallen Angel and Void Wraith.
@@ -137,5 +155,6 @@ localhost port, stubs external art/font requests, renders all cards/forms, check
 eight rarity skins, six viewport sizes, the inline header, right-hand navigation,
 keyboard tabs, Lore, transformations, the travelling light and reduced-motion fallback,
 missing artwork, and the shared spell and Survival entry points. Additional checks cover English UI labels,
-unchanged ability content, Henry's independent dimensions, Arcanyx's dynamic
-travel limit and the exact hovering/flying rosters.
+unchanged ability content, point-to-tile conversion, raw-value crystal ratings,
+single-target width defaults, all Mundane overrides, Henry's independent
+dimensions, Arcanyx's dynamic travel limit and the exact hovering/flying rosters.

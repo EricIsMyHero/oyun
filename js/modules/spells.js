@@ -103,7 +103,7 @@ function buildSpellStatBars(stats) {
                  style="width:${pct}%;background:${s.color};box-shadow:0 0 8px ${s.color}60">
             </div>
           </div>
-          <div class="stat-val-sm">${stats[s.key]}</div>
+          <div class="stat-val-sm">${modalEscape(modalStatDisplay(s.key, stats[s.key]))}</div>
         </div>`;
     })
     .join('');
@@ -221,7 +221,7 @@ function createSpellEl(spell, idx) {
   const statPairs = [
     ['DMG',    stats.damageToCard],
     ['Tower',   stats.damageToCastle],
-    ['Range', stats.range],
+    ['Range', stats.range && stats.range !== '-' ? modalStatDisplay('range', stats.range) : stats.range],
   ].filter(([, v]) => v && v !== '-');
 
   /* Charge dots */
