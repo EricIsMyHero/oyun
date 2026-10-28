@@ -325,6 +325,22 @@ function modalAttackDistance(card) {
   return values.length ? Math.max(...values) : null;
 }
 
+// A repeating attack sequence can override geometry on individual hits.
+function modalAttackStep(card, hitNumber) {
+  if (!Number.isSafeInteger(hitNumber) || hitNumber < 1) return null;
+  const { attackSequence, ...base } = card.combatStats || {};
+  if (!Array.isArray(attackSequence) || !attackSequence.length) return base;
+  return { ...base, ...attackSequence[(hitNumber - 1) % attackSequence.length] };
+}
+function modalAttackSequenceSummary(card) {
+  const sequence = card.combatStats?.attackSequence;
+  if (!Array.isArray(sequence) || !sequence.length) return '';
+  return sequence.map((_, index) => {
+    const hit = modalAttackStep(card, index + 1);
+    return `${index + 1}: ${hit.multiTarget ? `${hit.attackAngle}° sahə` : 'Tək hədəf'}`;
+  }).join(' · ');
+}
+
 function buildCombatProfile(card) {
   const p = card.combatStats || {};
   const movement = MODAL_MOVEMENT[p.movementType];
@@ -334,13 +350,15 @@ function buildCombatProfile(card) {
     weight: { 'very-light':'Very light', light:'Light', medium:'Medium', heavy:'Heavy', 'very-heavy':'Very heavy' },
     targets: { ground:'Ground', air:'Air', both:'Ground & air', none:'None' },
   };
-  const multi = p.attackType === 'none' ? 'Does not attack' : p.multiTarget === true ? (Number.isFinite(p.maxTargets) ? `Yes · ${p.maxTargets} targets` : 'Yes · targets in the area') : p.multiTarget === false ? 'No · single target' : '—';
+  const sequence = Array.isArray(p.attackSequence) && p.attackSequence.length ? p.attackSequence.map((_, i) => modalAttackStep(card, i + 1)) : null;
+  const conditionalTargets = sequence && sequence.some(hit => hit.multiTarget) && sequence.some(hit => !hit.multiTarget);
+  const multi = conditionalTargets ? 'Conditional' : p.attackType === 'none' ? 'Does not attack' : p.multiTarget === true ? (Number.isFinite(p.maxTargets) ? `Yes · ${p.maxTargets} targets` : 'Yes · targets in the area') : p.multiTarget === false ? 'No · single target' : '—';
   const fields = [
     ['attackDistance','Attack Distance',modalDistance(modalAttackDistance(card)),'Maximum distance a single attack or projectile can travel. 1,000 points = 1 tile.'],
     ['attackWidth','Projectile Width',modalDistance(modalAttackWidth(card)),'Width of one projectile or strike. 1,000 points = 1 tile; single-target attacks default to 500 points (0.5 tiles).'],
-    ['attackAngle','Attack Arc',typeof p.attackAngle === 'number' ? `${p.attackAngle}°` : '—','Angle covered by a sweeping attack. Separate from projectile width.'],
+    ['attackAngle','Attack Arc',sequence ? sequence.map(hit => typeof hit.attackAngle === 'number' ? `${hit.attackAngle}°` : '—').join(' / ') : typeof p.attackAngle === 'number' ? `${p.attackAngle}°` : '—','Angle covered by a sweeping attack. Separate from projectile width.'],
     ['attackType','Attack Type',labels.attackType[p.attackType] || '—','How the card delivers its basic attack.'],
-    ['attackShape','Attack Shape',labels.attackShape[p.attackShape] || '—','Shape of the strike or impact area.'],
+    ['attackShape','Attack Shape',sequence ? sequence.map(hit => labels.attackShape[hit.attackShape] || '—').join(' / ') : labels.attackShape[p.attackShape] || '—','Shape of the strike or impact area.'],
     ['multiTarget','Multiple Targets',multi,'Targets hit by one attack. Separate from the number of deployed units.'],
     ['targets','Targets',labels.targets[p.targets] || '—','Target layers this card can attack.'],
     ['movementType','Movement',movement?.label || '—',movement?.hint || 'Movement type has not been specified.'],
@@ -356,6 +374,7 @@ function buildCombatProfile(card) {
     ${key === 'attackDistance' && p.attackDistanceMatchesRange ? '<small>Matches current Range.</small>' : ''}
     ${key === 'movementType' && movement ? `<small>${modalEscape(movement.hint)}</small>` : ''}
     ${key === 'movementType' && p.movementCondition ? `<small lang="az">${modalEscape(p.movementCondition)}</small>` : ''}
+    ${key === 'multiTarget' && sequence ? `<small lang="az" data-attack-sequence>${modalEscape(modalAttackSequenceSummary(card))}</small>` : ''}
     ${key === 'multiTarget' && p.multiTargetCondition ? `<small lang="az">${modalEscape(p.multiTargetCondition)}</small>` : ''}
   </div>`).join('');
 }

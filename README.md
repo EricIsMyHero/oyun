@@ -133,9 +133,10 @@ ground-only spells and effects. See the profile guide for the exact card rosters
 Spatial values stay in source points: **1,000 points = 1 tile**. The card modal
 shows Range only on the first Stats page and converts Speed to tiles per second.
 An unauthored single-target projectile width defaults to **500 points / 0.5 tiles**;
-explicit per-card values, including Henry's width, take priority. Mundane widths,
-travel distances and the requested shape, target, arc and weight overrides are
-stored in `rarity/mundane.json`; other stats and abilities are preserved.
+explicit per-card values, including Henry's width, take priority. Mundane and
+Familiar widths, travel distances and the requested shape, target, arc, impact
+and weight overrides live in their `rarity/*.json` files. Kai has a repeating
+per-hit attack sequence; other stats and original ability text are preserved.
 
 ## Spell JSON Format
 

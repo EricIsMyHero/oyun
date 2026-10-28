@@ -228,3 +228,61 @@ test('Mundane projectile geometry follows the requested values, including Mini F
   assert.deepEqual([mini.attackWidth,mini.attackDistance,mini.weight],[500,500,'heavy']);
   assert.deepEqual([profile('henry').attackWidth,profile('henry').attackDistance],[1200,1250]);
 });
+
+
+test('Familiar geometry and explicit weight, target and impact overrides match the request', () => {
+  const familiar=JSON.parse(fs.readFileSync(path.join(root,'rarity/familiar.json')));
+  assert.equal(familiar.length,24);
+  const geometry={warborn:[1000,500],trac:[1000,500],tornado:[750,500],'shadow-reaper':[1500,1000]};
+  const weights={frostshot:'heavy',warborn:'very-heavy',nyra:'light',trac:'heavy',dino:'very-heavy',tenta:'heavy',astranova:'light',cassandra:'light'};
+  for (const card of familiar) {
+    const p=card.combatStats;
+    assert.deepEqual([p.attackWidth,p.attackDistance],geometry[card.id] || [500,500],card.id);
+    if (weights[card.id]) assert.equal(p.weight,weights[card.id],card.id);
+  }
+  const profile=id=>familiar.find(c=>c.id===id).combatStats;
+  assert.equal(profile('albert').targets,'both');
+  assert.equal(profile('tenta').targets,'ground');
+  assert.equal(profile('chicken').impactSize,'2 × 2 tiles');
+  assert.equal(profile('chicken').projectileEndEffect,'explode');
+  assert.equal(profile('tornado').impactSize,'0.75 × 0.75 tiles');
+  assert.equal(profile('shadow-reaper').attackShape,'cone');
+  assert.equal(profile('shadow-reaper').attackAngle,180);
+  const mini=familiar.find(c=>c.id==='turtle').forms.find(c=>c.name==='Mini Turtles').combatStats;
+  assert.deepEqual([mini.attackWidth,mini.attackDistance],[500,500]);
+  assert.equal(mini.weight,'light'); // No weight change was requested for this form.
+});
+
+test('Kai repeats two single-target hits then one 360-degree area hit without changing the base profile', () => {
+  context.card=cards.find(c=>c.id==='kai');
+  const before=JSON.stringify(context.card.combatStats);
+  for (let hit=1;hit<=9;hit++) {
+    context.hit=hit;
+    const step=run('modalAttackStep(card,hit)');
+    const area=hit%3===0;
+    assert.equal(step.attackShape,area?'circle':'single');
+    assert.equal(step.attackAngle,area?360:null);
+    assert.equal(step.multiTarget,area);
+    assert.equal(step.maxTargets,area?null:1);
+    assert.equal(step.attackWidth,500);
+    assert.equal(step.attackDistance,500);
+  }
+  assert.equal(JSON.stringify(context.card.combatStats),before);
+  assert.equal(run('modalAttackStep(card,0)'),null);
+  const html=run('buildCombatProfile(card)');
+  assert.match(html,/Conditional/);
+  assert.match(html,/Single target \/ Single target \/ Circular/);
+  assert.match(html,/lang="az" data-attack-sequence/);
+  assert.match(html,/1: Tək hədəf · 2: Tək hədəf · 3: 360° sahə/);
+});
+
+test('Familiar impact dimensions remain in tiles while projectile widths use source points', () => {
+  context.card=cards.find(c=>c.id==='tornado');
+  const html=run('buildCombatProfile(card)');
+  assert.match(html,/0\.75 tiles/);
+  assert.match(html,/0\.75 × 0\.75 tiles/);
+  assert.doesNotMatch(html,/0\.00075/);
+  context.card=cards.find(c=>c.id==='chicken');
+  assert.match(run('buildCombatProfile(card)'),/2 × 2 tiles/);
+  assert.match(run('buildCombatProfile(card)'),/Explodes/);
+});

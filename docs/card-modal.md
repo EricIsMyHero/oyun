@@ -100,7 +100,8 @@ it unless the user explicitly requests that change.
 | `attackDistance` | Maximum travel distance of one attack in source points; independent of Range; `null` when not specified |
 | `attackDistanceMatchesRange` | Resolves travel distance from the current maximum `additionalStats.range`, including slash-separated variants |
 | `attackAngle` | Sweep angle in degrees, e.g. `135` or `360`; independent of width |
-| `impactSize` | Impact area dimensions such as `1 × 1 tiles`; separate from projectile width |
+| `impactSize` | Impact area dimensions such as `1 × 1 tiles`; separate from projectile width and already expressed in tiles |
+| `attackSequence` | Optional repeating array of per-hit overrides; each step inherits the base combat profile |
 | `projectileEndEffect` | `explode` for an explosion at the travel endpoint; `null` when not specified |
 | `movementType` | `ground`, `flying`, `hovering` |
 | `groundEffectImmune` | True for hovering and airborne cards, which are not affected by ground-only effects |
@@ -125,6 +126,28 @@ Scrapy and Fen use the Cone shape; Nitrox and Ben target Ground. Freak, Mini
 Freaks, Ironjaw and M-Manager are Heavy. Nightprowler and Bethe use a 75° arc;
 Bethe uses the final requested weight, Medium. Henry retains his earlier values.
 Unmentioned stats, ability text and level bonuses stay unchanged.
+
+Familiar overrides are authored in `rarity/familiar.json`, including Mini Turtles.
+Chicken has a `2 × 2 tiles` impact area and an explosion at the end of the attack;
+Tornado's impact area is `0.75 × 0.75 tiles`. Shadow Reaper uses a 180° Cone.
+Requested width, travel-distance, weight and target overrides preserve all other
+stats, including the established Ground / Flying / Hovering classifications.
+
+Kai's base attack remains single-target. His repeating `attackSequence` overrides
+individual hits: **single target → single target → circular 360° area**. Each step
+inherits his base 500-point width and 500-point distance. `modalAttackStep()`
+resolves a positive, one-based hit index and repeats the sequence every three
+hits. The profile displays conditional targeting and the per-hit shape/arc;
+the explanatory sequence text remains Azerbaijani, and the existing ability
+body is unchanged.
+
+```json
+"attackSequence": [
+  { "attackShape": "single", "attackAngle": null, "multiTarget": false, "maxTargets": 1 },
+  { "attackShape": "single", "attackAngle": null, "multiTarget": false, "maxTargets": 1 },
+  { "attackShape": "circle", "attackAngle": 360, "multiTarget": true, "maxTargets": null }
+]
+```
 
 **Hovering** cards move on the **ground** layer while ignoring ground-only spells
 and effects: Cryon, Tornado, Astranova, Whisper, Fallen Angel and Void Wraith.
@@ -156,5 +179,6 @@ eight rarity skins, six viewport sizes, the inline header, right-hand navigation
 keyboard tabs, Lore, transformations, the travelling light and reduced-motion fallback,
 missing artwork, and the shared spell and Survival entry points. Additional checks cover English UI labels,
 unchanged ability content, point-to-tile conversion, raw-value crystal ratings,
-single-target width defaults, all Mundane overrides, Henry's independent
+single-target width defaults, Mundane and Familiar overrides, Mini Turtles,
+Kai's repeating attack cycle, impact area units, Henry's independent
 dimensions, Arcanyx's dynamic travel limit and the exact hovering/flying rosters.
