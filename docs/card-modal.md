@@ -114,10 +114,13 @@ it unless the user explicitly requests that change.
 is the width of that attack; sweep angles and impact areas have their own fields.
 Henry's authored width remains **1200 points (1.2 tiles)** and his travel distance
 **1250 points (1.25 tiles)**. His existing Range stays **1200 points**, shown as
-**1.2 tiles** on page 1. Arcanyx's travel distance follows his current maximum
-Range (**2100 points / 2.1 tiles** in the current data), and his attack explodes
-at its endpoint. Unspecified travel distances remain `null`. Single-target
-attacks without an authored width use **500 points / 0.5 tiles**; non-attackers
+**1.2 tiles** on page 1. Arcanyx's authored travel distance is now **500 points /
+0.5 tiles**, independent of his unchanged **2100-point / 2.1-tile Range**. His
+attack explodes at its endpoint with a **1.5 × 1.5 tiles** impact area and targets
+Ground. `attackDistanceMatchesRange` is false for this explicit override; other
+profiles can still opt into a dynamic travel distance. Unspecified travel
+distances remain `null`. Single-target attacks without an authored width use
+**500 points / 0.5 tiles**; non-attackers
 and unknown multi-target widths receive no invented width. Width changes do not
 rewrite `multiTarget`, `maxTargets` or other unspecified combat fields.
 
@@ -149,11 +152,30 @@ body is unchanged.
 ]
 ```
 
+Arcane overrides are stored in `rarity/arcane.json`, including Cratex, Phoenix
+and Pirate Girls. Tphoenix's attack ends in an explosion with a `1 × 1 tiles`
+impact area; the Phoenix form is Flying. Hell boy and Shellbyte are Heavy,
+Whisper is Very light, and SlasherX uses a 90° arc. Void Striker is Alien, with
+a 75° Cone, 1000-point width and 1400-point travel distance and Range.
+
+The requested numeric balance overrides are explicit source strings:
+
+| Card | Damage | Attack Speed | DPS | Range (points) |
+| --- | --- | --- | --- | --- |
+| Lumina | 56 | 1.85s | 30 | 1500 |
+| Sunrise | 38 | 1.50s | 25 | 2000 |
+
+Toxic's Range is 1050 points. Ship Cannoneer targets Ground and has a 1600-point
+travel distance. Tribe has a 500-point width and 750-point travel distance.
+Other named Arcane width/distance overrides leave unmentioned stats, abilities,
+transformations and attack targeting counts unchanged.
+
 **Hovering** cards move on the **ground** layer while ignoring ground-only spells
 and effects: Cryon, Tornado, Astranova, Whisper, Fallen Angel and Void Wraith.
-**Flying** cards use the **air** layer: Bees, Angels, Hornets, Venom Fangs, Bats
-and Butterflies. Every other base form is Ground. Temporary flight remains in
-its original ability description and does not introduce a fourth movement type.
+**Flying** cards use the **air** layer: Bees, Angels, Hornets, Venom Fangs, Bats,
+Butterflies and the Phoenix form. Every other base form is Ground. Temporary
+flight remains in its original ability description and does not introduce a
+fourth movement type.
 
 **Count** (`stats.number`) is the number of deployed units. Burst damage such as
 `3x5` describes successive hits. Neither means three simultaneous targets.
@@ -162,8 +184,8 @@ two Mr. Ray types have separate circular and single-target profiles.
 
 These fields describe the Codex card. They do not alter Battle or Survival's
 existing combat simulation; Survival continues to use its own weapon geometry,
-loadout and upgrade rules. Original numeric stats, lore, abilities and level
-bonuses are preserved.
+loadout and upgrade rules. Only explicitly requested numeric balance changes are
+applied; unmentioned stats, lore, abilities and level bonuses are preserved.
 
 ## Verification
 
@@ -179,6 +201,6 @@ eight rarity skins, six viewport sizes, the inline header, right-hand navigation
 keyboard tabs, Lore, transformations, the travelling light and reduced-motion fallback,
 missing artwork, and the shared spell and Survival entry points. Additional checks cover English UI labels,
 unchanged ability content, point-to-tile conversion, raw-value crystal ratings,
-single-target width defaults, Mundane and Familiar overrides, Mini Turtles,
+single-target width defaults, Mundane, Familiar and Arcane overrides, nested forms,
 Kai's repeating attack cycle, impact area units, Henry's independent
-dimensions, Arcanyx's dynamic travel limit and the exact hovering/flying rosters.
+dimensions, Arcanyx's fixed travel limit, balance updates and the exact hovering/flying rosters.

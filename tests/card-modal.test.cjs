@@ -138,16 +138,26 @@ test('Henry projectile width and attack travel distance are independent of Range
   assert.match(html,/1\.25 tiles/);
 });
 
-test('Arcanyx travel limit follows maximum Range dynamically and explodes at the endpoint', () => {
+test('Arcanyx has an authored 500-point travel limit independent of Range', () => {
   context.card=structuredClone(cards.find(c=>c.id==='arcanyx'));
-  assert.equal(run('modalAttackDistance(card)'),2100);
+  assert.equal(context.card.combatStats.attackDistanceMatchesRange,false);
+  assert.equal(context.card.additionalStats.range,'2100');
+  assert.equal(run('modalAttackDistance(card)'),500);
   context.card.additionalStats.range='2600/4800';
-  assert.equal(run('modalAttackDistance(card)'),4800);
+  assert.equal(run('modalAttackDistance(card)'),500);
   assert.equal(context.card.combatStats.projectileEndEffect,'explode');
   const html=run('buildCombatProfile(card)');
-  assert.match(html,/4\.8 tiles/);
-  assert.match(html,/Matches current Range/);
+  assert.match(html,/0\.5 tiles/);
+  assert.match(html,/1\.5 × 1\.5 tiles/);
+  assert.doesNotMatch(html,/Matches current Range/);
   assert.match(html,/Explodes/);
+});
+
+test('explicit opt-in can still resolve travel distance from the maximum Range variant', () => {
+  context.card={additionalStats:{range:'2600/4800'},combatStats:{attackDistanceMatchesRange:true}};
+  assert.equal(run('modalAttackDistance(card)'),4800);
+  context.card.additionalStats.range='-';
+  assert.equal(run('modalAttackDistance(card)'),null);
 });
 
 test('movement classifications match the provided hovering and flying rosters', () => {
@@ -155,7 +165,7 @@ test('movement classifications match the provided hovering and flying rosters', 
   assert.deepEqual(forms.filter(c=>c.combatStats.movementType==='hovering').map(key).sort(),
     ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith'].sort());
   assert.deepEqual(forms.filter(c=>c.combatStats.movementType==='flying').map(key).sort(),
-    ['bees','angels','hornets','venom-fangs','bats','butterflies'].sort());
+    ['bees','angels','hornets','venom-fangs','bats','butterflies','phoenix'].sort());
   assert.equal(run('MODAL_MOVEMENT.hovering.layer'),'ground');
   assert.equal(run('MODAL_MOVEMENT.hovering.groundEffectImmune'),true);
   assert.equal(run('MODAL_MOVEMENT.ground.groundEffectImmune'),false);
@@ -285,4 +295,51 @@ test('Familiar impact dimensions remain in tiles while projectile widths use sou
   context.card=cards.find(c=>c.id==='chicken');
   assert.match(run('buildCombatProfile(card)'),/2 × 2 tiles/);
   assert.match(run('buildCombatProfile(card)'),/Explodes/);
+});
+
+test('named Arcane cards and forms use the requested geometry, layers, impacts and weights', () => {
+  const arcane=JSON.parse(fs.readFileSync(path.join(root,'rarity/arcane.json')));
+  const named=['arcanyx','leafshade','jestro','tphoenix','corsair-crew','ship-cannoneer','toxic','lumina','hell-boy','slasherx','sheriff','nurse','tribe','earthshakers','whisper','roguex','void-striker','sunrise','shellbyte','wong'];
+  const geometry={'ship-cannoneer':[500,1600],lumina:[500,1500],slasherx:[1000,1000],tribe:[500,750],earthshakers:[1000,1000],'void-striker':[1000,1400],wong:[500,1000]};
+  const card=id=>arcane.find(c=>c.id===id);
+  const profile=id=>card(id).combatStats;
+  for (const id of named) {
+    const p=profile(id);
+    assert.deepEqual([p.attackWidth,p.attackDistance],geometry[id]||[500,500],id);
+    assert.equal(p.attackDistanceMatchesRange,false,id);
+  }
+  for (const [id,name] of [['jestro','Cratex'],['tphoenix','Phoenix'],['corsair-crew','Pirate Girls']]) {
+    const p=card(id).forms.find(c=>c.name===name).combatStats;
+    assert.deepEqual([p.attackWidth,p.attackDistance],[500,500],name);
+  }
+  for (const id of ['arcanyx','ship-cannoneer','sunrise']) assert.equal(profile(id).targets,'ground',id);
+  assert.equal(profile('arcanyx').impactSize,'1.5 × 1.5 tiles');
+  assert.equal(profile('tphoenix').impactSize,'1 × 1 tiles');
+  assert.equal(profile('tphoenix').projectileEndEffect,'explode');
+  const phoenix=card('tphoenix').forms.find(c=>c.name==='Phoenix').combatStats;
+  assert.equal(phoenix.movementType,'flying');
+  assert.equal(phoenix.groundEffectImmune,true);
+  const egg=card('tphoenix').forms.find(c=>c.name==='Fire Egg').combatStats;
+  assert.equal(egg.attackType,'none');
+  assert.equal(egg.attackWidth,null);
+  assert.equal(egg.attackDistance,null);
+  for (const id of ['hell-boy','shellbyte']) assert.equal(profile(id).weight,'heavy',id);
+  assert.equal(profile('whisper').weight,'very-light');
+  assert.equal(profile('whisper').movementType,'hovering');
+  assert.equal(profile('slasherx').attackAngle,90);
+  assert.equal(profile('void-striker').attackAngle,75);
+  assert.equal(profile('void-striker').attackShape,'cone');
+  assert.deepEqual(card('void-striker').type,['Alien']);
+});
+
+test('Arcane balance overrides preserve the requested DPS and distinguish Range from travel distance', () => {
+  const card=id=>cards.find(c=>c.id===id);
+  const values=id=>{const c=card(id);return [c.stats.damage,c.stats.attackSpeed,c.stats.sps,c.additionalStats.range];};
+  assert.deepEqual(values('lumina'),['56','1.85s','30','1500']);
+  assert.deepEqual(values('sunrise'),['38','1.50s','25','2000']);
+  assert.equal(card('toxic').additionalStats.range,'1050');
+  assert.equal(card('void-striker').additionalStats.range,'1400');
+  context.card=card('sunrise');
+  assert.match(run('buildModalStats(card)'),/data-stat="range"[\s\S]*?2 tiles/);
+  assert.equal(run('modalAttackDistance(card)'),500);
 });

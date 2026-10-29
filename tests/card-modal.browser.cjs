@@ -166,8 +166,44 @@ const server = http.createServer(async (req, res) => {
     assert.equal(await page.locator('[data-profile="attackAngle"] strong').textContent(),'— / — / 360°');
     await page.evaluate(()=>openModal(allCards.find(c=>c.id==='arcanyx')));
     await page.locator('[data-stat-page="3"]').click();
-    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'2.1 tiles');
+    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'0.5 tiles');
+    assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'0.5 tiles');
+    assert.equal(await page.locator('[data-profile="impactSize"] strong').textContent(),'1.5 × 1.5 tiles');
+    assert.equal(await page.locator('[data-profile="targets"] strong').textContent(),'Ground');
+    assert.doesNotMatch(await page.locator('[data-profile="attackDistance"]').textContent(),/Matches current Range/);
     assert.equal(await page.locator('[data-profile="projectileEndEffect"] strong').textContent(),'Explodes');
+    await page.locator('[data-stat-page="1"]').click();
+    assert.equal(await page.locator('[data-stat="range"] .modal-stat-value').textContent(),'2.1 tiles');
+    for (const [id,damage,interval,dps,range] of [['lumina','56','1.85s','30','1.5 tiles'],['sunrise','38','1.50s','25','2 tiles']]) {
+      await page.evaluate(id=>openModal(allCards.find(c=>c.id===id)),id);
+      for (const [key,value] of [['damage',damage],['attackSpeed',interval],['sps',dps],['range',range]]) {
+        assert.equal(await page.locator(`[data-stat="${key}"] .modal-stat-value`).textContent(),value);
+      }
+    }
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='void-striker')));
+    await page.locator('[data-stat-page="3"]').click();
+    for (const [key,value] of [['attackWidth','1 tile'],['attackDistance','1.4 tiles'],['attackShape','Cone'],['attackAngle','75°'],['type','Alien']]) {
+      assert.equal(await page.locator(`[data-profile="${key}"] strong`).textContent(),value);
+    }
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='tribe')));
+    await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'0.5 tiles');
+    assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'0.75 tiles');
+    for (const [id,index] of [['jestro',0],['corsair-crew',0],['tphoenix',1]]) {
+      await page.evaluate(id=>openModal(allCards.find(c=>c.id===id)),id);
+      await page.locator(`[data-form-index="${index}"]`).click();
+      await page.locator('[data-stat-page="3"]').click();
+      assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'0.5 tiles');
+      assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'0.5 tiles');
+      if (id==='tphoenix') {
+        assert.equal(await page.locator('[data-profile="movementType"] strong').textContent(),'Flying');
+        assert.equal(await page.locator('[data-profile="groundEffectImmune"] strong').textContent(),'Yes');
+      }
+    }
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='tphoenix')));
+    await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="projectileEndEffect"] strong').textContent(),'Explodes');
+    assert.equal(await page.locator('[data-profile="impactSize"] strong').textContent(),'1 × 1 tiles');
     for (const id of ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith']) {
       await page.evaluate(id=>openModal(allCards.find(c=>c.id===id)),id);
       await page.locator('[data-stat-page="3"]').click();
