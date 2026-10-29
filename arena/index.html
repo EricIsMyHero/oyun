@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1718">
+  <meta name="description" content="Command your Clash-A-Mana deck in a real-time, three-route forest arena. Capture the mana wells. Break the enemy citadel.">
+  <title>Clash-A-Mana · The Threefold Arena</title>
+  <link rel="stylesheet" href="styles/arena.css?v=1">
+  <script type="module" src="js/app.mjs?v=1"></script>
+</head>
+<body data-mode="lobby">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Clash-A-Mana Codex">
+      <svg viewBox="0 0 32 36" aria-hidden="true"><path d="M16 2 29 9v17L16 34 3 26V9Z"/><path d="m8 12 8 5 8-5M16 17v10M8 12v9l8 5 8-5v-9M16 6v7"/></svg>
+      <span>CLASH<span class="brand-dash">—</span>A<span class="brand-dash">—</span>MANA<small>THE THREEFOLD ARENA</small></span>
+    </a>
+    <nav class="header-actions" aria-label="Arena navigation">
+      <span class="status-pill"><i></i> SINGLE PLAYER</span>
+      <button type="button" class="text-button" id="guide-button">Field guide <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></button>
+      <a class="text-button codex-link" href="../index.html">Codex <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a>
+    </nav>
+  </header>
+
+  <main id="app-root">
+    <section id="loading-state" class="system-state" aria-live="polite"><span class="loading-mark"></span><p class="eyebrow">ESTABLISHING MANA BONDS</p><h1>Opening the arena.</h1><p>Reading the Codex and preparing your roster…</p></section>
+    <section id="error-state" class="system-state" hidden><p class="eyebrow">CONNECTION INTERRUPTED</p><h1>The Codex could not be loaded.</h1><p id="load-error-message"></p><button type="button" id="retry-load" class="primary-button">Try again</button><a href="../index.html" class="text-button">Return to the Codex</a></section>
+
+    <div id="app-content" hidden>
+      <section class="lobby-intro lobby-only">
+        <div><p class="eyebrow"><span class="fine-line"></span> THE STAGNANTIA BATTLEGROUNDS</p><h1>Three paths.<br><span>One crown.</span></h1></div>
+        <div class="intro-copy"><p>Raise your deck. Hold the mana wells.<br>Bring the enemy citadel to its knees.</p><div class="intro-facts"><span>8-CARD DECK</span><i></i><span>3 ROUTES</span><i></i><span>1 CITADEL</span></div></div>
+      </section>
+
+      <section id="battle-shell" class="battle-shell" aria-label="Arena battlefield">
+        <div id="battle-toolbar" class="battle-toolbar battle-only" hidden>
+          <div class="citadel-status azure"><span class="team-mark" aria-hidden="true"></span><div><span class="micro-label">AZURE CORE · YOU</span><strong><span id="player-castle-hp">1,000</span><small> / 1,000</small></strong><div class="castle-track"><i id="player-castle-bar"></i></div></div></div>
+          <div class="match-status"><span id="match-phase" class="micro-label">REGULATION</span><strong id="match-clock">5:00</strong><span id="match-seed">VERDANT BASIN</span></div>
+          <div class="citadel-status crimson"><div><span class="micro-label">CRIMSON CROWN · BOT</span><strong><span id="enemy-castle-hp">1,000</span><small> / 1,000</small></strong><div class="castle-track"><i id="enemy-castle-bar"></i></div></div><span class="team-mark" aria-hidden="true"></span></div>
+        </div>
+        <div id="arena-stage" class="arena-stage">
+          <canvas id="arena-canvas" tabindex="0" aria-label="Three-route battlefield. Select a card with keys 1 to 4, then click your half of a path to deploy. Q selects your active spell."></canvas>
+          <div class="map-title lobby-only"><span class="micro-label">ARENA 01</span><h2>Verdant Basin</h2><span>THE MANA FRONTIER</span></div>
+          <div id="node-hud" class="node-hud battle-only" hidden aria-label="Mana well ownership"></div>
+          <div class="map-legend lobby-only"><span><i class="legend-dot azure"></i> AZURE CORE</span><span><i class="legend-dot neutral"></i> MANA WELLS</span><span><i class="legend-dot crimson"></i> CRIMSON CROWN</span></div>
+          <div id="stage-message" class="stage-message battle-only" hidden aria-live="polite">Select a card, then choose a path on your side.</div>
+          <div id="pause-overlay" class="stage-overlay" hidden><div class="overlay-panel"><span class="eyebrow">BATTLE ON HOLD</span><h2>Take your time.</h2><p id="pause-message">The arena is paused. Neither side can act.</p><button type="button" class="primary-button" id="resume-button">Resume battle <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button><button type="button" class="text-button" id="pause-edit-deck">Return to deck</button></div></div>
+          <div id="result-overlay" class="stage-overlay result-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="result-title"><div class="overlay-panel"><span class="eyebrow" id="result-eyebrow">BATTLE COMPLETE</span><svg class="result-emblem" viewBox="0 0 60 70" aria-hidden="true"><path d="m30 3 24 32-24 32L6 35Z"/><path d="m6 35 24 10 24-10M30 3v42"/></svg><h2 id="result-title">Victory</h2><p id="result-summary"></p><div class="result-score"><div><span>YOUR CITADEL</span><strong id="result-player-hp"></strong></div><span>—</span><div><span>ENEMY CITADEL</span><strong id="result-enemy-hp"></strong></div></div><button type="button" class="primary-button" id="play-again">Battle again <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button><button type="button" class="text-button" id="result-edit-deck">Edit your deck</button></div></div>
+        </div>
+
+        <div id="battle-hud" class="battle-hud battle-only" hidden>
+          <div class="resource-panel"><div class="resource-heading"><svg class="resource-icon" viewBox="0 0 24 28" aria-hidden="true"><path d="m12 2 9 12-9 12L3 14Z"/><path d="m3 14 9 4 9-4M12 2v16"/></svg><div><span class="micro-label">MANA</span><strong id="mana-value">12<span>/20</span></strong></div><span id="mana-bonus" class="mana-bonus">+0%</span></div><div class="mana-track"><i id="mana-fill"></i><div aria-hidden="true"></div></div><div class="energy-row"><span><i></i> SPELL ENERGY</span><strong id="energy-value">0.00</strong></div></div>
+          <div id="hand-cards" class="hand-cards" aria-label="Your four-card hand"></div>
+          <div id="next-card" class="next-card" aria-label="Next card"></div>
+          <div id="spell-command" class="spell-command"></div>
+        </div>
+        <div id="battle-controls" class="battle-controls battle-only" hidden><p><kbd>1</kbd>–<kbd>4</kbd> cards <span>·</span> <kbd>Q</kbd> spell <span>·</span> Select, then click a path <span>·</span> Click a unit to inspect</p><div><button type="button" class="text-button" id="pause-button">Pause</button><button type="button" class="text-button" id="restart-button">Restart</button><button type="button" class="text-button" id="return-lobby">Edit deck</button></div></div>
+      </section>
+
+      <section id="deck-panel" class="deck-panel lobby-only" aria-labelledby="deck-title">
+        <div class="section-heading"><div><p class="eyebrow">YOUR COMMAND</p><h2 id="deck-title">Assemble the vanguard.</h2><p>Eight units. One spell cycle. Every choice matters.</p></div><div class="deck-actions"><button type="button" class="secondary-button" id="quick-build"><svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg> Quick build</button><button type="button" class="text-button" id="clear-deck">Clear</button></div></div>
+        <div class="deck-summary"><span>UNIT DECK <strong id="deck-count">0 / 8</strong></span><span>AVERAGE MANA <strong id="average-mana">—</strong></span></div>
+        <div id="selected-deck" class="selected-deck" aria-label="Selected unit deck"></div>
+        <div class="spell-loadout"><div class="spell-loadout-label"><span class="micro-label">SPELL CYCLE</span><strong id="spell-load">0 / 5 charge</strong><span>One active spell.<br>Cast to cycle.</span></div><div id="selected-spells" class="selected-spells" aria-label="Selected spell cycle"></div><div class="deploy-action"><button type="button" id="start-match" class="primary-button" disabled>Enter the arena <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button><span id="start-hint">Choose 8 units and at least 1 spell.</span></div></div>
+      </section>
+
+      <section id="library" class="library lobby-only" aria-labelledby="library-title">
+        <div class="section-heading"><div><p class="eyebrow">THE ENTITY REGISTRY</p><h2 id="library-title">Choose your allegiance.</h2></div><p id="roster-summary" class="roster-summary"></p></div>
+        <div class="library-controls"><div class="library-tabs" role="tablist" aria-label="Catalog type"><button type="button" id="troop-tab" role="tab" aria-selected="true" aria-controls="catalog-grid">Units <span id="troop-total">138</span></button><button type="button" id="spell-tab" role="tab" aria-selected="false" aria-controls="catalog-grid">Spells <span id="spell-total">26</span></button></div><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="card-search" placeholder="Search names, roles, types…" aria-label="Search the catalog"></label><label class="filter-label"><span class="sr-only">Readiness</span><select id="readiness-filter"><option value="all">All entries</option><option value="ready">Battle-ready</option><option value="locked">Needs data</option></select></label><label class="filter-label"><span class="sr-only">Rarity</span><select id="rarity-filter"><option value="all">All rarities</option></select></label><label class="filter-label"><span class="sr-only">Class</span><select id="class-filter"><option value="all">All roles</option></select></label></div>
+        <div class="library-caption"><p id="catalog-summary" role="status"></p><span><i class="small-lock" aria-hidden="true"></i> Unfinished Codex entries stay locked. No invented stats.</span></div>
+        <div id="catalog-grid" class="catalog-grid" role="tabpanel" aria-labelledby="troop-tab"></div>
+      </section>
+      <footer class="site-footer lobby-only"><span>CLASH-A-MANA <i>·</i> THE STAGNANTIA PROJECT</span><span>Built from the Codex. Fought in real time.</span><a href="../index.html">Return to the archive <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a></footer>
+    </div>
+  </main>
+
+  <dialog id="inspector" class="inspector-dialog" aria-labelledby="inspector-name"><button type="button" class="dialog-close" id="inspector-close" aria-label="Close details">×</button><div id="inspector-content"></div></dialog>
+  <dialog id="guide-dialog" class="guide-dialog" aria-labelledby="guide-title"><button type="button" class="dialog-close" id="guide-close" aria-label="Close field guide">×</button><p class="eyebrow">FIELD MANUAL</p><h2 id="guide-title">Own the paths.<br>Control the battle.</h2><div class="guide-grid"><article><span>01</span><h3>Build your command</h3><p>Select 8 different unit cards and spells with a combined Charge of no more than 5. Four cards form your hand; deployment cycles in the next card.</p></article><article><span>02</span><h3>Place with purpose</h3><p>Select a card or press 1–4, then click a path on your half of the map. Units march and fight automatically. Flying units can cross terrain; hovering units follow the ground and resist ground effects.</p></article><article><span>03</span><h3>Take the wells</h3><p>Hold a well for 5 uncontested seconds to capture it. Every well you control adds 2% to your mana regeneration. Enemy presence stops capture progress.</p></article><article><span>04</span><h3>Spend mana, earn energy</h3><p>You begin with 12 mana, regenerate 1 every 1.3 seconds, and can hold 20. Spending 18 mana earns 1 spell energy, rounded in steps of 0.05 for each deployment.</p></article><article><span>05</span><h3>Cast and cycle</h3><p>Press Q or select your active spell, then choose its target. A successful cast spends its Energy cost and reveals the next spell in your loadout. Charge is deck capacity, not a consumable.</p></article><article><span>06</span><h3>Break the citadel</h3><p>Both citadels have 1,000 health and defend themselves. Destroy the enemy citadel to win. After 5 minutes, surviving citadels enter 2 minutes of double-mana overtime; the healthier citadel then wins.</p></article></div><div class="guide-note"><strong>Faithful to the Codex.</strong> 1,000 source points equal 1 tile. A × B means A hits of B damage; deployed Count is separate. Shield Depletion splits incoming damage between shield and health. Missing battle data stays visibly locked.</div><button type="button" id="guide-done" class="primary-button">Understood <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><div class="system-state"><h1>JavaScript is required.</h1><p>Enable JavaScript to play the arena, or return to the <a href="../index.html">Codex</a>.</p></div></noscript>
+</body>
+</html>
