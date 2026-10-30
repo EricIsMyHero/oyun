@@ -187,6 +187,28 @@ async function minimapPixelAt(page,point) {
     await page.evaluate(()=>arenaApp.startMatch());await settleFrame(page);
     assert.equal(await page.evaluate(()=>arenaApp.renderer.camera.zoom),1,'restart restores the close home camera');
 
+    // Exercise a real ranged Codex card across 3.5 tiles. It must fire a visible
+    // projectile before impact and keep its distance, rather than chasing melee.
+    const ranged=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.state.effects=[];
+      const [source]=e.spawn(arenaApp.catalog.byId.get('soldier'),0,{x:15,y:14},1,{count:1});
+      const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));
+      dummy.id='ranged-target';Object.assign(dummy.stats,{health:10000,shield:0,speed:0,damage:0,range:0,dodge:0,healrecovery:0});dummy.combat.attackType='none';
+      const [target]=e.spawn(dummy,1,{x:18.5,y:14},1,{count:1});
+      e.step(1/30);e.setPaused(true);arenaApp.renderer.focusAt({x:16,y:14});
+      window.rangedFixture={source,target};
+      return {x:source.x,y:source.y,shots:source.shots,hp:target.hp,projectiles:e.state.projectiles.filter(p=>p.sourceId===source.id).length,slash:e.state.effects.some(fx=>fx.type==='slash')};
+    });
+    assert.equal(ranged.x,15);assert.equal(ranged.y,14);assert.ok(ranged.shots>0);assert.equal(ranged.hp,10000);assert.ok(ranged.projectiles>0);assert.equal(ranged.slash,false);
+    await settleFrame(page);
+    await page.screenshot({path:'/tmp/oyun-arena-ranged.png',fullPage:true});screenshots.push('/tmp/oyun-arena-ranged.png');
+    const impact=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.setPaused(false);e.step(.6);e.setPaused(true);
+      return {hp:window.rangedFixture.target.hp,x:window.rangedFixture.source.x,y:window.rangedFixture.source.y};
+    });
+    assert.ok(impact.hp<10000);assert.equal(impact.x,15);assert.equal(impact.y,14);
+    await page.evaluate(()=>{delete window.rangedFixture;arenaApp.startMatch();});await settleFrame(page);
+
     // Current vision is rendered, inspected and reported consistently. Freeze
     // this fixture without the pause overlay so actual canvas pixels are tested.
     assert.equal(await page.locator('#enemy-castle-hp').textContent(),'?');
@@ -463,7 +485,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; mouse/touch/keyboard/scroll camera, minimap navigation and fog markers, zoom bounds, drag-versus-deploy, hand drag, rendered fog, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

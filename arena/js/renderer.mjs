@@ -575,11 +575,28 @@ export class ArenaRenderer {
       this.block(ctx,u.x-.4,u.y-.4,.8,.8,.65,'#a9b5a1','#718e85','#d0ccb0');
       this.roof(ctx,u.x-.5,u.y-.5,1,1,.65,.4,side===0?['#317da1','#24566e','#6db2bd']:['#b6544f','#7c423e','#c68766']);
     } else {
-      // Tiny armored bodies and visible blades give portrait units physical presence.
+      // The weapon pose follows the authored attack type, not a universal blade.
       polygon(ctx,[{x:p.x-size*.36,y:bodyY+size*.07},{x:p.x+size*.31,y:bodyY+size*.03},{x:p.x+size*.46,y:py-size*.03},{x:p.x-size*.48,y:py}],side===0?'#355d79':'#864e48','#263f44',1);
-      ctx.strokeStyle='#d5c59c';ctx.lineWidth=Math.max(1,size*.1);
-      const dir=side===0?1:-1;
-      ctx.beginPath();ctx.moveTo(p.x+dir*size*.34,py-size*.22);ctx.lineTo(p.x+dir*size*(attacking ? .98 : .65),py-size*(attacking ? .66 : .85));ctx.stroke();
+      if(u.def?.combat?.attackType==='ranged') {
+        const fx=u.facingX??(side===0?1:-1),fy=u.facingY||0;
+        const length=Math.hypot(fx+fy,(fy-fx)*.5)||1,ax=(fx+fy)/length,ay=(fy-fx)*.5/length;
+        const recoil=attacking?.07:0;
+        const grip={x:p.x+ax*size*(.24-recoil),y:py-size*.35+ay*size*.24};
+        const tip={x:grip.x+ax*size*.65,y:grip.y+ay*size*.65};
+        ctx.lineCap='round';ctx.strokeStyle='#243e47';ctx.lineWidth=size*.2;
+        ctx.beginPath();ctx.moveTo(grip.x,grip.y);ctx.lineTo(tip.x,tip.y);ctx.stroke();
+        ctx.strokeStyle='#aac5bc';ctx.lineWidth=Math.max(1,size*.075);ctx.stroke();
+        ellipse(ctx,tip.x,tip.y,size*.075,size*.075,color);
+        if(attacking) {
+          const muzzle={x:tip.x+ax*size*.1,y:tip.y+ay*size*.1};
+          ctx.save();ctx.shadowColor=color;ctx.shadowBlur=9;
+          polygon(ctx,[{x:muzzle.x+ax*size*.23,y:muzzle.y+ay*size*.23},{x:muzzle.x-ay*size*.13,y:muzzle.y+ax*size*.13},{x:muzzle.x-ax*size*.1,y:muzzle.y-ay*size*.1},{x:muzzle.x+ay*size*.13,y:muzzle.y-ax*size*.13}],'#effff0',color,1);ctx.restore();
+        }
+      }else {
+        ctx.strokeStyle='#d5c59c';ctx.lineWidth=Math.max(1,size*.1);
+        const dir=side===0?1:-1;
+        ctx.beginPath();ctx.moveTo(p.x+dir*size*.34,py-size*.22);ctx.lineTo(p.x+dir*size*(attacking ? .98 : .65),py-size*(attacking ? .66 : .85));ctx.stroke();
+      }
       ctx.strokeStyle='#283f44';ctx.lineWidth=size*.15;ctx.beginPath();ctx.moveTo(p.x-size*.17,py-size*.08);ctx.lineTo(p.x-size*.2,py+size*.1);ctx.moveTo(p.x+size*.15,py-size*.08);ctx.lineTo(p.x+size*.2,py+size*.07);ctx.stroke();
     }
     const headY=bodyY-size*.2;

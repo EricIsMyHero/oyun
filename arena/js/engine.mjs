@@ -333,6 +333,11 @@ export class ArenaEngine {
     return step?{...base,...step}:{...base};
   }
   _reach(u,p=this._profile(u)){return Math.max(0,num(p.attackDistance)/1000);}
+  _attackReach(u,p=this._profile(u)){
+    // A ranged unit fires from its acquisition Range, rather than walking into
+    // contact because its source projectile profile has a short travel value.
+    return p.attackType==='ranged'?this._range(u):this._reach(u,p);
+  }
   _courtyardExit(u){
     const bounds=courtyardFor(u.side),route=u.route;
     for(let i=1;i<route.length;i++){
@@ -410,7 +415,7 @@ export class ArenaEngine {
   }
   _targetsFor(u,target,p){
     if(!p.multiTarget)return [target];
-    const reach=this._reach(u,p),width=num(p.attackWidth)/1000;
+    const reach=this._attackReach(u,p),width=num(p.attackWidth)/1000;
     const dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;
     const angle=(num(p.attackAngle)||2*Math.atan(width/(2*Math.max(reach,.01)))*180/Math.PI)*Math.PI/180;
     // Picking separate targets requires sight; a cone, splash or swept area can
@@ -442,7 +447,7 @@ export class ArenaEngine {
     // Per-mode damage is authored independently of the base per-hit statistic.
     if(u.def.attack?.sequence)hit.damage=attack.damage;
     this._hook('attack',u,target,hit);
-    if(hit.targetId){const selected=this.units.find(t=>t.id===hit.targetId);if(this._legalTarget(u,selected)&&distance(u,selected)<=this._reach(u,profile)+selected.radius)target=selected;}
+    if(hit.targetId){const selected=this.units.find(t=>t.id===hit.targetId);if(this._legalTarget(u,selected)&&distance(u,selected)<=this._attackReach(u,profile)+selected.radius)target=selected;}
     hit.damage*=1+strongest(u,'damageBonus',this.time);
     hit.critical=hit.critical||(!has(u,'suppression',this.time)&&this.random()<clamp(num(u.stats.criticalChance),0,100)/100);
     const p={...profile,...hit.combat};
@@ -468,7 +473,7 @@ export class ArenaEngine {
   }
   _projectile(u,target,hit,profile){
     let dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;
-    const remaining=this._reach(u,profile);
+    const remaining=profile.attackType==='ranged'?Math.max(this._reach(u,profile),this._attackReach(u,profile)):this._reach(u,profile);
     this.state.projectiles.push({id:`shot-${++this.serial}`,x:u.x,y:u.y,prevX:u.x,prevY:u.y,dx:dx/len,dy:dy/len,remaining,width:num(profile.attackWidth)/1000,side:u.side,sourceId:u.id,source:u,targetId:target.id,hit:{...hit},profile:{...profile},hitIds:new Set(),kind:'bolt',color:u.side?'#ffb286':'#9feaff',
       homing:!!u.isCastle,origin:{x:u.x,y:u.y},range:remaining,ttl:2*remaining/RULES.projectileSpeed+RULES.fixedStep});
   }
@@ -705,7 +710,7 @@ export class ArenaEngine {
       if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this._hook('tick',u,dt);
       if(!u.alive||has(u,'stun',this.time)||has(u,'imprisonment',this.time))continue;
       const target=this._target(u);u.targetId=target?.id??null;
-      const profile=this._profile(u),reach=this._reach(u,profile);
+      const profile=this._profile(u),reach=this._attackReach(u,profile);
       if(target&&distance(u,target)<=reach+target.radius+u.radius*.2&&profile.attackType!=='none'){
         const dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;u.facingX=dx/len;u.facingY=dy/len;
         if(u.cooldown<=EPS)this._fire(u,target);

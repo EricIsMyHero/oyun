@@ -14,6 +14,9 @@ deployable. The enlarged 43×28-tile island has a straight central road with its
 mana well 17.5 walking tiles from either castle; the two outer roads take about
 23.23 tiles to their wells. Unseen terrain is dark: allied cards reveal eight
 tiles, captured wells four and your castle 7.5. Castle shots track moving targets.
+Ranged cards fire from their Range (subject to Vision) and send projectiles far
+enough to reach that range; a short source Attack Distance no longer forces them
+into close combat. Melee cards retain their authored strike reach.
 Battles use a close camera: drag or swipe the map, scroll, or use WASD/arrow keys
 to explore. The fog-aware minimap moves the camera without revealing enemies;
 Home/Space or the citadel button returns to your base. Zoom buttons adjust detail.

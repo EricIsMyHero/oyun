@@ -94,11 +94,65 @@ test('flexibility shortens debuffs, Predominance blocks them, and hover ignores 
   unit.statuses=[];unit.def.combat.groundEffectImmune=true;assert.equal(e.status(unit,'slow',4,.25,null,{groundOnly:true}),null);
 });
 
-test('Range acquires a target but a short Attack Distance makes the attacker approach before striking',async()=>{
+test('melee Range acquires a target but a short Attack Distance still requires approaching before striking',async()=>{
   const {engine:e,base}=await fixture();const def=structuredClone(base);def.stats.range=4000;def.combat.attackDistance=500;def.stats.speed=1000;
   const attacker=e.spawn(def,0,{x:10,y:14},0,{count:1})[0];const target=inert(e,base,1,{x:13,y:14});
   e.step(.5);assert.equal(attacker.shots,0);assert.ok(attacker.x>10);assert.equal(target.hp,1000);
   e.step(3);assert.ok(attacker.shots>0);assert.ok(target.hp<1000);
+});
+
+test('every playable ranged card fires and lands projectiles at its Range without walking into melee',async()=>{
+  const {catalog}=await fixture();
+  for(const card of catalog.forms.filter(c=>c.ready&&c.combat?.attackType==='ranged')) {
+    const {engine:e,base}=await fixture();
+    const def=structuredClone(card),point={x:15,y:14};
+    const [source]=e.spawn(def,0,point,1,{count:1});
+    const reach=e._range(source),target=inert(e,base,1,{x:point.x+reach*.8,y:14},{health:100000});
+    assert.ok(reach>1,card.id);
+    e.step(1/30);
+    assert.ok(source.shots>0,`${card.id} fires before contact`);
+    assert.ok(Math.hypot(source.x-point.x,source.y-point.y)<1e-8,`${card.id} holds firing distance`);
+    assert.ok(e.state.projectiles.some(p=>p.sourceId===source.id&&p.remaining>0),`${card.id} emits a traveling projectile`);
+    assert.equal(target.hp,100000,`${card.id} does not apply instant melee damage`);
+    assert.equal(e.state.effects.some(fx=>fx.type==='slash'),false,card.id);
+    e.step(reach*.8/8+.1);
+    assert.ok(target.hp<100000,`${card.id} projectile reaches the target`);
+    assert.equal(def.combat.attackDistance,card.combat.attackDistance,'source travel data remains unchanged');
+  }
+});
+
+test('ranged firing stays inside Range and Vision even when the source projectile travels farther',async()=>{
+  const {engine:e,base}=await fixture();
+  const def=structuredClone(base);def.combat.attackType='ranged';def.combat.attackDistance=10000;def.stats.range=2000;def.stats.speed=0;
+  const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+  const target=inert(e,base,1,{x:18,y:14});
+  e.step(.1);assert.equal(source.shots,0);assert.equal(target.hp,1000);
+  target.x=16.8;source.stats.vision=1000;e.step(.1);assert.equal(source.shots,0);
+  source.stats.vision=8000;e.step(1/30);assert.equal(source.shots,1);
+  e.status(source,'blind',3,.75,target);source.burstTargetId=target.id;
+  e.step(1.1);assert.equal(source.shots,1,'blindness still shortens the firing range of a locked target');
+});
+
+test('Tenta fires at multiple visible targets across its ranged reach',async()=>{
+  const {engine:e,catalog,base}=await fixture();
+  const [source]=e.spawn(catalog.byId.get('tenta'),0,{x:15,y:14},1,{count:1});
+  const targets=[{x:16.5,y:13.5},{x:16.5,y:14.5}].map(p=>inert(e,base,1,p));
+  e.step(1/30);
+  assert.deepEqual(new Set(e.state.projectiles.filter(p=>p.sourceId===source.id).map(p=>p.targetId)),new Set(targets.map(t=>t.id)));
+  e.step(.4);
+  for(const target of targets)assert.ok(target.hp<1000);
+  assert.equal(source.x,15);assert.equal(source.y,14);
+});
+
+test('piercing ranged projectiles reach the firing range and then expire without hitting distant units',async()=>{
+  const {engine:e,base}=await fixture();
+  const def=structuredClone(base);def.stats.range=4000;
+  Object.assign(def.combat,{attackType:'ranged',attackDistance:500,attackShape:'line',multiTarget:true,maxTargets:null});
+  const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+  const target=inert(e,base,1,{x:18.5,y:14}),distant=inert(e,base,1,{x:20.5,y:14});
+  e._projectile(source,target,{damage:25,kind:'attack'},def.combat);e._projectiles(1);
+  assert.equal(target.hp,975);assert.equal(distant.hp,1000);
+  assert.equal(e.state.projectiles.length,0);
 });
 
 test('Soldier source A×B fires fifteen three-damage hits at one locked target then recovers interval plus delay',async()=>{

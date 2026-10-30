@@ -148,8 +148,13 @@ The engine keeps these quantities separate:
 
 - **1,000 points = one tile.** Spatial source values retain their original units
   in data; movement and collision use tiles.
-- **Range** acquires a target. **Attack Distance** determines whether the attack
-  can reach it. A unit approaches an acquired target until its strike can connect.
+- **Range** acquires a target and sets a ranged card's firing distance, limited
+  by its Vision and blindness. Ranged cards hold position and launch projectiles
+  when a target enters that range; a short recorded Attack Distance never forces
+  them into melee. Their projectile travel budget is the greater of Attack
+  Distance and the current firing range, so a shot can reach its acquired target.
+  Melee cards still approach until their authored **Attack Distance** can connect.
+  Source JSON values, projectile widths, bursts and impact geometry are retained.
 - **Projectile Width** describes one strike or projectile. Arc and impact area
   are independent dimensions. Numeric spell Range is a radius; rectangular
   dimensions are full width and height, and Global covers the arena.
