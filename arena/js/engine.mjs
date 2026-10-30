@@ -1,6 +1,7 @@
 import { RULES, clamp, num, burst, energyForMana } from './rules.mjs';
 import { MAP, routeFor, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
+import { visibilitySources, isEntityVisible } from './vision.mjs';
 
 const NEGATIVE = new Set(['slow','movementSlow','stun','root','silence','blind','poison','burn','bleed','curse','misfortune','imprisonment','suppression','healBlock','fear','conversion']);
 const finitePoint = p => p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.x <= MAP.width && p.y >= 0 && p.y <= MAP.height;
@@ -292,14 +293,16 @@ export class ArenaEngine {
     for(let i=1;i<u.route.length;i++){const q=projectSegment(u,u.route[i-1],u.route[i]);if(q.distance<best.distance)best={...q,index:i};}
     u.waypoint=best.index;
   }
-  _legalTarget(u,target){
+  _canHit(u,target){
     if(!target?.alive||target.side===u.side)return false;
-    if(has(target,'untargetable',this.time)||has(target,'invisible',this.time)||has(target,'imprisonment',this.time))return false;
+    if(has(target,'untargetable',this.time)||has(target,'imprisonment',this.time))return false;
     const layers=u.def?.combat?.targets||'both';
     if(layers==='none')return false;
     const air=target.def?.combat?.movementType==='flying';
     return layers==='both'||(layers==='air'?air:!air);
   }
+  _legalTarget(u,target,sources=null){return this._canHit(u,target)&&isEntityVisible(this.state,u.side,target,sources);}
+  canTarget(u,target){return this._legalTarget(u,target);}
   _range(u){
     const blind=strongest(u,'blind',this.time);
     const range=num(u.stats.range)/1000*(1-blind);
@@ -308,12 +311,13 @@ export class ArenaEngine {
     return authored!=null&&!/^[-—–]$/.test(String(authored).trim())?Math.min(range,vision):range;
   }
   _target(u){
-    if(u.burstTargetId){const locked=this.units.concat(this.castles).find(t=>t.id===u.burstTargetId);if(this._legalTarget(u,locked))return locked;u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
+    const sources=visibilitySources(this.state,u.side);
+    if(u.burstTargetId){const locked=this.units.concat(this.castles).find(t=>t.id===u.burstTargetId);if(this._legalTarget(u,locked,sources))return locked;u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
     const reach=this._range(u);
-    const candidates=this.units.filter(t=>this._legalTarget(u,t)&&distance(u,t)<=reach+t.radius);
+    const candidates=this.units.filter(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius);
     candidates.sort((a,b)=>distance(u,a)-distance(u,b)||a.id.localeCompare(b.id));
     if(candidates.length)return candidates[0];
-    return this.castles.find(t=>this._legalTarget(u,t)&&distance(u,t)<=reach+t.radius)||null;
+    return this.castles.find(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius)||null;
   }
   _profile(u){
     let p={...u.def.combat};
@@ -409,7 +413,10 @@ export class ArenaEngine {
     const reach=this._reach(u,p),width=num(p.attackWidth)/1000;
     const dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;
     const angle=(num(p.attackAngle)||2*Math.atan(width/(2*Math.max(reach,.01)))*180/Math.PI)*Math.PI/180;
-    let victims=this.units.concat(this.castles).filter(t=>this._legalTarget(u,t));
+    // Picking separate targets requires sight; a cone, splash or swept area can
+    // still strike an unseen enemy without granting information to its caster.
+    const sources=p.attackShape==='multi'?visibilitySources(this.state,u.side):null;
+    let victims=this.units.concat(this.castles).filter(t=>p.attackShape==='multi'?this._legalTarget(u,t,sources):this._canHit(u,t));
     victims=victims.filter(t=>{
       const x=t.x-u.x,y=t.y-u.y,dist=Math.hypot(x,y);
       if(p.attackShape==='square'){
@@ -462,7 +469,8 @@ export class ArenaEngine {
   _projectile(u,target,hit,profile){
     let dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;
     const remaining=this._reach(u,profile);
-    this.state.projectiles.push({id:`shot-${++this.serial}`,x:u.x,y:u.y,prevX:u.x,prevY:u.y,dx:dx/len,dy:dy/len,remaining,width:num(profile.attackWidth)/1000,side:u.side,sourceId:u.id,source:u,targetId:target.id,hit:{...hit},profile:{...profile},hitIds:new Set(),kind:'bolt',color:u.side?'#ffb286':'#9feaff'});
+    this.state.projectiles.push({id:`shot-${++this.serial}`,x:u.x,y:u.y,prevX:u.x,prevY:u.y,dx:dx/len,dy:dy/len,remaining,width:num(profile.attackWidth)/1000,side:u.side,sourceId:u.id,source:u,targetId:target.id,hit:{...hit},profile:{...profile},hitIds:new Set(),kind:'bolt',color:u.side?'#ffb286':'#9feaff',
+      homing:!!u.isCastle,origin:{x:u.x,y:u.y},range:remaining,ttl:2*remaining/RULES.projectileSpeed+RULES.fixedStep});
   }
   _resolveHit(source,target,hit){
     if(!target.alive)return;
@@ -479,9 +487,23 @@ export class ArenaEngine {
     for(const shot of this.state.projectiles){
       if(shot.done)continue;
       shot.prevX=shot.x;shot.prevY=shot.y;
-      const step=Math.min(shot.remaining,RULES.projectileSpeed*dt);
-      shot.x+=shot.dx*step;shot.y+=shot.dy*step;shot.remaining-=step;
-      const targets=this.units.concat(this.castles).filter(t=>this._legalTarget(shot.source,t)&&!shot.hitIds.has(t.id)&&projectSegment(t,{x:shot.prevX,y:shot.prevY},shot).distance<=t.radius+shot.width/2);
+      let candidates;
+      if(shot.homing){
+        const target=this.units.find(t=>t.id===shot.targetId);
+        if(!this._legalTarget(shot.source,target)||distance(shot.origin,target)>shot.range+EPS||shot.ttl<=0){shot.done=true;continue;}
+        const dx=target.x-shot.x,dy=target.y-shot.y,len=Math.hypot(dx,dy)||1;
+        shot.dx=dx/len;shot.dy=dy/len;
+        const step=Math.min(len,RULES.projectileSpeed*Math.min(dt,shot.ttl));
+        shot.x+=shot.dx*step;shot.y+=shot.dy*step;shot.ttl-=dt;
+        // Castle range is a radial boundary; a tracking arc may be longer.
+        shot.remaining=Math.max(0,shot.range-distance(shot.origin,shot));
+        candidates=[target];
+      }else{
+        const step=Math.min(shot.remaining,RULES.projectileSpeed*dt);
+        shot.x+=shot.dx*step;shot.y+=shot.dy*step;shot.remaining-=step;
+        candidates=this.units.concat(this.castles);
+      }
+      const targets=candidates.filter(t=>this._canHit(shot.source,t)&&!shot.hitIds.has(t.id)&&projectSegment(t,{x:shot.prevX,y:shot.prevY},shot).distance<=t.radius+shot.width/2);
       targets.sort((a,b)=>distance({x:shot.prevX,y:shot.prevY},a)-distance({x:shot.prevX,y:shot.prevY},b));
       for(const target of targets){
         if(shot.profile.projectileEndEffect==='explode'||shot.profile.multiTarget&&['square','circle'].includes(shot.profile.attackShape)){
@@ -491,7 +513,7 @@ export class ArenaEngine {
         const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
         if(limit!=null&&shot.hitIds.size>=limit){shot.done=true;break;}
       }
-      if(shot.remaining<=EPS){if(!shot.done&&shot.profile.projectileEndEffect==='explode')this._explodeProjectile(shot,shot);shot.done=true;}
+      if(shot.remaining<=EPS||shot.homing&&shot.ttl<=0){if(!shot.done&&shot.profile.projectileEndEffect==='explode')this._explodeProjectile(shot,shot);shot.done=true;}
     }
     this.state.projectiles=this.state.projectiles.filter(s=>!s.done);
   }
@@ -499,7 +521,7 @@ export class ArenaEngine {
     const dimensions=String(shot.profile.impactSize||'').match(/[\d.]+/g)?.map(Number);
     const width=dimensions?.[0]??shot.width,height=dimensions?.[1]??width;
     const shape={shape:'rect',width,height};
-    const targets=this.units.concat(this.castles).filter(t=>this._legalTarget(shot.source,t)&&this._inside(t,point,shape));
+    const targets=this.units.concat(this.castles).filter(t=>this._canHit(shot.source,t)&&this._inside(t,point,shape));
     const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
     for(const t of targets.slice(0,limit??targets.length))this._resolveHit(shot.source,t,shot.hit);
     this.fx('explosion',point.x,point.y,{side:shot.side,radius:Math.max(width,height)/2,duration:.7});
@@ -553,7 +575,8 @@ export class ArenaEngine {
       castle.dps=castle.damageWindow.reduce((sum,d)=>sum+d.damage,0);
       castle.cooldown-=dt;
       if(castle.cooldown>EPS)continue;
-      const targets=this.units.filter(u=>u.alive&&u.side!==castle.side&&!has(u,'invisible',this.time)&&!has(u,'imprisonment',this.time)&&distance(castle,u)<=RULES.castleRange+u.radius);
+      const sources=visibilitySources(this.state,castle.side);
+      const targets=this.units.filter(u=>this._legalTarget(castle,u,sources)&&distance(castle,u)<=RULES.castleRange+EPS);
       targets.sort((a,b)=>distance(castle,a)-distance(castle,b));
       if(!targets.length)continue;
       const target=targets[0];
@@ -624,7 +647,7 @@ export class ArenaEngine {
     if(!this.bot)return;
     this.botClock-=dt;if(this.botClock>0)return;
     this.botClock=.6;
-    const side=1,team=this.teams[side],castle=this.castles[side],opponent=this.castles[1-side],enemy=this.units.filter(u=>u.alive&&u.side!==side);
+    const side=1,team=this.teams[side],castle=this.castles[side],opponent=this.castles[1-side],sources=visibilitySources(this.state,side),enemy=this.units.filter(u=>u.side!==side&&isEntityVisible(this.state,side,u,sources));
     const scores=MAP.routes.map((r,lane)=>{
       const pressure=enemy.filter(u=>u.lane===lane).reduce((n,u)=>n+(distance(u,castle)<distance(u,opponent)?3:1)*(u.hp/Math.max(1,u.maxHp)),0);
       return pressure+(this.state.nodes[lane].owner!==side?2:0)+(this.random()*.4);
@@ -652,7 +675,8 @@ export class ArenaEngine {
       }
       else{
         const pool=friendly?this.units.filter(u=>u.alive&&u.side===side&&!u.isBuilding):enemy;
-        const target=pool.sort((a,b)=>this.near(b,2,u=>u.side===b.side).length-this.near(a,2,u=>u.side===a.side).length)[0];
+        const cluster=target=>pool.filter(u=>distance(target,u)<=2+(u.radius||0)).length;
+        const target=pool.sort((a,b)=>cluster(b)-cluster(a))[0];
         if(target)this.cast(side,target);
       }
     }

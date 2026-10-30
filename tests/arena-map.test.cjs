@@ -27,36 +27,53 @@ test('three symmetric routes connect both castles and each contain a capture obj
   const {MAP,routeFor,closestRoute,routeLength,pointOnRoute,distance}=await mod('map.mjs');
   assert.equal(MAP.routes.length,3);
   assert.equal(MAP.nodes.length,3);
+  assert.ok(MAP.width>32&&MAP.height>22);
   for(let lane=0;lane<3;lane++) {
     assert.deepEqual(routeFor(lane,0)[0],MAP.bases[0]);
     assert.deepEqual(routeFor(lane,0).at(-1),MAP.bases[1]);
     assert.deepEqual(routeFor(lane,1),routeFor(lane,0).reverse());
     assert.equal(closestRoute(MAP.nodes[lane]).lane,lane);
     assert.equal(closestRoute(MAP.nodes[lane]).distance,0);
-    assert.ok(Math.abs(routeLength(routeFor(lane,0))-35)<1e-9);
+    const length=routeLength(routeFor(lane,0));
+    assert.ok(lane===1?Math.abs(length-35)<1e-9:length>35);
+    assert.ok(MAP.routes[lane].every(p=>p.x>=0&&p.x<=MAP.width&&p.y>=0&&p.y<=MAP.height));
     for(const side of [0,1]) {
       const route=routeFor(lane,side);
       const index=route.findIndex(p=>distance(p,MAP.nodes[lane])<1e-9);
       assert.ok(index>0);
-      assert.ok(Math.abs(routeLength(route.slice(0,index+1))-17.5)<1e-9);
-      assert.ok(distance(pointOnRoute(lane,side,17.5),MAP.nodes[lane])<1e-9);
+      assert.ok(Math.abs(routeLength(route.slice(0,index+1))-length/2)<1e-9);
+      assert.ok(distance(pointOnRoute(lane,side,length/2),MAP.nodes[lane])<1e-9);
     }
+  }
+  assert.ok(Math.abs(routeLength(MAP.routes[0])-routeLength(MAP.routes[2]))<1e-9);
+});
+
+test('center corridor is straight with its pump exactly 17.5 tiles from either castle',async()=>{
+  const {MAP,routeFor,pointOnRoute,distance}=await mod('map.mjs');
+  const y=MAP.bases[0].y;
+  assert.equal(MAP.bases[1].y,y);
+  assert.ok(MAP.routes[1].every(p=>p.y===y));
+  for(const side of [0,1]) {
+    const route=routeFor(1,side),direction=side===0?1:-1;
+    assert.ok(route.slice(1).every((p,i)=>(p.x-route[i].x)*direction>0));
+    assert.equal(distance(MAP.bases[side],MAP.nodes[1]),17.5);
+    assert.deepEqual(pointOnRoute(1,side,17.5),{x:MAP.nodes[1].x,y:MAP.nodes[1].y});
   }
 });
 
 test('deployment allows own roads and courtyard only inside the 7.5-tile castle radius',async()=>{
   const {MAP,isDeployable,pointOnRoute,distance}=await mod('map.mjs');
-  assert.equal(isDeployable({x:6.5,y:11},0),true);
-  assert.equal(isDeployable({x:25.5,y:11},1),true);
-  assert.equal(isDeployable({x:25.5,y:11},0),false);
-  assert.equal(isDeployable({x:6.5,y:11},1),false);
-  assert.equal(isDeployable({x:16,y:11},0),false);
-  assert.equal(isDeployable({x:16,y:11},1),false);
-  assert.equal(isDeployable({x:9,y:7},0),false);
+  assert.equal(isDeployable({x:6.5,y:14},0),true);
+  assert.equal(isDeployable({x:36.5,y:14},1),true);
+  assert.equal(isDeployable({x:36.5,y:14},0),false);
+  assert.equal(isDeployable({x:6.5,y:14},1),false);
+  assert.equal(isDeployable(MAP.nodes[1],0),false);
+  assert.equal(isDeployable(MAP.nodes[1],1),false);
+  assert.equal(isDeployable({x:9,y:10},0),false);
   assert.equal(isDeployable(MAP.bases[0],0),false);
-  assert.equal(isDeployable({x:6.5,y:11},0,[{x:6.5,y:11,radius:.5}]),false);
-  for(const p of [null,{x:NaN,y:11},{x:Infinity,y:11},{x:-5,y:11}])assert.equal(isDeployable(p,0),false);
-  assert.equal(isDeployable({x:6.5,y:11},2),false);
+  assert.equal(isDeployable({x:6.5,y:14},0,[{x:6.5,y:14,radius:.5}]),false);
+  for(const p of [null,{x:NaN,y:14},{x:Infinity,y:14},{x:-5,y:14}])assert.equal(isDeployable(p,0),false);
+  assert.equal(isDeployable({x:6.5,y:14},2),false);
   for(const side of [0,1]) {
     // Find the exact radius intersection on the real north road, rather than
     // testing an off-road point that would be rejected for another reason.
@@ -91,6 +108,6 @@ test('courtyards preserve one tile behind and 2.5 tiles ahead, with both spaces 
 test('road projection clamps to segment endpoints and finds closest actual path',async()=>{
   const {projectSegment,closestRoute}=await mod('map.mjs');
   assert.deepEqual(projectSegment({x:4,y:3},{x:1,y:1},{x:3,y:1}),{x:3,y:1,t:1,distance:Math.sqrt(5)});
-  assert.equal(closestRoute({x:10,y:3.4}).lane,0);
-  assert.equal(closestRoute({x:10,y:18.7}).lane,2);
+  assert.equal(closestRoute({x:12,y:4.4}).lane,0);
+  assert.equal(closestRoute({x:12,y:23.7}).lane,2);
 });

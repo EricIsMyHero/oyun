@@ -3,6 +3,7 @@ import { ArenaEngine } from './engine.mjs';
 import { ArenaRenderer } from './renderer.mjs';
 import { RULES, STAT_KEYS, num } from './rules.mjs';
 import { MAP, distance, isDeployable } from './map.mjs';
+import { isEntityVisible, isPointVisible } from './vision.mjs';
 
 const $ = id => document.getElementById(id);
 const STORAGE_KEY = 'clash-a-mana.arena.deck.v1';
@@ -156,6 +157,7 @@ function profileMarkup(def) {
 }
 function openInspector(def,kind='card',unit=null) {
   if(!def)return;
+  if(unit&&state.engine&&state.engine.state.phase!=='ended'&&!isEntityVisible(state.engine.state,0,unit))return;
   state.inspectorDefinition={def,kind,unit};
   if(unit)state.selectedUnitId=unit.id;
   const raw=def.raw||{},values=sourceValues(def),locked=!def.ready,canAdd=kind==='spell'||state.catalog.cards.some(c=>c.id===def.id);
@@ -254,9 +256,10 @@ function isValidPlacement(point) {
   if(!state.engine||!state.selection||!point)return false;
   const def=selectedDefinition(),team=state.engine.state.teams[0];
   if(!def)return false;
-  if(state.selection.kind==='card')return team.mana+1e-6>=def.stats.mana&&isDeployable(point,0,state.engine.state.units.filter(u=>u.alive));
+  const visibleOccupants=state.engine.state.units.filter(u=>u.alive&&isEntityVisible(state.engine.state,0,u));
+  if(state.selection.kind==='card')return team.mana+1e-6>=def.stats.mana&&isDeployable(point,0,visibleOccupants);
   if(team.energy+1e-6<def.energy)return false;
-  if(def.kind==='building'||def.spellkind==='building')return isDeployable(point,0,state.engine.state.units.filter(u=>u.alive));
+  if(def.kind==='building'||def.spellkind==='building')return isDeployable(point,0,visibleOccupants);
   return point.x>=0&&point.x<=MAP.width&&point.y>=0&&point.y<=MAP.height;
 }
 function commitPlacement(point) {
@@ -268,7 +271,9 @@ function commitPlacement(point) {
   else {const message=result?.error||'Choose an open path on your side of the arena.';stageMessage(message,true);toast(message,true);}
 }
 function inspectAt(point) {
-  const candidates=[...state.engine.state.units,...state.engine.state.castles].filter(u=>u.alive!==false&&u.hp>0);
+  const battle=state.engine.state;
+  if(battle.phase!=='ended'&&!isPointVisible(battle,0,point))return;
+  const candidates=[...battle.units,...battle.castles].filter(u=>u.alive!==false&&u.hp>0&&(battle.phase==='ended'||isEntityVisible(battle,0,u)));
   const unit=candidates.map(u=>({u,d:distance(u,point)})).filter(x=>x.d<Math.max(.65,(x.u.radius||0)+.25)).sort((a,b)=>a.d-b.d)[0]?.u;
   if(!unit)return;
   if(unit.def){openInspector(unit.def,unit.isBuilding?'spell':'card',unit);return;}
@@ -296,10 +301,18 @@ function updateHUD(force=false) {
   $('match-phase').parentElement.classList.toggle('overtime',s.phase==='overtime');
   for(const [side,prefix] of [[0,'player'],[1,'enemy']]){
     const castle=s.castles.find(c=>c.side===side)||s.castles[side];
-    $(`${prefix}-castle-hp`).textContent=Math.ceil(Math.max(0,castle?.hp||0)).toLocaleString('en-US');
-    $(`${prefix}-castle-bar`).style.width=`${Math.max(0,(castle?.hp||0)/1000*100)}%`;
+    const visible=side===0||s.phase==='ended'||!!castle&&isEntityVisible(s,0,castle);
+    const element=$(`${prefix}-castle-hp`);
+    element.textContent=visible?Math.ceil(Math.max(0,castle?.hp||0)).toLocaleString('en-US'):'?';
+    element.setAttribute('aria-label',visible?`${prefix==='player'?'Your':'Enemy'} citadel: ${Math.ceil(Math.max(0,castle?.hp||0))} health`:'Enemy citadel health is hidden in the fog');
+    element.closest('.citadel-status').dataset.visible=String(visible);
+    $(`${prefix}-castle-bar`).style.width=visible?`${Math.max(0,(castle?.hp||0)/1000*100)}%`:'0%';
   }
-  $('node-hud').innerHTML=(s.nodes||MAP.nodes).map(n=>`<span class="node-indicator ${n.owner===0?'azure':n.owner===1?'crimson':''}" data-owner="${n.owner===0?'0':n.owner===1?'1':'neutral'}" aria-label="${escapeHTML(n.name||n.id)}: ${n.owner===0?'Azure Core':n.owner===1?'Crimson Crown':'Neutral'}"><i></i><span>${escapeHTML((n.name||n.id).toUpperCase())}</span><b style="width:${Math.max(0,Math.min(100,(n.progress||0)/5*100))}%"></b></span>`).join('');
+  $('node-hud').innerHTML=(s.nodes||MAP.nodes).map(n=>{
+    const visible=s.phase==='ended'||isPointVisible(s,0,n);
+    const owner=visible?(n.owner===0?'0':n.owner===1?'1':'neutral'):'unknown';
+    return `<span class="node-indicator ${visible?(n.owner===0?'azure':n.owner===1?'crimson':''):'unknown'}" data-owner="${owner}" aria-label="${escapeHTML(n.name||n.id)}: ${visible?(n.owner===0?'Azure Core':n.owner===1?'Crimson Crown':'Neutral'):'Unseen'}"><i></i><span>${escapeHTML((n.name||n.id).toUpperCase())}</span><b style="width:${visible?Math.max(0,Math.min(100,(n.progress||0)/5*100)):0}%"></b></span>`;
+  }).join('');
   const handKey=JSON.stringify([team.hand,team.hand.map(id=>mana>=(state.catalog.byId.get(id)?.stats.mana||0)),state.selection]);
   if(force||handKey!==state.handSignature){
     state.handSignature=handKey;
@@ -336,6 +349,14 @@ function animationFrame(now) {
   state.lastFrame=now;
   if(state.engine){
     if(!state.engine.state.paused&&state.engine.state.phase!=='ended')state.engine.step(dt);
+    const battle=state.engine.state;
+    if(state.selectedUnitId&&battle.phase!=='ended') {
+      const selected=[...battle.units,...battle.castles].find(unit=>unit.id===state.selectedUnitId);
+      if(!selected||!isEntityVisible(battle,0,selected)){
+        state.selectedUnitId=null;
+        if(state.inspectorDefinition?.unit)closeInspector();
+      }
+    }
     updateHUD();
   }
   if(state.renderer){

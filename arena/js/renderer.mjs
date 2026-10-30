@@ -1,10 +1,12 @@
 import { MAP, closestRoute, courtyardFor, isCourtyard, isDeployable, distance, projectSegment } from './map.mjs';
 import { RULES, clamp, num } from './rules.mjs';
+import { visibilitySources, isPointVisible, isEntityVisible } from './vision.mjs';
 
 const TEAM = ['#69d6ff', '#ff8068'];
 const TEAL = '#89f4ed';
-const RIVER = [{x:11,y:-1},{x:11.8,y:3},{x:10.8,y:5.5},{x:13,y:8},{x:17,y:9},{x:17.5,y:12},{x:19,y:15},{x:20.6,y:19},{x:21.5,y:23}];
-const SHORE = [{x:-.2,y:7},{x:.7,y:2.7},{x:6,y:-.1},{x:14,y:-.65},{x:25,y:-.1},{x:30.8,y:1.5},{x:32.5,y:7},{x:32.2,y:16.7},{x:27.3,y:21.4},{x:20,y:22.2},{x:8,y:22.5},{x:.8,y:19.3},{x:-.6,y:13}];
+const terrainPoint=({x,y})=>({x:x*MAP.width/32,y:y*MAP.height/22});
+const RIVER = [{x:11,y:-1},{x:11.8,y:3},{x:10.8,y:5.5},{x:13,y:8},{x:17,y:9},{x:17.5,y:12},{x:19,y:15},{x:20.6,y:19},{x:21.5,y:23}].map(terrainPoint);
+const SHORE = [{x:-.2,y:7},{x:.7,y:2.7},{x:6,y:-.1},{x:14,y:-.65},{x:25,y:-.1},{x:30.8,y:1.5},{x:32.5,y:7},{x:32.2,y:16.7},{x:27.3,y:21.4},{x:20,y:22.2},{x:8,y:22.5},{x:.8,y:19.3},{x:-.6,y:13}].map(terrainPoint);
 
 function seeded(seed=719) {
   return () => { seed=(Math.imul(seed,1664525)+1013904223)>>>0; return seed/4294967296; };
@@ -67,6 +69,8 @@ export class ArenaRenderer {
     this.canvas=canvas;
     this.ctx=canvas.getContext('2d',{alpha:false});
     this.background=document.createElement('canvas');
+    this.fog=document.createElement('canvas');
+    this.fogKey=null;
     this.images=new Map();
     this.shotTimes=new Map();
     this.deploymentPreview=null;
@@ -90,13 +94,14 @@ export class ArenaRenderer {
     const height=Math.max(1,Math.round(rect.height||this.canvas.clientHeight||600));
     const dpr=Math.min(2,globalThis.devicePixelRatio||1);
     if(this.view.width===width&&this.view.height===height&&this.view.dpr===dpr)return;
-    // On phones crop only the decorative forest rim; keep all three roads and
-    // both castles in frame instead of shrinking the playable field to a stamp.
-    const worldWidth=width/height<1.35 ? 44 : 58;
-    const scale=Math.min(width/worldWidth,height/34);
-    this.view={width,height,dpr,scale,ox:width/2-27*scale,oy:height/2+2.1*scale};
+    // Fit the complete island, including the larger forest rim and cliff faces.
+    const totalExtent=MAP.width+MAP.height;
+    const worldWidth=totalExtent+4;
+    const scale=Math.min(width/worldWidth,height/(totalExtent*.5+6));
+    this.view={width,height,dpr,scale,ox:width/2-totalExtent*.5*scale,oy:height/2+(MAP.width-MAP.height)*.25*scale};
     this.canvas.width=Math.round(width*dpr);this.canvas.height=Math.round(height*dpr);
     this.background.width=this.canvas.width;this.background.height=this.canvas.height;
+    this.fog.width=this.canvas.width;this.fog.height=this.canvas.height;this.fogKey=null;
     this.deploymentPreview=null;
     this.makeBackground();
   }
@@ -122,6 +127,7 @@ export class ArenaRenderer {
     globalThis.removeEventListener?.('resize',this.resize);
     for(const img of this.images.values()){img.onload=null;img.onerror=null;}
     this.images.clear();this.shotTimes.clear();
+    this.fog.width=1;this.fog.height=1;this.fogKey=null;
   }
 
   world(ctx,callback) {
@@ -184,7 +190,7 @@ export class ArenaRenderer {
     polygon(ctx,shore,grass,'#233e31',s*.22);
     ctx.save();polygon(ctx,shore);ctx.clip();
     for(let i=0;i<1800;i++) {
-      const p=this.screenAt(random()*33,random()*23);
+      const p=this.screenAt(random()*(MAP.width+1),random()*(MAP.height+1));
       const r=s*(.02+random()*.1);
       ellipse(ctx,p.x,p.y,r,r*.5,i%3?'#c3ca7e19':'#142e2920');
     }
@@ -238,7 +244,7 @@ export class ArenaRenderer {
     }
     for(const p of crossings)this.bridge(ctx,p,p.angle);
     const trees=[];
-    for(let x=.25;x<32;x+=.95)for(let y=.1;y<22.2;y+=1.05) {
+    for(let x=.25;x<MAP.width;x+=.95)for(let y=.1;y<MAP.height+.2;y+=1.05) {
       const p={x:x+(random()-.5)*.8,y:y+(random()-.5)*.85};
       if(closestRoute(p).distance<2.05||riverDistance(p)<1.35||nearCourtyard(p,.85)||MAP.nodes.some(b=>distance(p,b)<2.1))continue;
       if(random()<.21)continue;
@@ -249,7 +255,7 @@ export class ArenaRenderer {
     for(const tree of trees)this.tree(ctx,tree.screen.x,tree.screen.y,tree.height,tree.tone,tree.lean);
     // Boulders, tufts and wildflowers soften the ends of the roads.
     for(let i=0;i<170;i++) {
-      const p={x:random()*32,y:random()*22},rd=closestRoute(p).distance;
+      const p={x:random()*MAP.width,y:random()*MAP.height},rd=closestRoute(p).distance;
       if(rd<1.3||rd>2.1||nearCourtyard(p,.4)||riverDistance(p)<.9)continue;
       const q=this.screenAt(p),r=s*(.1+random()*.22);
       if(i%3===0)this.rock(ctx,q.x,q.y,r);
@@ -262,7 +268,8 @@ export class ArenaRenderer {
     }
     ctx.restore();
     // Weathered outer stones trace the route's arena boundary.
-    for(const edge of [[{x:2.1,y:4.2},{x:8.2,y:1.4},{x:24,y:1.35},{x:29.7,y:4.4}],[{x:2.1,y:17.7},{x:8.3,y:20.7},{x:24.2,y:20.7},{x:30,y:17.6}]]) {
+    for(const originalEdge of [[{x:2.1,y:4.2},{x:8.2,y:1.4},{x:24,y:1.35},{x:29.7,y:4.4}],[{x:2.1,y:17.7},{x:8.3,y:20.7},{x:24.2,y:20.7},{x:30,y:17.6}]]) {
+      const edge=originalEdge.map(terrainPoint);
       const length=pathLength(edge);
       for(let d=0;d<length;d+=.75) {
         const p=pathPoint(edge,d);
@@ -270,7 +277,7 @@ export class ArenaRenderer {
       }
     }
     // A restrained vignette holds the landscape together without hiding roads.
-    const vignette=ctx.createRadialGradient(w*.5,h*.47,s*13,w*.5,h*.5,s*32);
+    const vignette=ctx.createRadialGradient(w*.5,h*.47,s*(MAP.width+MAP.height)*.24,w*.5,h*.5,s*(MAP.width+MAP.height)*.6);
     vignette.addColorStop(0,'#07131c00');vignette.addColorStop(1,'#06131c88');
     ctx.fillStyle=vignette;ctx.fillRect(0,0,w,h);
   }
@@ -612,7 +619,8 @@ export class ArenaRenderer {
     const building=ui.selectedCard?.kind==='building'||String(ui.selectedCard?.raw?.type||'').toLowerCase()==='building';
     if(!ui.spellSelected||building) {
       const side=ui.side===1?1:0,base=MAP.bases[side];
-      const buildings=(state?.units||[]).filter(u=>u.isBuilding&&u.alive!==false);
+      const viewerSide=ui.viewerSide===1?1:0;
+      const buildings=(state?.units||[]).filter(u=>u.isBuilding&&u.alive!==false&&isEntityVisible(state,viewerSide,u,this.sightSources));
       const key=`${side}:`+buildings.map(b=>`${b.id}:${b.x}:${b.y}:${b.radius||.45}`).join('|');
       if(this.deploymentPreview?.key!==key) {
         // Reuse the actual placement predicate. This mask cannot accidentally
@@ -650,6 +658,34 @@ export class ArenaRenderer {
     }
   }
 
+  applyFog(state,side,sources) {
+    if(!state)return;
+    const {width,height,dpr}=this.view;
+    const key=`${side}:`+sources.map(source=>`${source.x},${source.y},${source.radius}`).join('|');
+    if(key!==this.fogKey) {
+      const ctx=this.fog.getContext('2d');
+      ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
+      ctx.fillStyle='#020507';ctx.fillRect(0,0,this.fog.width,this.fog.height);
+      ctx.setTransform(dpr,0,0,dpr,0,0);ctx.globalCompositeOperation='destination-out';
+      this.world(ctx,c=>{
+        for(const source of sources) {
+          // The soft falloff is strictly inside the visibility radius: no blur
+          // is allowed to expose terrain or combat effects beyond the boundary.
+          const clearEdge=Math.max(0,1-.65/source.radius);
+          const gradient=c.createRadialGradient(source.x,source.y,0,source.x,source.y,source.radius);
+          gradient.addColorStop(0,'#000');gradient.addColorStop(clearEdge,'#000');
+          gradient.addColorStop(1,'#0000');
+          c.beginPath();c.arc(source.x,source.y,source.radius,0,Math.PI*2);c.fillStyle=gradient;c.fill();
+        }
+      });
+      this.fogKey=key;
+    }
+    // Composite after every world layer, including labels and effects whose
+    // visible centers could otherwise leak geometry into unseen terrain.
+    this.ctx.save();this.ctx.setTransform(1,0,0,1,0,0);
+    this.ctx.drawImage(this.fog,0,0);this.ctx.restore();
+  }
+
   draw(state=null,ui={}) {
     if(this.destroyed)return;
     this.lastState=state;this.lastUI=ui;
@@ -657,28 +693,38 @@ export class ArenaRenderer {
     ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(this.background,0,0);
     ctx.setTransform(dpr,0,0,dpr,0,0);
     const time=state?.time??((globalThis.performance?.now?.()||0)/1000);
+    const viewerSide=ui.viewerSide===1?1:0;
+    const sources=state?visibilitySources(state,viewerSide):[];
+    this.sightSources=sources;
+    const pointVisible=p=>!state||isPointVisible(state,viewerSide,p,sources);
+    const entityVisible=entity=>!state||isEntityVisible(state,viewerSide,entity,sources);
     // Slow river glints and fireflies make an idle preview feel alive.
     for(let i=0;i<12;i++) {
       const p=pathPoint(RIVER,((time*.3+i*2.3)%pathLength(RIVER))),q=this.screenAt(p);
       if(MAP.bases.some((_,side)=>isCourtyard(p,side)))continue;
+      if(!pointVisible(p))continue;
       ellipse(ctx,q.x,q.y,s*.045,s*.025,'#c3fff6a0');
     }
     this.placement(ctx,state,ui);
     const nodes=state?.nodes?.length?state.nodes:MAP.nodes.map(n=>({...n,owner:null,progress:0}));
     const sprites=[];
-    for(let side=0;side<2;side++)sprites.push({kind:'castle',side,value:state?.castles?.[side],y:this.screenAt(MAP.bases[side]).y});
-    for(const node of nodes)sprites.push({kind:'node',value:node,y:this.screenAt(node).y});
-    for(const unit of state?.units||[])if(unit.alive!==false&&unit.hp>0)sprites.push({kind:'unit',value:unit,y:this.screenAt(unit).y});
+    for(let side=0;side<2;side++) {
+      const castle=state?.castles?.find(c=>c.side===side);
+      if(!state||castle&&entityVisible(castle))sprites.push({kind:'castle',side,value:castle,y:this.screenAt(MAP.bases[side]).y});
+    }
+    for(const node of nodes)if(pointVisible(node))sprites.push({kind:'node',value:node,y:this.screenAt(node).y});
+    for(const unit of state?.units||[])if(unit.alive!==false&&unit.hp>0&&entityVisible(unit))sprites.push({kind:'unit',value:unit,y:this.screenAt(unit).y});
     sprites.sort((a,b)=>a.y-b.y);
     for(const sprite of sprites) {
       if(sprite.kind==='castle')this.castle(ctx,sprite.value,sprite.side,time);
       else if(sprite.kind==='node')this.node(ctx,sprite.value,time);
       else this.unit(ctx,sprite.value,state,ui);
     }
-    for(const b of state?.projectiles||[])this.projectile(ctx,b,state);
-    for(const e of state?.effects||[])this.effect(ctx,e,time);
+    for(const b of state?.projectiles||[])if(pointVisible(b))this.projectile(ctx,b,state);
+    for(const e of state?.effects||[])if(pointVisible(e))this.effect(ctx,e,time);
     for(let i=0;i<13;i++) {
-      const px=4+((i*7.37)%25),py=1+((i*4.61)%19),p=this.screenAt(px,py);
+      const px=4+((i*7.37)%(MAP.width-8)),py=1+((i*4.61)%(MAP.height-3)),p=this.screenAt(px,py);
+      if(!pointVisible({x:px,y:py}))continue;
       const alpha=.15+(Math.sin(time*.8+i*1.7)+1)*.15;
       ctx.globalAlpha=alpha;ellipse(ctx,p.x+Math.sin(time*.5+i)*s*.35,p.y-s*(.4+Math.cos(time*.4+i)*.15),1.2,1.2,'#a9ffd4');
     }
@@ -690,5 +736,6 @@ export class ArenaRenderer {
     // Delicate edge lines keep the artwork integrated with its surrounding HUD.
     const border=ctx.createLinearGradient(0,0,w,0);border.addColorStop(0,'#a8d6c000');border.addColorStop(.5,'#adddc425');border.addColorStop(1,'#a8d6c000');
     ctx.strokeStyle=border;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(w*.08,h-1);ctx.lineTo(w*.92,h-1);ctx.stroke();
+    this.applyFog(state,viewerSide,sources);
   }
 }

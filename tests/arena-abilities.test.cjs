@@ -5,7 +5,9 @@ const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const rawCards=fs.readdirSync(path.join(root,'rarity')).filter(f=>f.endsWith('.json')).sort().flatMap(f=>JSON.parse(fs.readFileSync(path.join(root,'rarity',f))));
 const rawSpells=JSON.parse(fs.readFileSync(path.join(root,'data/spells.json')));
-const modules=Promise.all([import('../arena/js/catalog.mjs'),import('../arena/js/abilities.mjs')]);
+const modules=Promise.all([import('../arena/js/catalog.mjs'),import('../arena/js/abilities.mjs'),import('../arena/js/vision.mjs')]);
+let isEntityVisible;
+modules.then(([, ,vision])=>{isEntityVisible=vision.isEntityVisible;});
 const catalogPromise=modules.then(([{buildCatalog}])=>buildCatalog(rawCards,rawSpells));
 const close=(actual,expected)=>assert.ok(Math.abs(actual-expected)<1e-7,`${actual} != ${expected}`);
 
@@ -17,6 +19,7 @@ function fixture(catalog,id) {
   t.hp=t.maxHp=1000;
   const records={statuses:[],damage:[],spawn:[],push:[],fx:[]};
   const ctx={time:0,units:[u,t],castles:[],teams:[{mana:10,energy:0},{mana:10,energy:0}],random:()=>.01,
+    canTarget(source,target){return source.side!==target.side&&isEntityVisible({time:this.time,units:this.units,castles:this.castles,nodes:[]},source.side,target);},
     status(target,kind,duration,magnitude=0,source=null,extra={}){const st={target,kind,duration,magnitude,source,...extra};records.statuses.push(st);target.statuses.push(st);},
     near(point,radius,filter=null){return this.units.filter(v=>v.alive&&Math.hypot(v.x-point.x,v.y-point.y)<=radius&&(!filter||filter(v)));},
     damage(source,target,amount,options={}){records.damage.push({source,target,amount,options});target.hp=Math.max(0,target.hp-amount);const killed=target.hp<=0;target.alive=!killed;return {healthDamage:amount,shieldDamage:0,total:amount,killed};},
@@ -120,6 +123,36 @@ for(const [id,exercise] of Object.entries(cases))test(`native arena ability: ${i
   const catalog=await catalogPromise;
   const f=fixture(catalog,id);f.rule=ABILITIES[id];f.catalog=catalog;
   assert.ok(f.rule,`${id} has a registry rule`);exercise(f);
+});
+
+test('Sheriff marks only visible enemies and Shellbyte cannot leap to concealed targets',async()=>{
+  const [,{ABILITIES}]=await modules;
+  const catalog=await catalogPromise;
+  const sheriff=fixture(catalog,'sheriff');
+  sheriff.t.x=sheriff.u.x+9;
+  ABILITIES.sheriff.tick(sheriff.ctx,sheriff.u);
+  assert.deepEqual(sheriff.u.memory.marked,[]);
+  const scout={...sheriff.u,id:'scout',x:sheriff.t.x-1,statuses:[]};
+  sheriff.ctx.units.push(scout);
+  ABILITIES.sheriff.tick(sheriff.ctx,sheriff.u);
+  assert.deepEqual(sheriff.u.memory.marked,[sheriff.t.id]);
+  sheriff.t.statuses=[{kind:'invisible',until:5}];
+  ABILITIES.sheriff.tick(sheriff.ctx,sheriff.u);
+  assert.deepEqual(sheriff.u.memory.marked,[]);
+
+  const shellbyte=fixture(catalog,'shellbyte');
+  shellbyte.t.x=shellbyte.u.x+4;
+  shellbyte.t.statuses=[{kind:'invisible',until:5}];
+  shellbyte.u.memory.charge=100;
+  const origin={x:shellbyte.u.x,y:shellbyte.u.y};
+  ABILITIES.shellbyte.tick(shellbyte.ctx,shellbyte.u,0);
+  assert.equal(shellbyte.u.memory.charge,100);
+  assert.equal(shellbyte.u.x,origin.x);
+  assert.equal(shellbyte.u.targetId,null);
+  shellbyte.t.statuses=[];
+  ABILITIES.shellbyte.tick(shellbyte.ctx,shellbyte.u,0);
+  assert.equal(shellbyte.u.targetId,shellbyte.t.id);
+  assert.equal(shellbyte.u.memory.charge,0);
 });
 
 test('every enabled native card and reachable form has a behavioral test',async()=>{

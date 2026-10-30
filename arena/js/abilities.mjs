@@ -167,7 +167,7 @@ export const ABILITIES = {
   },
   slasherx:{attack(ctx,u,t,hit){if(!t.isCastle&&ctx.random()<Math.min(1,(1+u.shield)/100))hit.instantKill=true;}},
   sheriff:{
-    tick(ctx,u){u.memory.marked=ctx.near(u,10,t=>t.side!==u.side).sort((a,b)=>Math.hypot(a.x-u.x,a.y-u.y)-Math.hypot(b.x-u.x,b.y-u.y)).slice(0,6).map(t=>t.id);},
+    tick(ctx,u){u.memory.marked=ctx.near(u,10,t=>ctx.canTarget(u,t)).sort((a,b)=>Math.hypot(a.x-u.x,a.y-u.y)-Math.hypot(b.x-u.x,b.y-u.y)).slice(0,6).map(t=>t.id);},
     attack(ctx,u,t,hit){if(u.memory.marked?.includes(t.id))hit.damage*=1.25;},
   },
   nurse:{
@@ -194,9 +194,9 @@ export const ABILITIES = {
     hit(ctx,u,t,r,hit){if(damageEvent(r)&&hit.voidFast&&!t.isCastle)ctx.status(t,'slow',.8,.1,u);},
   },
   shellbyte:{
-    tick(ctx,u,dt){if(enemies(ctx,u).length){u.memory.leapClock=0;return;}
+    tick(ctx,u,dt){if(enemies(ctx,u).some(t=>ctx.canTarget(u,t))){u.memory.leapClock=0;return;}
       periodic(u,'leapClock',dt,.225,()=>{u.memory.charge=(u.memory.charge||0)+3;});
-      if((u.memory.charge||0)>=100){const target=enemies(ctx,u,4.5).filter(t=>!airborne(t)).sort((a,b)=>a.hp-b.hp)[0];if(target){u.memory.charge-=100;u.x=target.x+(u.side===0?-.35:.35);u.y=target.y;u.targetId=target.id;u.memory.leapStrike=true;ctx.fx('leap',u.x,u.y,{side:u.side});}}
+      if((u.memory.charge||0)>=100){const target=enemies(ctx,u,4.5).filter(t=>!airborne(t)&&ctx.canTarget(u,t)).sort((a,b)=>a.hp-b.hp)[0];if(target){u.memory.charge-=100;u.x=target.x+(u.side===0?-.35:.35);u.y=target.y;u.targetId=target.id;u.memory.leapStrike=true;ctx.fx('leap',u.x,u.y,{side:u.side});}}
     },
     attack(ctx,u,t,hit){if(u.memory.leapStrike){hit.damage*=1.5;u.memory.leapStrike=false;}},
   },

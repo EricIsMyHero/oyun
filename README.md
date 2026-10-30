@@ -10,8 +10,11 @@ Cards with missing essential combat or ability data show their lock reasons.
 Both castles have 1000 health and a 7.5-tile firing/deployment radius. Units and
 spell buildings deploy on roads or the castle courtyard inside that radius.
 Courtyards leave one tile behind and 2.5 ahead of the castle body; both are
-deployable. Every mana well lies 17.5 walking tiles along its route from either
-castle. Mana starts at 12, caps at 20 and regenerates at
+deployable. The enlarged 43×28-tile island has a straight central road with its
+mana well 17.5 walking tiles from either castle; the two outer roads take about
+23.23 tiles to their wells. Unseen terrain is dark: allied cards reveal eight
+tiles, captured wells four and your castle 7.5. Castle shots track moving targets.
+Mana starts at 12, caps at 20 and regenerates at
 one per 1.3 seconds. Each captured crystal adds 2% mana regeneration; spending
 mana earns spell energy in 0.05 increments. Matches last five minutes plus two
 minutes of overtime whenever both castles survive. See [the arena guide](docs/arena.md)

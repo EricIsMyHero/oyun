@@ -45,10 +45,13 @@ Spells can be used again when their turn returns and sufficient energy exists.
 The original illustrated map places the Azure Core castle at the southwest and
 the Crimson Crown castle at the northeast. The central road and two outer roads
 connect them through a forest island with rivers, cliffs and three crystal wells.
-Each route is **35 tiles** long, with its well **17.5 walking tiles from either
-castle**. The central road winds so all three travel distances agree; distance
-is measured along road segments, not as a straight line through the terrain.
-The map uses world coordinates independently of its isometric screen projection.
+The battlefield spans **43 × 28 world tiles**, with castles at `(4,14)` and
+`(39,14)`. The central road is a **straight 35-tile route**; its well is exactly
+**17.5 walking tiles from either castle**. Each outer forest road is about
+**46.46 tiles** long, placing its well about **23.23 walking tiles from either
+castle**. Outer roads intentionally take longer routes; the center is not bent
+to equalize travel times. World coordinates remain independent of the isometric
+screen projection.
 
 Deploy units and spell buildings only on roads or your castle courtyard **within
 7.5 tiles of the castle centre**. The courtyard has **one tile of clear space
@@ -58,9 +61,11 @@ the castle body and occupied building footprints remain blocked. The deployment
 radius does not make surrounding forest walkable. Capturing a well does not
 unlock an extra deployment zone; normal spells retain their usual target areas.
 
-The castle acquires targets whose body intersects its 7.5-tile firing range;
-projectiles travel at most 7.5 tiles. The same geometry and deployment rules
-apply to both teams, including the bot.
+The castle acquires visible ground or flying targets whose center is within
+7.5 tiles. Its shots track that target through lateral movement, rather than
+continuing toward an outdated position. Shots remain inside the 7.5-tile radial
+boundary and expire if their target dies, becomes concealed or leaves range;
+they cannot switch to another unit. The same rules apply to both teams.
 
 Each well takes **five uncontested seconds** to capture within its 1.25-tile
 radius. Living units, including flying units and summons, can capture; buildings
@@ -72,6 +77,40 @@ Ground units follow the roads. Hovering units also follow the ground routes but
 ignore ground-only effects. Flying units travel over terrain. Target layers and
 ground immunity remain independent: a hovering unit still belongs to the ground
 target layer.
+
+## Fog of war and scouting
+
+Battles use current team vision, with **opaque black fog** outside all friendly
+vision sources:
+
+| Vision source | Reveal radius |
+| --- | --- |
+| Living allied card | 8 tiles |
+| Owned crystal well | 4 tiles |
+| Living allied castle | 7.5 tiles |
+
+The castle supplies starting vision before the first card is deployed. Each
+team's visible area is the union of its source circles. There is no permanent
+explored-map memory: an area returns to black immediately after its last vision
+source leaves, dies or changes owner. These scouting radii are separate from
+individual cards' authored Vision and Range combat stats.
+
+Enemies outside current vision are not drawn, targetable or inspectable. Normal
+invisibility, untargetability and imprisonment also conceal enemies according to
+their active status. Hidden enemy castle health is shown as `?`, its health bar
+is empty, and unseen well ownership and capture progress are not disclosed.
+Friendly units remain inspectable. Placement previews do not use concealed enemy
+occupancy to expose their positions. Spells may still be aimed at unseen ground;
+casting does not by itself reveal the area or produce hidden-enemy UI reports.
+Fog and invisibility prevent acquired targets, not incidental projectile hits or
+area damage. A cone, splash, damage field or blind skillshot can still hit an
+unseen enemy without revealing the ground around it.
+
+The bot uses its own team vision for enemy-aware decisions. The illustrated lobby
+preview shows the full arena before battle; match results may show final castle
+health after the battle has ended. This is a local single-player simulation, not
+a server security boundary; UI and simulation consumers share the same sight
+predicates rather than implementing separate reveal rules.
 
 ## Codex fidelity and locked cards
 
@@ -146,5 +185,8 @@ node tests/arena.browser.cjs
 The browser check uses Playwright and Chromium (`/usr/bin/chromium`, or set
 `CHROMIUM_PATH`). It serves the real application under a project prefix, stubs
 external artwork, and exercises deck building, locked-card explanations, resource
-accounting, deployment, spell targeting, pause, restart and small-screen layouts.
+accounting, deployment, spell targeting, fog visibility, hidden-enemy inspection,
+pause, restart and small-screen layouts. Browser import mappings version every
+arena module together, including vision, so a previous cached geometry cannot
+mix with the current map or renderer.
 The test writes preview screenshots under `/tmp` for visual review.

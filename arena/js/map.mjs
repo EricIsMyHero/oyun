@@ -1,28 +1,19 @@
 import { RULES } from './rules.mjs';
 
-// Equal 35-tile routes put each pump 17.5 walking tiles from either castle.
-// Bends change the road geometry, never the source-to-tile conversion.
+// The straight center road puts its pump 17.5 tiles from either castle.
+// Outer roads take longer forest routes; no bends are needed to pad the center.
 const PUMP_DISTANCE=17.5;
-const centralLeg=(PUMP_DISTANCE**2+48)/(4*PUMP_DISTANCE);
-const centralSway=Math.sqrt(centralLeg**2-16);
-let bendLow=3,bendHigh=6;
-for(let i=0;i<52;i++) {
-  const y=(bendLow+bendHigh)/2;
-  if(Math.hypot(1,11-y)+Math.hypot(4,y-3)>PUMP_DISTANCE-7)bendLow=y;
-  else bendHigh=y;
-}
-const northBendY=(bendLow+bendHigh)/2;
 
 export const MAP = Object.freeze({
-  width:32,height:22,roadWidth:2.2,castleRadius:1.05,pumpDistance:PUMP_DISTANCE,
+  width:43,height:28,roadWidth:2.2,castleRadius:1.05,pumpDistance:PUMP_DISTANCE,
   courtyard:Object.freeze({rear:1,front:2.5,side:1}),
-  bases:[{x:4,y:11},{x:28,y:11}],
+  bases:[{x:4,y:14},{x:39,y:14}],
   routes:[
-    [{x:4,y:11},{x:5,y:northBendY},{x:9,y:3},{x:16,y:3},{x:23,y:3},{x:27,y:northBendY},{x:28,y:11}],
-    [{x:4,y:11},{x:8,y:11-centralSway},{x:12,y:11+centralSway},{x:16,y:11},{x:20,y:11-centralSway},{x:24,y:11+centralSway},{x:28,y:11}],
-    [{x:4,y:11},{x:5,y:22-northBendY},{x:9,y:19},{x:16,y:19},{x:23,y:19},{x:27,y:22-northBendY},{x:28,y:11}],
+    [{x:4,y:14},{x:6,y:8},{x:11,y:4},{x:21.5,y:4},{x:32,y:4},{x:37,y:8},{x:39,y:14}],
+    [{x:4,y:14},{x:10,y:14},{x:16,y:14},{x:21.5,y:14},{x:27,y:14},{x:33,y:14},{x:39,y:14}],
+    [{x:4,y:14},{x:6,y:20},{x:11,y:24},{x:21.5,y:24},{x:32,y:24},{x:37,y:20},{x:39,y:14}],
   ],
-  nodes:[{id:'north',name:'Northwell',x:16,y:3},{id:'center',name:'Heartwell',x:16,y:11},{id:'south',name:'Southwell',x:16,y:19}],
+  nodes:[{id:'north',name:'Northwell',x:21.5,y:4},{id:'center',name:'Heartwell',x:21.5,y:14},{id:'south',name:'Southwell',x:21.5,y:24}],
 });
 export const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 export function projectSegment(p,a,b) {
