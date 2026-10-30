@@ -115,7 +115,7 @@ async function settleFrame(page) {
     assert.ok(choice,'opening hand contains an affordable card');
     const before=await page.evaluate(()=>({mana:arenaApp.engine.state.teams[0].mana,energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand],queue:[...arenaApp.engine.state.teams[0].queue]}));
     await page.keyboard.press(String(choice.index+1));
-    const valid=await clientPoint(page,{x:8,y:11});
+    const valid=await clientPoint(page,{x:6.5,y:11});
     await page.mouse.click(valid.x,valid.y);
     await page.waitForFunction(()=>arenaApp.engine.state.teams[0].energy>0);
     const after=await page.evaluate(()=>({mana:arenaApp.engine.state.teams[0].mana,energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand],queue:[...arenaApp.engine.state.teams[0].queue],units:arenaApp.engine.state.units.filter(u=>u.side===0)}));
@@ -125,12 +125,52 @@ async function settleFrame(page) {
     assert.equal(after.queue.at(-1),choice.id);
     assert.ok(after.units.length>0);
 
-    // Invalid enemy-side placement and targeting cancellation are atomic.
-    const invalidBefore=await page.evaluate(()=>({energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand]}));
+    // The cleared courtyard also accepts a deployment behind the castle.
+    const rearChoice=await page.evaluate(()=>{
+      const t=arenaApp.engine.state.teams[0];
+      return t.hand.map((id,index)=>({id,index,cost:arenaApp.catalog.byId.get(id).stats.mana})).filter(c=>c.cost<=t.mana).sort((a,b)=>a.cost-b.cost)[0];
+    });
+    assert.ok(rearChoice,'the opening cycle can afford a second courtyard deployment');
+    await page.keyboard.press(String(rearChoice.index+1));
+    const rear=await clientPoint(page,{x:2.2,y:11});
+    await page.mouse.click(rear.x,rear.y);
+    await page.waitForFunction(energy=>arenaApp.engine.state.teams[0].energy>energy,after.energy);
+    const rearAfter=await page.evaluate(()=>({energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand],queue:[...arenaApp.engine.state.teams[0].queue]}));
+    assert.ok(Math.abs(rearAfter.energy-after.energy-Math.round(rearChoice.cost/18*20)/20)<1e-8,'rear placement spends mana and earns energy exactly once');
+    assert.equal(rearAfter.queue.at(-1),rearChoice.id);
+
+    // An own-side road remains invalid outside the castle's 7.5-tile radius.
+    // This fixture funds the hand so affordability cannot mask a placement error.
+    const outsideRoad=await page.evaluate(async()=>{
+      arenaApp.engine.state.teams[0].mana=20;
+      const {MAP,distance,closestRoute}=await import('./js/map.mjs');
+      const base=MAP.bases[0],radius=8.5;
+      for(let i=1;i<MAP.routes[0].length;i++){
+        const a=MAP.routes[0][i-1],b=MAP.routes[0][i],dx=b.x-a.x,dy=b.y-a.y,ox=a.x-base.x,oy=a.y-base.y;
+        const aa=dx*dx+dy*dy,bb=2*(ox*dx+oy*dy),cc=ox*ox+oy*oy-radius*radius;
+        const discriminant=bb*bb-4*aa*cc;
+        if(discriminant<0||aa===0)continue;
+        for(const t of [(-bb-Math.sqrt(discriminant))/(2*aa),(-bb+Math.sqrt(discriminant))/(2*aa)]){
+          if(t<0||t>1)continue;
+          const point={x:a.x+dx*t,y:a.y+dy*t};
+          if(point.x<15.5)return {...point,castleDistance:distance(base,point),roadDistance:closestRoute(point).distance};
+        }
+      }
+      throw Error('No own-side road crosses the castle range boundary');
+    });
+    assert.ok(Math.abs(outsideRoad.castleDistance-8.5)<1e-6);
+    assert.ok(outsideRoad.roadDistance<1e-6,'the invalid range fixture is on an actual route');
+    const invalidBefore=await page.evaluate(()=>({mana:arenaApp.engine.state.teams[0].mana,energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand],queue:[...arenaApp.engine.state.teams[0].queue]}));
+    await page.keyboard.press('1');
+    const tooFar=await clientPoint(page,outsideRoad);
+    await page.mouse.click(tooFar.x,tooFar.y);
+    assert.deepEqual(await page.evaluate(()=>({mana:arenaApp.engine.state.teams[0].mana,energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand],queue:[...arenaApp.engine.state.teams[0].queue]})),invalidBefore,'out-of-radius placement is atomic even on an own-side road');
+
+    // Enemy-side placement and targeting cancellation are atomic as well.
     await page.keyboard.press('1');
     const enemy=await clientPoint(page,{x:24,y:11});
     await page.mouse.click(enemy.x,enemy.y);
-    assert.deepEqual(await page.evaluate(()=>({energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand]})),invalidBefore);
+    assert.deepEqual(await page.evaluate(()=>({mana:arenaApp.engine.state.teams[0].mana,energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand],queue:[...arenaApp.engine.state.teams[0].queue]})),invalidBefore);
     await page.keyboard.press('Escape');
 
     await page.locator('#pause-button').click();
@@ -179,14 +219,19 @@ async function settleFrame(page) {
 
     await page.waitForFunction(()=>document.getElementById('toast').hidden);
     await page.screenshot({path:'/tmp/oyun-arena-desktop.png',fullPage:true});screenshots.push('/tmp/oyun-arena-desktop.png');
+    await page.keyboard.press('1');
+    const previewPoint=await clientPoint(page,{x:6.5,y:11});
+    await page.mouse.move(previewPoint.x,previewPoint.y);await settleFrame(page);
+    await page.screenshot({path:'/tmp/oyun-arena-deployment-preview.png',fullPage:true});screenshots.push('/tmp/oyun-arena-deployment-preview.png');
+    await page.keyboard.press('Escape');
     for (const [width,height] of [[1024,768],[768,1024],[390,844],[320,568],[844,390]]) {
       await page.setViewportSize({width,height});await settleFrame(page);
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${width}x${height}: page overflows horizontally`);
       const box=await page.locator('#arena-canvas').boundingBox();
       assert.ok(box.width>100&&box.height>100,`${width}x${height}: battlefield remains visible`);
-      const p=await clientPoint(page,{x:8,y:11});
+      const p=await clientPoint(page,{x:6.5,y:11});
       const roundTrip=await page.evaluate(p=>arenaApp.renderer.worldAt(p.x,p.y),p);
-      assert.ok(Math.abs(roundTrip.x-8)<.01&&Math.abs(roundTrip.y-11)<.01,`${width}x${height}: map input projection`);
+      assert.ok(Math.abs(roundTrip.x-6.5)<.01&&Math.abs(roundTrip.y-11)<.01,`${width}x${height}: map input projection`);
     }
     await page.setViewportSize({width:390,height:844});await settleFrame(page);
     await page.screenshot({path:'/tmp/oyun-arena-mobile.png',fullPage:true});screenshots.push('/tmp/oyun-arena-mobile.png');
@@ -206,7 +251,7 @@ async function settleFrame(page) {
     const touchEnergy=await page.evaluate(()=>arenaApp.engine.state.teams[0].energy);
     await page.locator(`[data-hand-index="${touchChoice.index}"]`).tap();
     await page.locator('#arena-canvas').scrollIntoViewIfNeeded();
-    const touchPoint=await clientPoint(page,{x:8,y:11});
+    const touchPoint=await clientPoint(page,{x:6.5,y:11});
     await page.touchscreen.tap(touchPoint.x,touchPoint.y);
     await page.waitForFunction(before=>arenaApp.engine.state.teams[0].energy>before,touchEnergy);
     assert.ok(Math.abs(await page.evaluate(()=>arenaApp.engine.state.teams[0].energy)-touchEnergy-Math.round(touchChoice.cost/18*20)/20)<1e-8);
@@ -224,7 +269,7 @@ async function settleFrame(page) {
     });
     assert.deepEqual(captured.owners,[0,0,0]);
     assert.ok(Math.abs(captured.mana-1.06)<1e-6,'three owned wells add six percent to base mana regeneration');
-    await settleFrame(page);
+    await page.waitForFunction(()=>document.querySelectorAll('#node-hud [data-owner="0"]').length===3);
     assert.equal(await page.locator('#node-hud [data-owner="0"]').count(),3,'the HUD shows all three captured wells');
 
     await page.evaluate(()=>{
@@ -232,12 +277,13 @@ async function settleFrame(page) {
       e.step(1/30);
     });
     await page.waitForFunction(()=>arenaApp.engine.state.phase==='overtime');
-    await settleFrame(page);
+    await page.waitForFunction(()=>/overtime/i.test(document.getElementById('match-phase').textContent));
     assert.match(await page.locator('#match-phase').textContent(),/overtime/i);
 
     // Resolve a terminal state with the real damage path, then exercise its UI.
     await page.evaluate(()=>arenaApp.engine.damage(null,arenaApp.engine.state.castles[1],2000,{kind:'spell',bypassShield:true,secondary:true}));
     await page.waitForFunction(()=>arenaApp.engine.state.phase==='ended');
+    await page.locator('#result-overlay').waitFor({state:'visible'});
     assert.ok(await page.locator('#result-overlay').isVisible());
     assert.equal(await page.evaluate(()=>arenaApp.engine.state.winner),0);
 
@@ -258,7 +304,7 @@ async function settleFrame(page) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; real deck, deployment, energy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; real deck, front/rear courtyard deployment, castle-radius rejection, energy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

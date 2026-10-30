@@ -40,11 +40,14 @@ test('paid deployment is atomic, cycles four cards and converts spent mana into 
   e.spawn(cards[0],0,{x:12,y:11},1,{count:1});assert.equal(e.teams[0].energy,.95,'free summons cannot farm energy');
 });
 
-test('full Count formation fits own roads at the center boundary without paid partial spawns',async()=>{
+test('full Count formation remains inside the castle deployment boundary without paid partial spawns',async()=>{
   const {engine:e,cards}=await fixture();cards[0].stats.number=10;
-  const result=e.deploy(0,0,{x:15.4,y:11});assert.equal(result.ok,true);assert.equal(result.units.length,10);
-  const [, , {isDeployable}]=await modules;
-  for(const u of result.units)assert.ok(isDeployable(u,0),`${u.x},${u.y}`);
+  const {RULES}=await import('../arena/js/rules.mjs');
+  const [, , {isDeployable,distance,MAP}]=await modules;
+  const point=e._deploymentCandidates(0,0).find(p=>distance(p,MAP.bases[0])>RULES.castleRange-.4);
+  assert.ok(point,'a valid road point lies near the deployment-radius edge');
+  const result=e.deploy(0,0,point);assert.equal(result.ok,true);assert.equal(result.units.length,10);
+  for(const u of result.units){assert.ok(isDeployable(u,0),`${u.x},${u.y}`);assert.ok(distance(u,MAP.bases[0])<=RULES.castleRange+1e-9);}
   for(let i=0;i<result.units.length;i++)for(let j=i+1;j<result.units.length;j++)assert.ok(Math.hypot(result.units[i].x-result.units[j].x,result.units[i].y-result.units[j].y)>=result.units[i].radius+result.units[j].radius);
 });
 
@@ -93,15 +96,15 @@ test('flexibility shortens debuffs, Predominance blocks them, and hover ignores 
 
 test('Range acquires a target but a short Attack Distance makes the attacker approach before striking',async()=>{
   const {engine:e,base}=await fixture();const def=structuredClone(base);def.stats.range=4000;def.combat.attackDistance=500;def.stats.speed=1000;
-  const attacker=e.spawn(def,0,{x:10,y:11},1,{count:1})[0];const target=inert(e,base,1,{x:13,y:11});
+  const attacker=e.spawn(def,0,{x:10,y:3},0,{count:1})[0];const target=inert(e,base,1,{x:13,y:3});
   e.step(.5);assert.equal(attacker.shots,0);assert.ok(attacker.x>10);assert.equal(target.hp,1000);
   e.step(3);assert.ok(attacker.shots>0);assert.ok(target.hp<1000);
 });
 
 test('Soldier source A×B fires fifteen three-damage hits at one locked target then recovers interval plus delay',async()=>{
   const {engine:e,base}=await fixture();const def=structuredClone(base);def.id='soldier';def.stats.damage=3;def.stats.attackSpeed=.2;def.stats.delay=1.75;def.stats.speed=0;def.attack={count:15,damage:3,interval:.2,delay:1.75};
-  const attacker=e.spawn(def,0,{x:10,y:11},1,{count:1})[0];const target=inert(e,base,1,{x:10.8,y:11});
-  const other=inert(e,base,1,{x:10.7,y:11.6});e.step(2.84);
+  const attacker=e.spawn(def,0,{x:10,y:3},0,{count:1})[0];const target=inert(e,base,1,{x:10.8,y:3});
+  const other=inert(e,base,1,{x:10.7,y:3.6});e.step(2.84);
   assert.equal(attacker.shots,15);assert.equal(target.hp,955);assert.equal(other.hp,1000);e.step(1.8);assert.equal(attacker.shots,15);e.step(.2);assert.equal(attacker.shots,16);
 });
 
@@ -198,4 +201,68 @@ test('seeded bot matches are reproducible, spend only earned mana and bound visu
   const [{ArenaEngine},{buildCatalog}]=await modules;const catalog=buildCatalog(rawCards,rawSpells);const deck=['hammies','b-b','scrapy','venomora','ben','freak','bethe','soldier'];
   const run=()=>{const e=new ArenaEngine({...catalog,deck,spellDeck:['healing-light','shock-bomb'],seed:190,bot:true});for(let i=0;i<420&&e.state.phase!=='ended';i++)e.step(1);return e;};
   const a=run(),b=run();assert.equal(JSON.stringify(a.state),JSON.stringify(b.state));assert.ok(a.teams[1].mana>=0&&a.teams[1].mana<=20);assert.ok(a.teams[1].energy>=0);assert.ok(a.state.effects.length<=300);assert.ok(a.state.events.length<=160);assert.equal(a.state.phase,'ended');
+});
+
+test('castle acquires targets at its 7.5-tile body-edge range and shots cannot travel farther',async()=>{
+  const {engine:e,base}=await fixture();const {RULES}=await import('../arena/js/rules.mjs');
+  assert.equal(RULES.castleRange,7.5);
+  const castle=e.castles[0],target=inert(e,base,1,{x:16,y:3});
+  target.x=castle.x+RULES.castleRange+target.radius+.01;target.y=castle.y;
+  e._castles(0);assert.equal(e.state.projectiles.length,0);
+  target.x=castle.x+RULES.castleRange+target.radius-.01;e._castles(0);
+  assert.equal(e.state.projectiles.length,1);assert.equal(e.state.projectiles[0].remaining,7.5);
+  e._projectiles(1);assert.equal(target.hp,975);assert.equal(e.state.projectiles.length,0);
+});
+
+test('paid troops and buildings beyond the castle radius are rejected without spending resources',async()=>{
+  const {engine:e}=await fixture({spellDeck:['guard-post']});const [,,{pointOnRoute,isWalkable}]=await modules;
+  const point=pointOnRoute(0,0,8.5);assert.ok(isWalkable(point));
+  const before=structuredClone(e.teams[0]);assert.equal(e.deploy(0,0,point).ok,false);assert.deepEqual(e.teams[0],before);
+  e.teams[0].energy=10;assert.equal(e.cast(0,point).ok,false);assert.equal(e.teams[0].energy,10);assert.equal(e.teams[0].spellIndex,0);assert.equal(e.units.length,0);
+});
+
+test('rear courtyard deployments retain their location and walk around the castle body',async()=>{
+  const {engine:e}=await fixture();const [,,{MAP,isWalkable,distance}]=await modules;
+  const point={x:2.2,y:11},result=e.deploy(0,0,point);assert.equal(result.ok,true);
+  const unit=result.units[0];assert.equal(unit.x,point.x);assert.equal(unit.y,point.y);
+  assert.equal(e.castles[0].radius,MAP.castleRadius);
+  for(let i=0;i<80;i++){
+    const previous={x:unit.x,y:unit.y};
+    e.step(.1);assert.ok(isWalkable(unit),`${unit.x},${unit.y}`);
+    assert.ok(distance(previous,unit)<=.1+1e-8,'the courtyard exit does not teleport the unit');
+    assert.ok(distance(unit,e.castles[0])>=MAP.castleRadius+unit.radius-1e-8,'walking does not intersect the castle');
+  }
+  assert.ok(distance(unit,point)>3,'a rear deployment can leave the courtyard');
+});
+
+test('front-corner courtyard units enter their route without getting stuck or teleporting on either side',async()=>{
+  const {engine:e,catalog}=await fixture();const [,,{MAP,isDeployable,isWalkable,distance,closestRoute}]=await modules;
+  const cases=[{side:0,point:{x:7.4,y:12.9}},{side:1,point:{x:24.6,y:9.1}},{side:0,point:{x:7.4,y:9.1}},{side:1,point:{x:24.6,y:12.9}}];
+  for(const {side,point} of cases){
+    e.state.units=[];assert.ok(isDeployable(point,side));
+    const def=catalog.byId.get('henry'),lane=closestRoute(point).lane;
+    const [unit]=e.spawn(def,side,point,lane,{count:1,positions:[point]});
+    for(let i=0;i<220;i++){
+      const previous={x:unit.x,y:unit.y};e.step(1/30);
+      assert.ok(isWalkable(unit),`${side}: ${unit.x},${unit.y}`);
+      assert.ok(distance(previous,unit)<=def.stats.speed/1000/30+1e-8,'walking respects the source speed');
+      assert.ok(distance(unit,e.castles[side])>=MAP.castleRadius+unit.radius-1e-8);
+    }
+    assert.ok(distance(unit,point)>3,`${side}: the corner deployment leaves the courtyard`);
+  }
+});
+
+test('bot troop and building placement derives legal positions from each lane and castle range',async()=>{
+  const {engine:e}=await fixture({bot:true,spellDeck:['guard-post']});const [,,{MAP,isDeployable,distance}]=await modules;
+  const {RULES}=await import('../arena/js/rules.mjs');
+  for(let side=0;side<2;side++)for(let lane=0;lane<3;lane++){
+    const candidates=e._deploymentCandidates(side,lane);assert.ok(candidates.length>0,`side ${side}, lane ${lane}`);
+    for(const p of candidates){assert.ok(isDeployable(p,side));assert.ok(distance(p,MAP.bases[side])<=RULES.castleRange+1e-9);}
+  }
+  const placements=[],casts=[],deploy=e.deploy.bind(e),cast=e.cast.bind(e);
+  e.deploy=(side,index,point)=>{const result=deploy(side,index,point);if(result.ok)placements.push({side,point:{...point}});return result;};
+  e.cast=(side,point)=>{const result=cast(side,point);if(result.ok)casts.push({side,point:{...point}});return result;};
+  e.teams[1].energy=10;e.step(8);
+  assert.ok(placements.length>0);assert.ok(casts.length>0);
+  for(const {side,point} of [...placements,...casts]){assert.equal(side,1);assert.ok(isDeployable(point,side));assert.ok(distance(point,MAP.bases[side])<=7.5+1e-9);}
 });

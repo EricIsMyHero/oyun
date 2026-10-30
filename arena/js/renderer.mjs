@@ -1,4 +1,4 @@
-import { MAP, closestRoute, distance, projectSegment } from './map.mjs';
+import { MAP, closestRoute, courtyardFor, isCourtyard, isDeployable, distance, projectSegment } from './map.mjs';
 import { RULES, clamp, num } from './rules.mjs';
 
 const TEAM = ['#69d6ff', '#ff8068'];
@@ -46,6 +46,20 @@ function pathPoint(points, position) {
 function riverDistance(p) {
   return Math.min(...RIVER.slice(1).map((b,i)=>projectSegment(p,RIVER[i],b).distance));
 }
+function nearCourtyard(p,margin=0) {
+  return MAP.bases.some((_,side)=>{
+    const b=courtyardFor(side);
+    return p.x>=b.minX-margin&&p.x<=b.maxX+margin&&p.y>=b.minY-margin&&p.y<=b.maxY+margin;
+  });
+}
+function segmentCrossing(a,b,c,d) {
+  const rx=b.x-a.x,ry=b.y-a.y,sx=d.x-c.x,sy=d.y-c.y;
+  const denominator=rx*sy-ry*sx;
+  if(Math.abs(denominator)<1e-8)return null;
+  const t=((c.x-a.x)*sy-(c.y-a.y)*sx)/denominator;
+  const u=((c.x-a.x)*ry-(c.y-a.y)*rx)/denominator;
+  return t>=0&&t<=1&&u>=0&&u<=1?{x:a.x+t*rx,y:a.y+t*ry,angle:Math.atan2(ry,rx)}:null;
+}
 
 /** Original illustrated isometric arena. All simulation geometry remains in tiles. */
 export class ArenaRenderer {
@@ -55,6 +69,7 @@ export class ArenaRenderer {
     this.background=document.createElement('canvas');
     this.images=new Map();
     this.shotTimes=new Map();
+    this.deploymentPreview=null;
     this.view={scale:1,ox:0,oy:0,width:1,height:1,dpr:1};
     this.lastState=null;
     this.lastUI={};
@@ -82,6 +97,7 @@ export class ArenaRenderer {
     this.view={width,height,dpr,scale,ox:width/2-27*scale,oy:height/2+2.1*scale};
     this.canvas.width=Math.round(width*dpr);this.canvas.height=Math.round(height*dpr);
     this.background.width=this.canvas.width;this.background.height=this.canvas.height;
+    this.deploymentPreview=null;
     this.makeBackground();
   }
 
@@ -178,15 +194,27 @@ export class ArenaRenderer {
       ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
       ctx.strokeStyle='#8a9a593f';ctx.lineWidth=s*.32;ctx.stroke();
     }
+    ctx.save();ctx.beginPath();ctx.rect(-w,-h,w*3,h*3);
+    for(let side=0;side<2;side++) {
+      const b=courtyardFor(side);
+      const points=[this.screenAt(b.minX,b.minY),this.screenAt(b.maxX,b.minY),this.screenAt(b.maxX,b.maxY),this.screenAt(b.minX,b.maxY)];
+      ctx.moveTo(points[0].x,points[0].y);for(const p of points.slice(1))ctx.lineTo(p.x,p.y);ctx.closePath();
+    }
+    ctx.clip('evenodd');
     this.worldLine(ctx,RIVER,1.8,'#1c4a51');
     this.worldLine(ctx,RIVER,1.5,'#3a8e9c');
     this.worldLine(ctx,RIVER,1.05,'#4cadb8');
     this.worldLine(ctx,RIVER.map(p=>({x:p.x+.25,y:p.y-.13})),.28,'#8bd5d35f');
+    ctx.restore();
     const waterLength=pathLength(RIVER);
     for(let d=.3;d<waterLength;d+=.65) {
-      const p=pathPoint(RIVER,d),a=this.screenAt(p.x-.25,p.y-.09),b=this.screenAt(p.x+.2,p.y+.13);
+      const p=pathPoint(RIVER,d);
+      if(nearCourtyard(p,.35))continue;
+      const a=this.screenAt(p.x-.25,p.y-.09),b=this.screenAt(p.x+.2,p.y+.13);
       ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.lineWidth=s*.035;ctx.strokeStyle='#d7f7e982';ctx.stroke();
     }
+    // Castle courts are playable paving, with their exact asymmetric clearances.
+    for(let side=0;side<2;side++)this.courtyard(ctx,side);
     // Three paved routes share one consistent logical road footprint.
     for(const route of MAP.routes) {
       this.worldLine(ctx,route,MAP.roadWidth+.42,'#344b32');
@@ -202,12 +230,17 @@ export class ArenaRenderer {
         polygon(ctx,stone,['#c7c4a2','#aaad93','#d2c7a1','#989c87'][Math.floor(random()*4)],'#787f673e',s*.025);
       }
     }
-    // Stone bridges cross each channel; their low parapets frame the walkways.
-    for(const p of [{x:11.8,y:3},{x:17.4,y:11},{x:20.5,y:19}])this.bridge(ctx,p);
+    // Find crossings from the current road geometry, including the central S.
+    const crossings=[];
+    for(const route of MAP.routes)for(let i=1;i<route.length;i++)for(let j=1;j<RIVER.length;j++) {
+      const p=segmentCrossing(route[i-1],route[i],RIVER[j-1],RIVER[j]);
+      if(p&&!nearCourtyard(p,.4)&&!crossings.some(b=>distance(p,b)<1.7))crossings.push(p);
+    }
+    for(const p of crossings)this.bridge(ctx,p,p.angle);
     const trees=[];
     for(let x=.25;x<32;x+=.95)for(let y=.1;y<22.2;y+=1.05) {
       const p={x:x+(random()-.5)*.8,y:y+(random()-.5)*.85};
-      if(closestRoute(p).distance<2.05||riverDistance(p)<1.35||MAP.bases.some(b=>distance(p,b)<3.2)||MAP.nodes.some(b=>distance(p,b)<2.1))continue;
+      if(closestRoute(p).distance<2.05||riverDistance(p)<1.35||nearCourtyard(p,.85)||MAP.nodes.some(b=>distance(p,b)<2.1))continue;
       if(random()<.21)continue;
       const top=this.screenAt(p);
       trees.push({...p,screen:top,height:s*(1.7+random()*1.6),tone:random(),lean:(random()-.5)*s*.2});
@@ -217,7 +250,7 @@ export class ArenaRenderer {
     // Boulders, tufts and wildflowers soften the ends of the roads.
     for(let i=0;i<170;i++) {
       const p={x:random()*32,y:random()*22},rd=closestRoute(p).distance;
-      if(rd<1.3||rd>2.1||MAP.bases.some(b=>distance(p,b)<2.7)||riverDistance(p)<.9)continue;
+      if(rd<1.3||rd>2.1||nearCourtyard(p,.4)||riverDistance(p)<.9)continue;
       const q=this.screenAt(p),r=s*(.1+random()*.22);
       if(i%3===0)this.rock(ctx,q.x,q.y,r);
       else {
@@ -242,13 +275,45 @@ export class ArenaRenderer {
     ctx.fillStyle=vignette;ctx.fillRect(0,0,w,h);
   }
 
-  bridge(ctx,p) {
+  courtyard(ctx,side) {
+    const b=courtyardFor(side),base=MAP.bases[side],random=seeded(730+side);
+    this.world(ctx,c=>{
+      c.fillStyle='#6b7d6b';c.fillRect(b.minX-.08,b.minY-.08,b.maxX-b.minX+.16,b.maxY-b.minY+.16);
+      c.fillStyle='#aeb095';c.fillRect(b.minX,b.minY,b.maxX-b.minX,b.maxY-b.minY);
+      c.save();c.beginPath();c.rect(b.minX+.08,b.minY+.08,b.maxX-b.minX-.16,b.maxY-b.minY-.16);c.clip();
+      let row=0;
+      for(let y=b.minY;y<b.maxY;y+=.38,row++)for(let x=b.minX-.5+(row%2)*.32;x<b.maxX;x+=.65) {
+        c.fillStyle=['#b9baa0','#b2b59b','#c0bea3','#a3ad94'][Math.floor(random()*4)];
+        c.fillRect(x+.025,y+.025,.6,.33);
+      }
+      c.restore();c.strokeStyle=side===0?'#6ba3ac99':'#ba8b7899';c.lineWidth=.06;
+      c.strokeRect(b.minX+.12,b.minY+.12,b.maxX-b.minX-.24,b.maxY-b.minY-.24);
+      // The inlaid approach is flat paving, not an obstacle in the deployment court.
+      const direction=side===0?1:-1,front=base.x+direction*((MAP.castleRadius||1.05)+1.4);
+      c.beginPath();c.moveTo(front+direction*.26,base.y);c.lineTo(front-direction*.2,base.y-.23);c.lineTo(front-direction*.2,base.y+.23);c.closePath();
+      c.fillStyle=side===0?'#5f92945c':'#b17b655c';c.fill();
+    });
+  }
+
+  bridge(ctx,p,angle=0) {
     const s=this.view.scale;
-    for(let k=-2;k<=2;k++)this.block(ctx,p.x+k*.4-.18,p.y-.95,.36,1.9,.12,'#9ba897','#6c817b','#bdc2a5');
+    const cosine=Math.cos(angle),sine=Math.sin(angle);
+    const at=(x,y,z=0)=>this.screenAt(p.x+x*cosine-y*sine,p.y+x*sine+y*cosine,z);
+    const block=(x,y,w,d,h,left,right,top)=>{
+      const points=[at(x,y),at(x+w,y),at(x+w,y+d),at(x,y+d)];
+      const raised=[at(x,y,h),at(x+w,y,h),at(x+w,y+d,h),at(x,y+d,h)];
+      const faces=points.map((point,i)=>({i,y:(point.y+points[(i+1)%4].y)/2})).sort((a,b)=>a.y-b.y);
+      for(const face of faces) {
+        const i=face.i,j=(i+1)%4;
+        polygon(ctx,[points[i],points[j],raised[j],raised[i]],i%2?left:right,'#3c5a51',s*.045);
+      }
+      polygon(ctx,raised,top,'#65796b',s*.035);
+    };
+    for(let k=-2;k<=2;k++)block(k*.4-.18,-.95,.36,1.9,.12,'#9ba897','#6c817b','#bdc2a5');
     for(const side of [-1,1]) {
-      for(let k=-2;k<=2;k++)this.block(ctx,p.x+k*.4-.16,p.y+side*1.06-.12,.32,.24,.42,'#a5ac96','#74877a','#d3ceb0');
-      const a=this.screenAt(p.x-.95,p.y+side*1.05),b=this.screenAt(p.x+.95,p.y+side*1.05);
-      ctx.beginPath();ctx.moveTo(a.x,a.y-s*.45);ctx.lineTo(b.x,b.y-s*.45);ctx.strokeStyle='#d0ceb2';ctx.lineWidth=s*.11;ctx.stroke();
+      for(let k=-2;k<=2;k++)block(k*.4-.16,side*1.06-.12,.32,.24,.42,'#a5ac96','#74877a','#d3ceb0');
+      const a=at(-.95,side*1.05,.45),b=at(.95,side*1.05,.45);
+      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='#d0ceb2';ctx.lineWidth=s*.11;ctx.stroke();
     }
   }
 
@@ -304,6 +369,8 @@ export class ArenaRenderer {
   castle(ctx,castle,side,time) {
     const base=MAP.bases[side],s=this.view.scale,p=this.screenAt(base);
     const blue=side===0,color=TEAM[side];
+    const artScale=(MAP.castleRadius||1.05)/1.8;
+    ctx.save();ctx.translate(p.x,p.y);ctx.scale(artScale,artScale);ctx.translate(-p.x,-p.y);
     ellipse(ctx,p.x+s*.18,p.y+s*.25,s*3.15,s*1.25,'#142b2b5c');
     this.block(ctx,base.x-1.8,base.y-1.7,3.6,3.4,.28,'#7b8981','#526e69','#b5b9a0');
     this.block(ctx,base.x-1.55,base.y-1.5,3.1,.3,.86,'#8c998d','#6b8178','#c1c4a9',.28);
@@ -343,8 +410,9 @@ export class ArenaRenderer {
     }
     this.torch(ctx,base.x-1.55,base.y+1.7,time);
     this.torch(ctx,base.x+1.7,base.y+.95,time+1.5);
+    ctx.restore();
     const hp=castle?.hp??RULES.castleHealth,max=castle?.maxHp??RULES.castleHealth;
-    const labelY=p.y-s*5.32,width=clamp(s*4.8,64,106);
+    const labelY=p.y-s*5.32*artScale,width=clamp(s*4.8,64,106);
     ctx.save();ctx.textAlign='center';ctx.font=`600 ${clamp(s*.5,9,12)}px system-ui,sans-serif`;
     ctx.letterSpacing='1px';ctx.fillStyle='#e6ead3';ctx.shadowColor='#0b252a';ctx.shadowBlur=6;
     ctx.fillText(blue?'AZURE CORE':'CRIMSON CROWN',p.x,labelY-s*.37);ctx.shadowBlur=0;
@@ -541,14 +609,29 @@ export class ArenaRenderer {
   placement(ctx,state,ui) {
     if(!ui.selectedCard&&!ui.spellSelected)return;
     const s=this.view.scale;
-    if(!ui.spellSelected) {
-      this.world(ctx,c=>{
-        c.beginPath();c.rect(.1,.1,15.3,21.8);c.clip();c.lineCap='round';c.lineJoin='round';
-        for(const route of MAP.routes) {
-          c.beginPath();c.moveTo(route[0].x,route[0].y);for(const p of route.slice(1))c.lineTo(p.x,p.y);
-          c.lineWidth=MAP.roadWidth-.15;c.strokeStyle='#77d9f51f';c.stroke();
-          c.lineWidth=.045;c.strokeStyle='#b9edee76';c.setLineDash([.16,.2]);c.stroke();
+    const building=ui.selectedCard?.kind==='building'||String(ui.selectedCard?.raw?.type||'').toLowerCase()==='building';
+    if(!ui.spellSelected||building) {
+      const side=ui.side===1?1:0,base=MAP.bases[side];
+      const buildings=(state?.units||[]).filter(u=>u.isBuilding&&u.alive!==false);
+      const key=`${side}:`+buildings.map(b=>`${b.id}:${b.x}:${b.y}:${b.radius||.45}`).join('|');
+      if(this.deploymentPreview?.key!==key) {
+        // Reuse the actual placement predicate. This mask cannot accidentally
+        // advertise the old half-map roads or a court blocked by a building.
+        const path=new Path2D(),step=.2,radius=RULES.castleRange;
+        const minX=Math.max(1,base.x-radius),maxX=Math.min(MAP.width-1,base.x+radius);
+        const minY=Math.max(1,base.y-radius),maxY=Math.min(MAP.height-1,base.y+radius);
+        for(let x=minX;x<maxX;x+=step)for(let y=minY;y<maxY;y+=step) {
+          const w=Math.min(step,maxX-x),h=Math.min(step,maxY-y);
+          if(!isDeployable({x:x+w/2,y:y+h/2},side,buildings))continue;
+          if(![[x,y],[x+w,y],[x+w,y+h],[x,y+h]].every(([px,py])=>isDeployable({x:px,y:py},side,buildings)))continue;
+          path.rect(x,y,w,h);
         }
+        this.deploymentPreview={key,path};
+      }
+      this.world(ctx,c=>{
+        c.fillStyle=side===0?'#8ce3ed35':'#f3a68f35';c.fill(this.deploymentPreview.path);
+        c.beginPath();c.arc(base.x,base.y,RULES.castleRange,0,Math.PI*2);
+        c.lineWidth=.035;c.strokeStyle=side===0?'#a5d9de85':'#e5ad9985';c.setLineDash([.16,.18]);c.stroke();
       });
     }
     const p=ui.placement;
@@ -577,6 +660,7 @@ export class ArenaRenderer {
     // Slow river glints and fireflies make an idle preview feel alive.
     for(let i=0;i<12;i++) {
       const p=pathPoint(RIVER,((time*.3+i*2.3)%pathLength(RIVER))),q=this.screenAt(p);
+      if(MAP.bases.some((_,side)=>isCourtyard(p,side)))continue;
       ellipse(ctx,q.x,q.y,s*.045,s*.025,'#c3fff6a0');
     }
     this.placement(ctx,state,ui);

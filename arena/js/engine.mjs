@@ -1,5 +1,5 @@
 import { RULES, clamp, num, burst, energyForMana } from './rules.mjs';
-import { MAP, routeFor, closestRoute, isDeployable, distance, projectSegment } from './map.mjs';
+import { MAP, routeFor, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
 
 const NEGATIVE = new Set(['slow','movementSlow','stun','root','silence','blind','poison','burn','bleed','curse','misfortune','imprisonment','suppression','healBlock','fear','conversion']);
@@ -32,7 +32,7 @@ export class ArenaEngine {
     this.state = {
       time:0, phase:'regulation',remaining:RULES.regulation,paused:false,winner:null,
       teams:[0,1].map(()=>({mana:RULES.startMana,energy:0,hand:deck.slice(0,RULES.handSize),queue:deck.slice(RULES.handSize),spellIds:[...spellDeck],spellIndex:0,deployed:0,spentMana:0})),
-      castles:MAP.bases.map((p,side)=>({id:`castle-${side}`,name:side?'Crimson Crown':'Azure Core',...p,side,radius:1.05,hp:RULES.castleHealth,maxHp:RULES.castleHealth,shield:0,maxShield:0,alive:true,isCastle:true,isBuilding:true,stats:{dodge:0,damageminimiser:0,shieldtakendamage:0,criticdamageminimiser:0},statuses:[],memory:{},cooldown:0})),
+      castles:MAP.bases.map((p,side)=>({id:`castle-${side}`,name:side?'Crimson Crown':'Azure Core',...p,side,radius:MAP.castleRadius,hp:RULES.castleHealth,maxHp:RULES.castleHealth,shield:0,maxShield:0,alive:true,isCastle:true,isBuilding:true,stats:{dodge:0,damageminimiser:0,shieldtakendamage:0,criticdamageminimiser:0},statuses:[],memory:{},cooldown:0})),
       nodes:MAP.nodes.map(n=>({...n,owner:null,capturing:null,progress:0})),
       units:[],projectiles:[],effects:[],events:[],fields:[],
     };
@@ -66,7 +66,7 @@ export class ArenaEngine {
     if(!def?.ready)return {ok:false,error:'This card has incomplete battle data.'};
     const cost=num(def.stats.mana);
     if(team.mana+EPS<cost)return {ok:false,error:'Not enough mana.'};
-    if(!isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Deploy on a road in your own half.'};
+    if(!isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Deploy on a road or courtyard within your castle\'s 7.5-tile range.'};
     if(this.near(point,.18).some(u=>!u.isBuilding&&u.def.combat?.movementType!=='flying'))return {ok:false,error:'That position is occupied.'};
     const lane=closestRoute(point).lane;
     const formation=this._formation(def,side,point,lane);
@@ -84,7 +84,7 @@ export class ArenaEngine {
     const radius=.18+.07*(bodyMass[def.combat?.weight]||1);
     const positions=[];
     const candidates=[{...point}];
-    // Stable radial packing; every paid unit receives a legal own-half location.
+    // Stable radial packing; every paid unit receives a legal in-range location.
     for(let ring=1;ring<=6;ring++)for(let k=0;k<ring*8;k++){
       const angle=k/(ring*8)*Math.PI*2;
       candidates.push({x:point.x+Math.cos(angle)*ring*(radius*2+.04),y:point.y+Math.sin(angle)*ring*(radius*2+.04)});
@@ -108,7 +108,7 @@ export class ArenaEngine {
       const mass=bodyMass[def.combat?.weight]||1;
       const route=routeFor(lane,side);
       let p=options.positions?.[i]||{x:clamp(point.x+(count===1?0:(i%3-1)*.24),0,MAP.width),y:clamp(point.y+(Math.floor(i/3)-(Math.ceil(count/3)-1)/2)*.27,0,MAP.height)};
-      if(def.combat?.movementType!=='flying'&&closestRoute(p).distance>MAP.roadWidth/2-.05){const projected=closestRoute(p);p={x:projected.x,y:projected.y};}
+      if(!options.positions&&def.combat?.movementType!=='flying'&&!isWalkable(p)){const projected=closestRoute(p);p={x:projected.x,y:projected.y};}
       let best={distance:Infinity,index:1};
       for(let j=1;j<route.length;j++) {const q=projectSegment(p,route[j-1],route[j]);if(q.distance<best.distance)best={...q,index:j};}
       const u={
@@ -145,7 +145,7 @@ export class ArenaEngine {
     if(team.energy+EPS<cost)return {ok:false,error:'Not enough spell energy.'};
     if(!finitePoint(point))return {ok:false,error:'Choose a point inside the arena.'};
     const building=(spell.kind||String(spell.raw?.type).toLowerCase())==='building';
-    if(building&&!isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Place buildings on an open road in your own half.'};
+    if(building&&!isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Place buildings on a road or courtyard within your castle\'s 7.5-tile range.'};
     const id=spell.id||slug(spell.name);
     const handled=new Set(['spirit-of-the-wild','illustration-spell','laser','nightfall-curse','roots','lunar-mirrage','shock-bomb','shield-of-serenity','healing-light','dark-orb','reflector','guard-post','watchtower','obsidian-fortress','mana-surge','stagnantias-wrath']);
     if(!handled.has(id))return {ok:false,error:'This spell has incomplete battle data.'};
@@ -329,6 +329,21 @@ export class ArenaEngine {
     return step?{...base,...step}:{...base};
   }
   _reach(u,p=this._profile(u)){return Math.max(0,num(p.attackDistance)/1000);}
+  _courtyardExit(u){
+    const bounds=courtyardFor(u.side),route=u.route;
+    for(let i=1;i<route.length;i++){
+      const a=route[i-1],b=route[i];
+      if(isCourtyard(b,u.side))continue;
+      let t=1;
+      if(b.x<bounds.minX)t=Math.min(t,(bounds.minX-a.x)/(b.x-a.x));
+      if(b.x>bounds.maxX)t=Math.min(t,(bounds.maxX-a.x)/(b.x-a.x));
+      if(b.y<bounds.minY)t=Math.min(t,(bounds.minY-a.y)/(b.y-a.y));
+      if(b.y>bounds.maxY)t=Math.min(t,(bounds.maxY-a.y)/(b.y-a.y));
+      const inside=clamp(t-.12/(distance(a,b)||1),0,1);
+      return {x:a.x+(b.x-a.x)*inside,y:a.y+(b.y-a.y)*inside,next:b};
+    }
+    return null;
+  }
   _move(u,target,dt){
     if(u.isBuilding||has(u,'root',this.time)||has(u,'stun',this.time)||has(u,'imprisonment',this.time))return;
     const movement=u.def.combat?.movementType;
@@ -342,6 +357,15 @@ export class ArenaEngine {
     }
     const node=this.state.nodes.find(n=>n.owner!==u.side&&distance(n,u)<=RULES.captureRadius);
     if(!target&&node&&!this.near(node,RULES.captureRadius,t=>t.side!==u.side&&!t.isBuilding).length)return;
+    if(movement!=='flying'&&isCourtyard(u,u.side)&&!isCourtyard(destination,u.side)){
+      // An off-road courtyard placement must enter its chosen lane through the
+      // road/courtyard intersection, not aim across the forest toward a bend.
+      const exit=this._courtyardExit(u);
+      if(exit){
+        if(distance(u,exit)<=.14)u.memory.leavingCourtyard=true;
+        destination=u.memory.leavingCourtyard?exit.next:exit;
+      }
+    }else delete u.memory.leavingCourtyard;
     let dx=destination.x-u.x,dy=destination.y-u.y,d=Math.hypot(dx,dy);
     if(d<EPS)return;
     let slow=Math.max(strongest(u,'slow',this.time),strongest(u,'movementSlow',this.time));if(has(u,'poison',this.time))slow=Math.max(slow,.1);
@@ -350,19 +374,35 @@ export class ArenaEngine {
     const travel=Math.min(d,speed*dt),p={x:u.x+dx/d*travel,y:u.y+dy/d*travel};
     u.facingX=dx/d;u.facingY=dy/d;
     if(movement!=='flying'){
-      const q=closestRoute(p);
-      if(q.distance>MAP.roadWidth/2-.1){p.x=q.x;p.y=q.y;}
-      const block=this.units.find(b=>b.alive&&b.isBuilding&&b.id!==u.id&&distance(p,b)<u.radius+b.radius);
+      if(!isWalkable(p)){
+        // Leave a courtyard through a road at walking speed, rather than
+        // snapping across the gap when a direct pursuit reaches its edge.
+        const q=closestRoute(u),toward=Math.hypot(q.x-u.x,q.y-u.y);
+        if(toward<EPS)return;
+        const correction=Math.min(toward,speed*dt);
+        p.x=u.x+(q.x-u.x)/toward*correction;p.y=u.y+(q.y-u.y)/toward*correction;
+        if(!isWalkable(p))return;
+      }
+      const obstacles=this.castles.concat(this.units.filter(b=>b.isBuilding));
+      const block=obstacles.find(b=>b.alive&&b.id!==u.id&&distance(p,b)<u.radius+b.radius);
       if(block){
         const direction=(u.id.charCodeAt(u.id.length-1)%2)?1:-1;
-        const slide={x:u.x-dy/d*speed*dt*direction,y:u.y+dx/d*speed*dt*direction};
-        if(closestRoute(slide).distance<MAP.roadWidth/2-.05&&distance(slide,block)>distance(u,block))Object.assign(p,slide);else return;
+        let avoided=false;
+        for(const sign of [direction,-direction]){
+          const slide={x:u.x-dy/d*speed*dt*sign,y:u.y+dx/d*speed*dt*sign};
+          if(isWalkable(slide)&&distance(slide,block)>distance(u,block)&&!obstacles.some(b=>b.alive&&b.id!==u.id&&distance(slide,b)<u.radius+b.radius)){
+            Object.assign(p,slide);avoided=true;break;
+          }
+        }
+        if(!avoided)return;
       }
     }
+    const travelled=distance(u,p);
+    if(travelled>EPS){u.facingX=(p.x-u.x)/travelled;u.facingY=(p.y-u.y)/travelled;}
     u.x=clamp(p.x,.5,MAP.width-.5);u.y=clamp(p.y,.5,MAP.height-.5);
-    u.memory.distance=(u.memory.distance||0)+travel*1000;
+    u.memory.distance=(u.memory.distance||0)+travelled*1000;
     u.memory.movedTime=(u.memory.movedTime||0)+dt;
-    u.moving=travel>0;
+    u.moving=travelled>0;
   }
   _targetsFor(u,target,p){
     if(!p.multiTarget)return [target];
@@ -543,7 +583,7 @@ export class ArenaEngine {
       for(const [u,sign,weight] of [[a,1,b.mass/total],[b,-1,a.mass/total]]){
         if(has(u,'stun',this.time)||has(u,'root',this.time)||has(u,'imprisonment',this.time))continue;
         const p={x:u.x+dx/d*overlap*sign*weight,y:u.y+dy/d*overlap*sign*weight};
-        if(closestRoute(p).distance<=MAP.roadWidth/2-.05){u.x=p.x;u.y=p.y;}
+        if(isWalkable(p)&&!this.castles.some(c=>c.alive&&distance(p,c)<c.radius+u.radius)){u.x=p.x;u.y=p.y;}
       }
     }
   }
@@ -563,34 +603,53 @@ export class ArenaEngine {
     }
     this.state.units=this.units.filter(u=>u.alive);
   }
+  _deploymentCandidates(side,lane,goal=MAP.nodes[lane],building=false){
+    const route=routeFor(lane,side),buildings=this.units.filter(u=>u.alive&&u.isBuilding);
+    const candidates=[],seen=new Set();
+    for(let i=1;i<route.length;i++){
+      const a=route[i-1],b=route[i],length=distance(a,b),steps=Math.max(1,Math.ceil(length/.4));
+      const nx=length?-(b.y-a.y)/length:0,ny=length?(b.x-a.x)/length:0;
+      for(let step=0;step<=steps;step++)for(const offset of [0,.45,-.45]){
+        const fraction=step/steps,point={x:a.x+(b.x-a.x)*fraction+nx*offset,y:a.y+(b.y-a.y)*fraction+ny*offset};
+        const key=`${point.x.toFixed(4)},${point.y.toFixed(4)}`;
+        if(seen.has(key)||!isDeployable(point,side,buildings))continue;
+        if(building&&this.units.some(u=>u.alive&&u.def.combat?.movementType!=='flying'&&distance(u,point)<u.radius+.5))continue;
+        seen.add(key);candidates.push(point);
+      }
+    }
+    // Both sides use the same road/range legality and tactical distance metric.
+    return candidates.sort((a,b)=>distance(a,goal)-distance(b,goal)||distance(a,MAP.bases[side])-distance(b,MAP.bases[side]));
+  }
   _bot(dt){
     if(!this.bot)return;
     this.botClock-=dt;if(this.botClock>0)return;
     this.botClock=.6;
-    const side=1,team=this.teams[side],enemy=this.units.filter(u=>u.alive&&u.side!==side);
+    const side=1,team=this.teams[side],castle=this.castles[side],opponent=this.castles[1-side],enemy=this.units.filter(u=>u.alive&&u.side!==side);
     const scores=MAP.routes.map((r,lane)=>{
-      const pressure=enemy.filter(u=>u.lane===lane).reduce((n,u)=>n+(u.x>16?3:1)*(u.hp/Math.max(1,u.maxHp)),0);
+      const pressure=enemy.filter(u=>u.lane===lane).reduce((n,u)=>n+(distance(u,castle)<distance(u,opponent)?3:1)*(u.hp/Math.max(1,u.maxHp)),0);
       return pressure+(this.state.nodes[lane].owner!==side?2:0)+(this.random()*.4);
     });
     const lane=scores.indexOf(Math.max(...scores));
-    const threats=enemy.filter(u=>u.lane===lane&&u.x>16).sort((a,b)=>b.x-a.x);
-    let point=threats.length?{x:clamp(threats[0].x+1.5,17,26),y:threats[0].y}:MAP.routes[lane][MAP.routes[lane].length-2];
-    if(!threats.length){const node=this.state.nodes[lane];point={x:18,y:node.y};}
-    const road=closestRoute(point);point={x:road.x,y:road.y};
+    const threats=enemy.filter(u=>u.lane===lane&&distance(u,castle)<distance(u,opponent)).sort((a,b)=>distance(a,castle)-distance(b,castle));
+    let goal=MAP.nodes[lane];
+    if(threats.length){
+      const target=threats[0],length=distance(castle,target)||1;
+      goal={x:target.x+(castle.x-target.x)/length,y:target.y+(castle.y-target.y)/length};
+    }
     const legal=team.hand.map((id,index)=>({def:this.cards.get(id),index})).filter(v=>v.def.stats.mana<=team.mana+EPS);
     legal.sort((a,b)=>{
       const score=v=>num(v.def.stats.health)/100+num(v.def.stats.damage)*(v.def.attack?.count||1)/20+(v.def.combat.targets==='both'?1:0)-v.def.stats.mana*.12;
       return score(b)-score(a);
     });
     if(legal.length){
-      let placed=false;
-      for(const dy of [0,.5,-.5]){const result=this.deploy(side,legal[0].index,{x:point.x,y:point.y+dy});if(result.ok){placed=true;break;}}
-      if(!placed){const fallback=MAP.routes[lane].at(-2);this.deploy(side,legal[0].index,fallback);}
+      for(const point of this._deploymentCandidates(side,lane,goal).slice(0,24))if(this.deploy(side,legal[0].index,point).ok)break;
     }
     const spell=this.spells.get(team.spellIds[team.spellIndex]);
     if(spell&&team.energy>=spell.energy){
       const name=slug(spell.name),friendly=['healing-light','shield-of-serenity','lunar-mirrage'].includes(name);
-      if(spell.kind==='building')this.cast(side,{x:23,y:MAP.nodes[lane].y});
+      if(spell.kind==='building'){
+        for(const point of this._deploymentCandidates(side,lane,goal,true).slice(0,24))if(this.cast(side,point).ok)break;
+      }
       else{
         const pool=friendly?this.units.filter(u=>u.alive&&u.side===side&&!u.isBuilding):enemy;
         const target=pool.sort((a,b)=>this.near(b,2,u=>u.side===b.side).length-this.near(a,2,u=>u.side===a.side).length)[0];

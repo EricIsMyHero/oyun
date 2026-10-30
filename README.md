@@ -7,7 +7,11 @@ Codex to play the separate, three-route arena against a bot. Build an eight-card
 deck with a four-card hand and a cycling spell loadout of at most five Charge.
 Cards with missing essential combat or ability data show their lock reasons.
 
-Both castles have 1000 health. Mana starts at 12, caps at 20 and regenerates at
+Both castles have 1000 health and a 7.5-tile firing/deployment radius. Units and
+spell buildings deploy on roads or the castle courtyard inside that radius.
+Courtyards leave one tile behind and 2.5 ahead of the castle body; both are
+deployable. Every mana well lies 17.5 walking tiles along its route from either
+castle. Mana starts at 12, caps at 20 and regenerates at
 one per 1.3 seconds. Each captured crystal adds 2% mana regeneration; spending
 mana earns spell energy in 0.05 increments. Matches last five minutes plus two
 minutes of overtime whenever both castles survive. See [the arena guide](docs/arena.md)

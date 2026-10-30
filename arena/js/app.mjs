@@ -203,7 +203,7 @@ function startMatch() {
     document.body.dataset.mode='battle';
     document.querySelectorAll('.battle-only').forEach(el=>{el.hidden=false;});
     $('pause-overlay').hidden=true;$('result-overlay').hidden=true;
-    $('stage-message').textContent='Select a card, then choose a path on your side.';
+    $('stage-message').textContent='Choose a road or courtyard within 7.5 tiles of your citadel.';
     $('stage-message').classList.remove('warning');
     state.renderer.resize();
     updateHUD(true);
@@ -233,7 +233,7 @@ function selectHand(index) {
   state.selection={kind:'card',handIndex:index};
   state.pointer=null;
   const def=selectedDefinition();
-  stageMessage(`Place ${def.name} on a path in your half. ${def.stats.mana} mana.`);
+  stageMessage(`Place ${def.name} on a road or courtyard within 7.5 tiles of your citadel. ${def.stats.mana} mana.`);
   state.handSignature='';updateHUD(true);
 }
 function selectSpell() {
@@ -241,12 +241,12 @@ function selectSpell() {
   state.selection={kind:'spell'};state.pointer=null;
   const def=selectedDefinition();
   if(!def){state.selection=null;return;}
-  stageMessage(`${def.name} · Choose ${def.kind==='building'||def.spellkind==='building'?'a path in your half':'a target area'}. ${def.energy} energy.`);
+  stageMessage(`${def.name} · Choose ${def.kind==='building'||def.spellkind==='building'?'a road or courtyard within your citadel’s 7.5-tile range':'a target area'}. ${def.energy} energy.`);
   state.spellSignature='';updateHUD(true);
 }
 function clearSelection() {
   state.selection=null;state.pointer=null;state.drag=null;
-  stageMessage('Select a card, then choose a path on your side.');
+  stageMessage('Select a card, then place it in the highlighted deployment area.');
   state.handSignature='';state.spellSignature='';updateHUD(true);
 }
 function stageMessage(message,warning=false) { $('stage-message').textContent=message;$('stage-message').classList.toggle('warning',warning); }
@@ -273,7 +273,8 @@ function inspectAt(point) {
   if(!unit)return;
   if(unit.def){openInspector(unit.def,unit.isBuilding?'spell':'card',unit);return;}
   if(unit.isCastle){
-    const def={id:`castle-${unit.side}`,name:unit.side===0?'Azure Citadel':'Crimson Citadel',ready:true,type:['Citadel'],rarity:'mundane',stats:unit.stats||{},raw:{class:'Citadel',subclass:'Defender',stats:{health:1000,shield:0,damage:25,attackSpeed:'1.00s',sps:25,mana:'—',number:1},additionalStats:{range:4000,speed:0,vision:4000},combatStats:{attackType:'ranged',attackDistance:4000,attackWidth:500,targets:'both',movementType:'ground',multiTarget:false,weight:'very-heavy'},trait:'',story:'The heart of your command. Its destruction ends the battle.'}};
+    const range=RULES.castleRange*1000;
+    const def={id:`castle-${unit.side}`,name:unit.side===0?'Azure Citadel':'Crimson Citadel',ready:true,type:['Citadel'],rarity:'mundane',stats:unit.stats||{},raw:{class:'Citadel',subclass:'Defender',stats:{health:RULES.castleHealth,shield:0,damage:RULES.castleDamage,attackSpeed:`${RULES.castleInterval.toFixed(2)}s`,sps:RULES.castleDamage/RULES.castleInterval,mana:'—',number:1},additionalStats:{range,speed:0,vision:range},combatStats:{attackType:'ranged',attackDistance:range,attackWidth:500,targets:'both',movementType:'ground',multiTarget:false,weight:'very-heavy'},trait:'',story:'The heart of your command. Its destruction ends the battle.'}};
     openInspector(def,'card',unit);
   }
 }

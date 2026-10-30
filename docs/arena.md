@@ -24,7 +24,7 @@ original language; they are not translated at runtime.
 | Starting spell energy | Zero |
 | Spell energy limit | No separate cap |
 | Paid deployment reward | `Math.round((manaSpent / 18) * 20) / 20` energy |
-| Castle | 1,000 health, 25 damage every second, four-tile range, ground and air targets |
+| Castle | 1,000 health, 25 damage every second, 7.5-tile range, ground and air targets |
 | Regulation | Five minutes |
 | Overtime | Two minutes if both castles survive regulation; mana recovery doubles |
 | Victory | Destroy the opposing castle, or retain more castle health at the end of overtime |
@@ -45,12 +45,22 @@ Spells can be used again when their turn returns and sufficient energy exists.
 The original illustrated map places the Azure Core castle at the southwest and
 the Crimson Crown castle at the northeast. The central road and two outer roads
 connect them through a forest island with rivers, cliffs and three crystal wells.
+Each route is **35 tiles** long, with its well **17.5 walking tiles from either
+castle**. The central road winds so all three travel distances agree; distance
+is measured along road segments, not as a straight line through the terrain.
 The map uses world coordinates independently of its isometric screen projection.
 
-Deploy units on roads in your own half of the map. Castles, existing buildings
-and the central neutral strip cannot be used as deployment positions. Capturing
-a well does not unlock an extra deployment zone. Spell buildings use your own
-half; normal spells use their appropriate target area.
+Deploy units and spell buildings only on roads or your castle courtyard **within
+7.5 tiles of the castle centre**. The courtyard has **one tile of clear space
+behind the castle body and 2.5 tiles ahead**, facing the opposing castle, plus a
+one-tile side margin. Rear and front clearances are walkable and deployable;
+the castle body and occupied building footprints remain blocked. The deployment
+radius does not make surrounding forest walkable. Capturing a well does not
+unlock an extra deployment zone; normal spells retain their usual target areas.
+
+The castle acquires targets whose body intersects its 7.5-tile firing range;
+projectiles travel at most 7.5 tiles. The same geometry and deployment rules
+apply to both teams, including the bot.
 
 Each well takes **five uncontested seconds** to capture within its 1.25-tile
 radius. Living units, including flying units and summons, can capture; buildings

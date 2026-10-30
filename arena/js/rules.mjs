@@ -1,6 +1,6 @@
 export const RULES = Object.freeze({
   maxMana:20, startMana:12, manaInterval:1.3, regulation:300, overtime:120,
-  castleHealth:1000, castleDamage:25, castleInterval:1, castleRange:4,
+  castleHealth:1000, castleDamage:25, castleInterval:1, castleRange:7.5,
   captureTime:5, captureRadius:1.25, nodeBonus:0.02, deckSize:8, handSize:4,
   spellBudget:5, fixedStep:1/30, projectileSpeed:8,
 });
