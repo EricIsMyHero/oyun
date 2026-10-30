@@ -80,6 +80,20 @@ target layer.
 
 ## Fog of war and scouting
 
+The battle camera shows a close portion of the island. Drag with a mouse or
+swipe with one finger to move it; a short click/tap places the selected card or
+inspects a visible unit. Dragging the battlefield never deploys a card, even
+while one is selected. Cards can also be dragged from the hand onto the map.
+Scroll or use **WASD / arrow keys** to pan. **Home / Space**, or the citadel
+button beside the minimap, returns to your castle. Click or drag the minimap
+to travel directly to another area; its frame shows your current viewport.
+
+Use the **+ / −** buttons (or keyboard keys) to zoom from 80% to 160%; Ctrl/Command
+plus the mouse wheel zooms around the pointer. Even the widest battle setting
+requires panning. Resizing retains your camera focus and zoom. Starting or
+restarting a match restores the home camera; the lobby shows the complete island.
+Camera movement does not alter combat positions, deployment range or team sight.
+
 Battles use current team vision, with **opaque black fog** outside all friendly
 vision sources:
 
@@ -111,6 +125,10 @@ preview shows the full arena before battle; match results may show final castle
 health after the battle has ended. This is a local single-player simulation, not
 a server security boundary; UI and simulation consumers share the same sight
 predicates rather than implementing separate reveal rules.
+The minimap uses that same current sight: enemy markers, well ownership and
+terrain outside vision remain hidden there too. Moving the camera into fog
+does not reveal that area. Static terrain is cached separately from the camera
+so scrolling does not regenerate the illustrated forest.
 
 ## Codex fidelity and locked cards
 

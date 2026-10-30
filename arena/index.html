@@ -6,20 +6,21 @@
   <meta name="theme-color" content="#0b1718">
   <meta name="description" content="Command your Clash-A-Mana deck in a real-time, three-route forest arena. Capture the mana wells. Break the enemy citadel.">
   <title>Clash-A-Mana · The Threefold Arena</title>
-  <link rel="stylesheet" href="styles/arena.css?v=3">
+  <link rel="stylesheet" href="styles/arena.css?v=4">
   <script type="importmap">
     {"imports":{
-      "./js/app.mjs":"./js/app.mjs?v=3",
-      "./js/abilities.mjs":"./js/abilities.mjs?v=3",
-      "./js/catalog.mjs":"./js/catalog.mjs?v=3",
-      "./js/engine.mjs":"./js/engine.mjs?v=3",
-      "./js/map.mjs":"./js/map.mjs?v=3",
-      "./js/renderer.mjs":"./js/renderer.mjs?v=3",
-      "./js/rules.mjs":"./js/rules.mjs?v=3",
-      "./js/vision.mjs":"./js/vision.mjs?v=3"
+      "./js/app.mjs":"./js/app.mjs?v=4",
+      "./js/abilities.mjs":"./js/abilities.mjs?v=4",
+      "./js/camera.mjs":"./js/camera.mjs?v=4",
+      "./js/catalog.mjs":"./js/catalog.mjs?v=4",
+      "./js/engine.mjs":"./js/engine.mjs?v=4",
+      "./js/map.mjs":"./js/map.mjs?v=4",
+      "./js/renderer.mjs":"./js/renderer.mjs?v=4",
+      "./js/rules.mjs":"./js/rules.mjs?v=4",
+      "./js/vision.mjs":"./js/vision.mjs?v=4"
     }}
   </script>
-  <script type="module" src="js/app.mjs?v=3"></script>
+  <script type="module" src="js/app.mjs?v=4"></script>
 </head>
 <body data-mode="lobby">
   <header class="site-header">
@@ -51,9 +52,19 @@
           <div class="citadel-status crimson"><div><span class="micro-label">CRIMSON CROWN · BOT</span><strong><span id="enemy-castle-hp" aria-label="Enemy citadel health is hidden in the fog">?</span><small> / 1,000</small></strong><div class="castle-track"><i id="enemy-castle-bar"></i></div></div><span class="team-mark" aria-hidden="true"></span></div>
         </div>
         <div id="arena-stage" class="arena-stage">
-          <canvas id="arena-canvas" tabindex="0" aria-label="Three-route battlefield with black fog of war. Your citadel reveals 7.5 tiles, allied units reveal 8 tiles, and captured wells reveal 4 tiles. Select a card with keys 1 to 4, then deploy on a road or courtyard within 7.5 tiles of your citadel. Q selects your active spell."></canvas>
+          <canvas id="arena-canvas" tabindex="0" aria-label="Battlefield camera. Drag or swipe to explore; arrow keys or WASD move the view. Home or Space returns to your citadel. Tap to place a selected card; dragging the map never deploys it. Fog hides enemies outside allied vision. Keys 1 to 4 select a card; Q selects a spell."></canvas>
           <div class="map-title lobby-only"><span class="micro-label">ARENA 01</span><h2>Verdant Basin</h2><span>THE MANA FRONTIER</span></div>
           <div id="node-hud" class="node-hud battle-only" hidden aria-label="Mana well ownership"></div>
+          <div class="camera-hint battle-only" hidden>DRAG TO EXPLORE <span>· WASD / ARROWS</span></div>
+          <aside id="camera-panel" class="camera-panel battle-only" hidden aria-label="Camera navigation">
+            <div class="minimap-heading"><span>TACTICAL MAP</span><output id="camera-zoom" aria-label="Camera zoom">100%</output></div>
+            <canvas id="arena-minimap" tabindex="0" aria-label="Tactical minimap. Click or drag to move the camera. The frame marks your view; hidden enemies are never shown."></canvas>
+            <div class="camera-buttons">
+              <button type="button" id="camera-zoom-out" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10"/></svg></button>
+              <button type="button" id="camera-home" aria-label="Return camera to your citadel" title="Your citadel · Home / Space"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v3m0 10v3M2 10h3m10 0h3"/><circle cx="10" cy="10" r="5"/><circle cx="10" cy="10" r="1"/></svg></button>
+              <button type="button" id="camera-zoom-in" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10m-5-5v10"/></svg></button>
+            </div>
+          </aside>
           <div class="map-legend lobby-only"><span><i class="legend-dot azure"></i> AZURE CORE</span><span><i class="legend-dot neutral"></i> MANA WELLS</span><span><i class="legend-dot crimson"></i> CRIMSON CROWN</span></div>
           <div id="stage-message" class="stage-message battle-only" hidden aria-live="polite">Select a card, then place it in the highlighted deployment area.</div>
           <div id="pause-overlay" class="stage-overlay" hidden><div class="overlay-panel"><span class="eyebrow">BATTLE ON HOLD</span><h2>Take your time.</h2><p id="pause-message">The arena is paused. Neither side can act.</p><button type="button" class="primary-button" id="resume-button">Resume battle <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button><button type="button" class="text-button" id="pause-edit-deck">Return to deck</button></div></div>
@@ -66,7 +77,7 @@
           <div id="next-card" class="next-card" aria-label="Next card"></div>
           <div id="spell-command" class="spell-command"></div>
         </div>
-        <div id="battle-controls" class="battle-controls battle-only" hidden><p><kbd>1</kbd>–<kbd>4</kbd> cards <span>·</span> <kbd>Q</kbd> spell <span>·</span> Select, then place in the highlighted area <span>·</span> Click a unit to inspect</p><div><button type="button" class="text-button" id="pause-button">Pause</button><button type="button" class="text-button" id="restart-button">Restart</button><button type="button" class="text-button" id="return-lobby">Edit deck</button></div></div>
+        <div id="battle-controls" class="battle-controls battle-only" hidden><p><kbd>1</kbd>–<kbd>4</kbd> cards <span>·</span> <kbd>Q</kbd> spell <span>·</span> Drag / swipe to explore <span>·</span> <kbd>Space</kbd> your citadel <span>·</span> Tap to place or inspect</p><div><button type="button" class="text-button" id="pause-button">Pause</button><button type="button" class="text-button" id="restart-button">Restart</button><button type="button" class="text-button" id="return-lobby">Edit deck</button></div></div>
       </section>
 
       <section id="deck-panel" class="deck-panel lobby-only" aria-labelledby="deck-title">
@@ -87,7 +98,7 @@
   </main>
 
   <dialog id="inspector" class="inspector-dialog" aria-labelledby="inspector-name"><button type="button" class="dialog-close" id="inspector-close" aria-label="Close details">×</button><div id="inspector-content"></div></dialog>
-  <dialog id="guide-dialog" class="guide-dialog" aria-labelledby="guide-title"><button type="button" class="dialog-close" id="guide-close" aria-label="Close field guide">×</button><p class="eyebrow">FIELD MANUAL</p><h2 id="guide-title">Own the paths.<br>Control the battle.</h2><div class="guide-grid"><article><span>01</span><h3>Build your command</h3><p>Select 8 different unit cards and spells with a combined Charge of no more than 5. Four cards form your hand; deployment cycles in the next card.</p></article><article><span>02</span><h3>Place with purpose</h3><p>Select a card or press 1–4, then click a road or courtyard within 7.5 tiles of your citadel. Units march and fight automatically. Flying units can cross terrain; hovering units follow the ground and resist ground effects.</p></article><article><span>03</span><h3>Take the wells</h3><p>Hold a well for 5 uncontested seconds to capture it. The central well is 17.5 walking tiles from either citadel; outer wells are about 23.23 tiles along their longer routes. Every well you control adds 2% to your mana regeneration. Enemy presence stops capture progress.</p></article><article><span>04</span><h3>Spend mana, earn energy</h3><p>You begin with 12 mana, regenerate 1 every 1.3 seconds, and can hold 20. Spending 18 mana earns 1 spell energy, rounded in steps of 0.05 for each deployment.</p></article><article><span>05</span><h3>Cast and cycle</h3><p>Press Q or select your active spell, then choose its target. A successful cast spends its Energy cost and reveals the next spell in your loadout. Charge is deck capacity, not a consumable.</p></article><article><span>06</span><h3>Break the citadel</h3><p>Both citadels have 1,000 health and a 7.5-tile range. Courtyards leave 1 tile behind and 2.5 ahead, both available for deployment. Destroy the enemy citadel to win. After 5 minutes, surviving citadels enter 2 minutes of double-mana overtime; the healthier citadel then wins.</p></article><article><span>07</span><h3>Scout through the fog</h3><p>Unseen ground stays black. Allied units reveal an 8-tile radius, captured wells reveal 4 tiles, and your citadel reveals 7.5 tiles from the start. Losing sight hides the area again. Enemy units, citadel health and well ownership stay hidden outside your current vision.</p></article></div><div class="guide-note"><strong>Faithful to the Codex.</strong> 1,000 source points equal 1 tile. A × B means A hits of B damage; deployed Count is separate. Shield Depletion splits incoming damage between shield and health. Missing battle data stays visibly locked.</div><button type="button" id="guide-done" class="primary-button">Understood <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button></dialog>
+  <dialog id="guide-dialog" class="guide-dialog" aria-labelledby="guide-title"><button type="button" class="dialog-close" id="guide-close" aria-label="Close field guide">×</button><p class="eyebrow">FIELD MANUAL</p><h2 id="guide-title">Own the paths.<br>Control the battle.</h2><div class="guide-grid"><article><span>01</span><h3>Build your command</h3><p>Select 8 different unit cards and spells with a combined Charge of no more than 5. Four cards form your hand; deployment cycles in the next card.</p></article><article><span>02</span><h3>Place with purpose</h3><p>Select a card or press 1–4, then click a road or courtyard within 7.5 tiles of your citadel. Units march and fight automatically. Flying units can cross terrain; hovering units follow the ground and resist ground effects.</p></article><article><span>03</span><h3>Take the wells</h3><p>Hold a well for 5 uncontested seconds to capture it. The central well is 17.5 walking tiles from either citadel; outer wells are about 23.23 tiles along their longer routes. Every well you control adds 2% to your mana regeneration. Enemy presence stops capture progress.</p></article><article><span>04</span><h3>Spend mana, earn energy</h3><p>You begin with 12 mana, regenerate 1 every 1.3 seconds, and can hold 20. Spending 18 mana earns 1 spell energy, rounded in steps of 0.05 for each deployment.</p></article><article><span>05</span><h3>Cast and cycle</h3><p>Press Q or select your active spell, then choose its target. A successful cast spends its Energy cost and reveals the next spell in your loadout. Charge is deck capacity, not a consumable.</p></article><article><span>06</span><h3>Break the citadel</h3><p>Both citadels have 1,000 health and a 7.5-tile range. Courtyards leave 1 tile behind and 2.5 ahead, both available for deployment. Destroy the enemy citadel to win. After 5 minutes, surviving citadels enter 2 minutes of double-mana overtime; the healthier citadel then wins.</p></article><article><span>07</span><h3>Scout through the fog</h3><p>Unseen ground stays black. Allied units reveal an 8-tile radius, captured wells reveal 4 tiles, and your citadel reveals 7.5 tiles from the start. Losing sight hides the area again. Enemy units, citadel health and well ownership stay hidden outside your current vision.</p></article><article><span>08</span><h3>Move your view</h3><p>Drag or swipe the battlefield to explore. A short tap places a card; a drag only moves the camera. Click or drag the tactical minimap to jump across the island. Scroll, WASD or arrow keys also move the view. Home or Space returns to your citadel; + and − adjust zoom. Moving the camera never reveals fog.</p></article></div><div class="guide-note"><strong>Faithful to the Codex.</strong> 1,000 source points equal 1 tile. A × B means A hits of B damage; deployed Count is separate. Shield Depletion splits incoming damage between shield and health. Missing battle data stays visibly locked.</div><button type="button" id="guide-done" class="primary-button">Understood <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   <noscript><div class="system-state"><h1>JavaScript is required.</h1><p>Enable JavaScript to play the arena, or return to the <a href="../index.html">Codex</a>.</p></div></noscript>
 </body>

@@ -1,6 +1,7 @@
 import { MAP, closestRoute, courtyardFor, isCourtyard, isDeployable, distance, projectSegment } from './map.mjs';
 import { RULES, clamp, num } from './rules.mjs';
 import { visibilitySources, isPointVisible, isEntityVisible } from './vision.mjs';
+import { ArenaCamera, CAMERA } from './camera.mjs';
 
 const TEAM = ['#69d6ff', '#ff8068'];
 const TEAL = '#89f4ed';
@@ -63,6 +64,23 @@ function segmentCrossing(a,b,c,d) {
   return t>=0&&t<=1&&u>=0&&u<=1?{x:a.x+t*rx,y:a.y+t*ry,angle:Math.atan2(ry,rx)}:null;
 }
 
+function paintFog(canvas,view,sources) {
+  const {width,height,dpr,scale,ox,oy}=view;
+  const w=Math.round(width*dpr),h=Math.round(height*dpr);
+  if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+  const ctx=canvas.getContext('2d');
+  ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
+  ctx.fillStyle='#020507';ctx.fillRect(0,0,w,h);
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.globalCompositeOperation='destination-out';
+  ctx.transform(scale,-scale*.5,scale,scale*.5,ox,oy);
+  for(const source of sources) {
+    const clearEdge=Math.max(0,1-.65/source.radius);
+    const gradient=ctx.createRadialGradient(source.x,source.y,0,source.x,source.y,source.radius);
+    gradient.addColorStop(0,'#000');gradient.addColorStop(clearEdge,'#000');gradient.addColorStop(1,'#0000');
+    ctx.beginPath();ctx.arc(source.x,source.y,source.radius,0,Math.PI*2);ctx.fillStyle=gradient;ctx.fill();
+  }
+}
+
 /** Original illustrated isometric arena. All simulation geometry remains in tiles. */
 export class ArenaRenderer {
   constructor(canvas) {
@@ -70,6 +88,9 @@ export class ArenaRenderer {
     this.ctx=canvas.getContext('2d',{alpha:false});
     this.background=document.createElement('canvas');
     this.fog=document.createElement('canvas');
+    this.minimapFog=document.createElement('canvas');
+    this.camera=new ArenaCamera();
+    this.backgroundKey=null;
     this.fogKey=null;
     this.images=new Map();
     this.shotTimes=new Map();
@@ -94,16 +115,48 @@ export class ArenaRenderer {
     const height=Math.max(1,Math.round(rect.height||this.canvas.clientHeight||600));
     const dpr=Math.min(2,globalThis.devicePixelRatio||1);
     if(this.view.width===width&&this.view.height===height&&this.view.dpr===dpr)return;
-    // Fit the complete island, including the larger forest rim and cliff faces.
-    const totalExtent=MAP.width+MAP.height;
-    const worldWidth=totalExtent+4;
-    const scale=Math.min(width/worldWidth,height/(totalExtent*.5+6));
-    this.view={width,height,dpr,scale,ox:width/2-totalExtent*.5*scale,oy:height/2+(MAP.width-MAP.height)*.25*scale};
+    this.camera.resize(width,height);
+    this.view={...this.camera.view,dpr};
     this.canvas.width=Math.round(width*dpr);this.canvas.height=Math.round(height*dpr);
-    this.background.width=this.canvas.width;this.background.height=this.canvas.height;
     this.fog.width=this.canvas.width;this.fog.height=this.canvas.height;this.fogKey=null;
     this.deploymentPreview=null;
-    this.makeBackground();
+    this.backgroundKey=null;
+    this.ensureBackground();
+  }
+
+  syncCamera() {
+    this.view={...this.camera.view,dpr:this.view.dpr};
+    this.fogKey=null;
+  }
+  setBattleView(active) {
+    this.camera.setActive(active);this.syncCamera();
+    this.backgroundKey=null;
+  }
+  focusAt(point) {this.camera.focus(point);this.syncCamera();}
+  home() {this.camera.home();this.syncCamera();}
+  panBy(dx,dy) {this.camera.panBy(dx,dy);this.syncCamera();}
+  zoomBy(factor,anchor) {this.camera.zoomBy(factor,anchor);this.syncCamera();}
+
+  ensureBackground() {
+    // Paint the island once at the maximum camera scale, then move the cached
+    // artwork beneath the viewport. Panning never regenerates the forest.
+    const scale=this.camera.active?this.camera.baseScale*CAMERA.maxZoom:this.view.scale;
+    const dpr=this.camera.active?1:this.view.dpr;
+    const key=`${scale}:${dpr}`;
+    if(this.backgroundKey===key)return;
+    const extent=MAP.width+MAP.height,width=Math.ceil((extent+4)*scale),height=Math.ceil((extent*.5+6)*scale);
+    this.backgroundView={width,height,scale,dpr,ox:width/2-extent*.5*scale,oy:height/2+(MAP.width-MAP.height)*.25*scale};
+    this.background.width=Math.ceil(width*dpr);this.background.height=Math.ceil(height*dpr);
+    const viewport=this.view;
+    try {this.view=this.backgroundView;this.makeBackground();}
+    finally {this.view=viewport;}
+    this.backgroundKey=key;
+  }
+
+  drawTerrain(ctx,view) {
+    const atlas=this.backgroundView,ratio=view.scale/atlas.scale;
+    ctx.fillStyle='#0a171b';ctx.fillRect(0,0,view.width,view.height);
+    ctx.drawImage(this.background,view.ox-atlas.ox*ratio,view.oy-atlas.oy*ratio,atlas.width*ratio,atlas.height*ratio);
   }
 
   /** Canvas-local CSS pixels. Use canvas rect offsets for page coordinates. */
@@ -128,6 +181,7 @@ export class ArenaRenderer {
     for(const img of this.images.values()){img.onload=null;img.onerror=null;}
     this.images.clear();this.shotTimes.clear();
     this.fog.width=1;this.fog.height=1;this.fogKey=null;
+    this.background.width=1;this.background.height=1;this.minimapFog.width=1;this.minimapFog.height=1;
   }
 
   world(ctx,callback) {
@@ -495,7 +549,7 @@ export class ArenaRenderer {
     const s=this.view.scale,side=u.side??0,color=TEAM[side];
     const movement=u.def?.combat?.movementType||u.def?.raw?.combatStats?.movementType||'ground';
     const time=state?.time||0,p=this.screenAt(u),selected=ui.selectedUnitId===u.id&&!ghost;
-    const size=clamp(s*.86,12,24)*(u.isBuilding?1.2:1);
+    const size=clamp(s*.86,12,34)*(u.isBuilding?1.2:1);
     const phase=String(u.id||'').split('').reduce((sum,c)=>sum+c.charCodeAt(0),0);
     const floating=movement==='flying'?s*(.77+Math.sin(time*4+phase)*.06):movement==='hovering'?s*(.19+Math.sin(time*3+u.x)*.05):0;
     const py=p.y-floating,bodyY=py-size*.57;
@@ -660,24 +714,10 @@ export class ArenaRenderer {
 
   applyFog(state,side,sources) {
     if(!state)return;
-    const {width,height,dpr}=this.view;
-    const key=`${side}:`+sources.map(source=>`${source.x},${source.y},${source.radius}`).join('|');
+    const {scale,ox,oy}=this.view;
+    const key=`${side}:${scale}:${ox}:${oy}:`+sources.map(source=>`${source.x},${source.y},${source.radius}`).join('|');
     if(key!==this.fogKey) {
-      const ctx=this.fog.getContext('2d');
-      ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
-      ctx.fillStyle='#020507';ctx.fillRect(0,0,this.fog.width,this.fog.height);
-      ctx.setTransform(dpr,0,0,dpr,0,0);ctx.globalCompositeOperation='destination-out';
-      this.world(ctx,c=>{
-        for(const source of sources) {
-          // The soft falloff is strictly inside the visibility radius: no blur
-          // is allowed to expose terrain or combat effects beyond the boundary.
-          const clearEdge=Math.max(0,1-.65/source.radius);
-          const gradient=c.createRadialGradient(source.x,source.y,0,source.x,source.y,source.radius);
-          gradient.addColorStop(0,'#000');gradient.addColorStop(clearEdge,'#000');
-          gradient.addColorStop(1,'#0000');
-          c.beginPath();c.arc(source.x,source.y,source.radius,0,Math.PI*2);c.fillStyle=gradient;c.fill();
-        }
-      });
+      paintFog(this.fog,this.view,sources);
       this.fogKey=key;
     }
     // Composite after every world layer, including labels and effects whose
@@ -686,12 +726,49 @@ export class ArenaRenderer {
     this.ctx.drawImage(this.fog,0,0);this.ctx.restore();
   }
 
+  minimapView(canvas) {
+    const bounds=canvas.getBoundingClientRect();
+    const camera=new ArenaCamera(Math.max(1,Math.round(bounds.width)),Math.max(1,Math.round(bounds.height)));
+    return {...camera.view,dpr:Math.min(2,globalThis.devicePixelRatio||1)};
+  }
+  minimapWorldAt(canvas,clientX,clientY) {
+    const bounds=canvas.getBoundingClientRect(),{scale,ox,oy}=this.minimapView(canvas);
+    const a=(clientX-bounds.left-ox)/scale,b=(clientY-bounds.top-oy)/(scale*.5);
+    return {x:(a-b)*.5,y:(a+b)*.5};
+  }
+  drawMinimap(canvas,state,side=0) {
+    if(!canvas||!state||this.destroyed)return;
+    const view=this.minimapView(canvas),{width,height,dpr,scale,ox,oy}=view;
+    const w=Math.round(width*dpr),h=Math.round(height*dpr);
+    if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+    const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);
+    this.drawTerrain(ctx,view);
+    const project=p=>({x:ox+(p.x+p.y)*scale,y:oy+(p.y-p.x)*scale*.5});
+    const sources=visibilitySources(state,side);
+    const key=`${side}:${width}:${height}:${dpr}:`+sources.map(source=>`${source.x},${source.y},${source.radius}`).join('|');
+    if(key!==this.minimapFogKey){paintFog(this.minimapFog,view,sources);this.minimapFogKey=key;}
+    ctx.drawImage(this.minimapFog,0,0,w,h,0,0,width,height);
+    for(const node of state.nodes||[])if(isPointVisible(state,side,node,sources)) {
+      const p=project(node),color=node.owner===0?TEAM[0]:node.owner===1?TEAM[1]:'#b6b69b';
+      polygon(ctx,[{x:p.x,y:p.y-3},{x:p.x+3,y:p.y},{x:p.x,y:p.y+3},{x:p.x-3,y:p.y}],color);
+    }
+    for(const castle of state.castles||[])if(isEntityVisible(state,side,castle,sources)) {
+      const p=project(castle);ctx.fillStyle=TEAM[castle.side];ctx.fillRect(p.x-3,p.y-3,6,6);
+    }
+    for(const unit of state.units||[])if(isEntityVisible(state,side,unit,sources)) {
+      const p=project(unit);ellipse(ctx,p.x,p.y,1.8,1.8,TEAM[unit.side]);
+    }
+    const points=[[0,0],[this.view.width,0],[this.view.width,this.view.height],[0,this.view.height]].map(([x,y])=>project(this.camera.worldAt(x,y)));
+    polygon(ctx,points,'#c5e9dc0c','#d5f0df',1);
+  }
+
   draw(state=null,ui={}) {
     if(this.destroyed)return;
     this.lastState=state;this.lastUI=ui;
     const ctx=this.ctx,{width:w,height:h,dpr,scale:s}=this.view;
-    ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(this.background,0,0);
+    this.ensureBackground();
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    this.drawTerrain(ctx,this.view);
     const time=state?.time??((globalThis.performance?.now?.()||0)/1000);
     const viewerSide=ui.viewerSide===1?1:0;
     const sources=state?visibilitySources(state,viewerSide):[];

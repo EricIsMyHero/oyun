@@ -43,9 +43,31 @@ async function settleFrame(page) {
   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
 }
 
+async function focusCamera(page,point) {
+  await page.evaluate(point=>arenaApp.renderer.focusAt(point),point);
+  await settleFrame(page);
+}
+
+async function minimapPoint(page,point) {
+  return page.evaluate(point=>{
+    const canvas=document.getElementById('arena-minimap'),bounds=canvas.getBoundingClientRect();
+    const {scale,ox,oy}=arenaApp.renderer.minimapView(canvas);
+    return {x:bounds.left+ox+(point.x+point.y)*scale,y:bounds.top+oy+(point.y-point.x)*scale*.5};
+  },point);
+}
+
 async function pixelAt(page,point) {
+  await focusCamera(page,point);
   const canvas=page.locator('#arena-canvas'),box=await canvas.boundingBox();
   const screen=await clientPoint(page,point);
+  const png=PNG.sync.read(await canvas.screenshot());
+  const x=Math.max(0,Math.min(png.width-1,Math.round((screen.x-box.x)*png.width/box.width)));
+  const y=Math.max(0,Math.min(png.height-1,Math.round((screen.y-box.y)*png.height/box.height)));
+  return [...png.data.subarray((y*png.width+x)*4,(y*png.width+x)*4+3)];
+}
+
+async function minimapPixelAt(page,point) {
+  const canvas=page.locator('#arena-minimap'),box=await canvas.boundingBox(),screen=await minimapPoint(page,point);
   const png=PNG.sync.read(await canvas.screenshot());
   const x=Math.max(0,Math.min(png.width-1,Math.round((screen.x-box.x)*png.width/box.width)));
   const y=Math.max(0,Math.min(png.height-1,Math.round((screen.y-box.y)*png.height/box.height)));
@@ -117,6 +139,54 @@ async function pixelAt(page,point) {
     assert.equal(await page.locator('[data-hand-index]').count(),4);
     assert.equal(await page.locator('#active-spell').count(),1);
 
+    // The battle opens close to our castle. Dragging an armed map pans it and
+    // never commits the card, even when the release is over a legal road.
+    const cameraStart=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.bot=false;e.teams[0].mana=20;
+      return {center:{...arenaApp.renderer.camera.center},scale:arenaApp.renderer.view.scale};
+    });
+    assert.deepEqual(cameraStart.center,{x:8,y:14});
+    await page.keyboard.press('1');
+    const actionBefore=await page.evaluate(()=>({energy:arenaApp.engine.teams[0].energy,hand:[...arenaApp.engine.teams[0].hand],queue:[...arenaApp.engine.teams[0].queue],deployed:arenaApp.engine.teams[0].deployed}));
+    const panStart=await clientPoint(page,{x:6.5,y:14});
+    await page.mouse.move(panStart.x,panStart.y);await page.mouse.down();
+    await page.mouse.move(panStart.x+120,panStart.y-20,{steps:8});await page.mouse.up();
+    assert.notDeepEqual(await page.evaluate(()=>arenaApp.renderer.camera.center),cameraStart.center);
+    assert.deepEqual(await page.evaluate(()=>({energy:arenaApp.engine.teams[0].energy,hand:[...arenaApp.engine.teams[0].hand],queue:[...arenaApp.engine.teams[0].queue],deployed:arenaApp.engine.teams[0].deployed})),actionBefore,'panning does not deploy the selected card');
+    assert.ok(await page.evaluate(()=>arenaApp.selection?.kind==='card'),'the selection survives map panning');
+    await page.locator('#camera-home').click();
+    assert.deepEqual(await page.evaluate(()=>arenaApp.renderer.camera.center),cameraStart.center);
+    await page.keyboard.press('Escape');
+    await page.keyboard.down('ArrowRight');await page.waitForTimeout(150);await page.keyboard.up('ArrowRight');
+    assert.notDeepEqual(await page.evaluate(()=>arenaApp.renderer.camera.center),cameraStart.center);
+    await page.keyboard.press('Home');
+    assert.deepEqual(await page.evaluate(()=>arenaApp.renderer.camera.center),cameraStart.center);
+    await page.mouse.move(panStart.x,panStart.y);const scrollBefore=await page.evaluate(()=>scrollY);
+    await page.mouse.wheel(0,90);await settleFrame(page);
+    assert.notDeepEqual(await page.evaluate(()=>arenaApp.renderer.camera.center),cameraStart.center);
+    assert.equal(await page.evaluate(()=>scrollY),scrollBefore,'wheel navigation does not scroll the page');
+    await page.keyboard.press('Space');
+    assert.deepEqual(await page.evaluate(()=>arenaApp.renderer.camera.center),cameraStart.center);
+    for(let i=0;i<4&&!await page.locator('#camera-zoom-in').isDisabled();i++)await page.locator('#camera-zoom-in').click();
+    assert.equal(await page.evaluate(()=>arenaApp.renderer.camera.zoom),1.6);
+    assert.equal(await page.locator('#camera-zoom-in').isDisabled(),true);
+    for(let i=0;i<10&&!await page.locator('#camera-zoom-out').isDisabled();i++)await page.locator('#camera-zoom-out').click();
+    assert.equal(await page.evaluate(()=>arenaApp.renderer.camera.zoom),.8);
+    assert.equal(await page.locator('#camera-zoom-out').isDisabled(),true);
+    await page.keyboard.press('1');
+    const remote=await minimapPoint(page,{x:39,y:14});
+    await page.mouse.click(remote.x,remote.y);await settleFrame(page);
+    const remoteCenter=await page.evaluate(()=>arenaApp.renderer.camera.center);
+    assert.ok(Math.hypot(remoteCenter.x-39,remoteCenter.y-14)<.5,'the minimap reaches the opposing castle');
+    assert.equal(await page.locator('#enemy-castle-hp').textContent(),'?','camera movement does not reveal enemies');
+    const north=await minimapPoint(page,{x:21.5,y:4}),south=await minimapPoint(page,{x:21.5,y:24});
+    await page.mouse.move(north.x,north.y);await page.mouse.down();await page.mouse.move(south.x,south.y,{steps:6});await page.mouse.up();
+    const draggedCenter=await page.evaluate(()=>arenaApp.renderer.camera.center);
+    assert.ok(Math.hypot(draggedCenter.x-21.5,draggedCenter.y-24)<.5,'dragging the minimap reaches another route');
+    assert.deepEqual(await page.evaluate(()=>({energy:arenaApp.engine.teams[0].energy,hand:[...arenaApp.engine.teams[0].hand],queue:[...arenaApp.engine.teams[0].queue],deployed:arenaApp.engine.teams[0].deployed})),actionBefore,'minimap input never places the armed card');
+    await page.evaluate(()=>arenaApp.startMatch());await settleFrame(page);
+    assert.equal(await page.evaluate(()=>arenaApp.renderer.camera.zoom),1,'restart restores the close home camera');
+
     // Current vision is rendered, inspected and reported consistently. Freeze
     // this fixture without the pause overlay so actual canvas pixels are tested.
     assert.equal(await page.locator('#enemy-castle-hp').textContent(),'?');
@@ -133,7 +203,9 @@ async function pixelAt(page,point) {
       window.fogFixture={enemy,def};
     });
     await settleFrame(page);
-    const hiddenEnemy=await clientPoint(page,{x:32,y:14});
+    await focusCamera(page,{x:32,y:14});
+    let hiddenEnemy=await clientPoint(page,{x:32,y:14});
+    assert.ok((await minimapPixelAt(page,{x:32,y:14})).every(channel=>channel<35),'the minimap does not expose an unseen enemy marker');
     await page.evaluate(()=>arenaApp.engine.setPaused(false));
     await page.mouse.click(hiddenEnemy.x,hiddenEnemy.y);
     assert.equal(await page.locator('#inspector').isVisible(),false,'clicking an unseen enemy does not disclose its identity');
@@ -143,6 +215,9 @@ async function pixelAt(page,point) {
     });
     await settleFrame(page);
     assert.ok((await pixelAt(page,{x:30,y:14})).some(channel=>channel>30),'a scout reveals terrain within eight tiles');
+    const enemyMarker=await minimapPixelAt(page,{x:32,y:14});
+    assert.ok(enemyMarker[0]>140&&enemyMarker[0]>enemyMarker[1]*1.5,`a visible enemy appears as a red minimap marker: ${JSON.stringify(enemyMarker)}`);
+    hiddenEnemy=await clientPoint(page,{x:32,y:14});
     await page.evaluate(()=>arenaApp.engine.setPaused(false));
     await page.mouse.click(hiddenEnemy.x,hiddenEnemy.y);
     assert.equal(await page.locator('#inspector').isVisible(),true,'a revealed enemy can be inspected');
@@ -165,6 +240,7 @@ async function pixelAt(page,point) {
       e.spawn(window.fogFixture.def,0,{x:14,y:14},1,{count:1});e.state.time+=.2;
     });
     await settleFrame(page);
+    await focusCamera(page,{x:12,y:14});
     await page.screenshot({path:'/tmp/oyun-arena-fog-desktop.png',fullPage:true});screenshots.push('/tmp/oyun-arena-fog-desktop.png');
     await page.evaluate(()=>{delete window.fogFixture;arenaApp.startMatch();});
     await settleFrame(page);
@@ -193,9 +269,10 @@ async function pixelAt(page,point) {
       return t.hand.map((id,index)=>({id,index,cost:arenaApp.catalog.byId.get(id).stats.mana})).filter(c=>c.cost<=t.mana).sort((a,b)=>a.cost-b.cost)[0];
     });
     assert.ok(rearChoice,'the opening cycle can afford a second courtyard deployment');
-    await page.keyboard.press(String(rearChoice.index+1));
     const rear=await clientPoint(page,{x:2.2,y:14});
-    await page.mouse.click(rear.x,rear.y);
+    const rearHand=await page.locator(`[data-hand-index="${rearChoice.index}"]`).boundingBox();
+    await page.mouse.move(rearHand.x+rearHand.width/2,rearHand.y+rearHand.height/2);await page.mouse.down();
+    await page.mouse.move(rear.x,rear.y,{steps:8});await page.mouse.up();
     await page.waitForFunction(energy=>arenaApp.engine.state.teams[0].energy>energy,after.energy);
     const rearAfter=await page.evaluate(()=>({energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand],queue:[...arenaApp.engine.state.teams[0].queue]}));
     assert.ok(Math.abs(rearAfter.energy-after.energy-Math.round(rearChoice.cost/18*20)/20)<1e-8,'rear placement spends mana and earns energy exactly once');
@@ -230,10 +307,12 @@ async function pixelAt(page,point) {
 
     // Enemy-side placement and targeting cancellation are atomic as well.
     await page.keyboard.press('1');
+    await focusCamera(page,{x:36,y:14});
     const enemy=await clientPoint(page,{x:36,y:14});
     await page.mouse.click(enemy.x,enemy.y);
     assert.deepEqual(await page.evaluate(()=>({mana:arenaApp.engine.state.teams[0].mana,energy:arenaApp.engine.state.teams[0].energy,hand:[...arenaApp.engine.state.teams[0].hand],queue:[...arenaApp.engine.state.teams[0].queue]})),invalidBefore);
     await page.keyboard.press('Escape');
+    await page.locator('#camera-home').click();
 
     await page.locator('#pause-button').click();
     assert.equal(await page.evaluate(()=>arenaApp.engine.state.paused),true);
@@ -298,7 +377,8 @@ async function pixelAt(page,point) {
         const {MAP}=await import('./js/map.mjs');
         return [...MAP.bases,...MAP.nodes].map(p=>arenaApp.renderer.screenAt(p));
       });
-      assert.ok(landmarks.every(p=>p.x>0&&p.x<box.width&&p.y>0&&p.y<box.height),`${width}x${height}: all enlarged map landmarks fit in the canvas`);
+      assert.ok(landmarks.some(p=>p.x<0||p.x>box.width||p.y<0||p.y>box.height),`${width}x${height}: only part of the map is shown`);
+      assert.ok(landmarks[0].x>0&&landmarks[0].x<box.width&&landmarks[0].y>0&&landmarks[0].y<box.height,`${width}x${height}: home castle stays in view`);
     }
     await page.setViewportSize({width:390,height:844});await settleFrame(page);
     await page.screenshot({path:'/tmp/oyun-arena-mobile.png',fullPage:true});screenshots.push('/tmp/oyun-arena-mobile.png');
@@ -322,6 +402,18 @@ async function pixelAt(page,point) {
     await page.touchscreen.tap(touchPoint.x,touchPoint.y);
     await page.waitForFunction(before=>arenaApp.engine.state.teams[0].energy>before,touchEnergy);
     assert.ok(Math.abs(await page.evaluate(()=>arenaApp.engine.state.teams[0].energy)-touchEnergy-Math.round(touchChoice.cost/18*20)/20)<1e-8);
+
+    // A real Chromium touch swipe pans an armed battlefield without deploying.
+    await page.evaluate(()=>{arenaApp.engine.teams[0].mana=20;});
+    await page.locator('[data-hand-index="0"]').tap();
+    const touchBefore=await page.evaluate(()=>({center:{...arenaApp.renderer.camera.center},energy:arenaApp.engine.teams[0].energy,deployed:arenaApp.engine.teams[0].deployed,hand:[...arenaApp.engine.teams[0].hand]}));
+    const swipe=await clientPoint(page,{x:9,y:14}),cdp=await context.newCDPSession(page);
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:swipe.x,y:swipe.y,id:1}]});
+    for(let i=1;i<=6;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:swipe.x+70*i/6,y:swipe.y+10*i/6,id:1}]});
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await cdp.detach();
+    assert.notDeepEqual(await page.evaluate(()=>arenaApp.renderer.camera.center),touchBefore.center);
+    assert.deepEqual(await page.evaluate(()=>({energy:arenaApp.engine.teams[0].energy,deployed:arenaApp.engine.teams[0].deployed,hand:[...arenaApp.engine.teams[0].hand]})),{energy:touchBefore.energy,deployed:touchBefore.deployed,hand:touchBefore.hand});
+    await page.locator('#camera-home').tap();await page.keyboard.press('Escape');
 
     const captured=await page.evaluate(()=>{
       const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];
@@ -371,7 +463,7 @@ async function pixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; rendered fog radii, scout/pump vision loss, hidden inspection/HUD, real deck, courtyard deployment, castle-radius rejection, energy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; mouse/touch/keyboard/scroll camera, minimap navigation and fog markers, zoom bounds, drag-versus-deploy, hand drag, rendered fog, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

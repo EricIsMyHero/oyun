@@ -14,6 +14,9 @@ deployable. The enlarged 43×28-tile island has a straight central road with its
 mana well 17.5 walking tiles from either castle; the two outer roads take about
 23.23 tiles to their wells. Unseen terrain is dark: allied cards reveal eight
 tiles, captured wells four and your castle 7.5. Castle shots track moving targets.
+Battles use a close camera: drag or swipe the map, scroll, or use WASD/arrow keys
+to explore. The fog-aware minimap moves the camera without revealing enemies;
+Home/Space or the citadel button returns to your base. Zoom buttons adjust detail.
 Mana starts at 12, caps at 20 and regenerates at
 one per 1.3 seconds. Each captured crystal adds 2% mana regeneration; spending
 mana earns spell energy in 0.05 increments. Matches last five minutes plus two
