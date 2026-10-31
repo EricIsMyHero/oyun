@@ -38,7 +38,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,58);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,65);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);assert.ok(card.attack.interval>0);}}
   assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
@@ -57,6 +57,16 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  stacy:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'burn');assert.equal(records.statuses[0].amount,8);assert.equal(records.statuses[0].duration,4);assert.equal(records.statuses[0].stack,true);u.hp=u.maxHp*.1;rule.tick(ctx,u);close(u.stats.range,2600);u.hp-=.01;rule.tick(ctx,u);close(u.stats.range,2860);u.hp=u.maxHp;rule.tick(ctx,u);close(u.stats.range,2600);},
+  death:({ctx,u,rule})=>{for(let i=0;i<50;i++)rule.unitDeath(ctx,u);assert.equal(u.memory.damageGrowth,80);assert.equal(u.stats.damage,105);},
+  demotron:({ctx,u,rule})=>{u.hp=u.maxHp-100;rule.tick(ctx,u,10);close(u.hp,u.maxHp-90);rule.tick(ctx,u,10);close(u.hp,u.maxHp-81);},
+  aeralis:({ctx,u,t,rule,result,records})=>{ctx.random=()=>.119;rule.hit(ctx,u,t,result);close(records.push[0].distance,.4);ctx.random=()=>.12;rule.hit(ctx,u,t,result);close(records.push[1].distance,.1);rule.hit(ctx,u,t,{total:0});assert.equal(records.push.length,2);},
+  'dark-necromancer':({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'silence');assert.equal(records.statuses[0].duration,10);rule.tick(ctx,u,14);assert.equal(records.spawn[0].def.id,'dark-necromancer/bladeknight');ctx.random=()=>.4;rule.tick(ctx,u,14);assert.equal(records.spawn[1].def.id,'dark-necromancer/stormbow');ctx.random=()=>.75;rule.tick(ctx,u,14);assert.equal(records.spawn[2].def.id,'dark-necromancer/ironhide');},
+  'dark-necromancer/bladeknight':({ctx,u,t,rule,hit})=>{rule.attack(ctx,u,t,hit);assert.equal(hit.bypassShield,true);},
+  'dark-necromancer/stormbow':({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'burn');assert.equal(records.statuses[0].amount,4);assert.equal(records.statuses[0].duration,2);},
+  'dark-necromancer/ironhide':({ctx,u,t,rule})=>{for(let i=1;i<=8;i++){const hit={damage:10};rule.incoming(ctx,u,t,hit);assert.equal(hit.damage,i%4?10:0);}},
+  ali:({ctx,u,t,rule,records})=>{rule.tick(ctx,u,25);assert.equal(records.statuses.length,0,'Ali cannot charge alone');t.side=u.side;rule.tick(ctx,u,25);assert.equal(records.statuses.length,2);assert.ok(records.statuses.every(s=>s.kind==='untouchable'&&s.duration===3));close(u.memory.charge,0);},
+  worms:({ctx,u,t,rule,result,records})=>{rule.spawn(ctx,u);assert.equal(records.statuses[0].kind,'invisible');rule.hit(ctx,u,t,result);assert.equal(u.statuses.some(s=>s.kind==='invisible'),false);assert.equal(records.statuses[1].kind,'stun');assert.equal(records.statuses[1].duration,.8);rule.hit(ctx,u,t,result);assert.equal(records.statuses.length,2);},
   hammies:({ctx,u,rule,records})=>{rule.spawn(ctx,u);assert.equal(records.statuses[0].duration,12);close(records.statuses[0].magnitude,.2);},
   'b-b':({ctx,u,t,rule,hit})=>{t.def={...t.def,type:['Animal']};rule.incoming(ctx,u,t,hit);close(hit.damage,4);},
   scrapy:({ctx,u,t,rule,hit})=>{rule.attack(ctx,u,t,hit);close(hit.damage,15);assert.ok(hit.bypassShield);},

@@ -64,7 +64,7 @@ export class ArenaEngine {
     if(u.engulfedBy&&['tick','attack','hit','lifesteal'].includes(name))return;
     if(['tick','attack'].includes(name)&&(has(u,'airborne',this.time)||has(u,'frozen',this.time)))return;
     const fn=this.ability(u)?.[name];if(!fn)return;
-    const chance=strongest(u,'misfortune',this.time),triggered=['incoming','damaged','death','lifesteal'].includes(name);
+    const chance=strongest(u,'misfortune',this.time),triggered=['incoming','damaged','death','unitDeath','lifesteal'].includes(name);
     if(triggered&&chance&&this.random()<chance)return;
     const previous=this.abilityContext;this.abilityContext={source:u,name,missed:triggered?false:null};
     try{fn(this,u,...args);}finally{this.abilityContext=previous;}
@@ -643,7 +643,16 @@ export class ArenaEngine {
         shot.x+=shot.dx*step;shot.y+=shot.dy*step;shot.remaining-=step;
         candidates=this.units.concat(this.castles);
       }
-      const targets=candidates.filter(t=>this._canHit(shot.source,t)&&!shot.hitIds.has(t.id)&&projectSegment(t,{x:shot.prevX,y:shot.prevY},shot).distance<=t.radius+shot.width/2);
+      const targets=candidates.filter(t=>{
+        if(!this._canHit(shot.source,t)||shot.hitIds.has(t.id))return false;
+        let halfWidth=shot.width/2;
+        if(shot.profile.attackShape==='cone'){
+          const along=(t.x-shot.origin.x)*shot.dx+(t.y-shot.origin.y)*shot.dy;
+          const angle=num(shot.profile.attackAngle,2*Math.atan(shot.width/(2*Math.max(.01,this._reach(shot.source,shot.profile))))*180/Math.PI)*Math.PI/180;
+          halfWidth=Math.min(halfWidth,Math.max(0,along)*Math.tan(angle/2));
+        }
+        return projectSegment(t,{x:shot.prevX,y:shot.prevY},shot).distance<=t.radius+halfWidth;
+      });
       targets.sort((a,b)=>distance({x:shot.prevX,y:shot.prevY},a)-distance({x:shot.prevX,y:shot.prevY},b));
       for(const target of targets){
         if(shot.profile.projectileEndEffect==='explode'||shot.profile.multiTarget&&['square','circle'].includes(shot.profile.attackShape)){
@@ -757,6 +766,7 @@ export class ArenaEngine {
     while(this.deaths.length&&processed++<2048){
       const {u,killer}=this.deaths.shift();if(u.memory.deathResolved)continue;u.memory.deathResolved=true;
       if(u.isCastle){this.fx('explosion',u.x,u.y,{side:u.side,radius:2,duration:1.8});continue;}
+      if(!u.isBuilding)for(const observer of [...this.units])if(observer.alive&&observer!==u&&this.ability(observer)?.unitDeath)this._hook('unitDeath',observer,u,killer);
       // Release is structural: Silence cannot leave survivors trapped forever.
       for(const captive of this.captivesOf(u))this.releaseEngulfed(captive);
       if(u.engulfedBy)this.releaseEngulfed(u);

@@ -223,6 +223,57 @@ export const ABILITIES = {
     },
     attack(ctx,u,t,hit){if(u.memory.leapStrike){hit.damage*=1.5;u.memory.leapStrike=false;}},
   },
+  stacy:{
+    tick(ctx,u){u.stats.range=u.def.stats.range*(u.hp<healthCap(ctx,u)*.1?1.1:1);},
+    hit(ctx,u,t,result){
+      if(!damageEvent(result))return;
+      ctx.status(t,'burn',4*STATUS_INTERVALS.burn,0,u,{amount:8,stack:true});
+      ctx.fx('burn',t.x,t.y,{side:u.side,duration:.4,color:'#ffb578'});
+    },
+  },
+  death:{unitDeath(ctx,u){
+    const before=u.memory.damageGrowth||0;growDamage(u,2,80);
+    if((u.memory.damageGrowth||0)>before)ctx.fx('buff',u.x,u.y,{side:u.side,color:'#c2a6ed'});
+  }},
+  demotron:{tick(ctx,u,dt){
+    periodic(u,'repairClock',dt,10,()=>ctx.heal(u,Math.max(0,healthCap(ctx,u)-u.hp)*.1,u),ctx);
+  }},
+  aeralis:{hit(ctx,u,t,result){
+    if(damageEvent(result)&&!t.isCastle)ctx.push(t,u,ctx.random()<.12?.4:.1);
+  }},
+  'dark-necromancer':{
+    hit(ctx,u,t,result){if(damageEvent(result)&&!t.isCastle&&ctx.random()<.17)ctx.status(t,'silence',10,0,u);},
+    tick(ctx,u,dt){periodic(u,'summonClock',dt,14,()=>{
+      const chance=ctx.random(),index=chance<.4?0:chance<.75?1:2,form=u.def.forms[index];
+      if(form){ctx.spawn(form,u.side,u,u.lane,{count:1,groupId:u.groupId});ctx.fx('spawn',u.x,u.y,{side:u.side,color:'#bba3f1'});}
+    },ctx);},
+  },
+  'dark-necromancer/bladeknight':{attack(ctx,u,t,hit){hit.bypassShield=true;}},
+  'dark-necromancer/stormbow':{hit(ctx,u,t,result){
+    if(damageEvent(result)&&!t.isCastle&&ctx.random()<.35)ctx.status(t,'burn',2*STATUS_INTERVALS.burn,0,u,{amount:4,stack:true});
+  }},
+  'dark-necromancer/ironhide':{incoming(ctx,u,s,hit){
+    if(!(hit.damage>0))return;
+    u.memory.incomingHits=(u.memory.incomingHits||0)+1;
+    if(u.memory.incomingHits%4===0){hit.damage=0;hit.instantKill=false;ctx.fx('shield',u.x,u.y,{side:u.side});}
+  }},
+  ali:{tick(ctx,u,dt){
+    u.memory.charge=(u.memory.charge||0)+allies(ctx,u).length*4*dt;
+    while(u.memory.charge+1e-7>=100){
+      u.memory.charge=Math.max(0,u.memory.charge-100);
+      const protect=()=>{allies(ctx,u,radius(u,ctx),true).forEach(t=>ctx.status(t,'untouchable',3,0,u));ctx.fx('shield',u.x,u.y,{side:u.side,radius:radius(u,ctx)});};
+      if(ctx.useAbility)ctx.useAbility(u,protect);else protect();
+    }
+  }},
+  worms:{
+    spawn(ctx,u){ctx.status(u,'invisible',Infinity,0,u);},
+    hit(ctx,u,t,result){
+      if(!damageEvent(result)||u.memory.ambushed)return;
+      u.memory.ambushed=true;u.statuses=u.statuses.filter(s=>s.kind!=='invisible');
+      if(!t.isCastle)ctx.status(t,'stun',.8,0,u);
+      ctx.fx('leap',u.x,u.y,{side:u.side});
+    },
+  },
 };
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
@@ -254,7 +305,7 @@ export function abilityReadiness(raw,id) {
   if(ABILITY_GAPS[id]?.length)return [...ABILITY_GAPS[id]];
   if(ABILITIES[id])return [];
   if(!raw.trait||raw.trait==='-')return [];
-  return ['Native ability cannot be verified until its missing combat profile is authored.'];
+  return ['The native ability has not been implemented in Arena yet.'];
 }
 
 export const SPELL_RULES = Object.freeze({

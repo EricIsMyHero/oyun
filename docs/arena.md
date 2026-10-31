@@ -170,7 +170,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **58 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **65 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -178,10 +178,38 @@ after the first successful hit; their poison continues and keeps its original
 caster attribution. Giga Bomb deals its immediate source damage and then ten
 one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
 
+Seven Relic roots now have their native abilities implemented: **Stacy**,
+**Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali** and **Worms**.
+
+- Stacy adds four one-second Burn ticks of eight damage after each successful
+  hit. Independent packets stack and continue after her death. Below 10% health,
+  her acquisition Range increases by 10%; healing above that threshold removes
+  the bonus. Her base projectile geometry remains unchanged.
+- Death gains two damage for each allied or enemy unit death, including summons.
+  The bonus caps at 80, for 105 total base damage. Castles and buildings do not
+  grant stacks. The `unitDeath` native hook dispatches each resolved death once
+  to living observers through the usual Silence and Misfortune rules.
+- Demotron restores 10% of its **currently missing** health every ten active
+  seconds. With 100 health missing it restores ten, then nine at the following
+  interval if no other damage or healing occurs. Normal healing modifiers apply.
+- Aeralis pushes victims 0.1 tiles per hit, with a 12% chance to push 0.4 tiles.
+  His and Stacy's ranged cones widen toward their authored projectile width;
+  they can damage multiple enemies inside the fan.
+- Dark Necromancer has a 17% chance to Silence a victim for ten seconds and
+  summons one unit every fourteen active seconds: Bladeknight 40%, Stormbow 35%,
+  Ironhide 25%. Bladeknight bypasses shields, Stormbow has a 35% chance to add
+  two Burn ticks of four damage, and Ironhide blocks every fourth damage event.
+- Ali gains four charge per second for each other nearby ally. At 100 charge,
+  he and nearby allies receive three seconds of Untouchable immunity.
+- Worms deploy as six concealed units. Each emerges on its first successful
+  strike and stuns its victim for 0.8 seconds. Normal spell and incidental area
+  damage can break Invisibility according to the shared status rules.
+
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. Locked entries explain the missing fact rather than
-substituting invented combat values. Required child forms must also be complete.
+defined for this simulator. The remaining 73 locked entries explain an undefined
+rule, missing combat data, or an unimplemented native ability. Required child
+forms must also be complete; removing a lock never substitutes invented values.
 
 Authored `combatStats` fields take priority over class labels and artwork.
 Existing single-target projectile width fallback is 500 points. Missing essential

@@ -18,7 +18,7 @@
       "mana": "17",
       "number": "1"
     },
-    "trait": "Canı 15%-in altına düşdükdə menzili +10% artar. Atışları ekstra 4x8 Hasar verər",
+    "trait": "Hər uğurlu vuruşu rəqibi yandırar və hər saniyə 8 olmaqla 4 dəfə yanma hasarı verər. Canı 10%-in altına düşdükdə menzili +10% artar.",
     "additionalStats": {
       "range": "2600",
       "speed": "1400",
@@ -81,7 +81,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Ölən hər kart üçün +2 Hasar bonusu qazanar. (Max: 80)",
+    "trait": "Ölən hər dost və rəqib kart üçün +2 Hasar bonusu qazanar. Bonus maksimum +80 Hasara çatar; əsas 25 Hasar ilə birlikdə maksimum 105 Hasar verər.",
     "additionalStats": {
       "range": "1200",
       "speed": "1000",
@@ -654,7 +654,7 @@
       "mana": "16",
       "number": "1"
     },
-    "trait": "Demotron döyüş meydanında zərər gördükcə daxili strukturu avtomatik olaraq bərpa olunmağa başlayar. O, hər 10 saniyədə bir itirdiyi ümumi can miqdarının 10%-i qədərini dərhal bərpa edər. Bu xüsusiyyət sayəsində o, nə qədər çox hasar alsa, bir o qədər yüksək bərpa effekti nümayiş etdirərək döyüşdə qalma müddətini uzadar.",
+    "trait": "Demotron hər 10 saniyədə bir həmin anda çatışmayan canının 10%-ni bərpa edər. Məsələn, 100 can çatışmırsa 10 can, daha sonra 90 can çatışmırsa 9 can yeniləyər.",
     "additionalStats": {
       "range": "1400",
       "speed": "1000",

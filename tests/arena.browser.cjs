@@ -99,6 +99,15 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
+    assert.equal(coverage.ready,65);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms']){
+      const card=page.locator(`[data-add-card="${id}"]`);
+      assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
+      assert.equal(await card.locator('.card-locked-mark').count(),0);
+    }
+    await page.locator('[data-inspect-card="demotron"]').click();
+    assert.match(await page.locator('#inspector .native-ability[lang="az"]').first().textContent(),/100 can.*10 can.*90 can.*9 can/);
+    await page.locator('#inspector-close').click();
     await page.locator(`[data-inspect-card="${coverage.locked.id}"]`).click();
     assert.ok(await page.locator('#inspector').isVisible());
     assert.ok((await page.locator('#inspector').textContent()).includes(coverage.locked.reasons[0]));
