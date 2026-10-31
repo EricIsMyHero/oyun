@@ -157,7 +157,7 @@ function renderCatalog() {
 function profileMarkup(def) {
   const p=def.raw?.combatStats||def.combat||{},distanceValue=p.attackDistanceMatchesRange?num(def.raw?.additionalStats?.range):p.attackDistance;
   const pairs=[['Attack Distance',formatValue('range',distanceValue)],['Projectile Width',formatValue('range',p.attackWidth??(p.multiTarget===false?500:null))],['Attack Arc',p.attackSequence?p.attackSequence.map(x=>x.attackAngle?`${x.attackAngle}°`:'—').join(' / '):p.attackAngle!=null?`${p.attackAngle}°`:'—'],['Attack Shape',label(p.attackShape)||'—'],['Attack Type',label(p.attackType)||'—'],['Multiple Targets',p.attackSequence?'Conditional':p.multiTarget?(p.maxTargets?`Up to ${p.maxTargets}`:'Targets in area'):'Single target'],['Targets',p.targets==='both'?'Ground & air':label(p.targets)||'—'],['Movement',label(p.movementType)||'—'],['Ground Effect Immunity',p.groundEffectImmune?'Yes':'No'],['Weight',label(p.weight)||'—'],['Creature Type',(Array.isArray(def.type)?def.type:[def.type||'']).join(' / ')||'—'],['Impact Area',p.impactSize||'—'],['End of Attack',p.projectileEndEffect==='explode'?'Explodes':'—']];
-  return pairs.map(([name,value])=>`<div class="profile-item"><span>${name}</span><strong>${escapeHTML(value)}</strong></div>`).join('');
+  return pairs.map(([name,value])=>`<div class="profile-item"><span>${name}</span><strong>${escapeHTML(value)}</strong>${name==='Attack Distance'&&p.refreshStatsOnTransform?'<small data-copy-stats-note>Base form. Stats and combat profile refresh from the copied enemy after transformation.</small>':''}</div>`).join('');
 }
 function openInspector(def,kind='card',unit=null) {
   if(!def)return;

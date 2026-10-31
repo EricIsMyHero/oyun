@@ -235,7 +235,7 @@ async function initCards() {
     try {
       const results = await Promise.all(
         RARITY_FILES.map(r =>
-          fetch(`rarity/${r}.json`)
+          fetch(`rarity/${r}.json`, { cache:'no-cache' })
             .then(res => res.ok ? res.json() : [])
             .catch(() => [])
         )

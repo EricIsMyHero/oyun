@@ -71,3 +71,15 @@ test('source-native ability text, spell Charge and Energy remain independently a
   assert.equal(healing.energy,1);
   assert.ok(catalog.spells.some(s=>s.ready),'a legal spell loadout exists');
 });
+
+test('Relic normalization preserves the authored geometry, transformations and source statistics',async()=>{
+  const {buildCatalog}=await catalogModule(),{byId}=buildCatalog(rawCards,rawSpells);
+  const ali=byId.get('ali');assert.equal(ali.stats.range,1250);assert.equal(ali.combat.attackDistance,4500);assert.equal(ali.combat.attackWidth,1500);
+  assert.equal(ali.stats.damage,30);assert.equal(ali.stats.attackSpeed,1.25);assert.equal(ali.combat.attackAngle,null);assert.deepEqual(ali.type,['Human']);
+  for(const id of ['stacy','aeralis']){const c=byId.get(id);assert.equal(c.combat.attackShape,'cone');assert.ok(c.combat.attackAngle>0);assert.equal(c.raw.combatStats.attackAngle,null,'derived angles never rewrite source data');}
+  assert.equal(byId.get('avalith').combat.attackShape,'line');assert.equal(byId.get('avalith').combat.targets,'ground');
+  assert.equal(byId.get('naar').combat.projectileEndEffect,'explode');assert.equal(byId.get('naar').combat.impactSize,'1 × 1 tiles');
+  for(const id of ['sylviana/butterflies','malvaris/phantomis','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'])assert.deepEqual([byId.get(id).combat.attackWidth,byId.get(id).combat.attackDistance],[500,500],id);
+  assert.equal(byId.get('format').combat.refreshStatsOnTransform,true);assert.equal(byId.get('format').raw.stats.damage,'-');
+  assert.equal(byId.get('shine').combat.attackType,'melee');assert.equal(byId.get('shine').stats.damage,16);
+});

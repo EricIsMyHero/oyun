@@ -344,3 +344,45 @@ test('Arcane balance overrides preserve the requested DPS and distinguish Range 
   assert.match(run('buildModalStats(card)'),/data-stat="range"[\s\S]*?2 tiles/);
   assert.equal(run('modalAttackDistance(card)'),500);
 });
+
+test('Relic roots and named summoned forms use their authored projectile widths and travel distances', () => {
+  const relic=JSON.parse(fs.readFileSync(path.join(root,'rarity/relic.json')));
+  const geometry={stacy:[1000,2600],death:[500,500],sylviana:[500,500],malvaris:[500,500],etheris:[500,500],magma:[500,500],avalith:[1000,1750],far:[500,500],demotron:[500,500],format:[500,500],pyhsic:[500,500],naar:[500,500],lyra:[500,500],aeralis:[1000,2500],'dark-necromancer':[500,500],shine:[500,500],bloodraider:[1000,2000],'fallen-angel':[500,500],worms:[500,500],unara:[500,500],ali:[1500,4500],clara:[500,500],artist:[500,500]};
+  assert.equal(Object.keys(geometry).length,relic.length);
+  for(const [id,expected] of Object.entries(geometry)){
+    const p=relic.find(c=>c.id===id).combatStats;
+    assert.deepEqual([p.attackWidth,p.attackDistance],expected,id);assert.equal(p.attackDistanceMatchesRange,false,id);
+  }
+  for(const [id,names] of [['sylviana',['Butterflies']],['malvaris',['Phantomis']],['dark-necromancer',['Bladeknight','Stormbow','Ironhide']]]){
+    const card=relic.find(c=>c.id===id);
+    for(const name of names){const p=card.forms.find(c=>c.name===name).combatStats;assert.deepEqual([p.attackWidth,p.attackDistance],[500,500],name);}
+  }
+  const ravens=relic.find(c=>c.id==='artist').forms[0].combatStats;
+  assert.equal(ravens.attackWidth,null);assert.equal(ravens.attackDistance,null,'the unmentioned raven form remains unauthored');
+});
+
+test('Relic cones, lines, single targets, attack layers and endpoint explosions remain distinct', () => {
+  const card=id=>cards.find(c=>c.id===id),p=id=>card(id).combatStats;
+  for(const id of ['stacy','aeralis']){assert.equal(p(id).attackShape,'cone');assert.equal(p(id).multiTarget,true);assert.equal(p(id).maxTargets,null);}
+  assert.equal(p('avalith').attackShape,'line');assert.equal(p('avalith').targets,'ground');assert.equal(p('avalith').multiTarget,true);
+  assert.equal(p('malvaris').attackShape,'single');assert.equal(p('malvaris').multiTarget,false);assert.equal(p('malvaris').maxTargets,1);assert.equal(p('malvaris').attackAngle,null);
+  assert.equal(card('malvaris').stats.damage,'3x23','successive hits are not simultaneous targets');
+  assert.equal(p('naar').projectileEndEffect,'explode');assert.equal(p('naar').impactSize,'1 × 1 tiles');assert.equal(p('naar').multiTargetCondition,undefined,'the basic endpoint explosion is not gated by the grenade ability');
+  assert.equal(p('shine').attackType,'melee');assert.equal(p('shine').attackShape,'single');assert.equal(p('shine').maxTargets,1);assert.equal(p('shine').targets,'ground');
+  assert.equal(p('fallen-angel').targets,'ground');assert.equal(p('fallen-angel').movementType,'hovering');assert.equal(p('fallen-angel').groundEffectImmune,true);
+  assert.equal(card('sylviana').forms[0].combatStats.movementType,'flying');
+  assert.deepEqual(card('far').type,['Alien']);
+});
+
+test('Ali keeps acquisition Range separate from line travel and Format identifies its base form', () => {
+  const ali=cards.find(c=>c.id==='ali'),format=cards.find(c=>c.id==='format');
+  assert.deepEqual([ali.stats.damage,ali.stats.attackSpeed,ali.stats.sps,ali.additionalStats.range],['30','1.25s','24','1250']);
+  assert.deepEqual(ali.type,['Human']);assert.equal(ali.combatStats.attackShape,'line');assert.equal(ali.combatStats.attackAngle,null);
+  context.card=ali;
+  assert.match(run('buildModalStats(card)'),/data-stat="range"[\s\S]*?1.25 tiles/);
+  const html=run('buildCombatProfile(card)');assert.match(html,/4.5 tiles/);assert.match(html,/1.5 tiles/);
+  assert.match(html,/data-profile="attackAngle"[\s\S]*?<strong>—<\/strong>/);
+  assert.equal(format.combatStats.refreshStatsOnTransform,true);
+  assert.equal(format.stats.damage,'-');assert.equal(format.additionalStats.range,'-');
+  context.card=format;assert.match(run('buildCombatProfile(card)'),/data-copy-stats-note/);
+});

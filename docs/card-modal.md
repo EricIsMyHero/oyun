@@ -170,6 +170,33 @@ travel distance. Tribe has a 500-point width and 750-point travel distance.
 Other named Arcane width/distance overrides leave unmentioned stats, abilities,
 transformations and attack targeting counts unchanged.
 
+Relic overrides cover all 23 root cards and the named Butterflies, Phantomis,
+Bladeknight, Stormbow and Ironhide forms. Their default authored width and travel
+distance are 500 points each. The exceptions are:
+
+| Card | Projectile Width | Attack Distance | Additional changes |
+| --- | --- | --- | --- |
+| Stacy | 1000 | 2600 | Cone, multiple targets |
+| Avalith | 1000 | 1750 | Line, ground targets |
+| Aeralis | 1000 | 2500 | Cone, multiple targets |
+| Bloodraider | 1000 | 2000 | Existing circular attack preserved |
+| Ali | 1500 | 4500 | Line, no attack arc; Range 1250, Damage 30, Attack Speed 1.25s; Human |
+
+Malvaris now has a single-target attack; its successive `3x23` hits remain
+separate from simultaneous target count. Far is Alien. Shine has a single-target
+ground melee attack using its existing Damage 16 and Attack Speed 1.15s. Naar's
+basic projectile explodes at its endpoint in a `1 × 1 tiles` area, independent of
+the low-health grenade ability. Fallen Angel targets Ground and keeps Hovering.
+
+Format's 500/500 geometry describes the base form. The optional
+`combatStats.refreshStatsOnTransform` flag displays a note that statistics and
+the combat profile refresh from the copied enemy after transformation. Unknown
+base Damage, Attack Speed and Range stay as authored dashes. The flag documents
+the Codex transformation; it does not substitute a native Arena ability handler.
+The unnamed 500/500 entry in the supplied list was confirmed to be a duplicate.
+Unmentioned raven-form geometry, other stats, native abilities, lore and levels
+are preserved. Both the Codex modal and Arena inspector read the source data.
+
 **Hovering** cards move on the **ground** layer while ignoring ground-only spells
 and effects: Cryon, Tornado, Astranova, Whisper, Fallen Angel and Void Wraith.
 **Flying** cards use the **air** layer: Bees, Angels, Hornets, Venom Fangs, Bats,
@@ -201,6 +228,6 @@ eight rarity skins, six viewport sizes, the inline header, right-hand navigation
 keyboard tabs, Lore, transformations, the travelling light and reduced-motion fallback,
 missing artwork, and the shared spell and Survival entry points. Additional checks cover English UI labels,
 unchanged ability content, point-to-tile conversion, raw-value crystal ratings,
-single-target width defaults, Mundane, Familiar and Arcane overrides, nested forms,
+single-target width defaults, Mundane, Familiar, Arcane and Relic overrides, nested forms,
 Kai's repeating attack cycle, impact area units, Henry's independent
 dimensions, Arcanyx's fixed travel limit, balance updates and the exact hovering/flying rosters.

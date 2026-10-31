@@ -372,6 +372,7 @@ function buildCombatProfile(card) {
     <span class="modal-stat-label">${modalIcon(key === 'movementType' ? p.movementType : key)}<span>${name}</span></span>
     <strong>${modalEscape(value)}</strong>
     ${key === 'attackDistance' && p.attackDistanceMatchesRange ? '<small>Matches current Range.</small>' : ''}
+    ${key === 'attackDistance' && p.refreshStatsOnTransform ? '<small data-copy-stats-note>Base form. Stats and combat profile refresh from the copied enemy after transformation.</small>' : ''}
     ${key === 'movementType' && movement ? `<small>${modalEscape(movement.hint)}</small>` : ''}
     ${key === 'movementType' && p.movementCondition ? `<small lang="az">${modalEscape(p.movementCondition)}</small>` : ''}
     ${key === 'multiTarget' && sequence ? `<small lang="az" data-attack-sequence>${modalEscape(modalAttackSequenceSummary(card))}</small>` : ''}

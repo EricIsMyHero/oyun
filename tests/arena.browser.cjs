@@ -114,6 +114,16 @@ async function minimapPixelAt(page,point) {
     },readyInspect);
     assert.equal((await page.locator('#inspector .native-ability[lang="az"]').first().textContent()).replace(/\s+/g,' ').trim(),authored,'ability body keeps its authored text');
     await page.locator('#inspector-close').click();
+    for(const [id,width,travel,shape] of [['ali','1.5 tiles','4.5 tiles','Line'],['avalith','1 tile','1.75 tiles','Line'],['stacy','1 tile','2.6 tiles','Cone']]){
+      await page.locator(`[data-inspect-card="${id}"]`).click();
+      for(const [name,value] of [['Projectile Width',width],['Attack Distance',travel],['Attack Shape',shape]]){
+        const field=page.locator('#inspector .profile-item').filter({has:page.locator('span',{hasText:new RegExp(`^${name}$`)})});
+        assert.equal(await field.locator('strong').textContent(),value);
+      }
+      if(id==='ali'){assert.equal(await page.locator('#inspector [data-stat="range"] strong').textContent(),'1.25 tiles');assert.equal(await page.locator('#inspector [data-stat="damage"] strong').textContent(),'30');}
+      await page.locator('#inspector-close').click();
+    }
+    await page.locator('[data-inspect-card="format"]').click();assert.ok(await page.locator('#inspector [data-copy-stats-note]').isVisible());await page.locator('#inspector-close').click();
 
     // Build through real controls and test that spell capacity is enforced.
     await page.locator('#spell-tab').click();

@@ -204,6 +204,25 @@ const server = http.createServer(async (req, res) => {
     await page.locator('[data-stat-page="3"]').click();
     assert.equal(await page.locator('[data-profile="projectileEndEffect"] strong').textContent(),'Explodes');
     assert.equal(await page.locator('[data-profile="impactSize"] strong').textContent(),'1 × 1 tiles');
+    for(const [id,width,travel,shape] of [['stacy','1 tile','2.6 tiles','Cone'],['aeralis','1 tile','2.5 tiles','Cone'],['avalith','1 tile','1.75 tiles','Line'],['malvaris','0.5 tiles','0.5 tiles','Single target']]){
+      await page.evaluate(id=>openModal(allCards.find(c=>c.id===id)),id);await page.locator('[data-stat-page="3"]').click();
+      for(const [key,value] of [['attackWidth',width],['attackDistance',travel],['attackShape',shape]])assert.equal(await page.locator(`[data-profile="${key}"] strong`).textContent(),value,id);
+    }
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='ali')));
+    for(const [key,value] of [['damage','30'],['attackSpeed','1.25s'],['sps','24'],['range','1.25 tiles']])assert.equal(await page.locator(`[data-stat="${key}"] .modal-stat-value`).textContent(),value);
+    await page.locator('[data-stat-page="3"]').click();
+    for(const [key,value] of [['attackWidth','1.5 tiles'],['attackDistance','4.5 tiles'],['attackShape','Line'],['attackAngle','—'],['type','Human']])assert.equal(await page.locator(`[data-profile="${key}"] strong`).textContent(),value);
+    await page.locator('#modal-box').screenshot({path:'/tmp/oyun-relic-ali-modal.png'});
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='format')));await page.locator('[data-stat-page="3"]').click();
+    assert.ok(await page.locator('[data-copy-stats-note]').isVisible());assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'0.5 tiles');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='shine')));await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="attackType"] strong').textContent(),'Melee');assert.equal(await page.locator('[data-profile="multiTarget"] strong').textContent(),'No · single target');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='naar')));await page.locator('[data-stat-page="3"]').click();
+    assert.equal(await page.locator('[data-profile="projectileEndEffect"] strong').textContent(),'Explodes');assert.equal(await page.locator('[data-profile="impactSize"] strong').textContent(),'1 × 1 tiles');
+    for(const [id,index] of [['sylviana',0],['malvaris',0],['dark-necromancer',0],['dark-necromancer',1],['dark-necromancer',2]]){
+      await page.evaluate(id=>openModal(allCards.find(c=>c.id===id)),id);await page.locator(`[data-form-index="${index}"]`).click();await page.locator('[data-stat-page="3"]').click();
+      assert.equal(await page.locator('[data-profile="attackWidth"] strong').textContent(),'0.5 tiles');assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'0.5 tiles');
+    }
     for (const id of ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith']) {
       await page.evaluate(id=>openModal(allCards.find(c=>c.id===id)),id);
       await page.locator('[data-stat-page="3"]').click();
