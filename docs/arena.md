@@ -280,8 +280,28 @@ engine.useAbility(caster, () => { /* one shared accuracy roll for this action */
 
 Card-only execution, possession and copying do not target castles or crystal
 wells. Deaths and secondary effects resolve through the simulation event order,
-avoiding repeated kill credit or reflection loops. The bot uses the same selected
-deck, costs, mana, energy, capture and placement rules as the player.
+avoiding repeated kill credit or reflection loops.
+
+## Opponent decisions
+
+Each match draws the bot's own eight-card deck from playable root cards, plus an
+independent spell cycle within the five-charge budget. The draw mixes affordable
+cards, a frontline, ranged support and an answer to flying targets when available;
+it does not copy or inspect the player's selected deck. A different match seed
+draws a different combination; identical seeds reproduce the same decisions.
+
+The bot saves mana for a chosen deployment instead of automatically cycling any
+affordable card. Ordinary attacks keep up to four mana in reserve and leave at
+least 3.5 seconds between deployments. Existing forces can finish capturing a
+well while the bot banks mana. It adds ranged support behind a tank and chooses
+cards that can actually hit visible threats. An under-defended castle can
+interrupt a saved plan and spend the reserve on a faster response; emergency
+deployments still have a 1.25-second minimum gap. Spell decisions conserve energy
+when healing is unnecessary or an expensive attack would hit only a weak target.
+
+The bot follows the same mana, energy, capture, target-layer and placement rules
+as the player. It receives no extra resources and reads enemy units only through
+its own team vision; camera movement and hidden player hands give it no knowledge.
 
 ## Running and checking
 

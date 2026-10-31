@@ -308,6 +308,7 @@ test('front-corner courtyard units enter their route without getting stuck or te
 
 test('bot troop and building placement derives legal positions from each lane and castle range',async()=>{
   const {engine:e}=await fixture({bot:true,spellDeck:['guard-post']});const [,,{MAP,isDeployable,distance}]=await modules;
+  e.teams[1].spellIds=['guard-post'];e.teams[1].spellIndex=0;
   const {RULES}=await import('../arena/js/rules.mjs');
   for(let side=0;side<2;side++)for(let lane=0;lane<3;lane++){
     const candidates=e._deploymentCandidates(side,lane);assert.ok(candidates.length>0,`side ${side}, lane ${lane}`);
@@ -392,8 +393,9 @@ test('bot decisions and hostile spells do not read unseen enemy armies',async()=
   const {engine:a,base}=await fixture({bot:true,spellDeck:['shock-bomb'],seed:25});
   const {engine:b}=await fixture({bot:true,spellDeck:['shock-bomb'],seed:25});
   a.teams[1].energy=b.teams[1].energy=10;
+  a.teams[1].spellIds=b.teams[1].spellIds=['shock-bomb'];
   for(let i=0;i<6;i++)inert(a,base,0,{x:7+i*.2,y:14});
-  a._bot(1);b._bot(1);
+  a.step(5);b.step(5);
   const placements=e=>e.units.filter(u=>u.side===1).map(u=>({id:u.def.id,x:u.x,y:u.y,lane:u.lane}));
   assert.deepEqual(placements(a),placements(b));
   assert.equal(a.teams[1].energy,b.teams[1].energy);

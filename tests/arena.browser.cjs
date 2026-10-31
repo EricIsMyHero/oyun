@@ -139,6 +139,26 @@ async function minimapPixelAt(page,point) {
     assert.equal(await page.locator('[data-hand-index]').count(),4);
     assert.equal(await page.locator('#active-spell').count(),1);
 
+    const rosters=await page.evaluate(()=>{
+      const [player,opponent]=arenaApp.engine.teams;
+      return {player:player.hand.concat(player.queue),bot:opponent.hand.concat(opponent.queue),spells:opponent.spellIds,charge:opponent.spellIds.reduce((n,id)=>n+arenaApp.catalog.spellById.get(id).charge,0),ready:opponent.hand.concat(opponent.queue).every(id=>arenaApp.catalog.byId.get(id).ready)};
+    });
+    assert.deepEqual(rosters.player,initialDeck.deck);assert.equal(new Set(rosters.bot).size,8);
+    assert.notDeepEqual([...rosters.bot].sort(),[...rosters.player].sort());assert.ok(rosters.ready);assert.ok(rosters.spells.length>0&&rosters.charge<=5);
+    const botActions=await page.evaluate(()=>{
+      const e=arenaApp.engine,actions=[],deploy=e.deploy.bind(e);
+      e.deploy=(side,index,point)=>{const before=e.teams[side].mana,result=deploy(side,index,point);if(result.ok&&side===1)actions.push({time:e.time,before,after:e.teams[side].mana});return result;};
+      e.step(45);return actions;
+    });
+    assert.ok(botActions.length>=3&&botActions.length<=13,'the bot makes deliberate deployments rather than playing every second');
+    for(let i=0;i<botActions.length;i++){
+      assert.ok(botActions[i].after>=0&&botActions[i].after<botActions[i].before);
+      if(i)assert.ok(botActions[i].time-botActions[i-1].time>=3.5-1e-7);
+    }
+    await page.evaluate(()=>arenaApp.startMatch());await settleFrame(page);
+    const nextBotDeck=await page.evaluate(()=>arenaApp.engine.teams[1].hand.concat(arenaApp.engine.teams[1].queue));
+    assert.notDeepEqual([...nextBotDeck].sort(),[...rosters.bot].sort(),'a new match draws a new opponent deck');
+
     // The battle opens close to our castle. Dragging an armed map pans it and
     // never commits the card, even when the release is over a legal road.
     const cameraStart=await page.evaluate(()=>{
@@ -572,7 +592,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; independent bot decks and paced mana spending, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

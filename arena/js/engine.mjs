@@ -3,6 +3,7 @@ import { MAP, routeFor, closestRoute, isDeployable, isWalkable, isCourtyard, cou
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
 import { NEGATIVE_STATUSES as NEGATIVE, statusKind, statusParameters, statValue, statModifiers } from './statuses.mjs';
+import { buildBotLoadout, createBotState, tickBot } from './bot.mjs';
 
 const finitePoint = p => p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.x <= MAP.width && p.y >= 0 && p.y <= MAP.height;
 const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -25,6 +26,7 @@ export class ArenaEngine {
     if(spellDeck.reduce((s,id)=>s+num(this.spells.get(id).charge),0) > RULES.spellBudget) throw new Error('Spell charge capacity is five.');
     this.seed = (Number(seed) >>> 0) || 1;
     this.bot = !!bot;
+    const opponent=this.bot?buildBotLoadout(cards,spells,()=>this.random()):{deck,spellDeck};
     this.accumulator = 0;
     this.serial = 0;
     this.deaths = [];
@@ -34,11 +36,12 @@ export class ArenaEngine {
     this.abilityContext=null;
     this.state = {
       time:0, phase:'regulation',remaining:RULES.regulation,paused:false,winner:null,
-      teams:[0,1].map(()=>({mana:RULES.startMana,energy:0,hand:deck.slice(0,RULES.handSize),queue:deck.slice(RULES.handSize),spellIds:[...spellDeck],spellIndex:0,deployed:0,spentMana:0})),
+      teams:[{deck,spellDeck},opponent].map(loadout=>({mana:RULES.startMana,energy:0,hand:loadout.deck.slice(0,RULES.handSize),queue:loadout.deck.slice(RULES.handSize),spellIds:[...loadout.spellDeck],spellIndex:0,deployed:0,spentMana:0})),
       castles:MAP.bases.map((p,side)=>({id:`castle-${side}`,name:side?'Crimson Crown':'Azure Core',...p,side,radius:MAP.castleRadius,hp:RULES.castleHealth,maxHp:RULES.castleHealth,shield:0,maxShield:0,alive:true,isCastle:true,isBuilding:true,stats:{dodge:0,damageminimiser:0,shieldtakendamage:0,criticdamageminimiser:0},statuses:[],memory:{},cooldown:0})),
       nodes:MAP.nodes.map(n=>({...n,owner:null,capturing:null,progress:0})),
       units:[],projectiles:[],effects:[],events:[],fields:[],
     };
+    this.botState=this.bot?createBotState(this):null;
   }
   get time(){return this.state.time;}
   get units(){return this.state.units;}
@@ -785,44 +788,7 @@ export class ArenaEngine {
     // Both sides use the same road/range legality and tactical distance metric.
     return candidates.sort((a,b)=>distance(a,goal)-distance(b,goal)||distance(a,MAP.bases[side])-distance(b,MAP.bases[side]));
   }
-  _bot(dt){
-    if(!this.bot)return;
-    this.botClock-=dt;if(this.botClock>0)return;
-    this.botClock=.6;
-    const side=1,team=this.teams[side],castle=this.castles[side],opponent=this.castles[1-side],sources=visibilitySources(this.state,side),enemy=this.units.filter(u=>u.side!==side&&isEntityVisible(this.state,side,u,sources));
-    const scores=MAP.routes.map((r,lane)=>{
-      const pressure=enemy.filter(u=>u.lane===lane).reduce((n,u)=>n+(distance(u,castle)<distance(u,opponent)?3:1)*(u.hp/Math.max(1,u.maxHp)),0);
-      return pressure+(this.state.nodes[lane].owner!==side?2:0)+(this.random()*.4);
-    });
-    const lane=scores.indexOf(Math.max(...scores));
-    const threats=enemy.filter(u=>u.lane===lane&&distance(u,castle)<distance(u,opponent)).sort((a,b)=>distance(a,castle)-distance(b,castle));
-    let goal=MAP.nodes[lane];
-    if(threats.length){
-      const target=threats[0],length=distance(castle,target)||1;
-      goal={x:target.x+(castle.x-target.x)/length,y:target.y+(castle.y-target.y)/length};
-    }
-    const legal=team.hand.map((id,index)=>({def:this.cards.get(id),index})).filter(v=>v.def.stats.mana<=team.mana+EPS);
-    legal.sort((a,b)=>{
-      const score=v=>num(v.def.stats.health)/100+num(v.def.stats.damage)*(v.def.attack?.count||1)/20+(v.def.combat.targets==='both'?1:0)-v.def.stats.mana*.12;
-      return score(b)-score(a);
-    });
-    if(legal.length){
-      for(const point of this._deploymentCandidates(side,lane,goal).slice(0,24))if(this.deploy(side,legal[0].index,point).ok)break;
-    }
-    const spell=this.spells.get(team.spellIds[team.spellIndex]);
-    if(spell&&team.energy>=spell.energy){
-      const name=slug(spell.name),friendly=['healing-light','shield-of-serenity','lunar-mirrage'].includes(name);
-      if(spell.kind==='building'){
-        for(const point of this._deploymentCandidates(side,lane,goal,true).slice(0,24))if(this.cast(side,point).ok)break;
-      }
-      else{
-        const pool=friendly?this.units.filter(u=>u.alive&&u.side===side&&!u.isBuilding):enemy;
-        const cluster=target=>pool.filter(u=>distance(target,u)<=2+(u.radius||0)).length;
-        const target=pool.sort((a,b)=>cluster(b)-cluster(a))[0];
-        if(target)this.cast(side,target);
-      }
-    }
-  }
+  _bot(dt){tickBot(this,dt);}
   _finish(){
     const [a,b]=this.castles;
     if(a.hp<=0||b.hp<=0)this.state.winner=a.hp<=0&&b.hp<=0?'draw':a.hp<=0?1:0;
