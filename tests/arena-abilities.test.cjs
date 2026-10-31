@@ -39,7 +39,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,68);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,70);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);assert.ok(card.attack.interval>0);}}
   assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
@@ -58,6 +58,10 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  sylviana:({ctx,u,t,rule,records})=>{t.def={...t.def,type:['Alien']};const hit={damage:50};rule.incoming(ctx,u,t,hit);close(hit.damage,40);rule.death(ctx,u);assert.equal(records.spawn[0].def.id,'sylviana/butterflies');assert.equal(records.spawn[0].options.count,4);},
+  'sylviana/butterflies':({ctx,u,t,rule})=>{u.alive=false;t.side=u.side;rule.death(ctx,u);assert.equal(t.hp,1010);assert.equal(t.maxHp,1010);},
+  malvaris:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'soulMark');assert.equal(records.statuses[0].duration,2);assert.equal(records.statuses[0].summonFormId,'malvaris/phantomis');rule.unitDeath(ctx,u,t);assert.equal(u.stats.criticalChance,5);t.side=u.side;for(let i=0;i<160;i++)rule.unitDeath(ctx,u,t);assert.equal(u.memory.criticalGrowth,75);assert.equal(u.stats.criticalChance,80);},
+  'malvaris/phantomis':({ctx,u,rule})=>{const make=id=>({...u,id,stats:{...u.stats},memory:{},groupId:id});ctx.units.push(make('other-a'),make('other-b'));rule.tick(ctx,u);close(u.stats.damage,12);close(u.stats.attackSpeed,1.5/1.1);ctx.units.pop();rule.tick(ctx,u);close(u.stats.damage,11);},
   avalith:({ctx,u,t,rule})=>{ctx.random=()=>.329;let hit={damage:10,instantKill:true};rule.incoming(ctx,u,t,hit);assert.equal(hit.damage,0);assert.equal(hit.instantKill,false);ctx.random=()=>.33;hit={damage:10};rule.incoming(ctx,u,t,hit);assert.equal(hit.damage,10);for(const [distance,factor] of [[.5,.2],[1,.2],[2.375,.6],[3.75,1]]){t.x=u.x+distance;t.y=u.y;hit={};rule.attack(ctx,u,t,hit);close(hit.intervalScale,factor);assert.equal(hit.returning,true);}},
   bloodraider:({ctx,u,t,rule,result})=>{u.stats.damage=20;for(const expected of [22,24,27]){rule.hit(ctx,u,t,result);assert.equal(u.stats.damage,expected);}close(u.hp,u.maxHp*.88);},
   shine:({ctx,u,t,rule})=>{t.side=u.side;t.maxHp=t.hp=t.def.stats.health;const initial=u.maxHp;for(let i=0;i<8;i++)rule.tick(ctx,u,5);close(u.maxHp,initial*1.2);close(t.maxHp,t.def.stats.health*1.2);assert.equal(u.memory.shineStacks,5);},

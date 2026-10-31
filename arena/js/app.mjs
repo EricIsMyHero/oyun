@@ -170,7 +170,7 @@ function openInspector(def,kind='card',unit=null) {
   const stats=kind==='spell'?Object.entries(raw.stats||{}).map(([key,value])=>`<div class="inspector-stat" data-spell-stat="${escapeHTML(key)}"><span>${escapeHTML(({damageToCard:'Unit Damage',damageToCastle:'Castle Damage',timeBetweenDamage:'Hit Interval',energy:'Energy',charge:'Charge',lifetime:'Lifetime',attackSpeed:'Attack Speed'})[key]||label(key))}</span><strong>${escapeHTML(formatValue(key,value))}</strong></div>`).join(''):STAT_ORDER.map(key=>{
     let value=values[key];
     if(unit){
-      const base=num(unit.stats[key]),blind=['range','vision'].includes(key)?statusMagnitude(unit,'blind',state.engine.time):0;
+      const base=num(def.stats?.[key],num(unit.stats[key])),blind=['range','vision'].includes(key)?statusMagnitude(unit,'blind',state.engine.time):0;
       const effective=state.engine.statValue(unit,key)*(1-blind);
       if(Math.abs(effective-base)>1e-7){
         const number=Number(effective.toFixed(3));

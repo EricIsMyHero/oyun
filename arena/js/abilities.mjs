@@ -300,6 +300,33 @@ export const ABILITIES = {
       hit.returning=true;
     },
   },
+  sylviana:{
+    incoming(ctx,u,s,hit){if(s?.def?.type?.includes('Alien'))hit.damage*=.8;},
+    death(ctx,u){const form=u.def.forms[0];if(form)ctx.spawn(form,u.side,u,u.lane,{count:form.stats.number,groupId:u.groupId});},
+  },
+  'sylviana/butterflies':{death(ctx,u){
+    for(const ally of ctx.units.filter(t=>t.alive&&!t.engulfedBy&&t.side===u.side&&Math.abs(t.x-u.x)<=.75+t.radius&&Math.abs(t.y-u.y)<=.75+t.radius)){
+      ally.maxHp+=10;ally.stats.health=ally.maxHp;ally.hp=Math.min(healthCap(ctx,ally),ally.hp+10);
+      ctx.fx('heal',ally.x,ally.y,{side:u.side,amount:10});
+    }
+    ctx.fx('healthBloom',u.x,u.y,{side:u.side,width:1.5,height:1.5,color:'#afe8ab',duration:.6});
+  }},
+  malvaris:{
+    hit(ctx,u,t,result){
+      if(!damageEvent(result)||t.isCastle||t.isBuilding)return;
+      const form=u.def.forms[0];if(form)ctx.status(t,'soulMark',2,0,u,{onLethalHit:result.killed,summonFormId:form.id,summonSide:u.side,groupId:u.groupId});
+    },
+    unitDeath(ctx,u,dead){
+      if(dead.side!==u.side)return;
+      u.memory.criticalGrowth=Math.min(75,(u.memory.criticalGrowth||0)+.5);
+      u.stats.criticalChance=u.def.stats.criticalChance+u.memory.criticalGrowth;
+    },
+  },
+  'malvaris/phantomis':{tick(ctx,u){
+    const extra=ctx.units.filter(t=>t.alive&&t!==u&&t.side===u.side&&t.def.id===u.def.id).length;
+    u.stats.damage=u.def.stats.damage*(1+extra*.1);
+    u.stats.attackSpeed=u.def.stats.attackSpeed/(1+extra*.05);
+  }},
 };
 
 /* These are author-data gaps, not substitute versions of the native abilities. */

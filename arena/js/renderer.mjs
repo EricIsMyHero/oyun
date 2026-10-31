@@ -753,7 +753,7 @@ export class ArenaRenderer {
         ctx.strokeStyle='#a8dc86';ctx.lineWidth=1;ctx.stroke();
         ctx.fillStyle='#d8f6be';ctx.textAlign='center';ctx.font='700 10px system-ui,sans-serif';ctx.fillText(String(captiveCount),p.x+size*.35+12,barY-7);
       }
-      const statusColors={poison:'#b5df78',burn:'#ffb875',bleed:'#ef8692',slow:'#94d6ec',stun:'#ffdf89',silence:'#d9b0fa',blind:'#d0aecf',root:'#b2d98b',imprisonment:'#a3b4fa',curse:'#e69cd6',frozen:'#b0efff',airborne:'#c3dcff',betrayal:'#ff8096',reflection:'#c3f7e5',taunted:'#f4ac82',statReduction:'#e9a2cd',berserk:'#ffb46d',fearless:'#ffe9ac',predominance:'#e1d3ff'};
+      const statusColors={poison:'#b5df78',burn:'#ffb875',bleed:'#ef8692',slow:'#94d6ec',stun:'#ffdf89',silence:'#d9b0fa',blind:'#d0aecf',root:'#b2d98b',imprisonment:'#a3b4fa',curse:'#e69cd6',frozen:'#b0efff',airborne:'#c3dcff',betrayal:'#ff8096',reflection:'#c3f7e5',taunted:'#f4ac82',statReduction:'#e9a2cd',berserk:'#ffb46d',fearless:'#ffe9ac',predominance:'#e1d3ff',soulMark:'#c2a6ed'};
       statuses.slice(0,3).forEach((st,i)=>{
         const c=statusColors[st.kind]||'#d9d9c0';
         ctx.fillStyle='#1c353c';roundRect(ctx,p.x-size*.55+i*7,barY-13,6,6,1);ctx.fill();
@@ -814,6 +814,12 @@ export class ArenaRenderer {
         const x=p.x+Math.cos(angle)*length,y=p.y+Math.sin(angle)*length*.5-s*progress*.35;
         ellipse(ctx,x,y,Math.max(.6,s*.05*(1-progress)),Math.max(.6,s*.05*(1-progress)),color);
       }
+    } else if(e.type==='healthBloom') {
+      this.world(ctx,c=>{
+        const width=e.width||1.5,height=e.height||1.5;
+        c.fillStyle='#afe8ab22';c.strokeStyle=color;c.lineWidth=.035;
+        c.beginPath();c.rect(e.x-width/2,e.y-height/2,width,height);c.fill();c.stroke();
+      });
     } else if(e.type==='slash') {
       const direction=Math.atan2(e.dy||0,e.dx||1),spread=(e.angle||135)*Math.PI/180,radius=e.radius||.65;
       this.world(ctx,c=>{

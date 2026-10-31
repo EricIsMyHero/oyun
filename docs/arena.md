@@ -170,7 +170,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **68 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **70 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -178,9 +178,9 @@ after the first successful hit; their poison continues and keeps its original
 caster attribution. Giga Bomb deals its immediate source damage and then ten
 one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
 
-Ten Relic roots now have their native abilities implemented: **Stacy**,
+Twelve Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,
-**Bloodraider**, **Shine** and **Avalith**.
+**Bloodraider**, **Shine**, **Avalith**, **Malvaris** and **Sylviana**.
 
 - Stacy adds four one-second Burn ticks of eight damage after each successful
   hit. Independent packets stack and continue after her death. Below 10% health,
@@ -225,10 +225,30 @@ Ten Relic roots now have their native abilities implemented: **Stacy**,
   Slow and Haste still apply. The source 1.30s Delay remains reference data and
   is not added again on top of flight time. Pause freezes flight; Silence does
   not strand an already-thrown weapon, and death or timeout clears its lock.
+- Malvaris marks successful hits for two seconds, including killing blows. A
+  marked unit's death summons one allied Phantomis per active caster mark,
+  regardless of the killer. Repeated hits refresh that caster's mark. Expiry,
+  Cleanse and Predominance prevent conversion; castles and buildings cannot be
+  marked. Flexibility shortens the mark, while an already-applied mark persists
+  through its caster's Silence or death. Each allied unit death grants Malvaris
+  +0.5 percentage points of critical chance, capped at **+75 bonus**, for **80%**
+  total with its base 5%. Friendly Phantomis from all summoners count together:
+  each additional one grants +10% damage and +5% attack speed, added together.
+  Three therefore give each +20% damage and +10% attack speed. The bonuses
+  recalculate as allies die; enemy Phantomis do not contribute.
+- Sylviana takes 20% less damage from Alien units and creates four flying
+  Butterflies on death. Each Butterfly's death adds ten maximum and current
+  health to living friends in a centered **1.5 × 1.5-tile square**. A full-health
+  100/100 ally becomes 110/110; an injured 70/100 ally becomes 80/110. The bonus
+  stacks across deaths, excludes enemies and castles, and cannot revive dead
+  units. Its green area effect displays the actual square footprint.
+
+The live unit inspector displays native stat growth as well as status modifiers,
+so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 70 locked entries explain an undefined
+defined for this simulator. The remaining 68 locked entries explain an undefined
 rule, missing combat data, or an unimplemented native ability. Required child
 forms must also be complete; removing a lock never substitutes invented values.
 

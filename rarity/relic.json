@@ -189,7 +189,7 @@
           "mana": "-",
           "number": "4"
         },
-        "trait": "-",
+        "trait": "Öləndə ətrafındakı 1,5 × 1,5 karo sahəsində olan dost kartların maksimum canını və cari canını +10 artırar. Məsələn, 100/100 canı olan dost kart 110/110 cana çatar.",
         "additionalStats": {
           "range": "800",
           "speed": "1100",
@@ -264,7 +264,7 @@
       "mana": "16",
       "number": "1"
     },
-    "trait": "Malvaris zərbə vurduğu hər bir rəqib kartı 2 saniyəlik xüsusi bir ruh damğası ilə işarələyər. Bu işarəni daşıyan rəqib kartlar hər hansı bir səbəbdən öldükdə, onların ruhları dərhal qaranlıq tərəfə keçərək bir \"Phantomis\"-ə çevrilər. O, döyüş meydanında fədakarlığı mükafatlandırır; ölən hər bir dost kart Malvaris-in qəzəbini alovlandıraraq onun kritik şans göstəricisini +0,5% artırar. Bu kritik şans bonusu maksimum 75%-ə qədər yüksələ bilər.",
+    "trait": "Malvaris zərbə vurduğu hər bir rəqib kartı 2 saniyəlik xüsusi bir ruh damğası ilə işarələyər. Bu işarəni daşıyan rəqib kartlar hər hansı bir səbəbdən öldükdə, onların ruhları dərhal qaranlıq tərəfə keçərək bir \"Phantomis\"-ə çevrilər. O, döyüş meydanında fədakarlığı mükafatlandırır; ölən hər bir dost kart Malvaris-in qəzəbini alovlandıraraq onun kritik şans göstəricisini +0,5% artırar. Əlavə kritik şans bonusu maksimum +75%-ə çatar; əsas 5% kritik şansı ilə birlikdə yekun kritik şansı 80% olar.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -314,7 +314,7 @@
           "mana": "-",
           "number": "1"
         },
-        "trait": "Bu döyüşçülər birgə hərəkət etdikdə qat-qat güclənən kütləvi bir mexanikaya malikdir. Döyüş meydanında mövcud olan hər bir əlavə Phantomis üçün ordudakı bütün Phantomis-lər +10% hasar və +5% hücum sürəti qazanar. Onların sayı artdıqca meydandakı effektivlikləri həndəsi silsilə ilə çoxalar.",
+        "trait": "Eyni tərəfdəki hər bir əlavə Phantomis üçün bütün dost Phantomis-lər +10% Hasar və +5% Hücum Sürəti qazanar. Fərqli Malvaris-lərin yaratdığı Phantomis-lər də birlikdə sayılar. Bonuslar toplanar: 3 Phantomis olduqda hər biri +20% Hasar və +10% Hücum Sürəti qazanar.",
         "additionalStats": {
           "range": "1000",
           "speed": "1000",

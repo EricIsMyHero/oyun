@@ -247,7 +247,8 @@ export class ArenaEngine {
   }
   status(target,kind,duration,magnitude=0,source=null,extra={}){
     kind=statusKind(kind);
-    if(!target?.alive)return null;
+    // A successful killing blow can mark its victim before the death queue runs.
+    if(!target?.alive&&!(target&&kind==='soulMark'&&extra.onLethalHit&&!target.memory?.deathResolved))return null;
     if(extra.groundOnly&&target.def?.combat?.groundEffectImmune)return null;
     if(NEGATIVE.has(kind)&&has(target,'predominance',this.time))return null;
     const caster=source||(kind==='taunt'?target:null);
@@ -809,6 +810,13 @@ export class ArenaEngine {
       // Release is structural: Silence cannot leave survivors trapped forever.
       for(const captive of this.captivesOf(u))this.releaseEngulfed(captive);
       if(u.engulfedBy)this.releaseEngulfed(u);
+      if(!u.isBuilding)for(const mark of active(u,'soulMark',this.time)){
+        const form=this.cards.get(mark.summonFormId);
+        if(form&&[0,1].includes(mark.summonSide)){
+          this.spawn(form,mark.summonSide,u,u.lane,{count:1,groupId:mark.groupId});
+          this.fx('spawn',u.x,u.y,{side:mark.summonSide,color:'#c2a6ed'});
+        }
+      }
       this._hook('death',u,killer);
       if(u.buildingKind==='dark-orb'){
         const raw=u.spell.raw.stats;

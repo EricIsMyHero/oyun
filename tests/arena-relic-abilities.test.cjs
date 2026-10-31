@@ -23,11 +23,11 @@ async function fixture(){
   return {e,catalog,spawn,dummy,hit,kill,has:(u,kind)=>hasStatus(u,kind,e.time)};
 }
 
-test('ten Relic cards and all three Necromancer summons unlock with verified native handlers',async()=>{
+test('twelve Relic cards and their summons unlock with verified native handlers',async()=>{
   const {catalog}=await fixture();
-  const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
+  const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','sylviana','sylviana/butterflies','malvaris','malvaris/phantomis','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
   for(const id of ids){assert.equal(catalog.byId.get(id).ready,true,id);assert.deepEqual(catalog.byId.get(id).reasons,[]);}
-  assert.equal(catalog.cards.filter(c=>c.ready).length,68);
+  assert.equal(catalog.cards.filter(c=>c.ready).length,70);
   assert.equal(catalog.byId.get('format').ready,false);assert.match(catalog.byId.get('format').reasons.join(' '),/not been implemented/);
 });
 
@@ -246,4 +246,102 @@ test('Avalith flight freezes on pause and clears its attack lock on caster death
   assert.equal(e.state.projectiles.length,0);assert.equal(u.memory.returningShotId,undefined);
   const next=spawn('avalith');e._fire(next,target);e.state.projectiles[0].ttl=.01;e._projectiles(.1);
   assert.equal(e.state.projectiles.length,0);assert.equal(next.memory.returningShotId,undefined);assert.ok(next.cooldown>0);
+});
+
+test('Malvaris marks a successful hit for two seconds, refreshes it, and any killer can raise its Phantomis',async()=>{
+  const {e,spawn,dummy,hit,kill,has}=await fixture(),u=spawn('malvaris'),target=dummy();hit(u,target);
+  assert.ok(has(target,'soulMark'));close(target.statuses.find(s=>s.kind==='soulMark').until,2);
+  e.step(1.5);hit(u,target);assert.equal(target.statuses.filter(s=>s.kind==='soulMark').length,1);
+  close(target.statuses.find(s=>s.kind==='soulMark').until,3.5);e.step(1);kill(target);
+  const child=e.units.filter(t=>t.def.id==='malvaris/phantomis');assert.equal(child.length,1);
+  assert.equal(child[0].side,u.side);assert.equal(child[0].groupId,u.groupId);assert.equal(child[0].lane,target.lane);close(child[0].maxHp,60);
+  e.deaths.push({u:target,killer:null});e._drainDeaths();assert.equal(e.units.filter(t=>t.def.id==='malvaris/phantomis').length,1);
+});
+
+test('Malvaris killing blows can mark before queued death, without accepting other statuses on dead units',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('malvaris'),target=dummy(1,{x:16,y:14},{health:10});hit(u,target);
+  assert.equal(target.alive,false);assert.ok(target.statuses.some(s=>s.kind==='soulMark'));
+  assert.equal(e.status(target,'burn',2,0,u,{onLethalHit:true,amount:8}),null);e._drainDeaths();
+  assert.equal(e.units.filter(t=>t.def.id==='malvaris/phantomis').length,1);
+  assert.equal(e.status(target,'soulMark',2,0,u,{onLethalHit:true}),null,'a resolved death cannot be marked again');
+});
+
+test('expired, cleansed or immune Soul Marks do not summon and buildings cannot be converted',async()=>{
+  for(const mode of ['expired','cleanse','predominance','building','castle']){
+    const {e,spawn,dummy,hit,kill}=await fixture(),u=spawn('malvaris'),target=mode==='castle'?e.castles[1]:dummy();
+    if(mode==='building')target.isBuilding=true;if(mode==='predominance')e.status(target,'predominance',5);
+    hit(u,target);if(mode==='expired')e.step(2);if(mode==='cleanse')e.cleanse(target);
+    kill(target);assert.equal(e.units.some(t=>t.def.id==='malvaris/phantomis'),false,mode);
+  }
+});
+
+test('Soul Mark respects Flexibility, and a prevented or missed hit applies no mark',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('malvaris'),target=dummy(1,{x:15.6,y:14},{flexibility:50});hit(u,target);
+  close(target.statuses.find(s=>s.kind==='soulMark').until,1);e.cleanse(target);e.status(target,'untouchable',2);hit(u,target);
+  assert.equal(target.statuses.some(s=>s.kind==='soulMark'),false);target.statuses=[];
+  e.status(u,'misfortune',2,1);e._fire(u,target);assert.equal(target.statuses.some(s=>s.kind==='soulMark'),false);
+});
+
+test('an existing Soul Mark survives caster death or Silence without holding dead caster objects forever',async()=>{
+  for(const mode of ['dead','silenced']){
+    const {e,spawn,dummy,hit,kill}=await fixture(),u=spawn('malvaris'),target=dummy();hit(u,target);
+    if(mode==='dead')kill(u);else e.status(u,'silence',5);
+    if(mode==='dead')assert.ok(e.statusSources.has(u.id),'the pending mark retains its dead caster');
+    e.step(.5);kill(target);assert.equal(e.units.filter(t=>t.def.id==='malvaris/phantomis').length,1,mode);
+    e.step(.1);assert.equal(e.statusSources.has(u.id),false);
+  }
+});
+
+test('each caster mark resolves once even when two Malvaris mark the same victim',async()=>{
+  const {e,spawn,dummy,hit,kill}=await fixture(),a=spawn('malvaris'),b=spawn('malvaris',0,{x:13,y:14}),target=dummy();
+  hit(a,target);hit(b,target);kill(target);
+  const children=e.units.filter(t=>t.def.id==='malvaris/phantomis');assert.equal(children.length,2);
+  assert.deepEqual(new Set(children.map(t=>t.groupId)),new Set([a.groupId,b.groupId]));
+});
+
+test('Malvaris caps the additional critical chance at seventy-five for eighty total with its five base',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),u=spawn('malvaris',0,{x:15,y:14},{criticalChance:5});kill(dummy(1));close(u.stats.criticalChance,5);
+  kill(dummy(0,{x:12,y:14}));close(u.stats.criticalChance,5.5);
+  for(let i=0;i<160;i++)kill(dummy(0,{x:12,y:14}));close(u.memory.criticalGrowth,75);close(u.stats.criticalChance,80);close(u.def.stats.criticalChance,5);
+});
+
+test('Silence prevents fresh Malvaris marks and allied death bonuses',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),u=spawn('malvaris'),target=dummy(1,{x:15.6,y:14});e.status(u,'silence',5);
+  e._fire(u,target);assert.equal(target.statuses.some(s=>s.kind==='soulMark'),false);kill(dummy(0,{x:12,y:14}));close(u.stats.criticalChance,0);
+  e.cleanse(u);kill(dummy(0,{x:12,y:14}));close(u.stats.criticalChance,.5);
+});
+
+test('Phantomis bonuses add across allied groups and update when an ally dies',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),a=spawn('malvaris/phantomis'),b=spawn('malvaris/phantomis',0,{x:24,y:14}),c=spawn('malvaris/phantomis',0,{x:11,y:14}),enemy=spawn('malvaris/phantomis',1,{x:30,y:14}),target=dummy(1,{x:15.6,y:14});
+  e.step(1/30);for(const u of [a,b,c]){close(u.stats.damage,12);close(u.stats.attackSpeed,1.5/1.1);}close(enemy.stats.damage,10);
+  e._fire(a,target);close(target.hp,988);close(a.cooldown,1.5/1.1);a.cooldown=Infinity;
+  kill(c);e.step(1/30);for(const u of [a,b]){close(u.stats.damage,11);close(u.stats.attackSpeed,1.5/1.05);}close(a.def.stats.damage,10);
+});
+
+test('Sylviana takes twenty percent less damage from Aliens and creates four flying Butterflies on death',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),u=spawn('sylviana'),alien=dummy();alien.def.type=['Alien'];
+  close(e.damage(alien,u,50,{kind:'attack'}).total,40);close(u.hp,108);close(u.shield,12);
+  alien.def.type=['Human'];close(e.damage(alien,u,50,{kind:'spell',bypassShield:true}).total,50);
+  kill(u);const children=e.units.filter(t=>t.def.id==='sylviana/butterflies');assert.equal(children.length,4);
+  assert.ok(children.every(t=>t.side===u.side&&t.groupId===u.groupId&&t.lane===u.lane&&t.def.combat.movementType==='flying'&&t.shots===0));
+});
+
+test('Butterflies increase current and maximum Health by ten for friends inside a one-and-a-half tile square',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),u=spawn('sylviana/butterflies'),full=dummy(0,{x:15.4,y:14},{health:100,shield:30}),hurt=dummy(0,{x:15.5,y:14},{health:100}),corner=dummy(0),outside=dummy(0),enemy=dummy(1,{x:15.2,y:14});hurt.hp=70;
+  Object.assign(corner,{x:15.75,y:14.75,radius:0});Object.assign(outside,{x:15.7501,y:14,radius:0});
+  kill(u);close(full.maxHp,110);close(full.hp,110);close(full.shield,30);close(hurt.maxHp,110);close(hurt.hp,80);
+  close(corner.maxHp,1010);close(outside.maxHp,1000);close(enemy.maxHp,1000);close(e.castles[0].maxHp,1000);
+  const bloom=e.state.effects.find(f=>f.type==='healthBloom');assert.equal(bloom.width,1.5);assert.equal(bloom.height,1.5);
+});
+
+test('simultaneous Butterfly deaths stack their gifts on survivors without reviving the dead',async()=>{
+  const {e,catalog,dummy}=await fixture(),ally=dummy(0,{x:15.6,y:14}),butterflies=e.spawn(catalog.byId.get('sylviana/butterflies'),0,{x:15,y:14},1,{count:4});
+  for(const u of butterflies)e.damage(null,u,1000,{kind:'spell',bypassShield:true});e._drainDeaths();
+  close(ally.maxHp,1040);close(ally.hp,1040);assert.ok(butterflies.every(u=>!u.alive&&u.hp===0&&u.maxHp===30));
+});
+
+test('native Soul Mark clocks and summon state freeze with pause',async()=>{
+  const {e,spawn,dummy,hit,kill}=await fixture(),u=spawn('malvaris'),target=dummy();hit(u,target);e.step(1);e.setPaused(true);
+  const before=JSON.stringify(e.state);e.step(30);assert.equal(JSON.stringify(e.state),before);e.setPaused(false);kill(target);
+  assert.equal(e.units.filter(t=>t.def.id==='malvaris/phantomis').length,1);
 });
