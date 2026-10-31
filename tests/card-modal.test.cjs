@@ -120,11 +120,11 @@ test('modal stat, profile and level renderers use inline icons without emoji', (
 
 
 test('ability texts, names, turn abilities and star upgrades are preserved verbatim', () => {
-  // Includes the requested Gloop rules and clarified Stacy, Death and Demotron abilities.
+  // Includes requested Gloop rules and the six user-clarified Relic abilities.
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    '7fced3c51f5f0cdbd82dc444edf7b5eb1359ea317ffcb76b860805b335bb3062');
+    '3a936eef239490146e048bae312e8807424f4f778205e55263af3c35bd6f9177');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {

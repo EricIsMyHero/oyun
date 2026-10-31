@@ -274,6 +274,32 @@ export const ABILITIES = {
       ctx.fx('leap',u.x,u.y,{side:u.side});
     },
   },
+  bloodraider:{hit(ctx,u,t,result){
+    if(!u.alive||!damageEvent(result))return;
+    // Keep the unrounded compound value: 20 -> 22 -> 24.2 -> 26.62.
+    u.memory.bloodDamage=Math.min(Number.MAX_SAFE_INTEGER,(u.memory.bloodDamage??u.stats.damage)*1.1);
+    u.stats.damage=Math.round(u.memory.bloodDamage);
+    ctx.loseHealth(u,healthCap(ctx,u)*.04);
+  }},
+  shine:{tick(ctx,u,dt){
+    periodic(u,'shineClock',dt,5,()=>{
+      for(const ally of allies(ctx,u,radius(u,ctx),true)){
+        const stacks=ally.memory.shineStacks||0;if(stacks>=5)continue;
+        const gain=ally.def.stats.health*.04;
+        ally.memory.shineStacks=stacks+1;ally.maxHp+=gain;ally.stats.health=ally.maxHp;
+        ally.hp=Math.min(healthCap(ctx,ally),ally.hp+gain);
+        ctx.fx('buff',ally.x,ally.y,{side:u.side,color:'#f1db92'});
+      }
+    },ctx);
+  }},
+  avalith:{
+    incoming(ctx,u,s,hit){if(ctx.random()<.33){hit.damage=0;hit.instantKill=false;ctx.fx('shield',u.x,u.y,{side:u.side});}},
+    attack(ctx,u,t,hit){
+      const distance=Math.hypot(t.x-u.x,t.y-u.y),range=u.def.stats.range/1000;
+      hit.intervalScale=.2+.8*clamp((distance-1)/Math.max(.01,range-1),0,1);
+      hit.returning=true;
+    },
+  },
 };
 
 /* These are author-data gaps, not substitute versions of the native abilities. */

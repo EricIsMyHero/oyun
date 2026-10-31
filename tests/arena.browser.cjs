@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,65);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms']){
+    assert.equal(coverage.ready,68);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -277,6 +277,24 @@ async function minimapPixelAt(page,point) {
     await page.screenshot({path:'/tmp/oyun-arena-status-inspector.png',fullPage:true});screenshots.push('/tmp/oyun-arena-status-inspector.png');
     await page.locator('#inspector-close').click();
     await page.evaluate(()=>{delete window.rangedFixture;arenaApp.startMatch();});await settleFrame(page);
+
+    const returning=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.state.effects=[];
+      const def=structuredClone(arenaApp.catalog.byId.get('avalith'));Object.assign(def.stats,{speed:0,criticalChance:0});
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+      const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='return-target';
+      Object.assign(dummy.stats,{health:1000,shield:0,speed:0,damage:0,range:0,dodge:0,healrecovery:0});dummy.combat.attackType='none';
+      const [target]=e.spawn(dummy,1,{x:18.5,y:14},1,{count:1});e._fire(source,target);e.step(.5);e.setPaused(true);arenaApp.renderer.focusAt(source);
+      window.returnFixture={source,target};return{phase:e.state.projectiles[0]?.returning,shots:source.shots,locked:!!source.memory.returningShotId,hp:target.hp};
+    });
+    assert.equal(returning.phase,'return');assert.equal(returning.shots,1);assert.ok(returning.locked);assert.equal(returning.hp,968);
+    await settleFrame(page);await page.screenshot({path:'/tmp/oyun-arena-avalith-return.png',fullPage:true});screenshots.push('/tmp/oyun-arena-avalith-return.png');
+    const caught=await page.evaluate(()=>{
+      const e=arenaApp.engine,{source,target}=returnFixture;e.setPaused(false);e.step(.5);e.setPaused(true);
+      return{shots:source.shots,locked:!!source.memory.returningShotId,hp:target.hp,remaining:e.state.projectiles.filter(p=>p.sourceId===source.id).length};
+    });
+    assert.deepEqual(caught,{shots:1,locked:false,hp:968,remaining:0});
+    await page.evaluate(()=>{delete window.returnFixture;arenaApp.startMatch();});await settleFrame(page);
 
     // A real flyer engages units in its deployed outer lane, then resumes that
     // corridor. Gloop hides captives, reports its count/lifetime, and releases.
@@ -611,7 +629,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; independent bot decks and paced mana spending, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

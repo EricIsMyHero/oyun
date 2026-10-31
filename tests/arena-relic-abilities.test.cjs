@@ -23,11 +23,11 @@ async function fixture(){
   return {e,catalog,spawn,dummy,hit,kill,has:(u,kind)=>hasStatus(u,kind,e.time)};
 }
 
-test('seven Relic cards and all three Necromancer summons unlock with verified native handlers',async()=>{
+test('ten Relic cards and all three Necromancer summons unlock with verified native handlers',async()=>{
   const {catalog}=await fixture();
-  const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
+  const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
   for(const id of ids){assert.equal(catalog.byId.get(id).ready,true,id);assert.deepEqual(catalog.byId.get(id).reasons,[]);}
-  assert.equal(catalog.cards.filter(c=>c.ready).length,65);
+  assert.equal(catalog.cards.filter(c=>c.ready).length,68);
   assert.equal(catalog.byId.get('format').ready,false);assert.match(catalog.byId.get('format').reasons.join(' '),/not been implemented/);
 });
 
@@ -145,4 +145,105 @@ test('Worms deploy as six concealed units and their first successful strike emer
 test('native Relic timers and deaths freeze with the simulation pause',async()=>{
   const {e,spawn,dummy}=await fixture();spawn('death');const u=spawn('demotron'),mage=spawn('dark-necromancer');u.hp-=100;spawn('ali');dummy(0,{x:15.5,y:14});
   e.step(5);e.setPaused(true);const before=JSON.stringify(e.state);e.step(30);assert.equal(JSON.stringify(e.state),before);assert.equal(mage.memory.summonClock>4.9,true);
+});
+
+test('Bloodraider compounds unrounded damage while each delivered strike uses an integer',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('bloodraider',0,{x:15,y:14},{damage:20}),target=dummy(),shield=u.shield;
+  for(const expected of [22,24,27]){hit(u,target);assert.equal(u.stats.damage,expected);}
+  close(u.memory.bloodDamage,26.62);close(target.hp,934);close(u.hp,308);close(u.shield,shield);
+  assert.equal(u.def.stats.damage,20);assert.equal(e.cards.get('bloodraider').stats.damage,38);
+});
+
+test('Bloodraider spends four percent maximum Health per successful victim without shield or damage reduction',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('bloodraider',0,{x:15,y:14},{damageminimiser:90}),target=dummy(),shield=u.shield;
+  e.status(u,'untouchable',3);hit(u,target);close(u.hp,336);close(u.shield,shield);
+  e.status(target,'untouchable',3);hit(u,target);close(u.hp,336);assert.equal(u.stats.damage,42);
+  e.cleanse(target);target.statuses=[];e.status(u,'silence',3);hit(u,target);close(u.hp,336);assert.equal(u.stats.damage,42);
+});
+
+test('Bloodraider health costs resolve a lethal loss once, and Immortal can preserve its last Health',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('bloodraider'),target=dummy(),death=spawn('death');u.hp=14;
+  hit(u,target);assert.equal(u.alive,false);close(u.hp,0);e._drainDeaths();assert.equal(death.stats.damage,27);
+  assert.equal(e.loseHealth(u,14),0);e._drainDeaths();assert.equal(death.stats.damage,27);
+  const immortal=spawn('bloodraider');immortal.hp=7;e.status(immortal,'immortal',2);hit(immortal,target);close(immortal.hp,1);assert.ok(immortal.alive);
+});
+
+test('Shine raises self and nearby allies by four percent of base maximum Health every five seconds',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('shine'),ally=dummy(0,{x:15.6,y:14.5}),enemy=dummy(1,{x:15.6,y:13.5}),far=dummy(0,{x:18,y:14});ally.hp=950;
+  e.step(4.9);close(u.maxHp,280);close(ally.maxHp,1000);e.step(.1);
+  close(u.maxHp,291.2);close(u.hp,291.2);close(ally.maxHp,1040);close(ally.hp,990);
+  close(enemy.maxHp,1000);close(far.maxHp,1000);close(e.castles[0].maxHp,1000);close(u.shield,90);
+  e.step(25);close(u.maxHp,336);close(ally.maxHp,1200);close(ally.hp,1150);assert.equal(ally.memory.shineStacks,5);
+});
+
+test('overlapping Shines share the twenty-percent cap and preserve other maximum-Health bonuses',async()=>{
+  const {e,spawn,dummy}=await fixture(),a=spawn('shine'),b=spawn('shine',0,{x:15.7,y:14}),ally=dummy(0,{x:15.35,y:14.6});
+  ally.maxHp+=50;ally.stats.health=ally.maxHp;ally.hp+=50;
+  for(let i=0;i<4;i++){e._hook('tick',a,5);e._hook('tick',b,5);}
+  close(ally.maxHp,1250);close(ally.hp,1250);assert.equal(ally.memory.shineStacks,5);close(ally.def.stats.health,1000);
+});
+
+test('Shine pauses its aura timer when silenced and with the battle pause',async()=>{
+  const {e,spawn}=await fixture(),u=spawn('shine');e.step(4.9);e.status(u,'silence',20);e.step(10);close(u.maxHp,280);
+  e.cleanse(u);e.setPaused(true);e.step(30);close(u.maxHp,280);e.setPaused(false);e.step(.1);close(u.maxHp,291.2);
+});
+
+test('Avalith pierces ground targets once on each leg and turns at the original target position',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('avalith'),primary=dummy(1,{x:17.5,y:14}),near=dummy(1,{x:15.9,y:14}),far=dummy(1,{x:19,y:14}),outside=dummy(1,{x:16.2,y:15.1}),air=dummy(1,{x:16.5,y:14});air.def.combat.movementType='flying';outside.y=15.1;
+  e._fire(u,primary);const shot=e.state.projectiles[0];assert.equal(u.memory.returningShotId,shot.id);
+  for(let i=0;i<100&&shot.returning==='outbound';i++)e._projectiles(1/60);
+  assert.equal(shot.returning,'return');close(shot.x,17.5);close(primary.hp,984);close(near.hp,984);
+  e._fire(u,primary);assert.equal(u.shots,1,'the returning weapon must be caught before another shot');
+  for(let i=0;i<100&&e.state.projectiles.length;i++)e._projectiles(1/60);
+  close(primary.hp,968);close(near.hp,968);close(far.hp,1000);close(outside.hp,1000);close(air.hp,1000);
+  assert.equal(u.hits,4);assert.equal(u.memory.returningShotId,undefined);assert.equal(e.state.projectiles.length,0);
+});
+
+test('Avalith returns to its moving owner, without chasing a target that left the line',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('avalith'),target=dummy(1,{x:17,y:14});e._fire(u,target);
+  target.y=17;const shot=e.state.projectiles[0];
+  for(let i=0;i<100&&shot.returning==='outbound';i++)e._projectiles(1/60);
+  close(shot.x,17);close(shot.y,14);u.x=14.5;
+  for(let i=0;i<100&&e.state.projectiles.length;i++)e._projectiles(1/60);
+  close(shot.x,u.x);close(shot.y,u.y);close(target.hp,1000);assert.equal(u.memory.returningShotId,undefined);
+});
+
+test('Avalith recovers after catching its shot with the confirmed linear distance interval',async()=>{
+  for(const [distance,interval] of [[.75,.16],[1,.16],[2.375,.48],[3.75,.8]]){
+    const {e,spawn,dummy}=await fixture(),u=spawn('avalith'),target=dummy(1,{x:15+distance,y:14});
+    e._fire(u,target);const shot=e.state.projectiles[0];close(shot.recovery,interval);
+    assert.equal(u.def.stats.attackSpeed,.8);assert.equal(u.def.stats.delay,1.3);
+    e.step(2*distance/8-.01);assert.equal(u.shots,1);assert.ok(u.memory.returningShotId);
+    for(let i=0;i<100&&u.memory.returningShotId;i++)e.step(1/30);
+    const caught=e.time;close(u.cooldown,interval);e.step(interval-.04);assert.equal(u.shots,1);
+    e.step(.1);assert.equal(u.shots,2);assert.ok(e.time>=caught+interval);
+  }
+});
+
+test('Avalith respects Slow and Haste and a new Silence does not strand a shot in flight',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('avalith'),target=dummy(1,{x:16,y:14});
+  e.status(u,'slow',5,.25);e.status(u,'attackHaste',5,.5);e._fire(u,target);
+  close(e.state.projectiles[0].recovery,.8/1.5/.75*.2);e.status(u,'silence',5);
+  for(let i=0;i<100&&e.state.projectiles.length;i++)e._projectiles(1/60);
+  close(target.hp,968);assert.equal(u.memory.returningShotId,undefined);
+});
+
+test('Avalith cannot avoid damage or launch its returning ability while silenced',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('avalith'),target=dummy(1,{x:16,y:14});e.random=()=>0;
+  e.status(u,'silence',3);close(e.damage(null,u,50,{kind:'spell'}).total,50);e._fire(u,target);
+  assert.equal(e.state.projectiles[0].returning,undefined);assert.equal(u.memory.returningShotId,undefined);close(u.cooldown,2.1);
+});
+
+test('Avalith has an exact thirty-three-percent incoming-damage avoidance boundary',async()=>{
+  const {e,spawn}=await fixture(),u=spawn('avalith');e.random=()=>.329;
+  close(e.damage(null,u,100,{kind:'spell',instantKill:true}).total,0);close(u.hp,240);
+  e.random=()=>.33;close(e.damage(null,u,100,{kind:'spell'}).total,100);close(u.hp,140);
+});
+
+test('Avalith flight freezes on pause and clears its attack lock on caster death or timeout',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),u=spawn('avalith'),target=dummy(1,{x:17,y:14});e._fire(u,target);e.step(.1);e.setPaused(true);
+  const before=JSON.stringify(e.state);e.step(20);assert.equal(JSON.stringify(e.state),before);e.setPaused(false);e.random=()=>.99;kill(u);e.step(.1);
+  assert.equal(e.state.projectiles.length,0);assert.equal(u.memory.returningShotId,undefined);
+  const next=spawn('avalith');e._fire(next,target);e.state.projectiles[0].ttl=.01;e._projectiles(.1);
+  assert.equal(e.state.projectiles.length,0);assert.equal(next.memory.returningShotId,undefined);assert.ok(next.cooldown>0);
 });

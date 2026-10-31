@@ -521,7 +521,7 @@
       "mana": "14",
       "number": "1"
     },
-    "trait": "33% Şansa hasar almaz, menzilə görə Saldırı Hızı, Gecikmə Vaxtı 80%-ə qədər azalar",
+    "trait": "33% şansla gələn hasardan yayınar. Atışı hədəfə çatanda geri dönər və hər iki istiqamətdə hasar verər. Atış özünə qayıdana qədər yeni atış etməz; qayıtdıqdan sonra hücum intervalını gözləyər. Rəqib 1 karo və ya daha yaxında olduqda hücum intervalı 80% azalar. Bu azalma məsafəyə görə xətti şəkildə dəyişərək 3,75 karoda 0%-ə enər.",
     "additionalStats": {
       "range": "3750",
       "speed": "1000",
@@ -1265,7 +1265,7 @@
       "mana": "12",
       "number": "1"
     },
-    "trait": "Ətrafındakı kartlara hər 5 saniyədə +4% M.Can verər (Max:20%)",
+    "trait": "Hər 5 saniyədə özünün və yaxın dost kartların əsas maksimum canını +4% artırar (maksimum bonus: +20%). Qazanılan can bonusu cari cana da əlavə olunar.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -1334,7 +1334,7 @@
       "mana": "16",
       "number": "1"
     },
-    "trait": "Hər hasar verdikcə M.Canının 4%-ni itirər və hasarı +10% artar",
+    "trait": "Hər uğurlu vuruşda maksimum canının 4%-ni itirər. Hasarı hər dəfə yuvarlaqlaşdırılmamış əvvəlki hasarına görə +10% artar; vuruş hasarı ən yaxın tam ədədə yuvarlaqlaşdırılar.",
     "additionalStats": {
       "range": "2000",
       "speed": "1000",

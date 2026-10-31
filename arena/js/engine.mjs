@@ -345,6 +345,15 @@ export class ArenaEngine {
     if(value<=0)return 0;
     target.hp+=value;this.fx('heal',target.x,target.y,{amount:value,side:target.side});return value;
   }
+  loseHealth(target,amount){
+    if(!target?.alive||!Number.isFinite(amount)||amount<=0)return 0;
+    // Health costs bypass shields and damage modifiers, without triggering a hit.
+    const before=target.hp;target.hp=Math.max(has(target,'immortal',this.time)?1:0,target.hp-amount);
+    const lost=Math.max(0,before-target.hp);
+    if(lost)this.fx('hit',target.x,target.y,{amount:lost,side:target.side,color:'#d07b88'});
+    if(target.hp<=0){target.alive=false;this.deaths.push({u:target,killer:null});}
+    return lost;
+  }
   giveShield(target,amount,source=this.abilityContext?.source||null){
     if(!target?.alive||amount<=0||has(target,'suppression',this.time))return 0;
     if(source&&this._abilityMiss(source,target))return 0;
@@ -573,6 +582,7 @@ export class ArenaEngine {
     return victims;
   }
   _fire(u,target){
+    if(u.memory.returningShotId)return;
     const attack=this._attackDefinition(u),profile=this._profile(u);
     const index=u.burstIndex;
     u.shots++;u.memory.lastAttack=this.time;
@@ -594,11 +604,14 @@ export class ArenaEngine {
         this.fx('slash',u.x,u.y,{side:u.side,radius:this._reach(u,p),angle:p.attackAngle||0,dx:target.x-u.x,dy:target.y-u.y,duration:.24});
       }
     }else this.fx('miss',target.x,target.y,{side:u.side});
-    const interval=this.attackInterval(u,hit.haste||0);
+    const interval=Math.max(.01,this.attackInterval(u,hit.haste||0)*num(hit.intervalScale,1));
+    const returning=hit.returning&&this.state.projectiles.find(shot=>shot.id===u.memory.returningShotId);
+    if(returning)returning.recovery=interval;
     u.burstIndex++;
     if(u.burstIndex>=Math.max(1,attack.count)){
       u.burstIndex=0;u.burstTargetId=null;u.sequenceIndex++;u.attacks++;
-      u.cooldown=Math.max(.01,interval+statValue(u,'delay',this.time,num(attack.delay)));
+      // A returning weapon's flight is its Delay; recovery starts when caught.
+      u.cooldown=Math.max(.01,interval+(returning?0:statValue(u,'delay',this.time,num(attack.delay))));
     }else{u.burstTargetId=target.id;u.cooldown=interval;}
   }
   attackInterval(u,extraHaste=0){
@@ -609,8 +622,19 @@ export class ArenaEngine {
   _projectile(u,target,hit,profile){
     let dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;
     const remaining=profile.attackType==='ranged'?Math.max(this._reach(u,profile),this._attackReach(u,profile)):this._reach(u,profile);
-    this.state.projectiles.push({id:`shot-${++this.serial}`,x:u.x,y:u.y,prevX:u.x,prevY:u.y,dx:dx/len,dy:dy/len,remaining,width:num(profile.attackWidth)/1000,side:u.side,sourceId:u.id,source:u,targetId:target.id,hit:{...hit},profile:{...profile},hitIds:new Set(),kind:'bolt',color:u.side?'#ffb286':'#9feaff',
-      homing:!!u.isCastle,origin:{x:u.x,y:u.y},range:remaining,ttl:2*remaining/RULES.projectileSpeed+RULES.fixedStep});
+    const shot={id:`shot-${++this.serial}`,x:u.x,y:u.y,prevX:u.x,prevY:u.y,dx:dx/len,dy:dy/len,remaining,width:num(profile.attackWidth)/1000,side:u.side,sourceId:u.id,source:u,targetId:target.id,hit:{...hit},profile:{...profile},hitIds:new Set(),kind:'bolt',color:u.side?'#ffb286':'#9feaff',
+      homing:!!u.isCastle,origin:{x:u.x,y:u.y},range:remaining,ttl:2*remaining/RULES.projectileSpeed+RULES.fixedStep};
+    if(hit.returning){
+      shot.returning='outbound';shot.remaining=Math.min(remaining,Math.hypot(dx,dy));
+      shot.ttl=4*remaining/RULES.projectileSpeed+2;u.memory.returningShotId=shot.id;
+    }
+    this.state.projectiles.push(shot);
+  }
+  _catchProjectile(shot){
+    shot.done=true;
+    if(shot.source.memory.returningShotId!==shot.id)return;
+    delete shot.source.memory.returningShotId;
+    if(shot.source.alive)shot.source.cooldown=Math.max(.01,shot.recovery||.01);
   }
   _resolveHit(source,target,hit){
     if(!target.alive)return;
@@ -628,7 +652,17 @@ export class ArenaEngine {
       if(shot.done)continue;
       shot.prevX=shot.x;shot.prevY=shot.y;
       let candidates;
-      if(shot.homing){
+      if(shot.returning){
+        shot.ttl-=dt;
+        if(!shot.source.alive||shot.ttl<=0){this._catchProjectile(shot);continue;}
+      }
+      if(shot.returning==='return'){
+        const dx=shot.source.x-shot.x,dy=shot.source.y-shot.y,len=Math.hypot(dx,dy);
+        shot.dx=dx/(len||1);shot.dy=dy/(len||1);
+        const step=Math.min(len,RULES.projectileSpeed*dt);
+        shot.x+=shot.dx*step;shot.y+=shot.dy*step;shot.remaining=Math.max(0,len-step);
+        candidates=this.units.concat(this.castles);
+      }else if(shot.homing){
         const target=this.units.find(t=>t.id===shot.targetId);
         if(!this._legalTarget(shot.source,target)||distance(shot.origin,target)>shot.range+EPS||shot.ttl<=0){shot.done=true;continue;}
         const dx=target.x-shot.x,dy=target.y-shot.y,len=Math.hypot(dx,dy)||1;
@@ -662,7 +696,12 @@ export class ArenaEngine {
         const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
         if(limit!=null&&shot.hitIds.size>=limit){shot.done=true;break;}
       }
-      if(shot.remaining<=EPS||shot.homing&&shot.ttl<=0){if(!shot.done&&shot.profile.projectileEndEffect==='explode')this._explodeProjectile(shot,shot);shot.done=true;}
+      if(shot.returning&&shot.remaining<=EPS){
+        if(shot.returning==='outbound'){
+          shot.returning='return';shot.hitIds.clear();shot.remaining=distance(shot,shot.source);
+          this.fx('wave',shot.x,shot.y,{side:shot.side,radius:.25,duration:.2});
+        }else this._catchProjectile(shot);
+      }else if(shot.remaining<=EPS||shot.homing&&shot.ttl<=0){if(!shot.done&&shot.profile.projectileEndEffect==='explode')this._explodeProjectile(shot,shot);shot.done=true;}
     }
     this.state.projectiles=this.state.projectiles.filter(s=>!s.done);
   }
@@ -832,7 +871,7 @@ export class ArenaEngine {
       const allowance=this.ability(u)?.contactAttack?EPS:u.radius*.2;
       if(target&&distance(u,target)<=reach+target.radius+allowance&&profile.attackType!=='none'){
         const dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;u.facingX=dx/len;u.facingY=dy/len;
-        if(u.cooldown<=EPS)this._fire(u,target);
+        if(u.cooldown<=EPS&&!u.memory.returningShotId)this._fire(u,target);
       }else this._move(u,target,dt);
     }
     this._syncCaptives();this._separation();this._castles(dt);this._projectiles(dt);this._objectives(dt);this._drainDeaths();

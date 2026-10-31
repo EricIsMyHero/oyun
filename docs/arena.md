@@ -170,7 +170,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **65 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **68 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -178,8 +178,9 @@ after the first successful hit; their poison continues and keeps its original
 caster attribution. Giga Bomb deals its immediate source damage and then ten
 one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
 
-Seven Relic roots now have their native abilities implemented: **Stacy**,
-**Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali** and **Worms**.
+Ten Relic roots now have their native abilities implemented: **Stacy**,
+**Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,
+**Bloodraider**, **Shine** and **Avalith**.
 
 - Stacy adds four one-second Burn ticks of eight damage after each successful
   hit. Independent packets stack and continue after her death. Below 10% health,
@@ -204,10 +205,30 @@ Seven Relic roots now have their native abilities implemented: **Stacy**,
 - Worms deploy as six concealed units. Each emerges on its first successful
   strike and stuns its victim for 0.8 seconds. Normal spell and incidental area
   damage can break Invisibility according to the shared status rules.
+- Bloodraider compounds its unrounded damage by 10% per successful victim and
+  rounds delivered damage to the nearest integer. A hypothetical base of 20
+  produces 22, 24 and 27; the underlying values remain 22, 24.2 and 26.62.
+  Each successful victim costs 4% of its current maximum health. This health
+  cost bypasses shields and damage reduction; Immortal can preserve the last
+  health point. Failed or prevented hits grant no growth and spend no health.
+- Shine adds 4% of base maximum health to itself and nearby allies every five
+  active seconds, adding the same amount to their current health. Each recipient
+  has a shared five-stack cap (+20%), even with overlapping Shines. Other maximum
+  health bonuses remain separate. Enemies and castles receive no bonus.
+- Avalith avoids incoming damage with a 33% chance. Its piercing line shot turns
+  at the aimed target position and returns to its moving owner, hitting each
+  eligible ground target once per leg. It cannot throw another shot before
+  catching the first. Actual flight time replaces the fixed Delay; the next
+  attack interval starts after the catch, using normal projectile speed.
+  The interval is reduced 80% at one tile or closer, scaling linearly to no
+  reduction at 3.75 tiles: 0.16s, 0.48s and 0.80s at 1, 2.375 and 3.75 tiles.
+  Slow and Haste still apply. The source 1.30s Delay remains reference data and
+  is not added again on top of flight time. Pause freezes flight; Silence does
+  not strand an already-thrown weapon, and death or timeout clears its lock.
 
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 73 locked entries explain an undefined
+defined for this simulator. The remaining 70 locked entries explain an undefined
 rule, missing combat data, or an unimplemented native ability. Required child
 forms must also be complete; removing a lock never substitutes invented values.
 
@@ -238,7 +259,8 @@ The engine keeps these quantities separate:
   the final hit, the normal interval plus **Delay** elapses before a new burst.
   A complete repeating burst therefore takes `hitCount × AttackSpeed + Delay`,
   matching the Codex's damage calculation rather than Survival's separate
-  weapon timings.
+  weapon timings. Native returning weapons such as Avalith instead wait for
+  their actual round trip, followed by their distance-dependent attack interval.
 - **Count** is the number of deployed units. Summoning and transformations follow
   the particular card's native rules.
 - **DPS** is source reference data. Actual damage per second follows damage,

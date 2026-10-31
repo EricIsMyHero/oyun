@@ -24,6 +24,7 @@ function fixture(catalog,id) {
     near(point,radius,filter=null){return this.units.filter(v=>v.alive&&Math.hypot(v.x-point.x,v.y-point.y)<=radius&&(!filter||filter(v)));},
     damage(source,target,amount,options={}){records.damage.push({source,target,amount,options});target.hp=Math.max(0,target.hp-amount);const killed=target.hp<=0;target.alive=!killed;return {healthDamage:amount,shieldDamage:0,total:amount,killed};},
     heal(target,amount){const n=Math.min(amount,target.maxHp-target.hp);target.hp+=n;return n;},
+    loseHealth(target,amount){const lost=Math.min(target.hp,amount);target.hp-=lost;target.alive=target.hp>0;return lost;},
     giveShield(target,amount){target.shield+=amount;target.maxShield=Math.max(target.maxShield,target.shield);return amount;},
     spawn(d,side,p,lane,options={}){records.spawn.push({def:d,side,p,lane,options});const out=[];for(let i=0;i<(options.count||1);i++){const child=unit(d,'child-'+i,side);child.groupId=options.groupId||u.groupId;this.units.push(child);out.push(child);}return out;},
     push(target,from,distance){records.push.push({target,from,distance});},fx(type,x,y,opts){records.fx.push({type,x,y,opts});},
@@ -38,7 +39,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,65);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,68);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);assert.ok(card.attack.interval>0);}}
   assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
@@ -57,6 +58,9 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  avalith:({ctx,u,t,rule})=>{ctx.random=()=>.329;let hit={damage:10,instantKill:true};rule.incoming(ctx,u,t,hit);assert.equal(hit.damage,0);assert.equal(hit.instantKill,false);ctx.random=()=>.33;hit={damage:10};rule.incoming(ctx,u,t,hit);assert.equal(hit.damage,10);for(const [distance,factor] of [[.5,.2],[1,.2],[2.375,.6],[3.75,1]]){t.x=u.x+distance;t.y=u.y;hit={};rule.attack(ctx,u,t,hit);close(hit.intervalScale,factor);assert.equal(hit.returning,true);}},
+  bloodraider:({ctx,u,t,rule,result})=>{u.stats.damage=20;for(const expected of [22,24,27]){rule.hit(ctx,u,t,result);assert.equal(u.stats.damage,expected);}close(u.hp,u.maxHp*.88);},
+  shine:({ctx,u,t,rule})=>{t.side=u.side;t.maxHp=t.hp=t.def.stats.health;const initial=u.maxHp;for(let i=0;i<8;i++)rule.tick(ctx,u,5);close(u.maxHp,initial*1.2);close(t.maxHp,t.def.stats.health*1.2);assert.equal(u.memory.shineStacks,5);},
   stacy:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'burn');assert.equal(records.statuses[0].amount,8);assert.equal(records.statuses[0].duration,4);assert.equal(records.statuses[0].stack,true);u.hp=u.maxHp*.1;rule.tick(ctx,u);close(u.stats.range,2600);u.hp-=.01;rule.tick(ctx,u);close(u.stats.range,2860);u.hp=u.maxHp;rule.tick(ctx,u);close(u.stats.range,2600);},
   death:({ctx,u,rule})=>{for(let i=0;i<50;i++)rule.unitDeath(ctx,u);assert.equal(u.memory.damageGrowth,80);assert.equal(u.stats.damage,105);},
   demotron:({ctx,u,rule})=>{u.hp=u.maxHp-100;rule.tick(ctx,u,10);close(u.hp,u.maxHp-90);rule.tick(ctx,u,10);close(u.hp,u.maxHp-81);},
