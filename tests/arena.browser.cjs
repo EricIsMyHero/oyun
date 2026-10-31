@@ -167,11 +167,29 @@ async function minimapPixelAt(page,point) {
     assert.equal(await page.evaluate(()=>scrollY),scrollBefore,'wheel navigation does not scroll the page');
     await page.keyboard.press('Space');
     assert.deepEqual(await page.evaluate(()=>arenaApp.renderer.camera.center),cameraStart.center);
+    for(const percent of [90,80,75,70,60,50]){
+      await page.locator('#camera-zoom-out').click();
+      assert.equal(await page.evaluate(()=>arenaApp.renderer.camera.zoom),percent/100);
+      assert.equal(await page.locator('#camera-zoom').textContent(),`${percent}%`);
+    }
+    assert.equal(await page.locator('#camera-zoom-out').isDisabled(),true);
+    await page.screenshot({path:'/tmp/oyun-arena-zoom-50.png',fullPage:true});screenshots.push('/tmp/oyun-arena-zoom-50.png');
+    for(const percent of [60,70,75,80,90,100]){
+      await page.locator('#camera-zoom-in').click();
+      assert.equal(await page.locator('#camera-zoom').textContent(),`${percent}%`);
+    }
+    await page.locator('#arena-canvas').focus();await page.keyboard.press('-');
+    assert.equal(await page.locator('#camera-zoom').textContent(),'90%');
+    await page.keyboard.press('+');assert.equal(await page.locator('#camera-zoom').textContent(),'100%');
+    await page.mouse.move(panStart.x,panStart.y);await page.keyboard.down('Control');
+    await page.mouse.wheel(0,80);await page.keyboard.up('Control');await settleFrame(page);
+    assert.equal(await page.locator('#camera-zoom').textContent(),'90%');
+    await page.locator('#camera-zoom-in').click();
     for(let i=0;i<4&&!await page.locator('#camera-zoom-in').isDisabled();i++)await page.locator('#camera-zoom-in').click();
     assert.equal(await page.evaluate(()=>arenaApp.renderer.camera.zoom),1.6);
     assert.equal(await page.locator('#camera-zoom-in').isDisabled(),true);
     for(let i=0;i<10&&!await page.locator('#camera-zoom-out').isDisabled();i++)await page.locator('#camera-zoom-out').click();
-    assert.equal(await page.evaluate(()=>arenaApp.renderer.camera.zoom),.8);
+    assert.equal(await page.evaluate(()=>arenaApp.renderer.camera.zoom),.5);
     assert.equal(await page.locator('#camera-zoom-out').isDisabled(),true);
     await page.keyboard.press('1');
     const remote=await minimapPoint(page,{x:39,y:14});

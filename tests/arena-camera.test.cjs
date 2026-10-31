@@ -43,8 +43,25 @@ test('zoom preserves its pointer anchor, stays bounded and cannot expose a whole
   camera.zoomBy(1e6);assert.equal(camera.zoom,CAMERA.maxZoom);
   camera.zoomBy(1e-6);assert.equal(camera.zoom,CAMERA.minZoom);
   const fullWidth=(MAP.width+MAP.height)*camera.view.scale;
-  assert.ok(fullWidth>camera.width*1.7);
+  assert.ok(fullWidth>camera.width);
   const before={...camera.view};camera.zoomBy(0);camera.zoomBy(NaN);assert.deepEqual(camera.view,before);
+});
+
+test('zoom steps include every requested level, preserve their anchor, and stop at 50 percent',async()=>{
+  const [{ArenaCamera,CAMERA},{MAP}]=await modules;
+  const camera=new ArenaCamera(1200,650);camera.setActive(true);camera.focus(MAP.nodes[1]);
+  const anchor={x:510,y:280},point=camera.worldAt(anchor.x,anchor.y);
+  for(const expected of [.9,.8,.75,.7,.6,.5]){
+    camera.zoomStep(-1,anchor);assert.equal(camera.zoom,expected);
+    const after=camera.worldAt(anchor.x,anchor.y);close(after.x,point.x);close(after.y,point.y);
+  }
+  const before={...camera.view};camera.zoomStep(-1,anchor);assert.deepEqual(camera.view,before);
+  for(const expected of [.6,.7,.75,.8,.9,1,1.2,1.4,1.6]){camera.zoomStep(1);assert.equal(camera.zoom,expected);}
+  camera.zoomStep(1);assert.equal(camera.zoom,CAMERA.maxZoom);
+  camera.zoomStep(0);camera.zoomStep(NaN);assert.equal(camera.zoom,CAMERA.maxZoom);
+  camera.setZoom(.76);camera.zoomStep(-1);assert.equal(camera.zoom,.75);
+  camera.setZoom(.76);camera.zoomStep(1);assert.equal(camera.zoom,.8);
+  camera.setActive(false);camera.zoomStep(-1);assert.equal(camera.zoom,1);
 });
 
 test('resizing preserves camera focus and zoom; restarting restores the home view',async()=>{

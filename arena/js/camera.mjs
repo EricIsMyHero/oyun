@@ -1,7 +1,7 @@
 import { MAP } from './map.mjs';
 import { clamp } from './rules.mjs';
 
-export const CAMERA = Object.freeze({ minZoom:.8, maxZoom:1.6, desktopSpan:32, mobileSpan:18 });
+export const CAMERA = Object.freeze({ minZoom:.5, maxZoom:1.6, zoomSteps:Object.freeze([.5,.6,.7,.75,.8,.9,1,1.2,1.4,1.6]), desktopSpan:32, mobileSpan:18 });
 
 /** Camera coordinates are presentation only; simulation positions stay in tiles. */
 export class ArenaCamera {
@@ -43,11 +43,21 @@ export class ArenaCamera {
     const s=this.view.scale;
     this.focus({x:this.center.x-(dx/s-dy/(s*.5))*.5,y:this.center.y-(dx/s+dy/(s*.5))*.5});
   }
-  zoomBy(factor,anchor={x:this.width/2,y:this.height/2}) {
-    if(!this.active||!Number.isFinite(factor)||factor<=0)return;
+  setZoom(zoom,anchor={x:this.width/2,y:this.height/2}) {
+    if(!this.active||!Number.isFinite(zoom)||zoom<=0)return;
     const before=this.worldAt(anchor.x,anchor.y);
-    this.zoom=clamp(this.zoom*factor,CAMERA.minZoom,CAMERA.maxZoom);
+    this.zoom=clamp(zoom,CAMERA.minZoom,CAMERA.maxZoom);
     const after=this.worldAt(anchor.x,anchor.y);
     this.focus({x:this.center.x+before.x-after.x,y:this.center.y+before.y-after.y});
+  }
+  zoomBy(factor,anchor) {
+    if(!Number.isFinite(factor)||factor<=0)return;
+    this.setZoom(this.zoom*factor,anchor);
+  }
+  zoomStep(direction,anchor) {
+    if(!Number.isFinite(direction)||direction===0)return;
+    const steps=direction>0?CAMERA.zoomSteps:[...CAMERA.zoomSteps].reverse();
+    const next=steps.find(zoom=>direction>0?zoom>this.zoom+1e-9:zoom<this.zoom-1e-9);
+    if(next!=null)this.setZoom(next,anchor);
   }
 }

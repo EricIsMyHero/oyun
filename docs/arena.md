@@ -101,9 +101,11 @@ Scroll or use **WASD / arrow keys** to pan. **Home / Space**, or the citadel
 button beside the minimap, returns to your castle. Click or drag the minimap
 to travel directly to another area; its frame shows your current viewport.
 
-Use the **+ / −** buttons (or keyboard keys) to zoom from 80% to 160%; Ctrl/Command
-plus the mouse wheel zooms around the pointer. Even the widest battle setting
-requires panning. Resizing retains your camera focus and zoom. Starting or
+Use the **+ / −** buttons (or keyboard keys) to step through **100%, 90%, 80%,
+75%, 70%, 60%, and 50%** when zooming out. Zooming in can continue to 120%, 140%,
+and 160%. Ctrl/Command plus the mouse wheel uses the same steps around the
+pointer. Even the widest battle setting requires panning. Resizing retains your
+camera focus and zoom. Starting or
 restarting a match restores the home camera; the lobby shows the complete island.
 Camera movement does not alter combat positions, deployment range or team sight.
 

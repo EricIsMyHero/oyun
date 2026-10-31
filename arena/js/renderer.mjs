@@ -137,6 +137,7 @@ export class ArenaRenderer {
   home() {this.camera.home();this.syncCamera();}
   panBy(dx,dy) {this.camera.panBy(dx,dy);this.syncCamera();}
   zoomBy(factor,anchor) {this.camera.zoomBy(factor,anchor);this.syncCamera();}
+  zoomStep(direction,anchor) {this.camera.zoomStep(direction,anchor);this.syncCamera();}
 
   ensureBackground() {
     // Paint the island once at the maximum camera scale, then move the cached

@@ -292,9 +292,9 @@ function homeCamera() {
   cancelDrag();state.renderer.home();updateCameraControls();
   $('arena-canvas').focus({preventScroll:true});
 }
-function zoomCamera(factor,anchor) {
+function zoomCamera(direction,anchor) {
   if(!state.engine)return;
-  state.pointer=null;state.renderer.zoomBy(factor,anchor);updateCameraControls();
+  state.pointer=null;state.renderer.zoomStep(direction,anchor);updateCameraControls();
 }
 function cancelDrag() {
   const drag=state.drag;state.drag=null;state.pointer=null;
@@ -456,8 +456,8 @@ $('pause-button').addEventListener('click',togglePause);
 $('resume-button').addEventListener('click',resumeMatch);
 $('restart-button').addEventListener('click',startMatch);
 $('camera-home').addEventListener('click',homeCamera);
-$('camera-zoom-in').addEventListener('click',()=>zoomCamera(1.2));
-$('camera-zoom-out').addEventListener('click',()=>zoomCamera(1/1.2));
+$('camera-zoom-in').addEventListener('click',()=>zoomCamera(1));
+$('camera-zoom-out').addEventListener('click',()=>zoomCamera(-1));
 $('play-again').addEventListener('click',startMatch);
 for(const id of ['return-lobby','pause-edit-deck','result-edit-deck'])$(id).addEventListener('click',returnToLobby);
 $('inspector-close').addEventListener('click',closeInspector);
@@ -473,8 +473,8 @@ document.addEventListener('keydown',event=>{
   const key=event.key.toLowerCase();
   if(cameraDirections.has(key)){event.preventDefault();cameraKeys.add(key);}
   else if(event.key==='Home'||event.code==='Space'&&['arena-canvas','arena-minimap'].includes(event.target.id)){event.preventDefault();homeCamera();}
-  else if(event.key==='+'||event.key==='='){event.preventDefault();zoomCamera(1.2);}
-  else if(event.key==='-'){event.preventDefault();zoomCamera(1/1.2);}
+  else if(event.key==='+'||event.key==='='){event.preventDefault();zoomCamera(1);}
+  else if(event.key==='-'){event.preventDefault();zoomCamera(-1);}
   else if(/^[1-4]$/.test(event.key)){event.preventDefault();selectHand(Number(event.key)-1);}
   else if(event.key.toLowerCase()==='q'){event.preventDefault();selectSpell();}
   else if(event.key==='Escape'){event.preventDefault();state.selection?clearSelection():togglePause();}
@@ -531,7 +531,7 @@ $('arena-canvas').addEventListener('wheel',event=>{
   if(!state.engine||$('inspector').open||$('guide-dialog').open)return;
   event.preventDefault();cancelDrag();
   const rect=$('arena-canvas').getBoundingClientRect();
-  if(event.ctrlKey||event.metaKey)zoomCamera(Math.exp(-event.deltaY*.002),{x:event.clientX-rect.left,y:event.clientY-rect.top});
+  if(event.ctrlKey||event.metaKey)zoomCamera(-Math.sign(event.deltaY),{x:event.clientX-rect.left,y:event.clientY-rect.top});
   else {
     const unit=event.deltaMode===1?16:event.deltaMode===2?rect.height:1;
     state.renderer.panBy(-event.deltaX*unit,-event.deltaY*unit);
