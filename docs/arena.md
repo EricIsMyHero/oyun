@@ -10,6 +10,28 @@ separate. Arena loads the same card and spell JSON files without changing them.
 New controls and labels are English. Authored ability descriptions retain their
 original language; they are not translated at runtime.
 
+## Arena artwork
+
+The forest uses shaded evergreen and broadleaf canopies, soft ground shadows,
+mossy boulders, ferns and small mushrooms. Roads have individually shaded paving
+stones; riverbanks and cliff faces carry layered rock and vegetation. Citadels
+use cut-stone masonry, tiled roofs, warm windows and orbiting crystal light.
+Mana wells have luminous liquid, rising bubbles and engraved capture rings.
+
+Unit portraits sit in metallic team-colored frames. Moving units step, archers
+carry bows, heavy fighters carry hammers, and mages have illuminated staves.
+Shield halos, frozen portraits, poison and fire motes make combat status easier
+to read. Projectiles leave light trails, impacts scatter sparks and melee arcs
+follow the attack direction. Command panels use matching brass and glass shading.
+
+Scenery is drawn once into a cached terrain atlas, so panning and zooming reuse
+the artwork. Card portraits are cropped into small cached textures once after
+loading; terrain blits use only the visible atlas region. The scenery generator
+has its own deterministic seeds; drawing does not advance combat or change any
+card statistics. Fog covers the final world
+image, including every new light and particle effect. Artwork is procedural and
+requires no additional external image service.
+
 ## Match rules
 
 | Rule | Value |
