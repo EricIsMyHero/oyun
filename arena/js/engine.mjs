@@ -2,11 +2,11 @@ import { RULES, clamp, num, burst, energyForMana } from './rules.mjs';
 import { MAP, routeFor, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
+import { NEGATIVE_STATUSES as NEGATIVE, statusKind, statusParameters, statValue, statModifiers } from './statuses.mjs';
 
-const NEGATIVE = new Set(['slow','movementSlow','stun','root','silence','blind','poison','burn','bleed','curse','misfortune','imprisonment','suppression','healBlock','fear','conversion']);
 const finitePoint = p => p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.x <= MAP.width && p.y >= 0 && p.y <= MAP.height;
 const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-const active = (u,kind,time) => (u.statuses || []).filter(s => s.kind === kind && s.until > time);
+const active = (u,kind,time) => (u.statuses || []).filter(s => s.kind === kind && s.until > time+1e-7);
 const strongest = (u,kind,time) => Math.max(0,...active(u,kind,time).map(s => s.magnitude || 0));
 const has = (u,kind,time) => active(u,kind,time).length > 0;
 const bodyMass = { 'very-light':.5, light:.75, medium:1, heavy:1.5, 'very-heavy':2 };
@@ -30,6 +30,8 @@ export class ArenaEngine {
     this.deaths = [];
     this.damageDepth = 0;
     this.botClock = .6;
+    this.statusSources=new Map();
+    this.abilityContext=null;
     this.state = {
       time:0, phase:'regulation',remaining:RULES.regulation,paused:false,winner:null,
       teams:[0,1].map(()=>({mana:RULES.startMana,energy:0,hand:deck.slice(0,RULES.handSize),queue:deck.slice(RULES.handSize),spellIds:[...spellDeck],spellIndex:0,deployed:0,spentMana:0})),
@@ -56,8 +58,31 @@ export class ArenaEngine {
   ability(u){return ABILITIES[u.def?.id] || ABILITIES[u.def?.rootId] || null;}
   _hook(name,u,...args){
     if(name!=='spawn'&&(has(u,'silence',this.time)||has(u,'imprisonment',this.time)))return;
-    const fn=this.ability(u)?.[name];if(fn)fn(this,u,...args);
+    if(['tick','attack'].includes(name)&&(has(u,'airborne',this.time)||has(u,'frozen',this.time)))return;
+    const fn=this.ability(u)?.[name];if(!fn)return;
+    const chance=strongest(u,'misfortune',this.time),triggered=['incoming','damaged','death','lifesteal'].includes(name);
+    if(triggered&&chance&&this.random()<chance)return;
+    const previous=this.abilityContext;this.abilityContext={source:u,name,missed:triggered?false:null};
+    try{fn(this,u,...args);}finally{this.abilityContext=previous;}
   }
+  statValue(u,key,fallback=0){return statValue(u,key,this.time,num(u?.stats?.[key],fallback));}
+  maxHealth(u){return Math.max(1,statValue(u,'health',this.time,u.maxHp));}
+  maxShield(u){return statValue(u,'shield',this.time,u.maxShield);}
+  isEnemy(source,target){return !!target&&source!==target&&(has(source,'betrayal',this.time)?source.side===target.side&&!target.isCastle:source.side!==target.side);}
+  _abilityMiss(source,target){
+    const chance=strongest(source,'misfortune',this.time);if(!chance)return false;
+    const context=this.abilityContext;
+    if(context?.source===source&&['attack','hit','lifesteal','spawn'].includes(context.name))return false;
+    if(context?.source===source){if(context.missed==null)context.missed=this.random()<chance;return context.missed;}
+    return this.random()<chance;
+  }
+  useAbility(source,action){
+    if(['silence','imprisonment','airborne','frozen'].some(kind=>has(source,kind,this.time)))return false;
+    if(this._abilityMiss(source,source))return false;
+    const previous=this.abilityContext;this.abilityContext={source,name:'ability',missed:false};
+    try{action();return true;}finally{this.abilityContext=previous;}
+  }
+  _sourceFor(status){return this.units.find(u=>u.id===status.sourceId)||this.castles.find(u=>u.id===status.sourceId)||this.statusSources.get(status.sourceId)||null;}
   _validAction(side){return (side===0||side===1)&&!this.state.paused&&this.state.phase!=='ended';}
   deploy(side,handIndex,point){
     if(!this._validAction(side))return {ok:false,error:'The battle is paused or finished.'};
@@ -148,7 +173,7 @@ export class ArenaEngine {
     const building=(spell.kind||String(spell.raw?.type).toLowerCase())==='building';
     if(building&&!isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Place buildings on a road or courtyard within your castle\'s 7.5-tile range.'};
     const id=spell.id||slug(spell.name);
-    const handled=new Set(['spirit-of-the-wild','illustration-spell','laser','nightfall-curse','roots','lunar-mirrage','shock-bomb','shield-of-serenity','healing-light','dark-orb','reflector','guard-post','watchtower','obsidian-fortress','mana-surge','stagnantias-wrath']);
+    const handled=new Set(['giga-bomb','spirit-of-the-wild','illustration-spell','laser','nightfall-curse','roots','lunar-mirrage','shock-bomb','shield-of-serenity','healing-light','dark-orb','reflector','guard-post','watchtower','obsidian-fortress','mana-surge','stagnantias-wrath']);
     if(!handled.has(id))return {ok:false,error:'This spell has incomplete battle data.'};
     team.energy=Math.max(0,Math.round((team.energy-cost)*1e9)/1e9);
     team.spellIndex=(team.spellIndex+1)%team.spellIds.length;
@@ -165,6 +190,13 @@ export class ArenaEngine {
     const visualRadius=shape.shape==='global'?12:shape.radius||Math.max(shape.width||0,shape.height||0)/2;
     this.fx('spell',point.x,point.y,{side,radius:visualRadius,shape,duration:.9,color:side?'#fb8c79':'#77ddff'});
     if((spell.kind||String(spell.raw.type).toLowerCase())==='building') {this._building(spell,side,point,id);return;}
+    if(id==='giga-bomb'){
+      for(const [targets,damage,amount] of [[enemies,num(raw.damageToCard),25],[castles,num(raw.damageToCastle),5]])for(const target of targets){
+        this.damage(source,target,damage,{kind:'spell'});
+        if(target.alive)this.status(target,'burn',10,0,source,{amount,stack:true});
+      }
+      return;
+    }
     if(id==='healing-light'){
       for(const u of allies){this.cleanse(u);this.heal(u,u.maxHp*.3,source);}return;
     }
@@ -208,60 +240,88 @@ export class ArenaEngine {
     u.isBuilding=true;u.radius=.44;u.buildingKind=kind;u.spell=spell;u.expiresAt=this.time+num(raw.lifetime);
   }
   status(target,kind,duration,magnitude=0,source=null,extra={}){
-    if(!target?.alive||duration<=0)return null;
+    kind=statusKind(kind);
+    if(!target?.alive)return null;
     if(extra.groundOnly&&target.def?.combat?.groundEffectImmune)return null;
     if(NEGATIVE.has(kind)&&has(target,'predominance',this.time))return null;
-    const actual=NEGATIVE.has(kind)&&Number.isFinite(duration)?duration*(1-clamp(num(target.stats.flexibility),0,80)/100):duration;
+    const caster=source||(kind==='taunt'?target:null);
+    if(caster&&!extra.scheduled&&this._abilityMiss(caster,target))return null;
+    if(kind==='cleanse'){this.cleanse(target);return {kind};}
+    if(kind==='knockback'){if(!source||!(magnitude>0))return null;this.push(target,source,magnitude);return {kind};}
+    if(duration<=0)return null;
+    if(kind==='predominance')this.cleanse(target);
+    const normalized=statusParameters(kind,magnitude,extra);if(!normalized)return null;
+    magnitude=normalized.magnitude;extra=normalized.params;
+    const actual=NEGATIVE.has(kind)&&Number.isFinite(duration)?duration*(1-clamp(this.statValue(target,'flexibility'),0,80)/100):duration;
     const sourceId=source?.id??null;
-    let entry=target.statuses.find(s=>s.kind===kind&&s.sourceId===sourceId&&s.until>this.time);
+    if(sourceId)this.statusSources.set(sourceId,source);
+    let entry=!extra.stack&&target.statuses.find(s=>s.kind===kind&&s.sourceId===sourceId&&s.until>this.time);
     if(entry){entry.until=Math.max(entry.until,this.time+actual);entry.magnitude=Math.max(entry.magnitude||0,magnitude);Object.assign(entry,extra);return entry;}
-    entry={kind,until:this.time+actual,magnitude,sourceId,nextTick:this.time+(extra.interval||1),...extra};target.statuses.push(entry);
+    entry={kind,until:this.time+actual,magnitude,sourceId,nextTick:this.time+extra.interval,...extra};target.statuses.push(entry);
+    if(kind==='taunt'){
+      const radius=num(extra.radius,this.statValue(target,'range')/1000);
+      for(const enemy of this.near(target,radius,u=>this.isEnemy(target,u)))this.status(enemy,'taunted',actual,0,target,{scheduled:true});
+    }
+    if(kind==='statReduction')this._capVitals(target);
     return entry;
   }
+  _capVitals(u){u.effectiveMaxHp=this.maxHealth(u);u.effectiveMaxShield=this.maxShield(u);u.hp=Math.min(u.hp,u.effectiveMaxHp);u.shield=Math.min(u.shield,u.effectiveMaxShield);}
   cleanse(target){
     target.statuses=target.statuses.filter(s=>!NEGATIVE.has(s.kind));
     if(target.memory.conversion)this._restoreConversion(target);
+    this._capVitals(target);
   }
   _restoreConversion(u){
     u.side=u.memory.conversion.side;delete u.memory.conversion;u.targetId=null;u.burstTargetId=null;
     u.route=routeFor(u.lane,u.side);this._resetWaypoint(u);
   }
-  heal(target,amount,source=null){
+  heal(target,amount,source=null,options={}){
     if(!target?.alive||amount<=0||has(target,'bleed',this.time)||has(target,'healBlock',this.time)||has(target,'suppression',this.time))return 0;
+    if(source&&!options.passive&&this._abilityMiss(source,target))return 0;
     const burn=has(target,'burn',this.time)?.8:1;
-    const value=Math.min(target.maxHp-target.hp,amount*(1+num(target.stats.healBonus)/100)*burn);
+    const value=Math.min(this.maxHealth(target)-target.hp,amount*(1+this.statValue(target,'healBonus')/100)*burn);
     if(value<=0)return 0;
     target.hp+=value;this.fx('heal',target.x,target.y,{amount:value,side:target.side});return value;
   }
-  giveShield(target,amount){
+  giveShield(target,amount,source=this.abilityContext?.source||null){
     if(!target?.alive||amount<=0||has(target,'suppression',this.time))return 0;
-    const value=amount;target.maxShield=Math.max(target.maxShield,target.shield+value);target.shield+=value;
+    if(source&&this._abilityMiss(source,target))return 0;
+    const {flat,factor}=statModifiers(target,'shield',this.time);if(factor<=0)return 0;
+    const value=amount;target.maxShield=Math.max(target.maxShield,(target.shield+value)/factor+flat);target.shield+=value;
     this.fx('shield',target.x,target.y,{amount:value,side:target.side});return value;
   }
   damage(source,target,amount,options={}){
     const empty={healthDamage:0,shieldDamage:0,total:0,killed:false};
     if(!target?.alive||!(amount>0)||this.damageDepth>16)return empty;
+    if(source&&(has(source,'imprisonment',this.time)||has(source,'airborne',this.time)))return empty;
     if(has(target,'imprisonment',this.time)||has(target,'untouchable',this.time)||has(target,'untargetable',this.time))return empty;
     const hit={damage:amount,kind:'attack',bypassShield:false,critical:false,secondary:false,...options};
-    if(source&&source.side===target.side&&!options.friendlyFire)return empty;
-    if(hit.kind==='attack'&&!hit.secondary&&this.random()<clamp(num(target.stats.dodge),0,70)/100){this.fx('miss',target.x,target.y,{side:target.side});return empty;}
+    if(source&&!this.isEnemy(source,target)&&!options.friendlyFire)return empty;
+    if(hit.kind==='ability'&&source&&this._abilityMiss(source,target)){this.fx('miss',target.x,target.y,{side:source.side});return empty;}
+    if(hit.kind==='attack'&&!hit.secondary&&this.random()<clamp(this.statValue(target,'dodge'),0,70)/100){this.fx('miss',target.x,target.y,{side:target.side});return empty;}
     this.damageDepth++;
     this._hook('incoming',target,source,hit);
     if(hit.instantKill&&!target.isCastle&&!target.isBuilding){hit.damage=target.hp+target.shield+1;hit.bypassShield=true;hit.kind='execution';}
     if(hit.critical){
-      const multiplier=Math.max(1,num(source?.stats?.criticDamage,1.5));
-      hit.damage*=1+(multiplier-1)*(1-clamp(num(target.stats.criticdamageminimiser),0,90)/100);
+      const multiplier=Math.max(1,this.statValue(source,'criticDamage',1.5));
+      hit.damage*=1+(multiplier-1)*(1-clamp(this.statValue(target,'criticdamageminimiser'),0,90)/100);
     }
-    let reduction=clamp(num(target.stats.damageminimiser)/100,0,.9);
+    let reduction=clamp(this.statValue(target,'damageminimiser')/100,0,.9);
+    let fearless=0;
+    for(const buff of active(target,'fearless',this.time)){
+      const radius=num(buff.radius,this.statValue(target,'range')/1000);
+      const nearby=this.near(target,radius,u=>u!==target);
+      if(!nearby.some(u=>u.side===target.side)||nearby.filter(u=>u.side!==target.side).length>5)fearless=Math.max(fearless,clamp(buff.magnitude,0,.9));
+    }
     const protection=strongest(target,'protection',this.time)||strongest(target,'defense',this.time);
     const spellProtection=hit.kind==='spell'?strongest(target,'spellProtection',this.time):0;
-    if(hit.kind!=='execution')hit.damage*=Math.max(0,(1-reduction)*(1-protection)*(1-spellProtection));
+    if(hit.kind!=='execution')hit.damage*=Math.max(0,(1-reduction)*(1-protection)*(1-spellProtection)*(1-fearless));
     hit.damage*=1+strongest(target,'curse',this.time);
     if(!Number.isFinite(hit.damage)||hit.damage<=0){this.damageDepth--;return empty;}
     const beforeHp=target.hp,beforeShield=target.shield;
     let healthPart=hit.damage;
     if(target.shield>0&&!hit.bypassShield){
-      const fraction=clamp(num(target.stats.shieldtakendamage,70)/100,0,1),multiplier=Math.max(.01,hit.shieldMultiplier??1);
+      const fraction=clamp(this.statValue(target,'shieldtakendamage',70)/100,0,1),multiplier=Math.max(.01,hit.shieldMultiplier??1);
       const absorbedRaw=Math.min(hit.damage*fraction,target.shield/multiplier);
       target.shield=Math.max(0,target.shield-absorbedRaw*multiplier);healthPart-=absorbedRaw;
     }
@@ -274,14 +334,15 @@ export class ArenaEngine {
       this.fx('hit',target.x,target.y,{amount:result.total,side:target.side,critical:hit.critical,color:hit.kind==='dot'?'#b9db72':undefined});
       if(source&&!source.isSpell){source.damageWindow??=[];source.damageWindow.push({time:this.time,damage:result.total});}
       this._hook('damaged',target,source,result,hit);
-      if(target.buildingKind==='reflector'&&source?.alive&&!hit.secondary)this.damage(target,source,result.total*(source.isCastle?.4:.6),{kind:'reflect',secondary:true});
+      if(source?.alive&&source!==target&&!hit.reflected&&has(target,'reflection',this.time))this.damage(target,source,result.total,{kind:'reflect',secondary:true,reflected:true,friendlyFire:true});
+      else if(target.buildingKind==='reflector'&&source?.alive&&!hit.secondary)this.damage(target,source,result.total*(source.isCastle?.4:.6),{kind:'reflect',secondary:true,reflected:true});
     }
     if(target.hp<=0&&target.alive){target.alive=false;this.deaths.push({u:target,killer:source});}
     this.damageDepth--;
     return result;
   }
   push(target,awayFrom,tiles){
-    if(!target?.alive||target.isCastle||target.isBuilding||tiles<=0)return;
+    if(!target?.alive||target.isCastle||target.isBuilding||tiles<=0||has(target,'predominance',this.time))return;
     let dx=target.x-awayFrom.x,dy=target.y-awayFrom.y,len=Math.hypot(dx,dy);
     if(!len){dx=target.side?-1:1;dy=0;len=1;}
     const p={x:clamp(target.x+dx/len*tiles,.5,MAP.width-.5),y:clamp(target.y+dy/len*tiles,.5,MAP.height-.5)};
@@ -294,7 +355,7 @@ export class ArenaEngine {
     u.waypoint=best.index;
   }
   _canHit(u,target){
-    if(!target?.alive||target.side===u.side)return false;
+    if(!target?.alive||!this.isEnemy(u,target))return false;
     if(has(target,'untargetable',this.time)||has(target,'imprisonment',this.time))return false;
     const layers=u.def?.combat?.targets||'both';
     if(layers==='none')return false;
@@ -305,13 +366,18 @@ export class ArenaEngine {
   canTarget(u,target){return this._legalTarget(u,target);}
   _range(u){
     const blind=strongest(u,'blind',this.time);
-    const range=num(u.stats.range)/1000*(1-blind);
+    const range=this.statValue(u,'range')/1000*(1-blind);
     const authored=u.def?.raw?.additionalStats?.vision;
-    const vision=num(u.stats.vision)/1000*(1-blind);
+    const vision=this.statValue(u,'vision')/1000*(1-blind);
     return authored!=null&&!/^[-—–]$/.test(String(authored).trim())?Math.min(range,vision):range;
   }
   _target(u){
     const sources=visibilitySources(this.state,u.side);
+    if(!has(u,'predominance',this.time)){
+      const taunts=active(u,'taunted',this.time).map(s=>({status:s,target:this._sourceFor(s)})).filter(({target})=>this._legalTarget(u,target,sources));
+      taunts.sort((a,b)=>distance(u,a.target)-distance(u,b.target)||a.target.id.localeCompare(b.target.id));
+      if(taunts.length){const target=taunts[0].target;if(u.burstTargetId&&u.burstTargetId!==target.id){u.burstTargetId=null;u.burstIndex=0;}return target;}
+    }
     if(u.burstTargetId){const locked=this.units.concat(this.castles).find(t=>t.id===u.burstTargetId);if(this._legalTarget(u,locked,sources))return locked;u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
     const reach=this._range(u);
     const candidates=this.units.filter(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius);
@@ -354,7 +420,7 @@ export class ArenaEngine {
     return null;
   }
   _move(u,target,dt){
-    if(u.isBuilding||has(u,'root',this.time)||has(u,'stun',this.time)||has(u,'imprisonment',this.time))return;
+    if(u.isBuilding||['root','stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))return;
     const movement=u.def.combat?.movementType;
     let destination;
     if(target)destination=target;
@@ -378,7 +444,7 @@ export class ArenaEngine {
     let dx=destination.x-u.x,dy=destination.y-u.y,d=Math.hypot(dx,dy);
     if(d<EPS)return;
     let slow=Math.max(strongest(u,'slow',this.time),strongest(u,'movementSlow',this.time));if(has(u,'poison',this.time))slow=Math.max(slow,.1);
-    let speed=num(u.stats.speed)/1000*(1+strongest(u,'speedBonus',this.time))*(1-clamp(slow,0,.95));
+    let speed=this.statValue(u,'speed')/1000*(1+strongest(u,'speedBonus',this.time))*(1-clamp(slow,0,.95));
     if(has(u,'fear',this.time)){dx=-dx;dy=-dy;}
     const travel=Math.min(d,speed*dt),p={x:u.x+dx/d*travel,y:u.y+dy/d*travel};
     u.facingX=dx/d;u.facingY=dy/d;
@@ -443,16 +509,15 @@ export class ArenaEngine {
     const attack=this._attackDefinition(u),profile=this._profile(u);
     const index=u.burstIndex;
     u.shots++;u.memory.lastAttack=this.time;
-    const hit={damage:attack.sequence?attack.damage:num(u.stats.damage,attack.damage),kind:'attack',bypassShield:false,critical:false,secondary:false,burstIndex:index,combat:profile};
+    const hit={damage:attack.sequence?statValue(u,'damage',this.time,attack.damage):this.statValue(u,'damage',attack.damage),kind:'attack',bypassShield:false,critical:false,secondary:false,burstIndex:index,combat:profile};
     // Per-mode damage is authored independently of the base per-hit statistic.
-    if(u.def.attack?.sequence)hit.damage=attack.damage;
-    this._hook('attack',u,target,hit);
+    const missed=this.random()<strongest(u,'misfortune',this.time);
+    if(!missed)this._hook('attack',u,target,hit);
     if(hit.targetId){const selected=this.units.find(t=>t.id===hit.targetId);if(this._legalTarget(u,selected)&&distance(u,selected)<=this._attackReach(u,profile)+selected.radius)target=selected;}
     hit.damage*=1+strongest(u,'damageBonus',this.time);
-    hit.critical=hit.critical||(!has(u,'suppression',this.time)&&this.random()<clamp(num(u.stats.criticalChance),0,100)/100);
+    hit.critical=hit.critical||(!has(u,'suppression',this.time)&&this.random()<clamp(this.statValue(u,'criticalChance'),0,100)/100);
     const p={...profile,...hit.combat};
-    const misfortune=strongest(u,'misfortune',this.time);
-    if(this.random()>=misfortune){
+    if(!missed){
       if(p.attackType==='ranged'){
         const targets=p.attackShape==='multi'&&p.multiTarget?this._targetsFor(u,target,p):[target];
         for(const t of targets)this._projectile(u,t,hit,p);
@@ -463,12 +528,12 @@ export class ArenaEngine {
       }
     }else this.fx('miss',target.x,target.y,{side:u.side});
     const haste=strongest(u,'attackHaste',this.time)+(hit.haste||0),slow=strongest(u,'slow',this.time);
-    const baseInterval=u.def.attack?.sequence?attack.interval:num(u.stats.attackSpeed,attack.interval);
+    const baseInterval=u.def.attack?.sequence?statValue(u,'attackSpeed',this.time,attack.interval):this.statValue(u,'attackSpeed',attack.interval);
     const interval=Math.max(.01,baseInterval/(1+haste)/(1-clamp(slow,0,.95)));
     u.burstIndex++;
     if(u.burstIndex>=Math.max(1,attack.count)){
       u.burstIndex=0;u.burstTargetId=null;u.sequenceIndex++;u.attacks++;
-      u.cooldown=Math.max(.01,interval+num(attack.delay));
+      u.cooldown=Math.max(.01,interval+statValue(u,'delay',this.time,num(attack.delay)));
     }else{u.burstTargetId=target.id;u.cooldown=interval;}
   }
   _projectile(u,target,hit,profile){
@@ -483,8 +548,8 @@ export class ArenaEngine {
     if(result.total<=0)return;
     source.hits=(source.hits||0)+1;
     this._hook('hit',source,target,result,hit);
-    if(result.healthDamage>0&&source.alive&&!source.isCastle&&!source.isBuilding&&!has(source,'suppression',this.time)&&this.random()<clamp(num(source.stats.lifestealChance),0,100)/100){
-      const healed=this.heal(source,result.healthDamage*clamp(num(source.stats.lifesteal),0,100)/100,source);
+    if(result.healthDamage>0&&source.alive&&!source.isCastle&&!source.isBuilding&&!has(source,'suppression',this.time)&&this.random()<clamp(this.statValue(source,'lifestealChance'),0,100)/100){
+      const healed=this.heal(source,result.healthDamage*clamp(this.statValue(source,'lifesteal'),0,100)/100,source);
       if(healed>0)this._hook('lifesteal',source,healed);
     }
   }
@@ -534,24 +599,26 @@ export class ArenaEngine {
   _statuses(u,dt){
     for(const s of u.statuses){
       while(s.nextTick<=Math.min(this.time,s.until)+EPS){
-        if(s.kind==='bleed')this.damage(this.units.find(v=>v.id===s.sourceId)||null,u,u.maxHp*.01,{kind:'dot',secondary:true});
-        else if(s.kind==='poison'||s.kind==='burn')this.damage(this.units.find(v=>v.id===s.sourceId)||null,u,s.amount||0,{kind:'dot',secondary:true,bypassShield:!!s.bypassShield});
+        if(s.kind==='bleed')this.damage(this._sourceFor(s),u,this.maxHealth(u)*.01,{kind:'dot',secondary:true});
+        else if(s.kind==='poison'||s.kind==='burn')this.damage(this._sourceFor(s),u,s.amount||0,{kind:'dot',secondary:true,bypassShield:!!s.bypassShield});
         else if(s.kind==='regen')this.heal(u,s.amount??s.magnitude,null);
         s.nextTick+=s.interval||1;
       }
+      if(s.kind==='frozen'&&s.until<=this.time+EPS)this.status(u,'slow',3,.25,this._sourceFor(s),{scheduled:true});
     }
-    u.statuses=u.statuses.filter(s=>s.until>this.time);
+    u.statuses=u.statuses.filter(s=>s.until>this.time+EPS);
     if(u.memory.conversion&&!has(u,'conversion',this.time))this._restoreConversion(u);
     if(!u.alive)return;
-    this.heal(u,num(u.stats.healrecovery)*dt,u);
+    this._capVitals(u);
+    this.heal(u,this.statValue(u,'healrecovery')*dt,u,{passive:true});
     if(!has(u,'suppression',this.time)){
-      const raw=String(u.def.raw?.additionalStats?.shieldrecovery||'');
+      const raw=String(u.def?.raw?.additionalStats?.shieldrecovery||'');
       if(/^\d+(?:\.\d+)?\/\d+(?:\.\d+)?s$/.test(raw)){
         const [amount,period]=raw.split('/').map(num);u.memory.shieldClock=(u.memory.shieldClock||0)+dt;
-        if(u.memory.shieldClock>=period){u.shield=Math.min(u.maxShield,u.shield+amount);u.memory.shieldClock-=period;}
-      }else u.shield=Math.min(u.maxShield,u.shield+num(u.stats.shieldrecovery)*dt);
+        if(u.memory.shieldClock>=period){u.shield=Math.min(this.maxShield(u),u.shield+amount);u.memory.shieldClock-=period;}
+      }else u.shield=Math.min(this.maxShield(u),u.shield+this.statValue(u,'shieldrecovery')*dt);
     }
-    u.damageWindow=u.damageWindow.filter(d=>d.time>this.time-1);u.dps=u.damageWindow.reduce((sum,d)=>sum+d.damage,0);
+    u.damageWindow=(u.damageWindow||[]).filter(d=>d.time>this.time-1);u.dps=u.damageWindow.reduce((sum,d)=>sum+d.damage,0);
   }
   _fields(){
     for(const field of this.state.fields){
@@ -609,7 +676,7 @@ export class ArenaEngine {
       if(d>=min)continue;if(d<.001){dx=0;dy=(i%2?1:-1)*.001;d=.001;}
       const overlap=Math.min(.04,(min-d)*.3),total=a.mass+b.mass;
       for(const [u,sign,weight] of [[a,1,b.mass/total],[b,-1,a.mass/total]]){
-        if(has(u,'stun',this.time)||has(u,'root',this.time)||has(u,'imprisonment',this.time))continue;
+        if(['stun','root','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
         const p={x:u.x+dx/d*overlap*sign*weight,y:u.y+dy/d*overlap*sign*weight};
         if(isWalkable(p)&&!this.castles.some(c=>c.alive&&distance(p,c)<c.radius+u.radius)){u.x=p.x;u.y=p.y;}
       }
@@ -699,16 +766,17 @@ export class ArenaEngine {
       this.teams[side].mana=Math.min(RULES.maxMana,this.teams[side].mana+dt/RULES.manaInterval*(1+owned*RULES.nodeBonus)*(this.state.phase==='overtime'?2:1));
     }
     this._fields();
+    for(const castle of this.castles)if(castle.alive)this._statuses(castle,dt);
     // Snapshot prevents summons from taking an extra action in their birth tick.
     for(const u of [...this.units]){
       if(!u.alive)continue;
       u.moving=false;u.cooldown-=dt;
       this._statuses(u,dt);
       if(!u.alive)continue;
-      if(u.expiresAt<=this.time){u.hp=0;u.alive=false;this.deaths.push({u,killer:null});continue;}
+      if(u.expiresAt<=this.time||u.def.stats.life>0&&this.time-u.born>=this.statValue(u,'life')){u.hp=0;u.alive=false;this.deaths.push({u,killer:null});continue;}
       if(u.isBuilding)this._buildingAura(u);
       if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this._hook('tick',u,dt);
-      if(!u.alive||has(u,'stun',this.time)||has(u,'imprisonment',this.time))continue;
+      if(!u.alive||['stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
       const target=this._target(u);u.targetId=target?.id??null;
       const profile=this._profile(u),reach=this._attackReach(u,profile);
       if(target&&distance(u,target)<=reach+target.radius+u.radius*.2&&profile.attackType!=='none'){
@@ -718,6 +786,8 @@ export class ArenaEngine {
     }
     this._separation();this._castles(dt);this._projectiles(dt);this._objectives(dt);this._drainDeaths();
     this.state.effects=this.state.effects.filter(e=>e.until>this.time);
+    const referenced=new Set(this.units.concat(this.castles).flatMap(u=>u.statuses.filter(s=>s.until>this.time).map(s=>s.sourceId)));
+    for(const id of this.statusSources.keys())if(!referenced.has(id))this.statusSources.delete(id);
     this._finish();
     if(this.state.phase==='ended')return;
     if(this.state.remaining<=EPS&&this.state.phase==='regulation'){

@@ -38,7 +38,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,55);assert.equal(c.spells.filter(x=>x.ready).length,16);
+  assert.equal(c.cards.filter(x=>x.ready).length,58);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);assert.ok(card.attack.interval>0);}}
   assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
@@ -71,6 +71,9 @@ const cases={
   twins:({ctx,u,rule})=>{const twin={...u,id:'other',stats:{...u.stats},memory:{}};ctx.units.push(twin);rule.death(ctx,u);assert.equal(twin.maxHp,u.maxHp*3);assert.equal(twin.stats.damage,u.stats.damage*2);},
   bethe:({ctx,u,t,rule,result})=>{rule.hit(ctx,u,t,{...result,killed:true});rule.tick(ctx,u);assert.equal(u.stats.criticalChance,u.def.stats.criticalChance+5);ctx.time=11;rule.tick(ctx,u);assert.equal(u.stats.criticalChance,u.def.stats.criticalChance);},
   soldier:({ctx,u,t,rule,hit})=>{t.def={...t.def,combat:{movementType:'flying'}};rule.attack(ctx,u,t,hit);close(hit.damage,13.3);},
+  snaykies:({ctx,u,t,rule,hit,result,records})=>{rule.attack(ctx,u,t,hit);assert.equal(hit.bypassShield,true);rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].duration,1.5);assert.equal(records.statuses[0].amount,4);},
+  bees:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].duration,6);assert.equal(records.statuses[0].amount,2);assert.equal(u.alive,false);rule.hit(ctx,u,t,result);assert.equal(records.statuses.length,1);},
+  toxic:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].duration,1.5);assert.equal(records.statuses[0].amount,3);},
   phewphew:({ctx,u,t,rule,hit})=>{rule.attack(ctx,u,t,hit);assert.equal(hit.shieldMultiplier,2);},
   hailey:({ctx,u,t,rule,result})=>{rule.hit(ctx,u,t,result);close(u.stats.criticalChance,u.def.stats.criticalChance+.5);},
   'chrono-mage':({ctx,u,t,rule,hit,records})=>{u.shots=5;const ally={...u,id:'ally',memory:{},statuses:[]};ctx.units.push(ally);rule.attack(ctx,u,t,hit);assert.ok(records.statuses.some(x=>x.kind==='attackHaste'&&x.duration===5));assert.ok(records.statuses.some(x=>x.kind==='slow'&&x.duration===8));},

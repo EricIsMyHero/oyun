@@ -5,6 +5,7 @@ import { RULES, STAT_KEYS, num } from './rules.mjs';
 import { MAP, distance, isDeployable } from './map.mjs';
 import { isEntityVisible, isPointVisible } from './vision.mjs';
 import { CAMERA } from './camera.mjs';
+import { statusMagnitude } from './statuses.mjs';
 
 const $ = id => document.getElementById(id);
 const STORAGE_KEY = 'clash-a-mana.arena.deck.v1';
@@ -168,15 +169,30 @@ function openInspector(def,kind='card',unit=null) {
   const image=def.image?`<img src="${escapeHTML(def.image)}" alt="" draggable="false"><span class="art-initials" hidden>${escapeHTML(initials(def.name))}</span>`:`<span class="art-initials">${escapeHTML(initials(def.name))}</span>`;
   const stats=kind==='spell'?Object.entries(raw.stats||{}).map(([key,value])=>`<div class="inspector-stat" data-spell-stat="${escapeHTML(key)}"><span>${escapeHTML(({damageToCard:'Unit Damage',damageToCastle:'Castle Damage',timeBetweenDamage:'Hit Interval',energy:'Energy',charge:'Charge',lifetime:'Lifetime',attackSpeed:'Attack Speed'})[key]||label(key))}</span><strong>${escapeHTML(formatValue(key,value))}</strong></div>`).join(''):STAT_ORDER.map(key=>{
     let value=values[key];
-    if(unit&&key==='health')value=`${Math.ceil(unit.hp)} / ${Math.ceil(unit.maxHp)}`;
-    if(unit&&key==='shield')value=`${Math.ceil(unit.shield)} / ${Math.ceil(unit.maxShield)}`;
+    if(unit){
+      const base=num(unit.stats[key]),blind=['range','vision'].includes(key)?statusMagnitude(unit,'blind',state.engine.time):0;
+      const effective=state.engine.statValue(unit,key)*(1-blind);
+      if(Math.abs(effective-base)>1e-7){
+        const number=Number(effective.toFixed(3));
+        const suffix=String(values[key]??'').match(/(%|x|\/s|s)$/)?.[0]||'';
+        value=`${key==='damage'&&unit.def?.attack?.count>1?`${unit.def.attack.count} × `:''}${number}${suffix}`;
+      }
+    }
+    if(unit&&key==='health')value=`${Math.ceil(unit.hp)} / ${Math.ceil(state.engine.maxHealth(unit))}`;
+    if(unit&&key==='shield')value=`${Math.ceil(unit.shield)} / ${Math.ceil(state.engine.maxShield(unit))}`;
     return `<div class="inspector-stat" data-stat="${key}"><span>${STAT_LABELS[key]}</span><strong>${escapeHTML(formatValue(key,value))}</strong></div>`;
   }).join('');
   const ability=raw.trait??raw.treat??'';
+  const liveEffects=unit?(unit.statuses||[]).filter(s=>s.until>state.engine.time+1e-7).map(s=>{
+    const names={regen:'Heal',invisible:'Invisibility',bleed:'Bleeding',statReduction:'Stat Reduction'};
+    const name=names[s.kind]||label(s.kind.replace(/([a-z])([A-Z])/g,'$1 $2'));
+    return `<span class="live-status" data-status="${escapeHTML(s.kind)}">${escapeHTML(name)} <small>${Number.isFinite(s.until)?`${Math.max(.1,s.until-state.engine.time).toFixed(1)}s`:'Ongoing'}</small></span>`;
+  }).join(''):'';
   const forms=[...(def.forms||[]),...(def.typeVariants||[])];
   $('inspector').style.setProperty('--rarity',rarityColor(def));
   $('inspector-content').innerHTML=`<div class="inspector-layout"><div class="inspector-art">${image}<div class="inspector-identity"><span class="identity-class">${escapeHTML([raw.class,raw.subclass].filter(Boolean).join(' / ')||label(raw.type||kind))}</span><h2 id="inspector-name">${escapeHTML(def.name)}</h2><span class="identity-faction">${escapeHTML(label(raw.group||'The Stagnantia Project'))}</span></div></div><div class="inspector-body"><div class="inspector-status ${locked?'locked':''}"><i></i>${locked?'Battle data incomplete':'Battle-ready'}${unit?' · Battle paused for inspection':''}</div>${locked?`<ul class="readiness-list">${(def.reasons||['Required battle data is missing.']).map(reason=>`<li>${escapeHTML(reason)}</li>`).join('')}</ul>`:''}<h3>${kind==='spell'?'Spell Parameters':'All Statistics'}</h3><div class="inspector-stat-grid">${stats}</div>${kind==='card'?`<h3>Combat Profile</h3><div class="profile-grid">${profileMarkup(def)}</div>`:''}<h3>Ability</h3><div class="native-ability" lang="az">${raw.abilityName?`<strong class="ability-name">${escapeHTML(raw.abilityName)}</strong>`:''}${ability&&ability!=='-'?nativeHTML(ability):'<span>No additional ability is specified.</span>'}</div><p class="inspector-native-note">Original Codex ability text. Source DPS is informational.</p>${forms.length?`<h3>Forms</h3><div>${forms.map(form=>`<button type="button" class="inspector-form-button" data-inspect-card="${escapeHTML(form.id)}">${escapeHTML(form.name)}</button>`).join('')}</div>`:''}${raw.showlevels?`<details><summary>Star levels</summary><ol class="inspector-levels" lang="az">${Object.values(raw.showlevels).map(x=>`<li>${nativeHTML(x)}</li>`).join('')}</ol><p>Star upgrades are shown for reference. Arena deployment uses the base Codex stats.</p></details>`:''}${raw.story&&raw.story!=='-'?`<details><summary>Lore</summary><p>${escapeHTML(raw.story).replace(/\n/g,'<br>')}</p></details>`:''}<div class="inspector-actions">${canAdd&&!state.engine?`<button type="button" class="primary-button" data-add-${kind==='spell'?'spell':'card'}="${escapeHTML(def.id)}" ${locked?'disabled':''}>${selected?'Remove from deck':'Add to deck'}</button>`:''}<button type="button" class="text-button" data-close-inspector>Close details</button></div></div></div>`;
   if(!$('inspector').open)$('inspector').showModal();
+  if(liveEffects)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section"><h3>Active Effects</h3><div class="live-status-list">${liveEffects}</div></section>`);
   setPause('inspector',true);
 }
 function closeInspector() {

@@ -1,4 +1,5 @@
 import { RULES } from './rules.mjs';
+import { statValue, statusMagnitude, hasStatus } from './statuses.mjs';
 
 // Team sight is independent of the authored card Vision combat statistic.
 // Fog has no explored-memory layer: losing the last source hides the area again.
@@ -7,8 +8,7 @@ export const VISION = Object.freeze({ card:8, pump:4, castle:RULES.castleRange }
 const validSide = side => side === 0 || side === 1;
 const finitePoint = point => point && Number.isFinite(point.x) && Number.isFinite(point.y);
 const living = entity => entity && entity.alive !== false && (entity.hp == null || entity.hp > 0);
-const concealed = (entity,time) => (entity.statuses || []).some(status =>
-  ['invisible','untargetable','imprisonment'].includes(status.kind) && status.until > time);
+const concealed = (entity,time) => ['invisible','untargetable','imprisonment'].some(kind=>hasStatus(entity,kind,time));
 
 export function visibilitySources(state,side) {
   if (!state || !validSide(side)) return [];
@@ -17,7 +17,10 @@ export function visibilitySources(state,side) {
     if (castle.side === side && living(castle) && finitePoint(castle)) sources.push({x:castle.x,y:castle.y,radius:VISION.castle});
   }
   for (const unit of state.units || []) {
-    if (unit.side === side && living(unit) && finitePoint(unit)) sources.push({x:unit.x,y:unit.y,radius:VISION.card});
+    if (unit.side === side && living(unit) && finitePoint(unit)) {
+      const radius=statValue(unit,'vision',state.time||0,VISION.card*1000)/1000*(1-statusMagnitude(unit,'blind',state.time||0));
+      if(radius>0)sources.push({x:unit.x,y:unit.y,radius});
+    }
   }
   for (const node of state.nodes || []) {
     if (node.owner === side && finitePoint(node)) sources.push({x:node.x,y:node.y,radius:VISION.pump});

@@ -2,6 +2,7 @@ import { MAP, closestRoute, courtyardFor, isCourtyard, isDeployable, distance, p
 import { RULES, clamp, num } from './rules.mjs';
 import { visibilitySources, isPointVisible, isEntityVisible } from './vision.mjs';
 import { ArenaCamera, CAMERA } from './camera.mjs';
+import { statValue } from './statuses.mjs';
 
 const TEAM = ['#69d6ff', '#ff8068'];
 const TEAL = '#89f4ed';
@@ -551,19 +552,19 @@ export class ArenaRenderer {
     const time=state?.time||0,p=this.screenAt(u),selected=ui.selectedUnitId===u.id&&!ghost;
     const size=clamp(s*.86,12,34)*(u.isBuilding?1.2:1);
     const phase=String(u.id||'').split('').reduce((sum,c)=>sum+c.charCodeAt(0),0);
-    const floating=movement==='flying'?s*(.77+Math.sin(time*4+phase)*.06):movement==='hovering'?s*(.19+Math.sin(time*3+u.x)*.05):0;
+    const statuses=(u.statuses||[]).filter(st=>(st.until??Infinity)>time);
+    const floating=(movement==='flying'?s*(.77+Math.sin(time*4+phase)*.06):movement==='hovering'?s*(.19+Math.sin(time*3+u.x)*.05):0)+(statuses.some(st=>st.kind==='airborne')?s*.9:0);
     const py=p.y-floating,bodyY=py-size*.57;
     const shot=this.shotTimes.get(u.id);
     if(!shot||shot.shots!==u.shots)this.shotTimes.set(u.id,{shots:u.shots,time});
     const attackTime=this.shotTimes.get(u.id)?.time??-99;
     const attacking=time-attackTime<.18&&u.shots>0;
-    const statuses=(u.statuses||[]).filter(st=>(st.until??Infinity)>time);
     const hidden=statuses.some(st=>['invisible','invisibility','stealth'].includes(st.kind));
     ctx.save();ctx.globalAlpha=ghost ? .58 : hidden ? .48 : 1;
     ellipse(ctx,p.x,p.y+s*.07,size*.57,size*.2,'#142c2b66');
     if(selected) {
       ellipse(ctx,p.x,p.y+s*.03,size*.75,size*.29,null,'#f4d27c',2);
-      const range=num(u.stats?.range)/1000;
+      const range=statValue(u,'range',time)/1000;
       if(range>0)this.world(ctx,c=>{c.beginPath();c.arc(u.x,u.y,range,0,Math.PI*2);c.strokeStyle='#e4cc7a55';c.lineWidth=.035;c.setLineDash([.12,.13]);c.stroke();});
     }
     if(movement==='flying') {
@@ -624,9 +625,9 @@ export class ArenaRenderer {
     }
     if(!ghost) {
       const barY=headY-size*.78;
-      this.healthBar(ctx,p.x,barY,size*1.16,u.hp/(u.maxHp||1),side===0?'#a0df8e':'#fa9b80',3);
-      if(u.maxShield>0&&u.shield>0)this.healthBar(ctx,p.x,barY-4,size*1.16,u.shield/u.maxShield,'#83ccf4',2);
-      const statusColors={poison:'#b5df78',burn:'#ffb875',bleed:'#ef8692',slow:'#94d6ec',stun:'#ffdf89',silence:'#d9b0fa',blind:'#d0aecf',root:'#b2d98b',prison:'#a3b4fa',curse:'#e69cd6'};
+      this.healthBar(ctx,p.x,barY,size*1.16,u.hp/(statValue(u,'health',time,u.maxHp)||1),side===0?'#a0df8e':'#fa9b80',3);
+      if(u.maxShield>0&&u.shield>0)this.healthBar(ctx,p.x,barY-4,size*1.16,u.shield/(statValue(u,'shield',time,u.maxShield)||1),'#83ccf4',2);
+      const statusColors={poison:'#b5df78',burn:'#ffb875',bleed:'#ef8692',slow:'#94d6ec',stun:'#ffdf89',silence:'#d9b0fa',blind:'#d0aecf',root:'#b2d98b',imprisonment:'#a3b4fa',curse:'#e69cd6',frozen:'#b0efff',airborne:'#c3dcff',betrayal:'#ff8096',reflection:'#c3f7e5',taunted:'#f4ac82',statReduction:'#e9a2cd',berserk:'#ffb46d',fearless:'#ffe9ac',predominance:'#e1d3ff'};
       statuses.slice(0,3).forEach((st,i)=>{
         const c=statusColors[st.kind]||'#d9d9c0';
         ctx.fillStyle='#1c353c';roundRect(ctx,p.x-size*.55+i*7,barY-13,6,6,1);ctx.fill();

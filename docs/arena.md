@@ -132,6 +132,15 @@ so scrolling does not regenerate the illustrated forest.
 
 ## Codex fidelity and locked cards
 
+The authored status timing completes three additional native card profiles:
+**Snaykies**, **Bees** and **Toxic**. There are now **58 playable root cards** and
+**17 playable spells**, including **Giga Bomb**. Poison packets use the native
+A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
+0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
+after the first successful hit; their poison continues and keeps its original
+caster attribution. Giga Bomb deals its immediate source damage and then ten
+one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
+
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
 defined for this simulator. Locked entries explain the missing fact rather than
@@ -183,6 +192,76 @@ slows movement by 10%; Burn reduces healing by 20%; Invisibility breaks on incom
 damage; Silence disables abilities, rather than ordinary movement or attacks.
 The partially outdated generic `effects` arrays are not automatically executed
 on top of native card handlers.
+
+## Status effects
+
+`data/info.json` contains the readable rules. `arena/js/statuses.mjs` defines the
+canonical names, intervals and stat modifiers; native cards supply their own
+strengths, durations, radii and health thresholds. A listed minimum does not
+invent an unknown card's actual strength: Fen and RogueX still need their authored
+Blind percentage, for example. Card ability names and descriptions retain their
+original language. The Codex's map and victory text describes the existing three
+routes and guaranteed two-minute overtime; those game rules have not changed.
+
+| Effect | Arena behavior |
+| --- | --- |
+| Heal | Timed health recovery; healing bonus applies. |
+| Untouchable | Blocks all incoming damage; the unit may still be targeted. |
+| Immortal | Incoming damage leaves at least one health. Authored lifetime limits still expire. |
+| Predominance | Clears current negatives and blocks new negatives during its duration. |
+| Fearless | Uses the supplied reduction when no other allied cards are nearby or more than five enemies are nearby. |
+| Taunt | Nearby legal enemies focus the taunter, interrupting a different burst target; immunity, sight and target layers still apply. |
+| Cleanse | Removes every current negative, restores temporary conversion, and cancels Frozen's pending slow. |
+| Berserk | Applies supplied damage and/or attack-rate bonuses below a supplied health fraction. |
+| Invisibility | Prevents enemy acquisition until expiry or actual incoming damage. Area hits can still connect. |
+| Untargetable | Prevents enemy acquisition and every incoming damage type. |
+| Reflection | Returns the damage actually received to its attacker once, including spell and DOT damage; reflected damage does not bounce. |
+| Burn | One tick each second and 20% less healing received. |
+| Poison | One tick each 0.75 seconds and 10% less movement speed. |
+| Slow | At least 10% less movement and attack rate. |
+| Silence | Disables native abilities, while normal attacks and movement continue. |
+| Blind | At least 12.5% less attack range, combat vision and the card's scouting radius. |
+| Stat Reduction | Temporary flat or proportional reductions, applied on top of live stat growth; expiry preserves the underlying stats. |
+| Curse | Multiplies incoming damage from every source. |
+| Stun | Stops movement and attacks. |
+| Bleeding | One tick of 1% effective maximum health each second; blocks all healing. |
+| Misfortune | At least 10% miss chance for basic attacks and triggered abilities, including buffs and healing. A missed action applies no damage or effects. |
+| Imprisonment | Prevents acquisition, incoming damage, outgoing damage and active actions. |
+| Root | Stops voluntary movement; attacks and forced displacement remain possible. |
+| Airborne | Stops movement, actions and outgoing damage; visually lifts the unit without changing its authored target layer. |
+| Betrayal | Makes the card target and damage its own allied cards while retaining ownership; its own castle is excluded. |
+| Knockback | Immediately displaces the target by the supplied tile distance; Predominance blocks it. |
+| Frozen | Stops movement and actions, then applies 25% Slow for three seconds after thawing. |
+
+Flexibility reduces finite negative durations, including the follow-up Slow.
+Timed damage includes the final due tick. Clocks run on the fixed simulation
+step, so a 0.75-second event is resolved on the first step at or after its due
+time. Pausing freezes status clocks. Damage packets retain a caster reference
+outside serializable match state, with references released after the last packet
+expires. In-flight effects are not rerolled for Misfortune after they were cast.
+
+The inspector shows active effects, remaining durations and changed numerical
+stats. Health and shield bars use their current effective caps. Deploying a card
+still uses its source Mana and Count; temporary instance effects do not rewrite
+the deck or the source JSON.
+
+Engine API examples (magnitudes use fractions unless a stat uses source points):
+
+```js
+engine.status(unit, 'Poison', 1.5, 0, caster, {amount:4, stack:true});
+engine.status(unit, 'Berserk', 5, 0, caster, {
+  threshold:.3, damageBonus:.5, attackSpeedBonus:.25
+});
+engine.status(unit, 'Stat Reduction', 4, 0, caster, {
+  stats:{damage:5, speed:500}
+});
+engine.status(unit, 'Stat Reduction', 4, 0, caster, {
+  stats:{damage:.2, range:.25}, percent:true
+});
+engine.status(taunter, 'Taunt', 3, 0, taunter, {radius:3});
+engine.status(enemy, 'Knockback', 0, 3, caster);
+engine.useAbility(caster, () => { /* one shared accuracy roll for this action */ });
+```
 
 Card-only execution, possession and copying do not target castles or crystal
 wells. Deaths and secondary effects resolve through the simulation event order,

@@ -207,6 +207,18 @@ async function minimapPixelAt(page,point) {
       return {hp:window.rangedFixture.target.hp,x:window.rangedFixture.source.x,y:window.rangedFixture.source.y};
     });
     assert.ok(impact.hp<10000);assert.equal(impact.x,15);assert.equal(impact.y,14);
+    await page.evaluate(()=>{
+      const e=arenaApp.engine,u=window.rangedFixture.source;
+      e.status(u,'Frozen',5);e.status(u,'Blind',5,.25);e.status(u,'Stat Reduction',5,0,null,{stats:{damage:1}});
+      e.setPaused(false);arenaApp.renderer.focusAt(u);
+    });
+    const affected=await clientPoint(page,{x:15,y:14});await page.mouse.click(affected.x,affected.y);
+    await page.locator('#inspector').waitFor({state:'visible'});
+    for(const effect of ['frozen','blind','statReduction'])assert.ok(await page.locator(`#inspector [data-status="${effect}"]`).isVisible());
+    assert.equal(await page.locator('#inspector [data-stat="damage"] strong').textContent(),'15 × 2');
+    assert.equal(await page.locator('#inspector [data-stat="range"] strong').textContent(),'3 tiles');
+    await page.screenshot({path:'/tmp/oyun-arena-status-inspector.png',fullPage:true});screenshots.push('/tmp/oyun-arena-status-inspector.png');
+    await page.locator('#inspector-close').click();
     await page.evaluate(()=>{delete window.rangedFixture;arenaApp.startMatch();});await settleFrame(page);
 
     // Current vision is rendered, inspected and reported consistently. Freeze
@@ -482,6 +494,21 @@ async function minimapPixelAt(page,point) {
     await page.evaluate(()=>window.scrollTo(0,0));await settleFrame(page);
     await page.screenshot({path:'/tmp/oyun-arena-lobby-desktop.png'});screenshots.push('/tmp/oyun-arena-lobby-desktop.png');
 
+    // Codex copy follows the preserved arena map/timer rules and lists all stats.
+    const codex=await context.newPage();codex.on('pageerror',error=>errors.push(error.message));
+    await codex.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
+    await codex.goto(`http://127.0.0.1:${server.address().port}${prefix}index.html`,{waitUntil:'domcontentloaded'});
+    await codex.evaluate(()=>showPortal('info'));
+    await codex.waitForFunction(()=>document.querySelectorAll('#codex-content .codex-entry').length===8);
+    await codex.getByRole('button',{name:'Card Stats',exact:true}).click();
+    assert.equal(await codex.locator('.codex-entry.visible li').count(),24);
+    await codex.getByRole('button',{name:'How to Play',exact:true}).click();
+    assert.match(await codex.locator('.codex-entry.visible').textContent(),/three-route/);
+    await codex.getByRole('button',{name:'Win Conditions',exact:true}).click();
+    assert.match(await codex.locator('.codex-entry.visible').textContent(),/overtime always follow/);
+    await codex.getByRole('button',{name:'Negative Status Effects',exact:true}).click();
+    assert.match(await codex.locator('.codex-entry.visible').textContent(),/Poison:.*0\.75 seconds/);
+    await codex.close();
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');

@@ -6,7 +6,7 @@
       "list": [
         "Mana - The energy resource used to deploy cards. Regenerates over time.",
         "Tower - Your base. If destroyed, you lose the match.",
-        "Arena - The battlefield split into two lanes.",
+        "Arena - A three-route battlefield with a straight central lane, two longer outer lanes, and three capturable mana wells.",
         "Cycle - Your deck of 8 cards cycles continuously during battle."
       ]
     },
@@ -20,7 +20,7 @@
         "Relic - Ancient warriors of legend. High cost, high impact.",
         "Ascendant - Evolved beings beyond normal classification.",
         "Apex - The pinnacle of combat power. Extremely rare.",
-        "Emergent - İstifadə olunduqca yeni xüsusiyyətlər qazanan kartlar",
+        "Emergent - Cards that gain new traits as they are used.",
         "Ethereal - Beings that exist between dimensions. Unpredictable and devastating."
       ]
     },
@@ -34,22 +34,25 @@
     },
     {
       "heading": "Win Conditions",
-      "content": "Destroy the enemy tower before the timer runs out. If both towers survive, the player who dealt more tower damage wins. In case of a tie, sudden death overtime begins with accelerated mana regeneration.",
+      "content": "Destroy the enemy tower to win immediately. If both towers survive the five-minute match, two minutes of overtime always follow with doubled mana regeneration. After overtime, the surviving tower with more health wins; equal health is a draw.",
       "list": [
         "Tower Destruction - Instantly win by destroying the opponent's tower.",
-        "Higher Damage - Win on timer if your tower has less damage taken.",
-        "Overtime - Sudden death with doubled mana regeneration.",
+        "Higher Health - If both towers survive overtime, the tower with more remaining health wins; equal health is a draw.",
+        "Overtime - Two extra minutes with doubled mana regeneration whenever both towers survive regulation.",
         "Perfect Victory - Destroy tower without taking any damage yourself."
       ]
     },
     {
     "heading": "Card Stats",
-      "content": "Oyunda bir çox əsas özəllik mövcuddur:",
+      "content": "Cards have 24 numerical stats. Distances use 1,000 source points per tile; Speed is measured in tiles per second.",
       "list": [
         "Health - The total amount of life your card has. When it reaches zero, your character dies.",
-        "Shield - A protective shield that absorbs 70 percent of incoming damage.",
+        "Shield - By default, 70% of incoming damage goes to shield while it lasts. Shield Depletion changes this split; unabsorbed damage reaches health.",
         "Damage - The amount of harm dealt to an enemy per hit or action.",
-        "Attack Speed - How fast your card performs attacks within a given time.",
+        "Attack Speed - The interval in seconds between hits. Lower values mean faster attacks.",
+        "Delay - Extra recovery time after the final hit of an attack sequence.",
+        "Mana - The mana cost of deploying the card.",
+        "Count - The number of units deployed by one card. This is separate from the number of hits per attack.",
         "Range - The maximum distance from which your card attacks or uses abilities.",
         "Speed - How fast your card moves across the game world.",
         "D.P.S. - Damage per second. The average damage your card deals each second over time.",
@@ -58,7 +61,15 @@
         "Life Steal - A mechanic where a portion of dealt damage restores your health.",
         "Life Steal Chance - The probability that an attack triggers life steal.",
         "Damage Reduction - A stat that lowers incoming damage before it affects health.",
-        "Dodge - A chance-based mechanic that avoids incoming attacks completely."
+        "Dodge - A chance-based mechanic that avoids incoming attacks completely.",
+        "Vision - The distance at which a card can detect targets, limiting its attack acquisition.",
+        "Healing Bonus - Increases healing received.",
+        "Rejuvenation - Health recovered per second.",
+        "Fortification - Shield recovered over time.",
+        "Critical Resistance - Reduces the bonus portion of incoming critical damage.",
+        "Flexibility - Shortens the duration of finite negative status effects.",
+        "Shield Depletion - The percentage of incoming damage assigned to shield while it is available.",
+        "Life - The unit's lifetime in seconds, when a lifetime is specified."
       ]
     },
     {
@@ -67,8 +78,8 @@
       "list": [
         "Heal: Restores a specific amount of health to an ally card over a set duration.",
         "Untouchable: Grants an ally card complete immunity to all incoming damage for a limited time.",
-        "Immortal: Prevents an ally card from dying for a set duration; their health cannot drop below 0.",
-        "Predominance: Grants an ally card total immunity to all negative status effects for a limited time.",
+        "Immortal: Prevents an ally card from dying from damage for a set duration; damage cannot reduce their health below 1.",
+        "Predominance: Removes current negative status effects and grants immunity to new negative effects for a limited time.",
         "Fearless: Grants damage reduction to an ally card when no other ally cards are nearby, or when surrounded by more than 5 enemy cards.",
         "Taunt: Forces nearby enemy cards to focus their attacks exclusively on the casting ally card for a set duration.",
         "Cleanse: Removes all current negative effects.",
@@ -91,7 +102,7 @@
         "Curse: Amplifies the damage an enemy card receives from all sources.",
         "Stun: Immobilizes an enemy card for a set duration, preventing movement and attacks.",
         "Bleeding: Deals continuous damage to an enemy card once every 1 second, equal to 1% of their maximum health, and completely blocks all forms of healing for the duration.",
-        "Misfortune: Reduces the target's accuracy. All basic attacks and abilities have a specified chance to miss (minumum 10%). Missed attacks deal no damage and apply no effects.",
+        "Misfortune: Reduces the target's accuracy. All basic attacks and abilities have a specified chance to miss (minimum 10%). Missed attacks deal no damage and apply no effects.",
         "Imprisonment: For a set duration and under certain conditions, an enemy card can neither be targeted nor take damage, and it also cannot deal damage.",
         "Root: For a set duration and under certain conditions, an enemy card cannot move.",
         "Airborne: For a set duration and under certain conditions, enemy cards are launched into the air; during this time they can neither deal damage nor move.",
