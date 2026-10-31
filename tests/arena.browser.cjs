@@ -221,6 +221,48 @@ async function minimapPixelAt(page,point) {
     await page.locator('#inspector-close').click();
     await page.evaluate(()=>{delete window.rangedFixture;arenaApp.startMatch();});await settleFrame(page);
 
+    // A real flyer engages units in its deployed outer lane, then resumes that
+    // corridor. Gloop hides captives, reports its count/lifetime, and releases.
+    const flight=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.state.effects=[];
+      const [flyer]=e.spawn(arenaApp.catalog.byId.get('hornets'),0,{x:11,y:4},0,{count:1});
+      const def=structuredClone(arenaApp.catalog.byId.get('hammies'));def.id='flight-target';
+      Object.assign(def.stats,{health:1000,shield:0,speed:0,damage:0,range:0,dodge:0,healrecovery:0});def.combat.attackType='none';
+      const [target]=e.spawn(def,1,{x:11.8,y:4},0,{count:1});
+      e.step(3);const hp=target.hp;e.damage(null,target,10000,{kind:'spell'});e.step(4);e.setPaused(true);arenaApp.renderer.focusAt(flyer);
+      return {hp,x:flyer.x,y:flyer.y,lane:flyer.lane,shots:flyer.shots};
+    });
+    assert.ok(flight.hp<1000);assert.ok(flight.x>12);assert.ok(Math.abs(flight.y-4)<.26);assert.equal(flight.lane,0);assert.ok(flight.shots>0);
+    await settleFrame(page);await page.screenshot({path:'/tmp/oyun-arena-flying-lane.png',fullPage:true});screenshots.push('/tmp/oyun-arena-flying-lane.png');
+    const engulfed=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.state.units=[];e.state.projectiles=[];e.state.effects=[];e.setPaused(false);
+      const [gloop]=e.spawn(arenaApp.catalog.byId.get('gloop'),0,{x:17,y:14},1,{count:1});gloop.stats.speed=0;
+      const def=structuredClone(arenaApp.catalog.byId.get('hammies'));def.id='gloop-target';
+      Object.assign(def.stats,{health:1000,shield:0,speed:0,damage:0,range:0,dodge:0,healrecovery:0});def.combat.attackType='none';
+      const [target]=e.spawn(def,1,{x:17.4,y:14},1,{count:1});e.step(1);e.setPaused(true);arenaApp.renderer.focusAt(gloop);
+      window.gloopFixture={gloop,target};
+      return {hp:target.hp,hostHp:gloop.hp,captive:target.engulfedBy===gloop.id,count:e.captivesOf(gloop).length};
+    });
+    assert.equal(engulfed.captive,true);assert.equal(engulfed.count,1);assert.equal(engulfed.hp,990);assert.equal(engulfed.hostHp,990);
+    await settleFrame(page);
+    assert.equal(await page.evaluate(()=>arenaApp.renderer.shotTimes.has(gloopFixture.target.id)),false,'a swallowed portrait is not rendered');
+    await page.screenshot({path:'/tmp/oyun-arena-gloop-captive.png',fullPage:true});screenshots.push('/tmp/oyun-arena-gloop-captive.png');
+    await page.evaluate(()=>arenaApp.engine.setPaused(false));
+    const gloopPoint=await clientPoint(page,{x:17,y:14});await page.mouse.click(gloopPoint.x,gloopPoint.y);
+    await page.locator('#inspector').waitFor({state:'visible'});
+    assert.equal(await page.locator('#inspector-name').textContent(),'Gloop');
+    assert.equal(await page.locator('[data-engulfed-count="1"]').count(),1);
+    const life=parseFloat(await page.locator('#inspector [data-stat="life"] strong').textContent());
+    assert.ok(life>=98&&life<=99,'the inspector shows Gloop\'s remaining lifetime');
+    await page.screenshot({path:'/tmp/oyun-arena-gloop-inspector.png',fullPage:true});screenshots.push('/tmp/oyun-arena-gloop-inspector.png');
+    await page.locator('#inspector-close').click();
+    const released=await page.evaluate(()=>{
+      const e=arenaApp.engine,{gloop,target}=gloopFixture;e.setPaused(false);e.damage(null,gloop,10000,{kind:'spell'});e.step(1/30);e.setPaused(true);
+      return {hostAlive:gloop.alive,captive:!!target.engulfedBy,alive:target.alive,hp:target.hp};
+    });
+    assert.equal(released.hostAlive,false);assert.equal(released.captive,false);assert.equal(released.alive,true);assert.equal(released.hp,840);
+    await page.evaluate(()=>{delete window.gloopFixture;arenaApp.startMatch();});await settleFrame(page);
+
     // Current vision is rendered, inspected and reported consistently. Freeze
     // this fixture without the pause overlay so actual canvas pixels are tested.
     assert.equal(await page.locator('#enemy-castle-hp').textContent(),'?');
@@ -512,7 +554,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

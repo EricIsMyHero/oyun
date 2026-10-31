@@ -120,10 +120,11 @@ test('modal stat, profile and level renderers use inline icons without emoji', (
 
 
 test('ability texts, names, turn abilities and star upgrades are preserved verbatim', () => {
+  // Includes the explicitly requested Gloop engulf/release and 100-second life.
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    'c1816898f72721bb8d2117f018df01434fe6e98cd64b895b3eed681f19a2e794');
+    'de7b07a1cc0d2930875d0f5f921940ec7b3e7c9025ea645ebbd270f0d3a9c427');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {

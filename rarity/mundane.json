@@ -333,7 +333,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Gloop toxunduğu bütün rəqib kartları öz yapışqan kütləsinin içinə çəkərək onları hərəkətsiz qoyar və davamlı hasar verər. Bu qədim varlığın döyüş meydanında 125 saniyəlik məhdud ömrü var. Ömrü başa çatdıqda və ya məhv edildikdə daxili enerjisi partlayar, ətrafındakı bütün rəqiblərə 150 hasar yetirərək tamamilə yox olar.",
+    "trait": "Gloop toxunduğu bütün uyğun rəqib kartları öz yapışqan kütləsinin içinə çəkərək onları hərəkətsiz qoyar, hücum etmələrinə mane olar və davamlı hasar verər. Onun döyüş meydanında 100 saniyəlik məhdud ömrü var və hər saniyə maksimum canının 1%-ni itirər. Ömrü başa çatdıqda və ya məhv edildikdə içindəki sağ qalan kartlar azad olar, daxili enerjisi isə partlayaraq ətrafındakı bütün rəqiblərə 150 hasar yetirər.",
     "additionalStats": {
       "range": "800",
       "speed": "800",
@@ -350,12 +350,12 @@
       "criticdamageminimiser": "0%",
       "flexibility": "0%",
       "shieldtakendamage": "70%",
-      "life": "-"
+      "life": "100s"
     },
     "showlevels": {
       "level1": "+10% Hasar  |  10 » 11",
       "level2": "+5% Hasar Azaltma  |  0% » 5%",
-      "level3": "+20% Ömür  |  150s » 180s"
+      "level3": "+20% Ömür  |  100s » 120s"
     },
     "story": "Gloop is a massive, green, slime-like entity that haunts the depths of the Dreadful Swamp. It waits in the stagnant waters for unsuspecting travelers, pulling them into its viscous body to face a slow and agonizing end. Legend says that those who enter its territory never return, becoming part of the swamp's eternal rot. It is a mindless consumer, a living trap that turns the murky waters into a graveyard. To face Gloop is to face an inescapable, suffocating death.",
     "class": "Tank",

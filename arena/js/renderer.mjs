@@ -575,6 +575,10 @@ export class ArenaRenderer {
     if(u.isBuilding) {
       this.block(ctx,u.x-.4,u.y-.4,.8,.8,.65,'#a9b5a1','#718e85','#d0ccb0');
       this.roof(ctx,u.x-.5,u.y-.5,1,1,.65,.4,side===0?['#317da1','#24566e','#6db2bd']:['#b6544f','#7c423e','#c68766']);
+    } else if(u.def?.id==='gloop') {
+      const pulse=1+Math.sin(time*3)*.06;
+      ellipse(ctx,p.x,py-size*.15,size*.8*pulse,size*.42,'#345d3788','#8bd18c',1.5);
+      ellipse(ctx,p.x-size*.2,py-size*.26,size*.32,size*.18,'#7dbd6c66');
     } else {
       // The weapon pose follows the authored attack type, not a universal blade.
       polygon(ctx,[{x:p.x-size*.36,y:bodyY+size*.07},{x:p.x+size*.31,y:bodyY+size*.03},{x:p.x+size*.46,y:py-size*.03},{x:p.x-size*.48,y:py}],side===0?'#355d79':'#864e48','#263f44',1);
@@ -627,6 +631,12 @@ export class ArenaRenderer {
       const barY=headY-size*.78;
       this.healthBar(ctx,p.x,barY,size*1.16,u.hp/(statValue(u,'health',time,u.maxHp)||1),side===0?'#a0df8e':'#fa9b80',3);
       if(u.maxShield>0&&u.shield>0)this.healthBar(ctx,p.x,barY-4,size*1.16,u.shield/(statValue(u,'shield',time,u.maxShield)||1),'#83ccf4',2);
+      const captiveCount=u.def?.id==='gloop'?(state?.units||[]).filter(t=>t.alive&&t.engulfedBy===u.id).length:0;
+      if(captiveCount){
+        ctx.fillStyle='#162d21';roundRect(ctx,p.x+size*.35,barY-17,24,14,4);ctx.fill();
+        ctx.strokeStyle='#a8dc86';ctx.lineWidth=1;ctx.stroke();
+        ctx.fillStyle='#d8f6be';ctx.textAlign='center';ctx.font='700 10px system-ui,sans-serif';ctx.fillText(String(captiveCount),p.x+size*.35+12,barY-7);
+      }
       const statusColors={poison:'#b5df78',burn:'#ffb875',bleed:'#ef8692',slow:'#94d6ec',stun:'#ffdf89',silence:'#d9b0fa',blind:'#d0aecf',root:'#b2d98b',imprisonment:'#a3b4fa',curse:'#e69cd6',frozen:'#b0efff',airborne:'#c3dcff',betrayal:'#ff8096',reflection:'#c3f7e5',taunted:'#f4ac82',statReduction:'#e9a2cd',berserk:'#ffb46d',fearless:'#ffe9ac',predominance:'#e1d3ff'};
       statuses.slice(0,3).forEach((st,i)=>{
         const c=statusColors[st.kind]||'#d9d9c0';
@@ -656,9 +666,16 @@ export class ArenaRenderer {
     const p=this.screenAt(e),s=this.view.scale;
     const duration=Math.max(.1,(e.until??time+.5)-(e.born??time));
     const progress=clamp((time-(e.born??time))/duration,0,1),alpha=1-progress;
-    const color=e.color||({heal:'#a2e7a2',shield:'#8edcff',death:'#f8c99b',capture:'#9bf5ed',explosion:'#ffc279',slash:'#fff2c2',spell:'#ccadff',spawn:'#b8edfa'}[e.type]||'#ffe8c0');
+    const color=e.color||({heal:'#a2e7a2',shield:'#8edcff',death:'#f8c99b',capture:'#9bf5ed',engulf:'#a5e27c',release:'#d2efac',explosion:'#ffc279',slash:'#fff2c2',spell:'#ccadff',spawn:'#b8edfa'}[e.type]||'#ffe8c0');
     ctx.save();ctx.globalAlpha=alpha;
-    if(['explosion','spell','capture','spawn','death'].includes(e.type)) {
+    if(e.type==='engulf'){
+      const radius=(e.radius||.6)*s*(1-progress*.85);
+      ellipse(ctx,p.x,p.y-s*.2,radius,radius*.5,'#75b75b44',color,Math.max(1,s*.06));
+      for(let i=0;i<6;i++){
+        const angle=i*Math.PI/3+progress*Math.PI;
+        ellipse(ctx,p.x+Math.cos(angle)*radius,p.y-s*.2+Math.sin(angle)*radius*.5,s*.05,s*.05,color);
+      }
+    }else if(['explosion','spell','capture','spawn','death','release'].includes(e.type)) {
       const radius=(e.radius||.7)*s*(.3+progress);
       ellipse(ctx,p.x,p.y,radius,radius*.5,progress<.2?color+'44':null,color,Math.max(1,s*.07)*(1-progress));
       for(let i=0;i<8;i++) {

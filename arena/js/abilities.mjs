@@ -36,10 +36,22 @@ export const ABILITIES = {
   scrapy:{attack(ctx,u,t,hit){hit.bypassShield=true;if(ctx.random()<.25)hit.damage*=1.5;}},
   nitrox:{tick(ctx,u){aura(ctx,u,'attackHaste',.12);}},
   gloop:{
-    spawn(ctx,u){u.memory.expires=ctx.time+125;u.expiresAt=ctx.time+125;},
-    tick(ctx,u){
-      if(ctx.time>=u.memory.expires){ctx.damage(null,u,u.hp+u.shield+1,{kind:'expiry',bypassShield:true,secondary:true});return;}
-      enemies(ctx,u,u.def.combat.attackDistance/1000).forEach(t=>ctx.status(t,'root',.2,0,u));
+    contactAttack:true,
+    lifeDecay:{fraction:.01,interval:1},
+    tick(ctx,u,dt){
+      const interval=ctx.attackInterval(u),attempts=u.memory.engulfAttempts||=Object.create(null);
+      for(const target of enemies(ctx,u,u.radius)){
+        if((attempts[target.id]||0)>ctx.time)continue;
+        attempts[target.id]=ctx.time+interval;
+        ctx.engulf(u,target);
+      }
+      for(const target of ctx.captivesOf(u)){
+        target.memory.digestClock+=dt;
+        while(target.alive&&target.memory.digestClock+1e-7>=interval){
+          target.memory.digestClock-=interval;
+          ctx.damage(u,target,ctx.statValue(u,'damage'),{kind:'ability',secondary:true});
+        }
+      }
     },
     death(ctx,u){enemies(ctx,u).forEach(t=>ctx.damage(u,t,150,{kind:'ability',secondary:true}));ctx.fx('explosion',u.x,u.y,{radius:radius(u,ctx),side:u.side});},
   },

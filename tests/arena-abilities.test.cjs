@@ -61,7 +61,7 @@ const cases={
   'b-b':({ctx,u,t,rule,hit})=>{t.def={...t.def,type:['Animal']};rule.incoming(ctx,u,t,hit);close(hit.damage,4);},
   scrapy:({ctx,u,t,rule,hit})=>{rule.attack(ctx,u,t,hit);close(hit.damage,15);assert.ok(hit.bypassShield);},
   nitrox:({ctx,u,t,rule,records})=>{t.side=0;rule.tick(ctx,u);assert.equal(records.statuses[0].kind,'attackHaste');close(records.statuses[0].magnitude,.12);},
-  gloop:({ctx,u,rule,records})=>{rule.spawn(ctx,u);assert.equal(u.expiresAt,125);rule.tick(ctx,u);assert.equal(records.statuses[0].kind,'root');rule.death(ctx,u);assert.equal(records.damage[0].amount,150);},
+  gloop:({ctx,u,rule,records})=>{assert.equal(u.stats.life,100);assert.deepEqual(rule.lifeDecay,{fraction:.01,interval:1});assert.equal(rule.contactAttack,true);rule.death(ctx,u);assert.equal(records.damage[0].amount,150);},
   henry:({ctx,u,t,rule,hit})=>{t.def={...t.def,type:['Animal']};rule.attack(ctx,u,t,hit);close(hit.damage,14);},
   venomora:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].duration,2);close(records.statuses[0].magnitude,.25);},
   blocker:({ctx,u,t,rule,hit,records})=>{rule.incoming(ctx,u,t,hit);close(hit.damage,7);t.side=0;rule.tick(ctx,u);assert.equal(records.statuses[0].kind,'spellProtection');},

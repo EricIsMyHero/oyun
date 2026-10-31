@@ -73,10 +73,23 @@ cannot. Contested progress pauses. If the attacker leaves, its progress resets.
 Ownership remains until an opponent finishes a capture. Each owned well adds
 **2% mana recovery speed**, up to 6%; overtime doubles the resulting recovery.
 
-Ground units follow the roads. Hovering units also follow the ground routes but
-ignore ground-only effects. Flying units travel over terrain. Target layers and
-ground immunity remain independent: a hovering unit still belongs to the ground
-target layer.
+All units advance along the corridor where they were deployed. Flying units
+follow its bends, engage valid enemies they encounter, and return to that
+corridor after pursuit. They can fly over terrain while engaging. Hovering units
+follow the ground routes but ignore ground-only effects. Target layers and
+ground immunity remain independent: a hovering unit belongs to the ground layer.
+
+Gloop engulfs eligible enemy cards on body contact. Captives travel inside it,
+cannot move, attack, scout, or contest wells, and receive Gloop's current Damage
+at its current Attack Speed. Their sprites disappear; Gloop displays a captive
+count, and its inspector lists the held cards. Outside attacks cannot hit them.
+Cleanse releases a captive, and Predominance prevents engulfing. Surviving cards
+are released onto the road when Gloop falls, before its existing 150-damage
+death explosion. Silence pauses engulfing and digestion but never blocks release.
+Gloop lives at most **100 seconds**, losing **1% of its maximum health each
+second** regardless of shields, damage reduction, or combat immunities. Healing
+can offset that health loss but cannot extend its lifetime. Pausing the match
+freezes both clocks. Native ability text remains Azerbaijani.
 
 ## Fog of war and scouting
 

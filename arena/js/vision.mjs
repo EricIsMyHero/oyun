@@ -7,7 +7,7 @@ export const VISION = Object.freeze({ card:8, pump:4, castle:RULES.castleRange }
 
 const validSide = side => side === 0 || side === 1;
 const finitePoint = point => point && Number.isFinite(point.x) && Number.isFinite(point.y);
-const living = entity => entity && entity.alive !== false && (entity.hp == null || entity.hp > 0);
+const living = entity => entity && !entity.engulfedBy && entity.alive !== false && (entity.hp == null || entity.hp > 0);
 const concealed = (entity,time) => ['invisible','untargetable','imprisonment'].some(kind=>hasStatus(entity,kind,time));
 
 export function visibilitySources(state,side) {

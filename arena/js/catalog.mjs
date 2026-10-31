@@ -97,7 +97,7 @@ export function buildCatalog(rawCards,rawSpells) {
 }
 export async function loadCatalog(baseURL=new URL('../../',import.meta.url)) {
   const fetchJSON=async path=>{
-    const response=await fetch(new URL(path,baseURL));
+    const response=await fetch(new URL(path,baseURL),{cache:'no-cache'});
     if(!response.ok)throw Error(`Could not load ${path} (${response.status}).`);
     const data=await response.json();if(!Array.isArray(data))throw Error(`Invalid entity list in ${path}.`);return data;
   };
