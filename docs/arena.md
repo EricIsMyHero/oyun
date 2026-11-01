@@ -170,7 +170,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **70 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **73 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -178,9 +178,10 @@ after the first successful hit; their poison continues and keeps its original
 caster attribution. Giga Bomb deals its immediate source damage and then ten
 one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
 
-Twelve Relic roots now have their native abilities implemented: **Stacy**,
+Fifteen Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,
-**Bloodraider**, **Shine**, **Avalith**, **Malvaris** and **Sylviana**.
+**Bloodraider**, **Shine**, **Avalith**, **Malvaris**, **Sylviana**, **Pyhsic**,
+**Unara** and **Clara**.
 
 - Stacy adds four one-second Burn ticks of eight damage after each successful
   hit. Independent packets stack and continue after her death. Below 10% health,
@@ -242,13 +243,33 @@ Twelve Relic roots now have their native abilities implemented: **Stacy**,
   100/100 ally becomes 110/110; an injured 70/100 ally becomes 80/110. The bonus
   stacks across deaths, excludes enemies and castles, and cannot revive dead
   units. Its green area effect displays the actual square footprint.
+- Pyhsic attempts its special attack every 22 active seconds against a visible
+  frontal enemy unit within 7.5 tiles. It deals 50 damage, then has a
+  `min(100, 20 + maximumHealth × 0.1)` percent chance to execute a surviving
+  target: 40% at 200 maximum health and 100% at 800 or more. Executions respect
+  damage immunity and Immortal, exclude structures, and are not basic-hit procs.
+- Unara gains nine charge per successful basic hit. Spending 100 charge pushes
+  nearby visible enemy units two tiles away and starts 30 homing orbs, one every
+  0.1 seconds for two damage each. The initial targets rotate in a queue starting
+  with the nearest; dead, concealed or unavailable targets leave it. The native
+  orb range includes the two-tile push, and shots track only their assigned
+  target. Orbs keep the base weapon separate and never generate charge or repeat
+  basic-hit abilities. Twelve basic hits leave eight charge after activation.
+  Misfortune is checked once at launch, while global pause or Silence freezes
+  new launches. A valid Taunt redirects subsequent orbs to its caster.
+- Clara gains 20 charge per visible nearby enemy per second, including flyers.
+  Spending 100 applies seven seconds of Taunt and seven seconds of self-healing:
+  three health every 0.25 seconds, for 28 ticks and 84 base healing. Bleeding,
+  Burn and healing bonuses retain their normal effects. Taunt changes attack
+  targets rather than immobilizing enemies. Recasting refreshes existing victims
+  and affects newly nearby enemies without stacking duplicate regeneration.
 
 The live unit inspector displays native stat growth as well as status modifiers,
 so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 68 locked entries explain an undefined
+defined for this simulator. The remaining 65 locked entries explain an undefined
 rule, missing combat data, or an unimplemented native ability. Required child
 forms must also be complete; removing a lock never substitutes invented values.
 

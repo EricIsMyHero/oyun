@@ -263,8 +263,8 @@ export class ArenaEngine {
     const sourceId=source?.id??null;
     if(sourceId)this.statusSources.set(sourceId,source);
     let entry=!extra.stack&&target.statuses.find(s=>s.kind===kind&&s.sourceId===sourceId&&s.until>this.time);
-    if(entry){entry.until=Math.max(entry.until,this.time+actual);entry.magnitude=Math.max(entry.magnitude||0,magnitude);Object.assign(entry,extra);return entry;}
-    entry={kind,until:this.time+actual,magnitude,sourceId,nextTick:this.time+extra.interval,...extra};target.statuses.push(entry);
+    if(entry){entry.until=Math.max(entry.until,this.time+actual);entry.magnitude=Math.max(entry.magnitude||0,magnitude);Object.assign(entry,extra);}
+    else {entry={kind,until:this.time+actual,magnitude,sourceId,nextTick:this.time+extra.interval,...extra};target.statuses.push(entry);}
     if(kind==='taunt'){
       const radius=num(extra.radius,this.statValue(target,'range')/1000);
       for(const enemy of this.near(target,radius,u=>this.isEnemy(target,u)))this.status(enemy,'taunted',actual,0,target,{scheduled:true});
@@ -370,7 +370,7 @@ export class ArenaEngine {
     if(has(target,'imprisonment',this.time)||has(target,'untouchable',this.time)||has(target,'untargetable',this.time))return empty;
     const hit={damage:amount,kind:'attack',bypassShield:false,critical:false,secondary:false,...options};
     if(source&&!this.isEnemy(source,target)&&!options.friendlyFire)return empty;
-    if(hit.kind==='ability'&&source&&this._abilityMiss(source,target)){this.fx('miss',target.x,target.y,{side:source.side});return empty;}
+    if(hit.kind==='ability'&&!hit.accuracyChecked&&source&&this._abilityMiss(source,target)){this.fx('miss',target.x,target.y,{side:source.side});return empty;}
     if(hit.kind==='attack'&&!hit.secondary&&this.random()<clamp(this.statValue(target,'dodge'),0,70)/100){this.fx('miss',target.x,target.y,{side:target.side});return empty;}
     this.damageDepth++;
     this._hook('incoming',target,source,hit);
@@ -437,6 +437,13 @@ export class ArenaEngine {
   }
   _legalTarget(u,target,sources=null){return this._canHit(u,target)&&isEntityVisible(this.state,u.side,target,sources);}
   canTarget(u,target){return this._legalTarget(u,target);}
+  canSee(u,target){return isEntityVisible(this.state,u.side,target);}
+  tauntTarget(u,sources=null){
+    if(has(u,'predominance',this.time))return null;
+    const targets=active(u,'taunted',this.time).map(s=>this._sourceFor(s)).filter(target=>this._legalTarget(u,target,sources));
+    targets.sort((a,b)=>distance(u,a)-distance(u,b)||a.id.localeCompare(b.id));
+    return targets[0]||null;
+  }
   _range(u){
     const blind=strongest(u,'blind',this.time);
     const range=this.statValue(u,'range')/1000*(1-blind);
@@ -446,11 +453,8 @@ export class ArenaEngine {
   }
   _target(u){
     const sources=visibilitySources(this.state,u.side);
-    if(!has(u,'predominance',this.time)){
-      const taunts=active(u,'taunted',this.time).map(s=>({status:s,target:this._sourceFor(s)})).filter(({target})=>this._legalTarget(u,target,sources));
-      taunts.sort((a,b)=>distance(u,a.target)-distance(u,b.target)||a.target.id.localeCompare(b.target.id));
-      if(taunts.length){const target=taunts[0].target;if(u.burstTargetId&&u.burstTargetId!==target.id){u.burstTargetId=null;u.burstIndex=0;}return target;}
-    }
+    const taunter=this.tauntTarget(u,sources);
+    if(taunter){if(u.burstTargetId&&u.burstTargetId!==taunter.id){u.burstTargetId=null;u.burstIndex=0;}return taunter;}
     if(u.burstTargetId){const locked=this.units.concat(this.castles).find(t=>t.id===u.burstTargetId);if(this._legalTarget(u,locked,sources))return locked;u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
     const reach=this._range(u);
     const candidates=this.units.filter(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius);
@@ -630,6 +634,16 @@ export class ArenaEngine {
       shot.ttl=4*remaining/RULES.projectileSpeed+2;u.memory.returningShotId=shot.id;
     }
     this.state.projectiles.push(shot);
+    return shot;
+  }
+  abilityProjectile(source,target,damage,{range,kind='orb',color='#c5a7ff'}={}){
+    if(!source?.alive||!this._legalTarget(source,target)||this._abilityMiss(source,target))return false;
+    const reach=Math.max(0,num(range))+(target.radius||0);
+    if(distance(source,target)>reach+EPS)return false;
+    const profile={attackType:'ranged',attackWidth:500,attackDistance:reach*1000,attackShape:'single',multiTarget:false,maxTargets:1};
+    const shot=this._projectile(source,target,{damage,kind:'ability',secondary:true,critical:false,accuracyChecked:true},profile);
+    shot.homing=true;shot.ability=true;shot.kind=kind;shot.color=color;
+    return true;
   }
   _catchProjectile(shot){
     shot.done=true;
@@ -693,7 +707,9 @@ export class ArenaEngine {
         if(shot.profile.projectileEndEffect==='explode'||shot.profile.multiTarget&&['square','circle'].includes(shot.profile.attackShape)){
           this._explodeProjectile(shot,target);shot.done=true;break;
         }
-        shot.hitIds.add(target.id);this._resolveHit(shot.source,target,shot.hit);
+        shot.hitIds.add(target.id);
+        if(shot.ability)this.damage(shot.source,target,shot.hit.damage,shot.hit);
+        else this._resolveHit(shot.source,target,shot.hit);
         const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
         if(limit!=null&&shot.hitIds.size>=limit){shot.done=true;break;}
       }

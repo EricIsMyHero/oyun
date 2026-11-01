@@ -327,6 +327,63 @@ export const ABILITIES = {
     u.stats.damage=u.def.stats.damage*(1+extra*.1);
     u.stats.attackSpeed=u.def.stats.attackSpeed/(1+extra*.05);
   }},
+  pyhsic:{tick(ctx,u,dt){
+    periodic(u,'executionClock',dt,22,()=>{
+      const forced=ctx.tauntTarget?.(u);
+      const target=enemies(ctx,u,7.5).filter(t=>!t.isBuilding&&ctx.canTarget(u,t)&&front(ctx,u,t)&&(!forced||t===forced))
+        .sort((a,b)=>Math.hypot(a.x-u.x,a.y-u.y)-Math.hypot(b.x-u.x,b.y-u.y)||a.id.localeCompare(b.id))[0];
+      if(!target)return;
+      const result=ctx.damage(u,target,50,{kind:'ability',secondary:true});
+      if(damageEvent(result)&&target.alive&&ctx.random()<clamp((20+healthCap(ctx,target)*.1)/100,0,1))
+        ctx.damage(u,target,target.hp+target.shield+1,{kind:'ability',secondary:true,instantKill:true});
+      ctx.fx('spell',target.x,target.y,{side:u.side,radius:.5,color:'#cbb2ff'});
+    },ctx);
+  }},
+  unara:{
+    hit(ctx,u,t,result){
+      if(!u.alive||!damageEvent(result))return;
+      u.memory.charge=(u.memory.charge||0)+9;
+      if(u.memory.charge<100||u.memory.orbRemaining>0)return;
+      const targets=enemies(ctx,u).filter(t=>!t.isBuilding&&ctx.canTarget(u,t))
+        .sort((a,b)=>Math.hypot(a.x-u.x,a.y-u.y)-Math.hypot(b.x-u.x,b.y-u.y)||a.id.localeCompare(b.id));
+      if(!targets.length)return;
+      u.memory.charge-=100;u.memory.orbRemaining=30;u.memory.orbClock=0;
+      u.memory.orbRange=radius(u,ctx)+2;u.memory.orbTargets=targets.map(t=>t.id);
+      targets.forEach(t=>ctx.push(t,u,2));ctx.fx('wave',u.x,u.y,{side:u.side,radius:radius(u,ctx),color:'#c5a7ff'});
+    },
+    tick(ctx,u,dt){
+      if(!(u.memory.orbRemaining>0))return;
+      u.memory.orbClock+=dt;
+      while(u.memory.orbRemaining>0&&u.memory.orbClock+1e-9>=.1){
+        u.memory.orbClock=Math.max(0,u.memory.orbClock-.1);
+        const valid=t=>t?.alive&&!t.isBuilding&&ctx.canTarget(u,t)&&Math.hypot(t.x-u.x,t.y-u.y)<=u.memory.orbRange+(t.radius||0);
+        const forced=ctx.tauntTarget?.(u);let target=valid(forced)?forced:null;
+        if(forced&&!target){u.memory.orbRemaining--;continue;}
+        if(!target){
+          const queue=u.memory.orbTargets;
+          while(queue.length&&!target){const id=queue.shift(),candidate=ctx.units.find(t=>t.id===id);if(valid(candidate)){target=candidate;queue.push(id);}}
+        }
+        if(!target){u.memory.orbRemaining=0;break;}
+        u.memory.orbRemaining--;
+        const launch=()=>ctx.abilityProjectile(u,target,2,{range:u.memory.orbRange,kind:'orb',color:'#c5a7ff'});
+        if(ctx.useAbility)ctx.useAbility(u,launch);else launch();
+      }
+      if(!u.memory.orbRemaining){u.memory.orbTargets=[];u.memory.orbClock=0;}
+    },
+  },
+  clara:{tick(ctx,u,dt){
+    const nearby=enemies(ctx,u).filter(t=>!t.isBuilding&&(ctx.canSee?ctx.canSee(u,t):ctx.canTarget(u,t)));
+    u.memory.charge=(u.memory.charge||0)+nearby.length*20*dt;
+    while(u.memory.charge+1e-7>=100){
+      u.memory.charge=Math.max(0,u.memory.charge-100);
+      const cast=()=>{
+        ctx.status(u,'taunt',7,0,u,{radius:radius(u,ctx)});
+        ctx.status(u,'regen',7,0,u,{amount:3,interval:.25});
+        ctx.fx('wave',u.x,u.y,{side:u.side,radius:radius(u,ctx),color:'#edb4a3'});
+      };
+      if(ctx.useAbility)ctx.useAbility(u,cast);else cast();
+    }
+  }},
 };
 
 /* These are author-data gaps, not substitute versions of the native abilities. */

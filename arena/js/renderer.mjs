@@ -778,7 +778,10 @@ export class ArenaRenderer {
     ctx.strokeStyle=trail;ctx.lineWidth=clamp((b.width||.2)*s*.6,3,8);ctx.globalAlpha=.35;
     ctx.beginPath();ctx.moveTo(tail.x,tail.y-s*.6);ctx.lineTo(p.x,p.y-s*.6);ctx.stroke();
     ctx.globalAlpha=1;ctx.shadowColor=color;ctx.shadowBlur=9;ctx.strokeStyle=color;ctx.lineWidth=clamp((b.width||.2)*s*.23,1,3);ctx.stroke();
-    if(b.returning){
+    if(b.kind==='orb'){
+      const radius=clamp(s*.13,2.5,5);ellipse(ctx,p.x,p.y-s*.6,radius,radius,'#e7d6ff',color,1);
+      ctx.strokeStyle=color;ctx.lineWidth=1;ctx.beginPath();ctx.arc(p.x,p.y-s*.6,radius*1.65,(state?.time||0)*10,(state?.time||0)*10+Math.PI*1.4);ctx.stroke();
+    }else if(b.returning){
       ctx.translate(p.x,p.y-s*.6);ctx.rotate((state?.time||0)*15);
       const radius=clamp(s*.2,4,10);ctx.lineWidth=2;ctx.strokeStyle='#fff5d6';
       ctx.beginPath();ctx.moveTo(-radius,radius*.45);ctx.quadraticCurveTo(-radius*.25,-radius*.9,radius,0);ctx.quadraticCurveTo(0,-radius*.1,-radius,radius*.45);ctx.stroke();

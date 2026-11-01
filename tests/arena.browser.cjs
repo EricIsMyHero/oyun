@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,70);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana']){
+    assert.equal(coverage.ready,73);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -336,6 +336,42 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(bloom,{born:4,friendHp:110,friendMax:110,enemyHp:100,area:1.5});
     await settleFrame(page);await page.screenshot({path:'/tmp/oyun-arena-butterfly-bloom.png',fullPage:true});screenshots.push('/tmp/oyun-arena-butterfly-bloom.png');
     await page.evaluate(()=>{delete window.soulFixture;arenaApp.startMatch();});await settleFrame(page);
+
+    const volley=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.state.effects=[];
+      const def=structuredClone(arenaApp.catalog.byId.get('unara'));def.stats.speed=0;
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;
+      const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='orb-target';
+      Object.assign(dummy.stats,{health:1000,shield:0,speed:0,damage:0,range:0,dodge:0,healrecovery:0});dummy.combat.attackType='none';
+      const targets=[16,16.7].map(x=>e.spawn(dummy,1,{x,y:14},1,{count:1})[0]);for(let i=0;i<12;i++)e._resolveHit(source,targets[0],{kind:'attack',damage:5});
+      for(const target of targets)target.hp=1000;e.step(.2);e.setPaused(true);arenaApp.renderer.focusAt(source);window.orbFixture={source,targets,dummy};
+      return{charge:source.memory.charge,remaining:source.memory.orbRemaining,orbs:e.state.projectiles.filter(p=>p.kind==='orb').length};
+    });
+    assert.deepEqual(volley,{charge:8,remaining:28,orbs:2});await settleFrame(page);
+    await page.screenshot({path:'/tmp/oyun-arena-unara-orbs.png',fullPage:true});screenshots.push('/tmp/oyun-arena-unara-orbs.png');
+    const orbImpact=await page.evaluate(()=>{const e=arenaApp.engine;e.setPaused(false);e.step(3.4);e.setPaused(true);return{hp:orbFixture.targets.map(t=>t.hp),charge:orbFixture.source.memory.charge,hits:orbFixture.source.hits};});
+    assert.deepEqual(orbImpact,{hp:[970,970],charge:8,hits:12});
+    const taunt=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.state.units=[];e.state.projectiles=[];e.state.effects=[];e.setPaused(false);
+      const def=structuredClone(arenaApp.catalog.byId.get('clara'));def.stats.speed=0;
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;source.hp=100;
+      const dummy=structuredClone(orbFixture.dummy);dummy.stats.range=5000;
+      const [other]=e.spawn(dummy,0,{x:15.4,y:14},1,{count:1}),[enemy]=e.spawn(dummy,1,{x:15.8,y:14},1,{count:1});
+      enemy.burstTargetId=other.id;enemy.burstIndex=2;e.step(5.3);arenaApp.renderer.focusAt(source);
+      return{forced:e._target(enemy)===source,hp:source.hp,taunted:enemy.statuses.some(s=>s.kind==='taunted')};
+    });
+    assert.deepEqual(taunt,{forced:true,hp:103,taunted:true});await settleFrame(page);
+    const tauntPoint=await clientPoint(page,{x:15.8,y:14});await page.mouse.click(tauntPoint.x,tauntPoint.y);
+    await page.locator('#inspector').waitFor({state:'visible'});assert.ok(await page.locator('#inspector [data-status="taunted"]').isVisible());
+    await page.screenshot({path:'/tmp/oyun-arena-clara-taunt.png',fullPage:true});screenshots.push('/tmp/oyun-arena-clara-taunt.png');await page.locator('#inspector-close').click();
+    const execution=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.setPaused(false);e.state.units=[];e.state.projectiles=[];e.state.effects=[];e.random=()=>.399;
+      const def=structuredClone(arenaApp.catalog.byId.get('pyhsic'));def.stats.speed=0;
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;
+      const dummy=structuredClone(orbFixture.dummy);dummy.stats.health=200;const [target]=e.spawn(dummy,1,{x:21,y:14},1,{count:1});
+      e.step(22);e.setPaused(true);return{alive:target.alive,hp:target.hp,hits:source.hits};
+    });
+    assert.deepEqual(execution,{alive:false,hp:0,hits:0});await page.evaluate(()=>{delete window.orbFixture;arenaApp.startMatch();});await settleFrame(page);
 
     // A real flyer engages units in its deployed outer lane, then resumes that
     // corridor. Gloop hides captives, reports its count/lifetime, and releases.
@@ -670,7 +706,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

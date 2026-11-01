@@ -23,11 +23,11 @@ async function fixture(){
   return {e,catalog,spawn,dummy,hit,kill,has:(u,kind)=>hasStatus(u,kind,e.time)};
 }
 
-test('twelve Relic cards and their summons unlock with verified native handlers',async()=>{
+test('fifteen Relic cards and their summons unlock with verified native handlers',async()=>{
   const {catalog}=await fixture();
-  const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','sylviana','sylviana/butterflies','malvaris','malvaris/phantomis','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
+  const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','sylviana','sylviana/butterflies','malvaris','malvaris/phantomis','pyhsic','unara','clara','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
   for(const id of ids){assert.equal(catalog.byId.get(id).ready,true,id);assert.deepEqual(catalog.byId.get(id).reasons,[]);}
-  assert.equal(catalog.cards.filter(c=>c.ready).length,70);
+  assert.equal(catalog.cards.filter(c=>c.ready).length,73);
   assert.equal(catalog.byId.get('format').ready,false);assert.match(catalog.byId.get('format').reasons.join(' '),/not been implemented/);
 });
 
@@ -344,4 +344,87 @@ test('native Soul Mark clocks and summon state freeze with pause',async()=>{
   const {e,spawn,dummy,hit,kill}=await fixture(),u=spawn('malvaris'),target=dummy();hit(u,target);e.step(1);e.setPaused(true);
   const before=JSON.stringify(e.state);e.step(30);assert.equal(JSON.stringify(e.state),before);e.setPaused(false);kill(target);
   assert.equal(e.units.filter(t=>t.def.id==='malvaris/phantomis').length,1);
+});
+
+test('Pyhsic deals fifty damage at twenty-two seconds and follows the exact execution probability',async()=>{
+  for(const [health,roll,dead] of [[200,.399,true],[200,.4,false],[800,.999,true],[1000,.999,true]]){
+    const {e,spawn,dummy}=await fixture(),u=spawn('pyhsic'),target=dummy(1,{x:21,y:14},{health});e.random=()=>roll;
+    e.step(21.9);close(target.hp,health);e.step(.1);
+    assert.equal(target.alive,!dead,`${health} at ${roll}`);close(target.hp,dead?0:health-50);close(u.memory.executionClock,0);
+  }
+});
+
+test('Pyhsic selects a visible frontal unit within seven-and-a-half tiles and excludes structures',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('pyhsic',0,{x:15,y:14},{range:0}),back=dummy(1,{x:14,y:14}),hidden=dummy(1,{x:16,y:14}),building=dummy(1,{x:17,y:14}),legal=dummy(1,{x:22.5,y:14}),far=dummy(1,{x:24,y:14});
+  building.isBuilding=true;e.status(hidden,'invisible',30);e.random=()=>.999;e.step(22);
+  assert.equal(legal.alive,false);for(const t of [back,hidden,building,far])close(t.hp,1000);assert.equal(u.hits,0);
+});
+
+test('Pyhsic executions respect immunity, Immortal and reduction while Silence prevents the cast',async()=>{
+  for(const mode of ['untouchable','immortal','reduction','silence']){
+    const {e,spawn,dummy}=await fixture(),u=spawn('pyhsic'),t=dummy(1,{x:20,y:14},{health:800,shield:100,damageminimiser:90});e.random=()=>.9;
+    if(mode==='silence')e.status(u,'silence',30);else if(mode!=='reduction')e.status(t,mode,30);
+    e.step(22);if(mode==='untouchable'||mode==='silence'){close(t.hp,800);close(t.shield,100);}
+    else if(mode==='immortal'){assert.ok(t.alive);close(t.hp,1);}else assert.equal(t.alive,false);
+  }
+});
+
+test('Unara spends one hundred of twelve nine-charge hits and distributes exactly thirty two-damage orbs',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('unara'),targets=[16,16.5,17].map(x=>dummy(1,{x,y:14}));
+  for(let i=0;i<11;i++)hit(u,targets[0]);assert.equal(u.memory.charge,99);assert.equal(u.memory.orbRemaining,undefined);
+  hit(u,targets[0]);assert.equal(u.memory.charge,8);assert.equal(u.memory.orbRemaining,30);for(const t of targets)t.hp=1000;
+  assert.deepEqual(targets.map(t=>t.x),[18,18.5,19]);const launched=[],launch=e.abilityProjectile.bind(e);
+  e.abilityProjectile=(s,t,d,o)=>{launched.push({id:t.id,time:e.time,damage:d});return launch(s,t,d,o);};
+  e.step(3.6);assert.equal(launched.length,30);for(let i=0;i<30;i++){assert.equal(launched[i].id,targets[i%3].id);close(launched[i].damage,2);if(i)close(launched[i].time-launched[i-1].time,.1);}
+  for(const t of targets)close(t.hp,980);assert.equal(u.hits,12);assert.equal(u.memory.charge,8);assert.equal(u.memory.orbRemaining,0);assert.equal(e.state.projectiles.length,0);
+});
+
+test('Unara ability orbs do not reroll accuracy on impact or hit an intervening opponent',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('unara'),blocker=dummy(1,{x:16,y:14}),target=dummy(1,{x:18,y:14});e.status(u,'misfortune',10,.5);e.random=()=>.9;
+  assert.equal(e.abilityProjectile(u,target,2,{range:4.1}),true);e.random=()=>.1;e._projectiles(1);
+  close(target.hp,998);close(blocker.hp,1000);assert.equal(u.hits,0);assert.equal(u.memory.charge,undefined);
+});
+
+test('Unara removes dead or hidden targets from its queue and cancels if no valid targets remain',async()=>{
+  const {e,spawn,dummy,hit,kill}=await fixture(),u=spawn('unara'),a=dummy(1,{x:16,y:14}),b=dummy(1,{x:17,y:14});
+  for(let i=0;i<12;i++)hit(u,a);e.step(.5);e.status(a,'invisible',10);const launches=[],launch=e.abilityProjectile.bind(e);
+  e.abilityProjectile=(s,t,d,o)=>{launches.push(t.id);return launch(s,t,d,o);};e.step(.5);assert.ok(launches.length>0&&launches.every(id=>id===b.id));
+  kill(b);e.step(.2);assert.equal(u.memory.orbRemaining,0);assert.deepEqual(u.memory.orbTargets,[]);
+});
+
+test('Clara Taunt redirects Unara orbs and expires without replacing targets inside existing projectiles',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('unara'),enemy=dummy(1,{x:16,y:14}),taunter=spawn('clara',1,{x:16.8,y:14});
+  for(let i=0;i<12;i++)hit(u,enemy);e.status(taunter,'taunt',1,0,taunter,{radius:5});const launches=[],launch=e.abilityProjectile.bind(e);
+  e.abilityProjectile=(s,t,d,o)=>{launches.push(t.id);return launch(s,t,d,o);};e.step(.5);
+  assert.ok(launches.length===5&&launches.every(id=>id===taunter.id));assert.equal(e.tauntTarget(u),taunter);
+  e.cleanse(u);launches.length=0;e.step(.3);assert.ok(launches.includes(enemy.id));
+});
+
+test('Clara gains twenty charge per nearby enemy per second and forces attacks toward herself',async()=>{
+  const {e,spawn,dummy,has}=await fixture(),u=spawn('clara'),other=dummy(0,{x:15.4,y:14}),enemy=dummy(1,{x:15.8,y:14},{range:5000});
+  enemy.burstTargetId=other.id;enemy.burstIndex=2;e.step(4.9);assert.equal(has(enemy,'taunted'),false);e.step(.1);
+  assert.ok(has(u,'taunt'));assert.ok(has(enemy,'taunted'));assert.equal(e._target(enemy),u);assert.equal(enemy.burstTargetId,null);
+  close(enemy.statuses.find(s=>s.kind==='taunted').until,e.time+7);assert.equal(has(u,'regen'),true);
+});
+
+test('Clara heals exactly twenty-eight quarter-second ticks during one seven-second activation',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('clara'),enemy=dummy(1,{x:15.8,y:14});e.step(5);enemy.x=20;u.hp=100;
+  e.step(.24);close(u.hp,100);e.step(.03);close(u.hp,103);e.step(6.73);close(u.hp,184);
+  assert.equal(u.statuses.some(s=>s.kind==='regen'),false);e.step(.5);close(u.hp,184);
+});
+
+test('Clara Taunt affects flying enemies, respects Predominance and refreshes both old and new victims',async()=>{
+  const {e,spawn,dummy,has}=await fixture(),u=spawn('clara'),flyer=dummy(1,{x:15.8,y:14});flyer.def.combat.movementType='flying';
+  assert.equal(e.canTarget(u,flyer),false);e.step(5);assert.ok(has(flyer,'taunted'));assert.equal(e.tauntTarget(flyer),u);
+  const fresh=dummy(1,{x:15.7,y:14}),immune=dummy(1,{x:15.6,y:14});e.status(immune,'predominance',20);e.step(1);
+  u.memory.charge=100;e._hook('tick',u,0);assert.ok(has(fresh,'taunted'));assert.equal(has(immune,'taunted'),false);
+  close(flyer.statuses.find(s=>s.kind==='taunted').until,e.time+7);assert.equal(u.statuses.filter(s=>s.kind==='regen').length,1);
+});
+
+test('Clara healing respects Bleeding, while Silence and pause freeze new charge and orbital timers',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('clara'),enemy=dummy(1,{x:15.8,y:14});e.step(5);enemy.x=21;u.hp=100;
+  e.status(u,'bleed',1);e.step(.27);close(u.hp,100);e.cleanse(u);e.step(.25);close(u.hp,103);
+  const mage=spawn('unara'),target=dummy(1,{x:16,y:14});for(let i=0;i<12;i++)hit(mage,target);e.status(mage,'silence',10);
+  e.step(.5);assert.equal(mage.memory.orbRemaining,30);e.cleanse(mage);e.setPaused(true);const before=JSON.stringify(e.state);e.step(30);assert.equal(JSON.stringify(e.state),before);
+  e.setPaused(false);e.step(.1);assert.equal(mage.memory.orbRemaining,29);
 });

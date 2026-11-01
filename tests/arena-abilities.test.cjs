@@ -17,7 +17,7 @@ function fixture(catalog,id) {
   const unit=(d,name,side)=>({id:name,def:d,side,lane:1,x:5+(side?.3:0),y:11,radius:.2,hp:d.stats.health,maxHp:d.stats.health,shield:d.stats.shield,maxShield:d.stats.shield,stats:{...d.stats},alive:true,born:0,hits:1,shots:1,memory:{},statuses:[],groupId:name==='u'?'group':'enemy-group',targetId:null});
   const u=unit(def,'u',0),t=unit(targetDef,'t',1);
   t.hp=t.maxHp=1000;
-  const records={statuses:[],damage:[],spawn:[],push:[],fx:[]};
+  const records={statuses:[],damage:[],spawn:[],push:[],fx:[],projectiles:[]};
   const ctx={time:0,units:[u,t],castles:[],teams:[{mana:10,energy:0},{mana:10,energy:0}],random:()=>.01,
     canTarget(source,target){return source.side!==target.side&&isEntityVisible({time:this.time,units:this.units,castles:this.castles,nodes:[]},source.side,target);},
     status(target,kind,duration,magnitude=0,source=null,extra={}){const st={target,kind,duration,magnitude,source,...extra};records.statuses.push(st);target.statuses.push(st);},
@@ -25,6 +25,7 @@ function fixture(catalog,id) {
     damage(source,target,amount,options={}){records.damage.push({source,target,amount,options});target.hp=Math.max(0,target.hp-amount);const killed=target.hp<=0;target.alive=!killed;return {healthDamage:amount,shieldDamage:0,total:amount,killed};},
     heal(target,amount){const n=Math.min(amount,target.maxHp-target.hp);target.hp+=n;return n;},
     loseHealth(target,amount){const lost=Math.min(target.hp,amount);target.hp-=lost;target.alive=target.hp>0;return lost;},
+    abilityProjectile(source,target,damage,options){records.projectiles.push({source,target,damage,options});return true;},
     giveShield(target,amount){target.shield+=amount;target.maxShield=Math.max(target.maxShield,target.shield);return amount;},
     spawn(d,side,p,lane,options={}){records.spawn.push({def:d,side,p,lane,options});const out=[];for(let i=0;i<(options.count||1);i++){const child=unit(d,'child-'+i,side);child.groupId=options.groupId||u.groupId;this.units.push(child);out.push(child);}return out;},
     push(target,from,distance){records.push.push({target,from,distance});},fx(type,x,y,opts){records.fx.push({type,x,y,opts});},
@@ -39,7 +40,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,70);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,73);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);assert.ok(card.attack.interval>0);}}
   assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
@@ -58,6 +59,9 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  pyhsic:({ctx,u,t,rule,records})=>{rule.tick(ctx,u,22);assert.equal(records.damage[0].amount,50);assert.equal(records.damage[1].options.instantKill,true);assert.equal(t.alive,false);},
+  unara:({ctx,u,t,rule,result,records})=>{for(let i=0;i<12;i++)rule.hit(ctx,u,t,result);assert.equal(u.memory.charge,8);assert.equal(u.memory.orbRemaining,30);assert.equal(records.push[0].distance,2);rule.tick(ctx,u,3);assert.equal(records.projectiles.length,30);assert.ok(records.projectiles.every(p=>p.damage===2));assert.equal(u.memory.orbRemaining,0);},
+  clara:({ctx,u,rule,records})=>{rule.tick(ctx,u,5);assert.equal(records.statuses[0].kind,'taunt');assert.equal(records.statuses[0].duration,7);assert.equal(records.statuses[1].kind,'regen');assert.equal(records.statuses[1].amount,3);assert.equal(records.statuses[1].interval,.25);assert.equal(records.statuses[1].duration,7);close(u.memory.charge,0);},
   sylviana:({ctx,u,t,rule,records})=>{t.def={...t.def,type:['Alien']};const hit={damage:50};rule.incoming(ctx,u,t,hit);close(hit.damage,40);rule.death(ctx,u);assert.equal(records.spawn[0].def.id,'sylviana/butterflies');assert.equal(records.spawn[0].options.count,4);},
   'sylviana/butterflies':({ctx,u,t,rule})=>{u.alive=false;t.side=u.side;rule.death(ctx,u);assert.equal(t.hp,1010);assert.equal(t.maxHp,1010);},
   malvaris:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'soulMark');assert.equal(records.statuses[0].duration,2);assert.equal(records.statuses[0].summonFormId,'malvaris/phantomis');rule.unitDeath(ctx,u,t);assert.equal(u.stats.criticalChance,5);t.side=u.side;for(let i=0;i<160;i++)rule.unitDeath(ctx,u,t);assert.equal(u.memory.criticalGrowth,75);assert.equal(u.stats.criticalChance,80);},

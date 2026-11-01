@@ -781,7 +781,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Hər 22 saniyədə 7,500 Karo qarşıdakı rəqibə 50 hasar verər. Onu 20+(Rəqib kartın maksimum canının 10%)%-i şansla yox edər",
+    "trait": "Hər 22 saniyədə qarşısındakı 7,5 karo məsafədə görünən rəqib karta 50 hasar verər. Onu 20 + (rəqibin maksimum canının 10%-i) faiz şansla məhv edər; maksimum şans 100%-dir. Məsələn, maksimum can 200 olduqda şans 40%, 800 və daha çox olduqda 100% olar.",
     "additionalStats": {
       "range": "4000",
       "speed": "1150",
@@ -1529,7 +1529,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Unara hər uğurlu zərbəsində 9 yük toplayar. 100 yükə çatdıqda ultisi aktivləşər: Ətrafındakı rəqibləri 2 karo geriyə itələyərərək və onlara ardıcıl olaraq 30 ədəd sehrli orb atar, hər bir orb 2 hasar verər. (Hücum sürəti: 0,1).",
+    "trait": "Hər uğurlu vuruşunda 9 yük qazanar. 100 yük xərclədikdə yaxın rəqib kartları 2 karo geri itələyər və onlara növbə ilə 30 sehrli orb atar. Hər orb 2 hasar verər və orblar arasında 0,1 saniyə fasilə olar. Orblar yeni yük qazandırmaz.",
     "additionalStats": {
       "range": "2100",
       "speed": "1000",
@@ -1655,7 +1655,7 @@
       "mana": "14",
       "number": "1"
     },
-    "trait": "Yaxındakı hər bir rəqib üçün hər saniyə 20 yük qazanar. 100 yükə çatdıqda ətrafındakı rəqib kartları 7 saniyəlik qışqırdar və hər 0.25 saniyədə 3 can yeniləyər",
+    "trait": "Yaxındakı hər bir görünən rəqib kart üçün hər saniyə 20 yük qazanar. 100 yük xərclədikdə yaxın rəqiblərə 7 saniyəlik Taunt tətbiq edər: rəqiblər hücumlarını yalnız Clara-ya yönəldərlər. Clara həmin 7 saniyə boyunca hər 0,25 saniyədə özünün 3 canını bərpa edər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
