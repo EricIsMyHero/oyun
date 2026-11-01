@@ -29,6 +29,15 @@ const growDamage = (u,amount,max=Infinity) => {u.memory.damageGrowth=Math.min(ma
 const markCriticalKills = (ctx,u,result) => {
   if(result.killed)(u.memory.criticalKills||=[]).push(ctx.time+10);
 };
+const lyraBonus=(ctx,u)=>Math.min(5,Math.floor(Math.max(0,1-u.hp/healthCap(ctx,u))*10+1e-7))*.08;
+const enrageNaar=(ctx,u,crossed=false)=>{
+  const threshold=healthCap(ctx,u)*.4;
+  if(u.hp>=threshold){u.memory.naarArmed=true;return;}
+  if(u.hp<=0||(u.memory.naarArmed===false&&!crossed)||(u.memory.naarCasts||0)>=3)return;
+  u.memory.naarArmed=false;u.memory.naarCasts=(u.memory.naarCasts||0)+1;
+  const cast=()=>{(u.memory.grenadeBursts||=[]).push({remaining:20,clock:0});ctx.fx('wave',u.x,u.y,{side:u.side,radius:radius(u,ctx),color:'#ffc184'});};
+  if(ctx.useAbility)ctx.useAbility(u,cast);else cast();
+};
 
 export const ABILITIES = {
   hammies:{spawn(ctx,u){ctx.status(u,'speedBonus',12,.2,u);}},
@@ -323,7 +332,7 @@ export const ABILITIES = {
     },
   },
   'malvaris/phantomis':{tick(ctx,u){
-    const extra=ctx.units.filter(t=>t.alive&&t!==u&&t.side===u.side&&t.def.id===u.def.id).length;
+    const extra=ctx.units.filter(t=>t.alive&&!t.banished&&t!==u&&t.side===u.side&&t.def.id===u.def.id).length;
     u.stats.damage=u.def.stats.damage*(1+extra*.1);
     u.stats.attackSpeed=u.def.stats.attackSpeed/(1+extra*.05);
   }},
@@ -384,6 +393,33 @@ export const ABILITIES = {
       if(ctx.useAbility)ctx.useAbility(u,cast);else cast();
     }
   }},
+  far:{hit(ctx,u,t,result){
+    if(damageEvent(result)&&!t.isCastle&&!t.isBuilding&&ctx.random()<.08)ctx.banish(u,t,10);
+  }},
+  lyra:{
+    tick(ctx,u){const bonus=lyraBonus(ctx,u);u.stats.damage=u.def.stats.damage*(1+bonus);u.stats.attackSpeed=u.def.stats.attackSpeed/(1+bonus);},
+    attack(ctx,u,t,hit){const bonus=lyraBonus(ctx,u);hit.damage*=1+bonus;hit.haste=(hit.haste||0)+bonus;},
+  },
+  naar:{
+    damaged(ctx,u,s,result){enrageNaar(ctx,u,u.hp+(result.healthDamage||0)>=healthCap(ctx,u)*.4);},
+    tick(ctx,u,dt){
+      enrageNaar(ctx,u);
+      for(const burst of u.memory.grenadeBursts||[]){
+        burst.clock+=dt;
+        while(burst.remaining>0&&burst.clock+1e-9>=.5){
+          burst.clock=Math.max(0,burst.clock-.5);burst.remaining--;
+          const targets=enemies(ctx,u).filter(t=>!t.isBuilding&&ctx.canTarget(u,t))
+            .sort((a,b)=>Math.hypot(a.x-u.x,a.y-u.y)-Math.hypot(b.x-u.x,b.y-u.y)||a.id.localeCompare(b.id));
+          const forced=ctx.tauntTarget?.(u),index=u.memory.grenadeCursor||0;
+          const target=forced?targets.find(t=>t===forced):targets[index%targets.length];
+          u.memory.grenadeCursor=index+1;if(!target)continue;
+          const launch=()=>ctx.abilityProjectile(u,target,4,{range:radius(u,ctx),kind:'grenade',color:'#ffc184',impactSize:'1.25 × 1.25 tiles',deathBlast:{size:2.5,damage:40},cardOnly:true});
+          if(ctx.useAbility)ctx.useAbility(u,launch);else launch();
+        }
+      }
+      u.memory.grenadeBursts=(u.memory.grenadeBursts||[]).filter(b=>b.remaining>0);
+    },
+  },
 };
 
 /* These are author-data gaps, not substitute versions of the native abilities. */

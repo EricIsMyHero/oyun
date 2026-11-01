@@ -23,11 +23,11 @@ async function fixture(){
   return {e,catalog,spawn,dummy,hit,kill,has:(u,kind)=>hasStatus(u,kind,e.time)};
 }
 
-test('fifteen Relic cards and their summons unlock with verified native handlers',async()=>{
+test('eighteen Relic cards and their summons unlock with verified native handlers',async()=>{
   const {catalog}=await fixture();
-  const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','sylviana','sylviana/butterflies','malvaris','malvaris/phantomis','pyhsic','unara','clara','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
+  const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','sylviana','sylviana/butterflies','malvaris','malvaris/phantomis','pyhsic','unara','clara','far','lyra','naar','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
   for(const id of ids){assert.equal(catalog.byId.get(id).ready,true,id);assert.deepEqual(catalog.byId.get(id).reasons,[]);}
-  assert.equal(catalog.cards.filter(c=>c.ready).length,73);
+  assert.equal(catalog.cards.filter(c=>c.ready).length,76);
   assert.equal(catalog.byId.get('format').ready,false);assert.match(catalog.byId.get('format').reasons.join(' '),/not been implemented/);
 });
 
@@ -316,6 +316,7 @@ test('Phantomis bonuses add across allied groups and update when an ally dies',a
   e.step(1/30);for(const u of [a,b,c]){close(u.stats.damage,12);close(u.stats.attackSpeed,1.5/1.1);}close(enemy.stats.damage,10);
   e._fire(a,target);close(target.hp,988);close(a.cooldown,1.5/1.1);a.cooldown=Infinity;
   kill(c);e.step(1/30);for(const u of [a,b]){close(u.stats.damage,11);close(u.stats.attackSpeed,1.5/1.05);}close(a.def.stats.damage,10);
+  const far=spawn('far',1,{x:24.6,y:14});e.banish(far,b);e.step(1/30);close(a.stats.damage,10);
 });
 
 test('Sylviana takes twenty percent less damage from Aliens and creates four flying Butterflies on death',async()=>{
@@ -427,4 +428,91 @@ test('Clara healing respects Bleeding, while Silence and pause freeze new charge
   const mage=spawn('unara'),target=dummy(1,{x:16,y:14});for(let i=0;i<12;i++)hit(mage,target);e.status(mage,'silence',10);
   e.step(.5);assert.equal(mage.memory.orbRemaining,30);e.cleanse(mage);e.setPaused(true);const before=JSON.stringify(e.state);e.step(30);assert.equal(JSON.stringify(e.state),before);
   e.setPaused(false);e.step(.1);assert.equal(mage.memory.orbRemaining,29);
+});
+
+test('Far banishes on eight percent of real hits and returns a victim after ten seconds with twelve-percent damage',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('far'),target=dummy();e.random=()=>.079;hit(u,target);
+  assert.equal(target.banished,true);assert.equal(e.canTarget(u,target),false);close(e.damage(null,target,50,{kind:'spell'}).total,0);
+  close(e.heal(target,50),0);close(target.hp,992);e.step(9.9);assert.ok(target.banished);e.step(.1);
+  assert.equal(target.banished,undefined);close(target.hp,872);assert.ok(Math.hypot(target.x-18,target.y-14)>.6);assert.ok([0,1,2].includes(target.lane));
+  const {isWalkable}=await import('../arena/js/map.mjs');assert.ok(isWalkable(target));
+});
+
+test('banished cards cannot scout, contest pumps, collide or be seen by either team',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('far',1,{x:22.2,y:14}),target=dummy(0,{x:21.5,y:14});
+  const {isEntityVisible,isPointVisible}=await import('../arena/js/vision.mjs');assert.equal(isPointVisible(e.state,0,target),true);
+  e.banish(u,target);assert.equal(isEntityVisible(e.state,0,target),false);assert.equal(isEntityVisible(e.state,1,target),false);assert.equal(isPointVisible(e.state,0,target),false);
+  assert.equal(e.near(e.state.nodes[1],1.25).includes(target),false);e._objectives(6);assert.equal(e.state.nodes[1].owner,1);
+  assert.equal(e.status(target,'poison',3,0,u,{amount:8}),null);assert.equal(e.giveShield(target,10),0);
+});
+
+test('Far return respects Flexibility, can survive the caster death and can be cleansed without the exit penalty',async()=>{
+  for(const mode of ['flexibility','dead','cleanse']){
+    const {e,spawn,dummy,kill}=await fixture(),u=spawn('far'),target=dummy(1,{x:18,y:14},mode==='flexibility'?{flexibility:50}:{});e.random=()=>.4;
+    e.banish(u,target);if(mode==='dead')kill(u);
+    if(mode==='cleanse'){e.cleanse(target);close(target.hp,1000);}else{e.step(mode==='flexibility'?5:10);close(target.hp,880);}
+    assert.equal(target.banished,undefined,mode);assert.ok(Math.hypot(target.x-18,target.y-14)>.6);
+  }
+});
+
+test('Far honors its chance boundary, immunity, pause, deterministic return placement and normal shields',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('far'),target=dummy(1,{x:18,y:14},{shield:100});e.random=()=>.08;hit(u,target);assert.equal(target.banished,undefined);
+  e.status(target,'predominance',20);assert.equal(e.banish(u,target),false);target.statuses=[];e.random=()=>0;e.banish(u,target);target.hp=1000;target.shield=100;
+  e.step(5);e.setPaused(true);const before=JSON.stringify(e.state);e.step(20);assert.equal(JSON.stringify(e.state),before);e.setPaused(false);e.step(5);
+  close(target.hp,964);close(target.shield,16);assert.equal(target.banished,undefined);assert.ok(Math.hypot(target.x-18,target.y-14)>.6);
+});
+
+test('Lyra repeats two single attacks and one three-hit burst with the authored timing',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('lyra'),target=dummy(1,{x:15.6,y:14}),times=[],fire=e._fire.bind(e);u.cooldown=0;
+  e._fire=(source,t)=>{if(source===u)times.push(e.time);return fire(source,t);};e.step(3);
+  close(target.hp,975);assert.equal(u.shots,5);assert.equal(u.attacks,3);assert.equal(u.sequenceIndex,3);
+  for(const [i,offset] of [0,1.1,2.2,2.4,2.6].entries())close(times[i]-times[0],offset);
+  e.step(.8);close(times[5]-times[0],3.7);close(u.def.stats.attackSpeed,.2);close(u.def.stats.delay,.9);assert.equal(u.def.stats.sps,7);
+});
+
+test('Lyra missing-health bonuses are additive, capped and removed by healing without doubling damage',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('lyra'),target=dummy(1,{x:15.6,y:14});u.hp=135;e._hook('tick',u,0);close(u.stats.damage,5.4);
+  e._fire(u,target);close(target.hp,994.6);close(u.cooldown,.2/1.08+.9);
+  u.hp=75;e._hook('tick',u,0);e._fire(u,target);close(target.hp,987.6);close(u.stats.attackSpeed,.2/1.4);
+  u.hp=1;e._hook('tick',u,0);close(u.stats.damage,7);e.heal(u,150);e._hook('tick',u,0);close(u.stats.damage,5);close(u.stats.attackSpeed,.2);
+});
+
+test('Lyra advances the attack cycle when its locked burst target dies',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('lyra'),first=dummy(1,{x:15.6,y:14},{health:5});u.sequenceIndex=2;e._fire(u,first);e._drainDeaths();
+  const next=dummy(1,{x:15.6,y:14});assert.equal(e._target(u),next);assert.equal(u.sequenceIndex,3);assert.equal(e._attackDefinition(u).count,1);close(u.cooldown,.9);
+});
+
+test('Naar launches twenty four-damage grenades over ten seconds with the requested square footprint',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('naar'),a=dummy(1,{x:18,y:14}),b=dummy(1,{x:18.5,y:14}),shots=[],launch=e.abilityProjectile.bind(e);u.hp=67;
+  e.abilityProjectile=(source,t,damage,options)=>{shots.push({time:e.time,damage,options});return launch(source,t,damage,options);};
+  e.step(10.6);assert.equal(shots.length,20);for(const shot of shots){assert.equal(shot.damage,4);assert.equal(shot.options.impactSize,'1.25 × 1.25 tiles');assert.deepEqual(shot.options.deathBlast,{size:2.5,damage:40});}
+  for(let i=1;i<20;i++)close(shots[i].time-shots[i-1].time,.5);close(a.hp,920);close(b.hp,920);assert.equal(u.memory.naarCasts,1);
+  e.step(5);assert.equal(shots.length,20,'remaining below the threshold does not retrigger the ultimate');
+});
+
+test('Naar rearms only after recovering to forty percent and is capped at three activations',async()=>{
+  const {e,spawn}=await fixture(),u=spawn('naar');u.hp=68;e._hook('tick',u,0);assert.equal(u.memory.naarCasts,undefined);
+  e.damage(null,u,.1,{kind:'spell',bypassShield:true});assert.equal(u.memory.naarCasts,1);
+  for(let i=0;i<4;i++){e.heal(u,1000);e.damage(null,u,103,{kind:'spell',bypassShield:true});}
+  assert.equal(u.memory.naarCasts,3);assert.equal(u.memory.grenadeBursts.length,3);
+  const dead=spawn('naar');e.damage(null,dead,1000,{kind:'spell',bypassShield:true});assert.equal(dead.memory.naarCasts,undefined);
+});
+
+test('Naar grenade kills chain forty-damage square explosions once per victim without damaging allies or structures',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('naar'),a=dummy(1,{x:18,y:14},{health:4}),b=dummy(1,{x:19.2,y:14},{health:35}),c=dummy(1,{x:20.4,y:14}),friend=dummy(0,{x:18.2,y:14}),building=dummy(1,{x:19,y:14});building.isBuilding=true;
+  e.abilityProjectile(u,a,4,{range:6,kind:'grenade',impactSize:'1.25 × 1.25 tiles',deathBlast:{size:2.5,damage:40},cardOnly:true});e._projectiles(1);e._drainDeaths();
+  assert.equal(a.alive,false);assert.equal(b.alive,false);close(c.hp,960);close(friend.hp,1000);close(building.hp,1000);
+  e.deaths.push({u:b,killer:u,deathBlast:{size:2.5,damage:40}});e._drainDeaths();close(c.hp,960);
+  assert.equal(e.state.effects.filter(f=>f.type==='blastArea'&&f.width===2.5).length,2);
+});
+
+test('Naar basic attacks preserve the original one-tile blast and do not trigger the ultimate death chain',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('naar'),a=dummy(1,{x:18,y:14},{health:4}),b=dummy(1,{x:19.2,y:14});e._fire(u,a);e._projectiles(1);e._drainDeaths();
+  assert.equal(a.alive,false);close(b.hp,1000);assert.equal(u.def.combat.impactSize,'1 × 1 tiles');assert.equal(e.state.effects.some(f=>f.type==='blastArea'),false);
+});
+
+test('Naar burst timers and Lyra attacks freeze during pause, while Silence pauses new grenade throws',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('naar');dummy(1,{x:18,y:14});u.hp=67;e.step(.5);assert.equal(u.memory.grenadeBursts[0].remaining,19);
+  e.status(u,'silence',2);e.step(1);assert.equal(u.memory.grenadeBursts[0].remaining,19);e.cleanse(u);
+  const lyra=spawn('lyra');lyra.cooldown=0;e.setPaused(true);const before=JSON.stringify(e.state);e.step(20);assert.equal(JSON.stringify(e.state),before);
 });

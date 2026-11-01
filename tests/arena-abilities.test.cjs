@@ -17,7 +17,7 @@ function fixture(catalog,id) {
   const unit=(d,name,side)=>({id:name,def:d,side,lane:1,x:5+(side?.3:0),y:11,radius:.2,hp:d.stats.health,maxHp:d.stats.health,shield:d.stats.shield,maxShield:d.stats.shield,stats:{...d.stats},alive:true,born:0,hits:1,shots:1,memory:{},statuses:[],groupId:name==='u'?'group':'enemy-group',targetId:null});
   const u=unit(def,'u',0),t=unit(targetDef,'t',1);
   t.hp=t.maxHp=1000;
-  const records={statuses:[],damage:[],spawn:[],push:[],fx:[],projectiles:[]};
+  const records={statuses:[],damage:[],spawn:[],push:[],fx:[],projectiles:[],banish:[]};
   const ctx={time:0,units:[u,t],castles:[],teams:[{mana:10,energy:0},{mana:10,energy:0}],random:()=>.01,
     canTarget(source,target){return source.side!==target.side&&isEntityVisible({time:this.time,units:this.units,castles:this.castles,nodes:[]},source.side,target);},
     status(target,kind,duration,magnitude=0,source=null,extra={}){const st={target,kind,duration,magnitude,source,...extra};records.statuses.push(st);target.statuses.push(st);},
@@ -26,6 +26,7 @@ function fixture(catalog,id) {
     heal(target,amount){const n=Math.min(amount,target.maxHp-target.hp);target.hp+=n;return n;},
     loseHealth(target,amount){const lost=Math.min(target.hp,amount);target.hp-=lost;target.alive=target.hp>0;return lost;},
     abilityProjectile(source,target,damage,options){records.projectiles.push({source,target,damage,options});return true;},
+    banish(source,target,duration){records.banish.push({source,target,duration});return true;},
     giveShield(target,amount){target.shield+=amount;target.maxShield=Math.max(target.maxShield,target.shield);return amount;},
     spawn(d,side,p,lane,options={}){records.spawn.push({def:d,side,p,lane,options});const out=[];for(let i=0;i<(options.count||1);i++){const child=unit(d,'child-'+i,side);child.groupId=options.groupId||u.groupId;this.units.push(child);out.push(child);}return out;},
     push(target,from,distance){records.push.push({target,from,distance});},fx(type,x,y,opts){records.fx.push({type,x,y,opts});},
@@ -40,7 +41,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,73);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,76);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);assert.ok(card.attack.interval>0);}}
   assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
@@ -59,6 +60,9 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  far:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.banish[0].duration,10);assert.equal(records.banish[0].target,t);ctx.random=()=>.08;rule.hit(ctx,u,t,result);assert.equal(records.banish.length,1);},
+  lyra:({ctx,u,t,rule})=>{u.hp=u.maxHp*.5;rule.tick(ctx,u);close(u.stats.damage,7);close(u.stats.attackSpeed,.2/1.4);const hit={damage:5};rule.attack(ctx,u,t,hit);close(hit.damage,7);close(hit.haste,.4);u.hp=u.maxHp;rule.tick(ctx,u);close(u.stats.damage,5);},
+  naar:({ctx,u,rule,records})=>{u.hp=u.maxHp*.3;rule.tick(ctx,u,10);assert.equal(records.projectiles.length,20);assert.ok(records.projectiles.every(p=>p.damage===4&&p.options.impactSize==='1.25 × 1.25 tiles'&&p.options.deathBlast.size===2.5));for(let i=0;i<4;i++){u.hp=u.maxHp;rule.tick(ctx,u,0);u.hp=u.maxHp*.3;rule.tick(ctx,u,0);}assert.equal(u.memory.naarCasts,3);},
   pyhsic:({ctx,u,t,rule,records})=>{rule.tick(ctx,u,22);assert.equal(records.damage[0].amount,50);assert.equal(records.damage[1].options.instantKill,true);assert.equal(t.alive,false);},
   unara:({ctx,u,t,rule,result,records})=>{for(let i=0;i<12;i++)rule.hit(ctx,u,t,result);assert.equal(u.memory.charge,8);assert.equal(u.memory.orbRemaining,30);assert.equal(records.push[0].distance,2);rule.tick(ctx,u,3);assert.equal(records.projectiles.length,30);assert.ok(records.projectiles.every(p=>p.damage===2));assert.equal(u.memory.orbRemaining,0);},
   clara:({ctx,u,rule,records})=>{rule.tick(ctx,u,5);assert.equal(records.statuses[0].kind,'taunt');assert.equal(records.statuses[0].duration,7);assert.equal(records.statuses[1].kind,'regen');assert.equal(records.statuses[1].amount,3);assert.equal(records.statuses[1].interval,.25);assert.equal(records.statuses[1].duration,7);close(u.memory.charge,0);},

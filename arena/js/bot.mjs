@@ -5,7 +5,7 @@ import { visibilitySources, isEntityVisible } from './vision.mjs';
 const airTarget = def => ['air','both'].includes(def.combat?.targets);
 const ranged = def => def.combat?.attackType === 'ranged';
 const frontline = def => def.combat?.attackType==='melee' && num(def.stats.health)+num(def.stats.shield)>=230;
-const living = unit => unit.alive && !unit.engulfedBy;
+const living = unit => unit.alive && !unit.engulfedBy && !unit.banished;
 const shuffled = (values,random) => {
   const copy=[...values];
   for(let i=copy.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]];}

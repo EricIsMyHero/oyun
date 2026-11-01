@@ -584,7 +584,7 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "8% şansla rəqibi mistik bir boyuta ışınlayar. Rəqib kart orada 10 saniyə qalar. Daha sonra başqa bir yerdən çıxar, çıxdıqda maksimum canının 12%-i qədər hasar alar.",
+    "trait": "Hər uğurlu vuruşunda 8% şansla rəqib kartı 10 saniyəlik başqa ölçüyə göndərər. Kart həmin müddətdə döyüş meydanından yox olar. Müddət bitdikdə istənilən kolidorda başqa boş mövqeyə qayıdar və maksimum canının 12%-i qədər hasar alar.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -844,7 +844,7 @@
       "mana": "10",
       "number": "1"
     },
-    "trait": "Naar-ın canı 40%-in altına düşdükdə hiddətlənərək ətrafına 10 saniyə boyunca 20 ədəd nar atar. Bu narlar hər biri 4 hasar verər. Bu hücum nəticəsində ölən rəqib kartlar partlayaraq yaxınlıqdakı digər düşmənlərə 40 hasar verər.",
+    "trait": "Canı 40%-dən aşağı düşəndə 10 saniyə ərzində 20 nar atar; hər nar 1,25 × 1,25 karo sahəsində 4 hasar verər. Bu ulti nəticəsində məhv olan rəqib kartlar partlayaraq 2,5 × 2,5 karo sahəsindəki digər rəqib kartlara 40 hasar verər və zəncirvari partlayış yarada bilər. Canı 40%-ə və ya yuxarıya qalxıb yenidən aşağı düşəndə ulti təkrar aktivləşər; bir Naar maksimum 3 dəfə ulti aktivləşdirə bilər.",
     "additionalStats": {
       "range": "6000",
       "speed": "800",
@@ -902,12 +902,12 @@
       "shield": "25",
       "damage": "5",
       "sps": "7",
-      "attackSpeed": "0.70s",
-      "delay": "-",
+      "attackSpeed": "0.20s",
+      "delay": "0.90s",
       "mana": "3",
       "number": "1"
     },
-    "trait": "Canı hər 10% azaldıqda +8% bonus hasar və saldırı hızı qazanar (Max 40%). Hər 3-cü vuruşu ekstra 2 dəfə təkrarlanar (3x6)",
+    "trait": "Hazırda itirdiyi canın hər 10%-i üçün +8% Hasar və Hücum Sürəti bonusu qazanar (maksimum +40%). Hücum dövrü: ilk iki hücumun hərəsində bir dəfə 5 hasar, üçüncü hücumda isə ardıcıl 3 dəfə 5 hasar verər. Hücumlar arasındakı əsas interval 0,20 saniyə, hücumun sonundakı gecikmə 0,90 saniyədir.",
     "additionalStats": {
       "range": "1000",
       "speed": "1100",

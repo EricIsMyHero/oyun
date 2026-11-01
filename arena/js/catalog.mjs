@@ -36,7 +36,8 @@ function normalizeCard(raw,parent=null,id=raw.id||slugify(raw.name)) {
   if(id==='kai'){
     parsed={count:1,damage:9};
     sequence=[9,9,21].map(damage=>({count:1,damage,interval:num(raw.stats.attackSpeed),delay:num(raw.stats.delay)}));
-  }else if(id==='tribe')parsed={count:1,damage:4};
+  }else if(id==='lyra')sequence=[1,1,3].map(count=>({count,damage:parsed.damage,interval:num(raw.stats.attackSpeed),delay:num(raw.stats.delay)}));
+  else if(id==='tribe')parsed={count:1,damage:4};
   else if(!parsed)modeReasons.push('The slash-separated attack modes are not fully defined for this combat profile.');
   stats.damage=parsed?.damage||0;
   const attack={...(parsed||{count:1,damage:0}),interval:num(raw.stats?.attackSpeed),delay:num(raw.stats?.delay)};

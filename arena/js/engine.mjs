@@ -1,5 +1,5 @@
 import { RULES, clamp, num, burst, energyForMana } from './rules.mjs';
-import { MAP, routeFor, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
+import { MAP, routeFor, routeLength, pointOnRoute, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
 import { NEGATIVE_STATUSES as NEGATIVE, statusKind, statusParameters, statValue, statModifiers } from './statuses.mjs';
@@ -57,7 +57,7 @@ export class ArenaEngine {
     this.state.effects.push({id:`fx-${++this.serial}`,type,x,y,born:this.time,until:this.time+(options.duration??.65),...options});
     if(this.state.effects.length>300)this.state.effects.splice(0,this.state.effects.length-300);
   }
-  near(point,radius,filter=null){return this.units.filter(u=>u.alive&&!u.engulfedBy&&distance(u,point)<=radius+(u.radius||0)&&(!filter||filter(u)));}
+  near(point,radius,filter=null){return this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&distance(u,point)<=radius+(u.radius||0)&&(!filter||filter(u)));}
   ability(u){return ABILITIES[u.def?.id] || ABILITIES[u.def?.rootId] || null;}
   _hook(name,u,...args){
     if(name!=='spawn'&&(has(u,'silence',this.time)||has(u,'imprisonment',this.time)))return;
@@ -190,7 +190,7 @@ export class ArenaEngine {
   _applySpell(side,spell,point,id){
     const raw=spell.raw.stats,shape=this._shape(spell);
     const source={id:`spell-${++this.serial}`,side,x:point.x,y:point.y,isSpell:true,stats:{},statuses:[]};
-    const targets=this.units.filter(u=>u.alive&&this._inside(u,point,shape));
+    const targets=this.units.filter(u=>u.alive&&!u.banished&&this._inside(u,point,shape));
     const enemies=targets.filter(u=>u.side!==side),allies=targets.filter(u=>u.side===side&&!u.isBuilding);
     const castles=this.castles.filter(u=>u.alive&&u.side!==side&&this._inside(u,point,shape));
     const visualRadius=shape.shape==='global'?12:shape.radius||Math.max(shape.width||0,shape.height||0)/2;
@@ -247,6 +247,7 @@ export class ArenaEngine {
   }
   status(target,kind,duration,magnitude=0,source=null,extra={}){
     kind=statusKind(kind);
+    if(target?.banished&&kind!=='cleanse')return null;
     // A successful killing blow can mark its victim before the death queue runs.
     if(!target?.alive&&!(target&&kind==='soulMark'&&extra.onLethalHit&&!target.memory?.deathResolved))return null;
     if(extra.groundOnly&&target.def?.combat?.groundEffectImmune)return null;
@@ -275,9 +276,43 @@ export class ArenaEngine {
   _capVitals(u){u.effectiveMaxHp=this.maxHealth(u);u.effectiveMaxShield=this.maxShield(u);u.hp=Math.min(u.hp,u.effectiveMaxHp);u.shield=Math.min(u.shield,u.effectiveMaxShield);}
   cleanse(target){
     target.statuses=target.statuses.filter(s=>!NEGATIVE.has(s.kind));
+    if(target.banished)this.returnBanished(target,false);
     if(target.engulfedBy)this.releaseEngulfed(target);
     if(target.memory.conversion)this._restoreConversion(target);
     this._capVitals(target);
+  }
+  banish(source,target,duration=10){
+    if(!source?.alive||!target?.alive||target.banished||target.isCastle||target.isBuilding||!this._canHit(source,target))return false;
+    const effect=this.status(target,'imprisonment',duration,0,source,{banish:true});if(!effect)return false;
+    target.memory.banish={origin:{x:target.x,y:target.y},sourceId:source.id};target.banished=true;
+    target.targetId=null;target.burstTargetId=null;target.burstIndex=0;target.moving=false;
+    this.fx('portal',target.x,target.y,{side:source.side,color:'#b8a3ff',duration:.7});return true;
+  }
+  returnBanished(target,penalty=true){
+    const memory=target.memory.banish;if(!target.banished||!memory)return;
+    delete target.banished;delete target.memory.banish;
+    target.statuses=target.statuses.filter(s=>!s.banish);
+    if(!target.alive)return;
+    let chosen=null,fallback=null;
+    for(let i=0;i<120;i++){
+      const lane=Math.floor(this.random()*MAP.routes.length),length=routeLength(MAP.routes[lane]);
+      const point=pointOnRoute(lane,target.side,this.random()*length);
+      if(distance(point,memory.origin)<=target.radius*2+.1||this.castles.some(c=>c.alive&&distance(c,point)<=c.radius+target.radius+.05))continue;
+      if(this.units.some(u=>u!==target&&u.alive&&!u.banished&&!u.engulfedBy&&u.isBuilding&&distance(u,point)<u.radius+target.radius))continue;
+      fallback||={...point,lane};
+      if(this.units.some(u=>u!==target&&u.alive&&!u.banished&&!u.engulfedBy&&u.def.combat.movementType!=='flying'&&distance(u,point)<u.radius+target.radius))continue;
+      chosen={...point,lane};break;
+    }
+    if(!chosen&&!fallback)for(let lane=0;lane<MAP.routes.length&&!fallback;lane++)for(const fraction of [.25,.5,.75]){
+      const point=pointOnRoute(lane,target.side,routeLength(MAP.routes[lane])*fraction);
+      if(distance(point,memory.origin)>target.radius*2+.1&&!this.units.some(u=>u!==target&&u.alive&&u.isBuilding&&distance(u,point)<u.radius+target.radius)){fallback={...point,lane};break;}
+    }
+    chosen||=fallback;
+    Object.assign(target,chosen);target.route=routeFor(target.lane,target.side);this._resetWaypoint(target);
+    target.targetId=null;target.burstTargetId=null;
+    this.fx('portal',target.x,target.y,{side:target.side,color:'#b8a3ff',duration:.7});
+    if(penalty){const source=this.units.find(u=>u.id===memory.sourceId)||this.statusSources.get(memory.sourceId)||null;
+      this.damage(source,target,this.maxHealth(target)*.12,{kind:'ability',secondary:true,accuracyChecked:true});}
   }
   captivesOf(host){return this.units.filter(u=>u.alive&&u.engulfedBy===host.id);}
   engulf(host,target){
@@ -339,7 +374,7 @@ export class ArenaEngine {
     u.route=routeFor(u.lane,u.side);this._resetWaypoint(u);
   }
   heal(target,amount,source=null,options={}){
-    if(!target?.alive||amount<=0||has(target,'bleed',this.time)||has(target,'healBlock',this.time)||has(target,'suppression',this.time))return 0;
+    if(!target?.alive||target.banished||amount<=0||has(target,'bleed',this.time)||has(target,'healBlock',this.time)||has(target,'suppression',this.time))return 0;
     if(source&&!options.passive&&this._abilityMiss(source,target))return 0;
     const burn=has(target,'burn',this.time)?.8:1;
     const value=Math.min(this.maxHealth(target)-target.hp,amount*(1+this.statValue(target,'healBonus')/100)*burn);
@@ -356,7 +391,7 @@ export class ArenaEngine {
     return lost;
   }
   giveShield(target,amount,source=this.abilityContext?.source||null){
-    if(!target?.alive||amount<=0||has(target,'suppression',this.time))return 0;
+    if(!target?.alive||target.banished||amount<=0||has(target,'suppression',this.time))return 0;
     if(source&&this._abilityMiss(source,target))return 0;
     const {flat,factor}=statModifiers(target,'shield',this.time);if(factor<=0)return 0;
     const value=amount;target.maxShield=Math.max(target.maxShield,(target.shield+value)/factor+flat);target.shield+=value;
@@ -364,7 +399,7 @@ export class ArenaEngine {
   }
   damage(source,target,amount,options={}){
     const empty={healthDamage:0,shieldDamage:0,total:0,killed:false};
-    if(!target?.alive||!(amount>0)||this.damageDepth>16)return empty;
+    if(!target?.alive||target.banished||!(amount>0)||this.damageDepth>16)return empty;
     if(source&&(source.engulfedBy||has(source,'imprisonment',this.time)||has(source,'airborne',this.time)))return empty;
     if(target.engulfedBy&&source?.id!==target.engulfedBy)return empty;
     if(has(target,'imprisonment',this.time)||has(target,'untouchable',this.time)||has(target,'untargetable',this.time))return empty;
@@ -410,7 +445,7 @@ export class ArenaEngine {
       if(source?.alive&&source!==target&&!hit.reflected&&has(target,'reflection',this.time))this.damage(target,source,result.total,{kind:'reflect',secondary:true,reflected:true,friendlyFire:true});
       else if(target.buildingKind==='reflector'&&source?.alive&&!hit.secondary)this.damage(target,source,result.total*(source.isCastle?.4:.6),{kind:'reflect',secondary:true,reflected:true});
     }
-    if(target.hp<=0&&target.alive){target.alive=false;this.deaths.push({u:target,killer:source});}
+    if(target.hp<=0&&target.alive){target.alive=false;this.deaths.push({u:target,killer:source,deathBlast:hit.deathBlast});}
     this.damageDepth--;
     return result;
   }
@@ -428,7 +463,7 @@ export class ArenaEngine {
     u.waypoint=best.index;
   }
   _canHit(u,target){
-    if(!target?.alive||target.engulfedBy||!this.isEnemy(u,target))return false;
+    if(!target?.alive||target.engulfedBy||target.banished||!this.isEnemy(u,target))return false;
     if(has(target,'untargetable',this.time)||has(target,'imprisonment',this.time))return false;
     const layers=u.def?.combat?.targets||'both';
     if(layers==='none')return false;
@@ -455,7 +490,9 @@ export class ArenaEngine {
     const sources=visibilitySources(this.state,u.side);
     const taunter=this.tauntTarget(u,sources);
     if(taunter){if(u.burstTargetId&&u.burstTargetId!==taunter.id){u.burstTargetId=null;u.burstIndex=0;}return taunter;}
-    if(u.burstTargetId){const locked=this.units.concat(this.castles).find(t=>t.id===u.burstTargetId);if(this._legalTarget(u,locked,sources))return locked;u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
+    if(u.burstTargetId){const locked=this.units.concat(this.castles).find(t=>t.id===u.burstTargetId);if(this._legalTarget(u,locked,sources))return locked;
+      if(u.burstIndex>0&&u.def.attack?.sequence?.length)u.sequenceIndex++;
+      u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
     const reach=this._range(u);
     const candidates=this.units.filter(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius);
     candidates.sort((a,b)=>distance(u,a)-distance(u,b)||a.id.localeCompare(b.id));
@@ -636,12 +673,12 @@ export class ArenaEngine {
     this.state.projectiles.push(shot);
     return shot;
   }
-  abilityProjectile(source,target,damage,{range,kind='orb',color='#c5a7ff'}={}){
+  abilityProjectile(source,target,damage,{range,kind='orb',color='#c5a7ff',impactSize=null,deathBlast=null,cardOnly=false}={}){
     if(!source?.alive||!this._legalTarget(source,target)||this._abilityMiss(source,target))return false;
     const reach=Math.max(0,num(range))+(target.radius||0);
     if(distance(source,target)>reach+EPS)return false;
-    const profile={attackType:'ranged',attackWidth:500,attackDistance:reach*1000,attackShape:'single',multiTarget:false,maxTargets:1};
-    const shot=this._projectile(source,target,{damage,kind:'ability',secondary:true,critical:false,accuracyChecked:true},profile);
+    const profile={attackType:'ranged',attackWidth:500,attackDistance:reach*1000,attackShape:impactSize?'square':'single',multiTarget:!!impactSize,maxTargets:impactSize?null:1,impactSize,cardOnly};
+    const shot=this._projectile(source,target,{damage,kind:'ability',secondary:true,critical:false,accuracyChecked:true,deathBlast},profile);
     shot.homing=true;shot.ability=true;shot.kind=kind;shot.color=color;
     return true;
   }
@@ -726,10 +763,13 @@ export class ArenaEngine {
     const dimensions=String(shot.profile.impactSize||'').match(/[\d.]+/g)?.map(Number);
     const width=dimensions?.[0]??shot.width,height=dimensions?.[1]??width;
     const shape={shape:'rect',width,height};
-    const targets=this.units.concat(this.castles).filter(t=>this._canHit(shot.source,t)&&this._inside(t,point,shape));
+    const targets=this.units.concat(this.castles).filter(t=>this._canHit(shot.source,t)&&(!shot.profile.cardOnly||!t.isBuilding&&!t.isCastle)&&this._inside(t,point,shape));
     const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
-    for(const t of targets.slice(0,limit??targets.length))this._resolveHit(shot.source,t,shot.hit);
+    for(const t of targets.slice(0,limit??targets.length)){
+      if(shot.ability)this.damage(shot.source,t,shot.hit.damage,shot.hit);else this._resolveHit(shot.source,t,shot.hit);
+    }
     this.fx('explosion',point.x,point.y,{side:shot.side,radius:Math.max(width,height)/2,duration:.7});
+    if(shot.kind==='grenade')this.fx('blastArea',point.x,point.y,{side:shot.side,width,height,color:'#ffbe87'});
   }
   _statuses(u,dt){
     for(const s of u.statuses){
@@ -742,6 +782,7 @@ export class ArenaEngine {
       if(s.kind==='frozen'&&s.until<=this.time+EPS)this.status(u,'slow',3,.25,this._sourceFor(s),{scheduled:true});
     }
     u.statuses=u.statuses.filter(s=>s.until>this.time+EPS);
+    if(u.banished&&!u.statuses.some(s=>s.banish))this.returnBanished(u);
     if(u.memory.conversion&&!has(u,'conversion',this.time))this._restoreConversion(u);
     if(!u.alive)return;
     this._capVitals(u);
@@ -804,7 +845,7 @@ export class ArenaEngine {
     }
   }
   _separation(){
-    const bodies=this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.isBuilding&&u.def.combat.movementType!=='flying');
+    const bodies=this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.isBuilding&&u.def.combat.movementType!=='flying');
     for(let i=0;i<bodies.length;i++)for(let j=i+1;j<bodies.length;j++){
       const a=bodies[i],b=bodies[j],min=(a.radius+b.radius)*.72;
       let dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
@@ -820,7 +861,7 @@ export class ArenaEngine {
   _drainDeaths(){
     let processed=0;
     while(this.deaths.length&&processed++<2048){
-      const {u,killer}=this.deaths.shift();if(u.memory.deathResolved)continue;u.memory.deathResolved=true;
+      const {u,killer,deathBlast}=this.deaths.shift();if(u.memory.deathResolved)continue;u.memory.deathResolved=true;
       if(u.isCastle){this.fx('explosion',u.x,u.y,{side:u.side,radius:2,duration:1.8});continue;}
       if(!u.isBuilding)for(const observer of [...this.units])if(observer.alive&&observer!==u&&this.ability(observer)?.unitDeath)this._hook('unitDeath',observer,u,killer);
       // Release is structural: Silence cannot leave survivors trapped forever.
@@ -834,6 +875,12 @@ export class ArenaEngine {
         }
       }
       this._hook('death',u,killer);
+      if(deathBlast&&killer&&!u.isBuilding){
+        const shape={shape:'rect',width:deathBlast.size,height:deathBlast.size};
+        for(const enemy of this.units.filter(t=>t.alive&&!t.banished&&!t.engulfedBy&&!t.isBuilding&&this.isEnemy(killer,t)&&this._inside(t,u,shape)))
+          this.damage(killer,enemy,deathBlast.damage,{kind:'ability',secondary:true,accuracyChecked:true,deathBlast});
+        this.fx('blastArea',u.x,u.y,{side:killer.side,width:deathBlast.size,height:deathBlast.size,color:'#ffad78'});
+      }
       if(u.buildingKind==='dark-orb'){
         const raw=u.spell.raw.stats;
         for(const enemy of this.units.filter(v=>v.alive&&v.side!==u.side))this.damage(u,enemy,num(raw.damageToCard),{kind:'spell',secondary:true});

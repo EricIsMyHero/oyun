@@ -170,7 +170,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **73 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **76 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -178,10 +178,10 @@ after the first successful hit; their poison continues and keeps its original
 caster attribution. Giga Bomb deals its immediate source damage and then ten
 one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
 
-Fifteen Relic roots now have their native abilities implemented: **Stacy**,
+Eighteen Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,
 **Bloodraider**, **Shine**, **Avalith**, **Malvaris**, **Sylviana**, **Pyhsic**,
-**Unara** and **Clara**.
+**Unara**, **Clara**, **Far**, **Lyra** and **Naar**.
 
 - Stacy adds four one-second Burn ticks of eight damage after each successful
   hit. Independent packets stack and continue after her death. Below 10% health,
@@ -263,13 +263,36 @@ Fifteen Relic roots now have their native abilities implemented: **Stacy**,
   Burn and healing bonuses retain their normal effects. Taunt changes attack
   targets rather than immobilizing enemies. Recasting refreshes existing victims
   and affects newly nearby enemies without stacking duplicate regeneration.
+- Far has an 8% chance on a successful hit to banish an enemy unit for ten
+  seconds. The victim cannot move, attack, take combat damage, receive normal
+  buffs, scout, contest wells, block bodies or appear on either team's map.
+  On return it moves to another legal position on any of the three corridors,
+  using the match's seeded randomness and retaining its team and formation.
+  It takes 12% of its current maximum health as damage through normal shields.
+  Flexibility shortens banishment, Predominance prevents it, and Cleanse returns
+  the unit immediately without the exit penalty. The applied effect survives
+  the caster's death; pause freezes its timer.
+- Lyra cycles **5 → 5 → 3 × 5**. Every mode uses a 0.20s hit interval and 0.90s
+  end delay, producing five base strikes in a 3.70s repeating cycle. The triple
+  burst locks one target; losing that target cancels the burst and advances the
+  cycle. Each currently missing 10% health adds 8% damage and attack speed,
+  capped at +40%; healing removes the corresponding bonus. Base source DPS
+  remains seven and is reference data.
+- Naar activates below 40% health and throws twenty four-damage grenades over
+  ten active seconds, one every 0.5 seconds. Grenades use a **1.25 × 1.25-tile**
+  square. Ultimate victims explode for 40 damage in a **2.5 × 2.5-tile** square;
+  those kills can chain, with each victim exploding once. Friends and structures
+  are excluded. Healing to at least 40% rearms the trigger; one Naar can activate
+  at most **three times total**. Overlapping activations retain their own twenty
+  throws. Silence pauses new throws, while pause freezes all combat. The normal
+  120-damage shot retains its original 1 × 1-tile impact and has no death chain.
 
 The live unit inspector displays native stat growth as well as status modifiers,
 so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 65 locked entries explain an undefined
+defined for this simulator. The remaining 62 locked entries explain an undefined
 rule, missing combat data, or an unimplemented native ability. Required child
 forms must also be complete; removing a lock never substitutes invented values.
 

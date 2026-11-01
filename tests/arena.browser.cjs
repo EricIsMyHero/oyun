@@ -99,14 +99,18 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,73);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara']){
+    assert.equal(coverage.ready,76);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
     }
     await page.locator('[data-inspect-card="demotron"]').click();
     assert.match(await page.locator('#inspector .native-ability[lang="az"]').first().textContent(),/100 can.*10 can.*90 can.*9 can/);
+    await page.locator('#inspector-close').click();
+    await page.locator('[data-inspect-card="lyra"]').click();
+    assert.equal(await page.locator('#inspector [data-stat="attackSpeed"] strong').textContent(),'0.20s');
+    assert.equal(await page.locator('#inspector [data-stat="delay"] strong').textContent(),'0.90s');
     await page.locator('#inspector-close').click();
     await page.locator(`[data-inspect-card="${coverage.locked.id}"]`).click();
     assert.ok(await page.locator('#inspector').isVisible());
@@ -372,6 +376,43 @@ async function minimapPixelAt(page,point) {
       e.step(22);e.setPaused(true);return{alive:target.alive,hp:target.hp,hits:source.hits};
     });
     assert.deepEqual(execution,{alive:false,hp:0,hits:0});await page.evaluate(()=>{delete window.orbFixture;arenaApp.startMatch();});await settleFrame(page);
+
+    const portal=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.state.effects=[];e.random=()=>.079;
+      const def=structuredClone(arenaApp.catalog.byId.get('far'));def.stats.speed=0;def.stats.criticalChance=0;
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;
+      const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='portal-target';
+      Object.assign(dummy.stats,{health:1000,shield:0,speed:0,damage:0,range:0,dodge:0,healrecovery:0});dummy.combat.attackType='none';
+      const [target]=e.spawn(dummy,1,{x:15.6,y:14},1,{count:1});e._resolveHit(source,target,{kind:'attack',damage:8});e.step(.2);e.setPaused(true);arenaApp.renderer.focusAt(source);
+      arenaApp.renderer.shotTimes.delete(target.id);window.portalFixture={source,target,dummy};return{banished:target.banished,hp:target.hp};
+    });
+    assert.deepEqual(portal,{banished:true,hp:992});await settleFrame(page);
+    assert.equal(await page.evaluate(()=>arenaApp.renderer.shotTimes.has(portalFixture.target.id)),false);
+    await page.screenshot({path:'/tmp/oyun-arena-far-portal.png',fullPage:true});screenshots.push('/tmp/oyun-arena-far-portal.png');
+    const returned=await page.evaluate(()=>{const e=arenaApp.engine;e.setPaused(false);e.step(9.8);e.setPaused(true);const t=portalFixture.target;return{absent:!!t.banished,hp:t.hp,moved:Math.hypot(t.x-15.6,t.y-14)>.6,lane:t.lane};});
+    assert.equal(returned.absent,false);assert.equal(returned.hp,872);assert.ok(returned.moved);assert.ok([0,1,2].includes(returned.lane));
+    const combo=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.state.units=[];e.state.projectiles=[];e.state.effects=[];e.setPaused(false);
+      const def=structuredClone(arenaApp.catalog.byId.get('lyra'));def.stats.speed=0;def.stats.criticalChance=0;
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1}),[target]=e.spawn(portalFixture.dummy,1,{x:15.6,y:14},1,{count:1});
+      e.step(3);e.setPaused(true);return{hp:target.hp,hits:source.hits,attacks:source.attacks,sequence:source.def.attack.sequence.map(mode=>mode.count)};
+    });
+    assert.deepEqual(combo,{hp:975,hits:5,attacks:3,sequence:[1,1,3]});
+    const grenades=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.state.units=[];e.state.projectiles=[];e.state.effects=[];e.setPaused(false);
+      const def=structuredClone(arenaApp.catalog.byId.get('naar'));def.stats.speed=0;
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.hp=67;source.cooldown=Infinity;
+      const targets=[18,18.5].map(x=>e.spawn(portalFixture.dummy,1,{x,y:14},1,{count:1})[0]);e.step(.6);e.setPaused(true);arenaApp.renderer.focusAt(source);window.grenadeFixture={source,targets};
+      return{casts:source.memory.naarCasts,remaining:source.memory.grenadeBursts[0].remaining,kind:e.state.projectiles[0]?.kind};
+    });
+    assert.deepEqual(grenades,{casts:1,remaining:19,kind:'grenade'});await settleFrame(page);
+    await page.screenshot({path:'/tmp/oyun-arena-naar-grenade.png',fullPage:true});screenshots.push('/tmp/oyun-arena-naar-grenade.png');
+    const detonated=await page.evaluate(()=>{
+      const e=arenaApp.engine,{source,targets}=grenadeFixture;e.setPaused(false);e.step(10);e.setPaused(true);
+      const hp=targets.map(t=>t.hp);for(let i=0;i<4;i++){e.heal(source,1000);e.damage(null,source,103,{kind:'spell',bypassShield:true});}
+      return{hp,casts:source.memory.naarCasts};
+    });
+    assert.deepEqual(detonated,{hp:[920,920],casts:3});await page.evaluate(()=>{delete window.portalFixture;delete window.grenadeFixture;arenaApp.startMatch();});await settleFrame(page);
 
     // A real flyer engages units in its deployed outer lane, then resumes that
     // corridor. Gloop hides captives, reports its count/lifetime, and releases.
