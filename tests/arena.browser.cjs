@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,81);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel']){
+    assert.equal(coverage.ready,84);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -469,6 +469,54 @@ async function minimapPixelAt(page,point) {
     await page.screenshot({path:'/tmp/oyun-arena-raven-lifetime.png',fullPage:true});screenshots.push('/tmp/oyun-arena-raven-lifetime.png');await page.locator('#inspector-close').click();
     await page.evaluate(()=>{delete window.inkFixture;arenaApp.startMatch();});await settleFrame(page);
 
+    {
+      const burstPackets=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.setPaused(false);
+        const def=structuredClone(arenaApp.catalog.byId.get('nortex'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});
+        const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+        const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='mundane-browser-target';dummy.combat.attackType='none';Object.assign(dummy.stats,{health:5000,shield:0,damage:0,range:0,speed:0,dodge:0,healrecovery:0});
+        const [target]=e.spawn(dummy,1,{x:18,y:14},1,{count:1}),packets=[],damage=e.damage.bind(e);
+        e.damage=(u,t,amount,options)=>{const result=damage(u,t,amount,options);if(u===source&&t===target&&result.total>0)packets.push(result.total);return result;};
+        e.step(3.05);source.cooldown=Infinity;e.setPaused(true);arenaApp.renderer.focusAt(source);window.mundaneFixture={source,target,dummy};return packets;
+      });
+      assert.deepEqual(burstPackets,[5,7,9,5,7,9]);await settleFrame(page);
+      const nortexPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(nortexPoint.x,nortexPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.match(await page.locator('[data-nortex-burst]').textContent(),/5 → 7 → 9/);
+      await page.screenshot({path:'/tmp/oyun-arena-nortex-burst.png',fullPage:true});screenshots.push('/tmp/oyun-arena-nortex-burst.png');await page.locator('#inspector-close').click();
+      const fenBlind=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.setPaused(true);
+        const def=structuredClone(arenaApp.catalog.byId.get('fen'));def.stats.speed=0;const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;
+        const dummy=structuredClone(mundaneFixture.dummy);dummy.stats.range=4000;const [target]=e.spawn(dummy,1,{x:18,y:14},1,{count:1});
+        e._resolveHit(source,target,{damage:4,kind:'attack'});arenaApp.renderer.focusAt(target);window.mundaneFixture={...mundaneFixture,source,target};
+        return{magnitude:target.statuses.find(s=>s.kind==='blind').magnitude,range:e._range(target)};
+      });
+      assert.deepEqual(fenBlind,{magnitude:.125,range:3.5});await settleFrame(page);
+      const blindPoint=await clientPoint(page,{x:18,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(blindPoint.x,blindPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-status="blind"]').count(),1);
+      assert.equal(await page.locator('#inspector [data-stat="range"] strong').textContent(),'3.5 tiles');assert.equal(await page.locator('#inspector [data-stat="vision"] strong').textContent(),'7 tiles');
+      await page.screenshot({path:'/tmp/oyun-arena-fen-blind.png',fullPage:true});screenshots.push('/tmp/oyun-arena-fen-blind.png');await page.locator('#inspector-close').click();
+      const hiddenNight=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.setPaused(false);
+        const def=structuredClone(arenaApp.catalog.byId.get('nightprowler'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;
+        const [target]=e.spawn(mundaneFixture.dummy,1,{x:15.8,y:14},1,{count:1});e.step(2);e.setPaused(true);arenaApp.renderer.focusAt(source);window.mundaneFixture={...mundaneFixture,source,target};
+        return{hidden:source.statuses.some(s=>s.kind==='invisible'),targetable:e.canTarget(target,source),friendly:e.canSee(source,source)};
+      });
+      assert.deepEqual(hiddenNight,{hidden:true,targetable:false,friendly:true});await settleFrame(page);
+      const nightPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(nightPoint.x,nightPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.match(await page.locator('[data-nightprowler-stealth]').textContent(),/Invisibility Active/);
+      await page.screenshot({path:'/tmp/oyun-arena-nightprowler-stealth.png',fullPage:true});screenshots.push('/tmp/oyun-arena-nightprowler-stealth.png');await page.locator('#inspector-close').click();
+      const ambush=await page.evaluate(()=>{
+        const e=arenaApp.engine,{source,target}=mundaneFixture;e.setPaused(true);e._fire(source,target);source.cooldown=Infinity;
+        const effect=target.statuses.find(s=>s.kind==='misfortune');arenaApp.renderer.focusAt(target);
+        return{magnitude:effect.magnitude,duration:effect.until-e.time,hidden:source.statuses.some(s=>s.kind==='invisible')};
+      });
+      assert.equal(ambush.magnitude,.1);assert.ok(Math.abs(ambush.duration-8)<1e-7);assert.equal(ambush.hidden,false);await settleFrame(page);
+      const ambushPoint=await clientPoint(page,{x:15.8,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(ambushPoint.x,ambushPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-status="misfortune"]').count(),1);
+      await page.screenshot({path:'/tmp/oyun-arena-nightprowler-misfortune.png',fullPage:true});screenshots.push('/tmp/oyun-arena-nightprowler-misfortune.png');await page.locator('#inspector-close').click();
+      await page.evaluate(()=>{delete window.mundaneFixture;arenaApp.startMatch();});await settleFrame(page);
+    }
+
     const magmaWalk=await page.evaluate(()=>{
       const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.setPaused(false);
       const def=structuredClone(arenaApp.catalog.byId.get('magma'));def.stats.criticalChance=0;
@@ -835,7 +883,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

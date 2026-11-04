@@ -1,6 +1,6 @@
 /* Native card rules. Missing facts are explicit locks, never invented effects. */
 import { RULES, clamp } from './rules.mjs';
-import { STATUS_INTERVALS } from './statuses.mjs';
+import { STATUS_INTERVALS, hasStatus } from './statuses.mjs';
 
 const animal = u => (u?.def?.type || []).includes('Animal');
 const airborne = u => u?.def?.combat?.movementType === 'flying';
@@ -44,6 +44,24 @@ export const ABILITIES = {
   'b-b':{incoming(ctx,u,s,hit){if(animal(s))hit.damage*=.4;}},
   scrapy:{attack(ctx,u,t,hit){hit.bypassShield=true;if(ctx.random()<.25)hit.damage*=1.5;}},
   nitrox:{tick(ctx,u){aura(ctx,u,'attackHaste',.12);}},
+  nortex:{attack(ctx,u,t,hit){hit.damage*=1+.4*hit.burstIndex;}},
+  fen:{hit(ctx,u,t,result){
+    if(damageEvent(result)&&!t.isCastle&&!t.isBuilding)ctx.status(t,'blind',7,.125,u);
+  }},
+  nightprowler:{
+    breakStealthOnDamage:true,
+    spawn(ctx,u){u.memory.lastDamageDealt=ctx.time;},
+    tick(ctx,u){
+      const last=Math.max(u.born??ctx.time,u.memory.lastDamageDealt??0,u.memory.lastDamageReceived??0);
+      if(ctx.time-last+1e-7<2||hasStatus(u,'invisible',ctx.time))return;
+      const hide=()=>ctx.status(u,'invisible',Infinity,0,u);
+      if(ctx.useAbility)ctx.useAbility(u,hide);else hide();
+    },
+    attack(ctx,u,t,hit){if(hasStatus(u,'invisible',ctx.time))hit.nightAmbush=true;},
+    hit(ctx,u,t,result,hit){
+      if(damageEvent(result)&&hit?.nightAmbush&&!t.isCastle&&!t.isBuilding)ctx.status(t,'misfortune',8,.1,u);
+    },
+  },
   gloop:{
     contactAttack:true,
     lifeDecay:{fraction:.01,interval:1},
@@ -458,9 +476,6 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {
-  nortex:['The +40% successive-shot bonus has no authored reset or stacking boundary.'],
-  fen:['Blindness duration is authored, but its Range/Vision reduction percentage is not.'],
-  nightprowler:['The opening Misfortune effect has no authored magnitude or duration.'],
   angels:['The continuous spawn stream has no end condition or relationship to Count 10.'],
   boomix:['The returning projectile has no authored turn point or return-hit rule.'],
   albert:['The same-target growth has no authored increment or reset rule.'],

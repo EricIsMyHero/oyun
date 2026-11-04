@@ -202,6 +202,15 @@ function openInspector(def,kind='card',unit=null) {
       notes.push(`<section class="live-status-section" data-artist-charge="${charge}"><h3>Ink Charge · ${charge}</h3><p>On death: ${6+bonus*2} ravens for ${7+bonus} seconds.</p></section>`);
     }
     if(unit.def.id==='magma')notes.push('<section class="live-status-section" data-magma-trail><h3>Flame Trail</h3><p>1.5 tiles wide · Lasts 10 seconds · 3 damage each second. Affects grounded enemies.</p></section>');
+    if(unit.def.id==='nortex'){
+      const damage=state.engine.statValue(unit,'damage');
+      notes.push(`<section class="live-status-section" data-nortex-burst><h3>Progressive Burst</h3><p>${[1,1.4,1.8].map(scale=>Number((damage*scale).toFixed(3))).join(' → ')} damage. Resets after each three-shot series.</p></section>`);
+    }
+    if(unit.def.id==='nightprowler'){
+      const last=Math.max(unit.born,unit.memory.lastDamageDealt??0,unit.memory.lastDamageReceived??0),remaining=Math.max(0,2-(state.engine.time-last));
+      const hidden=(unit.statuses||[]).some(s=>s.kind==='invisible'&&s.until>state.engine.time);
+      notes.push(`<section class="live-status-section" data-nightprowler-stealth><h3>${hidden?'Invisibility Active':'Stealth Recovery'}</h3><p>${hidden?'The next successful attack applies 10% Misfortune for 8 seconds.':`${remaining.toFixed(1)}s until eligible for invisibility. Dealing or taking damage restarts the timer.`}</p></section>`);
+    }
     if(unit.def.id==='fallen-angel'){
       const target=state.engine.units.find(t=>t.id===unit.memory.fallenTargetId&&t.alive&&state.engine.canSee(unit,t));
       const stacks=unit.memory.fallenStacks||0;

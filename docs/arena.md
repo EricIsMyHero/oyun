@@ -171,13 +171,32 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **81 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **84 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
 after the first successful hit; their poison continues and keeps its original
 caster attribution. Giga Bomb deals its immediate source damage and then ten
 one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
+
+Three more Mundane roots have native rules ready:
+
+- **Nortex** fires **5 → 7 → 9** in every three-shot series: each subsequent shot
+  adds 40% of base Damage. The next series restarts at five; losing or changing
+  the burst target starts a fresh series too. Misses consume their shot position.
+  Native growth never mutates base Damage, Attack Speed, Delay or source DPS.
+- **Fen** applies **12.5% Blind for seven seconds** on a damaging hit. Range,
+  combat Vision and team scouting shrink by that percentage. Further hits from
+  the same Fen refresh one entry; Cleanse, Predominance and Flexibility follow
+  the usual rules. An applied Blind persists after Fen dies.
+- **Nightprowler** becomes invisible after **two seconds without dealing or
+  taking damage**. Real damage in either direction ends stealth and restarts
+  recovery; zero damage, misses and dodges do not. The first successful attack
+  from stealth applies **10% Misfortune for eight seconds** to cards it hits,
+  including cone victims. Missed or fully prevented attacks retain the ambush.
+  Silence blocks new stealth and Misfortune, but cannot prevent an existing
+  conditional stealth state from ending on damage. Pause freezes all timers.
+  The inspector shows the recovery countdown or active invisibility.
 
 All twenty-three Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,
@@ -340,7 +359,7 @@ so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 57 locked entries explain an undefined
+defined for this simulator. The remaining 54 locked entries explain an undefined
 rule, missing combat data, or an unimplemented native ability. Required child
 forms must also be complete; removing a lock never substitutes invented values.
 

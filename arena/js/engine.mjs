@@ -538,7 +538,12 @@ export class ArenaEngine {
       target.statuses=target.statuses.filter(s=>s.kind!=='invisible');
       target.memory.lastDamageReceived=this.time;
       this.fx('hit',target.x,target.y,{amount:result.total,side:target.side,critical:hit.critical,color:hit.kind==='dot'?'#b9db72':undefined});
-      if(source&&!source.isSpell){source.damageWindow??=[];source.damageWindow.push({time:this.time,damage:result.total});}
+      if(source&&!source.isSpell){
+        source.damageWindow??=[];source.damageWindow.push({time:this.time,damage:result.total});
+        (source.memory??={}).lastDamageDealt=this.time;
+        // Ending a conditional stealth state is structural, including while silenced.
+        if(this.ability(source)?.breakStealthOnDamage)source.statuses=source.statuses.filter(s=>s.kind!=='invisible');
+      }
       this._hook('damaged',target,source,result,hit);
       if(source?.alive&&source!==target&&!hit.reflected&&has(target,'reflection',this.time))this.damage(target,source,result.total,{kind:'reflect',secondary:true,reflected:true,friendlyFire:true});
       else if(target.buildingKind==='reflector'&&source?.alive&&!hit.secondary)this.damage(target,source,result.total*(source.isCastle?.4:.6),{kind:'reflect',secondary:true,reflected:true});

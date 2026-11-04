@@ -41,10 +41,10 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,81);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,84);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none')assert.ok(card.attack.interval>0);}}
-  assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
+  assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
   assert.match(c.byId.get('tphoenix').reasons.join(' '),/Health restored/);
   assert.match(c.byId.get('nightfang').reasons.join(' '),/Attack Distance/);
   assert.match(c.spellById.get('crystalline-prison').reasons.join(' '),/conflict/);
@@ -60,6 +60,9 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  nortex:({ctx,u,t,rule})=>{for(const [burstIndex,damage] of [[0,5],[1,7],[2,9],[0,5]]){const hit={damage:5,burstIndex};rule.attack(ctx,u,t,hit);close(hit.damage,damage);}},
+  fen:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'blind');assert.equal(records.statuses[0].duration,7);close(records.statuses[0].magnitude,.125);},
+  nightprowler:({ctx,u,t,rule,result,records})=>{rule.spawn(ctx,u);ctx.time=2;rule.tick(ctx,u);assert.equal(records.statuses[0].kind,'invisible');u.statuses=[{kind:'invisible',until:Infinity}];const hit={};rule.attack(ctx,u,t,hit);assert.equal(hit.nightAmbush,true);rule.hit(ctx,u,t,result,hit);assert.equal(records.statuses[1].kind,'misfortune');assert.equal(records.statuses[1].duration,8);close(records.statuses[1].magnitude,.1);assert.equal(rule.breakStealthOnDamage,true);},
   magma:({ctx,u,rule})=>{let patch=null;ctx.leaveTrail=(source,from,to,params)=>{patch={source,from,to,params};};rule.move(ctx,u,{x:5,y:11},{x:5.1,y:11});assert.equal(patch.source,u);assert.deepEqual(patch.params,{width:1.5,duration:10,damage:3,interval:1});},
   'fallen-angel':({ctx,u,t,rule,result})=>{assert.equal(rule.target(ctx,u),t);rule.targetChanged(ctx,u,t);for(let i=0;i<100;i++)rule.hit(ctx,u,t,result);assert.equal(u.memory.fallenStacks,80);close(u.stats.attackSpeed,u.def.stats.attackSpeed/1.8);rule.targetChanged(ctx,u,null);assert.equal(u.memory.fallenStacks,0);close(u.stats.attackSpeed,u.def.stats.attackSpeed);},
   etheris:({ctx,u,rule})=>{let linked=null;ctx.linkEtheris=actor=>{linked=actor;};rule.tick(ctx,u,0);assert.equal(linked,u);},

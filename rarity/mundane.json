@@ -270,7 +270,7 @@
       "mana": "8",
       "number": "1"
     },
-    "trait": "Hər bir sonrakı atışa <b>+40%</b> Hasar bonusu qazanar",
+    "trait": "Hər 3 gülləlik seriyada sonrakı atışlar əsas hasarın +40%-i qədər əlavə bonus qazanar: 5 → 7 → 9 hasar. Hər yeni seriyada bonus sıfırlanar.",
     "additionalStats": {
       "range": "3000",
       "speed": "1000",
@@ -592,7 +592,7 @@
       "mana": "5",
       "number": "1"
     },
-    "trait": "Atışları rəqib kartları 7 saniyəlik kor edər",
+    "trait": "Atışları rəqib kartları 7 saniyəlik kor edər: menzilləri və görüşləri 12,5% azalar.",
     "additionalStats": {
       "range": "3600",
       "speed": "1000",
@@ -614,7 +614,8 @@
     "effects": [
       {
         "type": "blind",
-        "duration": 7
+        "duration": 7,
+        "percentage": 12.5
       }
     ],
     "showlevels": {
@@ -851,7 +852,7 @@
       "mana": "5",
       "number": "1"
     },
-    "trait": "Hasar vermədikdə 2 saniyə ərzində görünməz olar. Görünməz olduqda ilk vuruşu rəqib karta bədbəxtlik effekti verər.",
+    "trait": "2 saniyə ərzində hasar vermədikdə və almadıqda görünməz olar. Görünməzlikdən ilk uğurlu hücumu rəqib kartlara 8 saniyəlik bədbəxtlik verər: hücumlarının və özəlliklərinin 10% şansla boşa çıxmasına səbəb olar. Hasar verdikdə və ya aldıqda görünməzliyi itirər və 2 saniyəlik sayğac sıfırlanar.",
     "additionalStats": {
       "range": "1000",
       "speed": "1200",
