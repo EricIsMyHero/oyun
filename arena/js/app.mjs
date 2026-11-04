@@ -208,6 +208,8 @@ function openInspector(def,kind='card',unit=null) {
       notes.push(`<section class="live-status-section" data-angel-stream="${emitted}"><h3>Reinforcements · ${emitted} / ${total}</h3><p>${stream?`Next Angel in ${Math.max(0,stream.nextAt-state.engine.time).toFixed(2)}s. Each interval grows by 0.05s.`:'All scheduled Angels have arrived.'}</p><p>Death Rally: +${bonus} damage from fallen allies.</p></section>`);
     }
     if(unit.def.id==='boomix')notes.push(`<section class="live-status-section" data-boomix-flight="${!!unit.memory.returningShotId}"><h3>${unit.memory.returningShotId?'Weapon in Flight':'Weapon Ready'}</h3><p>${unit.memory.returningShotId?'Flight protection: 20% less incoming damage.':'The weapon damages one target on each leg.'} Attack interval starts at launch; the weapon must return before another throw.</p></section>`);
+    if(unit.def.id==='albert')notes.push(`<section class="live-status-section" data-albert-growth="${unit.memory.albertGrowth||0}"><h3>Target Bonus · +${unit.memory.albertGrowth||0} / +3</h3><p>Damage: ${Number(state.engine.statValue(unit,'damage').toFixed(3))} · Base: ${unit.def.stats.damage}</p></section>`);
+    if(unit.def.id==='chicken')notes.push('<section class="live-status-section" data-chicken-detonation><h3>Explosion Parameters</h3><p>100 damage · 2 × 2 tiles<br>80%: 500 damage · 3.5 × 3.5 tiles</p></section>');
     if(unit.def.id==='nortex'){
       const damage=state.engine.statValue(unit,'damage');
       notes.push(`<section class="live-status-section" data-nortex-burst><h3>Progressive Burst</h3><p>${[1,1.4,1.8].map(scale=>Number((damage*scale).toFixed(3))).join(' → ')} damage. Resets after each three-shot series.</p></section>`);

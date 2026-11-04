@@ -136,6 +136,31 @@ export const ABILITIES = {
   'm-manager':{tick(ctx,u,dt){periodic(u,'manaClock',dt,9,()=>{ctx.teams[u.side].mana=Math.min(RULES.maxMana,ctx.teams[u.side].mana+1);ctx.fx('mana',u.x,u.y,{side:u.side});},ctx);}},
   srail:{tick(ctx,u){const n=enemies(ctx,u).filter(t=>front(ctx,u,t)).length;u.stats.criticalChance=Math.min(80,u.def.stats.criticalChance+n*8);}},
   cryon:{damaged(ctx,u){if(u.hp>0&&u.hp<healthCap(ctx,u)*.2&&!u.memory.maskOff){u.memory.maskOff=true;ctx.near(u,radius(u,ctx),t=>t!==u).forEach(t=>ctx.status(t,'stun',12,0,u));ctx.fx('wave',u.x,u.y,{radius:radius(u,ctx),side:u.side});}}},
+  albert:{
+    targetChanged(ctx,u,target){u.memory.albertTargetId=target?.id??null;u.memory.albertGrowth=0;u.stats.damage=u.def.stats.damage;},
+    attack(ctx,u,target,hit){
+      if(u.memory.albertTargetId===target.id)return;
+      ABILITIES.albert.targetChanged(ctx,u,target);hit.damage=ctx.statValue?ctx.statValue(u,'damage'):u.stats.damage;
+    },
+    hit(ctx,u,target,result){
+      if(!damageEvent(result)||u.memory.albertTargetId!==target.id)return;
+      u.memory.albertGrowth=Math.min(3,(u.memory.albertGrowth||0)+1);
+      u.stats.damage=u.def.stats.damage+u.memory.albertGrowth;
+    },
+  },
+  chicken:{
+    noBasicAttack:true,
+    contactAttack:true,
+    contact(ctx,u){ctx.killUnit(u);},
+    death(ctx,u){
+      const large=ctx.random()<.8,size=large?3.5:2,damage=ctx.statValue(u,'damage')*(large?5:1);
+      const shape={shape:'rect',width:size,height:size};
+      for(const target of [...ctx.units,...ctx.castles].filter(t=>ctx._canHit(u,t)&&ctx._inside(t,u,shape)))
+        ctx.damage(u,target,damage,{kind:'ability',secondary:true,accuracyChecked:true});
+      ctx.fx('explosion',u.x,u.y,{side:u.side,radius:size/2,color:large?'#ffb56b':'#ffd998',duration:.85});
+      ctx.fx('blastArea',u.x,u.y,{side:u.side,width:size,height:size,color:'#ffc184',duration:.85});
+    },
+  },
   frostshot:{
     spawn(ctx,u){u.memory.lastDamage=ctx.time;},
     attack(ctx,u,t,hit){if(ctx.time-u.memory.lastDamage>=18)hit.damage*=3.75;},
@@ -488,8 +513,6 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {
-  albert:['The same-target growth has no authored increment or reset rule.'],
-  chicken:['The 80% larger death explosion has no authored enlarged dimensions.'],
   tornado:['The whirlwind energy or duration, which triggers release, is not authored.'],
   tphoenix:['Health restored when Fire Egg breaks and returns to Tphoenix is not authored.'],
   'tphoenix/fire-egg':['Health restored on a broken-egg transformation is not authored.'],

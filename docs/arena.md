@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **86 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **88 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -223,6 +223,28 @@ battle-ready**:
   until the weapon is caught. Only one weapon can be airborne, including during
   a Format promotion. Pause, death and Silence retain normal behavior. Avalith
   keeps its separate recovery-after-catch rule.
+
+Two more Familiar roots are complete:
+
+- **Albert** adds **+1 Damage after each successful hit on its current target**,
+  capped at **+3 bonus Damage**. Its successive hits start **7, 8, 9, 10** and
+  stay at ten while that target remains selected, including across twelve-hit
+  series. Shield damage counts; misses and fully blocked hits do not. Selecting
+  a different target or losing the current target resets the bonus, including
+  while silenced. Count, burst interval, delay, mana and source DPS stay intact.
+  The live inspector shows the current bonus and effective per-hit damage.
+- **Chicken** has no normal basic attack and no invented Attack Speed. It
+  approaches a legal ground target until the bodies touch, then sacrifices
+  itself. Contact and externally caused death resolve the same **single**
+  explosion. One roll chooses **100 Damage in a 2 × 2-tile square** (20%) or
+  **500 Damage in a 3.5 × 3.5-tile square** (80%, a +400% bonus). The square is
+  centered on Chicken and includes overlapping enemy bodies, grounded buildings
+  and castles; flying cards and allies are excluded. Hovering is still a ground
+  target. Shield, Damage Reduction, immunity, Silence and Misfortune follow
+  normal rules; a missed death explosion is consumed once, without a reroll for
+  each victim. Control effects prevent contact activation while active. Paid
+  deployment still costs six mana once. Source combat dimensions and the blank
+  Attack Speed remain available in the Codex.
 
 All twenty-three Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,

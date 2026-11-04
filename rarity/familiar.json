@@ -18,7 +18,7 @@
       "mana": "15",
       "number": "1"
     },
-    "trait": "Atışları eyni rəqib karta dəyərsə yavaşca artar (max: +3)",
+    "trait": "Eyni rəqibə hər uğurlu vuruşdan sonra hasarı +1 artar (maksimum əlavə bonus: +3). Hədəf dəyişdikdə bonus sıfırlanar.",
     "additionalStats": {
       "range": "1500",
       "speed": "900",
@@ -81,7 +81,7 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "Chicken öldüyü an daxilindəki mutasiya olunmuş hüceyrələr kəskin reaksiya verərək partlayar. Bu partlayış 80% şansla daha geniş bir sahəyə yayılar və rəqiblərə əlavə +400% hasar verər. Henry-nin laboratoriyasından çıxan ən təhlükəli canlı bəlkə də budur.",
+    "trait": "Chicken rəqibə toxunduqda və ya öldürüldükdə bir dəfə partlayar. Adi partlayış 2×2 karo sahədə 100 hasar verər. 80% şansla partlayışın sahəsi 3.5×3.5 karo, hasarı isə əlavə +400% bonusla 500 olar. Adi hücum etmir. Henry-nin laboratoriyasından çıxan ən təhlükəli canlı bəlkə də budur.",
     "additionalStats": {
       "range": "800",
       "speed": "1300",
@@ -121,7 +121,7 @@
       "attackWidth": 500,
       "weight": "medium",
       "targets": "ground",
-      "multiTargetCondition": "Öldükdə.",
+      "multiTargetCondition": "Öldükdə və ya rəqibə toxunduqda.",
       "attackDistance": 500,
       "attackDistanceMatchesRange": false,
       "attackAngle": null,

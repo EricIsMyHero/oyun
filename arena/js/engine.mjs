@@ -779,7 +779,7 @@ export class ArenaEngine {
     return victims;
   }
   _fire(u,target){
-    if(u.memory.returningShotId)return;
+    if(u.memory.returningShotId||this.ability(u)?.noBasicAttack)return;
     const attack=this._attackDefinition(u),profile=this._profile(u);
     const index=u.burstIndex;
     u.shots++;u.memory.lastAttack=this.time;
@@ -1105,7 +1105,8 @@ export class ArenaEngine {
       const allowance=this.ability(u)?.contactAttack?EPS:u.radius*.2;
       if(target&&distance(u,target)<=reach+target.radius+allowance&&profile.attackType!=='none'){
         const dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;u.facingX=dx/len;u.facingY=dy/len;
-        if(u.cooldown<=EPS&&!u.memory.returningShotId)this._fire(u,target);
+        if(this.ability(u)?.noBasicAttack)this._hook('contact',u,target);
+        else if(u.cooldown<=EPS&&!u.memory.returningShotId)this._fire(u,target);
       }else this._move(u,target,dt);
     }
     this._syncCaptives();this._separation();this._castles(dt);this._projectiles(dt);this._objectives(dt);this._drainDeaths();this._spawnStreams();

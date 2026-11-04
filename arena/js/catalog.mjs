@@ -1,5 +1,5 @@
 import { STAT_KEYS, num, burst } from './rules.mjs';
-import { abilityReadiness, SPELL_RULES, SPELL_GAPS } from './abilities.mjs';
+import { ABILITIES, abilityReadiness, SPELL_RULES, SPELL_GAPS } from './abilities.mjs';
 import { createPowerScorer } from './power.mjs';
 
 const RARITIES=['mundane','familiar','arcane','relic','ascendant','apex','emergent','ethereal'];
@@ -55,7 +55,7 @@ function normalizeCard(raw,parent=null,id=raw.id||slugify(raw.name)) {
     if(combat.attackShape==='square'&&!combat.impactSize)reasons.push('Impact Area dimensions are not authored.');
     if(combat.projectileEndEffect==='explode'&&!combat.impactSize)reasons.push('The endpoint explosion dimensions are not authored.');
     if(!(stats.range>0))reasons.push('Target-acquisition Range is not authored.');
-    if(!(attack.interval>0)&&attack.damage>0)reasons.push('A positive Attack Speed interval is not authored.');
+    if(!(attack.interval>0)&&attack.damage>0&&!ABILITIES[id]?.noBasicAttack)reasons.push('A positive Attack Speed interval is not authored.');
   }
   reasons.push(...abilityReadiness(raw,id));
   const def={id,name:raw.name||'Unnamed',raw,rarity:raw.rarity||parent?.rarity||'Mundane',group:raw.group||parent?.group||'',image:imageFor(raw,parent),type:(Array.isArray(raw.type)?raw.type:[raw.type]).filter(Boolean).map(creature),class:raw.class||parent?.class||'',subclass:raw.subclass||'',stats,attack,combat,forms:[],typeVariants:[],ready:false,reasons};

@@ -72,6 +72,16 @@ test('source-native ability text, spell Charge and Energy remain independently a
   assert.ok(catalog.spells.some(s=>s.ready),'a legal spell loadout exists');
 });
 
+test('only explicitly authored ability-only attackers can omit a positive Attack Speed',async()=>{
+  const {buildCatalog}=await catalogModule(),raw=structuredClone(rawCards);
+  raw.find(c=>c.id==='albert').stats.attackSpeed='-';
+  const catalog=buildCatalog(raw,rawSpells);
+  assert.equal(catalog.byId.get('chicken').ready,true);
+  assert.equal(catalog.byId.get('chicken').attack.interval,0);
+  assert.equal(catalog.byId.get('albert').ready,false);
+  assert.match(catalog.byId.get('albert').reasons.join(' '),/positive Attack Speed/);
+});
+
 test('Relic normalization preserves the authored geometry, transformations and source statistics',async()=>{
   const {buildCatalog}=await catalogModule(),{byId}=buildCatalog(rawCards,rawSpells);
   const ali=byId.get('ali');assert.equal(ali.stats.range,1250);assert.equal(ali.combat.attackDistance,4500);assert.equal(ali.combat.attackWidth,1500);

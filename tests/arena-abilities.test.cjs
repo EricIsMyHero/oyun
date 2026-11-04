@@ -41,9 +41,9 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,86);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,88);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
-  for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none')assert.ok(card.attack.interval>0);}}
+  for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&card.id!=='chicken')assert.ok(card.attack.interval>0);}}
   assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
   assert.match(c.byId.get('tphoenix').reasons.join(' '),/Health restored/);
   assert.match(c.byId.get('nightfang').reasons.join(' '),/Attack Distance/);
@@ -60,6 +60,8 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  albert:({ctx,u,t,rule,hit,result})=>{rule.targetChanged(ctx,u,t);for(let i=0;i<8;i++)rule.hit(ctx,u,t,result);assert.equal(u.memory.albertGrowth,3);assert.equal(u.stats.damage,10);rule.targetChanged(ctx,u,null);assert.equal(u.stats.damage,7);rule.attack(ctx,u,t,hit);assert.equal(hit.damage,7);rule.hit(ctx,u,t,{total:0});assert.equal(u.memory.albertGrowth,0);},
+  chicken:({ctx,u,t,rule,records})=>{ctx.statValue=(actor,key)=>actor.stats[key];ctx._canHit=(source,target)=>source.side!==target.side;ctx._inside=()=>true;ctx.killUnit=actor=>{actor.alive=false;};assert.equal(rule.noBasicAttack,true);assert.equal(rule.contactAttack,true);rule.contact(ctx,u,t);assert.equal(u.alive,false);rule.death(ctx,u);assert.equal(records.damage[0].amount,500);assert.equal(records.fx.find(f=>f.type==='blastArea').opts.width,3.5);},
   angels:({ctx,u,t,rule})=>{assert.deepEqual(rule.spawnSchedule,{initialGap:.4,gapStep:.05});const damage=u.stats.damage;t.def=u.def;t.side=u.side;rule.unitDeath(ctx,u,t);close(u.stats.damage,damage+2);assert.equal(u.memory.angelDeaths,1);t.side=1;rule.unitDeath(ctx,u,t);close(u.stats.damage,damage+2);},
   boomix:({ctx,u,t,rule,hit})=>{rule.attack(ctx,u,t,hit);assert.equal(hit.returning,true);assert.equal(hit.recoveryFromLaunch,true);hit={damage:100};rule.incoming(ctx,u,t,hit);close(hit.damage,100);u.memory.returningShotId='returning';rule.incoming(ctx,u,t,hit);close(hit.damage,80);},
   nortex:({ctx,u,t,rule})=>{for(const [burstIndex,damage] of [[0,5],[1,7],[2,9],[0,5]]){const hit={damage:5,burstIndex};rule.attack(ctx,u,t,hit);close(hit.damage,damage);}},

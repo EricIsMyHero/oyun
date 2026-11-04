@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,86);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix']){
+    assert.equal(coverage.ready,88);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -518,6 +518,36 @@ async function minimapPixelAt(page,point) {
     }
 
     {
+      const growth=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('albert'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});
+        const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;
+        const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='familiar-browser-target';dummy.combat.attackType='none';Object.assign(dummy.stats,{health:1000,shield:0,damage:0,range:0,speed:0,dodge:0,healrecovery:0});
+        const [target]=e.spawn(dummy,1,{x:15.6,y:14},1,{count:1});for(let i=0;i<3;i++)e._fire(source,target);source.cooldown=Infinity;
+        e.setPaused(true);arenaApp.renderer.focusAt(source);window.familiarFixture={source,target,dummy};return{damage:source.stats.damage,hp:target.hp};
+      });
+      assert.deepEqual(growth,{damage:10,hp:976});await settleFrame(page);
+      const albertPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(albertPoint.x,albertPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-albert-growth="3"]').count(),1);assert.equal(await page.locator('#inspector [data-stat="damage"] strong').textContent(),'12 × 10');
+      await page.screenshot({path:'/tmp/oyun-arena-albert-growth.png',fullPage:true});screenshots.push('/tmp/oyun-arena-albert-growth.png');await page.locator('#inspector-close').click();
+      const chickenReady=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.teams[0].hand[0]='chicken';const result=e.deploy(0,0,{x:7,y:14});if(!result.ok)throw Error(result.error);
+        const source=result.units[0];e.setPaused(true);arenaApp.renderer.focusAt(source);window.familiarFixture={...familiarFixture,source};return{spent:e.teams[0].spentMana,shots:source.shots};
+      });
+      assert.deepEqual(chickenReady,{spent:6,shots:0});await settleFrame(page);
+      const chickenPoint=await clientPoint(page,{x:7,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(chickenPoint.x,chickenPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-chicken-detonation]').count(),1);assert.match(await page.locator('[data-chicken-detonation]').textContent(),/3.5 × 3.5 tiles/);assert.equal(await page.locator('#inspector [data-stat="attackSpeed"] strong').textContent(),'—');
+      await page.screenshot({path:'/tmp/oyun-arena-chicken-ready.png',fullPage:true});screenshots.push('/tmp/oyun-arena-chicken-ready.png');await page.locator('#inspector-close').click();
+      const explosion=await page.evaluate(()=>{
+        const e=arenaApp.engine,{source,dummy}=familiarFixture;e.setPaused(true);const [target]=e.spawn(dummy,1,{x:source.x+.4,y:source.y},1,{count:1});e.random=()=>.1;e.setPaused(false);e.step(1/30);e.setPaused(true);
+        const blast=e.state.effects.find(f=>f.type==='blastArea');return{alive:source.alive,hp:target.hp,shots:source.shots,spent:e.teams[0].spentMana,width:blast?.width};
+      });
+      assert.deepEqual(explosion,{alive:false,hp:500,shots:0,spent:6,width:3.5});await settleFrame(page);
+      await page.screenshot({path:'/tmp/oyun-arena-chicken-explosion.png',fullPage:true});screenshots.push('/tmp/oyun-arena-chicken-explosion.png');
+      await page.evaluate(()=>{delete window.familiarFixture;arenaApp.startMatch();});await settleFrame(page);
+    }
+
+    {
       const angelsPaid=await page.evaluate(()=>{
         arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.teams[0].hand[0]='angels';
         const result=e.deploy(0,0,{x:7,y:14});if(!result.ok)throw Error(result.error);
@@ -919,7 +949,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));
