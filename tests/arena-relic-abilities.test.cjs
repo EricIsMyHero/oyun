@@ -635,6 +635,7 @@ test('Artist death creates six ravens for seven seconds, gaining two ravens and 
   for(const [charge,count,life] of [[0,6,7],[10,6,7],[20,8,8],[39,8,8],[40,10,9]]){
     const {e,spawn,kill}=await fixture(),u=spawn('artist');u.memory.artistCharge=charge;kill(u);
     const ravens=e.units.filter(t=>t.def.id==='artist/flock-of-ravens');assert.equal(ravens.length,count);
+    assert.ok(ravens.every(raven=>raven.stats.number===count));
     for(const raven of ravens){assert.equal(raven.healthless,true);assert.equal(raven.def.raw.stats.health,'-');assert.equal(raven.def.combat.movementType,'flying');close(raven.expiresAt-e.time,life);close(raven.stats.vision,4000);raven.stats.speed=0;}
     e.setPaused(true);e.step(30);assert.equal(e.units.length,count);e.setPaused(false);e.step(life-.1);assert.equal(e.units.length,count);e.step(.1);assert.equal(e.units.length,0);
   }

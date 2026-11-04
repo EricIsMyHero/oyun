@@ -427,9 +427,9 @@ export const ABILITIES = {
     hit(ctx,u,t,result){if(damageEvent(result))ctx.addInk(u,t);},
     death(ctx,u){
       const form=u.def.forms[0];if(!form)return;
-      const bonus=Math.floor((u.memory.artistCharge||0)/20),lifetime=7+bonus;
-      for(const raven of ctx.spawn(form,u.side,u,u.lane,{count:form.stats.number+bonus*2,groupId:u.groupId})){
-        raven.stats.life=lifetime;raven.expiresAt=ctx.time+lifetime;raven.memory.artistCharge=u.memory.artistCharge||0;
+      const bonus=Math.floor((u.memory.artistCharge||0)/20),lifetime=7+bonus,count=form.stats.number+bonus*2;
+      for(const raven of ctx.spawn(form,u.side,u,u.lane,{count,groupId:u.groupId})){
+        raven.stats.number=count;raven.stats.life=lifetime;raven.expiresAt=ctx.time+lifetime;raven.memory.artistCharge=u.memory.artistCharge||0;
       }
     },
   },

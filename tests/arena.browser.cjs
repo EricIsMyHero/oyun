@@ -463,6 +463,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(timedRavens,{count:8,life:8,vision:4000,canHit:false,damage:0});await settleFrame(page);
     const ravenPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(ravenPoint.x,ravenPoint.y);
     await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-healthless]').count(),1);
+    assert.equal(await page.locator('#inspector [data-stat="number"] strong').textContent(),'8');
     assert.equal(await page.locator('#inspector [data-stat="health"] strong').textContent(),'—');assert.equal(await page.locator('#inspector [data-stat="shield"] strong').textContent(),'—');
     const ravenLife=parseFloat(await page.locator('#inspector [data-stat="life"] strong').textContent());assert.ok(ravenLife>=7.5&&ravenLife<=8);
     await page.screenshot({path:'/tmp/oyun-arena-raven-lifetime.png',fullPage:true});screenshots.push('/tmp/oyun-arena-raven-lifetime.png');await page.locator('#inspector-close').click();
