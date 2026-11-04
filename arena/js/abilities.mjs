@@ -247,6 +247,26 @@ export const ABILITIES = {
   demotron:{tick(ctx,u,dt){
     periodic(u,'repairClock',dt,10,()=>ctx.heal(u,Math.max(0,healthCap(ctx,u)-u.hp)*.1,u),ctx);
   }},
+  magma:{move(ctx,u,from,to){
+    const leave=()=>ctx.leaveTrail(u,from,to,{width:(u.def.combat.trailWidth||1500)/1000,duration:10,damage:3,interval:1});
+    if(ctx.useAbility)ctx.useAbility(u,leave);else leave();
+  }},
+  'fallen-angel':{
+    target(ctx,u){
+      const previous=ctx.units.find(t=>t.id===u.memory.fallenTargetId);
+      if(previous&&!previous.isBuilding&&ctx.canTarget(u,previous))return previous;
+      return enemies(ctx,u,7.5).filter(t=>!t.isBuilding&&ctx.canTarget(u,t)&&Math.hypot(t.x-u.x,t.y-u.y)<=7.5+1e-7&&front(ctx,u,t))
+        .sort((a,b)=>b.hp-a.hp||Math.hypot(a.x-u.x,a.y-u.y)-Math.hypot(b.x-u.x,b.y-u.y)||a.id.localeCompare(b.id))[0]||null;
+    },
+    targetChanged(ctx,u,target){
+      u.memory.fallenTargetId=target?.id??null;u.memory.fallenStacks=0;u.stats.attackSpeed=u.def.stats.attackSpeed;
+    },
+    hit(ctx,u,target,result){
+      if(!damageEvent(result)||target.isBuilding||target.isCastle||target.id!==u.memory.fallenTargetId)return;
+      u.memory.fallenStacks=Math.min(80,(u.memory.fallenStacks||0)+1);
+      u.stats.attackSpeed=u.def.stats.attackSpeed/(1+u.memory.fallenStacks/100);
+    },
+  },
   aeralis:{hit(ctx,u,t,result){
     if(damageEvent(result)&&!t.isCastle)ctx.push(t,u,ctx.random()<.12?.4:.1);
   }},

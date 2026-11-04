@@ -124,7 +124,7 @@ test('ability texts, names, turn abilities and star upgrades are preserved verba
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    '46669c5ef69d7f0cc0904ba025e24b20e1842524c1051e7ecb4866062861a7ad');
+    '214f8f93a98d009143bf0fc14d411a1b2fa109aa83a5fd0b399ec3d163aa90dc');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {

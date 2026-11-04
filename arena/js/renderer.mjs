@@ -793,6 +793,33 @@ export class ArenaRenderer {
     ctx.restore();
   }
 
+  fireTrail(ctx,trail,time) {
+    const segments=trail.segments.filter(s=>s.until>time),width=trail.width;
+    if(!segments.length)return;
+    this.world(ctx,c=>{
+      c.lineCap='round';c.lineJoin='round';
+      // Batch short movement segments by fade so long trails stay inexpensive.
+      for(let bucket=1;bucket<=4;bucket++){
+        c.beginPath();let drawn=false;
+        for(const segment of segments){
+          if(Math.max(1,Math.ceil(clamp((segment.until-time)/2,0,1)*4))!==bucket)continue;
+          c.moveTo(segment.from.x,segment.from.y);c.lineTo(segment.to.x,segment.to.y);drawn=true;
+        }
+        if(!drawn)continue;c.globalAlpha=bucket/4;
+        for(const [fraction,color] of [[1,'#652315b0'],[.7,'#f06b2cbb'],[.22,'#ffd787cc']]){c.lineWidth=width*fraction;c.strokeStyle=color;c.stroke();}
+      }
+    });
+    const scale=this.view.scale;
+    for(let i=0;i<segments.length;i+=8){
+      const segment=segments[i],p=this.screenAt(segment.to);
+      if(p.x< -scale||p.y< -scale||p.x>this.view.width+scale||p.y>this.view.height+scale)continue;
+      const flicker=(Math.sin(time*9+i*1.7)+1)/2,alpha=clamp((segment.until-time)/2,0,1);
+      ctx.save();ctx.globalAlpha=alpha*.75;
+      ellipse(ctx,p.x,p.y-scale*(.08+flicker*.08),scale*width*.1,scale*(.13+flicker*.12),'#ff9d48');
+      ellipse(ctx,p.x,p.y-scale*.06,scale*width*.045,scale*.1,'#ffe8a2');ctx.restore();
+    }
+  }
+
   effect(ctx,e,time) {
     if(!Number.isFinite(e.x)||!Number.isFinite(e.y))return;
     const p=this.screenAt(e),s=this.view.scale;
@@ -973,6 +1000,7 @@ export class ArenaRenderer {
       if(!pointVisible(p))continue;
       ellipse(ctx,q.x,q.y,s*.045,s*.025,'#c3fff6a0');
     }
+    for(const trail of state?.trails||[])this.fireTrail(ctx,trail,time);
     this.placement(ctx,state,ui);
     const nodes=state?.nodes?.length?state.nodes:MAP.nodes.map(n=>({...n,owner:null,progress:0}));
     const sprites=[];

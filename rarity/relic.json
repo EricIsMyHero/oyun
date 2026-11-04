@@ -451,7 +451,7 @@
       "mana": "18",
       "number": "1"
     },
-    "trait": "-5 Can hər saniyə, arxasındakı kartlar ekstra 2x5 Yanma Hasarı verər",
+    "trait": "Hərəkət etdikcə arxasında 1,5 karo enində və 10 saniyə davam edən alov izi buraxar. Alov üzərindəki rəqib yer kartlarına hər saniyə 3 hasar verər. Uçan və süzülən kartlar bu yer effektindən təsirlənməz.",
     "additionalStats": {
       "range": "1000",
       "speed": "800",
@@ -499,7 +499,8 @@
       "impactSize": null,
       "projectileEndEffect": null,
       "movementType": "ground",
-      "groundEffectImmune": false
+      "groundEffectImmune": false,
+      "trailWidth": 1500
     }
   },
   {
@@ -1397,7 +1398,7 @@
       "mana": "14",
       "number": "1"
     },
-    "trait": "Fallen Angel döyüşə başladığı an önündəki 7,500 karo məsafədə yerləşən və canı ən yüksək olan rəqib kartı özünə əsas hədəf seçər. Bu seçilmiş hədəfə vurduğu hər bir uğurlu zərbə ona +1% hücum sürəti qazandırar.Bu sürət bonusu maksimum 80%-ə qədər yüksələ bilər. Təyin olunan hədəf dəyişənə və ya məhv edilənə qədər Fallen Angel getdikcə daha sürətli və amansız hücumlar edər.",
+    "trait": "Fallen Angel önündəki 7,5 karo məsafədə görünən və hazırkı canı ən yüksək olan rəqib yer kartını əsas hədəf seçər. Seçilmiş hədəfə hər uğurlu vuruşu +1% hücum sürəti qazandırar (maksimum +80%). Hədəf dəyişəndə və ya məhv olanda sürət yığımı sıfırlanar.",
     "additionalStats": {
       "range": "1100",
       "speed": "1050",

@@ -23,13 +23,13 @@ async function fixture(){
   return {e,catalog,spawn,dummy,hit,kill,has:(u,kind)=>hasStatus(u,kind,e.time)};
 }
 
-test('twenty-one Relic cards and their summons unlock with verified native handlers',async()=>{
+test('all twenty-three Relic cards and their summons unlock with verified native handlers',async()=>{
   const {catalog}=await fixture();
   const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','sylviana','sylviana/butterflies','malvaris','malvaris/phantomis','pyhsic','unara','clara','far','lyra','naar','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
   for(const id of ids){assert.equal(catalog.byId.get(id).ready,true,id);assert.deepEqual(catalog.byId.get(id).reasons,[]);}
   for(const id of ['etheris','format','artist','artist/flock-of-ravens'])assert.equal(catalog.byId.get(id).ready,true,id);
-  assert.equal(catalog.cards.filter(c=>c.ready).length,79);
-  assert.equal(catalog.byId.get('magma').ready,false);
+  assert.equal(catalog.cards.filter(c=>c.ready).length,81);
+  assert.equal(catalog.byId.get('magma').ready,true);assert.equal(catalog.byId.get('fallen-angel').ready,true);
 });
 
 test('each Stacy impact delivers exactly four eight-damage Burn ticks without recursion',async()=>{
@@ -657,4 +657,108 @@ test('raven liveness never becomes health through allied growth; beneficial comb
   close(raven.hp,1);close(raven.maxHp,1);close(raven.stats.health,0);close(raven.shield,0);
   assert.ok(raven.statuses.some(s=>s.kind==='attackHaste'&&s.magnitude===.12));
   const point={x:raven.x,y:raven.y};e.push(raven,{x:14,y:14},3);close(raven.x,point.x);close(raven.y,point.y);
+});
+
+test('all Relic root cards now have complete battle data; Magma replaces its old health-loss/burn aura',async()=>{
+  const {catalog,e,spawn}=await fixture();assert.equal(catalog.cards.filter(c=>c.rarity==='Relic').length,23);assert.ok(catalog.cards.filter(c=>c.rarity==='Relic').every(c=>c.ready));
+  const magma=spawn('magma');e.step(20);close(magma.hp,magma.maxHp);close(magma.shield,magma.maxShield);assert.equal(e.state.trails.length,0);
+  assert.equal(magma.def.combat.attackWidth,500);assert.equal(magma.def.combat.trailWidth,1500);
+});
+
+test('Magma creates a continuous 1.5-tile ground trail only along its actual voluntary movement',async()=>{
+  const {e,spawn}=await fixture(),u=spawn('magma',0,{x:15,y:14},{speed:800});
+  e.step(1);assert.ok(u.x>15.7);assert.equal(e.state.trails.length,1);const trail=e.state.trails[0];assert.equal(trail.width,1.5);assert.equal(trail.segments.length,30);
+  for(let i=0;i<trail.segments.length;i++){const segment=trail.segments[i];close(segment.until-segment.born,10);if(i)assert.deepEqual(segment.from,trail.segments[i-1].to);}
+  const end={x:u.x,y:u.y},count=trail.segments.length;e.status(u,'root',2);e.step(1);close(u.x,end.x);assert.equal(trail.segments.length,count);
+  e.cleanse(u);e.status(u,'silence',2);e.step(1);assert.ok(u.x>end.x);assert.equal(trail.segments.length,count);
+  e.cleanse(u);u.stats.speed=0;e.push(u,{x:14,y:14},2);e.step(1);assert.equal(trail.segments.length,count);
+});
+
+test('a Magma patch deals exactly three damage per second for ten seconds, with no damage afterward',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('magma'),target=dummy(1,{x:15.5,y:14});
+  e.leaveTrail(u,{x:15,y:14},{x:16,y:14},{width:1.5,duration:10,damage:3,interval:1});
+  e.step(.9);close(target.hp,1000);e.step(.1);close(target.hp,997);e.step(9);close(target.hp,970);
+  assert.equal(e.state.trails.length,0);e.step(10);close(target.hp,970);assert.equal(target.statuses.some(s=>s.kind==='burn'),false);
+});
+
+test('overlapping pieces of the same Magma trail deal one packet per second; distinct Magmas remain independent',async()=>{
+  const {e,spawn,dummy}=await fixture(),a=spawn('magma'),b=spawn('magma'),target=dummy(1,{x:15.5,y:14});
+  const params={width:1.5,duration:10,damage:3,interval:1};
+  for(let i=0;i<50;i++)e.leaveTrail(a,{x:15,y:14},{x:16,y:14},params);
+  e.step(1);close(target.hp,997);e.leaveTrail(b,{x:15,y:14},{x:16,y:14},params);
+  // Memory resets during a Format promotion cannot duplicate one caster's field.
+  a.memory={};e.leaveTrail(a,{x:15,y:14},{x:16,y:14},params);assert.equal(e.state.trails.length,2);
+  e.step(1);close(target.hp,991);
+});
+
+test('Magma fire uses the authored footprint, excludes allies and structures, and respects flying/hovering immunity',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('magma'),inside=dummy(1,{x:15.5,y:14}),outside=dummy(1,{x:15.5,y:14}),ally=dummy(0,{x:15.5,y:14}),hover=spawn('cryon',1,{x:15.5,y:14}),flyer=spawn('hornets',1,{x:15.5,y:14}),building=dummy(1,{x:15.5,y:14});
+  inside.radius=outside.radius=.1;inside.y=14.84;outside.y=14.86;building.isBuilding=true;const hoverHp=hover.hp,flyerHp=flyer.hp;
+  e.leaveTrail(u,{x:15,y:14},{x:16,y:14},{width:1.5,duration:10,damage:3,interval:1});e.step(1);
+  close(inside.hp,997);close(outside.hp,1000);close(ally.hp,1000);close(hover.hp,hoverHp);close(flyer.hp,flyerHp);close(building.hp,1000);
+});
+
+test('Magma fire persists after caster death or loss of control, retains its owner, and freezes on pause',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),u=spawn('magma'),target=dummy(1,{x:15.5,y:14}),ally=dummy(0,{x:15.5,y:14});
+  e.leaveTrail(u,{x:15,y:14},{x:16,y:14},{width:1.5,duration:10,damage:3,interval:1});e.status(u,'imprisonment',5);u.side=1;
+  e.step(1);close(target.hp,997);close(ally.hp,1000);e.setPaused(true);e.step(30);close(target.hp,997);close(e.time,1);e.setPaused(false);
+  u.statuses=[];kill(u);e.step(9);close(target.hp,970);assert.equal(e.state.trails.length,0);assert.equal(u.alive,false);
+});
+
+test('Magma fire starts a new exposure interval after leaving and re-entering, without applying a lingering Burn',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('magma'),target=dummy(1,{x:15.5,y:14});
+  e.leaveTrail(u,{x:15,y:14},{x:16,y:14},{width:1.5,duration:10,damage:3,interval:1});e.step(.7);target.x=19;e.step(1);close(target.hp,1000);
+  target.x=15.5;e.step(.9);close(target.hp,1000);e.step(.1);close(target.hp,997);target.x=19;e.step(2);close(target.hp,997);
+});
+
+test('Fallen Angel chooses highest current Health instead of maximum Health, shields or proximity',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('fallen-angel'),wounded=dummy(1,{x:18,y:14},{health:2000}),chosen=dummy(1,{x:20,y:14},{health:700}),near=dummy(1,{x:15.8,y:14},{health:100,shield:5000});
+  wounded.hp=600;e.step(1/30);assert.equal(u.targetId,chosen.id);assert.equal(u.memory.fallenTargetId,chosen.id);assert.notEqual(u.targetId,near.id);
+});
+
+test('Fallen Angel acquires only visible grounded opponents ahead within seven-and-a-half tiles',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('fallen-angel'),behind=dummy(1,{x:14,y:14},{health:9000}),far=dummy(1,{x:22.6,y:14},{health:9000}),hidden=dummy(1,{x:18,y:14},{health:9000}),air=spawn('hornets',1,{x:18,y:14},{health:9000}),ground=dummy(1,{x:22.5,y:14},{health:900});
+  e.status(hidden,'invisible',5);e.step(1/30);assert.equal(u.targetId,ground.id);assert.equal(u.def.combat.movementType,'hovering');assert.ok([behind,far,hidden,air].every(t=>t.id!==u.targetId));
+});
+
+test('Fallen Angel retains its marked target and gains one percent per real hit on that target only, capped at eighty',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('fallen-angel'),chosen=dummy(1,{x:18,y:14},{health:100000}),other=dummy(1,{x:18.3,y:14});
+  e.step(1/30);assert.equal(u.targetId,chosen.id);chosen.hp=500;assert.equal(e._target(u),chosen);
+  hit(u,other,1);close(u.memory.fallenStacks,0);hit(u,chosen,1);close(u.memory.fallenStacks,1);close(e.attackInterval(u),.8/1.01);
+  e.status(chosen,'untouchable',1);hit(u,chosen,1);close(u.memory.fallenStacks,1);chosen.statuses=[];
+  for(let i=0;i<100;i++)hit(u,chosen,1);close(u.memory.fallenStacks,80);close(u.stats.attackSpeed,.8/1.8);close(e.attackInterval(u),.8/1.8);
+  assert.equal(u.def.stats.attackSpeed,.8);
+});
+
+test('Fallen Angel resets stacks on target death, concealment or Taunt and Silence cannot preserve stacks on a changed target',async()=>{
+  for(const mode of ['death','invisible','taunt','silence']){
+    const {e,spawn,dummy,hit,kill}=await fixture(),u=spawn('fallen-angel'),chosen=dummy(1,{x:18,y:14},{health:2000}),next=dummy(1,{x:17,y:14});
+    e.step(1/30);for(let i=0;i<5;i++)hit(u,chosen,1);assert.equal(u.memory.fallenStacks,5);
+    if(mode==='death')kill(chosen);
+    if(mode==='invisible')e.status(chosen,'invisible',2);
+    if(mode==='taunt')e.status(u,'taunted',2,0,next);
+    if(mode==='silence')e.status(u,'silence',2);
+    e.step(1/30);close(u.memory.fallenStacks,0);close(u.stats.attackSpeed,.8);assert.equal(u.targetId,mode==='silence'?null:next.id);
+  }
+});
+
+test('Magma trail emission respects Misfortune, while placed flames use normal shield, Curse and immunity rules',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('magma',0,{x:15,y:14},{speed:800}),target=dummy(1,{x:15.5,y:14},{shield:100});
+  e.status(u,'misfortune',5,1);e._move(u,null,1/30);assert.equal(e.state.trails.length,0);e.cleanse(u);
+  e._move(u,null,1/30);assert.equal(e.state.trails.length,1);u.stats.speed=0;
+  e.status(target,'curse',5,.25);e.step(1);close(target.hp,998.875);close(target.shield,97.375);
+  e.status(target,'untouchable',5);e.step(1);close(target.hp,998.875);close(target.shield,97.375);
+});
+
+test('a copied Magma flame kill promotes Format with its original caster attribution',async()=>{
+  const {e,spawn}=await fixture(),u=spawn('format'),enemy=spawn('magma',1,{x:18,y:14});enemy.hp=3;enemy.shield=0;
+  e._hook('tick',u,3);assert.equal(u.def.id,'magma');
+  e.leaveTrail(u,{x:17.5,y:14},{x:18.5,y:14},{width:1.5,duration:10,damage:3,interval:1});e.step(1);
+  assert.equal(enemy.alive,false);assert.equal(u.memory.format.promoted,true);close(u.stats.damage,164);close(u.hp,1480);
+});
+
+test('new fire laid under Betrayal damages the caster allies while existing fire retains its allegiance',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('magma'),enemy=dummy(1,{x:15.5,y:14}),ally=dummy(0,{x:15.5,y:14}),params={width:1.5,duration:10,damage:3,interval:1};
+  e.leaveTrail(u,{x:15,y:14},{x:16,y:14},params);e.status(u,'betrayal',2);e._hook('move',u,{x:15,y:14},{x:16,y:14});
+  assert.equal(e.state.trails.length,2);e.step(1);close(enemy.hp,997);close(ally.hp,997);close(u.hp,740);
 });

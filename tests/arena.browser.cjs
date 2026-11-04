@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,79);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist']){
+    assert.equal(coverage.ready,81);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -469,6 +469,39 @@ async function minimapPixelAt(page,point) {
     await page.screenshot({path:'/tmp/oyun-arena-raven-lifetime.png',fullPage:true});screenshots.push('/tmp/oyun-arena-raven-lifetime.png');await page.locator('#inspector-close').click();
     await page.evaluate(()=>{delete window.inkFixture;arenaApp.startMatch();});await settleFrame(page);
 
+    const magmaWalk=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.setPaused(false);
+      const def=structuredClone(arenaApp.catalog.byId.get('magma'));def.stats.criticalChance=0;
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;e.step(2);source.stats.speed=0;
+      const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='fire-target';Object.assign(dummy.stats,{health:1000,shield:0,speed:0,damage:0,range:0,dodge:0,healrecovery:0});dummy.combat.attackType='none';
+      const [target]=e.spawn(dummy,1,{x:15.4,y:14},1,{count:1});e.step(1);e.setPaused(true);arenaApp.renderer.focusAt(source);window.flameFixture={source,target,dummy};
+      return{hp:source.hp,enemyHp:target.hp,width:e.state.trails[0].width,segments:e.state.trails[0].segments.length,walked:source.x-15};
+    });
+    assert.equal(magmaWalk.hp,740);assert.equal(magmaWalk.enemyHp,997);assert.equal(magmaWalk.width,1.5);assert.equal(magmaWalk.segments,60);assert.ok(magmaWalk.walked>1.5);
+    await settleFrame(page);await page.screenshot({path:'/tmp/oyun-arena-magma-trail.png',fullPage:true});screenshots.push('/tmp/oyun-arena-magma-trail.png');
+    const magmaPoint=await clientPoint(page,await page.evaluate(()=>({x:flameFixture.source.x,y:flameFixture.source.y})));await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(magmaPoint.x,magmaPoint.y);
+    await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-magma-trail]').count(),1);assert.match(await page.locator('[data-magma-trail]').textContent(),/1.5 tiles.*10 seconds.*3 damage/);
+    await page.locator('#inspector-close').click();
+    await page.evaluate(()=>{const e=arenaApp.engine;e.setPaused(true);e.leaveTrail(flameFixture.source,{x:30,y:14},{x:31,y:14},{width:1.5,duration:10,damage:3,interval:1});});
+    const hiddenFire=await pixelAt(page,{x:30.5,y:14});assert.ok(hiddenFire.every(value=>value<12),'distant flame does not expose fog');
+    const fallenMark=await page.evaluate(()=>{
+      arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.setPaused(false);
+      const def=structuredClone(arenaApp.catalog.byId.get('fallen-angel'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;
+      const [wounded]=e.spawn(flameFixture.dummy,1,{x:16.8,y:14},1,{count:1});wounded.hp=500;
+      const other=structuredClone(flameFixture.dummy);other.stats.health=600;
+      const [chosen]=e.spawn(other,1,{x:18,y:14},1,{count:1});e.step(1/30);
+      for(let i=0;i<5;i++)e._resolveHit(source,chosen,{kind:'attack',damage:1});
+      e.setPaused(true);arenaApp.renderer.focusAt(source);window.flameFixture={source,chosen,wounded};
+      return{chosen:source.targetId===chosen.id,stacks:source.memory.fallenStacks,interval:e.attackInterval(source)};
+    });
+    assert.equal(fallenMark.chosen,true);assert.equal(fallenMark.stacks,5);assert.ok(Math.abs(fallenMark.interval-.8/1.05)<1e-7);await settleFrame(page);
+    const fallenPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(fallenPoint.x,fallenPoint.y);
+    await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-fallen-stacks="5"]').count(),1);assert.equal(await page.locator('#inspector [data-stat="attackSpeed"] strong').textContent(),'0.762s');
+    await page.screenshot({path:'/tmp/oyun-arena-fallen-mark.png',fullPage:true});screenshots.push('/tmp/oyun-arena-fallen-mark.png');await page.locator('#inspector-close').click();
+    const fallenReset=await page.evaluate(()=>{const e=arenaApp.engine,{source,chosen,wounded}=flameFixture;e.damage(null,chosen,5000,{kind:'spell',bypassShield:true});e._drainDeaths();e.setPaused(false);e.step(1/30);e.setPaused(true);return{stacks:source.memory.fallenStacks,next:source.targetId===wounded.id};});
+    assert.deepEqual(fallenReset,{stacks:0,next:true});await page.evaluate(()=>{delete window.flameFixture;arenaApp.startMatch();});await settleFrame(page);
+
     // A real flyer engages units in its deployed outer lane, then resumes that
     // corridor. Gloop hides captives, reports its count/lifetime, and releases.
     const flight=await page.evaluate(()=>{
@@ -802,7 +835,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

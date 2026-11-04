@@ -201,6 +201,12 @@ function openInspector(def,kind='card',unit=null) {
       const charge=unit.memory.artistCharge||0,bonus=Math.floor(charge/20);
       notes.push(`<section class="live-status-section" data-artist-charge="${charge}"><h3>Ink Charge · ${charge}</h3><p>On death: ${6+bonus*2} ravens for ${7+bonus} seconds.</p></section>`);
     }
+    if(unit.def.id==='magma')notes.push('<section class="live-status-section" data-magma-trail><h3>Flame Trail</h3><p>1.5 tiles wide · Lasts 10 seconds · 3 damage each second. Affects grounded enemies.</p></section>');
+    if(unit.def.id==='fallen-angel'){
+      const target=state.engine.units.find(t=>t.id===unit.memory.fallenTargetId&&t.alive&&state.engine.canSee(unit,t));
+      const stacks=unit.memory.fallenStacks||0;
+      notes.push(`<section class="live-status-section" data-fallen-stacks="${stacks}"><h3>Marked Target · ${target?escapeHTML(target.def.name):'None'}</h3><p>Attack Speed +${stacks}% · ${stacks} / 80 stacks. Resets when the target changes.</p></section>`);
+    }
     if(unit.healthless)notes.push('<section class="live-status-section" data-healthless><h3>Timed Form</h3><p>No health. Flying and untargetable. Reveals a 4-tile radius; the violet bar shows remaining lifetime.</p></section>');
     if(unit.memory.format&&!unit.memory.format.transformed)notes.push(`<section class="live-status-section" data-format-channel><h3>Transformation</h3><p>${unit.memory.format.targetId?`${Math.max(0,unit.memory.format.remaining).toFixed(1)}s remaining`:'Waiting for a visible enemy ahead.'}</p><p>Chooses by Codex Power. Cannot deal damage before transforming.</p></section>`);
     if(notes.length)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',notes.join(''));

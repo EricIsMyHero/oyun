@@ -41,7 +41,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,79);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,81);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none')assert.ok(card.attack.interval>0);}}
   assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
@@ -60,6 +60,8 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  magma:({ctx,u,rule})=>{let patch=null;ctx.leaveTrail=(source,from,to,params)=>{patch={source,from,to,params};};rule.move(ctx,u,{x:5,y:11},{x:5.1,y:11});assert.equal(patch.source,u);assert.deepEqual(patch.params,{width:1.5,duration:10,damage:3,interval:1});},
+  'fallen-angel':({ctx,u,t,rule,result})=>{assert.equal(rule.target(ctx,u),t);rule.targetChanged(ctx,u,t);for(let i=0;i<100;i++)rule.hit(ctx,u,t,result);assert.equal(u.memory.fallenStacks,80);close(u.stats.attackSpeed,u.def.stats.attackSpeed/1.8);rule.targetChanged(ctx,u,null);assert.equal(u.memory.fallenStacks,0);close(u.stats.attackSpeed,u.def.stats.attackSpeed);},
   etheris:({ctx,u,rule})=>{let linked=null;ctx.linkEtheris=actor=>{linked=actor;};rule.tick(ctx,u,0);assert.equal(linked,u);},
   format:({ctx,u,rule})=>{let channel=null;ctx.channelFormat=(actor,dt)=>{channel={actor,dt};};rule.tick(ctx,u,3);assert.equal(channel.actor,u);assert.equal(channel.dt,3);},
   artist:({ctx,u,t,rule,result,records})=>{let ink=null;ctx.addInk=(source,target)=>{ink={source,target};};rule.hit(ctx,u,t,result);assert.equal(ink.source,u);assert.equal(ink.target,t);u.memory.artistCharge=40;rule.death(ctx,u);assert.equal(records.spawn[0].options.count,10);for(const raven of ctx.units.filter(t=>t.def.id==='artist/flock-of-ravens')){assert.equal(raven.expiresAt,9);assert.equal(raven.stats.life,9);}},

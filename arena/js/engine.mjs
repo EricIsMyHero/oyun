@@ -40,7 +40,7 @@ export class ArenaEngine {
       teams:[{deck,spellDeck},opponent].map(loadout=>({mana:RULES.startMana,energy:0,hand:loadout.deck.slice(0,RULES.handSize),queue:loadout.deck.slice(RULES.handSize),spellIds:[...loadout.spellDeck],spellIndex:0,deployed:0,spentMana:0})),
       castles:MAP.bases.map((p,side)=>({id:`castle-${side}`,name:side?'Crimson Crown':'Azure Core',...p,side,radius:MAP.castleRadius,hp:RULES.castleHealth,maxHp:RULES.castleHealth,shield:0,maxShield:0,alive:true,isCastle:true,isBuilding:true,stats:{dodge:0,damageminimiser:0,shieldtakendamage:0,criticdamageminimiser:0},statuses:[],memory:{},cooldown:0})),
       nodes:MAP.nodes.map(n=>({...n,owner:null,capturing:null,progress:0})),
-      units:[],projectiles:[],effects:[],events:[],fields:[],sharedVitals:[],
+      units:[],projectiles:[],effects:[],events:[],fields:[],trails:[],sharedVitals:[],
     };
     this.botState=this.bot?createBotState(this):null;
   }
@@ -61,14 +61,15 @@ export class ArenaEngine {
   near(point,radius,filter=null){return this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&distance(u,point)<=radius+(u.radius||0)&&(!filter||filter(u)));}
   ability(u){return ABILITIES[u.def?.id] || ABILITIES[u.def?.rootId] || null;}
   _hook(name,u,...args){
-    if(name!=='spawn'&&(has(u,'silence',this.time)||has(u,'imprisonment',this.time)))return;
-    if(u.engulfedBy&&['tick','attack','hit','lifesteal'].includes(name))return;
-    if(['tick','attack'].includes(name)&&(has(u,'airborne',this.time)||has(u,'frozen',this.time)))return;
+    // Target changes clear passive state even while abilities are silenced.
+    if(!['spawn','targetChanged'].includes(name)&&(has(u,'silence',this.time)||has(u,'imprisonment',this.time)))return;
+    if(u.engulfedBy&&['tick','move','attack','hit','lifesteal'].includes(name))return;
+    if(['tick','move','attack'].includes(name)&&(has(u,'airborne',this.time)||has(u,'frozen',this.time)))return;
     const fn=this.ability(u)?.[name];if(!fn)return;
     const chance=strongest(u,'misfortune',this.time),triggered=['incoming','damaged','death','unitDeath','lifesteal'].includes(name);
     if(triggered&&chance&&this.random()<chance)return;
     const previous=this.abilityContext;this.abilityContext={source:u,name,missed:triggered?false:null};
-    try{fn(this,u,...args);}finally{this.abilityContext=previous;}
+    try{return fn(this,u,...args);}finally{this.abilityContext=previous;}
   }
   statValue(u,key,fallback=0){return statValue(u,key,this.time,num(u?.stats?.[key],fallback));}
   _pool(u){return this.vitalPools.get(u?.sharedVitalsId)||null;}
@@ -497,11 +498,11 @@ export class ArenaEngine {
   damage(source,target,amount,options={}){
     const empty={healthDamage:0,shieldDamage:0,total:0,killed:false};
     if(!target?.alive||target.healthless||target.banished||!(amount>0)||this.damageDepth>16)return empty;
-    if(source&&(source.engulfedBy||has(source,'imprisonment',this.time)||has(source,'airborne',this.time)))return empty;
+    if(source&&!options.persistentField&&(source.engulfedBy||has(source,'imprisonment',this.time)||has(source,'airborne',this.time)))return empty;
     if(target.engulfedBy&&source?.id!==target.engulfedBy)return empty;
     if(has(target,'imprisonment',this.time)||has(target,'untouchable',this.time)||has(target,'untargetable',this.time))return empty;
     const hit={damage:amount,kind:'attack',bypassShield:false,critical:false,secondary:false,...options};
-    if(source&&!this.isEnemy(source,target)&&!options.friendlyFire)return empty;
+    if(source&&!(options.fieldSide!=null?target.side!==options.fieldSide:this.isEnemy(source,target))&&!options.friendlyFire)return empty;
     if(hit.kind==='ability'&&!hit.accuracyChecked&&source&&this._abilityMiss(source,target)){this.fx('miss',target.x,target.y,{side:source.side});return empty;}
     if(hit.kind==='attack'&&!hit.secondary&&this.random()<clamp(this.statValue(target,'dodge'),0,70)/100){this.fx('miss',target.x,target.y,{side:target.side});return empty;}
     this.damageDepth++;
@@ -590,6 +591,8 @@ export class ArenaEngine {
     if(u.burstTargetId){const locked=this.units.concat(this.castles).find(t=>t.id===u.burstTargetId);if(this._legalTarget(u,locked,sources))return locked;
       if(u.burstIndex>0&&u.def.attack?.sequence?.length)u.sequenceIndex++;
       u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
+    const prioritized=this._hook('target',u);
+    if(prioritized&&this._legalTarget(u,prioritized,sources))return prioritized;
     const reach=this._range(u);
     const candidates=this.units.filter(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius);
     candidates.sort((a,b)=>distance(u,a)-distance(u,b)||a.id.localeCompare(b.id));
@@ -689,10 +692,39 @@ export class ArenaEngine {
     }
     const travelled=distance(u,p);
     if(travelled>EPS){u.facingX=(p.x-u.x)/travelled;u.facingY=(p.y-u.y)/travelled;}
+    const from={x:u.x,y:u.y};
     u.x=clamp(p.x,.5,MAP.width-.5);u.y=clamp(p.y,.5,MAP.height-.5);
     u.memory.distance=(u.memory.distance||0)+travelled*1000;
     u.memory.movedTime=(u.memory.movedTime||0)+dt;
     u.moving=travelled>0;
+    if(distance(from,u)>EPS)this._hook('move',u,from,{x:u.x,y:u.y});
+  }
+  leaveTrail(u,from,to,{width,duration,damage,interval}){
+    if(distance(from,to)<=EPS||!(width>0&&duration>0&&interval>0))return;
+    const side=has(u,'betrayal',this.time)?1-u.side:u.side;
+    let trail=this.state.trails.find(t=>t.sourceId===u.id&&t.side===side);
+    if(!trail){
+      trail={id:`trail-${++this.serial}`,source:u,sourceId:u.id,side,width,damage,interval,segments:[],exposure:{}};
+      this.state.trails.push(trail);u.memory.magmaTrailId=trail.id;
+    }
+    trail.segments.push({from:{...from},to:{...to},born:this.time,until:this.time+duration});
+  }
+  _trails(dt){
+    for(const trail of this.state.trails){
+      const segments=trail.segments.filter(s=>s.until+EPS>=this.time),exposure={};
+      for(const target of this.units){
+        if(!target.alive||target.id===trail.sourceId||target.banished||target.engulfedBy||target.isBuilding||target.healthless||target.side===trail.side||target.def.combat.movementType!=='ground'||target.def.combat.groundEffectImmune)continue;
+        if(!segments.some(s=>projectSegment(target,s.from,s.to).distance<=trail.width/2+target.radius+EPS))continue;
+        let clock=(trail.exposure[target.id]||0)+dt;
+        while(target.alive&&clock+EPS>=trail.interval){
+          clock=Math.max(0,clock-trail.interval);
+          this.damage(trail.source,target,trail.damage,{kind:'dot',secondary:true,accuracyChecked:true,persistentField:true,fieldSide:trail.side});
+        }
+        if(target.alive)exposure[target.id]=clock;
+      }
+      trail.exposure=exposure;trail.segments=segments.filter(s=>s.until>this.time+EPS);
+    }
+    this.state.trails=this.state.trails.filter(t=>t.segments.length);
   }
   _targetsFor(u,target,p){
     if(!p.multiTarget)return [target];
@@ -1023,7 +1055,7 @@ export class ArenaEngine {
       const owned=this.state.nodes.filter(n=>n.owner===side).length;
       this.teams[side].mana=Math.min(RULES.maxMana,this.teams[side].mana+dt/RULES.manaInterval*(1+owned*RULES.nodeBonus)*(this.state.phase==='overtime'?2:1));
     }
-    this._fields();
+    this._fields();this._trails(dt);
     this._syncCaptives();
     for(const castle of this.castles)if(castle.alive)this._statuses(castle,dt);
     // Snapshot prevents summons from taking an extra action in their birth tick.
@@ -1039,7 +1071,9 @@ export class ArenaEngine {
       if(u.isBuilding)this._buildingAura(u);
       if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this._hook('tick',u,dt);
       if(!u.alive||['stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
-      const target=this._target(u);u.targetId=target?.id??null;
+      const target=this._target(u);
+      if(u.targetId!==(target?.id??null))this._hook('targetChanged',u,target);
+      u.targetId=target?.id??null;
       const profile=this._profile(u),reach=this._attackReach(u,profile);
       const allowance=this.ability(u)?.contactAttack?EPS:u.radius*.2;
       if(target&&distance(u,target)<=reach+target.radius+allowance&&profile.attackType!=='none'){

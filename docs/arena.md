@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **79 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **81 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -179,10 +179,10 @@ after the first successful hit; their poison continues and keeps its original
 caster attribution. Giga Bomb deals its immediate source damage and then ten
 one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
 
-Twenty-one Relic roots now have their native abilities implemented: **Stacy**,
+All twenty-three Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,
 **Bloodraider**, **Shine**, **Avalith**, **Malvaris**, **Sylviana**, **Pyhsic**,
-**Unara**, **Clara**, **Far**, **Lyra**, **Naar**, **Etheris**, **Format** and **Artist**.
+**Unara**, **Clara**, **Far**, **Lyra**, **Naar**, **Etheris**, **Format**, **Artist**, **Magma** and **Fallen Angel**.
 
 - Stacy adds four one-second Burn ticks of eight damage after each successful
   hit. Independent packets stack and continue after her death. Below 10% health,
@@ -317,12 +317,30 @@ Twenty-one Relic roots now have their native abilities implemented: **Stacy**,
   The simulation uses an internal liveness sentinel, never an invented health
   stat. Pause freezes their expiry with every other combat timer.
 
+- Magma replaces its former health drain and ally Burn aura with a **1.5-tile
+  flame trail**. Only actual walking lays fire; standing still, crowd separation,
+  knockback and teleports do not. Each piece lasts **ten seconds**. Grounded enemy
+  units touching the trail take **three damage per second** of continuous exposure.
+  Hovering/flying units, allies and structures are excluded. Leaving resets the
+  exposure timer; no extra Burn persists off the trail. Overlapping pieces from
+  one Magma do not multiply damage; separate Magmas have independent trails.
+  Existing fire keeps its original team and lifetime after caster death,
+  conversion or crowd control. Silence prevents new fire; pause freezes it all.
+- Fallen Angel initially chooses the visible grounded enemy ahead within **7.5
+  tiles** with the greatest **current health**, ignoring maximum health, shields
+  and proximity except to break ties. It retains that target while legal/visible.
+  Each successful impact on that target grants **1% attack speed**, capped at
+  **80%** (0.80s becomes approximately 0.444s). Cone collateral does not grant
+  stacks. Target death, concealment, loss of legal targeting, or a Taunt changing
+  the target resets the bonus. Native prioritization respects fog and Silence;
+  the inspector displays the marked target and current stacks.
+
 The live unit inspector displays native stat growth as well as status modifiers,
 so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 59 locked entries explain an undefined
+defined for this simulator. The remaining 57 locked entries explain an undefined
 rule, missing combat data, or an unimplemented native ability. Required child
 forms must also be complete; removing a lock never substitutes invented values.
 
