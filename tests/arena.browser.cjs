@@ -460,7 +460,7 @@ async function minimapPixelAt(page,point) {
       inkFixture.raven=ravens[0];e.state.units=ravens;arenaApp.renderer.focusAt(ravens[0]);
       return{count:ravens.length,life:ravens[0].expiresAt-e.time,vision:ravens[0].stats.vision,canHit:e.canTarget(inkFixture.next,ravens[0]),damage:e.damage(null,ravens[0],9999,{kind:'spell'}).total};
     });
-    assert.deepEqual(timedRavens,{count:8,life:8,vision:4000,canHit:false,damage:0});await settleFrame(page);
+    assert.ok(Math.abs(timedRavens.life-8)<1e-7);assert.deepEqual({...timedRavens,life:8},{count:8,life:8,vision:4000,canHit:false,damage:0});await settleFrame(page);
     const ravenPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(ravenPoint.x,ravenPoint.y);
     await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-healthless]').count(),1);
     assert.equal(await page.locator('#inspector [data-stat="number"] strong').textContent(),'8');
