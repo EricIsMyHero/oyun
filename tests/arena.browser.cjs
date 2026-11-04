@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,84);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler']){
+    assert.equal(coverage.ready,86);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -517,6 +517,42 @@ async function minimapPixelAt(page,point) {
       await page.evaluate(()=>{delete window.mundaneFixture;arenaApp.startMatch();});await settleFrame(page);
     }
 
+    {
+      const angelsPaid=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.teams[0].hand[0]='angels';
+        const result=e.deploy(0,0,{x:7,y:14});if(!result.ok)throw Error(result.error);
+        const first=result.units[0];e.step(.9);e.setPaused(true);arenaApp.renderer.focusAt(first);window.wingFixture={first};
+        return{units:e.units.length,spent:e.teams[0].spentMana,deployed:e.teams[0].deployed,next:e.state.spawnStreams[0].nextAt};
+      });
+      assert.deepEqual(angelsPaid,{units:3,spent:8,deployed:1,next:1.35});await settleFrame(page);
+      const angelPoint=await clientPoint(page,await page.evaluate(()=>({x:wingFixture.first.x,y:wingFixture.first.y})));await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(angelPoint.x,angelPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-angel-stream="3"]').count(),1);
+      assert.match(await page.locator('[data-angel-stream]').textContent(),/3 \/ 10/);
+      await page.screenshot({path:'/tmp/oyun-arena-angels-stream.png',fullPage:true});screenshots.push('/tmp/oyun-arena-angels-stream.png');await page.locator('#inspector-close').click();
+      const rallied=await page.evaluate(()=>{
+        const e=arenaApp.engine;e.setPaused(false);e.step(Math.max(0,5.4-e.time));e.setPaused(true);const emitted=e.units.filter(u=>u.def.id==='angels').length;
+        e.damage(null,wingFixture.first,10000,{kind:'spell',bypassShield:true});e._drainDeaths();
+        return{emitted,alive:e.units.filter(u=>u.def.id==='angels').length,damage:e.units.filter(u=>u.def.id==='angels').map(u=>u.stats.damage),pending:e.state.spawnStreams.length,spent:e.teams[0].spentMana};
+      });
+      assert.deepEqual(rallied,{emitted:10,alive:9,damage:Array(9).fill(8),pending:0,spent:8});
+      const boomFlight=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('boomix'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});
+        const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.shield=0;
+        const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='return-browser-target';dummy.combat.attackType='none';Object.assign(dummy.stats,{health:1000,shield:0,damage:0,range:0,speed:0,dodge:0,healrecovery:0});
+        const [target]=e.spawn(dummy,1,{x:18,y:14},1,{count:1});e._fire(source,target);e.step(.2);const damage=e.damage(null,source,10,{kind:'spell',bypassShield:true}).total;
+        e.setPaused(true);arenaApp.renderer.focusAt(source);window.wingFixture={source,target};return{damage,flight:!!source.memory.returningShotId,phase:e.state.projectiles[0].returning};
+      });
+      assert.deepEqual(boomFlight,{damage:8,flight:true,phase:'outbound'});await settleFrame(page);
+      const boomPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(boomPoint.x,boomPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-boomix-flight="true"]').count(),1);assert.match(await page.locator('[data-boomix-flight]').textContent(),/20% less incoming damage/);
+      await page.screenshot({path:'/tmp/oyun-arena-boomix-flight.png',fullPage:true});screenshots.push('/tmp/oyun-arena-boomix-flight.png');await page.locator('#inspector-close').click();
+      const caught=await page.evaluate(()=>{const e=arenaApp.engine,{source,target}=wingFixture;e.setPaused(false);e.step(Math.max(0,.9-e.time));e.setPaused(true);return{hp:target.hp,flight:!!source.memory.returningShotId,shots:source.shots,cooldown:source.cooldown};});
+      assert.equal(caught.hp,972);assert.equal(caught.flight,false);assert.equal(caught.shots,1);assert.ok(Math.abs(caught.cooldown-1.5)<1e-7);
+      const relaunched=await page.evaluate(()=>{const e=arenaApp.engine;e.setPaused(false);e.step(Math.max(0,2.4-e.time));e.setPaused(true);return wingFixture.source.shots;});assert.equal(relaunched,2);
+      await page.evaluate(()=>{delete window.wingFixture;arenaApp.startMatch();});await settleFrame(page);
+    }
+
     const magmaWalk=await page.evaluate(()=>{
       const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.setPaused(false);
       const def=structuredClone(arenaApp.catalog.byId.get('magma'));def.stats.criticalChance=0;
@@ -883,7 +919,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

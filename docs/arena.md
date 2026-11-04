@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **84 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **86 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -197,6 +197,32 @@ Three more Mundane roots have native rules ready:
   Silence blocks new stealth and Misfortune, but cannot prevent an existing
   conditional stealth state from ending on damage. Pause freezes all timers.
   The inspector shows the recovery countdown or active invisibility.
+
+The last two Mundane profiles are now complete, so **every Mundane root is
+battle-ready**:
+
+- **Angels** is one prepaid ten-body reinforcement stream. The first arrives
+  immediately. Subsequent gaps are **0.40, 0.45, 0.50 … 0.80 seconds**, giving
+  scheduled arrival times **0, 0.40, 0.85, 1.35, 1.90, 2.50, 3.15, 3.85, 4.60,
+  5.40 seconds**. Fixed-step emission rounds up by at most one simulation tick
+  without accumulating delay. The ten-body Count and eight-mana cost stay intact;
+  only the initial body needs a deployment position. Reinforcements arrive at
+  that position on the selected corridor, independently of the first body's
+  survival or control effects. After ten, the stream stops. Pause freezes it.
+- Each fallen friendly Angel grants **+2 permanent Damage** to currently living
+  friendly Angels across deployment groups. Enemy or unrelated deaths do not
+  grant it. Future arrivals start with base Damage, because they were not yet on
+  the field when those earlier Angels died. Native ability suppression follows
+  Silence/Misfortune. The inspector shows arrivals, the next deadline and bonus.
+- **Boomix** travels to the target's launch-time position and returns to its
+  moving owner. It retains the single-target profile: at most one victim on each
+  leg, with a fresh hit budget on return. The same target can take both hits.
+  During flight its native passive reduces incoming damage by **20%**. Its
+  **2.40-second attack interval begins at launch**; catching a weapon early
+  preserves the remaining cooldown, while a late return delays the next launch
+  until the weapon is caught. Only one weapon can be airborne, including during
+  a Format promotion. Pause, death and Silence retain normal behavior. Avalith
+  keeps its separate recovery-after-catch rule.
 
 All twenty-three Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,
@@ -359,7 +385,7 @@ so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 54 locked entries explain an undefined
+defined for this simulator. The remaining 52 locked entries explain an undefined
 rule, missing combat data, or an unimplemented native ability. Required child
 forms must also be complete; removing a lock never substitutes invented values.
 

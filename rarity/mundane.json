@@ -1307,7 +1307,7 @@
       "mana": "8",
       "number": "10"
     },
-    "trait": "Angels döyüş meydanında davamlı bir axın yaradır və hər 0,4 saniyədə bir yenisi ön xəttə daxil olar. Meydandakı hər bir Angels vahidi məhv edildikdə, onun ruhu geridə qalan digər bütün mələk kartlarını gücləndirər və onlara daimi +2 hasar bonusu qazandırar.",
+    "trait": "Cəmi 10 mələk yaranar. İlk mələk dərhal, ikinci 0,40 saniyə sonra yaranar; hər sonrakı mələk üçün fasilə 0,05 saniyə artar: 0,40 → 0,45 → 0,50 saniyə və s. Onuncu mələkdən sonra axın dayanar. Meydandakı hər bir Angels vahidi məhv edildikdə, meydanda sağ qalan digər dost Angels vahidləri daimi +2 hasar qazanar.",
     "additionalStats": {
       "range": "900",
       "speed": "1100",
@@ -1370,7 +1370,7 @@
       "mana": "4",
       "number": "1"
     },
-    "trait": "Atışları gedib-geri qayıdar. Atış müddətində 20% hasar azaltma qazanar",
+    "trait": "Atışı hədəfin olduğu nöqtəyə çatdıqda geri dönər və hər iki istiqamətdə hasar verər. Hər istiqamətdə tək hədəfə bir dəfə hasar verə bilər. Silah havada olduğu müddətdə 20% daha az hasar alar. 2,40 saniyəlik hücum intervalı atış anından hesablanar; silah hələ qayıtmayıbsa, növbəti atış üçün onun qayıtmasını gözləyər.",
     "additionalStats": {
       "range": "3750",
       "speed": "1000",

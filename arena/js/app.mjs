@@ -202,6 +202,12 @@ function openInspector(def,kind='card',unit=null) {
       notes.push(`<section class="live-status-section" data-artist-charge="${charge}"><h3>Ink Charge · ${charge}</h3><p>On death: ${6+bonus*2} ravens for ${7+bonus} seconds.</p></section>`);
     }
     if(unit.def.id==='magma')notes.push('<section class="live-status-section" data-magma-trail><h3>Flame Trail</h3><p>1.5 tiles wide · Lasts 10 seconds · 3 damage each second. Affects grounded enemies.</p></section>');
+    if(unit.def.id==='angels'){
+      const stream=state.engine.state.spawnStreams.find(s=>s.id===unit.memory.spawnStreamId),total=unit.memory.spawnTotal||1;
+      const emitted=stream?.emitted??total,bonus=(unit.memory.angelDeaths||0)*2;
+      notes.push(`<section class="live-status-section" data-angel-stream="${emitted}"><h3>Reinforcements · ${emitted} / ${total}</h3><p>${stream?`Next Angel in ${Math.max(0,stream.nextAt-state.engine.time).toFixed(2)}s. Each interval grows by 0.05s.`:'All scheduled Angels have arrived.'}</p><p>Death Rally: +${bonus} damage from fallen allies.</p></section>`);
+    }
+    if(unit.def.id==='boomix')notes.push(`<section class="live-status-section" data-boomix-flight="${!!unit.memory.returningShotId}"><h3>${unit.memory.returningShotId?'Weapon in Flight':'Weapon Ready'}</h3><p>${unit.memory.returningShotId?'Flight protection: 20% less incoming damage.':'The weapon damages one target on each leg.'} Attack interval starts at launch; the weapon must return before another throw.</p></section>`);
     if(unit.def.id==='nortex'){
       const damage=state.engine.statValue(unit,'damage');
       notes.push(`<section class="live-status-section" data-nortex-burst><h3>Progressive Burst</h3><p>${[1,1.4,1.8].map(scale=>Number((damage*scale).toFixed(3))).join(' → ')} damage. Resets after each three-shot series.</p></section>`);
@@ -252,6 +258,7 @@ function startMatch() {
     if($('inspector').open)closeInspector();
     state.pauseReasons.clear();
     state.engine=new ArenaEngine({cards:state.catalog.cards,spells:state.catalog.spells,deck:[...state.deck],spellDeck:[...state.spellDeck],seed:state.seed++,bot:true});
+    state.renderer.shotTimes.clear();
     state.selection=null;state.pointer=null;state.drag=null;state.selectedUnitId=null;state.resultShown=false;state.handSignature='';state.spellSignature='';state.lastHUD=0;
     document.body.dataset.mode='battle';
     document.querySelectorAll('.battle-only').forEach(el=>{el.hidden=false;});

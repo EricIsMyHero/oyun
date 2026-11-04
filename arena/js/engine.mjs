@@ -40,7 +40,7 @@ export class ArenaEngine {
       teams:[{deck,spellDeck},opponent].map(loadout=>({mana:RULES.startMana,energy:0,hand:loadout.deck.slice(0,RULES.handSize),queue:loadout.deck.slice(RULES.handSize),spellIds:[...loadout.spellDeck],spellIndex:0,deployed:0,spentMana:0})),
       castles:MAP.bases.map((p,side)=>({id:`castle-${side}`,name:side?'Crimson Crown':'Azure Core',...p,side,radius:MAP.castleRadius,hp:RULES.castleHealth,maxHp:RULES.castleHealth,shield:0,maxShield:0,alive:true,isCastle:true,isBuilding:true,stats:{dodge:0,damageminimiser:0,shieldtakendamage:0,criticdamageminimiser:0},statuses:[],memory:{},cooldown:0})),
       nodes:MAP.nodes.map(n=>({...n,owner:null,capturing:null,progress:0})),
-      units:[],projectiles:[],effects:[],events:[],fields:[],trails:[],sharedVitals:[],
+      units:[],projectiles:[],effects:[],events:[],fields:[],trails:[],sharedVitals:[],spawnStreams:[],
     };
     this.botState=this.bot?createBotState(this):null;
   }
@@ -129,9 +129,9 @@ export class ArenaEngine {
     this._setFormatForm(u,def,true);
   }
   _setFormatForm(u,def,spawnHook=false){
-    const format=u.memory.format;
+    const format=u.memory.format,returningShotId=u.memory.returningShotId;
     u.def=def;u.stats={...def.stats};u.hp=u.maxHp=def.stats.health;u.shield=u.maxShield=def.stats.shield;
-    u.memory={format};u.healthless=false;u.mass=bodyMass[def.combat.weight]||1;u.radius=.18+.07*u.mass;
+    u.memory={format,...(returningShotId?{returningShotId}:{})};u.healthless=false;u.mass=bodyMass[def.combat.weight]||1;u.radius=.18+.07*u.mass;
     u.hits=u.shots=u.attacks=u.burstIndex=u.sequenceIndex=0;u.targetId=u.burstTargetId=null;u.cooldown=0;
     delete u.lifeDecay;const decay=this.ability(u)?.lifeDecay;if(decay)u.lifeDecay={...decay,next:this.time+decay.interval};
     u.born=this.time;u.expiresAt=def.stats.life>0?this.time+def.stats.life:Infinity;
@@ -204,7 +204,7 @@ export class ArenaEngine {
     return {ok:true,units};
   }
   _formation(def,side,point,lane){
-    const count=Math.max(1,Math.floor(num(def.stats.number,1)));
+    const count=this.ability({def})?.spawnSchedule?1:Math.max(1,Math.floor(num(def.stats.number,1)));
     const radius=.18+.07*(bodyMass[def.combat?.weight]||1);
     const positions=[];
     const candidates=[{...point}];
@@ -226,6 +226,15 @@ export class ArenaEngine {
     if(!def||!finitePoint(point)||(side!==0&&side!==1))return [];
     const count=Math.max(0,Math.floor(options.count??num(def.stats.number,1)));
     const groupId=options.groupId??`group-${++this.serial}`;
+    const schedule=this.ability({def})?.spawnSchedule;
+    if(schedule&&count>1&&!options.fromStream){
+      const made=this.spawn(def,side,point,lane,{...options,count:1,groupId,fromStream:true,positions:options.positions?.slice(0,1)});
+      if(made.length){
+        const stream={id:`stream-${++this.serial}`,def,side,lane,point:{x:made[0].x,y:made[0].y},groupId,total:count,emitted:1,nextAt:this.time+schedule.initialGap,...schedule,positions:options.positions?.map(p=>({...p}))};
+        this.state.spawnStreams.push(stream);made[0].memory.spawnStreamId=stream.id;made[0].memory.spawnTotal=count;
+      }
+      return made;
+    }
     const made=[];
     for(let i=0;i<count;i++){
       const stats={...def.stats};
@@ -250,6 +259,18 @@ export class ArenaEngine {
       this.fx('spawn',u.x,u.y,{side,duration:.6});
     }
     return made;
+  }
+  _spawnStreams(){
+    for(const stream of this.state.spawnStreams){
+      while(stream.emitted<stream.total&&stream.nextAt<=this.time+EPS){
+        const position=stream.positions?.[stream.emitted];
+        const made=this.spawn(stream.def,stream.side,stream.point,stream.lane,{count:1,groupId:stream.groupId,fromStream:true,positions:position?[position]:undefined});
+        if(!made.length)break;
+        made[0].memory.spawnStreamId=stream.id;made[0].memory.spawnTotal=stream.total;stream.emitted++;
+        stream.nextAt+=stream.initialGap+(stream.emitted-1)*stream.gapStep;
+      }
+    }
+    this.state.spawnStreams=this.state.spawnStreams.filter(stream=>stream.emitted<stream.total);
   }
   _shape(spell){
     if(spell.range&&typeof spell.range==='object')return spell.range;
@@ -786,7 +807,7 @@ export class ArenaEngine {
     u.burstIndex++;
     if(u.burstIndex>=Math.max(1,attack.count)){
       u.burstIndex=0;u.burstTargetId=null;u.sequenceIndex++;u.attacks++;
-      // A returning weapon's flight is its Delay; recovery starts when caught.
+      // Returning weapons can count recovery from launch or from the catch.
       u.cooldown=Math.max(.01,interval+(returning?0:statValue(u,'delay',this.time,num(attack.delay))));
     }else{u.burstTargetId=target.id;u.cooldown=interval;}
   }
@@ -820,7 +841,7 @@ export class ArenaEngine {
     shot.done=true;
     if(shot.source.memory.returningShotId!==shot.id)return;
     delete shot.source.memory.returningShotId;
-    if(shot.source.alive)shot.source.cooldown=Math.max(.01,shot.recovery||.01);
+    if(shot.source.alive)shot.source.cooldown=Math.max(.01,shot.hit.recoveryFromLaunch?shot.source.cooldown:shot.recovery||.01);
   }
   _resolveHit(source,target,hit){
     if(!target.alive)return;
@@ -863,7 +884,9 @@ export class ArenaEngine {
         shot.x+=shot.dx*step;shot.y+=shot.dy*step;shot.remaining-=step;
         candidates=this.units.concat(this.castles);
       }
+      const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
       const targets=candidates.filter(t=>{
+        if(shot.returning&&limit!=null&&shot.hitIds.size>=limit)return false;
         if(!this._canHit(shot.source,t)||shot.hitIds.has(t.id))return false;
         let halfWidth=shot.width/2;
         if(shot.profile.attackShape==='cone'){
@@ -881,8 +904,7 @@ export class ArenaEngine {
         shot.hitIds.add(target.id);
         if(shot.ability)this.damage(shot.source,target,shot.hit.damage,shot.hit);
         else this._resolveHit(shot.source,target,shot.hit);
-        const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
-        if(limit!=null&&shot.hitIds.size>=limit){shot.done=true;break;}
+        if(limit!=null&&shot.hitIds.size>=limit){if(!shot.returning)shot.done=true;break;}
       }
       if(shot.returning&&shot.remaining<=EPS){
         if(shot.returning==='outbound'){
@@ -1086,7 +1108,7 @@ export class ArenaEngine {
         if(u.cooldown<=EPS&&!u.memory.returningShotId)this._fire(u,target);
       }else this._move(u,target,dt);
     }
-    this._syncCaptives();this._separation();this._castles(dt);this._projectiles(dt);this._objectives(dt);this._drainDeaths();
+    this._syncCaptives();this._separation();this._castles(dt);this._projectiles(dt);this._objectives(dt);this._drainDeaths();this._spawnStreams();
     this.state.effects=this.state.effects.filter(e=>e.until>this.time);
     const referenced=new Set(this.units.concat(this.castles).flatMap(u=>u.statuses.filter(s=>s.until>this.time).map(s=>s.sourceId)));
     for(const id of this.statusSources.keys())if(!referenced.has(id))this.statusSources.delete(id);

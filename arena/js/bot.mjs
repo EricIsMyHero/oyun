@@ -72,7 +72,10 @@ function situation(engine) {
 function choosePlan(engine,view) {
   const team=engine.teams[view.side],danger=[...view.lanes].sort((a,b)=>b.danger-a.danger)[0];
   const defending=danger.danger>0;
-  const lane=defending?danger:view.lanes.map(report=>({...report,priority:(engine.state.nodes[report.lane].owner!==view.side?6:1)-report.investment*.45-report.foes.reduce((n,u)=>n+unitPower(u),0)*.2+engine.random()*.8})).sort((a,b)=>b.priority-a.priority)[0];
+  const lane=defending?danger:view.lanes.map(report=>{
+    const needsSupport=report.army.some(u=>frontline(u.def)&&!u.isBuilding)&&!report.army.some(u=>ranged(u.def)&&!u.isBuilding);
+    return {...report,priority:(engine.state.nodes[report.lane].owner!==view.side?6:1)-report.investment*.45+(needsSupport?1.5:0)-report.foes.reduce((n,u)=>n+unitPower(u),0)*.2+engine.random()*.8};
+  }).sort((a,b)=>b.priority-a.priority)[0];
   const urgent=defending&&lane.nearest<=7.5;
   const mode=defending?'defend':lane.army.some(u=>frontline(u.def)&&!u.isBuilding)?'support':'advance';
   let candidates=team.hand.map(id=>engine.cards.get(id));
@@ -80,6 +83,9 @@ function choosePlan(engine,view) {
     const counters=candidates.filter(def=>lane.approaching.some(t=>canHit(def,t)));
     if(counters.length)candidates=counters;else return null;
     if(urgent&&candidates.some(def=>def.stats.mana<=team.mana))candidates=candidates.filter(def=>def.stats.mana<=team.mana);
+  }
+  if(mode==='support'){
+    const backline=candidates.filter(ranged);if(backline.length)candidates=backline;
   }
   const previous=engine.botState.plan;
   if(previous&&previous.mode===mode&&previous.lane===lane.lane&&previous.until>engine.time&&candidates.some(def=>def.id===previous.cardId))return {...previous,urgent,report:lane};

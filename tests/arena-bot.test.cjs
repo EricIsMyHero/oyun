@@ -74,10 +74,12 @@ test('a sufficiently defended lane does not force a reserve-draining panic deplo
 });
 
 test('bot supports a committed tank with a ranged unit placed behind it',async()=>{
-  const {e,turn,hand,center,spawn,distance}=await fixture();center();hand(['gloop','fire-archer','scrapy','hailey']);
-  const tank=spawn('gloop',1,{x:34,y:14});e.teams[1].mana=20;e.botState.nextDeployAt=0;turn();
-  const support=e.units.find(u=>u.side===1&&u!==tank);assert.ok(support);assert.equal(support.def.combat.attackType,'ranged');
-  assert.equal(support.lane,1);assert.ok(distance(support,e.castles[1])<distance(tank,e.castles[1]));
+  for(const seed of [1,12,77,190]){
+    const {e,turn,hand,center,spawn,distance}=await fixture(seed);center();hand(['gloop','fire-archer','scrapy','hailey']);
+    const tank=spawn('gloop',1,{x:34,y:14});e.teams[1].mana=20;e.botState.nextDeployAt=0;turn();
+    const support=e.units.find(u=>u.side===1&&u!==tank);assert.ok(support);assert.equal(support.def.combat.attackType,'ranged');
+    assert.equal(support.lane,1);assert.ok(distance(support,e.castles[1])<distance(tank,e.castles[1]));
+  }
 });
 
 test('a non-attacking building does not count as a defender that can stop an approaching enemy',async()=>{
@@ -100,13 +102,16 @@ test('bot banks mana while every corridor already has a strong marching force, t
 test('normal deployments have deliberate gaps, stay legal, and spend only available mana',async()=>{
   const {e,isDeployable}=await fixture(190),actions=[],deploy=e.deploy.bind(e);
   e.deploy=(side,index,point)=>{
-    const before=e.teams[side].mana,result=deploy(side,index,point);
-    if(result.ok)actions.push({time:e.time,before,after:e.teams[side].mana,point,side});return result;
+    const before=e.teams[side].mana,cost=e.cards.get(e.teams[side].hand[index]).stats.mana,result=deploy(side,index,point);
+    if(result.ok)actions.push({time:e.time,before,after:e.teams[side].mana,point,side,cost});return result;
   };
   e.step(1.9);assert.equal(actions.length,0);e.step(88.1);
   assert.ok(actions.length>=5&&actions.length<25,`${actions.length} deliberate deployments in 90 seconds`);
   for(let i=0;i<actions.length;i++){
-    const a=actions[i];assert.equal(a.side,1);assert.ok(a.after>=4-1e-7&&a.after<a.before);assert.ok(isDeployable(a.point,1));
+    const a=actions[i];assert.equal(a.side,1);assert.ok(a.after>=0&&a.after<a.before);assert.ok(Math.abs(a.before-a.after-a.cost)<1e-7);assert.ok(isDeployable(a.point,1));
+    // Cards costing over 16 must wait for the full 20-mana bar; other
+    // normal deployments retain at least four mana for the next decision.
+    if(a.cost>16)assert.ok(Math.abs(a.before-20)<1e-7);else assert.ok(a.after>=4-1e-7);
     if(i)assert.ok(a.time-actions[i-1].time>=3.5-1e-7);
   }
 });

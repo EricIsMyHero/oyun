@@ -110,6 +110,18 @@ export const ABILITIES = {
     tick(ctx,u){u.memory.criticalKills=(u.memory.criticalKills||[]).filter(end=>end>ctx.time);u.stats.criticalChance=clamp(u.def.stats.criticalChance+u.memory.criticalKills.length*5,0,100);},
   },
   soldier:{attack(ctx,u,t,hit){if(airborne(t))hit.damage*=1.33;}},
+  angels:{
+    spawnSchedule:{initialGap:.4,gapStep:.05},
+    unitDeath(ctx,u,dead){
+      if(dead.def?.id!=='angels'||dead.side!==u.side||dead===u||dead.isBuilding)return;
+      u.memory.angelDeaths=(u.memory.angelDeaths||0)+1;u.stats.damage+=2;
+      ctx.fx('buff',u.x,u.y,{side:u.side,color:'#ffe6aa'});
+    },
+  },
+  boomix:{
+    attack(ctx,u,t,hit){hit.returning=true;hit.recoveryFromLaunch=true;},
+    incoming(ctx,u,source,hit){if(u.memory.returningShotId)hit.damage*=.8;},
+  },
   snaykies:{attack(ctx,u,t,hit){hit.bypassShield=true;},hit(ctx,u,t,r){poisonHit(ctx,u,t,r,2,4);}},
   bees:{hit(ctx,u,t,r){if(!damageEvent(r)||u.memory.sacrificed)return;u.memory.sacrificed=true;poisonHit(ctx,u,t,r,8,2);ctx.damage(null,u,u.hp+u.shield+1,{kind:'sacrifice',bypassShield:true,secondary:true});}},
   phewphew:{attack(ctx,u,t,hit){hit.shieldMultiplier=2;}},
@@ -476,8 +488,6 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {
-  angels:['The continuous spawn stream has no end condition or relationship to Count 10.'],
-  boomix:['The returning projectile has no authored turn point or return-hit rule.'],
   albert:['The same-target growth has no authored increment or reset rule.'],
   chicken:['The 80% larger death explosion has no authored enlarged dimensions.'],
   tornado:['The whirlwind energy or duration, which triggers release, is not authored.'],
