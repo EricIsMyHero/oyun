@@ -41,9 +41,9 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,76);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,79);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
-  for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);assert.ok(card.attack.interval>0);}}
+  for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none')assert.ok(card.attack.interval>0);}}
   assert.match(c.byId.get('fen').reasons.join(' '),/percentage/);
   assert.match(c.byId.get('tphoenix').reasons.join(' '),/Health restored/);
   assert.match(c.byId.get('nightfang').reasons.join(' '),/Attack Distance/);
@@ -60,6 +60,10 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  etheris:({ctx,u,rule})=>{let linked=null;ctx.linkEtheris=actor=>{linked=actor;};rule.tick(ctx,u,0);assert.equal(linked,u);},
+  format:({ctx,u,rule})=>{let channel=null;ctx.channelFormat=(actor,dt)=>{channel={actor,dt};};rule.tick(ctx,u,3);assert.equal(channel.actor,u);assert.equal(channel.dt,3);},
+  artist:({ctx,u,t,rule,result,records})=>{let ink=null;ctx.addInk=(source,target)=>{ink={source,target};};rule.hit(ctx,u,t,result);assert.equal(ink.source,u);assert.equal(ink.target,t);u.memory.artistCharge=40;rule.death(ctx,u);assert.equal(records.spawn[0].options.count,10);for(const raven of ctx.units.filter(t=>t.def.id==='artist/flock-of-ravens')){assert.equal(raven.expiresAt,9);assert.equal(raven.stats.life,9);}},
+  'artist/flock-of-ravens':({u})=>{assert.equal(u.def.combat.healthless,true);assert.equal(u.def.combat.untargetable,true);assert.equal(u.def.combat.movementType,'flying');assert.equal(u.stats.life,7);assert.equal(u.stats.vision,4000);},
   far:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.banish[0].duration,10);assert.equal(records.banish[0].target,t);ctx.random=()=>.08;rule.hit(ctx,u,t,result);assert.equal(records.banish.length,1);},
   lyra:({ctx,u,t,rule})=>{u.hp=u.maxHp*.5;rule.tick(ctx,u);close(u.stats.damage,7);close(u.stats.attackSpeed,.2/1.4);const hit={damage:5};rule.attack(ctx,u,t,hit);close(hit.damage,7);close(hit.haste,.4);u.hp=u.maxHp;rule.tick(ctx,u);close(u.stats.damage,5);},
   naar:({ctx,u,rule,records})=>{u.hp=u.maxHp*.3;rule.tick(ctx,u,10);assert.equal(records.projectiles.length,20);assert.ok(records.projectiles.every(p=>p.damage===4&&p.options.impactSize==='1.25 × 1.25 tiles'&&p.options.deathBlast.size===2.5));for(let i=0;i<4;i++){u.hp=u.maxHp;rule.tick(ctx,u,0);u.hp=u.maxHp*.3;rule.tick(ctx,u,0);}assert.equal(u.memory.naarCasts,3);},

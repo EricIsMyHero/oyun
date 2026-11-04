@@ -1,5 +1,6 @@
 import { STAT_KEYS, num, burst } from './rules.mjs';
 import { abilityReadiness, SPELL_RULES, SPELL_GAPS } from './abilities.mjs';
+import { createPowerScorer } from './power.mjs';
 
 const RARITIES=['mundane','familiar','arcane','relic','ascendant','apex','emergent','ethereal'];
 const R2='https://pub-ebf8690f3ea54a55853e5e920cb6903a.r2.dev';
@@ -44,7 +45,8 @@ function normalizeCard(raw,parent=null,id=raw.id||slugify(raw.name)) {
   if(sequence)attack.sequence=sequence;
   const combat=parseCombat(raw);
   const reasons=[...modeReasons];
-  if(!raw.stats||num(raw.stats.health,NaN)<=0||!Number.isFinite(num(raw.stats.health,NaN)))reasons.push('A positive Health value is not authored.');
+  if(!combat?.healthless&&(!raw.stats||num(raw.stats.health,NaN)<=0||!Number.isFinite(num(raw.stats.health,NaN))))reasons.push('A positive Health value is not authored.');
+  if(combat?.healthless&&!(stats.life>0))reasons.push('A positive lifetime for the healthless form is not authored.');
   if(!combat)reasons.push('The essential combat profile is not authored.');
   else if(combat.attackType!=='none'){
     if(!Number.isFinite(combat.attackDistance)||combat.attackDistance<=0)reasons.push('Attack Distance is not authored.');
@@ -93,6 +95,8 @@ export function buildCatalog(rawCards,rawSpells) {
   const forms=[];
   function walk(def){forms.push(def);def.forms.forEach(walk);def.typeVariants.forEach(walk);if(def.ascended)walk(def.ascended);}
   cards.forEach(walk);
+  const power=createPowerScorer(rawCards);
+  for(const def of forms)def.power=power(def.raw);
   const spells=rawSpells.map(normalizeSpell);
   return {cards,spells,forms,byId:new Map(forms.map(c=>[c.id,c])),spellById:new Map(spells.map(s=>[s.id,s]))};
 }

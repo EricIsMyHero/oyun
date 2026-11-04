@@ -23,12 +23,13 @@ async function fixture(){
   return {e,catalog,spawn,dummy,hit,kill,has:(u,kind)=>hasStatus(u,kind,e.time)};
 }
 
-test('eighteen Relic cards and their summons unlock with verified native handlers',async()=>{
+test('twenty-one Relic cards and their summons unlock with verified native handlers',async()=>{
   const {catalog}=await fixture();
   const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','sylviana','sylviana/butterflies','malvaris','malvaris/phantomis','pyhsic','unara','clara','far','lyra','naar','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
   for(const id of ids){assert.equal(catalog.byId.get(id).ready,true,id);assert.deepEqual(catalog.byId.get(id).reasons,[]);}
-  assert.equal(catalog.cards.filter(c=>c.ready).length,76);
-  assert.equal(catalog.byId.get('format').ready,false);assert.match(catalog.byId.get('format').reasons.join(' '),/not been implemented/);
+  for(const id of ['etheris','format','artist','artist/flock-of-ravens'])assert.equal(catalog.byId.get(id).ready,true,id);
+  assert.equal(catalog.cards.filter(c=>c.ready).length,79);
+  assert.equal(catalog.byId.get('magma').ready,false);
 });
 
 test('each Stacy impact delivers exactly four eight-damage Burn ticks without recursion',async()=>{
@@ -515,4 +516,144 @@ test('Naar burst timers and Lyra attacks freeze during pause, while Silence paus
   const {e,spawn,dummy}=await fixture(),u=spawn('naar');dummy(1,{x:18,y:14});u.hp=67;e.step(.5);assert.equal(u.memory.grenadeBursts[0].remaining,19);
   e.status(u,'silence',2);e.step(1);assert.equal(u.memory.grenadeBursts[0].remaining,19);e.cleanse(u);
   const lyra=spawn('lyra');lyra.cooldown=0;e.setPaused(true);const before=JSON.stringify(e.state);e.step(20);assert.equal(JSON.stringify(e.state),before);
+});
+
+test('Etheris combines ninety percent of two bodies and one ally into one health/shield reserve',async()=>{
+  const {e,catalog,dummy}=await fixture();
+  const pair=e.spawn(catalog.byId.get('etheris'),0,{x:15,y:14},1),friend=dummy(0,{x:15.5,y:14}),other=dummy(0,{x:15.7,y:14});
+  pair.forEach(u=>{u.stats.speed=0;u.cooldown=Infinity;});e._hook('tick',pair[0],0);
+  const members=[...pair,friend];
+  assert.equal(e.state.sharedVitals.length,1);assert.equal(e.state.sharedVitals[0].members.length,3);
+  for(const u of members){close(u.hp,1116);close(e.maxHealth(u),1116);close(u.shield,108);}
+  close(other.hp,1000);assert.equal(other.sharedVitalsId,undefined);
+  const result=e.damage(null,pair[0],50,{kind:'spell'});close(result.total,50);
+  for(const u of members){close(u.hp,1101);close(u.shield,73);}
+  close(e.heal(friend,10),10);members.forEach(u=>close(u.hp,1111));
+  e.giveShield(pair[1],5);members.forEach(u=>close(u.shield,78));
+  // Repeated ticking never compounds the ninety-percent conversion.
+  e._hook('tick',pair[1],0);members.forEach(u=>close(e.maxHealth(u),1116));
+  assert.doesNotThrow(()=>JSON.stringify(e.state));
+  const death=e.damage(null,friend,5000,{kind:'spell',bypassShield:true});assert.equal(death.killed,true);
+  assert.ok(members.every(u=>!u.alive&&u.hp===0));assert.equal(e.deaths.length,3);
+  e._drainDeaths();assert.equal(e.state.events.filter(x=>x.type==='death').length,3);assert.equal(e.vitalPools.size,0);assert.ok(other.alive);
+});
+
+test('Etheris can recruit a later nearby ally, shares healing and respects linked Immortal',async()=>{
+  const {e,catalog,dummy}=await fixture(),pair=e.spawn(catalog.byId.get('etheris'),0,{x:15,y:14},1);
+  e._hook('tick',pair[0],0);close(pair[0].hp,216);const friend=dummy(0,{x:17,y:14});
+  e._hook('tick',pair[1],0);assert.equal(friend.sharedVitalsId,undefined);
+  friend.x=15.4;e._hook('tick',pair[1],0);close(friend.hp,1116);
+  e.status(friend,'immortal',2);e.damage(null,pair[0],5000,{kind:'spell',bypassShield:true});
+  for(const u of [...pair,friend]){assert.equal(u.alive,true);close(u.hp,1);}
+  e.cleanse(friend);friend.statuses=[];e.loseHealth(pair[1],1);assert.ok([...pair,friend].every(u=>!u.alive));
+});
+
+test('Format uses the actual website Power score rather than current health or damage and waits three active seconds',async()=>{
+  const {e,catalog,spawn,dummy}=await fixture(),u=spawn('format'),weak=dummy(1,{x:16,y:14},{health:50000,damage:5000});weak.def.power=100;
+  const strong=spawn('death',1,{x:18,y:14});strong.def.power=900;strong.hp=1;strong.shield=0;
+  const before=JSON.stringify(catalog.byId.get('death'));
+  e.step(1);assert.equal(u.memory.format.targetId,strong.id);assert.equal(u.def.id,'format');assert.equal(u.shots,0);assert.equal(e.state.projectiles.length,0);
+  e.setPaused(true);e.step(10);assert.equal(u.def.id,'format');e.setPaused(false);
+  e.step(1.9);assert.equal(u.def.id,'format');e.step(.1);assert.equal(u.def.id,'death');
+  close(u.hp,strong.maxHp);close(u.shield,strong.maxShield);assert.equal(u.memory.format.transformed,true);assert.equal(u.shots,0);
+  assert.equal(JSON.stringify(catalog.byId.get('death')),before);
+});
+
+test('Format channel ignores hidden, behind and out-of-reach enemies; losing its target restarts the channel',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('format'),hidden=dummy(1,{x:16,y:14}),behind=dummy(1,{x:14,y:14}),far=dummy(1,{x:31,y:14});
+  hidden.def.power=1000;e.status(hidden,'invisible',20);behind.def.power=999;far.def.power=998;
+  e.step(1);assert.equal(u.memory.format.targetId,null);
+  const first=spawn('soldier',1,{x:18,y:14});e.step(2);assert.equal(u.memory.format.targetId,first.id);
+  first.x=35;const next=spawn('phewphew',1,{x:18,y:14});e.step(1.1);assert.equal(u.def.id,'format');assert.equal(u.memory.format.targetId,next.id);
+  e.step(1.9);assert.equal(u.def.id,'phewphew');assert.equal(u.def.combat.attackType,'ranged');close(u.stats.damage,next.stats.damage);
+});
+
+test('Format doubles its refreshed copied statistics only when it kills the original target',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('format'),target=spawn('soldier',1,{x:18,y:14});
+  target.stats.damage=9;target.hp=5;target.shield=0;
+  e._hook('tick',u,3);assert.equal(u.def.id,'soldier');close(u.stats.damage,9);close(u.hp,target.maxHp);
+  const copied={...u.stats};const other=dummy();e.damage(u,other,5000,{kind:'ability',bypassShield:true});assert.equal(u.memory.format.promoted,false);
+  u.hp=1;e.damage(u,target,5000,{kind:'ability',bypassShield:true});assert.equal(u.memory.format.promoted,true);
+  close(u.stats.damage,18);close(u.stats.health,copied.health*2);close(u.hp,copied.health*2);close(u.stats.attackSpeed,copied.attackSpeed/2);close(u.stats.delay,copied.delay/2);
+  close(u.stats.range,copied.range*2);close(u.stats.speed,copied.speed*2);close(u.stats.vision,copied.vision*2);
+  e._promoteFormat(u,target);close(u.stats.damage,18);e._drainDeaths();assert.ok(u.alive);
+});
+
+test('Format does not promote when another ally kills its original enemy, and Silence suspends transformation',async()=>{
+  const {e,spawn,kill}=await fixture(),u=spawn('format'),target=spawn('phewphew',1,{x:18,y:14});
+  e.status(u,'silence',3);e.step(2);assert.equal(u.memory.format,undefined);e.cleanse(u);
+  e._hook('tick',u,3);assert.equal(u.def.id,'phewphew');kill(target);assert.equal(u.memory.format.promoted,false);
+});
+
+test('Artist applies one persistent ink per damaging hit: three-percent increments, twenty-one threshold and ten charge',async()=>{
+  const {e,spawn,dummy,hit,has}=await fixture(),u=spawn('artist'),target=dummy();
+  hit(u,target,1);const ink=target.statuses.find(s=>s.kind==='ink');assert.equal(ink.stacks,1);close(ink.magnitude,.03);assert.equal(ink.until,Infinity);
+  close(e.attackInterval(target),target.stats.attackSpeed/.97);
+  for(let i=1;i<20;i++)hit(u,target,1);assert.equal(ink.stacks,20);assert.equal(has(target,'curse'),false);assert.equal(u.memory.artistCharge,undefined);
+  hit(u,target,1);assert.equal(ink.stacks,21);close(ink.magnitude,.63);assert.equal(has(target,'curse'),true);assert.equal(u.memory.artistCharge,10);
+  hit(u,target,1);assert.equal(u.memory.artistCharge,10);close(target.hp,977.75);
+  e.damage(null,target,40,{kind:'spell'});close(target.hp,927.75);
+  e.cleanse(target);assert.equal(has(target,'ink'),false);assert.equal(has(target,'curse'),false);hit(u,target,1);assert.equal(target.statuses.find(s=>s.kind==='ink').stacks,1);
+});
+
+test('Artist ink slows movement and attacks by its own authored increments, unaffected by generic minimum Slow',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('artist'),target=dummy(1,{x:20,y:14},{speed:1000,attackSpeed:1});
+  e.addInk(u,target);const before=target.x;e._move(target,null,1);close(before-target.x,.97);close(e.attackInterval(target),1/.97);
+  e.addInk(u,target,20);close(e.attackInterval(target),1/.37);
+  e.status(target,'slow',2,.75);close(e.attackInterval(target),4);
+});
+
+test('Artist ignores missed, immune and non-damaging hits and Predominance prevents ink and Curse',async()=>{
+  const {e,spawn,dummy,hit,has}=await fixture(),u=spawn('artist'),target=dummy();
+  e.status(target,'untouchable',2);hit(u,target,1);assert.equal(has(target,'ink'),false);target.statuses=[];
+  e.status(target,'predominance',2);for(let i=0;i<21;i++)hit(u,target,1);assert.equal(has(target,'ink'),false);assert.equal(has(target,'curse'),false);assert.equal(u.memory.artistCharge,undefined);
+  target.statuses=[];e.status(u,'misfortune',2,1);e._fire(u,target);assert.equal(e.state.projectiles.length,0);assert.equal(has(target,'ink'),false);
+});
+
+test('cursed death spreads four ink to every enemy within a two-by-two square, including after Artist death',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),u=spawn('artist'),target=dummy(),inside=dummy(1,{x:18.9,y:14.9}),outside=dummy(1,{x:19.5,y:14}),ally=dummy(0,{x:18.2,y:14});
+  e.addInk(u,target,21);kill(u);kill(target);
+  assert.equal(inside.statuses.find(s=>s.kind==='ink').stacks,4);assert.equal(outside.statuses.length,0);assert.equal(ally.statuses.length,0);
+  assert.equal(e.units.filter(t=>t.def.id==='artist/flock-of-ravens').length,6);
+});
+
+test('a lethal twenty-first Artist hit still curses and spreads; spread can trigger another Curse without recursion',async()=>{
+  const {e,spawn,dummy,hit}=await fixture(),u=spawn('artist'),target=dummy(),next=dummy(1,{x:18.5,y:14});
+  e.addInk(u,target,20);e.addInk(u,next,17);target.hp=1;hit(u,target,1);e._drainDeaths();
+  assert.equal(next.statuses.find(s=>s.kind==='ink').stacks,21);assert.equal(u.memory.artistCharge,20);
+  close(next.statuses.find(s=>s.kind==='curse').magnitude,.25);
+});
+
+test('independent Artists retain their own ink, curses, charge and death spread attribution',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),a=spawn('artist'),b=spawn('artist',0,{x:15.6,y:14}),target=dummy(),next=dummy(1,{x:18.5,y:14});
+  e.addInk(a,target,21);e.addInk(b,target,21);assert.equal(target.statuses.filter(s=>s.kind==='ink').length,2);
+  assert.equal(a.memory.artistCharge,10);assert.equal(b.memory.artistCharge,10);kill(target);
+  assert.equal(next.statuses.filter(s=>s.kind==='ink').length,2);assert.ok(next.statuses.filter(s=>s.kind==='ink').every(s=>s.stacks===4));
+});
+
+test('Artist death creates six ravens for seven seconds, gaining two ravens and one second per twenty charge',async()=>{
+  for(const [charge,count,life] of [[0,6,7],[10,6,7],[20,8,8],[39,8,8],[40,10,9]]){
+    const {e,spawn,kill}=await fixture(),u=spawn('artist');u.memory.artistCharge=charge;kill(u);
+    const ravens=e.units.filter(t=>t.def.id==='artist/flock-of-ravens');assert.equal(ravens.length,count);
+    for(const raven of ravens){assert.equal(raven.healthless,true);assert.equal(raven.def.raw.stats.health,'-');assert.equal(raven.def.combat.movementType,'flying');close(raven.expiresAt-e.time,life);close(raven.stats.vision,4000);raven.stats.speed=0;}
+    e.setPaused(true);e.step(30);assert.equal(e.units.length,count);e.setPaused(false);e.step(life-.1);assert.equal(e.units.length,count);e.step(.1);assert.equal(e.units.length,0);
+  }
+});
+
+test('ravens have no health, cannot be targeted or damaged by cards, spells or status effects, but attack and scout',async()=>{
+  const {e,spawn,dummy,kill}=await fixture(),artist=spawn('artist');kill(artist);const raven=e.units[0];raven.stats.speed=0;raven.stats.criticalChance=0;raven.stats.lifestealChance=0;
+  const enemy=dummy(1,{x:raven.x+.4,y:raven.y});assert.equal(e.canTarget(enemy,raven),false);
+  assert.equal(e.canSee(enemy,raven),true);assert.equal(e.damage(enemy,raven,9999,{kind:'spell',instantKill:true}).total,0);assert.equal(e.status(raven,'burn',10,0,enemy,{amount:9999}),null);
+  assert.equal(e.heal(raven,100),0);assert.equal(e.giveShield(raven,100),0);assert.equal(e.loseHealth(raven,999),0);assert.equal(raven.alive,true);
+  const {visibilitySources,isPointVisible}=await import('../arena/js/vision.mjs');const state={time:e.time,units:[raven],castles:[],nodes:[]};
+  assert.equal(visibilitySources(state,0)[0].radius,4);assert.equal(isPointVisible(state,0,{x:raven.x+4,y:raven.y}),true);assert.equal(isPointVisible(state,0,{x:raven.x+4.01,y:raven.y}),false);
+  e._fire(raven,enemy);assert.ok(enemy.hp<1000);assert.ok(raven.alive);
+});
+
+test('raven liveness never becomes health through allied growth; beneficial combat auras still work',async()=>{
+  const {e,spawn}=await fixture(),raven=spawn('artist/flock-of-ravens'),shine=spawn('shine'),cassandra=spawn('cassandra'),butterfly=spawn('sylviana/butterflies'),nitrox=spawn('nitrox');
+  e._hook('tick',shine,5);e._hook('tick',cassandra,1);e._hook('death',butterfly);e._hook('tick',nitrox,0);
+  close(raven.hp,1);close(raven.maxHp,1);close(raven.stats.health,0);close(raven.shield,0);
+  assert.ok(raven.statuses.some(s=>s.kind==='attackHaste'&&s.magnitude===.12));
+  const point={x:raven.x,y:raven.y};e.push(raven,{x:14,y:14},3);close(raven.x,point.x);close(raven.y,point.y);
 });

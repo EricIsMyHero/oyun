@@ -388,7 +388,7 @@
       "mana": "6",
       "number": "2"
     },
-    "trait": "Bir-birləri və yaxındakı bir dost kartla bağ qurarlar. Hər ikisinin və dost kartın canı və qalxanı (can və qalxanın 90%-i) birləşər və biri hasar aldıqda digərinində canı gedər.",
+    "trait": "İki Etheris bir-biri və yaxındakı bir dost kartla bağ qurar. Bağlanan kartların can və qalxan ehtiyatlarının 90%-i bir ortaq ehtiyatda birləşər. Birinə hasar dəydikdə hamısının ortaq canı və qalxanı azalar. Ortaq can sıfırlananda bağlı kartların hamısı ölər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -717,7 +717,7 @@
       "mana": "3",
       "number": "1"
     },
-    "trait": "15,000 Karo qabaqdakı ən güclü rəqib karta 3 saniyə ərzində dönüşər. Əgər həmin rəqib kartı öldürərsə bütün statları yenilənər və +100% artar.",
+    "trait": "15 karo qabaqdakı ən güclü görünən rəqib karta 3 saniyə ərzində dönüşər. Hədəf saytdakı 1000 ballıq güc göstəricisinə görə seçilər. Dönüşənə qədər hasar verməz; dönüşəndə hədəfin statlarını və döyüş formasını alar, canı və qalxanı tam dolar. Həmin rəqibi özü öldürərsə kopyalanmış statları yenilənər və +100% güclənər.",
     "additionalStats": {
       "range": "-",
       "speed": "1050",
@@ -745,13 +745,13 @@
     "class": "Specialist",
     "subclass": "Mimic",
     "combatStats": {
-      "attackType": "melee",
+      "attackType": "none",
       "multiTarget": false,
       "maxTargets": 1,
       "attackShape": "single",
       "attackWidth": 500,
       "weight": "medium",
-      "targets": "ground",
+      "targets": "none",
       "attackDistance": 500,
       "attackDistanceMatchesRange": false,
       "attackAngle": null,
@@ -1719,7 +1719,7 @@
       "mana": "17",
       "number": "1"
     },
-    "trait": "Rəqib kartlara mürəkkəb atar və bu mürəkkəblər rəqib kartın üstündə qalar. Hər bir mürəkkəb rəqib kartı 2% yavaşladar, 18 mürəkkəb bulaşdırdıqdan sonra rəqib kartı lənətləyər. Lənətlənən kart öldükdə ətrafa 3 mürəkkəb bulaşdırar. Lənətlənən hər bir kart başına Artist 25 yük qazanar. Artist öldükdə Quzğun sürüsünə dönüşər. Hər 25 yük Quzğun sürüsünü +2 artırar.",
+    "trait": "Rəqib kartlara mürəkkəb atar və bu mürəkkəblər rəqib kartın üstündə qalar. Hər bir mürəkkəb rəqib kartı 3% yavaşladar, 21 mürəkkəb bulaşdırdıqdan sonra rəqib kartı lənətləyər. Lənət bütün mənbələrdən alınan hasarı 25% artırar. Lənətlənən kart öldükdə 2×2 karo sahədəki bütün rəqib kartlara 4 mürəkkəb bulaşdırar. Lənətlənən hər bir kart başına Artist 10 yük qazanar. Artist öldükdə Quzğun sürüsünə dönüşər. Quzğunların canı yoxdur, uçar və hədəfə alına bilməzlər; 4 karo görüş verər və ən azı 7 saniyə qalarlar. Hər 20 yük Quzğun sürüsünün müddətini +1 saniyə, sayını isə +2 artırar.",
     "additionalStats": {
       "range": "3000",
       "speed": "1000",
@@ -1772,7 +1772,9 @@
           "lifestealChance": "-",
           "lifesteal": "-",
           "damageminimiser": "-",
-          "dodge": "-"
+          "dodge": "-",
+          "vision": "4000",
+          "life": "7s"
         },
         "showlevels": {
           "level1": "-",
@@ -1786,16 +1788,19 @@
           "multiTarget": false,
           "maxTargets": 1,
           "attackShape": "single",
-          "attackWidth": null,
+          "attackWidth": 500,
           "weight": "very-light",
           "targets": "both",
-          "attackDistance": null,
+          "attackDistance": 500,
           "attackDistanceMatchesRange": false,
           "attackAngle": null,
           "impactSize": null,
           "projectileEndEffect": null,
-          "movementType": "ground",
-          "groundEffectImmune": false
+          "movementType": "flying",
+          "groundEffectImmune": true,
+          "healthless": true,
+          "untargetable": true,
+          "scoutingRadius": 4
         }
       }
     ],

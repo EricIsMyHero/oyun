@@ -3,7 +3,7 @@ import { clamp, num } from './rules.mjs';
 // Canonical status rules from data/info.json. Native cards still supply their
 // own damage, duration, radius and thresholds; prose is never executed at runtime.
 export const STATUS_INTERVALS=Object.freeze({burn:1,poison:.75,bleed:1,regen:1});
-export const NEGATIVE_STATUSES=new Set(['slow','movementSlow','stun','root','silence','blind','poison','burn','bleed','curse','misfortune','imprisonment','suppression','healBlock','fear','conversion','statReduction','airborne','betrayal','frozen','taunted','knockback','engulfed','soulMark']);
+export const NEGATIVE_STATUSES=new Set(['slow','movementSlow','stun','root','silence','blind','poison','burn','bleed','curse','misfortune','imprisonment','suppression','healBlock','fear','conversion','statReduction','airborne','betrayal','frozen','taunted','knockback','engulfed','soulMark','ink']);
 const aliases={heal:'regen',healing:'regen',bleeding:'bleed',invisibility:'invisible',reflection:'reflection',statreduction:'statReduction',knockback:'knockback',movementslow:'movementSlow',healblock:'healBlock',attackhaste:'attackHaste',damagebonus:'damageBonus',speedbonus:'speedBonus'};
 const canonical=['regen','burn','poison','bleed','untouchable','immortal','predominance','fearless','taunt','taunted','cleanse','berserk','invisible','untargetable','reflection',...NEGATIVE_STATUSES];
 const names=new Map(canonical.map(name=>[name.toLowerCase(),name]));
@@ -37,6 +37,7 @@ export function statusParameters(kind,magnitude,extra={}) {
   if(kind==='slow')magnitude=clamp(num(magnitude),.1,.95);
   if(kind==='blind')magnitude=clamp(num(magnitude),.125,1);
   if(kind==='misfortune')magnitude=clamp(num(magnitude),.1,1);
+  if(kind==='curse')magnitude=Math.max(.25,num(magnitude));
   if(kind==='statReduction') {
     params.stats={...(extra.stats||{}),...(extra.stat?{[extra.stat]:magnitude}:{})};
     if(!Object.entries(params.stats).some(([,value])=>Number.isFinite(value)&&value>0))return null;

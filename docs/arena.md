@@ -137,6 +137,7 @@ vision sources:
 | Vision source | Reveal radius |
 | --- | --- |
 | Living allied card | 8 tiles |
+| Artist raven | 4 tiles |
 | Owned crystal well | 4 tiles |
 | Living allied castle | 7.5 tiles |
 
@@ -144,7 +145,7 @@ The castle supplies starting vision before the first card is deployed. Each
 team's visible area is the union of its source circles. There is no permanent
 explored-map memory: an area returns to black immediately after its last vision
 source leaves, dies or changes owner. These scouting radii are separate from
-individual cards' authored Vision and Range combat stats.
+individual cards' authored Vision and Range combat stats. Artist's timed raven form explicitly overrides scouting to four tiles.
 
 Enemies outside current vision are not drawn, targetable or inspectable. Normal
 invisibility, untargetability and imprisonment also conceal enemies according to
@@ -170,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **76 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **79 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -178,10 +179,10 @@ after the first successful hit; their poison continues and keeps its original
 caster attribution. Giga Bomb deals its immediate source damage and then ten
 one-second Burn ticks: 25 to affected units, 5 to the affected castle per tick.
 
-Eighteen Relic roots now have their native abilities implemented: **Stacy**,
+Twenty-one Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,
 **Bloodraider**, **Shine**, **Avalith**, **Malvaris**, **Sylviana**, **Pyhsic**,
-**Unara**, **Clara**, **Far**, **Lyra** and **Naar**.
+**Unara**, **Clara**, **Far**, **Lyra**, **Naar**, **Etheris**, **Format** and **Artist**.
 
 - Stacy adds four one-second Burn ticks of eight damage after each successful
   hit. Independent packets stack and continue after her death. Below 10% health,
@@ -287,18 +288,47 @@ Eighteen Relic roots now have their native abilities implemented: **Stacy**,
   throws. Silence pauses new throws, while pause freezes all combat. The normal
   120-damage shot retains its original 1 × 1-tile impact and has no death chain.
 
+- Etheris links its two deployed bodies and the first eligible nearby ally in
+  acquisition Range. Ninety percent of their current and maximum health/shield
+  becomes one reserve, mirrored by all three. Damage to one subtracts once;
+  healing and shield restoration affect the reserve. Zero shared health kills
+  every linked body once. The link persists when bodies move apart. An available
+  ally can join later; a body cannot belong to two reserves.
+- Format cannot attack before transforming. It channels for three active seconds
+  on the strongest visible enemy ahead within 15 tiles, using the **same scaled
+  Codex Power score** as the website. Lost targets restart the channel. It copies
+  current numeric stats, attack sequences, movement and native ability, with full
+  health/shield. Killing that original target refreshes the copied stats at
+  double strength once; attack intervals and Delay halve. Another ally's kill
+  does not activate this bonus. Original source definitions stay immutable.
+- Artist's successful basic impacts add permanent, source-specific ink. Each ink
+  gives **3% Slow**; **21 ink** applies a **25% Curse** to damage from every source
+  and grants that Artist **10 charge** once. The cursed victim's death spreads
+  **4 ink** to every enemy in a **2 × 2-tile** square. Existing curses and their
+  attributed spread survive Artist's death. Cleanse removes ink/Curse and
+  Predominance prevents them. Different Artists keep separate charge and stacks.
+- Artist's death replaces it with **six ravens for seven seconds**. Every complete
+  **20 charge** adds **two ravens and one second**: 20 charge means eight ravens
+  for eight seconds, 40 means ten for nine. Bonuses are sampled at Artist's
+  death. Ravens have no authored health, fly along their deployed lane, attack
+  legal opponents, are visible but intrinsically untargetable, and ignore damage
+  and negative effects. Each reveals exactly **four tiles**. The violet overhead
+  bar shows remaining lifetime; the inspector shows health/shield as a dash.
+  The simulation uses an internal liveness sentinel, never an invented health
+  stat. Pause freezes their expiry with every other combat timer.
+
 The live unit inspector displays native stat growth as well as status modifiers,
 so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
 All 138 root cards appear in the library, including unavailable cards. A card is
 playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 62 locked entries explain an undefined
+defined for this simulator. The remaining 59 locked entries explain an undefined
 rule, missing combat data, or an unimplemented native ability. Required child
 forms must also be complete; removing a lock never substitutes invented values.
 
 Authored `combatStats` fields take priority over class labels and artwork.
 Existing single-target projectile width fallback is 500 points. Missing essential
-travel distance, unresolved attack variants, absent health, or an unspecified
+travel distance, unresolved attack variants, absent health (except explicitly authored timed, healthless forms), or an unspecified
 ability magnitude/trigger can prevent deployment. A dash for a stat that does
 not apply is not, by itself, grounds for locking a card. The library and inspector
 are the current readiness report; source data is never rewritten to mark cards.
@@ -373,7 +403,7 @@ routes and guaranteed two-minute overtime; those game rules have not changed.
 | Silence | Disables native abilities, while normal attacks and movement continue. |
 | Blind | At least 12.5% less attack range, combat vision and the card's scouting radius. |
 | Stat Reduction | Temporary flat or proportional reductions, applied on top of live stat growth; expiry preserves the underlying stats. |
-| Curse | Multiplies incoming damage from every source. |
+| Curse | Multiplies incoming damage from every source by at least 25%. |
 | Stun | Stops movement and attacks. |
 | Bleeding | One tick of 1% effective maximum health each second; blocks all healing. |
 | Misfortune | At least 10% miss chance for basic attacks and triggered abilities, including buffs and healing. A missed action applies no damage or effects. |

@@ -174,7 +174,7 @@ export const ABILITIES = {
   cassandra:{tick(ctx,u,dt){
     aura(ctx,u,'predominance',1,true);
     periodic(u,'music',dt,1,()=>{
-      allies(ctx,u,radius(u,ctx),true).forEach(t=>{const gain=Math.min(1,50-(t.memory.musicGrowth||0));if(gain>0){t.memory.musicGrowth=(t.memory.musicGrowth||0)+gain;t.maxHp+=gain;t.stats.health=t.maxHp;t.hp+=gain;}});
+      allies(ctx,u,radius(u,ctx),true).filter(t=>!t.healthless).forEach(t=>{const gain=Math.min(1,50-(t.memory.musicGrowth||0));if(gain>0){t.memory.musicGrowth=(t.memory.musicGrowth||0)+gain;t.maxHp+=gain;t.stats.health=t.maxHp;t.hp+=gain;}});
       enemies(ctx,u).forEach(t=>ctx.damage(u,t,1,{kind:'ability',secondary:true}));ctx.fx('wave',u.x,u.y,{radius:radius(u,ctx),side:u.side});
     },ctx);
   }},
@@ -293,6 +293,7 @@ export const ABILITIES = {
   shine:{tick(ctx,u,dt){
     periodic(u,'shineClock',dt,5,()=>{
       for(const ally of allies(ctx,u,radius(u,ctx),true)){
+        if(ally.healthless)continue;
         const stacks=ally.memory.shineStacks||0;if(stacks>=5)continue;
         const gain=ally.def.stats.health*.04;
         ally.memory.shineStacks=stacks+1;ally.maxHp+=gain;ally.stats.health=ally.maxHp;
@@ -314,7 +315,7 @@ export const ABILITIES = {
     death(ctx,u){const form=u.def.forms[0];if(form)ctx.spawn(form,u.side,u,u.lane,{count:form.stats.number,groupId:u.groupId});},
   },
   'sylviana/butterflies':{death(ctx,u){
-    for(const ally of ctx.units.filter(t=>t.alive&&!t.engulfedBy&&t.side===u.side&&Math.abs(t.x-u.x)<=.75+t.radius&&Math.abs(t.y-u.y)<=.75+t.radius)){
+    for(const ally of ctx.units.filter(t=>t.alive&&!t.healthless&&!t.engulfedBy&&t.side===u.side&&Math.abs(t.x-u.x)<=.75+t.radius&&Math.abs(t.y-u.y)<=.75+t.radius)){
       ally.maxHp+=10;ally.stats.health=ally.maxHp;ally.hp=Math.min(healthCap(ctx,ally),ally.hp+10);
       ctx.fx('heal',ally.x,ally.y,{side:u.side,amount:10});
     }
@@ -420,6 +421,19 @@ export const ABILITIES = {
       u.memory.grenadeBursts=(u.memory.grenadeBursts||[]).filter(b=>b.remaining>0);
     },
   },
+  etheris:{tick(ctx,u){ctx.linkEtheris(u);}},
+  format:{tick(ctx,u,dt){ctx.channelFormat(u,dt);}},
+  artist:{
+    hit(ctx,u,t,result){if(damageEvent(result))ctx.addInk(u,t);},
+    death(ctx,u){
+      const form=u.def.forms[0];if(!form)return;
+      const bonus=Math.floor((u.memory.artistCharge||0)/20),lifetime=7+bonus;
+      for(const raven of ctx.spawn(form,u.side,u,u.lane,{count:form.stats.number+bonus*2,groupId:u.groupId})){
+        raven.stats.life=lifetime;raven.expiresAt=ctx.time+lifetime;raven.memory.artistCharge=u.memory.artistCharge||0;
+      }
+    },
+  },
+  'artist/flock-of-ravens':{},
 };
 
 /* These are author-data gaps, not substitute versions of the native abilities. */

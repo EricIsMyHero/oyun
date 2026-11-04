@@ -178,8 +178,8 @@ function openInspector(def,kind='card',unit=null) {
         value=`${key==='damage'&&unit.def?.attack?.count>1?`${unit.def.attack.count} × `:''}${number}${suffix}`;
       }
     }
-    if(unit&&key==='health')value=`${Math.ceil(unit.hp)} / ${Math.ceil(state.engine.maxHealth(unit))}`;
-    if(unit&&key==='shield')value=`${Math.ceil(unit.shield)} / ${Math.ceil(state.engine.maxShield(unit))}`;
+    if(unit&&key==='health')value=unit.healthless?'—':`${Math.ceil(unit.hp)} / ${Math.ceil(state.engine.maxHealth(unit))}`;
+    if(unit&&key==='shield')value=unit.healthless?'—':`${Math.ceil(unit.shield)} / ${Math.ceil(state.engine.maxShield(unit))}`;
     if(unit&&key==='life'&&Number.isFinite(unit.expiresAt))value=`${Math.max(0,unit.expiresAt-state.engine.time).toFixed(1)}s`;
     return `<div class="inspector-stat" data-stat="${key}"><span>${STAT_LABELS[key]}</span><strong>${escapeHTML(formatValue(key,value))}</strong></div>`;
   }).join('');
@@ -187,13 +187,24 @@ function openInspector(def,kind='card',unit=null) {
   const liveEffects=unit?(unit.statuses||[]).filter(s=>s.until>state.engine.time+1e-7).map(s=>{
     const names={regen:'Heal',invisible:'Invisibility',bleed:'Bleeding',statReduction:'Stat Reduction'};
     const name=names[s.kind]||label(s.kind.replace(/([a-z])([A-Z])/g,'$1 $2'));
-    return `<span class="live-status" data-status="${escapeHTML(s.kind)}">${escapeHTML(name)} <small>${Number.isFinite(s.until)?`${Math.max(.1,s.until-state.engine.time).toFixed(1)}s`:'Ongoing'}</small></span>`;
+    return `<span class="live-status" data-status="${escapeHTML(s.kind)}">${escapeHTML(name)} <small>${s.kind==='ink'?`${s.stacks} / 21 · ${Math.round(s.magnitude*100)}% slow`:Number.isFinite(s.until)?`${Math.max(.1,s.until-state.engine.time).toFixed(1)}s`:'Ongoing'}</small></span>`;
   }).join(''):'';
   const forms=[...(def.forms||[]),...(def.typeVariants||[])];
   $('inspector').style.setProperty('--rarity',rarityColor(def));
   $('inspector-content').innerHTML=`<div class="inspector-layout"><div class="inspector-art">${image}<div class="inspector-identity"><span class="identity-class">${escapeHTML([raw.class,raw.subclass].filter(Boolean).join(' / ')||label(raw.type||kind))}</span><h2 id="inspector-name">${escapeHTML(def.name)}</h2><span class="identity-faction">${escapeHTML(label(raw.group||'The Stagnantia Project'))}</span></div></div><div class="inspector-body"><div class="inspector-status ${locked?'locked':''}"><i></i>${locked?'Battle data incomplete':'Battle-ready'}${unit?' · Battle paused for inspection':''}</div>${locked?`<ul class="readiness-list">${(def.reasons||['Required battle data is missing.']).map(reason=>`<li>${escapeHTML(reason)}</li>`).join('')}</ul>`:''}<h3>${kind==='spell'?'Spell Parameters':'All Statistics'}</h3><div class="inspector-stat-grid">${stats}</div>${kind==='card'?`<h3>Combat Profile</h3><div class="profile-grid">${profileMarkup(def)}</div>`:''}<h3>Ability</h3><div class="native-ability" lang="az">${raw.abilityName?`<strong class="ability-name">${escapeHTML(raw.abilityName)}</strong>`:''}${ability&&ability!=='-'?nativeHTML(ability):'<span>No additional ability is specified.</span>'}</div><p class="inspector-native-note">Original Codex ability text. Source DPS is informational.</p>${forms.length?`<h3>Forms</h3><div>${forms.map(form=>`<button type="button" class="inspector-form-button" data-inspect-card="${escapeHTML(form.id)}">${escapeHTML(form.name)}</button>`).join('')}</div>`:''}${raw.showlevels?`<details><summary>Star levels</summary><ol class="inspector-levels" lang="az">${Object.values(raw.showlevels).map(x=>`<li>${nativeHTML(x)}</li>`).join('')}</ol><p>Star upgrades are shown for reference. Arena deployment uses the base Codex stats.</p></details>`:''}${raw.story&&raw.story!=='-'?`<details><summary>Lore</summary><p>${escapeHTML(raw.story).replace(/\n/g,'<br>')}</p></details>`:''}<div class="inspector-actions">${canAdd&&!state.engine?`<button type="button" class="primary-button" data-add-${kind==='spell'?'spell':'card'}="${escapeHTML(def.id)}" ${locked?'disabled':''}>${selected?'Remove from deck':'Add to deck'}</button>`:''}<button type="button" class="text-button" data-close-inspector>Close details</button></div></div></div>`;
   if(!$('inspector').open)$('inspector').showModal();
   if(liveEffects)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section"><h3>Active Effects</h3><div class="live-status-list">${liveEffects}</div></section>`);
+  if(unit){
+    const notes=[];
+    if(unit.sharedVitalsId)notes.push(`<section class="live-status-section" data-shared-vitals><h3>Shared Reserve</h3><p>${state.engine.units.filter(t=>t.sharedVitalsId===unit.sharedVitalsId).map(t=>escapeHTML(t.def.name)).join(' · ')}</p><p>Health and shield are shared. When shared health reaches zero, every linked card falls.</p></section>`);
+    if(unit.def.id==='artist'){
+      const charge=unit.memory.artistCharge||0,bonus=Math.floor(charge/20);
+      notes.push(`<section class="live-status-section" data-artist-charge="${charge}"><h3>Ink Charge · ${charge}</h3><p>On death: ${6+bonus*2} ravens for ${7+bonus} seconds.</p></section>`);
+    }
+    if(unit.healthless)notes.push('<section class="live-status-section" data-healthless><h3>Timed Form</h3><p>No health. Flying and untargetable. Reveals a 4-tile radius; the violet bar shows remaining lifetime.</p></section>');
+    if(unit.memory.format&&!unit.memory.format.transformed)notes.push(`<section class="live-status-section" data-format-channel><h3>Transformation</h3><p>${unit.memory.format.targetId?`${Math.max(0,unit.memory.format.remaining).toFixed(1)}s remaining`:'Waiting for a visible enemy ahead.'}</p><p>Chooses by Codex Power. Cannot deal damage before transforming.</p></section>`);
+    if(notes.length)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',notes.join(''));
+  }
   if(unit&&def.id==='gloop'){
     const captives=state.engine.captivesOf(unit);
     $('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section" data-engulfed-count="${captives.length}"><h3>Engulfed Cards · ${captives.length}</h3><p>${captives.length?captives.map(t=>escapeHTML(t.def.name)).join(', '):'No cards held.'}</p><p>Survivors are released when Gloop falls.</p></section>`);

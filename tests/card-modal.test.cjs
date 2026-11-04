@@ -124,7 +124,7 @@ test('ability texts, names, turn abilities and star upgrades are preserved verba
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    'cd6254068560ff2d471bc54ce2df602c230b0af3ac8793f675ffeb7b9b6a600c');
+    '46669c5ef69d7f0cc0904ba025e24b20e1842524c1051e7ecb4866062861a7ad');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {
@@ -166,7 +166,7 @@ test('movement classifications match the provided hovering and flying rosters', 
   assert.deepEqual(forms.filter(c=>c.combatStats.movementType==='hovering').map(key).sort(),
     ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith'].sort());
   assert.deepEqual(forms.filter(c=>c.combatStats.movementType==='flying').map(key).sort(),
-    ['bees','angels','hornets','venom-fangs','bats','butterflies','phoenix'].sort());
+    ['bees','angels','hornets','venom-fangs','bats','butterflies','phoenix','flock-of-ravens'].sort());
   assert.equal(run('MODAL_MOVEMENT.hovering.layer'),'ground');
   assert.equal(run('MODAL_MOVEMENT.hovering.groundEffectImmune'),true);
   assert.equal(run('MODAL_MOVEMENT.ground.groundEffectImmune'),false);
@@ -358,7 +358,7 @@ test('Relic roots and named summoned forms use their authored projectile widths 
     for(const name of names){const p=card.forms.find(c=>c.name===name).combatStats;assert.deepEqual([p.attackWidth,p.attackDistance],[500,500],name);}
   }
   const ravens=relic.find(c=>c.id==='artist').forms[0].combatStats;
-  assert.equal(ravens.attackWidth,null);assert.equal(ravens.attackDistance,null,'the unmentioned raven form remains unauthored');
+  assert.equal(ravens.attackWidth,500);assert.equal(ravens.attackDistance,500);assert.equal(ravens.healthless,true);assert.equal(ravens.untargetable,true);assert.equal(ravens.movementType,'flying');
 });
 
 test('Relic cones, lines, single targets, attack layers and endpoint explosions remain distinct', () => {

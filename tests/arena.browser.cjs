@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,76);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar']){
+    assert.equal(coverage.ready,79);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -413,6 +413,60 @@ async function minimapPixelAt(page,point) {
       return{hp,casts:source.memory.naarCasts};
     });
     assert.deepEqual(detonated,{hp:[920,920],casts:3});await page.evaluate(()=>{delete window.portalFixture;delete window.grenadeFixture;arenaApp.startMatch();});await settleFrame(page);
+
+    // Shared reserves, copied Power profiles and the timed, healthless raven form
+    // run in the real browser module graph and remain inspectable through clicks.
+    const linkedReserve=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.setPaused(true);
+      const def=structuredClone(arenaApp.catalog.byId.get('etheris'));def.stats.speed=0;
+      const pair=e.spawn(def,0,{x:15,y:14},1),friend=structuredClone(arenaApp.catalog.byId.get('hammies'));
+      Object.assign(friend.stats,{health:1000,shield:0,speed:0,range:0,damage:0,healrecovery:0});friend.combat.attackType='none';friend.id='shared-friend';
+      const [ally]=e.spawn(friend,0,{x:15.7,y:14},1,{count:1});e._hook('tick',pair[0],0);
+      e.damage(null,ally,50,{kind:'spell'});pair.forEach(u=>u.cooldown=Infinity);
+      arenaApp.renderer.focusAt(ally);window.inkFixture={dummy:friend,ally,pair};
+      return{hp:ally.hp,shield:ally.shield,shared:pair.every(u=>u.hp===ally.hp),max:e.maxHealth(ally)};
+    });
+    assert.deepEqual(linkedReserve,{hp:1101,shield:73,shared:true,max:1116});await settleFrame(page);
+    const sharedPoint=await clientPoint(page,{x:15.7,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(sharedPoint.x,sharedPoint.y);
+    await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-shared-vitals]').count(),1);
+    assert.equal(await page.locator('#inspector [data-stat="health"] strong').textContent(),'1101 / 1116');
+    await page.screenshot({path:'/tmp/oyun-arena-etheris-reserve.png',fullPage:true});screenshots.push('/tmp/oyun-arena-etheris-reserve.png');await page.locator('#inspector-close').click();
+    const copiedPower=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.state.units=[];e.state.projectiles=[];e.setPaused(true);
+      const format=structuredClone(arenaApp.catalog.byId.get('format'));format.stats.speed=0;
+      const [source]=e.spawn(format,0,{x:15,y:14},1,{count:1});
+      const strong=structuredClone(arenaApp.catalog.byId.get('soldier'));strong.stats.speed=0;
+      const [target]=e.spawn(strong,1,{x:18,y:14},1,{count:1});target.hp=1;target.shield=0;
+      e._hook('tick',source,2.9);const before={name:source.def.id,shots:source.shots};e._hook('tick',source,.1);
+      return{before,name:source.def.id,hp:source.hp,max:target.maxHp,range:source.stats.range,power:source.def.power,website:ClashCardPower.scorer(arenaApp.catalog.cards.map(c=>c.raw))(target.def.raw)};
+    });
+    assert.deepEqual(copiedPower.before,{name:'format',shots:0});assert.equal(copiedPower.name,'soldier');assert.equal(copiedPower.hp,copiedPower.max);assert.equal(copiedPower.power,copiedPower.website);
+    const inkCurse=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.state.units=[];e.state.projectiles=[];e.setPaused(true);
+      const def=structuredClone(arenaApp.catalog.byId.get('artist'));def.stats.speed=0;def.stats.criticalChance=0;
+      const [artist]=e.spawn(def,0,{x:15,y:14},1,{count:1});artist.cooldown=Infinity;
+      const [target]=e.spawn(inkFixture.dummy,1,{x:18,y:14},1,{count:1}),[next]=e.spawn(inkFixture.dummy,1,{x:18.6,y:14},1,{count:1});
+      e.addInk(artist,target,21);e.addInk(artist,next,17);e.damage(null,target,5000,{kind:'spell',bypassShield:true});e._drainDeaths();
+      window.inkFixture={...inkFixture,artist,next};arenaApp.renderer.focusAt(artist);
+      return{ink:next.statuses.find(s=>s.kind==='ink').stacks,charge:artist.memory.artistCharge,curse:next.statuses.find(s=>s.kind==='curse').magnitude};
+    });
+    assert.deepEqual(inkCurse,{ink:21,charge:20,curse:.25});await settleFrame(page);
+    const artistPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(artistPoint.x,artistPoint.y);
+    await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-artist-charge="20"]').count(),1);
+    assert.match(await page.locator('[data-artist-charge]').textContent(),/8 ravens for 8 seconds/);await page.locator('#inspector-close').click();
+    const timedRavens=await page.evaluate(()=>{
+      const e=arenaApp.engine;e.setPaused(true);e.damage(null,inkFixture.artist,5000,{kind:'spell',bypassShield:true});e._drainDeaths();
+      const ravens=e.units.filter(u=>u.healthless);for(const r of ravens){r.x=15;r.y=14;r.stats.speed=0;r.cooldown=Infinity;}
+      inkFixture.raven=ravens[0];e.state.units=ravens;arenaApp.renderer.focusAt(ravens[0]);
+      return{count:ravens.length,life:ravens[0].expiresAt-e.time,vision:ravens[0].stats.vision,canHit:e.canTarget(inkFixture.next,ravens[0]),damage:e.damage(null,ravens[0],9999,{kind:'spell'}).total};
+    });
+    assert.deepEqual(timedRavens,{count:8,life:8,vision:4000,canHit:false,damage:0});await settleFrame(page);
+    const ravenPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(ravenPoint.x,ravenPoint.y);
+    await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-healthless]').count(),1);
+    assert.equal(await page.locator('#inspector [data-stat="health"] strong').textContent(),'—');assert.equal(await page.locator('#inspector [data-stat="shield"] strong').textContent(),'—');
+    const ravenLife=parseFloat(await page.locator('#inspector [data-stat="life"] strong').textContent());assert.ok(ravenLife>=7.5&&ravenLife<=8);
+    await page.screenshot({path:'/tmp/oyun-arena-raven-lifetime.png',fullPage:true});screenshots.push('/tmp/oyun-arena-raven-lifetime.png');await page.locator('#inspector-close').click();
+    await page.evaluate(()=>{delete window.inkFixture;arenaApp.startMatch();});await settleFrame(page);
 
     // A real flyer engages units in its deployed outer lane, then resumes that
     // corridor. Gloop hides captives, reports its count/lifetime, and releases.
@@ -747,7 +801,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

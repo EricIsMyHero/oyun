@@ -745,15 +745,16 @@ export class ArenaRenderer {
     }
     if(!ghost) {
       const barY=headY-size*.78;
-      this.healthBar(ctx,p.x,barY,size*1.16,u.hp/(statValue(u,'health',time,u.maxHp)||1),side===0?'#a0df8e':'#fa9b80',3);
-      if(u.maxShield>0&&u.shield>0)this.healthBar(ctx,p.x,barY-4,size*1.16,u.shield/(statValue(u,'shield',time,u.maxShield)||1),'#83ccf4',2);
+      if(u.healthless)this.healthBar(ctx,p.x,barY,size*1.16,Math.max(0,u.expiresAt-time)/(u.expiresAt-u.born||1),'#c99ae6',3);
+      else this.healthBar(ctx,p.x,barY,size*1.16,u.hp/((u.sharedVitalsId?u.effectiveMaxHp:statValue(u,'health',time,u.maxHp))||1),side===0?'#a0df8e':'#fa9b80',3);
+      if(u.maxShield>0&&u.shield>0)this.healthBar(ctx,p.x,barY-4,size*1.16,u.shield/((u.sharedVitalsId?u.effectiveMaxShield:statValue(u,'shield',time,u.maxShield))||1),'#83ccf4',2);
       const captiveCount=u.def?.id==='gloop'?(state?.units||[]).filter(t=>t.alive&&t.engulfedBy===u.id).length:0;
       if(captiveCount){
         ctx.fillStyle='#162d21';roundRect(ctx,p.x+size*.35,barY-17,24,14,4);ctx.fill();
         ctx.strokeStyle='#a8dc86';ctx.lineWidth=1;ctx.stroke();
         ctx.fillStyle='#d8f6be';ctx.textAlign='center';ctx.font='700 10px system-ui,sans-serif';ctx.fillText(String(captiveCount),p.x+size*.35+12,barY-7);
       }
-      const statusColors={poison:'#b5df78',burn:'#ffb875',bleed:'#ef8692',slow:'#94d6ec',stun:'#ffdf89',silence:'#d9b0fa',blind:'#d0aecf',root:'#b2d98b',imprisonment:'#a3b4fa',curse:'#e69cd6',frozen:'#b0efff',airborne:'#c3dcff',betrayal:'#ff8096',reflection:'#c3f7e5',taunted:'#f4ac82',statReduction:'#e9a2cd',berserk:'#ffb46d',fearless:'#ffe9ac',predominance:'#e1d3ff',soulMark:'#c2a6ed'};
+      const statusColors={poison:'#b5df78',burn:'#ffb875',bleed:'#ef8692',slow:'#94d6ec',stun:'#ffdf89',silence:'#d9b0fa',blind:'#d0aecf',root:'#b2d98b',imprisonment:'#a3b4fa',curse:'#e69cd6',frozen:'#b0efff',airborne:'#c3dcff',betrayal:'#ff8096',reflection:'#c3f7e5',taunted:'#f4ac82',statReduction:'#e9a2cd',berserk:'#ffb46d',fearless:'#ffe9ac',predominance:'#e1d3ff',soulMark:'#c2a6ed',ink:'#c99ae6'};
       statuses.slice(0,3).forEach((st,i)=>{
         const c=statusColors[st.kind]||'#d9d9c0';
         ctx.fillStyle='#1c353c';roundRect(ctx,p.x-size*.55+i*7,barY-13,6,6,1);ctx.fill();

@@ -1,7 +1,7 @@
 import { RULES } from './rules.mjs';
 import { statValue, statusMagnitude, hasStatus } from './statuses.mjs';
 
-// Team sight is independent of the authored card Vision combat statistic.
+// Team sight is eight tiles unless a native form explicitly authors an override.
 // Fog has no explored-memory layer: losing the last source hides the area again.
 export const VISION = Object.freeze({ card:8, pump:4, castle:RULES.castleRange });
 
@@ -18,7 +18,7 @@ export function visibilitySources(state,side) {
   }
   for (const unit of state.units || []) {
     if (unit.side === side && living(unit) && finitePoint(unit)) {
-      const radius=statValue(unit,'vision',state.time||0,VISION.card*1000)/1000*(1-statusMagnitude(unit,'blind',state.time||0));
+      const radius=statValue(unit,'vision',state.time||0,(unit.def?.combat?.scoutingRadius??VISION.card)*1000)/1000*(1-statusMagnitude(unit,'blind',state.time||0));
       if(radius>0)sources.push({x:unit.x,y:unit.y,radius});
     }
   }

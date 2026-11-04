@@ -143,6 +143,13 @@ test('Curse increases incoming damage and Silence disables native abilities',asy
   assert.equal(t.statuses.some(s=>s.kind==='poison'),false);
 });
 
+test('Curse has a twenty-five-percent minimum across attacks, spells and periodic damage',async()=>{
+  for(const kind of ['attack','spell','dot']){
+    const {e,make}=await fixture(),u=make(0),t=make(1);
+    close(e.status(t,'curse',3,.1,u).magnitude,.25);close(e.damage(u,t,40,{kind}).total,50);
+  }
+});
+
 test('Misfortune suppresses attack-triggered abilities and harmful ability damage/statuses together',async()=>{
   const {e,make,catalog}=await fixture(),t=make(1,18);
   const [chrono]=e.spawn(catalog.byId.get('chrono-mage'),0,{x:15,y:14},1,{count:1});chrono.shots=4;
