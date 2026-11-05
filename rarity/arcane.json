@@ -451,7 +451,7 @@
       "mana": "12",
       "number": "1"
     },
-    "trait": "5+(Kaçınma şansı+Kritik Şansı)% şansla rəqibin güllələrindən hasar almayaraq ona geri ötürər.",
+    "trait": "Yerləşdirildikdə özü ilə birlikdə iki Pirate Girls gətirər. 5 + Kaçınma Şansı + Kritik Şansı faizlik ehtimalla rəqibin mərmisini zərər almadan atıcısına geri qaytarar (maksimum 100%).",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -495,7 +495,7 @@
           "mana": "-",
           "number": "2"
         },
-        "trait": "Rəqib kart nə qədər uzaqdadırsa ona o qədər çox hasar verərlər. (Max: 75%)",
+        "trait": "Rəqib nə qədər uzaqdadırsa ona o qədər çox hasar verər. Məsafə bonusu 0 karoda 0%-dən 2.75 karoda +75%-ə qədər düz xətt üzrə artar (maksimum +75%).",
         "additionalStats": {
           "range": "2750",
           "speed": "1000",
@@ -1216,7 +1216,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Verdiyi hasar 50% şansla rəqib kartı 7 saniyəlik kor edər.",
+    "trait": "Uğurlu vuruşu 50% şansla rəqib kartı 7 saniyəlik kor edər: rəqibin menzili və görüşü 25% azalar.",
     "additionalStats": {
       "range": "3000",
       "speed": "1000",

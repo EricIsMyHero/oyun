@@ -260,6 +260,21 @@ export const ABILITIES = {
     tick(ctx,u){ctx.hatchPhoenix(u);},
     damaged(ctx,u){ctx.breakPhoenixEgg(u);},
   },
+  'corsair-crew':{
+    spawnForms:[0],
+    intercept(ctx,u,shot){
+      if(shot.hit.reflected)return false;
+      const chance=clamp((5+ctx.statValue(u,'dodge')+ctx.statValue(u,'criticalChance'))/100,0,1);
+      return ctx.random()<chance&&ctx.reflectProjectile(u,shot);
+    },
+  },
+  'corsair-crew/pirate-girls':{attack(ctx,u,target,hit){
+    const bonus=clamp(Math.hypot(target.x-u.x,target.y-u.y)/2.75,0,1)*.75;
+    u.memory.distanceBonus=bonus;hit.damage*=1+bonus;
+  }},
+  roguex:{hit(ctx,u,target,result){
+    if(damageEvent(result)&&!target.isCastle&&!target.isBuilding&&ctx.random()<.5)ctx.status(target,'blind',7,.25,u);
+  }},
   toxic:{hit(ctx,u,t,r){poisonHit(ctx,u,t,r,2,3);}},
   leafshade:{
     attack(ctx,u,t,hit){hit.bypassShield=true;},
@@ -536,10 +551,7 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {
-  'corsair-crew':['Pirate Girls have no distance-to-damage scaling formula before the 75% cap.'],
-  'corsair-crew/pirate-girls':['Distance-to-damage scaling before the 75% cap is not authored.'],
   whisper:['Host restoration and ownership after the possession expires are not authored.'],
-  roguex:['Blindness has no authored Range/Vision reduction percentage.'],
   sunrise:['The 210 Health growth cap is not identified as total Health or bonus Health.'],
   wong:['The firearm state after its eight-hit burst is not authored.'],
 };

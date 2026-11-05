@@ -66,7 +66,7 @@ export class ArenaEngine {
     if(u.engulfedBy&&['tick','move','attack','hit','lifesteal'].includes(name))return;
     if(['tick','move','attack'].includes(name)&&(has(u,'airborne',this.time)||has(u,'frozen',this.time)))return;
     const fn=this.ability(u)?.[name];if(!fn)return;
-    const chance=strongest(u,'misfortune',this.time),triggered=['incoming','damaged','death','unitDeath','lifesteal'].includes(name);
+    const chance=strongest(u,'misfortune',this.time),triggered=['incoming','damaged','death','unitDeath','lifesteal','intercept'].includes(name);
     if(triggered&&chance&&this.random()<chance)return;
     const previous=this.abilityContext;this.abilityContext={source:u,name,missed:triggered?false:null};
     try{return fn(this,u,...args);}finally{this.abilityContext=previous;}
@@ -141,7 +141,7 @@ export class ArenaEngine {
   _setFormatForm(u,def,spawnHook=false){
     const format=u.memory.format,returningShotId=u.memory.returningShotId;
     this._setUnitForm(u,def,{format,...(returningShotId?{returningShotId}:{})});
-    if(spawnHook)this._hook('spawn',u);
+    if(spawnHook){this._hook('spawn',u);this._spawnCompanions(u);}
     this.fx('capture',u.x,u.y,{side:u.side,duration:1});
     this.log('transform',`Format became ${def.name}${format.promoted?' with doubled stats':''}.`,{side:u.side,unitId:u.id});
   }
@@ -234,10 +234,12 @@ export class ArenaEngine {
     return {ok:true,units};
   }
   _formation(def,side,point,lane){
-    const count=this.ability({def})?.spawnSchedule?1:Math.max(1,Math.floor(num(def.stats.number,1)));
-    const radius=.18+.07*(bodyMass[def.combat?.weight]||1);
+    const ability=this.ability({def}),forms=(ability?.spawnForms||[]).map(i=>def.forms[i]).filter(Boolean);
+    const count=ability?.spawnSchedule?1:Math.max(1,Math.floor(num(def.stats.number,1)))*(1+forms.reduce((n,f)=>n+Math.max(1,Math.floor(num(f.stats.number,1))),0));
+    const radius=Math.max(...[def,...forms].map(f=>.18+.07*(bodyMass[f.combat?.weight]||1)));
     const positions=[];
     const candidates=[{...point}];
+    if(forms.length)for(const sign of [-1,1])candidates.push({x:point.x+(side===0?-1:1)*(radius*2+.1),y:point.y+sign*(radius+.1)});
     // Stable radial packing; every paid unit receives a legal in-range location.
     for(let ring=1;ring<=6;ring++)for(let k=0;k<ring*8;k++){
       const angle=k/(ring*8)*Math.PI*2;
@@ -287,6 +289,23 @@ export class ArenaEngine {
       if(decay)u.lifeDecay={...decay,next:this.time+decay.interval};
       this._hook('spawn',u);
       this.fx('spawn',u.x,u.y,{side,duration:.6});
+    }
+    let slot=count;
+    for(const parent of [...made]){
+      const companions=this._spawnCompanions(parent,options.positions?.slice(slot));
+      slot+=companions.length;made.push(...companions);
+    }
+    return made;
+  }
+  _spawnCompanions(parent,positions){
+    const made=[],{def,side,lane,groupId}=parent;let slot=0;
+    for(const index of this.ability(parent)?.spawnForms||[]){
+      const form=def.forms[index];if(!form)continue;
+      for(let j=0;j<Math.max(1,Math.floor(num(form.stats.number,1)));j++){
+        const placement=positions?.[slot++],back=parent.radius+.18+.07*(bodyMass[form.combat?.weight]||1)+.1;
+        const point=placement||{x:clamp(parent.x+(side===0?-back:back),.5,MAP.width-.5),y:clamp(parent.y+(j%2?1:-1)*.35,.5,MAP.height-.5)};
+        made.push(...this.spawn(form,side,point,lane,{count:1,groupId,positions:placement?[placement]:undefined}));
+      }
     }
     return made;
   }
@@ -565,7 +584,7 @@ export class ArenaEngine {
     this._hook('incoming',target,source,hit);
     if(hit.instantKill&&!target.isCastle&&!target.isBuilding){hit.damage=target.hp+target.shield+1;hit.bypassShield=true;hit.kind='execution';}
     if(hit.critical){
-      const multiplier=Math.max(1,this.statValue(source,'criticDamage',1.5));
+      const multiplier=Math.max(1,hit.criticalMultiplier??this.statValue(source,'criticDamage',1.5));
       hit.damage*=1+(multiplier-1)*(1-clamp(this.statValue(target,'criticdamageminimiser'),0,90)/100);
     }
     let reduction=clamp(this.statValue(target,'damageminimiser')/100,0,.9);
@@ -623,16 +642,15 @@ export class ArenaEngine {
     for(let i=1;i<u.route.length;i++){const q=projectSegment(u,u.route[i-1],u.route[i]);if(q.distance<best.distance)best={...q,index:i};}
     u.waypoint=best.index;
   }
-  _canHit(u,target){
+  _canHit(u,target,layers=u.def?.combat?.targets||'both'){
     if(!target?.alive||target.def?.combat?.untargetable||target.banished||!this.isEnemy(u,target))return false;
     if(target.engulfedBy&&!(target.engulfedBy===u.id&&this.ability(u)?.captiveTarget))return false;
     if(has(target,'untargetable',this.time)||has(target,'imprisonment',this.time))return false;
-    const layers=u.def?.combat?.targets||'both';
     if(layers==='none')return false;
     const air=target.def?.combat?.movementType==='flying';
     return layers==='both'||(layers==='air'?air:!air);
   }
-  _legalTarget(u,target,sources=null){return this._canHit(u,target)&&(target.engulfedBy===u.id&&this.ability(u)?.captiveTarget||isEntityVisible(this.state,u.side,target,sources));}
+  _legalTarget(u,target,sources=null,layers){return this._canHit(u,target,layers)&&(target.engulfedBy===u.id&&this.ability(u)?.captiveTarget||isEntityVisible(this.state,u.side,target,sources));}
   canTarget(u,target){return this._legalTarget(u,target);}
   canSee(u,target){return isEntityVisible(this.state,u.side,target);}
   tauntTarget(u,sources=null){
@@ -887,6 +905,17 @@ export class ArenaEngine {
     delete shot.source.memory.returningShotId;
     if(shot.source.alive)shot.source.cooldown=Math.max(.01,shot.hit.recoveryFromLaunch?shot.source.cooldown:shot.recovery||.01);
   }
+  reflectProjectile(defender,shot){
+    if(shot.done||shot.hit.reflected||!shot.source)return false;
+    const attacker=shot.source,range=distance(defender,attacker)+(attacker.radius||.25)+.35;
+    const hit={...shot.hit,reflected:true,accuracyChecked:true,returning:false,criticalMultiplier:shot.hit.criticalMultiplier??this.statValue(attacker,'criticDamage',1.5)};
+    const reflected=this._projectile(defender,attacker,hit,{...shot.profile,attackType:'ranged',attackDistance:range*1000});
+    reflected.homing=true;reflected.reflected=true;reflected.ability=shot.ability;reflected.kind=shot.kind;reflected.color='#a8f0dd';
+    if(shot.returning)reflected.returningOriginal=shot;
+    shot.done=true;defender.memory.reflectedShots=(defender.memory.reflectedShots||0)+1;
+    this.fx('shield',defender.x,defender.y,{side:defender.side,color:'#a8f0dd',duration:.4});
+    return true;
+  }
   _resolveHit(source,target,hit){
     if(!target.alive)return;
     const amount=hit.damage*(hit.splashScale!=null&&target.id!==hit.primaryTargetId?hit.splashScale:1);
@@ -915,8 +944,8 @@ export class ArenaEngine {
         shot.x+=shot.dx*step;shot.y+=shot.dy*step;shot.remaining=Math.max(0,len-step);
         candidates=this.units.concat(this.castles);
       }else if(shot.homing){
-        const target=this.units.find(t=>t.id===shot.targetId);
-        if(!this._legalTarget(shot.source,target)||distance(shot.origin,target)>shot.range+EPS||shot.ttl<=0){shot.done=true;continue;}
+        const target=this.units.concat(this.castles).find(t=>t.id===shot.targetId);
+        if(!this._legalTarget(shot.source,target,null,shot.reflected?'both':undefined)||distance(shot.origin,target)>shot.range+EPS||shot.ttl<=0){shot.done=true;continue;}
         const dx=target.x-shot.x,dy=target.y-shot.y,len=Math.hypot(dx,dy)||1;
         shot.dx=dx/len;shot.dy=dy/len;
         const step=Math.min(len,RULES.projectileSpeed*Math.min(dt,shot.ttl));
@@ -932,7 +961,7 @@ export class ArenaEngine {
       const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
       const targets=candidates.filter(t=>{
         if(shot.returning&&limit!=null&&shot.hitIds.size>=limit)return false;
-        if(!this._canHit(shot.source,t)||shot.hitIds.has(t.id))return false;
+        if(!this._canHit(shot.source,t,shot.reflected?'both':undefined)||shot.hitIds.has(t.id))return false;
         let halfWidth=shot.width/2;
         if(shot.profile.attackShape==='cone'){
           const along=(t.x-shot.origin.x)*shot.dx+(t.y-shot.origin.y)*shot.dy;
@@ -943,6 +972,7 @@ export class ArenaEngine {
       });
       targets.sort((a,b)=>distance({x:shot.prevX,y:shot.prevY},a)-distance({x:shot.prevX,y:shot.prevY},b));
       for(const target of targets){
+        if(this._hook('intercept',target,shot))break;
         if(shot.profile.projectileEndEffect==='explode'||shot.profile.multiTarget&&['square','circle'].includes(shot.profile.attackShape)){
           this._explodeProjectile(shot,target);shot.done=true;break;
         }
@@ -951,6 +981,7 @@ export class ArenaEngine {
         else this._resolveHit(shot.source,target,shot.hit);
         if(limit!=null&&shot.hitIds.size>=limit){if(!shot.returning)shot.done=true;break;}
       }
+      if(shot.done)continue;
       if(shot.returning&&shot.remaining<=EPS){
         if(shot.returning==='outbound'){
           shot.returning='return';shot.hitIds.clear();shot.remaining=distance(shot,shot.source);
@@ -958,13 +989,14 @@ export class ArenaEngine {
         }else this._catchProjectile(shot);
       }else if(shot.remaining<=EPS||shot.homing&&shot.ttl<=0){if(!shot.done&&shot.profile.projectileEndEffect==='explode')this._explodeProjectile(shot,shot);shot.done=true;}
     }
+    for(const shot of this.state.projectiles)if(shot.done&&shot.returningOriginal)this._catchProjectile(shot.returningOriginal);
     this.state.projectiles=this.state.projectiles.filter(s=>!s.done);
   }
   _explodeProjectile(shot,point){
     const dimensions=String(shot.profile.impactSize||'').match(/[\d.]+/g)?.map(Number);
     const width=dimensions?.[0]??shot.width,height=dimensions?.[1]??width;
     const shape={shape:'rect',width,height};
-    const targets=this.units.concat(this.castles).filter(t=>this._canHit(shot.source,t)&&(!shot.profile.cardOnly||!t.isBuilding&&!t.isCastle)&&this._inside(t,point,shape));
+    const targets=this.units.concat(this.castles).filter(t=>this._canHit(shot.source,t,shot.reflected?'both':undefined)&&(!shot.profile.cardOnly||!t.isBuilding&&!t.isCastle)&&this._inside(t,point,shape));
     const limit=shot.profile.multiTarget?shot.profile.maxTargets:1;
     for(const t of targets.slice(0,limit??targets.length)){
       if(shot.ability)this.damage(shot.source,t,shot.hit.damage,shot.hit);else this._resolveHit(shot.source,t,shot.hit);

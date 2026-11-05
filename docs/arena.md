@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **90 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **92 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -286,6 +286,35 @@ The **Tphoenix → Fire Egg → Phoenix** chain is also battle-ready:
   permanent Damage per successful hit**. The source does not author a growth cap.
   Each form has its own Codex statistics, portrait and movement profile. The live
   inspector shows the hatch countdown and completed rebirth cycles.
+
+**Corsair Crew** and **RogueX** complete two more Arcane profiles:
+
+- One **12-mana Corsair Crew** deployment immediately creates the captain and two
+  **Pirate Girls** on the selected corridor, with shared group identity. Formation
+  validation reserves three legal, separated positions inside the deployment
+  zone before spending mana or cycling the hand. The girls start behind the
+  captain where space permits. Their survival is independent of the captain.
+  Source Count remains one captain and two girls. Format copies summon the pair
+  once; promotion does not create another pair.
+- The captain intercepts a physical enemy projectile with probability
+  **5 + effective Dodge Chance + effective Critical Chance percent**, capped at
+  100%. This roll precedes ordinary Dodge. Success cancels the incoming projectile
+  without health/shield damage or on-hit effects and launches a visible return to
+  its shooter. The returned payload retains its damage and rolled critical
+  multiplier, while the recipient's normal mitigation still applies. It can
+  return to an airborne shooter or castle without changing the captain's ordinary
+  ground-only melee targeting. Already reflected shots cannot bounce recursively.
+  Melee, direct spells and damage-over-time do not use this interception. Silence
+  or Misfortune can suppress it. Returning-weapon owners keep their weapon lock
+  until the reflected shot finishes; pause and fizzle cleanup retain that rule.
+- Pirate Girls gain a launch-distance bonus rising linearly from **0% at zero
+  tiles** to **+75% at 2.75 tiles**, capped there. Their 16 base Damage becomes
+  **22 at 1.375 tiles** and **28 at 2.75 tiles** before normal criticals and target
+  mitigation. Their base statistic stays unchanged. The inspector shows the last
+  launch's distance bonus.
+- RogueX has a **50% chance** after a successful hit to apply **seven seconds of
+  Blind**, reducing Range and Vision by **25%**. Fully blocked/missed hits do not
+  trigger it. Predominance and normal native-ability suppression still apply.
 
 All twenty-three Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,

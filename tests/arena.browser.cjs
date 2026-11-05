@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,90);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix']){
+    assert.equal(coverage.ready,92);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -584,6 +584,48 @@ async function minimapPixelAt(page,point) {
     }
 
     {
+      const crew=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.teams[0].hand[0]='corsair-crew';const result=e.deploy(0,0,{x:7,y:14});if(!result.ok)throw Error(result.error);
+        e.setPaused(true);arenaApp.renderer.focusAt(result.units[0]);return{ids:result.units.map(u=>u.def.id),spent:e.teams[0].spentMana,groups:new Set(result.units.map(u=>u.groupId)).size};
+      });
+      assert.deepEqual(crew,{ids:['corsair-crew','corsair-crew/pirate-girls','corsair-crew/pirate-girls'],spent:12,groups:1});await settleFrame(page);
+      await page.screenshot({path:'/tmp/oyun-arena-corsair-formation.png',fullPage:true});screenshots.push('/tmp/oyun-arena-corsair-formation.png');
+      const crewPoint=await clientPoint(page,{x:7,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(crewPoint.x,crewPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-corsair-crew="3"]').count(),1);await page.locator('#inspector-close').click();
+      const deflected=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('corsair-crew'));Object.assign(def.stats,{speed:0,criticalChance:100,lifestealChance:0});const made=e.spawn(def,0,{x:15,y:14},1,{count:1});for(const u of made){u.cooldown=Infinity;u.stats.speed=0;}
+        const source=made[0],dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='corsair-browser-target';dummy.combat.attackType='ranged';Object.assign(dummy.stats,{health:1000,shield:0,damage:40,range:6000,attackSpeed:1,speed:0,criticalChance:0,dodge:0,healrecovery:0});
+        const [attacker]=e.spawn(dummy,1,{x:18,y:14},1,{count:1});attacker.cooldown=Infinity;e.random=()=>.5;e._fire(attacker,source);e.step(.4);e.setPaused(true);arenaApp.renderer.focusAt(source);window.corsairFixture={source,attacker,dummy};
+        return{hp:source.hp,reflected:source.memory.reflectedShots,flight:e.state.projectiles.some(p=>p.reflected)};
+      });
+      assert.deepEqual(deflected,{hp:430,reflected:1,flight:true});await settleFrame(page);
+      await page.screenshot({path:'/tmp/oyun-arena-corsair-return.png',fullPage:true});screenshots.push('/tmp/oyun-arena-corsair-return.png');
+      const corsairPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(corsairPoint.x,corsairPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.match(await page.locator('[data-corsair-crew]').textContent(),/Reflected shots: 1/);await page.locator('#inspector-close').click();
+      const returnedHp=await page.evaluate(()=>{const e=arenaApp.engine;e.setPaused(false);e.step(.5);e.setPaused(true);return corsairFixture.attacker.hp;});assert.equal(returnedHp,960);
+      const distant=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('corsair-crew/pirate-girls'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+        const dummy=structuredClone(corsairFixture.dummy);dummy.combat.attackType='none';dummy.stats.range=0;dummy.stats.damage=0;const [target]=e.spawn(dummy,1,{x:17.75,y:14},1,{count:1});e._fire(source,target);source.cooldown=Infinity;e.step(.5);e.setPaused(true);arenaApp.renderer.focusAt(source);window.corsairFixture={dummy};
+        return{hp:target.hp,base:source.stats.damage,bonus:source.memory.distanceBonus};
+      });
+      assert.deepEqual(distant,{hp:972,base:16,bonus:.75});await settleFrame(page);
+      const girlPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(girlPoint.x,girlPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.match(await page.locator('[data-pirate-distance]').textContent(),/\+75%/);await page.screenshot({path:'/tmp/oyun-arena-pirate-distance.png',fullPage:true});screenshots.push('/tmp/oyun-arena-pirate-distance.png');await page.locator('#inspector-close').click();
+      const rogueBlind=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('roguex'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+        const dummy=structuredClone(corsairFixture.dummy);Object.assign(dummy.stats,{range:4000,vision:8000});const [target]=e.spawn(dummy,1,{x:18,y:14},1,{count:1});e.random=()=>.4;e._fire(source,target);source.cooldown=Infinity;e.step(.5);e.setPaused(true);arenaApp.renderer.focusAt(target);const status=target.statuses.find(s=>s.kind==='blind');return{hp:target.hp,magnitude:status.magnitude,range:e._range(target)};
+      });
+      assert.deepEqual(rogueBlind,{hp:984,magnitude:.25,range:3});await settleFrame(page);
+      const roguePoint=await clientPoint(page,{x:18,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(roguePoint.x,roguePoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-status="blind"]').count(),1);assert.equal(await page.locator('#inspector [data-stat="range"] strong').textContent(),'3 tiles');assert.equal(await page.locator('#inspector [data-stat="vision"] strong').textContent(),'6 tiles');
+      await page.screenshot({path:'/tmp/oyun-arena-rogue-blind.png',fullPage:true});screenshots.push('/tmp/oyun-arena-rogue-blind.png');await page.locator('#inspector-close').click();
+      await page.evaluate(()=>{delete window.corsairFixture;arenaApp.startMatch();});await settleFrame(page);
+    }
+
+    {
       const held=await page.evaluate(()=>{
         arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
         const def=structuredClone(arenaApp.catalog.byId.get('tornado'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});
@@ -986,7 +1028,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Corsair formation and projectile reflection, Pirate Girls distance scaling, RogueX 25% Blind, Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

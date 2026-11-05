@@ -210,6 +210,12 @@ function openInspector(def,kind='card',unit=null) {
     if(unit.def.id==='boomix')notes.push(`<section class="live-status-section" data-boomix-flight="${!!unit.memory.returningShotId}"><h3>${unit.memory.returningShotId?'Weapon in Flight':'Weapon Ready'}</h3><p>${unit.memory.returningShotId?'Flight protection: 20% less incoming damage.':'The weapon damages one target on each leg.'} Attack interval starts at launch; the weapon must return before another throw.</p></section>`);
     if(unit.def.id==='albert')notes.push(`<section class="live-status-section" data-albert-growth="${unit.memory.albertGrowth||0}"><h3>Target Bonus · +${unit.memory.albertGrowth||0} / +3</h3><p>Damage: ${Number(state.engine.statValue(unit,'damage').toFixed(3))} · Base: ${unit.def.stats.damage}</p></section>`);
     if(unit.def.id==='chicken')notes.push('<section class="live-status-section" data-chicken-detonation><h3>Explosion Parameters</h3><p>100 damage · 2 × 2 tiles<br>80%: 500 damage · 3.5 × 3.5 tiles</p></section>');
+    if(unit.def.id==='corsair-crew'){
+      const crew=state.engine.units.filter(t=>t.alive&&t.side===unit.side&&t.groupId===unit.groupId&&['corsair-crew','corsair-crew/pirate-girls'].includes(t.def.id));
+      const chance=Math.min(100,Math.max(0,5+state.engine.statValue(unit,'dodge')+state.engine.statValue(unit,'criticalChance')));
+      notes.push(`<section class="live-status-section" data-corsair-crew="${crew.length}"><h3>Crew · ${crew.length} / 3</h3><p>Projectile Reflection: ${Number(chance.toFixed(2))}%<br>Reflected shots: ${unit.memory.reflectedShots||0}</p></section>`);
+    }
+    if(unit.def.id==='corsair-crew/pirate-girls')notes.push(`<section class="live-status-section" data-pirate-distance><h3>Distance Bonus · +${Number(((unit.memory.distanceBonus||0)*100).toFixed(2))}%</h3><p>0 tiles: +0% · 2.75 tiles: +75%</p></section>`);
     if(unit.def.id==='tornado'){
       const captives=state.engine.captivesOf(unit);
       const damage=state.engine.statValue(unit,'damage');
