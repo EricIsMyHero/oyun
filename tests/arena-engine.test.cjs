@@ -402,3 +402,16 @@ test('bot decisions and hostile spells do not read unseen enemy armies',async()=
   assert.ok(a.teams[1].energy>10,'the successful deployment still earns its energy');
   assert.equal(a.state.events.some(event=>event.type==='spell'),false);
 });
+
+test('melee cone, line and circle attackers move into their actual damage radius before swinging',async()=>{
+  for(const attackShape of ['cone','line','circle']){
+    const {engine:e,base}=await fixture(),def=structuredClone(base);Object.assign(def.combat,{attackDistance:500,attackShape,attackAngle:135,multiTarget:true,maxTargets:null});
+    const [u]=e.spawn(def,0,{x:15,y:14},1,{count:1}),target=inert(e,base,1,{x:17,y:14});e.step(3);
+    assert.ok(u.hits>0,`${attackShape} must land a hit after approaching`);assert.equal(u.shots,u.hits);assert.equal(target.hp,1000-u.hits*10);
+  }
+});
+
+test('a stationary melee area attacker outside its damage radius cannot spend its attack on an empty swing',async()=>{
+  const {engine:e,base}=await fixture(),def=structuredClone(base);def.stats.speed=0;Object.assign(def.combat,{attackDistance:500,attackShape:'cone',attackAngle:135,multiTarget:true,maxTargets:null});
+  const [u]=e.spawn(def,0,{x:15,y:14},1,{count:1}),target=inert(e,base,1,{x:15.775,y:14});e.step(2);assert.equal(u.shots,0);assert.equal(target.hp,1000);
+});

@@ -738,17 +738,17 @@ async function minimapPixelAt(page,point) {
     const hiddenFire=await pixelAt(page,{x:30.5,y:14});assert.ok(hiddenFire.every(value=>value<12),'distant flame does not expose fog');
     const fallenMark=await page.evaluate(()=>{
       arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.setPaused(false);
-      const def=structuredClone(arenaApp.catalog.byId.get('fallen-angel'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});
-      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.cooldown=Infinity;
+      const def=structuredClone(arenaApp.catalog.byId.get('fallen-angel'));Object.assign(def.stats,{criticalChance:0,lifestealChance:0});
+      const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
       const [wounded]=e.spawn(flameFixture.dummy,1,{x:16.8,y:14},1,{count:1});wounded.hp=500;
       const other=structuredClone(flameFixture.dummy);other.stats.health=600;
       const [chosen]=e.spawn(other,1,{x:18,y:14},1,{count:1});e.step(1/30);
-      for(let i=0;i<5;i++)e._resolveHit(source,chosen,{kind:'attack',damage:1});
+      while((source.memory.fallenStacks||0)<5&&e.time<12)e.step(1/30);
       e.setPaused(true);arenaApp.renderer.focusAt(source);window.flameFixture={source,chosen,wounded};
-      return{chosen:source.targetId===chosen.id,stacks:source.memory.fallenStacks,interval:e.attackInterval(source)};
+      return{chosen:source.targetId===chosen.id,stacks:source.memory.fallenStacks,interval:e.attackInterval(source),hp:chosen.hp,point:{x:source.x,y:source.y}};
     });
-    assert.equal(fallenMark.chosen,true);assert.equal(fallenMark.stacks,5);assert.ok(Math.abs(fallenMark.interval-.8/1.05)<1e-7);await settleFrame(page);
-    const fallenPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(fallenPoint.x,fallenPoint.y);
+    assert.equal(fallenMark.chosen,true);assert.equal(fallenMark.hp,530);assert.equal(fallenMark.stacks,5);assert.ok(Math.abs(fallenMark.interval-.8/1.05)<1e-7);await settleFrame(page);
+    const fallenPoint=await clientPoint(page,fallenMark.point);await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(fallenPoint.x,fallenPoint.y);
     await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-fallen-stacks="5"]').count(),1);assert.equal(await page.locator('#inspector [data-stat="attackSpeed"] strong').textContent(),'0.762s');
     await page.screenshot({path:'/tmp/oyun-arena-fallen-mark.png',fullPage:true});screenshots.push('/tmp/oyun-arena-fallen-mark.png');await page.locator('#inspector-close').click();
     const fallenReset=await page.evaluate(()=>{const e=arenaApp.engine,{source,chosen,wounded}=flameFixture;e.damage(null,chosen,5000,{kind:'spell',bypassShield:true});e._drainDeaths();e.setPaused(false);e.step(1/30);e.setPaused(true);return{stacks:source.memory.fallenStacks,next:source.targetId===wounded.id};});

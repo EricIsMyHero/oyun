@@ -762,3 +762,18 @@ test('new fire laid under Betrayal damages the caster allies while existing fire
   e.leaveTrail(u,{x:15,y:14},{x:16,y:14},params);e.status(u,'betrayal',2);e._hook('move',u,{x:15,y:14},{x:16,y:14});
   assert.equal(e.state.trails.length,2);e.step(1);close(enemy.hp,997);close(ally.hp,997);close(u.hp,740);
 });
+
+test('Fallen Angel pursues and damages its marked enemy through normal simulation from either side',async()=>{
+  for(const side of [0,1])for(const offset of [1,2,3,5]){
+    const {e,spawn,dummy}=await fixture(),x=side?28:15,u=spawn('fallen-angel',side,{x,y:14},{speed:1050}),target=dummy(1-side,{x:x+(side?-offset:offset),y:14});
+    u.cooldown=0;e.step(8);
+    assert.equal(u.targetId,target.id);assert.ok(u.hits>0,`side ${side}, initial gap ${offset}: ${u.shots} empty swings`);assert.ok(target.hp<1000);
+    close(target.hp,1000-u.hits*14);assert.equal(u.memory.fallenStacks,u.hits);assert.equal(u.shots,u.hits);assert.ok(Math.hypot(u.x-target.x,u.y-target.y)<=e._reach(u)+target.radius+1e-7);
+    close(u.def.stats.damage,14);close(u.def.combat.attackDistance,500);close(u.def.combat.attackAngle,135);
+  }
+});
+
+test('Fallen Angel reaches the selected healthier enemy and its successful hits damage shields and grant haste',async()=>{
+  const {e,spawn,dummy}=await fixture(),u=spawn('fallen-angel',0,{x:15,y:14},{speed:1050}),near=dummy(1,{x:16,y:14},{health:100}),chosen=dummy(1,{x:20,y:14},{health:1000,shield:1000});
+  u.cooldown=0;e.step(8);assert.equal(u.targetId,chosen.id);assert.ok(u.memory.fallenStacks>0);assert.ok(chosen.hp<1000);assert.ok(chosen.shield<1000);assert.ok(e.attackInterval(u)<.8);assert.ok(near.hp<=100);
+});

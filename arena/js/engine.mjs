@@ -927,7 +927,7 @@ export class ArenaEngine {
         const nums=String(p.impactSize||'').match(/[\d.]+/g)?.map(Number)||[width,width];
         return Math.abs(t.x-target.x)<=nums[0]/2+t.radius&&Math.abs(t.y-target.y)<=(nums[1]??nums[0])/2+t.radius;
       }
-      if(dist>reach+t.radius)return false;
+      if(dist>reach+t.radius+EPS)return false;
       if(p.attackShape==='circle')return true;
       const along=(x*dx+y*dy)/len,cross=Math.abs(x*dy-y*dx)/len;
       if(p.attackShape==='cone')return along>=-t.radius&&Math.acos(clamp((x*dx+y*dy)/(dist*len||1),-1,1))<=angle/2+Math.asin(Math.min(1,t.radius/(dist||1)))&&cross<=width/2+t.radius;
@@ -1292,7 +1292,9 @@ export class ArenaEngine {
       if(u.targetId!==(target?.id??null))this._hook('targetChanged',u,target);
       u.targetId=target?.id??null;
       const profile=this._profile(u),reach=this._attackReach(u,profile);
-      const allowance=this.ability(u)?.contactAttack?EPS:u.radius*.2;
+      // A melee unit must reach its real damage area before stopping. A wider
+      // trigger radius leaves cone/line attacks swinging forever outside it.
+      const allowance=profile.attackType==='melee'||this.ability(u)?.contactAttack?EPS:u.radius*.2;
       if(target&&distance(u,target)<=reach+target.radius+allowance&&profile.attackType!=='none'){
         const dx=target.x-u.x,dy=target.y-u.y,len=Math.hypot(dx,dy)||1;u.facingX=dx/len;u.facingY=dy/len;
         if(this.ability(u)?.noBasicAttack)this._hook('contact',u,target);

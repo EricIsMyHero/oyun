@@ -534,7 +534,10 @@ All twenty-three Relic roots now have their native abilities implemented: **Stac
   **80%** (0.80s becomes approximately 0.444s). Cone collateral does not grant
   stacks. Target death, concealment, loss of legal targeting, or a Taunt changing
   the target resets the bonus. Native prioritization respects fog and Silence;
-  the inspector displays the marked target and current stacks.
+  the inspector displays the marked target and current stacks. Melee pursuit
+  stops only inside the actual attack area, so Fallen Angel reaches its
+  0.5-tile strike distance before swinging; the same boundary applies to cone,
+  line and circle melee attacks.
 
 The live unit inspector displays native stat growth as well as status modifiers,
 so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
