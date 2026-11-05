@@ -10,7 +10,7 @@ async function fixture(){
 }
 
 test('John and his source empowered form unlock with the authored 180-degree cone and original stats',async()=>{
- const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,137);
+ const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,138);
  for(const up of [false,true]){const c=catalog.byId.get(up?'john-reynolds/ascended':'john-reynolds');assert.equal(c.ready,true);assert.deepEqual(c.reasons,[]);assert.deepEqual([c.combat.attackWidth,c.combat.attackDistance,c.combat.attackAngle,c.combat.attackShape,c.combat.targets],[1000,1250,180,'cone','ground']);close(c.stats.vision,8000);close(c.stats.health,up?335:305);close(c.stats.shield,up?190:160);close(c.stats.damage,up?25:22);close(c.stats.mana,up?15:13);close(c.attack.interval,1.15);}
 });
 

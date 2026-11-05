@@ -1359,7 +1359,7 @@
       "lifesteal": "25%",
       "damageminimiser": "0%",
       "dodge": "0%",
-      "vision": "8000",
+      "vision": "12500",
       "healBonus": "0%",
       "healrecovery": "0/s",
       "shieldrecovery": "0/s",
@@ -1381,16 +1381,17 @@
       "multiTarget": false,
       "maxTargets": 1,
       "attackShape": "single",
-      "attackWidth": null,
+      "attackWidth": 500,
       "weight": "light",
       "targets": "both",
-      "attackDistance": null,
+      "attackDistance": 500,
       "attackDistanceMatchesRange": false,
       "attackAngle": null,
       "impactSize": null,
       "projectileEndEffect": null,
       "movementType": "ground",
-      "groundEffectImmune": false
+      "groundEffectImmune": false,
+      "scoutingRadius": 12.5
     }
   },
   {

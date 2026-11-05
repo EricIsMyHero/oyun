@@ -55,8 +55,8 @@ test('every ready definition preserves all 24 numerical stat keys and explicit m
     assert.ok(card.stats.number>=1,card.id);
     assert.ok(card.combat.attackType==='none'||Number.isFinite(card.combat.attackDistance),card.id);
   }
-  assert.equal(catalog.byId.get('nightfang').ready,false,'travel distance has not been authored');
-  assert.match(catalog.byId.get('nightfang').reasons.join(' '),/distance/i);
+  assert.equal(catalog.byId.get('nightfang').ready,true);
+  assert.deepEqual(catalog.byId.get('nightfang').reasons,[]);
 });
 
 test('source-native ability text, spell Charge and Energy remain independently available',async()=>{

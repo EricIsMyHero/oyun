@@ -24,7 +24,7 @@ async function fixture(){
 }
 
 test('Nortex, Fen and Nightprowler unlock with unchanged base stats and faithful combat geometry',async()=>{
-  const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,137);
+  const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,138);
   for(const id of ['nortex','fen','nightprowler']){const def=catalog.byId.get(id);assert.equal(def.ready,true,id);assert.deepEqual(def.reasons,[]);}
   assert.deepEqual(catalog.byId.get('nortex').attack,{count:3,damage:5,interval:.3,delay:1.1});assert.equal(catalog.byId.get('nortex').stats.sps,15);
   assert.equal(catalog.byId.get('fen').attack.count,12);assert.equal(catalog.byId.get('fen').attack.damage,4);
@@ -122,7 +122,7 @@ test('Nightprowler ambush respects Predominance and Flexibility, while pause fre
 });
 
 test('all Mundane roots are battle-ready, including the final Angels and Boomix profiles',async()=>{
-  const {catalog}=await fixture();assert.ok(catalog.cards.filter(c=>c.rarity==='Mundane').every(c=>c.ready));assert.equal(catalog.cards.filter(c=>c.ready).length,137);
+  const {catalog}=await fixture();assert.ok(catalog.cards.filter(c=>c.rarity==='Mundane').every(c=>c.ready));assert.equal(catalog.cards.filter(c=>c.ready).length,138);
   assert.equal(catalog.byId.get('angels').stats.number,10);assert.equal(catalog.byId.get('boomix').attack.interval,2.4);assert.equal(catalog.byId.get('boomix').stats.sps,6);
 });
 

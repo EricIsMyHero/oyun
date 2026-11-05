@@ -65,6 +65,10 @@ const untouchReady=(ctx,u)=>{
 };
 
 export const ABILITIES = {
+  nightfang:{
+    spawn(ctx,u){ctx.status(u,'invisible',12,0,u);},
+    hit(ctx,u,t,result){if(damageEvent(result)&&u.hits%60===0)ctx.status(u,'invisible',3,0,u);},
+  },
   willowshade:{
     attack(ctx,u,t,hit){hit.bypassShield=true;},
     death(ctx,u){const form=u.def.forms[0];if(form)ctx.spawn(form,u.side,u,u.lane,{count:1,groupId:u.groupId});},

@@ -41,12 +41,12 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,193);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,137);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,138);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&!ABILITIES[card.id]?.noBasicAttack)assert.ok(card.attack.interval>0);}}
   assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
   assert.equal(c.byId.get('tphoenix').ready,true);assert.equal(c.byId.get('tornado').ready,true);
-  assert.match(c.byId.get('nightfang').reasons.join(' '),/Attack Distance/);
+  assert.equal(c.byId.get('nightfang').ready,true);assert.deepEqual(c.byId.get('nightfang').reasons,[]);
   assert.match(c.spellById.get('crystalline-prison').reasons.join(' '),/conflict/);
   assert.equal(c.byId.get('soldier').attack.count,15);assert.equal(c.byId.get('soldier').attack.damage,3);
   assert.deepEqual(c.byId.get('kai').attack.sequence.map(x=>x.damage),[9,9,21]);
@@ -60,6 +60,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  nightfang:({ctx,u,t,rule,result,records})=>{rule.spawn(ctx,u);assert.equal(records.statuses[0].kind,'invisible');assert.equal(records.statuses[0].duration,12);u.hits=59;rule.hit(ctx,u,t,result);assert.equal(records.statuses.length,1);u.hits=60;rule.hit(ctx,u,t,result);assert.equal(records.statuses[1].kind,'invisible');assert.equal(records.statuses[1].duration,3);},
   'john-reynolds':({ctx,u,rule,records})=>{const hp=u.hp;rule.damaged(ctx,u,null,{healthDamage:u.maxHp*.08,total:u.maxHp*.08});assert.equal(u.memory.johnWhinnies,1);assert.equal(records.statuses[0].kind,'taunt');assert.equal(records.statuses[0].duration,u.def.id.includes('/ascended')?5:3);assert.equal(records.statuses[1].kind,'protection');assert.equal(rule.criticalPiercesShield,true);close(u.hp,hp);},
   reacher:({ctx,u,t,rule})=>{rule.spawn(ctx,u);close(u.stats.range,2200);rule.prepareAttack(ctx,u,t);assert.equal(u.memory.combatMode,0);t.side=0;rule.tick(ctx,u);close(u.stats.damageminimiser,u.def.stats.damageminimiser+(u.def.id.includes('/ascended')?3:2));},
   bastra:({ctx,u,t,rule,hit})=>{t.side=0;rule.tick(ctx,u);close(u.stats.attackSpeed,2/(1+(u.def.id.includes('/ascended')?.03:.02)));rule.attack(ctx,u,t,hit);assert.equal(hit.bypassShield,true);},

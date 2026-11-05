@@ -92,15 +92,16 @@ async function minimapPixelAt(page,point) {
     await page.goto(`http://127.0.0.1:${server.address().port}${prefix}arena/`,{waitUntil:'domcontentloaded'});
     await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===138);
     assert.equal(await page.locator('#start-match').isDisabled(),true,'an empty deck cannot start');
-    const coverage=await page.evaluate(()=>({cards:arenaApp.catalog.cards.length,ready:arenaApp.catalog.cards.filter(c=>c.ready).length,spells:arenaApp.catalog.spells.length,locked:arenaApp.catalog.cards.find(c=>!c.ready)}));
+    const coverage=await page.evaluate(()=>({cards:arenaApp.catalog.cards.length,ready:arenaApp.catalog.cards.filter(c=>c.ready).length,spells:arenaApp.catalog.spells.length,locked:arenaApp.catalog.cards.find(c=>!c.ready),lockedSpell:arenaApp.catalog.spells.find(c=>!c.ready)}));
     assert.equal(coverage.cards,138);
     assert.equal(coverage.spells,26);
     assert.ok(coverage.ready>=8,'at least one complete deck is available');
-    assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
+    assert.equal(coverage.locked,undefined,'all authored root cards are playable');
+    assert.ok(coverage.lockedSpell?.reasons?.length,'incomplete spells still expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,137);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex','whisper','sunrise','wong','reacher','bastra','maapp','avara','john-reynolds','azrith','untouch','heartix','r-1','blank','magmara','willowshade','collector','sushu','umbra','thief','rotlings','stormblade','venom-fangs','skyhunter','rockback','neon-droid','void-wraith','bio-mech','mixela','laura']){
+    assert.equal(coverage.ready,138);
+    for(const id of ['nightfang','stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex','whisper','sunrise','wong','reacher','bastra','maapp','avara','john-reynolds','azrith','untouch','heartix','r-1','blank','magmara','willowshade','collector','sushu','umbra','thief','rotlings','stormblade','venom-fangs','skyhunter','rockback','neon-droid','void-wraith','bio-mech','mixela','laura']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -129,9 +130,17 @@ async function minimapPixelAt(page,point) {
     assert.equal(await page.locator('#inspector [data-stat="attackSpeed"] strong').textContent(),'0.20s');
     assert.equal(await page.locator('#inspector [data-stat="delay"] strong').textContent(),'0.90s');
     await page.locator('#inspector-close').click();
-    await page.locator(`[data-inspect-card="${coverage.locked.id}"]`).click();
+    await page.locator('#spell-tab').click();
+    await page.locator(`[data-inspect-spell="${coverage.lockedSpell.id}"]`).click();
     assert.ok(await page.locator('#inspector').isVisible());
-    assert.ok((await page.locator('#inspector').textContent()).includes(coverage.locked.reasons[0]));
+    assert.ok((await page.locator('#inspector').textContent()).includes(coverage.lockedSpell.reasons[0]));
+    await page.locator('#inspector-close').click();
+
+    await page.locator('#troop-tab').click();
+    await page.locator('[data-inspect-card="nightfang"]').click();
+    assert.equal(await page.locator('#inspector [data-stat="vision"] strong').textContent(),'12.5 tiles');
+    assert.equal(await page.locator('#inspector [data-stat="range"] strong').textContent(),'12 tiles');
+    assert.match(await page.locator('#inspector .profile-grid').textContent(),/Attack Distance0.5 tiles.*Projectile Width0.5 tiles/);
     await page.locator('#inspector-close').click();
 
     const readyInspect=await page.evaluate(()=>arenaApp.catalog.cards.find(c=>c.ready).id);

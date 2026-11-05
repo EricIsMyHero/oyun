@@ -71,7 +71,7 @@ test('Leila form II enlarges every fifth explosion and applies eight-second Blee
 });
 
 test('new Emergent geometry, Human manifestation and all Ethereal forms preserve authored measurements',async()=>{
- const{catalog}=await fixture();assert.equal(catalog.forms.length,193);assert.equal(catalog.cards.filter(c=>c.ready).length,137);
+ const{catalog}=await fixture();assert.equal(catalog.forms.length,193);assert.equal(catalog.cards.filter(c=>c.ready).length,138);
  for(const[id,width,distance,arc]of[['xii-josh',1000,1000,135],['dumpsy',500,500,360],['blesser',1000,2000,45],['js',500,500,null],['mimic',1000,2750,75],['the-seven-sins',500,500,null],['stella',500,500,null]]){const p=catalog.byId.get(id).combat;assert.deepEqual([p.attackWidth,p.attackDistance,p.attackAngle],[width,distance,arc],id);}
  for(const c of catalog.cards.filter(c=>c.rarity==='Ethereal')){assert.equal(c.choiceRequired,true);assert.ok(c.typeVariants.every(v=>v.ready));}
  const human=catalog.byId.get('the-seven-sins/human');assert.deepEqual([human.stats.health,human.stats.shield,human.stats.damage,human.stats.attackSpeed],[100,100,10,1]);assert.equal(human.raw.trait,'-');assert.equal(catalog.byId.get('lord/type1').combat.attackWidth,500);assert.equal(catalog.byId.get('mr-and-mrs-ray/type1/the-rays-form').combat.attackWidth,1000);

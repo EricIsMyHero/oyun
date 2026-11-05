@@ -5,7 +5,7 @@
 Open [arena/index.html](arena/index.html) through the same HTTP server as the
 Codex to play the separate, three-route arena against a bot. Build an eight-card
 deck with a four-card hand and a cycling spell loadout of at most five Charge.
-There are 137 playable root cards, including all Apex, Emergent and Ethereal cards. Ethereal forms are chosen before battle; Emergent deployment progression resets each match. Cards with missing essential combat or ability data show their lock reasons.
+All 138 root cards are playable, including Nightfang and every Apex, Emergent and Ethereal card. Ethereal forms are chosen before battle; Emergent deployment progression resets each match. Spells with missing essential battle data still show their lock reasons.
 
 Both castles have 1000 health and a 7.5-tile firing/deployment radius. Units and
 spell buildings deploy on roads or the castle courtyard inside that radius.

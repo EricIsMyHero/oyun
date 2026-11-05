@@ -365,8 +365,19 @@ amounts display as `+<1` rather than `+0`.
 
 ## Codex fidelity and locked cards
 
+All **138 root cards** are battle-ready. **Nightfang** completes the roster with
+**500 Projectile Width**, **500 Attack Distance**, and **12,500 Vision**. The
+Vision stat also gives his team a **12.5-tile scouting radius**, including while
+he is invisible; his existing **12,000 target-acquisition Range** is unchanged.
+Blind reduces both his sight and acquisition range normally. His native Eternal
+Shroud grants **12 seconds of invisibility on arrival**, then **3 seconds on
+every 60th successful hit**. Misses and fully prevented damage do not advance
+the counter. Outgoing attacks retain stealth; incoming damage breaks it under
+the shared Invisibility rule. Silence prevents renewal, and each deployed body
+starts its own hit counter. Native ability prose stays in Azerbaijani.
+
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **137 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **138 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -801,11 +812,10 @@ All twenty-three Relic roots now have their native abilities implemented: **Stac
 The live unit inspector displays native stat growth as well as status modifiers,
 so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
-All 138 root cards appear in the library, including unavailable cards. A card is
-playable only when the source data and its native behavior are sufficiently
-defined for this simulator. The remaining 52 locked entries explain an undefined
-rule, missing combat data, or an unimplemented native ability. Required child
-forms must also be complete; removing a lock never substitutes invented values.
+All 138 root cards appear in the library and are playable. Readiness still
+requires complete source data and native behavior, including required child
+forms. Incomplete spells retain explicit lock reasons; removing a lock never
+substitutes invented values.
 
 Authored `combatStats` fields take priority over class labels and artwork.
 Existing single-target projectile width fallback is 500 points. Missing essential
@@ -968,8 +978,9 @@ node tests/arena.browser.cjs
 
 The browser check uses Playwright and Chromium (`/usr/bin/chromium`, or set
 `CHROMIUM_PATH`). It serves the real application under a project prefix, stubs
-external artwork, and exercises deck building, locked-card explanations, resource
-accounting, deployment, spell targeting, fog visibility, hidden-enemy inspection,
+external artwork, and exercises deck building, complete troop availability,
+incomplete-spell explanations, resource accounting, deployment, spell targeting,
+fog visibility, hidden-enemy inspection,
 pause, restart and small-screen layouts. Browser import mappings version every
 arena module together, including vision, so a previous cached geometry cannot
 mix with the current map or renderer.
