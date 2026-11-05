@@ -71,8 +71,26 @@ export const ABILITIES = {
     attack(ctx,u,t,hit){hit.bypassShield=true;},
   },
   maapp:{hit(ctx,u,t,result){
-    if(damageEvent(result)&&!t.isCastle&&!t.isBuilding&&ctx.random()<(ascended(u)?.17:.15))ctx.status(t,'statReduction',ascended(u)?5:4,0,u,{percent:true,stats:{damage:.9}});
+    const up=ascended(u);
+    if(damageEvent(result)&&!t.isCastle&&!t.isBuilding&&ctx.random()<(up?.10:.08))ctx.status(t,'statReduction',up?3:2,0,u,{percent:true,stats:{damage:up?.8:.75}});
   }},
+  'john-reynolds':{
+    criticalPiercesShield:true,
+    damaged(ctx,u,source,result){
+      if(u.hp<=0||!(result.healthDamage>0))return;
+      const lost=(u.memory.johnHealthLoss||0)+result.healthDamage/healthCap(ctx,u),steps=Math.floor((lost+1e-7)/.08);
+      u.memory.johnHealthLoss=Math.max(0,lost-steps*.08);
+      if(!steps)return;
+      u.memory.johnWhinnies=(u.memory.johnWhinnies||0)+steps;
+      const cast=()=>{
+        const duration=ascended(u)?5:3;
+        ctx.status(u,'taunt',duration,0,u,{radius:radius(u,ctx)});
+        ctx.status(u,'protection',duration,ascended(u)?.3:.25,u);
+        ctx.fx('wave',u.x,u.y,{side:u.side,radius:radius(u,ctx),color:'#ffd4a1'});
+      };
+      if(ctx.useAbility)ctx.useAbility(u,cast);else cast();
+    },
+  },
   avara:{
     attack(ctx,u,target,hit){const step=hit.sequenceIndex%4;if(step===1){hit.projectileKind='raspberry';hit.projectileColor='#f6a2c6';}else if(step===2){hit.projectileKind='avocado';hit.projectileColor='#c6e28e';}},
     hit(ctx,u,target,result,hit){
@@ -624,7 +642,7 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {};
-for(const id of ['reacher','bastra','maapp','avara'])ABILITIES[`${id}/ascended`]=ABILITIES[id];
+for(const id of ['reacher','bastra','maapp','avara','john-reynolds'])ABILITIES[`${id}/ascended`]=ABILITIES[id];
 
 // Phoenix is a reachable form rather than a separately selectable root card.
 ABILITIES['tphoenix/phoenix']={attack(ctx,u,t,hit){hit.bypassShield=true;},hit(ctx,u,t,r){if(damageEvent(r))growDamage(u,1);}};

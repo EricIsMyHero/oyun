@@ -124,7 +124,7 @@ test('ability texts, names, turn abilities and star upgrades are preserved verba
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    '7f97f2931310099a34aaffd41a1da9babd8fe3961a77289f79e0cb5a4f1cbd41');
+    '32f2a3f945c5306fc5b4f28ea26957b8b24a4b01b2f8e90ed533668873275706');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {
@@ -391,4 +391,9 @@ test('Ascendant geometry is authored in both partner forms and Avara exposes all
  for(const id of ['reacher','bastra','maapp','avara']){const root=cards.find(c=>c.id===id);assert.ok(root.ascension.partnerIds.length);for(const c of [root,root.upgradedsecondForm]){assert.equal(c.combatStats.attackWidth,id==='maapp'?5000:500);assert.equal(c.combatStats.attackDistance,id==='maapp'?5000:500);}}
  context.card=cards.find(c=>c.id==='reacher');assert.match(run('buildCombatProfile(card)'),/Melee &amp; ranged|Melee & ranged/);
  context.card=cards.find(c=>c.id==='avara');const html=run('buildCombatProfile(card)');assert.match(html,/2.5 × 5 tiles \/ — \/ — \/ 5 × 2.5 tiles/);
+});
+
+
+test('John Reynolds has the requested sweep geometry in both forms',()=>{
+ const c=cards.find(c=>c.id==='john-reynolds');for(const form of[c,c.upgradedsecondForm]){assert.equal(form.combatStats.attackWidth,1000);assert.equal(form.combatStats.attackDistance,1250);assert.equal(form.combatStats.attackAngle,180);assert.equal(form.combatStats.attackShape,'cone');assert.equal(form.combatStats.multiTarget,true);}
 });

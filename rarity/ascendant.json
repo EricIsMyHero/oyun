@@ -281,12 +281,12 @@
       "shield": "80",
       "damage": "2",
       "sps": "8",
-      "attackSpeed": "0.25s",
+      "attackSpeed": "0.30s",
       "delay": "-",
       "mana": "4",
       "number": "1"
     },
-    "trait": "15% şansla rəqibin hasarını 4 saniyəlik -90% azaldar",
+    "trait": "8% şansla rəqibin hasarını 2 saniyəlik -75% azaldar",
     "additionalStats": {
       "range": "5000",
       "speed": "1100",
@@ -333,12 +333,12 @@
         "shield": "100",
         "damage": "3",
         "sps": "12",
-        "attackSpeed": "0.25s",
+        "attackSpeed": "0.30s",
         "delay": "-",
         "mana": "7",
         "number": "1"
       },
-      "trait": "17% şansla rəqibin hasarını 5 saniyəlik -90% azaldar",
+      "trait": "10% şansla rəqibin hasarını 3 saniyəlik -80% azaldar",
       "additionalStats": {
         "range": "5000",
         "speed": "1100",
@@ -678,7 +678,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -689,15 +697,15 @@
       "class": "Suicide Assassin",
       "combatStats": {
         "attackType": "melee",
-        "multiTarget": false,
-        "maxTargets": 1,
-        "attackShape": "single",
-        "attackWidth": null,
+        "multiTarget": true,
+        "maxTargets": null,
+        "attackShape": "cone",
+        "attackWidth": 1000,
         "weight": "heavy",
         "targets": "ground",
-        "attackDistance": null,
+        "attackDistance": 1250,
         "attackDistanceMatchesRange": false,
-        "attackAngle": null,
+        "attackAngle": 180,
         "impactSize": null,
         "projectileEndEffect": null,
         "movementType": "ground",
@@ -708,19 +716,24 @@
     "subclass": "Anchor",
     "combatStats": {
       "attackType": "melee",
-      "multiTarget": false,
-      "maxTargets": 1,
-      "attackShape": "single",
-      "attackWidth": null,
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": 1000,
       "weight": "heavy",
       "targets": "ground",
-      "attackDistance": null,
+      "attackDistance": 1250,
       "attackDistanceMatchesRange": false,
-      "attackAngle": null,
+      "attackAngle": 180,
       "impactSize": null,
       "projectileEndEffect": null,
       "movementType": "ground",
       "groundEffectImmune": false
+    },
+    "ascension": {
+      "partnerIds": [
+        "sheriff"
+      ]
     }
   }
 ]

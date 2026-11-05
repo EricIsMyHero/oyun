@@ -41,7 +41,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,99);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,100);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&!ABILITIES[card.id]?.noBasicAttack)assert.ok(card.attack.interval>0);}}
   assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
@@ -60,9 +60,10 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  'john-reynolds':({ctx,u,rule,records})=>{const hp=u.hp;rule.damaged(ctx,u,null,{healthDamage:u.maxHp*.08,total:u.maxHp*.08});assert.equal(u.memory.johnWhinnies,1);assert.equal(records.statuses[0].kind,'taunt');assert.equal(records.statuses[0].duration,u.def.id.includes('/ascended')?5:3);assert.equal(records.statuses[1].kind,'protection');assert.equal(rule.criticalPiercesShield,true);close(u.hp,hp);},
   reacher:({ctx,u,t,rule})=>{rule.spawn(ctx,u);close(u.stats.range,2200);rule.prepareAttack(ctx,u,t);assert.equal(u.memory.combatMode,0);t.side=0;rule.tick(ctx,u);close(u.stats.damageminimiser,u.def.stats.damageminimiser+(u.def.id.includes('/ascended')?3:2));},
   bastra:({ctx,u,t,rule,hit})=>{t.side=0;rule.tick(ctx,u);close(u.stats.attackSpeed,2/(1+(u.def.id.includes('/ascended')?.03:.02)));rule.attack(ctx,u,t,hit);assert.equal(hit.bypassShield,true);},
-  maapp:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'statReduction');close(records.statuses[0].stats.damage,.9);assert.equal(records.statuses[0].percent,true);},
+  maapp:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'statReduction');close(records.statuses[0].stats.damage,u.def.id.includes('/ascended')?.8:.75);assert.equal(records.statuses[0].percent,true);},
   avara:({ctx,u,t,rule,result,hit,records})=>{hit.sequenceIndex=0;rule.hit(ctx,u,t,result,hit);assert.equal(records.statuses[0].kind,'slow');hit.sequenceIndex=1;rule.attack(ctx,u,t,hit);assert.equal(hit.projectileKind,'raspberry');rule.hit(ctx,u,t,result,hit);assert.equal(records.push.length,1);hit.sequenceIndex=2;rule.hit(ctx,u,t,result,hit);assert.equal(records.statuses[1].kind,'stun');},
 
   sunrise:({ctx,u,rule})=>{const hp=u.hp;rule.move(ctx,u,{x:0,y:0},{x:1,y:0},.6);close(u.memory.sunriseGrowth,1);close(u.hp,hp+1);close(u.maxHp,hp+1);},
@@ -174,7 +175,7 @@ const cases={
   'tphoenix/phoenix':({ctx,u,t,rule,hit,result})=>{rule.attack(ctx,u,t,hit);assert.ok(hit.bypassShield);rule.hit(ctx,u,t,result);assert.equal(u.stats.damage,u.def.stats.damage+1);},
 };
 
-for(const id of ['reacher','bastra','maapp','avara'])cases[`${id}/ascended`]=cases[id];
+for(const id of ['reacher','bastra','maapp','avara','john-reynolds'])cases[`${id}/ascended`]=cases[id];
 
 for(const [id,exercise] of Object.entries(cases))test(`native arena ability: ${id}`,async()=>{
   const [,{ABILITIES}]=await modules;

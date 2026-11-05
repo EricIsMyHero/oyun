@@ -10,12 +10,12 @@ async function fixture(ids=[]){
  return{e,catalog,resolveDeckCard,deck,spawn,dummy};
 }
 
-test('four Ascendant roots and all four empowered forms unlock with authored stats and geometry',async()=>{
- const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,99);
- for(const id of ['reacher','bastra','maapp','avara'])for(const key of [id,id+'/ascended']){const c=catalog.byId.get(key);assert.equal(c.ready,true,key);assert.deepEqual(c.reasons,[]);close(c.stats.vision,8000);}
+test('five Ascendant roots and all five empowered forms unlock with authored stats and geometry',async()=>{
+ const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,100);
+ for(const id of ['reacher','bastra','maapp','avara','john-reynolds'])for(const key of [id,id+'/ascended']){const c=catalog.byId.get(key);assert.equal(c.ready,true,key);assert.deepEqual(c.reasons,[]);close(c.stats.vision,8000);}
  const r=catalog.byId.get('reacher');assert.equal(r.combat.attackType,'mixed');assert.equal(r.combat.targets,'both');close(r.combat.attackDistance,500);assert.deepEqual(r.attack.modes.map(m=>[m.damage,m.count,m.interval,m.delay,m.range]),[[24,1,1.2,0,1000],[8,2,.2,.8,2200]]);
  const m=catalog.byId.get('maapp');assert.deepEqual([m.combat.attackWidth,m.combat.attackDistance,m.combat.attackAngle,m.combat.weight],[5000,5000,360,'light']);
- assert.equal(catalog.byId.get('john-reynolds').ready,false);
+ assert.equal(catalog.byId.get('john-reynolds').ready,true);
 });
 
 test('each authored partner activates exactly one stronger form based on original deck membership',async()=>{
@@ -84,12 +84,12 @@ test('Maapp pulses in all directions and hits air without producing a projectile
  const {e,spawn,dummy}=await fixture(),u=spawn('maapp'),front=dummy(1,{x:19.8,y:14}),back=dummy(1,{x:10.2,y:14}),air=dummy(1,{x:15,y:18.8}),far=dummy(1,{x:20.5,y:14});air.def.combat.movementType='flying';e.random=()=>.99;e._fire(u,front);for(const t of[front,back,air])close(t.hp,998);close(far.hp,1000);assert.equal(e.state.projectiles.length,0);assert.ok(e.state.effects.some(f=>f.type==='wave'&&f.radius===5));
 });
 
-test('Maapp proc probability, ninety-percent reduction and four/five second duration match both forms',async()=>{
- for(const up of [false,true])for(const proc of [false,true]){const {e,spawn,dummy}=await fixture(),u=spawn(up?'maapp/ascended':'maapp'),t=dummy(1,{x:17,y:14},{damage:100});e.random=()=>((up?.17:.15)+(proc?-.001:0));e._fire(u,t);u.cooldown=Infinity;close(e.statValue(t,'damage'),proc?10:100);if(proc){close(t.statuses.find(s=>s.kind==='statReduction').until,up?5:4);e.step(up?5:4);close(e.statValue(t,'damage'),100);}}
+test('Maapp proc probability, updated reduction probabilities and two/three second duration match both forms',async()=>{
+ for(const up of [false,true])for(const proc of [false,true]){const {e,spawn,dummy}=await fixture(),u=spawn(up?'maapp/ascended':'maapp'),t=dummy(1,{x:17,y:14},{damage:100});e.random=()=>((up?.10:.08)+(proc?-.001:0));e._fire(u,t);u.cooldown=Infinity;close(e.statValue(t,'damage'),proc?(up?20:25):100);if(proc){close(t.statuses.find(s=>s.kind==='statReduction').until,up?3:2);e.step(up?3:2);close(e.statValue(t,'damage'),100);}}
 });
 
 test('Maapp reduction respects Predominance and Cleanse',async()=>{
- const {e,spawn,dummy}=await fixture(),u=spawn('maapp'),t=dummy(1,{x:17,y:14},{damage:100});e.random=()=>0;e.status(t,'predominance',10);e._fire(u,t);close(e.statValue(t,'damage'),100);e.cleanse(t);t.statuses=[];e._fire(u,t);close(e.statValue(t,'damage'),10);e.cleanse(t);close(e.statValue(t,'damage'),100);
+ const {e,spawn,dummy}=await fixture(),u=spawn('maapp'),t=dummy(1,{x:17,y:14},{damage:100});e.random=()=>0;e.status(t,'predominance',10);e._fire(u,t);close(e.statValue(t,'damage'),100);e.cleanse(t);t.statuses=[];e._fire(u,t);close(e.statValue(t,'damage'),25);e.cleanse(t);close(e.statValue(t,'damage'),100);
 });
 
 test('Avara source modes preserve four damage values, four ranges and a delay after every attack',async()=>{

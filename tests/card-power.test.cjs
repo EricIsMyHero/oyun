@@ -8,8 +8,12 @@ const cards=fs.readdirSync(path.join(root,'rarity')).filter(f=>f.endsWith('.json
 const modules=Promise.all([import('../arena/js/power.mjs'),import('../arena/js/catalog.mjs')]);
 
 test('shared Power scorer preserves all 138 original Codex scores, including dual-card averages',async()=>{
-  const [{createPowerScorer}]=await modules,score=createPowerScorer(cards);
-  const scores=cards.map(card=>[card.id,score(card)]);
+  // Keep the original-stat regression fixture independent of the requested
+  // Maapp interval rebalance. The next test checks every current authored score.
+  const baseline=structuredClone(cards),maapp=baseline.find(c=>c.id==='maapp');
+  maapp.stats.attackSpeed='0.25s';maapp.upgradedsecondForm.stats.attackSpeed='0.25s';
+  const [{createPowerScorer}]=await modules,score=createPowerScorer(baseline);
+  const scores=baseline.map(card=>[card.id,score(card)]);
   // Captured from the original Codex formula before extracting the shared module.
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(scores)).digest('hex'),'2db2dd13f823024488b778a7550884236a312d000081aefa5f71c39edd1b11af');
 });

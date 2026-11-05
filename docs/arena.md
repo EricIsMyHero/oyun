@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **99 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **100 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -316,7 +316,7 @@ The **Tphoenix → Fire Egg → Phoenix** chain is also battle-ready:
   Blind**, reducing Range and Vision by **25%**. Fully blocked/missed hits do not
   trigger it. Predominance and normal native-ability suppression still apply.
 
-**Reacher**, **Bastra**, **Maapp** and **Avara** are battle-ready, including
+**Reacher**, **Bastra**, **Maapp**, **Avara** and **John Reynolds** are battle-ready, including
 partner forms. Partner activation is based on each team's original eight-card
 deck, never on the current hand, deployment, proximity or a surviving partner:
 
@@ -326,12 +326,13 @@ deck, never on the current hand, deployment, proximity or a surviving partner:
 | Bastra | Maapp or Avara | 9 → 11 |
 | Maapp | Bastra or Avara | 4 → 7 |
 | Avara | Bastra or Maapp | 15 → 18 |
+| John Reynolds | Sheriff | 13 → 15 |
 
 The source `upgradedsecondForm` supplies all empowered stats; multiple partners
 never stack the upgrade. Both teams, deployment affordability/energy, cycle,
 deck average, catalog, hand and bot mana planning use the same resolution.
 Empowered forms cannot be selected directly as independent deck cards.
-Unspecified additional stats in the four empowered forms retain the base values.
+Unspecified additional stats in the five empowered forms retain the base values.
 The existing website Power formula remains unchanged.
 
 - Reacher keeps its 500-point attack width and travel distance. It acquires
@@ -348,10 +349,21 @@ The existing website Power formula remains unchanged.
   per ally. Its 70-damage ranged shots bypass shields. Silence disables these
   proximity bonuses and shield bypass. Buildings and absent bodies do not count.
 - Maapp is light, with 5,000-point width and travel distance, five-tile Range
-  and 360° coverage. Its .25s attack pulses around itself, including enemies
-  behind it and flyers. Each successful hit has a 15% chance to reduce the
-  victim's Damage by 90% for 4s; the empowered form uses 17% for 5s. This uses
+  and 360° coverage. Its .30s attack pulses around itself, including enemies
+  behind it and flyers. Each successful hit has an 8% chance to reduce the
+  victim's Damage by 75% for 2s; the empowered form uses 10% for 3s with an
+  80% reduction. This uses
   the standard Stat Reduction, immunity, duration and Cleanse rules.
+- John Reynolds has a 1,000-point strike width, 1,250-point attack distance and
+  180° forward cone against ground targets. Critical basic attacks bypass
+  shields; Silence disables that native bypass while critical damage remains a
+  base stat. Each cumulative 8% of maximum Health actually lost triggers a
+  horse call: Taunt in the authored 1.25-tile Range and 25% protection for 3s.
+  The source empowered form uses 30% protection and 5s. Shield loss does not
+  advance the counter. Large packets consume all complete 8% portions but
+  refresh one effect, without stacking protection or multiplying its duration.
+  Repeated Health loss after healing can trigger again; lethal damage does not
+  trigger the call. Standard immunity, targeting and Cleanse rules apply.
 - Avara cycles 22/44/64/92 damage, or 26/52/76/108 empowered. The corresponding
   acquisition ranges are 2.2/2.4/4.2/5 tiles, with intervals 1.35/.75/.85/1.75s.
   **Every attack adds the authored 1.45s delay**: 2.8/2.2/2.3/3.2s between attacks.

@@ -686,6 +686,7 @@ export class ArenaEngine {
     if(hit.kind==='attack'&&!hit.secondary&&this.random()<clamp(this.statValue(target,'dodge'),0,70)/100){this.fx('miss',target.x,target.y,{side:target.side});return empty;}
     this.damageDepth++;
     if(source&&this.ability(source)?.cannotCrit)hit.critical=false;
+    if(source&&hit.kind==='attack'&&hit.critical&&this.ability(source)?.criticalPiercesShield&&!has(source,'silence',this.time))hit.bypassShield=true;
     this._hook('incoming',target,source,hit);
     if(hit.instantKill&&!target.isCastle&&!target.isBuilding){hit.damage=target.hp+target.shield+1;hit.bypassShield=true;hit.kind='execution';}
     if(hit.critical){
