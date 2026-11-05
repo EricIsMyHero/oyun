@@ -257,7 +257,8 @@ four central Damage and **two to every other enemy in the 1.2-tile radius**, or
 **six central and three surrounding Damage** at 50% Health or less. Surrounding
 enemies are not captured. The bonus does not stack and ends after healing above
 the threshold. The tenth attack attempt releases any
-survivor and knocks it back **3.5 tiles** along its original approach direction.
+survivor and throws it **3.5 tiles from the vortex centre** along its original
+approach direction, projected onto the lane for ground movement.
 Release still happens if the last attack misses or Silence prevents the final
 native effect. Cleanse, changing targets and the captor's death also release
 survivors. Predominance prevents capture, while ordinary immunity, Dodge and

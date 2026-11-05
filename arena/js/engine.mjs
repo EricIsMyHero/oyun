@@ -610,11 +610,11 @@ export class ArenaEngine {
     this.damageDepth--;
     return result;
   }
-  push(target,awayFrom,tiles){
+  push(target,awayFrom,tiles,origin=target){
     if(!target?.alive||target.healthless||target.engulfedBy||target.isCastle||target.isBuilding||tiles<=0||has(target,'predominance',this.time))return;
-    let dx=target.x-awayFrom.x,dy=target.y-awayFrom.y,len=Math.hypot(dx,dy);
+    let dx=origin.x-awayFrom.x,dy=origin.y-awayFrom.y,len=Math.hypot(dx,dy);
     if(!len){dx=target.side?-1:1;dy=0;len=1;}
-    const p={x:clamp(target.x+dx/len*tiles,.5,MAP.width-.5),y:clamp(target.y+dy/len*tiles,.5,MAP.height-.5)};
+    const p={x:clamp(origin.x+dx/len*tiles,.5,MAP.width-.5),y:clamp(origin.y+dy/len*tiles,.5,MAP.height-.5)};
     if(target.def.combat.movementType!=='flying'){const q=closestRoute(p);target.x=q.x;target.y=q.y;}else Object.assign(target,p);
     this._resetWaypoint(target);
   }
@@ -851,7 +851,7 @@ export class ArenaEngine {
       if(releaseDistance)for(const captive of this.captivesOf(u)){
         const vector=captive.memory.vortexVector||{x:u.side===0?1:-1,y:0};
         this.releaseEngulfed(captive);
-        if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this.push(captive,{x:captive.x-vector.x,y:captive.y-vector.y},releaseDistance);
+        if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this.push(captive,{x:u.x-vector.x,y:u.y-vector.y},releaseDistance,u);
       }
     }else{u.burstTargetId=target.id;u.cooldown=interval;}
   }

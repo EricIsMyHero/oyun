@@ -98,7 +98,7 @@ test('Tornado hurls victims along their original approach direction for either f
   for(const side of [0,1]){
     const {e,spawn,dummy}=await fixture(),u=spawn('tornado',side),target=dummy(1-side,{x:15+(side===0?1:-1),y:14});
     for(let i=0;i<10;i++)e._fire(u,target);
-    assert.ok(side===0?target.x>18:target.x<13,`side ${side}`);assert.equal(target.engulfedBy,undefined);
+    close(Math.hypot(target.x-u.x,target.y-u.y),3.5);assert.ok(side===0?target.x>18:target.x<13,`side ${side}`);assert.equal(target.engulfedBy,undefined);
   }
 });
 

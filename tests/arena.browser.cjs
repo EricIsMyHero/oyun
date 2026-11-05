@@ -597,7 +597,7 @@ async function minimapPixelAt(page,point) {
       await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-tornado-captives="1"]').count(),1);assert.equal(await page.locator('#inspector [data-stat="damage"] strong').textContent(),'10 × 6');assert.equal(await page.locator('#inspector [data-stat="attackSpeed"] strong').textContent(),'0.25s');
       await page.screenshot({path:'/tmp/oyun-arena-tornado-vortex.png',fullPage:true});screenshots.push('/tmp/oyun-arena-tornado-vortex.png');await page.locator('#inspector-close').click();
       const released=await page.evaluate(()=>{const e=arenaApp.engine,{source,target,other}=vortexFixture;e.setPaused(true);for(let i=0;i<9;i++)e._fire(source,target);return{held:!!target.engulfedBy,hp:target.hp,splashHp:other.hp,x:target.x,attacks:source.attacks};});
-      assert.equal(released.held,false);assert.equal(released.hp,940);assert.equal(released.splashHp,970);assert.ok(released.x>18);assert.equal(released.attacks,1);
+      assert.equal(released.held,false);assert.equal(released.hp,940);assert.equal(released.splashHp,970);assert.ok(Math.abs(released.x-18.5)<1e-7);assert.equal(released.attacks,1);
       const egg=await page.evaluate(()=>{
         arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
         const def=structuredClone(arenaApp.catalog.byId.get('tphoenix'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
