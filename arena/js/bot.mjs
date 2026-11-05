@@ -5,7 +5,7 @@ import { visibilitySources, isEntityVisible } from './vision.mjs';
 const airTarget = def => ['air','both'].includes(def.combat?.targets);
 const ranged = def => def.combat?.attackType === 'ranged';
 const frontline = def => def.combat?.attackType==='melee' && num(def.stats.health)+num(def.stats.shield)>=230;
-const living = unit => unit.alive && !unit.engulfedBy && !unit.banished;
+const living = unit => unit.alive && !unit.engulfedBy && !unit.banished && !unit.possessingId;
 const shuffled = (values,random) => {
   const copy=[...values];
   for(let i=copy.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]];}
@@ -152,6 +152,7 @@ function castUsefulSpell(engine,view,plan) {
   if(id==='healing-light')pool=allies.filter(u=>u.hp<engine.maxHealth(u)*.7||u.statuses.some(s=>['stun','frozen','poison','burn','bleed'].includes(s.kind)));
   else if(id==='shield-of-serenity')pool=allies.filter(u=>u.maxShield>0&&enemies.some(t=>distance(t,u)<=5));
   else if(id==='lunar-mirrage')pool=allies.filter(u=>enemies.some(t=>distance(t,u)<=5)||distance(u,view.castle)>10);
+  else if(id==='illustration-spell')pool=enemies.filter(u=>!u.isBuilding&&!u.possessedBy&&!u.memory.conversion);
   else pool=id==='roots'?enemies.filter(u=>!u.def.combat.groundEffectImmune):enemies;
   const shape=engine._shape(spell);
   const scored=pool.map(target=>({target,value:pool.filter(u=>engine._inside(u,target,shape)).reduce((n,u)=>n+(id==='healing-light'?Math.min(engine.maxHealth(u)-u.hp,engine.maxHealth(u)*.3)/50:unitPower(u)),0)})).sort((a,b)=>b.value-a.value);

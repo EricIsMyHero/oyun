@@ -37,13 +37,13 @@ function fixture(catalog,id) {
 }
 
 test('arena catalog preserves every source definition and exposes honest data locks',async()=>{
-  const [{buildCatalog,imageFor,formatStat}]=await modules;
+  const [{buildCatalog,imageFor,formatStat},{ABILITIES}]=await modules;
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,92);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,93);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
-  for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&card.id!=='chicken')assert.ok(card.attack.interval>0);}}
+  for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&!ABILITIES[card.id]?.noBasicAttack)assert.ok(card.attack.interval>0);}}
   assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
   assert.equal(c.byId.get('tphoenix').ready,true);assert.equal(c.byId.get('tornado').ready,true);
   assert.match(c.byId.get('nightfang').reasons.join(' '),/Attack Distance/);
@@ -60,6 +60,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  whisper:({ctx,u,t,rule})=>{let collected=null,possessed=null;ctx.collectWhisperCritical=source=>{collected=source;};ctx.possessionTarget=()=>t;ctx.possess=(source,target)=>{possessed={source,target};};rule.spawn(ctx,u);assert.equal(collected,u);assert.equal(rule.target(ctx,u),t);rule.contact(ctx,u,t);assert.equal(possessed.source,u);assert.equal(possessed.target,t);assert.equal(rule.noBasicAttack,true);assert.equal(rule.cannotCrit,true);},
   'corsair-crew':({ctx,u,rule})=>{assert.deepEqual(rule.spawnForms,[0]);ctx.statValue=(actor,key)=>actor.stats[key];let reflected=false;ctx.reflectProjectile=()=>{reflected=true;return true;};assert.equal(rule.intercept(ctx,u,{hit:{reflected:false}}),true);assert.equal(reflected,true);assert.equal(rule.intercept(ctx,u,{hit:{reflected:true}}),false);},
   'corsair-crew/pirate-girls':({ctx,u,t,rule})=>{t.x=u.x+2.75;t.y=u.y;const hit={damage:16};rule.attack(ctx,u,t,hit);close(hit.damage,28);close(u.memory.distanceBonus,.75);},
   roguex:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'blind');assert.equal(records.statuses[0].duration,7);close(records.statuses[0].magnitude,.25);},

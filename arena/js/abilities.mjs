@@ -275,6 +275,15 @@ export const ABILITIES = {
   roguex:{hit(ctx,u,target,result){
     if(damageEvent(result)&&!target.isCastle&&!target.isBuilding&&ctx.random()<.5)ctx.status(target,'blind',7,.25,u);
   }},
+  whisper:{
+    noBasicAttack:true,
+    cannotCrit:true,
+    possessor:true,
+    exclusiveTarget:true,
+    spawn(ctx,u){ctx.collectWhisperCritical(u);},
+    target(ctx,u){return ctx.possessionTarget(u);},
+    contact(ctx,u,target){ctx.possess(u,target);},
+  },
   toxic:{hit(ctx,u,t,r){poisonHit(ctx,u,t,r,2,3);}},
   leafshade:{
     attack(ctx,u,t,hit){hit.bypassShield=true;},
@@ -551,7 +560,6 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {
-  whisper:['Host restoration and ownership after the possession expires are not authored.'],
   sunrise:['The 210 Health growth cap is not identified as total Health or bonus Health.'],
   wong:['The firearm state after its eight-hit burst is not authored.'],
 };

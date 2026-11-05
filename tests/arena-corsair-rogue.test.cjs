@@ -23,7 +23,7 @@ async function fixture(){
 }
 
 test('Corsair Crew, Pirate Girls and RogueX unlock while source mana, Count and damage stay intact',async()=>{
-  const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,92);
+  const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,93);
   for(const id of ['corsair-crew','corsair-crew/pirate-girls','roguex'])assert.deepEqual(catalog.byId.get(id).reasons,[]);
   const c=catalog.byId.get('corsair-crew'),g=c.forms[0],r=catalog.byId.get('roguex');
   assert.equal(c.stats.number,1);assert.equal(c.stats.mana,12);assert.equal(c.stats.health,430);assert.equal(c.stats.damage,20);

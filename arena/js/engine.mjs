@@ -58,7 +58,7 @@ export class ArenaEngine {
     this.state.effects.push({id:`fx-${++this.serial}`,type,x,y,born:this.time,until:this.time+(options.duration??.65),...options});
     if(this.state.effects.length>300)this.state.effects.splice(0,this.state.effects.length-300);
   }
-  near(point,radius,filter=null){return this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&distance(u,point)<=radius+(u.radius||0)&&(!filter||filter(u)));}
+  near(point,radius,filter=null){return this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.possessingId&&distance(u,point)<=radius+(u.radius||0)&&(!filter||filter(u)));}
   ability(u){return ABILITIES[u.def?.id] || ABILITIES[u.def?.rootId] || null;}
   _hook(name,u,...args){
     // Target changes clear passive state even while abilities are silenced.
@@ -83,11 +83,106 @@ export class ArenaEngine {
   killUnit(u,killer=null,extra={}){
     const pool=this._pool(u),members=pool?this.units.filter(t=>pool.members.includes(t.id)):[u];
     for(const member of members)if(member.alive){member.hp=0;member.alive=false;this.deaths.push({u:member,killer,...extra});}
+    for(const member of members)this._possessionGone(member);
     for(const member of members)this._promoteFormat(killer,member);
+  }
+  vanishUnit(u){
+    if(!u?.alive)return;
+    this._detachSharedVitals(u);
+    u.hp=0;u.alive=false;this.deaths.push({u,killer:null});this._possessionGone(u);
+  }
+  _detachSharedVitals(u){
+    const pool=this._pool(u);
+    if(pool){
+      const contribution=u.sharedVitalContribution||{health:0,shield:0};
+      const ownHealth=contribution.health/.9||u.stats.health,ownShield=contribution.shield/.9||0;
+      const saved={hp:pool.maxHp>0?pool.hp/pool.maxHp*ownHealth:0,maxHp:ownHealth,shield:pool.maxShield>0?pool.shield/pool.maxShield*ownShield:0,maxShield:ownShield};
+      pool.members=pool.members.filter(id=>id!==u.id);delete u.sharedVitalsId;delete u.sharedVitalContribution;
+      for(const [current,maximum,part]of [['hp','maxHp',contribution.health],['shield','maxShield',contribution.shield]]){
+        const capacity=pool[maximum];pool[maximum]=Math.max(0,capacity-part);
+        pool[current]=capacity>0?pool[current]*pool[maximum]/capacity:0;
+      }
+      for(const [key,value]of Object.entries(saved))Object.defineProperty(u,key,{enumerable:true,configurable:true,writable:true,value});
+      for(const member of this.units.filter(t=>t.alive&&pool.members.includes(t.id)))this._capVitals(member);
+    }
+  }
+  collectWhisperCritical(u){
+    const bank=u.whisperState||={bonusSeconds:0};
+    const gained=clamp(num(u.stats.criticalChance),0,100);u.stats.criticalChance=0;
+    if(gained>0){bank.bonusSeconds+=gained;if(u.possessingId)bank.until+=gained*bank.durationFactor;}
+    return bank;
+  }
+  possessionTarget(u){
+    return this.near(u,this._range(u),t=>!t.isBuilding&&!t.healthless&&!t.possessedBy&&this._legalTarget(u,t))
+      .sort((a,b)=>distance(u,a)-distance(u,b)||a.id.localeCompare(b.id))[0]||null;
+  }
+  _possessionMarker(source,host){
+    let marker=host.statuses.find(s=>s.kind==='possession'&&s.sourceId===source.id);
+    if(!marker){marker={kind:'possession',sourceId:source.id,magnitude:1,unbreakable:true,nextTick:Infinity,interval:1};host.statuses.push(marker);}
+    marker.until=source.whisperState.until;this.statusSources.set(source.id,source);
+  }
+  _possessionSide(host,side){
+    if(host.side===side)return;
+    host.side=side;host.targetId=host.burstTargetId=null;host.burstIndex=0;
+    host.route=routeFor(host.lane,side);this._resetWaypoint(host);
+  }
+  possess(source,host){
+    if(!source?.alive||!this.ability(source)?.possessor||source.possessingId||source.engulfedBy||source.banished||['silence','stun','imprisonment','airborne','frozen'].some(kind=>has(source,kind,this.time))||!host?.alive||host.isBuilding||host.healthless||host.possessedBy||!this._legalTarget(source,host)||distance(source,host)>this._range(source)+host.radius+EPS)return false;
+    const bank=this.collectWhisperCritical(source),missed=this._abilityMiss(source,host);
+    bank.penalized=missed||has(host,'predominance',this.time);bank.durationFactor=bank.penalized?.75:1;
+    bank.startedAt=this.time;bank.until=this.time+(num(source.def.raw?.mechanicStats?.controlDuration,14)+bank.bonusSeconds)*bank.durationFactor;
+    bank.originalSide=host.side;bank.controlSide=source.side;bank.hostId=host.id;
+    this._detachSharedVitals(source);
+    source.possessingId=host.id;host.possessedBy=source.id;
+    source.targetId=source.burstTargetId=null;source.moving=false;
+    this._possessionSide(host,bank.controlSide);this._possessionMarker(source,host);
+    this.fx('portal',source.x,source.y,{side:source.side,color:'#cbb5ff',duration:.7});
+    source.x=host.x;source.y=host.y;
+    this.fx('capture',host.x,host.y,{side:bank.controlSide,color:'#cbb5ff',duration:.8});
+    this.log('possession',`Whisper controls ${host.def.name}.`,{side:bank.controlSide,unitId:host.id});
+    return true;
+  }
+  _penalizePossession(host){
+    const source=this.units.find(u=>u.id===host.possessedBy),bank=source?.whisperState;
+    if(!source?.alive||!source.possessingId||!bank||bank.penalized)return;
+    bank.until=this.time+Math.max(0,bank.until-this.time)*.75;bank.durationFactor=.75;bank.penalized=true;
+    this._possessionMarker(source,host);
+  }
+  endPossession(source){
+    if(!source?.possessingId)return;
+    const host=this.units.find(u=>u.id===source.possessingId),bank=source.whisperState;
+    if(host?.possessedBy===source.id){
+      // An expired lower-priority conversion may change the underlying owner.
+      if(host.alive&&host.memory.conversion&&!has(host,'conversion',this.time))this._restoreConversion(host);
+      delete host.possessedBy;host.statuses=host.statuses.filter(s=>s.kind!=='possession'||s.sourceId!==source.id);
+      if(host.alive)this._possessionSide(host,bank.originalSide);
+    }
+    delete source.possessingId;bank.hostId=null;bank.until=null;
+    this.vanishUnit(source);
+  }
+  _possessionGone(u){
+    if(u.possessingId)this.endPossession(u);
+    if(u.possessedBy){const controller=this.units.find(t=>t.id===u.possessedBy);if(controller)this.endPossession(controller);}
+  }
+  _syncPossessions(){
+    const sources=this.units.filter(u=>u.possessingId||u.alive&&this.ability(u)?.possessor);
+    if(!sources.length)return;
+    const byId=new Map(this.units.map(u=>[u.id,u]));
+    for(const u of sources)if(u.alive)this.collectWhisperCritical(u);
+    for(const source of sources){
+      if(!source.possessingId)continue;
+      const host=byId.get(source.possessingId),bank=source.whisperState;
+      if(!source.alive||!host?.alive||this.time+EPS>=bank.until){this.endPossession(source);continue;}
+      host.possessedBy=source.id;this._possessionSide(host,bank.controlSide);this._possessionMarker(source,host);
+      let position=host;const visited=new Set([source.id]);
+      while(position.possessingId&&!visited.has(position.id)){visited.add(position.id);const next=byId.get(position.possessingId);if(!next?.alive)break;position=next;}
+      source.x=position.x;source.y=position.y;source.moving=false;
+    }
   }
   _bindVitals(pool,u){
     const saved={hp:u.hp,maxHp:u.maxHp,shield:u.shield,maxShield:u.maxShield};
     for(const key of Object.keys(saved))pool[key]+=saved[key]*.9;
+    u.sharedVitalContribution={health:saved.maxHp*.9,shield:saved.maxShield*.9};
     pool.members.push(u.id);u.sharedVitalsId=pool.id;
     for(const key of Object.keys(saved))Object.defineProperty(u,key,{enumerable:true,configurable:true,get:()=>pool[key],set:value=>{pool[key]=Math.max(0,Number.isFinite(value)?value:0);}});
     this._capVitals(u);
@@ -249,7 +344,7 @@ export class ArenaEngine {
       if(!isDeployable(candidate,side,this.units.filter(u=>u.alive&&u.isBuilding)))continue;
       if(closestRoute(candidate).lane!==lane&&distance(point,candidate)>1)continue;
       if(positions.some(p=>distance(p,candidate)<radius*2+.02))continue;
-      if(this.units.some(u=>u.alive&&!u.engulfedBy&&u.def.combat?.movementType===def.combat?.movementType&&distance(candidate,u)<radius+u.radius+.02))continue;
+      if(this.units.some(u=>u.alive&&!u.engulfedBy&&!u.possessingId&&u.def.combat?.movementType===def.combat?.movementType&&distance(candidate,u)<radius+u.radius+.02))continue;
       positions.push(candidate);if(positions.length===count)return positions;
     }
     return null;
@@ -354,7 +449,7 @@ export class ArenaEngine {
   _applySpell(side,spell,point,id){
     const raw=spell.raw.stats,shape=this._shape(spell);
     const source={id:`spell-${++this.serial}`,side,x:point.x,y:point.y,isSpell:true,stats:{},statuses:[]};
-    const targets=this.units.filter(u=>u.alive&&!u.banished&&this._inside(u,point,shape));
+    const targets=this.units.filter(u=>u.alive&&!u.banished&&!u.possessingId&&this._inside(u,point,shape));
     const enemies=targets.filter(u=>u.side!==side),allies=targets.filter(u=>u.side===side&&!u.isBuilding);
     const castles=this.castles.filter(u=>u.alive&&u.side!==side&&this._inside(u,point,shape));
     const visualRadius=shape.shape==='global'?12:shape.radius||Math.max(shape.width||0,shape.height||0)/2;
@@ -373,7 +468,7 @@ export class ArenaEngine {
     if(id==='shield-of-serenity'){for(const u of allies)this.giveShield(u,u.maxShield*.2);return;}
     if(id==='illustration-spell'){
       for(const u of enemies.filter(u=>!u.isBuilding)){
-        if(u.memory.conversion)continue;
+        if(u.memory.conversion||u.possessedBy)continue;
         const conversion=this.status(u,'conversion',20,1,source,{originalSide:u.side});
         if(!conversion)continue;
         u.memory.conversion={side:u.side,until:conversion.until};u.side=side;u.targetId=null;u.burstTargetId=null;u.route=routeFor(u.lane,side);this._resetWaypoint(u);
@@ -411,6 +506,7 @@ export class ArenaEngine {
   }
   status(target,kind,duration,magnitude=0,source=null,extra={}){
     kind=statusKind(kind);
+    if(target?.possessingId||kind==='conversion'&&target?.possessedBy)return null;
     if(target?.banished&&kind!=='cleanse')return null;
     // A successful killing blow can mark its victim before the death queue runs.
     if(!target?.alive&&!(target&&['soulMark','ink','curse'].includes(kind)&&extra.onLethalHit&&!target.memory?.deathResolved))return null;
@@ -422,7 +518,7 @@ export class ArenaEngine {
     if(kind==='cleanse'){this.cleanse(target);return {kind};}
     if(kind==='knockback'){if(!source||!(magnitude>0))return null;this.push(target,source,magnitude);return {kind};}
     if(duration<=0)return null;
-    if(kind==='predominance')this.cleanse(target);
+    if(kind==='predominance'){this.cleanse(target);if(target.possessedBy)this._penalizePossession(target);}
     const normalized=statusParameters(kind,magnitude,extra);if(!normalized)return null;
     magnitude=normalized.magnitude;extra=normalized.params;
     const actual=NEGATIVE.has(kind)&&Number.isFinite(duration)?duration*(1-clamp(this.statValue(target,'flexibility'),0,80)/100):duration;
@@ -542,11 +638,13 @@ export class ArenaEngine {
     }
   }
   _restoreConversion(u){
-    u.side=u.memory.conversion.side;delete u.memory.conversion;u.targetId=null;u.burstTargetId=null;
+    const originalSide=u.memory.conversion.side;delete u.memory.conversion;
+    if(u.possessedBy){const controller=this.units.find(t=>t.id===u.possessedBy);if(controller?.whisperState){controller.whisperState.originalSide=originalSide;return;}}
+    u.side=originalSide;u.targetId=null;u.burstTargetId=null;
     u.route=routeFor(u.lane,u.side);this._resetWaypoint(u);
   }
   heal(target,amount,source=null,options={}){
-    if(!target?.alive||target.healthless||target.banished||amount<=0||has(target,'bleed',this.time)||has(target,'healBlock',this.time)||has(target,'suppression',this.time))return 0;
+    if(!target?.alive||target.healthless||target.banished||target.possessingId||amount<=0||has(target,'bleed',this.time)||has(target,'healBlock',this.time)||has(target,'suppression',this.time))return 0;
     if(source&&!options.passive&&this._abilityMiss(source,target))return 0;
     const burn=has(target,'burn',this.time)?.8:1;
     const value=Math.min(this.maxHealth(target)-target.hp,amount*(1+this.statValue(target,'healBonus')/100)*burn);
@@ -554,7 +652,7 @@ export class ArenaEngine {
     target.hp+=value;this.fx('heal',target.x,target.y,{amount:value,side:target.side});return value;
   }
   loseHealth(target,amount){
-    if(!target?.alive||target.healthless||!Number.isFinite(amount)||amount<=0)return 0;
+    if(!target?.alive||target.healthless||target.possessingId||!Number.isFinite(amount)||amount<=0)return 0;
     // Health costs bypass shields and damage modifiers, without triggering a hit.
     const before=target.hp;target.hp=Math.max(this._healthFloor(target),target.hp-amount);
     const lost=Math.max(0,before-target.hp);
@@ -563,7 +661,7 @@ export class ArenaEngine {
     return lost;
   }
   giveShield(target,amount,source=this.abilityContext?.source||null){
-    if(!target?.alive||target.healthless||target.banished||amount<=0||has(target,'suppression',this.time))return 0;
+    if(!target?.alive||target.healthless||target.banished||target.possessingId||amount<=0||has(target,'suppression',this.time))return 0;
     if(source&&this._abilityMiss(source,target))return 0;
     const {flat,factor}=statModifiers(target,'shield',this.time);if(factor<=0)return 0;
     const value=amount;target.maxShield=Math.max(target.maxShield,(target.shield+value)/factor+flat);target.shield+=value;
@@ -571,7 +669,8 @@ export class ArenaEngine {
   }
   damage(source,target,amount,options={}){
     const empty={healthDamage:0,shieldDamage:0,total:0,killed:false};
-    if(!target?.alive||target.healthless||target.banished||!(amount>0)||this.damageDepth>16)return empty;
+    if(!target?.alive||target.healthless||target.banished||target.possessingId||!(amount>0)||this.damageDepth>16)return empty;
+    if(source?.possessingId)return empty;
     if(source?.memory?.vortexHeld)return empty;
     if(source&&!options.persistentField&&(source.engulfedBy||has(source,'imprisonment',this.time)||has(source,'airborne',this.time)))return empty;
     if(target.engulfedBy&&source?.id!==target.engulfedBy)return empty;
@@ -581,6 +680,7 @@ export class ArenaEngine {
     if(hit.kind==='ability'&&!hit.accuracyChecked&&source&&this._abilityMiss(source,target)){this.fx('miss',target.x,target.y,{side:source.side});return empty;}
     if(hit.kind==='attack'&&!hit.secondary&&this.random()<clamp(this.statValue(target,'dodge'),0,70)/100){this.fx('miss',target.x,target.y,{side:target.side});return empty;}
     this.damageDepth++;
+    if(source&&this.ability(source)?.cannotCrit)hit.critical=false;
     this._hook('incoming',target,source,hit);
     if(hit.instantKill&&!target.isCastle&&!target.isBuilding){hit.damage=target.hp+target.shield+1;hit.bypassShield=true;hit.kind='execution';}
     if(hit.critical){
@@ -630,7 +730,7 @@ export class ArenaEngine {
     return result;
   }
   push(target,awayFrom,tiles,origin=target){
-    if(!target?.alive||target.healthless||target.engulfedBy||target.isCastle||target.isBuilding||tiles<=0||has(target,'predominance',this.time))return;
+    if(!target?.alive||target.healthless||target.engulfedBy||target.possessingId||target.isCastle||target.isBuilding||tiles<=0||has(target,'predominance',this.time))return;
     let dx=origin.x-awayFrom.x,dy=origin.y-awayFrom.y,len=Math.hypot(dx,dy);
     if(!len){dx=target.side?-1:1;dy=0;len=1;}
     const p={x:clamp(origin.x+dx/len*tiles,.5,MAP.width-.5),y:clamp(origin.y+dy/len*tiles,.5,MAP.height-.5)};
@@ -643,7 +743,8 @@ export class ArenaEngine {
     u.waypoint=best.index;
   }
   _canHit(u,target,layers=u.def?.combat?.targets||'both'){
-    if(!target?.alive||target.def?.combat?.untargetable||target.banished||!this.isEnemy(u,target))return false;
+    if(u.possessingId)return false;
+    if(!target?.alive||target.def?.combat?.untargetable||target.banished||target.possessingId||!this.isEnemy(u,target))return false;
     if(target.engulfedBy&&!(target.engulfedBy===u.id&&this.ability(u)?.captiveTarget))return false;
     if(has(target,'untargetable',this.time)||has(target,'imprisonment',this.time))return false;
     if(layers==='none')return false;
@@ -675,6 +776,7 @@ export class ArenaEngine {
       u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
     const prioritized=this._hook('target',u);
     if(prioritized&&this._legalTarget(u,prioritized,sources))return prioritized;
+    if(this.ability(u)?.exclusiveTarget)return null;
     const reach=this._range(u);
     const candidates=this.units.filter(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius);
     candidates.sort((a,b)=>distance(u,a)-distance(u,b)||a.id.localeCompare(b.id));
@@ -717,7 +819,7 @@ export class ArenaEngine {
     return null;
   }
   _move(u,target,dt){
-    if(u.isBuilding||['root','stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))return;
+    if(u.isBuilding||u.possessingId||['root','stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))return;
     const movement=u.def.combat?.movementType;
     let destination;
     if(target)destination=target;
@@ -795,7 +897,7 @@ export class ArenaEngine {
     for(const trail of this.state.trails){
       const segments=trail.segments.filter(s=>s.until+EPS>=this.time),exposure={};
       for(const target of this.units){
-        if(!target.alive||target.id===trail.sourceId||target.banished||target.engulfedBy||target.isBuilding||target.healthless||target.side===trail.side||target.def.combat.movementType!=='ground'||target.def.combat.groundEffectImmune)continue;
+        if(!target.alive||target.id===trail.sourceId||target.banished||target.engulfedBy||target.possessingId||target.isBuilding||target.healthless||target.side===trail.side||target.def.combat.movementType!=='ground'||target.def.combat.groundEffectImmune)continue;
         if(!segments.some(s=>projectSegment(target,s.from,s.to).distance<=trail.width/2+target.radius+EPS))continue;
         let clock=(trail.exposure[target.id]||0)+dt;
         while(target.alive&&clock+EPS>=trail.interval){
@@ -845,7 +947,7 @@ export class ArenaEngine {
     if(!missed)this._hook('attack',u,target,hit);
     if(hit.targetId){const selected=this.units.find(t=>t.id===hit.targetId);if(this._legalTarget(u,selected)&&distance(u,selected)<=this._attackReach(u,profile)+selected.radius)target=selected;}
     hit.damage*=1+strongest(u,'damageBonus',this.time);
-    hit.critical=hit.critical||(!has(u,'suppression',this.time)&&this.random()<clamp(this.statValue(u,'criticalChance'),0,100)/100);
+    hit.critical=!this.ability(u)?.cannotCrit&&(hit.critical||(!has(u,'suppression',this.time)&&this.random()<clamp(this.statValue(u,'criticalChance'),0,100)/100));
     const p={...profile,...hit.combat};
     if(!missed){
       if(p.attackType==='ranged'){
@@ -1078,7 +1180,7 @@ export class ArenaEngine {
     }
   }
   _separation(){
-    const bodies=this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.isBuilding&&u.def.combat.movementType!=='flying');
+    const bodies=this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.isBuilding&&u.def.combat.movementType!=='flying');
     for(let i=0;i<bodies.length;i++)for(let j=i+1;j<bodies.length;j++){
       const a=bodies[i],b=bodies[j],min=(a.radius+b.radius)*.72;
       let dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
@@ -1155,6 +1257,7 @@ export class ArenaEngine {
   }
   _tick(dt){
     this.state.time+=dt;this.state.remaining-=dt;
+    this._syncPossessions();
     for(let side=0;side<2;side++){
       const owned=this.state.nodes.filter(n=>n.owner===side).length;
       this.teams[side].mana=Math.min(RULES.maxMana,this.teams[side].mana+dt/RULES.manaInterval*(1+owned*RULES.nodeBonus)*(this.state.phase==='overtime'?2:1));
@@ -1168,6 +1271,7 @@ export class ArenaEngine {
       u.moving=false;u.cooldown-=dt;
       this._statuses(u,dt);
       if(!u.alive)continue;
+      if(u.possessingId)continue;
       this._lifeDecay(u);
       if(!u.alive)continue;
       if(u.expiresAt<=this.time+EPS||u.def.stats.life>0&&this.time-u.born+EPS>=this.statValue(u,'life')){this.killUnit(u);continue;}
@@ -1186,7 +1290,7 @@ export class ArenaEngine {
         else if(u.cooldown<=EPS&&!u.memory.returningShotId)this._fire(u,target);
       }else this._move(u,target,dt);
     }
-    this._syncCaptives();this._separation();this._castles(dt);this._projectiles(dt);this._objectives(dt);this._drainDeaths();this._spawnStreams();
+    this._syncCaptives();this._separation();this._castles(dt);this._projectiles(dt);this._syncPossessions();this._objectives(dt);this._drainDeaths();this._spawnStreams();
     this.state.effects=this.state.effects.filter(e=>e.until>this.time);
     const referenced=new Set(this.units.concat(this.castles).flatMap(u=>u.statuses.filter(s=>s.until>this.time).map(s=>s.sourceId)));
     for(const id of this.statusSources.keys())if(!referenced.has(id))this.statusSources.delete(id);

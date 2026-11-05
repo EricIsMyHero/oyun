@@ -216,6 +216,11 @@ function openInspector(def,kind='card',unit=null) {
       notes.push(`<section class="live-status-section" data-corsair-crew="${crew.length}"><h3>Crew · ${crew.length} / 3</h3><p>Projectile Reflection: ${Number(chance.toFixed(2))}%<br>Reflected shots: ${unit.memory.reflectedShots||0}</p></section>`);
     }
     if(unit.def.id==='corsair-crew/pirate-girls')notes.push(`<section class="live-status-section" data-pirate-distance><h3>Distance Bonus · +${Number(((unit.memory.distanceBonus||0)*100).toFixed(2))}%</h3><p>0 tiles: +0% · 2.75 tiles: +75%</p></section>`);
+    if(unit.def.id==='whisper')notes.push(`<section class="live-status-section" data-whisper-bonus="${unit.whisperState?.bonusSeconds||0}"><h3>Critical Conversion · +${unit.whisperState?.bonusSeconds||0}s</h3><p>Base control: 14s · Critical damage: Disabled</p></section>`);
+    if(unit.possessedBy){
+      const controller=state.engine.units.find(u=>u.id===unit.possessedBy),control=controller?.whisperState;
+      if(control)notes.push(`<section class="live-status-section" data-whisper-control><h3>Whisper Control · ${Math.max(0,control.until-state.engine.time).toFixed(1)}s</h3><p>Critical conversion: +${control.bonusSeconds}s${control.penalized?' · Duration penalty: 25%':''}</p><p>Locked control · Restores the previous owner at the current health and shield.</p></section>`);
+    }
     if(unit.def.id==='tornado'){
       const captives=state.engine.captivesOf(unit);
       const damage=state.engine.statValue(unit,'damage');
@@ -374,7 +379,7 @@ function commitPlacement(point) {
 function inspectAt(point) {
   const battle=state.engine.state;
   if(battle.phase!=='ended'&&!isPointVisible(battle,0,point))return;
-  const candidates=[...battle.units,...battle.castles].filter(u=>u.alive!==false&&u.hp>0&&(battle.phase==='ended'||isEntityVisible(battle,0,u)));
+  const candidates=[...battle.units,...battle.castles].filter(u=>u.alive!==false&&!u.possessingId&&u.hp>0&&(battle.phase==='ended'||isEntityVisible(battle,0,u)));
   const unit=candidates.map(u=>({u,d:distance(u,point)})).filter(x=>x.d<Math.max(.65,(x.u.radius||0)+.25)).sort((a,b)=>a.d-b.d)[0]?.u;
   if(!unit)return;
   if(unit.def){openInspector(unit.def,unit.isBuilding?'spell':'card',unit);return;}

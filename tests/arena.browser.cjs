@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,92);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex']){
+    assert.equal(coverage.ready,93);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex','whisper']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -584,6 +584,40 @@ async function minimapPixelAt(page,point) {
     }
 
     {
+      const banked=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('whisper'));Object.assign(def.stats,{speed:0,criticalChance:5});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+        e.setPaused(true);arenaApp.renderer.focusAt(source);return{chance:source.stats.criticalChance,bonus:source.whisperState.bonusSeconds};
+      });
+      assert.deepEqual(banked,{chance:0,bonus:5});await settleFrame(page);
+      const whisperPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(whisperPoint.x,whisperPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-whisper-bonus="5"]').count(),1);assert.match(await page.locator('[data-whisper-bonus]').textContent(),/Critical damage: Disabled/);
+      await page.screenshot({path:'/tmp/oyun-arena-whisper-bank.png',fullPage:true});screenshots.push('/tmp/oyun-arena-whisper-bank.png');await page.locator('#inspector-close').click();
+      const possession=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('whisper'));Object.assign(def.stats,{speed:0,criticalChance:5});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+        const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='whisper-browser-host';dummy.combat.attackType='none';Object.assign(dummy.stats,{health:1000,shield:100,damage:0,range:0,speed:0,dodge:0,criticalChance:40,healrecovery:0,shieldrecovery:0});
+        const [target]=e.spawn(dummy,1,{x:16.5,y:14},1,{count:1});target.hp=780;target.shield=40;e.possess(source,target);e.step(2);e.cleanse(target);e.status(target,'predominance',30);source.stats.criticalChance=4;e.step(1/30);e.setPaused(true);arenaApp.renderer.focusAt(target);window.whisperFixture={source,target,dummy};
+        return{side:target.side,sourceVisible:e.canSee(source,source),hostChance:target.stats.criticalChance,bonus:source.whisperState.bonusSeconds,deadline:source.whisperState.until,penalty:source.whisperState.penalized,hp:target.hp,shield:target.shield};
+      });
+      assert.deepEqual(possession,{side:0,sourceVisible:false,hostChance:40,bonus:9,deadline:17.75,penalty:true,hp:780,shield:40});await settleFrame(page);
+      await page.screenshot({path:'/tmp/oyun-arena-whisper-possession.png',fullPage:true});screenshots.push('/tmp/oyun-arena-whisper-possession.png');
+      const hostPoint=await clientPoint(page,{x:16.5,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(hostPoint.x,hostPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-whisper-control]').count(),1);assert.equal(await page.locator('[data-status="possession"]').count(),1);assert.match(await page.locator('[data-whisper-control]').textContent(),/Critical conversion: \+9s.*Duration penalty: 25%/);assert.equal(await page.locator('#inspector-name').textContent(),'Hammies');
+      await page.screenshot({path:'/tmp/oyun-arena-whisper-control.png',fullPage:true});screenshots.push('/tmp/oyun-arena-whisper-control.png');await page.locator('#inspector-close').click();
+      const restored=await page.evaluate(()=>{
+        const e=arenaApp.engine,{source,target}=whisperFixture;target.hp=611;target.shield=17;e.setPaused(false);e.step(Math.max(0,source.whisperState.until-e.time)+1/30);e.setPaused(true);
+        return{side:target.side,hp:target.hp,shield:target.shield,sourceAlive:source.alive,sourceInWorld:e.units.includes(source),marker:target.statuses.some(s=>s.kind==='possession')};
+      });
+      assert.deepEqual(restored,{side:1,hp:611,shield:17,sourceAlive:false,sourceInWorld:false,marker:false});
+      const earlyDeath=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];const def=structuredClone(arenaApp.catalog.byId.get('whisper'));def.stats.speed=0;const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1}),[target]=e.spawn(whisperFixture.dummy,1,{x:16.5,y:14},1,{count:1});
+        e.possess(source,target);e.damage(null,target,10000,{kind:'spell'});e._drainDeaths();e.setPaused(true);return{hostAlive:target.alive,sourceAlive:source.alive,units:e.units.length,deaths:e.state.events.filter(s=>s.type==='death').length};
+      });
+      assert.deepEqual(earlyDeath,{hostAlive:false,sourceAlive:false,units:0,deaths:2});await page.evaluate(()=>{delete window.whisperFixture;arenaApp.startMatch();});await settleFrame(page);
+    }
+
+    {
       const crew=await page.evaluate(()=>{
         arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];e.teams[0].hand[0]='corsair-crew';const result=e.deploy(0,0,{x:7,y:14});if(!result.ok)throw Error(result.error);
         e.setPaused(true);arenaApp.renderer.focusAt(result.units[0]);return{ids:result.units.map(u=>u.def.id),spent:e.teams[0].spentMana,groups:new Set(result.units.map(u=>u.groupId)).size};
@@ -1028,7 +1062,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Corsair formation and projectile reflection, Pirate Girls distance scaling, RogueX 25% Blind, Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Whisper critical conversion, priority possession, current-health return and host-death cleanup, Corsair formation and projectile reflection, Pirate Girls distance scaling, RogueX 25% Blind, Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

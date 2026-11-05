@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **92 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **93 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -315,6 +315,46 @@ The **Tphoenix → Fire Egg → Phoenix** chain is also battle-ready:
 - RogueX has a **50% chance** after a successful hit to apply **seven seconds of
   Blind**, reducing Range and Vision by **25%**. Fully blocked/missed hits do not
   trigger it. Predominance and normal native-ability suppression still apply.
+
+**Whisper** is battle-ready with locked, priority possession:
+
+- The six-mana hovering card has no basic attack or invented attack interval.
+  It selects a visible, targetable enemy unit inside its 1.8-tile acquisition
+  range. Buildings, healthless forms and units already held by another Whisper
+  are not possession targets. Silence or crowd control can prevent activation
+  while Whisper still has a physical body.
+- Every **one percentage point of current or newly gained Critical Chance** is
+  consumed into **one stored second**, leaving its ordinary Critical Chance at
+  zero. The base duration is **14 seconds plus stored seconds**. Further grants
+  extend an active possession once, rather than being counted repeatedly each
+  tick. Whisper cannot deal critical damage, including a forced critical packet.
+  The host retains its own statistics and critical attacks.
+- Starting control changes the host's team without healing it or replacing its
+  identity, group, lane or native form. Whisper loses its physical presence: it
+  cannot be seen, targeted, damaged, buffed, collide, scout or capture a well.
+  The host supplies its own normal vision and combat. A violet timer and live
+  inspector panel show remaining control and converted seconds.
+- **Started control cannot be dispelled or overwritten.** Cleanse, ordinary
+  conversion, Flexibility and host crowd control do not cancel ownership or
+  shorten the timer. Ordinary combat effects can still affect the host. Expiry
+  or the host's death ends the link.
+- A Misfortune roll that would have caused the cast to miss instead applies a
+  **single 25% duration penalty**. Predominance already on the host applies the
+  same penalty. They never stack. Predominance gained later shortens remaining
+  time by 25% once; repeated aura refreshes cannot compound it. Further critical
+  seconds use the resulting 75% duration factor.
+- At expiry the same host returns to its previous owner at its **current health
+  and shield**, current location and current native form. A lower-priority
+  temporary conversion keeps its original underlying expiry, without overriding
+  active Whisper control. Form changes such as Format and Fire Egg preserve the
+  locked possession. If the host dies sooner, Whisper vanishes immediately too.
+- Whisper's disappearance has no killer and never damages a living host. If it
+  belonged to Etheris's shared reserve, losing its physical body removes its
+  contribution proportionally without killing the remaining partners. The former
+  reserve can no longer end active possession by killing the hidden controller.
+  The hidden controller, priority timer,
+  conversion bank and nested-link cleanup are fixed-step simulation state; pause
+  freezes them. The bot avoids wasting Illustration Spell on a locked host.
 
 All twenty-three Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,

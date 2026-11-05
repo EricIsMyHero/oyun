@@ -5,7 +5,8 @@ import { clamp, num } from './rules.mjs';
 export const STATUS_INTERVALS=Object.freeze({burn:1,poison:.75,bleed:1,regen:1});
 export const NEGATIVE_STATUSES=new Set(['slow','movementSlow','stun','root','silence','blind','poison','burn','bleed','curse','misfortune','imprisonment','suppression','healBlock','fear','conversion','statReduction','airborne','betrayal','frozen','taunted','knockback','engulfed','soulMark','ink']);
 const aliases={heal:'regen',healing:'regen',bleeding:'bleed',invisibility:'invisible',reflection:'reflection',statreduction:'statReduction',knockback:'knockback',movementslow:'movementSlow',healblock:'healBlock',attackhaste:'attackHaste',damagebonus:'damageBonus',speedbonus:'speedBonus'};
-const canonical=['regen','burn','poison','bleed','untouchable','immortal','predominance','fearless','taunt','taunted','cleanse','berserk','invisible','untargetable','reflection',...NEGATIVE_STATUSES];
+// Locked possession is deliberately outside the set removed by Cleanse.
+const canonical=['regen','burn','poison','bleed','untouchable','immortal','predominance','fearless','taunt','taunted','cleanse','berserk','invisible','untargetable','reflection','possession',...NEGATIVE_STATUSES];
 const names=new Map(canonical.map(name=>[name.toLowerCase(),name]));
 export const statusKind=name=>aliases[String(name).replace(/[\s_-]/g,'').toLowerCase()]||names.get(String(name).toLowerCase())||name;
 export const statusesAt=(u,kind,time)=>(u?.statuses||[]).filter(s=>s.kind===kind&&s.until>time+1e-7);

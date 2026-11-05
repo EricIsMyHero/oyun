@@ -1149,7 +1149,7 @@
       "mana": "6",
       "number": "1"
     },
-    "trait": "Whisper fiziki bədənini itirərək birbaşa hədəf aldığı rəqib kartın daxilinə sızar. Kartın daxili kritik şans göstəricisindən asılı olaraq, rəqibi 14 + (Kritik Şansı) saniyə boyunca tamamilə öz idarəsinə keçirər. Bu nəzarət müddəti başa çatdıqda Whisper döyüş meydanından tamamilə silinərək yox olar.",
+    "trait": "Whisper kritik hasar verə bilməz. Mövcud və sonradan qazandığı hər 1 faiz Kritik Şansı avtomatik olaraq 1 saniyəlik nəzarət bonusuna çevirər. Fiziki bədənini itirərək hədəf aldığı rəqib kartın daxilinə sızar və onu 14 saniyə + çevrilmiş saniyələr qədər idarə edər; nəzarət zamanı qazandığı bonus da müddəti uzadar. Başlamış nəzarət heç bir effektlə ləğv oluna bilməz. Misfortune sızmanı qaçırdacağı halda və ya hədəfdə Predominance olduqda müddət yalnız bir dəfə 25% azalar; iki səbəb birlikdə olsa da azalma toplanmaz. Müddət bitəndə hədəf hazırkı can və qalxanı ilə əvvəlki sahibinə qayıdar, Whisper isə yox olar. Hədəf daha tez ölərsə, Whisper də yox olar.",
     "additionalStats": {
       "range": "1800",
       "speed": "1000",
