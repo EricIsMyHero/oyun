@@ -19,7 +19,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Reacher komanda işinə fokuslanmış bir döyüşçüdür. Yanında olan hər bir dost kart üçün +2% hasar azaltma qazanar. Bu effekt maksimum 16%-ə qədər yüksələ bilər. O, ətrafında nə qədər çox müttəfiq olarsa, bir o qədər sarsılmaz bir qüvvəyə çevrilər.",
+    "trait": "Reacher komanda işinə fokuslanmış bir döyüşçüdür. Yanında olan hər bir dost kart üçün +2% hasar azaltma qazanar. Bu effekt maksimum 16%-ə qədər yüksələ bilər. O, ətrafında nə qədər çox müttəfiq olarsa, bir o qədər sarsılmaz bir qüvvəyə çevrilər. Dost bonusu kartın ətrafındakı 3×3 karo sahədə hesablanar.",
     "additionalStats": {
       "range": "1000/2200",
       "speed": "1000",
@@ -61,7 +61,7 @@
         "mana": "15",
         "number": "1"
       },
-      "trait": "Reacher komanda işinə fokuslanmış bir döyüşçüdür. Yanında olan hər bir dost kart üçün +3% hasar azaltma qazanar. Bu effekt maksimum 24%-ə qədər yüksələ bilər. O, ətrafında nə qədər çox müttəfiq olarsa xüsusilədə Soldier, bir o qədər sarsılmaz bir qüvvəyə çevrilər.",
+      "trait": "Reacher komanda işinə fokuslanmış bir döyüşçüdür. Yanında olan hər bir dost kart üçün +3% hasar azaltma qazanar. Bu effekt maksimum 24%-ə qədər yüksələ bilər. O, ətrafında nə qədər çox müttəfiq olarsa xüsusilədə Soldier, bir o qədər sarsılmaz bir qüvvəyə çevrilər. Dost bonusu kartın ətrafındakı 3×3 karo sahədə hesablanar.",
       "additionalStats": {
         "range": "1000/2200",
         "speed": "1000",
@@ -70,7 +70,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -80,39 +88,48 @@
       "story": "Reacher is a veteran soldier who spent years on various battlefields. Now in his later years, he provides essential support to the Soldier within Mission 1. His experience bridges the gap between raw talent and seasoned strategy. When he stands beside the Soldier, they become an unstoppable force that no enemy can withstand. He does not seek the spotlight or leadership for himself. Instead, he uses his tactical knowledge to clear the path forward. His presence ensures the mission remains on track.",
       "class": "Suicide Assassin",
       "combatStats": {
-        "attackType": "melee",
+        "attackType": "mixed",
         "multiTarget": false,
         "maxTargets": 1,
         "attackShape": "single",
-        "attackWidth": null,
+        "attackWidth": 500,
         "weight": "medium",
-        "targets": "ground",
-        "attackDistance": null,
+        "targets": "both",
+        "attackDistance": 500,
         "attackDistanceMatchesRange": false,
         "attackAngle": null,
         "impactSize": null,
         "projectileEndEffect": null,
         "movementType": "ground",
-        "groundEffectImmune": false
+        "groundEffectImmune": false,
+        "meleeRange": 1000,
+        "allyArea": "3 × 3 tiles"
       }
     },
     "class": "Tank",
     "subclass": "Anchor",
     "combatStats": {
-      "attackType": "melee",
+      "attackType": "mixed",
       "multiTarget": false,
       "maxTargets": 1,
       "attackShape": "single",
-      "attackWidth": null,
+      "attackWidth": 500,
       "weight": "medium",
-      "targets": "ground",
-      "attackDistance": null,
+      "targets": "both",
+      "attackDistance": 500,
       "attackDistanceMatchesRange": false,
       "attackAngle": null,
       "impactSize": null,
       "projectileEndEffect": null,
       "movementType": "ground",
-      "groundEffectImmune": false
+      "groundEffectImmune": false,
+      "meleeRange": 1000,
+      "allyArea": "3 × 3 tiles"
+    },
+    "ascension": {
+      "partnerIds": [
+        "soldier"
+      ]
     }
   },
   {
@@ -135,7 +152,7 @@
       "mana": "9",
       "number": "1"
     },
-    "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +2% Saldırı Hızı qazanar",
+    "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +2% Saldırı Hızı qazanar Dost bonusu kartın ətrafındakı 3×3 karo sahədə hesablanar.",
     "additionalStats": {
       "range": "3500",
       "speed": "1000",
@@ -179,7 +196,7 @@
         "mana": "11",
         "number": "1"
       },
-      "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +3% Saldırı Hızı qazanar",
+      "trait": "Atışları qalxandan keçər. Yanındakı dost başına ekstra +3% Saldırı Hızı qazanar Dost bonusu kartın ətrafındakı 3×3 karo sahədə hesablanar.",
       "additionalStats": {
         "range": "3500",
         "speed": "1000",
@@ -188,7 +205,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -202,16 +227,17 @@
         "multiTarget": false,
         "maxTargets": 1,
         "attackShape": "single",
-        "attackWidth": null,
+        "attackWidth": 500,
         "weight": "medium",
         "targets": "both",
-        "attackDistance": null,
+        "attackDistance": 500,
         "attackDistanceMatchesRange": false,
         "attackAngle": null,
         "impactSize": null,
         "projectileEndEffect": null,
         "movementType": "ground",
-        "groundEffectImmune": false
+        "groundEffectImmune": false,
+        "allyArea": "3 × 3 tiles"
       }
     },
     "class": "Tank",
@@ -221,16 +247,23 @@
       "multiTarget": false,
       "maxTargets": 1,
       "attackShape": "single",
-      "attackWidth": null,
+      "attackWidth": 500,
       "weight": "medium",
       "targets": "both",
-      "attackDistance": null,
+      "attackDistance": 500,
       "attackDistanceMatchesRange": false,
       "attackAngle": null,
       "impactSize": null,
       "projectileEndEffect": null,
       "movementType": "ground",
-      "groundEffectImmune": false
+      "groundEffectImmune": false,
+      "allyArea": "3 × 3 tiles"
+    },
+    "ascension": {
+      "partnerIds": [
+        "maapp",
+        "avara"
+      ]
     }
   },
   {
@@ -314,7 +347,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -325,38 +366,46 @@
       "class": "Suicide Assassin",
       "combatStats": {
         "attackType": "ranged",
-        "multiTarget": false,
-        "maxTargets": 1,
-        "attackShape": "single",
-        "attackWidth": null,
-        "weight": "medium",
+        "multiTarget": true,
+        "maxTargets": null,
+        "attackShape": "circle",
+        "attackWidth": 5000,
+        "weight": "light",
         "targets": "both",
-        "attackDistance": null,
+        "attackDistance": 5000,
         "attackDistanceMatchesRange": false,
-        "attackAngle": null,
+        "attackAngle": 360,
         "impactSize": null,
         "projectileEndEffect": null,
         "movementType": "ground",
-        "groundEffectImmune": false
+        "groundEffectImmune": false,
+        "instantArea": true
       }
     },
     "class": "Tank",
     "subclass": "Warden",
     "combatStats": {
       "attackType": "ranged",
-      "multiTarget": false,
-      "maxTargets": 1,
-      "attackShape": "single",
-      "attackWidth": null,
-      "weight": "medium",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "circle",
+      "attackWidth": 5000,
+      "weight": "light",
       "targets": "both",
-      "attackDistance": null,
+      "attackDistance": 5000,
       "attackDistanceMatchesRange": false,
-      "attackAngle": null,
+      "attackAngle": 360,
       "impactSize": null,
       "projectileEndEffect": null,
       "movementType": "ground",
-      "groundEffectImmune": false
+      "groundEffectImmune": false,
+      "instantArea": true
+    },
+    "ascension": {
+      "partnerIds": [
+        "bastra",
+        "avara"
+      ]
     }
   },
   {
@@ -379,7 +428,7 @@
       "mana": "15",
       "number": "1"
     },
-    "trait": "İlk atış rəqibləri 2,5 saniyəlik 40% yavaşladar, İkinci atış rəqibi 2,5 karo geri itər, Üçüncü atış rəqibi 0,75 saniyəlik sərsəmlətər, Dördüncü atış bir xətdəki bütün rəqiblərə hasar verər",
+    "trait": "İlk hücum qarşısındakı 2,5×5 karo sahəyə hasar verər və rəqibləri 2,5 saniyəlik 40% yavaşladar. İkinci hücumda moruq ataraq rəqibi 2,5 karo geri itələyər. Üçüncü hücumda avokado toxumu ataraq rəqibi 0,75 saniyəlik sərsəmlədər. Dördüncü hücum hədəfin üzərindəki 5×2,5 karo sahədə bütün rəqiblərə hasar verər. Hər hücumdan sonra 1,45 saniyə gecikmə tətbiq olunar.",
     "additionalStats": {
       "range": "2200/2400/4200/5000",
       "speed": "1000",
@@ -434,7 +483,7 @@
         "mana": "18",
         "number": "1"
       },
-      "trait": "İlk atış rəqibləri 2,75 saniyəlik 50% yavaşladar, İkinci atış rəqibi 3 karo geri itər, Üçüncü atış rəqibi 1,25 saniyəlik sərsəmlətər, Dördüncü atış bir xətdəki bütün rəqiblərə hasar verər",
+      "trait": "İlk hücum qarşısındakı 2,5×5 karo sahəyə hasar verər və rəqibləri 2,75 saniyəlik 50% yavaşladar. İkinci hücumda moruq ataraq rəqibi 3 karo geri itələyər. Üçüncü hücumda avokado toxumu ataraq rəqibi 1,25 saniyəlik sərsəmlədər. Dördüncü hücum hədəfin üzərindəki 5×2,5 karo sahədə bütün rəqiblərə hasar verər. Hər hücumdan sonra 1,45 saniyə gecikmə tətbiq olunar.",
       "additionalStats": {
         "range": "2200/2400/4200/5000",
         "speed": "1000",
@@ -443,7 +492,15 @@
         "lifestealChance": "0%",
         "lifesteal": "25%",
         "damageminimiser": "0%",
-        "dodge": "0%"
+        "dodge": "0%",
+        "vision": "8000",
+        "healBonus": "0%",
+        "healrecovery": "0/s",
+        "shieldrecovery": "0/s",
+        "criticdamageminimiser": "0%",
+        "flexibility": "0%",
+        "shieldtakendamage": "70%",
+        "life": "-"
       },
       "showlevels": {
         "level1": "-",
@@ -457,16 +514,44 @@
         "multiTarget": false,
         "maxTargets": 1,
         "attackShape": "single",
-        "attackWidth": null,
+        "attackWidth": 500,
         "weight": "medium",
         "targets": "both",
-        "attackDistance": null,
+        "attackDistance": 500,
         "attackDistanceMatchesRange": false,
         "attackAngle": null,
         "impactSize": null,
         "projectileEndEffect": null,
         "movementType": "ground",
-        "groundEffectImmune": false
+        "groundEffectImmune": false,
+        "attackSequence": [
+          {
+            "attackShape": "square",
+            "impactSize": "2.5 × 5 tiles",
+            "multiTarget": true,
+            "maxTargets": null,
+            "instantArea": true,
+            "areaOrigin": "front"
+          },
+          {
+            "attackShape": "single",
+            "multiTarget": false,
+            "maxTargets": 1
+          },
+          {
+            "attackShape": "single",
+            "multiTarget": false,
+            "maxTargets": 1
+          },
+          {
+            "attackShape": "square",
+            "impactSize": "5 × 2.5 tiles",
+            "multiTarget": true,
+            "maxTargets": null,
+            "instantArea": true,
+            "areaOrigin": "target"
+          }
+        ]
       }
     },
     "class": "Tank",
@@ -476,16 +561,50 @@
       "multiTarget": false,
       "maxTargets": 1,
       "attackShape": "single",
-      "attackWidth": null,
+      "attackWidth": 500,
       "weight": "medium",
       "targets": "both",
-      "attackDistance": null,
+      "attackDistance": 500,
       "attackDistanceMatchesRange": false,
       "attackAngle": null,
       "impactSize": null,
       "projectileEndEffect": null,
       "movementType": "ground",
-      "groundEffectImmune": false
+      "groundEffectImmune": false,
+      "attackSequence": [
+        {
+          "attackShape": "square",
+          "impactSize": "2.5 × 5 tiles",
+          "multiTarget": true,
+          "maxTargets": null,
+          "instantArea": true,
+          "areaOrigin": "front"
+        },
+        {
+          "attackShape": "single",
+          "multiTarget": false,
+          "maxTargets": 1
+        },
+        {
+          "attackShape": "single",
+          "multiTarget": false,
+          "maxTargets": 1
+        },
+        {
+          "attackShape": "square",
+          "impactSize": "5 × 2.5 tiles",
+          "multiTarget": true,
+          "maxTargets": null,
+          "instantArea": true,
+          "areaOrigin": "target"
+        }
+      ]
+    },
+    "ascension": {
+      "partnerIds": [
+        "bastra",
+        "maapp"
+      ]
     }
   },
   {

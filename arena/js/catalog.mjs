@@ -33,16 +33,25 @@ function normalizeCard(raw,parent=null,id=raw.id||slugify(raw.name)) {
   if(values.criticDamage==null||values.criticDamage==='-')stats.criticDamage=1;
   let parsed=burst(raw.stats?.damage);
   let sequence;
+  let modes;
+  const rootId=id.split('/')[0];
   const modeReasons=[];
   if(id==='kai'){
     parsed={count:1,damage:9};
     sequence=[9,9,21].map(damage=>({count:1,damage,interval:num(raw.stats.attackSpeed),delay:num(raw.stats.delay)}));
   }else if(id==='lyra')sequence=[1,1,3].map(count=>({count,damage:parsed.damage,interval:num(raw.stats.attackSpeed),delay:num(raw.stats.delay)}));
   else if(id==='tribe')parsed={count:1,damage:4};
-  else if(!parsed)modeReasons.push('The slash-separated attack modes are not fully defined for this combat profile.');
+  else if(rootId==='reacher'){
+    const damage=String(raw.stats.damage).split('/').map(burst),intervals=String(raw.stats.attackSpeed).split('/').map(v=>num(v)),delays=String(raw.stats.delay).split('/').map(v=>num(v)),ranges=String(raw.additionalStats.range).split('/').map(v=>num(v));
+    parsed=damage[0];modes=damage.map((hit,i)=>({...hit,interval:intervals[i],delay:delays[i],range:ranges[i],combat:{attackType:i?'ranged':'melee',targets:i?'both':'ground'}}));
+  }else if(rootId==='avara'){
+    const damage=String(raw.stats.damage).split('/').map(burst),intervals=String(raw.stats.attackSpeed).split('/').map(v=>num(v)),ranges=String(raw.additionalStats.range).split('/').map(v=>num(v));
+    parsed=damage[0];sequence=damage.map((hit,i)=>({...hit,interval:intervals[i],delay:num(raw.stats.delay),range:ranges[i]}));
+  }else if(!parsed)modeReasons.push('The slash-separated attack modes are not fully defined for this combat profile.');
   stats.damage=parsed?.damage||0;
   const attack={...(parsed||{count:1,damage:0}),interval:num(raw.stats?.attackSpeed),delay:num(raw.stats?.delay)};
   if(sequence)attack.sequence=sequence;
+  if(modes)attack.modes=modes;
   const combat=parseCombat(raw);
   const reasons=[...modeReasons];
   if(!combat?.healthless&&(!raw.stats||num(raw.stats.health,NaN)<=0||!Number.isFinite(num(raw.stats.health,NaN))))reasons.push('A positive Health value is not authored.');

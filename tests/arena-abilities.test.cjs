@@ -41,7 +41,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,95);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,99);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&!ABILITIES[card.id]?.noBasicAttack)assert.ok(card.attack.interval>0);}}
   assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
@@ -60,6 +60,11 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  reacher:({ctx,u,t,rule})=>{rule.spawn(ctx,u);close(u.stats.range,2200);rule.prepareAttack(ctx,u,t);assert.equal(u.memory.combatMode,0);t.side=0;rule.tick(ctx,u);close(u.stats.damageminimiser,u.def.stats.damageminimiser+(u.def.id.includes('/ascended')?3:2));},
+  bastra:({ctx,u,t,rule,hit})=>{t.side=0;rule.tick(ctx,u);close(u.stats.attackSpeed,2/(1+(u.def.id.includes('/ascended')?.03:.02)));rule.attack(ctx,u,t,hit);assert.equal(hit.bypassShield,true);},
+  maapp:({ctx,u,t,rule,result,records})=>{rule.hit(ctx,u,t,result);assert.equal(records.statuses[0].kind,'statReduction');close(records.statuses[0].stats.damage,.9);assert.equal(records.statuses[0].percent,true);},
+  avara:({ctx,u,t,rule,result,hit,records})=>{hit.sequenceIndex=0;rule.hit(ctx,u,t,result,hit);assert.equal(records.statuses[0].kind,'slow');hit.sequenceIndex=1;rule.attack(ctx,u,t,hit);assert.equal(hit.projectileKind,'raspberry');rule.hit(ctx,u,t,result,hit);assert.equal(records.push.length,1);hit.sequenceIndex=2;rule.hit(ctx,u,t,result,hit);assert.equal(records.statuses[1].kind,'stun');},
+
   sunrise:({ctx,u,rule})=>{const hp=u.hp;rule.move(ctx,u,{x:0,y:0},{x:1,y:0},.6);close(u.memory.sunriseGrowth,1);close(u.hp,hp+1);close(u.maxHp,hp+1);},
   wong:({ctx,u,t,rule,result,hit,records})=>{for(let i=0;i<4;i++)rule.hit(ctx,u,t,result,hit);close(u.memory.charge,100);rule.attack(ctx,u,t,hit);assert.equal(hit.wongCharged,true);rule.hit(ctx,u,t,result,hit);close(u.memory.charge,25);close(records.push[0].distance,3);u.hp=u.maxHp*.39;rule.damaged(ctx,u);assert.equal(u.wongBurstUsed,true);close(u.attackMode.remaining,8);close(u.attackMode.attack.damage,8);close(u.attackMode.attack.interval,.4);rule.tick(ctx,u);close(u.attackMode.remaining,8);},
   whisper:({ctx,u,t,rule})=>{let collected=null,possessed=null;ctx.collectWhisperCritical=source=>{collected=source;};ctx.possessionTarget=()=>t;ctx.possess=(source,target)=>{possessed={source,target};};rule.spawn(ctx,u);assert.equal(collected,u);assert.equal(rule.target(ctx,u),t);rule.contact(ctx,u,t);assert.equal(possessed.source,u);assert.equal(possessed.target,t);assert.equal(rule.noBasicAttack,true);assert.equal(rule.cannotCrit,true);},
@@ -169,6 +174,8 @@ const cases={
   'tphoenix/phoenix':({ctx,u,t,rule,hit,result})=>{rule.attack(ctx,u,t,hit);assert.ok(hit.bypassShield);rule.hit(ctx,u,t,result);assert.equal(u.stats.damage,u.def.stats.damage+1);},
 };
 
+for(const id of ['reacher','bastra','maapp','avara'])cases[`${id}/ascended`]=cases[id];
+
 for(const [id,exercise] of Object.entries(cases))test(`native arena ability: ${id}`,async()=>{
   const [,{ABILITIES}]=await modules;
   const catalog=await catalogPromise;
@@ -209,6 +216,6 @@ test('Sheriff marks only visible enemies and Shellbyte cannot leap to concealed 
 test('every enabled native card and reachable form has a behavioral test',async()=>{
   const [,{ABILITIES}]=await modules;
   const catalog=await catalogPromise;
-  function verify(card){assert.ok(ABILITIES[card.id],card.id);assert.ok(cases[card.id],`${card.id} missing behavioral assertion`);card.forms.forEach(verify);}
+  function verify(card){assert.ok(ABILITIES[card.id],card.id);assert.ok(cases[card.id],`${card.id} missing behavioral assertion`);card.forms.forEach(verify);if(card.ascended)verify(card.ascended);}
   catalog.cards.filter(x=>x.ready).forEach(verify);
 });

@@ -99,12 +99,26 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,95);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex','whisper','sunrise','wong']){
+    assert.equal(coverage.ready,99);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex','whisper','sunrise','wong','reacher','bastra','maapp','avara']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
     }
+    await page.locator('[data-add-card="reacher"]').click();assert.equal(await page.locator('#selected-deck .slot-mana').first().textContent(),'11');
+    await page.locator('[data-add-card="soldier"]').click();assert.equal(await page.locator('#selected-deck .slot-mana').first().textContent(),'15');assert.equal(await page.locator('[data-add-card="reacher"] .card-role').textContent(),'Tank / Anchor');
+    await page.locator('[data-inspect-card="reacher"]').click();assert.equal(await page.locator('[data-ascended]').count(),1);assert.equal(await page.locator('#inspector [data-stat="health"] strong').textContent(),'250');await page.locator('#inspector-close').click();
+    await page.locator('[data-remove-card="soldier"]').click();assert.equal(await page.locator('#selected-deck .slot-mana').first().textContent(),'11');
+    for(const id of ['bastra','maapp','avara'])await page.locator(`[data-add-card="${id}"]`).click();
+    assert.deepEqual(await page.locator('#selected-deck .slot-mana').allTextContents(),['11','11','7','18']);
+    await page.locator('[data-inspect-card="avara"]').click();assert.equal(await page.locator('[data-ascended]').count(),1);assert.match(await page.locator('#inspector .profile-grid').textContent(),/2.5 × 5 tiles.*5 × 2.5 tiles/);await page.locator('#inspector-close').click();
+    for(const id of ['soldier','hammies','b-b','scrapy'])await page.locator(`[data-add-card="${id}"]`).click();
+    assert.deepEqual(await page.locator('#selected-deck .slot-mana').allTextContents().then(v=>v.slice(0,4)),['15','11','7','18']);
+    await page.screenshot({path:'/tmp/oyun-arena-ascendant-deck.png',fullPage:true});screenshots.push('/tmp/oyun-arena-ascendant-deck.png');
+    await page.locator('#spell-tab').click();await page.locator('[data-add-spell="healing-light"]').click();await page.locator('#start-match').click();
+    const partnerGame=await page.evaluate(()=>{const e=arenaApp.engine;e.bot=false;e.setPaused(false);e.teams[0].mana=20;const paid=e.deploy(0,0,{x:7,y:14});e.setPaused(true);return{cost:e.teams[0].spentMana,health:paid.units[0].hp,shield:paid.units[0].shield,active:paid.units[0].def.ascension.active,deck:e.teams[0].deck.includes('soldier')};});
+    assert.deepEqual(partnerGame,{cost:15,health:250,shield:250,active:true,deck:true});
+    await page.evaluate(()=>arenaApp.returnToLobby());await page.locator('#clear-deck').click();await page.locator('#troop-tab').click();
     await page.locator('[data-inspect-card="demotron"]').click();
     assert.match(await page.locator('#inspector .native-ability[lang="az"]').first().textContent(),/100 can.*10 can.*90 can.*9 can/);
     await page.locator('#inspector-close').click();
@@ -609,6 +623,25 @@ async function minimapPixelAt(page,point) {
     }
 
     {
+      const radial=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('maapp'));def.stats.speed=0;const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+        const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='ascendant-browser-host';dummy.combat.attackType='none';Object.assign(dummy.stats,{health:1000,shield:0,damage:0,range:0,speed:0,dodge:0,healrecovery:0,shieldrecovery:0});
+        const [front]=e.spawn(dummy,1,{x:19,y:14},1,{count:1}),[back]=e.spawn(dummy,1,{x:11,y:14},1,{count:1});e.random=()=>.99;e._fire(source,front);source.cooldown=Infinity;e.setPaused(true);arenaApp.renderer.focusAt(source);window.ascendantFixture={source,dummy};return{front:front.hp,back:back.hp,shots:e.state.projectiles.length};
+      });assert.deepEqual(radial,{front:998,back:998,shots:0});await settleFrame(page);
+      const maappPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(maappPoint.x,maappPoint.y);await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-maapp-pulse]').count(),1);await page.screenshot({path:'/tmp/oyun-arena-maapp-pulse.png',fullPage:true});screenshots.push('/tmp/oyun-arena-maapp-pulse.png');await page.locator('#inspector-close').click();
+      const rectangle=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];const def=structuredClone(arenaApp.catalog.byId.get('avara'));def.stats.speed=0;const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1}),[target]=e.spawn(ascendantFixture.dummy,1,{x:17,y:14},1,{count:1}),[deep]=e.spawn(ascendantFixture.dummy,1,{x:19.8,y:14},1,{count:1});e._fire(source,target);source.cooldown=Infinity;e.setPaused(true);arenaApp.renderer.focusAt(source);window.ascendantFixture={...ascendantFixture,source,target,deep};return{hp:target.hp,deep:deep.hp,step:source.sequenceIndex,delay:e._attackDefinition(source).delay,slow:target.statuses.find(s=>s.kind==='slow').magnitude};
+      });assert.deepEqual(rectangle,{hp:978,deep:978,step:1,delay:1.45,slow:.4});await settleFrame(page);await page.screenshot({path:'/tmp/oyun-arena-avara-front.png',fullPage:true});screenshots.push('/tmp/oyun-arena-avara-front.png');
+      const avaraPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(avaraPoint.x,avaraPoint.y);await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-avara-step="2"]').count(),1);assert.equal(await page.locator('#inspector [data-stat="damage"] strong').textContent(),'44');assert.equal(await page.locator('#inspector [data-stat="range"] strong').textContent(),'2.4 tiles');await page.screenshot({path:'/tmp/oyun-arena-avara-sequence.png',fullPage:true});screenshots.push('/tmp/oyun-arena-avara-sequence.png');await page.locator('#inspector-close').click();
+      const fourth=await page.evaluate(()=>{const e=arenaApp.engine,{source,target,deep}=ascendantFixture;source.sequenceIndex=3;e._fire(source,target);return{target:target.hp,deep:deep.hp,cooldown:source.cooldown,step:source.sequenceIndex%4};});assert.deepEqual(fourth,{target:886,deep:978,cooldown:3.2,step:0});
+      const hybrid=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];const def=structuredClone(arenaApp.catalog.byId.get('reacher'));Object.assign(def.stats,{speed:0,criticalChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1}),[target]=e.spawn(ascendantFixture.dummy,1,{x:15.6,y:14},1,{count:1});e.step(.1);e.setPaused(true);arenaApp.renderer.focusAt(source);return{hp:target.hp,mode:source.memory.combatMode,type:e._profile(source).attackType};
+      });assert.deepEqual(hybrid,{hp:976,mode:0,type:'melee'});await settleFrame(page);await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(avaraPoint.x,avaraPoint.y);await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-reacher-mode="melee"]').count(),1);await page.screenshot({path:'/tmp/oyun-arena-reacher-melee.png',fullPage:true});screenshots.push('/tmp/oyun-arena-reacher-melee.png');await page.locator('#inspector-close').click();
+      await page.evaluate(()=>{delete window.ascendantFixture;arenaApp.startMatch();});await settleFrame(page);
+    }
+
+    {
       const banked=await page.evaluate(()=>{
         arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
         const def=structuredClone(arenaApp.catalog.byId.get('whisper'));Object.assign(def.stats,{speed:0,criticalChance:5});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
@@ -1087,7 +1120,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Sunrise movement-only Health growth and Wong one-use eight-shot burst/melee restoration, Whisper critical conversion, priority possession, current-health return and host-death cleanup, Corsair formation and projectile reflection, Pirate Girls distance scaling, RogueX 25% Blind, Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; partner-aware Ascendant decks/mana, Reacher hybrid attacks, Maapp radial pulse and Avara four-mode areas, Sunrise movement-only Health growth and Wong one-use eight-shot burst/melee restoration, Whisper critical conversion, priority possession, current-health return and host-death cleanup, Corsair formation and projectile reflection, Pirate Girls distance scaling, RogueX 25% Blind, Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

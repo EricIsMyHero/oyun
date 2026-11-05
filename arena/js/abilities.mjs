@@ -8,6 +8,14 @@ const radius = (u,ctx) => (ctx?.statValue?ctx.statValue(u,'range'):u.stats.range
 const enemies = (ctx,u,r=radius(u,ctx)) => ctx.near(u,r,t=>(ctx.isEnemy?ctx.isEnemy(u,t):t.side!==u.side)&&!t.isCastle);
 const healthCap=(ctx,u)=>ctx.maxHealth?ctx.maxHealth(u):u.maxHp;
 const shieldCap=(ctx,u)=>ctx.maxShield?ctx.maxShield(u):u.maxShield;
+const ascended=u=>u.def.ascension?.active||u.def.id.endsWith('/ascended');
+const squareFriends=(ctx,u)=>ctx.units.filter(t=>t!==u&&t.alive&&t.side===u.side&&!t.isBuilding&&!t.engulfedBy&&!t.banished&&!t.possessingId&&Math.abs(t.x-u.x)<=1.5+1e-7&&Math.abs(t.y-u.y)<=1.5+1e-7);
+const reacherMode=(ctx,u,target=null)=>{
+  const melee=target&&target.def?.combat?.movementType!=='flying'&&Math.hypot(target.x-u.x,target.y-u.y)<=1+(target.radius||0)+1e-7;
+  const index=melee?0:1,mode=u.def.attack.modes[index];
+  if(u.memory.combatMode!==index){u.burstIndex=0;u.burstTargetId=null;u.memory.combatMode=index;}
+  Object.assign(u.stats,{damage:mode.damage,attackSpeed:mode.interval,delay:mode.delay,range:mode.range});
+};
 const poisonHit=(ctx,u,t,result,count,amount)=>{
   if(!damageEvent(result)||t.isCastle)return;
   ctx.status(t,'poison',count*STATUS_INTERVALS.poison,0,u,{amount,stack:true});
@@ -51,6 +59,30 @@ const armWong=(ctx,u)=>{
 };
 
 export const ABILITIES = {
+  reacher:{
+    conditionalStats:['damageminimiser'],
+    spawn(ctx,u){reacherMode(ctx,u);},
+    prepareAttack:reacherMode,
+    tick(ctx,u){const n=squareFriends(ctx,u).length;u.memory.nearbyFriends=n;u.stats.damageminimiser=u.def.stats.damageminimiser+Math.min(ascended(u)?24:16,n*(ascended(u)?3:2));},
+  },
+  bastra:{
+    conditionalStats:['attackSpeed'],
+    tick(ctx,u){const n=squareFriends(ctx,u).length;u.memory.nearbyFriends=n;u.stats.attackSpeed=u.def.stats.attackSpeed/(1+n*(ascended(u)?.03:.02));},
+    attack(ctx,u,t,hit){hit.bypassShield=true;},
+  },
+  maapp:{hit(ctx,u,t,result){
+    if(damageEvent(result)&&!t.isCastle&&!t.isBuilding&&ctx.random()<(ascended(u)?.17:.15))ctx.status(t,'statReduction',ascended(u)?5:4,0,u,{percent:true,stats:{damage:.9}});
+  }},
+  avara:{
+    attack(ctx,u,target,hit){const step=hit.sequenceIndex%4;if(step===1){hit.projectileKind='raspberry';hit.projectileColor='#f6a2c6';}else if(step===2){hit.projectileKind='avocado';hit.projectileColor='#c6e28e';}},
+    hit(ctx,u,target,result,hit){
+      if(!damageEvent(result)||target.isCastle||target.isBuilding)return;
+      const step=hit.sequenceIndex%4,up=ascended(u);
+      if(step===0)ctx.status(target,'slow',up?2.75:2.5,up?.5:.4,u);
+      else if(step===1)ctx.push(target,u,up?3:2.5);
+      else if(step===2)ctx.status(target,'stun',up?1.25:.75,0,u);
+    },
+  },
   hammies:{spawn(ctx,u){ctx.status(u,'speedBonus',12,.2,u);}},
   'b-b':{incoming(ctx,u,s,hit){if(animal(s))hit.damage*=.4;}},
   scrapy:{attack(ctx,u,t,hit){hit.bypassShield=true;if(ctx.random()<.25)hit.damage*=1.5;}},
@@ -592,6 +624,7 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {};
+for(const id of ['reacher','bastra','maapp','avara'])ABILITIES[`${id}/ascended`]=ABILITIES[id];
 
 // Phoenix is a reachable form rather than a separately selectable root card.
 ABILITIES['tphoenix/phoenix']={attack(ctx,u,t,hit){hit.bypassShield=true;},hit(ctx,u,t,r){if(damageEvent(r))growDamage(u,1);}};

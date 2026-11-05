@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **95 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **99 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -315,6 +315,58 @@ The **Tphoenix → Fire Egg → Phoenix** chain is also battle-ready:
 - RogueX has a **50% chance** after a successful hit to apply **seven seconds of
   Blind**, reducing Range and Vision by **25%**. Fully blocked/missed hits do not
   trigger it. Predominance and normal native-ability suppression still apply.
+
+**Reacher**, **Bastra**, **Maapp** and **Avara** are battle-ready, including
+partner forms. Partner activation is based on each team's original eight-card
+deck, never on the current hand, deployment, proximity or a surviving partner:
+
+| Card | Any qualifying partner | Base → empowered mana |
+| --- | --- | --- |
+| Reacher | Soldier | 11 → 15 |
+| Bastra | Maapp or Avara | 9 → 11 |
+| Maapp | Bastra or Avara | 4 → 7 |
+| Avara | Bastra or Maapp | 15 → 18 |
+
+The source `upgradedsecondForm` supplies all empowered stats; multiple partners
+never stack the upgrade. Both teams, deployment affordability/energy, cycle,
+deck average, catalog, hand and bot mana planning use the same resolution.
+Empowered forms cannot be selected directly as independent deck cards.
+Unspecified additional stats in the four empowered forms retain the base values.
+The existing website Power formula remains unchanged.
+
+- Reacher keeps its 500-point attack width and travel distance. It acquires
+  targets up to 2.2 tiles away and uses ranged bursts even against close flyers.
+  A ground target within its authored one-tile melee mode switches it to a
+  hand strike, approaching to its actual 0.5-tile strike distance. Base modes:
+  24 melee damage/1.2s, or two 8-damage shots/.2s plus .8s delay. Empowered modes:
+  32 melee/1.1s, or two 12-damage shots/.4s plus .6s delay. Switching cancels the
+  unfinished burst without resetting the recovery; launched projectiles retain
+  their own damage. Weapon selection remains available while silenced.
+- Reacher counts other living allied units with centers inside a 3 × 3 square
+  around itself: +2% Damage Reduction per ally, capped at 16%, or +3% capped at
+  24% when empowered. Bastra uses the same square and gains +2%/+3% attack haste
+  per ally. Its 70-damage ranged shots bypass shields. Silence disables these
+  proximity bonuses and shield bypass. Buildings and absent bodies do not count.
+- Maapp is light, with 5,000-point width and travel distance, five-tile Range
+  and 360° coverage. Its .25s attack pulses around itself, including enemies
+  behind it and flyers. Each successful hit has a 15% chance to reduce the
+  victim's Damage by 90% for 4s; the empowered form uses 17% for 5s. This uses
+  the standard Stat Reduction, immunity, duration and Cleanse rules.
+- Avara cycles 22/44/64/92 damage, or 26/52/76/108 empowered. The corresponding
+  acquisition ranges are 2.2/2.4/4.2/5 tiles, with intervals 1.35/.75/.85/1.75s.
+  **Every attack adds the authored 1.45s delay**: 2.8/2.2/2.3/3.2s between attacks.
+  Attack one instantly strikes a forward rectangle 2.5 tiles wide and five deep;
+  attack four instantly strikes a rectangle five wide and 2.5 deep centered on
+  the selected enemy. Both rectangles align with the direction of attack.
+  Attack one slows all victims by 40% for 2.5s (empowered: 50%, 2.75s). Attack
+  two fires a raspberry, pushing its victim 2.5 tiles (empowered: 3). Attack
+  three fires an avocado seed, stunning for .75s (empowered: 1.25). The two
+  single-target projectiles retain their .5-tile width and travel profile.
+  Their effects use the launch step even if Avara's sequence has advanced.
+
+The Codex and Arena inspectors show both area dimensions; battle inspection
+shows current attack mode, next sequence step and partner activation. Native
+ability descriptions remain Azerbaijani; interface text remains English.
 
 **Sunrise** and **Wong** are battle-ready:
 

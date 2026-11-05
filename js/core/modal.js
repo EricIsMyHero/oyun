@@ -365,7 +365,7 @@ function buildCombatProfile(card) {
     ['groundEffectImmune','Ground Effect Immunity',movement ? movement.groundEffectImmune ? 'Yes' : 'No' : '—','Immunity to spells and effects that only affect the ground. Hovering cards still move on the ground.'],
     ['weight','Weight',labels.weight[p.weight] || '—','Very light, light, medium, heavy or very heavy.'],
     ['type','Creature Type',modalTypes(card.type).join(' / ') || '—','The creature category this card belongs to.'],
-    ['impactSize','Impact Area',p.impactSize || '—','Area affected on impact. Separate from projectile width.'],
+    ['impactSize','Impact Area',sequence ? sequence.map(hit => hit.impactSize || '—').join(' / ') : p.impactSize || '—','Area affected on impact. Separate from projectile width.'],
     ['projectileEndEffect','End of Attack',p.projectileEndEffect === 'explode' ? 'Explodes' : '—','Effect triggered at the end of the attack distance.'],
   ];
   return fields.map(([key, name, value, hint]) => `<div class="modal-profile-tile" data-profile="${key}" title="${modalEscape(hint)}">

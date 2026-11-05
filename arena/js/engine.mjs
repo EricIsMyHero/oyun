@@ -4,6 +4,7 @@ import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
 import { NEGATIVE_STATUSES as NEGATIVE, statusKind, statusParameters, statValue, statModifiers } from './statuses.mjs';
 import { buildBotLoadout, createBotState, tickBot } from './bot.mjs';
+import { resolveDeckCard } from './ascension.mjs';
 
 const finitePoint = p => p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.x <= MAP.width && p.y >= 0 && p.y <= MAP.height;
 const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -17,11 +18,11 @@ const EPS = 1e-7;
 export class ArenaEngine {
   constructor({cards=[],spells=[],deck=[],spellDeck=[],seed=1,bot=true}={}) {
     this.cards = new Map();
-    const add = c => { this.cards.set(c.id,c); for(const f of c.forms || []) add(f); };
+    const add = c => { this.cards.set(c.id,c); for(const f of c.forms || []) add(f);if(c.ascended)add(c.ascended); };
     cards.forEach(add);
     this.spells = new Map(spells.map(s => [s.id,s]));
     if(deck.length !== RULES.deckSize || new Set(deck).size !== RULES.deckSize) throw new Error('Choose eight different unit cards.');
-    if(deck.some(id => !this.cards.get(id)?.ready)) throw new Error('Every selected unit must have complete battle data.');
+    if(deck.some(id => id.endsWith('/ascended')||!this.cards.get(id)?.ready)) throw new Error('Select complete root cards; an ascended form requires its partner in the deck.');
     if(!spellDeck.length || new Set(spellDeck).size !== spellDeck.length || spellDeck.some(id => !this.spells.get(id)?.ready)) throw new Error('Choose complete, distinct spells.');
     if(spellDeck.reduce((s,id)=>s+num(this.spells.get(id).charge),0) > RULES.spellBudget) throw new Error('Spell charge capacity is five.');
     this.seed = (Number(seed) >>> 0) || 1;
@@ -37,7 +38,7 @@ export class ArenaEngine {
     this.abilityContext=null;
     this.state = {
       time:0, phase:'regulation',remaining:RULES.regulation,paused:false,winner:null,
-      teams:[{deck,spellDeck},opponent].map(loadout=>({mana:RULES.startMana,energy:0,hand:loadout.deck.slice(0,RULES.handSize),queue:loadout.deck.slice(RULES.handSize),spellIds:[...loadout.spellDeck],spellIndex:0,deployed:0,spentMana:0})),
+      teams:[{deck,spellDeck},opponent].map(loadout=>({deck:[...loadout.deck],mana:RULES.startMana,energy:0,hand:loadout.deck.slice(0,RULES.handSize),queue:loadout.deck.slice(RULES.handSize),spellIds:[...loadout.spellDeck],spellIndex:0,deployed:0,spentMana:0})),
       castles:MAP.bases.map((p,side)=>({id:`castle-${side}`,name:side?'Crimson Crown':'Azure Core',...p,side,radius:MAP.castleRadius,hp:RULES.castleHealth,maxHp:RULES.castleHealth,shield:0,maxShield:0,alive:true,isCastle:true,isBuilding:true,stats:{dodge:0,damageminimiser:0,shieldtakendamage:0,criticdamageminimiser:0},statuses:[],memory:{},cooldown:0})),
       nodes:MAP.nodes.map(n=>({...n,owner:null,capturing:null,progress:0})),
       units:[],projectiles:[],effects:[],events:[],fields:[],trails:[],sharedVitals:[],spawnStreams:[],
@@ -48,6 +49,7 @@ export class ArenaEngine {
   get units(){return this.state.units;}
   get castles(){return this.state.castles;}
   get teams(){return this.state.teams;}
+  cardFor(side,id){return resolveDeckCard(this.cards,id,this.teams[side]?.deck);}
   random(){let x=this.seed;x^=x<<13;x^=x>>>17;x^=x<<5;this.seed=x>>>0;return this.seed/4294967296;}
   setPaused(paused){this.state.paused=!!paused;return this.state.paused;}
   log(type,text,extra={}){
@@ -216,10 +218,12 @@ export class ArenaEngine {
     if(memory.remaining>EPS)return;
     const def={...target.def,stats:{...target.stats,health:this.maxHealth(target),shield:this.maxShield(target)},attack:structuredClone(target.def.attack),combat:{...target.def.combat}};
     // Keep authored attack sequences, including their relative damage/intervals.
-    const damageScale=target.def.stats.damage>0?def.stats.damage/target.def.stats.damage:1;
-    const speedScale=target.def.stats.attackSpeed>0?def.stats.attackSpeed/target.def.stats.attackSpeed:1;
-    const delayScale=target.def.stats.delay>0?def.stats.delay/target.def.stats.delay:1;
-    for(const attack of [def.attack,...(def.attack.sequence||[])]){attack.damage*=damageScale;attack.interval*=speedScale;attack.delay*=delayScale;}
+    const activeMode=target.def.attack?.modes?this._attackDefinition(target):null;
+    const originalDamage=activeMode?.damage??target.def.stats.damage,originalSpeed=activeMode?.interval??target.def.stats.attackSpeed,originalDelay=activeMode?.delay??target.def.stats.delay;
+    const damageScale=originalDamage>0?def.stats.damage/originalDamage:1;
+    const speedScale=originalSpeed>0?def.stats.attackSpeed/originalSpeed:1;
+    const delayScale=originalDelay>0?def.stats.delay/originalDelay:1;
+    for(const attack of [def.attack,...(def.attack.sequence||[]),...(def.attack.modes||[])]){attack.damage*=damageScale;attack.interval*=speedScale;attack.delay*=delayScale;}
     memory.snapshot=def;memory.transformed=true;memory.promoted=false;
     this._setFormatForm(u,def,true);
   }
@@ -273,7 +277,7 @@ export class ArenaEngine {
     memory.promoted=true;
     const snapshot=memory.snapshot,stats=Object.fromEntries(Object.entries(snapshot.stats).map(([key,value])=>[key,['attackSpeed','delay'].includes(key)?value/2:value*2]));
     const attack=structuredClone(snapshot.attack);
-    for(const mode of [attack,...(attack.sequence||[])]){mode.damage*=2;mode.interval/=2;mode.delay/=2;}
+    for(const mode of [attack,...(attack.sequence||[]),...(attack.modes||[])]){mode.damage*=2;mode.interval/=2;mode.delay/=2;}
     this._setFormatForm(source,{...snapshot,stats,attack});
   }
   addInk(source,target,count=1,scheduled=false){
@@ -312,7 +316,7 @@ export class ArenaEngine {
     if(!this._validAction(side))return {ok:false,error:'The battle is paused or finished.'};
     const team=this.teams[side];
     if(!Number.isInteger(handIndex)||handIndex<0||handIndex>=team.hand.length)return {ok:false,error:'Select a card in your hand.'};
-    const def=this.cards.get(team.hand[handIndex]);
+    const def=this.cardFor(side,team.hand[handIndex]);
     if(!def?.ready)return {ok:false,error:'This card has incomplete battle data.'};
     const cost=num(def.stats.mana);
     if(team.mana+EPS<cost)return {ok:false,error:'Not enough mana.'};
@@ -763,7 +767,8 @@ export class ArenaEngine {
   }
   _range(u){
     const blind=strongest(u,'blind',this.time);
-    const range=this.statValue(u,'range')/1000*(1-blind);
+    const attack=u.def?this._attackDefinition(u):{},modeRange=u.def?.attack?.modes?Math.max(...u.def.attack.modes.map(m=>m.range)):attack.range;
+    const range=(modeRange!=null?statValue(u,'range',this.time,modeRange):this.statValue(u,'range'))/1000*(1-blind);
     const authored=u.def?.raw?.additionalStats?.vision;
     const vision=this.statValue(u,'vision')/1000*(1-blind);
     return authored!=null&&!/^[-—–]$/.test(String(authored).trim())?Math.min(range,vision):range;
@@ -785,7 +790,7 @@ export class ArenaEngine {
     return this.castles.find(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius)||null;
   }
   _profile(u){
-    let p={...u.def.combat,...u.attackMode?.combat};
+    let p={...u.def.combat,...u.def.attack?.modes?.[u.memory.combatMode??1]?.combat,...u.attackMode?.combat};
     const sequence=p.attackSequence;
     if(sequence?.length)p={...p,...sequence[u.sequenceIndex%sequence.length]};
     // Conditional death/periodic splash is resolved by the native handler only.
@@ -795,6 +800,7 @@ export class ArenaEngine {
   _attackDefinition(u){
     const base=u.def.attack||{count:1,damage:num(u.stats.damage),interval:num(u.stats.attackSpeed),delay:num(u.stats.delay)};
     if(u.attackMode)return {...base,...u.attackMode.attack};
+    if(base.modes)return {...base,...base.modes[u.memory.combatMode??1]};
     const step=base.sequence?.[u.sequenceIndex%base.sequence.length];
     return step?{...base,...step}:{...base};
   }
@@ -924,6 +930,10 @@ export class ArenaEngine {
     victims=victims.filter(t=>{
       const x=t.x-u.x,y=t.y-u.y,dist=Math.hypot(x,y);
       if(p.attackShape==='square'){
+        if(p.areaOrigin){
+          const area=this._strikeArea(u,target,p),ax=t.x-area.x,ay=t.y-area.y;
+          return Math.abs(ax*area.dx+ay*area.dy)<=area.width/2+t.radius+EPS&&Math.abs(-ax*area.dy+ay*area.dx)<=area.height/2+t.radius+EPS;
+        }
         const nums=String(p.impactSize||'').match(/[\d.]+/g)?.map(Number)||[width,width];
         return Math.abs(t.x-target.x)<=nums[0]/2+t.radius&&Math.abs(t.y-target.y)<=(nums[1]??nums[0])/2+t.radius;
       }
@@ -938,12 +948,19 @@ export class ArenaEngine {
     if(Number.isFinite(p.maxTargets))victims=victims.slice(0,p.maxTargets);
     return victims;
   }
+  _strikeArea(u,target,p){
+    const [width=1,height=width]=String(p.impactSize||'').match(/[\d.]+/g)?.map(Number)||[];
+    const length=distance(u,target),dx=length>EPS?(target.x-u.x)/length:(u.facingX??1),dy=length>EPS?(target.y-u.y)/length:(u.facingY??0);
+    const center=p.areaOrigin==='front'?{x:u.x+dx*height/2,y:u.y+dy*height/2}:target;
+    return {x:center.x,y:center.y,width:height,height:width,dx,dy,angle:Math.atan2(dy,dx)};
+  }
   _fire(u,target){
     if(u.memory.returningShotId||this.ability(u)?.noBasicAttack)return;
+    this.ability(u)?.prepareAttack?.(this,u,target);
     const attack=this._attackDefinition(u),profile=this._profile(u),mode=u.attackMode;
     const index=u.burstIndex;
     u.shots++;u.memory.lastAttack=this.time;
-    const hit={damage:mode||attack.sequence?statValue(u,'damage',this.time,attack.damage):this.statValue(u,'damage',attack.damage),kind:'attack',bypassShield:false,critical:false,secondary:false,burstIndex:index,combat:profile};
+    const hit={damage:mode||attack.sequence||attack.modes?statValue(u,'damage',this.time,attack.damage):this.statValue(u,'damage',attack.damage),kind:'attack',bypassShield:false,critical:false,secondary:false,burstIndex:index,sequenceIndex:u.sequenceIndex,combat:profile};
     // Per-mode damage is authored independently of the base per-hit statistic.
     const missed=this.random()<strongest(u,'misfortune',this.time);
     if(!missed)this._hook('attack',u,target,hit);
@@ -952,13 +969,14 @@ export class ArenaEngine {
     hit.critical=!this.ability(u)?.cannotCrit&&(hit.critical||(!has(u,'suppression',this.time)&&this.random()<clamp(this.statValue(u,'criticalChance'),0,100)/100));
     const p={...profile,...hit.combat};
     if(!missed){
-      if(p.attackType==='ranged'){
+      if(p.attackType==='ranged'&&!p.instantArea){
         const targets=p.attackShape==='multi'&&p.multiTarget?this._targetsFor(u,target,p):[target];
         for(const t of targets)this._projectile(u,t,hit,p);
       }else{
         const victims=this._targetsFor(u,target,p);
         for(const t of victims)this._resolveHit(u,t,hit);
-        this.fx('slash',u.x,u.y,{side:u.side,radius:this._reach(u,p),angle:p.attackAngle||0,dx:target.x-u.x,dy:target.y-u.y,duration:.24});
+        if(p.areaOrigin){const area=this._strikeArea(u,target,p);this.fx('blastArea',area.x,area.y,{...area,side:u.side,color:'#ffc5a2',duration:.6});}
+        else this.fx(p.instantArea?'wave':'slash',u.x,u.y,{side:u.side,radius:this._reach(u,p),angle:p.attackAngle||0,dx:target.x-u.x,dy:target.y-u.y,duration:p.instantArea?.5:.24});
       }
     }else this.fx('miss',target.x,target.y,{side:u.side});
     const interval=Math.max(.01,this.attackInterval(u,hit.haste||0)*num(hit.intervalScale,1));
@@ -986,7 +1004,7 @@ export class ArenaEngine {
   }
   attackInterval(u,extraHaste=0){
     const attack=this._attackDefinition(u),haste=strongest(u,'attackHaste',this.time)+extraHaste,slow=Math.max(strongest(u,'slow',this.time),strongest(u,'ink',this.time));
-    const base=u.attackMode||u.def.attack?.sequence?statValue(u,'attackSpeed',this.time,attack.interval):this.statValue(u,'attackSpeed',attack.interval);
+    const base=u.attackMode||u.def.attack?.sequence||u.def.attack?.modes?statValue(u,'attackSpeed',this.time,attack.interval):this.statValue(u,'attackSpeed',attack.interval);
     return Math.max(.01,base/(1+haste)/(1-clamp(slow,0,.95)));
   }
   _projectile(u,target,hit,profile){
@@ -994,6 +1012,8 @@ export class ArenaEngine {
     const remaining=profile.attackType==='ranged'?Math.max(this._reach(u,profile),this._attackReach(u,profile)):this._reach(u,profile);
     const shot={id:`shot-${++this.serial}`,x:u.x,y:u.y,prevX:u.x,prevY:u.y,dx:dx/len,dy:dy/len,remaining,width:num(profile.attackWidth)/1000,side:u.side,sourceId:u.id,source:u,targetId:target.id,hit:{...hit},profile:{...profile},hitIds:new Set(),kind:'bolt',color:u.side?'#ffb286':'#9feaff',
       homing:!!u.isCastle,origin:{x:u.x,y:u.y},range:remaining,ttl:2*remaining/RULES.projectileSpeed+RULES.fixedStep};
+    if(hit.projectileKind)shot.kind=hit.projectileKind;
+    if(hit.projectileColor)shot.color=hit.projectileColor;
     if(hit.returning){
       shot.returning='outbound';shot.remaining=Math.min(remaining,Math.hypot(dx,dy));
       shot.ttl=4*remaining/RULES.projectileSpeed+2;u.memory.returningShotId=shot.id;
@@ -1286,11 +1306,13 @@ export class ArenaEngine {
       if(u.expiresAt<=this.time+EPS||u.def.stats.life>0&&this.time-u.born+EPS>=this.statValue(u,'life')){this.killUnit(u);continue;}
       if(u.engulfedBy)continue;
       if(u.isBuilding)this._buildingAura(u);
+      if(has(u,'silence',this.time)||has(u,'imprisonment',this.time))for(const key of this.ability(u)?.conditionalStats||[])u.stats[key]=u.def.stats[key];
       if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this._hook('tick',u,dt);
       if(!u.alive||['stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
       const target=this._target(u);
       if(u.targetId!==(target?.id??null))this._hook('targetChanged',u,target);
       u.targetId=target?.id??null;
+      this.ability(u)?.prepareAttack?.(this,u,target);
       const profile=this._profile(u),reach=this._attackReach(u,profile);
       // A melee unit must reach its real damage area before stopping. A wider
       // trigger radius leaves cone/line attacks swinging forever outside it.

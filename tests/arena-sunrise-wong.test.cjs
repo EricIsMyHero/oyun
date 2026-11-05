@@ -15,7 +15,7 @@ async function fixture(){
 }
 
 test('Sunrise and Wong unlock without changing authored stats, geometry, Power or source definitions',async()=>{
- const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,95);
+ const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,99);
  const s=catalog.byId.get('sunrise'),w=catalog.byId.get('wong');for(const c of[s,w]){assert.equal(c.ready,true);assert.deepEqual(c.reasons,[]);}
  assert.deepEqual([s.stats.health,s.stats.shield,s.stats.damage,s.stats.mana,s.stats.range,s.attack.interval],[155,155,38,11,2000,1.5]);
  assert.deepEqual([w.stats.health,w.stats.shield,w.stats.damage,w.stats.mana,w.stats.range,w.attack.interval],[445,10,28,17,1000,1.1]);

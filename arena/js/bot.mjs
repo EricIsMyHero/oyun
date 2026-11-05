@@ -3,7 +3,7 @@ import { MAP, distance } from './map.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
 
 const airTarget = def => ['air','both'].includes(def.combat?.targets);
-const ranged = def => def.combat?.attackType === 'ranged';
+const ranged = def => ['ranged','mixed'].includes(def.combat?.attackType);
 const frontline = def => def.combat?.attackType==='melee' && num(def.stats.health)+num(def.stats.shield)>=230;
 const living = unit => unit.alive && !unit.engulfedBy && !unit.banished && !unit.possessingId;
 const shuffled = (values,random) => {
@@ -78,7 +78,7 @@ function choosePlan(engine,view) {
   }).sort((a,b)=>b.priority-a.priority)[0];
   const urgent=defending&&lane.nearest<=7.5;
   const mode=defending?'defend':lane.army.some(u=>frontline(u.def)&&!u.isBuilding)?'support':'advance';
-  let candidates=team.hand.map(id=>engine.cards.get(id));
+  let candidates=team.hand.map(id=>engine.cardFor(1,id));
   if(defending){
     const counters=candidates.filter(def=>lane.approaching.some(t=>canHit(def,t)));
     if(counters.length)candidates=counters;else return null;
@@ -109,7 +109,7 @@ function choosePlan(engine,view) {
 
 function deployPlan(engine,view,plan) {
   if(!plan)return false;
-  const ai=engine.botState,team=engine.teams[view.side],def=engine.cards.get(plan.cardId),cost=num(def.stats.mana);
+  const ai=engine.botState,team=engine.teams[view.side],def=engine.cardFor(view.side,plan.cardId),cost=num(def.stats.mana);
   const minimumGap=plan.urgent?1.25:3.5;
   if(engine.time-ai.lastDeployAt<minimumGap)return false;
   if(!plan.urgent&&engine.time<ai.nextDeployAt)return false;

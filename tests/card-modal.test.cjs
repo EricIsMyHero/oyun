@@ -124,7 +124,7 @@ test('ability texts, names, turn abilities and star upgrades are preserved verba
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    'fb2e06060d0bce26b18ab9895cf31c2463c30947e90af4f9d5acc985d817b6bc');
+    '7f97f2931310099a34aaffd41a1da9babd8fe3961a77289f79e0cb5a4f1cbd41');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {
@@ -385,4 +385,10 @@ test('Ali keeps acquisition Range separate from line travel and Format identifie
   assert.equal(format.combatStats.refreshStatsOnTransform,true);
   assert.equal(format.stats.damage,'-');assert.equal(format.additionalStats.range,'-');
   context.card=format;assert.match(run('buildCombatProfile(card)'),/data-copy-stats-note/);
+});
+
+test('Ascendant geometry is authored in both partner forms and Avara exposes all four impact areas',()=>{
+ for(const id of ['reacher','bastra','maapp','avara']){const root=cards.find(c=>c.id===id);assert.ok(root.ascension.partnerIds.length);for(const c of [root,root.upgradedsecondForm]){assert.equal(c.combatStats.attackWidth,id==='maapp'?5000:500);assert.equal(c.combatStats.attackDistance,id==='maapp'?5000:500);}}
+ context.card=cards.find(c=>c.id==='reacher');assert.match(run('buildCombatProfile(card)'),/Melee &amp; ranged|Melee & ranged/);
+ context.card=cards.find(c=>c.id==='avara');const html=run('buildCombatProfile(card)');assert.match(html,/2.5 × 5 tiles \/ — \/ — \/ 5 × 2.5 tiles/);
 });

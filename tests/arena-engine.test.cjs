@@ -103,7 +103,7 @@ test('melee Range acquires a target but a short Attack Distance still requires a
 
 test('every playable ranged basic attacker fires and lands projectiles at its Range without walking into melee',async()=>{
   const {catalog,engine}=await fixture();
-  for(const card of catalog.forms.filter(c=>c.ready&&c.combat?.attackType==='ranged'&&!engine.ability({def:c})?.noBasicAttack)) {
+  for(const card of catalog.forms.filter(c=>c.ready&&c.combat?.attackType==='ranged'&&!c.combat.instantArea&&!c.combat.attackSequence?.some(p=>p.instantArea)&&!engine.ability({def:c})?.noBasicAttack)) {
     const {engine:e,base}=await fixture();
     const def=structuredClone(card),point={x:15,y:14};
     const [source]=e.spawn(def,0,point,1,{count:1});
