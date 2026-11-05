@@ -1412,7 +1412,7 @@
       "mana": "11",
       "number": "1"
     },
-    "trait": "Hərəkət etdikcə hər 0,6 saniyə ərzində +1 M. Can qazanar (Max: 210)",
+    "trait": "Hərəkət etdikcə hər 0,6 saniyə ərzində +1 maksimum və cari Can qazanar. Əlavə Can bonusu maksimum +210 olar (155 → 365).",
     "additionalStats": {
       "range": "2000",
       "speed": "1000",
@@ -1544,7 +1544,7 @@
       "mana": "17",
       "number": "1"
     },
-    "trait": "Hasar verdikdə 25 yük qazanar. 100 yükdə ilk vuruşu rəqibi 3 karo geri ataraq 1 saniyəlik sərsəmlətər. Canı 40%-in altına düşdükdə bir tekme ataraq ətrafındakı bütün rəqibləri 5 karo geri atar və silahını çıxaraq ardıcıl 8x8 dəfə hasar verər (SH:0,4)",
+    "trait": "Hasar verdikdə 25 yük qazanar. 100 yükdə ilk vuruşu rəqibi 3 karo geri ataraq 1 saniyəlik sərsəmlətər. Canı 40%-in altına düşdükdə ətrafındakı rəqibləri 5 karo geri itələyər, silahını çıxarıb 0,4 saniyə aralıqlarla 8 dəfə 8 hasar verər, sonra yaxın döyüşə qayıdar. Bu xüsusi seriya hər yerləşdirmədə yalnız bir dəfə işləyər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1050",

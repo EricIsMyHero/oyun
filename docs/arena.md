@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **93 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **95 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -315,6 +315,30 @@ The **Tphoenix → Fire Egg → Phoenix** chain is also battle-ready:
 - RogueX has a **50% chance** after a successful hit to apply **seven seconds of
   Blind**, reducing Range and Vision by **25%**. Fully blocked/missed hits do not
   trigger it. Predominance and normal native-ability suppression still apply.
+
+**Sunrise** and **Wong** are battle-ready:
+
+- Sunrise gains +1 maximum and current Health for each 0.6 seconds actually
+  moving, up to **+210 additional Health** (155 → 365 before other modifiers).
+  Idle time, combat stops, Root and pause do not advance its movement clock;
+  Silence blocks new growth without accumulating a deferred award. This is a
+  capacity increase, not a heal multiplied by Healing Bonus. Its original
+  Shield, attack profile and source stats remain unchanged.
+- Wong gains 25 charge per successful damage event, capped at 100. Its next
+  charged attack consumes the charge; a successful hit pushes the enemy three
+  tiles and stuns it for one second. Buildings are unaffected by this control.
+- Below 40% current Health, Wong kicks nearby enemy units five tiles away and
+  enters a temporary firearm stance: **8 shots × 8 damage**, with a 0.4-second
+  base interval. It retains its authored one-tile Range and target layers. It
+  waits for a legal target and follows normal movement, fog and combat rules.
+  Missed shots consume ammunition. Stun pauses attacks; Silence cannot leave
+  it permanently in firearm mode. After shot eight it restores its original
+  melee profile, 28 base damage and 1.1-second base interval.
+- Wong's special is available **once per deployment**. Healing above 40% and
+  crossing the threshold again cannot rearm it. Form changes clear active
+  stances and preserve the actor's used allowance, including Format promotion.
+  The inspector shows Sunrise's earned Health and Wong's charge, remaining
+  ammunition and spent special. Native ability descriptions remain Azerbaijani.
 
 **Whisper** is battle-ready with locked, priority possession:
 

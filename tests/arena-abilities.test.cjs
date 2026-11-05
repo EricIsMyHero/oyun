@@ -41,7 +41,7 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,93);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,95);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&!ABILITIES[card.id]?.noBasicAttack)assert.ok(card.attack.interval>0);}}
   assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
@@ -60,6 +60,8 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  sunrise:({ctx,u,rule})=>{const hp=u.hp;rule.move(ctx,u,{x:0,y:0},{x:1,y:0},.6);close(u.memory.sunriseGrowth,1);close(u.hp,hp+1);close(u.maxHp,hp+1);},
+  wong:({ctx,u,t,rule,result,hit,records})=>{for(let i=0;i<4;i++)rule.hit(ctx,u,t,result,hit);close(u.memory.charge,100);rule.attack(ctx,u,t,hit);assert.equal(hit.wongCharged,true);rule.hit(ctx,u,t,result,hit);close(u.memory.charge,25);close(records.push[0].distance,3);u.hp=u.maxHp*.39;rule.damaged(ctx,u);assert.equal(u.wongBurstUsed,true);close(u.attackMode.remaining,8);close(u.attackMode.attack.damage,8);close(u.attackMode.attack.interval,.4);rule.tick(ctx,u);close(u.attackMode.remaining,8);},
   whisper:({ctx,u,t,rule})=>{let collected=null,possessed=null;ctx.collectWhisperCritical=source=>{collected=source;};ctx.possessionTarget=()=>t;ctx.possess=(source,target)=>{possessed={source,target};};rule.spawn(ctx,u);assert.equal(collected,u);assert.equal(rule.target(ctx,u),t);rule.contact(ctx,u,t);assert.equal(possessed.source,u);assert.equal(possessed.target,t);assert.equal(rule.noBasicAttack,true);assert.equal(rule.cannotCrit,true);},
   'corsair-crew':({ctx,u,rule})=>{assert.deepEqual(rule.spawnForms,[0]);ctx.statValue=(actor,key)=>actor.stats[key];let reflected=false;ctx.reflectProjectile=()=>{reflected=true;return true;};assert.equal(rule.intercept(ctx,u,{hit:{reflected:false}}),true);assert.equal(reflected,true);assert.equal(rule.intercept(ctx,u,{hit:{reflected:true}}),false);},
   'corsair-crew/pirate-girls':({ctx,u,t,rule})=>{t.x=u.x+2.75;t.y=u.y;const hit={damage:16};rule.attack(ctx,u,t,hit);close(hit.damage,28);close(u.memory.distanceBonus,.75);},

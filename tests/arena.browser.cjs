@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,93);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex','whisper']){
+    assert.equal(coverage.ready,95);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex','whisper','sunrise','wong']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -584,6 +584,31 @@ async function minimapPixelAt(page,point) {
     }
 
     {
+      const growth=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('sunrise'));Object.assign(def.stats,{speed:1000,criticalChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});e.step(1.2);source.stats.speed=0;
+        e.setPaused(true);arenaApp.renderer.focusAt(source);return{growth:source.memory.sunriseGrowth,hp:source.hp,maxHp:source.maxHp,sourceHealth:source.def.stats.health};
+      });assert.deepEqual(growth,{growth:2,hp:157,maxHp:157,sourceHealth:155});await settleFrame(page);
+      const sunrisePoint=await clientPoint(page,{x:16.2,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(sunrisePoint.x,sunrisePoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-sunrise-growth="2"]').count(),1);assert.match(await page.locator('[data-sunrise-growth]').textContent(),/\+2 \/ \+210 Health/);
+      await page.screenshot({path:'/tmp/oyun-arena-sunrise-growth.png',fullPage:true});screenshots.push('/tmp/oyun-arena-sunrise-growth.png');await page.locator('#inspector-close').click();
+      const burst=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('wong'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});e.damage(null,source,300,{kind:'spell',bypassShield:true});
+        const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='wong-browser-host';dummy.combat.attackType='none';Object.assign(dummy.stats,{health:1000,shield:0,damage:0,range:0,speed:0,dodge:0,criticalChance:0,healrecovery:0,shieldrecovery:0});const [target]=e.spawn(dummy,1,{x:15.9,y:14},1,{count:1});e.status(target,'predominance',30);e.step(.5);
+        e.setPaused(true);arenaApp.renderer.focusAt(source);window.wongFixture={source,target};return{shots:source.shots,remaining:source.attackMode.remaining,hp:target.hp,mode:e._profile(source).attackType,interval:e.attackInterval(source),baseDamage:source.stats.damage};
+      });assert.deepEqual(burst,{shots:2,remaining:6,hp:984,mode:'ranged',interval:.4,baseDamage:28});await settleFrame(page);
+      const wongPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(wongPoint.x,wongPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-wong-burst="6"]').count(),1);assert.match(await page.locator('[data-wong-burst]').textContent(),/Firearm Burst.*2 \/ 8 shots/);
+      await page.screenshot({path:'/tmp/oyun-arena-wong-burst.png',fullPage:true});screenshots.push('/tmp/oyun-arena-wong-burst.png');await page.locator('#inspector-close').click();
+      const returned=await page.evaluate(()=>{const e=arenaApp.engine,{source,target}=wongFixture;e.setPaused(false);e.step(2.5);e.setPaused(true);return{shots:source.shots,specialShots:source.memory.wongShots,hp:target.hp,mode:e._profile(source).attackType,interval:e.attackInterval(source),active:!!source.attackMode,used:source.wongBurstUsed};});
+      assert.deepEqual(returned,{shots:8,specialShots:8,hp:936,mode:'melee',interval:1.1,active:false,used:true});
+      await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(wongPoint.x,wongPoint.y);await page.locator('#inspector').waitFor({state:'visible'});assert.match(await page.locator('[data-wong-burst="0"]').textContent(),/Melee · Burst Used/);
+      await page.screenshot({path:'/tmp/oyun-arena-wong-melee.png',fullPage:true});screenshots.push('/tmp/oyun-arena-wong-melee.png');await page.locator('#inspector-close').click();
+      await page.evaluate(()=>{const e=arenaApp.engine,{source}=wongFixture;source.hp=source.maxHp;e.damage(null,source,300,{kind:'spell',bypassShield:true});if(source.attackMode)throw Error('Wong repeated its one-use special');delete window.wongFixture;arenaApp.startMatch();});await settleFrame(page);
+    }
+
+    {
       const banked=await page.evaluate(()=>{
         arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
         const def=structuredClone(arenaApp.catalog.byId.get('whisper'));Object.assign(def.stats,{speed:0,criticalChance:5});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
@@ -1062,7 +1087,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Whisper critical conversion, priority possession, current-health return and host-death cleanup, Corsair formation and projectile reflection, Pirate Girls distance scaling, RogueX 25% Blind, Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Sunrise movement-only Health growth and Wong one-use eight-shot burst/melee restoration, Whisper critical conversion, priority possession, current-health return and host-death cleanup, Corsair formation and projectile reflection, Pirate Girls distance scaling, RogueX 25% Blind, Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

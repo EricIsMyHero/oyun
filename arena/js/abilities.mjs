@@ -38,6 +38,17 @@ const enrageNaar=(ctx,u,crossed=false)=>{
   const cast=()=>{(u.memory.grenadeBursts||=[]).push({remaining:20,clock:0});ctx.fx('wave',u.x,u.y,{side:u.side,radius:radius(u,ctx),color:'#ffc184'});};
   if(ctx.useAbility)ctx.useAbility(u,cast);else cast();
 };
+const armWong=(ctx,u)=>{
+  if(!u.alive||u.hp<=0||u.hp>=healthCap(ctx,u)*.4||u.wongBurstUsed)return;
+  const draw=()=>{
+    u.wongBurstUsed=true;u.memory.wongShots=0;
+    u.attackMode={remaining:8,attack:{damage:8,interval:.4,delay:0,count:1},combat:{attackType:'ranged',attackShape:'single',multiTarget:false,maxTargets:1}};
+    u.burstIndex=0;u.burstTargetId=null;u.cooldown=0;
+    for(const target of enemies(ctx,u))if(!target.isBuilding)ctx.push(target,u,5);
+    ctx.fx('wave',u.x,u.y,{side:u.side,radius:radius(u,ctx),color:'#ffc184'});
+  };
+  if(ctx.useAbility)ctx.useAbility(u,draw);else draw();
+};
 
 export const ABILITIES = {
   hammies:{spawn(ctx,u){ctx.status(u,'speedBonus',12,.2,u);}},
@@ -283,6 +294,27 @@ export const ABILITIES = {
     spawn(ctx,u){ctx.collectWhisperCritical(u);},
     target(ctx,u){return ctx.possessionTarget(u);},
     contact(ctx,u,target){ctx.possess(u,target);},
+  },
+  sunrise:{move(ctx,u,from,to,dt){
+    if((u.memory.sunriseGrowth||0)>=210)return;
+    periodic(u,'sunriseClock',dt,.6,()=>{
+      const gain=Math.min(1,210-(u.memory.sunriseGrowth||0));if(gain<=0)return;
+      u.memory.sunriseGrowth=(u.memory.sunriseGrowth||0)+gain;
+      u.maxHp+=gain;u.stats.health=u.maxHp;u.hp=Math.min(healthCap(ctx,u),u.hp+gain);
+      ctx.fx('buff',u.x,u.y,{side:u.side,color:'#ffe5a3'});
+    },ctx);
+  }},
+  wong:{
+    tick(ctx,u){armWong(ctx,u);},
+    damaged(ctx,u){armWong(ctx,u);},
+    attack(ctx,u,target,hit){
+      if((u.memory.charge||0)>=100){u.memory.charge-=100;hit.wongCharged=true;}
+    },
+    hit(ctx,u,target,result,hit){
+      if(!damageEvent(result))return;
+      u.memory.charge=Math.min(100,(u.memory.charge||0)+25);
+      if(hit.wongCharged&&!target.isCastle&&!target.isBuilding){ctx.push(target,u,3);ctx.status(target,'stun',1,0,u);}
+    },
   },
   toxic:{hit(ctx,u,t,r){poisonHit(ctx,u,t,r,2,3);}},
   leafshade:{
@@ -559,10 +591,7 @@ export const ABILITIES = {
 };
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
-export const ABILITY_GAPS = {
-  sunrise:['The 210 Health growth cap is not identified as total Health or bonus Health.'],
-  wong:['The firearm state after its eight-hit burst is not authored.'],
-};
+export const ABILITY_GAPS = {};
 
 // Phoenix is a reachable form rather than a separately selectable root card.
 ABILITIES['tphoenix/phoenix']={attack(ctx,u,t,hit){hit.bypassShield=true;},hit(ctx,u,t,r){if(damageEvent(r))growDamage(u,1);}};

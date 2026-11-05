@@ -224,6 +224,7 @@ export class ArenaEngine {
     this._setFormatForm(u,def,true);
   }
   _setUnitForm(u,def,memory={}){
+    delete u.attackMode;
     u.def=def;u.stats={...def.stats};u.hp=u.maxHp=def.stats.health;u.shield=u.maxShield=def.stats.shield;
     u.memory=memory;u.healthless=false;u.mass=bodyMass[def.combat.weight]||1;u.radius=.18+.07*u.mass;u.moving=false;
     u.hits=u.shots=u.attacks=u.burstIndex=u.sequenceIndex=0;u.targetId=u.burstTargetId=null;u.cooldown=0;
@@ -784,7 +785,7 @@ export class ArenaEngine {
     return this.castles.find(t=>this._legalTarget(u,t,sources)&&distance(u,t)<=reach+t.radius)||null;
   }
   _profile(u){
-    let p={...u.def.combat};
+    let p={...u.def.combat,...u.attackMode?.combat};
     const sequence=p.attackSequence;
     if(sequence?.length)p={...p,...sequence[u.sequenceIndex%sequence.length]};
     // Conditional death/periodic splash is resolved by the native handler only.
@@ -793,6 +794,7 @@ export class ArenaEngine {
   }
   _attackDefinition(u){
     const base=u.def.attack||{count:1,damage:num(u.stats.damage),interval:num(u.stats.attackSpeed),delay:num(u.stats.delay)};
+    if(u.attackMode)return {...base,...u.attackMode.attack};
     const step=base.sequence?.[u.sequenceIndex%base.sequence.length];
     return step?{...base,...step}:{...base};
   }
@@ -881,7 +883,7 @@ export class ArenaEngine {
     u.memory.distance=(u.memory.distance||0)+travelled*1000;
     u.memory.movedTime=(u.memory.movedTime||0)+dt;
     u.moving=travelled>0;
-    if(distance(from,u)>EPS)this._hook('move',u,from,{x:u.x,y:u.y});
+    if(distance(from,u)>EPS)this._hook('move',u,from,{x:u.x,y:u.y},dt);
   }
   leaveTrail(u,from,to,{width,duration,damage,interval}){
     if(distance(from,to)<=EPS||!(width>0&&duration>0&&interval>0))return;
@@ -938,10 +940,10 @@ export class ArenaEngine {
   }
   _fire(u,target){
     if(u.memory.returningShotId||this.ability(u)?.noBasicAttack)return;
-    const attack=this._attackDefinition(u),profile=this._profile(u);
+    const attack=this._attackDefinition(u),profile=this._profile(u),mode=u.attackMode;
     const index=u.burstIndex;
     u.shots++;u.memory.lastAttack=this.time;
-    const hit={damage:attack.sequence?statValue(u,'damage',this.time,attack.damage):this.statValue(u,'damage',attack.damage),kind:'attack',bypassShield:false,critical:false,secondary:false,burstIndex:index,combat:profile};
+    const hit={damage:mode||attack.sequence?statValue(u,'damage',this.time,attack.damage):this.statValue(u,'damage',attack.damage),kind:'attack',bypassShield:false,critical:false,secondary:false,burstIndex:index,combat:profile};
     // Per-mode damage is authored independently of the base per-hit statistic.
     const missed=this.random()<strongest(u,'misfortune',this.time);
     if(!missed)this._hook('attack',u,target,hit);
@@ -974,10 +976,17 @@ export class ArenaEngine {
         if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this.push(captive,{x:u.x-vector.x,y:u.y-vector.y},releaseDistance,u);
       }
     }else{u.burstTargetId=target.id;u.cooldown=interval;}
+    if(mode){
+      mode.remaining--;u.memory.wongShots=(u.memory.wongShots||0)+1;
+      if(mode.remaining<=0){
+        delete u.attackMode;u.burstIndex=0;u.burstTargetId=null;
+        u.cooldown=this.attackInterval(u)+this.statValue(u,'delay');
+      }
+    }
   }
   attackInterval(u,extraHaste=0){
     const attack=this._attackDefinition(u),haste=strongest(u,'attackHaste',this.time)+extraHaste,slow=Math.max(strongest(u,'slow',this.time),strongest(u,'ink',this.time));
-    const base=u.def.attack?.sequence?statValue(u,'attackSpeed',this.time,attack.interval):this.statValue(u,'attackSpeed',attack.interval);
+    const base=u.attackMode||u.def.attack?.sequence?statValue(u,'attackSpeed',this.time,attack.interval):this.statValue(u,'attackSpeed',attack.interval);
     return Math.max(.01,base/(1+haste)/(1-clamp(slow,0,.95)));
   }
   _projectile(u,target,hit,profile){
