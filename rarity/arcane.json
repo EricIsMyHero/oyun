@@ -279,7 +279,7 @@
       "mana": "15",
       "number": "1"
     },
-    "trait": "Bu qədim insan bədənini bürüyən alovlar sayəsində döyüş boyu aldığı hasarın 10%-ni eynilə hücum edən rəqibə geri ötürər.Canı 25%-in altına düşdükdə ölümdən qaçmaq üçün özünü alovlu bir barama daxilinə salaraq Fire Egg formasına dönüşər.",
+    "trait": "Bu qədim insan bədənini bürüyən alovlar sayəsində döyüş boyu aldığı hasarın 10%-ni eynilə hücum edən rəqibə geri ötürər. Canı 25%-in altına düşdükdə ölümdən qaçmaq üçün Fire Egg formasına dönüşər. Bu çevrilmə hər yerləşdirmədə yalnız bir dəfə baş verə bilər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -323,7 +323,7 @@
           "mana": "0",
           "number": "1"
         },
-        "trait": "Fire Egg formasında kart müdafiə mövqeyinə keçir və döyüş meydanında 10 saniyə boyunca sağ qalmağa çalışar. Əgər bu 10 saniyə ərzində rəqiblər tərəfindən qırılmazsa, daha güclü olan Phoenix formasına keçid edər. Əgər bu müddət bitmədən qırılarsa, yenidən əvvəlki Tphoenix formasına geri qayıdar.",
+        "trait": "Fire Egg formasında kart müdafiə mövqeyinə keçir və döyüş meydanında 10 saniyə boyunca sağ qalmağa çalışar. Əgər bu 10 saniyə ərzində rəqiblər tərəfindən qırılmazsa, daha güclü olan Phoenix formasına keçid edər. Əgər bu müddət bitmədən qırılarsa, maksimum canının 25%-i ilə əvvəlki Tphoenix formasına geri qayıdar (120 / 480 Can). Geri qayıdan Tphoenix həmin yerləşdirmə ərzində yenidən Fire Egg ola bilməz.",
         "additionalStats": {
           "range": "-",
           "speed": "-",

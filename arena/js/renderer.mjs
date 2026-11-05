@@ -748,7 +748,7 @@ export class ArenaRenderer {
       if(u.healthless)this.healthBar(ctx,p.x,barY,size*1.16,Math.max(0,u.expiresAt-time)/(u.expiresAt-u.born||1),'#c99ae6',3);
       else this.healthBar(ctx,p.x,barY,size*1.16,u.hp/((u.sharedVitalsId?u.effectiveMaxHp:statValue(u,'health',time,u.maxHp))||1),side===0?'#a0df8e':'#fa9b80',3);
       if(u.maxShield>0&&u.shield>0)this.healthBar(ctx,p.x,barY-4,size*1.16,u.shield/((u.sharedVitalsId?u.effectiveMaxShield:statValue(u,'shield',time,u.maxShield))||1),'#83ccf4',2);
-      const captiveCount=u.def?.id==='gloop'?(state?.units||[]).filter(t=>t.alive&&t.engulfedBy===u.id).length:0;
+      const captiveCount=['gloop','tornado'].includes(u.def?.id)?(state?.units||[]).filter(t=>t.alive&&t.engulfedBy===u.id).length:0;
       if(captiveCount){
         ctx.fillStyle='#162d21';roundRect(ctx,p.x+size*.35,barY-17,24,14,4);ctx.fill();
         ctx.strokeStyle='#a8dc86';ctx.lineWidth=1;ctx.stroke();

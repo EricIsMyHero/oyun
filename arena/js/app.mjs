@@ -210,6 +210,13 @@ function openInspector(def,kind='card',unit=null) {
     if(unit.def.id==='boomix')notes.push(`<section class="live-status-section" data-boomix-flight="${!!unit.memory.returningShotId}"><h3>${unit.memory.returningShotId?'Weapon in Flight':'Weapon Ready'}</h3><p>${unit.memory.returningShotId?'Flight protection: 20% less incoming damage.':'The weapon damages one target on each leg.'} Attack interval starts at launch; the weapon must return before another throw.</p></section>`);
     if(unit.def.id==='albert')notes.push(`<section class="live-status-section" data-albert-growth="${unit.memory.albertGrowth||0}"><h3>Target Bonus · +${unit.memory.albertGrowth||0} / +3</h3><p>Damage: ${Number(state.engine.statValue(unit,'damage').toFixed(3))} · Base: ${unit.def.stats.damage}</p></section>`);
     if(unit.def.id==='chicken')notes.push('<section class="live-status-section" data-chicken-detonation><h3>Explosion Parameters</h3><p>100 damage · 2 × 2 tiles<br>80%: 500 damage · 3.5 × 3.5 tiles</p></section>');
+    if(unit.def.id==='tornado'){
+      const captives=state.engine.captivesOf(unit);
+      const damage=state.engine.statValue(unit,'damage');
+      notes.push(`<section class="live-status-section" data-tornado-captives="${captives.length}"><h3>Vortex · ${captives.length} / 1</h3><p>${captives.length?captives.map(t=>escapeHTML(t.def.name)).join(', '):'No target held.'}</p><p>Center: ${damage} damage · Surrounding: ${damage/2} damage<br>Radius: 1.2 tiles · Burst: ${unit.burstIndex} / 10<br>Interval: 0.25s · Delay: 1.25s · Knockback: 3.5 tiles</p></section>`);
+    }
+    if(unit.def.id==='tphoenix/fire-egg')notes.push(`<section class="live-status-section" data-phoenix-egg><h3>Hatching · ${Math.max(0,(unit.memory.rebirth?.hatchAt??unit.born+10)-state.engine.time).toFixed(1)}s</h3><p>Tphoenix restoration: 25% Max Health</p></section>`);
+    if(unit.def.id==='tphoenix'&&unit.memory.rebirth)notes.push(`<section class="live-status-section" data-phoenix-cycles="${unit.memory.rebirth.cycles}"><h3>Rebirth Cycle · ${unit.memory.rebirth.cycles} / 1</h3><p>Restoration: 25% Max Health · Rebirth used</p></section>`);
     if(unit.def.id==='nortex'){
       const damage=state.engine.statValue(unit,'damage');
       notes.push(`<section class="live-status-section" data-nortex-burst><h3>Progressive Burst</h3><p>${[1,1.4,1.8].map(scale=>Number((damage*scale).toFixed(3))).join(' → ')} damage. Resets after each three-shot series.</p></section>`);

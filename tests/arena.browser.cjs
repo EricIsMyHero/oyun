@@ -99,8 +99,8 @@ async function minimapPixelAt(page,point) {
     assert.ok(coverage.locked?.reasons?.length,'incomplete cards expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
     assert.equal(await page.locator('[data-inspect-card]').count(),138);
-    assert.equal(coverage.ready,88);
-    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken']){
+    assert.equal(coverage.ready,90);
+    for(const id of ['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
       assert.equal(await card.locator('.card-locked-mark').count(),0);
@@ -583,6 +583,43 @@ async function minimapPixelAt(page,point) {
       await page.evaluate(()=>{delete window.wingFixture;arenaApp.startMatch();});await settleFrame(page);
     }
 
+    {
+      const held=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('tornado'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});
+        const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});source.hp=175;e._hook('tick',source,0);
+        const dummy=structuredClone(arenaApp.catalog.byId.get('hammies'));dummy.id='vortex-browser-target';dummy.combat.attackType='none';Object.assign(dummy.stats,{health:1000,shield:0,damage:0,range:0,speed:0,dodge:0,healrecovery:0});
+        const [target]=e.spawn(dummy,1,{x:16,y:14},1,{count:1}),[other]=e.spawn(dummy,1,{x:16.1,y:14},1,{count:1});e._fire(source,target);source.cooldown=Infinity;e.setPaused(true);arenaApp.renderer.focusAt(source);window.vortexFixture={source,target,other};
+        return{held:target.engulfedBy===source.id,hp:target.hp,splashHp:other.hp,captiveDamage:e.damage(target,source,100,{kind:'spell'}).total};
+      });
+      assert.deepEqual(held,{held:true,hp:994,splashHp:997,captiveDamage:0});await settleFrame(page);
+      const tornadoPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(tornadoPoint.x,tornadoPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-tornado-captives="1"]').count(),1);assert.equal(await page.locator('#inspector [data-stat="damage"] strong').textContent(),'10 × 6');assert.equal(await page.locator('#inspector [data-stat="attackSpeed"] strong').textContent(),'0.25s');
+      await page.screenshot({path:'/tmp/oyun-arena-tornado-vortex.png',fullPage:true});screenshots.push('/tmp/oyun-arena-tornado-vortex.png');await page.locator('#inspector-close').click();
+      const released=await page.evaluate(()=>{const e=arenaApp.engine,{source,target,other}=vortexFixture;e.setPaused(true);for(let i=0;i<9;i++)e._fire(source,target);return{held:!!target.engulfedBy,hp:target.hp,splashHp:other.hp,x:target.x,attacks:source.attacks};});
+      assert.equal(released.held,false);assert.equal(released.hp,940);assert.equal(released.splashHp,970);assert.ok(released.x>18);assert.equal(released.attacks,1);
+      const egg=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];
+        const def=structuredClone(arenaApp.catalog.byId.get('tphoenix'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+        const result=e.damage(null,source,361,{kind:'spell'});e.step(2);e.setPaused(true);arenaApp.renderer.focusAt(source);window.vortexFixture={source};return{id:source.def.id,hp:source.hp,killed:result.killed,remaining:source.memory.rebirth.hatchAt-e.time};
+      });
+      assert.equal(egg.id,'tphoenix/fire-egg');assert.equal(egg.hp,360);assert.equal(egg.killed,false);assert.ok(Math.abs(egg.remaining-8)<1e-7);await settleFrame(page);
+      const eggPoint=await clientPoint(page,{x:15,y:14});await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(eggPoint.x,eggPoint.y);
+      await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-phoenix-egg]').count(),1);assert.match(await page.locator('[data-phoenix-egg]').textContent(),/Hatching.*25% Max Health/);assert.equal(await page.locator('#inspector-name').textContent(),'Fire Egg');
+      await page.screenshot({path:'/tmp/oyun-arena-fire-egg.png',fullPage:true});screenshots.push('/tmp/oyun-arena-fire-egg.png');await page.locator('#inspector-close').click();
+      const restored=await page.evaluate(()=>{const e=arenaApp.engine,{source}=vortexFixture;e.setPaused(true);const result=e.damage(null,source,1000,{kind:'spell'});return{id:source.def.id,hp:source.hp,max:source.maxHp,killed:result.killed,cycles:source.memory.rebirth.cycles};});
+      assert.deepEqual(restored,{id:'tphoenix',hp:120,max:480,killed:false,cycles:1});await settleFrame(page);
+      await page.evaluate(()=>arenaApp.engine.setPaused(false));await page.mouse.click(eggPoint.x,eggPoint.y);await page.locator('#inspector').waitFor({state:'visible'});assert.equal(await page.locator('[data-phoenix-cycles="1"]').count(),1);assert.equal(await page.locator('#inspector [data-stat="health"] strong').textContent(),'120 / 480');
+      await page.screenshot({path:'/tmp/oyun-arena-phoenix-restoration.png',fullPage:true});screenshots.push('/tmp/oyun-arena-phoenix-restoration.png');await page.locator('#inspector-close').click();
+      const used=await page.evaluate(()=>{const e=arenaApp.engine,{source}=vortexFixture;e.setPaused(true);e.damage(null,source,1,{kind:'spell'});e._hook('tick',source,0);return{id:source.def.id,hp:source.hp,used:source.phoenixEggUsed};});assert.deepEqual(used,{id:'tphoenix',hp:119,used:true});
+      const phoenix=await page.evaluate(()=>{
+        arenaApp.startMatch();const e=arenaApp.engine;e.bot=false;e.state.units=[];const def=structuredClone(arenaApp.catalog.byId.get('tphoenix'));Object.assign(def.stats,{speed:0,criticalChance:0,lifestealChance:0});const [source]=e.spawn(def,0,{x:15,y:14},1,{count:1});
+        e.damage(null,source,361,{kind:'spell'});e.step(10);e.setPaused(true);return{id:source.def.id,hp:source.hp,movement:source.def.combat.movementType,deaths:e.state.events.filter(v=>v.type==='death').length};
+      });
+      assert.deepEqual(phoenix,{id:'tphoenix/phoenix',hp:240,movement:'flying',deaths:0});await settleFrame(page);
+      await page.evaluate(()=>{delete window.vortexFixture;arenaApp.startMatch();});await settleFrame(page);
+    }
+
     const magmaWalk=await page.evaluate(()=>{
       const e=arenaApp.engine;e.bot=false;e.state.units=[];e.state.projectiles=[];e.setPaused(false);
       const def=structuredClone(arenaApp.catalog.byId.get('magma'));def.stats.criticalChance=0;
@@ -949,7 +986,7 @@ async function minimapPixelAt(page,point) {
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');
     assert.ok(!requests.some(url=>url.startsWith('/rarity/')),'no origin-root data URLs');
-    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
+    console.log(`Arena browser checks passed: ${coverage.cards} cards, ${coverage.ready} ready, ${coverage.spells} spells; Tornado central/splash damage and captive release, once-per-deployment Tphoenix rebirth and Phoenix hatch, Albert same-target growth and inspector, Chicken contact/death explosion and inspector, Angels staggered reinforcements and death rally, Boomix two-way hits and launch cooldown, Nortex 5/7/9 burst reset, Fen 12.5% Blind, Nightprowler stealth and Misfortune, Magma ground flame trail and fog, Fallen Angel current-health targeting and haste stacks, Etheris shared reserve, Format Power copying, Artist ink/Curse/charge and timed healthless ravens, Pyhsic execution, Unara orb distribution, Clara Taunt/healing, Soul Mark conversion, Malvaris and Phantomis live stats, Butterfly health bloom, independent bot decks and paced mana spending, Avalith return flight and two-way hits, flying lane combat, Gloop engulf/digestion/release and inspector, ranged projectile launch and impact, mouse/touch/keyboard/scroll camera, minimap and fog, zoom, drag-versus-deploy, hand drag, hidden inspection/HUD, deck, deployment radius, economy, spell cycle, pause/restart and six viewports. Screenshots: ${screenshots.join(', ')}`);
   } finally {
     await browser.close();
     await new Promise(resolve=>server.close(resolve));

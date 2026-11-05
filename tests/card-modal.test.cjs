@@ -124,7 +124,7 @@ test('ability texts, names, turn abilities and star upgrades are preserved verba
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    '6282aff79872c4ca3c204ec7faa8ba8006a782d3f84f84df535da5d9f6e3a2bd');
+    '98335416d025dab18c44c6997d40cb54830e58903eea1157a7a4d2b465e69a5a');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {
@@ -244,7 +244,7 @@ test('Mundane projectile geometry follows the requested values, including Mini F
 test('Familiar geometry and explicit weight, target and impact overrides match the request', () => {
   const familiar=JSON.parse(fs.readFileSync(path.join(root,'rarity/familiar.json')));
   assert.equal(familiar.length,24);
-  const geometry={warborn:[1000,500],trac:[1000,500],tornado:[750,500],'shadow-reaper':[1500,1000]};
+  const geometry={warborn:[1000,500],trac:[1000,500],tornado:[750,1200],'shadow-reaper':[1500,1000]};
   const weights={frostshot:'heavy',warborn:'very-heavy',nyra:'light',trac:'heavy',dino:'very-heavy',tenta:'heavy',astranova:'light',cassandra:'light'};
   for (const card of familiar) {
     const p=card.combatStats;

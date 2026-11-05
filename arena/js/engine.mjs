@@ -128,18 +128,48 @@ export class ArenaEngine {
     memory.snapshot=def;memory.transformed=true;memory.promoted=false;
     this._setFormatForm(u,def,true);
   }
-  _setFormatForm(u,def,spawnHook=false){
-    const format=u.memory.format,returningShotId=u.memory.returningShotId;
+  _setUnitForm(u,def,memory={}){
     u.def=def;u.stats={...def.stats};u.hp=u.maxHp=def.stats.health;u.shield=u.maxShield=def.stats.shield;
-    u.memory={format,...(returningShotId?{returningShotId}:{})};u.healthless=false;u.mass=bodyMass[def.combat.weight]||1;u.radius=.18+.07*u.mass;
+    u.memory=memory;u.healthless=false;u.mass=bodyMass[def.combat.weight]||1;u.radius=.18+.07*u.mass;u.moving=false;
     u.hits=u.shots=u.attacks=u.burstIndex=u.sequenceIndex=0;u.targetId=u.burstTargetId=null;u.cooldown=0;
     delete u.lifeDecay;const decay=this.ability(u)?.lifeDecay;if(decay)u.lifeDecay={...decay,next:this.time+decay.interval};
     u.born=this.time;u.expiresAt=def.stats.life>0?this.time+def.stats.life:Infinity;
+    u.statuses=u.statuses.filter(s=>!s.groundOnly||!def.combat.groundEffectImmune);
     if(def.combat.movementType!=='flying'&&!isWalkable(u)){const point=closestRoute(u);u.x=point.x;u.y=point.y;}
     this._resetWaypoint(u);this._capVitals(u);
+  }
+  _setFormatForm(u,def,spawnHook=false){
+    const format=u.memory.format,returningShotId=u.memory.returningShotId;
+    this._setUnitForm(u,def,{format,...(returningShotId?{returningShotId}:{})});
     if(spawnHook)this._hook('spawn',u);
     this.fx('capture',u.x,u.y,{side:u.side,duration:1});
     this.log('transform',`Format became ${def.name}${format.promoted?' with doubled stats':''}.`,{side:u.side,unitId:u.id});
+  }
+  _phoenixForm(u,def,fraction=1){
+    if(!u?.alive||!def)return false;
+    const previous=u.def,rebirth=u.memory.rebirth||{root:previous.id==='tphoenix'?previous:this.cards.get('tphoenix'),cycles:0};
+    const {format,conversion,lastDamageReceived,lastDamageDealt}=u.memory;
+    this._setUnitForm(u,def,{rebirth,...(format?{format}:{}),...(conversion?{conversion}:{}),lastDamageReceived,lastDamageDealt});
+    u.hp=this.maxHealth(u)*fraction;
+    if(def.id==='tphoenix/fire-egg'){u.phoenixEggUsed=true;rebirth.cycles++;rebirth.hatchAt=this.time+10;}
+    else delete rebirth.hatchAt;
+    this.fx('portal',u.x,u.y,{side:u.side,color:'#ffba72',duration:.8});
+    this.log('transform',`${previous.name} became ${def.name}.`,{side:u.side,unitId:u.id});
+    return true;
+  }
+  phoenixEgg(u){
+    if(u.def.id!=='tphoenix'||u.phoenixEggUsed||u.hp>=this.maxHealth(u)*.25)return false;
+    return this._phoenixForm(u,u.def.forms.find(f=>f.id==='tphoenix/fire-egg'));
+  }
+  hatchPhoenix(u){
+    const hatchAt=u.memory.rebirth?.hatchAt??u.born+10;
+    if(this.time+EPS<hatchAt)return false;
+    const root=u.memory.rebirth?.root||this.cards.get('tphoenix');
+    return this._phoenixForm(u,root?.forms.find(f=>f.id==='tphoenix/phoenix'));
+  }
+  breakPhoenixEgg(u){
+    if(u.hp>0)return false;
+    return this._phoenixForm(u,u.memory.rebirth?.root||this.cards.get('tphoenix'),.25);
   }
   _promoteFormat(source,target){
     const memory=source?.memory?.format;
@@ -434,19 +464,23 @@ export class ArenaEngine {
       this.damage(source,target,this.maxHealth(target)*.12,{kind:'ability',secondary:true,accuracyChecked:true});}
   }
   captivesOf(host){return this.units.filter(u=>u.alive&&u.engulfedBy===host.id);}
-  engulf(host,target){
+  engulf(host,target,{radius=host?.radius,vortex=false}={}){
     if(!host?.alive||host.engulfedBy||!target?.alive||target.engulfedBy||target.isCastle||target.isBuilding||!this._canHit(host,target))return false;
-    if(distance(host,target)>host.radius+target.radius+EPS)return false;
+    if(distance(host,target)>radius+target.radius+EPS)return false;
     const status=this.status(target,'engulfed',Infinity,0,host);
     if(!status)return false;
     target.engulfedBy=host.id;target.targetId=null;target.burstTargetId=null;target.burstIndex=0;target.moving=false;
-    target.memory.digestClock=0;target.x=host.x;target.y=host.y;
-    this.fx('engulf',host.x,host.y,{side:host.side,radius:host.radius+target.radius,duration:.55});
+    target.memory.digestClock=0;if(vortex){
+      const dx=target.x-host.x,dy=target.y-host.y;
+      target.memory.vortexHeld=true;target.memory.vortexVector=dx||dy?{x:dx,y:dy}:{x:host.side===0?1:-1,y:0};
+    }
+    target.x=host.x;target.y=host.y;
+    this.fx('engulf',host.x,host.y,{side:host.side,radius:host.radius+target.radius,color:vortex?'#b9dcff':undefined,duration:.55});
     return true;
   }
   releaseEngulfed(target){
     const host=this.units.find(u=>u.id===target.engulfedBy);
-    delete target.engulfedBy;delete target.memory.digestClock;
+    delete target.engulfedBy;delete target.memory.digestClock;delete target.memory.vortexHeld;delete target.memory.vortexVector;
     target.statuses=target.statuses.filter(s=>s.kind!=='engulfed');
     if(!target.alive)return;
     if(host){
@@ -519,6 +553,7 @@ export class ArenaEngine {
   damage(source,target,amount,options={}){
     const empty={healthDamage:0,shieldDamage:0,total:0,killed:false};
     if(!target?.alive||target.healthless||target.banished||!(amount>0)||this.damageDepth>16)return empty;
+    if(source?.memory?.vortexHeld)return empty;
     if(source&&!options.persistentField&&(source.engulfedBy||has(source,'imprisonment',this.time)||has(source,'airborne',this.time)))return empty;
     if(target.engulfedBy&&source?.id!==target.engulfedBy)return empty;
     if(has(target,'imprisonment',this.time)||has(target,'untouchable',this.time)||has(target,'untargetable',this.time))return empty;
@@ -570,6 +605,8 @@ export class ArenaEngine {
       else if(target.buildingKind==='reflector'&&source?.alive&&!hit.secondary)this.damage(target,source,result.total*(source.isCastle?.4:.6),{kind:'reflect',secondary:true,reflected:true});
     }
     if(target.hp<=0&&target.alive)this.killUnit(target,source,{deathBlast:hit.deathBlast});
+    // Native form changes can survive an otherwise lethal packet.
+    result.killed=!target.alive||target.hp<=0;
     this.damageDepth--;
     return result;
   }
@@ -587,14 +624,15 @@ export class ArenaEngine {
     u.waypoint=best.index;
   }
   _canHit(u,target){
-    if(!target?.alive||target.def?.combat?.untargetable||target.engulfedBy||target.banished||!this.isEnemy(u,target))return false;
+    if(!target?.alive||target.def?.combat?.untargetable||target.banished||!this.isEnemy(u,target))return false;
+    if(target.engulfedBy&&!(target.engulfedBy===u.id&&this.ability(u)?.captiveTarget))return false;
     if(has(target,'untargetable',this.time)||has(target,'imprisonment',this.time))return false;
     const layers=u.def?.combat?.targets||'both';
     if(layers==='none')return false;
     const air=target.def?.combat?.movementType==='flying';
     return layers==='both'||(layers==='air'?air:!air);
   }
-  _legalTarget(u,target,sources=null){return this._canHit(u,target)&&isEntityVisible(this.state,u.side,target,sources);}
+  _legalTarget(u,target,sources=null){return this._canHit(u,target)&&(target.engulfedBy===u.id&&this.ability(u)?.captiveTarget||isEntityVisible(this.state,u.side,target,sources));}
   canTarget(u,target){return this._legalTarget(u,target);}
   canSee(u,target){return isEntityVisible(this.state,u.side,target);}
   tauntTarget(u,sources=null){
@@ -809,6 +847,12 @@ export class ArenaEngine {
       u.burstIndex=0;u.burstTargetId=null;u.sequenceIndex++;u.attacks++;
       // Returning weapons can count recovery from launch or from the catch.
       u.cooldown=Math.max(.01,interval+(returning?0:statValue(u,'delay',this.time,num(attack.delay))));
+      const releaseDistance=this.ability(u)?.releaseCaptivesAfterBurst;
+      if(releaseDistance)for(const captive of this.captivesOf(u)){
+        const vector=captive.memory.vortexVector||{x:u.side===0?1:-1,y:0};
+        this.releaseEngulfed(captive);
+        if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this.push(captive,{x:captive.x-vector.x,y:captive.y-vector.y},releaseDistance);
+      }
     }else{u.burstTargetId=target.id;u.cooldown=interval;}
   }
   attackInterval(u,extraHaste=0){
@@ -845,7 +889,8 @@ export class ArenaEngine {
   }
   _resolveHit(source,target,hit){
     if(!target.alive)return;
-    const result=this.damage(source,target,hit.damage,hit);
+    const amount=hit.damage*(hit.splashScale!=null&&target.id!==hit.primaryTargetId?hit.splashScale:1);
+    const result=this.damage(source,target,amount,{...hit,damage:amount});
     if(result.total<=0)return;
     source.hits=(source.hits||0)+1;
     this._hook('hit',source,target,result,hit);

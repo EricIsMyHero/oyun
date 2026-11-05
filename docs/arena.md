@@ -171,7 +171,7 @@ so scrolling does not regenerate the illustrated forest.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **88 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **90 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves
@@ -245,6 +245,46 @@ Two more Familiar roots are complete:
   each victim. Control effects prevent contact activation while active. Paid
   deployment still costs six mana once. Source combat dimensions and the blank
   Attack Speed remain available in the Codex.
+
+**Tornado** completes the Familiar roster, so all Mundane and Familiar root cards
+are battle-ready. Its ten-hit attack uses a **0.25-second interval** and
+**1.25-second additional delay**, with a **1.2-tile acquisition and attack reach**.
+A successful central hit pulls that one target inside the vortex; it cannot
+move, scout, be selected by outsiders, or deal damage, including from existing
+projectiles, damage-over-time and persistent flame fields. Tornado continues its
+series against its own captive. Each strike deals
+four central Damage and **two to every other enemy in the 1.2-tile radius**, or
+**six central and three surrounding Damage** at 50% Health or less. Surrounding
+enemies are not captured. The bonus does not stack and ends after healing above
+the threshold. The tenth attack attempt releases any
+survivor and knocks it back **3.5 tiles** along its original approach direction.
+Release still happens if the last attack misses or Silence prevents the final
+native effect. Cleanse, changing targets and the captor's death also release
+survivors. Predominance prevents capture, while ordinary immunity, Dodge and
+Misfortune can prevent the successful hit needed to capture. The inspector shows
+the held target and burst progress.
+
+The **Tphoenix → Fire Egg → Phoenix** chain is also battle-ready:
+
+- Tphoenix reflects **10% of damage actually received**, including Shield damage,
+  once to its attacker. Reflected damage cannot bounce recursively. Crossing
+  strictly below **25% Max Health**, including a lethal damage packet, changes the
+  same actor into a full **360-Health Fire Egg**. Transformation does not count as
+  a kill, trigger death effects, change the selected corridor or spend extra mana.
+- Fire Egg remains stationary and cannot attack. Surviving **ten game seconds**
+  changes it into a full **240-Health Phoenix**. Pause freezes the clock. Silence
+  can postpone an eligible hatch and suppress the native rescue if the egg breaks.
+- A broken egg changes back into Tphoenix at **25% of its effective Max Health**:
+  normally **120 / 480 Health**. Fire Egg is available **once per deployment**.
+  Later damage or healing cannot rearm it; Format promotion and ownership changes
+  retain that consumed allowance. Existing status modifiers are retained;
+  airborne forms discard effects explicitly limited to the ground. Format copies
+  retain their own copied root
+  profile throughout these transformations.
+- Phoenix flies along the selected corridor, bypasses shields and gains **+1
+  permanent Damage per successful hit**. The source does not author a growth cap.
+  Each form has its own Codex statistics, portrait and movement profile. The live
+  inspector shows the hatch countdown and completed rebirth cycles.
 
 All twenty-three Relic roots now have their native abilities implemented: **Stacy**,
 **Death**, **Demotron**, **Aeralis**, **Dark Necromancer**, **Ali**, **Worms**,

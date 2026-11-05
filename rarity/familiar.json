@@ -789,12 +789,12 @@
       "shield": "0",
       "damage": "10x4",
       "sps": "40",
-      "attackSpeed": "0.10s",
-      "delay": "2.70s",
+      "attackSpeed": "0.25s",
+      "delay": "1.25s",
       "mana": "16",
       "number": "1"
     },
-    "trait": "Tornado hədəf aldığı rəqib kartı öz burulğanının içinə çəkərək hərəkətsiz qoyur və ona davamlı zərər vurar. Burulğanın enerjisi bitdikdə rəqibi 3,5 karo uzağa fırladıb atar. Öz canı 50%-ə düşdükdə güclənər və etdiyi hər vuruş üçün ekstra +2 hasar bonusu qazanar.",
+    "trait": "Tornado 1.2 karo radiusa daxil olan mərkəzi hədəfi içinə çəkər; həmin kart hərəkət və hasar verə bilməz. Hər 0.25 saniyədə mərkəzi hədəfə 4, radiusdakı digər rəqiblərə 2 hasar verər. Canı 50% və ya daha aşağı olduqda bu hasarlar müvafiq olaraq 6 və 3 olar; bonus toplanmır. 10-cu vuruşdan sonra sağ qalan mərkəzi hədəfi 3.5 karo uzağa atar və 1.25 saniyə gecikmə qazanar.",
     "additionalStats": {
       "range": "1200",
       "speed": "900",
@@ -823,19 +823,20 @@
     "subclass": "Disruptor",
     "combatStats": {
       "attackType": "melee",
-      "multiTarget": false,
-      "maxTargets": 1,
-      "attackShape": "single",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "circle",
       "attackWidth": 750,
       "weight": "medium",
       "targets": "ground",
-      "attackDistance": 500,
+      "attackDistance": 1200,
       "attackDistanceMatchesRange": false,
       "attackAngle": null,
       "impactSize": "0.75 × 0.75 tiles",
       "projectileEndEffect": null,
       "movementType": "hovering",
-      "groundEffectImmune": true
+      "groundEffectImmune": true,
+      "multiTargetCondition": "Mərkəzi hədəfə tam, 1.2 karo radiusdakı digər rəqiblərə yarı hasar verər."
     }
   },
   {

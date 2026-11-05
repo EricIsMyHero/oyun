@@ -41,11 +41,11 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
   assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,88);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.filter(x=>x.ready).length,90);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&card.id!=='chicken')assert.ok(card.attack.interval>0);}}
   assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
-  assert.match(c.byId.get('tphoenix').reasons.join(' '),/Health restored/);
+  assert.equal(c.byId.get('tphoenix').ready,true);assert.equal(c.byId.get('tornado').ready,true);
   assert.match(c.byId.get('nightfang').reasons.join(' '),/Attack Distance/);
   assert.match(c.spellById.get('crystalline-prison').reasons.join(' '),/conflict/);
   assert.equal(c.byId.get('soldier').attack.count,15);assert.equal(c.byId.get('soldier').attack.damage,3);
@@ -60,6 +60,9 @@ test('arena catalog preserves every source definition and exposes honest data lo
 });
 
 const cases={
+  tornado:({ctx,u,t,rule,result,hit})=>{let capture=null;ctx.captivesOf=()=>[];ctx.engulf=(host,target,params)=>{capture={host,target,params};};u.hp=u.maxHp/2;rule.tick(ctx,u);assert.equal(u.stats.damage,6);rule.attack(ctx,u,t,hit);assert.equal(hit.splashScale,.5);rule.hit(ctx,u,t,result,hit);assert.equal(capture.target,t);close(capture.params.radius,1.2);assert.equal(capture.params.vortex,true);assert.equal(rule.releaseCaptivesAfterBurst,3.5);u.hp=u.maxHp;rule.tick(ctx,u);assert.equal(u.stats.damage,4);},
+  tphoenix:({ctx,u,t,rule,result,hit,records})=>{let egg=null;ctx.phoenixEgg=actor=>{egg=actor;};rule.damaged(ctx,u,t,result,hit);assert.equal(egg,u);close(records.damage[0].amount,1);assert.equal(records.damage[0].options.reflected,true);},
+  'tphoenix/fire-egg':({ctx,u,rule})=>{let hatch=null,broken=null;ctx.hatchPhoenix=actor=>{hatch=actor;};ctx.breakPhoenixEgg=actor=>{broken=actor;};rule.tick(ctx,u);rule.damaged(ctx,u);assert.equal(hatch,u);assert.equal(broken,u);},
   albert:({ctx,u,t,rule,hit,result})=>{rule.targetChanged(ctx,u,t);for(let i=0;i<8;i++)rule.hit(ctx,u,t,result);assert.equal(u.memory.albertGrowth,3);assert.equal(u.stats.damage,10);rule.targetChanged(ctx,u,null);assert.equal(u.stats.damage,7);rule.attack(ctx,u,t,hit);assert.equal(hit.damage,7);rule.hit(ctx,u,t,{total:0});assert.equal(u.memory.albertGrowth,0);},
   chicken:({ctx,u,t,rule,records})=>{ctx.statValue=(actor,key)=>actor.stats[key];ctx._canHit=(source,target)=>source.side!==target.side;ctx._inside=()=>true;ctx.killUnit=actor=>{actor.alive=false;};assert.equal(rule.noBasicAttack,true);assert.equal(rule.contactAttack,true);rule.contact(ctx,u,t);assert.equal(u.alive,false);rule.death(ctx,u);assert.equal(records.damage[0].amount,500);assert.equal(records.fx.find(f=>f.type==='blastArea').opts.width,3.5);},
   angels:({ctx,u,t,rule})=>{assert.deepEqual(rule.spawnSchedule,{initialGap:.4,gapStep:.05});const damage=u.stats.damage;t.def=u.def;t.side=u.side;rule.unitDeath(ctx,u,t);close(u.stats.damage,damage+2);assert.equal(u.memory.angelDeaths,1);t.side=1;rule.unitDeath(ctx,u,t);close(u.stats.damage,damage+2);},

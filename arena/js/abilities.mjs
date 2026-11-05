@@ -204,6 +204,17 @@ export const ABILITIES = {
     u.stats.damageminimiser=Math.min(90,u.def.stats.damageminimiser+stacks*.5);
     u.stats.attackSpeed=u.def.stats.attackSpeed/(1+stacks*.005);
   }},
+  tornado:{
+    captiveTarget:true,
+    releaseCaptivesAfterBurst:3.5,
+    tick(ctx,u){u.stats.damage=u.def.stats.damage+(u.hp<=healthCap(ctx,u)*.5?2:0);},
+    attack(ctx,u,target,hit){hit.primaryTargetId=target.id;hit.splashScale=.5;hit.combat={attackShape:'circle',multiTarget:true,maxTargets:null};},
+    hit(ctx,u,target,result,hit){
+      if(!damageEvent(result)||target.id!==hit.primaryTargetId||target.engulfedBy===u.id)return;
+      ctx.engulf(u,target,{radius:radius(u,ctx),vortex:true});
+    },
+    targetChanged(ctx,u,target){for(const captive of ctx.captivesOf(u))if(captive!==target)ctx.releaseEngulfed(captive);},
+  },
   dino:{hit(ctx,u,t,r){if(damageEvent(r))growDamage(u,2,24);}},
   tenta:{hit(ctx,u,t,r){if(damageEvent(r)&&!t.isCastle)ctx.status(t,'slow',1,.25,u);}},
   'fire-archer':{attack(ctx,u){if(u.shots%4===0)ctx.status(u,'attackHaste',3,.7,u);}},
@@ -236,6 +247,18 @@ export const ABILITIES = {
   arcanyx:{
     attack(ctx,u,t,hit){hit.damage*=1.6;},
     hit(ctx,u,t,r){if(damageEvent(r))ctx.near(t,radius(u,ctx),a=>a.side===u.side).forEach(a=>ctx.status(a,'regen',5,0,u,{amount:4,interval:1}));},
+  },
+  tphoenix:{
+    tick(ctx,u){ctx.phoenixEgg(u);},
+    damaged(ctx,u,source,result,hit){
+      if(source&&source!==u&&!hit.reflected)ctx.damage(u,source,result.total*.1,{kind:'reflect',secondary:true,reflected:true,friendlyFire:true});
+      ctx.phoenixEgg(u);
+    },
+  },
+  'tphoenix/fire-egg':{
+    spawn(ctx,u){u.phoenixEggUsed=true;},
+    tick(ctx,u){ctx.hatchPhoenix(u);},
+    damaged(ctx,u){ctx.breakPhoenixEgg(u);},
   },
   toxic:{hit(ctx,u,t,r){poisonHit(ctx,u,t,r,2,3);}},
   leafshade:{
@@ -513,10 +536,6 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {
-  tornado:['The whirlwind energy or duration, which triggers release, is not authored.'],
-  tphoenix:['Health restored when Fire Egg breaks and returns to Tphoenix is not authored.'],
-  'tphoenix/fire-egg':['Health restored on a broken-egg transformation is not authored.'],
-  'tphoenix/phoenix':[],
   'corsair-crew':['Pirate Girls have no distance-to-damage scaling formula before the 75% cap.'],
   'corsair-crew/pirate-girls':['Distance-to-damage scaling before the 75% cap is not authored.'],
   whisper:['Host restoration and ownership after the possession expires are not authored.'],
@@ -525,8 +544,7 @@ export const ABILITY_GAPS = {
   wong:['The firearm state after its eight-hit burst is not authored.'],
 };
 
-// Phoenix is not independently selectable; its parent remains locked until its
-// broken-egg health is supplied. The native shield bypass/growth is still exact.
+// Phoenix is a reachable form rather than a separately selectable root card.
 ABILITIES['tphoenix/phoenix']={attack(ctx,u,t,hit){hit.bypassShield=true;},hit(ctx,u,t,r){if(damageEvent(r))growDamage(u,1);}};
 
 export function abilityReadiness(raw,id) {
