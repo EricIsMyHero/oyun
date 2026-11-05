@@ -124,7 +124,7 @@ test('ability texts, names, turn abilities and star upgrades are preserved verba
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    '2d4e99e3b7e1db110dff1d5204acd7a6d1e0d7f326054a2a9394c0c0f7d879e3');
+    '7af76d2c0ee0712b73d1a002e25e130989c37a5956160305cae909c66f4f4e27');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {
@@ -405,6 +405,6 @@ test('Apex profiles render independent Range/travel, updated flight and whole-se
   }
   const storm=cards.find(c=>c.id==='stormblade');assert.equal(storm.additionalStats.range,'1200');assert.equal(storm.combatStats.attackDistance,2500);
   const r1=cards.find(c=>c.id==='r-1');assert.match(r1.trait,/seriyasının bütün güllələri/);assert.doesNotMatch(r1.trait,/50%|İnsan/);
-  const rotter=cards.find(c=>c.id==='rotlings').forms[0];assert.match(rotter.trait,/Rotlings/);assert.doesNotMatch(rotter.trait,/Zomboids/);
+  const rotter=cards.find(c=>c.id==='rotlings').forms[0];assert.match(rotter.trait,/5 saniyə/);assert.match(rotter.trait,/25%/);assert.equal(rotter.stats.number,'3');assert.doesNotMatch(rotter.trait,/Zomboids|45 saniyə/);
   assert.equal(cards.find(c=>c.id==='neon-droid').combatStats.movementType,'flying');
 });

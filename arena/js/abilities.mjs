@@ -108,12 +108,20 @@ export const ABILITIES = {
       if(ctx.useAbility)ctx.useAbility(u,cast);else cast();
     }
   }},
-  rotlings:{unitDeath(ctx,u,dead){if(dead.side!==u.side&&!dead.isBuilding)growDamage(u,1);}},
-  'rotlings/mini-rotters':{tick(ctx,u){
-    if(ctx.time-u.born+1e-7<45)return;
-    const def=ctx.cards.get('rotlings'),hp=u.hp/healthCap(ctx,u),shield=u.shield;
-    ctx._setUnitForm(u,def,{});u.hp=u.maxHp*hp;u.shield=Math.min(u.maxShield,shield);ctx.fx('capture',u.x,u.y,{side:u.side});
-  }},
+  rotlings:{
+    spawnForms:[0],spawnFormCounts:{0:1},conditionalStats:['damage'],
+    tick(ctx,u){u.memory.rotlingSouls=(u.memory.rotlingSouls||[]).filter(until=>until>ctx.time+1e-7);u.stats.damage=u.def.stats.damage+u.memory.rotlingSouls.length;},
+    unitDeath(ctx,u,dead){
+      if(dead.side===u.side||dead.isBuilding)return;
+      (u.memory.rotlingSouls||=[]).push(ctx.time+20);ABILITIES.rotlings.tick(ctx,u);
+    },
+  },
+  'rotlings/mini-rotters':{
+    death(ctx,u){
+      const mist=u.def.raw.mechanicStats?.deathMist;if(!mist)return;
+      ctx.state.fields.push({id:`mist-${++ctx.serial}`,kind:'blinding-mist',x:u.x,y:u.y,side:u.side,source:u,shape:{shape:'rect',width:mist.size,height:mist.size},born:ctx.time,until:ctx.time+mist.duration,magnitude:mist.blind/100});
+    },
+  },
   sushu:{
     noBasicAttack:true,
     spawn(ctx,u){ctx.status(u,'invisible',Infinity,0,u);},

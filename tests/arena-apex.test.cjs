@@ -33,11 +33,11 @@ test('Laura pulses after 12.5 seconds, granting three 25-percent bonuses for 30 
 test('Mixela permanently gains current and maximum Health from allied and enemy deaths within Range',async()=>{
  const{e,spawn,dummy,kill}=await fixture(),u=spawn('mixela'),ally=dummy(0,{x:15.7,y:14},{health:100}),enemy=dummy(1,{x:16,y:14},{health:200}),far=dummy(1,{x:20,y:14},{health:1000});u.hp=100;kill(ally);close(u.maxHp,220);close(u.hp,160);kill(enemy);close(u.maxHp,340);close(u.hp,280);kill(far);close(u.maxHp,340);close(u.stats.health,340);close(u.def.stats.health,160);close(u.memory.mixelaGrowth,180);e._drainDeaths();close(u.maxHp,340);
 });
-test('Rotlings gain damage from any enemy card death and never create Mini Rotters on death',async()=>{
- const{e,spawn,dummy,kill}=await fixture(),u=spawn('rotlings'),ally=dummy(0),enemy=dummy();kill(ally);close(u.stats.damage,14);kill(enemy);close(u.stats.damage,15);kill(u);assert.equal(e.units.filter(t=>t.alive&&t.def.id==='rotlings/mini-rotters').length,0);
+test('Rotlings gain timed damage from enemy deaths and do not create additional Mini Rotters on death',async()=>{
+ const{e,spawn,dummy,kill}=await fixture(),u=spawn('rotlings'),ally=dummy(0),enemy=dummy();const minis=e.units.filter(t=>t.alive&&t.def.id==='rotlings/mini-rotters').length;kill(ally);close(u.stats.damage,14);kill(enemy);close(u.stats.damage,15);kill(u);assert.equal(e.units.filter(t=>t.alive&&t.def.id==='rotlings/mini-rotters').length,minis);
 });
-test('one Mini Rotter matures after 45 seconds into one Rotlings, preserving current health fraction and identity',async()=>{
- const{e,spawn}=await fixture(),u=spawn('rotlings/mini-rotters'),id=u.id;u.hp=u.maxHp*.5;e.step(44.99);assert.equal(u.def.id,'rotlings/mini-rotters');e.step(.01);assert.equal(u.def.id,'rotlings');assert.equal(u.id,id);close(u.hp,70);assert.equal(e.units.filter(t=>t.alive&&t.def.id==='rotlings').length,1);
+test('Mini Rotters retain their own form after forty-five seconds and do not mature into adults',async()=>{
+ const{e,spawn}=await fixture(),u=spawn('rotlings/mini-rotters'),id=u.id;u.hp=u.maxHp*.5;e.step(46);assert.equal(u.def.id,'rotlings/mini-rotters');assert.equal(u.id,id);close(u.hp,20);assert.equal(e.units.filter(t=>t.alive&&t.def.id==='rotlings').length,0);
 });
 
 test('Sushu enters a touched enemy, hides its body and vision, and deals sixteen damage each second',async()=>{
@@ -144,4 +144,32 @@ test('Thief can adopt each available native passive without crashing its next co
 
 test('a hidden Sushu does not count toward allied auras or receive Butterfly permanent health growth',async()=>{
  const{e,spawn,dummy,kill}=await fixture(),u=spawn('reacher'),sushu=spawn('sushu',0,{x:15.5,y:14}),host=dummy(1,{x:16,y:14});e.parasitize(sushu,host);e._hook('tick',u,0);close(u.memory.nearbyFriends,0);const hp=sushu.maxHp,butterfly=spawn('sylviana/butterflies',0,{x:15.6,y:14});kill(butterfly);close(sushu.maxHp,hp);
+});
+
+test('paid Rotlings deployment creates exactly three adults and three minis for nine Mana on both sides',async()=>{
+ for(const side of[0,1]){
+  const{e,map}=await fixture(),team=e.teams[side],point={x:side?36:7,y:14};team.hand[0]='rotlings';team.mana=12;const result=e.deploy(side,0,point);assert.equal(result.ok,true,result.error);assert.equal(result.units.length,6);assert.equal(result.units.filter(u=>u.def.id==='rotlings').length,3);assert.equal(result.units.filter(u=>u.def.id==='rotlings/mini-rotters').length,3);close(team.mana,3);close(team.spentMana,9);assert.equal(new Set(result.units.map(u=>u.groupId)).size,1);
+  for(const u of result.units){assert.equal(u.side,side);assert.equal(u.lane,1);assert.ok(map.isDeployable(u,side));assert.ok(map.distance(u,e.castles[side])<=7.5+1e-7);}
+ }
+});
+test('Rotlings formation reserves room for all six bodies and failed placement spends no Mana',async()=>{
+ const{e}=await fixture(),point={x:7,y:14};e.teams[0].hand[0]='rotlings';const blockers=[];
+ // Block the candidate region without modifying the placement implementation.
+ for(let x=4;x<=10;x+=.3)for(let y=11;y<=17;y+=.3)blockers.push({id:'occupied',alive:true,x,y,radius:.3,def:{combat:{movementType:'ground'}}});
+ e.state.units.push(...blockers);const before=[...e.teams[0].hand];const result=e.deploy(0,0,point);assert.equal(result.ok,false);close(e.teams[0].mana,12);close(e.teams[0].spentMana,0);assert.deepEqual(e.teams[0].hand,before);
+});
+test('Rotlings bonuses stack separately for twenty seconds without renewing older stacks',async()=>{
+ const{e,spawn,dummy,kill}=await fixture(),u=spawn('rotlings');for(const t of e.units){t.stats.speed=0;t.cooldown=Infinity;}const enemy=()=>dummy(1,{x:25,y:14});kill(enemy());close(u.stats.damage,15);e.step(5);kill(enemy());close(u.stats.damage,16);e.step(14.99);close(u.stats.damage,16);e.step(.01);close(u.stats.damage,15);e.step(5);close(u.stats.damage,14);close(u.def.stats.damage,14);assert.deepEqual(u.memory.rotlingSouls,[]);
+});
+test('all living Rotlings receive an enemy death bonus while Silence suppresses its effect without renewing expiry',async()=>{
+ const{e,catalog,dummy,kill}=await fixture(),made=e.spawn(catalog.byId.get('rotlings'),0,{x:15,y:14},1);for(const u of made){u.stats.speed=0;u.cooldown=Infinity;}const adults=made.filter(u=>u.def.id==='rotlings');kill(dummy(1,{x:25,y:14}));for(const u of adults)close(u.stats.damage,15);const u=adults[0];e.status(u,'silence',10);e.step(1);close(u.stats.damage,14);e.cleanse(u);e.step(.1);close(u.stats.damage,15);e.step(18.9);for(const adult of adults)close(adult.stats.damage,14);
+});
+test('Mini Rotter death creates a two-tile mist that blinds enemies including late entrants, flying and hovering cards',async()=>{
+ const{e,spawn,dummy,kill,vision}=await fixture(),mini=spawn('rotlings/mini-rotters'),ground=dummy(1,{x:15.5,y:14},{range:4000}),late=dummy(1,{x:20,y:14},{range:4000}),air=dummy(1,{x:15,y:14.7}),hover=dummy(1,{x:15,y:13.3}),ally=dummy(0,{x:15.6,y:14});air.def.combat.movementType='flying';hover.def.combat.movementType='hovering';hover.def.combat.groundEffectImmune=true;kill(mini);const field=e.state.fields[0];assert.equal(field.kind,'blinding-mist');assert.deepEqual(field.shape,{shape:'rect',width:2,height:2});e.step(.1);for(const t of[ground,air,hover])assert.ok(t.statuses.some(s=>s.kind==='blind'),t.id);close(e._range(ground),3);close(vision.visibilitySources(e.state,1).find(s=>s.x===ground.x&&s.y===ground.y).radius,6);assert.equal(ally.statuses.some(s=>s.kind==='blind'),false);assert.equal(late.statuses.length,0);late.x=15.7;e.step(.1);close(e._range(late),3);assert.equal(field.until,5);
+});
+test('mist blindness ends on exit or cloud expiry without removing Blind from other sources',async()=>{
+ const{e,spawn,dummy,kill}=await fixture(),mini=spawn('rotlings/mini-rotters'),t=dummy(1,{x:15.5,y:14},{range:4000}),other=spawn('roguex',0,{x:10,y:14});kill(mini);e.step(.1);e.status(t,'blind',10,.5,other);close(e._range(t),2);t.x=20;e.step(.1);assert.equal(t.statuses.some(s=>s.mistFieldId),false);close(e._range(t),2);t.x=15.5;e.step(.1);assert.ok(t.statuses.some(s=>s.mistFieldId));e.step(4.7);assert.equal(e.state.fields.length,0);assert.equal(t.statuses.some(s=>s.mistFieldId),false);close(e._range(t),2);
+});
+test('mist respects Predominance, Cleanse, pause and overlapping clouds without multiplying Blind strength',async()=>{
+ const{e,spawn,dummy,kill}=await fixture(),a=spawn('rotlings/mini-rotters'),b=spawn('rotlings/mini-rotters',0,{x:15.1,y:14}),t=dummy(1,{x:15.5,y:14},{range:4000});e.status(t,'predominance',1);kill(a);kill(b);e.step(.5);close(e._range(t),4);e.step(.6);close(e._range(t),3);assert.equal(t.statuses.filter(s=>s.mistFieldId).length,2);e.cleanse(t);close(e._range(t),4);e.step(.1);close(e._range(t),3);e.setPaused(true);e.step(10);assert.equal(e.state.fields.length,2);close(e._range(t),3);e.setPaused(false);e.step(3.8);assert.equal(e.state.fields.length,0);close(e._range(t),4);
 });

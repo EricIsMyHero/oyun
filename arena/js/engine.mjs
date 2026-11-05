@@ -389,7 +389,8 @@ export class ArenaEngine {
   }
   _formation(def,side,point,lane){
     const ability=this.ability({def}),forms=(ability?.spawnForms||[]).map(i=>def.forms[i]).filter(Boolean);
-    const count=ability?.spawnSchedule?1:Math.max(1,Math.floor(num(def.stats.number,1)))*(1+forms.reduce((n,f)=>n+Math.max(1,Math.floor(num(f.stats.number,1))),0));
+    const companions=(ability?.spawnForms||[]).reduce((n,index)=>n+(def.forms[index]?Math.max(1,Math.floor(num(ability.spawnFormCounts?.[index],num(def.forms[index].stats.number,1)))):0),0);
+    const count=ability?.spawnSchedule?1:Math.max(1,Math.floor(num(def.stats.number,1)))*(1+companions);
     const radius=Math.max(...[def,...forms].map(f=>.18+.07*(bodyMass[f.combat?.weight]||1)));
     const positions=[];
     const candidates=[{...point}];
@@ -453,9 +454,10 @@ export class ArenaEngine {
   }
   _spawnCompanions(parent,positions){
     const made=[],{def,side,lane,groupId}=parent;let slot=0;
-    for(const index of this.ability(parent)?.spawnForms||[]){
+    const ability=this.ability(parent);
+    for(const index of ability?.spawnForms||[]){
       const form=def.forms[index];if(!form)continue;
-      for(let j=0;j<Math.max(1,Math.floor(num(form.stats.number,1)));j++){
+      for(let j=0;j<Math.max(1,Math.floor(num(ability.spawnFormCounts?.[index],num(form.stats.number,1))));j++){
         const placement=positions?.[slot++],back=parent.radius+.18+.07*(bodyMass[form.combat?.weight]||1)+.1;
         const point=placement||{x:clamp(parent.x+(side===0?-back:back),.5,MAP.width-.5),y:clamp(parent.y+(j%2?1:-1)*.35,.5,MAP.height-.5)};
         made.push(...this.spawn(form,side,point,lane,{count:1,groupId,positions:placement?[placement]:undefined}));
@@ -1240,8 +1242,19 @@ export class ArenaEngine {
   }
   _fields(){
     for(const field of this.state.fields){
-      if(field.until<=this.time+EPS)continue;
+      if(field.until<=this.time+EPS){
+        if(field.kind==='blinding-mist')for(const u of this.units)u.statuses=u.statuses.filter(s=>s.mistFieldId!==field.id);
+        continue;
+      }
       const targets=this.units.filter(u=>u.alive&&u.side!==field.side&&this._inside(u,field,field.shape));
+      if(field.kind==='blinding-mist'){
+        const affected=new Set(targets.filter(u=>!u.isBuilding&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.parasitizingId).map(u=>u.id));
+        for(const u of this.units){
+          if(affected.has(u.id))this.status(u,'blind',.12,field.magnitude,field.source,{scheduled:true,mistFieldId:field.id});
+          else u.statuses=u.statuses.filter(s=>s.mistFieldId!==field.id);
+        }
+        continue;
+      }
       if(field.kind==='poison-cloud'){
         for(const u of targets){
           if(field.poisoned[u.id]||u.isBuilding||u.healthless||u.def.combat.movementType!=='ground'||u.def.combat.groundEffectImmune)continue;

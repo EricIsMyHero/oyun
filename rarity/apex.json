@@ -829,7 +829,7 @@
       "mana": "9",
       "number": "3"
     },
-    "trait": "Hər ölən rəqib kart üçün +1 Hasar bonusu",
+    "trait": "Yerləşdirildikdə 3 Rotlings və 3 Mini Rotters birlikdə yaranar. Ölən hər rəqib kart üçün +1 Hasar bonusu qazanarlar. Hər bonus ayrıca 20 saniyə davam edər.",
     "additionalStats": {
       "range": "1000",
       "speed": "1000",
@@ -871,9 +871,9 @@
           "attackSpeed": "1.00",
           "delay": "-",
           "mana": "-",
-          "number": "2"
+          "number": "3"
         },
-        "trait": "45 saniyə sonra Rotlings formasına çevrilər. Rotlings öldükdə Mini Rotters yaranmaz.",
+        "trait": "3 Mini Rotters, 3 Rotlings ilə birlikdə yaranar. Öldükdə 2x2 karo sahədə 5 saniyə qalan sis yaradar. Sis içindəki rəqib kartların menzili və görüşü 25% azalar; sisdən çıxanda təsir bitər.",
         "additionalStats": {
           "range": "1000",
           "speed": "1000",
@@ -905,6 +905,13 @@
           "projectileEndEffect": null,
           "movementType": "ground",
           "groundEffectImmune": false
+        },
+        "mechanicStats": {
+          "deathMist": {
+            "size": 2,
+            "duration": 5,
+            "blind": 25
+          }
         }
       }
     ],

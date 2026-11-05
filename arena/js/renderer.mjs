@@ -1018,6 +1018,17 @@ export class ArenaRenderer {
       this.world(ctx,c=>{c.fillStyle='#89bf4c55';c.strokeStyle='#bbe47d99';c.lineWidth=.025;c.fillRect(field.x-.75,field.y-.75,1.5,1.5);c.strokeRect(field.x-.75,field.y-.75,1.5,1.5);});
       for(let i=0;i<7;i++){const p=this.screenAt(field.x+Math.sin(i*4.1+time)*.6,field.y+Math.cos(i*2.3+time*.7)*.6);ellipse(ctx,p.x,p.y-s*(.1+(time*.25+i*.12)% .6),s*.07,s*.07,'#c3e78088');}
     }
+    for(const field of state?.fields||[])if(field.kind==='blinding-mist'&&field.until>time){
+      const width=field.shape.width,height=field.shape.height,fade=clamp((field.until-time)/.5,0,1);
+      ctx.save();ctx.globalAlpha=fade;
+      this.world(ctx,c=>{c.fillStyle='#bec9df35';c.strokeStyle='#d1dcee77';c.lineWidth=.025;c.fillRect(field.x-width/2,field.y-height/2,width,height);c.strokeRect(field.x-width/2,field.y-height/2,width,height);});
+      for(let i=0;i<12;i++){
+        const p=this.screenAt(field.x+Math.sin(i*4.1+time*.4)*width*.33,field.y+Math.cos(i*2.3+time*.3)*height*.33);
+        const radius=s*(.22+(i%3)*.045),fog=ctx.createRadialGradient(p.x,p.y-s*.15,0,p.x,p.y-s*.15,radius);
+        fog.addColorStop(0,'#d9e1ed80');fog.addColorStop(1,'#aabbd500');ellipse(ctx,p.x,p.y-s*.15,radius,radius*.65,fog);
+      }
+      ctx.restore();
+    }
     this.placement(ctx,state,ui);
     const nodes=state?.nodes?.length?state.nodes:MAP.nodes.map(n=>({...n,owner:null,progress:0}));
     const sprites=[];

@@ -225,9 +225,11 @@ Venom Fangs target ground and air, and Neon Droid flies.
 Stormblade's 1200-point Range remains separate from its 2500-point attack travel
 limit. R-1's native Azerbaijani ability describes the bonus for every bullet of
 the next series. Author-confirmed aura sizes, durations, transformations, shield
-and Health gains are reflected in the native ability descriptions. No ability
-was translated into English. See [Arena rules](arena.md#apex-cards) for execution
-and interaction details.
+and Health gains are reflected in the native ability descriptions. Rotlings and
+Mini Rotters now deploy together as three of each. Adult death bonuses last 20
+seconds per stack; minis create a 2 × 2-tile, five-second mist with 25% Blind and
+no longer mature into adults. No ability was translated into English. See
+[Arena rules](arena.md#apex-cards) for execution and interaction details.
 
 ## Verification
 

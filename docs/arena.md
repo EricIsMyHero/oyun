@@ -210,9 +210,16 @@ in a 1.5 × 1.5 square. Neon Droid flies; Venom Fangs can target ground and air.
   victim loses its native passive permanently. The thief retains its body,
   source stats and weapon while adopting the native handler and its required
   forms. Existing projectiles keep their launch payloads.
-- **Rotlings / Mini Rotters:** each enemy card death increases Rotlings Damage
-  by one. Rotlings do not spawn Mini Rotters on death. Each Mini Rotter matures
-  into one adult after 45 seconds, keeping identity and current Health fraction.
+- **Rotlings / Mini Rotters:** one nine-Mana deployment creates three adults
+  and three minis together, with legal placement reserved for all six bodies.
+  Each enemy card death grants each living Rotlings +1 Damage for 20 seconds;
+  every stack expires independently. Adult deaths do not create extra minis.
+  Mini Rotters retain their own form and no longer mature into adults. On death,
+  each creates a 2 × 2-tile mist lasting five seconds. Enemies inside lose 25%
+  Range and Vision, including late entrants, flyers and hovering cards. The
+  Blind ends on exit or mist expiry; overlapping mists do not multiply strength.
+  Predominance prevents it, while Cleanse clears it until the next aura update
+  if the enemy remains inside. Pausing freezes mist and bonus timers.
 - **Stormblade:** a main hit can jump to three additional enemies within three
   tiles of the main target. Secondary hits deal 50% Damage. Four victims total;
   secondary hits cannot recursively bounce. Critical damage is applied once to
