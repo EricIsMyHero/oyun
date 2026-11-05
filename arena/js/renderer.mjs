@@ -892,7 +892,7 @@ export class ArenaRenderer {
     }
     if(e.amount&&Number.isFinite(e.amount)) {
       ctx.font=`700 ${clamp(s*.65,10,16)}px system-ui,sans-serif`;ctx.textAlign='center';ctx.fillStyle=color;ctx.strokeStyle='#193038';ctx.lineWidth=3;
-      const text=`${e.type==='heal'?'+':''}${Math.round(e.amount)}`;
+      const rounded=Math.round(e.amount),text=e.type==='heal'?`+${rounded||'<1'}`:String(rounded);
       ctx.strokeText(text,p.x,p.y-s*(1.15+progress*.7));ctx.fillText(text,p.x,p.y-s*(1.15+progress*.7));
     }
     ctx.restore();

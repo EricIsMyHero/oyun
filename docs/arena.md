@@ -242,6 +242,11 @@ native handlers, timing boundaries, statuses, death cleanup, geometry, source
 stat preservation, and multi-card interactions. Original ability prose stays
 Azerbaijani in both Codex and Arena; live inspection notes are English.
 
+Freak restores one Health in a single pulse each second. Its native regeneration
+respects healing bonuses, Burn, Bleeding, Silence and pause, and does not emit
+fractional healing effects every simulation frame. Small positive healing
+amounts display as `+<1` rather than `+0`.
+
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:

@@ -283,7 +283,7 @@ export const ABILITIES = {
     if(wounds[t.id]%4===0)ctx.status(t,'bleed',2,0,u,{amount:healthCap(ctx,t)*.01,interval:1});
   }},
   freak:{
-    tick(ctx,u,dt){ctx.heal(u,dt,u);},
+    tick(ctx,u,dt){periodic(u,'freakRegenClock',dt,1,()=>ctx.heal(u,1,u),ctx);},
     death(ctx,u){const mini=u.def.forms[0];if(mini)ctx.spawn(mini,u.side,u,u.lane,{count:2,groupId:u.groupId});},
   },
   'freak/mini-freaks':{attack(ctx,u,t,hit){hit.combat={attackShape:'single',multiTarget:false,maxTargets:1};},death(ctx,u){enemies(ctx,u).forEach(t=>ctx.damage(u,t,50,{kind:'ability',secondary:true}));ctx.fx('explosion',u.x,u.y,{radius:radius(u,ctx),side:u.side});}},

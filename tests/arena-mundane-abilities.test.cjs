@@ -221,3 +221,30 @@ test('an Angel arriving after a death in the same tick does not inherit a retroa
   e.status(first,'burn',.4,0,null,{amount:25,interval:.4});e.step(.4);
   assert.equal(first.alive,false);assert.equal(e.units.length,1);close(e.units[0].stats.damage,6);close(e.units[0].born,.4);
 });
+
+test('wounded Freak heals once per second instead of flooding every frame with fractional effects',async()=>{
+  const {e,spawn}=await fixture(),u=spawn('freak'),effects=[],fx=e.fx.bind(e);
+  e.fx=(type,x,y,options)=>{if(type==='heal')effects.push(options.amount);return fx(type,x,y,options);};
+  e.damage(null,u,10,{kind:'spell',bypassShield:true});const hp=u.hp;
+  e.step(.99);close(u.hp,hp);assert.deepEqual(effects,[]);
+  e.step(.01);close(u.hp,hp+1);assert.deepEqual(effects,[1]);
+  e.step(2);close(u.hp,hp+3);assert.deepEqual(effects,[1,1,1]);
+});
+
+test('Freak regeneration stays capped and respects healing modifiers, Bleeding, Silence and pause',async()=>{
+  const {e,spawn}=await fixture(),u=spawn('freak');e.step(2);close(u.hp,u.maxHp);assert.equal(e.state.effects.filter(f=>f.type==='heal').length,0);
+  u.hp-=10;u.stats.healBonus=50;e.step(1);close(u.hp,u.maxHp-8.5);
+  e.status(u,'burn',5,0,null,{amount:0});e.step(1);close(u.hp,u.maxHp-7.3);e.cleanse(u);
+  e.status(u,'bleed',1);e.step(.9);const blockedHp=u.hp;e._hook('tick',u,.1);close(u.hp,blockedHp);e.cleanse(u);
+  e.status(u,'silence',2);const hp=u.hp;e.step(1);close(u.hp,hp);e.cleanse(u);
+  e.setPaused(true);e.step(10);close(u.hp,hp);e.setPaused(false);
+  e.step(1);close(u.hp,hp+1.5);
+});
+
+test('fractional healing effects never render misleading plus-zero text',async()=>{
+  const {ArenaRenderer}=await import('../arena/js/renderer.mjs'),text=[];
+  const ctx={save(){},restore(){},fillRect(){},strokeText(){},fillText(value){text.push(value);}};
+  const renderer={view:{scale:20},screenAt:()=>({x:10,y:10})};
+  for(const amount of [.03,.25,.8,1])ArenaRenderer.prototype.effect.call(renderer,ctx,{type:'heal',x:1,y:1,born:0,until:1,amount},.1);
+  assert.deepEqual(text,['+<1','+<1','+1','+1']);assert.equal(text.includes('+0'),false);
+});
