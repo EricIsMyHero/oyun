@@ -168,10 +168,84 @@ terrain outside vision remain hidden there too. Moving the camera into fog
 does not reveal that area. Static terrain is cached separately from the camera
 so scrolling does not regenerate the illustrated forest.
 
+## Apex cards
+
+All 21 Apex roots and their reachable forms are battle-ready. Projectile width,
+attack travel distance and targeting Range remain independent, using 1000 points
+per tile. Stormblade has 1.2-tile Range and 2.5-tile attack distance. Blank uses a
+0.75-tile line; Willowshade and Collector use 125° and 75° cones. Heartix explodes
+in a 1.5 × 1.5 square. Neon Droid flies; Venom Fangs can target ground and air.
+
+- **R-1:** each completed three-bullet series rolls once at 3% to enhance the
+  next series. Every bullet of that series gains 10% Damage, triple width
+  (0.5 → 1.5 tiles), and double Range (2.3 → 4.6 tiles). Gold projectiles show
+  the larger size. Canceled bursts lose their active enhancement. Silence stops
+  enhancement. The old shield bypass and Human damage reduction are removed.
+- **Azrith / Bannerox:** centered 2 × 2-square auras grant allies 10% Damage
+  while Azrith has Shield, and 10% Attack Speed around his stationary banner.
+  Only the first shield break creates a banner, even if his Shield recovers.
+- **Untouch:** losing 20% maximum Health cumulatively triggers two seconds of
+  immunity. After expiry, the next successful strike deals 20% extra Damage.
+  Shield absorption alone does not count; lethal packets are not prevented.
+- **Heartix:** after 24 seconds, the next launch can convert its primary enemy
+  for eight seconds. Other splash victims take damage without conversion.
+  Conversion restores the previous team with current Health and resets routing.
+- **Blank:** personal enemy kills add one Damage, up to +5. **Magmara:** each
+  hit applies an independent three-tick Burn packet, 10 Damage per second.
+  **Collector:** personal kills restore two Mana, limited to 20, without Energy.
+- **Willowshade / Octarion:** Willowshade bypasses Shield and creates one
+  Octarion on death. Octarion leaves a 1.5 × 1.5 poison cloud for three seconds.
+  Each grounded enemy entering it receives one 3 × 5 Poison packet, ticking
+  every 0.75s; late entrants also receive the packet, which can finish after
+  the cloud expires. Hovering/flying cards are immune to the ground cloud.
+  Cleanse removes the packet; the same cloud does not reapply it to that card.
+- **Sushu:** enters a touched enemy and deals 16 Damage every second. Inside,
+  it has no targetable body, vision, collisions or objective presence. It follows
+  its host and vanishes when the host dies. Cleanse removes the parasite;
+  Predominance prevents entry. Whisper's separate priority possession is unchanged.
+- **Umbra:** once per deployment, hides for three seconds at 75% Health and
+  retreats 7.5 tiles along its own lane at 50%, stopping outside its castle.
+- **Thief:** uses melee nearby and a ranged weapon at distance. Once per
+  deployment it steals the first visible passive ahead within 15 tiles; the
+  victim loses its native passive permanently. The thief retains its body,
+  source stats and weapon while adopting the native handler and its required
+  forms. Existing projectiles keep their launch payloads.
+- **Rotlings / Mini Rotters:** each enemy card death increases Rotlings Damage
+  by one. Rotlings do not spawn Mini Rotters on death. Each Mini Rotter matures
+  into one adult after 45 seconds, keeping identity and current Health fraction.
+- **Stormblade:** a main hit can jump to three additional enemies within three
+  tiles of the main target. Secondary hits deal 50% Damage. Four victims total;
+  secondary hits cannot recursively bounce. Critical damage is applied once to
+  each victim, with that victim's normal defenses.
+- **Venom Fangs:** bypass Shield and transfer up to 0.5 Critical Chance points
+  from each victim, respecting available chance and the 100% ceiling.
+  **Skyhunter:** launch Damage increases 10% per tile of target distance.
+- **Rockback:** gains 50% movement speed while approaching its first target;
+  its first landed hit deals +150% Damage. For six seconds after a shield break,
+  successful hits restore 10 Shield, without exceeding current maximum Shield.
+- **Neon Droid:** successful hits grant independently expiring three-second
+  20% Attack Speed stacks, up to 60%.
+- **Void Wraith:** acquires enemy links within its 1.8-tile Range, reducing each
+  victim's Damage by 20% and gaining that amount, capped at +16 Damage. Each
+  link ends at six tiles; Silence/death lets its debuff expire within 0.2s.
+- **Bio Mech:** each damage event shields nearby allies for 3% of each
+  recipient's maximum Shield. Intrinsically shieldless allies gain five instead.
+- **Mixela:** nearby allied or enemy deaths permanently increase maximum and
+  current Health by 60% of the dead card's maximum Health. Buildings and
+  healthless forms do not count. Each death is processed once.
+- **Laura:** gains eight charge per second. At 100 charge, allies in Range gain
+  25% Damage, Attack Speed and Movement Speed for 30 seconds. Further pulses
+  refresh the same bonus rather than stacking it.
+
+Apex tests exercise the real engine in `tests/arena-apex.test.cjs`, including
+native handlers, timing boundaries, statuses, death cleanup, geometry, source
+stat preservation, and multi-card interactions. Original ability prose stays
+Azerbaijani in both Codex and Arena; live inspection notes are English.
+
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **100 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **121 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves

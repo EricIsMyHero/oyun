@@ -181,6 +181,8 @@ function openInspector(def,kind='card',unit=null) {
       if(variable&&key==='attackSpeed')effective=state.engine.attackInterval(unit);
       if(variable&&key==='delay')effective=state.engine.statValue({...unit,stats:{...unit.stats,delay:attack.delay}},key);
       if(variable&&key==='range')effective=state.engine._range(unit)*1000;
+      if(key==='range'&&unit.def.id==='r-1')effective=state.engine._range(unit)*1000;
+      if(key==='damage'&&unit.def.id==='r-1')effective*=state.engine._burstBoost(unit)?.damage||1;
       if(Math.abs(effective-base)>1e-7){
         const number=Number(effective.toFixed(3));
         const suffix=String(values[key]??'').match(/(%|x|\/s|s)$/)?.[0]||'';
@@ -207,6 +209,15 @@ function openInspector(def,kind='card',unit=null) {
   else if(raw.ascension?.partnerIds)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section" data-partner-ready><h3>Partner Bonus Available</h3><p>Add ${raw.ascension.partnerIds.map(id=>escapeHTML(state.catalog.byId.get(id)?.name||id)).join(' or ')} to the same deck.</p></section>`);
   if(unit){
     const notes=[];
+    if(unit.theftState?.used)notes.push(`<section class="live-status-section" data-thief-stolen><h3>${unit.def.rootId==='thief'?'Stolen Ability':'Theft Attempt Used'}</h3><p>${escapeHTML(unit.theftState.donorName)} · One attempt per deployment. The victim loses the stolen passive.</p></section>`);
+    if(unit.passiveDisabled)notes.push('<section class="live-status-section" data-passive-stolen><h3>Passive Stolen</h3><p>This card retains its combat stats and attacks, but its native passive is disabled.</p></section>');
+    if(unit.parasiteIds?.length)notes.push(`<section class="live-status-section" data-parasite-host><h3>Sushu Inside · ${unit.parasiteIds.length}</h3><p>Each Sushu deals its Damage every second and cannot be targeted inside this host. It vanishes when this host dies.</p></section>`);
+    if(unit.def.id==='r-1'){const boost=unit.memory.burstBoost;notes.push(`<section class="live-status-section" data-r1-boost="${boost?.active?'active':boost?.queued?'queued':'none'}"><h3>${boost?.active?'Enhanced Series Active':boost?.queued?'Enhanced Series Ready':'Burst Weapon'}</h3><p>3% chance after a complete series to enhance all three bullets of the next series.<br>+10% Damage · 3× projectile width · 2× Range<br>Progress: ${unit.burstIndex} / 3 · ${boost?.active||boost?.queued?'1.5':'0.5'}-tile projectile width</p></section>`);}
+    if(unit.def.id==='laura')notes.push(`<section class="live-status-section" data-laura-charge><h3>Charge · ${Math.floor(unit.memory.charge||0)} / 100</h3><p>8 charge each second. Nearby allies gain +25% Damage, Attack Speed and Movement Speed for 30s. Reapplication refreshes the duration.</p></section>`);
+    if(unit.def.id==='void-wraith')notes.push(`<section class="live-status-section" data-void-links><h3>Damage Drain · +${(unit.memory.voidBonus||0).toFixed(1)} / 16</h3><p>${Object.keys(unit.memory.voidLinks||{}).length} linked enemies · Each loses 20% Damage.<br>Links break at a distance of 6 tiles.</p></section>`);
+    if(unit.def.id==='mixela')notes.push(`<section class="live-status-section" data-mixela-growth><h3>Permanent Health Growth · +${Math.round(unit.memory.mixelaGrowth||0)}</h3><p>Nearby allied and enemy deaths grant 60% of their maximum Health to both current and maximum Health.</p></section>`);
+    if(unit.def.id==='rotlings/mini-rotters')notes.push(`<section class="live-status-section" data-rotter-growth><h3>Rotlings in ${Math.max(0,45-(state.engine.time-unit.born)).toFixed(1)}s</h3><p>This Mini Rotter matures into one Rotlings. Rotlings do not create Mini Rotters on death.</p></section>`);
+    if(unit.def.id==='stormblade')notes.push('<section class="live-status-section" data-stormblade-chain><h3>Chain Strike</h3><p>One primary target and up to three additional enemies. Bounces deal 50% Damage within 3 tiles of the primary target.</p></section>');
     if(unit.def.id.split('/')[0]==='reacher')notes.push(`<section class="live-status-section" data-reacher-mode="${unit.memory.combatMode===0?'melee':'ranged'}"><h3>${unit.memory.combatMode===0?'Melee':'Ranged'} Mode</h3><p>Nearby allies: ${unit.memory.nearbyFriends||0} · 3 × 3 tiles<br>Conditional damage reduction: ${Math.max(0,unit.stats.damageminimiser-unit.def.stats.damageminimiser)}%</p></section>`);
     if(unit.def.id.split('/')[0]==='bastra')notes.push(`<section class="live-status-section" data-bastra-allies="${unit.memory.nearbyFriends||0}"><h3>Nearby Allies · ${unit.memory.nearbyFriends||0}</h3><p>3 × 3 tiles · Shield-piercing shots<br>Attack interval: ${state.engine.attackInterval(unit).toFixed(3)}s</p></section>`);
     if(unit.def.id.split('/')[0]==='maapp')notes.push('<section class="live-status-section" data-maapp-pulse><h3>Radial Pulse</h3><p>360° · 5-tile radius · Light weight</p></section>');
@@ -397,7 +408,7 @@ function commitPlacement(point) {
 function inspectAt(point) {
   const battle=state.engine.state;
   if(battle.phase!=='ended'&&!isPointVisible(battle,0,point))return;
-  const candidates=[...battle.units,...battle.castles].filter(u=>u.alive!==false&&!u.possessingId&&u.hp>0&&(battle.phase==='ended'||isEntityVisible(battle,0,u)));
+  const candidates=[...battle.units,...battle.castles].filter(u=>u.alive!==false&&!u.possessingId&&!u.parasitizingId&&u.hp>0&&(battle.phase==='ended'||isEntityVisible(battle,0,u)));
   const unit=candidates.map(u=>({u,d:distance(u,point)})).filter(x=>x.d<Math.max(.65,(x.u.radius||0)+.25)).sort((a,b)=>a.d-b.d)[0]?.u;
   if(!unit)return;
   if(unit.def){openInspector(unit.def,unit.isBuilding?'spell':'card',unit);return;}

@@ -200,7 +200,7 @@ are preserved. Both the Codex modal and Arena inspector read the source data.
 **Hovering** cards move on the **ground** layer while ignoring ground-only spells
 and effects: Cryon, Tornado, Astranova, Whisper, Fallen Angel and Void Wraith.
 **Flying** cards use the **air** layer: Bees, Angels, Hornets, Venom Fangs, Bats,
-Butterflies and the Phoenix form. Every other base form is Ground. Temporary
+Butterflies, Neon Droid, the Phoenix form and Artist’s raven form. Every other base form is Ground. Temporary
 flight remains in its original ability description and does not introduce a
 fourth movement type.
 
@@ -213,6 +213,21 @@ These fields describe the Codex card. They do not alter Battle or Survival's
 existing combat simulation; Survival continues to use its own weapon geometry,
 loadout and upgrade rules. Only explicitly requested numeric balance changes are
 applied; unmentioned stats, lore, abilities and level bonuses are preserved.
+
+## Apex profiles
+
+All 21 Apex roots now have authored projectile widths and attack travel distances.
+Octarion and Mini Rotters use 500-point widths and distances. Blank uses a
+750-point line reaching 3800 points; Willowshade and Collector use 125° and 75°
+cones. Heartix has a 1.5 × 1.5-tile endpoint explosion. Thief has a mixed weapon,
+Venom Fangs target ground and air, and Neon Droid flies.
+
+Stormblade's 1200-point Range remains separate from its 2500-point attack travel
+limit. R-1's native Azerbaijani ability describes the bonus for every bullet of
+the next series. Author-confirmed aura sizes, durations, transformations, shield
+and Health gains are reflected in the native ability descriptions. No ability
+was translated into English. See [Arena rules](arena.md#apex-cards) for execution
+and interaction details.
 
 ## Verification
 

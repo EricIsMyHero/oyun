@@ -776,13 +776,14 @@ export class ArenaRenderer {
     if(!Number.isFinite(b.x)||!Number.isFinite(b.y))return;
     const p=this.screenAt(b),s=this.view.scale;
     const previous=this.screenAt(Number.isFinite(b.prevX)?b.prevX:b.x-(b.dx||0)*.04,Number.isFinite(b.prevY)?b.prevY:b.y-(b.dy||0)*.04);
-    const color=b.source?.def?.id==='fire-archer'?'#ffba72':b.source?.def?.class==='Mage'?'#b9b4ff':b.color||TEAM[b.side]||'#f6dab0';
+    const boost=b.hit?.burstBoosted?3:1,baseWidth=(b.width||.2)/boost;
+    const color=b.hit?.burstBoosted?'#ffe5a2':b.source?.def?.id==='fire-archer'?'#ffba72':b.source?.def?.class==='Mage'?'#b9b4ff':b.color||TEAM[b.side]||'#f6dab0';
     const dx=p.x-previous.x,dy=p.y-previous.y,len=Math.hypot(dx,dy)||1,tail={x:previous.x-dx/len*s*.2,y:previous.y-dy/len*s*.2};
     ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
     const trail=ctx.createLinearGradient(tail.x,tail.y,p.x,p.y);trail.addColorStop(0,color+'00');trail.addColorStop(1,color);
-    ctx.strokeStyle=trail;ctx.lineWidth=clamp((b.width||.2)*s*.6,3,8);ctx.globalAlpha=.35;
+    ctx.strokeStyle=trail;ctx.lineWidth=clamp(baseWidth*s*.6,3,8)*boost;ctx.globalAlpha=.35;
     ctx.beginPath();ctx.moveTo(tail.x,tail.y-s*.6);ctx.lineTo(p.x,p.y-s*.6);ctx.stroke();
-    ctx.globalAlpha=1;ctx.shadowColor=color;ctx.shadowBlur=9;ctx.strokeStyle=color;ctx.lineWidth=clamp((b.width||.2)*s*.23,1,3);ctx.stroke();
+    ctx.globalAlpha=1;ctx.shadowColor=color;ctx.shadowBlur=9*boost;ctx.strokeStyle=color;ctx.lineWidth=clamp(baseWidth*s*.23,1,3)*boost;ctx.stroke();
     if(b.kind==='grenade'){
       const radius=clamp(s*.13,3,6);ellipse(ctx,p.x,p.y-s*.6,radius,radius*.92,'#ffbb77','#ffedd0',1);
       ctx.strokeStyle='#d9e9b0';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(p.x-radius*.5,p.y-s*.6-radius);ctx.lineTo(p.x,p.y-s*.6-radius*1.4);ctx.lineTo(p.x+radius*.5,p.y-s*.6-radius);ctx.stroke();
@@ -797,7 +798,7 @@ export class ArenaRenderer {
       ctx.translate(p.x,p.y-s*.6);ctx.rotate((state?.time||0)*15);
       const radius=clamp(s*.2,4,10);ctx.lineWidth=2;ctx.strokeStyle='#fff5d6';
       ctx.beginPath();ctx.moveTo(-radius,radius*.45);ctx.quadraticCurveTo(-radius*.25,-radius*.9,radius,0);ctx.quadraticCurveTo(0,-radius*.1,-radius,radius*.45);ctx.stroke();
-    }else ellipse(ctx,p.x,p.y-s*.6,clamp(s*.09,1.5,3.5),clamp(s*.065,1,2.5),'#f4fff2');
+    }else ellipse(ctx,p.x,p.y-s*.6,clamp(s*.09,1.5,3.5)*boost,clamp(s*.065,1,2.5)*boost,'#f4fff2');
     ctx.restore();
   }
 
@@ -841,7 +842,10 @@ export class ArenaRenderer {
       light.addColorStop(0,color+'80');light.addColorStop(.25,color+'35');light.addColorStop(1,color+'00');
       ctx.save();ctx.globalCompositeOperation='lighter';ellipse(ctx,p.x,p.y-s*.2,radius,radius*.65,light);ctx.restore();
     }
-    if(e.type==='engulf'){
+    if(e.type==='chain'){
+      const from=this.screenAt(e.fromX,e.fromY);ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.lineWidth=Math.max(1,s*.055);ctx.shadowBlur=8;ctx.shadowColor=color;
+      ctx.beginPath();ctx.moveTo(from.x,from.y-s*.45);ctx.lineTo((from.x+p.x)/2+s*.1,(from.y+p.y)/2-s*.7);ctx.lineTo(p.x,p.y-s*.45);ctx.stroke();ctx.restore();
+    }else if(e.type==='engulf'){
       const radius=(e.radius||.6)*s*(1-progress*.85);
       ellipse(ctx,p.x,p.y-s*.2,radius,radius*.5,'#75b75b44',color,Math.max(1,s*.06));
       for(let i=0;i<6;i++){
@@ -1010,6 +1014,10 @@ export class ArenaRenderer {
       ellipse(ctx,q.x,q.y,s*.045,s*.025,'#c3fff6a0');
     }
     for(const trail of state?.trails||[])this.fireTrail(ctx,trail,time);
+    for(const field of state?.fields||[])if(field.kind==='poison-cloud'&&field.until>time){
+      this.world(ctx,c=>{c.fillStyle='#89bf4c55';c.strokeStyle='#bbe47d99';c.lineWidth=.025;c.fillRect(field.x-.75,field.y-.75,1.5,1.5);c.strokeRect(field.x-.75,field.y-.75,1.5,1.5);});
+      for(let i=0;i<7;i++){const p=this.screenAt(field.x+Math.sin(i*4.1+time)*.6,field.y+Math.cos(i*2.3+time*.7)*.6);ellipse(ctx,p.x,p.y-s*(.1+(time*.25+i*.12)% .6),s*.07,s*.07,'#c3e78088');}
+    }
     this.placement(ctx,state,ui);
     const nodes=state?.nodes?.length?state.nodes:MAP.nodes.map(n=>({...n,owner:null,progress:0}));
     const sprites=[];

@@ -47,6 +47,8 @@ function normalizeCard(raw,parent=null,id=raw.id||slugify(raw.name)) {
   }else if(rootId==='avara'){
     const damage=String(raw.stats.damage).split('/').map(burst),intervals=String(raw.stats.attackSpeed).split('/').map(v=>num(v)),ranges=String(raw.additionalStats.range).split('/').map(v=>num(v));
     parsed=damage[0];sequence=damage.map((hit,i)=>({...hit,interval:intervals[i],delay:num(raw.stats.delay),range:ranges[i]}));
+  }else if(rootId==='thief'){
+    modes=String(raw.additionalStats.range).split('/').map((value,i)=>({...parsed,interval:num(raw.stats.attackSpeed),delay:num(raw.stats.delay),range:num(value),combat:{attackType:i?'ranged':'melee'}}));
   }else if(!parsed)modeReasons.push('The slash-separated attack modes are not fully defined for this combat profile.');
   stats.damage=parsed?.damage||0;
   const attack={...(parsed||{count:1,damage:0}),interval:num(raw.stats?.attackSpeed),delay:num(raw.stats?.delay)};

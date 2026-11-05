@@ -124,7 +124,7 @@ test('ability texts, names, turn abilities and star upgrades are preserved verba
   // Change this baseline only when an ability edit is explicitly requested.
   const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
-    '32f2a3f945c5306fc5b4f28ea26957b8b24a4b01b2f8e90ed533668873275706');
+    '2d4e99e3b7e1db110dff1d5204acd7a6d1e0d7f326054a2a9394c0c0f7d879e3');
 });
 
 test('Henry projectile width and attack travel distance are independent of Range', () => {
@@ -166,7 +166,7 @@ test('movement classifications match the provided hovering and flying rosters', 
   assert.deepEqual(forms.filter(c=>c.combatStats.movementType==='hovering').map(key).sort(),
     ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith'].sort());
   assert.deepEqual(forms.filter(c=>c.combatStats.movementType==='flying').map(key).sort(),
-    ['bees','angels','hornets','venom-fangs','bats','butterflies','phoenix','flock-of-ravens'].sort());
+    ['bees','angels','hornets','venom-fangs','bats','butterflies','phoenix','neon-droid','flock-of-ravens'].sort());
   assert.equal(run('MODAL_MOVEMENT.hovering.layer'),'ground');
   assert.equal(run('MODAL_MOVEMENT.hovering.groundEffectImmune'),true);
   assert.equal(run('MODAL_MOVEMENT.ground.groundEffectImmune'),false);
@@ -396,4 +396,15 @@ test('Ascendant geometry is authored in both partner forms and Avara exposes all
 
 test('John Reynolds has the requested sweep geometry in both forms',()=>{
  const c=cards.find(c=>c.id==='john-reynolds');for(const form of[c,c.upgradedsecondForm]){assert.equal(form.combatStats.attackWidth,1000);assert.equal(form.combatStats.attackDistance,1250);assert.equal(form.combatStats.attackAngle,180);assert.equal(form.combatStats.attackShape,'cone');assert.equal(form.combatStats.multiTarget,true);}
+});
+
+test('Apex profiles render independent Range/travel, updated flight and whole-series R-1 ability in Codex',()=>{
+  for(const id of ['r-1','stormblade','heartix','neon-droid','thief']){
+    context.card=cards.find(c=>c.id===id);
+    const html=run('buildCombatProfile(card)');assert.doesNotMatch(html,/undefined|NaN/);
+  }
+  const storm=cards.find(c=>c.id==='stormblade');assert.equal(storm.additionalStats.range,'1200');assert.equal(storm.combatStats.attackDistance,2500);
+  const r1=cards.find(c=>c.id==='r-1');assert.match(r1.trait,/seriyasının bütün güllələri/);assert.doesNotMatch(r1.trait,/50%|İnsan/);
+  const rotter=cards.find(c=>c.id==='rotlings').forms[0];assert.match(rotter.trait,/Rotlings/);assert.doesNotMatch(rotter.trait,/Zomboids/);
+  assert.equal(cards.find(c=>c.id==='neon-droid').combatStats.movementType,'flying');
 });

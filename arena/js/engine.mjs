@@ -2,7 +2,7 @@ import { RULES, clamp, num, burst, energyForMana } from './rules.mjs';
 import { MAP, routeFor, routeLength, pointOnRoute, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
-import { NEGATIVE_STATUSES as NEGATIVE, statusKind, statusParameters, statValue, statModifiers } from './statuses.mjs';
+import { NEGATIVE_STATUSES as NEGATIVE, STATUS_INTERVALS, statusKind, statusParameters, statValue, statModifiers } from './statuses.mjs';
 import { buildBotLoadout, createBotState, tickBot } from './bot.mjs';
 import { resolveDeckCard } from './ascension.mjs';
 
@@ -60,8 +60,31 @@ export class ArenaEngine {
     this.state.effects.push({id:`fx-${++this.serial}`,type,x,y,born:this.time,until:this.time+(options.duration??.65),...options});
     if(this.state.effects.length>300)this.state.effects.splice(0,this.state.effects.length-300);
   }
-  near(point,radius,filter=null){return this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.possessingId&&distance(u,point)<=radius+(u.radius||0)&&(!filter||filter(u)));}
-  ability(u){return ABILITIES[u.def?.id] || ABILITIES[u.def?.rootId] || null;}
+  near(point,radius,filter=null){return this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.parasitizingId&&distance(u,point)<=radius+(u.radius||0)&&(!filter||filter(u)));}
+  ability(u){return u.passiveDisabled?null:ABILITIES[u.def?.id] || ABILITIES[u.def?.rootId] || null;}
+  prepareWeapon(u,target=null){
+    const custom=this.ability(u)?.prepareAttack;if(custom){custom(this,u,target);return;}
+    const modes=u.def.attack?.modes;if(!modes)return;
+    const index=target&&target.def?.combat?.movementType!=='flying'&&distance(u,target)<=modes[0].range/1000+(target.radius||0)+EPS?0:1,mode=modes[index];
+    if(u.memory.combatMode!==index){u.burstIndex=0;u.burstTargetId=null;this._cancelBurstBoost(u);u.memory.combatMode=index;}
+    Object.assign(u.stats,{damage:mode.damage,attackSpeed:mode.interval,delay:mode.delay,range:mode.range});
+  }
+  stealAbility(u){
+    if(u.theftState?.used)return false;
+    const donor=this.units.filter(t=>!t.isBuilding&&!t.healthless&&this._legalTarget(u,t,null,'both')&&distance(u,t)<=15+EPS&&(t.x-u.x)*(u.side?-1:1)>=0&&this.ability(t)&&Object.keys(this.ability(t)).length)
+      .sort((a,b)=>distance(u,a)-distance(u,b)||a.id.localeCompare(b.id))[0];
+    if(!donor)return false;
+    u.theftState={used:true,donorId:donor.id,donorName:donor.def.name};
+    if(has(donor,'predominance',this.time)||this._abilityMiss(u,donor))return false;
+    const behavior=this.ability(donor),original=u.def;
+    donor.passiveDisabled=true;donor.abilityStolenBy=u.id;
+    for(const key of behavior.conditionalStats||[])donor.stats[key]=donor.def.stats[key];
+    if(behavior.lifeDecay)delete donor.lifeDecay;
+    u.def={...original,id:donor.def.id,rootId:original.rootId||original.id,forms:donor.def.forms,ascension:donor.def.ascension,
+      raw:{...original.raw,trait:donor.def.raw.trait,abilityName:donor.def.raw.abilityName,mechanicStats:donor.def.raw.mechanicStats}};
+    if(behavior.lifeDecay)u.lifeDecay={...behavior.lifeDecay,next:this.time+behavior.lifeDecay.interval};
+    this._hook('spawn',u);this._spawnCompanions(u);this.fx('capture',donor.x,donor.y,{side:u.side,color:'#d0b3ee'});return true;
+  }
   _hook(name,u,...args){
     // Target changes clear passive state even while abilities are silenced.
     if(!['spawn','targetChanged'].includes(name)&&(has(u,'silence',this.time)||has(u,'imprisonment',this.time)))return;
@@ -85,13 +108,13 @@ export class ArenaEngine {
   killUnit(u,killer=null,extra={}){
     const pool=this._pool(u),members=pool?this.units.filter(t=>pool.members.includes(t.id)):[u];
     for(const member of members)if(member.alive){member.hp=0;member.alive=false;this.deaths.push({u:member,killer,...extra});}
-    for(const member of members)this._possessionGone(member);
+    for(const member of members){this._possessionGone(member);this._parasitesGone(member);}
     for(const member of members)this._promoteFormat(killer,member);
   }
   vanishUnit(u){
     if(!u?.alive)return;
     this._detachSharedVitals(u);
-    u.hp=0;u.alive=false;this.deaths.push({u,killer:null});this._possessionGone(u);
+    u.hp=0;u.alive=false;this.deaths.push({u,killer:null});this._possessionGone(u);this._parasitesGone(u);
   }
   _detachSharedVitals(u){
     const pool=this._pool(u);
@@ -188,6 +211,37 @@ export class ArenaEngine {
     pool.members.push(u.id);u.sharedVitalsId=pool.id;
     for(const key of Object.keys(saved))Object.defineProperty(u,key,{enumerable:true,configurable:true,get:()=>pool[key],set:value=>{pool[key]=Math.max(0,Number.isFinite(value)?value:0);}});
     this._capVitals(u);
+  }
+  parasitize(source,host){
+    if(['silence','stun','frozen','imprisonment','airborne'].some(kind=>has(source,kind,this.time)))return false;
+    if(!source?.alive||source.parasitizingId||source.possessingId||source.engulfedBy||source.banished||!host?.alive||host.isCastle||host.isBuilding||host.healthless||!this._legalTarget(source,host)||distance(source,host)>this._reach(source)+host.radius+EPS||this.time<(source.memory.parasiteRetry||0))return false;
+    source.memory.parasiteRetry=this.time+this.attackInterval(source);
+    const marker=this.status(host,'parasite',Infinity,0,source);if(!marker)return false;
+    this._detachSharedVitals(source);source.parasitizingId=host.id;(host.parasiteIds||=[]).push(source.id);
+    source.memory.parasiteTick=this.time+this.attackInterval(source);source.targetId=null;source.moving=false;
+    source.x=host.x;source.y=host.y;this.fx('portal',host.x,host.y,{side:source.side,color:'#b8d4ff'});return true;
+  }
+  endParasite(source){
+    if(!source?.parasitizingId)return;
+    const host=this.units.find(u=>u.id===source.parasitizingId);delete source.parasitizingId;
+    if(host){host.parasiteIds=(host.parasiteIds||[]).filter(id=>id!==source.id);host.statuses=host.statuses.filter(s=>s.kind!=='parasite'||s.sourceId!==source.id);}
+    this.vanishUnit(source);
+  }
+  _parasitesGone(u){
+    if(u.parasitizingId)this.endParasite(u);
+    for(const id of [...(u.parasiteIds||[])]){const source=this.units.find(t=>t.id===id);if(source)this.endParasite(source);}
+  }
+  _syncParasites(){
+    for(const source of [...this.units]){
+      if(!source.parasitizingId)continue;
+      const host=this.units.find(t=>t.id===source.parasitizingId);
+      if(!source.alive||!host?.alive||!host.statuses.some(s=>s.kind==='parasite'&&s.sourceId===source.id)){this.endParasite(source);continue;}
+      source.x=host.x;source.y=host.y;source.moving=false;
+      while(source.alive&&source.parasitizingId&&host.alive&&source.memory.parasiteTick<=this.time+EPS){
+        source.memory.parasiteTick+=this.attackInterval(source);
+        this.damage(source,host,this.statValue(source,'damage'),{kind:'parasite',secondary:true,accuracyChecked:true,parasiteDamage:true,friendlyFire:true});
+      }
+    }
   }
   linkEtheris(u){
     const pair=this.units.filter(t=>t.alive&&!t.banished&&t.side===u.side&&t.groupId===u.groupId&&t.def.id==='etheris');
@@ -349,7 +403,7 @@ export class ArenaEngine {
       if(!isDeployable(candidate,side,this.units.filter(u=>u.alive&&u.isBuilding)))continue;
       if(closestRoute(candidate).lane!==lane&&distance(point,candidate)>1)continue;
       if(positions.some(p=>distance(p,candidate)<radius*2+.02))continue;
-      if(this.units.some(u=>u.alive&&!u.engulfedBy&&!u.possessingId&&u.def.combat?.movementType===def.combat?.movementType&&distance(candidate,u)<radius+u.radius+.02))continue;
+      if(this.units.some(u=>u.alive&&!u.engulfedBy&&!u.possessingId&&!u.parasitizingId&&u.def.combat?.movementType===def.combat?.movementType&&distance(candidate,u)<radius+u.radius+.02))continue;
       positions.push(candidate);if(positions.length===count)return positions;
     }
     return null;
@@ -454,7 +508,7 @@ export class ArenaEngine {
   _applySpell(side,spell,point,id){
     const raw=spell.raw.stats,shape=this._shape(spell);
     const source={id:`spell-${++this.serial}`,side,x:point.x,y:point.y,isSpell:true,stats:{},statuses:[]};
-    const targets=this.units.filter(u=>u.alive&&!u.banished&&!u.possessingId&&this._inside(u,point,shape));
+    const targets=this.units.filter(u=>u.alive&&!u.banished&&!u.possessingId&&!u.parasitizingId&&this._inside(u,point,shape));
     const enemies=targets.filter(u=>u.side!==side),allies=targets.filter(u=>u.side===side&&!u.isBuilding);
     const castles=this.castles.filter(u=>u.alive&&u.side!==side&&this._inside(u,point,shape));
     const visualRadius=shape.shape==='global'?12:shape.radius||Math.max(shape.width||0,shape.height||0)/2;
@@ -511,7 +565,7 @@ export class ArenaEngine {
   }
   status(target,kind,duration,magnitude=0,source=null,extra={}){
     kind=statusKind(kind);
-    if(target?.possessingId||kind==='conversion'&&target?.possessedBy)return null;
+    if(target?.possessingId||target?.parasitizingId||kind==='conversion'&&target?.possessedBy)return null;
     if(target?.banished&&kind!=='cleanse')return null;
     // A successful killing blow can mark its victim before the death queue runs.
     if(!target?.alive&&!(target&&['soulMark','ink','curse'].includes(kind)&&extra.onLethalHit&&!target.memory?.deathResolved))return null;
@@ -545,6 +599,7 @@ export class ArenaEngine {
   }
   cleanse(target){
     target.statuses=target.statuses.filter(s=>!NEGATIVE.has(s.kind));
+    for(const id of [...(target.parasiteIds||[])]){const source=this.units.find(t=>t.id===id);if(source)this.endParasite(source);}
     if(target.banished)this.returnBanished(target,false);
     if(target.engulfedBy)this.releaseEngulfed(target);
     if(target.memory.conversion)this._restoreConversion(target);
@@ -649,7 +704,7 @@ export class ArenaEngine {
     u.route=routeFor(u.lane,u.side);this._resetWaypoint(u);
   }
   heal(target,amount,source=null,options={}){
-    if(!target?.alive||target.healthless||target.banished||target.possessingId||amount<=0||has(target,'bleed',this.time)||has(target,'healBlock',this.time)||has(target,'suppression',this.time))return 0;
+    if(!target?.alive||target.healthless||target.banished||target.possessingId||target.parasitizingId||amount<=0||has(target,'bleed',this.time)||has(target,'healBlock',this.time)||has(target,'suppression',this.time))return 0;
     if(source&&!options.passive&&this._abilityMiss(source,target))return 0;
     const burn=has(target,'burn',this.time)?.8:1;
     const value=Math.min(this.maxHealth(target)-target.hp,amount*(1+this.statValue(target,'healBonus')/100)*burn);
@@ -657,7 +712,7 @@ export class ArenaEngine {
     target.hp+=value;this.fx('heal',target.x,target.y,{amount:value,side:target.side});return value;
   }
   loseHealth(target,amount){
-    if(!target?.alive||target.healthless||target.possessingId||!Number.isFinite(amount)||amount<=0)return 0;
+    if(!target?.alive||target.healthless||target.possessingId||target.parasitizingId||!Number.isFinite(amount)||amount<=0)return 0;
     // Health costs bypass shields and damage modifiers, without triggering a hit.
     const before=target.hp;target.hp=Math.max(this._healthFloor(target),target.hp-amount);
     const lost=Math.max(0,before-target.hp);
@@ -666,16 +721,30 @@ export class ArenaEngine {
     return lost;
   }
   giveShield(target,amount,source=this.abilityContext?.source||null){
-    if(!target?.alive||target.healthless||target.banished||target.possessingId||amount<=0||has(target,'suppression',this.time))return 0;
+    if(!target?.alive||target.healthless||target.banished||target.possessingId||target.parasitizingId||amount<=0||has(target,'suppression',this.time))return 0;
     if(source&&this._abilityMiss(source,target))return 0;
     const {flat,factor}=statModifiers(target,'shield',this.time);if(factor<=0)return 0;
     const value=amount;target.maxShield=Math.max(target.maxShield,(target.shield+value)/factor+flat);target.shield+=value;
     this.fx('shield',target.x,target.y,{amount:value,side:target.side});return value;
   }
+  convert(source,target,duration){
+    if(!source?.alive||!target?.alive||target.isCastle||target.isBuilding||target.healthless||target.possessedBy||target.memory.conversion||!this.isEnemy(source,target))return false;
+    const entry=this.status(target,'conversion',duration,1,source,{originalSide:target.side});if(!entry)return false;
+    target.memory.conversion={side:target.side,until:entry.until};this._possessionSide(target,source.side);
+    this.fx('capture',target.x,target.y,{side:source.side,duration:.8});return true;
+  }
+  retreat(u,tiles){
+    let walked=0,best={distance:Infinity,walked:0};
+    for(let i=1;i<u.route.length;i++){const a=u.route[i-1],b=u.route[i],length=distance(a,b),p=projectSegment(u,a,b);if(p.distance<best.distance)best={distance:p.distance,walked:walked+p.t*length};walked+=length;}
+    const before={x:u.x,y:u.y},point=pointOnRoute(u.lane,u.side,Math.max(this.castles[u.side].radius+u.radius+.03,best.walked-tiles));
+    Object.assign(u,point);this._resetWaypoint(u);this.fx('portal',before.x,before.y,{side:u.side,color:'#bdafef'});this.fx('leap',u.x,u.y,{side:u.side});
+  }
+  _burstBoost(u){return !has(u,'silence',this.time)&&this.ability(u)?.burstBoost&&(u.memory.burstBoost?.active||u.memory.burstBoost?.queued)?this.ability(u).burstBoost:null;}
+  _cancelBurstBoost(u){if(u.memory.burstBoost)u.memory.burstBoost.active=false;}
   damage(source,target,amount,options={}){
     const empty={healthDamage:0,shieldDamage:0,total:0,killed:false};
-    if(!target?.alive||target.healthless||target.banished||target.possessingId||!(amount>0)||this.damageDepth>16)return empty;
-    if(source?.possessingId)return empty;
+    if(!target?.alive||target.healthless||target.banished||target.possessingId||target.parasitizingId||!(amount>0)||this.damageDepth>16)return empty;
+    if(source?.possessingId||source?.parasitizingId&&!(options.parasiteDamage&&target.id===source.parasitizingId))return empty;
     if(source?.memory?.vortexHeld)return empty;
     if(source&&!options.persistentField&&(source.engulfedBy||has(source,'imprisonment',this.time)||has(source,'airborne',this.time)))return empty;
     if(target.engulfedBy&&source?.id!==target.engulfedBy)return empty;
@@ -711,6 +780,7 @@ export class ArenaEngine {
       const fraction=clamp(this.statValue(target,'shieldtakendamage',70)/100,0,1),multiplier=Math.max(.01,hit.shieldMultiplier??1);
       const absorbedRaw=Math.min(hit.damage*fraction,target.shield/multiplier);
       target.shield=Math.max(0,target.shield-absorbedRaw*multiplier);healthPart-=absorbedRaw;
+      if(target.shield<EPS)target.shield=0;
     }
     target.hp=Math.max(this._healthFloor(target),target.hp-healthPart);
     const result={healthDamage:Math.max(0,beforeHp-target.hp),shieldDamage:Math.max(0,beforeShield-target.shield),total:0,killed:target.hp<=0};
@@ -736,7 +806,7 @@ export class ArenaEngine {
     return result;
   }
   push(target,awayFrom,tiles,origin=target){
-    if(!target?.alive||target.healthless||target.engulfedBy||target.possessingId||target.isCastle||target.isBuilding||tiles<=0||has(target,'predominance',this.time))return;
+    if(!target?.alive||target.healthless||target.engulfedBy||target.possessingId||target.parasitizingId||target.isCastle||target.isBuilding||tiles<=0||has(target,'predominance',this.time))return;
     let dx=origin.x-awayFrom.x,dy=origin.y-awayFrom.y,len=Math.hypot(dx,dy);
     if(!len){dx=target.side?-1:1;dy=0;len=1;}
     const p={x:clamp(origin.x+dx/len*tiles,.5,MAP.width-.5),y:clamp(origin.y+dy/len*tiles,.5,MAP.height-.5)};
@@ -749,8 +819,8 @@ export class ArenaEngine {
     u.waypoint=best.index;
   }
   _canHit(u,target,layers=u.def?.combat?.targets||'both'){
-    if(u.possessingId)return false;
-    if(!target?.alive||target.def?.combat?.untargetable||target.banished||target.possessingId||!this.isEnemy(u,target))return false;
+    if(u.possessingId||u.parasitizingId)return false;
+    if(!target?.alive||target.def?.combat?.untargetable||target.banished||target.possessingId||target.parasitizingId||!this.isEnemy(u,target))return false;
     if(target.engulfedBy&&!(target.engulfedBy===u.id&&this.ability(u)?.captiveTarget))return false;
     if(has(target,'untargetable',this.time)||has(target,'imprisonment',this.time))return false;
     if(layers==='none')return false;
@@ -769,7 +839,7 @@ export class ArenaEngine {
   _range(u){
     const blind=strongest(u,'blind',this.time);
     const attack=u.def?this._attackDefinition(u):{},modeRange=u.def?.attack?.modes?Math.max(...u.def.attack.modes.map(m=>m.range)):attack.range;
-    const range=(modeRange!=null?statValue(u,'range',this.time,modeRange):this.statValue(u,'range'))/1000*(1-blind);
+    const range=(modeRange!=null?statValue(u,'range',this.time,modeRange):this.statValue(u,'range'))/1000*(1-blind)*(this._burstBoost(u)?.range||1);
     const authored=u.def?.raw?.additionalStats?.vision;
     const vision=this.statValue(u,'vision')/1000*(1-blind);
     return authored!=null&&!/^[-—–]$/.test(String(authored).trim())?Math.min(range,vision):range;
@@ -777,10 +847,10 @@ export class ArenaEngine {
   _target(u){
     const sources=visibilitySources(this.state,u.side);
     const taunter=this.tauntTarget(u,sources);
-    if(taunter){if(u.burstTargetId&&u.burstTargetId!==taunter.id){u.burstTargetId=null;u.burstIndex=0;}return taunter;}
+    if(taunter){if(u.burstTargetId&&u.burstTargetId!==taunter.id){u.burstTargetId=null;u.burstIndex=0;this._cancelBurstBoost(u);}return taunter;}
     if(u.burstTargetId){const locked=this.units.concat(this.castles).find(t=>t.id===u.burstTargetId);if(this._legalTarget(u,locked,sources))return locked;
       if(u.burstIndex>0&&u.def.attack?.sequence?.length)u.sequenceIndex++;
-      u.burstTargetId=null;u.burstIndex=0;u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
+      u.burstTargetId=null;u.burstIndex=0;this._cancelBurstBoost(u);u.cooldown=Math.max(u.cooldown,u.def.attack?.delay||0);}
     const prioritized=this._hook('target',u);
     if(prioritized&&this._legalTarget(u,prioritized,sources))return prioritized;
     if(this.ability(u)?.exclusiveTarget)return null;
@@ -796,6 +866,7 @@ export class ArenaEngine {
     if(sequence?.length)p={...p,...sequence[u.sequenceIndex%sequence.length]};
     // Conditional death/periodic splash is resolved by the native handler only.
     if(p.multiTargetCondition&&!sequence){p.multiTarget=false;p.maxTargets=1;p.attackShape='single';}
+    p.attackWidth*=this._burstBoost(u)?.width||1;
     return p;
   }
   _attackDefinition(u){
@@ -828,7 +899,7 @@ export class ArenaEngine {
     return null;
   }
   _move(u,target,dt){
-    if(u.isBuilding||u.possessingId||['root','stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))return;
+    if(u.isBuilding||u.possessingId||u.parasitizingId||['root','stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))return;
     const movement=u.def.combat?.movementType;
     let destination;
     if(target)destination=target;
@@ -906,7 +977,7 @@ export class ArenaEngine {
     for(const trail of this.state.trails){
       const segments=trail.segments.filter(s=>s.until+EPS>=this.time),exposure={};
       for(const target of this.units){
-        if(!target.alive||target.id===trail.sourceId||target.banished||target.engulfedBy||target.possessingId||target.isBuilding||target.healthless||target.side===trail.side||target.def.combat.movementType!=='ground'||target.def.combat.groundEffectImmune)continue;
+        if(!target.alive||target.id===trail.sourceId||target.banished||target.engulfedBy||target.possessingId||target.parasitizingId||target.isBuilding||target.healthless||target.side===trail.side||target.def.combat.movementType!=='ground'||target.def.combat.groundEffectImmune)continue;
         if(!segments.some(s=>projectSegment(target,s.from,s.to).distance<=trail.width/2+target.radius+EPS))continue;
         let clock=(trail.exposure[target.id]||0)+dt;
         while(target.alive&&clock+EPS>=trail.interval){
@@ -957,11 +1028,16 @@ export class ArenaEngine {
   }
   _fire(u,target){
     if(u.memory.returningShotId||this.ability(u)?.noBasicAttack)return;
-    this.ability(u)?.prepareAttack?.(this,u,target);
+    this.prepareWeapon(u,target);
+    const booster=this.ability(u)?.burstBoost;
+    if(booster&&u.burstIndex===0){const state=u.memory.burstBoost||={queued:false,active:false};state.active=state.queued;state.queued=false;}
     const attack=this._attackDefinition(u),profile=this._profile(u),mode=u.attackMode;
+    if(!(attack.damage>0))return;
     const index=u.burstIndex;
     u.shots++;u.memory.lastAttack=this.time;
     const hit={damage:mode||attack.sequence||attack.modes?statValue(u,'damage',this.time,attack.damage):this.statValue(u,'damage',attack.damage),kind:'attack',bypassShield:false,critical:false,secondary:false,burstIndex:index,sequenceIndex:u.sequenceIndex,combat:profile};
+    hit.damage*=this._burstBoost(u)?.damage||1;
+    hit.burstBoosted=!!this._burstBoost(u);
     // Per-mode damage is authored independently of the base per-hit statistic.
     const missed=this.random()<strongest(u,'misfortune',this.time);
     if(!missed)this._hook('attack',u,target,hit);
@@ -986,6 +1062,7 @@ export class ArenaEngine {
     u.burstIndex++;
     if(u.burstIndex>=Math.max(1,attack.count)){
       u.burstIndex=0;u.burstTargetId=null;u.sequenceIndex++;u.attacks++;
+      if(booster){this._cancelBurstBoost(u);if(!has(u,'silence',this.time)&&this.random()<booster.chance)this.useAbility(u,()=>{u.memory.burstBoost.queued=true;});}
       // Returning weapons can count recovery from launch or from the catch.
       u.cooldown=Math.max(.01,interval+(returning?0:statValue(u,'delay',this.time,num(attack.delay))));
       const releaseDistance=this.ability(u)?.releaseCaptivesAfterBurst;
@@ -1163,8 +1240,15 @@ export class ArenaEngine {
   }
   _fields(){
     for(const field of this.state.fields){
-      if(field.until<=this.time)continue;
+      if(field.until<=this.time+EPS)continue;
       const targets=this.units.filter(u=>u.alive&&u.side!==field.side&&this._inside(u,field,field.shape));
+      if(field.kind==='poison-cloud'){
+        for(const u of targets){
+          if(field.poisoned[u.id]||u.isBuilding||u.healthless||u.def.combat.movementType!=='ground'||u.def.combat.groundEffectImmune)continue;
+          if(this.status(u,'poison',3*STATUS_INTERVALS.poison,0,field.source,{amount:5,stack:true,groundOnly:true,scheduled:true}))field.poisoned[u.id]=true;
+        }
+        continue;
+      }
       if(field.kind==='suppression'){for(const u of targets)this.status(u,'suppression',.1,1,field.source);continue;}
       for(const u of targets)this.status(u,field.kind==='roots'?'slow':'curse',.1,field.kind==='roots'?.15:.4,field.source,{groundOnly:field.kind==='roots'});
       if(field.left>0&&field.next<=this.time+EPS){
@@ -1173,7 +1257,7 @@ export class ArenaEngine {
         field.left--;field.next+=field.interval;
       }
     }
-    this.state.fields=this.state.fields.filter(f=>f.until>this.time);
+    this.state.fields=this.state.fields.filter(f=>f.until>this.time+EPS);
   }
   _buildingAura(u){
     const radius=num(u.spell?.raw?.stats?.range)/1000;
@@ -1210,7 +1294,7 @@ export class ArenaEngine {
     }
   }
   _separation(){
-    const bodies=this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.isBuilding&&u.def.combat.movementType!=='flying');
+    const bodies=this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.parasitizingId&&!u.isBuilding&&u.def.combat.movementType!=='flying');
     for(let i=0;i<bodies.length;i++)for(let j=i+1;j<bodies.length;j++){
       const a=bodies[i],b=bodies[j],min=(a.radius+b.radius)*.72;
       let dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
@@ -1287,7 +1371,7 @@ export class ArenaEngine {
   }
   _tick(dt){
     this.state.time+=dt;this.state.remaining-=dt;
-    this._syncPossessions();
+    this._syncPossessions();this._syncParasites();
     for(let side=0;side<2;side++){
       const owned=this.state.nodes.filter(n=>n.owner===side).length;
       this.teams[side].mana=Math.min(RULES.maxMana,this.teams[side].mana+dt/RULES.manaInterval*(1+owned*RULES.nodeBonus)*(this.state.phase==='overtime'?2:1));
@@ -1301,7 +1385,7 @@ export class ArenaEngine {
       u.moving=false;u.cooldown-=dt;
       this._statuses(u,dt);
       if(!u.alive)continue;
-      if(u.possessingId)continue;
+      if(u.possessingId||u.parasitizingId)continue;
       this._lifeDecay(u);
       if(!u.alive)continue;
       if(u.expiresAt<=this.time+EPS||u.def.stats.life>0&&this.time-u.born+EPS>=this.statValue(u,'life')){this.killUnit(u);continue;}
@@ -1313,7 +1397,7 @@ export class ArenaEngine {
       const target=this._target(u);
       if(u.targetId!==(target?.id??null))this._hook('targetChanged',u,target);
       u.targetId=target?.id??null;
-      this.ability(u)?.prepareAttack?.(this,u,target);
+      this.prepareWeapon(u,target);
       const profile=this._profile(u),reach=this._attackReach(u,profile);
       // A melee unit must reach its real damage area before stopping. A wider
       // trigger radius leaves cone/line attacks swinging forever outside it.
@@ -1324,7 +1408,7 @@ export class ArenaEngine {
         else if(u.cooldown<=EPS&&!u.memory.returningShotId)this._fire(u,target);
       }else this._move(u,target,dt);
     }
-    this._syncCaptives();this._separation();this._castles(dt);this._projectiles(dt);this._syncPossessions();this._objectives(dt);this._drainDeaths();this._spawnStreams();
+    this._syncCaptives();this._separation();this._castles(dt);this._projectiles(dt);this._syncPossessions();this._syncParasites();this._objectives(dt);this._drainDeaths();this._spawnStreams();
     this.state.effects=this.state.effects.filter(e=>e.until>this.time);
     const referenced=new Set(this.units.concat(this.castles).flatMap(u=>u.statuses.filter(s=>s.until>this.time).map(s=>s.sourceId)));
     for(const id of this.statusSources.keys())if(!referenced.has(id))this.statusSources.delete(id);

@@ -9,7 +9,7 @@ const enemies = (ctx,u,r=radius(u,ctx)) => ctx.near(u,r,t=>(ctx.isEnemy?ctx.isEn
 const healthCap=(ctx,u)=>ctx.maxHealth?ctx.maxHealth(u):u.maxHp;
 const shieldCap=(ctx,u)=>ctx.maxShield?ctx.maxShield(u):u.maxShield;
 const ascended=u=>u.def.ascension?.active||u.def.id.endsWith('/ascended');
-const squareFriends=(ctx,u)=>ctx.units.filter(t=>t!==u&&t.alive&&t.side===u.side&&!t.isBuilding&&!t.engulfedBy&&!t.banished&&!t.possessingId&&Math.abs(t.x-u.x)<=1.5+1e-7&&Math.abs(t.y-u.y)<=1.5+1e-7);
+const squareFriends=(ctx,u)=>ctx.units.filter(t=>t!==u&&t.alive&&t.side===u.side&&!t.isBuilding&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&Math.abs(t.x-u.x)<=1.5+1e-7&&Math.abs(t.y-u.y)<=1.5+1e-7);
 const reacherMode=(ctx,u,target=null)=>{
   const melee=target&&target.def?.combat?.movementType!=='flying'&&Math.hypot(target.x-u.x,target.y-u.y)<=1+(target.radius||0)+1e-7;
   const index=melee?0:1,mode=u.def.attack.modes[index];
@@ -57,8 +57,136 @@ const armWong=(ctx,u)=>{
   };
   if(ctx.useAbility)ctx.useAbility(u,draw);else draw();
 };
+const untouchReady=(ctx,u)=>{
+  const state=u.memory.untouch;
+  if(state?.until&&ctx.time+1e-7>=state.until){state.until=0;state.ready=true;}
+  return state;
+};
 
 export const ABILITIES = {
+  willowshade:{
+    attack(ctx,u,t,hit){hit.bypassShield=true;},
+    death(ctx,u){const form=u.def.forms[0];if(form)ctx.spawn(form,u.side,u,u.lane,{count:1,groupId:u.groupId});},
+  },
+  'willowshade/octarion':{death(ctx,u){
+    ctx.state.fields.push({id:`poison-${++ctx.serial}`,kind:'poison-cloud',x:u.x,y:u.y,side:u.side,source:u,shape:{shape:'rect',width:1.5,height:1.5},born:ctx.time,until:ctx.time+3,poisoned:{}});
+    ctx.fx('poison',u.x,u.y,{side:u.side,radius:.75,duration:3});
+  }},
+  stormblade:{
+    attack(ctx,u,t,hit){hit.combat={...hit.combat,multiTarget:false,maxTargets:1};},
+    hit(ctx,u,t,result,hit){
+      if(!damageEvent(result)||hit.stormBounce||t.isBuilding||t.isCastle)return;
+      const targets=ctx.near(t,3,v=>v!==t&&!v.isBuilding&&!v.healthless&&ctx._canHit(u,v))
+        .sort((a,b)=>Math.hypot(a.x-t.x,a.y-t.y)-Math.hypot(b.x-t.x,b.y-t.y)||a.id.localeCompare(b.id)).slice(0,3);
+      for(const target of targets){ctx._resolveHit(u,target,{...hit,damage:hit.damage*.5,secondary:true,stormBounce:true});ctx.fx('chain',target.x,target.y,{fromX:t.x,fromY:t.y,side:u.side,color:'#b4d8ff',duration:.3});}
+    },
+  },
+  mixela:{unitDeath(ctx,u,dead){
+    if(dead.isBuilding||dead.healthless||Math.hypot(dead.x-u.x,dead.y-u.y)>radius(u,ctx)+(dead.radius||0)+1e-7)return;
+    const gain=healthCap(ctx,dead)*.6;u.maxHp+=gain;u.stats.health=u.maxHp;u.hp=Math.min(healthCap(ctx,u),u.hp+gain);
+    u.memory.mixelaGrowth=(u.memory.mixelaGrowth||0)+gain;ctx.fx('heal',u.x,u.y,{side:u.side,amount:gain});
+  }},
+  thief:{spawn(ctx,u){ctx.prepareWeapon(u);},tick(ctx,u){if(!u.theftState?.used)ctx.stealAbility(u);}},
+  azrith:{
+    tick(ctx,u){if(u.shield>0)for(const ally of ctx.units.filter(t=>t.alive&&t!==u&&t.side===u.side&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&Math.abs(t.x-u.x)<=1&&Math.abs(t.y-u.y)<=1))ctx.status(ally,'damageBonus',.2,.1,u);},
+    damaged(ctx,u,source,result){
+      if(u.hp<=0||!(result.shieldDamage>0)||u.shield>0||u.banneroxCreated)return;
+      u.banneroxCreated=true;const [flag]=ctx.spawn(u.def.forms[0],u.side,u,u.lane,{count:1,groupId:u.groupId});
+      if(flag){flag.isBuilding=true;flag.stats.speed=0;ctx.fx('spawn',flag.x,flag.y,{side:u.side,color:'#f1d893'});}
+    },
+  },
+  'azrith/bannerox':{tick(ctx,u){for(const ally of ctx.units.filter(t=>t.alive&&t!==u&&t.side===u.side&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&Math.abs(t.x-u.x)<=1&&Math.abs(t.y-u.y)<=1))ctx.status(ally,'attackHaste',.2,.1,u);}},
+  'bio-mech':{damaged(ctx,u,source,result){
+    if(!damageEvent(result))return;
+    for(const ally of allies(ctx,u).filter(t=>!t.isBuilding&&!t.healthless))ctx.giveShield(ally,ally.def.stats.shield>0?shieldCap(ctx,ally)*.03:5);
+  }},
+  laura:{tick(ctx,u,dt){
+    u.memory.charge=(u.memory.charge||0)+8*dt;
+    while(u.memory.charge+1e-7>=100){
+      u.memory.charge=Math.max(0,u.memory.charge-100);
+      const cast=()=>{for(const ally of allies(ctx,u))for(const kind of ['damageBonus','attackHaste','speedBonus'])ctx.status(ally,kind,30,.25,u);ctx.fx('wave',u.x,u.y,{side:u.side,radius:radius(u,ctx),color:'#b6e8e1'});};
+      if(ctx.useAbility)ctx.useAbility(u,cast);else cast();
+    }
+  }},
+  rotlings:{unitDeath(ctx,u,dead){if(dead.side!==u.side&&!dead.isBuilding)growDamage(u,1);}},
+  'rotlings/mini-rotters':{tick(ctx,u){
+    if(ctx.time-u.born+1e-7<45)return;
+    const def=ctx.cards.get('rotlings'),hp=u.hp/healthCap(ctx,u),shield=u.shield;
+    ctx._setUnitForm(u,def,{});u.hp=u.maxHp*hp;u.shield=Math.min(u.maxShield,shield);ctx.fx('capture',u.x,u.y,{side:u.side});
+  }},
+  sushu:{
+    noBasicAttack:true,
+    spawn(ctx,u){ctx.status(u,'invisible',Infinity,0,u);},
+    contact(ctx,u,t){ctx.parasitize(u,t);},
+  },
+  'void-wraith':{
+    conditionalStats:['damage'],
+    tick(ctx,u){
+      const links=u.memory.voidLinks||={},nearby=enemies(ctx,u);
+      for(const target of nearby)if(!target.isBuilding&&!target.healthless)links[target.id]=true;
+      let bonus=0;
+      for(const id of Object.keys(links)){
+        const target=ctx.units.find(t=>t.id===id);
+        if(!target?.alive||target.isBuilding||target.healthless||!ctx.isEnemy(u,target)||Math.hypot(target.x-u.x,target.y-u.y)>=6-1e-7){
+          if(target)target.statuses=target.statuses.filter(s=>!(s.voidDrain&&s.sourceId===u.id));delete links[id];continue;
+        }
+        const status=ctx.status(target,'statReduction',.2,0,u,{percent:true,stats:{damage:.2},voidDrain:true});
+        if(status){const clean={...target,statuses:target.statuses.filter(s=>!(s.voidDrain&&s.sourceId===u.id))};bonus+=ctx.statValue(clean,'damage')*.2;}
+      }
+      u.memory.voidBonus=Math.min(16,bonus);u.stats.damage=u.def.stats.damage+u.memory.voidBonus;
+    },
+  },
+  untouch:{
+    damaged(ctx,u,source,result){
+      if(u.hp<=0||!result.healthDamage)return;
+      const state=u.memory.untouch||={loss:0,ready:false,until:0};
+      state.loss+=result.healthDamage/healthCap(ctx,u);
+      const steps=Math.floor((state.loss+1e-7)/.2);if(!steps)return;
+      state.loss=Math.max(0,state.loss-steps*.2);state.until=ctx.time+2;state.ready=false;
+      ctx.status(u,'untouchable',2,0,u);ctx.fx('shield',u.x,u.y,{side:u.side,duration:2});
+    },
+    tick(ctx,u){untouchReady(ctx,u);},
+    attack(ctx,u,t,hit){if(untouchReady(ctx,u)?.ready){hit.damage*=1.2;hit.untouchBonus=true;}},
+    hit(ctx,u,t,result,hit){if(damageEvent(result)&&hit.untouchBonus)u.memory.untouch.ready=false;},
+  },
+  heartix:{
+    attack(ctx,u,t,hit){if(!t.isBuilding&&!t.isCastle&&ctx.time-(u.memory.heartixLast??u.born??0)+1e-7>=24){u.memory.heartixLast=ctx.time;hit.heartixTargetId=t.id;}},
+    hit(ctx,u,t,result,hit){if(damageEvent(result)&&t.id===hit.heartixTargetId)ctx.convert(u,t,8);},
+  },
+  'r-1':{burstBoost:{chance:.03,damage:1.1,width:3,range:2}},
+  blank:{hit(ctx,u,t,result){if(result.killed&&!t.isCastle&&!t.isBuilding)growDamage(u,1,5);}},
+  magmara:{hit(ctx,u,t,result){if(damageEvent(result)&&!t.isCastle&&!t.isBuilding){ctx.status(t,'burn',3,0,u,{amount:10,stack:true});ctx.fx('burn',t.x,t.y,{side:u.side});}}},
+  collector:{hit(ctx,u,t,result){if(result.killed&&!t.isCastle&&!t.isBuilding){ctx.teams[u.side].mana=Math.min(RULES.maxMana,ctx.teams[u.side].mana+2);ctx.fx('mana',u.x,u.y,{side:u.side,amount:2});}}},
+  umbra:{damaged(ctx,u){
+    if(u.hp<=0)return;
+    if(u.hp<=healthCap(ctx,u)*.75&&!u.umbraHidden){u.umbraHidden=true;ctx.status(u,'invisible',3,0,u);}
+    if(u.hp<=healthCap(ctx,u)*.5&&!u.umbraRetreated){u.umbraRetreated=true;ctx.retreat(u,7.5);}
+  }},
+  'venom-fangs':{
+    attack(ctx,u,t,hit){hit.bypassShield=true;},
+    hit(ctx,u,t,result){
+      if(!damageEvent(result)||t.isCastle||t.isBuilding)return;
+      const gain=Math.min(.5,Math.max(0,t.stats.criticalChance),Math.max(0,100-u.stats.criticalChance));
+      t.stats.criticalChance-=gain;u.stats.criticalChance+=gain;
+    },
+  },
+  skyhunter:{attack(ctx,u,t,hit){const bonus=Math.hypot(t.x-u.x,t.y-u.y)*.1;u.memory.skyhunterBonus=bonus;hit.damage*=1+bonus;}},
+  rockback:{
+    conditionalStats:['speed'],
+    tick(ctx,u){u.stats.speed=u.def.stats.speed*(!u.memory.rockbackStruck&&u.targetId?1.5:1);},
+    attack(ctx,u,t,hit){if(!u.memory.rockbackStruck){hit.damage*=2.5;hit.rockbackCharge=true;}},
+    damaged(ctx,u,s,result){if(result.shieldDamage>0&&u.shield<=0&&u.hp>0)u.memory.rockbackRepair=ctx.time+6;},
+    hit(ctx,u,t,result,hit){
+      if(!damageEvent(result))return;
+      if(hit.rockbackCharge){u.memory.rockbackStruck=true;u.stats.speed=u.def.stats.speed;}
+      if((u.memory.rockbackRepair||0)>ctx.time+1e-7)ctx.giveShield(u,Math.min(10,Math.max(0,shieldCap(ctx,u)-u.shield)));
+    },
+  },
+  'neon-droid':{
+    conditionalStats:['attackSpeed'],
+    tick(ctx,u){u.memory.neonStacks=(u.memory.neonStacks||[]).filter(end=>end>ctx.time+1e-7);u.stats.attackSpeed=u.def.stats.attackSpeed/(1+u.memory.neonStacks.length*.2);},
+    hit(ctx,u,t,result){if(damageEvent(result)){u.memory.neonStacks=[...(u.memory.neonStacks||[]).filter(end=>end>ctx.time+1e-7),ctx.time+3].slice(-3);ABILITIES['neon-droid'].tick(ctx,u);}},
+  },
   reacher:{
     conditionalStats:['damageminimiser'],
     spawn(ctx,u){reacherMode(ctx,u);},
@@ -519,7 +647,7 @@ export const ABILITIES = {
     death(ctx,u){const form=u.def.forms[0];if(form)ctx.spawn(form,u.side,u,u.lane,{count:form.stats.number,groupId:u.groupId});},
   },
   'sylviana/butterflies':{death(ctx,u){
-    for(const ally of ctx.units.filter(t=>t.alive&&!t.healthless&&!t.engulfedBy&&t.side===u.side&&Math.abs(t.x-u.x)<=.75+t.radius&&Math.abs(t.y-u.y)<=.75+t.radius)){
+    for(const ally of ctx.units.filter(t=>t.alive&&!t.healthless&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&t.side===u.side&&Math.abs(t.x-u.x)<=.75+t.radius&&Math.abs(t.y-u.y)<=.75+t.radius)){
       ally.maxHp+=10;ally.stats.health=ally.maxHp;ally.hp=Math.min(healthCap(ctx,ally),ally.hp+10);
       ctx.fx('heal',ally.x,ally.y,{side:u.side,amount:10});
     }
