@@ -231,6 +231,22 @@ seconds per stack; minis create a 2 × 2-tile, five-second mist with 25% Blind a
 no longer mature into adults. No ability was translated into English. See
 [Arena rules](arena.md#apex-cards) for execution and interaction details.
 
+## Emergent and Ethereal profiles
+
+Emergent and both Ethereal form profiles now include the supplied geometry.
+The 1000/2000, 45° cone belongs to Blesser; Dumpsy remains 500/500. XII Josh
+hovers, Mimic has a 75° cone, and the eight Seven Sins manifestations include
+the new passiveless Human. Both King forms use 1000/1000 and 180°. Leno targets
+ground in both forms, with Form II Range changed to 1000. Dracula Form I hovers,
+Form II and its very-light Bats fly; Hunter's Eagle also flies. Leila Form II
+has the authored 1 × 1 endpoint explosion. Both Ray partners inherit their
+selected family's geometry: 1000/1000 for Form I, 500/500 for Form II.
+
+Arena form selection, deployment progression and confirmed native parameters
+are documented in [the Arena rules](arena.md#emergent-deployment-progression).
+Other numeric stats, lore and star-level bonuses remain as authored. There are
+138 root cards and 193 total definitions after adding Human.
+
 ## Verification
 
 ```sh

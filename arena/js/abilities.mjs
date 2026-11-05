@@ -1,6 +1,7 @@
 /* Native card rules. Missing facts are explicit locks, never invented effects. */
 import { RULES, clamp } from './rules.mjs';
 import { STATUS_INTERVALS, hasStatus } from './statuses.mjs';
+import { LATE_ABILITIES } from './late-abilities.mjs';
 
 const animal = u => (u?.def?.type || []).includes('Animal');
 const airborne = u => u?.def?.combat?.movementType === 'flying';
@@ -9,7 +10,7 @@ const enemies = (ctx,u,r=radius(u,ctx)) => ctx.near(u,r,t=>(ctx.isEnemy?ctx.isEn
 const healthCap=(ctx,u)=>ctx.maxHealth?ctx.maxHealth(u):u.maxHp;
 const shieldCap=(ctx,u)=>ctx.maxShield?ctx.maxShield(u):u.maxShield;
 const ascended=u=>u.def.ascension?.active||u.def.id.endsWith('/ascended');
-const squareFriends=(ctx,u)=>ctx.units.filter(t=>t!==u&&t.alive&&t.side===u.side&&!t.isBuilding&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&Math.abs(t.x-u.x)<=1.5+1e-7&&Math.abs(t.y-u.y)<=1.5+1e-7);
+const squareFriends=(ctx,u)=>ctx.units.filter(t=>t!==u&&t.alive&&t.side===u.side&&!t.isBuilding&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&!t.fusedInto&&Math.abs(t.x-u.x)<=1.5+1e-7&&Math.abs(t.y-u.y)<=1.5+1e-7);
 const reacherMode=(ctx,u,target=null)=>{
   const melee=target&&target.def?.combat?.movementType!=='flying'&&Math.hypot(target.x-u.x,target.y-u.y)<=1+(target.radius||0)+1e-7;
   const index=melee?0:1,mode=u.def.attack.modes[index];
@@ -88,14 +89,14 @@ export const ABILITIES = {
   }},
   thief:{spawn(ctx,u){ctx.prepareWeapon(u);},tick(ctx,u){if(!u.theftState?.used)ctx.stealAbility(u);}},
   azrith:{
-    tick(ctx,u){if(u.shield>0)for(const ally of ctx.units.filter(t=>t.alive&&t!==u&&t.side===u.side&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&Math.abs(t.x-u.x)<=1&&Math.abs(t.y-u.y)<=1))ctx.status(ally,'damageBonus',.2,.1,u);},
+    tick(ctx,u){if(u.shield>0)for(const ally of ctx.units.filter(t=>t.alive&&t!==u&&t.side===u.side&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&!t.fusedInto&&Math.abs(t.x-u.x)<=1&&Math.abs(t.y-u.y)<=1))ctx.status(ally,'damageBonus',.2,.1,u);},
     damaged(ctx,u,source,result){
       if(u.hp<=0||!(result.shieldDamage>0)||u.shield>0||u.banneroxCreated)return;
       u.banneroxCreated=true;const [flag]=ctx.spawn(u.def.forms[0],u.side,u,u.lane,{count:1,groupId:u.groupId});
       if(flag){flag.isBuilding=true;flag.stats.speed=0;ctx.fx('spawn',flag.x,flag.y,{side:u.side,color:'#f1d893'});}
     },
   },
-  'azrith/bannerox':{tick(ctx,u){for(const ally of ctx.units.filter(t=>t.alive&&t!==u&&t.side===u.side&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&Math.abs(t.x-u.x)<=1&&Math.abs(t.y-u.y)<=1))ctx.status(ally,'attackHaste',.2,.1,u);}},
+  'azrith/bannerox':{tick(ctx,u){for(const ally of ctx.units.filter(t=>t.alive&&t!==u&&t.side===u.side&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&!t.fusedInto&&Math.abs(t.x-u.x)<=1&&Math.abs(t.y-u.y)<=1))ctx.status(ally,'attackHaste',.2,.1,u);}},
   'bio-mech':{damaged(ctx,u,source,result){
     if(!damageEvent(result))return;
     for(const ally of allies(ctx,u).filter(t=>!t.isBuilding&&!t.healthless))ctx.giveShield(ally,ally.def.stats.shield>0?shieldCap(ctx,ally)*.03:5);
@@ -655,7 +656,7 @@ export const ABILITIES = {
     death(ctx,u){const form=u.def.forms[0];if(form)ctx.spawn(form,u.side,u,u.lane,{count:form.stats.number,groupId:u.groupId});},
   },
   'sylviana/butterflies':{death(ctx,u){
-    for(const ally of ctx.units.filter(t=>t.alive&&!t.healthless&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&t.side===u.side&&Math.abs(t.x-u.x)<=.75+t.radius&&Math.abs(t.y-u.y)<=.75+t.radius)){
+    for(const ally of ctx.units.filter(t=>t.alive&&!t.healthless&&!t.engulfedBy&&!t.banished&&!t.possessingId&&!t.parasitizingId&&!t.fusedInto&&t.side===u.side&&Math.abs(t.x-u.x)<=.75+t.radius&&Math.abs(t.y-u.y)<=.75+t.radius)){
       ally.maxHp+=10;ally.stats.health=ally.maxHp;ally.hp=Math.min(healthCap(ctx,ally),ally.hp+10);
       ctx.fx('heal',ally.x,ally.y,{side:u.side,amount:10});
     }
@@ -778,6 +779,7 @@ export const ABILITIES = {
 
 /* These are author-data gaps, not substitute versions of the native abilities. */
 export const ABILITY_GAPS = {};
+Object.assign(ABILITIES,LATE_ABILITIES);
 for(const id of ['reacher','bastra','maapp','avara','john-reynolds'])ABILITIES[`${id}/ascended`]=ABILITIES[id];
 
 // Phoenix is a reachable form rather than a separately selectable root card.

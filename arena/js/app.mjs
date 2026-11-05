@@ -13,9 +13,9 @@ const STORAGE_KEY = 'clash-a-mana.arena.deck.v1';
 const RARITY_COLORS = {mundane:'#8da093',familiar:'#6eaa8e',arcane:'#6ba4bd',relic:'#a189c2',ascendant:'#bd9565',apex:'#d18a74',emergent:'#b2aa68',ethereal:'#8bbac1',common:'#8da093',rare:'#6ba4bd',epic:'#a189c2',legendary:'#bd9565'};
 const STAT_LABELS = {health:'Health',shield:'Shield',damage:'Damage',sps:'DPS',attackSpeed:'Attack Speed',delay:'Delay',mana:'Mana',number:'Count',range:'Range',speed:'Speed',criticDamage:'Critical Damage',criticalChance:'Critical Chance',lifesteal:'Lifesteal',lifestealChance:'Lifesteal Chance',dodge:'Dodge Chance',vision:'Vision',healBonus:'Healing Bonus',healrecovery:'Rejuvenation',shieldrecovery:'Fortification',damageminimiser:'Damage Reduction',criticdamageminimiser:'Critical Resistance',flexibility:'Flexibility',shieldtakendamage:'Shield Depletion',life:'Life'};
 const STAT_ORDER = ['health','shield','damage','sps','attackSpeed','delay','mana','number','range','speed','criticDamage','criticalChance','lifesteal','lifestealChance','dodge','vision','healBonus','healrecovery','shieldrecovery','damageminimiser','criticdamageminimiser','flexibility','shieldtakendamage','life'];
-const state = {catalog:null,renderer:null,engine:null,deck:[],spellDeck:[],tab:'troops',selection:null,pointer:null,drag:null,pauseReasons:new Set(),selectedUnitId:null,toastTimer:0,frame:0,lastFrame:0,lastHUD:0,handSignature:'',spellSignature:'',resultShown:false,seed:Date.now()>>>0,inspectorDefinition:null};
+const state = {catalog:null,renderer:null,engine:null,deck:[],spellDeck:[],formChoices:{},tab:'troops',selection:null,pointer:null,drag:null,pauseReasons:new Set(),selectedUnitId:null,toastTimer:0,frame:0,lastFrame:0,lastHUD:0,handSignature:'',spellSignature:'',resultShown:false,seed:Date.now()>>>0,inspectorDefinition:null};
 const cameraKeys=new Set();
-const deckCard=id=>resolveDeckCard(state.catalog.byId,id,state.deck);
+const deckCard=id=>resolveDeckCard(state.catalog.byId,id,state.deck,state.formChoices);
 const cameraDirections=new Set(['arrowleft','arrowright','arrowup','arrowdown','w','a','s','d']);
 
 function escapeHTML(value='') { return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -54,12 +54,14 @@ function toast(message,error=false) {
 }
 function sourceValues(def) {return {...def.raw?.additionalStats,...def.raw?.stats};}
 function spellCharge() { return state.spellDeck.reduce((sum,id)=>sum+(state.catalog.spellById.get(id)?.charge||0),0); }
-function canStart() { return state.deck.length===RULES.deckSize&&state.spellDeck.length>0&&spellCharge()<=RULES.spellBudget&&state.deck.every(id=>state.catalog.byId.get(id)?.ready)&&state.spellDeck.every(id=>state.catalog.spellById.get(id)?.ready); }
-function saveDeck() {try {localStorage.setItem(STORAGE_KEY,JSON.stringify({version:1,deck:state.deck,spells:state.spellDeck}));}catch {/* Storage is optional. */}}
+function canStart() { return state.deck.length===RULES.deckSize&&state.spellDeck.length>0&&spellCharge()<=RULES.spellBudget&&state.deck.every(id=>deckCard(id)?.ready&&(!deckCard(id).choiceRequired||deckCard(id).ethereal))&&state.spellDeck.every(id=>state.catalog.spellById.get(id)?.ready); }
+function saveDeck() {try {localStorage.setItem(STORAGE_KEY,JSON.stringify({version:1,deck:state.deck,spells:state.spellDeck,forms:state.formChoices}));}catch {/* Storage is optional. */}}
 function restoreDeck() {
   try {
     const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
     if (!saved||saved.version!==1||!Array.isArray(saved.deck)||!Array.isArray(saved.spells)) return;
+    state.formChoices={};
+    for(const [id,key] of Object.entries(saved.forms||{}))if(state.catalog.byId.get(id)?.typeVariants.some(form=>form.ready&&form.id===`${id}/${key}`))state.formChoices[id]=key;
     state.deck=[...new Set(saved.deck.filter(id=>typeof id==='string'&&state.catalog.cards.some(c=>c.id===id&&c.ready)))].slice(0,8);
     state.spellDeck=[];
     for (const id of [...new Set(saved.spells)]) {
@@ -74,6 +76,7 @@ function toggleCard(id) {
   if (!card.ready) {openInspector(card);return;}
   const index=state.deck.indexOf(id);
   if(index>=0)state.deck.splice(index,1);
+  else if(card.choiceRequired&&!deckCard(id).ethereal){openInspector(card);return;}
   else if(state.deck.length<8)state.deck.push(id);
   else {toast('Your unit deck is full. Remove a card before adding another.',true);return;}
   updateDeck();
@@ -96,7 +99,7 @@ function reorder(array,id,direction) {
 }
 function quickBuild() {
   if (!state.catalog) return;
-  const ready=state.catalog.cards.filter(c=>c.ready);
+  const ready=state.catalog.cards.filter(c=>c.ready&&!c.choiceRequired);
   const preferred=['hammies','scrapy','venomora','soldier','henry','hailey','nyra','aegis-guard'];
   state.deck=preferred.filter(id=>ready.some(c=>c.id===id));
   const cheapest=[...ready].sort((a,b)=>(a.stats.mana-b.stats.mana)||a.name.localeCompare(b.name));
@@ -116,14 +119,15 @@ function updateDeck() {
   $('selected-deck').innerHTML=Array.from({length:8},(_,i)=>{
     const def=deckCard(state.deck[i]);
     if(!def)return `<div class="deck-slot empty"><strong>${String(i+1).padStart(2,'0')}</strong><span>UNIT SLOT</span></div>`;
-    return `<article class="deck-slot" style="--rarity:${rarityColor(def)}">${imageMarkup(def,'','slot-art-fallback')}<span class="slot-mana">${def.stats.mana}</span><button type="button" class="slot-remove" data-remove-card="${escapeHTML(def.id)}" aria-label="Remove ${escapeHTML(def.name)}">×</button><div class="slot-content"><strong>${escapeHTML(def.name)}</strong><span>${def.ascension?.active?'ASCENDED · ':''}${i<4?'OPENING HAND':'NEXT IN CYCLE'}</span></div><div class="slot-reorder"><button type="button" data-move-card="${escapeHTML(def.id)}" data-direction="-1" aria-label="Move ${escapeHTML(def.name)} earlier" ${i===0?'disabled':''}>←</button><button type="button" data-move-card="${escapeHTML(def.id)}" data-direction="1" aria-label="Move ${escapeHTML(def.name)} later" ${i===state.deck.length-1?'disabled':''}>→</button></div></article>`;
+    return `<article class="deck-slot" style="--rarity:${rarityColor(def)}">${imageMarkup(def,'','slot-art-fallback')}<span class="slot-mana">${def.stats.mana}</span><button type="button" class="slot-remove" data-remove-card="${escapeHTML(def.id)}" aria-label="Remove ${escapeHTML(def.name)}">×</button><div class="slot-content"><strong>${escapeHTML(def.name)}</strong><span>${def.ethereal?`FORM ${def.ethereal.formNumber} · `:def.ascension?.active?'ASCENDED · ':''}${i<4?'OPENING HAND':'NEXT IN CYCLE'}</span></div><div class="slot-reorder">${def.choiceRequired?`<button type="button" data-inspect-card="${escapeHTML(def.id)}" aria-label="Change form for ${escapeHTML(def.name)}">${def.ethereal?(def.ethereal.formNumber===1?'I':'II'):'?'}</button>`:''}<button type="button" data-move-card="${escapeHTML(def.id)}" data-direction="-1" aria-label="Move ${escapeHTML(def.name)} earlier" ${i===0?'disabled':''}>←</button><button type="button" data-move-card="${escapeHTML(def.id)}" data-direction="1" aria-label="Move ${escapeHTML(def.name)} later" ${i===state.deck.length-1?'disabled':''}>→</button></div></article>`;
   }).join('');
   $('selected-spells').innerHTML=state.spellDeck.length?state.spellDeck.map((id,i)=>{
     const def=state.catalog.spellById.get(id);
     return `<article class="spell-slot"><button type="button" class="slot-remove" data-remove-spell="${escapeHTML(id)}" aria-label="Remove ${escapeHTML(def.name)}">×</button><strong>${escapeHTML(def.name)}</strong><span>${def.charge} charge · ${def.energy} energy</span><div class="spell-order"><button type="button" data-move-spell="${escapeHTML(id)}" data-direction="-1" aria-label="Move ${escapeHTML(def.name)} earlier" ${i===0?'disabled':''}>←</button><button type="button" data-move-spell="${escapeHTML(id)}" data-direction="1" aria-label="Move ${escapeHTML(def.name)} later" ${i===state.spellDeck.length-1?'disabled':''}>→</button></div></article>`;
   }).join(''):'<div class="spell-empty">Add spells from the registry below.</div>';
   $('start-match').disabled=!canStart();
-  $('start-hint').textContent=canStart()?'Ready for a fair battle against the bot.':`Choose ${8-state.deck.length} more unit${8-state.deck.length===1?'':'s'}${state.spellDeck.length?'':' and at least 1 spell'}.`;
+  const missingForms=state.deck.filter(id=>state.catalog.byId.get(id)?.choiceRequired&&!deckCard(id).ethereal);
+  $('start-hint').textContent=missingForms.length?`Choose a form for ${missingForms.map(id=>state.catalog.byId.get(id).name).join(', ')}.`:canStart()?'Ready for a fair battle against the bot.':`Choose ${8-state.deck.length} more unit${8-state.deck.length===1?'':'s'}${state.spellDeck.length?'':' and at least 1 spell'}.`;
   renderCatalog();
 }
 function populateFilters() {
@@ -152,7 +156,7 @@ function renderCatalog() {
   $('catalog-grid').innerHTML=shown.length?shown.map(entry=>{const def=isSpell?entry:deckCard(entry.id);
     const selected=(isSpell?state.spellDeck:state.deck).includes(def.id),roleText=isSpell?`${label(def.kind||def.spellkind||def.raw?.type)} · ${def.charge} charge`:[def.class||def.raw?.class,def.subclass||def.raw?.subclass].filter(Boolean).join(' / ');
     const reason=def.reasons?.[0]||'Required battle information is missing.';
-    return `<article class="library-card ${def.ready?'':'locked'} ${selected?'selected':''} ${isSpell?'spell-card':''}" style="--rarity:${rarityColor(def)}"><button type="button" class="card-pick" data-add-${isSpell?'spell':'card'}="${escapeHTML(def.id)}" aria-label="${def.ready?(selected?'Remove':'Add'):'Inspect locked'} ${escapeHTML(def.name)}" aria-pressed="${selected}"><div class="catalog-art">${imageMarkup(def)}</div><div class="card-tile-body"><strong>${escapeHTML(def.name)}</strong><span class="card-role">${escapeHTML(roleText||label(def.rarity))}</span><div class="card-footer"><span>${escapeHTML(def.ready?(selected?'IN YOUR DECK':'BATTLE-READY'):reason)}</span><span class="card-cost ${isSpell?'spell-cost':''}">${isSpell?`${def.energy} E`:`${def.stats.mana} M`}</span></div></div>${selected?'<span class="card-selected-mark"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg></span>':!def.ready?'<span class="card-locked-mark"><i class="small-lock" aria-hidden="true"></i> NEEDS DATA</span>':''}</button><button type="button" class="card-info" data-inspect-${isSpell?'spell':'card'}="${escapeHTML(def.id)}" aria-label="Inspect ${escapeHTML(def.name)}">i</button></article>`;
+    return `<article class="library-card ${def.ready?'':'locked'} ${selected?'selected':''} ${isSpell?'spell-card':''}" style="--rarity:${rarityColor(def)}"><button type="button" class="card-pick" data-add-${isSpell?'spell':'card'}="${escapeHTML(def.id)}" aria-label="${def.ready?(selected?'Remove':'Add'):'Inspect locked'} ${escapeHTML(def.name)}" aria-pressed="${selected}"><div class="catalog-art">${imageMarkup(def)}</div><div class="card-tile-body"><strong>${escapeHTML(def.name)}</strong><span class="card-role">${escapeHTML(roleText||label(def.rarity))}</span><div class="card-footer"><span>${escapeHTML(def.ready?(def.choiceRequired&&!def.ethereal?'CHOOSE FORM':`${def.ethereal?`FORM ${def.ethereal.formNumber} · `:''}${selected?'IN YOUR DECK':'BATTLE-READY'}`):reason)}</span><span class="card-cost ${isSpell?'spell-cost':''}">${isSpell?`${def.energy} E`:`${def.stats.mana} M`}</span></div></div>${selected?'<span class="card-selected-mark"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg></span>':!def.ready?'<span class="card-locked-mark"><i class="small-lock" aria-hidden="true"></i> NEEDS DATA</span>':''}</button><button type="button" class="card-info" data-inspect-${isSpell?'spell':'card'}="${escapeHTML(def.id)}" aria-label="Inspect ${escapeHTML(def.name)}">i</button></article>`;
   }).join(''):'<div class="empty-catalog"><strong>No entries found.</strong>Try another search or clear a filter.</div>';
 }
 
@@ -165,6 +169,11 @@ function profileMarkup(def) {
 function openInspector(def,kind='card',unit=null) {
   if(!def)return;
   if(!unit&&kind==='card'&&state.catalog.cards.some(c=>c.id===def.id))def=deckCard(def.id);
+  const choiceRoot=kind==='card'&&state.catalog.cards.find(card=>card.choiceRequired&&(card.id===def.id||card.typeVariants.some(form=>form.id===def.id)));
+  if(!unit&&choiceRoot&&!def.ethereal){
+    const preview=choiceRoot.typeVariants.find(form=>form.id===def.id)||choiceRoot.typeVariants.find(form=>form.ready)||choiceRoot.typeVariants[0];
+    def={...preview,id:choiceRoot.id,rootId:choiceRoot.id,variantId:preview.id,choiceRequired:true,typeVariants:choiceRoot.typeVariants};
+  }
   if(unit&&state.engine&&state.engine.state.phase!=='ended'&&!isEntityVisible(state.engine.state,0,unit))return;
   state.inspectorDefinition={def,kind,unit};
   if(unit)state.selectedUnitId=unit.id;
@@ -200,15 +209,30 @@ function openInspector(def,kind='card',unit=null) {
     const name=names[s.kind]||label(s.kind.replace(/([a-z])([A-Z])/g,'$1 $2'));
     return `<span class="live-status" data-status="${escapeHTML(s.kind)}">${escapeHTML(name)} <small>${s.kind==='ink'?`${s.stacks} / 21 · ${Math.round(s.magnitude*100)}% slow`:Number.isFinite(s.until)?`${Math.max(.1,s.until-state.engine.time).toFixed(1)}s`:'Ongoing'}</small></span>`;
   }).join(''):'';
-  const forms=[...(def.forms||[]),...(def.typeVariants||[])];
+  const forms=[...(def.forms||[]),...(!choiceRoot?(def.typeVariants||[]):[])];
   $('inspector').style.setProperty('--rarity',rarityColor(def));
   $('inspector-content').innerHTML=`<div class="inspector-layout"><div class="inspector-art">${image}<div class="inspector-identity"><span class="identity-class">${escapeHTML([def.class||raw.class,def.subclass||raw.subclass].filter(Boolean).join(' / ')||label(raw.type||kind))}</span><h2 id="inspector-name">${escapeHTML(def.name)}</h2><span class="identity-faction">${escapeHTML(label(def.group||raw.group||'The Stagnantia Project'))}</span></div></div><div class="inspector-body"><div class="inspector-status ${locked?'locked':''}"><i></i>${locked?'Battle data incomplete':'Battle-ready'}${unit?' · Battle paused for inspection':''}</div>${locked?`<ul class="readiness-list">${(def.reasons||['Required battle data is missing.']).map(reason=>`<li>${escapeHTML(reason)}</li>`).join('')}</ul>`:''}<h3>${kind==='spell'?'Spell Parameters':'All Statistics'}</h3><div class="inspector-stat-grid">${stats}</div>${kind==='card'?`<h3>Combat Profile</h3><div class="profile-grid">${profileMarkup(def)}</div>`:''}<h3>Ability</h3><div class="native-ability" lang="az">${raw.abilityName?`<strong class="ability-name">${escapeHTML(raw.abilityName)}</strong>`:''}${ability&&ability!=='-'?nativeHTML(ability):'<span>No additional ability is specified.</span>'}</div><p class="inspector-native-note">Original Codex ability text. Source DPS is informational.</p>${forms.length?`<h3>Forms</h3><div>${forms.map(form=>`<button type="button" class="inspector-form-button" data-inspect-card="${escapeHTML(form.id)}">${escapeHTML(form.name)}</button>`).join('')}</div>`:''}${raw.showlevels?`<details><summary>Star levels</summary><ol class="inspector-levels" lang="az">${Object.values(raw.showlevels).map(x=>`<li>${nativeHTML(x)}</li>`).join('')}</ol><p>Star upgrades are shown for reference. Arena deployment uses the base Codex stats.</p></details>`:''}${raw.story&&raw.story!=='-'?`<details><summary>Lore</summary><p>${escapeHTML(raw.story).replace(/\n/g,'<br>')}</p></details>`:''}<div class="inspector-actions">${canAdd&&!state.engine?`<button type="button" class="primary-button" data-add-${kind==='spell'?'spell':'card'}="${escapeHTML(def.id)}" ${locked?'disabled':''}>${selected?'Remove from deck':'Add to deck'}</button>`:''}<button type="button" class="text-button" data-close-inspector>Close details</button></div></div></div>`;
   if(!$('inspector').open)$('inspector').showModal();
+  if(choiceRoot&&!state.engine){
+    const picker=`<section class="live-status-section" data-ethereal-picker><h3>Choose Your Form</h3><p>Choose one form for this deck. It remains fixed throughout the match.</p><div class="ethereal-choices">${choiceRoot.typeVariants.map((form,i)=>`<button type="button" class="ethereal-choice" data-choose-form="type${i+1}" data-form-root="${escapeHTML(choiceRoot.id)}" aria-pressed="${state.formChoices[choiceRoot.id]===`type${i+1}`}" ${form.ready?'':'disabled'}><strong>Form ${i+1} · ${escapeHTML(form.class)} / ${escapeHTML(form.subclass)}</strong><span>${form.stats.mana} Mana · ${form.stats.health} Health · ${escapeHTML(label(form.combat.attackType))}</span>${form.ready?'':`<small>${escapeHTML(form.reasons[0])}</small>`}</button>`).join('')}</div></section>`;
+    $('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',picker);
+    const add=$('inspector-content').querySelector('[data-add-card]');if(add&&!state.formChoices[choiceRoot.id])add.disabled=true;
+  }
+  if(unit?.def.ethereal)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section" data-ethereal-locked><h3>Form ${unit.def.ethereal.formNumber} · Locked for This Match</h3></section>`);
   if(liveEffects)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section"><h3>Active Effects</h3><div class="live-status-list">${liveEffects}</div></section>`);
   if(def.ascension?.active)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section" data-ascended><h3>Partner Bonus Active</h3><p>${def.ascension.partners.map(id=>escapeHTML(state.catalog.byId.get(id)?.name||id)).join(' · ')} in this deck.<br>Mana: ${def.ascension.baseMana} → ${def.stats.mana}. The bonus remains active for the match.</p></section>`);
   else if(raw.ascension?.partnerIds)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section" data-partner-ready><h3>Partner Bonus Available</h3><p>Add ${raw.ascension.partnerIds.map(id=>escapeHTML(state.catalog.byId.get(id)?.name||id)).join(' or ')} to the same deck.</p></section>`);
   if(unit){
     const notes=[];
+    if(unit.def.rarity==='Emergent')notes.push(`<section class="live-status-section" data-emergent-deployment="${unit.deploymentNumber}"><h3>Deployment ${unit.deploymentNumber}</h3><p>Successful placements are counted separately for each card and player, and reset each match.</p></section>`);
+    if(unit.def.id==='xii-josh')notes.push(`<section class="live-status-section" data-josh-flight><h3>${unit.temporaryFlight?'Flying':'Hovering'} · ${unit.deploymentNumber%3===0?'Empowered':'Standard'}</h3><p>Enemy Mana in 2 × 2 tiles: ${unit.memory.joshMana||0}<br>${unit.temporaryFlight?`Landing in ${Math.max(0,unit.temporaryFlight.until-state.engine.time).toFixed(1)}s · `:''}Landing: 24 Damage · 1.5 × 1.5 tiles</p></section>`);
+    if(unit.def.id==='dumpsy')notes.push(`<section class="live-status-section" data-dumpsy-items><h3>Orbiting Objects · 3 + ${(unit.memory.dumpLoot||[]).length} / 12</h3><p>Inner weapons: 0.90s · Collected throws: 1.15s<br>Consecutive hits: ${unit.memory.dumpCombo?.count||0} · +25% per same-target hit, uncapped.</p></section>`);
+    if(unit.def.id==='blesser')notes.push(`<section class="live-status-section" data-blesser-stage><h3>Blessing Tier ${Math.min(3,unit.deploymentNumber)}</h3><p>${unit.memory.blessed?'Blessing used.':`Preparation: ${Math.max(0,12-(state.engine.time-unit.born)).toFixed(1)}s`}<br>One blessing per deployment · Tier three is the maximum.</p></section>`);
+    if(unit.def.id==='mimic')notes.push(`<section class="live-status-section" data-mimic-clones><h3>Mimic Clones</h3><p>At most two per enemy: one shield break and one 20% Health-loss trigger.<br>Clones retain native abilities; Health, Shield and Damage are reduced by 30%.</p></section>`);
+    if(unit.def.id==='stella')notes.push(`<section class="live-status-section" data-stella-glider><h3>Glider Bonus · +${Math.round((unit.memory.gliderBonus||0)*100)}% / +50%</h3><p>Landing: 20 Damage in 1.5 × 1.5 tiles. Glider: ${Number((12*(1+(unit.memory.gliderBonus||0))).toFixed(2))} Damage · ${Number((3*(1+(unit.memory.gliderBonus||0))).toFixed(2))} tiles.</p></section>`);
+    if(unit.memory.envyWeapon)notes.push(`<section class="live-status-section" data-envy-weapon><h3>Copied Weapon</h3><p>${unit.memory.envyWeapon.attack.count} × ${unit.memory.envyWeapon.attack.damage} Damage · ${unit.memory.envyWeapon.attack.interval}s · ${unit.memory.envyWeapon.attack.delay}s Delay · ${unit.memory.envyWeapon.attack.range/1000} tiles</p></section>`);
+    if((unit.def.variantId||unit.def.id).startsWith('mr-and-mrs-ray/'))notes.push(`<section class="live-status-section" data-ray-charge><h3>Twin Charge · ${Math.floor(unit.memory.rayCharge||0)} / 100</h3><p>Partners charge within 2 tiles.${unit.rayDash?'<br>Dash: 5 tiles in 3.75s.':''}${unit.sharedVitalsId?'<br>Health is shared for the fusion; shields remain individual.':''}</p></section>`);
+
     if(unit.theftState?.used)notes.push(`<section class="live-status-section" data-thief-stolen><h3>${unit.def.rootId==='thief'?'Stolen Ability':'Theft Attempt Used'}</h3><p>${escapeHTML(unit.theftState.donorName)} · One attempt per deployment. The victim loses the stolen passive.</p></section>`);
     if(unit.passiveDisabled)notes.push('<section class="live-status-section" data-passive-stolen><h3>Passive Stolen</h3><p>This card retains its combat stats and attacks, but its native passive is disabled.</p></section>');
     if(unit.parasiteIds?.length)notes.push(`<section class="live-status-section" data-parasite-host><h3>Sushu Inside · ${unit.parasiteIds.length}</h3><p>Each Sushu deals its Damage every second and cannot be targeted inside this host. It vanishes when this host dies.</p></section>`);
@@ -230,7 +254,7 @@ function openInspector(def,kind='card',unit=null) {
     if(unit.def.id.split('/')[0]==='maapp')notes.push('<section class="live-status-section" data-maapp-pulse><h3>Radial Pulse</h3><p>360° · 5-tile radius · Light weight</p></section>');
     if(unit.def.id.split('/')[0]==='john-reynolds')notes.push(`<section class="live-status-section" data-john-calls="${unit.memory.johnWhinnies||0}"><h3>Horse Call · ${unit.memory.johnWhinnies||0}</h3><p>Health loss toward next call: ${((unit.memory.johnHealthLoss||0)*100).toFixed(2)}% / 8%<br>Critical attacks bypass shields · 180° ground strike<br>Taunt: 1.25 tiles · ${unit.def.ascension?.active||unit.def.id.endsWith('/ascended')?'5s · 30%':'3s · 25%'} damage reduction</p></section>`);
     if(unit.def.id.split('/')[0]==='avara'){const next=state.engine._attackDefinition(unit);notes.push(`<section class="live-status-section" data-avara-step="${unit.sequenceIndex%4+1}"><h3>Next Attack · ${unit.sequenceIndex%4+1} / 4</h3><p>${next.damage} damage · ${next.range/1000} tiles<br>Interval: ${next.interval}s · Delay after every attack: ${next.delay}s</p><p>1: Front 2.5 × 5 area + Slow<br>2: Raspberry + Knockback<br>3: Avocado seed + Stun<br>4: Target 5 × 2.5 area</p></section>`);}
-    if(unit.sharedVitalsId)notes.push(`<section class="live-status-section" data-shared-vitals><h3>Shared Reserve</h3><p>${state.engine.units.filter(t=>t.sharedVitalsId===unit.sharedVitalsId).map(t=>escapeHTML(t.def.name)).join(' · ')}</p><p>Health and shield are shared. When shared health reaches zero, every linked card falls.</p></section>`);
+    if(unit.sharedVitalsId)notes.push(`<section class="live-status-section" data-shared-vitals><h3>Shared Reserve</h3><p>${state.engine.units.filter(t=>t.sharedVitalsId===unit.sharedVitalsId).map(t=>escapeHTML(t.def.name)).join(' · ')}</p><p>${state.engine.vitalPools.get(unit.sharedVitalsId)?.healthOnly?'Health is shared during fusion; shields remain individual.':'Health and shield are shared.'} When shared health reaches zero, every linked card falls.</p></section>`);
     if(unit.def.id==='artist'){
       const charge=unit.memory.artistCharge||0,bonus=Math.floor(charge/20);
       notes.push(`<section class="live-status-section" data-artist-charge="${charge}"><h3>Ink Charge · ${charge}</h3><p>On death: ${6+bonus*2} ravens for ${7+bonus} seconds.</p></section>`);
@@ -313,7 +337,7 @@ function startMatch() {
   try {
     if($('inspector').open)closeInspector();
     state.pauseReasons.clear();
-    state.engine=new ArenaEngine({cards:state.catalog.cards,spells:state.catalog.spells,deck:[...state.deck],spellDeck:[...state.spellDeck],seed:state.seed++,bot:true});
+    state.engine=new ArenaEngine({cards:state.catalog.cards,spells:state.catalog.spells,deck:[...state.deck],spellDeck:[...state.spellDeck],formChoices:{...state.formChoices},seed:state.seed++,bot:true});
     state.renderer.shotTimes.clear();
     state.selection=null;state.pointer=null;state.drag=null;state.selectedUnitId=null;state.resultShown=false;state.handSignature='';state.spellSignature='';state.lastHUD=0;
     document.body.dataset.mode='battle';
@@ -415,7 +439,7 @@ function commitPlacement(point) {
 function inspectAt(point) {
   const battle=state.engine.state;
   if(battle.phase!=='ended'&&!isPointVisible(battle,0,point))return;
-  const candidates=[...battle.units,...battle.castles].filter(u=>u.alive!==false&&!u.possessingId&&!u.parasitizingId&&u.hp>0&&(battle.phase==='ended'||isEntityVisible(battle,0,u)));
+  const candidates=[...battle.units,...battle.castles].filter(u=>u.alive!==false&&!u.possessingId&&!u.parasitizingId&&!u.fusedInto&&u.hp>0&&(battle.phase==='ended'||isEntityVisible(battle,0,u)));
   const unit=candidates.map(u=>({u,d:distance(u,point)})).filter(x=>x.d<Math.max(.65,(x.u.radius||0)+.25)).sort((a,b)=>a.d-b.d)[0]?.u;
   if(!unit)return;
   if(unit.def){openInspector(unit.def,unit.isBuilding?'spell':'card',unit);return;}
@@ -460,7 +484,7 @@ function updateHUD(force=false) {
     state.handSignature=handKey;
     $('hand-cards').innerHTML=team.hand.map((id,i)=>{
       const def=state.engine.cardFor(0,id);if(!def)return '';
-      return `<button type="button" class="hand-card ${mana<def.stats.mana?'unaffordable':''} ${state.selection?.kind==='card'&&state.selection.handIndex===i?'selected':''}" data-hand-index="${i}" aria-label="${escapeHTML(def.name)}, ${def.stats.mana} mana, key ${i+1}" aria-pressed="${state.selection?.kind==='card'&&state.selection.handIndex===i}">${imageMarkup(def,'','hand-placeholder',false)}<span class="hand-cost">${def.stats.mana}</span><span class="hand-key">${i+1}</span><span class="hand-name">${escapeHTML(def.name)}</span></button>`;
+      return `<button type="button" class="hand-card ${mana<def.stats.mana?'unaffordable':''} ${state.selection?.kind==='card'&&state.selection.handIndex===i?'selected':''}" data-hand-index="${i}" aria-label="${escapeHTML(def.name)}, ${def.stats.mana} mana, key ${i+1}" aria-pressed="${state.selection?.kind==='card'&&state.selection.handIndex===i}">${imageMarkup(def,'','hand-placeholder',false)}<span class="hand-cost">${def.stats.mana}</span><span class="hand-key">${i+1}</span><span class="hand-name">${escapeHTML(def.name)}${def.ethereal?`<small>FORM ${def.ethereal.formNumber}</small>`:def.rarity==='Emergent'?`<small>DEPLOY ${(team.cardDeployments[id]||0)+1}</small>`:''}</span></button>`;
     }).join('');
     const next=state.engine.cardFor(0,team.queue?.[0]);
     $('next-card').innerHTML=next?`<span class="micro-label">UP NEXT</span><div class="next-card-art">${imageMarkup(next,'','',false)}</div><span>${escapeHTML(next.name)}</span>`:'';
@@ -523,6 +547,10 @@ document.addEventListener('error',event=>{
 },true);
 document.addEventListener('click',event=>{
   const target=event.target.closest('button');if(!target)return;
+  if(target.dataset.chooseForm&&!state.engine){
+    const id=target.dataset.formRoot,key=target.dataset.chooseForm,root=state.catalog.byId.get(id);
+    if(root?.typeVariants.some(form=>form.ready&&form.id===`${id}/${key}`)){state.formChoices[id]=key;updateDeck();openInspector(root);}return;
+  }
   if(target.dataset.addCard){toggleCard(target.dataset.addCard);if($('inspector').open&&state.inspectorDefinition){const {def,kind,unit}=state.inspectorDefinition;openInspector(def,kind,unit);}return;}
   if(target.dataset.addSpell){toggleSpell(target.dataset.addSpell);if($('inspector').open&&state.inspectorDefinition){const {def,kind,unit}=state.inspectorDefinition;openInspector(def,kind,unit);}return;}
   if(target.dataset.inspectCard){openInspector(state.catalog.byId.get(target.dataset.inspectCard));return;}
@@ -649,7 +677,7 @@ async function load() {
 }
 $('retry-load').addEventListener('click',load);
 window.arenaApp={
-  get catalog(){return state.catalog;},get engine(){return state.engine;},get renderer(){return state.renderer;},get deck(){return [...state.deck];},get spellDeck(){return [...state.spellDeck];},get selection(){return state.selection;},
+  get catalog(){return state.catalog;},get engine(){return state.engine;},get renderer(){return state.renderer;},get deck(){return [...state.deck];},get spellDeck(){return [...state.spellDeck];},get formChoices(){return {...state.formChoices};},get selection(){return state.selection;},
   startMatch,returnToLobby,quickBuild,selectHand,selectSpell,clearSelection,
 };
 load();

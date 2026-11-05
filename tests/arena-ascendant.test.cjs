@@ -11,7 +11,7 @@ async function fixture(ids=[]){
 }
 
 test('five Ascendant roots and all five empowered forms unlock with authored stats and geometry',async()=>{
- const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,121);
+ const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,137);
  for(const id of ['reacher','bastra','maapp','avara','john-reynolds'])for(const key of [id,id+'/ascended']){const c=catalog.byId.get(key);assert.equal(c.ready,true,key);assert.deepEqual(c.reasons,[]);close(c.stats.vision,8000);}
  const r=catalog.byId.get('reacher');assert.equal(r.combat.attackType,'mixed');assert.equal(r.combat.targets,'both');close(r.combat.attackDistance,500);assert.deepEqual(r.attack.modes.map(m=>[m.damage,m.count,m.interval,m.delay,m.range]),[[24,1,1.2,0,1000],[8,2,.2,.8,2200]]);
  const m=catalog.byId.get('maapp');assert.deepEqual([m.combat.attackWidth,m.combat.attackDistance,m.combat.attackAngle,m.combat.weight],[5000,5000,360,'light']);

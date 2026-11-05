@@ -9,9 +9,10 @@ const modules=Promise.all([import('../arena/js/power.mjs'),import('../arena/js/c
 
 test('shared Power scorer preserves all 138 original Codex scores, including dual-card averages',async()=>{
   // Keep the original-stat regression fixture independent of the requested
-  // Maapp interval and Stormblade Range rebalances. The next test checks every current authored score.
+  // Maapp interval, Stormblade Range and Leno Form II Range rebalances. The next test checks every current authored score.
   const baseline=structuredClone(cards),maapp=baseline.find(c=>c.id==='maapp');
   baseline.find(c=>c.id==='stormblade').additionalStats.range='2600';
+  baseline.find(c=>c.id==='leno').type2.additionalStats.range='3200';
   maapp.stats.attackSpeed='0.25s';maapp.upgradedsecondForm.stats.attackSpeed='0.25s';
   const [{createPowerScorer}]=await modules,score=createPowerScorer(baseline);
   const scores=baseline.map(card=>[card.id,score(card)]);

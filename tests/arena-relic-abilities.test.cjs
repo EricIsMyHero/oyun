@@ -28,7 +28,7 @@ test('all twenty-three Relic cards and their summons unlock with verified native
   const ids=['stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','sylviana','sylviana/butterflies','malvaris','malvaris/phantomis','pyhsic','unara','clara','far','lyra','naar','dark-necromancer/bladeknight','dark-necromancer/stormbow','dark-necromancer/ironhide'];
   for(const id of ids){assert.equal(catalog.byId.get(id).ready,true,id);assert.deepEqual(catalog.byId.get(id).reasons,[]);}
   for(const id of ['etheris','format','artist','artist/flock-of-ravens'])assert.equal(catalog.byId.get(id).ready,true,id);
-  assert.equal(catalog.cards.filter(c=>c.ready).length,121);
+  assert.equal(catalog.cards.filter(c=>c.ready).length,137);
   assert.equal(catalog.byId.get('magma').ready,true);assert.equal(catalog.byId.get('fallen-angel').ready,true);
 });
 

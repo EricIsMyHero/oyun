@@ -168,6 +168,115 @@ terrain outside vision remain hidden there too. Moving the camera into fog
 does not reveal that area. Static terrain is cached separately from the camera
 so scrolling does not regenerate the illustrated forest.
 
+## Emergent deployment progression
+
+The seven Emergent roots use the authored geometry from `rarity/emergent.json`.
+Each player has an independent counter for each root card. A counter advances
+only after a successful, paid deployment: failed placements, summons and clones
+do not advance it. Every body in one paid formation receives the same ordinal.
+Counters reset each match. Third/fifth/even-deployment enhancements apply only
+to the matching placements, rather than becoming permanent account upgrades.
+The hand and inspector show placement ordinals and the relevant live state.
+
+- **XII Josh:** three hovering bodies, each with a 1000-point-wide, 1000-point
+  attack. Only enemy Mana in a centered 2 × 2 square grants haste: half the summed
+  Mana in percentage points. Falling below 10% Health triggers ten seconds of
+  flight, followed by a 24-Damage landing in 1.5 × 1.5 tiles. Landing still ends
+  flight under Silence, but Silence prevents its damage. Every third deployment
+  gains a 33% on-hit chance to apply 15% Misfortune indefinitely; Cleanse works.
+- **Dumpsy:** three non-throwable inner objects orbit on a 0.90s weapon cycle.
+  Deaths generate collectible outer objects, capped at twelve, which can be
+  thrown at most once per 1.15s. Basic orbital weapons continue under Silence;
+  passive growth and elemental applications do not. Consecutive successful hits
+  on one target compound +25% Damage without an authored cap. Every even
+  deployment gives each new object a 25% chance of a random element: three
+  seconds of 25% Slow, a 7 × 2 Poison packet or a 3 × 5 Burn packet. Objects have
+  a 500-point width/travel profile; the source targeting ranges remain 1 / 3.2
+  tiles. There are no stored instant volleys after a long period without loot.
+- **Blesser:** the 1000-wide, 2000-distance cone is **45°**. It prepares for
+  twelve seconds without moving or attacking, then grants one random blessing
+  to the highest-current-Health ally within twelve tiles. Tier I/II/III grant
+  20/22.5/25% all-stat bonuses, 25/28.5/32% of maximum Health as Shield, or a
+  1.75-square trap with 2/3/4s Stun and three-tile Knockback. Tier III is the cap.
+  Stat blessings exclude Mana, Count and Life; attack/delay intervals improve
+  in the correct direction and percentage chances retain their normal caps.
+  Blessed Shield retaliates with one second of Bleeding when its layer is hit.
+- **JS:** eight-second Curse increases incoming damage by 25%, or 75% for every
+  fifth deployment. Each currently missing 2% Health grants 25 points / 0.025
+  tiles of Range. Healing removes the corresponding conditional Range bonus.
+- **Mimic:** a 75° cone, width 1000 and travel 2750. Each victim can produce at
+  most two permanent clones: one for its first shield break and one after
+  Mimic's cumulative Health damage reaches 20% of that victim's maximum Health.
+  Clones retain native abilities, with Health, Shield and Damage reduced 30%.
+  Every third deployment grants permanent Predominance and 50% negative-status
+  reflection. Reflections cannot recursively reflect one another. Whisper's
+  priority possession remains unbreakable and receives its existing penalty.
+- **The Seven Sins:** a 1% Human roll, otherwise an equally likely one of the
+  seven manifestations. Human has 100 Health, 100 Shield, 10 Damage, a one-second
+  attack, 500/500 geometry and no passive. Pride, Greed, Lust, Envy, Gluttony,
+  Wrath and Sloth use their native rules. Greed drains current Health and grows
+  both Health caps on deaths. Lust applies Taunt in a 3 × 3 square and bonds to
+  a weak ally, with a two-second rebind delay. Envy copies burst count/damage,
+  interval, delay and Range rather than creature type. It restores its base
+  weapon under Silence. Native manifestation rolls never advance deployments.
+- **Stella:** a fixed 20-Damage landing in 1.5 × 1.5 tiles, followed by a visible
+  two-tile-wide glider dealing 12 Damage over three tiles. Starting with the
+  second deployment, only glider Damage and travel gain 10% per placement,
+  capped at +50%. Ordinary seven-shot attacks retain their 500/500 geometry.
+
+## Ethereal forms
+
+All nine Ethereal roots have two complete, selectable forms. Choose an available
+form in the card inspector before adding the card to the deck. The selection is
+saved with the deck and may be changed before battle. The chosen form's exact
+stats, class, native passive and summons are used for every deployment of that
+root in the match. Combat cannot change the choice. The bot chooses legal forms
+for its independently generated deck; it does not copy the player's choices.
+
+- **Ase:** gains one part each seven seconds and spends four to summon the
+  selected Giga-R every 28 seconds. Form I's melee robot has 22s of 10% protection;
+  Form II's ranged robot gains 3% haste per kill, capped at +30%.
+- **Leno:** both forms target ground. Form I gains +45 Critical Chance for 25s,
+  then +15. Form II has 1000-point Range and +40% Damage against the six listed
+  non-Human creature types. Both use 500/500 projectile geometry.
+- **King:** both forms use 1000/1000, 180° cones. Form I grants nearby allies
+  25% haste. Stationary Form II calls one Guard every twelve seconds and gains
+  two seconds of 15% protection. Guards deal +30% Damage to shielded enemies.
+- **Dracula:** Form I hovers and steals up to 25 additional Lifesteal Chance
+  points, reaching 50% with its original 25%. Flying Form II gains five Damage
+  Reduction points per missing 10% Health and creates ten very-light flying Bats
+  on death. Each Bat's first landed strike deals +40% Damage.
+- **Leila:** Form I throws a 12-Damage, 3 × 3 bomb after 24 successful bullets,
+  inflicting four seconds of 12.5% Blind. Form II explodes in 1 × 1 tiles; each
+  fifth strike expands to 1.2 × 1.2 and applies eight seconds of Bleeding.
+- **Lord:** Form I triggers five seconds of Immortal once per deployment below
+  5% Health, including a lethal crossing, then heals a quarter of the Health
+  missing at that instant over five pulses. Form II regenerates one Health each
+  second and summons up to five Riders from 10% Health-loss thresholds. Riders
+  permanently gain 50% Damage when their Shield first breaks.
+- **Hunter:** Form I targets ground and deals +60% to Animals, becoming Wolf on
+  death. Form II deals +50% to Humans and becomes a flying Eagle. Wolf hits
+  shields harder; Eagle bypasses Shield. These are native death summons, not
+  changes to the selected prematch form.
+- **Soul Master:** deaths grant souls. Form I gains +25% Damage per ten souls;
+  Form II spends eight souls to deal 10% of a frontal target's maximum Health.
+- **Mr. and Mrs. Ray:** each form deploys its matching couple. Within two tiles,
+  both gain three charge/s in Form I or two in Form II. At 100 each, Form I
+  fuses into one target for five seconds, sharing summed Health while retaining
+  individual shields. Twenty quarter-second pulses deal five Damage and heal
+  three; protection is 25%. Splitting preserves the pooled Health fraction.
+  Form II advances five tiles in 3.75s and each partner hits each crossed enemy
+  once for 75 Damage, with 75% protection. Below 20% Health during a dash, each
+  partner may heal 75% of missing Health once per deployment. Dash collisions
+  do not shorten its authored travel. Fusion cleanup handles deaths and control
+  changes without leaving hidden bodies or shared Health behind.
+
+The 193 definitions include the newly authored Human manifestation. Missing
+Shield-absorption values use the game's standard 70%; authored zeroes remain
+zero. Source DPS remains informational. Native abilities stay Azerbaijani.
+Original Power scoring is unchanged; regression baselines restore only the
+explicitly rebalanced original stats when checking historical scores.
+
 ## Apex cards
 
 All 21 Apex roots and their reachable forms are battle-ready. Projectile width,
@@ -257,7 +366,7 @@ amounts display as `+<1` rather than `+0`.
 ## Codex fidelity and locked cards
 
 The authored status timing completes three additional native card profiles:
-**Snaykies**, **Bees** and **Toxic**. There are now **121 playable root cards** and
+**Snaykies**, **Bees** and **Toxic**. There are now **137 playable root cards** and
 **17 playable spells**, including **Giga Bomb**. Poison packets use the native
 A × B hit-count rule: Snaykies 2 × 4, Bees 8 × 2, Toxic 2 × 3, one tick each
 0.75 seconds. Each successful hit keeps its own packet. Bees sacrifice themselves

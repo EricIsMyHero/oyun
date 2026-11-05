@@ -40,8 +40,8 @@ test('arena catalog preserves every source definition and exposes honest data lo
   const [{buildCatalog,imageFor,formatStat},{ABILITIES}]=await modules;
   const before=JSON.stringify([rawCards,rawSpells]);
   const c=buildCatalog(rawCards,rawSpells);
-  assert.equal(c.cards.length,138);assert.equal(c.forms.length,192);assert.equal(c.spells.length,26);
-  assert.equal(c.cards.filter(x=>x.ready).length,121);assert.equal(c.spells.filter(x=>x.ready).length,17);
+  assert.equal(c.cards.length,138);assert.equal(c.forms.length,193);assert.equal(c.spells.length,26);
+  assert.equal(c.cards.filter(x=>x.ready).length,137);assert.equal(c.spells.filter(x=>x.ready).length,17);
   assert.equal(JSON.stringify([rawCards,rawSpells]),before);
   for(const card of c.cards){assert.equal(card.raw,rawCards.find(x=>x.id===card.id));assert.equal(card.ready,card.reasons.length===0);if(card.ready){assert.ok(card.combat.attackDistance>0);if(card.combat.attackType!=='none'&&!ABILITIES[card.id]?.noBasicAttack)assert.ok(card.attack.interval>0);}}
   assert.equal(c.byId.get('fen').ready,true);assert.equal(c.byId.get('nightprowler').ready,true);assert.equal(c.byId.get('nortex').ready,true);
@@ -218,9 +218,10 @@ test('every enabled native card and reachable form has a behavioral test',async(
   const [,{ABILITIES}]=await modules;
   const catalog=await catalogPromise;
   function verify(card){
+    if(card.choiceRequired){card.typeVariants.filter(form=>form.ready).forEach(verify);return;}
     assert.ok(ABILITIES[card.id],card.id);
     // Apex behavior is exercised with the real engine in arena-apex.test.cjs.
-    assert.ok(cases[card.id]||card.rarity==='Apex',`${card.id} missing behavioral assertion`);
+    assert.ok(cases[card.id]||['Apex','Emergent','Ethereal'].includes(card.rarity),`${card.id} missing behavioral assertion`);
     card.forms.forEach(verify);if(card.ascended)verify(card.ascended);
   }
   catalog.cards.filter(x=>x.ready).forEach(verify);

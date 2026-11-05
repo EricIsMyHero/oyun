@@ -5,7 +5,7 @@ import { visibilitySources, isEntityVisible } from './vision.mjs';
 const airTarget = def => ['air','both'].includes(def.combat?.targets);
 const ranged = def => ['ranged','mixed'].includes(def.combat?.attackType);
 const frontline = def => def.combat?.attackType==='melee' && num(def.stats.health)+num(def.stats.shield)>=230;
-const living = unit => unit.alive && !unit.engulfedBy && !unit.banished && !unit.possessingId && !unit.parasitizingId;
+const living = unit => unit.alive && !unit.engulfedBy && !unit.banished && !unit.possessingId && !unit.parasitizingId&&!unit.fusedInto;
 const shuffled = (values,random) => {
   const copy=[...values];
   for(let i=copy.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]];}
@@ -36,7 +36,14 @@ export function buildBotLoadout(cards,spells,random) {
   const offense=spellPool.find(s=>s.kind!=='building'&&!['healing-light','shield-of-serenity','lunar-mirrage'].includes(s.id));
   if(offense){spellIds.push(offense.id);capacity-=offense.charge;}
   for(const spell of spellPool)if(!spellIds.includes(spell.id)&&spell.charge<=capacity){spellIds.push(spell.id);capacity-=spell.charge;}
-  return {deck:deck.map(c=>c.id),spellDeck:spellIds};
+  const formChoices={};
+  for(const card of deck.filter(c=>c.choiceRequired)){
+    const variants=card.typeVariants.filter(v=>v.ready),needsAir=!deck.some(c=>c!==card&&airTarget(c));
+    const preferred=needsAir?variants.filter(airTarget):variants;
+    const pool=preferred.length?preferred:variants,chosen=pool[Math.floor(random()*pool.length)];
+    formChoices[card.id]=chosen.id.split('/').at(-1);
+  }
+  return {deck:deck.map(c=>c.id),spellDeck:spellIds,formChoices};
 }
 
 export function createBotState(engine) {

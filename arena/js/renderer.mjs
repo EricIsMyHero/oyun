@@ -652,6 +652,11 @@ export class ArenaRenderer {
     const attacking=time-attackTime<.18&&u.shots>0;
     const hidden=statuses.some(st=>['invisible','invisibility','stealth'].includes(st.kind));
     ctx.save();ctx.globalAlpha=ghost ? .58 : hidden ? .48 : 1;
+    for(const object of [...(u.memory?.dumpFixed||[]),...(u.memory?.dumpLoot||[])]){
+      const orb=this.screenAt(u.x+(object.ox||0),u.y+(object.oy||0)),tint=({slow:'#94d6ec',poison:'#b5df78',burn:'#ffb875'})[object.element]||'#ddc59f';
+      ctx.save();ctx.shadowColor=tint;ctx.shadowBlur=object.element?8:2;ctx.translate(orb.x,orb.y-s*.4);ctx.rotate(time*7+object.angle);
+      polygon(ctx,[{x:-s*.13,y:0},{x:0,y:-s*.07},{x:s*.13,y:0},{x:0,y:s*.07}],tint,'#243c35',1);ctx.restore();
+    }
     const shadow=ctx.createRadialGradient(p.x,p.y+s*.07,0,p.x,p.y+s*.07,size*.72);
     shadow.addColorStop(0,'#08201fb3');shadow.addColorStop(1,'#102c2b00');ellipse(ctx,p.x,p.y+s*.07,size*.74,size*.26,shadow);
     if(u.shield>0&&!ghost)ellipse(ctx,p.x,py-size*.36,size*.65,size*.71,null,'#9bddf53b',1);
@@ -784,7 +789,10 @@ export class ArenaRenderer {
     ctx.strokeStyle=trail;ctx.lineWidth=clamp(baseWidth*s*.6,3,8)*boost;ctx.globalAlpha=.35;
     ctx.beginPath();ctx.moveTo(tail.x,tail.y-s*.6);ctx.lineTo(p.x,p.y-s*.6);ctx.stroke();
     ctx.globalAlpha=1;ctx.shadowColor=color;ctx.shadowBlur=9*boost;ctx.strokeStyle=color;ctx.lineWidth=clamp(baseWidth*s*.23,1,3)*boost;ctx.stroke();
-    if(b.kind==='grenade'){
+    if(b.kind==='glider'){
+      ctx.translate(p.x,p.y-s*.6);ctx.rotate(Math.atan2(dy,dx));const span=Math.max(s*.4,(b.width||2)*s*.45);
+      polygon(ctx,[{x:s*.3,y:0},{x:-s*.2,y:-span},{x:-s*.05,y:0},{x:-s*.2,y:span}],'#d5e9cf','#768b70',1.2);ctx.strokeStyle='#fff4d1';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-s*.22,0);ctx.lineTo(s*.3,0);ctx.stroke();
+    }else if(b.kind==='grenade'){
       const radius=clamp(s*.13,3,6);ellipse(ctx,p.x,p.y-s*.6,radius,radius*.92,'#ffbb77','#ffedd0',1);
       ctx.strokeStyle='#d9e9b0';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(p.x-radius*.5,p.y-s*.6-radius);ctx.lineTo(p.x,p.y-s*.6-radius*1.4);ctx.lineTo(p.x+radius*.5,p.y-s*.6-radius);ctx.stroke();
     }else if(b.kind==='raspberry'){

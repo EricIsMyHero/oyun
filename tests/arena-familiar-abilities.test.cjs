@@ -23,7 +23,7 @@ async function fixture(){
 }
 
 test('Albert and Chicken unlock without changing their authored stats or inventing a Chicken attack interval',async()=>{
-  const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,121);
+  const {catalog}=await fixture();assert.equal(catalog.cards.filter(c=>c.ready).length,137);
   for(const id of ['albert','chicken'])assert.deepEqual(catalog.byId.get(id).reasons,[]);
   const a=catalog.byId.get('albert'),c=catalog.byId.get('chicken');
   assert.deepEqual(a.attack,{count:12,damage:7,interval:.25,delay:1.25});assert.equal(a.stats.mana,15);assert.equal(a.stats.sps,28);

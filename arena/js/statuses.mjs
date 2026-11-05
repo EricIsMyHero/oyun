@@ -24,6 +24,8 @@ export function statModifiers(u,key,time) {
 export function statValue(u,key,time,base=num(u?.stats?.[key])) {
   const {flat,factor}=statModifiers(u,key,time),inverse=key==='attackSpeed'||key==='delay';
   let value=inverse?(base+flat)/Math.max(.001,factor):Math.max(0,base-flat)*factor;
+  if(!['mana','number','life'].includes(key))for(const buff of statusesAt(u,'allStatsBonus',time))value=inverse?value/(1+buff.magnitude):value*(1+buff.magnitude);
+  if(statusesAt(u,'allStatsBonus',time).length){const cap={criticalChance:100,lifestealChance:100,lifesteal:100,dodge:70,damageminimiser:90,criticdamageminimiser:90,flexibility:80,healBonus:100,criticDamage:5,shieldtakendamage:100}[key];if(cap!=null)value=Math.min(cap,value);}
   if(key==='damage'||key==='attackSpeed')for(const s of statusesAt(u,'berserk',time)) {
     const cap=Math.max(1,statValue(u,'health',time,u.maxHp||num(u.stats?.health,1)));
     if(u.hp>=cap*s.threshold)continue;

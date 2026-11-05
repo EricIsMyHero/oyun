@@ -120,7 +120,7 @@ const server = http.createServer(async (req, res) => {
       }
       return {forms,rarities:[...rarities]};
     });
-    assert.equal(rendered.forms, 192);
+    assert.equal(rendered.forms, 193);
     assert.equal(new Set(rendered.rarities.map(x => x[1])).size, 8);
 
     await page.evaluate(()=>openModal(allCards.find(c=>c.id==='henry')));
@@ -315,7 +315,7 @@ const server = http.createServer(async (req, res) => {
       closeModal();
       return count;
     });
-    assert.equal(mobileForms,192);
+    assert.equal(mobileForms,193);
     await page.evaluate(() => openModal({id:'missing-art',name:'Missing art',rarity:'Apex',stats:{health:0},additionalStats:{}}));
     await page.waitForFunction(() => document.getElementById('modal-placeholder').style.display === 'flex');
     assert.equal(await page.locator('#modal-img').isVisible(), false);

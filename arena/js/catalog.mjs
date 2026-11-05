@@ -31,6 +31,7 @@ function normalizeCard(raw,parent=null,id=raw.id||slugify(raw.name)) {
   const values={...raw.additionalStats,...raw.stats};
   const stats=Object.fromEntries(STAT_KEYS.map(key=>[key,num(values[key])]));
   if(values.criticDamage==null||values.criticDamage==='-')stats.criticDamage=1;
+  if(values.shieldtakendamage==null||/^[-—–]$/.test(String(values.shieldtakendamage).trim()))stats.shieldtakendamage=70;
   let parsed=burst(raw.stats?.damage);
   let sequence;
   let modes;
@@ -78,7 +79,13 @@ function normalizeCard(raw,parent=null,id=raw.id||slugify(raw.name)) {
   for(const form of [...def.forms,...def.typeVariants,...(def.ascended?[def.ascended]:[])]){
     if(!form.ready)reasons.push(`${form.name}: ${form.reasons.join(' ')}`);
   }
-  if(raw.isDual)reasons.push('A complete selectable Type I or Type II combat profile is required.');
+  if(raw.isDual){
+    const available=def.typeVariants.filter(form=>form.ready),preview=available[0]||def.typeVariants[0];
+    if(preview){def.stats={...preview.stats,mana:num(raw.stats?.mana,preview.stats.mana)};def.attack=preview.attack;def.combat=preview.combat;}
+    def.choiceRequired=true;
+    def.reasons=available.length?[]:def.typeVariants.flatMap((form,i)=>form.reasons.map(reason=>`Form ${i+1}: ${reason}`));
+    def.ready=available.length>0;return def;
+  }
   def.reasons=[...new Set(reasons)];def.ready=def.reasons.length===0;
   return def;
 }

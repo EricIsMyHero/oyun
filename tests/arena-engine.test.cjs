@@ -107,8 +107,8 @@ test('every playable ranged basic attacker fires and lands projectiles at its Ra
     const {engine:e,base}=await fixture();
     const def=structuredClone(card),point={x:15,y:14};
     const [source]=e.spawn(def,0,point,1,{count:1});
-    const reach=e._range(source),target=inert(e,base,1,{x:point.x+reach*.8,y:14},{health:100000});
-    assert.ok(reach>1,card.id);
+    const reach=e._range(source),target=inert(e,base,1,{x:point.x+reach*(reach<=1?.98:.8),y:14},{health:100000});
+    assert.ok(reach>=1,card.id);
     e.step(1/30);
     assert.ok(source.shots>0,`${card.id} fires before contact`);
     assert.ok(Math.hypot(source.x-point.x,source.y-point.y)<1e-8,`${card.id} holds firing distance`);
