@@ -53,3 +53,5 @@ body[data-mode="battle"] .stage-message{left:16px;right:auto;bottom:16px;transfo
 .ethereal-choice:disabled{opacity:.5;cursor:default}
 @media(max-width:480px){.ethereal-choices{grid-template-columns:1fr}}
 .hand-name small{display:block;margin-top:3px;font:600 9px system-ui,sans-serif;letter-spacing:.1em;color:#bed4be}
+
+.live-status{border-color:color-mix(in srgb,var(--status-color,#a8c9c1) 40%,#263b3e)}.live-status>svg{width:16px;height:16px;flex:none;color:var(--status-color,#b8d8ce)}

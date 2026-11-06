@@ -1,6 +1,7 @@
 import { loadCatalog } from './catalog.mjs';
 import { ArenaEngine } from './engine.mjs';
 import { ArenaRenderer } from './renderer.mjs';
+import { statusIconSVG, statusVisual } from './visuals.mjs';
 import { RULES, STAT_KEYS, num } from './rules.mjs';
 import { MAP, distance, isDeployable } from './map.mjs';
 import { isEntityVisible, isPointVisible } from './vision.mjs';
@@ -207,7 +208,7 @@ function openInspector(def,kind='card',unit=null) {
   const liveEffects=unit?(unit.statuses||[]).filter(s=>s.until>state.engine.time+1e-7).map(s=>{
     const names={regen:'Heal',invisible:'Invisibility',bleed:'Bleeding',statReduction:'Stat Reduction'};
     const name=names[s.kind]||label(s.kind.replace(/([a-z])([A-Z])/g,'$1 $2'));
-    return `<span class="live-status" data-status="${escapeHTML(s.kind)}">${escapeHTML(name)} <small>${s.kind==='ink'?`${s.stacks} / 21 · ${Math.round(s.magnitude*100)}% slow`:Number.isFinite(s.until)?`${Math.max(.1,s.until-state.engine.time).toFixed(1)}s`:'Ongoing'}</small></span>`;
+    return `<span class="live-status" style="--status-color:${statusVisual(s.kind).color}" data-status="${escapeHTML(s.kind)}">${statusIconSVG(s.kind)}${escapeHTML(name)} <small>${s.kind==='ink'?`${s.stacks} / 21 · ${Math.round(s.magnitude*100)}% slow`:Number.isFinite(s.until)?`${Math.max(.1,s.until-state.engine.time).toFixed(1)}s`:'Ongoing'}</small></span>`;
   }).join(''):'';
   const forms=[...(def.forms||[]),...(!choiceRoot?(def.typeVariants||[]):[])];
   $('inspector').style.setProperty('--rarity',rarityColor(def));

@@ -867,6 +867,31 @@ on top of native card handlers.
 
 ## Status effects
 
+The battlefield uses hand-drawn vector status symbols instead of colored dots.
+Frozen, Slow, Poison, Burn, Stun, Root, Silence, Blind and other conditions have
+separate silhouettes and colors, shared with the live inspector's text labels.
+Crowd control takes priority above a card; repeated packets share one icon with
+a stack count, and excess conditions use a `+N` badge. Minor stat-bonus icons
+appear on selected cards to keep armies readable. Frozen bodies gain faceted ice,
+Slow draws a foot ring, Stun has orbiting stars, and Root wraps the feet in vines.
+First applications emit a short pulse; refreshing an existing effect does not
+spam particles. Thawing sheds ice while retaining the existing follow-up Slow.
+
+Persistent **Roots**, **Nightfall Curse**, **Spirit of the Wild**, **Octarion
+poison clouds** and **Mini Rotter mist** now draw their actual circle/rectangle
+throughout their lifetime. Color, interior texture, a team-colored boundary and
+a diminishing perimeter trace distinguish the areas. A label shows the name and
+seconds remaining; mobile and zoomed-out views use the symbol and seconds only.
+Expiration removes the area. Fog masks areas and their labels; these visuals do
+not grant sight. All animation and countdowns use paused simulation time.
+
+Lifetime Health loss, including Gloop's ageing, uses a **red negative number and
+hourglass**. Healing retains green positive numbers. Spell footprints, radial
+waves, leap trails, poison motes, shield impacts and critical-hit text have
+separate visual treatments. These are presentation changes; authored card
+statistics, damage amounts and ability prose are preserved.
+
+
 `data/info.json` contains the readable rules. `arena/js/statuses.mjs` defines the
 canonical names, intervals and stat modifiers; native cards supply their own
 strengths, durations, radii and health thresholds. A listed minimum does not
@@ -974,6 +999,7 @@ Cloudflare R2 URLs; unavailable artwork has a local visual fallback.
 ```sh
 node --test tests/*.test.cjs
 node tests/arena.browser.cjs
+node tests/arena-effects.browser.cjs
 ```
 
 The browser check uses Playwright and Chromium (`/usr/bin/chromium`, or set
@@ -985,3 +1011,7 @@ pause, restart and small-screen layouts. Browser import mappings version every
 arena module together, including vision, so a previous cached geometry cannot
 mix with the current map or renderer.
 The test writes preview screenshots under `/tmp` for visual review.
+
+The effects browser check also compares rendered pixels at each active area
+boundary, expired areas and hidden fog, and checks status icons, inspector labels,
+50% zoom and a phone viewport. Set `ARENA_EFFECTS_URL` to test a deployed Arena.

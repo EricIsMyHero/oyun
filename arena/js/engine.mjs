@@ -600,11 +600,11 @@ export class ArenaEngine {
       }return;
     }
     if(id==='spirit-of-the-wild'){
-      this.state.fields.push({id:`field-${++this.serial}`,kind:'suppression',...point,side,shape,until:this.time+10,next:this.time,source});return;
+      this.state.fields.push({id:`field-${++this.serial}`,kind:'suppression',...point,side,shape,born:this.time,until:this.time+10,next:this.time,source});return;
     }
     if(id==='roots'||id==='nightfall-curse'){
       const attack=burst(raw.damageToCard),castleAttack=burst(raw.damageToCastle),interval=num(raw.timeBetweenDamage);
-      this.state.fields.push({id:`field-${++this.serial}`,kind:id,...point,side,shape,until:this.time+attack.count*interval,next:this.time,left:attack.count,interval,attack,castleAttack,source});return;
+      this.state.fields.push({id:`field-${++this.serial}`,kind:id,...point,side,shape,born:this.time,until:this.time+attack.count*interval,next:this.time,left:attack.count,interval,attack,castleAttack,source});return;
     }
     const attack=burst(raw.damageToCard)||{damage:0,count:1},castleAttack=burst(raw.damageToCastle)||{damage:0,count:1};
     let extra=0,castleExtra=0;
@@ -650,11 +650,13 @@ export class ArenaEngine {
     const normalized=statusParameters(kind,magnitude,extra);if(!normalized)return null;
     magnitude=normalized.magnitude;extra=normalized.params;
     const actual=NEGATIVE.has(kind)&&Number.isFinite(duration)?duration*(1-clamp(this.statValue(target,'flexibility'),0,80)/100):duration;
+    const firstVisual=!target.statuses.some(s=>s.kind===kind&&s.until>this.time);
     const sourceId=source?.id??null;
     if(sourceId)this.statusSources.set(sourceId,source);
     let entry=!extra.stack&&target.statuses.find(s=>s.kind===kind&&s.sourceId===sourceId&&s.until>this.time);
     if(entry){entry.until=Math.max(entry.until,this.time+actual);entry.magnitude=Math.max(entry.magnitude||0,magnitude);Object.assign(entry,extra);}
     else {entry={kind,until:this.time+actual,magnitude,sourceId,nextTick:this.time+extra.interval,...extra};target.statuses.push(entry);}
+    if(firstVisual&&['frozen','stun','slow','poison','burn','root','curse','blind','silence'].includes(kind))this.fx('status',target.x,target.y,{side:target.side,unitId:target.id,statusKind:kind,duration:.5});
     if(kind==='taunt'){
       const radius=num(extra.radius,this.statValue(target,'range')/1000);
       for(const enemy of this.near(target,radius,u=>this.isEnemy(target,u)))this.status(enemy,'taunted',actual,0,target,{scheduled:true});
@@ -762,7 +764,7 @@ export class ArenaEngine {
     while(u.alive&&decay.next<=Math.min(this.time,u.expiresAt)+EPS){
       // Ageing is health loss, independent of shields and combat immunities.
       const amount=this.maxHealth(u)*decay.fraction;u.hp=Math.max(0,u.hp-amount);decay.next+=decay.interval;
-      this.fx('hit',u.x,u.y,{amount,side:u.side,color:'#b5df78'});
+      this.fx('lifeLoss',u.x,u.y,{amount,side:u.side,color:'#ff747d',cause:'lifetime'});
       if(u.hp<=EPS)this.killUnit(u);
     }
   }
@@ -1307,7 +1309,7 @@ export class ArenaEngine {
         else if(s.kind==='regen')this.heal(u,s.amount??s.magnitude,null);
         s.nextTick+=s.interval||1;
       }
-      if(s.kind==='frozen'&&s.until<=this.time+EPS)this.status(u,'slow',3,.25,this._sourceFor(s),{scheduled:true});
+      if(s.kind==='frozen'&&s.until<=this.time+EPS){this.status(u,'slow',3,.25,this._sourceFor(s),{scheduled:true});this.fx('thaw',u.x,u.y,{side:u.side,unitId:u.id,duration:.55});}
     }
     u.statuses=u.statuses.filter(s=>s.until>this.time+EPS);
     if(u.banished&&!u.statuses.some(s=>s.banish))this.returnBanished(u);
