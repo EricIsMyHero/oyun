@@ -1,8 +1,8 @@
 import { loadCatalog } from './catalog.mjs';
 import { ArenaEngine } from './engine.mjs';
 import { ArenaRenderer } from './renderer.mjs';
-import { statusIconSVG, statusVisual } from './visuals.mjs';
-import { RULES, STAT_KEYS, num } from './rules.mjs';
+import { statusIconSVG, statusVisual, nativeCharge } from './visuals.mjs';
+import { RULES, STAT_KEYS, num, RAY_CHARGE } from './rules.mjs';
 import { MAP, distance, isDeployable } from './map.mjs';
 import { isEntityVisible, isPointVisible } from './vision.mjs';
 import { CAMERA } from './camera.mjs';
@@ -232,13 +232,15 @@ function openInspector(def,kind='card',unit=null) {
     if(unit.def.id==='mimic')notes.push(`<section class="live-status-section" data-mimic-clones><h3>Mimic Clones</h3><p>At most two per enemy: one shield break and one 20% Health-loss trigger.<br>Clones retain native abilities; Health, Shield and Damage are reduced by 30%.</p></section>`);
     if(unit.def.id==='stella')notes.push(`<section class="live-status-section" data-stella-glider><h3>Glider Bonus · +${Math.round((unit.memory.gliderBonus||0)*100)}% / +50%</h3><p>Landing: 20 Damage in 1.5 × 1.5 tiles. Glider: ${Number((12*(1+(unit.memory.gliderBonus||0))).toFixed(2))} Damage · ${Number((3*(1+(unit.memory.gliderBonus||0))).toFixed(2))} tiles.</p></section>`);
     if(unit.memory.envyWeapon)notes.push(`<section class="live-status-section" data-envy-weapon><h3>Copied Weapon</h3><p>${unit.memory.envyWeapon.attack.count} × ${unit.memory.envyWeapon.attack.damage} Damage · ${unit.memory.envyWeapon.attack.interval}s · ${unit.memory.envyWeapon.attack.delay}s Delay · ${unit.memory.envyWeapon.attack.range/1000} tiles</p></section>`);
-    if((unit.def.variantId||unit.def.id).startsWith('mr-and-mrs-ray/'))notes.push(`<section class="live-status-section" data-ray-charge><h3>Twin Charge · ${Math.floor(unit.memory.rayCharge||0)} / 100</h3><p>Partners charge within 2 tiles.${unit.rayDash?'<br>Dash: 5 tiles in 3.75s.':''}${unit.sharedVitalsId?'<br>Health is shared for the fusion; shields remain individual.':''}</p></section>`);
+    const charge=nativeCharge(unit);
+    if(charge)notes.push(`<section class="live-status-section" data-native-charge="${charge.key}"><h3>${charge.label} · ${charge.caption}</h3><div class="native-charge-track" role="progressbar" aria-label="${charge.segmented?'Next flock bonus':charge.label}" aria-valuemin="0" aria-valuemax="${charge.max}" aria-valuenow="${Math.min(charge.max,charge.value)}" style="--charge-color:${charge.ready?'#ffdc88':charge.color}"><i style="width:${charge.ratio*100}%"></i></div>${charge.segmented?`<p>${Math.floor(charge.total)} total · next flock bonus at ${(Math.floor(charge.total/20)+1)*20}.</p>`:''}</section>`);
+    if((unit.def.variantId||unit.def.id).startsWith('mr-and-mrs-ray/'))notes.push(`<section class="live-status-section" data-ray-charge><h3>Twin Link</h3><p>${RAY_CHARGE.perSecond} charge per second while partners are within ${RAY_CHARGE.range} tiles.${unit.rayDash?'<br>Dash: 5 tiles in 3.75s.':''}${unit.sharedVitalsId?'<br>Health is shared for the fusion; shields remain individual.':''}</p></section>`);
 
     if(unit.theftState?.used)notes.push(`<section class="live-status-section" data-thief-stolen><h3>${unit.def.rootId==='thief'?'Stolen Ability':'Theft Attempt Used'}</h3><p>${escapeHTML(unit.theftState.donorName)} · One attempt per deployment. The victim loses the stolen passive.</p></section>`);
     if(unit.passiveDisabled)notes.push('<section class="live-status-section" data-passive-stolen><h3>Passive Stolen</h3><p>This card retains its combat stats and attacks, but its native passive is disabled.</p></section>');
     if(unit.parasiteIds?.length)notes.push(`<section class="live-status-section" data-parasite-host><h3>Sushu Inside · ${unit.parasiteIds.length}</h3><p>Each Sushu deals its Damage every second and cannot be targeted inside this host. It vanishes when this host dies.</p></section>`);
     if(unit.def.id==='r-1'){const boost=unit.memory.burstBoost;notes.push(`<section class="live-status-section" data-r1-boost="${boost?.active?'active':boost?.queued?'queued':'none'}"><h3>${boost?.active?'Enhanced Series Active':boost?.queued?'Enhanced Series Ready':'Burst Weapon'}</h3><p>3% chance after a complete series to enhance all three bullets of the next series.<br>+10% Damage · 3× projectile width · 2× Range<br>Progress: ${unit.burstIndex} / 3 · ${boost?.active||boost?.queued?'1.5':'0.5'}-tile projectile width</p></section>`);}
-    if(unit.def.id==='laura')notes.push(`<section class="live-status-section" data-laura-charge><h3>Charge · ${Math.floor(unit.memory.charge||0)} / 100</h3><p>8 charge each second. Nearby allies gain +25% Damage, Attack Speed and Movement Speed for 30s. Reapplication refreshes the duration.</p></section>`);
+    if(unit.def.id==='laura')notes.push(`<section class="live-status-section" data-laura-charge><h3>Ally Bonuses</h3><p>8 charge each second. Nearby allies gain +25% Damage, Attack Speed and Movement Speed for 30s. Reapplication refreshes the duration.</p></section>`);
     if(unit.def.id==='void-wraith')notes.push(`<section class="live-status-section" data-void-links><h3>Damage Drain · +${(unit.memory.voidBonus||0).toFixed(1)} / 16</h3><p>${Object.keys(unit.memory.voidLinks||{}).length} linked enemies · Each loses 20% Damage.<br>Links break at a distance of 6 tiles.</p></section>`);
     if(unit.def.id==='mixela')notes.push(`<section class="live-status-section" data-mixela-growth><h3>Permanent Health Growth · +${Math.round(unit.memory.mixelaGrowth||0)}</h3><p>Nearby allied and enemy deaths grant 60% of their maximum Health to both current and maximum Health.</p></section>`);
     if(unit.def.id==='rotlings'){
@@ -258,7 +260,7 @@ function openInspector(def,kind='card',unit=null) {
     if(unit.sharedVitalsId)notes.push(`<section class="live-status-section" data-shared-vitals><h3>Shared Reserve</h3><p>${state.engine.units.filter(t=>t.sharedVitalsId===unit.sharedVitalsId).map(t=>escapeHTML(t.def.name)).join(' · ')}</p><p>${state.engine.vitalPools.get(unit.sharedVitalsId)?.healthOnly?'Health is shared during fusion; shields remain individual.':'Health and shield are shared.'} When shared health reaches zero, every linked card falls.</p></section>`);
     if(unit.def.id==='artist'){
       const charge=unit.memory.artistCharge||0,bonus=Math.floor(charge/20);
-      notes.push(`<section class="live-status-section" data-artist-charge="${charge}"><h3>Ink Charge · ${charge}</h3><p>On death: ${6+bonus*2} ravens for ${7+bonus} seconds.</p></section>`);
+      notes.push(`<section class="live-status-section" data-artist-charge="${charge}"><h3>Raven Flock</h3><p>On death: ${6+bonus*2} ravens for ${7+bonus} seconds.</p></section>`);
     }
     if(unit.def.id==='magma')notes.push('<section class="live-status-section" data-magma-trail><h3>Flame Trail</h3><p>1.5 tiles wide · Lasts 10 seconds · 3 damage each second. Affects grounded enemies.</p></section>');
     if(unit.def.id==='angels'){
@@ -277,7 +279,7 @@ function openInspector(def,kind='card',unit=null) {
     if(unit.def.id==='corsair-crew/pirate-girls')notes.push(`<section class="live-status-section" data-pirate-distance><h3>Distance Bonus · +${Number(((unit.memory.distanceBonus||0)*100).toFixed(2))}%</h3><p>0 tiles: +0% · 2.75 tiles: +75%</p></section>`);
     if(unit.def.id==='whisper')notes.push(`<section class="live-status-section" data-whisper-bonus="${unit.whisperState?.bonusSeconds||0}"><h3>Critical Conversion · +${unit.whisperState?.bonusSeconds||0}s</h3><p>Base control: 14s · Critical damage: Disabled</p></section>`);
     if(unit.def.id==='sunrise')notes.push(`<section class="live-status-section" data-sunrise-growth="${unit.memory.sunriseGrowth||0}"><h3>Movement Growth · +${unit.memory.sunriseGrowth||0} / +210 Health</h3><p>Moving: +1 current and Max Health every 0.6s. Time spent standing still does not count.</p></section>`);
-    if(unit.def.id==='wong')notes.push(`<section class="live-status-section" data-wong-burst="${unit.attackMode?.remaining??0}"><h3>${unit.attackMode?'Firearm Burst':unit.wongBurstUsed?'Melee · Burst Used':'Melee · Burst Ready'}</h3><p>Charge: ${unit.memory.charge||0} / 100<br>Firearm: ${unit.memory.wongShots||0} / 8 shots · 8 damage · 0.4s interval<br>One burst per deployment. Returns to melee after the final shot.</p></section>`);
+    if(unit.def.id==='wong')notes.push(`<section class="live-status-section" data-wong-burst="${unit.attackMode?.remaining??0}"><h3>${unit.attackMode?'Firearm Burst':unit.wongBurstUsed?'Melee · Burst Used':'Melee · Burst Ready'}</h3><p>Firearm: ${unit.memory.wongShots||0} / 8 shots · 8 damage · 0.4s interval<br>One burst per deployment. Returns to melee after the final shot.</p></section>`);
     if(unit.possessedBy){
       const controller=state.engine.units.find(u=>u.id===unit.possessedBy),control=controller?.whisperState;
       if(control)notes.push(`<section class="live-status-section" data-whisper-control><h3>Whisper Control · ${Math.max(0,control.until-state.engine.time).toFixed(1)}s</h3><p>Critical conversion: +${control.bonusSeconds}s${control.penalized?' · Duration penalty: 25%':''}</p><p>Locked control · Restores the previous owner at the current health and shield.</p></section>`);

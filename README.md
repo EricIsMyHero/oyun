@@ -11,7 +11,8 @@ progression resets each match. Spells with missing essential battle data still
 show their lock reasons.
 
 Persistent spells show their area and countdown; vector status icons identify
-affected cards, and lifetime Health loss displays in red.
+affected cards, native charge bars show ability buildup, and lifetime Health
+loss displays in red.
 
 Both castles have 1000 health and a 7.5-tile firing/deployment radius. Units and
 spell buildings deploy on roads or the castle courtyard inside that radius.

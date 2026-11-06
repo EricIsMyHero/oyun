@@ -1,4 +1,4 @@
-import { clamp } from './rules.mjs';
+import { clamp, RAY_CHARGE } from './rules.mjs';
 import { statusKind } from './statuses.mjs';
 
 // The same hand-drawn symbols are used on the battlefield and in the inspector.
@@ -23,6 +23,7 @@ export const ICON_PATHS = Object.freeze({
   moon:'M14 3a8 8 0 1 0 3 11A8 8 0 0 1 14 3Z',
   target:'M10 2v3M10 15v3M2 10h3M15 10h3M4 10a6 6 0 1 0 12 0 6 6 0 1 0-12 0M8 10a2 2 0 1 0 4 0 2 2 0 1 0-4 0',
   down:'M10 2v11M5 9l5 5 5-5M3 18h14',
+  charge:'M11 2L3 12h6l-1 6 9-11h-6Z',
 });
 const visual=(label,color,icon,priority)=>Object.freeze({label,color,icon,priority});
 const STATUS_VISUALS=Object.freeze({
@@ -67,6 +68,23 @@ export function statusBadges(statuses=[],time=0){
     else groups.set(kind,{kind,...v,count:1,until:s.until??Infinity});
   }
   return [...groups.values()].sort((a,b)=>a.priority-b.priority||a.kind.localeCompare(b.kind));
+}
+
+const CHARGE_CARDS=new Set(['laura','kai','wong','tribe','shellbyte','ali','unara','clara']);
+// Presentation reads native counters directly: no animation invents charge or
+// changes a passive. Current ability IDs also cover copied/stolen passives.
+export function nativeCharge(unit){
+  if(!unit||unit.passiveDisabled||unit.def?.passiveDisabled)return null;
+  const id=unit.def?.variantId||unit.def?.id||'',memory=unit.memory||{};
+  let key='charge',max=100,label='Charge',color='#88deed',segmented=false;
+  if(id.startsWith('mr-and-mrs-ray/')){key='rayCharge';max=RAY_CHARGE.maximum;label='Twin Charge';color='#e5bf9a';}
+  else if(/^ase\/type[12]$/.test(id)){key='parts';max=4;label='Robot Parts';}
+  else if(id==='artist'){key='artistCharge';max=20;label='Ink Charge';color='#c99ae6';segmented=true;}
+  else if(!CHARGE_CARDS.has(id))return null;
+  const total=Number.isFinite(memory[key])?Math.max(0,memory[key]):0;
+  const value=segmented?total%max:total,ready=!segmented&&value>=max-1e-7;
+  return {key,label,color,total,value,max,ready,segmented,ratio:clamp(value/max,0,1),
+    caption:segmented?String(Math.floor(total+1e-7)):`${Math.floor(total+1e-7)}/${max}`};
 }
 
 const FIELDS=Object.freeze({

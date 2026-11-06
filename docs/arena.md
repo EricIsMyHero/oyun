@@ -260,8 +260,8 @@ for its independently generated deck; it does not copy the player's choices.
   changes to the selected prematch form.
 - **Soul Master:** deaths grant souls. Form I gains +25% Damage per ten souls;
   Form II spends eight souls to deal 10% of a frontal target's maximum Health.
-- **Mr. and Mrs. Ray:** each form deploys its matching couple. Within two tiles,
-  both gain three charge/s in Form I or two in Form II. At 100 each, Form I
+- **Mr. and Mrs. Ray:** each form deploys its matching couple. Within 2.5 tiles
+  measured between their centers, both gain six charge/s in either form. At 100 each, Form I
   fuses into one target for five seconds, sharing summed Health while retaining
   individual shields. Twenty quarter-second pulses deal five Damage and heal
   three; protection is 25%. Splitting preserves the pooled Health fraction.
@@ -693,8 +693,8 @@ All twenty-three Relic roots now have their native abilities implemented: **Stac
   eligible ground target once per leg. It cannot throw another shot before
   catching the first. Actual flight time replaces the fixed Delay; the next
   attack interval starts after the catch, using normal projectile speed.
-  The interval is reduced 80% at one tile or closer, scaling linearly to no
-  reduction at 3.75 tiles: 0.16s, 0.48s and 0.80s at 1, 2.375 and 3.75 tiles.
+  The interval is reduced 60% at one tile or closer, scaling linearly to no
+  reduction at 3.75 tiles: 0.32s, 0.56s and 0.80s at 1, 2.375 and 3.75 tiles.
   Slow and Haste still apply. The source 1.30s Delay remains reference data and
   is not added again on top of flight time. Pause freezes flight; Silence does
   not strand an already-thrown weapon, and death or timeout clears its lock.
@@ -864,6 +864,34 @@ slows movement by 10%; Burn reduces healing by 20%; Invisibility breaks on incom
 damage; Silence disables abilities, rather than ordinary movement or attacks.
 The partially outdated generic `effects` arrays are not automatically executed
 on top of native card handlers.
+
+## Native charge and card balance
+
+A small charge bar and numerical counter now sit above the Health/Shield bars of
+**Laura, Kai, Wong, Tribe, Shellbyte, Ali, Unara, Clara, Artist, Ase and both Ray
+forms/partners**. These read the native instance's current counters: earning,
+spending, pause and copied/stolen passives are reflected immediately. Non-charge
+cards and stripped passives do not show a meter. A full stored charge glows gold;
+ordinary meters show `current/100`, Ase shows robot parts out of four, and Artist
+shows its uncapped ink total with progress toward the next twenty-charge flock
+bonus. Status icons move above the charge bar. The live inspector includes a
+matching labeled progress bar. Rendering remains subject to entity visibility.
+
+The requested card rebalances apply to both Codex data and Arena:
+
+| Card | Updated values |
+| --- | --- |
+| Frostshot | 0.25s Attack Speed, 1.40s Delay; still 2 × 11 Damage |
+| Deadscope | 125 Damage, 5.25s Attack Speed, 7-tile Range |
+| Avalith | Up to 60% interval reduction near the target |
+| Naar | 96 Damage, 3.75s Attack Speed |
+| Lyra | 180 Health, 45 Shield |
+| Mr. and Mrs. Ray | Both forms gain 6 charge/s within 2.5 tiles; 100 each activates the ultimate |
+
+Ray's authored form IDs are retained, including the shared `the-rays` image IDs;
+Arena's normalized parent paths keep both partners and forms distinct. Native
+ability prose remains Azerbaijani. Unmentioned stats and the shared Power
+formula are preserved; source DPS remains informational.
 
 ## Status effects
 

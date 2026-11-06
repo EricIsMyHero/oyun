@@ -145,8 +145,8 @@
       "shield": "50",
       "damage": "2x11",
       "sps": "20",
-      "attackSpeed": "0.10s",
-      "delay": "1.20s",
+      "attackSpeed": "0.25s",
+      "delay": "1.40s",
       "mana": "7",
       "number": "1"
     },
@@ -472,16 +472,16 @@
     "stats": {
       "health": "140",
       "shield": "20",
-      "damage": "150",
+      "damage": "125",
       "sps": "30",
-      "attackSpeed": "5.00s",
+      "attackSpeed": "5.25s",
       "delay": "-",
       "mana": "8",
       "number": "1"
     },
     "trait": "Deadscope dəqiqliyini sürətlə birləşdirir. Bir rəqib kartı məhv etdikdən dərhal sonra qazandığı momentum sayəsində növbəti atışı üçün +20% hücum sürəti bonusu əldə edər. Bu, ona hədəfləri ard-arda, sürətli şəkildə zərərsizləşdirmək imkanı verir.",
     "additionalStats": {
-      "range": "8000",
+      "range": "7000",
       "speed": "900",
       "criticalChance": "5%",
       "criticDamage": "1.5x",
@@ -501,7 +501,7 @@
     "showlevels": {
       "level1": "+5% Speed  |  900 » 945",
       "level2": "+10% Ability DMG SPD Bonus  |  20% » 30%",
-      "level3": "+5% Range  |  8000 » 8400"
+      "level3": "+5% Range  |  7000 » 7350"
     },
     "story": "Deadscope has given his years to wars, and in return he has earned respect, not words. He is the oldest in the group, and this is measured not by age, but by the paths he has traveled. Even though he is in middle age, his gaze still searches for a target. So far, not a single shot has been wasted - this is not a legend, but a statistic. In Mission 1, he is here not only to shoot from a distance, but to pass on what he knows to the Soldier. Because a leader must know not only how to fight alone, but also how to shoot accurately.",
     "class": "Marksman",

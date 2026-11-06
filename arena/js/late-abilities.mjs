@@ -1,5 +1,5 @@
 /* Native Emergent/Ethereal handlers. Deployment ordinals are owned by the match. */
-import { clamp } from './rules.mjs';
+import { clamp, RAY_CHARGE } from './rules.mjs';
 import { statusMagnitude,hasStatus,STATUS_INTERVALS } from './statuses.mjs';
 const dealt=r=>(r?.total||0)>0;
 const range=(ctx,u)=>ctx.statValue(u,'range')/1000;
@@ -7,7 +7,7 @@ const friends=(ctx,u,r=range(ctx,u))=>ctx.near(u,r,t=>t!==u&&t.side===u.side&&!t
 const foes=(ctx,u,r=range(ctx,u))=>ctx.near(u,r,t=>ctx.isEnemy(u,t)&&!t.isBuilding&&!t.healthless);
 function every(ctx,u,key,dt,seconds,fn){u.memory[key]=(u.memory[key]||0)+dt;while(u.memory[key]+1e-7>=seconds){u.memory[key]=Math.max(0,u.memory[key]-seconds);ctx.useAbility(u,fn);}}
 const offspring=(ctx,u)=>{const form=u.def.forms[0];if(form)ctx.spawn(form,u.side,u,u.lane,{count:form.stats.number||1,groupId:u.groupId});};
-const rayPartner=(ctx,u)=>ctx.near(u,2,t=>t!==u&&t.side===u.side&&t.groupId===u.groupId&&(t.def.variantId||t.def.id).startsWith((u.def.variantId||u.def.id).split('/').slice(0,2).join('/'))&&!t.sharedVitalsId)[0];
+const rayPartner=(ctx,u)=>ctx.near(u,RAY_CHARGE.range,t=>t!==u&&t.side===u.side&&t.groupId===u.groupId&&(t.def.variantId||t.def.id).startsWith((u.def.variantId||u.def.id).split('/').slice(0,2).join('/'))&&!t.sharedVitalsId).find(t=>Math.hypot(t.x-u.x,t.y-u.y)<=RAY_CHARGE.range+1e-7);
 const rayCharge=(ctx,u,dt,type)=>{
  const pool=ctx._pool(u);
  if(pool?.kind==='ray'){
@@ -16,8 +16,8 @@ const rayCharge=(ctx,u,dt,type)=>{
  }
  if(u.rayDash)return;
  const partner=rayPartner(ctx,u);if(!partner)return;
- u.memory.rayCharge=Math.min(100,(u.memory.rayCharge||0)+dt*(type===1?3:2));
- if(u.memory.rayCharge>=100-1e-7&&(partner.memory.rayCharge||0)>=100-1e-7){if(type===1)ctx.fuseRays(u,partner);else ctx.startRayDash(u,partner);}
+ u.memory.rayCharge=Math.min(RAY_CHARGE.maximum,(u.memory.rayCharge||0)+dt*RAY_CHARGE.perSecond);
+ if(u.memory.rayCharge>=RAY_CHARGE.maximum-1e-7&&(partner.memory.rayCharge||0)>=RAY_CHARGE.maximum-1e-7){if(type===1)ctx.fuseRays(u,partner);else ctx.startRayDash(u,partner);}
 };
 const rayRescue=(ctx,u)=>{if(u.rayDash&&!u.rayHealUsed&&u.hp>0&&u.hp<ctx.maxHealth(u)*.2){u.rayHealUsed=true;ctx.heal(u,(ctx.maxHealth(u)-u.hp)*.75,u);}};
 const rayOne={spawnForms:[0],tick(ctx,u,dt){rayCharge(ctx,u,dt,1);}};
@@ -123,9 +123,9 @@ export const LATE_ABILITIES={
  },
 
  'mr-and-mrs-ray/type1':rayOne,
- 'mr-and-mrs-ray/type1/the-rays-form':{tick:rayOne.tick},
+ 'mr-and-mrs-ray/type1/the-rays':{tick:rayOne.tick},
  'mr-and-mrs-ray/type2':rayTwo,
- 'mr-and-mrs-ray/type2/the-rays-form-2':{tick:rayTwo.tick,damaged:rayTwo.damaged},
+ 'mr-and-mrs-ray/type2/the-rays':{tick:rayTwo.tick,damaged:rayTwo.damaged},
 
  'xii-josh':{
   conditionalStats:['attackSpeed'],

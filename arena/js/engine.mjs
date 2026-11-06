@@ -1,4 +1,4 @@
-import { RULES, clamp, num, burst, energyForMana } from './rules.mjs';
+import { RULES, clamp, num, burst, energyForMana, RAY_CHARGE } from './rules.mjs';
 import { MAP, routeFor, routeLength, pointOnRoute, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
@@ -222,7 +222,7 @@ export class ArenaEngine {
     const pool={id:`rays-${++this.serial}`,kind:'ray',healthOnly:true,factor:1,members:[],leaderId:leader.id,hp:0,maxHp:0,shield:0,maxShield:0,until:this.time+5};
     this.vitalPools.set(pool.id,pool);this.state.sharedVitals.push(pool);this._bindVitals(pool,leader);this._bindVitals(pool,partner);
     partner.fusedInto=leader.id;partner.x=leader.x;partner.y=leader.y;
-    for(const u of [leader,partner])u.memory.rayCharge=Math.max(0,(u.memory.rayCharge||0)-100);
+    for(const u of [leader,partner])u.memory.rayCharge=Math.max(0,(u.memory.rayCharge||0)-RAY_CHARGE.maximum);
     this.status(leader,'protection',5,.25,leader);this.fx('wave',leader.x,leader.y,{side:leader.side,radius:1,color:'#e8bda5'});return true;
   }
   endRayFusion(pool){
@@ -248,7 +248,7 @@ export class ArenaEngine {
   startRayDash(a,b){
     if(a.rayDash||b.rayDash)return false;
     const length=Math.hypot(a.facingX||0,a.facingY||0)||1,dx=(a.facingX??(a.side?-1:1))/length,dy=(a.facingY||0)/length;
-    for(const u of[a,b]){u.memory.rayCharge=Math.max(0,(u.memory.rayCharge||0)-100);u.rayDash={until:this.time+3.75,lastTime:this.time,remaining:5,dx,dy,hitIds:[]};this.status(u,'protection',3.75,.75,u);}
+    for(const u of[a,b]){u.memory.rayCharge=Math.max(0,(u.memory.rayCharge||0)-RAY_CHARGE.maximum);u.rayDash={until:this.time+3.75,lastTime:this.time,remaining:5,dx,dy,hitIds:[]};this.status(u,'protection',3.75,.75,u);}
     return true;
   }
   _rayDash(u,dt){

@@ -210,7 +210,7 @@ test('Avalith returns to its moving owner, without chasing a target that left th
 });
 
 test('Avalith recovers after catching its shot with the confirmed linear distance interval',async()=>{
-  for(const [distance,interval] of [[.75,.16],[1,.16],[2.375,.48],[3.75,.8]]){
+  for(const [distance,interval] of [[.75,.32],[1,.32],[2.375,.56],[3.75,.8]]){
     const {e,spawn,dummy}=await fixture(),u=spawn('avalith'),target=dummy(1,{x:15+distance,y:14});
     e._fire(u,target);const shot=e.state.projectiles[0];close(shot.recovery,interval);
     assert.equal(u.def.stats.attackSpeed,.8);assert.equal(u.def.stats.delay,1.3);
@@ -224,7 +224,7 @@ test('Avalith recovers after catching its shot with the confirmed linear distanc
 test('Avalith respects Slow and Haste and a new Silence does not strand a shot in flight',async()=>{
   const {e,spawn,dummy}=await fixture(),u=spawn('avalith'),target=dummy(1,{x:16,y:14});
   e.status(u,'slow',5,.25);e.status(u,'attackHaste',5,.5);e._fire(u,target);
-  close(e.state.projectiles[0].recovery,.8/1.5/.75*.2);e.status(u,'silence',5);
+  close(e.state.projectiles[0].recovery,.8/1.5/.75*.4);e.status(u,'silence',5);
   for(let i=0;i<100&&e.state.projectiles.length;i++)e._projectiles(1/60);
   close(target.hp,968);assert.equal(u.memory.returningShotId,undefined);
 });
@@ -472,10 +472,10 @@ test('Lyra repeats two single attacks and one three-hit burst with the authored 
 });
 
 test('Lyra missing-health bonuses are additive, capped and removed by healing without doubling damage',async()=>{
-  const {e,spawn,dummy}=await fixture(),u=spawn('lyra'),target=dummy(1,{x:15.6,y:14});u.hp=135;e._hook('tick',u,0);close(u.stats.damage,5.4);
+  const {e,spawn,dummy}=await fixture(),u=spawn('lyra'),target=dummy(1,{x:15.6,y:14});u.hp=u.maxHp*.9;e._hook('tick',u,0);close(u.stats.damage,5.4);
   e._fire(u,target);close(target.hp,994.6);close(u.cooldown,.2/1.08+.9);
-  u.hp=75;e._hook('tick',u,0);e._fire(u,target);close(target.hp,987.6);close(u.stats.attackSpeed,.2/1.4);
-  u.hp=1;e._hook('tick',u,0);close(u.stats.damage,7);e.heal(u,150);e._hook('tick',u,0);close(u.stats.damage,5);close(u.stats.attackSpeed,.2);
+  u.hp=u.maxHp*.5;e._hook('tick',u,0);e._fire(u,target);close(target.hp,987.6);close(u.stats.attackSpeed,.2/1.4);
+  u.hp=1;e._hook('tick',u,0);close(u.stats.damage,7);e.heal(u,u.maxHp);e._hook('tick',u,0);close(u.stats.damage,5);close(u.stats.attackSpeed,.2);
 });
 
 test('Lyra advances the attack cycle when its locked burst target dies',async()=>{

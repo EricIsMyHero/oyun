@@ -4,6 +4,7 @@ export const RULES = Object.freeze({
   captureTime:5, captureRadius:1.25, nodeBonus:0.02, deckSize:8, handSize:4,
   spellBudget:5, fixedStep:1/30, projectileSpeed:8,
 });
+export const RAY_CHARGE=Object.freeze({maximum:100,perSecond:6,range:2.5});
 export const STAT_KEYS = ['health','shield','damage','attackSpeed','delay','sps','mana','number','range','speed','criticalChance','criticDamage','lifestealChance','lifesteal','dodge','vision','healBonus','healrecovery','shieldrecovery','criticdamageminimiser','damageminimiser','flexibility','shieldtakendamage','life'];
 export function num(value, fallback=0) {
   if(value == null || /^\s*[-—–]?\s*$/.test(String(value))) return fallback;

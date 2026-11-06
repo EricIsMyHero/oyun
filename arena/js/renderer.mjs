@@ -4,7 +4,7 @@ import { visibilitySources, isPointVisible, isEntityVisible } from './vision.mjs
 import { ArenaCamera, CAMERA } from './camera.mjs';
 import { statValue } from './statuses.mjs';
 import { paintTree, paintRock, paintFern } from './art.mjs';
-import { ICON_PATHS, statusBadges, statusVisual, fieldVisual, effectColor } from './visuals.mjs';
+import { ICON_PATHS, statusBadges, statusVisual, fieldVisual, effectColor, nativeCharge } from './visuals.mjs';
 
 const TEAM = ['#69d6ff', '#ff8068'];
 const TEAL = '#89f4ed';
@@ -758,9 +758,11 @@ export class ArenaRenderer {
     }
     if(!ghost) {
       const barY=headY-size*.78;
+      const charge=nativeCharge(u);
       if(u.healthless)this.healthBar(ctx,p.x,barY,size*1.16,Math.max(0,u.expiresAt-time)/(u.expiresAt-u.born||1),'#c99ae6',3);
       else this.healthBar(ctx,p.x,barY,size*1.16,u.hp/((u.sharedVitalsId?u.effectiveMaxHp:statValue(u,'health',time,u.maxHp))||1),side===0?'#a0df8e':'#fa9b80',3);
       if(u.maxShield>0&&u.shield>0)this.healthBar(ctx,p.x,barY-4,size*1.16,u.shield/((u.sharedVitalsId?u.effectiveMaxShield:statValue(u,'shield',time,u.maxShield))||1),'#83ccf4',2);
+      if(charge)this.chargeBar(ctx,charge,p.x,barY-11,size,time);
       if(u.possessedBy){
         const control=state?.units?.find(t=>t.id===u.possessedBy)?.whisperState;
         if(control)this.healthBar(ctx,p.x,barY+5,size*1.16,Math.max(0,control.until-time)/Math.max(.01,control.until-control.startedAt),'#cbb5ff',2);
@@ -772,13 +774,28 @@ export class ArenaRenderer {
         ctx.fillStyle='#d8f6be';ctx.textAlign='center';ctx.font='700 10px system-ui,sans-serif';ctx.fillText(String(captiveCount),p.x+size*.35+12,barY-7);
       }
       this.statusEffects(ctx,u,statuses,p,py,headY,size,time);
-      this.statusIcons(ctx,statuses,p.x,barY-15,size,time,selected);
+      this.statusIcons(ctx,statuses,p.x,barY-(charge?26:15),size,time,selected);
       if(selected) {
         ctx.textAlign='center';ctx.font='600 10px system-ui,sans-serif';ctx.shadowColor='#102c32';ctx.shadowBlur=4;ctx.fillStyle='#fff0c9';
         ctx.fillText(u.def?.name||'Unit',p.x,py+17);ctx.shadowBlur=0;
       }
     }
     ctx.restore();
+  }
+
+  chargeBar(ctx,charge,x,y,size,time){
+    const width=clamp(size*1.4,32,44),color=charge.ready?'#ffdc88':charge.color;
+    ctx.save();ctx.globalAlpha=1;
+    roundRect(ctx,x-width/2,y-4.5,width,9,2.5);ctx.fillStyle='#091725ed';ctx.fill();
+    ctx.save();ctx.clip();
+    if(charge.ratio>0){
+      const fill=ctx.createLinearGradient(x-width/2,0,x+width/2,0);fill.addColorStop(0,color+'44');fill.addColorStop(1,color+'c0');ctx.fillStyle=fill;ctx.fillRect(x-width/2,y-4.5,width*charge.ratio,9);
+    }
+    ctx.restore();ctx.strokeStyle=color+(charge.ready?'dd':'8c');ctx.lineWidth=.7;ctx.stroke();
+    glyph(ctx,'charge',x-width/2-5,y,8,color);
+    if(charge.ready){ctx.shadowColor=color;ctx.shadowBlur=3+Math.sin(time*4)*1.5;}
+    ctx.font='700 7.5px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#f4f5e8';ctx.strokeStyle='#0d1b24';ctx.lineWidth=1.5;
+    ctx.strokeText(charge.caption,x,y+.5);ctx.fillText(charge.caption,x,y+.5);ctx.restore();
   }
 
   statusIcons(ctx,statuses,x,y,size,time,selected=false){

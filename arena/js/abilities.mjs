@@ -651,7 +651,7 @@ export const ABILITIES = {
     incoming(ctx,u,s,hit){if(ctx.random()<.33){hit.damage=0;hit.instantKill=false;ctx.fx('shield',u.x,u.y,{side:u.side});}},
     attack(ctx,u,t,hit){
       const distance=Math.hypot(t.x-u.x,t.y-u.y),range=u.def.stats.range/1000;
-      hit.intervalScale=.2+.8*clamp((distance-1)/Math.max(.01,range-1),0,1);
+      hit.intervalScale=.4+.6*clamp((distance-1)/Math.max(.01,range-1),0,1);
       hit.returning=true;
     },
   },

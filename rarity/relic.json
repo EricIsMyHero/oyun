@@ -522,7 +522,7 @@
       "mana": "14",
       "number": "1"
     },
-    "trait": "33% şansla gələn hasardan yayınar. Atışı hədəfə çatanda geri dönər və hər iki istiqamətdə hasar verər. Atış özünə qayıdana qədər yeni atış etməz; qayıtdıqdan sonra hücum intervalını gözləyər. Rəqib 1 karo və ya daha yaxında olduqda hücum intervalı 80% azalar. Bu azalma məsafəyə görə xətti şəkildə dəyişərək 3,75 karoda 0%-ə enər.",
+    "trait": "33% şansla gələn hasardan yayınar. Atışı hədəfə çatanda geri dönər və hər iki istiqamətdə hasar verər. Atış özünə qayıdana qədər yeni atış etməz; qayıtdıqdan sonra hücum intervalını gözləyər. Rəqib 1 karo və ya daha yaxında olduqda hücum intervalı 60% azalar. Bu azalma məsafəyə görə xətti şəkildə dəyişərək 3,75 karoda 0%-ə enər.",
     "additionalStats": {
       "range": "3750",
       "speed": "1000",
@@ -838,9 +838,9 @@
     "stats": {
       "health": "170",
       "shield": "40",
-      "damage": "120",
+      "damage": "96",
       "sps": "40",
-      "attackSpeed": "3.00s",
+      "attackSpeed": "3.75s",
       "delay": "-",
       "mana": "10",
       "number": "1"
@@ -899,8 +899,8 @@
     "group": "the-street-brawlers",
     "abilityName": "",
     "stats": {
-      "health": "150",
-      "shield": "25",
+      "health": "180",
+      "shield": "45",
       "damage": "5",
       "sps": "7",
       "attackSpeed": "0.20s",

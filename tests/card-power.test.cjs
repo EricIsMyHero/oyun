@@ -9,8 +9,15 @@ const modules=Promise.all([import('../arena/js/power.mjs'),import('../arena/js/c
 
 test('shared Power scorer preserves all 138 original Codex scores, including dual-card averages',async()=>{
   // Keep the original-stat regression fixture independent of the requested
-  // Maapp interval, Stormblade/Leno Range and Nightfang Vision rebalances. The next test checks every current authored score.
+  // Explicit stat rebalances are restored only in this historical fixture.
+  // The next test checks every current authored score with the website formula.
   const baseline=structuredClone(cards),maapp=baseline.find(c=>c.id==='maapp');
+  for(const[id,stats,additional]of[
+    ['frostshot',{attackSpeed:'0.10s',delay:'1.20s'},{}],
+    ['deadscope',{damage:'150',attackSpeed:'5.00s'},{range:'8000'}],
+    ['naar',{damage:'120',attackSpeed:'3.00s'},{}],
+    ['lyra',{health:'150',shield:'25'},{}],
+  ]){const card=baseline.find(c=>c.id===id);Object.assign(card.stats,stats);Object.assign(card.additionalStats,additional);}
   baseline.find(c=>c.id==='nightfang').additionalStats.vision='8000';
   baseline.find(c=>c.id==='stormblade').additionalStats.range='2600';
   baseline.find(c=>c.id==='leno').type2.additionalStats.range='3200';
