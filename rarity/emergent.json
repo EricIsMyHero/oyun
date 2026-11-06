@@ -78,7 +78,7 @@
       "mana": "12",
       "number": "1"
     },
-    "trait": "3 yaxın əşya ilə başlayar; bu əşyalar 0.90 saniyəlik hücum sürəti ilə ətrafında dönər. Ölən hər kartdan əlavə əşya qazanar (maksimum 12). Qazandığı əşyaları hər 1.15 saniyədə uzaqdakı rəqiblərə atar; ilk 3 əşyanı ata bilməz. Eyni hədəfə ardıcıl uğurlu vuruşların hasarı hər dəfə 25% artar, limit yoxdur. Taxtaya hər 2-ci qoyuluşda hər əşya 25% şansla təsadüfi element qazanar: 3 saniyəlik 25% Slow, 7x2 Zəhər və ya 3x5 Yanma.",
+    "trait": "3 yaxın əşya ilə başlayar; bu əşyalar 0.90 saniyəlik hücum sürəti ilə ətrafında dönər. Ölən hər kartdan əlavə əşya qazanar (maksimum 12). Qazandığı əşyaları hər 1.15 saniyədə uzaqdakı rəqiblərə atar; ilk 3 əşyanı ata bilməz. Eyni hədəfə ardıcıl uğurlu vuruşların hasarı hər dəfə 5% artar, limit yoxdur. Taxtaya hər 2-ci qoyuluşda hər əşya 25% şansla təsadüfi element qazanar: 3 saniyəlik 25% Slow, 7x2 Zəhər və ya 3x5 Yanma.",
     "additionalStats": {
       "range": "1000/3200",
       "speed": "950",
@@ -138,7 +138,7 @@
       "mana": "17",
       "number": "1"
     },
-    "trait": "İlk 12 saniyə hərəkət etməz və hücum etməz. Sonra 12 karo yaxınlığındakı cari canı ən çox olan dost karta bir dəfə təsadüfi kutsama verər: bütün döyüş statlarına +20% (mana, say və ömür xaric), maksimum canının 25%-i qədər əlavə qalxan və bu qalxana vuranlara 1 saniyəlik Qanama, yaxud 1.75x1.75 karo görünməz tələ. Tələyə girən ilk rəqib 3 karo geri itilər və 2 saniyə Stun alar. İkinci qoyuluşda bonuslar 22.5%, 28.5%, 3 saniyə; üçüncü və sonrakılarda 25%, 32%, 4 saniyə olar.",
+    "trait": "İlk 12 saniyə olduğu yerdə qalar və hücum etməz. Bu müddətdə 12 karo yaxınlığındakı Güc göstəricisi ən yüksək olan dost kartı seçib 3 saniyə ərzində ona kutsama hazırlayar. Seçilmiş kart işarələnər; hədəf məhv olsa, uzaqlaşsa və ya rəqibə çevrilsə yeni dost seçilər və hazırlıq yenidən başlayar. Hazırlıq bitdikdə bir dəfə təsadüfi kutsama verər: bütün döyüş statlarına +20% (mana, say və ömür xaric), maksimum canının 25%-i qədər əlavə qalxan və bu qalxana vuranlara 1 saniyəlik Qanama, yaxud 1.75x1.75 karo görünməz tələ. Tələyə girən ilk rəqib 3 karo geri itilər və 2 saniyə Stun alar. İkinci qoyuluşda bonuslar 22.5%, 28.5%, 3 saniyə; üçüncü və sonrakılarda 25%, 32%, 4 saniyə olar. Kutsama verildikdə dost kartın üzərində təsdiq işarəsi görünər.",
     "additionalStats": {
       "range": "2000",
       "speed": "1000",

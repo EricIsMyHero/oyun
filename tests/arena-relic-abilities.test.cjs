@@ -371,14 +371,14 @@ test('Pyhsic executions respect immunity, Immortal and reduction while Silence p
   }
 });
 
-test('Unara spends one hundred of twelve nine-charge hits and distributes exactly thirty two-damage orbs',async()=>{
+test('Unara caps twelve nine-charge hits at one hundred, spends them and distributes exactly thirty two-damage orbs',async()=>{
   const {e,spawn,dummy,hit}=await fixture(),u=spawn('unara'),targets=[16,16.5,17].map(x=>dummy(1,{x,y:14}));
   for(let i=0;i<11;i++)hit(u,targets[0]);assert.equal(u.memory.charge,99);assert.equal(u.memory.orbRemaining,undefined);
-  hit(u,targets[0]);assert.equal(u.memory.charge,8);assert.equal(u.memory.orbRemaining,30);for(const t of targets)t.hp=1000;
+  hit(u,targets[0]);assert.equal(u.memory.charge,0);assert.equal(u.memory.orbRemaining,30);for(const t of targets)t.hp=1000;
   assert.deepEqual(targets.map(t=>t.x),[18,18.5,19]);const launched=[],launch=e.abilityProjectile.bind(e);
   e.abilityProjectile=(s,t,d,o)=>{launched.push({id:t.id,time:e.time,damage:d});return launch(s,t,d,o);};
   e.step(3.6);assert.equal(launched.length,30);for(let i=0;i<30;i++){assert.equal(launched[i].id,targets[i%3].id);close(launched[i].damage,2);if(i)close(launched[i].time-launched[i-1].time,.1);}
-  for(const t of targets)close(t.hp,980);assert.equal(u.hits,12);assert.equal(u.memory.charge,8);assert.equal(u.memory.orbRemaining,0);assert.equal(e.state.projectiles.length,0);
+  for(const t of targets)close(t.hp,980);assert.equal(u.hits,12);assert.equal(u.memory.charge,0);assert.equal(u.memory.orbRemaining,0);assert.equal(e.state.projectiles.length,0);
 });
 
 test('Unara ability orbs do not reroll accuracy on impact or hit an intervening opponent',async()=>{

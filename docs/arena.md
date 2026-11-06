@@ -188,14 +188,18 @@ The hand and inspector show placement ordinals and the relevant live state.
   Deaths generate collectible outer objects, capped at twelve, which can be
   thrown at most once per 1.15s. Basic orbital weapons continue under Silence;
   passive growth and elemental applications do not. Consecutive successful hits
-  on one target compound +25% Damage without an authored cap. Every even
+  on one target compound +5% Damage without an authored cap. Every even
   deployment gives each new object a 25% chance of a random element: three
   seconds of 25% Slow, a 7 × 2 Poison packet or a 3 × 5 Burn packet. Objects have
   a 500-point width/travel profile; the source targeting ranges remain 1 / 3.2
   tiles. There are no stored instant volleys after a long period without loot.
 - **Blesser:** the 1000-wide, 2000-distance cone is **45°**. It prepares for
-  twelve seconds without moving or attacking, then grants one random blessing
-  to the highest-current-Health ally within twelve tiles. Tier I/II/III grant
+  twelve seconds without moving or attacking. During that preparation it locks
+  the highest-Power ally within twelve tiles and channels for three seconds
+  before granting one random blessing. Power uses the shared Codex score rather
+  than current Health. Losing the target restarts the channel on a new ally;
+  control effects pause progress. A gold tether, outline and progress ring mark
+  the selection, followed by a five-second Blessed icon and confirmation burst. Tier I/II/III grant
   20/22.5/25% all-stat bonuses, 25/28.5/32% of maximum Health as Shield, or a
   1.75-square trap with 2/3/4s Stun and three-tile Knockback. Tier III is the cap.
   Stat blessings exclude Mana, Count and Life; attack/delay intervals improve
@@ -265,11 +269,14 @@ for its independently generated deck; it does not copy the player's choices.
   fuses into one target for five seconds, sharing summed Health while retaining
   individual shields. Twenty quarter-second pulses deal five Damage and heal
   three; protection is 25%. Splitting preserves the pooled Health fraction.
-  Form II advances five tiles in 3.75s and each partner hits each crossed enemy
-  once for 75 Damage, with 75% protection. Below 20% Health during a dash, each
-  partner may heal 75% of missing Health once per deployment. Dash collisions
+  Form II also fuses into one body with shared Health, then advances five tiles
+  in 3.75s through a two-tile-wide corridor. Each crossed enemy takes 75 total
+  Damage once, with 75% protection during the dash. Below 20% shared Health, the
+  pair may heal 75% of missing Health once per deployment. Dash collisions
   do not shorten its authored travel. Fusion cleanup handles deaths and control
-  changes without leaving hidden bodies or shared Health behind.
+  changes without leaving hidden bodies or shared Health behind. Ground fields
+  affect the merged body once; existing ailments on either partner continue
+  against shared Health with the fusion's protection.
 
 The 193 definitions include the newly authored Human manifestation. Missing
 Shield-absorption values use the game's standard 70%; authored zeroes remain
@@ -726,7 +733,7 @@ All twenty-three Relic roots now have their native abilities implemented: **Stac
   with the nearest; dead, concealed or unavailable targets leave it. The native
   orb range includes the two-tile push, and shots track only their assigned
   target. Orbs keep the base weapon separate and never generate charge or repeat
-  basic-hit abilities. Twelve basic hits leave eight charge after activation.
+  basic-hit abilities. Twelve basic hits fill the 100-charge cap; activation leaves zero charge.
   Misfortune is checked once at launch, while global pause or Silence freezes
   new launches. A valid Taunt redirects subsequent orbs to its caster.
 - Clara gains 20 charge per visible nearby enemy per second, including flyers.
@@ -873,8 +880,14 @@ forms/partners**. These read the native instance's current counters: earning,
 spending, pause and copied/stolen passives are reflected immediately. Non-charge
 cards and stripped passives do not show a meter. A full stored charge glows gold;
 ordinary meters show `current/100`, Ase shows robot parts out of four, and Artist
-shows its uncapped ink total with progress toward the next twenty-charge flock
-bonus. Status icons move above the charge bar. The live inspector includes a
+shows a stable current/100 ink meter. All charge pools stop at 100 and have no
+age-based decay. Laura holds a full charge if no ally can receive her pulse;
+Clara holds it without enemies. Charge is spent by the relevant ability use,
+including the normal accuracy rules, rather than discarded by time. Artist's
+maximum 100 ink yields at most sixteen ravens for twelve seconds. Ase's parts
+remain a separate four-part resource. Active Ray fusions show an ACTIVE duration
+bar after spending their charge, so activation is distinct from stored charge.
+Status icons move above the charge bar. The live inspector includes a
 matching labeled progress bar. Rendering remains subject to entity visibility.
 
 The requested card rebalances apply to both Codex data and Arena:
@@ -1028,6 +1041,7 @@ Cloudflare R2 URLs; unavailable artwork has a local visual fallback.
 node --test tests/*.test.cjs
 node tests/arena.browser.cjs
 node tests/arena-effects.browser.cjs
+node tests/arena-casting.browser.cjs
 ```
 
 The browser check uses Playwright and Chromium (`/usr/bin/chromium`, or set
@@ -1043,3 +1057,7 @@ The test writes preview screenshots under `/tmp` for visual review.
 The effects browser check also compares rendered pixels at each active area
 boundary, expired areas and hidden fog, and checks status icons, inspector labels,
 50% zoom and a phone viewport. Set `ARENA_EFFECTS_URL` to test a deployed Arena.
+
+The casting browser check verifies Blesser selection/channel/receipt pixels and
+icons, one visible Ray body in both forms, shared Health and the 2×5 dash, held
+charge, and Dumpsy's 5% sequence. Set `ARENA_CASTING_URL` for a deployed build.

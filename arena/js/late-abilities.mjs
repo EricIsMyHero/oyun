@@ -1,5 +1,5 @@
 /* Native Emergent/Ethereal handlers. Deployment ordinals are owned by the match. */
-import { clamp, RAY_CHARGE } from './rules.mjs';
+import { clamp, RAY_CHARGE, addCharge } from './rules.mjs';
 import { statusMagnitude,hasStatus,STATUS_INTERVALS } from './statuses.mjs';
 const dealt=r=>(r?.total||0)>0;
 const range=(ctx,u)=>ctx.statValue(u,'range')/1000;
@@ -11,19 +11,23 @@ const rayPartner=(ctx,u)=>ctx.near(u,RAY_CHARGE.range,t=>t!==u&&t.side===u.side&
 const rayCharge=(ctx,u,dt,type)=>{
  const pool=ctx._pool(u);
  if(pool?.kind==='ray'){
-  if(pool.leaderId===u.id)every(ctx,u,'rayPulse',dt,.25,()=>{for(const t of foes(ctx,u))if(ctx._canHit(u,t))ctx.damage(u,t,5,{kind:'ability',secondary:true});ctx.heal(u,3,u);ctx.fx('wave',u.x,u.y,{side:u.side,radius:range(ctx,u),color:'#e9bea1',duration:.3});});
+  if(pool.mode===1&&pool.leaderId===u.id)every(ctx,u,'rayPulse',dt,.25,()=>{for(const t of foes(ctx,u))if(ctx._canHit(u,t))ctx.damage(u,t,5,{kind:'ability',secondary:true});ctx.heal(u,3,u);ctx.fx('wave',u.x,u.y,{side:u.side,radius:range(ctx,u),color:'#e9bea1',duration:.3});});
   return;
  }
  if(u.rayDash)return;
  const partner=rayPartner(ctx,u);if(!partner)return;
- u.memory.rayCharge=Math.min(RAY_CHARGE.maximum,(u.memory.rayCharge||0)+dt*RAY_CHARGE.perSecond);
+ addCharge(u,dt*RAY_CHARGE.perSecond,'rayCharge');
  if(u.memory.rayCharge>=RAY_CHARGE.maximum-1e-7&&(partner.memory.rayCharge||0)>=RAY_CHARGE.maximum-1e-7){if(type===1)ctx.fuseRays(u,partner);else ctx.startRayDash(u,partner);}
 };
-const rayRescue=(ctx,u)=>{if(u.rayDash&&!u.rayHealUsed&&u.hp>0&&u.hp<ctx.maxHealth(u)*.2){u.rayHealUsed=true;ctx.heal(u,(ctx.maxHealth(u)-u.hp)*.75,u);}};
+const rayRescue=(ctx,u)=>{
+ const pool=ctx._pool(u);if(pool?.mode!==2||u.rayHealUsed||u.hp<=0||u.hp>=ctx.maxHealth(u)*.2)return;
+ for(const member of ctx.units.filter(t=>pool.members.includes(t.id)))member.rayHealUsed=true;
+ ctx.heal(u,(ctx.maxHealth(u)-u.hp)*.75,u);
+};
 const rayOne={spawnForms:[0],tick(ctx,u,dt){rayCharge(ctx,u,dt,1);}};
 const rayTwo={spawnForms:[0],tick(ctx,u,dt){rayCharge(ctx,u,dt,2);rayRescue(ctx,u);},damaged(ctx,u){rayRescue(ctx,u);}};
 const dumpObject=(ctx,u,index,outer=false)=>({id:`object-${++ctx.serial}`,outer,angle:index,next:0,element:u.deploymentNumber%2===0&&ctx.random()<.25?['slow','poison','burn'][Math.floor(ctx.random()*3)]:null});
-const dumpDamage=(ctx,u,target)=>ctx.statValue(u,'damage')*(1+statusMagnitude(u,'damageBonus',ctx.time))*(u.memory.dumpCombo?.id===target.id&&!hasStatus(u,'silence',ctx.time)?Math.pow(1.25,u.memory.dumpCombo.count):1);
+const dumpDamage=(ctx,u,target)=>ctx.statValue(u,'damage')*(1+statusMagnitude(u,'damageBonus',ctx.time))*(u.memory.dumpCombo?.id===target.id&&!hasStatus(u,'silence',ctx.time)?Math.pow(1.05,u.memory.dumpCombo.count):1);
 const dumpHit=(ctx,u,t,result,hit)=>{
  if(!dealt(result)||!hit.dumpObject)return;
  u.memory.dumpCombo={id:t.id,count:u.memory.dumpCombo?.id===t.id?u.memory.dumpCombo.count+1:1};
@@ -67,16 +71,29 @@ export const LATE_ABILITIES={
 
  blesser:{
   preparationTime:12,
-  tick(ctx,u){
-   if(u.memory.blessed||ctx.time-u.born<12-1e-7)return;
-   const target=friends(ctx,u,12).sort((a,b)=>b.hp-a.hp||a.id.localeCompare(b.id))[0];if(!target)return;
-   u.memory.blessed=true;const stage=Math.min(2,Math.max(0,u.deploymentNumber-1)),kind=Math.floor(ctx.random()*3);u.memory.blessingKind=kind;u.memory.blessingTargetId=target.id;
+  spawn(ctx,u){u.memory.preparationBorn=ctx.time;},
+  holdsPosition(ctx,u){return !!u.memory.blessingChannel&&!u.memory.blessed;},
+  tick(ctx,u,dt=0){
+   if(u.memory.blessed)return;
+   const candidates=friends(ctx,u,12);
+   let channel=u.memory.blessingChannel,target=candidates.find(t=>t.id===channel?.targetId);
+   if(!target){
+    u.memory.blessingChannel=null;u.memory.blessingTargetId=null;
+    target=candidates.sort((a,b)=>(b.def.power||0)-(a.def.power||0)||Math.hypot(a.x-u.x,a.y-u.y)-Math.hypot(b.x-u.x,b.y-u.y)||a.id.localeCompare(b.id))[0];
+    if(!target)return;
+    channel=u.memory.blessingChannel={targetId:target.id,progress:0,kind:Math.floor(ctx.random()*3)};
+    u.memory.blessingTargetId=target.id;u.memory.blessingKind=channel.kind;
+   }
+   if(['stun','frozen','silence','imprisonment','airborne'].some(kind=>hasStatus(u,kind,ctx.time)))return;
+   channel.progress=Math.min(3,channel.progress+dt);if(channel.progress<3-1e-7)return;
+   const stage=Math.min(2,Math.max(0,u.deploymentNumber-1)),kind=channel.kind;let applied=false;
    ctx.useAbility(u,()=>{
-    if(kind===0){const hp=ctx.maxHealth(target),shield=ctx.maxShield(target),entry=ctx.status(target,'allStatsBonus',Infinity,[.2,.225,.25][stage],u);if(entry){target.hp*=ctx.maxHealth(target)/hp;if(shield>0)target.shield*=ctx.maxShield(target)/shield;ctx._capVitals(target);}}
-    else if(kind===1){const gain=ctx.giveShield(target,ctx.maxHealth(target)*[.25,.285,.32][stage],u);if(gain>0)ctx.status(target,'blessedShield',Infinity,0,u,{remaining:gain});}
-    else ctx.status(target,'blessedTrap',Infinity,0,u,{width:1.75,height:1.75,stunDuration:[2,3,4][stage]});
-    ctx.fx('buff',target.x,target.y,{side:u.side,color:'#f4dca0'});
+    if(kind===0){const hp=ctx.maxHealth(target),shield=ctx.maxShield(target),entry=ctx.status(target,'allStatsBonus',Infinity,[.2,.225,.25][stage],u);if(entry){target.hp*=ctx.maxHealth(target)/hp;if(shield>0)target.shield*=ctx.maxShield(target)/shield;ctx._capVitals(target);applied=true;}}
+    else if(kind===1){const gain=ctx.giveShield(target,ctx.maxHealth(target)*[.25,.285,.32][stage],u);if(gain>0){ctx.status(target,'blessedShield',Infinity,0,u,{remaining:gain});applied=true;}}
+    else applied=!!ctx.status(target,'blessedTrap',Infinity,0,u,{width:1.75,height:1.75,stunDuration:[2,3,4][stage]});
+    if(applied){ctx.status(target,'blessed',5,0,u,{blessingKind:kind});ctx.fx('blessing',target.x,target.y,{side:u.side,unitId:target.id,color:'#f4dca0',duration:1.2});}
    });
+   u.memory.blessed=applied;u.memory.blessingChannel=null;
   },
  },
  mimic:{

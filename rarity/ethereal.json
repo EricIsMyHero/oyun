@@ -1741,7 +1741,7 @@
         "mana": "17",
         "number": "1"
       },
-      "trait": "360° hasar verər. Cütlük bir-birindən maksimum 2.5 karo uzaqda olarkən hər biri saniyədə 6 yük qazanar. Hər ikisi 100 yükdə 5 saniyəlik birləşər və canlarını ortaqlaşdırar; hər 0.25 saniyədə 5 hasar verər və 3 Can bərpa edər. Bu müddətdə 25% hasar azaltma qazanar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
+      "trait": "Cütlük bir-birindən maksimum 2.5 karo uzaqda olarkən hər biri saniyədə 6 yük qazanar. Hər ikisi 100 yükdə 5 saniyəlik bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 360° sahədə hər 0.25 saniyədə 5 hasar verər və 3 Can bərpa edər. Bu müddətdə 25% hasar azaltma qazanar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
       "additionalStats": {
         "range": "1000",
         "speed": "1200",
@@ -1792,7 +1792,7 @@
             "mana": "-",
             "number": "1"
           },
-          "trait": "360° hasar verər. Cütlük bir-birindən maksimum 2.5 karo uzaqda olarkən hər biri saniyədə 6 yük qazanar. Hər ikisi 100 yükdə 5 saniyəlik birləşər və canlarını ortaqlaşdırar; hər 0.25 saniyədə 5 hasar verər və 3 Can bərpa edər. Bu müddətdə 25% hasar azaltma qazanar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
+          "trait": "Cütlük bir-birindən maksimum 2.5 karo uzaqda olarkən hər biri saniyədə 6 yük qazanar. Hər ikisi 100 yükdə 5 saniyəlik bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 360° sahədə hər 0.25 saniyədə 5 hasar verər və 3 Can bərpa edər. Bu müddətdə 25% hasar azaltma qazanar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
           "additionalStats": {
             "range": "1000",
             "speed": "1200",
@@ -1882,7 +1882,7 @@
         "mana": "17",
         "number": "1"
       },
-      "trait": "Tək hədəfə hasar verər. Cütlük maksimum 2.5 karo məsafədə saniyədə 6 yük qazanar. Hər ikisi 100 yükdə 3.75 saniyədə 5 karo düz irəliləyər və yolu üstündəki hər rəqibə bir dəfə 75 hasar verər. İrəliləmə müddətində 75% hasar azaltma qazanar. Bu müddətdə canı 20%-dən aşağı düşərsə çatışmayan canının 75%-ni bərpa edər; sağalma hər yerləşdirmədə yalnız bir dəfə işləyər.",
+      "trait": "Tək hədəfə hasar verər. Cütlük maksimum 2.5 karo məsafədə saniyədə 6 yük qazanar. Hər ikisi 100 yükdə bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 3.75 saniyədə 5 karo irəliləyər; 2x5 karo keçid sahəsində içindən keçdikləri hər rəqibə bir dəfə cəmi 75 hasar verərlər. İrəliləmə müddətində 75% hasar azaltma qazanarlar. Bu müddətdə ortaq can 20%-dən aşağı düşərsə çatışmayan canın 75%-ni bərpa edərlər; sağalma cütlüyün hər yerləşdirilməsində yalnız bir dəfə işləyər. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
       "additionalStats": {
         "range": "1000",
         "speed": "1100",
@@ -1926,7 +1926,7 @@
             "mana": "-",
             "number": "1"
           },
-          "trait": "Tək hədəfə hasar verər. Cütlük maksimum 2.5 karo məsafədə saniyədə 6 yük qazanar. Hər ikisi 100 yükdə 3.75 saniyədə 5 karo düz irəliləyər və yolu üstündəki hər rəqibə bir dəfə 75 hasar verər. İrəliləmə müddətində 75% hasar azaltma qazanar. Bu müddətdə canı 20%-dən aşağı düşərsə çatışmayan canının 75%-ni bərpa edər; sağalma hər yerləşdirmədə yalnız bir dəfə işləyər.",
+          "trait": "Tək hədəfə hasar verər. Cütlük maksimum 2.5 karo məsafədə saniyədə 6 yük qazanar. Hər ikisi 100 yükdə bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 3.75 saniyədə 5 karo irəliləyər; 2x5 karo keçid sahəsində içindən keçdikləri hər rəqibə bir dəfə cəmi 75 hasar verərlər. İrəliləmə müddətində 75% hasar azaltma qazanarlar. Bu müddətdə ortaq can 20%-dən aşağı düşərsə çatışmayan canın 75%-ni bərpa edərlər; sağalma cütlüyün hər yerləşdirilməsində yalnız bir dəfə işləyər. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
           "additionalStats": {
             "range": "1000",
             "speed": "1100",

@@ -1,4 +1,4 @@
-import { RULES, clamp, num, burst, energyForMana, RAY_CHARGE } from './rules.mjs';
+import { RULES, clamp, num, burst, energyForMana, RAY_CHARGE, addCharge } from './rules.mjs';
 import { MAP, routeFor, routeLength, pointOnRoute, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
@@ -216,14 +216,15 @@ export class ArenaEngine {
     for(const key of Object.keys(saved))Object.defineProperty(u,key,{enumerable:true,configurable:true,get:()=>pool[key],set:value=>{pool[key]=Math.max(0,Number.isFinite(value)?value:0);}});
     this._capVitals(u);
   }
-  fuseRays(a,b){
+  fuseRays(a,b,mode=1){
     if(!a.alive||!b.alive||a.side!==b.side||a.sharedVitalsId||b.sharedVitalsId)return false;
     const [leader,partner]=[a,b].sort((x,y)=>Number(y.def.name==='Mr. Ray')-Number(x.def.name==='Mr. Ray')||x.id.localeCompare(y.id));
-    const pool={id:`rays-${++this.serial}`,kind:'ray',healthOnly:true,factor:1,members:[],leaderId:leader.id,hp:0,maxHp:0,shield:0,maxShield:0,until:this.time+5};
+    const duration=mode===2?3.75:5;
+    const pool={id:`rays-${++this.serial}`,kind:'ray',mode,healthOnly:true,factor:1,members:[],leaderId:leader.id,hp:0,maxHp:0,shield:0,maxShield:0,until:this.time+duration};
     this.vitalPools.set(pool.id,pool);this.state.sharedVitals.push(pool);this._bindVitals(pool,leader);this._bindVitals(pool,partner);
     partner.fusedInto=leader.id;partner.x=leader.x;partner.y=leader.y;
-    for(const u of [leader,partner])u.memory.rayCharge=Math.max(0,(u.memory.rayCharge||0)-RAY_CHARGE.maximum);
-    this.status(leader,'protection',5,.25,leader);this.fx('wave',leader.x,leader.y,{side:leader.side,radius:1,color:'#e8bda5'});return true;
+    for(const u of [leader,partner]){u.memory.rayCharge=Math.max(0,(u.memory.rayCharge||0)-RAY_CHARGE.maximum);u.rayFusion={mode,born:this.time,until:pool.until};}
+    for(const member of [leader,partner])this.status(member,'protection',duration,mode===2?.75:.25,leader);this.fx('wave',leader.x,leader.y,{side:leader.side,radius:1,color:'#e8bda5'});return true;
   }
   endRayFusion(pool){
     const total=pool.members.reduce((n,id)=>n+(this.units.find(u=>u.id===id)?.sharedVitalContribution?.health||0),0);
@@ -231,7 +232,7 @@ export class ArenaEngine {
     for(const id of pool.members){const u=this.units.find(u=>u.id===id);if(!u)continue;
       const maxHp=pool.maxHp*(u.sharedVitalContribution?.health||0)/(total||1),hp=pool.maxHp>0?pool.hp/pool.maxHp*maxHp:0;
       for(const[key,value]of Object.entries({hp,maxHp}))Object.defineProperty(u,key,{enumerable:true,configurable:true,writable:true,value});
-      u.stats.health=maxHp;delete u.sharedVitalsId;delete u.sharedVitalContribution;delete u.fusedInto;u.memory.rayPulse=0;
+      u.stats.health=maxHp;delete u.sharedVitalsId;delete u.sharedVitalContribution;delete u.fusedInto;delete u.rayFusion;delete u.rayDash;u.memory.rayPulse=0;
       u.hp=this.maxHealth(u)*fraction;
       if(leader&&u!==leader){u.x=leader.x+(u.side?1:-1)*.45;u.y=leader.y+.3;if(!isWalkable(u)){const p=closestRoute(u);u.x=p.x;u.y=p.y;}this._resetWaypoint(u);}
       this._capVitals(u);
@@ -241,14 +242,15 @@ export class ArenaEngine {
   _syncRayFusions(final=false){
     for(const pool of [...this.vitalPools.values()])if(pool.kind==='ray'){
       const members=pool.members.map(id=>this.units.find(u=>u.id===id)),leader=members.find(u=>u?.id===pool.leaderId);
-      if(!leader||members.some(u=>!u?.alive||u.side!==leader.side)||(final?pool.until<=this.time+EPS:pool.until<this.time-EPS)){this.endRayFusion(pool);continue;}
+      if(!leader||members.some(u=>!u?.alive||u.side!==leader.side)||(final?pool.until<=this.time+EPS:pool.mode!==2&&pool.until<this.time-EPS)){this.endRayFusion(pool);continue;}
       for(const u of members)if(u!==leader){u.x=leader.x;u.y=leader.y;u.moving=false;}
     }
   }
   startRayDash(a,b){
-    if(a.rayDash||b.rayDash)return false;
-    const length=Math.hypot(a.facingX||0,a.facingY||0)||1,dx=(a.facingX??(a.side?-1:1))/length,dy=(a.facingY||0)/length;
-    for(const u of[a,b]){u.memory.rayCharge=Math.max(0,(u.memory.rayCharge||0)-RAY_CHARGE.maximum);u.rayDash={until:this.time+3.75,lastTime:this.time,remaining:5,dx,dy,hitIds:[]};this.status(u,'protection',3.75,.75,u);}
+    if(a.rayDash||b.rayDash||!this.fuseRays(a,b,2))return false;
+    const pool=this._pool(a),leader=this.units.find(u=>u.id===pool.leaderId);
+    const length=Math.hypot(leader.facingX||0,leader.facingY||0)||1,dx=(leader.facingX??(leader.side?-1:1))/length,dy=(leader.facingY||0)/length;
+    leader.rayDash={until:pool.until,lastTime:this.time,remaining:5,length:5,width:2,damage:75,startX:leader.x,startY:leader.y,dx,dy,hitIds:[]};
     return true;
   }
   _rayDash(u,dt){
@@ -256,8 +258,13 @@ export class ArenaEngine {
     const elapsed=Math.max(0,Math.min(this.time,dash.until)-dash.lastTime);dash.lastTime=this.time;
     const blocked=['stun','root','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time));
     const step=blocked?0:Math.min(dash.remaining,5/3.75*elapsed),from={x:u.x,y:u.y};dash.remaining-=step;u.x=clamp(u.x+dash.dx*step,.5,MAP.width-.5);u.y=clamp(u.y+dash.dy*step,.5,MAP.height-.5);u.moving=step>0;
-    for(const target of this.units.filter(t=>step>EPS&&!t.isBuilding&&this._canHit(u,t)&&!dash.hitIds.includes(t.id)&&projectSegment(t,from,u).distance<=t.radius+this._profile(u).attackWidth/2000)){
-      dash.hitIds.push(target.id);this.damage(u,target,75,{kind:'ability',secondary:true});
+    const along=point=>(point.x-dash.startX)*dash.dx+(point.y-dash.startY)*dash.dy,previous=along(from),current=along(u);
+    for(const target of this.units.filter(t=>{
+      if(step<=EPS||t.isBuilding||!this._canHit(u,t)||dash.hitIds.includes(t.id))return false;
+      const forward=along(t),across=Math.abs((t.x-dash.startX)*-dash.dy+(t.y-dash.startY)*dash.dx),padding=t.radius||0;
+      return across<=dash.width/2+padding+EPS&&forward>=Math.max(0,previous)-padding-EPS&&forward<=Math.min(dash.length,current)+padding+EPS;
+    })){
+      dash.hitIds.push(target.id);this.damage(u,target,dash.damage,{kind:'ability',secondary:true});
     }
     if(dash.until<=this.time+EPS){delete u.rayDash;if(!isWalkable(u)){const p=closestRoute(u);u.x=p.x;u.y=p.y;}this._resetWaypoint(u);}
     return true;
@@ -402,7 +409,7 @@ export class ArenaEngine {
     const ink=this.status(target,'ink',Infinity,stacks*.03,source,{stacks,onLethalHit:true,scheduled});
     if(!ink||stacks<21||active(target,'curse',this.time).some(s=>s.inkCurse&&s.sourceId===source.id))return ink;
     const curse=this.status(target,'curse',Infinity,.25,source,{inkCurse:true,onLethalHit:true,scheduled:true});
-    if(curse){source.memory.artistCharge=(source.memory.artistCharge||0)+10;this.fx('poison',target.x,target.y,{side:source.side,color:'#c99ae6'});}
+    if(curse){addCharge(source,10,'artistCharge');this.fx('poison',target.x,target.y,{side:source.side,color:'#c99ae6'});}
     return ink;
   }
   _spreadInk(target){
@@ -976,8 +983,10 @@ export class ArenaEngine {
     }
     return null;
   }
+  _preparing(u){return this.time-(u.memory.preparationBorn??u.born)<(this.ability(u)?.preparationTime||0)-EPS;}
+  _holding(u){return this._preparing(u)||!!this.ability(u)?.holdsPosition?.(this,u);}
   _move(u,target,dt){
-    if(u.isBuilding||this.ability(u)?.immobile||u.possessingId||u.parasitizingId||u.fusedInto||['root','stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))return;
+    if(this._holding(u)||u.isBuilding||this.ability(u)?.immobile||u.possessingId||u.parasitizingId||u.fusedInto||['root','stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))return;
     const movement=u.def.combat?.movementType;
     let destination;
     if(target)destination=target;
@@ -1106,7 +1115,7 @@ export class ArenaEngine {
   }
   _fire(u,target){
     if(u.memory.returningShotId||this.ability(u)?.noBasicAttack||this._pool(u)?.kind==='ray'||u.rayDash)return;
-    if(this.time-u.born<(this.ability(u)?.preparationTime||0)-EPS)return;
+    if(this._holding(u))return;
     this.prepareWeapon(u,target);
     const booster=this.ability(u)?.burstBoost;
     if(booster&&u.burstIndex===0){const state=u.memory.burstBoost||={queued:false,active:false};state.active=state.queued;state.queued=false;}
@@ -1332,7 +1341,7 @@ export class ArenaEngine {
         if(field.kind==='blinding-mist')for(const u of this.units)u.statuses=u.statuses.filter(s=>s.mistFieldId!==field.id);
         continue;
       }
-      const targets=this.units.filter(u=>u.alive&&u.side!==field.side&&this._inside(u,field,field.shape));
+      const targets=this.units.filter(u=>u.alive&&!u.fusedInto&&u.side!==field.side&&this._inside(u,field,field.shape));
       if(field.kind==='blinding-mist'){
         const affected=new Set(targets.filter(u=>!u.isBuilding&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.parasitizingId&&!u.fusedInto).map(u=>u.id));
         for(const u of this.units){
@@ -1400,7 +1409,7 @@ export class ArenaEngine {
       if(d>=min)continue;if(d<.001){dx=0;dy=(i%2?1:-1)*.001;d=.001;}
       const overlap=Math.min(.04,(min-d)*.3),total=a.mass+b.mass;
       for(const [u,sign,weight] of [[a,1,b.mass/total],[b,-1,a.mass/total]]){
-        if(['stun','root','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
+        if(this._holding(u)||['stun','root','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
         const p={x:u.x+dx/d*overlap*sign*weight,y:u.y+dy/d*overlap*sign*weight};
         if(isWalkable(p)&&!this.castles.some(c=>c.alive&&distance(p,c)<c.radius+u.radius)){u.x=p.x;u.y=p.y;}
       }
@@ -1493,7 +1502,7 @@ export class ArenaEngine {
       if(u.isBuilding)this._buildingAura(u);
       if(has(u,'silence',this.time)||has(u,'imprisonment',this.time))for(const key of this.ability(u)?.conditionalStats||[])u.stats[key]=u.def.stats[key];
       if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time))this._hook('tick',u,dt);
-      if(this.time-u.born<(this.ability(u)?.preparationTime||0)-EPS)continue;
+      if(this._holding(u))continue;
       if(this._rayDash(u,dt))continue;
       if(!u.alive||['stun','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
       this.ability(u)?.weaponTick?.(this,u,dt);

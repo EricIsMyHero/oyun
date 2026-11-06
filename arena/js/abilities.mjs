@@ -1,5 +1,5 @@
 /* Native card rules. Missing facts are explicit locks, never invented effects. */
-import { RULES, clamp } from './rules.mjs';
+import { RULES, clamp, addCharge } from './rules.mjs';
 import { STATUS_INTERVALS, hasStatus } from './statuses.mjs';
 import { LATE_ABILITIES } from './late-abilities.mjs';
 
@@ -106,7 +106,8 @@ export const ABILITIES = {
     for(const ally of allies(ctx,u).filter(t=>!t.isBuilding&&!t.healthless))ctx.giveShield(ally,ally.def.stats.shield>0?shieldCap(ctx,ally)*.03:5);
   }},
   laura:{tick(ctx,u,dt){
-    u.memory.charge=(u.memory.charge||0)+8*dt;
+    addCharge(u,8*dt);
+    if(!allies(ctx,u).length)return;
     while(u.memory.charge+1e-7>=100){
       u.memory.charge=Math.max(0,u.memory.charge-100);
       const cast=()=>{for(const ally of allies(ctx,u))for(const kind of ['damageBonus','attackHaste','speedBonus'])ctx.status(ally,kind,30,.25,u);ctx.fx('wave',u.x,u.y,{side:u.side,radius:radius(u,ctx),color:'#b6e8e1'});};
@@ -435,7 +436,7 @@ export const ABILITIES = {
   }},
   astranova:{attack(ctx,u,t,hit){const nova=u.shots%10===0;hit.combat={attackShape:nova?'square':'single',multiTarget:nova,maxTargets:nova?null:1,impactSize:'5 × 5 tiles'};if(nova)hit.damage*=5;}},
   kai:{
-    damaged(ctx,u,s,r){u.memory.chargeDamage=(u.memory.chargeDamage||0)+r.total;const chunks=Math.floor(u.memory.chargeDamage/10);u.memory.chargeDamage-=chunks*10;u.memory.charge=(u.memory.charge||0)+chunks*20;},
+    damaged(ctx,u,s,r){u.memory.chargeDamage=(u.memory.chargeDamage||0)+r.total;const chunks=Math.floor(u.memory.chargeDamage/10);u.memory.chargeDamage-=chunks*10;addCharge(u,chunks*20);},
     attack(ctx,u,t,hit){if((u.memory.charge||0)>=100){u.memory.charge-=100;hit.damage*=1.6;hit.kaiCharged=true;}},
     hit(ctx,u,t,r,hit){if(!damageEvent(r)||t.isCastle)return;if(u.shots%3===0)ctx.status(t,'stun',.8,0,u);if(hit.kaiCharged)ctx.push(t,u,3);},
   },
@@ -503,7 +504,7 @@ export const ABILITIES = {
     },
     hit(ctx,u,target,result,hit){
       if(!damageEvent(result))return;
-      u.memory.charge=Math.min(100,(u.memory.charge||0)+25);
+      addCharge(u,25);
       if(hit.wongCharged&&!target.isCastle&&!target.isBuilding){ctx.push(target,u,3);ctx.status(target,'stun',1,0,u);}
     },
   },
@@ -533,7 +534,7 @@ export const ABILITIES = {
   },
   tribe:{
     spawn(ctx,u){const i=ctx.units.filter(t=>t.groupId===u.groupId&&t.def.id===u.def.id).length-1;u.memory.dagger=i<2;u.stats.damage=u.memory.dagger?4:6;u.stats.attackSpeed=u.memory.dagger?1:1.25;},
-    tick(ctx,u,dt){u.memory.charge=(u.memory.charge||0)+8*dt;},
+    tick(ctx,u,dt){addCharge(u,8*dt);},
     attack(ctx,u,t,hit){if((u.memory.charge||0)>=100){u.memory.charge-=100;hit.damage*=u.memory.dagger?2:3;hit.tribeCharged=true;
       const group=ctx.units.filter(a=>a.alive&&a.groupId===u.groupId);const selected=group.find(a=>a.memory.chargedTarget)?.memory.chargedTarget;
       const target=ctx.units.find(a=>a.alive&&a.id===selected&&a.side!==u.side);
@@ -552,7 +553,7 @@ export const ABILITIES = {
   },
   shellbyte:{
     tick(ctx,u,dt){if(enemies(ctx,u).some(t=>ctx.canTarget(u,t))){u.memory.leapClock=0;return;}
-      periodic(u,'leapClock',dt,.225,()=>{u.memory.charge=(u.memory.charge||0)+3;});
+      periodic(u,'leapClock',dt,.225,()=>{addCharge(u,3);});
       if((u.memory.charge||0)>=100){const target=enemies(ctx,u,4.5).filter(t=>!airborne(t)&&ctx.canTarget(u,t)).sort((a,b)=>a.hp-b.hp)[0];if(target){u.memory.charge-=100;const leap=()=>{u.x=target.x+(u.side===0?-.35:.35);u.y=target.y;u.targetId=target.id;u.memory.leapStrike=true;ctx.fx('leap',u.x,u.y,{side:u.side});};if(ctx.useAbility)ctx.useAbility(u,leap);else leap();}}
     },
     attack(ctx,u,t,hit){if(u.memory.leapStrike){hit.damage*=1.5;u.memory.leapStrike=false;}},
@@ -612,7 +613,7 @@ export const ABILITIES = {
     if(u.memory.incomingHits%4===0){hit.damage=0;hit.instantKill=false;ctx.fx('shield',u.x,u.y,{side:u.side});}
   }},
   ali:{tick(ctx,u,dt){
-    u.memory.charge=(u.memory.charge||0)+allies(ctx,u).length*4*dt;
+    addCharge(u,allies(ctx,u).length*4*dt);
     while(u.memory.charge+1e-7>=100){
       u.memory.charge=Math.max(0,u.memory.charge-100);
       const protect=()=>{allies(ctx,u,radius(u,ctx),true).forEach(t=>ctx.status(t,'untouchable',3,0,u));ctx.fx('shield',u.x,u.y,{side:u.side,radius:radius(u,ctx)});};
@@ -697,7 +698,7 @@ export const ABILITIES = {
   unara:{
     hit(ctx,u,t,result){
       if(!u.alive||!damageEvent(result))return;
-      u.memory.charge=(u.memory.charge||0)+9;
+      addCharge(u,9);
       if(u.memory.charge<100||u.memory.orbRemaining>0)return;
       const targets=enemies(ctx,u).filter(t=>!t.isBuilding&&ctx.canTarget(u,t))
         .sort((a,b)=>Math.hypot(a.x-u.x,a.y-u.y)-Math.hypot(b.x-u.x,b.y-u.y)||a.id.localeCompare(b.id));
@@ -728,7 +729,8 @@ export const ABILITIES = {
   },
   clara:{tick(ctx,u,dt){
     const nearby=enemies(ctx,u).filter(t=>!t.isBuilding&&(ctx.canSee?ctx.canSee(u,t):ctx.canTarget(u,t)));
-    u.memory.charge=(u.memory.charge||0)+nearby.length*20*dt;
+    addCharge(u,nearby.length*20*dt);
+    if(!nearby.length)return;
     while(u.memory.charge+1e-7>=100){
       u.memory.charge=Math.max(0,u.memory.charge-100);
       const cast=()=>{

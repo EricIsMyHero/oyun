@@ -1720,7 +1720,7 @@
       "mana": "17",
       "number": "1"
     },
-    "trait": "Rəqib kartlara mürəkkəb atar və bu mürəkkəblər rəqib kartın üstündə qalar. Hər bir mürəkkəb rəqib kartı 3% yavaşladar, 21 mürəkkəb bulaşdırdıqdan sonra rəqib kartı lənətləyər. Lənət bütün mənbələrdən alınan hasarı 25% artırar. Lənətlənən kart öldükdə 2×2 karo sahədəki bütün rəqib kartlara 4 mürəkkəb bulaşdırar. Lənətlənən hər bir kart başına Artist 10 yük qazanar. Artist öldükdə Quzğun sürüsünə dönüşər. Quzğunların canı yoxdur, uçar və hədəfə alına bilməzlər; 4 karo görüş verər və ən azı 7 saniyə qalarlar. Hər 20 yük Quzğun sürüsünün müddətini +1 saniyə, sayını isə +2 artırar.",
+    "trait": "Rəqib kartlara mürəkkəb atar və bu mürəkkəblər rəqib kartın üstündə qalar. Hər bir mürəkkəb rəqib kartı 3% yavaşladar, 21 mürəkkəb bulaşdırdıqdan sonra rəqib kartı lənətləyər. Lənət bütün mənbələrdən alınan hasarı 25% artırar. Lənətlənən kart öldükdə 2×2 karo sahədəki bütün rəqib kartlara 4 mürəkkəb bulaşdırar. Lənətlənən hər bir kart başına Artist 10 yük qazanar. Artist öldükdə Quzğun sürüsünə dönüşər. Quzğunların canı yoxdur, uçar və hədəfə alına bilməzlər; 4 karo görüş verər və ən azı 7 saniyə qalarlar. Hər 20 yük Quzğun sürüsünün müddətini +1 saniyə, sayını isə +2 artırar. Yük maksimum 100-dür və zamanla silinməz.",
     "additionalStats": {
       "range": "3000",
       "speed": "1000",

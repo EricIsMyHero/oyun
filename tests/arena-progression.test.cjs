@@ -101,13 +101,13 @@ test('Dumpsy starts with three permanent orbital weapons and spends only collect
 test('Dumpsy has a twelve-object loot cap, unbounded repeated-target growth, and enhanced items only on even deployments',async()=>{
  const{e,spawn,dummy}=await fixture(),u=spawn('dumpsy');for(let i=0;i<20;i++){e.killUnit(dummy(1,{x:25,y:14}));e._drainDeaths();}assert.equal(u.memory.dumpLoot.length,12);assert.equal(u.memory.dumpFixed.length,3);
  e.random=()=>0;u.deploymentNumber=2;e._hook('spawn',u);assert.ok(u.memory.dumpFixed.every(o=>o.element==='slow'));u.deploymentNumber=3;e._hook('spawn',u);assert.ok(u.memory.dumpFixed.every(o=>o.element===null));
- const t=dummy(1,{x:15.55,y:14},{health:100000000});e.step(4);assert.ok(u.memory.dumpCombo.count>10);assert.ok(t.hp<100000000-200);close(u.stats.damage,10);
+ const t=dummy(1,{x:15.55,y:14},{health:100000000});e.step(4);assert.ok(u.memory.dumpCombo.count>10);assert.ok(t.hp<100000000-u.hits*10);close(u.stats.damage,10);
 });
 test('Dumpsy throws no faster than 1.15 seconds and Slow from enhanced items lasts three seconds',async()=>{
  const{e,spawn,dummy}=await fixture(),u=spawn('dumpsy'),t=dummy(1,{x:17.5,y:14});u.deploymentNumber=2;e.random=()=>0;e._hook('spawn',u);e.killUnit(dummy(0,{x:25,y:14}));e._drainDeaths();e.step(1.14);assert.equal(e.state.projectiles.length,0);e.step(.03);assert.equal(e.state.projectiles.length,1);e.step(.3);const slow=t.statuses.find(s=>s.kind==='slow');assert.ok(slow);close(slow.magnitude,.25);assert.ok(slow.until>4.1&&slow.until<4.5);
 });
-test('Blesser waits twelve seconds, blesses once, caps tier three, and excludes Mana, Count and Life from the stat blessing',async()=>{
- const{e,spawn,dummy}=await fixture(),u=spawn('blesser',0,{x:15,y:14},{speed:1000}),t=dummy(0,{x:16,y:14},{mana:5,number:3,life:80,damage:10,attackSpeed:1,range:4000});u.deploymentNumber=6;e.random=()=>0;e.step(11.99);close(u.x,15);assert.equal(t.statuses.length,0);e.step(.01);assert.ok(u.memory.blessed);close(e.maxHealth(t),1250);close(t.hp,1250);close(e.statValue(t,'damage'),12.5);close(e.statValue(t,'mana'),5);close(e.statValue(t,'number'),3);close(e.statValue(t,'life'),80);close(e.attackInterval(t),.8);e.step(1);assert.equal(t.statuses.filter(s=>s.kind==='allStatsBonus').length,1);
+test('Blesser channels for three seconds while standing for twelve, blesses once and preserves excluded stats',async()=>{
+ const{e,spawn,dummy}=await fixture(),u=spawn('blesser',0,{x:15,y:14},{speed:1000}),t=dummy(0,{x:16,y:14},{mana:5,number:3,life:80,damage:10,attackSpeed:1,range:4000});u.deploymentNumber=6;e.random=()=>0;e.step(2.99);close(u.x,15);assert.equal(t.statuses.some(s=>s.kind==='allStatsBonus'),false);e.step(.01);assert.ok(u.memory.blessed);e.step(8.99);close(u.x,15);close(e.maxHealth(t),1250);close(t.hp,1250);close(e.statValue(t,'damage'),12.5);close(e.statValue(t,'mana'),5);close(e.statValue(t,'number'),3);close(e.statValue(t,'life'),80);close(e.attackInterval(t),.8);e.step(1);assert.equal(t.statuses.filter(s=>s.kind==='allStatsBonus').length,1);
 });
 test('Blesser shield uses maximum Health and retaliates with one second of Bleeding when that layer is hit',async()=>{
  const{e,spawn,dummy}=await fixture(),u=spawn('blesser'),ally=dummy(0,{x:15.6,y:14},{health:200,shield:0}),enemy=dummy(1,{x:16,y:14});e.random=()=>.4;e.step(12);close(ally.shield,50);e.damage(enemy,ally,10,{kind:'attack'});const bleed=enemy.statuses.find(s=>s.kind==='bleed');assert.ok(bleed);close(bleed.until,e.time+1);
@@ -151,11 +151,11 @@ test('Ray first form fuses shared Health into one target, pulses twenty times, t
 test('Ray shared Health death kills both and leaves no permanently fused body',async()=>{
  const{e,spawn}=await fixture(),a=spawn('mr-and-mrs-ray/type1'),b=e.units.find(t=>t.def.id==='mr-and-mrs-ray/type1/the-rays');a.memory.rayCharge=b.memory.rayCharge=100;e._hook('tick',a,0);e.killUnit(a);e._syncRayFusions(true);assert.equal(a.alive,false);assert.equal(b.alive,false);assert.equal(b.fusedInto,undefined);assert.equal(e.state.sharedVitals.length,0);
 });
-test('Ray second form travels five tiles in 3.75 seconds and hits each crossed target once per partner',async()=>{
- const{e,spawn,dummy}=await fixture(),a=spawn('mr-and-mrs-ray/type2'),b=e.units.find(t=>t.def.id==='mr-and-mrs-ray/type2/the-rays'),t=dummy(1,{x:18,y:14});a.memory.rayCharge=b.memory.rayCharge=100;e._hook('tick',a,0);assert.ok(a.rayDash);e.step(3.8);assert.equal(a.rayDash,undefined);close(a.x,20);close(t.hp,850);
+test('Ray second form fuses, travels five tiles in 3.75 seconds and hits each crossed target once',async()=>{
+ const{e,spawn,dummy}=await fixture(),a=spawn('mr-and-mrs-ray/type2'),b=e.units.find(t=>t.def.id==='mr-and-mrs-ray/type2/the-rays'),t=dummy(1,{x:18,y:14});a.memory.rayCharge=b.memory.rayCharge=100;e._hook('tick',a,0);assert.ok(a.rayDash);e.step(3.8);assert.equal(a.rayDash,undefined);close(a.x,20);close(t.hp,925);
 });
 test('Ray second form rescue is available once per deployment even when later dashes begin',async()=>{
- const{e,spawn}=await fixture(),a=spawn('mr-and-mrs-ray/type2'),b=e.units.find(t=>t.def.id==='mr-and-mrs-ray/type2/the-rays');e.startRayDash(a,b);e.damage(null,a,1400,{kind:'spell',bypassShield:true});close(a.hp,332.5);assert.ok(a.rayHealUsed);e.damage(null,a,1000,{kind:'spell',bypassShield:true});close(a.hp,82.5);e.step(3.8);e.startRayDash(a,b);e._hook('tick',a,0);close(a.hp,82.5);
+ const{e,spawn}=await fixture(),a=spawn('mr-and-mrs-ray/type2'),b=e.units.find(t=>t.def.id==='mr-and-mrs-ray/type2/the-rays');e.startRayDash(a,b);e.damage(null,a,2560,{kind:'spell',bypassShield:true});close(a.hp,580);assert.ok(a.rayHealUsed);assert.ok(b.rayHealUsed);e.damage(null,a,2000,{kind:'spell',bypassShield:true});close(a.hp,80);e.step(3.8);e.startRayDash(a,b);e._hook('tick',a,0);close(a.hp,80);
 });
 
 test('Dracula authored twenty-five-percent Lifesteal Chance can gain an additional twenty-five points',async()=>{

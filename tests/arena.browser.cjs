@@ -386,10 +386,10 @@ async function minimapPixelAt(page,point) {
       for(const target of targets)target.hp=1000;e.step(.2);e.setPaused(true);arenaApp.renderer.focusAt(source);window.orbFixture={source,targets,dummy};
       return{charge:source.memory.charge,remaining:source.memory.orbRemaining,orbs:e.state.projectiles.filter(p=>p.kind==='orb').length};
     });
-    assert.deepEqual(volley,{charge:8,remaining:28,orbs:2});await settleFrame(page);
+    assert.deepEqual(volley,{charge:0,remaining:28,orbs:2});await settleFrame(page);
     await page.screenshot({path:'/tmp/oyun-arena-unara-orbs.png',fullPage:true});screenshots.push('/tmp/oyun-arena-unara-orbs.png');
     const orbImpact=await page.evaluate(()=>{const e=arenaApp.engine;e.setPaused(false);e.step(3.4);e.setPaused(true);return{hp:orbFixture.targets.map(t=>t.hp),charge:orbFixture.source.memory.charge,hits:orbFixture.source.hits};});
-    assert.deepEqual(orbImpact,{hp:[970,970],charge:8,hits:12});
+    assert.deepEqual(orbImpact,{hp:[970,970],charge:0,hits:12});
     const taunt=await page.evaluate(()=>{
       const e=arenaApp.engine;e.state.units=[];e.state.projectiles=[];e.state.effects=[];e.setPaused(false);
       const def=structuredClone(arenaApp.catalog.byId.get('clara'));def.stats.speed=0;

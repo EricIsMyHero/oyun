@@ -89,7 +89,7 @@ const server=http.createServer(async(req,res)=>{
       const {nativeCharge}=await import('./js/visuals.mjs');const a=arenaApp;a.startMatch();const e=a.engine;e.bot=false;e.state.units=[];e.state.fields=[];e.state.effects=[];for(const c of e.castles)c.cooldown=Infinity;
       const make=(id,x,y,value)=>{const d=structuredClone(a.catalog.byId.get(id));Object.assign(d.stats,{speed:0,range:0,damage:0,criticalChance:0,healrecovery:0,shieldrecovery:0});const[u]=e.spawn(d,0,{x,y},1,{count:1,positions:[{x,y}]});u.cooldown=Infinity;if(value!=null)u.memory[nativeCharge(u).key]=value;return u;};
       const laura=make('laura',15,14);e.step(5);const gained=nativeCharge(laura).total;
-      e.step(7.5);const spent=nativeCharge(laura).total;e.step(5);
+      e.step(7.5);const held=nativeCharge(laura).total;make('hammies',15.1,14);e.step(.04);const spent=nativeCharge(laura).total;e.step(5);
       const kai=make('kai',18,12,100),artist=make('artist',18,16,30);make('tribe',21,13,65);make('ase/type1',22,16,2);
       const ray=make('mr-and-mrs-ray/type1',25,14),partner=e.units.find(u=>u!==ray&&u.groupId===ray.groupId);Object.assign(partner,{x:27,y:14,cooldown:Infinity});partner.stats.speed=0;
       make('wong',17,18,75);make('clara',21,18,25);make('unara',25,18,90);make('ali',24,11,20);make('shellbyte',21,10,25);e.step(2);e.setPaused(true);a.renderer.focusAt({x:21,y:14});
@@ -99,10 +99,10 @@ const server=http.createServer(async(req,res)=>{
       const paint=r.chargeBar;r.chargeBar=()=>{};r.draw(e.state);const before=pixels();r.chargeBar=paint;r.draw(e.state);const after=pixels(),changed=before.reduce((n,v,i)=>n+(i%4!==3&&Math.abs(v-after[i])>10?1:0),0);
       r.portrait=portrait;r.draw(e.state);
       window.chargeFixture={laura,ray,partner};
-      return{gained,spent,changed,laura:nativeCharge(laura),ray:nativeCharge(ray),partner:nativeCharge(partner),artist:nativeCharge(artist),ready:nativeCharge(kai).ready,
+      return{gained,held,spent,changed,laura:nativeCharge(laura),ray:nativeCharge(ray),partner:nativeCharge(partner),artist:nativeCharge(artist),ready:nativeCharge(kai).ready,
         stats:Object.fromEntries(['frostshot','deadscope','naar','lyra'].map(id=>{const c=a.catalog.byId.get(id);return[id,{health:c.stats.health,shield:c.stats.shield,damage:c.attack.damage,interval:c.attack.interval,delay:c.attack.delay,range:c.stats.range}];}))};
     });
-    assert.ok(Math.abs(charges.gained-40)<1e-6);assert.ok(Math.abs(charges.spent)<1e-6);assert.ok(charges.changed>50,'the real charge bar and number paint above the card');
+    assert.ok(Math.abs(charges.gained-40)<1e-6);assert.ok(Math.abs(charges.held-100)<1e-6);assert.ok(Math.abs(charges.spent)<1e-6);assert.ok(charges.changed>50,'the real charge bar and number paint above the card');
     assert.ok(Math.abs(charges.ray.total-12)<1e-6);assert.ok(Math.abs(charges.partner.total-12)<1e-6);assert.equal(charges.ray.max,100);assert.equal(charges.artist.total,30);assert.equal(charges.ready,true);
     assert.equal(charges.stats.frostshot.interval,.25);assert.equal(charges.stats.frostshot.delay,1.4);assert.equal(charges.stats.deadscope.damage,125);assert.equal(charges.stats.deadscope.interval,5.25);assert.equal(charges.stats.deadscope.range,7000);assert.equal(charges.stats.naar.damage,96);assert.equal(charges.stats.naar.interval,3.75);assert.equal(charges.stats.lyra.health,180);assert.equal(charges.stats.lyra.shield,45);
     await page.screenshot({path:'/tmp/oyun-charge-v37-desktop.png',fullPage:true});

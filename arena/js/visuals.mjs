@@ -23,10 +23,13 @@ export const ICON_PATHS = Object.freeze({
   moon:'M14 3a8 8 0 1 0 3 11A8 8 0 0 1 14 3Z',
   target:'M10 2v3M10 15v3M2 10h3M15 10h3M4 10a6 6 0 1 0 12 0 6 6 0 1 0-12 0M8 10a2 2 0 1 0 4 0 2 2 0 1 0-4 0',
   down:'M10 2v11M5 9l5 5 5-5M3 18h14',
+  blessing:'M10 1l2.4 6.6L19 10l-6.6 2.4L10 19l-2.4-6.6L1 10l6.6-2.4ZM5 2v3M3.5 3.5h3',
+  link:'M8 6L6 4a4 4 0 0 0-5 6l4 4a4 4 0 0 0 6-5M12 14l2 2a4 4 0 0 0 5-6l-4-4a4 4 0 0 0-6 5M7 7l6 6',
   charge:'M11 2L3 12h6l-1 6 9-11h-6Z',
 });
 const visual=(label,color,icon,priority)=>Object.freeze({label,color,icon,priority});
 const STATUS_VISUALS=Object.freeze({
+  blessed:visual('Blessed','#f4dca0','blessing',-1),
   frozen:visual('Frozen','#b9f1ff','frost',0),stun:visual('Stun','#ffe09b','stun',1),
   airborne:visual('Airborne','#cae2ff','wind',2),imprisonment:visual('Imprisonment','#b8beff','lock',3),
   root:visual('Root','#b4dd88','root',4),silence:visual('Silence','#dfb1ff','silence',5),
@@ -73,15 +76,16 @@ export function statusBadges(statuses=[],time=0){
 const CHARGE_CARDS=new Set(['laura','kai','wong','tribe','shellbyte','ali','unara','clara']);
 // Presentation reads native counters directly: no animation invents charge or
 // changes a passive. Current ability IDs also cover copied/stolen passives.
-export function nativeCharge(unit){
+export function nativeCharge(unit,time=0){
   if(!unit||unit.passiveDisabled||unit.def?.passiveDisabled)return null;
   const id=unit.def?.variantId||unit.def?.id||'',memory=unit.memory||{};
   let key='charge',max=100,label='Charge',color='#88deed',segmented=false;
   if(id.startsWith('mr-and-mrs-ray/')){key='rayCharge';max=RAY_CHARGE.maximum;label='Twin Charge';color='#e5bf9a';}
   else if(/^ase\/type[12]$/.test(id)){key='parts';max=4;label='Robot Parts';}
-  else if(id==='artist'){key='artistCharge';max=20;label='Ink Charge';color='#c99ae6';segmented=true;}
+  else if(id==='artist'){key='artistCharge';label='Ink Charge';color='#c99ae6';}
   else if(!CHARGE_CARDS.has(id))return null;
-  const total=Number.isFinite(memory[key])?Math.max(0,memory[key]):0;
+  const total=Number.isFinite(memory[key])?clamp(memory[key],0,max):0;
+  if(unit.rayFusion?.until>time){const ratio=clamp((unit.rayFusion.until-time)/(unit.rayFusion.until-unit.rayFusion.born),0,1);return{key,label:'Fusion Active',color:'#f4dca0',total,value:ratio*100,max:100,ready:false,active:true,segmented:false,ratio,caption:'ACTIVE'};}
   const value=segmented?total%max:total,ready=!segmented&&value>=max-1e-7;
   return {key,label,color,total,value,max,ready,segmented,ratio:clamp(value/max,0,1),
     caption:segmented?String(Math.floor(total+1e-7)):`${Math.floor(total+1e-7)}/${max}`};

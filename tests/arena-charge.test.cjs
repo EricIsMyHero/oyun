@@ -51,14 +51,15 @@ test('every native charge family reads its own counter, including both Ray partn
 
 test('charge display follows real gain, spending and pause instead of independently animating progress',async()=>{
   const{e,spawn,nativeCharge}=await fixture(),u=spawn('laura');e.step(5);close(nativeCharge(u).total,40);close(nativeCharge(u).ratio,.4);
-  e.setPaused(true);e.step(8);close(nativeCharge(u).total,40);e.setPaused(false);e.step(7.5);close(nativeCharge(u).total,0);
-  const kai=spawn('kai');kai.memory.charge=240;const before=JSON.stringify(kai.memory);assert.equal(nativeCharge(kai).caption,'240/100');assert.equal(nativeCharge(kai).ready,true);close(nativeCharge(kai).ratio,1);assert.equal(JSON.stringify(kai.memory),before);
+  e.setPaused(true);e.step(8);close(nativeCharge(u).total,40);e.setPaused(false);e.step(7.5);close(nativeCharge(u).total,100);e.step(20);close(nativeCharge(u).total,100);
+  spawn('hammies',0,{x:16,y:14},{damage:0,range:0});e.step(.04);close(nativeCharge(u).total,0);
+  const kai=spawn('kai');kai.memory.charge=240;const before=JSON.stringify(kai.memory);assert.equal(nativeCharge(kai).caption,'100/100');assert.equal(nativeCharge(kai).ready,true);close(nativeCharge(kai).ratio,1);assert.equal(JSON.stringify(kai.memory),before);
 });
 
-test('Artist retains unlimited ink totals and shows progress to each next twenty-charge flock bonus',async()=>{
+test('Artist retains its ink count in a stable one-hundred-charge meter',async()=>{
   const{e,spawn,dummy,nativeCharge}=await fixture(),u=spawn('artist');
   for(let i=0;i<3;i++)e.addInk(u,dummy({x:16,y:14+i*.5}),21);
-  const meter=nativeCharge(u);close(meter.total,30);assert.equal(meter.caption,'30');close(meter.value,10);close(meter.max,20);close(meter.ratio,.5);assert.equal(meter.segmented,true);
+  const meter=nativeCharge(u);close(meter.total,30);assert.equal(meter.caption,'30/100');close(meter.value,30);close(meter.max,100);close(meter.ratio,.3);assert.equal(meter.segmented,false);
 });
 
 test('stolen native charges follow the thief while the stripped donor no longer displays a charge meter',async()=>{

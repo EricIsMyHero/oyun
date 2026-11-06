@@ -648,7 +648,7 @@ export class ArenaRenderer {
     const s=this.view.scale,side=u.side??0,color=TEAM[side];
     const movement=u.def?.combat?.movementType||u.def?.raw?.combatStats?.movementType||'ground';
     const time=state?.time||0,p=this.screenAt(u),selected=ui.selectedUnitId===u.id&&!ghost;
-    const size=clamp(s*.86,12,34)*(u.isBuilding?1.2:1);
+    const size=clamp(s*.86,12,34)*(u.isBuilding?1.2:u.rayFusion?1.15:1);
     const phase=String(u.id||'').split('').reduce((sum,c)=>sum+c.charCodeAt(0),0);
     const statuses=(u.statuses||[]).filter(st=>(st.until??Infinity)>time);
     const floating=(movement==='flying'?s*(.77+Math.sin(time*4+phase)*.06):movement==='hovering'?s*(.19+Math.sin(time*3+u.x)*.05):0)+(statuses.some(st=>st.kind==='airborne')?s*.9:0);
@@ -660,6 +660,15 @@ export class ArenaRenderer {
     const attacking=time-attackTime<.18&&u.shots>0;
     const hidden=statuses.some(st=>['invisible','invisibility','stealth'].includes(st.kind));
     ctx.save();ctx.globalAlpha=ghost ? .58 : hidden ? .48 : 1;
+    if(u.rayFusion&&!ghost){
+      const color='#f4dca0';
+      if(u.rayDash){
+        const dash=u.rayDash;
+        this.world(ctx,c=>{c.translate(dash.startX,dash.startY);c.rotate(Math.atan2(dash.dy,dash.dx));c.fillStyle=color+'18';c.strokeStyle=color+'a8';c.lineWidth=.04;c.beginPath();c.rect(0,-dash.width/2,dash.length,dash.width);c.fill();c.stroke();});
+      }else this.world(ctx,c=>{c.beginPath();c.arc(u.x,u.y,statValue(u,'range',time)/1000,0,Math.PI*2);c.fillStyle=color+'12';c.fill();c.strokeStyle=color+'99';c.lineWidth=.035;c.setLineDash([.15,.1]);c.lineDashOffset=-time*.2;c.stroke();});
+      ellipse(ctx,p.x,p.y,size*.8,size*.3,null,color+'a0',1.2);
+      for(let i=0;i<2;i++){const a=time*2+i*Math.PI;ellipse(ctx,p.x+Math.cos(a)*size*.7,py-size*.45+Math.sin(a)*size*.27,size*.07,size*.07,color);}
+    }
     for(const object of [...(u.memory?.dumpFixed||[]),...(u.memory?.dumpLoot||[])]){
       const orb=this.screenAt(u.x+(object.ox||0),u.y+(object.oy||0)),tint=({slow:'#94d6ec',poison:'#b5df78',burn:'#ffb875'})[object.element]||'#ddc59f';
       ctx.save();ctx.shadowColor=tint;ctx.shadowBlur=object.element?8:2;ctx.translate(orb.x,orb.y-s*.4);ctx.rotate(time*7+object.angle);
@@ -748,7 +757,7 @@ export class ArenaRenderer {
       ctx.fillStyle=color;ctx.fillRect(p.x-size*.15,headY-size*.085,size*.08,size*.035);ctx.fillRect(p.x+size*.06,headY-size*.085,size*.08,size*.035);
     }
     if(statuses.some(st=>st.kind==='frozen')){ctx.fillStyle='#a6e8ff66';ctx.fillRect(p.x-size*.6,headY-size*.6,size*1.2,size*1.2);}
-    ctx.restore();polygon(ctx,frame,null,selected?'#ffe0a1':metal,Math.max(1,size*.06));ctx.restore();
+    ctx.restore();polygon(ctx,frame,null,selected||this.blessingTargets?.has(u.id)?'#ffe0a1':metal,Math.max(1,size*.06));ctx.restore();
     if(statuses.some(st=>st.kind==='poison'||st.kind==='burn')){
       const statusColor=statuses.some(st=>st.kind==='burn')?'#ffbd78':'#bfdc76';
       for(let i=0;i<3;i++){const t=(time*.8+i*.31)%1;ctx.save();ctx.globalAlpha=(1-t)*.7;ellipse(ctx,p.x+Math.sin(i*3+time)*size*.4,py-size*(.3+t),size*.045,size*.07,statusColor);ctx.restore();}
@@ -758,7 +767,7 @@ export class ArenaRenderer {
     }
     if(!ghost) {
       const barY=headY-size*.78;
-      const charge=nativeCharge(u);
+      const charge=nativeCharge(u,time);
       if(u.healthless)this.healthBar(ctx,p.x,barY,size*1.16,Math.max(0,u.expiresAt-time)/(u.expiresAt-u.born||1),'#c99ae6',3);
       else this.healthBar(ctx,p.x,barY,size*1.16,u.hp/((u.sharedVitalsId?u.effectiveMaxHp:statValue(u,'health',time,u.maxHp))||1),side===0?'#a0df8e':'#fa9b80',3);
       if(u.maxShield>0&&u.shield>0)this.healthBar(ctx,p.x,barY-4,size*1.16,u.shield/((u.sharedVitalsId?u.effectiveMaxShield:statValue(u,'shield',time,u.maxShield))||1),'#83ccf4',2);
@@ -777,14 +786,14 @@ export class ArenaRenderer {
       this.statusIcons(ctx,statuses,p.x,barY-(charge?26:15),size,time,selected);
       if(selected) {
         ctx.textAlign='center';ctx.font='600 10px system-ui,sans-serif';ctx.shadowColor='#102c32';ctx.shadowBlur=4;ctx.fillStyle='#fff0c9';
-        ctx.fillText(u.def?.name||'Unit',p.x,py+17);ctx.shadowBlur=0;
+        ctx.fillText(u.rayFusion?'Mr. & Mrs. Ray':u.def?.name||'Unit',p.x,py+17);ctx.shadowBlur=0;
       }
     }
     ctx.restore();
   }
 
   chargeBar(ctx,charge,x,y,size,time){
-    const width=clamp(size*1.4,32,44),color=charge.ready?'#ffdc88':charge.color;
+    const width=clamp(size*1.4,32,44),color=charge.ready||charge.active?'#ffdc88':charge.color;
     ctx.save();ctx.globalAlpha=1;
     roundRect(ctx,x-width/2,y-4.5,width,9,2.5);ctx.fillStyle='#091725ed';ctx.fill();
     ctx.save();ctx.clip();
@@ -793,9 +802,24 @@ export class ArenaRenderer {
     }
     ctx.restore();ctx.strokeStyle=color+(charge.ready?'dd':'8c');ctx.lineWidth=.7;ctx.stroke();
     glyph(ctx,'charge',x-width/2-5,y,8,color);
-    if(charge.ready){ctx.shadowColor=color;ctx.shadowBlur=3+Math.sin(time*4)*1.5;}
+    if(charge.ready||charge.active){ctx.shadowColor=color;ctx.shadowBlur=3+Math.sin(time*4)*1.5;}
     ctx.font='700 7.5px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#f4f5e8';ctx.strokeStyle='#0d1b24';ctx.lineWidth=1.5;
     ctx.strokeText(charge.caption,x,y+.5);ctx.fillText(charge.caption,x,y+.5);ctx.restore();
+  }
+
+  blessingLinks(ctx,state,entityVisible){
+    const targets=new Set(),time=state?.time||0,s=this.view.scale;
+    for(const source of state?.units||[]){
+      const channel=source.memory?.blessingChannel;if(!channel||source.def?.id!=='blesser'||source.passiveDisabled||source.def?.passiveDisabled||!entityVisible(source))continue;
+      const target=state.units.find(t=>t.id===channel.targetId);if(!target||target.side!==source.side||distance(source,target)>12+(target.radius||0)+1e-7||!entityVisible(target))continue;
+      targets.add(target.id);const a=this.screenAt(source),b=this.screenAt(target),ratio=clamp(channel.progress/3,0,1);
+      ctx.save();ctx.strokeStyle='#f4dca055';ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(a.x,a.y-s*.5);ctx.lineTo(b.x,b.y-s*.5);ctx.stroke();
+      ctx.strokeStyle='#ffe9a6cc';ctx.lineWidth=1;ctx.stroke();
+      for(let i=0;i<4;i++){const t=(time*.6+i*.25)%1;ellipse(ctx,a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t-s*.5,1.7,1.7,'#fff2c2');}
+      this.world(ctx,c=>{c.beginPath();c.arc(target.x,target.y,.55,0,Math.PI*2);c.strokeStyle='#f4dca066';c.lineWidth=.04;c.stroke();c.beginPath();c.arc(target.x,target.y,.58,-Math.PI/2,-Math.PI/2+Math.max(.001,ratio)*Math.PI*2);c.strokeStyle='#ffe7a5';c.lineWidth=.08;c.stroke();});
+      glyph(ctx,'blessing',b.x,b.y-s*.55,clamp(s*.45,12,20),'#ffe7a5');ctx.restore();
+    }
+    return targets;
   }
 
   statusIcons(ctx,statuses,x,y,size,time,selected=false){
@@ -967,7 +991,11 @@ export class ArenaRenderer {
       light.addColorStop(0,color+'80');light.addColorStop(.25,color+'35');light.addColorStop(1,color+'00');
       ctx.save();ctx.globalCompositeOperation='lighter';ellipse(ctx,p.x,p.y-s*.2,radius,radius*.65,light);ctx.restore();
     }
-    if(e.type==='status'||e.type==='thaw'){
+    if(e.type==='blessing'){
+      const radius=s*(.25+progress*.7);ellipse(ctx,p.x,p.y,radius,radius*.4,null,color,1.5);
+      glyph(ctx,'blessing',p.x,p.y-s*(1.2+progress*.3),clamp(s*.7,16,30),color);
+      for(let i=0;i<8;i++){const a=i*Math.PI/4+progress*.5;ellipse(ctx,p.x+Math.cos(a)*radius,p.y-s*.5+Math.sin(a)*radius*.6,s*.035,s*.035,'#fff0be');}
+    }else if(e.type==='status'||e.type==='thaw'){
       const v=statusVisual(e.statusKind||'frozen'),radius=s*(.25+progress*.65);
       ellipse(ctx,p.x,p.y,radius,radius*.45,null,color,Math.max(.6,1.5*(1-progress)));
       if(e.type==='status')glyph(ctx,v.icon,p.x,p.y-s*(1+progress*.3),clamp(s*.5,12,20),color);
@@ -1169,6 +1197,7 @@ export class ArenaRenderer {
     }
     for(const trail of state?.trails||[])this.fireTrail(ctx,trail,time);
     for(const field of state?.fields||[])this.groundField(ctx,field,time,pointVisible(field));
+    this.blessingTargets=this.blessingLinks(ctx,state,entityVisible);
     this.placement(ctx,state,ui);
     const nodes=state?.nodes?.length?state.nodes:MAP.nodes.map(n=>({...n,owner:null,progress:0}));
     const sprites=[],visibleUnitIds=new Set();
