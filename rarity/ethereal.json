@@ -1775,7 +1775,7 @@
       "story": "-",
       "forms": [
         {
-          "id": "the-rays-form",
+          "id": "the-rays",
           "name": "Mrs. Ray",
           "type": [
             "Human"
@@ -1864,7 +1864,7 @@
       }
     },
     "type2": {
-      "id": "the-rays-2",
+      "id": "the-rays",
       "name": "Mr. Ray",
       "type": [
         "Human"
@@ -1909,7 +1909,7 @@
       "story": "-",
       "forms": [
         {
-          "id": "the-rays-form-2",
+          "id": "the-rays",
           "name": "Mrs. Ray",
           "type": [
             "Human"
