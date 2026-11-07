@@ -14,6 +14,11 @@ Persistent spells show their area and countdown; vector status icons identify
 affected cards, native charge bars hold up to 100 until ability use, and lifetime Health
 loss displays in red.
 
+XII Josh deploys as one card. Ase Form II has 2.5-tile Range and moves at
+1.05 tiles/s. Both Ray forms have 1.25-tile attack width; their full charge waits
+for a visible enemy unit in attack range. Form II aims its dash toward that unit
+and stops at the road or courtyard edge.
+
 Both castles have 1000 health and a 7.5-tile firing/deployment radius. Units and
 spell buildings deploy on roads or the castle courtyard inside that radius.
 Courtyards leave one tile behind and 2.5 ahead of the castle body; both are

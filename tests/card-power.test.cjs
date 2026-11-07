@@ -18,6 +18,8 @@ test('shared Power scorer preserves all 138 original Codex scores, including dua
     ['naar',{damage:'120',attackSpeed:'3.00s'},{}],
     ['lyra',{health:'150',shield:'25'},{}],
   ]){const card=baseline.find(c=>c.id===id);Object.assign(card.stats,stats);Object.assign(card.additionalStats,additional);}
+  baseline.find(c=>c.id==='xii-josh').stats.number='3';
+  Object.assign(baseline.find(c=>c.id==='ase').type2.additionalStats,{range:'1000',speed:'800'});
   baseline.find(c=>c.id==='nightfang').additionalStats.vision='8000';
   baseline.find(c=>c.id==='stormblade').additionalStats.range='2600';
   baseline.find(c=>c.id==='leno').type2.additionalStats.range='3200';

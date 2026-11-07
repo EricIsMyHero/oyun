@@ -17,7 +17,13 @@ const rayCharge=(ctx,u,dt,type)=>{
  if(u.rayDash)return;
  const partner=rayPartner(ctx,u);if(!partner)return;
  addCharge(u,dt*RAY_CHARGE.perSecond,'rayCharge');
- if(u.memory.rayCharge>=RAY_CHARGE.maximum-1e-7&&(partner.memory.rayCharge||0)>=RAY_CHARGE.maximum-1e-7){if(type===1)ctx.fuseRays(u,partner);else ctx.startRayDash(u,partner);}
+ if(u.memory.rayCharge<RAY_CHARGE.maximum-1e-7||(partner.memory.rayCharge||0)<RAY_CHARGE.maximum-1e-7)return;
+ const leader=ctx.rayLeader(u,partner),forced=ctx.tauntTarget(leader);
+ const target=foes(ctx,leader,ctx._range(leader)).filter(t=>ctx.canTarget(leader,t)&&(!forced||t===forced))
+  .sort((a,b)=>Math.hypot(a.x-leader.x,a.y-leader.y)-Math.hypot(b.x-leader.x,b.y-leader.y)||a.id.localeCompare(b.id))[0];
+ if(!target)return;
+ if(type===1)ctx.fuseRays(u,partner);
+ else{const dx=target.x-leader.x,dy=target.y-leader.y,length=Math.hypot(dx,dy);if(length>1e-7){leader.facingX=dx/length;leader.facingY=dy/length;}ctx.startRayDash(u,partner);}
 };
 const rayRescue=(ctx,u)=>{
  const pool=ctx._pool(u);if(pool?.mode!==2||u.rayHealUsed||u.hp<=0||u.hp>=ctx.maxHealth(u)*.2)return;

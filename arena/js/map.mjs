@@ -64,6 +64,19 @@ export function isWalkable(p) {
   if(!p||!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<0||p.x>MAP.width||p.y<0||p.y>MAP.height)return false;
   return isCourtyard(p,0)||isCourtyard(p,1)||closestRoute(p).distance<=MAP.roadWidth/2-.05;
 }
+// Trace the whole segment, so a dash cannot cross a gap and reappear on a road.
+export function clipWalkableSegment(from,to,padding=.5) {
+  const valid=p=>p.x>=padding&&p.x<=MAP.width-padding&&p.y>=padding&&p.y<=MAP.height-padding&&isWalkable(p);
+  if(!valid(from)||!Number.isFinite(to?.x)||!Number.isFinite(to?.y))return {x:from.x,y:from.y,blocked:true};
+  const length=distance(from,to),steps=Math.max(1,Math.ceil(length/.05));
+  const at=t=>({x:from.x+(to.x-from.x)*t,y:from.y+(to.y-from.y)*t});
+  for(let i=1;i<=steps;i++)if(!valid(at(i/steps))){
+    let low=(i-1)/steps,high=i/steps;
+    for(let j=0;j<20;j++){const middle=(low+high)/2;if(valid(at(middle)))low=middle;else high=middle;}
+    return {...at(low),blocked:true};
+  }
+  return {x:to.x,y:to.y,blocked:false};
+}
 export function isDeployable(p,side,buildings=[]) {
   if((side!==0&&side!==1)||!isWalkable(p))return false;
   if(distance(p,MAP.bases[side])>RULES.castleRange+1e-9)return false;

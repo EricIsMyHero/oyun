@@ -1,5 +1,5 @@
 import { RULES, clamp, num, burst, energyForMana, RAY_CHARGE, addCharge } from './rules.mjs';
-import { MAP, routeFor, routeLength, pointOnRoute, closestRoute, isDeployable, isWalkable, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
+import { MAP, routeFor, routeLength, pointOnRoute, closestRoute, isDeployable, isWalkable, clipWalkableSegment, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
 import { NEGATIVE_STATUSES as NEGATIVE, STATUS_INTERVALS, statusKind, statusParameters, statValue, statModifiers } from './statuses.mjs';
@@ -216,9 +216,10 @@ export class ArenaEngine {
     for(const key of Object.keys(saved))Object.defineProperty(u,key,{enumerable:true,configurable:true,get:()=>pool[key],set:value=>{pool[key]=Math.max(0,Number.isFinite(value)?value:0);}});
     this._capVitals(u);
   }
+  rayLeader(a,b){return [a,b].sort((x,y)=>Number(y.def.name==='Mr. Ray')-Number(x.def.name==='Mr. Ray')||x.id.localeCompare(y.id))[0];}
   fuseRays(a,b,mode=1){
     if(!a.alive||!b.alive||a.side!==b.side||a.sharedVitalsId||b.sharedVitalsId)return false;
-    const [leader,partner]=[a,b].sort((x,y)=>Number(y.def.name==='Mr. Ray')-Number(x.def.name==='Mr. Ray')||x.id.localeCompare(y.id));
+    const leader=this.rayLeader(a,b),partner=leader===a?b:a;
     const duration=mode===2?3.75:5;
     const pool={id:`rays-${++this.serial}`,kind:'ray',mode,healthOnly:true,factor:1,members:[],leaderId:leader.id,hp:0,maxHp:0,shield:0,maxShield:0,until:this.time+duration};
     this.vitalPools.set(pool.id,pool);this.state.sharedVitals.push(pool);this._bindVitals(pool,leader);this._bindVitals(pool,partner);
@@ -247,17 +248,22 @@ export class ArenaEngine {
     }
   }
   startRayDash(a,b){
-    if(a.rayDash||b.rayDash||!this.fuseRays(a,b,2))return false;
-    const pool=this._pool(a),leader=this.units.find(u=>u.id===pool.leaderId);
-    const length=Math.hypot(leader.facingX||0,leader.facingY||0)||1,dx=(leader.facingX??(leader.side?-1:1))/length,dy=(leader.facingY||0)/length;
-    leader.rayDash={until:pool.until,lastTime:this.time,remaining:5,length:5,width:2,damage:75,startX:leader.x,startY:leader.y,dx,dy,hitIds:[]};
+    if(a.rayDash||b.rayDash)return false;
+    const leader=this.rayLeader(a,b),fx=leader.facingX??(leader.side?-1:1),fy=leader.facingY||0,heading=Math.hypot(fx,fy),dx=heading>EPS?fx/heading:(leader.side?-1:1),dy=heading>EPS?fy/heading:0;
+    const end=clipWalkableSegment(leader,{x:leader.x+dx*5,y:leader.y+dy*5}),length=distance(leader,end);
+    if(length<=EPS||!this.fuseRays(a,b,2))return false;
+    const pool=this._pool(a);
+    leader.rayDash={until:pool.until,lastTime:this.time,remaining:length,length,maxLength:5,width:2,damage:75,startX:leader.x,startY:leader.y,dx,dy,hitIds:[],boundaryLimited:end.blocked};
     return true;
   }
   _rayDash(u,dt){
     const dash=u.rayDash;if(!dash)return false;
     const elapsed=Math.max(0,Math.min(this.time,dash.until)-dash.lastTime);dash.lastTime=this.time;
     const blocked=['stun','root','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time));
-    const step=blocked?0:Math.min(dash.remaining,5/3.75*elapsed),from={x:u.x,y:u.y};dash.remaining-=step;u.x=clamp(u.x+dash.dx*step,.5,MAP.width-.5);u.y=clamp(u.y+dash.dy*step,.5,MAP.height-.5);u.moving=step>0;
+    const intended=blocked?0:Math.min(dash.remaining,dash.maxLength/3.75*elapsed),from={x:u.x,y:u.y};
+    const next=clipWalkableSegment(from,{x:u.x+dash.dx*intended,y:u.y+dash.dy*intended}),step=distance(from,next);
+    u.x=next.x;u.y=next.y;dash.remaining=Math.max(0,dash.remaining-step);u.moving=step>EPS;
+    if(next.blocked){dash.boundaryLimited=true;dash.length=Math.min(dash.length,Math.max(0,(u.x-dash.startX)*dash.dx+(u.y-dash.startY)*dash.dy));dash.remaining=0;}
     const along=point=>(point.x-dash.startX)*dash.dx+(point.y-dash.startY)*dash.dy,previous=along(from),current=along(u);
     for(const target of this.units.filter(t=>{
       if(step<=EPS||t.isBuilding||!this._canHit(u,t)||dash.hitIds.includes(t.id))return false;

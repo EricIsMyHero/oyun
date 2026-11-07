@@ -159,8 +159,8 @@
       },
       "trait": "Hər 7 saniyədə bir parça qazanar 4 parça olduqda bir böyük robot yaradar",
       "additionalStats": {
-        "range": "1000",
-        "speed": "800",
+        "range": "2500",
+        "speed": "1050",
         "criticalChance": "15%",
         "criticDamage": "1.5x",
         "lifestealChance": "0%",
@@ -1741,7 +1741,7 @@
         "mana": "17",
         "number": "1"
       },
-      "trait": "Cütlük bir-birindən maksimum 2.5 karo uzaqda olarkən hər biri saniyədə 6 yük qazanar. Hər ikisi 100 yükdə 5 saniyəlik bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 360° sahədə hər 0.25 saniyədə 5 hasar verər və 3 Can bərpa edər. Bu müddətdə 25% hasar azaltma qazanar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
+      "trait": "Cütlük bir-birindən maksimum 2.5 karo uzaqda olarkən hər biri saniyədə 6 yük qazanar. Hər ikisi 100 yükdə olarkən menzildə vura bildikləri görünən rəqib kart varsa 5 saniyəlik bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 360° sahədə hər 0.25 saniyədə 5 hasar verər və 3 Can bərpa edər. Bu müddətdə 25% hasar azaltma qazanar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
       "additionalStats": {
         "range": "1000",
         "speed": "1200",
@@ -1792,7 +1792,7 @@
             "mana": "-",
             "number": "1"
           },
-          "trait": "Cütlük bir-birindən maksimum 2.5 karo uzaqda olarkən hər biri saniyədə 6 yük qazanar. Hər ikisi 100 yükdə 5 saniyəlik bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 360° sahədə hər 0.25 saniyədə 5 hasar verər və 3 Can bərpa edər. Bu müddətdə 25% hasar azaltma qazanar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
+          "trait": "Cütlük bir-birindən maksimum 2.5 karo uzaqda olarkən hər biri saniyədə 6 yük qazanar. Hər ikisi 100 yükdə olarkən menzildə vura bildikləri görünən rəqib kart varsa 5 saniyəlik bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 360° sahədə hər 0.25 saniyədə 5 hasar verər və 3 Can bərpa edər. Bu müddətdə 25% hasar azaltma qazanar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
           "additionalStats": {
             "range": "1000",
             "speed": "1200",
@@ -1831,7 +1831,7 @@
             "multiTarget": true,
             "maxTargets": null,
             "attackShape": "circle",
-            "attackWidth": 1000,
+            "attackWidth": 1250,
             "weight": "medium",
             "targets": "ground",
             "attackDistance": 1000,
@@ -1851,7 +1851,7 @@
         "multiTarget": true,
         "maxTargets": null,
         "attackShape": "circle",
-        "attackWidth": 1000,
+        "attackWidth": 1250,
         "weight": "medium",
         "targets": "ground",
         "attackDistance": 1000,
@@ -1882,7 +1882,7 @@
         "mana": "17",
         "number": "1"
       },
-      "trait": "Tək hədəfə hasar verər. Cütlük maksimum 2.5 karo məsafədə saniyədə 6 yük qazanar. Hər ikisi 100 yükdə bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 3.75 saniyədə 5 karo irəliləyər; 2x5 karo keçid sahəsində içindən keçdikləri hər rəqibə bir dəfə cəmi 75 hasar verərlər. İrəliləmə müddətində 75% hasar azaltma qazanarlar. Bu müddətdə ortaq can 20%-dən aşağı düşərsə çatışmayan canın 75%-ni bərpa edərlər; sağalma cütlüyün hər yerləşdirilməsində yalnız bir dəfə işləyər. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
+      "trait": "Tək hədəfə hasar verər. Cütlük maksimum 2.5 karo məsafədə saniyədə 6 yük qazanar. Hər ikisi 100 yükdə olarkən menzildə vura bildikləri görünən rəqib kart varsa bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda ən yaxın uyğun rəqibə doğru 3.75 saniyədə ən çox 5 karo irəliləyər; 2x5 karo keçid sahəsində içindən keçdikləri hər rəqibə bir dəfə cəmi 75 hasar verərlər. İrəliləmə müddətində 75% hasar azaltma qazanarlar. Bu müddətdə ortaq can 20%-dən aşağı düşərsə çatışmayan canın 75%-ni bərpa edərlər; sağalma cütlüyün hər yerləşdirilməsində yalnız bir dəfə işləyər. Keçilə bilən yolun sərhədində dayanarlar və xəritədən kənara çıxmazlar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
       "additionalStats": {
         "range": "1000",
         "speed": "1100",
@@ -1926,7 +1926,7 @@
             "mana": "-",
             "number": "1"
           },
-          "trait": "Tək hədəfə hasar verər. Cütlük maksimum 2.5 karo məsafədə saniyədə 6 yük qazanar. Hər ikisi 100 yükdə bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda 3.75 saniyədə 5 karo irəliləyər; 2x5 karo keçid sahəsində içindən keçdikləri hər rəqibə bir dəfə cəmi 75 hasar verərlər. İrəliləmə müddətində 75% hasar azaltma qazanarlar. Bu müddətdə ortaq can 20%-dən aşağı düşərsə çatışmayan canın 75%-ni bərpa edərlər; sağalma cütlüyün hər yerləşdirilməsində yalnız bir dəfə işləyər. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
+          "trait": "Tək hədəfə hasar verər. Cütlük maksimum 2.5 karo məsafədə saniyədə 6 yük qazanar. Hər ikisi 100 yükdə olarkən menzildə vura bildikləri görünən rəqib kart varsa bir bədənə birləşər və canlarını ortaqlaşdırar. Birləşmiş halda ən yaxın uyğun rəqibə doğru 3.75 saniyədə ən çox 5 karo irəliləyər; 2x5 karo keçid sahəsində içindən keçdikləri hər rəqibə bir dəfə cəmi 75 hasar verərlər. İrəliləmə müddətində 75% hasar azaltma qazanarlar. Bu müddətdə ortaq can 20%-dən aşağı düşərsə çatışmayan canın 75%-ni bərpa edərlər; sağalma cütlüyün hər yerləşdirilməsində yalnız bir dəfə işləyər. Keçilə bilən yolun sərhədində dayanarlar və xəritədən kənara çıxmazlar. Ulti bitdikdə ortaq can nisbəti ilə ayrılarlar.",
           "additionalStats": {
             "range": "1000",
             "speed": "1100",
@@ -1958,7 +1958,7 @@
             "multiTarget": false,
             "maxTargets": 1,
             "attackShape": "single",
-            "attackWidth": 500,
+            "attackWidth": 1250,
             "weight": "medium",
             "targets": "ground",
             "attackDistance": 500,
@@ -1978,7 +1978,7 @@
         "multiTarget": false,
         "maxTargets": 1,
         "attackShape": "single",
-        "attackWidth": 500,
+        "attackWidth": 1250,
         "weight": "medium",
         "targets": "ground",
         "attackDistance": 500,
@@ -1997,7 +1997,7 @@
       "multiTarget": true,
       "maxTargets": null,
       "attackShape": "circle",
-      "attackWidth": 1000,
+      "attackWidth": 1250,
       "weight": "medium",
       "targets": "ground",
       "attackDistance": 1000,

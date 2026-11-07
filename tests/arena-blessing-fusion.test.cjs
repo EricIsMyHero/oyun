@@ -10,7 +10,7 @@ async function fixture(){
     const made=e.spawn(d,side,p,1,{count:1,positions:[p]});for(const u of made){u.stats.speed=0;u.cooldown=Infinity;}return made[0];
   };
   const dummy=(side=1,p={x:16,y:14},stats={},power=100)=>{const u=spawn('hammies',side,p,{health:5000,shield:0,damage:0,range:0,...stats});u.def={...u.def,id:'rework-target',power,forms:[],combat:{...u.def.combat,attackType:'none'}};return u;};
-  const pair=type=>{const a=spawn(`mr-and-mrs-ray/type${type}`),b=e.units.find(u=>u!==a&&u.groupId===a.groupId);a.memory.rayCharge=b.memory.rayCharge=100;e._hook('tick',a,0);return[a,b];};
+  const pair=type=>{const a=spawn(`mr-and-mrs-ray/type${type}`),b=e.units.find(u=>u!==a&&u.groupId===a.groupId);a.memory.rayCharge=b.memory.rayCharge=100;if(type===1)e.fuseRays(a,b);else e.startRayDash(a,b);return[a,b];};
   return{e,catalog,spawn,dummy,pair,...visuals};
 }
 
@@ -57,9 +57,9 @@ test('the first Ray fusion hits all around its one-tile circle and never gains t
 });
 
 test('the fused second-form dash sweeps a two-by-five corridor once for seventy-five damage',async()=>{
-  for(const angle of[0,Math.PI/4]){
-    const{e,spawn,dummy}=await fixture(),a=spawn('mr-and-mrs-ray/type2'),b=e.units.find(u=>u!==a&&u.groupId===a.groupId);a.facingX=Math.cos(angle);a.facingY=Math.sin(angle);
-    const at=(forward,across)=>({x:15+forward*Math.cos(angle)-across*Math.sin(angle),y:14+forward*Math.sin(angle)+across*Math.cos(angle)});
+  for(const angle of[0,Math.atan2(-4,5)]){
+    const{e,spawn,dummy}=await fixture(),a=spawn('mr-and-mrs-ray/type2',0,angle===0?{x:15,y:14}:{x:6.5,y:7.6}),b=e.units.find(u=>u!==a&&u.groupId===a.groupId);a.facingX=Math.cos(angle);a.facingY=Math.sin(angle);
+    const origin={x:a.x,y:a.y},at=(forward,across)=>({x:origin.x+forward*Math.cos(angle)-across*Math.sin(angle),y:origin.y+forward*Math.sin(angle)+across*Math.cos(angle)});
     const near=dummy(1,at(.7,0)),edge=dummy(1,at(3,.95)),outside=dummy(1,at(3,1.5)),beyond=dummy(1,at(5.6,0)),behind=dummy(1,at(-.6,0));
     e.startRayDash(a,b);e.step(3.8);close(near.hp,4925);close(edge.hp,4925);for(const t of[outside,beyond,behind])close(t.hp,5000);
     assert.equal(a.sharedVitalsId,undefined);assert.equal(b.fusedInto,undefined);assert.equal(a.rayFusion,undefined);assert.equal(a.rayDash,undefined);

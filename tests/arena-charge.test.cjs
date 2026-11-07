@@ -69,10 +69,10 @@ test('stolen native charges follow the thief while the stripped donor no longer 
 
 test('each Ray form earns six charge per second within exactly 2.5 tiles, holds charge outside and opens its ultimate at one hundred',async()=>{
   for(const type of[1,2]){
-    const{e,spawn,nativeCharge}=await fixture(),u=spawn(`mr-and-mrs-ray/type${type}`),partner=e.units.find(t=>t!==u&&t.groupId===u.groupId);
+    const{e,spawn,dummy,nativeCharge}=await fixture(),u=spawn(`mr-and-mrs-ray/type${type}`),partner=e.units.find(t=>t!==u&&t.groupId===u.groupId);
     Object.assign(partner,{x:17.5,y:14,cooldown:Infinity});partner.stats.speed=0;e.step(2);close(u.memory.rayCharge,12);close(partner.memory.rayCharge,12);assert.equal(nativeCharge(u).caption,'12/100');
     partner.x=17.501;e.step(2);close(u.memory.rayCharge,12);close(partner.memory.rayCharge,12);
     partner.x=17.5;e.setPaused(true);e.step(3);close(u.memory.rayCharge,12);e.setPaused(false);e.step(14.6);assert.equal(!!u.sharedVitalsId||!!u.rayDash,false);
-    e.step(.1);assert.ok(type===1?u.sharedVitalsId:u.rayDash);close(nativeCharge(u).total,0);close(nativeCharge(partner).total,0);
+    dummy({x:15.4,y:14});e.step(.1);assert.ok(type===1?u.sharedVitalsId:u.rayDash);close(nativeCharge(u).total,0);close(nativeCharge(partner).total,0);
   }
 });

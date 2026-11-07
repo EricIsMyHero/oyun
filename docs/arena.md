@@ -178,7 +178,7 @@ Counters reset each match. Third/fifth/even-deployment enhancements apply only
 to the matching placements, rather than becoming permanent account upgrades.
 The hand and inspector show placement ordinals and the relevant live state.
 
-- **XII Josh:** three hovering bodies, each with a 1000-point-wide, 1000-point
+- **XII Josh:** one hovering body with a 1000-point-wide, 1000-point
   attack. Only enemy Mana in a centered 2 × 2 square grants haste: half the summed
   Mana in percentage points. Falling below 10% Health triggers ten seconds of
   flight, followed by a 24-Damage landing in 1.5 × 1.5 tiles. Landing still ends
@@ -238,7 +238,9 @@ root in the match. Combat cannot change the choice. The bot chooses legal forms
 for its independently generated deck; it does not copy the player's choices.
 
 - **Ase:** gains one part each seven seconds and spends four to summon the
-  selected Giga-R every 28 seconds. Form I's melee robot has 22s of 10% protection;
+  selected Giga-R every 28 seconds. Form II has 2500-point Range and 1050-point
+  Speed (2.5 tiles and 1.05 tiles/s); its melee strike distance stays 500 points.
+  Form I's melee robot has 22s of 10% protection;
   Form II's ranged robot gains 3% haste per kill, capped at +30%.
 - **Leno:** both forms target ground. Form I gains +45 Critical Chance for 25s,
   then +15. Form II has 1000-point Range and +40% Damage against the six listed
@@ -265,15 +267,23 @@ for its independently generated deck; it does not copy the player's choices.
 - **Soul Master:** deaths grant souls. Form I gains +25% Damage per ten souls;
   Form II spends eight souls to deal 10% of a frontal target's maximum Health.
 - **Mr. and Mrs. Ray:** each form deploys its matching couple. Within 2.5 tiles
-  measured between their centers, both gain six charge/s in either form. At 100 each, Form I
+  measured between their centers, both gain six charge/s in either form. Both
+  partners in each form have 1250-point normal attack width. At 100 each, the
+  couple holds its charge until a visible, hittable enemy troop is in the fusion
+  leader's effective attack Range. Buildings, castles, healthless units and
+  targets excluded by their ground targeting cannot trigger it. Blind and Taunt
+  also apply. Form I
   fuses into one target for five seconds, sharing summed Health while retaining
   individual shields. Twenty quarter-second pulses deal five Damage and heal
   three; protection is 25%. Splitting preserves the pooled Health fraction.
-  Form II also fuses into one body with shared Health, then advances five tiles
-  in 3.75s through a two-tile-wide corridor. Each crossed enemy takes 75 total
+  Form II also fuses into one body with shared Health, then aims toward the
+  selected enemy and advances up to five tiles in 3.75s through a two-tile-wide
+  corridor. Each crossed enemy takes 75 total
   Damage once, with 75% protection during the dash. Below 20% shared Health, the
-  pair may heal 75% of missing Health once per deployment. Dash collisions
-  do not shorten its authored travel. Fusion cleanup handles deaths and control
+  pair may heal 75% of missing Health once per deployment. The dash crosses troop
+  bodies but stops at the first road or courtyard boundary. The corridor preview
+  uses that shortened travel distance, and the fusion still lasts 3.75s. A blocked
+  dash that cannot move does not spend charge. Fusion cleanup handles deaths and control
   changes without leaving hidden bodies or shared Health behind. Ground fields
   affect the merged body once; existing ailments on either partner continue
   against shared Health with the fusion's protection.
@@ -899,7 +909,9 @@ The requested card rebalances apply to both Codex data and Arena:
 | Avalith | Up to 60% interval reduction near the target |
 | Naar | 96 Damage, 3.75s Attack Speed |
 | Lyra | 180 Health, 45 Shield |
-| Mr. and Mrs. Ray | Both forms gain 6 charge/s within 2.5 tiles; 100 each activates the ultimate |
+| Mr. and Mrs. Ray | Both forms gain 6 charge/s within 2.5 tiles; 100 each waits for a valid enemy in attack range; 1250-point attack width |
+| XII Josh | One body per deployment |
+| Ase Form II | 2.5-tile Range, 1.05 tiles/s Speed |
 
 Ray's authored form IDs are retained, including the shared `the-rays` image IDs;
 Arena's normalized parent paths keep both partners and forms distinct. Native
@@ -1059,5 +1071,7 @@ boundary, expired areas and hidden fog, and checks status icons, inspector label
 50% zoom and a phone viewport. Set `ARENA_EFFECTS_URL` to test a deployed Arena.
 
 The casting browser check verifies Blesser selection/channel/receipt pixels and
-icons, one visible Ray body in both forms, shared Health and the 2×5 dash, held
-charge, and Dumpsy's 5% sequence. Set `ARENA_CASTING_URL` for a deployed build.
+icons, one visible Ray body in both forms, shared Health, waiting for an enemy at
+full charge, the 2×5 dash and its shortened boundary path, the requested source
+stats, held charge, and Dumpsy's 5% sequence. Set `ARENA_CASTING_URL` for a
+deployed build.

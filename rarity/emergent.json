@@ -15,7 +15,7 @@
       "attackSpeed": "1.20s",
       "delay": "-",
       "mana": "9",
-      "number": "3"
+      "number": "1"
     },
     "trait": "Ətrafındakı 2x2 karo sahədə yalnız rəqib kartların manasının 50%-i qədər Hücum Sürəti bonusu qazanar. Canı 10%-in altına düşdükdə 10 saniyə uçar, sonra enərək 1.5x1.5 karo sahədə 24 hasar verər. Taxtaya hər 3-cü qoyuluşda vuruşları 33% şansla müddətsiz 15% Misfortune verər.",
     "additionalStats": {
