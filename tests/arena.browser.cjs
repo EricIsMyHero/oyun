@@ -90,17 +90,19 @@ async function minimapPixelAt(page,point) {
       return route.abort();
     });
     await page.goto(`http://127.0.0.1:${server.address().port}${prefix}arena/`,{waitUntil:'domcontentloaded'});
-    await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===138);
+    await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===167);
     assert.equal(await page.locator('#start-match').isDisabled(),true,'an empty deck cannot start');
     const coverage=await page.evaluate(()=>({cards:arenaApp.catalog.cards.length,ready:arenaApp.catalog.cards.filter(c=>c.ready).length,spells:arenaApp.catalog.spells.length,locked:arenaApp.catalog.cards.find(c=>!c.ready),lockedSpell:arenaApp.catalog.spells.find(c=>!c.ready)}));
-    assert.equal(coverage.cards,138);
+    assert.equal(coverage.cards,167);
     assert.equal(coverage.spells,26);
     assert.ok(coverage.ready>=8,'at least one complete deck is available');
-    assert.equal(coverage.locked,undefined,'all authored root cards are playable');
+    assert.ok(coverage.locked?.raw.sourceWorkbook&&coverage.locked.reasons.length,'new workbook cards expose their missing battle data');
     assert.ok(coverage.lockedSpell?.reasons?.length,'incomplete spells still expose source-backed reasons');
     await page.locator('#readiness-filter').selectOption('all');
-    assert.equal(await page.locator('[data-inspect-card]').count(),138);
+    assert.equal(await page.locator('[data-inspect-card]').count(),167);
     assert.equal(coverage.ready,138);
+    assert.equal(await page.locator('.library-card.locked').count(),29);
+    await page.locator('[data-inspect-card="mertel"]').click();assert.match(await page.locator('#inspector').textContent(),/native ability|combat profile/);assert.equal(await page.locator('#inspector [data-stat="health"] strong').textContent(),'125');await page.locator('#inspector-close').click();
     for(const id of ['nightfang','stacy','death','demotron','aeralis','dark-necromancer','ali','worms','bloodraider','shine','avalith','malvaris','sylviana','pyhsic','unara','clara','far','lyra','naar','etheris','format','artist','magma','fallen-angel','nortex','fen','nightprowler','angels','boomix','albert','chicken','tornado','tphoenix','corsair-crew','roguex','whisper','sunrise','wong','reacher','bastra','maapp','avara','john-reynolds','azrith','untouch','heartix','r-1','blank','magmara','willowshade','collector','sushu','umbra','thief','rotlings','stormblade','venom-fangs','skyhunter','rockback','neon-droid','void-wraith','bio-mech','mixela','laura']){
       const card=page.locator(`[data-add-card="${id}"]`);
       assert.ok((await card.getAttribute('aria-label')).startsWith('Add '),`${id} is available for deck building`);
@@ -167,7 +169,7 @@ async function minimapPixelAt(page,point) {
     // Ethereal forms must be chosen in the real UI and remain fixed in battle.
     await page.locator('[data-add-card="ase"]').click();await page.locator('[data-ethereal-picker]').waitFor();assert.equal(await page.locator('.ethereal-choice').count(),2);assert.equal(await page.locator('#inspector [data-add-card="ase"]').isDisabled(),true);
     await page.locator('[data-choose-form="type2"]').click();assert.equal(await page.locator('[data-choose-form="type2"]').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('#inspector [data-stat="range"] strong').textContent(),'2.5 tiles');assert.equal(await page.locator('#inspector [data-stat="speed"] strong').textContent(),'1.05 tiles/s');await page.locator('#inspector [data-add-card="ase"]').click();await page.locator('#inspector-close').click();assert.deepEqual(await page.evaluate(()=>arenaApp.formChoices),{ase:'type2'});assert.match(await page.locator('#selected-deck .slot-content').textContent(),/FORM 2/);
-    await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===138);assert.deepEqual(await page.evaluate(()=>({deck:arenaApp.deck,form:arenaApp.formChoices.ase})),{deck:['ase'],form:'type2'});
+    await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===167);assert.deepEqual(await page.evaluate(()=>({deck:arenaApp.deck,form:arenaApp.formChoices.ase})),{deck:['ase'],form:'type2'});
     await page.locator('#selected-deck [data-inspect-card="ase"]').click();await page.locator('[data-choose-form="type1"]').click();await page.locator('#inspector-close').click();assert.equal(await page.evaluate(()=>arenaApp.formChoices.ase),'type1');await page.locator('#clear-deck').click();
     for(const id of ['ase','leno','king','dracula','leila','lord','hunter','soul-master','mr-and-mrs-ray']){await page.locator(`[data-inspect-card="${id}"]`).click();assert.equal(await page.locator('.ethereal-choice').count(),2,id);assert.equal(await page.locator('.ethereal-choice:disabled').count(),0,id);await page.locator('#inspector-close').click();}
     await page.locator('#quick-build').click();await page.locator('[data-remove-card="hammies"]').click();await page.locator('[data-inspect-card="ase"]').click();await page.locator('[data-choose-form="type2"]').click();await page.locator('#inspector [data-add-card="ase"]').click();await page.screenshot({path:'/tmp/oyun-arena-ethereal-choice.png',fullPage:true});screenshots.push('/tmp/oyun-arena-ethereal-choice.png');await page.locator('#inspector-close').click();await page.locator('#start-match').click();

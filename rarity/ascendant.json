@@ -735,5 +735,560 @@
         "sheriff"
       ]
     }
+  },
+  {
+    "id": "atlas",
+    "name": "Atlas",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Ascendant",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "160",
+      "shield": "90",
+      "damage": "8",
+      "sps": "9/7",
+      "attackSpeed": "0.90s/1.15s",
+      "delay": "-",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "Hər bir atışı o rəqib karta 8 yük, vuruşu isə 14 yük qazandırar. 100 yük olduqda o kartı 6 saniyəlik hipnoz edər, hipnoz edilən kart eyni zamanda dost karta doğru hərəkət edər",
+    "additionalStats": {
+      "range": "1000/2600",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Ascendant (2)",
+      "row": 13
+    },
+    "isAscendant": true,
+    "ascension": {
+      "partnerIds": [
+        "stella"
+      ]
+    },
+    "upgradedsecondForm": {
+      "id": "atlas",
+      "name": "Atlas",
+      "type": [
+        "Human"
+      ],
+      "rarity": "Ascendant",
+      "group": "",
+      "abilityName": "",
+      "stats": {
+        "health": "260",
+        "shield": "190",
+        "damage": "12",
+        "sps": "13/10",
+        "attackSpeed": "0.90s/1.15s",
+        "delay": "-",
+        "mana": "17",
+        "number": "1"
+      },
+      "trait": "Hər bir atışı o rəqib karta 10 yük, vuruşu isə 16 yük qazandırar. 100 yük olduqda o kartı 8 saniyəlik hipnoz edər, hipnoz edilən kart eyni zamanda dost karta doğru hərəkət edər",
+      "additionalStats": {
+        "range": "1000/2600",
+        "speed": "1000",
+        "criticalChance": "5%",
+        "criticDamage": "-",
+        "lifestealChance": "0%",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-",
+        "vision": "-",
+        "healBonus": "-",
+        "healrecovery": "-",
+        "shieldrecovery": "-",
+        "criticdamageminimiser": "-",
+        "flexibility": "-",
+        "shieldtakendamage": "-",
+        "life": "-"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "",
+      "subclass": "",
+      "sourceWorkbook": {
+        "file": "Book2.xlsx",
+        "sheet": "Ascendant (2)",
+        "row": 14,
+        "originalName": "*stella"
+      }
+    }
+  },
+  {
+    "id": "great-stan",
+    "name": "Great Stan",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Ascendant",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "80",
+      "shield": "30",
+      "damage": "6x2",
+      "sps": "6",
+      "attackSpeed": "0.165s",
+      "delay": "1.40s",
+      "mana": "4",
+      "number": "1"
+    },
+    "trait": "Rəqib karta hər hasar verdikdə rəqib karta 4 yük qazandırar. 100 yük olduqda bir sonrakı 4 atış +125% hasar verər (18) və rəqib kart 24 saniyəlik qanama qazanar",
+    "additionalStats": {
+      "range": "3250",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Ascendant (2)",
+      "row": 15
+    },
+    "isAscendant": true,
+    "ascension": {
+      "partnerIds": [
+        "jestro"
+      ]
+    },
+    "upgradedsecondForm": {
+      "id": "great-stan",
+      "name": "Great Stan",
+      "type": [
+        "Human"
+      ],
+      "rarity": "Ascendant",
+      "group": "",
+      "abilityName": "",
+      "stats": {
+        "health": "160",
+        "shield": "60",
+        "damage": "6x6",
+        "sps": "36",
+        "attackSpeed": "0.165s",
+        "delay": "1.10s",
+        "mana": "18",
+        "number": "1"
+      },
+      "trait": "Rəqib karta hər hasar verdikdə rəqib karta 6 yük qazandırar. 100 yük olduqda bir sonrakı 4 atış +200% hasar verər (72) və rəqib kart 96 saniyəlik qanama qazanar",
+      "additionalStats": {
+        "range": "3250",
+        "speed": "1000",
+        "criticalChance": "0%",
+        "criticDamage": "-",
+        "lifestealChance": "20%",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-",
+        "vision": "-",
+        "healBonus": "-",
+        "healrecovery": "-",
+        "shieldrecovery": "-",
+        "criticdamageminimiser": "-",
+        "flexibility": "-",
+        "shieldtakendamage": "-",
+        "life": "-"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "",
+      "subclass": "",
+      "sourceWorkbook": {
+        "file": "Book2.xlsx",
+        "sheet": "Ascendant (2)",
+        "row": 16,
+        "originalName": "*jestro"
+      }
+    }
+  },
+  {
+    "id": "marcy",
+    "name": "Marcy",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Ascendant",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "100",
+      "shield": "60",
+      "damage": "4",
+      "sps": "5",
+      "attackSpeed": "0.80s",
+      "delay": "-",
+      "mana": "3",
+      "number": "1"
+    },
+    "trait": "Hər can çaldıqda 2 saniyəlik +20% Saldırı hızı qazanar",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1050",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "25%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Ascendant (2)",
+      "row": 17
+    },
+    "isAscendant": true,
+    "ascension": {
+      "partnerIds": [
+        "dracula"
+      ]
+    },
+    "upgradedsecondForm": {
+      "id": "marcy",
+      "name": "Marcy",
+      "type": [
+        "Human"
+      ],
+      "rarity": "Ascendant",
+      "group": "",
+      "abilityName": "",
+      "stats": {
+        "health": "120",
+        "shield": "80",
+        "damage": "6",
+        "sps": "8",
+        "attackSpeed": "0.80s",
+        "delay": "-",
+        "mana": "4",
+        "number": "1"
+      },
+      "trait": "Hər can çaldıqda 2 saniyəlik +25% Saldırı hızı qazanar",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1050",
+        "criticalChance": "0%",
+        "criticDamage": "-",
+        "lifestealChance": "25%",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-",
+        "vision": "-",
+        "healBonus": "-",
+        "healrecovery": "-",
+        "shieldrecovery": "-",
+        "criticdamageminimiser": "-",
+        "flexibility": "-",
+        "shieldtakendamage": "-",
+        "life": "-"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "",
+      "subclass": "",
+      "sourceWorkbook": {
+        "file": "Book2.xlsx",
+        "sheet": "Ascendant (2)",
+        "row": 18,
+        "originalName": "*dracula"
+      }
+    }
+  },
+  {
+    "id": "shield-maiden",
+    "name": "Shield Maiden",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Ascendant",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "130",
+      "shield": "260",
+      "damage": "17",
+      "sps": "23",
+      "attackSpeed": "0.75s",
+      "delay": "-",
+      "mana": "13",
+      "number": "1"
+    },
+    "trait": "Ətrafındakı dost kartlara qalxan yenilənmə effekti qazandırar (+2/5s)",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "15%",
+      "criticDamage": "-",
+      "lifestealChance": "15%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Ascendant (2)",
+      "row": 19
+    },
+    "isAscendant": true,
+    "ascension": {
+      "partnerIds": [
+        "legendary-warrior"
+      ]
+    },
+    "upgradedsecondForm": {
+      "id": "shield-maiden",
+      "name": "Shield Maiden",
+      "type": [
+        "Human"
+      ],
+      "rarity": "Ascendant",
+      "group": "",
+      "abilityName": "",
+      "stats": {
+        "health": "180",
+        "shield": "360",
+        "damage": "26",
+        "sps": "35",
+        "attackSpeed": "0.75s",
+        "delay": "-",
+        "mana": "18",
+        "number": "1"
+      },
+      "trait": "Ətrafındakı dost kartlara qalxan yenilənmə effekti qazandırar (+4/5s)",
+      "additionalStats": {
+        "range": "1000",
+        "speed": "1000",
+        "criticalChance": "15%",
+        "criticDamage": "-",
+        "lifestealChance": "15%",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-",
+        "vision": "-",
+        "healBonus": "-",
+        "healrecovery": "-",
+        "shieldrecovery": "-",
+        "criticdamageminimiser": "-",
+        "flexibility": "-",
+        "shieldtakendamage": "-",
+        "life": "-"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "",
+      "subclass": "",
+      "sourceWorkbook": {
+        "file": "Book2.xlsx",
+        "sheet": "Ascendant (2)",
+        "row": 20,
+        "originalName": "*legendary  Warrior"
+      }
+    }
+  },
+  {
+    "id": "shockwave",
+    "name": "ShockWave",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Ascendant",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "180",
+      "shield": "30",
+      "damage": "6",
+      "sps": "6",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "Hər 9 saniyədə ətrafına enerji dalğası yayar bu dalğa rəqib kartları 1 saniyə sərsəmlədər və 12 hasar verər",
+    "additionalStats": {
+      "range": "3000",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Ascendant (2)",
+      "row": 21
+    },
+    "isAscendant": true,
+    "ascension": {
+      "partnerIds": [
+        "bolt"
+      ]
+    },
+    "upgradedsecondForm": {
+      "id": "shockwave",
+      "name": "ShockWave",
+      "type": [
+        "Human"
+      ],
+      "rarity": "Ascendant",
+      "group": "",
+      "abilityName": "",
+      "stats": {
+        "health": "235",
+        "shield": "65",
+        "damage": "9",
+        "sps": "9",
+        "attackSpeed": "1.00s",
+        "delay": "-",
+        "mana": "15",
+        "number": "1"
+      },
+      "trait": "Hər 9 saniyədə ətrafına enerji dalğası yayar bu dalğa rəqib kartları 1 saniyə sərsəmlədər və 18 hasar verər",
+      "additionalStats": {
+        "range": "3000",
+        "speed": "1000",
+        "criticalChance": "5%",
+        "criticDamage": "-",
+        "lifestealChance": "0%",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-",
+        "vision": "-",
+        "healBonus": "-",
+        "healrecovery": "-",
+        "shieldrecovery": "-",
+        "criticdamageminimiser": "-",
+        "flexibility": "-",
+        "shieldtakendamage": "-",
+        "life": "-"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "",
+      "subclass": "",
+      "sourceWorkbook": {
+        "file": "Book2.xlsx",
+        "sheet": "Ascendant (2)",
+        "row": 22,
+        "originalName": "*bolt and volt"
+      }
+    }
   }
 ]

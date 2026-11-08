@@ -1861,5 +1861,224 @@
       "movementType": "hovering",
       "groundEffectImmune": true
     }
+  },
+  {
+    "id": "cow",
+    "name": "Cow",
+    "type": [
+      "Animal"
+    ],
+    "rarity": "Mundane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "800",
+      "shield": "200",
+      "damage": "10",
+      "sps": "8",
+      "attackSpeed": "1.25s",
+      "delay": "-",
+      "mana": "17",
+      "number": "1"
+    },
+    "trait": "Canı 50%-dən aşağı olan rəqib kartlara ekstra +100% hasar verər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "900",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "25%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Mundane (2)",
+      "row": 32
+    }
+  },
+  {
+    "id": "trainer",
+    "name": "Trainer",
+    "type": [
+      "Robot"
+    ],
+    "rarity": "Mundane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "250",
+      "shield": "70",
+      "damage": "14",
+      "sps": "10",
+      "attackSpeed": "1.45s",
+      "delay": "-",
+      "mana": "9",
+      "number": "1"
+    },
+    "trait": "Canı 30%-in altına düşdükdə ətrafındakı bütün rəqib kartları 3 karo geri itər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Mundane (2)",
+      "row": 33
+    }
+  },
+  {
+    "id": "burglar",
+    "name": "Burglar",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Mundane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "230",
+      "shield": "0",
+      "damage": "4",
+      "sps": "1",
+      "attackSpeed": "4.00s",
+      "delay": "-",
+      "mana": "8",
+      "number": "1"
+    },
+    "trait": "Rəqib kartın üstünə bir siçan atar. Bu siçan rəqib karta ekstra 2 hasar verər və onu 2 saniyəlik zəhərləyərək hər saniyə 6 hasar verər, 10% Şansla siçanın zəhər müddəti +150% artar",
+    "additionalStats": {
+      "range": "3000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Mundane (2)",
+      "row": 34
+    }
+  },
+  {
+    "id": "stormblade",
+    "name": "Stormblade",
+    "type": [
+      "Alien"
+    ],
+    "rarity": "Mundane",
+    "group": "the-nether-flux",
+    "abilityName": "",
+    "stats": {
+      "health": "160",
+      "shield": "40",
+      "damage": "26",
+      "sps": "32",
+      "attackSpeed": "0.80s",
+      "delay": "-",
+      "mana": "11",
+      "number": "1"
+    },
+    "trait": "Əsas hədəfdən 3 karo məsafədə maksimum 3 əlavə rəqibə hasar sıçrayar. Sıçrayan hasar əsas hasarın 50%-idir; cəmi maksimum 4 rəqibə hasar verər.",
+    "additionalStats": {
+      "range": "1200",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "The Tempest Executioner, one of the deadliest warriors of the Dark Layer in Alien World: The Binary Divide. A relentless alien speedster born beneath endless planetary superstorms, Stormblade transforms lightning into a weapon of absolute destruction. Every movement generates violent electrical discharges, allowing this merciless hunter to strike faster than the eye can follow. Victims rarely see Stormblade—they only witness flashes of lightning before everything goes dark. Stormblade is a tall, athletic alien warrior with a sleek, aerodynamic body built entirely for speed. Its armor is formed from dark obsidian-like alien alloy, featuring razor-sharp edges and smooth organic curves that reduce air resistance. Thin glowing veins of electric blue and violet energy race beneath the armor like living lightning, constantly pulsing across its body. Its helmet-like head has an aggressive, angular design with two piercing electric-blue eyes that radiate pure energy. Sharp horn-like energy conductors extend backward from the head, continuously attracting arcs of planetary lightning. Small bolts of electricity jump between the horns and surrounding air. Mounted on both forearms are dual plasma blades, each formed from condensed high-voltage energy contained within advanced alien emitters. The blades glow with brilliant blue-white plasma, surrounded by violent electrical arcs and streams of ionized energy. They appear impossibly sharp, capable of slicing through armored targets in a single high-speed strike. Stormblade's limbs are exceptionally lean and powerful, designed for explosive acceleration. Along its legs and back are streamlined energy conduits and electromagnetic propulsion vents that release bursts of blue plasma whenever it changes direction. Trails of crackling electricity remain suspended in the air behind every movement. The battlefield is a hostile alien wasteland beneath an enormous planetary electrical storm. Towering black rock formations, shattered alien structures, floating metallic debris, and enormous crystalline energy conductors surround the battlefield. Above, massive thunderclouds churn continuously while colossal bolts of blue lightning strike the landscape. Electricity constantly dances across the ground around Stormblade's feet, creating glowing fractures and ionized scorch marks. Floating rocks levitate as electromagnetic energy distorts gravity nearby. The atmosphere is filled with blue plasma particles, sparks, ozone mist, and swirling storm winds. Stormblade stands in an aggressive combat stance, one plasma blade held low and the other raised, while lightning repeatedly crashes directly into its body without causing any damage. The electrical energy is visibly absorbed into its armor, making the glowing energy veins intensify with every strike. The overall composition should portray Stormblade as the living embodiment of a planetary thunderstorm—merciless, impossibly fast, and overwhelmingly powerful.",
+    "class": "Marksman",
+    "subclass": "Splasher",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": true,
+      "maxTargets": null,
+      "attackShape": "cone",
+      "attackWidth": 1000,
+      "weight": "medium",
+      "targets": "ground",
+      "attackDistance": 2500,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": 135,
+      "impactSize": null,
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false
+    }
   }
 ]

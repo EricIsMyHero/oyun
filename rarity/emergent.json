@@ -923,5 +923,270 @@
       "groundEffectImmune": false,
       "movementCondition": "Meydana planörlə enərkən."
     }
+  },
+  {
+    "id": "huang-chen",
+    "name": "Huáng-chén",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Emergent",
+    "group": "",
+    "abilityName": "",
+    "isEmergent": true,
+    "stats": {
+      "health": "300",
+      "shield": "30",
+      "damage": "26",
+      "sps": "21",
+      "attackSpeed": "1.25s",
+      "delay": "-",
+      "mana": "15",
+      "number": "1"
+    },
+    "trait": "Usta Huáng-chén canı 40%-in altına düşdüşdə 8 saniyəlik odaklanmaya girər bu müddətdə +90% Hasar azaltma qazanaraq hər saniyə itirdiyi maksimum canın 10%-i qədər can yeniləyər. Hər 2-ci taxtaya qoyuluşda odaklanma müddəstində alınan hasarın 10%-ni rəqib karta geri göndərər.",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Emergent (2)",
+      "row": 17
+    }
+  },
+  {
+    "id": "servant",
+    "name": "Servant",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Emergent",
+    "group": "",
+    "abilityName": "",
+    "isEmergent": true,
+    "stats": {
+      "health": "40",
+      "shield": "100",
+      "damage": "3",
+      "sps": "3",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "3",
+      "number": "1"
+    },
+    "trait": "Hər atışda rəqib kartı 0,25 saniyə sərsəmlədər, Hər taxtaya qoyuluşda bu müddət +0,015 artar (Max: 0,75)",
+    "additionalStats": {
+      "range": "2000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "25%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Emergent (2)",
+      "row": 18
+    }
+  },
+  {
+    "id": "survivor",
+    "name": "Survivor",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Emergent",
+    "group": "",
+    "abilityName": "",
+    "isEmergent": true,
+    "stats": {
+      "health": "260",
+      "shield": "0",
+      "damage": "17",
+      "sps": "17",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "4",
+      "number": "1"
+    },
+    "trait": "Qarşısına çıxan bütün kartlara hasar verər. (arxaya hərəkət edə və hasar verə bilməz) Hər saniyə -2 can itirər, bir kart öldürdükdə +75% can yeniləyər və maksimum canı +30 artar, Arxadan bir karta ekstra +100% hasar verər. Taxtaya hər 5-ci qoyuluşda +80% saldırı hızı və +35% hasar qazanar",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Emergent (2)",
+      "row": 19
+    }
+  },
+  {
+    "id": "little-princess",
+    "name": "Little Princess",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Emergent",
+    "group": "",
+    "abilityName": "",
+    "isEmergent": true,
+    "stats": {
+      "health": "290",
+      "shield": "10",
+      "damage": "10",
+      "sps": "10",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "6",
+      "number": "1"
+    },
+    "trait": "Həyatda qaldığı müddətcə ağ atlı şəhzadəsini gözləyər. Hər saniyə +1% hasar və +0,5% Saldırı hızı qazanar (Max: 80%/40%). Hər taxtaya qoyuluşda bonuslar +0,2% və +0,1% artar. 1 - 1%/+0,5% , 80%/40% ; 2- 1,2%/+0,6% , 96%/48% ; 3 - 1,4%/+0,7% , 112%/56% ; 4 - 1,6%/+0,8% , 128%/64% ; 5 -  1,8%/+0,9% , 144%/72% ; 6 -  2%/+1% , 160%/80%",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "10%",
+      "criticDamage": "-",
+      "lifestealChance": "10%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Emergent (2)",
+      "row": 20
+    }
+  },
+  {
+    "id": "three-wise-monkeys",
+    "name": "Three Wise Monkeys",
+    "type": [
+      "Animal"
+    ],
+    "rarity": "Emergent",
+    "group": "",
+    "abilityName": "",
+    "isEmergent": true,
+    "stats": {
+      "health": "80",
+      "shield": "0",
+      "damage": "11",
+      "sps": "10",
+      "attackSpeed": "1.10s",
+      "delay": "-",
+      "mana": "3",
+      "number": "3"
+    },
+    "trait": "Biri rəqib kartı 3 saniyəlik kor edər, Biri rəqib kartı 3 saniyəlik susturar, Biri rəqib karta bədbəxtlik effekti verər.",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "10%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Emergent (2)",
+      "row": 21
+    }
   }
 ]

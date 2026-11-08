@@ -121,8 +121,8 @@ test('Nightprowler ambush respects Predominance and Flexibility, while pause fre
   e.setPaused(true);e.step(20);assert.equal(has(target,'misfortune'),true);e.setPaused(false);e.step(4);assert.equal(has(target,'misfortune'),false);
 });
 
-test('all Mundane roots are battle-ready, including the final Angels and Boomix profiles',async()=>{
-  const {catalog}=await fixture();assert.ok(catalog.cards.filter(c=>c.rarity==='Mundane').every(c=>c.ready));assert.equal(catalog.cards.filter(c=>c.ready).length,138);
+test('all original Mundane roots remain battle-ready, including the final Angels and Boomix profiles',async()=>{
+  const {catalog}=await fixture();assert.ok(catalog.cards.filter(c=>c.rarity==='Mundane'&&!c.raw.sourceWorkbook).every(c=>c.ready));assert.equal(catalog.cards.filter(c=>c.ready).length,138);
   assert.equal(catalog.byId.get('angels').stats.number,10);assert.equal(catalog.byId.get('boomix').attack.interval,2.4);assert.equal(catalog.byId.get('boomix').stats.sps,6);
 });
 

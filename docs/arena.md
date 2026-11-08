@@ -288,7 +288,9 @@ for its independently generated deck; it does not copy the player's choices.
   affect the merged body once; existing ailments on either partner continue
   against shared Health with the fusion's protection.
 
-The 193 definitions include the newly authored Human manifestation. Missing
+The original 193 definitions include the authored Human manifestation. With the
+Book2 import, the Codex now contains 232 definitions across 167 root cards.
+Missing
 Shield-absorption values use the game's standard 70%; authored zeroes remain
 zero. Source DPS remains informational. Native abilities stay Azerbaijani.
 Original Power scoring is unchanged; regression baselines restore only the
@@ -296,7 +298,8 @@ explicitly rebalanced original stats when checking historical scores.
 
 ## Apex cards
 
-All 21 Apex roots and their reachable forms are battle-ready. Projectile width,
+The original 21 Apex roots and their reachable forms remain battle-ready,
+including Stormblade (now Mundane) and Umbra (now Arcane). Projectile width,
 attack travel distance and targeting Range remain independent, using 1000 points
 per tile. Stormblade has 1.2-tile Range and 2.5-tile attack distance. Blank uses a
 0.75-tile line; Willowshade and Collector use 125° and 75° cones. Heartix explodes
@@ -382,7 +385,9 @@ amounts display as `+<1` rather than `+0`.
 
 ## Codex fidelity and locked cards
 
-All **138 root cards** are battle-ready. **Nightfang** completes the roster with
+All **138 original root cards** remain battle-ready. The 29 Book2 additions are
+listed with their current missing-data reasons. **Nightfang** completes the
+original roster with
 **500 Projectile Width**, **500 Attack Distance**, and **12,500 Vision**. The
 Vision stat also gives his team a **12.5-tile scouting radius**, including while
 he is invisible; his existing **12,000 target-acquisition Range** is unchanged.
@@ -469,8 +474,8 @@ Two more Familiar roots are complete:
   deployment still costs six mana once. Source combat dimensions and the blank
   Attack Speed remain available in the Codex.
 
-**Tornado** completes the Familiar roster, so all Mundane and Familiar root cards
-are battle-ready. Its ten-hit attack uses a **0.25-second interval** and
+**Tornado** completes the original Familiar roster, so all original Mundane and
+Familiar root cards remain battle-ready. Its ten-hit attack uses a **0.25-second interval** and
 **1.25-second additional delay**, with a **1.2-tile acquisition and attack reach**.
 A successful central hit pulls that one target inside the vortex; it cannot
 move, scout, be selected by outsiders, or deal damage, including from existing
@@ -829,7 +834,12 @@ All twenty-three Relic roots now have their native abilities implemented: **Stac
 The live unit inspector displays native stat growth as well as status modifiers,
 so Malvaris's critical stacks and Phantomis army bonuses appear in their values.
 
-All 138 root cards appear in the library and are playable. Readiness still
+All 167 root cards appear when the library's readiness filter is set to All;
+the 138 original cards remain playable. The 29 Book2 additions preserve their
+workbook stats and native prose, with unavailable combat facts left unspecified.
+Stormblade moves to Mundane and Umbra to Arcane without changing their identities,
+artwork paths or behavior. Arcane Mertel is separate from Ascendant Marcy.
+See [the import record](card-imports/book2.md). Readiness still
 requires complete source data and native behavior, including required child
 forms. Incomplete spells retain explicit lock reasons; removing a lock never
 substitutes invented values.

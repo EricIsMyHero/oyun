@@ -1,0 +1,240 @@
+{
+  "workbook": "Book2.xlsx",
+  "newRootCount": 29,
+  "totalRootCount": 167,
+  "totalDefinitionCount": 232,
+  "renames": [
+    {
+      "sheet": "Arcane (2)",
+      "row": 33,
+      "from": "Marcy",
+      "to": "Mertel",
+      "reason": "User clarification: a separate card from Ascendant Marcy."
+    }
+  ],
+  "rarityMoves": [
+    {
+      "id": "stormblade",
+      "name": "Stormblade",
+      "from": "Apex",
+      "to": "Mundane"
+    },
+    {
+      "id": "umbra",
+      "name": "Umbra",
+      "from": "Apex",
+      "to": "Arcane"
+    }
+  ],
+  "newCards": [
+    {
+      "id": "cow",
+      "name": "Cow",
+      "rarity": "Mundane",
+      "sheet": "Mundane (2)",
+      "row": 32
+    },
+    {
+      "id": "trainer",
+      "name": "Trainer",
+      "rarity": "Mundane",
+      "sheet": "Mundane (2)",
+      "row": 33
+    },
+    {
+      "id": "burglar",
+      "name": "Burglar",
+      "rarity": "Mundane",
+      "sheet": "Mundane (2)",
+      "row": 34
+    },
+    {
+      "id": "dr-golbert",
+      "name": "Dr. Golbert",
+      "rarity": "Familiar",
+      "sheet": "Familiar (2)",
+      "row": 28
+    },
+    {
+      "id": "indi",
+      "name": "Indi",
+      "rarity": "Familiar",
+      "sheet": "Familiar (2)",
+      "row": 29
+    },
+    {
+      "id": "punchman",
+      "name": "Punchman",
+      "rarity": "Familiar",
+      "sheet": "Familiar (2)",
+      "row": 30
+    },
+    {
+      "id": "leader",
+      "name": "Leader",
+      "rarity": "Arcane",
+      "sheet": "Arcane (2)",
+      "row": 29
+    },
+    {
+      "id": "hostess",
+      "name": "Hostess",
+      "rarity": "Arcane",
+      "sheet": "Arcane (2)",
+      "row": 30
+    },
+    {
+      "id": "mystic-magician",
+      "name": "Mystic Magician",
+      "rarity": "Arcane",
+      "sheet": "Arcane (2)",
+      "row": 31
+    },
+    {
+      "id": "kitsune",
+      "name": "Kitsune",
+      "rarity": "Arcane",
+      "sheet": "Arcane (2)",
+      "row": 32
+    },
+    {
+      "id": "mertel",
+      "name": "Mertel",
+      "rarity": "Arcane",
+      "sheet": "Arcane (2)",
+      "row": 33
+    },
+    {
+      "id": "captain-vane",
+      "name": "Captain Vane",
+      "rarity": "Relic",
+      "sheet": "Relic (2)",
+      "row": 32
+    },
+    {
+      "id": "spiritcaller",
+      "name": "Spiritcaller",
+      "rarity": "Relic",
+      "sheet": "Relic (2)",
+      "row": 33
+    },
+    {
+      "id": "bolt",
+      "name": "Bolt",
+      "rarity": "Relic",
+      "sheet": "Relic (2)",
+      "row": 34
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas",
+      "rarity": "Ascendant",
+      "sheet": "Ascendant (2)",
+      "row": 13
+    },
+    {
+      "id": "great-stan",
+      "name": "Great Stan",
+      "rarity": "Ascendant",
+      "sheet": "Ascendant (2)",
+      "row": 15
+    },
+    {
+      "id": "marcy",
+      "name": "Marcy",
+      "rarity": "Ascendant",
+      "sheet": "Ascendant (2)",
+      "row": 17
+    },
+    {
+      "id": "shield-maiden",
+      "name": "Shield Maiden",
+      "rarity": "Ascendant",
+      "sheet": "Ascendant (2)",
+      "row": 19
+    },
+    {
+      "id": "shockwave",
+      "name": "ShockWave",
+      "rarity": "Ascendant",
+      "sheet": "Ascendant (2)",
+      "row": 21
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud",
+      "rarity": "Apex",
+      "sheet": "Apex (2)",
+      "row": 14
+    },
+    {
+      "id": "esma",
+      "name": "Esma",
+      "rarity": "Apex",
+      "sheet": "Apex (2)",
+      "row": 20
+    },
+    {
+      "id": "legendary-warrior",
+      "name": "Legendary Warrior",
+      "rarity": "Apex",
+      "sheet": "Apex (2)",
+      "row": 29
+    },
+    {
+      "id": "lily",
+      "name": "Lily",
+      "rarity": "Apex",
+      "sheet": "Apex (2)",
+      "row": 30
+    },
+    {
+      "id": "huang-chen",
+      "name": "Huáng-chén",
+      "rarity": "Emergent",
+      "sheet": "Emergent (2)",
+      "row": 17
+    },
+    {
+      "id": "servant",
+      "name": "Servant",
+      "rarity": "Emergent",
+      "sheet": "Emergent (2)",
+      "row": 18
+    },
+    {
+      "id": "survivor",
+      "name": "Survivor",
+      "rarity": "Emergent",
+      "sheet": "Emergent (2)",
+      "row": 19
+    },
+    {
+      "id": "little-princess",
+      "name": "Little Princess",
+      "rarity": "Emergent",
+      "sheet": "Emergent (2)",
+      "row": 20
+    },
+    {
+      "id": "three-wise-monkeys",
+      "name": "Three Wise Monkeys",
+      "rarity": "Emergent",
+      "sheet": "Emergent (2)",
+      "row": 21
+    },
+    {
+      "id": "dragon",
+      "name": "Dragon",
+      "rarity": "Ethereal",
+      "sheet": "Ethereal (2)",
+      "row": 30
+    }
+  ],
+  "policy": {
+    "existingCards": "Keep all existing card fields unchanged except the requested rarity moves. JSON abilities and recent stat balances take precedence over the workbook.",
+    "newCards": "Import authored workbook values. Unprovided stats, combat profiles, classes, factions and lore remain unspecified.",
+    "units": "Range and Speed values from 0 to 10 are expressed in tiles and converted to points (1000 points = 1 tile). Comma thousands in Atlas Range are preserved; comma decimal attack intervals are normalized.",
+    "arena": "The original 138 roots stay playable. New roots remain listed with explicit missing-data reasons until their essential combat data and native ability behavior are authored."
+  }
+}

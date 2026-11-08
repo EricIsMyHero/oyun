@@ -1654,5 +1654,161 @@
       "movementType": "ground",
       "groundEffectImmune": false
     }
+  },
+  {
+    "id": "dr-golbert",
+    "name": "Dr. Golbert",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Familiar",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "120",
+      "shield": "120",
+      "damage": "4",
+      "sps": "5",
+      "attackSpeed": "0.85s",
+      "delay": "-",
+      "mana": "5",
+      "number": "1"
+    },
+    "trait": "Rəqib kartların aktiv yüklərinin 10%-ni hər 4,8 saniyədə özünə çəkər. 100 yük olduqda taxtada olan bütün rəqib kartları 12 saniyəlik susturar",
+    "additionalStats": {
+      "range": "3150",
+      "speed": "1000",
+      "criticalChance": "10%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Familiar (2)",
+      "row": 28
+    }
+  },
+  {
+    "id": "indi",
+    "name": "Indi",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Familiar",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "175",
+      "shield": "35",
+      "damage": "18",
+      "sps": "1",
+      "attackSpeed": "18.00s",
+      "delay": "-",
+      "mana": "13",
+      "number": "1"
+    },
+    "trait": "Rəqib karta bir ilan göndərər. İlan bir rəqibə yapışaraq ona 8 saniyəlik qanama verər. Əgər yaxında başqa bir rəqib kart varsa ona keçər, olmasa eyni kartı bir daha 8 saniyəlik qanadar. Bunu maksimum 3 dəfə edə bilər.",
+    "additionalStats": {
+      "range": "10000",
+      "speed": "900",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Familiar (2)",
+      "row": 29
+    }
+  },
+  {
+    "id": "punchman",
+    "name": "Punchman",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Familiar",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "160",
+      "shield": "60",
+      "damage": "10",
+      "sps": "10",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "3",
+      "number": "1"
+    },
+    "trait": "Hər vuruşda +2 Hasar bonusu qazanar amma saldırı hızı -0,1 azalar",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1100",
+      "criticalChance": "10%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Familiar (2)",
+      "row": 30
+    }
   }
 ]

@@ -1823,5 +1823,216 @@
       "movementType": "ground",
       "groundEffectImmune": false
     }
+  },
+  {
+    "id": "captain-vane",
+    "name": "Captain Vane",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Relic",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "250",
+      "shield": "50",
+      "damage": "16",
+      "sps": "16",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "11",
+      "number": "1"
+    },
+    "trait": "Uzaqdakı 3 rəqib kartın yerini göstərər. Bu kartlara ekstra +19% Hasar verər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "10%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Relic (2)",
+      "row": 32
+    }
+  },
+  {
+    "id": "spiritcaller",
+    "name": "Spiritcaller",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Relic",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "140",
+      "shield": "0",
+      "damage": "17",
+      "sps": "13",
+      "attackSpeed": "1.35s",
+      "delay": "-",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "Taxtaya qoyulduqdan 3 saniyə sonra bir totem yerləşdirər öldükdə bu totemdə yenidən doğular. Hər 15 saniyədə bir totem yerə buraxar, bu totem 3x3 ərazidə dost kartlara +10% Hasar azaltma qazandırar.",
+    "additionalStats": {
+      "range": "2000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Relic (2)",
+      "row": 33
+    }
+  },
+  {
+    "id": "bolt",
+    "name": "Bolt",
+    "type": [
+      "Robot"
+    ],
+    "rarity": "Relic",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "70",
+      "shield": "25",
+      "damage": "2",
+      "sps": "3",
+      "attackSpeed": "0.65s",
+      "delay": "-",
+      "mana": "7",
+      "number": "1"
+    },
+    "trait": "Bolt Voltdan daha kiçik olduğu üçün ilk rəqib karta tez çatar onun üstünə hoppanar və ekstra +200% hasar verər. Ardınca onu Volt gələnə qədər kökləyər. Bu müddətdə rəqibin üstündə qalar və +20% hasar azaltma qazanar.",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1250",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Relic (2)",
+      "row": 34
+    },
+    "forms": [
+      {
+        "id": "volt",
+        "name": "Volt",
+        "type": [
+          "Robot"
+        ],
+        "rarity": "Relic",
+        "group": "",
+        "abilityName": "",
+        "stats": {
+          "health": "100",
+          "shield": "45",
+          "damage": "12",
+          "sps": "9",
+          "attackSpeed": "1.30s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Volt Boltdan daha böyükdür. Boltun olduğu rəqibin üstünə gələrək ona hoppanar və ekstra +200% hasar verər. Bu müddətdə rəqib kart 5 karo geri gedər və bolt rəqib üstündən düşər",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "1000",
+          "criticalChance": "0%",
+          "criticDamage": "-",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "",
+        "subclass": "",
+        "sourceWorkbook": {
+          "file": "Book2.xlsx",
+          "sheet": "Relic (2)",
+          "row": 35
+        }
+      }
+    ],
+    "isMulti": true
   }
 ]

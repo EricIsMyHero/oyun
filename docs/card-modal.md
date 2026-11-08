@@ -58,7 +58,7 @@ visible. Crystal ratings are a display comparison, not a combat multiplier.
 
 ## Editable card fields
 
-All 138 cards and their nested forms (192 objects total) now have a `combatStats`
+The original 138 cards and their nested forms have a `combatStats`
 object in `rarity/*.json`. Store it directly on each form, including `type1`,
 `type2`, `forms[]` and `upgradedsecondForm`, so transformations can differ.
 The profiles are initial design values based on the existing card descriptions
@@ -245,7 +245,10 @@ selected family's geometry: 1000/1000 for Form I, 500/500 for Form II.
 Arena form selection, deployment progression and confirmed native parameters
 are documented in [the Arena rules](arena.md#emergent-deployment-progression).
 Other numeric stats, lore and star-level bonuses remain as authored. There are
-138 root cards and 193 total definitions after adding Human.
+The original roster has 138 root cards and 193 total definitions after adding
+Human. The Book2 import expands it to 167 roots and 232 definitions. New cards
+retain unspecified combat fields as dashes until those facts are supplied; see
+[the import record](card-imports/book2.md).
 
 ## Verification
 

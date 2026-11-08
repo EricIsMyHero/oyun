@@ -23,7 +23,7 @@ async function fixture(){
 
 test('Tornado uses the updated .25-second interval, 1.25-second delay and 1.2-tile reach',async()=>{
   const {catalog}=await fixture(),u=catalog.byId.get('tornado');assert.deepEqual(u.reasons,[]);
-  assert.ok(catalog.cards.filter(c=>c.rarity==='Familiar').every(c=>c.ready));
+  assert.ok(catalog.cards.filter(c=>c.rarity==='Familiar'&&!c.raw.sourceWorkbook).every(c=>c.ready));
   assert.deepEqual(u.attack,{count:10,damage:4,interval:.25,delay:1.25});assert.equal(u.stats.sps,40);assert.equal(u.stats.range,1200);assert.equal(u.combat.attackDistance,1200);assert.equal(u.combat.attackWidth,750);assert.equal(u.combat.movementType,'hovering');
 });
 

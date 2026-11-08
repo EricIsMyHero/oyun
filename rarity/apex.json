@@ -685,41 +685,41 @@
     }
   },
   {
-    "id": "umbra",
-    "name": "Umbra",
+    "id": "cloud",
+    "name": "Cloud",
     "type": [
       "Entity"
     ],
     "rarity": "Apex",
-    "group": "the-stellar-alliance",
+    "group": "",
     "abilityName": "",
     "stats": {
-      "health": "155",
-      "shield": "45",
-      "damage": "2x28",
-      "sps": "56",
+      "health": "-",
+      "shield": "-",
+      "damage": "1",
+      "sps": "4",
       "attackSpeed": "0.25s",
-      "delay": "0.50s",
-      "mana": "12",
+      "delay": "-",
+      "mana": "4",
       "number": "1"
     },
-    "trait": "Canı 75% olduqda 3 saniyəlik görünməz olar, 50% olduqda 7,500 Karo geriyə gedər",
+    "trait": "Döyüşə başladıqda hədəf alına bilməz. İlk 20 saniyə yağış formasında qalar. Bu müddətdə sadəcə altındakı kartlara hasar verə bilər. Hasar verdikdə rəqib kartların saldırı hızlarını 20% azaldar",
     "additionalStats": {
-      "range": "1000",
-      "speed": "1000",
-      "criticalChance": "5%",
-      "criticDamage": "1.5x",
+      "range": "500",
+      "speed": "800",
+      "criticalChance": "0%",
+      "criticDamage": "-",
       "lifestealChance": "0%",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%",
-      "vision": "8000",
-      "healBonus": "0%",
-      "healrecovery": "0/s",
-      "shieldrecovery": "0/s",
-      "criticdamageminimiser": "0%",
-      "flexibility": "0%",
-      "shieldtakendamage": "70%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
       "life": "-"
     },
     "showlevels": {
@@ -727,25 +727,121 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "The Twilight Warden, a mysterious female alien guardian who watches over the border between light and darkness in Alien World: The Binary Divide. Unlike the warriors of either faction, Umbra commands the ancient power of twilight—the perfect balance between light and shadow. She manipulates living shadows not to spread fear, but to protect the innocent and imprison the darkness before it can consume the world. Her presence is silent, graceful, and almost supernatural, making her one of the most enigmatic protectors of the Light Layer. Umbra is a tall, elegant female alien with a slender yet athletic physique. Her smooth skin fades seamlessly from luminous pearl-white into deep violet and midnight black, creating a natural twilight gradient across her body. Delicate glowing indigo energy veins flow beneath her skin like rivers of starlight. Her face is beautiful, calm, and mysterious, with graceful alien features and glowing violet eyes that seem to contain entire galaxies. Her expression is gentle yet unreadable, radiating wisdom, serenity, and quiet authority. Long flowing hair transitions from silver-white near the crown into deep violet and finally black at the tips, floating weightlessly around her. She wears living twilight crystal armor, organically grown from rare celestial minerals. The armor combines translucent white crystal with deep violet obsidian-like crystal, creating a perfect harmony between light and shadow. Elegant crystalline shoulder pieces, forearm guards, and leg armor emit a soft violet glow, while flowing shadow-like energy ribbons drift behind her like an ethereal cloak. Around Umbra orbit several floating shadow crystals, suspended effortlessly in the air. These crystalline shards emit faint violet light while releasing streams of living shadow that swirl gracefully around her without appearing evil or corrupted. Both of her hands command powerful twilight energy. One hand creates glowing violet shadow ribbons that form elegant protective barriers, while the other shapes luminous white energy capable of purifying corruption. Between her hands, both energies merge into a mesmerizing sphere of balanced cosmic power. Behind Umbra floats an enormous crescent-shaped twilight halo, formed from intertwined rings of radiant white light and deep violet shadow energy. Small stars, glowing particles, and fragments of cosmic dust slowly orbit within the halo, reinforcing her role as guardian of the boundary between day and night. The battlefield lies within the sacred Twilight Zone, where the Light Layer meets the edge of darkness. Crystal forests glow beneath an eternal sunset, while floating islands drift across a sky painted with brilliant shades of gold, lavender, indigo, and deep blue. Giant luminous trees, glowing flowers, crystal rivers, and distant celestial mountains create an environment that feels magical and peaceful. Soft twilight mist flows across the ground while luminous butterflies, floating stardust, and glowing flower petals drift gently through the air. Long beams of warm sunset light blend naturally with cool violet shadows, creating breathtaking cinematic contrast. Umbra gracefully hovers just above the ground, one hand extending protective shadow magic while the other radiates gentle celestial light. Her posture is elegant, composed, and protective, symbolizing harmony rather than conflict. The overall composition should portray Umbra as the divine guardian of twilight—a celestial female alien whose mastery of balanced light and shadow protects the universe from falling into eternal darkness.",
-    "class": "Assassin",
-    "subclass": "Phantom",
-    "combatStats": {
-      "attackType": "melee",
-      "multiTarget": false,
-      "maxTargets": 1,
-      "attackShape": "single",
-      "attackWidth": 500,
-      "weight": "light",
-      "targets": "ground",
-      "attackDistance": 500,
-      "attackDistanceMatchesRange": false,
-      "attackAngle": null,
-      "impactSize": null,
-      "projectileEndEffect": null,
-      "movementType": "ground",
-      "groundEffectImmune": false
-    }
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Apex (2)",
+      "row": 14
+    },
+    "forms": [
+      {
+        "id": "cloud-form-2",
+        "name": "Cloud (form 2)",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Apex",
+        "group": "",
+        "abilityName": "",
+        "stats": {
+          "health": "-",
+          "shield": "-",
+          "damage": "2",
+          "sps": "8",
+          "attackSpeed": "0.25s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Sonrakı 16 saniyə yağanaq formasında qalar. Hasarı +100% Buludun ölçüsü +50% artar. Hasar verdikdə rəqib kartların saldırı hızlarını 25% azaldar",
+        "additionalStats": {
+          "range": "1000",
+          "speed": "800",
+          "criticalChance": "0%",
+          "criticDamage": "-",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "",
+        "subclass": "",
+        "sourceWorkbook": {
+          "file": "Book2.xlsx",
+          "sheet": "Apex (2)",
+          "row": 15
+        }
+      },
+      {
+        "id": "cloud-form-3",
+        "name": "Cloud (form 3)",
+        "type": [
+          "Entity"
+        ],
+        "rarity": "Apex",
+        "group": "",
+        "abilityName": "",
+        "stats": {
+          "health": "-",
+          "shield": "-",
+          "damage": "4",
+          "sps": "16",
+          "attackSpeed": "0.25s",
+          "delay": "-",
+          "mana": "-",
+          "number": "1"
+        },
+        "trait": "Sonrakı 12 saniyə tufan formasında qalar. Hasarı +100% Buludun ölçüsü +33% artar. Hasar verdikdə rəqib kartların saldırı hızlarını 30% azaldar",
+        "additionalStats": {
+          "range": "1500",
+          "speed": "800",
+          "criticalChance": "0%",
+          "criticDamage": "-",
+          "lifestealChance": "0%",
+          "lifesteal": "-",
+          "damageminimiser": "-",
+          "dodge": "-",
+          "vision": "-",
+          "healBonus": "-",
+          "healrecovery": "-",
+          "shieldrecovery": "-",
+          "criticdamageminimiser": "-",
+          "flexibility": "-",
+          "shieldtakendamage": "-",
+          "life": "-"
+        },
+        "showlevels": {
+          "level1": "-",
+          "level2": "-",
+          "level3": "-"
+        },
+        "story": "-",
+        "class": "",
+        "subclass": "",
+        "sourceWorkbook": {
+          "file": "Book2.xlsx",
+          "sheet": "Apex (2)",
+          "row": 16
+        }
+      }
+    ],
+    "isMulti": true
   },
   {
     "id": "thief",
@@ -935,41 +1031,41 @@
     }
   },
   {
-    "id": "stormblade",
-    "name": "Stormblade",
+    "id": "esma",
+    "name": "Esma",
     "type": [
-      "Alien"
+      "Human"
     ],
     "rarity": "Apex",
-    "group": "the-nether-flux",
+    "group": "",
     "abilityName": "",
     "stats": {
-      "health": "160",
-      "shield": "40",
-      "damage": "26",
-      "sps": "32",
+      "health": "275",
+      "shield": "25",
+      "damage": "8",
+      "sps": "10",
       "attackSpeed": "0.80s",
       "delay": "-",
-      "mana": "11",
+      "mana": "14",
       "number": "1"
     },
-    "trait": "Əsas hədəfdən 3 karo məsafədə maksimum 3 əlavə rəqibə hasar sıçrayar. Sıçrayan hasar əsas hasarın 50%-idir; cəmi maksimum 4 rəqibə hasar verər.",
+    "trait": "Vuruşları qalxandan keçər. Rəqib karta hər hasar verdikdə həm rəqib kart həmdə özü +12 qalxan qazanar,",
     "additionalStats": {
-      "range": "1200",
-      "speed": "1000",
+      "range": "1750",
+      "speed": "1050",
       "criticalChance": "5%",
-      "criticDamage": "1.5x",
-      "lifestealChance": "0%",
-      "lifesteal": "25%",
-      "damageminimiser": "0%",
-      "dodge": "0%",
-      "vision": "8000",
-      "healBonus": "0%",
-      "healrecovery": "0/s",
-      "shieldrecovery": "0/s",
-      "criticdamageminimiser": "0%",
-      "flexibility": "0%",
-      "shieldtakendamage": "70%",
+      "criticDamage": "-",
+      "lifestealChance": "25%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
       "life": "-"
     },
     "showlevels": {
@@ -977,24 +1073,13 @@
       "level2": "-",
       "level3": "-"
     },
-    "story": "The Tempest Executioner, one of the deadliest warriors of the Dark Layer in Alien World: The Binary Divide. A relentless alien speedster born beneath endless planetary superstorms, Stormblade transforms lightning into a weapon of absolute destruction. Every movement generates violent electrical discharges, allowing this merciless hunter to strike faster than the eye can follow. Victims rarely see Stormblade—they only witness flashes of lightning before everything goes dark. Stormblade is a tall, athletic alien warrior with a sleek, aerodynamic body built entirely for speed. Its armor is formed from dark obsidian-like alien alloy, featuring razor-sharp edges and smooth organic curves that reduce air resistance. Thin glowing veins of electric blue and violet energy race beneath the armor like living lightning, constantly pulsing across its body. Its helmet-like head has an aggressive, angular design with two piercing electric-blue eyes that radiate pure energy. Sharp horn-like energy conductors extend backward from the head, continuously attracting arcs of planetary lightning. Small bolts of electricity jump between the horns and surrounding air. Mounted on both forearms are dual plasma blades, each formed from condensed high-voltage energy contained within advanced alien emitters. The blades glow with brilliant blue-white plasma, surrounded by violent electrical arcs and streams of ionized energy. They appear impossibly sharp, capable of slicing through armored targets in a single high-speed strike. Stormblade's limbs are exceptionally lean and powerful, designed for explosive acceleration. Along its legs and back are streamlined energy conduits and electromagnetic propulsion vents that release bursts of blue plasma whenever it changes direction. Trails of crackling electricity remain suspended in the air behind every movement. The battlefield is a hostile alien wasteland beneath an enormous planetary electrical storm. Towering black rock formations, shattered alien structures, floating metallic debris, and enormous crystalline energy conductors surround the battlefield. Above, massive thunderclouds churn continuously while colossal bolts of blue lightning strike the landscape. Electricity constantly dances across the ground around Stormblade's feet, creating glowing fractures and ionized scorch marks. Floating rocks levitate as electromagnetic energy distorts gravity nearby. The atmosphere is filled with blue plasma particles, sparks, ozone mist, and swirling storm winds. Stormblade stands in an aggressive combat stance, one plasma blade held low and the other raised, while lightning repeatedly crashes directly into its body without causing any damage. The electrical energy is visibly absorbed into its armor, making the glowing energy veins intensify with every strike. The overall composition should portray Stormblade as the living embodiment of a planetary thunderstorm—merciless, impossibly fast, and overwhelmingly powerful.",
-    "class": "Marksman",
-    "subclass": "Splasher",
-    "combatStats": {
-      "attackType": "melee",
-      "multiTarget": true,
-      "maxTargets": null,
-      "attackShape": "cone",
-      "attackWidth": 1000,
-      "weight": "medium",
-      "targets": "ground",
-      "attackDistance": 2500,
-      "attackDistanceMatchesRange": false,
-      "attackAngle": 135,
-      "impactSize": null,
-      "projectileEndEffect": null,
-      "movementType": "ground",
-      "groundEffectImmune": false
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Apex (2)",
+      "row": 20
     }
   },
   {
@@ -1512,6 +1597,111 @@
       "projectileEndEffect": null,
       "movementType": "ground",
       "groundEffectImmune": false
+    }
+  },
+  {
+    "id": "legendary-warrior",
+    "name": "Legendary Warrior",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Apex",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "310",
+      "shield": "90",
+      "damage": "12",
+      "sps": "12",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "15",
+      "number": "1"
+    },
+    "trait": "Qorxusuz effekti qazanar. Hər 4-cü vuruş krtitik vurar. Bu vuruşda rəqib kartın qalxanını qırarsa 12 saniyəlik +20% Saldırı hızı qazanar",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Apex (2)",
+      "row": 29,
+      "originalName": "Legendary  Warrior"
+    }
+  },
+  {
+    "id": "lily",
+    "name": "Lily",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Apex",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "80",
+      "shield": "0",
+      "damage": "-",
+      "sps": "-",
+      "attackSpeed": "-",
+      "delay": "-",
+      "mana": "6",
+      "number": "1"
+    },
+    "trait": "Lily öldükdə bir müddət daha yaşayar. Bu müddətdə hədəf alına bilməz. Daha sonra 15 karo qabağa qədər gedər. Öldüyü yerin 5 karo uzaqlığında canavar yaranar. Bu canavar Lily-ə doğru qaçaraq yolu ustündəki rəqib kartlara 125+(Rəqib kartın maksimum qalxanının 30%-i qədər) hasar verər. Sonda Lily-i tutaraq partlayar və yaxınlığındakı rəqib kartlara 100+(Rəqib kartın maksimum canının 25%-i qədər) hasar verər.",
+    "additionalStats": {
+      "range": "-",
+      "speed": "1250",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Apex (2)",
+      "row": 30
     }
   }
 ]

@@ -2008,5 +2008,129 @@
       "movementType": "ground",
       "groundEffectImmune": false
     }
+  },
+  {
+    "id": "dragon",
+    "name": "Dragon",
+    "type": [
+      "Animal"
+    ],
+    "rarity": "Ethereal",
+    "group": "",
+    "isDual": true,
+    "stats": {
+      "mana": "16"
+    },
+    "type1": {
+      "id": "dragon-light",
+      "name": "Dragon (Light)",
+      "type": [
+        "Animal"
+      ],
+      "rarity": "Ethereal",
+      "group": "",
+      "abilityName": "",
+      "stats": {
+        "health": "280",
+        "shield": "120",
+        "damage": "10x4",
+        "sps": "16",
+        "attackSpeed": "0.25s",
+        "delay": "0.75s",
+        "mana": "16",
+        "number": "1"
+      },
+      "trait": "Canı 25%-in altına düşdükdə 3 saniyəlik toxunulmaz olaraq yuxarı uçar və yox olar. 4 saniyə sonra qalanın ən arxasından olduğu kolidor boyunca olduğu yerə qədər gələr və alta doğru alov atar. Alov 24 hasar verərə və rəqib kartın statlarını 10% azaldar",
+      "additionalStats": {
+        "range": "1450",
+        "speed": "1000",
+        "criticalChance": "10%",
+        "criticDamage": "-",
+        "lifestealChance": "0%",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-",
+        "vision": "-",
+        "healBonus": "-",
+        "healrecovery": "-",
+        "shieldrecovery": "-",
+        "criticdamageminimiser": "-",
+        "flexibility": "-",
+        "shieldtakendamage": "-",
+        "life": "-"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "",
+      "subclass": "",
+      "sourceWorkbook": {
+        "file": "Book2.xlsx",
+        "sheet": "Ethereal (2)",
+        "row": 30
+      }
+    },
+    "type2": {
+      "id": "dragon-dark",
+      "name": "Dragon (Dark)",
+      "type": [
+        "Animal"
+      ],
+      "rarity": "Ethereal",
+      "group": "",
+      "abilityName": "",
+      "stats": {
+        "health": "280",
+        "shield": "120",
+        "damage": "10x5",
+        "sps": "20",
+        "attackSpeed": "0.25s",
+        "delay": "0.75s",
+        "mana": "16",
+        "number": "1"
+      },
+      "trait": "Canı 25%-in altına düşdükdə 3 saniyəlik toxunulmaz olaraq yuxarı uçar və yox olar. 4 saniyə sonra qalanın ən arxasından olduğu kolidor boyunca olduğu yerə qədər gələr və alta doğru alov atar. Alov 48  hasar verərə və rəqib kartı 30 saniyəlik lənətləyər",
+      "additionalStats": {
+        "range": "1450",
+        "speed": "1000",
+        "criticalChance": "10%",
+        "criticDamage": "-",
+        "lifestealChance": "0%",
+        "lifesteal": "-",
+        "damageminimiser": "-",
+        "dodge": "-",
+        "vision": "-",
+        "healBonus": "-",
+        "healrecovery": "-",
+        "shieldrecovery": "-",
+        "criticdamageminimiser": "-",
+        "flexibility": "-",
+        "shieldtakendamage": "-",
+        "life": "-"
+      },
+      "showlevels": {
+        "level1": "-",
+        "level2": "-",
+        "level3": "-"
+      },
+      "story": "-",
+      "class": "",
+      "subclass": "",
+      "sourceWorkbook": {
+        "file": "Book2.xlsx",
+        "sheet": "Ethereal (2)",
+        "row": 31
+      }
+    },
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Ethereal (2)",
+      "row": 30
+    }
   }
 ]

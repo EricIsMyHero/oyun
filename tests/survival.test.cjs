@@ -305,14 +305,14 @@ test('all 24 Codex keys, units and caps are reused; measured DPS is not an upgra
   assert.ok(!g.run('survivalUpgradePool()').some(c => c.key === 'stat:sps'));
 });
 
-test('all 138 repository cards can start and simulate; forms and raw data are preserved', () => {
+test('all 167 repository cards can start and simulate; forms and raw data are preserved', () => {
   const g = game();
   const cards = fs.readdirSync(path.join(__dirname,'../rarity')).flatMap(name => JSON.parse(fs.readFileSync(path.join(__dirname,'../rarity',name),'utf8')));
-  assert.equal(cards.length, 138);
+  assert.equal(cards.length, 167);
   const snapshot = JSON.stringify(cards);
   g.context.cards = cards;
   g.run('for (const card of cards) SURVIVAL_CHARACTERS[card.id] = survivalCardConfig(card)');
-  assert.equal(g.run('Object.keys(SURVIVAL_CHARACTERS).length'), 138);
+  assert.equal(g.run('Object.keys(SURVIVAL_CHARACTERS).length'), 167);
   for (const card of cards) {
     g.context.characterId = card.id;
     g.run('startSurvivalRun(characterId); for(let i=0;i<5;i++) survivalUpdate(0.05)');

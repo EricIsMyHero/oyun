@@ -11,7 +11,7 @@ test('shared Power scorer preserves all 138 original Codex scores, including dua
   // Keep the original-stat regression fixture independent of the requested
   // Explicit stat rebalances are restored only in this historical fixture.
   // The next test checks every current authored score with the website formula.
-  const baseline=structuredClone(cards),maapp=baseline.find(c=>c.id==='maapp');
+  const baseline=require('./fixtures/pre-book2-cards.json').order.map(id=>structuredClone(cards.find(c=>c.id===id))),maapp=baseline.find(c=>c.id==='maapp');
   for(const[id,stats,additional]of[
     ['frostshot',{attackSpeed:'0.10s',delay:'1.20s'},{}],
     ['deadscope',{damage:'150',attackSpeed:'5.00s'},{range:'8000'}],

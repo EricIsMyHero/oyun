@@ -5,8 +5,10 @@
 Open [arena/index.html](arena/index.html) through the same HTTP server as the
 Codex to play the separate, three-route arena against a bot. Build an eight-card
 deck with a four-card hand and a cycling spell loadout of at most five Charge.
-All 138 root cards are playable, including Nightfang and every Apex, Emergent
-and Ethereal card. Ethereal forms are chosen before battle; Emergent deployment
+The Codex contains 167 root cards, including the 29 additions from Book2.xlsx.
+The original 138 cards remain playable. New cards show explicit Arena lock
+reasons until their combat profiles and native abilities are complete.
+Ethereal forms are chosen before battle; Emergent deployment
 progression resets each match. Spells with missing essential battle data still
 show their lock reasons.
 
@@ -158,8 +160,10 @@ fills its area; an expand control opens the full, uncropped image. Inline SVG
 icons replace emoji in the modal and archive tiles. Stats
 has three numbered pages covering all 24 numeric stats and the combat profile.
 Five crystals replace bars, and a moving rarity light traces the frame.
-All 138 cards and their forms have editable
-combat profiles. See [the modal and profile guide](docs/card-modal.md) for field
+All 138 original cards and their forms have editable
+combat profiles. Imported cards display unspecified fields as dashes. See
+[the Book2 import record](docs/card-imports/book2.md) for new cards, rarity moves
+and the JSON-first preservation policy, and [the modal and profile guide](docs/card-modal.md) for field
 values, conditional flight/area attacks, stat ordering and validation commands.
 
 The new card interface uses English labels while ability names, descriptions,
@@ -219,7 +223,7 @@ Then open: `http://localhost:8080`
 ## Survival Arena
 
 Serve the repository over HTTP, open **Game → Survival**, and pick a character.
-The picker loads all **138 Codex cards** from the eight `rarity/*.json` files,
+The picker loads all **167 Codex cards** from the eight `rarity/*.json` files,
 with search and rarity filters. Failed files can be retried without losing the
 available roster. Multi-form cards start in their first form. Except for the
 explicit loadouts below, Range ≤1500 selects melee (axe / Dumpsy orbits);

@@ -659,8 +659,8 @@ test('raven liveness never becomes health through allied growth; beneficial comb
   const point={x:raven.x,y:raven.y};e.push(raven,{x:14,y:14},3);close(raven.x,point.x);close(raven.y,point.y);
 });
 
-test('all Relic root cards now have complete battle data; Magma replaces its old health-loss/burn aura',async()=>{
-  const {catalog,e,spawn}=await fixture();assert.equal(catalog.cards.filter(c=>c.rarity==='Relic').length,23);assert.ok(catalog.cards.filter(c=>c.rarity==='Relic').every(c=>c.ready));
+test('all original Relic root cards retain complete battle data; Magma replaces its old health-loss/burn aura',async()=>{
+  const {catalog,e,spawn}=await fixture();assert.equal(catalog.cards.filter(c=>c.rarity==='Relic'&&!c.raw.sourceWorkbook).length,23);assert.ok(catalog.cards.filter(c=>c.rarity==='Relic'&&!c.raw.sourceWorkbook).every(c=>c.ready));
   const magma=spawn('magma');e.step(20);close(magma.hp,magma.maxHp);close(magma.shield,magma.maxShield);assert.equal(e.state.trails.length,0);
   assert.equal(magma.def.combat.attackWidth,500);assert.equal(magma.def.combat.trailWidth,1500);
 });

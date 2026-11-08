@@ -33,8 +33,19 @@ const server = http.createServer(async (req, res) => {
     });
     await page.goto(`http://127.0.0.1:${server.address().port}`);
     await page.evaluate(async () => { showPortal('cards'); await initCards(); });
-    assert.equal(await page.locator('#cards-grid .card-item').count(), 138);
+    assert.equal(await page.locator('#cards-grid .card-item').count(), 167);
     assert.doesNotMatch(await page.locator('#cards-grid').textContent(), /\p{Extended_Pictographic}|\p{Emoji_Presentation}/u);
+    for(const[rarity,name]of[['mundane','Stormblade'],['arcane','Umbra']]){
+      await page.locator(`.filter-btn[data-rarity="${rarity}"]`).click();assert.equal(await page.locator('#cards-grid .card-item').filter({has:page.getByText(name,{exact:true})}).count(),1);
+      await page.locator('#cards-grid .card-item').filter({has:page.getByText(name,{exact:true})}).click();assert.equal(await page.locator('#modal-box').getAttribute('data-rarity'),rarity);await page.locator('#modal-close').click();
+    }
+    await page.locator('.filter-btn[data-rarity="all"]').click();
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='mertel')));assert.equal(await page.locator('#modal-box').getAttribute('data-rarity'),'arcane');assert.equal(await page.locator('[data-stat="health"] .modal-stat-value').textContent(),'125');
+    await page.locator('[data-stat-page="3"]').click();assert.equal(await page.locator('[data-profile="attackDistance"] strong').textContent(),'—');await page.locator('[data-card-section="ability"]').click();assert.match(await page.locator('.modal-trait-box').textContent(),/kritik şansı can çalma şansına/);await page.locator('#modal-box').screenshot({path:'/tmp/oyun-book2-mertel.png'});
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='marcy')));await page.locator('#ascended-toggle').click();assert.equal(await page.locator('[data-stat="health"] .modal-stat-value').textContent(),'120');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='cloud')));await page.locator('[data-form-index="1"]').click();assert.equal(await page.locator('[data-stat="damage"] .modal-stat-value').textContent(),'4');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='bolt')));await page.locator('[data-form-index="0"]').click();assert.equal(await page.locator('[data-stat="health"] .modal-stat-value').textContent(),'100');
+    await page.evaluate(()=>openModal(allCards.find(c=>c.id==='dragon')));assert.equal(await page.locator('.dual-type-card').count(),2);await page.locator('#dual-pick-2').click();assert.equal(await page.locator('[data-stat="damage"] .modal-stat-value').textContent(),'10x5');assert.equal(await page.locator('[data-stat="range"] .modal-stat-value').textContent(),'1.45 tiles');await page.locator('#modal-box').screenshot({path:'/tmp/oyun-book2-dragon-dark.png'});await page.locator('#modal-close').click();
     await page.locator('#cards-grid .card-item').filter({has:page.getByText('Nitrox', {exact:true})}).click();
     assert.equal(await page.locator('#modal-overlay').getAttribute('aria-hidden'), 'false');
     assert.equal(await page.locator('#modal-content .modal-rarity-badge').count(), 0);
@@ -120,7 +131,7 @@ const server = http.createServer(async (req, res) => {
       }
       return {forms,rarities:[...rarities]};
     });
-    assert.equal(rendered.forms, 193);
+    assert.equal(rendered.forms, 232);
     assert.equal(new Set(rendered.rarities.map(x => x[1])).size, 8);
 
     await page.evaluate(()=>openModal(allCards.find(c=>c.id==='henry')));
@@ -315,7 +326,7 @@ const server = http.createServer(async (req, res) => {
       closeModal();
       return count;
     });
-    assert.equal(mobileForms,193);
+    assert.equal(mobileForms,232);
     await page.evaluate(() => openModal({id:'missing-art',name:'Missing art',rarity:'Apex',stats:{health:0},additionalStats:{}}));
     await page.waitForFunction(() => document.getElementById('modal-placeholder').style.display === 'flex');
     assert.equal(await page.locator('#modal-img').isVisible(), false);
@@ -359,6 +370,6 @@ const server = http.createServer(async (req, res) => {
     await page.evaluate(async () => {switchSection('survival'); await initSurvival(); survivalVisible=true; startSurvivalRun('soldier'); });
     assert.equal(await page.evaluate(()=>typeof survivalTraitsInit), 'function');
     assert.deepEqual(errors, []);
-    console.log(`Browser checks passed: 138 cards, ${rendered.forms} forms, 8 rarity glows, 6 viewport sizes, Lore, tabs, form switches, spells and Survival.`);
+    console.log(`Browser checks passed: 167 cards, ${rendered.forms} forms, 8 rarity glows, 6 viewport sizes, Lore, tabs, form switches, spells and Survival.`);
   } finally { await browser.close(); }
 })().catch(err=>{console.error(err);process.exitCode=1;}).finally(()=>server.close());

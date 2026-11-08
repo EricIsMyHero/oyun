@@ -1594,5 +1594,329 @@
       "movementType": "ground",
       "groundEffectImmune": false
     }
+  },
+  {
+    "id": "umbra",
+    "name": "Umbra",
+    "type": [
+      "Entity"
+    ],
+    "rarity": "Arcane",
+    "group": "the-stellar-alliance",
+    "abilityName": "",
+    "stats": {
+      "health": "155",
+      "shield": "45",
+      "damage": "2x28",
+      "sps": "56",
+      "attackSpeed": "0.25s",
+      "delay": "0.50s",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "Canı 75% olduqda 3 saniyəlik görünməz olar, 50% olduqda 7,500 Karo geriyə gedər",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "1.5x",
+      "lifestealChance": "0%",
+      "lifesteal": "25%",
+      "damageminimiser": "0%",
+      "dodge": "0%",
+      "vision": "8000",
+      "healBonus": "0%",
+      "healrecovery": "0/s",
+      "shieldrecovery": "0/s",
+      "criticdamageminimiser": "0%",
+      "flexibility": "0%",
+      "shieldtakendamage": "70%",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "The Twilight Warden, a mysterious female alien guardian who watches over the border between light and darkness in Alien World: The Binary Divide. Unlike the warriors of either faction, Umbra commands the ancient power of twilight—the perfect balance between light and shadow. She manipulates living shadows not to spread fear, but to protect the innocent and imprison the darkness before it can consume the world. Her presence is silent, graceful, and almost supernatural, making her one of the most enigmatic protectors of the Light Layer. Umbra is a tall, elegant female alien with a slender yet athletic physique. Her smooth skin fades seamlessly from luminous pearl-white into deep violet and midnight black, creating a natural twilight gradient across her body. Delicate glowing indigo energy veins flow beneath her skin like rivers of starlight. Her face is beautiful, calm, and mysterious, with graceful alien features and glowing violet eyes that seem to contain entire galaxies. Her expression is gentle yet unreadable, radiating wisdom, serenity, and quiet authority. Long flowing hair transitions from silver-white near the crown into deep violet and finally black at the tips, floating weightlessly around her. She wears living twilight crystal armor, organically grown from rare celestial minerals. The armor combines translucent white crystal with deep violet obsidian-like crystal, creating a perfect harmony between light and shadow. Elegant crystalline shoulder pieces, forearm guards, and leg armor emit a soft violet glow, while flowing shadow-like energy ribbons drift behind her like an ethereal cloak. Around Umbra orbit several floating shadow crystals, suspended effortlessly in the air. These crystalline shards emit faint violet light while releasing streams of living shadow that swirl gracefully around her without appearing evil or corrupted. Both of her hands command powerful twilight energy. One hand creates glowing violet shadow ribbons that form elegant protective barriers, while the other shapes luminous white energy capable of purifying corruption. Between her hands, both energies merge into a mesmerizing sphere of balanced cosmic power. Behind Umbra floats an enormous crescent-shaped twilight halo, formed from intertwined rings of radiant white light and deep violet shadow energy. Small stars, glowing particles, and fragments of cosmic dust slowly orbit within the halo, reinforcing her role as guardian of the boundary between day and night. The battlefield lies within the sacred Twilight Zone, where the Light Layer meets the edge of darkness. Crystal forests glow beneath an eternal sunset, while floating islands drift across a sky painted with brilliant shades of gold, lavender, indigo, and deep blue. Giant luminous trees, glowing flowers, crystal rivers, and distant celestial mountains create an environment that feels magical and peaceful. Soft twilight mist flows across the ground while luminous butterflies, floating stardust, and glowing flower petals drift gently through the air. Long beams of warm sunset light blend naturally with cool violet shadows, creating breathtaking cinematic contrast. Umbra gracefully hovers just above the ground, one hand extending protective shadow magic while the other radiates gentle celestial light. Her posture is elegant, composed, and protective, symbolizing harmony rather than conflict. The overall composition should portray Umbra as the divine guardian of twilight—a celestial female alien whose mastery of balanced light and shadow protects the universe from falling into eternal darkness.",
+    "class": "Assassin",
+    "subclass": "Phantom",
+    "combatStats": {
+      "attackType": "melee",
+      "multiTarget": false,
+      "maxTargets": 1,
+      "attackShape": "single",
+      "attackWidth": 500,
+      "weight": "light",
+      "targets": "ground",
+      "attackDistance": 500,
+      "attackDistanceMatchesRange": false,
+      "attackAngle": null,
+      "impactSize": null,
+      "projectileEndEffect": null,
+      "movementType": "ground",
+      "groundEffectImmune": false
+    }
+  },
+  {
+    "id": "leader",
+    "name": "Leader",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Arcane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "140",
+      "shield": "30",
+      "damage": "9",
+      "sps": "8",
+      "attackSpeed": "1.10s",
+      "delay": "-",
+      "mana": "4",
+      "number": "1"
+    },
+    "trait": "Hər 6 saniyədə +0,025 sürət və +0,01 saldırı hızı qazanar",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Arcane (2)",
+      "row": 29
+    }
+  },
+  {
+    "id": "hostess",
+    "name": "Hostess",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Arcane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "270",
+      "shield": "0",
+      "damage": "15",
+      "sps": "12",
+      "attackSpeed": "1.25s",
+      "delay": "-",
+      "mana": "5",
+      "number": "1"
+    },
+    "trait": "25% Şansla əlindəki baltanı ən yaxın rəqib karta ataraq 1,25 saniyəlik sərsəmlədər. Əgər balta atılan kart 1.5 karo uzaqdadırsa balta ekstra 1,75 saniyə sərsəmlədər. Bu müddətdə Sophie baltasına doğru hərəkət edər. Yolu üstündə başqa bir rəqib kart varsa baltasını alana qədər hasarı -60% azalar amma ekstra +40% Saldırı hızı qazanar",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Arcane (2)",
+      "row": 30
+    }
+  },
+  {
+    "id": "mystic-magician",
+    "name": "Mystic Magician",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Arcane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "200",
+      "shield": "20",
+      "damage": "9",
+      "sps": "4",
+      "attackSpeed": "2.40s",
+      "delay": "-",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "Hər atış bir element atışı olar. Hər 4 atışda başqa bir elementin gücünə sahib olar. Alov - rəqib kartı yandırar və ekstra 2x6 hasar verər. Buz - rəqib kartı dondurar. Zəhər - rəqib kartı zəhərləyərək ekstra 6x3 hasar verər. Boşluq - rəqib kartın maksimum canının 10%-i qədər ekstra hasar verər.",
+    "additionalStats": {
+      "range": "5250",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Arcane (2)",
+      "row": 31
+    }
+  },
+  {
+    "id": "kitsune",
+    "name": "Kitsune",
+    "type": [
+      "Animal"
+    ],
+    "rarity": "Arcane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "100",
+      "shield": "0",
+      "damage": "-",
+      "sps": "-",
+      "attackSpeed": "-",
+      "delay": "-",
+      "mana": "5",
+      "number": "1"
+    },
+    "trait": "Görünməz olar maksimum 3 rəqib kartın içindən keçər və yox olar. İçindən keçdiyi rəəqib  kartların bir sonraki 3 vuruşu -99% daha az hasar verər.",
+    "additionalStats": {
+      "range": "800",
+      "speed": "1150",
+      "criticalChance": "-",
+      "criticDamage": "-",
+      "lifestealChance": "-",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Arcane (2)",
+      "row": 32
+    }
+  },
+  {
+    "id": "mertel",
+    "name": "Mertel",
+    "type": [
+      "Entity"
+    ],
+    "rarity": "Arcane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "125",
+      "shield": "65",
+      "damage": "9",
+      "sps": "15",
+      "attackSpeed": "0.60s",
+      "delay": "-",
+      "mana": "6",
+      "number": "1"
+    },
+    "trait": "Qazanacağı hər kritik şansı can çalma şansına çevrilər. Qazandığı hər +1% can çalma şansı üçün ekstra +1% maksimum can qazanar.",
+    "additionalStats": {
+      "range": "1200",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "50%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book2.xlsx",
+      "sheet": "Arcane (2)",
+      "row": 33,
+      "originalName": "Marcy"
+    }
   }
 ]

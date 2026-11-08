@@ -17,11 +17,14 @@ function allForms(card) {
   return [card, ...(card.forms || []).flatMap(allForms), ...['type1','type2','upgradedsecondForm'].flatMap(k => card[k] ? allForms(card[k]) : [])];
 }
 const forms = cards.flatMap(allForms);
+const originalCards = require('./fixtures/pre-book2-cards.json').order.map(id => cards.find(c => c.id === id));
+const originalForms = originalCards.flatMap(allForms);
 
-test('all cards and nested forms have complete, consistent editable combat profiles', () => {
-  assert.equal(cards.length, 138);
-  assert.equal(forms.length, 193);
-  for (const card of forms) {
+test('original cards retain complete combat profiles while the imported roster grows to 167 cards and 232 definitions', () => {
+  assert.equal(cards.length, 167);
+  assert.equal(forms.length, 232);
+  assert.equal(originalForms.length, 193);
+  for (const card of originalForms) {
     const p = card.combatStats;
     assert.ok(p, card.name);
     assert.ok(['melee','ranged','mixed','none'].includes(p.attackType), card.name);
@@ -122,7 +125,7 @@ test('modal stat, profile and level renderers use inline icons without emoji', (
 test('ability texts, names, turn abilities and star upgrades are preserved verbatim', () => {
   // Includes requested Gloop rules and the user-clarified Relic abilities.
   // Change this baseline only when an ability edit is explicitly requested.
-  const content=forms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
+  const content=originalForms.map(c=>[c.id??null,c.name,c.trait??null,c.abilityName??null,c.turns??null,c.showlevels??null]);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex'),
     'ffb22751a4b7482e42276c5d9068d0b514f4f778de8d76431c6dc76150d70b3a');
 });
@@ -163,9 +166,9 @@ test('explicit opt-in can still resolve travel distance from the maximum Range v
 
 test('movement classifications match the provided hovering and flying rosters', () => {
   const key=c=>c.id || c.name.toLowerCase().replaceAll(' ','-');
-  assert.deepEqual(forms.filter(c=>!c.isDual&&c.combatStats.movementType==='hovering').map(key).sort(),
+  assert.deepEqual(forms.filter(c=>!c.isDual&&c.combatStats?.movementType==='hovering').map(key).sort(),
     ['cryon','tornado','astranova','whisper','fallen-angel','void-wraith','xii-josh','dracula'].sort());
-  assert.deepEqual(forms.filter(c=>!c.isDual&&c.combatStats.movementType==='flying').map(key).sort(),
+  assert.deepEqual(forms.filter(c=>!c.isDual&&c.combatStats?.movementType==='flying').map(key).sort(),
     ['bees','angels','hornets','venom-fangs','bats','butterflies','phoenix','neon-droid','flock-of-ravens','dracula','eagle'].sort());
   assert.equal(run('MODAL_MOVEMENT.hovering.layer'),'ground');
   assert.equal(run('MODAL_MOVEMENT.hovering.groundEffectImmune'),true);
@@ -242,7 +245,7 @@ test('Mundane projectile geometry follows the requested values, including Mini F
 
 
 test('Familiar geometry and explicit weight, target and impact overrides match the request', () => {
-  const familiar=JSON.parse(fs.readFileSync(path.join(root,'rarity/familiar.json')));
+  const familiar=JSON.parse(fs.readFileSync(path.join(root,'rarity/familiar.json'))).filter(c=>!c.sourceWorkbook);
   assert.equal(familiar.length,24);
   const geometry={warborn:[1000,500],trac:[1000,500],tornado:[750,1200],'shadow-reaper':[1500,1000]};
   const weights={frostshot:'heavy',warborn:'very-heavy',nyra:'light',trac:'heavy',dino:'very-heavy',tenta:'heavy',astranova:'light',cassandra:'light'};
@@ -346,7 +349,7 @@ test('Arcane balance overrides preserve the requested DPS and distinguish Range 
 });
 
 test('Relic roots and named summoned forms use their authored projectile widths and travel distances', () => {
-  const relic=JSON.parse(fs.readFileSync(path.join(root,'rarity/relic.json')));
+  const relic=JSON.parse(fs.readFileSync(path.join(root,'rarity/relic.json'))).filter(c=>!c.sourceWorkbook);
   const geometry={stacy:[1000,2600],death:[500,500],sylviana:[500,500],malvaris:[500,500],etheris:[500,500],magma:[500,500],avalith:[1000,1750],far:[500,500],demotron:[500,500],format:[500,500],pyhsic:[500,500],naar:[500,500],lyra:[500,500],aeralis:[1000,2500],'dark-necromancer':[500,500],shine:[500,500],bloodraider:[1000,2000],'fallen-angel':[500,500],worms:[500,500],unara:[500,500],ali:[1500,4500],clara:[500,500],artist:[500,500]};
   assert.equal(Object.keys(geometry).length,relic.length);
   for(const [id,expected] of Object.entries(geometry)){
