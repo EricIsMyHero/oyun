@@ -416,8 +416,8 @@
     "subclass": "Reborn",
     "combatStats": {
       "attackType": "melee",
-      "multiTarget": false,
-      "maxTargets": 1,
+      "multiTarget": true,
+      "maxTargets": null,
       "attackShape": "single",
       "attackWidth": 500,
       "weight": "medium",

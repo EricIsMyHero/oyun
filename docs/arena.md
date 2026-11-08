@@ -915,9 +915,9 @@ The requested card rebalances apply to both Codex data and Arena:
 | Card | Updated values |
 | --- | --- |
 | Frostshot | 0.25s Attack Speed, 1.40s Delay; still 2 × 11 Damage |
-| Deadscope | 125 Damage, 5.25s Attack Speed, 7-tile Range |
+| Deadscope | 125 Damage, 5.25s Attack Speed, 7-tile Range, 23.81 reference DPS |
 | Avalith | Up to 60% interval reduction near the target |
-| Naar | 96 Damage, 3.75s Attack Speed |
+| Naar | 96 Damage, 3.75s Attack Speed, 25.6 reference DPS |
 | Lyra | 180 Health, 45 Shield |
 | Mr. and Mrs. Ray | Both forms gain 6 charge/s within 2.5 tiles; 100 each waits for a valid enemy in attack range; 1250-point attack width |
 | XII Josh | One body per deployment |
@@ -927,6 +927,28 @@ Ray's authored form IDs are retained, including the shared `the-rays` image IDs;
 Arena's normalized parent paths keep both partners and forms distinct. Native
 ability prose remains Azerbaijani. Unmentioned stats and the shared Power
 formula are preserved; source DPS remains informational.
+
+The card audit also corrects four native interactions:
+
+- Arcanyx fires one seed whose 1.5 × 1.5 impact hits every eligible ground
+  target once. The intrinsic splash remains under Silence; its +60% Damage and
+  native healing still require the passive.
+- Tphoenix's melee strike resolves its authored 1 × 1 impact once, without a
+  second direct hit. Ground targeting, shields, dodge, immunity and critical
+  damage use the normal damage pipeline.
+- Venom Fangs transfers 0.5 effective Critical Chance points per successful hit.
+  A permanent per-unit adjustment survives Leno I, Bethe and Srail recomputing
+  their base chance, as well as Cleanse or the thief dying. Transfers stop at
+  zero for the victim or 100 for the recipient. Hailey can earn stolen points
+  back with new hits. Mimic and Format snapshot the current effective chance;
+  a fresh form does not apply the previous body's adjustment twice.
+- Ironjaw's +25% is an additional bonus. Fifty successful hits add 0.5 points
+  each to the authored 25%, reaching 50%. Copied/stolen versions receive the
+  same additional cap relative to their own starting chance.
+
+Deadscope and Naar's source DPS now uses their base Damage divided by their
+attack cycle, rounded to two decimals. It excludes criticals, passives and
+additional targets. Damage, intervals and the shared Power formula are unchanged.
 
 ## Status effects
 
@@ -1064,6 +1086,7 @@ node --test tests/*.test.cjs
 node tests/arena.browser.cjs
 node tests/arena-effects.browser.cjs
 node tests/arena-casting.browser.cjs
+node tests/arena-card-fixes.browser.cjs
 ```
 
 The browser check uses Playwright and Chromium (`/usr/bin/chromium`, or set
@@ -1085,3 +1108,7 @@ icons, one visible Ray body in both forms, shared Health, waiting for an enemy a
 full charge, the 2×5 dash and its shortened boundary path, the requested source
 stats, held charge, and Dumpsy's 5% sequence. Set `ARENA_CASTING_URL` for a
 deployed build.
+
+The card-fixes browser check exercises both impact areas, persistent Critical
+Chance theft and live inspector values, Ironjaw's 50% cap, and the corrected
+source DPS. Set `ARENA_CARD_FIXES_URL` to check a deployed Arena.

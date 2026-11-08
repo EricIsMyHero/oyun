@@ -12,11 +12,11 @@ async function fixture(){
   return {e,catalog,spawn,dummy,...visuals};
 }
 
-test('requested balance values reach normalized Arena definitions without changing unmentioned damage formats or DPS',async()=>{
+test('requested balance values and corrected reference DPS reach normalized Arena definitions without changing damage formats',async()=>{
   const {catalog}=await fixture(),f=catalog.byId.get('frostshot'),d=catalog.byId.get('deadscope'),n=catalog.byId.get('naar'),l=catalog.byId.get('lyra');
   assert.equal(catalog.cards.filter(c=>c.ready).length,138);close(f.attack.interval,.25);close(f.attack.delay,1.4);assert.equal(f.attack.count,2);close(f.attack.damage,11);close(f.stats.sps,20);
-  close(d.attack.damage,125);close(d.attack.interval,5.25);close(d.stats.range,7000);close(d.stats.vision,8000);close(d.stats.sps,30);close(d.combat.attackDistance,500);
-  close(n.attack.damage,96);close(n.attack.interval,3.75);close(n.stats.sps,40);close(l.stats.health,180);close(l.stats.shield,45);close(l.attack.damage,5);assert.deepEqual(l.attack.sequence.map(s=>s.count),[1,1,3]);
+  close(d.attack.damage,125);close(d.attack.interval,5.25);close(d.stats.range,7000);close(d.stats.vision,8000);close(d.stats.sps,23.81);close(d.combat.attackDistance,500);
+  close(n.attack.damage,96);close(n.attack.interval,3.75);close(n.stats.sps,25.6);close(l.stats.health,180);close(l.stats.shield,45);close(l.attack.damage,5);assert.deepEqual(l.attack.sequence.map(s=>s.count),[1,1,3]);
 });
 
 test('Frostshot fires its two bullets a quarter second apart and recovers interval plus the new 1.40s delay',async()=>{

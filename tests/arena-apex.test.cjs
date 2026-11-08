@@ -121,7 +121,7 @@ test('Umbra hides once at seventy-five percent and retreats 7.5 tiles along its 
  const{e,spawn,map}=await fixture();for(const side of[0,1]){const p=map.pointOnRoute(1,side,15),u=spawn('umbra',side,p);e.damage(null,u,u.maxHp*.25,{kind:'spell',bypassShield:true});assert.ok(u.umbraHidden);e.damage(null,u,u.maxHp*.25,{kind:'spell',bypassShield:true});assert.ok(u.umbraRetreated);const target=map.pointOnRoute(1,side,7.5);close(u.x,target.x);close(u.y,target.y);e.heal(u,u.maxHp);e.damage(null,u,u.maxHp*.5,{kind:'spell',bypassShield:true});close(u.x,target.x);}
 });
 test('Venom Fangs transfer half a critical-chance point and bypass shields, including versus airborne targets',async()=>{
- const{e,spawn,dummy}=await fixture(),u=spawn('venom-fangs'),t=dummy(1,{x:15.5,y:14},{shield:100,criticalChance:1});t.def.combat.movementType='flying';e._fire(u,t);close(t.hp,989);close(t.shield,100);close(t.stats.criticalChance,.5);close(u.stats.criticalChance,.5);for(let i=0;i<2;i++)e._fire(u,t);close(t.stats.criticalChance,0);close(u.stats.criticalChance,1);
+ const{e,spawn,dummy}=await fixture(),u=spawn('venom-fangs'),t=dummy(1,{x:15.5,y:14},{shield:100,criticalChance:1});t.def.combat.movementType='flying';e._fire(u,t);close(t.hp,989);close(t.shield,100);close(e.statValue(t,'criticalChance'),.5);close(e.statValue(u,'criticalChance'),.5);for(let i=0;i<2;i++)e._fire(u,t);close(e.statValue(t,'criticalChance'),0);close(e.statValue(u,'criticalChance'),1);
 });
 test('Skyhunter projectile snapshots ten-percent additional damage per tile of launch distance',async()=>{
  const{e,spawn,dummy}=await fixture(),u=spawn('skyhunter'),t=dummy(1,{x:19,y:14});e._fire(u,t);close(e.state.projectiles[0].hit.damage,61.6);t.x=18;e.step(.5);close(t.hp,938.4);

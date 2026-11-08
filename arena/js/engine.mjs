@@ -333,7 +333,7 @@ export class ArenaEngine {
     if(!target)return;
     memory.remaining-=dt;
     if(memory.remaining>EPS)return;
-    const def={...target.def,stats:{...target.stats,health:this.maxHealth(target),shield:this.maxShield(target)},attack:structuredClone(target.def.attack),combat:{...target.def.combat}};
+    const def={...target.def,stats:{...target.stats,criticalChance:this.statValue(target,'criticalChance'),health:this.maxHealth(target),shield:this.maxShield(target)},attack:structuredClone(target.def.attack),combat:{...target.def.combat}};
     // Keep authored attack sequences, including their relative damage/intervals.
     const activeMode=target.def.attack?.modes?this._attackDefinition(target):null;
     const originalDamage=activeMode?.damage??target.def.stats.damage,originalSpeed=activeMode?.interval??target.def.stats.attackSpeed,originalDelay=activeMode?.delay??target.def.stats.delay;
@@ -346,6 +346,7 @@ export class ArenaEngine {
   }
   _setUnitForm(u,def,memory={}){
     delete u.attackMode;
+    delete u.criticalChanceOffset;
     u.def=def;u.stats={...def.stats};u.hp=u.maxHp=def.stats.health;u.shield=u.maxShield=def.stats.shield;
     u.memory=memory;u.healthless=false;u.mass=bodyMass[def.combat.weight]||1;u.radius=.18+.07*u.mass;u.moving=false;
     u.hits=u.shots=u.attacks=u.burstIndex=u.sequenceIndex=0;u.targetId=u.burstTargetId=null;u.cooldown=0;
@@ -954,8 +955,9 @@ export class ArenaEngine {
     if(!has(u,'silence',this.time)&&!has(u,'imprisonment',this.time)&&u.memory.envyWeapon)p={...p,...u.memory.envyWeapon.combat};
     const sequence=p.attackSequence;
     if(sequence?.length)p={...p,...sequence[u.sequenceIndex%sequence.length]};
-    // Conditional death/periodic splash is resolved by the native handler only.
-    if(p.multiTargetCondition&&!sequence){p.multiTarget=false;p.maxTargets=1;p.attackShape='single';}
+    // Death/periodic splash belongs to native handlers. An endpoint explosion
+    // is part of the projectile itself and keeps its authored area targets.
+    if(p.multiTargetCondition&&!sequence&&!(p.attackType==='ranged'&&p.projectileEndEffect==='explode')){p.multiTarget=false;p.maxTargets=1;p.attackShape='single';}
     p.attackWidth*=this._burstBoost(u)?.width||1;
     return p;
   }
@@ -1143,6 +1145,8 @@ export class ArenaEngine {
       if(p.attackType==='ranged'&&!p.instantArea){
         const targets=p.attackShape==='multi'&&p.multiTarget?this._targetsFor(u,target,p):[target];
         for(const t of targets)this._projectile(u,t,hit,p);
+      }else if(p.projectileEndEffect==='explode'){
+        this._explodeProjectile({source:u,hit,profile:p,width:num(p.attackWidth)/1000,side:u.side},target);
       }else{
         const victims=this._targetsFor(u,target,p);
         for(const t of victims)this._resolveHit(u,t,hit);

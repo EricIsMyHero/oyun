@@ -1,6 +1,6 @@
 /* Native card rules. Missing facts are explicit locks, never invented effects. */
 import { RULES, clamp, addCharge } from './rules.mjs';
-import { STATUS_INTERVALS, hasStatus } from './statuses.mjs';
+import { STATUS_INTERVALS, hasStatus, transferCriticalChance } from './statuses.mjs';
 import { LATE_ABILITIES } from './late-abilities.mjs';
 
 const animal = u => (u?.def?.type || []).includes('Animal');
@@ -180,8 +180,7 @@ export const ABILITIES = {
     attack(ctx,u,t,hit){hit.bypassShield=true;},
     hit(ctx,u,t,result){
       if(!damageEvent(result)||t.isCastle||t.isBuilding)return;
-      const gain=Math.min(.5,Math.max(0,t.stats.criticalChance),Math.max(0,100-u.stats.criticalChance));
-      t.stats.criticalChance-=gain;u.stats.criticalChance+=gain;
+      transferCriticalChance(u,t,.5,ctx.time);
     },
   },
   skyhunter:{attack(ctx,u,t,hit){const bonus=Math.hypot(t.x-u.x,t.y-u.y)*.1;u.memory.skyhunterBonus=bonus;hit.damage*=1+bonus;}},
@@ -328,14 +327,19 @@ export const ABILITIES = {
   snaykies:{attack(ctx,u,t,hit){hit.bypassShield=true;},hit(ctx,u,t,r){poisonHit(ctx,u,t,r,2,4);}},
   bees:{hit(ctx,u,t,r){if(!damageEvent(r)||u.memory.sacrificed)return;u.memory.sacrificed=true;poisonHit(ctx,u,t,r,8,2);ctx.damage(null,u,u.hp+u.shield+1,{kind:'sacrifice',bypassShield:true,secondary:true});}},
   phewphew:{attack(ctx,u,t,hit){hit.shieldMultiplier=2;}},
-  hailey:{hit(ctx,u,t,r){if(damageEvent(r))u.stats.criticalChance=Math.min(100,u.stats.criticalChance+.5);}},
+  hailey:{hit(ctx,u,t,r){
+    if(!damageEvent(r))return;
+    // New earned chance can replace stolen points even at the base stat cap.
+    const recovered=Math.min(.5,Math.max(0,-(u.criticalChanceOffset||0)));
+    u.criticalChanceOffset=(u.criticalChanceOffset||0)+recovered;u.stats.criticalChance=Math.min(100,u.stats.criticalChance+.5-recovered);
+  }},
   'chrono-mage':{attack(ctx,u,t,hit){
     if(u.shots%5||u.memory.lastWave===u.shots)return;u.memory.lastWave=u.shots;
     allies(ctx,u).forEach(a=>{ctx.status(a,'speedBonus',5,.25,u);ctx.status(a,'attackHaste',5,.25,u);});
     enemies(ctx,u).forEach(e=>ctx.status(e,'slow',8,.25,u));ctx.fx('wave',u.x,u.y,{radius:radius(u,ctx),side:u.side});
   }},
   'aegis-guard':{tick(ctx,u){aura(ctx,u,'protection',.15);}},
-  ironjaw:{hit(ctx,u,t,r){if(damageEvent(r))u.stats.lifestealChance=Math.min(25,u.stats.lifestealChance+.5);}},
+  ironjaw:{hit(ctx,u,t,r){if(damageEvent(r)){const gain=Math.min(.5,Math.max(0,25-(u.memory.ironjawSiphon||0)),Math.max(0,100-u.stats.lifestealChance));u.memory.ironjawSiphon=(u.memory.ironjawSiphon||0)+gain;u.stats.lifestealChance+=gain;}}},
   'm-manager':{tick(ctx,u,dt){periodic(u,'manaClock',dt,9,()=>{ctx.teams[u.side].mana=Math.min(RULES.maxMana,ctx.teams[u.side].mana+1);ctx.fx('mana',u.x,u.y,{side:u.side});},ctx);}},
   srail:{tick(ctx,u){const n=enemies(ctx,u).filter(t=>front(ctx,u,t)).length;u.stats.criticalChance=Math.min(80,u.def.stats.criticalChance+n*8);}},
   cryon:{damaged(ctx,u){if(u.hp>0&&u.hp<healthCap(ctx,u)*.2&&!u.memory.maskOff){u.memory.maskOff=true;ctx.near(u,radius(u,ctx),t=>t!==u).forEach(t=>ctx.status(t,'stun',12,0,u));ctx.fx('wave',u.x,u.y,{radius:radius(u,ctx),side:u.side});}}},

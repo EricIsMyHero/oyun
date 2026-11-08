@@ -4,10 +4,17 @@ const files=fs.readdirSync(path.join(root,'rarity')).filter(f=>f.endsWith('.json
 const cards=files.flatMap(file=>JSON.parse(fs.readFileSync(path.join(root,'rarity',file)))),byId=new Map(cards.map(c=>[c.id,c]));
 function walk(c){return[c,...(c.forms||[]).flatMap(walk),...['type1','type2','upgradedsecondForm'].flatMap(k=>c[k]?walk(c[k]):[])];}
 
-test('Book2 adds exactly 29 unique roots and retains all 138 original card definitions verbatim apart from the two rarity moves',()=>{
+test('Book2 retains all originals apart from rarity moves and explicitly authorized later audit corrections',()=>{
  assert.equal(cards.length,167);assert.equal(cards.flatMap(walk).length,232);assert.equal(byId.size,cards.length);assert.equal(manifest.newCards.length,29);
  assert.deepEqual(new Set(manifest.newCards.map(c=>c.id)),new Set(cards.filter(c=>!before.order.includes(c.id)).map(c=>c.id)));
- for(const id of before.order){const c=structuredClone(byId.get(id));assert.ok(c,id);delete c.rarity;assert.equal(crypto.createHash('sha256').update(JSON.stringify(c)).digest('hex'),before.sha256ById[id],id);}
+ for(const id of before.order){
+  const c=structuredClone(byId.get(id));assert.ok(c,id);delete c.rarity;
+  // Restore only the four source edits authorized after the Book2 import.
+  if(id==='ironjaw')c.trait='Hər hasar verdikdə Can Çalma şansı <b>+0,5%</b> artar <b>(Max:25%)</b>';
+  if(id==='tphoenix'){c.combatStats.multiTarget=false;c.combatStats.maxTargets=1;}
+  if(id==='deadscope')c.stats.sps='30';if(id==='naar')c.stats.sps='40';
+  assert.equal(crypto.createHash('sha256').update(JSON.stringify(c)).digest('hex'),before.sha256ById[id],id);
+ }
  assert.equal(byId.get('xii-josh').stats.number,'1');assert.equal(byId.get('ase').type2.additionalStats.range,'2500');assert.equal(byId.get('ase').type2.additionalStats.speed,'1050');
 });
 

@@ -839,7 +839,7 @@
       "health": "170",
       "shield": "40",
       "damage": "96",
-      "sps": "40",
+      "sps": "25.6",
       "attackSpeed": "3.75s",
       "delay": "-",
       "mana": "10",

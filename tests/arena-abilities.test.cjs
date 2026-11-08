@@ -133,7 +133,7 @@ const cases={
   hailey:({ctx,u,t,rule,result})=>{rule.hit(ctx,u,t,result);close(u.stats.criticalChance,u.def.stats.criticalChance+.5);},
   'chrono-mage':({ctx,u,t,rule,hit,records})=>{u.shots=5;const ally={...u,id:'ally',memory:{},statuses:[]};ctx.units.push(ally);rule.attack(ctx,u,t,hit);assert.ok(records.statuses.some(x=>x.kind==='attackHaste'&&x.duration===5));assert.ok(records.statuses.some(x=>x.kind==='slow'&&x.duration===8));},
   'aegis-guard':({ctx,u,t,rule,records})=>{t.side=0;rule.tick(ctx,u);assert.equal(records.statuses[0].kind,'protection');close(records.statuses[0].magnitude,.15);},
-  ironjaw:({ctx,u,t,rule,result})=>{rule.hit(ctx,u,t,result);close(u.stats.lifestealChance,Math.min(25,u.def.stats.lifestealChance+.5));for(let i=0;i<100;i++)rule.hit(ctx,u,t,result);assert.equal(u.stats.lifestealChance,25);},
+  ironjaw:({ctx,u,t,rule,result})=>{rule.hit(ctx,u,t,result);close(u.stats.lifestealChance,u.def.stats.lifestealChance+.5);for(let i=0;i<100;i++)rule.hit(ctx,u,t,result);assert.equal(u.stats.lifestealChance,50);assert.equal(u.memory.ironjawSiphon,25);},
   'm-manager':({ctx,u,rule})=>{rule.tick(ctx,u,9);assert.equal(ctx.teams[0].mana,11);assert.equal(ctx.teams[0].energy,0);},
   srail:({ctx,u,rule})=>{rule.tick(ctx,u);assert.equal(u.stats.criticalChance,u.def.stats.criticalChance+8);},
   cryon:({ctx,u,rule,records})=>{u.hp=u.maxHp*.19;rule.damaged(ctx,u);rule.damaged(ctx,u);assert.equal(records.statuses.length,1);assert.equal(records.statuses[0].duration,12);},

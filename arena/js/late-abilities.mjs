@@ -109,7 +109,7 @@ export const LATE_ABILITIES={
    if(!u.alive||!dealt(result)||target.isBuilding||target.isCastle||target.healthless)return;
    const record=(u.memory.mimicVictims||={})[target.id]||={healthDamage:0,health:false,shield:false};record.healthDamage+=result.healthDamage;
    const clone=()=>{
-    const def={...target.def,passiveDisabled:target.passiveDisabled||target.def.passiveDisabled,combat:structuredClone(target.temporaryFlight?.combat||target.def.combat),stats:{...target.stats,health:ctx.maxHealth(target)*.7,shield:ctx.maxShield(target)*.7,damage:target.stats.damage*.7},attack:structuredClone(target.def.attack)};
+    const def={...target.def,passiveDisabled:target.passiveDisabled||target.def.passiveDisabled,combat:structuredClone(target.temporaryFlight?.combat||target.def.combat),stats:{...target.stats,criticalChance:ctx.statValue(target,'criticalChance'),health:ctx.maxHealth(target)*.7,shield:ctx.maxShield(target)*.7,damage:target.stats.damage*.7},attack:structuredClone(target.def.attack)};
     const ratio=target.def.stats.damage>0?def.stats.damage/target.def.stats.damage:.7;
     for(const attack of[def.attack,...(def.attack.sequence||[]),...(def.attack.modes||[])])attack.damage*=ratio;
     const made=ctx.spawn(def,u.side,{x:u.x+(u.side?-.4:.4),y:u.y},u.lane,{count:1,groupId:u.groupId,deploymentNumber:target.deploymentNumber});for(const c of made)c.memory.mimicClone=true;

@@ -32,7 +32,16 @@ export function statValue(u,key,time,base=num(u?.stats?.[key])) {
     if(key==='damage')value*=1+Math.max(0,num(s.damageBonus));
     else value/=1+Math.max(0,num(s.attackSpeedBonus));
   }
+  // Native tick handlers may rebuild their base chance; theft survives those
+  // updates and transfers exact percentage points after temporary modifiers.
+  if(key==='criticalChance')value=clamp(value+num(u?.criticalChanceOffset),0,100);
   return Math.max(0,value);
+}
+
+export function transferCriticalChance(source,target,amount,time) {
+  const gain=Math.min(Math.max(0,num(amount)),statValue(target,'criticalChance',time),100-statValue(source,'criticalChance',time));
+  if(gain>0){source.criticalChanceOffset=num(source.criticalChanceOffset)+gain;target.criticalChanceOffset=num(target.criticalChanceOffset)-gain;}
+  return gain;
 }
 
 export function statusParameters(kind,magnitude,extra={}) {

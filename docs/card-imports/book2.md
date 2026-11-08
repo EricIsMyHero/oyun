@@ -76,3 +76,8 @@ their new native abilities.
 Regression checks retain hashes of all original definitions apart from their
 allowed root rarity values, the original ability-text fingerprint, and the
 historical Power-scoring baseline. The shared Power formula is unchanged.
+
+Subsequent user-authorized audit corrections update Tphoenix's area targeting,
+Ironjaw's native description to clarify an additional +25% Lifesteal Chance,
+and Deadscope/Naar's reference DPS. Historical import checks restore only these
+explicit edits before comparing the original fingerprints.
