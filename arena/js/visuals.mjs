@@ -1,5 +1,5 @@
 import { clamp, RAY_CHARGE } from './rules.mjs';
-import { statusKind } from './statuses.mjs';
+import { statusKind, effectDefinition } from './statuses.mjs';
 
 // The same hand-drawn symbols are used on the battlefield and in the inspector.
 // Paths use a 20×20 view box; there are no emoji or font-dependent glyphs.
@@ -23,6 +23,8 @@ export const ICON_PATHS = Object.freeze({
   moon:'M14 3a8 8 0 1 0 3 11A8 8 0 0 1 14 3Z',
   target:'M10 2v3M10 15v3M2 10h3M15 10h3M4 10a6 6 0 1 0 12 0 6 6 0 1 0-12 0M8 10a2 2 0 1 0 4 0 2 2 0 1 0-4 0',
   down:'M10 2v11M5 9l5 5 5-5M3 18h14',
+  weakness:'M4 3h12l-1 10-5 5-5-5ZM7 8l3 4 3-4M10 5v7',
+  absoluteWeakness:'M10 1l8 5-2 9-6 4-6-4-2-9ZM6 6l8 8M14 6l-8 8M10 2v3M10 15v3',
   blessing:'M10 1l2.4 6.6L19 10l-6.6 2.4L10 19l-2.4-6.6L1 10l6.6-2.4ZM5 2v3M3.5 3.5h3',
   link:'M8 6L6 4a4 4 0 0 0-5 6l4 4a4 4 0 0 0 6-5M12 14l2 2a4 4 0 0 0 5-6l-4-4a4 4 0 0 0-6 5M7 7l6 6',
   charge:'M11 2L3 12h6l-1 6 9-11h-6Z',
@@ -43,6 +45,7 @@ const STATUS_VISUALS=Object.freeze({
   statReduction:visual('Stat Reduction','#e9a2cd','down',19),healBlock:visual('Healing Blocked','#ff879c','heal',20),
   fear:visual('Fear','#d2b1ed','eye',20),engulfed:visual('Engulfed','#b5dc91','lock',20),
   parasite:visual('Parasite','#c2b3ff','drop',21),knockback:visual('Knockback','#c6e2ff','wind',21),
+  weakness:visual('Weakness','#dfad86','weakness',4),absoluteWeakness:visual('Absolute Weakness','#f088a4','absoluteWeakness',3),
   regen:visual('Heal','#a2e7a2','heal',30),untouchable:visual('Untouchable','#e4f8ff','shield',31),
   immortal:visual('Immortal','#ffe2ac','shield',31),predominance:visual('Predominance','#dfd0ff','shield',32),
   reflection:visual('Reflection','#b6f1df','shield',33),invisible:visual('Invisibility','#bfc9ea','moon',34),
@@ -68,7 +71,7 @@ export function statusBadges(statuses=[],time=0){
     const kind=statusKind(s.kind)==='movementSlow'?'slow':statusKind(s.kind),v=statusVisual(kind);
     const previous=groups.get(kind);
     if(previous){previous.count++;previous.until=Math.max(previous.until,s.until??Infinity);}
-    else groups.set(kind,{kind,...v,count:1,until:s.until??Infinity});
+    else groups.set(kind,{...effectDefinition(kind,{area:s.category==='crowd-control'}),...v,count:1,until:s.until??Infinity});
   }
   return [...groups.values()].sort((a,b)=>a.priority-b.priority||a.kind.localeCompare(b.kind));
 }

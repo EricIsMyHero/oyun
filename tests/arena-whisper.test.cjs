@@ -140,7 +140,7 @@ test('a lower-priority change to the hidden caster cannot transfer its active co
 
 test('silencing or stunning Whisper before activation delays casting rather than granting physical immunity',async()=>{
   for(const kind of ['silence','stun','frozen','airborne']){
-    const {e,spawn,host}=await fixture(),u=spawn(),t=host();e.status(u,kind,.2);assert.equal(e.possess(u,t),false);e.step(.1);assert.equal(t.side,1);e.cleanse(u);e.step(1/30);assert.equal(t.side,0);
+    const {e,spawn,host}=await fixture(),u=spawn(),t=host();e.status(u,kind,.2);assert.equal(e.possess(u,t),false);e.step(.1);assert.equal(t.side,1);e.cleanse(u);if(kind==='airborne'){e.step(1/30);assert.equal(t.side,1);e.status(u,'predominance',1);}e.step(1/30);assert.equal(t.side,0);
   }
 });
 

@@ -2,14 +2,14 @@ import { RULES, clamp, num, burst, energyForMana, RAY_CHARGE, addCharge } from '
 import { MAP, routeFor, routeLength, pointOnRoute, closestRoute, isDeployable, isWalkable, clipWalkableSegment, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
-import { NEGATIVE_STATUSES as NEGATIVE, STATUS_INTERVALS, statusKind, statusParameters, statValue, statModifiers } from './statuses.mjs';
+import { NEGATIVE_STATUSES as NEGATIVE, STATUS_INTERVALS, statusKind, statusParameters, statValue, statModifiers, statusMagnitude, effectDefinition, canApplyStatuses, canRemoveStatus, weaknessDurationMultiplier, bonusMultiplier } from './statuses.mjs';
 import { buildBotLoadout, createBotState, tickBot } from './bot.mjs';
 import { resolveDeckCard } from './ascension.mjs';
 
 const finitePoint = p => p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.x <= MAP.width && p.y >= 0 && p.y <= MAP.height;
 const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const active = (u,kind,time) => (u.statuses || []).filter(s => s.kind === kind && s.until > time+1e-7);
-const strongest = (u,kind,time) => Math.max(0,...active(u,kind,time).map(s => s.magnitude || 0));
+const strongest = statusMagnitude;
 const has = (u,kind,time) => active(u,kind,time).length > 0;
 const bodyMass = { 'very-light':.5, light:.75, medium:1, heavy:1.5, 'very-heavy':2 };
 const EPS = 1e-7;
@@ -156,6 +156,7 @@ export class ArenaEngine {
     host.route=routeFor(host.lane,side);this._resetWaypoint(host);
   }
   possess(source,host){
+    if(!canApplyStatuses(source,this.time))return false;
     if(!source?.alive||!this.ability(source)?.possessor||source.possessingId||source.engulfedBy||source.banished||['silence','stun','imprisonment','airborne','frozen'].some(kind=>has(source,kind,this.time))||!host?.alive||host.isBuilding||host.healthless||host.possessedBy||!this._legalTarget(source,host)||distance(source,host)>this._range(source)+host.radius+EPS)return false;
     const bank=this.collectWhisperCritical(source),missed=this._abilityMiss(source,host);
     bank.penalized=missed||has(host,'predominance',this.time);bank.durationFactor=bank.penalized?.75:1;
@@ -596,12 +597,12 @@ export class ArenaEngine {
     if(id==='giga-bomb'){
       for(const [targets,damage,amount] of [[enemies,num(raw.damageToCard),25],[castles,num(raw.damageToCastle),5]])for(const target of targets){
         this.damage(source,target,damage,{kind:'spell'});
-        if(target.alive)this.status(target,'burn',10,0,source,{amount,stack:true});
+        if(target.alive)this.status(target,'burn',10,0,source,{amount,stack:true,area:true});
       }
       return;
     }
     if(id==='healing-light'){
-      for(const u of allies){this.cleanse(u);this.heal(u,u.maxHp*.3,source);}return;
+      for(const u of allies){this.cleanse(u,{source});this.heal(u,u.maxHp*.3,source);}return;
     }
     if(id==='shield-of-serenity'){for(const u of allies)this.giveShield(u,u.maxShield*.2);return;}
     if(id==='illustration-spell'){
@@ -623,7 +624,7 @@ export class ArenaEngine {
     const attack=burst(raw.damageToCard)||{damage:0,count:1},castleAttack=burst(raw.damageToCastle)||{damage:0,count:1};
     let extra=0,castleExtra=0;
     if(id==='laser'&&enemies.length<=2){extra=50;castleExtra=25;}
-    for(const u of enemies){this.damage(source,u,attack.damage+extra,{kind:'spell'});if(id==='shock-bomb')this.status(u,'stun',1.5,1,source);}
+    for(const u of enemies){this.damage(source,u,attack.damage+extra,{kind:'spell'});if(id==='shock-bomb')this.status(u,'stun',1.5,1,source,{area:true});}
     for(const c of castles)this.damage(source,c,castleAttack.damage+castleExtra,{kind:'spell'});
     if(id==='lunar-mirrage'){
       for(const u of allies.filter(u=>!u.memory.illusion)){
@@ -643,9 +644,12 @@ export class ArenaEngine {
     u.isBuilding=true;u.radius=.44;u.buildingKind=kind;u.spell=spell;u.expiresAt=this.time+num(raw.lifetime);
   }
   status(target,kind,duration,magnitude=0,source=null,extra={}){
+    if(Array.isArray(target))return this.statusMany(target,kind,duration,magnitude,source,extra);
     kind=statusKind(kind);
+    const definition=effectDefinition(kind,extra),caster=source||this.abilityContext?.source||(kind==='taunt'?target:null);
+    if(!canApplyStatuses(caster,this.time)||extra.area&&definition.singleTargetOnly)return null;
     if(target?.possessingId||target?.parasitizingId||kind==='conversion'&&target?.possessedBy)return null;
-    if(target?.banished&&kind!=='cleanse')return null;
+    if(target?.banished&&kind!=='cleanse'&&!(definition.rank>effectDefinition('imprisonment').rank))return null;
     // A successful killing blow can mark its victim before the death queue runs.
     if(!target?.alive&&!(target&&['soulMark','ink','curse'].includes(kind)&&extra.onLethalHit&&!target.memory?.deathResolved))return null;
     if(target.healthless&&NEGATIVE.has(kind))return null;
@@ -655,40 +659,60 @@ export class ArenaEngine {
       if(mirror&&kind==='conversion'&&!source.isBuilding&&!source.possessedBy&&!source.memory.conversion){source.memory.conversion={side:source.side,until:mirror.until};this._possessionSide(source,target.side);}
     }
     if(NEGATIVE.has(kind)&&has(target,'predominance',this.time))return null;
-    const caster=source||(kind==='taunt'?target:null);
     if(caster&&!extra.scheduled&&this._abilityMiss(caster,target))return null;
-    if(kind==='cleanse'){this.cleanse(target);return {kind};}
-    if(kind==='knockback'){if(!source||!(magnitude>0))return null;this.push(target,source,magnitude);return {kind};}
+    if(kind==='cleanse')return this.cleanse(target,{source:caster})?{kind}:null;
+    if(kind==='knockback'){if(!source||!(magnitude>0))return null;return this.push(target,source,magnitude, target, caster)?{kind}:null;}
     if(duration<=0)return null;
-    if(kind==='predominance'){this.cleanse(target);if(target.possessedBy)this._penalizePossession(target);}
     const normalized=statusParameters(kind,magnitude,extra);if(!normalized)return null;
     magnitude=normalized.magnitude;extra=normalized.params;
-    const actual=NEGATIVE.has(kind)&&Number.isFinite(duration)?duration*(1-clamp(this.statValue(target,'flexibility'),0,80)/100):duration;
+    // Only negative effects applied while vulnerability is active are extended.
+    const actual=NEGATIVE.has(kind)&&Number.isFinite(duration)?duration*weaknessDurationMultiplier(target,kind,this.time)*(1-clamp(this.statValue(target,'flexibility'),0,80)/100):duration;
+    if(kind==='predominance'){
+      this._removeNegativeBelow(target,kind);
+      if(target.possessedBy)this._penalizePossession(target);
+    }
     const firstVisual=!target.statuses.some(s=>s.kind===kind&&s.until>this.time);
     const sourceId=source?.id??null;
     if(sourceId)this.statusSources.set(sourceId,source);
     let entry=!extra.stack&&target.statuses.find(s=>s.kind===kind&&s.sourceId===sourceId&&s.until>this.time);
     if(entry){entry.until=Math.max(entry.until,this.time+actual);entry.magnitude=Math.max(entry.magnitude||0,magnitude);Object.assign(entry,extra);}
     else {entry={kind,until:this.time+actual,magnitude,sourceId,nextTick:this.time+extra.interval,...extra};target.statuses.push(entry);}
-    if(firstVisual&&['frozen','stun','slow','poison','burn','root','curse','blind','silence'].includes(kind))this.fx('status',target.x,target.y,{side:target.side,unitId:target.id,statusKind:kind,duration:.5});
+    entry.polarity=definition.polarity;entry.category=definition.category;
+    if(firstVisual&&['frozen','stun','slow','poison','burn','root','curse','blind','silence','weakness','absoluteWeakness'].includes(kind))this.fx('status',target.x,target.y,{side:target.side,unitId:target.id,statusKind:kind,duration:.5});
     if(kind==='taunt'){
       const radius=num(extra.radius,this.statValue(target,'range')/1000);
-      for(const enemy of this.near(target,radius,u=>this.isEnemy(target,u)))this.status(enemy,'taunted',actual,0,target,{scheduled:true});
+      this.statusMany(this.near(target,radius,u=>this.isEnemy(target,u)),'taunted',actual,0,target,{scheduled:true,area:true});
     }
-    if(kind==='statReduction')this._capVitals(target);
+    if(kind==='statReduction'||kind==='absoluteWeakness')this._capVitals(target);
     return entry;
+  }
+  statusMany(targets,kind,duration,magnitude=0,source=null,extra={}){
+    const single=effectDefinition(kind).singleTargetOnly,entries=[];
+    for(const target of new Set(targets)){
+      const entry=this.status(target,kind,duration,magnitude,source,{...extra,area:single?false:true});
+      if(entry){entries.push(entry);if(single)break;}
+    }
+    return entries;
+  }
+  _removeNegativeBelow(target,remover){
+    const removed=new Set();
+    target.statuses=target.statuses.filter(s=>{
+      if(canRemoveStatus(s.kind,remover)){removed.add(s.kind);return false;}return true;
+    });
+    if(removed.has('parasite'))for(const id of [...(target.parasiteIds||[])]){const source=this.units.find(t=>t.id===id);if(source)this.endParasite(source);}
+    if(removed.has('imprisonment')&&target.banished)this.returnBanished(target,false);
+    if(removed.has('engulfed')&&target.engulfedBy)this.releaseEngulfed(target);
+    if(removed.has('conversion')&&target.memory.conversion)this._restoreConversion(target);
   }
   _capVitals(u){
     u.effectiveMaxHp=this.maxHealth(u);u.effectiveMaxShield=this.maxShield(u);u.hp=Math.min(u.hp,u.effectiveMaxHp);u.shield=Math.min(u.shield,u.effectiveMaxShield);
     const pool=this._pool(u);if(pool)for(const member of this.units.filter(t=>pool.members.includes(t.id))){member.effectiveMaxHp=u.effectiveMaxHp;member.effectiveMaxShield=pool.healthOnly?this.maxShield(member):u.effectiveMaxShield;}
   }
-  cleanse(target){
-    target.statuses=target.statuses.filter(s=>!NEGATIVE.has(s.kind));
-    for(const id of [...(target.parasiteIds||[])]){const source=this.units.find(t=>t.id===id);if(source)this.endParasite(source);}
-    if(target.banished)this.returnBanished(target,false);
-    if(target.engulfedBy)this.releaseEngulfed(target);
-    if(target.memory.conversion)this._restoreConversion(target);
+  cleanse(target,{source=this.abilityContext?.source||null}={}){
+    if(!target?.alive||!canApplyStatuses(source,this.time))return false;
+    this._removeNegativeBelow(target,'cleanse');
     this._capVitals(target);
+    return true;
   }
   banish(source,target,duration=10){
     if(!source?.alive||!target?.alive||target.banished||target.isCastle||target.isBuilding||!this._canHit(source,target))return false;
@@ -789,6 +813,7 @@ export class ArenaEngine {
     u.route=routeFor(u.lane,u.side);this._resetWaypoint(u);
   }
   heal(target,amount,source=null,options={}){
+    if(source&&!options.passive&&!canApplyStatuses(source,this.time))return 0;
     if(!target?.alive||target.healthless||target.banished||target.possessingId||target.parasitizingId||amount<=0||has(target,'bleed',this.time)||has(target,'healBlock',this.time)||has(target,'suppression',this.time))return 0;
     if(source&&!options.passive&&this._abilityMiss(source,target))return 0;
     const burn=has(target,'burn',this.time)?.8:1;
@@ -806,6 +831,7 @@ export class ArenaEngine {
     return lost;
   }
   giveShield(target,amount,source=this.abilityContext?.source||null){
+    if(!canApplyStatuses(source,this.time))return 0;
     if(!target?.alive||target.healthless||target.banished||target.possessingId||target.parasitizingId||amount<=0||has(target,'suppression',this.time))return 0;
     if(source&&this._abilityMiss(source,target))return 0;
     const {flat,factor}=statModifiers(target,'shield',this.time);if(factor<=0)return 0;
@@ -852,7 +878,7 @@ export class ArenaEngine {
     for(const buff of active(target,'fearless',this.time)){
       const radius=num(buff.radius,this.statValue(target,'range')/1000);
       const nearby=this.near(target,radius,u=>u!==target);
-      if(!nearby.some(u=>u.side===target.side)||nearby.filter(u=>u.side!==target.side).length>5)fearless=Math.max(fearless,clamp(buff.magnitude,0,.9));
+      if(!nearby.some(u=>u.side===target.side)||nearby.filter(u=>u.side!==target.side).length>5)fearless=Math.max(fearless,clamp(buff.magnitude*bonusMultiplier(target,this.time),0,.9));
     }
     const protection=strongest(target,'protection',this.time)||strongest(target,'defense',this.time);
     const spellProtection=hit.kind==='spell'?strongest(target,'spellProtection',this.time):0;
@@ -895,13 +921,15 @@ export class ArenaEngine {
     this.damageDepth--;
     return result;
   }
-  push(target,awayFrom,tiles,origin=target){
+  push(target,awayFrom,tiles,origin=target,source=this.abilityContext?.source||(origin!==target?origin:awayFrom)){
+    if(!canApplyStatuses(source,this.time))return false;
     if(!target?.alive||target.healthless||target.engulfedBy||target.possessingId||target.parasitizingId||target.fusedInto||target.isCastle||target.isBuilding||tiles<=0||has(target,'predominance',this.time))return;
     let dx=origin.x-awayFrom.x,dy=origin.y-awayFrom.y,len=Math.hypot(dx,dy);
     if(!len){dx=target.side?-1:1;dy=0;len=1;}
     const p={x:clamp(origin.x+dx/len*tiles,.5,MAP.width-.5),y:clamp(origin.y+dy/len*tiles,.5,MAP.height-.5)};
     if(target.def.combat.movementType!=='flying'){const q=closestRoute(p);target.x=q.x;target.y=q.y;}else Object.assign(target,p);
     this._resetWaypoint(target);
+    return true;
   }
   _resetWaypoint(u){
     let best={distance:Infinity,index:1};
@@ -1355,7 +1383,7 @@ export class ArenaEngine {
       if(field.kind==='blinding-mist'){
         const affected=new Set(targets.filter(u=>!u.isBuilding&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.parasitizingId&&!u.fusedInto).map(u=>u.id));
         for(const u of this.units){
-          if(affected.has(u.id))this.status(u,'blind',.12,field.magnitude,field.source,{scheduled:true,mistFieldId:field.id});
+          if(affected.has(u.id))this.status(u,'blind',.12,field.magnitude,field.source,{scheduled:true,area:true,mistFieldId:field.id});
           else u.statuses=u.statuses.filter(s=>s.mistFieldId!==field.id);
         }
         continue;
@@ -1363,12 +1391,12 @@ export class ArenaEngine {
       if(field.kind==='poison-cloud'){
         for(const u of targets){
           if(field.poisoned[u.id]||u.isBuilding||u.healthless||u.def.combat.movementType!=='ground'||u.def.combat.groundEffectImmune)continue;
-          if(this.status(u,'poison',3*STATUS_INTERVALS.poison,0,field.source,{amount:5,stack:true,groundOnly:true,scheduled:true}))field.poisoned[u.id]=true;
+          if(this.status(u,'poison',3*STATUS_INTERVALS.poison,0,field.source,{amount:5,stack:true,groundOnly:true,scheduled:true,area:true}))field.poisoned[u.id]=true;
         }
         continue;
       }
-      if(field.kind==='suppression'){for(const u of targets)this.status(u,'suppression',.1,1,field.source);continue;}
-      for(const u of targets)this.status(u,field.kind==='roots'?'slow':'curse',.1,field.kind==='roots'?.15:.4,field.source,{groundOnly:field.kind==='roots'});
+      if(field.kind==='suppression'){for(const u of targets)this.status(u,'suppression',.1,1,field.source,{area:true});continue;}
+      for(const u of targets)this.status(u,field.kind==='roots'?'slow':'curse',.1,field.kind==='roots'?.15:.4,field.source,{groundOnly:field.kind==='roots',area:true});
       if(field.left>0&&field.next<=this.time+EPS){
         for(const u of targets){if(field.kind!=='roots'||!u.def.combat.groundEffectImmune)this.damage(field.source,u,field.attack.damage,{kind:'spell'});}
         for(const c of this.castles.filter(c=>c.alive&&c.side!==field.side&&this._inside(c,field,field.shape)))this.damage(field.source,c,field.castleAttack.damage,{kind:'spell'});
@@ -1380,7 +1408,7 @@ export class ArenaEngine {
   _buildingAura(u){
     const radius=num(u.spell?.raw?.stats?.range)/1000;
     if(u.buildingKind==='watchtower'||u.buildingKind==='obsidian-fortress'){
-      for(const ally of this.near(u,radius,t=>t.side===u.side&&!t.isBuilding))this.status(ally,u.buildingKind==='watchtower'?'damageBonus':'spellProtection',.12,u.buildingKind==='watchtower'?.1:.5,u);
+      for(const ally of this.near(u,radius,t=>t.side===u.side&&!t.isBuilding))this.status(ally,u.buildingKind==='watchtower'?'damageBonus':'spellProtection',.12,u.buildingKind==='watchtower'?.1:.5,u,{area:true});
     }
   }
   _castles(dt){

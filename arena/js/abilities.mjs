@@ -33,7 +33,7 @@ const front = (ctx,u,t) => {
   const dx=target?target.x-u.x:(u.side===0?1:-1),dy=target?target.y-u.y:0;
   return (t.x-u.x)*dx+(t.y-u.y)*dy>=0;
 };
-const aura = (ctx,u,kind,magnitude,self=false) => allies(ctx,u,radius(u,ctx),self).forEach(t=>ctx.status(t,kind,.2,magnitude,u));
+const aura = (ctx,u,kind,magnitude,self=false) => allies(ctx,u,radius(u,ctx),self).forEach(t=>ctx.status(t,kind,.2,magnitude,u,{area:true}));
 const growDamage = (u,amount,max=Infinity) => {u.memory.damageGrowth=Math.min(max,(u.memory.damageGrowth||0)+amount);u.stats.damage=u.def.stats.damage+u.memory.damageGrowth;};
 const markCriticalKills = (ctx,u,result) => {
   if(result.killed)(u.memory.criticalKills||=[]).push(ctx.time+10);

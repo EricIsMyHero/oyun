@@ -43,7 +43,7 @@
       ]
     },
     {
-    "heading": "Card Stats",
+      "heading": "Card Stats",
       "content": "Cards have 24 numerical stats. Distances use 1,000 source points per tile; Speed is measured in tiles per second.",
       "list": [
         "Health - The total amount of life your card has. When it reaches zero, your character dies.",
@@ -79,10 +79,10 @@
         "Heal: Restores a specific amount of health to an ally card over a set duration.",
         "Untouchable: Grants an ally card complete immunity to all incoming damage for a limited time.",
         "Immortal: Prevents an ally card from dying from damage for a set duration; damage cannot reduce their health below 1.",
-        "Predominance: Removes current negative status effects and grants immunity to new negative effects for a limited time.",
+        "Predominance: Removes current lower-priority negative status effects and grants immunity to all new negative effects for a limited time. Unrelated positive buffs remain active.",
         "Fearless: Grants damage reduction to an ally card when no other ally cards are nearby, or when surrounded by more than 5 enemy cards.",
         "Taunt: Forces nearby enemy cards to focus their attacks exclusively on the casting ally card for a set duration.",
-        "Cleanse: Removes all current negative effects.",
+        "Cleanse: Instantly removes lower-priority negative effects. Cannot remove Airborne, Betrayal or Imprisonment. Positive buffs remain active.",
         "Berserk: Increases attack speed or attack damage when health falls below a threshold.",
         "Invisibility: For a set duration and under certain conditions, an ally card cannot be targeted by any enemy card. The effect ends immediately if the card takes damage from spells or any other source.",
         "Untargetable: For a set duration and under certain conditions, an ally card can neither be targeted nor damaged by enemy cards.",
@@ -108,7 +108,33 @@
         "Airborne: For a set duration and under certain conditions, enemy cards are launched into the air; during this time they can neither deal damage nor move.",
         "Betrayal: For a set duration and under certain conditions, enemy cards deal damage to their own allies.",
         "Knockback: Under certain conditions, enemy cards are pushed backwards.",
-        "Frozen: For a set duration and under certain conditions, enemy cards are frozen; for 3 seconds after thawing they are slowed by 25%."
+        "Frozen: For a set duration and under certain conditions, enemy cards are frozen; for 3 seconds after thawing they are slowed by 25%.",
+        "Weakness: Negative Control and Crowd Control effects applied to the affected card last 25% longer; negative Stacking up status effects last 33% longer.",
+        "Absolute Weakness: Negative Control and Crowd Control effects applied to the affected card last 33% longer; negative Stacking up status effects last 50% longer. The affected card cannot apply any positive or negative status effects. Bonuses from active and newly received buff effects are 30% weaker; a +20% buff becomes +14%. Permanent native passive gains are unchanged."
+      ]
+    },
+    {
+      "heading": "Status Effect Categories",
+      "content": "Every status effect is Positive or Negative. Control affects one target; Crowd Control affects multiple targets. Stacking up status effects have their own duration category, whether applied to one or many targets.",
+      "list": [
+        "Stacking up status effects - Only Burn, Poison, Bleeding, Slow and Frozen belong to this category. This classification does not grant extra stacks to abilities that do not specify them.",
+        "Single target only - Berserk, Untargetable, Reflection, Fearless, Imprisonment and Betrayal can only affect one card per application, never an entire area.",
+        "Duration calculation - Weakness and Absolute Weakness extend only newly applied negative effects. When both are present, use Absolute Weakness, without multiplying both bonuses. Flexibility then shortens the resulting duration. Positive effects and indefinite durations are not extended.",
+        "Buff bonuses - Absolute Weakness reduces temporary stat bonuses supplied by buff effects, including buffs already active. It does not reduce permanent native passive gains such as Dino damage growth, Mixela Health growth or Ironjaw Lifesteal Chance. Damage and movement still function; existing damage-over-time effects continue."
+      ]
+    },
+    {
+      "heading": "Status Effect Priority",
+      "content": "Priority applies only when effects interact by removing or preventing one another. A higher-priority status does not automatically erase unrelated effects. Positive and negative statuses can coexist; Stun does not interrupt Heal or remove other buffs.",
+      "list": [
+        "Tier 1 — Highest - Untargetable, Untouchable, Immortal.",
+        "Tier 2 - Predominance. Blocks all negative status effects, including Weakness and Absolute Weakness.",
+        "Tier 3 - Betrayal, Airborne, Imprisonment.",
+        "Tier 4 - Cleanse. An instant effect that cannot remove a higher tier.",
+        "Tier 5 - Root, Misfortune, Stun, Curse, Blind, Stat Reduction, Slow, Burn, Poison, Frozen, Bleeding, Knockback, Taunt, Silence, Weakness, Absolute Weakness.",
+        "Tier 6 — Lowest - Invisibility, Reflection, Fearless, Berserk, Heal.",
+        "Example - Stun and Heal may remain active together. Cleanse removes Stun, but cannot free an imprisoned card. Predominance can remove Imprisonment. Neither removes unrelated positive buffs.",
+        "Locked possession - Whisper retains its special unbreakable native possession rule. Predominance shortens its control duration by 25% instead of removing it."
       ]
     }
   ]

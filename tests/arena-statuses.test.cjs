@@ -80,11 +80,11 @@ test('Predominance blocks every Codex negative effect, including forced taunt an
   assert.deepEqual(t.statuses.map(s=>s.kind),['predominance']);
 });
 
-test('Cleanse removes all new negative effects and prevents a cleansed Frozen from creating a delayed slow',async()=>{
+test('Cleanse preserves higher controls and positive buffs, and a cleansed Frozen does not create a delayed slow',async()=>{
   const {e,make}=await fixture(),u=make(0);
   for(const kind of ['frozen','airborne','betrayal','taunted','poison','statReduction'])e.status(u,kind,1,0,null,{stats:{damage:5}});
   e.status(u,'reflection',5);e.status(u,'Cleanse',0);
-  assert.deepEqual(u.statuses.map(s=>s.kind),['reflection']);e.step(2);assert.equal(u.statuses.some(s=>s.kind==='slow'),false);
+  assert.deepEqual(u.statuses.map(s=>s.kind),['airborne','betrayal','reflection']);e.step(2);assert.equal(u.statuses.some(s=>s.kind==='slow'),false);
 });
 
 test('Fearless protects a lone card or a card surrounded by at least six enemies',async()=>{
@@ -187,7 +187,7 @@ test('Betrayal targets and damages own allies without changing ownership or harm
   const {e,make}=await fixture(),u=make(0,15,{range:5000}),ally=make(0,16),enemy=make(1,17);
   e.status(u,'Betrayal',2);assert.equal(u.side,0);assert.equal(e._target(u),ally);
   assert.equal(e.damage(u,enemy,10,{kind:'attack'}).total,0);assert.equal(e.damage(u,ally,10,{kind:'attack'}).total,10);
-  assert.equal(e.canTarget(u,e.castles[0]),false);e.cleanse(u);assert.equal(e._target(u),enemy);
+  assert.equal(e.canTarget(u,e.castles[0]),false);e.cleanse(u);assert.equal(e._target(u),ally);e.status(u,'predominance',1);assert.equal(e._target(u),enemy);
 });
 
 test('Frozen blocks actions then applies exactly three seconds of twenty-five-percent Slow',async()=>{

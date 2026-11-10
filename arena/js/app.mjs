@@ -6,7 +6,7 @@ import { RULES, STAT_KEYS, num, RAY_CHARGE } from './rules.mjs';
 import { MAP, distance, isDeployable } from './map.mjs';
 import { isEntityVisible, isPointVisible } from './vision.mjs';
 import { CAMERA } from './camera.mjs';
-import { statusMagnitude } from './statuses.mjs';
+import { statusMagnitude, effectDefinition } from './statuses.mjs';
 import { resolveDeckCard } from './ascension.mjs';
 
 const $ = id => document.getElementById(id);
@@ -208,7 +208,9 @@ function openInspector(def,kind='card',unit=null) {
   const liveEffects=unit?(unit.statuses||[]).filter(s=>s.until>state.engine.time+1e-7).map(s=>{
     const names={regen:'Heal',invisible:'Invisibility',bleed:'Bleeding',statReduction:'Stat Reduction'};
     const name=names[s.kind]||label(s.kind.replace(/([a-z])([A-Z])/g,'$1 $2'));
-    return `<span class="live-status" style="--status-color:${statusVisual(s.kind).color}" data-status="${escapeHTML(s.kind)}">${statusIconSVG(s.kind)}${escapeHTML(name)} <small>${s.kind==='ink'?`${s.stacks} / 21 · ${Math.round(s.magnitude*100)}% slow`:Number.isFinite(s.until)?`${Math.max(.1,s.until-state.engine.time).toFixed(1)}s`:'Ongoing'}</small></span>`;
+    const definition=effectDefinition(s.kind,{area:s.category==='crowd-control'}),category={control:'Control','crowd-control':'Crowd Control',stacking:'Stacking up status effects'}[definition.category];
+    const description=`${definition.polarity==='negative'?'Negative':'Positive'} · ${category}${definition.singleTargetOnly?' · Single target only':''}`;
+    return `<span class="live-status" title="${escapeHTML(description)}" data-polarity="${definition.polarity}" data-category="${definition.category}" style="--status-color:${statusVisual(s.kind).color}" data-status="${escapeHTML(s.kind)}">${statusIconSVG(s.kind)}${escapeHTML(name)} <small>${s.kind==='ink'?`${s.stacks} / 21 · ${Math.round(s.magnitude*100)}% slow`:Number.isFinite(s.until)?`${Math.max(.1,s.until-state.engine.time).toFixed(1)}s`:'Ongoing'}</small></span>`;
   }).join(''):'';
   const forms=[...(def.forms||[]),...(!choiceRoot?(def.typeVariants||[]):[])];
   $('inspector').style.setProperty('--rarity',rarityColor(def));
@@ -225,6 +227,8 @@ function openInspector(def,kind='card',unit=null) {
   else if(raw.ascension?.partnerIds)$('inspector-content').querySelector('.inspector-body').insertAdjacentHTML('afterbegin',`<section class="live-status-section" data-partner-ready><h3>Partner Bonus Available</h3><p>Add ${raw.ascension.partnerIds.map(id=>escapeHTML(state.catalog.byId.get(id)?.name||id)).join(' or ')} to the same deck.</p></section>`);
   if(unit){
     const notes=[];
+    const vulnerability=(unit.statuses||[]).find(s=>s.kind==='absoluteWeakness'&&s.until>state.engine.time)||(unit.statuses||[]).find(s=>s.kind==='weakness'&&s.until>state.engine.time);
+    if(vulnerability){const absolute=vulnerability.kind==='absoluteWeakness';notes.push(`<section class="live-status-section" data-vulnerability="${vulnerability.kind}"><h3>${absolute?'Absolute Weakness':'Weakness'}</h3><p>Incoming negative Control / Crowd Control lasts ${absolute?'33':'25'}% longer. Burn, Poison, Bleeding, Slow and Frozen last ${absolute?'50':'33'}% longer.${absolute?'<br>Cannot apply status effects. Active and new buff bonuses are 30% weaker; permanent native passive gains remain unchanged.':''}</p></section>`);}
     if(unit.def.rarity==='Emergent')notes.push(`<section class="live-status-section" data-emergent-deployment="${unit.deploymentNumber}"><h3>Deployment ${unit.deploymentNumber}</h3><p>Successful placements are counted separately for each card and player, and reset each match.</p></section>`);
     if(unit.def.id==='xii-josh')notes.push(`<section class="live-status-section" data-josh-flight><h3>${unit.temporaryFlight?'Flying':'Hovering'} · ${unit.deploymentNumber%3===0?'Empowered':'Standard'}</h3><p>Enemy Mana in 2 × 2 tiles: ${unit.memory.joshMana||0}<br>${unit.temporaryFlight?`Landing in ${Math.max(0,unit.temporaryFlight.until-state.engine.time).toFixed(1)}s · `:''}Landing: 24 Damage · 1.5 × 1.5 tiles</p></section>`);
     if(unit.def.id==='dumpsy')notes.push(`<section class="live-status-section" data-dumpsy-items><h3>Orbiting Objects · 3 + ${(unit.memory.dumpLoot||[]).length} / 12</h3><p>Inner weapons: 0.90s · Collected throws: 1.15s<br>Consecutive hits: ${unit.memory.dumpCombo?.count||0} · +5% per same-target hit, uncapped.</p></section>`);

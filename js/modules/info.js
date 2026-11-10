@@ -16,7 +16,7 @@ async function initInfo() {
 
   try {
     const [infoRes, groupRes] = await Promise.all([
-      fetch('data/info.json'),
+      fetch('data/info.json', {cache:'no-cache'}),
       fetch('data/groups.json'),
     ]);
     infoData   = await infoRes.json();

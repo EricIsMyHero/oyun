@@ -113,6 +113,30 @@ const server=http.createServer(async(req,res)=>{
     await page.evaluate(()=>{arenaApp.engine.setPaused(true);arenaApp.renderer.zoomBy(.5);arenaApp.renderer.focusAt({x:21,y:14});});
     await page.screenshot({path:'/tmp/oyun-charge-v37-zoom50.png',fullPage:true});await page.setViewportSize({width:390,height:844});await page.waitForTimeout(100);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:'/tmp/oyun-charge-v37-mobile.png',fullPage:true});
-    assert.deepEqual(errors,[]);console.log(JSON.stringify({url:page.url(),...boundaries,fields:fixture.fields,lifeLoss:fixture.life[0],charges,errors},null,2));
+    await page.setViewportSize({width:1440,height:1000});
+    const weakness=await page.evaluate(async()=>{
+      const [{statusMagnitude},{statusBadges}]=await Promise.all([import('./js/statuses.mjs'),import('./js/visuals.mjs')]);
+      const a=arenaApp;a.startMatch();const e=a.engine;e.bot=false;e.state.units=[];e.state.effects=[];for(const c of e.castles)c.cooldown=Infinity;
+      const make=(side,x)=>{const d=structuredClone(a.catalog.byId.get('hammies'));d.id='weakness-visual';d.combat.attackType='none';Object.assign(d.stats,{health:1000,shield:0,speed:0,range:0,damage:10,criticalChance:0,healrecovery:0,shieldrecovery:0,flexibility:0});const[u]=e.spawn(d,side,{x,y:14},1,{count:1,positions:[{x,y:14}]});u.cooldown=Infinity;return u;};
+      const u=make(0,19),enemy=make(1,21);u.hp=500;
+      e.status(u,'Heal',5,4);e.status(u,'damageBonus',10,.2);e.status(u,'allStatsBonus',10,.2);e.status(u,'weakness',10);e.status(u,'Absolute Weakness',10);
+      const stun=e.status(u,'stun',2),slow=e.status(u,'slow',4,.25),blocked=e.status(enemy,'poison',2,.1,u,{scheduled:true});
+      e.step(1);e.setPaused(true);a.renderer.focusAt(u);window.weaknessFixture={u,enemy};
+      const r=a.renderer,ctx=r.ctx,dpr=r.view.dpr,portrait=r.portrait;r.portrait=()=>null;r.canvas.width=r.canvas.width;
+      const p=r.screenAt(u),read=()=>Array.from(ctx.getImageData(Math.round((p.x-40)*dpr),Math.round((p.y-85)*dpr),Math.round(80*dpr),Math.round(65*dpr)).data);
+      const saved=u.statuses;u.statuses=[];r.draw(e.state);const before=read();u.statuses=saved;r.draw(e.state);const after=read(),changed=before.reduce((n,v,i)=>n+(i%4!==3&&Math.abs(v-after[i])>10?1:0),0);r.portrait=portrait;r.draw(e.state);
+      return{hp:u.hp,bonus:statusMagnitude(u,'damageBonus',e.time),maxHp:e.maxHealth(u),stun:stun.until,slow:slow.until,blocked,changed,badges:statusBadges(u.statuses,e.time).map(b=>b.kind)};
+    });
+    assert.ok(Math.abs(weakness.hp-504)<1e-6,'Stun does not stop an active Heal');assert.ok(Math.abs(weakness.bonus-.14)<1e-6);assert.equal(weakness.maxHp,1140);
+    assert.ok(Math.abs(weakness.stun-2.66)<1e-6);assert.equal(weakness.slow,6);assert.equal(weakness.blocked,null);assert.ok(weakness.changed>30,'the new vector badges paint on Canvas');
+    await page.screenshot({path:'/tmp/oyun-weakness-v42-desktop.png',fullPage:true});
+    const weakPoint=await page.evaluate(()=>{const p=arenaApp.renderer.screenAt(weaknessFixture.u),b=document.getElementById('arena-canvas').getBoundingClientRect();arenaApp.engine.setPaused(false);return{x:b.left+p.x,y:b.top+p.y};});
+    await page.mouse.click(weakPoint.x,weakPoint.y);await page.locator('#inspector').waitFor({state:'visible'});
+    for(const kind of['weakness','absoluteWeakness']){const badge=page.locator(`#inspector [data-status="${kind}"]`);assert.equal(await badge.locator('svg').count(),1);assert.equal(await badge.getAttribute('data-polarity'),'negative');assert.equal(await badge.getAttribute('data-category'),'control');assert.match(await badge.getAttribute('title'),/Negative.*Control/);}
+    assert.match(await page.locator('[data-vulnerability="absoluteWeakness"]').textContent(),/30% weaker.*permanent native passive gains remain unchanged/);
+    assert.equal(await page.locator('#inspector [data-status="regen"]').count(),1);assert.equal(await page.locator('#inspector [data-status="stun"]').count(),1);
+    await page.screenshot({path:'/tmp/oyun-weakness-v42-inspector.png',fullPage:true});await page.setViewportSize({width:390,height:844});await page.waitForTimeout(100);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:'/tmp/oyun-weakness-v42-mobile.png',fullPage:true});
+    assert.deepEqual(errors,[]);console.log(JSON.stringify({url:page.url(),...boundaries,fields:fixture.fields,lifeLoss:fixture.life[0],charges,weakness,errors},null,2));
   }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
 })().catch(error=>{console.error(error);server.close();process.exitCode=1;});

@@ -153,7 +153,7 @@ test('Angel reinforcements retain their selected outer corridor and faction on b
 test('Angel stream survives the first body death or control effects and pauses with the match clock',async()=>{
   const {e,catalog,kill}=await fixture(),def=structuredClone(catalog.byId.get('angels'));def.stats.speed=0;
   const [first]=e.spawn(def,0,{x:15,y:14},1);e.status(first,'silence',10);e.status(first,'imprisonment',10);e.setPaused(true);e.step(20);close(e.time,0);assert.equal(e.units.length,1);e.setPaused(false);
-  e.cleanse(first);kill(first);e.step(.4);assert.equal(e.units.length,1);assert.equal(e.units[0].def.id,'angels');e.step(5);assert.equal(e.units.length,9);assert.equal(e.state.spawnStreams.length,0);
+  e.cleanse(first);assert.ok(first.statuses.some(s=>s.kind==='imprisonment'));e.status(first,'predominance',.1);kill(first);e.step(.4);assert.equal(e.units.length,1);assert.equal(e.units[0].def.id,'angels');e.step(5);assert.equal(e.units.length,9);assert.equal(e.state.spawnStreams.length,0);
 });
 
 test('each friendly Angel death grants two permanent Damage to living Angels across groups, without affecting future arrivals',async()=>{

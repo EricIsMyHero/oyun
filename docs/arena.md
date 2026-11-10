@@ -763,8 +763,9 @@ All twenty-three Relic roots now have their native abilities implemented: **Stac
   On return it moves to another legal position on any of the three corridors,
   using the match's seeded randomness and retaining its team and formation.
   It takes 12% of its current maximum health as damage through normal shields.
-  Flexibility shortens banishment, Predominance prevents it, and Cleanse returns
-  the unit immediately without the exit penalty. The applied effect survives
+  Flexibility shortens banishment. Cleanse cannot remove its higher-priority
+  Imprisonment; Predominance prevents it or releases the unit immediately
+  without the exit penalty. The applied effect survives
   the caster's death; pause freezes its timer.
 - Lyra cycles **5 → 5 → 3 × 5**. Every mode uses a 0.20s hit interval and 0.90s
   end delay, producing five base strikes in a 3.70s repeating cycle. The triple
@@ -993,7 +994,7 @@ routes and guaranteed two-minute overtime; those game rules have not changed.
 | Predominance | Clears current negatives and blocks new negatives during its duration. |
 | Fearless | Uses the supplied reduction when no other allied cards are nearby or more than five enemies are nearby. |
 | Taunt | Nearby legal enemies focus the taunter, interrupting a different burst target; immunity, sight and target layers still apply. |
-| Cleanse | Removes every current negative, restores temporary conversion, and cancels Frozen's pending slow. |
+| Cleanse | Removes lower-priority negatives, restores temporary conversion and cancels a cleansed Frozen's pending slow. Cannot remove Betrayal, Airborne or Imprisonment. Positive buffs remain. |
 | Berserk | Applies supplied damage and/or attack-rate bonuses below a supplied health fraction. |
 | Invisibility | Prevents enemy acquisition until expiry or actual incoming damage. Area hits can still connect. |
 | Untargetable | Prevents enemy acquisition and every incoming damage type. |
@@ -1015,7 +1016,47 @@ routes and guaranteed two-minute overtime; those game rules have not changed.
 | Knockback | Immediately displaces the target by the supplied tile distance; Predominance blocks it. |
 | Frozen | Stops movement and actions, then applies 25% Slow for three seconds after thawing. |
 
-Flexibility reduces finite negative durations, including the follow-up Slow.
+| Weakness | Incoming negative Control / Crowd Control durations ×1.25; negative Stacking durations ×1.33. |
+| Absolute Weakness | Incoming negative Control / Crowd Control durations ×1.33; negative Stacking durations ×1.50. Blocks applying all status effects and reduces bonuses from active and new numerical buffs by 30%. |
+
+Priority resolves **removal and immunity interactions only**. Stun and Heal can
+coexist; a higher-priority status does not erase unrelated effects. The tiers,
+from strongest to weakest, are:
+
+1. Untargetable, Untouchable, Immortal.
+2. Predominance (clears and blocks all ordinary negatives).
+3. Betrayal, Airborne, Imprisonment.
+4. Cleanse (instant removal of lower-priority negatives only).
+5. Root, Misfortune, Stun, Curse, Blind, Stat Reduction, Slow, Burn, Poison,
+   Frozen, Bleeding, Knockback, Taunt; Silence and both Weakness effects use this
+   ordinary-negative tier.
+6. Invisibility, Reflection, Fearless, Berserk, Heal.
+
+Whisper's explicitly unbreakable native possession remains a separate exception:
+Predominance imposes its existing 25% duration penalty, and Cleanse cannot end it.
+
+Every effect has Positive / Negative polarity and a Control, Crowd Control or
+Stacking up status category. **Only Burn, Poison, Bleeding, Slow and Frozen** are
+Stacking; this category does not invent extra stacks for an ability. Berserk,
+Untargetable, Reflection, Fearless, Imprisonment and Betrayal are single-target
+only. `statusMany` selects one eligible target for these effects; explicit
+`area:true` application is rejected. Other area effects receive Crowd Control
+metadata; area Slow remains in the Stacking category.
+
+Vulnerability extends newly applied negative durations only. When both Weakness
+effects exist, Absolute Weakness wins without combining their multipliers.
+Indefinite durations remain indefinite. Flexibility then reduces the resulting
+finite duration, including the follow-up Slow. Existing effects are not extended
+retroactively. Buff potency is evaluated dynamically: +20% becomes +14%, and
+returns to normal after Absolute Weakness ends if the buff is still active.
+Native permanent gains, including Dino damage, Mixela Health and Ironjaw
+Lifesteal Chance, remain unchanged. Absolute Weakness does not disable ordinary
+damage, movement or previously applied damage-over-time packets.
+
+Both new effects have distinct vector icons and inspector descriptions. The
+inspector also exposes polarity, category and single-target restrictions.
+No card or spell gains either new effect without an authored assignment.
+
 Timed damage includes the final due tick. Clocks run on the fixed simulation
 step, so a 0.75-second event is resolved on the first step at or after its due
 time. Pausing freezes status clocks. Damage packets retain a caster reference
@@ -1042,6 +1083,9 @@ engine.status(unit, 'Stat Reduction', 4, 0, caster, {
 });
 engine.status(taunter, 'Taunt', 3, 0, taunter, {radius:3});
 engine.status(enemy, 'Knockback', 0, 3, caster);
+engine.status(enemy, 'Weakness', 4, 0, caster);
+engine.status(enemy, 'Absolute Weakness', 3, 0, caster);
+engine.statusMany(enemies, 'Stun', 1.5, 0, caster);
 engine.useAbility(caster, () => { /* one shared accuracy roll for this action */ });
 ```
 

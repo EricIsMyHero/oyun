@@ -447,11 +447,11 @@ test('banished cards cannot scout, contest pumps, collide or be seen by either t
   assert.equal(e.status(target,'poison',3,0,u,{amount:8}),null);assert.equal(e.giveShield(target,10),0);
 });
 
-test('Far return respects Flexibility, can survive the caster death and can be cleansed without the exit penalty',async()=>{
+test('Far return respects Flexibility and caster death; Predominance releases it while Cleanse cannot',async()=>{
   for(const mode of ['flexibility','dead','cleanse']){
     const {e,spawn,dummy,kill}=await fixture(),u=spawn('far'),target=dummy(1,{x:18,y:14},mode==='flexibility'?{flexibility:50}:{});e.random=()=>.4;
     e.banish(u,target);if(mode==='dead')kill(u);
-    if(mode==='cleanse'){e.cleanse(target);close(target.hp,1000);}else{e.step(mode==='flexibility'?5:10);close(target.hp,880);}
+    if(mode==='cleanse'){e.cleanse(target);assert.equal(target.banished,true);e.status(target,'predominance',1);close(target.hp,1000);}else{e.step(mode==='flexibility'?5:10);close(target.hp,880);}
     assert.equal(target.banished,undefined,mode);assert.ok(Math.hypot(target.x-18,target.y-14)>.6);
   }
 });

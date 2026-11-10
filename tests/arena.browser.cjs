@@ -1181,7 +1181,7 @@ async function minimapPixelAt(page,point) {
     await codex.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
     await codex.goto(`http://127.0.0.1:${server.address().port}${prefix}index.html`,{waitUntil:'domcontentloaded'});
     await codex.evaluate(()=>showPortal('info'));
-    await codex.waitForFunction(()=>document.querySelectorAll('#codex-content .codex-entry').length===8);
+    await codex.waitForFunction(()=>document.querySelectorAll('#codex-content .codex-entry').length===10);
     await codex.getByRole('button',{name:'Card Stats',exact:true}).click();
     assert.equal(await codex.locator('.codex-entry.visible li').count(),24);
     await codex.getByRole('button',{name:'How to Play',exact:true}).click();
@@ -1190,6 +1190,9 @@ async function minimapPixelAt(page,point) {
     assert.match(await codex.locator('.codex-entry.visible').textContent(),/overtime always follow/);
     await codex.getByRole('button',{name:'Negative Status Effects',exact:true}).click();
     assert.match(await codex.locator('.codex-entry.visible').textContent(),/Poison:.*0\.75 seconds/);
+    assert.match(await codex.locator('.codex-entry.visible').textContent(),/Absolute Weakness:.*30% weaker/);
+    await codex.getByRole('button',{name:'Status Effect Priority',exact:true}).click();
+    assert.match(await codex.locator('.codex-entry.visible').textContent(),/Stun does not interrupt Heal/);
     await codex.close();
     assert.deepEqual(errors,[],'no browser runtime errors');
     assert.ok(requests.includes('/project/rarity/mundane.json'),'data loads under the project prefix');

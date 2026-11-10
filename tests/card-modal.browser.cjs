@@ -367,6 +367,14 @@ const server = http.createServer(async (req, res) => {
     await page.emulateMedia({reducedMotion:'reduce'});
     assert.equal(await page.locator('.modal-frame').evaluate(el=>getComputedStyle(el,'::before').animationName), 'none');
     await page.locator('#modal-close').click();
+    await page.evaluate(()=>switchSection('info'));
+    await page.locator('#codex-nav button').filter({hasText:'Negative Status Effects'}).click();
+    assert.match(await page.locator('.codex-entry.visible').textContent(),/Absolute Weakness:.*30% weaker.*Permanent native passive gains are unchanged/);
+    await page.locator('#codex-nav button').filter({hasText:'Status Effect Categories'}).click();
+    assert.match(await page.locator('.codex-entry.visible').textContent(),/Only Burn, Poison, Bleeding, Slow and Frozen/);
+    await page.locator('#codex-nav button').filter({hasText:'Status Effect Priority'}).click();
+    assert.match(await page.locator('.codex-entry.visible').textContent(),/Stun does not interrupt Heal/);
+    await page.screenshot({path:'/tmp/oyun-codex-priority-v42.png',fullPage:true});
     await page.evaluate(async () => {switchSection('survival'); await initSurvival(); survivalVisible=true; startSurvivalRun('soldier'); });
     assert.equal(await page.evaluate(()=>typeof survivalTraitsInit), 'function');
     assert.deepEqual(errors, []);
