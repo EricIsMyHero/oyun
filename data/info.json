@@ -110,7 +110,7 @@
         "Knockback: Under certain conditions, enemy cards are pushed backwards.",
         "Frozen: For a set duration and under certain conditions, enemy cards are frozen; for 3 seconds after thawing they are slowed by 25%.",
         "Weakness: Negative Control and Crowd Control effects applied to the affected card last 25% longer; negative Stacking up status effects last 33% longer.",
-        "Absolute Weakness: Negative Control and Crowd Control effects applied to the affected card last 33% longer; negative Stacking up status effects last 50% longer. The affected card cannot apply any positive or negative status effects. Bonuses from active and newly received buff effects are 30% weaker; a +20% buff becomes +14%. Permanent native passive gains are unchanged."
+        "Absolute Weakness: Negative Control and Crowd Control effects applied to the affected card last 33% longer; negative Stacking up status effects last 50% longer. The affected card cannot apply any positive or negative status effects. Bonuses from active and newly received buff effects are 30% weaker. Permanent native passive gains are unchanged."
       ]
     },
     {
