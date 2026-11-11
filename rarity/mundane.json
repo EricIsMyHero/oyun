@@ -2080,5 +2080,57 @@
       "movementType": "ground",
       "groundEffectImmune": false
     }
+  },
+  {
+    "id": "erica",
+    "name": "Erica",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Mundane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "235",
+      "shield": "35",
+      "damage": "4x5",
+      "sps": "20",
+      "attackSpeed": "0.25s",
+      "delay": "0.75s",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "Saqqızlar hər rəqib karta dəydikdə rəqib hər saqqız üçün 10 yük qazanar. 100 yükdə rəqib kart 8 saniyəlik həbs olunar.",
+    "additionalStats": {
+      "range": "2600",
+      "speed": "1000",
+      "criticalChance": "15%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Mundane",
+      "row": 36
+    }
   }
 ]

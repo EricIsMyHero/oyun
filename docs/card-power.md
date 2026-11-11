@@ -89,7 +89,7 @@ combat limits. Survival retains its existing independent gameplay limits.
 ## Passive ratings
 
 `js/core/passive-power.js` contains an explicit editorial rating for all
-232 root/form/partner-upgrade records. The table below makes them reviewable.
+241 root/form/partner-upgrade records. The table below makes them reviewable.
 Ratings are assigned to native ability text, independently of rarity and base
 stats. They are balancing judgments, not measured win probabilities.
 
@@ -106,7 +106,7 @@ into scores. Dual-card parent ratings are derived from their two forms. Attack
 modes separated by `/` average complete, unrounded mode breakdowns. This also
 keeps the score of an individually selected Ethereal form accurate.
 
-`node scripts/power.js` exports all 232 scored records and their full breakdowns
+`node scripts/power.js` exports all 241 scored records and their full breakdowns
 to the ignored `output/cards-with-power.json`. Tests cover fixed budgets, the
 1,000 ceiling, all floors, chance pairs, attack cycles, periodic recovery,
 geometry, mode averages, catalog invariance and reviewed passive coverage.
@@ -347,3 +347,12 @@ geometry, mode averages, catalog invariance and reviewed passive coverage.
 | spiritcaller | Spiritcaller | 175 |
 | bolt | Bolt | 125 |
 | bolt/forms/0 | Volt | 100 |
+| radglic | Radglic | 150 |
+| nancy | Nancy | 100 |
+| veronica | Veronica | 125 |
+| plauge | Plauge | 150 |
+| witch | Witch | 125 |
+| bro | Bro | 100 |
+| tooni | Tooni | 125 |
+| spinata | Spinata | 100 |
+| erica | Erica | 150 |

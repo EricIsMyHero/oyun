@@ -305,14 +305,14 @@ test('all 24 Codex keys and labels are reused, while Power references do not cha
   assert.ok(!g.run('survivalUpgradePool()').some(c => c.key === 'stat:sps'));
 });
 
-test('all 167 repository cards can start and simulate; forms and raw data are preserved', () => {
+test('all 176 repository cards can start and simulate; forms and raw data are preserved', () => {
   const g = game();
   const cards = fs.readdirSync(path.join(__dirname,'../rarity')).flatMap(name => JSON.parse(fs.readFileSync(path.join(__dirname,'../rarity',name),'utf8')));
-  assert.equal(cards.length, 167);
+  assert.equal(cards.length, 176);
   const snapshot = JSON.stringify(cards);
   g.context.cards = cards;
   g.run('for (const card of cards) SURVIVAL_CHARACTERS[card.id] = survivalCardConfig(card)');
-  assert.equal(g.run('Object.keys(SURVIVAL_CHARACTERS).length'), 167);
+  assert.equal(g.run('Object.keys(SURVIVAL_CHARACTERS).length'), 176);
   for (const card of cards) {
     g.context.characterId = card.id;
     g.run('startSurvivalRun(characterId); for(let i=0;i<5;i++) survivalUpdate(0.05)');

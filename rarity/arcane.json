@@ -1918,5 +1918,109 @@
       "row": 33,
       "originalName": "Marcy"
     }
+  },
+  {
+    "id": "nancy",
+    "name": "Nancy",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Arcane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "150",
+      "shield": "0",
+      "damage": "22",
+      "sps": "17.6",
+      "attackSpeed": "1.25s",
+      "delay": "-",
+      "mana": "10",
+      "number": "1"
+    },
+    "trait": "5 saniyə hasar verməzsə hızı +25% artar. Bu müddətdə ilk rəqib karta doğru gedər və onu 2 karo geri itər və 3 saniyəlik sərsəmlədər.",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1200",
+      "criticalChance": "5%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Arcane",
+      "row": 34
+    }
+  },
+  {
+    "id": "veronica",
+    "name": "Veronica",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Arcane",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "215",
+      "shield": "15",
+      "damage": "15",
+      "sps": "15",
+      "attackSpeed": "1.00s",
+      "delay": "-",
+      "mana": "9",
+      "number": "1"
+    },
+    "trait": "Ətrafındakı dost katlara 10+(kartın maksimum canının 10%-i) yenilənə bilən qalxan verər. Qalxan qırıldıqdan 12 saniyə sonra yenilənər.",
+    "additionalStats": {
+      "range": "1100",
+      "speed": "1000",
+      "criticalChance": "5%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Arcane",
+      "row": 35
+    }
   }
 ]

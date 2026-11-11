@@ -33,7 +33,7 @@ const server = http.createServer(async (req, res) => {
     });
     await page.goto(`http://127.0.0.1:${server.address().port}`);
     await page.evaluate(async () => { showPortal('cards'); await initCards(); });
-    assert.equal(await page.locator('#cards-grid .card-item').count(), 167);
+    assert.equal(await page.locator('#cards-grid .card-item').count(), 176);
     assert.doesNotMatch(await page.locator('#cards-grid').textContent(), /\p{Extended_Pictographic}|\p{Emoji_Presentation}/u);
     for(const[rarity,name]of[['mundane','Stormblade'],['arcane','Umbra']]){
       await page.locator(`.filter-btn[data-rarity="${rarity}"]`).click();assert.equal(await page.locator('#cards-grid .card-item').filter({has:page.getByText(name,{exact:true})}).count(),1);
@@ -140,7 +140,7 @@ const server = http.createServer(async (req, res) => {
       }
       return {forms,rarities:[...rarities]};
     });
-    assert.equal(rendered.forms, 232);
+    assert.equal(rendered.forms, 241);
     assert.equal(new Set(rendered.rarities.map(x => x[1])).size, 8);
 
     await page.evaluate(()=>openModal(allCards.find(c=>c.id==='henry')));
@@ -335,7 +335,7 @@ const server = http.createServer(async (req, res) => {
       closeModal();
       return count;
     });
-    assert.equal(mobileForms,232);
+    assert.equal(mobileForms,241);
     await page.evaluate(() => openModal({id:'missing-art',name:'Missing art',rarity:'Apex',stats:{health:0},additionalStats:{}}));
     await page.waitForFunction(() => document.getElementById('modal-placeholder').style.display === 'flex');
     assert.equal(await page.locator('#modal-img').isVisible(), false);
@@ -387,6 +387,6 @@ const server = http.createServer(async (req, res) => {
     await page.evaluate(async () => {switchSection('survival'); await initSurvival(); survivalVisible=true; startSurvivalRun('soldier'); });
     assert.equal(await page.evaluate(()=>typeof survivalTraitsInit), 'function');
     assert.deepEqual(errors, []);
-    console.log(`Browser checks passed: 167 cards, ${rendered.forms} forms, 8 rarity glows, 6 viewport sizes, Lore, tabs, form switches, spells and Survival.`);
+    console.log(`Browser checks passed: 176 cards, ${rendered.forms} forms, 8 rarity glows, 6 viewport sizes, Lore, tabs, form switches, spells and Survival.`);
   } finally { await browser.close(); }
 })().catch(err=>{console.error(err);process.exitCode=1;}).finally(()=>server.close());

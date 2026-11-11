@@ -1703,5 +1703,57 @@
       "sheet": "Apex (2)",
       "row": 30
     }
+  },
+  {
+    "id": "radglic",
+    "name": "Radglic",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Apex",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "310",
+      "shield": "0",
+      "damage": "2x21",
+      "sps": "14",
+      "attackSpeed": "1.50s",
+      "delay": "-",
+      "mana": "17",
+      "number": "1"
+    },
+    "trait": "Rəqib karta onun maksimum canının 20%-i qədər hasar verdikdə onu 12 saniyəlik bədbəxtlik effektinə salar (75%)",
+    "additionalStats": {
+      "range": "3000",
+      "speed": "1000",
+      "criticalChance": "10%",
+      "criticDamage": "-",
+      "lifestealChance": "10%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Apex",
+      "row": 31
+    }
   }
 ]

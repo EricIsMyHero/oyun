@@ -23,7 +23,7 @@ const server=http.createServer(async(req,res)=>{
       if(url.hostname.includes('fonts.'))return r.abort();return r.continue();
     });
     await page.goto(process.env.ARENA_EFFECTS_URL||`http://127.0.0.1:${server.address().port}${prefix}arena/`,{waitUntil:'domcontentloaded'});
-    await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===167);
+    await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===176);
     assert.equal(await page.evaluate(()=>arenaApp.catalog.cards.filter(c=>c.ready).length),138,'all roots including the authored Ray form IDs are ready');
     await page.locator('#quick-build').click();await page.locator('#start-match').click();
     const fixture=await page.evaluate(()=>{

@@ -5,7 +5,7 @@
 Open [arena/index.html](arena/index.html) through the same HTTP server as the
 Codex to play the separate, three-route arena against a bot. Build an eight-card
 deck with a four-card hand and a cycling spell loadout of at most five Charge.
-The Codex contains 167 root cards, including the 29 additions from Book2.xlsx.
+The Codex contains 176 root cards, including 29 additions from Book2.xlsx and 9 from Book1.xlsx.
 The original 138 cards remain playable. New cards show explicit Arena lock
 reasons until their combat profiles and native abilities are complete.
 Ethereal forms are chosen before battle; Emergent deployment
@@ -223,7 +223,7 @@ Then open: `http://localhost:8080`
 ## Survival Arena
 
 Serve the repository over HTTP, open **Game → Survival**, and pick a character.
-The picker loads all **167 Codex cards** from the eight `rarity/*.json` files,
+The picker loads all **176 Codex cards** from the eight `rarity/*.json` files,
 with search and rarity filters. Failed files can be retried without losing the
 available roster. Multi-form cards start in their first form. Except for the
 explicit loadouts below, Range ≤1500 selects melee (axe / Dumpsy orbits);
@@ -339,3 +339,6 @@ Card Power uses fixed 500 / 100 / 200 stat budgets plus 200 editorial passive
 points. Open the Power breakdown in card details; see the [complete formula
 and individual passive ratings](docs/card-power.md). Export scores with
 `node scripts/power.js`.
+
+The nine Book1 additions and JSON preservation policy are documented in
+[the Book1 import record](docs/card-imports/book1.md).

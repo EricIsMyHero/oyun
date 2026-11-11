@@ -5,8 +5,8 @@ const cards=files.flatMap(file=>JSON.parse(fs.readFileSync(path.join(root,'rarit
 function walk(c){return[c,...(c.forms||[]).flatMap(walk),...['type1','type2','upgradedsecondForm'].flatMap(k=>c[k]?walk(c[k]):[])];}
 
 test('Book2 retains all originals apart from rarity moves and explicitly authorized later audit corrections',()=>{
- assert.equal(cards.length,167);assert.equal(cards.flatMap(walk).length,232);assert.equal(byId.size,cards.length);assert.equal(manifest.newCards.length,29);
- assert.deepEqual(new Set(manifest.newCards.map(c=>c.id)),new Set(cards.filter(c=>!before.order.includes(c.id)).map(c=>c.id)));
+ assert.equal(cards.length,176);assert.equal(cards.flatMap(walk).length,241);assert.equal(byId.size,cards.length);assert.equal(manifest.newCards.length,29);
+ assert.deepEqual(new Set(manifest.newCards.map(c=>c.id)),new Set(cards.filter(c=>!before.order.includes(c.id)&&c.sourceWorkbook?.file!=='Book1.xlsx').map(c=>c.id)));
  for(const id of before.order){
   const c=structuredClone(byId.get(id));assert.ok(c,id);delete c.rarity;
   // Restore only the four source edits authorized after the Book2 import.
@@ -19,7 +19,7 @@ test('Book2 retains all originals apart from rarity moves and explicitly authori
 });
 
 test('rarity files, visible rarity and moved card identities remain consistent without duplicate Stormblade or Umbra entries',()=>{
- const counts={Mundane:32,Familiar:27,Arcane:27,Relic:26,Ascendant:10,Apex:23,Emergent:12,Ethereal:10};
+ const counts={Mundane:33,Familiar:31,Arcane:29,Relic:26,Ascendant:10,Apex:24,Emergent:13,Ethereal:10};
  for(const file of files){const roots=JSON.parse(fs.readFileSync(path.join(root,'rarity',file)));for(const c of roots){assert.equal(c.rarity.toLowerCase()+'.json',file,c.id);for(const f of walk(c))assert.equal(f.rarity,c.rarity,f.name);}assert.equal(roots.length,counts[roots[0].rarity]);}
  assert.equal(byId.get('stormblade').rarity,'Mundane');assert.equal(byId.get('umbra').rarity,'Arcane');
  assert.deepEqual(manifest.rarityMoves.map(c=>[c.id,c.from,c.to]),[['stormblade','Apex','Mundane'],['umbra','Apex','Arcane']]);

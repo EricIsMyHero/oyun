@@ -12,7 +12,7 @@ async function fixture(){
 
 test('the original 21 Apex roots and their forms retain their unlocked profiles after rarity moves with the authored independent attack geometry',async()=>{
  const {catalog}=await fixture();const geometry={azrith:[1000,1300],untouch:[500,500],heartix:[500,500],'r-1':[500,500],blank:[750,3800],magmara:[500,500],willowshade:[1000,1000],collector:[1000,1000],sushu:[500,500],umbra:[500,500],thief:[500,500],rotlings:[500,500],stormblade:[1000,2500],'venom-fangs':[500,500],skyhunter:[500,500],rockback:[500,500],'neon-droid':[500,500],'void-wraith':[500,500],'bio-mech':[1000,1050],mixela:[500,500],laura:[500,500]};
- assert.equal(catalog.cards.filter(c=>c.ready).length,138);assert.equal(catalog.cards.filter(c=>c.rarity==='Apex').length,23);
+ assert.equal(catalog.cards.filter(c=>c.ready).length,138);assert.equal(catalog.cards.filter(c=>c.rarity==='Apex').length,24);
  for(const[id,pair]of Object.entries(geometry)){const c=catalog.byId.get(id);assert.equal(c.ready,true,id);assert.deepEqual(c.reasons,[]);assert.deepEqual([c.combat.attackWidth,c.combat.attackDistance],pair,id);for(const f of c.forms)assert.equal(f.ready,true,f.id);}
  close(catalog.byId.get('stormblade').stats.range,1200);assert.equal(catalog.byId.get('willowshade').combat.attackAngle,125);assert.equal(catalog.byId.get('collector').combat.attackAngle,75);
  assert.equal(catalog.byId.get('neon-droid').combat.movementType,'flying');assert.equal(catalog.byId.get('venom-fangs').combat.targets,'both');

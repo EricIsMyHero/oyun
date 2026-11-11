@@ -7,7 +7,7 @@ async function api(){await modules;return globalThis.ClashCardPower;}
 
 test('fixed budgets, per-entry floors and ceilings apply to every root, form and upgrade',async()=>{
  const p=await api(),[{createPowerScorer},{buildCatalog}]=await modules,catalog=buildCatalog(cards,[]),score=createPowerScorer(cards);
- assert.equal(catalog.forms.length,232);assert.equal(globalThis.ClashPassivePower.length,232);
+ assert.equal(catalog.forms.length,241);assert.equal(globalThis.ClashPassivePower.length,241);
  for(const def of catalog.forms){const b=p.breakdown(def.raw);assert.equal(def.power,score(def.raw));assert.equal(b.passive.reviewed,true,def.id);assert.ok(b.score>=118&&b.score<=1000,def.id);close(b.stats+b.passive.points,b.total);assert.equal(b.score,Math.round(b.total));
   for(const[key,count,budget,floor]of[['primary',10,500,10],['secondary',9,100,1],['combat',9,200,1]]){const g=b.groups[key];assert.equal(g.max,budget);assert.equal(g.entries.length,count);for(const e of g.entries){close(e.max,budget/count);assert.equal(e.min,floor);assert.ok(e.points>=floor-1e-7&&e.points<=e.max+1e-7);}close(g.points,g.entries.reduce((n,e)=>n+e.points,0));}
  }
@@ -61,5 +61,5 @@ test('dual cards and slash-separated modes average full unrounded breakdowns',as
 
 test('manual passive ratings survive stat rebalances, but changed or new abilities require a fresh review',async()=>{
  const p=await api(),c=structuredClone(cards.find(c=>c.id==='whisper'));assert.equal(p.breakdown(c).passive.points,200);c.stats.health=1;assert.equal(p.breakdown(c).passive.points,200);c.trait+=' changed';assert.equal(p.breakdown(c).passive.reviewed,false);assert.equal(p.breakdown(c).passive.points,0);
- const keys=globalThis.ClashPassivePower.map(e=>e.key);assert.equal(new Set(keys).size,232);for(const e of globalThis.ClashPassivePower)assert.ok(Number.isInteger(e.score)&&e.score>=0&&e.score<=200);
+ const keys=globalThis.ClashPassivePower.map(e=>e.key);assert.equal(new Set(keys).size,241);for(const e of globalThis.ClashPassivePower)assert.ok(Number.isInteger(e.score)&&e.score>=0&&e.score<=200);
 });

@@ -77,5 +77,5 @@ test('Ironjaw earns no stacks from prevented damage or while silenced, and a Thi
 
 test('Deadscope and Naar reference DPS matches their base per-hit damage and full attack cycle',async()=>{
  const{catalog}=await fixture();for(const[id,damage,interval,dps]of[['deadscope',125,5.25,23.81],['naar',96,3.75,25.6]]){const c=catalog.byId.get(id);close(c.stats.sps,dps);close(c.attack.damage,damage);close(c.attack.interval,interval);close(Math.round((damage/interval)*100)/100,dps);}
- assert.equal(catalog.cards.length,167);assert.equal(catalog.forms.length,232);assert.equal(catalog.cards.filter(c=>c.ready).length,138);
+ assert.equal(catalog.cards.length,176);assert.equal(catalog.forms.length,241);assert.equal(catalog.cards.filter(c=>c.ready).length,138);
 });

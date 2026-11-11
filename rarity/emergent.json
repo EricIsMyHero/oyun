@@ -1188,5 +1188,58 @@
       "sheet": "Emergent (2)",
       "row": 21
     }
+  },
+  {
+    "id": "plauge",
+    "name": "Plauge",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Emergent",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "235",
+      "shield": "90",
+      "damage": "2x9",
+      "sps": "12",
+      "attackSpeed": "0.75s",
+      "delay": "0.75s",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "Atışları rəqib kartlara 3,2 saniyəlik acizlik effekti verər. Hər 3-cü qoyuluşda rəqib kartlara 3,2 saniyəlik mütləq acizlik effekti verər.",
+    "additionalStats": {
+      "range": "4250",
+      "speed": "1000",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Emergent",
+      "row": 22
+    },
+    "isEmergent": true
   }
 ]

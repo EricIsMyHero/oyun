@@ -12,7 +12,7 @@ test('arena catalog retains all source cards and spells without mutating their d
   const {buildCatalog}=await catalogModule();
   const before=JSON.stringify([rawCards,rawSpells]);
   const catalog=buildCatalog(rawCards,rawSpells);
-  assert.equal(catalog.cards.length,167);
+  assert.equal(catalog.cards.length,176);
   assert.equal(catalog.spells.length,26);
   assert.ok(catalog.byId instanceof Map);
   for(const card of catalog.cards){

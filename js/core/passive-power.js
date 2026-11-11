@@ -1626,6 +1626,69 @@ root.ClashPassivePower=Object.freeze([
     "score": 100,
     "signature": "[\"volt\",\"Volt\",\"Volt Boltdan daha böyükdür. Boltun olduğu rəqibin üstünə gələrək ona hoppanar və ekstra +200% hasar verər. Bu müddətdə rəqib kart 5 karo geri gedər və bolt rəqib üstündən düşər\"]",
     "derived": false
+  },
+  {
+    "key": "radglic",
+    "name": "Radglic",
+    "score": 150,
+    "signature": "[\"radglic\",\"Radglic\",\"Rəqib karta onun maksimum canının 20%-i qədər hasar verdikdə onu 12 saniyəlik bədbəxtlik effektinə salar (75%)\"]",
+    "derived": false
+  },
+  {
+    "key": "nancy",
+    "name": "Nancy",
+    "score": 100,
+    "signature": "[\"nancy\",\"Nancy\",\"5 saniyə hasar verməzsə hızı +25% artar. Bu müddətdə ilk rəqib karta doğru gedər və onu 2 karo geri itər və 3 saniyəlik sərsəmlədər.\"]",
+    "derived": false
+  },
+  {
+    "key": "veronica",
+    "name": "Veronica",
+    "score": 125,
+    "signature": "[\"veronica\",\"Veronica\",\"Ətrafındakı dost katlara 10+(kartın maksimum canının 10%-i) yenilənə bilən qalxan verər. Qalxan qırıldıqdan 12 saniyə sonra yenilənər.\"]",
+    "derived": false
+  },
+  {
+    "key": "plauge",
+    "name": "Plauge",
+    "score": 150,
+    "signature": "[\"plauge\",\"Plauge\",\"Atışları rəqib kartlara 3,2 saniyəlik acizlik effekti verər. Hər 3-cü qoyuluşda rəqib kartlara 3,2 saniyəlik mütləq acizlik effekti verər.\"]",
+    "derived": false
+  },
+  {
+    "key": "witch",
+    "name": "Witch",
+    "score": 125,
+    "signature": "[\"witch\",\"Witch\",\"Canı 15%-in altına düşdükdə 4 dəfə rəqib kartın içindən keçər və hər bir vuruş 12 hasar verər. Bu müddətdə ölümsüz olar.\"]",
+    "derived": false
+  },
+  {
+    "key": "bro",
+    "name": "Bro",
+    "score": 100,
+    "signature": "[\"bro\",\"Bro\",\"Hər zaman hasar verər. Menzilindəki hər rəqib kart üçün ekstra +50% Hasar bonusu qazanar (Max:250%)\"]",
+    "derived": false
+  },
+  {
+    "key": "tooni",
+    "name": "Tooni",
+    "score": 125,
+    "signature": "[\"tooni\",\"Tooni\",\"Hər saniyə +2 menzildəki hər rəqib kart üçün isə ekstra +3 yük qazanar. 100 yükdə menzilindəki bütün rəqib kartlara 34 hasar verər və sürətlərini 3 saniyəlik -33% azaldar.\"]",
+    "derived": false
+  },
+  {
+    "key": "spinata",
+    "name": "Spinata",
+    "score": 100,
+    "signature": "[\"spinata\",\"Spinata\",\"Canı 75%-dən aşağı düşdükdə üstünlük effekti qazanar. Hər vuruşda can çalma şansı +1% artar (Max: 15%)\"]",
+    "derived": false
+  },
+  {
+    "key": "erica",
+    "name": "Erica",
+    "score": 150,
+    "signature": "[\"erica\",\"Erica\",\"Saqqızlar hər rəqib karta dəydikdə rəqib hər saqqız üçün 10 yük qazanar. 100 yükdə rəqib kart 8 saniyəlik həbs olunar.\"]",
+    "derived": false
   }
 ].map(entry=>Object.freeze(entry)));
 })(globalThis);

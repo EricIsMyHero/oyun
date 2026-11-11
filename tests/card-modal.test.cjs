@@ -20,9 +20,9 @@ const forms = cards.flatMap(allForms);
 const originalCards = require('./fixtures/pre-book2-cards.json').order.map(id => cards.find(c => c.id === id));
 const originalForms = originalCards.flatMap(allForms);
 
-test('original cards retain complete combat profiles while the imported roster grows to 167 cards and 232 definitions', () => {
-  assert.equal(cards.length, 167);
-  assert.equal(forms.length, 232);
+test('original cards retain complete combat profiles while the imported roster grows to 176 cards and 241 definitions', () => {
+  assert.equal(cards.length, 176);
+  assert.equal(forms.length, 241);
   assert.equal(originalForms.length, 193);
   for (const card of originalForms) {
     const p = card.combatStats;

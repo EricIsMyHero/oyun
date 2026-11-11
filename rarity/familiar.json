@@ -1810,5 +1810,213 @@
       "sheet": "Familiar (2)",
       "row": 30
     }
+  },
+  {
+    "id": "witch",
+    "name": "Witch",
+    "type": [
+      "Entity"
+    ],
+    "rarity": "Familiar",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "195",
+      "shield": "0",
+      "damage": "11",
+      "sps": "12.22222222",
+      "attackSpeed": "0.90s",
+      "delay": "-",
+      "mana": "7",
+      "number": "1"
+    },
+    "trait": "Canı 15%-in altına düşdükdə 4 dəfə rəqib kartın içindən keçər və hər bir vuruş 12 hasar verər. Bu müddətdə ölümsüz olar.",
+    "additionalStats": {
+      "range": "2250",
+      "speed": "1100",
+      "criticalChance": "5%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Familiar",
+      "row": 31
+    }
+  },
+  {
+    "id": "bro",
+    "name": "Bro",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Familiar",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "400",
+      "shield": "400",
+      "damage": "2",
+      "sps": "5.71428571",
+      "attackSpeed": "0.35s",
+      "delay": "-",
+      "mana": "14",
+      "number": "1"
+    },
+    "trait": "Hər zaman hasar verər. Menzilindəki hər rəqib kart üçün ekstra +50% Hasar bonusu qazanar (Max:250%)",
+    "additionalStats": {
+      "range": "5000",
+      "speed": "900",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Familiar",
+      "row": 32
+    }
+  },
+  {
+    "id": "tooni",
+    "name": "Tooni",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Familiar",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "100",
+      "shield": "100",
+      "damage": "17",
+      "sps": "12.59259259",
+      "attackSpeed": "1.35s",
+      "delay": "-",
+      "mana": "12",
+      "number": "1"
+    },
+    "trait": "Hər saniyə +2 menzildəki hər rəqib kart üçün isə ekstra +3 yük qazanar. 100 yükdə menzilindəki bütün rəqib kartlara 34 hasar verər və sürətlərini 3 saniyəlik -33% azaldar.",
+    "additionalStats": {
+      "range": "8000",
+      "speed": "900",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "0%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Familiar",
+      "row": 33
+    }
+  },
+  {
+    "id": "spinata",
+    "name": "Spinata",
+    "type": [
+      "Human"
+    ],
+    "rarity": "Familiar",
+    "group": "",
+    "abilityName": "",
+    "stats": {
+      "health": "180",
+      "shield": "85",
+      "damage": "12",
+      "sps": "21.81818182",
+      "attackSpeed": "0.55s",
+      "delay": "-",
+      "mana": "11",
+      "number": "1"
+    },
+    "trait": "Canı 75%-dən aşağı düşdükdə üstünlük effekti qazanar. Hər vuruşda can çalma şansı +1% artar (Max: 15%)",
+    "additionalStats": {
+      "range": "1000",
+      "speed": "1200",
+      "criticalChance": "0%",
+      "criticDamage": "-",
+      "lifestealChance": "15%",
+      "lifesteal": "-",
+      "damageminimiser": "-",
+      "dodge": "-",
+      "vision": "-",
+      "healBonus": "-",
+      "healrecovery": "-",
+      "shieldrecovery": "-",
+      "criticdamageminimiser": "-",
+      "flexibility": "-",
+      "shieldtakendamage": "-",
+      "life": "-"
+    },
+    "showlevels": {
+      "level1": "-",
+      "level2": "-",
+      "level3": "-"
+    },
+    "story": "-",
+    "class": "",
+    "subclass": "",
+    "sourceWorkbook": {
+      "file": "Book1.xlsx",
+      "sheet": "Familiar",
+      "row": 34
+    }
   }
 ]
