@@ -898,3 +898,9 @@ test('public HTML loads a complete Survival runtime without a separate passive s
   assert.equal(vm.runInContext('Object.keys(survivalTraitsInit().memory).length',context),0);
   assert.equal(vm.runInContext('Object.keys(SURVIVAL_PASSIVES).length',context),91);
 });
+
+test('role metadata audit preserves every established Survival starting weapon and gameplay config',()=>{
+ const before=require('./fixtures/pre-role-gameplay.json'),crypto=require('node:crypto'),g=game();
+ const cards=fs.readdirSync(path.join(__dirname,'../rarity')).filter(f=>f.endsWith('.json')).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../rarity',f))));
+ for(const card of cards){g.context.card=card;const config=JSON.parse(g.run('JSON.stringify(survivalCardConfig(card))'));assert.equal(config.role,card.class,card.id);assert.equal(config.weapon,before.survival[card.id].weapon,card.id);delete config.role;assert.equal(crypto.createHash('sha256').update(JSON.stringify(config)).digest('hex'),before.survival[card.id].hash,card.id);}
+});

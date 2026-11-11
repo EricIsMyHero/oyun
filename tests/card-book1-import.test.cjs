@@ -1,13 +1,14 @@
+const {restoreHistoricalRoles}=require('./card-role-history.cjs');
 const test=require('node:test'),assert=require('node:assert/strict'),crypto=require('node:crypto'),fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),manifest=require('../data/card-imports/book1.json'),before=require('./fixtures/pre-book1-cards.json');
 const cards=fs.readdirSync(path.join(root,'rarity')).filter(f=>f.endsWith('.json')).flatMap(f=>JSON.parse(fs.readFileSync(path.join(root,'rarity',f)))),byId=new Map(cards.map(c=>[c.id,c]));
 function walk(c,key=c.id){return[[c,key],...(c.forms||[]).flatMap((f,i)=>walk(f,key+'/forms/'+i)),...['type1','type2','upgradedsecondForm'].flatMap(k=>c[k]?walk(c[k],key+'/'+k):[])];}
 const all=cards.flatMap(c=>walk(c));
 
-test('Book1 adds exactly nine unique roots and preserves every prior card byte-for-byte as parsed JSON',()=>{
+test('Book1 preserves prior source data with only subsequently authorized role labels restored',()=>{
  assert.equal(cards.length,176);assert.equal(all.length,241);assert.equal(byId.size,176);assert.equal(manifest.newRootCount,9);
  const added=cards.filter(c=>!Object.hasOwn(before.hashes,c.id));assert.deepEqual(new Set(added.map(c=>c.id)),new Set(manifest.newCards.map(c=>c.id)));
- for(const[id,hash]of Object.entries(before.hashes))assert.equal(crypto.createHash('sha256').update(JSON.stringify(byId.get(id))).digest('hex'),hash,id);
+ for(const[id,hash]of Object.entries(before.hashes))assert.equal(crypto.createHash('sha256').update(JSON.stringify(restoreHistoricalRoles(byId.get(id)))).digest('hex'),hash,id);
 });
 
 test('new rows retain workbook stats, native ability prose, rarity, source rows and percentage conversions',()=>{
@@ -25,7 +26,7 @@ test('Martel is a documented alias for Mertel and workbook typos do not silently
 
 test('missing combat facts remain unspecified and new cards cannot enter an Arena deck accidentally',async()=>{
  const{buildCatalog}=await import('../arena/js/catalog.mjs'),catalog=buildCatalog(cards,JSON.parse(fs.readFileSync(path.join(root,'data/spells.json'))));assert.equal(catalog.cards.filter(c=>c.ready).length,138);assert.equal(catalog.cards.filter(c=>!c.ready).length,38);
- for(const entry of manifest.newCards){const c=byId.get(entry.id),d=catalog.byId.get(entry.id);assert.equal(c.combatStats,undefined);assert.equal(c.class,'');assert.equal(c.subclass,'');assert.equal(c.group,'');assert.equal(c.additionalStats.criticDamage,'-');assert.equal(d.ready,false);assert.match(d.reasons.join(' '),/combat profile|native ability/);}
+ for(const entry of manifest.newCards){const c=byId.get(entry.id),d=catalog.byId.get(entry.id);assert.equal(c.combatStats,undefined);assert.ok(c.class&&c.subclass,'later role audit supplies the role');assert.equal(c.group,'');assert.equal(c.additionalStats.criticDamage,'-');assert.equal(d.ready,false);assert.match(d.reasons.join(' '),/combat profile|native ability/);}
  const{ArenaEngine}=await import('../arena/js/engine.mjs');const deck=catalog.cards.filter(c=>c.ready).slice(0,7).map(c=>c.id).concat('plauge');assert.throws(()=>new ArenaEngine({cards:catalog.cards,spells:catalog.spells,deck,spellDeck:['healing-light'],bot:false}),/complete root/);
 });
 

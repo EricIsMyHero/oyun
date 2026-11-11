@@ -93,10 +93,27 @@ const SURVIVAL_STARTING_WEAPONS = {
   hailey: 'scythe', 'shadow-reaper': 'scythe', bloodraider: 'scythe',
   wong: 'spear', 'void-striker': 'spear', tribe: 'spear', lumina: 'spear',
 };
+// These established fallback loadouts are independent of editorial role labels.
+const SURVIVAL_RANGED_DEFAULTS = {
+  "mixela": "wand",
+  "mystic-magician": "rifle",
+  "maapp": "rifle",
+  "avara": "rifle",
+  "shockwave": "rifle",
+  "servant": "rifle",
+  "plauge": "rifle",
+  "tenta": "rifle",
+  "cassandra": "rifle",
+  "indi": "rifle",
+  "tooni": "rifle",
+  "cryon": "rifle",
+  "burglar": "rifle",
+  "erica": "rifle"
+};
 function survivalChooseStartingWeapon(card, stats, role) {
   if (SURVIVAL_STARTING_WEAPONS[card.id]) return SURVIVAL_STARTING_WEAPONS[card.id];
   if (stats.range <= SURVIVAL_MELEE_RANGE) return card.id === 'dumpsy' ? 'orbit' : 'axe';
-  return /mage|support/.test(role) ? 'wand' : 'rifle';
+  return SURVIVAL_RANGED_DEFAULTS[card.id] || (/mage|support/.test(role) ? 'wand' : 'rifle');
 }
 function survivalCardConfig(card) {
   const form = card.type1 || (card.turns && Object.values(card.turns)[0]) || card;

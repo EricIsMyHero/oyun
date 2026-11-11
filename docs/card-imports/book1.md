@@ -72,3 +72,10 @@ Regression fixtures fingerprint every pre-import root and Power score. Tests
 also verify exact new rows, chance conversion, stable old mechanics, aliases,
 rarity membership, reviewed passive scores, missing-data locks and rejection of
 an incomplete card in an Arena deck.
+
+## Subsequent role audit
+
+The user subsequently requested a full class/subclass review. Only these role
+labels may differ from the historical import description above; missing roles
+are now filled and misleading labels corrected. Source stats, abilities and
+combat profiles remain unchanged. See [the full role audit](../card-roles.md).

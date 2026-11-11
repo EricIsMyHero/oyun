@@ -94,11 +94,13 @@
           "projectileEndEffect": null,
           "movementType": "ground",
           "groundEffectImmune": false
-        }
+        },
+        "class": "Support",
+        "subclass": "Buffer"
       }
     ],
     "class": "Support",
-    "subclass": "Banner",
+    "subclass": "Buffer",
     "combatStats": {
       "attackType": "melee",
       "multiTarget": true,
@@ -290,7 +292,7 @@
     },
     "story": "The Radioactive Automaton, an advanced four-wheeled combat robot secretly engineered by an unknown genius inventor of the Steam Alliance. Built using the pinnacle of industrial-era technology, R-1 represents the perfect fusion of precision engineering, steam-powered mechanics, and experimental radioactive energy. Every component of the machine has been optimized for overwhelming firepower and battlefield efficiency. R-1 is a heavily armored four-wheeled combat automaton, featuring a robust chassis constructed from forged steel, polished brass, reinforced iron plating, copper piping, and intricate mechanical assemblies. The vehicle rides on four massive reinforced industrial wheels, allowing exceptional mobility across rough terrain while maintaining a low, stable profile. At the center of its body lies a highly protected radioactive reactor core, visible through reinforced glass containment chambers and heavy armored vents. The reactor emits a brilliant emerald-green glow, illuminating the surrounding machinery from within. Mechanical cooling systems, pressure valves, rotating turbines, and warning indicators surround the reactor, emphasizing the dangerous energy contained inside. Mounted on the front of the robot is a high-powered energy cannon equipped with three focusing emitters capable of releasing three consecutive devastating energy beams. The cannon is composed of precision-machined metal rings, electromagnetic coils, rotating focusing lenses, and heavy cooling mechanisms. During charging, glowing green energy flows through exposed conduits across the robot's chassis, converging toward the cannon as arcs of contained energy dance between mechanical components. Steam escapes from numerous exhaust vents while gears, pistons, and mechanical actuators operate continuously to stabilize the reactor. Small warning lights and rotating gauges indicate that enormous power is building inside the machine before its devastating attack. The battlefield is an enormous industrial complex filled with towering steam engines, massive gears, steel bridges, copper pipelines, pressure boilers, and colossal factories. Volumetric steam drifts through the environment while sparks, glowing furnaces, and industrial lighting create a dramatic atmosphere. The charging energy from R-1 reflects across polished metal surfaces, emphasizing its technological superiority. The overall design should feel like high-end steampunk technology, combining Victorian industrial engineering with advanced experimental science rather than futuristic cyberpunk aesthetics. R-1 should appear intimidating, sophisticated, and engineered with absolute precision.",
     "class": "Marksman",
-    "subclass": "Piercer",
+    "subclass": "Burst",
     "combatStats": {
       "attackType": "ranged",
       "multiTarget": false,
@@ -537,11 +539,13 @@
           "projectileEndEffect": null,
           "movementType": "ground",
           "groundEffectImmune": false
-        }
+        },
+        "class": "Specialist",
+        "subclass": "Saboteur"
       }
     ],
-    "class": "Assassin",
-    "subclass": "Reborn",
+    "class": "Fighter",
+    "subclass": "Piercer",
     "combatStats": {
       "attackType": "melee",
       "multiTarget": true,
@@ -728,8 +732,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Mage",
+    "subclass": "Controller",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Apex (2)",
@@ -780,8 +784,8 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "",
-        "subclass": "",
+        "class": "Mage",
+        "subclass": "Controller",
         "sourceWorkbook": {
           "file": "Book2.xlsx",
           "sheet": "Apex (2)",
@@ -832,8 +836,8 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "",
-        "subclass": "",
+        "class": "Mage",
+        "subclass": "Controller",
         "sourceWorkbook": {
           "file": "Book2.xlsx",
           "sheet": "Apex (2)",
@@ -1008,7 +1012,9 @@
             "duration": 5,
             "blind": 25
           }
-        }
+        },
+        "class": "Support",
+        "subclass": "Disruptor"
       }
     ],
     "class": "Fighter",
@@ -1074,8 +1080,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Fighter",
+    "subclass": "Piercer",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Apex (2)",
@@ -1132,7 +1138,7 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "Assassin",
+    "class": "Fighter",
     "subclass": "Siphon",
     "combatStats": {
       "attackType": "melee",
@@ -1517,8 +1523,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "Mage",
-    "subclass": "Lifedrainer",
+    "class": "Tank",
+    "subclass": "Juggernaut",
     "combatStats": {
       "attackType": "ranged",
       "multiTarget": false,
@@ -1581,7 +1587,7 @@
     },
     "story": "Laura has dedicated her life to the art of healing, focusing her magical energy on mending wounds and restoring life. Raised and educated by the Chrono Mage, she views the world with a patient, timeless perspective. She moves through the battlefield as a beacon of restoration, shielding her allies from the brink of death. Despite her immense power, she refuses to use it for harm, believing that her true purpose is to preserve the fragile balance of life around her.",
     "class": "Support",
-    "subclass": "Empowerer",
+    "subclass": "Buffer",
     "combatStats": {
       "attackType": "ranged",
       "multiTarget": false,
@@ -1643,8 +1649,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Fighter",
+    "subclass": "Duelist",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Apex (2)",
@@ -1696,8 +1702,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Specialist",
+    "subclass": "Saboteur",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Apex (2)",
@@ -1748,8 +1754,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Marksman",
+    "subclass": "Debuffer",
     "sourceWorkbook": {
       "file": "Book1.xlsx",
       "sheet": "Apex",

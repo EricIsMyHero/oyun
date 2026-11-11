@@ -1,0 +1,1129 @@
+{
+  "raw": {
+    "azrith": "d0c456e90191ed16d60f85cfd9d003e211ce9808f72189eeeb653517202c1cd9",
+    "untouch": "f351c13b9c6da0d2a9f4cda5ff390b28be52abe33f8966d670718a0bb7801e9d",
+    "heartix": "353f13378fb14ee1d63d33e652996eb88da02d683c0f111470cbd5c2f0b36fe2",
+    "r-1": "10dfd4838279c9dd3b39ff7ee00ba7ce9a6fee155247df8893aa09458645b731",
+    "blank": "b61ad99dc855a7afd2e8e0ce13bf6c93c3412c0f4eaeb236bc89862593163a8d",
+    "magmara": "e1d48a5ef710d09c3cd7e760f6521b59f84d74c65b74280bf8fc19b7b0f8e411",
+    "willowshade": "b93bfa1aaa04503f72c44697ed0a49325a1d9e8be8c56d659e2e81d8cad4cb14",
+    "collector": "c6dfab1868ed8c56cb69ce85907578186579d0c8c15856c15f794070085e98a8",
+    "sushu": "761414e9ee6d3a471c24dbc41e582d1f95155a4be28b6c7211b11dd64b01dab4",
+    "cloud": "b6d515b30522fad28fd7b5ad18ec63ace51d9c8c8cad158160f3cb5337bbe0de",
+    "thief": "094c79e49e54ff9477556daa0ea1598dfc752fa7a11eeb2ab630e48065ca942a",
+    "rotlings": "5f451d3078fe4c07a861136b3c31247b070cae6df7d56c2b92e5bbe9d6a4ed13",
+    "esma": "13e436a18b19ac796c7aaf6bcf77a237bb67a9529b15124c6ebef9b7a094ca10",
+    "venom-fangs": "eb1e333d90704998350380cde84fa9e80adcc7be46e321ee7068e0ce9e7fa03e",
+    "skyhunter": "def0a99b5960ec902585d20a00152c8bdbd98edb36af4438b67dfda617cb58f9",
+    "rockback": "a232ae3bd920d48126dd39f78525269e50be6ce34c184ae5fc21cf86956f88b7",
+    "neon-droid": "1b6b9cb3416e011e4e737d03e4a1f38fac3beb1fd9cc0401564582e440ffdb97",
+    "void-wraith": "67ea08992288cbb5b45e1f0a9fa8887d79c338f173159973b7a5907d0f03f13d",
+    "bio-mech": "5f397bed6827ee4b500d467c76b31a5c27abbc3240391f30d8fdf4503cbb732a",
+    "mixela": "6ec8f653781a79d0b8db69f90484c45419433b27c3fbf5e0caf921ca19eb4bcd",
+    "laura": "3dc2b586a5d10ec832fed3a77cdcced68bffc34a9bf69ccead7b6f566336c609",
+    "legendary-warrior": "32886240488f50a9a4505dd1933e511d53a57a81411c8b1058ddecae3bd88ec9",
+    "lily": "571164f81c2a744d25a4128982bcc239d00cc953fa5342a2bb2470185f3aee34",
+    "radglic": "a1caa6b015336a125a48ae59e449b17726c5fe4a581720e3b4c1095c6f39e0c6",
+    "arcanyx": "f4cabef0bd970bf1265bbc4e06c41e73767b63d3ea8a4b104b341271a407034b",
+    "leafshade": "a343fad05dfc98e24927b84ba5b22376e0bdc4f9b68930c0b7fbc26d41aa8921",
+    "jestro": "49c9eb3ec3e7dda2e489fbd959e0cf6a3abe8eb9c1eb6e74c7a8ff624f976dc6",
+    "tphoenix": "f0c29b99fd38a40b763cfaf21d1c3b8432b01df89da27afeb39e05473a8d7f6b",
+    "corsair-crew": "e2f6b0c3fbb93f93ccdf98f2425b05d05d134f8983b5d75f5790b125c6aefa03",
+    "ship-cannoneer": "5c09059ccf89a1711dd4f3d57b5b1b2d1d475cba85aae4e8800eca24d7fc92f5",
+    "toxic": "db3b15cb413733c253037b21ea199f9fddc107c537b7ebfbd1592d127b337f76",
+    "lumina": "613611ab1ff0626643ccc2af5b396b620d51c6b6aeec7fe0a4b47ee38561b533",
+    "hell-boy": "8a3c37664402d1af7b2ea6c5f5264d9c43b64ec438bb74ffc38812d30bb23644",
+    "slasherx": "45b582623b317ae783ba646e098adfe0fe06d882908a05b004b6c774d9c7b3e2",
+    "sheriff": "7e9e4a5c0bd9105b14a5989347fb7a889be13687f59dd4a968fd13204815b1ba",
+    "nurse": "a8bf23d94cf480331791a53321e533dba9799ef1550b888537a7ba4dff3018d4",
+    "tribe": "047466c23f5817752e40d511cce09832dbeae756b598817baa87c1c43feb7b7e",
+    "earthshakers": "60445d07218669c324a5751e7dcab4703116280d542eea95febcfb95cd6001a2",
+    "whisper": "27ab48fea97ae6f7b494c068c9d76dca4f5b8b4f6c7344c30f9fe651e5730d63",
+    "roguex": "92e3eaf6410d8c21c9550b30af6ea84594c757b49fa3bfc911541ba15d4036c0",
+    "void-striker": "f8912ea6d08bd8d1fcfdde94593930a93eaf9e6a7b5a28c46c6f6406d3550906",
+    "nightfang": "93c2b185d4d7d2e8d0013365ca9352b0d7b6beef8ffa7cab7c2853ec947f2f0c",
+    "sunrise": "eea6f24c600a1e5dd8fc0eed03f99fe64035577f605728b9f5b4afbf2d9c73a9",
+    "shellbyte": "85ae1b60d6ffc63b6abd0f260ae86c3a4ef1a9f67247db6eab3d95b05b1af2e9",
+    "wong": "1605f2963b72d8cf598785bfdf4dbb3a6628dd9340fd337e8384e59cf741d6a5",
+    "umbra": "2554999d501edc8d28ea44d3cd7917c2e0f9dedbcbd7b1fecf1f97b81f838cf5",
+    "leader": "a88d96ea15f3be59c60393f5e08c399d77fd450c7b508afcec611ca59c216415",
+    "hostess": "9ef293706934bf281d6146d293064ef89cfacbcaece9ed2d5c4d31a1f4f90d6a",
+    "mystic-magician": "67f083e91d89954f2791ddd0fd6e7060fa3e692654eed53ee29dd468caeb7f0a",
+    "kitsune": "44ed29ddca202bc0aa17f45e1e225d0f0d3fbfc330374be80318f0f298900b39",
+    "mertel": "102f1205fc558b95d5a70214aa13da373c1a6420db290dde0a0decd29086e550",
+    "nancy": "0a7fc6aab38d7bea70971364f503438e7fdf7dea13d693b77c7ac734b192b97d",
+    "veronica": "587f2d20222b56b0a68c52bec8b49532189cb68b4374f5e465bc8756337492ce",
+    "reacher": "185916b7aebe75e25830bf7392e3b548ade00a5c6c55e2d8a9ea173bf12b37d0",
+    "bastra": "7bdb3c7b3f19dc67724f61f92f41bf41b74d35623b4c9fcb5623aaa2c3f8fa14",
+    "maapp": "8cd2d83d9409fc97bc06ffc966bc9181d74bafad9ffa4a202773e522e7dcda85",
+    "avara": "bb7e9d1e7b284ba0ef54f1e5f949ad2110fd91187655a5b5af16e11497a56713",
+    "john-reynolds": "9f038c3404fd8448829654b14abf634021d6b4fc98799e57c06fa47d69074ff0",
+    "atlas": "545d8bb727072c049efbe961763ae3b05bce73b274fa154aabb3f4c35bd5c56c",
+    "great-stan": "64ec475130b9b9f9a68ecf7536498e73064addd16838e881a4e948eb3d02ad1b",
+    "marcy": "ab8f6eaf8989ff049a8da24e27bebe2ee893f02ec206a358811458896626b8d9",
+    "shield-maiden": "f5cb835d7c5b0c988e424aeaa621392843ed012110d6809ec167278ddabb04eb",
+    "shockwave": "5122ae04fbf2d846332f064b633f8aee97267dbda5d29fb914688fe8ff092f63",
+    "xii-josh": "d8446bb7840c31875a3215d579ebfc30018fa483ed25a8d9ba94a566a63d4040",
+    "dumpsy": "484ceb1352e4b12737716a66244a7902e0c156c84a5136d7e08677c30212d759",
+    "blesser": "e4a5570da4a68af81ec0e6356099a5cd379ab499ee51bacac292b10fe04b9611",
+    "js": "018117d5a7838272106661871b8bd0303913d45685156008b04a5f60118e12cb",
+    "mimic": "96936a0f6d660eab2b322bd5a2f8a62427acf7486f8634563087ca9f1cc423d9",
+    "the-seven-sins": "04ba99e1af08320bffa732ec37a41da8e635e6db88675655bc33d0ecb91d353f",
+    "stella": "ec28c33c7e19121bf16aea0f52366a22aeb0eeaa361d3b139747285d58203f9d",
+    "huang-chen": "9fa7418453ce9e3b3e21cf7168e2513fec7bca6d6012aca1a97584eea3827af4",
+    "servant": "971a23a5fda6ac4cfd665d9cb28b8abcf3f7929f2b13242c3df2a146c1473131",
+    "survivor": "c9f17eecefc36301ed54833494d0ffde1add12b957358d02f90e5462e2d4a9f5",
+    "little-princess": "52624a5c3ac837f947f26ea6b62950aaae064f349d37548b4c7ae91bb2cfebf5",
+    "three-wise-monkeys": "906a437d6d5522ff0c5d823bd50d2c8822a81977c8a1846d53f38ac61aa30aca",
+    "plauge": "269ddc1dd5b335ee42c9d524e52bd9ebff0b1ca81db3d6260c5dbb03da633f1a",
+    "ase": "6e0664d1ddff12fd2270e9fad076469d37de9482b6e6b36e1190b9ac4b9ea402",
+    "leno": "6941a55ae3c6f5d09c964b3566e1ca815c3da328b57d433b000d7354b857b88e",
+    "king": "5938d6123ef5cb2e811a5ab2777f7ae437a1c2b14d38d7e80cb4520dba7fdc19",
+    "dracula": "27ce193a95d11ec87134dfb1317d8451242075eadc80d6c1b1fb71514d46aa3a",
+    "leila": "a00e390339b1c327a67aee496b2dd43beff90f239e0b21bee8ccbf57a6d1ae27",
+    "lord": "e61a5cc27e66c629161fb37282afa98bba4682372b04cd35cd07b724738b2ef0",
+    "hunter": "b106a9c4c656353ba62c2f540c2f0b35decc000122682fa045d8336f01c9b105",
+    "soul-master": "50c63fe11c421ca9c95c320636663099d119b307ce231044961e6416d874cdb5",
+    "mr-and-mrs-ray": "36bbf0e5c98e3db3ec76349af62319457ebb01e676bdb11b7cefe6a5cca6128e",
+    "dragon": "5477c1d24aba8fea218e2cf2e91cb0217908fa82aec043217090700bca802cdc",
+    "albert": "59066ea1f8a07c07ab5c519815c1fbaae2c0d18bf373b573ee5e32a559f2a488",
+    "chicken": "465285a3d2b7d7ec10e96cb657ca5184826c1c003a74cbcd26343bcc3ef24a87",
+    "frostshot": "7bce97636ffcd44fc7becdd07f4ad86ca271bfd1a7cef80874ce6193de92f654",
+    "hornets": "89d77734124b49d8386541bdf435511ae8e790f74aadef5ef7fad04e49d96c91",
+    "warborn": "afd73524aa4fa0b9e116734849ad79527c8710015cd4c603e543c0ebe9be8ffc",
+    "x-bot": "7cd396734733081ea8e59ffc8feef0e173b5a6fd4e6f50adee8f1a12315097a7",
+    "nyra": "71155c968979b52732811ca8e2c1ff810099cf572555009f1521637bda2702fc",
+    "deadscope": "ab5fee4b507a60feb30b59cfa3b1cce7b67652279043b97f7b80a44362b9b2b8",
+    "turtle": "8086d92627aaf4c1d10f8a8e9f29b441a0a78568cf33b25cada44d5794196f57",
+    "feral-wolf": "30b081dc2ed02d0ddcf3c690fe240eb3aba261b0ae6832465a27175eec472e4e",
+    "trac": "c7baf43506e61091380710c0310b58c2f756070e926b1bd1103ab6830f197378",
+    "tornado": "bb9127e023f883713f960bf2405066651025a094ac68d3051194c81b3a90ec11",
+    "dino": "b841c250bbc5017157ddd47daedf275f1e97f2d9c4433bbb3e2f849dedd2b7e8",
+    "tenta": "e0712e73511a6b18ca86531b92285a230111c392c0ebbf0ae01b8342a4dafed0",
+    "fire-archer": "58532c5b2e04d6af08fbebb2d18710f8df40e56b6f0edf1d12421eae30bed27b",
+    "shadow-reaper": "25e8e27c43e83727de320eba89d8db7905d46813ca33f9b07f873ecb5d29e2a7",
+    "voltriker": "9625847e424d8aa1e2116ea9869ab3e360ff8a944d18f01b63b9da9abc2a7fe8",
+    "frostmaw": "2b863623d65b259ffd1e4db7c6f3f27afed94f041b25b3c1ad976da42ec03214",
+    "hexon": "d89bdfed53d0338baa0150aa0c00108a78ab794f6c2206df738d1c97da634282",
+    "mecha-shield": "3cf86a8d0bb5e8d46ab74bcf18aa0763ed867d79cd71047e2e5afbe6b70697aa",
+    "venomspikes": "3699cc39a76163b99a52faab8b97e86eb4bebd86a7f4d9cb4f858f6ded1c7927",
+    "astranova": "fdc38cfaa045806a02f88b605d2e45ece83ec13748c52787ec729ce0bbecadf8",
+    "kai": "bcb3fc42be02ff0d7b089cedd464372953d3c3882c766cd79d34378f2f14e4f5",
+    "cassandra": "a998e1c94b4afcd052e7274db844f4358b9afa2b5b0239319983392b3a7dbb6f",
+    "dr-golbert": "07841c48f06659bf95d9e617638826141534a2ff17ef4ac969874b26695a5311",
+    "indi": "5ae1204f77ec97aec0003d9f198c775906ec809eac3e5aaffe879426c659e516",
+    "punchman": "3ab052c86156db809a6587a44c9c4859590fadc9f5b3d3f34e139a09a3aff77f",
+    "witch": "0dfb329bb989a7e9e56ea89a38ffdb64bb4107cff7641aeae0f483a3685ac869",
+    "bro": "531bf6ab8c0f18a4aaf63b0b3cb37b245d420cc605797b1fb680a1a1313f47a8",
+    "tooni": "c557de1fe2a35e0a81f9f8cea3997886ce9de4073828e5a4e183237a7d54e011",
+    "spinata": "62696152934f289355db7ed8af9ee4a704bf75e115938cb5c8d851d6b2dc5e2c",
+    "hammies": "fa2198de81093faea7152120f73607950adc5308c90b52e6416a667275dd7f45",
+    "b-b": "b0a3fb24c2b021bc4165d92be94b1afca4e1efdebede2553e71fc47b3fa49986",
+    "scrapy": "3af60777d8a8cc8c2cb07ac653ce97e70a8e90b5d419f03a12b3c8f3a5278b85",
+    "nitrox": "34cd4bcc7de0516a1bffe09865eccf9f3d1d71d7c310afec0aef827d5fff9d32",
+    "nortex": "adc86e8c2a528497b231a86d7c02cc8ea762466e2e9c1f02db9e4974049f3f70",
+    "gloop": "e178a1dbb05cd43b1643c14f971a36a97606e0ba7777a01092879dabf963cac3",
+    "henry": "d736fae96bc95885ee7002a1afb4223d6fbb3e7777d301548f3be2d791811684",
+    "venomora": "fafdd371c646f7cef1ed19b2df26bf63f02a51a263688a56c5004e11dbefbf48",
+    "blocker": "bbb5bbfbc4f1946e04cf0e43c17e0423f672b3774355d8ea9f4f8f34e759955e",
+    "fen": "181242756495bc39df866ce1206aaaca8f0fc82e02b1e23618b9f60834a4c303",
+    "ben": "bdfdf7b4d7736bc2f448b570136f47c6812cac21821c8ffbefbf0eb07c1d4e68",
+    "freak": "8f4c1cf9e6ce14a8eb0c3d8c0a662661aef59951e478d7da36bba4ab53d221fd",
+    "nightprowler": "5830bb3370911079d6d88e319142897458ae3cfa76e366db61d74f124c20c2dc",
+    "twins": "04086f27aaaa852b3da3dae78ab745e08c54931293677b4b52e1d9ea43de05f9",
+    "bethe": "50aedb16caa741afbd38c9dc8c422dd0f790907d9a8629b1d1aad3be362f596c",
+    "snaykies": "bc40e2414389426a11b44b7bbefc08090c337a5982a97d3d12986b2d16e59f81",
+    "soldier": "4a1b35f7395e4e8559cca4a8750d12f8635578dd98809c9f55daf043a4f5c9d7",
+    "bees": "d9f9530d86cfbbc1f64426faf2ed297b49b66c92ffe130f8c1f251c58a3b033c",
+    "hailey": "bd25f72bece5859ce26f70ca8541e27eb18e58eeb293c1c09c2e1e5f8ffac05e",
+    "angels": "7f3c1e6d0b476781943551d1988f1a94fc03f776f4a65b391a132d3265624618",
+    "boomix": "b32252a2899f3818ebf33de8323e4846e865a1ed3c01b9c6722e862e28d3a21b",
+    "phewphew": "26b0251d31d37abbc8411390bc3442c1c55e50c3863002a403efff40376d441b",
+    "chrono-mage": "61a8af0fa1a5f0dafe274b7fd65aa19d7c79e3d4810dc8f3fe59b84cd7e2d108",
+    "aegis-guard": "32365c6c4ad0860e5d0a2f32b28dc14b06e9a8d4053dbe4545b2f8602ce9acea",
+    "ironjaw": "919672b9f9ca85ef05c949d08d337c0682b98484602304294a26c3088083aa43",
+    "m-manager": "60b2c2651a1f55ef7306f5143e8571b7433c741969f8b1900459daf10d2fbce2",
+    "srail": "e4073970e79e8ecee619d678e99a42c19a3ed9f05ff1886a0c75cdb0bc294694",
+    "cryon": "77ad3f576c19f076f3ce60cb49fdab4dd897fdfee3041a2e0b8eddd3c65956fe",
+    "cow": "b82e8997598660017a68f9c345068a59fcba414e860646879dde521538ca0113",
+    "trainer": "ebde91f25ed7fb68186bcee637e8331dce0e6c9d2092ab38cda6bc3df0d1c41c",
+    "burglar": "3b2e5d62a15c8f63e0d96e80ab61c01ea6f9a972eb236ef3f1d641a447686baf",
+    "stormblade": "bfc8e35acb2350371889aebee89ad9303d90f0d7e18f6df7b99fd5b108d6f341",
+    "erica": "dc53e86c95475e4bce10928acebfd3cb356522902648af7ab7fa441500aa10ea",
+    "stacy": "1bc8ee70abc1e9bc54f653165d41effdbc60267b3ce9c4898d3a13af2c0de215",
+    "death": "b4c0ae78dd7c236ffe8ec0be514768bd9339ff6c682afb75977f7b226b11ea92",
+    "sylviana": "7a84c884d6cb548689d625e848e53b0ce91914d0b387bda6656c10f8945eae4e",
+    "malvaris": "38714d2bde62f05638e4d89dba92c0f3709507475edff8897f919e44eb084e78",
+    "etheris": "d1c05ca4764f8057161dfd755bebc975009f1f7cb9451be4d61c2de35565e904",
+    "magma": "f880fbc990ae0ec529b520530372731be39747cf062666c54f4fab253113129a",
+    "avalith": "9ed07ff05b3b11dc51c3898c0a4a5cb6bb5c8b27467709f4285266ec26ea17b3",
+    "far": "86ece88dfa438f6a8eca94d8141d8c7549be52d90867aea086b330dcdbd9b4a5",
+    "demotron": "6dfb8e2003247c2f1e2ce0205374470c8d2c4fa137d4ef43cfd1b2074e8a596d",
+    "format": "53a23e74bfcf805040057597097c09fa7e96ff298b631d5f3c71f0f9b36d314c",
+    "pyhsic": "acf4dbf00879360a97b7334f143bddb4cdcb88e3401dce6084f6b404aff0e2d9",
+    "naar": "4c9fe8da126b554322d86a7b946c7854913504c27da3060efd2c628ae364161f",
+    "lyra": "7a81a71abac33fcc5f16d6ae3e221671171f02ab15996a329af39788cf1bcc2d",
+    "aeralis": "7430c1b9544f799378e043c46ead126b2f3006e91d19cf8e113ebc2fa7a0bac2",
+    "dark-necromancer": "919e3100090582f0cfe15cc6c2ded8bd74cede11be54306ea8459dfe01e83de4",
+    "shine": "20579ab8b8f5935bb7521832cccfe21dedd41e6796c1e3287433caa88727d2c5",
+    "bloodraider": "eef2aab5a494737bf917f52e363e45c0ad03a8ab8425d50b3e74d7b2d08fce89",
+    "fallen-angel": "0d46c8be9398d3ae3975ddf48eacccf1575dd75ac9d3bb6eda41d429d1ed7742",
+    "worms": "8ee3b01d4c9ce326ca3fc7f8f6496a4c4e421834731a343e319f65981e4a61a2",
+    "unara": "3ffa858b49c8611968a0d625eeb8414648340e520be11a2042d57827e014b0d9",
+    "ali": "a0e55b24e4acf902c89238b72fb6c7d902866e5f49fd5c47762d304bf11fc5cb",
+    "clara": "d99d0b66054dd7c9259e85f019e8da759e954d7cb75b2fc76eab762a52f3e29a",
+    "artist": "30da8777d80b673dd9ee9df30e433966eee3a3e5deea7c54460d34f5f3271a30",
+    "captain-vane": "95f6c6235c47364516f7aaf6aed79ec95ec42c5b5585a8e2d3b7fb124c3fe515",
+    "spiritcaller": "3feaa43dc88faed97c87600d05f8a28e14c13bbcc9f4bfb1a0e88c1881317097",
+    "bolt": "e69c851cb2a0a59b8f3f9d10a04a679e56fd65ed5debc628686a2c7fa88048ae"
+  },
+  "power": {
+    "azrith": 395,
+    "azrith/forms/0": 213,
+    "untouch": 389,
+    "heartix": 432,
+    "r-1": 316,
+    "blank": 340,
+    "magmara": 338,
+    "willowshade": 388,
+    "willowshade/forms/0": 242,
+    "collector": 356,
+    "sushu": 381,
+    "cloud": 358,
+    "cloud/forms/0": 352,
+    "cloud/forms/1": 379,
+    "thief": 405,
+    "rotlings": 359,
+    "rotlings/forms/0": 242,
+    "esma": 282,
+    "venom-fangs": 376,
+    "skyhunter": 343,
+    "rockback": 358,
+    "neon-droid": 358,
+    "void-wraith": 391,
+    "bio-mech": 358,
+    "mixela": 418,
+    "laura": 391,
+    "legendary-warrior": 332,
+    "lily": 347,
+    "radglic": 361,
+    "arcanyx": 432,
+    "leafshade": 327,
+    "jestro": 337,
+    "jestro/forms/0": 270,
+    "tphoenix": 423,
+    "tphoenix/forms/0": 294,
+    "tphoenix/forms/1": 416,
+    "corsair-crew": 384,
+    "corsair-crew/forms/0": 308,
+    "ship-cannoneer": 354,
+    "toxic": 274,
+    "lumina": 444,
+    "hell-boy": 370,
+    "slasherx": 445,
+    "sheriff": 334,
+    "nurse": 339,
+    "tribe": 373,
+    "earthshakers": 384,
+    "whisper": 404,
+    "roguex": 338,
+    "void-striker": 322,
+    "nightfang": 345,
+    "sunrise": 338,
+    "shellbyte": 349,
+    "wong": 399,
+    "umbra": 302,
+    "leader": 294,
+    "hostess": 323,
+    "mystic-magician": 387,
+    "kitsune": 325,
+    "mertel": 342,
+    "nancy": 312,
+    "veronica": 338,
+    "reacher": 309,
+    "reacher/upgradedsecondForm": 334,
+    "bastra": 345,
+    "bastra/upgradedsecondForm": 369,
+    "maapp": 408,
+    "maapp/upgradedsecondForm": 428,
+    "avara": 378,
+    "avara/upgradedsecondForm": 402,
+    "john-reynolds": 406,
+    "john-reynolds/upgradedsecondForm": 430,
+    "atlas": 334,
+    "atlas/upgradedsecondForm": 357,
+    "great-stan": 324,
+    "great-stan/upgradedsecondForm": 356,
+    "marcy": 296,
+    "marcy/upgradedsecondForm": 321,
+    "shield-maiden": 262,
+    "shield-maiden/upgradedsecondForm": 285,
+    "shockwave": 285,
+    "shockwave/upgradedsecondForm": 308,
+    "xii-josh": 428,
+    "dumpsy": 458,
+    "blesser": 394,
+    "js": 357,
+    "mimic": 454,
+    "the-seven-sins": 354,
+    "the-seven-sins/forms/0": 292,
+    "the-seven-sins/forms/1": 360,
+    "the-seven-sins/forms/2": 289,
+    "the-seven-sins/forms/3": 335,
+    "the-seven-sins/forms/4": 324,
+    "the-seven-sins/forms/5": 343,
+    "the-seven-sins/forms/6": 248,
+    "the-seven-sins/forms/7": 202,
+    "stella": 368,
+    "huang-chen": 382,
+    "servant": 347,
+    "survivor": 375,
+    "little-princess": 371,
+    "three-wise-monkeys": 324,
+    "plauge": 370,
+    "ase": 364,
+    "ase/type1": 364,
+    "ase/type1/forms/0": 303,
+    "ase/type2": 364,
+    "ase/type2/forms/0": 324,
+    "leno": 307,
+    "leno/type1": 307,
+    "leno/type2": 308,
+    "king": 407,
+    "king/type1": 395,
+    "king/type2": 420,
+    "king/type2/forms/0": 256,
+    "dracula": 361,
+    "dracula/type1": 354,
+    "dracula/type2": 367,
+    "dracula/type2/forms/0": 287,
+    "leila": 354,
+    "leila/type1": 323,
+    "leila/type2": 386,
+    "lord": 436,
+    "lord/type1": 456,
+    "lord/type2": 416,
+    "lord/type2/forms/0": 294,
+    "hunter": 339,
+    "hunter/type1": 338,
+    "hunter/type1/forms/0": 259,
+    "hunter/type2": 340,
+    "hunter/type2/forms/0": 307,
+    "soul-master": 367,
+    "soul-master/type1": 366,
+    "soul-master/type2": 367,
+    "mr-and-mrs-ray": 431,
+    "mr-and-mrs-ray/type1": 452,
+    "mr-and-mrs-ray/type1/forms/0": 438,
+    "mr-and-mrs-ray/type2": 410,
+    "mr-and-mrs-ray/type2/forms/0": 396,
+    "dragon": 389,
+    "dragon/type1": 388,
+    "dragon/type2": 390,
+    "albert": 284,
+    "chicken": 433,
+    "frostshot": 375,
+    "hornets": 327,
+    "warborn": 350,
+    "x-bot": 293,
+    "nyra": 339,
+    "deadscope": 313,
+    "turtle": 338,
+    "turtle/forms/0": 275,
+    "feral-wolf": 316,
+    "trac": 429,
+    "tornado": 425,
+    "dino": 343,
+    "tenta": 344,
+    "fire-archer": 368,
+    "shadow-reaper": 416,
+    "voltriker": 319,
+    "frostmaw": 314,
+    "hexon": 302,
+    "mecha-shield": 324,
+    "venomspikes": 362,
+    "astranova": 453,
+    "kai": 365,
+    "cassandra": 400,
+    "dr-golbert": 375,
+    "indi": 314,
+    "punchman": 300,
+    "witch": 345,
+    "bro": 333,
+    "tooni": 348,
+    "spinata": 313,
+    "hammies": 262,
+    "b-b": 314,
+    "scrapy": 345,
+    "nitrox": 324,
+    "nortex": 311,
+    "gloop": 465,
+    "henry": 302,
+    "venomora": 322,
+    "blocker": 370,
+    "fen": 362,
+    "ben": 319,
+    "freak": 358,
+    "freak/forms/0": 303,
+    "nightprowler": 368,
+    "twins": 362,
+    "bethe": 320,
+    "snaykies": 330,
+    "soldier": 297,
+    "bees": 339,
+    "hailey": 385,
+    "angels": 386,
+    "boomix": 346,
+    "phewphew": 320,
+    "chrono-mage": 367,
+    "aegis-guard": 322,
+    "ironjaw": 338,
+    "m-manager": 329,
+    "srail": 342,
+    "cryon": 416,
+    "cow": 300,
+    "trainer": 291,
+    "burglar": 291,
+    "stormblade": 394,
+    "erica": 365,
+    "stacy": 397,
+    "death": 382,
+    "sylviana": 341,
+    "sylviana/forms/0": 289,
+    "malvaris": 415,
+    "malvaris/forms/0": 292,
+    "etheris": 311,
+    "magma": 360,
+    "avalith": 405,
+    "far": 361,
+    "demotron": 324,
+    "format": 372,
+    "pyhsic": 422,
+    "naar": 446,
+    "lyra": 342,
+    "aeralis": 349,
+    "dark-necromancer": 409,
+    "dark-necromancer/forms/0": 287,
+    "dark-necromancer/forms/1": 257,
+    "dark-necromancer/forms/2": 304,
+    "shine": 330,
+    "bloodraider": 416,
+    "fallen-angel": 386,
+    "worms": 313,
+    "unara": 360,
+    "ali": 409,
+    "clara": 332,
+    "artist": 405,
+    "artist/forms/0": 221,
+    "captain-vane": 287,
+    "spiritcaller": 377,
+    "bolt": 338,
+    "bolt/forms/0": 287
+  },
+  "survival": {
+    "azrith": {
+      "weapon": "sword",
+      "hash": "14108431ef26943907e04de6ec7315fce356bbbe9ba288d81010d1e12a2a738c"
+    },
+    "untouch": {
+      "weapon": "axe",
+      "hash": "65a5a91c89ec5eb98752342a68ac41ad53a21b880c1e106721f2fb7b225d85b2"
+    },
+    "heartix": {
+      "weapon": "wand",
+      "hash": "89c60574b7380de9420ac4c384a9766b4cf521981a8f5b8b93c729e5ed733074"
+    },
+    "r-1": {
+      "weapon": "rifle",
+      "hash": "f978d512a29435aaa1688649acc139ce4f9bbb87f0fdb7c24aee38e10864364e"
+    },
+    "blank": {
+      "weapon": "rifle",
+      "hash": "914378ba094781fbba8c7937275f5b91dc6bf51f39f0b94e40146b8437bb20d9"
+    },
+    "magmara": {
+      "weapon": "axe",
+      "hash": "8d91025dc3d0352f6ed8132bc8b790d4e08fc749b8f7438a052695546a0bc10a"
+    },
+    "willowshade": {
+      "weapon": "axe",
+      "hash": "64e666ba13b3892b9db216baa1ea010e1b623b52eb5b73ab99744df7eb9c1dc9"
+    },
+    "collector": {
+      "weapon": "lightAxe",
+      "hash": "9d7d58115c5bde40b955dfc5dc67d4eb9b182aefeddc22344462839e3e04dd09"
+    },
+    "sushu": {
+      "weapon": "axe",
+      "hash": "f00fd6b6dcf5f9aeb920374f9c084e5e5d4ea76ed9b7e25b4438726e9f57486d"
+    },
+    "cloud": {
+      "weapon": "axe",
+      "hash": "71be8e42138c2120214e0224e82931ef513e1fc91cd83a363e21a29a9588011a"
+    },
+    "thief": {
+      "weapon": "axe",
+      "hash": "ba8df75af0df8a159186af86b8e86fa2e0303a28b2955e2e22a9825d7d1f9e56"
+    },
+    "rotlings": {
+      "weapon": "axe",
+      "hash": "b9e34cbc386fa97b0116e2c2c6ae0f45fdcaba4a4956c442408bca56694999fa"
+    },
+    "esma": {
+      "weapon": "rifle",
+      "hash": "1237e9687c022ab0d79b296867493d6e29d78365a6d99ef7859e70603260f860"
+    },
+    "venom-fangs": {
+      "weapon": "axe",
+      "hash": "f3e9cbac623affdfd950a6433ad6feb51256334e26c89640cd48cba78b8b0401"
+    },
+    "skyhunter": {
+      "weapon": "bow",
+      "hash": "b2cbdc6d1547e50daa73a347d7c30e65032f0d9d178010d1e954258588543f64"
+    },
+    "rockback": {
+      "weapon": "axe",
+      "hash": "ac8cca2393e4da4862a2f95e2393e9920500bd5dac145a14c9b412a5fe867858"
+    },
+    "neon-droid": {
+      "weapon": "rifle",
+      "hash": "785498fc05de3b1e9f9573ed4ab3ca3dd03ab1414ce62fb4cac564c0415ca3da"
+    },
+    "void-wraith": {
+      "weapon": "rifle",
+      "hash": "0c22cf1d14a65cbf10ca38f0ff4a46b9bbd58e120ee27f4bdd3b9ad587ad0d7c"
+    },
+    "bio-mech": {
+      "weapon": "sword",
+      "hash": "8d714209dd8cf20e6030b0b1927ffb749d27dfc7acd06487a3803f8ec6ae6afe"
+    },
+    "mixela": {
+      "weapon": "wand",
+      "hash": "06d7c03abcf46427d160e74aaf1f112efd711a6516b9e917f7d2ecb78090bcdc"
+    },
+    "laura": {
+      "weapon": "wand",
+      "hash": "e144981a0a7b147cc66c8bc14383185e9e1ec28704d5bc2accaad7ed67d37035"
+    },
+    "legendary-warrior": {
+      "weapon": "axe",
+      "hash": "d6f9306f32a14fa332068846ac00d8abbe885bb76fad27be854552cbc20a5ec4"
+    },
+    "lily": {
+      "weapon": "rifle",
+      "hash": "1eb668c898864aeb8204330cd5f22cf382db62d08cac34d60d323fda4543b421"
+    },
+    "radglic": {
+      "weapon": "rifle",
+      "hash": "d07198a8cbdeb5be01befd4bdb634f57ca96f1130ced49a321e3b763aaaa97f0"
+    },
+    "arcanyx": {
+      "weapon": "wand",
+      "hash": "51eec35d4462f475d441ba8b9d1d33026f1b9b30be6c399b91243d962b84323e"
+    },
+    "leafshade": {
+      "weapon": "axe",
+      "hash": "406fe378d5d20684ab26aea42d766af48fe1b83c66b7bcc6956e5c3e732e7451"
+    },
+    "jestro": {
+      "weapon": "rifle",
+      "hash": "6fde58ec605a326eb1b815752fffdeb3618f38eb458734ea4f51c5fd4ef9980b"
+    },
+    "tphoenix": {
+      "weapon": "axe",
+      "hash": "f06f75df3fa4c0b567618eda52bf68fdf5969e7873e11b02057e1a79a3e051e5"
+    },
+    "corsair-crew": {
+      "weapon": "axe",
+      "hash": "d7498667fa9cceaaa84e923249b0435393afe1b66f200f2a3f80e01213c99243"
+    },
+    "ship-cannoneer": {
+      "weapon": "rifle",
+      "hash": "3f70d21ec9c24d3847e86cdcdbd2c506c2dfde458cd5ad29c78c23db6a1e4d9c"
+    },
+    "toxic": {
+      "weapon": "axe",
+      "hash": "4de3ecb2f6678c4d6eeab329b82e591b192b8c5b219690f792a7a327a595a731"
+    },
+    "lumina": {
+      "weapon": "spear",
+      "hash": "532f854a1f6f0dc682c7683ca8af3017375406bb4d98b4bf683bf772a2fa4b77"
+    },
+    "hell-boy": {
+      "weapon": "lightAxe",
+      "hash": "a22cd98e3e3a5da36e6154e54ef863b85328d83a7ff9a22894f69caf51be6dbc"
+    },
+    "slasherx": {
+      "weapon": "sword",
+      "hash": "1a86e242ed0cc9dc823bf6ac256a89fb40fcce415740918f47a36dc775ee5070"
+    },
+    "sheriff": {
+      "weapon": "rifle",
+      "hash": "9fde877d0a15597468829192f7f042dcee273c01d3ec18f29954c276cac64cdf"
+    },
+    "nurse": {
+      "weapon": "axe",
+      "hash": "b674b623d230f3d58a19113ac0955f5294eed3d6f2e82bf454a581032e9289e1"
+    },
+    "tribe": {
+      "weapon": "spear",
+      "hash": "33846f5ca42abc86e176d65ab13c22d90e1368e14958e1e09ef9749aba4ebf5d"
+    },
+    "earthshakers": {
+      "weapon": "hammer",
+      "hash": "b56d42fa2c10b218537a4442d5907ca3723e1d2a0db55b99f2ae57bcf043c1f1"
+    },
+    "whisper": {
+      "weapon": "rifle",
+      "hash": "4aa7dd7e0750dca2a11400c52b72464442613f5c3462a16585664cc3990e6c1e"
+    },
+    "roguex": {
+      "weapon": "rifle",
+      "hash": "73e7d7efc12b433c0c3cf93180336d4c8ba1fc2a408f1c00f52567dc1802694c"
+    },
+    "void-striker": {
+      "weapon": "spear",
+      "hash": "6e2c31880eef62c7032f5b0109361f607dc0174fb04fc400f2cf84918e00f76f"
+    },
+    "nightfang": {
+      "weapon": "rifle",
+      "hash": "3b34ea2f43dafd1d50ca45b4cc07907e5cda689eb6cc39251315216ee997f271"
+    },
+    "sunrise": {
+      "weapon": "rifle",
+      "hash": "52f368f79d1a28a3ce513f012a1b06b1e0246e59d680bc7fa8e82a84dab3bf81"
+    },
+    "shellbyte": {
+      "weapon": "axe",
+      "hash": "f42b2b545c7534044d337eb3794ebb7e21b269da026fee93a24057ba88a08f6d"
+    },
+    "wong": {
+      "weapon": "spear",
+      "hash": "ad01776c91d26c2b1490b536fd27fd0dcd457d3ba239f87e38e38ab9632d5f7d"
+    },
+    "umbra": {
+      "weapon": "axe",
+      "hash": "dcc65234833002d2f68b8602f546075c8c13220f6fb804c29997c2e9324f90ad"
+    },
+    "leader": {
+      "weapon": "axe",
+      "hash": "7b45bed9792967d845bcda791b43df1484205b24cf52349182401472ec09fc9e"
+    },
+    "hostess": {
+      "weapon": "axe",
+      "hash": "19b6834bf1cb7450a570492ccb3d6b4ad25bc9c890a866f7b136c34bb4536261"
+    },
+    "mystic-magician": {
+      "weapon": "rifle",
+      "hash": "4bf2f19be136998d73d46472a0279fd82f71e3e374a2eb0e57b748ebb8525ff6"
+    },
+    "kitsune": {
+      "weapon": "axe",
+      "hash": "f1fc328d28ffdfe2be6e39991c89d4b7b425f2a06e924848de24a2c17db13bf9"
+    },
+    "mertel": {
+      "weapon": "axe",
+      "hash": "3793897393ec9e063574c57b380895ac6112251223471a58fa6fea53d8d8caa1"
+    },
+    "nancy": {
+      "weapon": "axe",
+      "hash": "d1548398693d80b04bd5eab50eb727c4e3b7b25bf7b26ccbb5d29f011f19e826"
+    },
+    "veronica": {
+      "weapon": "axe",
+      "hash": "e86c9c22f3fe5ed53d217cf6e256db16f4db57f8d14fe49fd3514b44a20c84b9"
+    },
+    "reacher": {
+      "weapon": "axe",
+      "hash": "37dd7fe90f293db302470ac27e63fdf9672ac0f95bea9ac9d66c1c0e2ce52d31"
+    },
+    "bastra": {
+      "weapon": "rifle",
+      "hash": "30af8d68698c6749450cdab3139c07579d16c3ac520747e25690130fa67b2982"
+    },
+    "maapp": {
+      "weapon": "rifle",
+      "hash": "00bd9a490cecda57249e9642dc71ce2f3ae51d187227797a6401b98ff5c39157"
+    },
+    "avara": {
+      "weapon": "rifle",
+      "hash": "225e00347d865760c18a54096ac92928991485a98aa6db59a0f090f72881a05a"
+    },
+    "john-reynolds": {
+      "weapon": "axe",
+      "hash": "8224ec9aaf1e88c86dad5b3338c13c814239f48e6169620a6bc19828076d1974"
+    },
+    "atlas": {
+      "weapon": "axe",
+      "hash": "55c7dd996fc4e065566ce4f652750aedd0957e8c3ceadb4931bf9c6c7051a7d4"
+    },
+    "great-stan": {
+      "weapon": "rifle",
+      "hash": "7c89a7b49307528c95aeaccd4e439e81831938f12784de3f84cf973724642a57"
+    },
+    "marcy": {
+      "weapon": "axe",
+      "hash": "ba2bdd199e03eb041c52d32020e93f15e334649b85f1c9901926ef4657414cdf"
+    },
+    "shield-maiden": {
+      "weapon": "axe",
+      "hash": "379b3cc03aaaa3af9a190d916002b6ca4e0293837d7d4ca4dd19050754e1a040"
+    },
+    "shockwave": {
+      "weapon": "rifle",
+      "hash": "4def18be14a59f46d7e137b12716ae5295ed896217971010031c2436d4824eec"
+    },
+    "xii-josh": {
+      "weapon": "sword",
+      "hash": "52f39f309a2c70e624c028957651183b677c43eb234a6f70eaff8696d3df3188"
+    },
+    "dumpsy": {
+      "weapon": "orbit",
+      "hash": "026a8f1d80da0768423b2ef05d7b084c04b531bddb52286928b8aca5af3beb28"
+    },
+    "blesser": {
+      "weapon": "sword",
+      "hash": "3d2f159427f227cc8bd2816853bb176b19ca8ca1b6fd8c7050f020d1fe18194f"
+    },
+    "js": {
+      "weapon": "bow",
+      "hash": "c3c88b264d55b54d555a91b6fb70e7194fead3368259263003077cc79d8c13d4"
+    },
+    "mimic": {
+      "weapon": "sword",
+      "hash": "c86968713bc73235092a3ec9e91209f45bab878a773535c237114409d9d23b6b"
+    },
+    "the-seven-sins": {
+      "weapon": "axe",
+      "hash": "8fa5579aea25d1b5408145c65e912e89314c11aae2d0662396f3885911467c48"
+    },
+    "stella": {
+      "weapon": "rifle",
+      "hash": "431d9f8ec1233c44a5cce4914effc5afdb1b194af958089a39a8538994b65671"
+    },
+    "huang-chen": {
+      "weapon": "axe",
+      "hash": "f2e3da927e6fd6bf2b63e5e1f7ef3c036053dd8dbbad112ee39987a933df5c5b"
+    },
+    "servant": {
+      "weapon": "rifle",
+      "hash": "d629f469bc815033990762a61bd674f389b58a5a42edfbcb8d9b90d319422abb"
+    },
+    "survivor": {
+      "weapon": "axe",
+      "hash": "3d07a6d219eb689426e867f45b0c479b0a6cb00a789f3b95c42b39e5f0e6bc5c"
+    },
+    "little-princess": {
+      "weapon": "axe",
+      "hash": "5fa863495567209dfd1b557310dd7ddf716bf0300152479fb6b748555e7bfe6b"
+    },
+    "three-wise-monkeys": {
+      "weapon": "axe",
+      "hash": "dd6c6a843ccd723edda868d02b6bc3bb723eda96b7bf71ee4bca665a335bcb25"
+    },
+    "plauge": {
+      "weapon": "rifle",
+      "hash": "9c3f26c0a0977096a9cb192fdc40928de51f2a4ded7f153022bc08ee633ef30c"
+    },
+    "ase": {
+      "weapon": "rifle",
+      "hash": "e8a35e4d64aa0898029671f884a48d7538fbe35ea35f224dd3f4c718687740b6"
+    },
+    "leno": {
+      "weapon": "rifle",
+      "hash": "74fbe685a4fcb7e78f20125d15fa35019c8472358fce9bc1417a9b7bc0fc48f3"
+    },
+    "king": {
+      "weapon": "sword",
+      "hash": "47085b677a5b5890c00800ae6a456f36aa38d505935ee42e458508b98a5e8aae"
+    },
+    "dracula": {
+      "weapon": "axe",
+      "hash": "ea01f63c1f304bbd754ae794e30624c71ccbe8f44610b9f52f9a375c635ebcee"
+    },
+    "leila": {
+      "weapon": "rifle",
+      "hash": "40224321efc6ee332741bfc3bd50a0dde925fe30d55072d3fdb27dc04f297228"
+    },
+    "lord": {
+      "weapon": "hammer",
+      "hash": "37a87ff1a10238021111f5f85d5717b1fd2e9761942acf0fa6ee75f90ae1602e"
+    },
+    "hunter": {
+      "weapon": "bow",
+      "hash": "dd686aad602a536d6f9eaf3928cc3114f435bba1a46fa982401001039afab1bb"
+    },
+    "soul-master": {
+      "weapon": "rifle",
+      "hash": "8ac414d43e4301fe758d3d55e0abb03a2281d2f29be6ae09471f0afb7f52e589"
+    },
+    "mr-and-mrs-ray": {
+      "weapon": "axe",
+      "hash": "3a90f7c60032e4b3685825c7c574e5da63396d0a6d89e271b303b78ae5972716"
+    },
+    "dragon": {
+      "weapon": "axe",
+      "hash": "a0e71c15194a2786b273ecc2dc87a358b37ef8617e05bcc6a0ef248069839e56"
+    },
+    "albert": {
+      "weapon": "axe",
+      "hash": "b0869e60d7993d2d86b81322693ba9bfa2e200792aa1dd9b16a65abbc0ae02a3"
+    },
+    "chicken": {
+      "weapon": "axe",
+      "hash": "797f7b912c90399b59af97bd74525cfc0fa23165178a46abdef34bd022a8c026"
+    },
+    "frostshot": {
+      "weapon": "rifle",
+      "hash": "01175aa08d87a9e050f1fed47f436048cd3e11612a319adcec9edf5ff17b7dcc"
+    },
+    "hornets": {
+      "weapon": "axe",
+      "hash": "069616332746c7f1bd6b9b61ab615e74839fb7956fb5e4cb170b679e1b821dbd"
+    },
+    "warborn": {
+      "weapon": "hammer",
+      "hash": "ffe41c9181035221cff0cd69202790f09f2c1ca6f22b482993ec008b2f2c400e"
+    },
+    "x-bot": {
+      "weapon": "axe",
+      "hash": "bf1c07e0cf2de450513667478f122d1c9169f5300a258371a26d72f7648b317a"
+    },
+    "nyra": {
+      "weapon": "bow",
+      "hash": "354666dd1f3df6b119c0c13f7841768d70ae816b028a2e5f4395f834d8483277"
+    },
+    "deadscope": {
+      "weapon": "rifle",
+      "hash": "b62691b83bed758cd5d2cc345d05b5ad36a50187cc81074af298912c471bf208"
+    },
+    "turtle": {
+      "weapon": "axe",
+      "hash": "e9b75dec98ead5b6b4e587b0b876eb061e709c7c3ac3f08a923e96d552cbe243"
+    },
+    "feral-wolf": {
+      "weapon": "axe",
+      "hash": "c20dacc17e25642600a0ad33e660f68de64319ccb410548271ebb17569a17d51"
+    },
+    "trac": {
+      "weapon": "hammer",
+      "hash": "d21ce6b05684ef341de91e114d43498240b1516fb134fbdcb9d8e8603f3062f6"
+    },
+    "tornado": {
+      "weapon": "axe",
+      "hash": "a1e50e58eba184ece23fa4ba744bb599c9d32604d83f704bd87bfe7ed580aa35"
+    },
+    "dino": {
+      "weapon": "axe",
+      "hash": "14ebf637c411c603266d6d05fc955f27eae53f35c24cd75c6d88d2fe16b53687"
+    },
+    "tenta": {
+      "weapon": "rifle",
+      "hash": "5ab650a8c08200b37827244f520aa53879840c65c5c32770fadc2294481b5eb1"
+    },
+    "fire-archer": {
+      "weapon": "bow",
+      "hash": "8a5aafae5bdefc13c141504fb7bbb3ced2de2027b9508af15ff837728f8ae6a4"
+    },
+    "shadow-reaper": {
+      "weapon": "scythe",
+      "hash": "ba04b5dfe763914d402c4f72cbd69ffb2dd59cc6b4f3f7f1081e6fef44fc2a5c"
+    },
+    "voltriker": {
+      "weapon": "axe",
+      "hash": "7e88a7a987c3527cabcf54f10646c7659de730646c72baa866a3396785ac5ed7"
+    },
+    "frostmaw": {
+      "weapon": "axe",
+      "hash": "db07dd62489364c0c39aed73bada772ee14ca64dbef590b642f0ed2e66cc3d28"
+    },
+    "hexon": {
+      "weapon": "axe",
+      "hash": "505b6fc2f0855932753b116ddd46ff9787b4541b57348fd60b2239b48d46b60c"
+    },
+    "mecha-shield": {
+      "weapon": "rifle",
+      "hash": "0d784ace32d62d895e411025d4d931b2552f277b7ef403803768bc83ca00d91d"
+    },
+    "venomspikes": {
+      "weapon": "axe",
+      "hash": "765e4517b3c34b2ec630d4cf020312d9eda19d45ad76b55ce1969f3d15ce9d98"
+    },
+    "astranova": {
+      "weapon": "axe",
+      "hash": "4333f3af98e46c63be5e508ce73d6b4b132a0b06e1c14ac0995aead082dcd801"
+    },
+    "kai": {
+      "weapon": "axe",
+      "hash": "0af4ab3cea96d0f5ea6076d638985bd2ea6dead0069e14533e4393ffc5dee721"
+    },
+    "cassandra": {
+      "weapon": "rifle",
+      "hash": "4822764072a3780e084b88d8ca9a8e6af4e8e077d81fefef51bc979259cecb0e"
+    },
+    "dr-golbert": {
+      "weapon": "rifle",
+      "hash": "9690f8971a586f6568df06c06fea475950e6716c7e2b4fd3599dfc7732fc9465"
+    },
+    "indi": {
+      "weapon": "rifle",
+      "hash": "642abc6f3624dd2c2d7ceb0ac1365261886004f69281c2fda5d104889ae7f89b"
+    },
+    "punchman": {
+      "weapon": "axe",
+      "hash": "3b7b970af29cae553f2762cf6309fd39d22b03884c944ee035a00e0cbdc99f16"
+    },
+    "witch": {
+      "weapon": "rifle",
+      "hash": "fc97565d45a8154a1a020322c6ed449ef4e097d70bccaf565d2dd31b9f7fe390"
+    },
+    "bro": {
+      "weapon": "rifle",
+      "hash": "ea4205244c8d43a15228a1481653becb3a782651e4f8052fa59d878ca4f86958"
+    },
+    "tooni": {
+      "weapon": "rifle",
+      "hash": "0467f36d8d0220686dedee8bfa38b46d6378d3b32bec1a3094a7d7c6dccc4b3a"
+    },
+    "spinata": {
+      "weapon": "axe",
+      "hash": "759b5657cf0b489bbefc77fb2a6f3433ce24a201576971131a0f7f82f3b4c13c"
+    },
+    "hammies": {
+      "weapon": "axe",
+      "hash": "425bdf37b55616a1976f4250a3f9621606c5da2b5bfa74703044d42dac79cf80"
+    },
+    "b-b": {
+      "weapon": "axe",
+      "hash": "a933dce64088d0c8c088327ba9f25337b0233c53a259e5dfef2fdf565905ca76"
+    },
+    "scrapy": {
+      "weapon": "rifle",
+      "hash": "71dc9629b1d18d53d14fc8a21feb67012e4e4a0c0970f561b116e8fabb0b8598"
+    },
+    "nitrox": {
+      "weapon": "wand",
+      "hash": "e9dc2ed163f54e6b31a5d3bacf19227b869811cdea420e40ec0636783e68150c"
+    },
+    "nortex": {
+      "weapon": "rifle",
+      "hash": "f90c8d6216c31a1b21e0037902034e807a4e945c48d0e829572d0bee9349b611"
+    },
+    "gloop": {
+      "weapon": "axe",
+      "hash": "65c38b1bb6cc2b9fa59c0cd705d53608480548a5e0b8e5a8f3f42561fdc3b821"
+    },
+    "henry": {
+      "weapon": "axe",
+      "hash": "84125c8be0fe984c44fc0dee7e38f84bf63c7c809492cb97e6bc12b83c5fa071"
+    },
+    "venomora": {
+      "weapon": "wand",
+      "hash": "9ccd2931020ce15eb54c14e78d296d47b235f4f309035a57ec23ef9f3570f128"
+    },
+    "blocker": {
+      "weapon": "axe",
+      "hash": "0a7b06f9c7de8da25315026b91608fb07236691e73c9d455c6e18574aaa25a41"
+    },
+    "fen": {
+      "weapon": "rifle",
+      "hash": "860f26ed993364e28628cb65c73e326cadde0a07eea5d1daf5e2c6e3c9abeac2"
+    },
+    "ben": {
+      "weapon": "rifle",
+      "hash": "d1506facbb8ee706f7dea29d2fcb5c0431e5f9aad9e8a0bc20bfc97fb83f3295"
+    },
+    "freak": {
+      "weapon": "axe",
+      "hash": "0c9a8cee0d0fb7db78baf2a70e2522bef66378a75d745a25e73c79c02d7e4ee7"
+    },
+    "nightprowler": {
+      "weapon": "dualSwords",
+      "hash": "34ad3b2d58780f5846f5ed18ea60979f108a270eb8a1088ace02006264e7f203"
+    },
+    "twins": {
+      "weapon": "axe",
+      "hash": "cf47eed397aaf82a1480fd251d0fa277d726b1ef3eacfe93ccdbaad613cc2e43"
+    },
+    "bethe": {
+      "weapon": "axe",
+      "hash": "1e359840882dc57370148a67e63dc1ad1e93dee9c6c56653924112301aad3216"
+    },
+    "snaykies": {
+      "weapon": "axe",
+      "hash": "906ac820fcffd0f0e09ced52ce428baed7761ae6d59a23a16f4bb48f4ce724c8"
+    },
+    "soldier": {
+      "weapon": "rifle",
+      "hash": "c13dd292b3ed7f9fadb242f5d9088f2c85015c9c4993f4f3b23f47d00901bb1c"
+    },
+    "bees": {
+      "weapon": "axe",
+      "hash": "2d9d1e85e6a93f97691eed83167a2316bc12bd629f9b6257c8c2980a2c04d76e"
+    },
+    "hailey": {
+      "weapon": "scythe",
+      "hash": "8271903a3d55156c6017aee50cf84eec096459047d2bb321ddc7acf315389484"
+    },
+    "angels": {
+      "weapon": "axe",
+      "hash": "d373cecc68442ae5a520ab41d0c7581b5751e0918bfda0386a2e41eb8c4ce008"
+    },
+    "boomix": {
+      "weapon": "rifle",
+      "hash": "1536e9e0ef7cdadb5232a3ebc6bd1887aff8174fcc56e1ab9eac875b6cd8d157"
+    },
+    "phewphew": {
+      "weapon": "rifle",
+      "hash": "2317b272c119e2fbd295826220876b99a8e1f1f45a0abedadfc7deedc9f469a5"
+    },
+    "chrono-mage": {
+      "weapon": "wand",
+      "hash": "49b64c8c4266a396e30679c113dcc2fbe9d15faba58dc457ff570003e8709bbf"
+    },
+    "aegis-guard": {
+      "weapon": "axe",
+      "hash": "f7bf99ce53fe4c4a49e9547533392248778ebd9fe5b59fbfb77c94fd4db2838e"
+    },
+    "ironjaw": {
+      "weapon": "axe",
+      "hash": "53dd5940629eaeaefd0be70c71e9cbaa4f37160e2b8db1f34971c570ae1e9847"
+    },
+    "m-manager": {
+      "weapon": "axe",
+      "hash": "b9d6944f3da9bb5efcd0c134841578979919995ce44508724f0718589a73fa33"
+    },
+    "srail": {
+      "weapon": "rifle",
+      "hash": "91e27ae9347ac6cab653dc618938674ec28acb57bf4aec09d276bb4bba653eb5"
+    },
+    "cryon": {
+      "weapon": "rifle",
+      "hash": "8247932585709f7df0111b093b39119642a0dc8ca919c1fe8411a7cebac9cd77"
+    },
+    "cow": {
+      "weapon": "axe",
+      "hash": "e759006e9950134c7f352c230dbe365a1b51f1ff53a84c94fe831d62d9b057ce"
+    },
+    "trainer": {
+      "weapon": "axe",
+      "hash": "9f102d02a8490807883e02472ac042bda76e761a0df588f33e9599ddb19c75f5"
+    },
+    "burglar": {
+      "weapon": "rifle",
+      "hash": "11e048e741b0c1391a38ac42c47f6637262ba6cbc9a25ab966342ac516436582"
+    },
+    "stormblade": {
+      "weapon": "sword",
+      "hash": "b60ebf4b81afbbe634314139f35cd69ce0eb9e8b94fae7fccfff663a16ed2f13"
+    },
+    "erica": {
+      "weapon": "rifle",
+      "hash": "225e70ecf1fccbf6912f306fa737501973ec256381716f314f515b2e279ba520"
+    },
+    "stacy": {
+      "weapon": "rifle",
+      "hash": "056554aac4162d8df794e71a95a77477f36499db660637498080df2ad73d1ec2"
+    },
+    "death": {
+      "weapon": "axe",
+      "hash": "4a404763341fa9f15bc70040057702caa336379911c06ccd903dadb1ad0c3b64"
+    },
+    "sylviana": {
+      "weapon": "rifle",
+      "hash": "19f57410045a6bc8c506640a8125cd33c34564ab126f1f8f73bc49ce71333131"
+    },
+    "malvaris": {
+      "weapon": "dualSwords",
+      "hash": "cf117a7d7a5fae82ebded56fb3004eca8ea892ac10bbaaa76ca7a017eb29709f"
+    },
+    "etheris": {
+      "weapon": "axe",
+      "hash": "ffd67bbfbdab253ff4d98a096e7c475d2e7e18edcb484efc3f87c01947e6a631"
+    },
+    "magma": {
+      "weapon": "axe",
+      "hash": "5caf23b61e7b79b8ea3bec578b7c5fa9e94244f3a605556841f702ce7f30a535"
+    },
+    "avalith": {
+      "weapon": "rifle",
+      "hash": "8b372686e2e38887454f8847e3d4b2c20876b4e0798795f3d3cb3d17bb8ae951"
+    },
+    "far": {
+      "weapon": "axe",
+      "hash": "07dc57446d98067588ae5ae55be0a3ee4e6723f789a517618cc24e03f6fd166b"
+    },
+    "demotron": {
+      "weapon": "axe",
+      "hash": "a02ca53410066f145ddb00662e03659a316aad11dc1b9f062fb2612abb214e4f"
+    },
+    "format": {
+      "weapon": "rifle",
+      "hash": "1121af0329af7e7169924d092789929d27721256b73d08e745b1c04459cfb13d"
+    },
+    "pyhsic": {
+      "weapon": "wand",
+      "hash": "407ed1ca3d78b0982725bc869de52c1e6407c1e56c714e4377305e8ea99023cc"
+    },
+    "naar": {
+      "weapon": "wand",
+      "hash": "54b5991b04cab5263c6d706e1035aeedbde3ee7905d768682b07a40d32643468"
+    },
+    "lyra": {
+      "weapon": "axe",
+      "hash": "c2560ede8e5ceaedbc9c3041eea96f44e9674a778938ec5eaf4fe3e0a193ef4b"
+    },
+    "aeralis": {
+      "weapon": "rifle",
+      "hash": "30d57e4b59b81011e7bc026535c0331f93779a15c26a4dac49753df6420ece5d"
+    },
+    "dark-necromancer": {
+      "weapon": "rifle",
+      "hash": "96da11d01c2a41cd019b4b068de363202558935ffb3c37f9e501544eff49c19a"
+    },
+    "shine": {
+      "weapon": "axe",
+      "hash": "d3ce251383c34336bfbfc9d0c14b9ae2384298c9a331563632df9770371d28d9"
+    },
+    "bloodraider": {
+      "weapon": "scythe",
+      "hash": "551dfd65e1fef2ae366f290b69836e6f4f1f96b8328c4c0f7f12ec0b7266d0a2"
+    },
+    "fallen-angel": {
+      "weapon": "sword",
+      "hash": "55e545a12692ff0ecaf4b8681dfda58313a6238c2d25e0410aaccba0e05e0c0b"
+    },
+    "worms": {
+      "weapon": "axe",
+      "hash": "c0a55462d7fdbddbf0d47c0c8e3b386530e806588caf969cd6bfddc99209f83b"
+    },
+    "unara": {
+      "weapon": "wand",
+      "hash": "57659b489ecceb89ba287a575143a6aba994e861dccefee1c7231151240192c6"
+    },
+    "ali": {
+      "weapon": "sword",
+      "hash": "5f77b7cdd6ef5a44bff2ecb3654fc1dea37adae19a52eb9b7143ef108f1b6fc9"
+    },
+    "clara": {
+      "weapon": "axe",
+      "hash": "e2fe2ddeba28d31a99dbb832fdd53a6338516d7ac3c8861450e5d11b49342b47"
+    },
+    "artist": {
+      "weapon": "rifle",
+      "hash": "ab9ed0f7059ab5acc69abecf074c840ddc311b1244e465d8c5917bfe9bc4b867"
+    },
+    "captain-vane": {
+      "weapon": "axe",
+      "hash": "67b6800688457bd43e1a3de99320a1cdf06ba20ac2d8869405c90728a61c9236"
+    },
+    "spiritcaller": {
+      "weapon": "rifle",
+      "hash": "d94038152bc3783f270d4d52f1daf4942b829d9c639d27f6ff49286201610b46"
+    },
+    "bolt": {
+      "weapon": "axe",
+      "hash": "365ccab839bc7da9058b4d674ca8bdb26d4ef2978b5a29ffe4b95c3eae9dafb6"
+    }
+  }
+}

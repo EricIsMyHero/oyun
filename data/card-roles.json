@@ -1,0 +1,406 @@
+{
+  "classes": [
+    {
+      "name": "Tank",
+      "description": "Frontline durability, protection, engagement or sustained control.",
+      "subclasses": [
+        {
+          "name": "Absorber",
+          "description": "Weakens nearby enemy attack power while gaining drained power."
+        },
+        {
+          "name": "Anchor",
+          "description": "Holds the frontline through defensive team synergy or repeated taunts."
+        },
+        {
+          "name": "Bulwark",
+          "description": "Relies on large defensive reserves or strong incoming-damage prevention."
+        },
+        {
+          "name": "Commander",
+          "description": "Combines a durable defensive presence with summoned reinforcements."
+        },
+        {
+          "name": "Igniter",
+          "description": "Adds repeated burning damage or leaves damaging fire zones."
+        },
+        {
+          "name": "Immortal",
+          "description": "Survives lethal damage through a conditional Immortal window."
+        },
+        {
+          "name": "Juggernaut",
+          "description": "Maintains prolonged offensive pressure through exceptional or growing durability."
+        },
+        {
+          "name": "Phaser",
+          "description": "Uses recurring conditional invulnerability windows to survive exchanges."
+        },
+        {
+          "name": "Protector",
+          "description": "Reduces damage suffered by nearby allies while occupying the frontline."
+        },
+        {
+          "name": "Reborn",
+          "description": "Survives or changes bodies through a rebirth lifecycle."
+        },
+        {
+          "name": "Regenerator",
+          "description": "Recovers Health or Shield over time or through sustained combat conditions."
+        },
+        {
+          "name": "Stunner",
+          "description": "Uses repeated stun effects to disrupt enemies at close range."
+        },
+        {
+          "name": "Vanguard",
+          "description": "Draws enemy attacks or initiates frontline control while sustaining itself."
+        },
+        {
+          "name": "Warden",
+          "description": "Contains enemies or repels threats through defensive crowd control."
+        }
+      ]
+    },
+    {
+      "name": "Fighter",
+      "description": "Sustained close combat, dueling and offensive scaling.",
+      "subclasses": [
+        {
+          "name": "Berserker",
+          "description": "Gains offensive power when Health or Shield is lost or a combat partner falls."
+        },
+        {
+          "name": "Bloodpact",
+          "description": "Trades its own Health for progressively increasing attack damage."
+        },
+        {
+          "name": "Brawler",
+          "description": "An all-round sustained close-combat fighter."
+        },
+        {
+          "name": "Breaker",
+          "description": "Deals increased damage to shields or shielded targets."
+        },
+        {
+          "name": "Bulwark",
+          "description": "Relies on large defensive reserves or strong incoming-damage prevention."
+        },
+        {
+          "name": "Burst",
+          "description": "Concentrates attack damage in volleys or heavy individual shots."
+        },
+        {
+          "name": "Charger",
+          "description": "Closes distance or rushes through targets with an empowered opening or dash."
+        },
+        {
+          "name": "Duelist",
+          "description": "Builds an advantage against a focused target or in isolated fights."
+        },
+        {
+          "name": "Flurry",
+          "description": "Alternates normal strikes with rapid multi-hit attack sequences."
+        },
+        {
+          "name": "Harvester",
+          "description": "Gains offensive strength or resources from deaths, souls or kills."
+        },
+        {
+          "name": "Piercer",
+          "description": "Bypasses shields or penetrates targets through the authored attack profile."
+        },
+        {
+          "name": "Poisoner",
+          "description": "Adds poison damage or toxin stacks to repeated attacks."
+        },
+        {
+          "name": "Rampager",
+          "description": "Increases attack damage with each successful damage event."
+        },
+        {
+          "name": "Reborn",
+          "description": "Survives or changes bodies through a rebirth lifecycle."
+        },
+        {
+          "name": "Regenerator",
+          "description": "Recovers Health or Shield over time or through sustained combat conditions."
+        },
+        {
+          "name": "Scavenger",
+          "description": "Converts enemy kills into Mana while fighting at close range."
+        },
+        {
+          "name": "Silencer",
+          "description": "Repeatedly prevents enemies from activating abilities."
+        },
+        {
+          "name": "Siphon",
+          "description": "Steals combat stats from enemies rather than relying on opening burst damage."
+        },
+        {
+          "name": "Skirmisher",
+          "description": "Combines close fighting with movement, repositioning or mobility-related growth."
+        },
+        {
+          "name": "Slayer",
+          "description": "Gains special damage advantages against durable targets or particular creature categories."
+        },
+        {
+          "name": "Snowballer",
+          "description": "Accumulates offensive bonuses through time, repeated success or kills."
+        },
+        {
+          "name": "Summoner",
+          "description": "Creates allied reinforcements or defensive summons as part of its combat plan."
+        },
+        {
+          "name": "Survivor",
+          "description": "Uses defensive triggers, reflection or body changes to stay in prolonged fights."
+        },
+        {
+          "name": "Swarm",
+          "description": "Fights through several fragile bodies or gains strength from related units."
+        },
+        {
+          "name": "Sweeper",
+          "description": "Deals close-range damage across arcs, circles or chained nearby targets."
+        },
+        {
+          "name": "Vampire",
+          "description": "Sustains itself through lifesteal or turns successful healing into offensive growth."
+        }
+      ]
+    },
+    {
+      "name": "Assassin",
+      "description": "Ambushes, infiltration, diving or decisive execution attacks.",
+      "subclasses": [
+        {
+          "name": "Ambusher",
+          "description": "Gains an opening advantage through concealment, surprise or enhanced first strikes."
+        },
+        {
+          "name": "Diver",
+          "description": "Reaches priority targets through leaps, charges or repeated passing attacks."
+        },
+        {
+          "name": "Executioner",
+          "description": "Uses critical opening strikes, finishing damage or instant-kill mechanics."
+        },
+        {
+          "name": "Infiltrator",
+          "description": "Enters an enemy body and deals damage from within."
+        },
+        {
+          "name": "Phantom",
+          "description": "Uses stealth and repositioning to escape or reset an engagement."
+        }
+      ]
+    },
+    {
+      "name": "Marksman",
+      "description": "Repeated ranged weapon attacks, precision shooting and projectile pressure.",
+      "subclasses": [
+        {
+          "name": "Artillery",
+          "description": "Projects heavy or broad attack damage, bombs or deployment strikes into an area."
+        },
+        {
+          "name": "Bleeder",
+          "description": "Applies bleeding damage and its associated healing denial."
+        },
+        {
+          "name": "Boomerang",
+          "description": "Damages enemies on outward and returning projectile paths."
+        },
+        {
+          "name": "Breaker",
+          "description": "Deals increased damage to shields or shielded targets."
+        },
+        {
+          "name": "Burst",
+          "description": "Concentrates attack damage in volleys or heavy individual shots."
+        },
+        {
+          "name": "Debuffer",
+          "description": "Reduces enemy combat effectiveness or increases the damage enemies receive."
+        },
+        {
+          "name": "Harvester",
+          "description": "Gains offensive strength or resources from deaths, souls or kills."
+        },
+        {
+          "name": "Igniter",
+          "description": "Adds repeated burning damage or leaves damaging fire zones."
+        },
+        {
+          "name": "Marker",
+          "description": "Marks multiple enemies to increase subsequent damage against them."
+        },
+        {
+          "name": "Overclocker",
+          "description": "Builds or triggers temporary attack-speed boosts through repeated attacks."
+        },
+        {
+          "name": "Piercer",
+          "description": "Bypasses shields or penetrates targets through the authored attack profile."
+        },
+        {
+          "name": "Poisoner",
+          "description": "Adds poison damage or toxin stacks to repeated attacks."
+        },
+        {
+          "name": "Repeller",
+          "description": "Keeps enemies at distance with repeated forced displacement."
+        },
+        {
+          "name": "Sharpshooter",
+          "description": "Maintains precise repeated ranged damage, often supported by critical hits."
+        },
+        {
+          "name": "Slayer",
+          "description": "Gains special damage advantages against durable targets or particular creature categories."
+        },
+        {
+          "name": "Sniper",
+          "description": "Uses long range, distance scaling or prepared precision shots to strike safely."
+        },
+        {
+          "name": "Snowballer",
+          "description": "Accumulates offensive bonuses through time, repeated success or kills."
+        },
+        {
+          "name": "Tracker",
+          "description": "Specializes in hunting selected enemy creature types."
+        },
+        {
+          "name": "Wanderer",
+          "description": "Converts movement or distance traveled into greater offensive strength."
+        }
+      ]
+    },
+    {
+      "name": "Mage",
+      "description": "Ability-driven burst, area damage, damage over time or enemy control.",
+      "subclasses": [
+        {
+          "name": "Bleeder",
+          "description": "Applies bleeding damage and its associated healing denial."
+        },
+        {
+          "name": "Controller",
+          "description": "Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment."
+        },
+        {
+          "name": "Deathcaller",
+          "description": "Threatens periodic lethal executions tied to the victim’s Health."
+        },
+        {
+          "name": "Debuffer",
+          "description": "Reduces enemy combat effectiveness or increases the damage enemies receive."
+        },
+        {
+          "name": "Elementalist",
+          "description": "Cycles through distinct elemental attacks with different status effects."
+        },
+        {
+          "name": "Enthraller",
+          "description": "Temporarily turns enemy cards against their original team."
+        },
+        {
+          "name": "Nuker",
+          "description": "Delivers concentrated ability volleys, bursts or chained area explosions."
+        },
+        {
+          "name": "Poisoner",
+          "description": "Adds poison damage or toxin stacks to repeated attacks."
+        }
+      ]
+    },
+    {
+      "name": "Support",
+      "description": "Ally buffs, healing, protection, resources, vision or utility-focused disruption.",
+      "subclasses": [
+        {
+          "name": "Buffer",
+          "description": "Strengthens nearby allies with offensive, mobility or beneficial status effects."
+        },
+        {
+          "name": "Disruptor",
+          "description": "Disables enemies or interferes with their actions, vision, resources or combat flow."
+        },
+        {
+          "name": "Guardian",
+          "description": "Protects allies through immunity or linked defensive reserves."
+        },
+        {
+          "name": "Healer",
+          "description": "Restores allied current Health, including paired current-and-maximum Health growth."
+        },
+        {
+          "name": "Resourcer",
+          "description": "Produces deployment resources for the team."
+        },
+        {
+          "name": "Scout",
+          "description": "Reveals or marks distant enemies to provide information."
+        },
+        {
+          "name": "Shieldbearer",
+          "description": "Grants or replenishes allied shields."
+        }
+      ]
+    },
+    {
+      "name": "Specialist",
+      "description": "Distinct deployment, summoning, copying, transformation or expendable-unit mechanics.",
+      "subclasses": [
+        {
+          "name": "Constructor",
+          "description": "Accumulates components to build a larger allied unit."
+        },
+        {
+          "name": "Disruptor",
+          "description": "Disables enemies or interferes with their actions, vision, resources or combat flow."
+        },
+        {
+          "name": "Mimic",
+          "description": "Copies an enemy body, weapon or combat statistics."
+        },
+        {
+          "name": "Possessor",
+          "description": "Takes temporary direct control of an enemy body."
+        },
+        {
+          "name": "Saboteur",
+          "description": "Trades an expendable body for an opening, death or one-off damage/debuff payload."
+        },
+        {
+          "name": "Splitter",
+          "description": "Splits into additional combat units when its original body dies."
+        },
+        {
+          "name": "Summoner",
+          "description": "Creates allied reinforcements or defensive summons as part of its combat plan."
+        },
+        {
+          "name": "Swarm",
+          "description": "Fights through several fragile bodies or gains strength from related units."
+        },
+        {
+          "name": "Transformer",
+          "description": "Selects or changes into a different combat form as its defining mechanic."
+        },
+        {
+          "name": "Trapper",
+          "description": "Waits for nearby enemies to trigger an area attack or control effect."
+        },
+        {
+          "name": "Trickster",
+          "description": "Steals an enemy’s native passive ability."
+        }
+      ]
+    }
+  ]
+}

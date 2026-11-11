@@ -58,7 +58,9 @@
       "movementType": "hovering",
       "groundEffectImmune": true,
       "movementCondition": "Canı 10%-dən aşağı düşəndə 10 saniyə uçar."
-    }
+    },
+    "class": "Fighter",
+    "subclass": "Skirmisher"
   },
   {
     "id": "dumpsy",
@@ -118,7 +120,9 @@
       "projectileEndEffect": null,
       "movementType": "ground",
       "groundEffectImmune": false
-    }
+    },
+    "class": "Tank",
+    "subclass": "Juggernaut"
   },
   {
     "id": "blesser",
@@ -178,7 +182,9 @@
       "projectileEndEffect": null,
       "movementType": "ground",
       "groundEffectImmune": false
-    }
+    },
+    "class": "Support",
+    "subclass": "Buffer"
   },
   {
     "id": "js",
@@ -238,7 +244,9 @@
       "projectileEndEffect": null,
       "movementType": "ground",
       "groundEffectImmune": false
-    }
+    },
+    "class": "Marksman",
+    "subclass": "Debuffer"
   },
   {
     "id": "mimic",
@@ -298,7 +306,9 @@
       "projectileEndEffect": null,
       "movementType": "ground",
       "groundEffectImmune": false
-    }
+    },
+    "class": "Specialist",
+    "subclass": "Mimic"
   },
   {
     "id": "the-seven-sins",
@@ -346,7 +356,7 @@
     },
     "story": "-",
     "class": "Specialist",
-    "subclass": "Emergent Vessel",
+    "subclass": "Transformer",
     "forms": [
       {
         "id": "pride",
@@ -391,8 +401,8 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "Tank",
-        "subclass": "Prideful",
+        "class": "Fighter",
+        "subclass": "Duelist",
         "combatStats": {
           "attackType": "melee",
           "multiTarget": false,
@@ -453,8 +463,8 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "Marksman",
-        "subclass": "Hoarder",
+        "class": "Tank",
+        "subclass": "Regenerator",
         "combatStats": {
           "attackType": "melee",
           "multiTarget": false,
@@ -515,8 +525,8 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "Support",
-        "subclass": "Enthraller",
+        "class": "Tank",
+        "subclass": "Warden",
         "combatStats": {
           "attackType": "melee",
           "multiTarget": false,
@@ -577,8 +587,8 @@
           "level3": "-"
         },
         "story": "-",
-        "class": "Assassin",
-        "subclass": "Mirror",
+        "class": "Specialist",
+        "subclass": "Mimic",
         "combatStats": {
           "attackType": "melee",
           "multiTarget": false,
@@ -640,7 +650,7 @@
         },
         "story": "-",
         "class": "Tank",
-        "subclass": "Devourer",
+        "subclass": "Bulwark",
         "combatStats": {
           "attackType": "melee",
           "multiTarget": false,
@@ -764,7 +774,7 @@
         },
         "story": "-",
         "class": "Tank",
-        "subclass": "Dormant",
+        "subclass": "Regenerator",
         "combatStats": {
           "attackType": "melee",
           "multiTarget": false,
@@ -842,7 +852,7 @@
         "trait": "-",
         "story": "-",
         "class": "Fighter",
-        "subclass": "Human"
+        "subclass": "Brawler"
       }
     ],
     "combatStats": {
@@ -922,7 +932,9 @@
       "movementType": "ground",
       "groundEffectImmune": false,
       "movementCondition": "Meydana planörlə enərkən."
-    }
+    },
+    "class": "Marksman",
+    "subclass": "Artillery"
   },
   {
     "id": "huang-chen",
@@ -969,8 +981,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Tank",
+    "subclass": "Regenerator",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Emergent (2)",
@@ -1022,8 +1034,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Support",
+    "subclass": "Disruptor",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Emergent (2)",
@@ -1075,8 +1087,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Fighter",
+    "subclass": "Harvester",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Emergent (2)",
@@ -1128,8 +1140,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Fighter",
+    "subclass": "Snowballer",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Emergent (2)",
@@ -1181,8 +1193,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Support",
+    "subclass": "Disruptor",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Emergent (2)",
@@ -1233,8 +1245,8 @@
       "level3": "-"
     },
     "story": "-",
-    "class": "",
-    "subclass": "",
+    "class": "Mage",
+    "subclass": "Debuffer",
     "sourceWorkbook": {
       "file": "Book1.xlsx",
       "sheet": "Emergent",

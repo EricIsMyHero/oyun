@@ -1,3 +1,4 @@
+const {restoreHistoricalRoles}=require('./card-role-history.cjs');
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..'),manifest=require('../data/card-imports/book2.json'),before=require('./fixtures/pre-book2-cards.json');
 const files=fs.readdirSync(path.join(root,'rarity')).filter(f=>f.endsWith('.json'));
@@ -8,7 +9,7 @@ test('Book2 retains all originals apart from rarity moves and explicitly authori
  assert.equal(cards.length,176);assert.equal(cards.flatMap(walk).length,241);assert.equal(byId.size,cards.length);assert.equal(manifest.newCards.length,29);
  assert.deepEqual(new Set(manifest.newCards.map(c=>c.id)),new Set(cards.filter(c=>!before.order.includes(c.id)&&c.sourceWorkbook?.file!=='Book1.xlsx').map(c=>c.id)));
  for(const id of before.order){
-  const c=structuredClone(byId.get(id));assert.ok(c,id);delete c.rarity;
+  const c=restoreHistoricalRoles(byId.get(id));assert.ok(c,id);delete c.rarity;
   // Restore only the four source edits authorized after the Book2 import.
   if(id==='ironjaw')c.trait='Hər hasar verdikdə Can Çalma şansı <b>+0,5%</b> artar <b>(Max:25%)</b>';
   if(id==='tphoenix'){c.combatStats.multiTarget=false;c.combatStats.maxTargets=1;}
@@ -50,5 +51,5 @@ test('new Ascendant partner rows, Bolt companion, Cloud phases and Dragon choice
 test('unprovided combat facts remain explicit instead of inventing profiles, while all original Arena cards remain playable',async()=>{
  const{buildCatalog}=await import('../arena/js/catalog.mjs'),catalog=buildCatalog(cards,[]);assert.equal(catalog.cards.filter(c=>c.ready).length,138);
  for(const id of before.order)assert.equal(catalog.byId.get(id).ready,true,id);
- for(const entry of manifest.newCards){const c=byId.get(entry.id),d=catalog.byId.get(entry.id);assert.equal(d.ready,false,entry.id);assert.match(d.reasons.join(' '),/combat profile|native ability/);for(const f of walk(c)){assert.equal(f.combatStats,undefined);assert.ok(f.story==null||f.story==='-');assert.equal(f.class,'');assert.equal(f.sourceWorkbook.file,'Book2.xlsx');if(f.additionalStats)assert.equal(f.additionalStats.criticDamage,'-');}}
+ for(const entry of manifest.newCards){const c=byId.get(entry.id),d=catalog.byId.get(entry.id);assert.equal(d.ready,false,entry.id);assert.match(d.reasons.join(' '),/combat profile|native ability/);for(const f of walk(c)){assert.equal(f.combatStats,undefined);assert.ok(f.story==null||f.story==='-');assert.ok(f.class&&f.subclass,'later role audit fills class and subclass');assert.equal(f.sourceWorkbook.file,'Book2.xlsx');if(f.additionalStats)assert.equal(f.additionalStats.criticDamage,'-');}}
 });

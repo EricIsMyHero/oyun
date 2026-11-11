@@ -119,7 +119,7 @@
           }
         }
       ],
-      "class": "Marksman",
+      "class": "Specialist",
       "subclass": "Constructor",
       "combatStats": {
         "attackType": "ranged",
@@ -227,7 +227,7 @@
           },
           "story": "-",
           "class": "Marksman",
-          "subclass": "Ravager",
+          "subclass": "Snowballer",
           "combatStats": {
             "attackType": "ranged",
             "multiTarget": false,
@@ -246,7 +246,7 @@
           }
         }
       ],
-      "class": "Marksman",
+      "class": "Specialist",
       "subclass": "Constructor",
       "combatStats": {
         "attackType": "melee",
@@ -265,7 +265,7 @@
         "groundEffectImmune": false
       }
     },
-    "class": "Marksman",
+    "class": "Specialist",
     "subclass": "Constructor",
     "combatStats": {
       "attackType": "ranged",
@@ -495,8 +495,8 @@
         "level3": "-"
       },
       "story": "The King is a skeletal monarch who commands the dead with absolute authority. Unlike the Lord, he wears bright, polished dark iron armor infused with deep purple and crimson hues, reflecting his ancient status. His skull holds piercing crimson eyes that blaze with undying malice. He grips a greatsword in his bony hands, ready to strike down anyone who defies his rule. While the Lord is a simple destroyer, the King is a ruler of the UnderWorld, a chilling specter of a lost kingdom that refuses to fade into dust.",
-      "class": "Tank",
-      "subclass": "Monarch",
+      "class": "Support",
+      "subclass": "Buffer",
       "combatStats": {
         "attackType": "melee",
         "multiTarget": true,
@@ -624,7 +624,7 @@
         }
       ],
       "class": "Tank",
-      "subclass": "Warden",
+      "subclass": "Commander",
       "combatStats": {
         "attackType": "melee",
         "multiTarget": true,
@@ -642,8 +642,8 @@
         "groundEffectImmune": false
       }
     },
-    "class": "Tank",
-    "subclass": "Monarch",
+    "class": "Support",
+    "subclass": "Buffer",
     "combatStats": {
       "attackType": "melee",
       "multiTarget": true,
@@ -823,8 +823,8 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Marksman",
-          "subclass": "Swarmer",
+          "class": "Fighter",
+          "subclass": "Swarm",
           "combatStats": {
             "attackType": "melee",
             "multiTarget": false,
@@ -844,7 +844,7 @@
         }
       ],
       "class": "Fighter",
-      "subclass": "Undying",
+      "subclass": "Survivor",
       "combatStats": {
         "attackType": "melee",
         "multiTarget": false,
@@ -943,7 +943,7 @@
       },
       "story": "-",
       "class": "Marksman",
-      "subclass": "Trapper",
+      "subclass": "Artillery",
       "combatStats": {
         "attackType": "ranged",
         "multiTarget": false,
@@ -1030,7 +1030,7 @@
       }
     },
     "class": "Marksman",
-    "subclass": "Trapper",
+    "subclass": "Artillery",
     "combatStats": {
       "attackType": "ranged",
       "multiTarget": false,
@@ -1233,7 +1233,7 @@
         }
       ],
       "class": "Tank",
-      "subclass": "Warlord",
+      "subclass": "Commander",
       "combatStats": {
         "attackType": "melee",
         "multiTarget": true,
@@ -1370,8 +1370,8 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Tank",
-          "subclass": "Ripper",
+          "class": "Fighter",
+          "subclass": "Breaker",
           "combatStats": {
             "attackType": "melee",
             "multiTarget": false,
@@ -1497,7 +1497,7 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Marksman",
+          "class": "Fighter",
           "subclass": "Piercer",
           "combatStats": {
             "attackType": "melee",
@@ -1611,7 +1611,7 @@
       },
       "story": "-",
       "class": "Marksman",
-      "subclass": "Reaper",
+      "subclass": "Harvester",
       "combatStats": {
         "attackType": "ranged",
         "multiTarget": false,
@@ -1692,7 +1692,7 @@
       }
     },
     "class": "Marksman",
-    "subclass": "Reaper",
+    "subclass": "Harvester",
     "combatStats": {
       "attackType": "ranged",
       "multiTarget": false,
@@ -1824,8 +1824,8 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Tank",
-          "subclass": "Twinshot",
+          "class": "Fighter",
+          "subclass": "Sweeper",
           "combatStats": {
             "attackType": "melee",
             "multiTarget": true,
@@ -1844,8 +1844,8 @@
           }
         }
       ],
-      "class": "Marksman",
-      "subclass": "Twinshot",
+      "class": "Fighter",
+      "subclass": "Sweeper",
       "combatStats": {
         "attackType": "melee",
         "multiTarget": true,
@@ -1951,8 +1951,8 @@
             "level3": "-"
           },
           "story": "-",
-          "class": "Marksman",
-          "subclass": "Twinshot",
+          "class": "Fighter",
+          "subclass": "Charger",
           "combatStats": {
             "attackType": "melee",
             "multiTarget": false,
@@ -1971,8 +1971,8 @@
           }
         }
       ],
-      "class": "Marksman",
-      "subclass": "Twinshot",
+      "class": "Fighter",
+      "subclass": "Charger",
       "combatStats": {
         "attackType": "melee",
         "multiTarget": false,
@@ -1990,8 +1990,8 @@
         "groundEffectImmune": false
       }
     },
-    "class": "Marksman",
-    "subclass": "Twinshot",
+    "class": "Fighter",
+    "subclass": "Sweeper",
     "combatStats": {
       "attackType": "melee",
       "multiTarget": true,
@@ -2065,8 +2065,8 @@
         "level3": "-"
       },
       "story": "-",
-      "class": "",
-      "subclass": "",
+      "class": "Mage",
+      "subclass": "Debuffer",
       "sourceWorkbook": {
         "file": "Book2.xlsx",
         "sheet": "Ethereal (2)",
@@ -2117,16 +2117,16 @@
         "level3": "-"
       },
       "story": "-",
-      "class": "",
-      "subclass": "",
+      "class": "Mage",
+      "subclass": "Debuffer",
       "sourceWorkbook": {
         "file": "Book2.xlsx",
         "sheet": "Ethereal (2)",
         "row": 31
       }
     },
-    "class": "",
-    "subclass": "",
+    "class": "Mage",
+    "subclass": "Debuffer",
     "sourceWorkbook": {
       "file": "Book2.xlsx",
       "sheet": "Ethereal (2)",

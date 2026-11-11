@@ -342,3 +342,7 @@ and individual passive ratings](docs/card-power.md). Export scores with
 
 The nine Book1 additions and JSON preservation policy are documented in
 [the Book1 import record](docs/card-imports/book1.md).
+
+All 241 definitions have reviewed class/subclass labels using seven primary
+classes. The [role audit and subclass glossary](docs/card-roles.md) records every
+assignment and correction. Class filters include either selectable Ethereal form.

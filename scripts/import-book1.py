@@ -40,7 +40,7 @@ def main():
             values=[workbook[rarity].cell(row,col).value for col in range(1,17)]
             card=build(values,rarity,row,card_id)
             if card_id not in ids:cards.append(card);ids.add(card_id)
-            elif next(c for c in cards if c['id']==card_id)!=card:raise ValueError(f'Existing card differs: {card_id}; refusing to overwrite JSON.')
+            elif {k:v for k,v in next(c for c in cards if c['id']==card_id).items() if k not in ('class','subclass')}!={k:v for k,v in card.items() if k not in ('class','subclass')}:raise ValueError(f'Existing card differs: {card_id}; refusing to overwrite JSON.')
             manifest['newCards'].append({'id':card_id,'name':card['name'],'rarity':rarity,'sheet':rarity,'row':row,'sourceValues':values})
         path.write_text(json.dumps(cards,ensure_ascii=False,indent=2)+'\n')
     (ROOT/'data/card-imports/book1.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')

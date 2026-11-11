@@ -81,3 +81,10 @@ Subsequent user-authorized audit corrections update Tphoenix's area targeting,
 Ironjaw's native description to clarify an additional +25% Lifesteal Chance,
 and Deadscope/Naar's reference DPS. Historical import checks restore only these
 explicit edits before comparing the original fingerprints.
+
+## Subsequent role audit
+
+The user subsequently requested a full class/subclass review. Only these role
+labels may differ from the historical import description above; missing roles
+are now filled and misleading labels corrected. Source stats, abilities and
+combat profiles remain unchanged. See [the full role audit](../card-roles.md).

@@ -131,11 +131,15 @@ function updateDeck() {
   $('start-hint').textContent=missingForms.length?`Choose a form for ${missingForms.map(id=>state.catalog.byId.get(id).name).join(', ')}.`:canStart()?'Ready for a fair battle against the bot.':`Choose ${8-state.deck.length} more unit${8-state.deck.length===1?'':'s'}${state.spellDeck.length?'':' and at least 1 spell'}.`;
   renderCatalog();
 }
+function libraryRoles(def) {
+  const choices=def.typeVariants?.length?def.typeVariants:[def];
+  return [...new Set(choices.map(c=>c.class||c.raw?.class||c.raw?.type).filter(x=>typeof x==='string'))];
+}
 function populateFilters() {
   const entries=state.tab==='troops'?state.catalog.cards:state.catalog.spells;
   const rarities=[...new Set(entries.map(c=>String(c.rarity||c.raw?.rarity||'').toLowerCase()).filter(Boolean))];
   $('rarity-filter').innerHTML='<option value="all">All rarities</option>'+rarities.map(x=>`<option value="${escapeHTML(x)}">${escapeHTML(label(x))}</option>`).join('');
-  const classes=[...new Set(entries.map(c=>c.raw?.class||c.raw?.type).filter(x=>typeof x==='string'))].sort();
+  const classes=[...new Set(entries.flatMap(libraryRoles))].sort();
   $('class-filter').innerHTML='<option value="all">All roles</option>'+classes.map(x=>`<option value="${escapeHTML(x)}">${escapeHTML(x)}</option>`).join('');
 }
 function setTab(tab) {
@@ -150,12 +154,13 @@ function renderCatalog() {
   const isSpell=state.tab==='spells',entries=isSpell?state.catalog.spells:state.catalog.cards;
   const query=$('card-search').value.trim().toLowerCase(),readiness=$('readiness-filter').value,rarity=$('rarity-filter').value,role=$('class-filter').value;
   const shown=entries.filter(def=>{
-    const haystack=[def.name,def.raw?.class,def.raw?.subclass,...(Array.isArray(def.type)?def.type:[def.type||'']),def.raw?.group].join(' ').toLowerCase();
-    return (!query||haystack.includes(query))&&(readiness==='all'||def.ready===(readiness==='ready'))&&(rarity==='all'||String(def.rarity||def.raw?.rarity).toLowerCase()===rarity)&&(role==='all'||(def.raw?.class||def.raw?.type)===role);
+    const haystack=[def.name,def.raw?.class,def.raw?.subclass,...(def.typeVariants||[]).flatMap(c=>[c.class,c.subclass]),...(Array.isArray(def.type)?def.type:[def.type||'']),def.raw?.group].join(' ').toLowerCase();
+    return (!query||haystack.includes(query))&&(readiness==='all'||def.ready===(readiness==='ready'))&&(rarity==='all'||String(def.rarity||def.raw?.rarity).toLowerCase()===rarity)&&(role==='all'||libraryRoles(def).includes(role));
   }).sort((a,b)=>Number(b.ready)-Number(a.ready));
   $('catalog-summary').textContent=`${shown.length} ${isSpell?'spells':'units'} · ${entries.filter(c=>c.ready).length} battle-ready`;
   $('catalog-grid').innerHTML=shown.length?shown.map(entry=>{const def=isSpell?entry:deckCard(entry.id);
-    const selected=(isSpell?state.spellDeck:state.deck).includes(def.id),roleText=isSpell?`${label(def.kind||def.spellkind||def.raw?.type)} · ${def.charge} charge`:[def.class||def.raw?.class,def.subclass||def.raw?.subclass].filter(Boolean).join(' / ');
+    const roleChoices=entry.typeVariants?.length&&!def.ethereal?entry.typeVariants:[def];
+    const selected=(isSpell?state.spellDeck:state.deck).includes(def.id),roleText=isSpell?`${label(def.kind||def.spellkind||def.raw?.type)} · ${def.charge} charge`:[...new Set(roleChoices.map(c=>[c.class||c.raw?.class,c.subclass||c.raw?.subclass].filter(Boolean).join(' / ')))].join(' · ');
     const reason=def.reasons?.[0]||'Required battle information is missing.';
     return `<article class="library-card ${def.ready?'':'locked'} ${selected?'selected':''} ${isSpell?'spell-card':''}" style="--rarity:${rarityColor(def)}"><button type="button" class="card-pick" data-add-${isSpell?'spell':'card'}="${escapeHTML(def.id)}" aria-label="${def.ready?(selected?'Remove':'Add'):'Inspect locked'} ${escapeHTML(def.name)}" aria-pressed="${selected}"><div class="catalog-art">${imageMarkup(def)}</div><div class="card-tile-body"><strong>${escapeHTML(def.name)}</strong><span class="card-role">${escapeHTML(roleText||label(def.rarity))}</span><div class="card-footer"><span>${escapeHTML(def.ready?(def.choiceRequired&&!def.ethereal?'CHOOSE FORM':`${def.ethereal?`FORM ${def.ethereal.formNumber} · `:''}${selected?'IN YOUR DECK':'BATTLE-READY'}`):reason)}</span><span class="card-cost ${isSpell?'spell-cost':''}">${isSpell?`${def.energy} E`:`${def.stats.mana} M`}</span></div></div>${selected?'<span class="card-selected-mark"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg></span>':!def.ready?'<span class="card-locked-mark"><i class="small-lock" aria-hidden="true"></i> NEEDS DATA</span>':''}</button><button type="button" class="card-info" data-inspect-${isSpell?'spell':'card'}="${escapeHTML(def.id)}" aria-label="Inspect ${escapeHTML(def.name)}">i</button></article>`;
   }).join(''):'<div class="empty-catalog"><strong>No entries found.</strong>Try another search or clear a filter.</div>';

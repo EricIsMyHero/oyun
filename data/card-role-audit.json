@@ -1,0 +1,3338 @@
+{
+  "baseCommit": "196afcbc247922d94e960fb762f967e94991b2e7",
+  "reviewed": 241,
+  "changed": 157,
+  "records": [
+    {
+      "key": "azrith",
+      "name": "Azrith",
+      "before": {
+        "class": "Support",
+        "subclass": "Banner"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": true,
+      "reason": "Support / Buffer: Strengthens nearby allies with offensive, mobility or beneficial status effects. Filled or corrected the role label."
+    },
+    {
+      "key": "azrith/forms/0",
+      "name": "Bannerox",
+      "before": {},
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": true,
+      "reason": "Support / Buffer: Strengthens nearby allies with offensive, mobility or beneficial status effects. Filled or corrected the role label."
+    },
+    {
+      "key": "untouch",
+      "name": "Untouch",
+      "before": {
+        "class": "Tank",
+        "subclass": "Phaser"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Phaser"
+      },
+      "changed": false,
+      "reason": "Tank / Phaser: Uses recurring conditional invulnerability windows to survive exchanges. Existing role retained after review."
+    },
+    {
+      "key": "heartix",
+      "name": "Heartix",
+      "before": {
+        "class": "Mage",
+        "subclass": "Enthraller"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Enthraller"
+      },
+      "changed": false,
+      "reason": "Mage / Enthraller: Temporarily turns enemy cards against their original team. Existing role retained after review."
+    },
+    {
+      "key": "r-1",
+      "name": "R-1",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Piercer"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "changed": true,
+      "reason": "Marksman / Burst: Concentrates attack damage in volleys or heavy individual shots. Filled or corrected the role label."
+    },
+    {
+      "key": "blank",
+      "name": "Blank",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Snowballer"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Snowballer"
+      },
+      "changed": false,
+      "reason": "Marksman / Snowballer: Accumulates offensive bonuses through time, repeated success or kills. Existing role retained after review."
+    },
+    {
+      "key": "magmara",
+      "name": "Magmara",
+      "before": {
+        "class": "Tank",
+        "subclass": "Igniter"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Igniter"
+      },
+      "changed": false,
+      "reason": "Tank / Igniter: Adds repeated burning damage or leaves damaging fire zones. Existing role retained after review."
+    },
+    {
+      "key": "willowshade",
+      "name": "Willowshade",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Reborn"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Piercer"
+      },
+      "changed": true,
+      "reason": "Fighter / Piercer: Bypasses shields or penetrates targets through the authored attack profile. Filled or corrected the role label."
+    },
+    {
+      "key": "willowshade/forms/0",
+      "name": "Octarion",
+      "before": {},
+      "after": {
+        "class": "Specialist",
+        "subclass": "Saboteur"
+      },
+      "changed": true,
+      "reason": "Specialist / Saboteur: Trades an expendable body for an opening, death or one-off damage/debuff payload. Filled or corrected the role label."
+    },
+    {
+      "key": "collector",
+      "name": "Collector",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Scavenger"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Scavenger"
+      },
+      "changed": false,
+      "reason": "Fighter / Scavenger: Converts enemy kills into Mana while fighting at close range. Existing role retained after review."
+    },
+    {
+      "key": "sushu",
+      "name": "Sushu",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Infiltrator"
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Infiltrator"
+      },
+      "changed": false,
+      "reason": "Assassin / Infiltrator: Enters an enemy body and deals damage from within. Existing role retained after review."
+    },
+    {
+      "key": "cloud",
+      "name": "Cloud",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "cloud/forms/0",
+      "name": "Cloud (form 2)",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "cloud/forms/1",
+      "name": "Cloud (form 3)",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "thief",
+      "name": "Thief",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Trickster"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Trickster"
+      },
+      "changed": false,
+      "reason": "Specialist / Trickster: Steals an enemy’s native passive ability. Existing role retained after review."
+    },
+    {
+      "key": "rotlings",
+      "name": "Rotlings",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Harvester"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Harvester"
+      },
+      "changed": false,
+      "reason": "Fighter / Harvester: Gains offensive strength or resources from deaths, souls or kills. Existing role retained after review."
+    },
+    {
+      "key": "rotlings/forms/0",
+      "name": "Mini Rotters",
+      "before": {},
+      "after": {
+        "class": "Support",
+        "subclass": "Disruptor"
+      },
+      "changed": true,
+      "reason": "Support / Disruptor: Disables enemies or interferes with their actions, vision, resources or combat flow. Filled or corrected the role label."
+    },
+    {
+      "key": "esma",
+      "name": "Esma",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Piercer"
+      },
+      "changed": true,
+      "reason": "Fighter / Piercer: Bypasses shields or penetrates targets through the authored attack profile. Filled or corrected the role label."
+    },
+    {
+      "key": "venom-fangs",
+      "name": "Venom Fangs",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Siphon"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Siphon"
+      },
+      "changed": true,
+      "reason": "Fighter / Siphon: Steals combat stats from enemies rather than relying on opening burst damage. Filled or corrected the role label."
+    },
+    {
+      "key": "skyhunter",
+      "name": "Skyhunter",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Sniper"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Sniper"
+      },
+      "changed": false,
+      "reason": "Marksman / Sniper: Uses long range, distance scaling or prepared precision shots to strike safely. Existing role retained after review."
+    },
+    {
+      "key": "rockback",
+      "name": "Rockback",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Charger"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Charger"
+      },
+      "changed": false,
+      "reason": "Fighter / Charger: Closes distance or rushes through targets with an empowered opening or dash. Existing role retained after review."
+    },
+    {
+      "key": "neon-droid",
+      "name": "Neon Droid",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Overclocker"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Overclocker"
+      },
+      "changed": false,
+      "reason": "Marksman / Overclocker: Builds or triggers temporary attack-speed boosts through repeated attacks. Existing role retained after review."
+    },
+    {
+      "key": "void-wraith",
+      "name": "Void Wraith",
+      "before": {
+        "class": "Tank",
+        "subclass": "Absorber"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Absorber"
+      },
+      "changed": false,
+      "reason": "Tank / Absorber: Weakens nearby enemy attack power while gaining drained power. Existing role retained after review."
+    },
+    {
+      "key": "bio-mech",
+      "name": "Bio Mech",
+      "before": {
+        "class": "Support",
+        "subclass": "Shieldbearer"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Shieldbearer"
+      },
+      "changed": false,
+      "reason": "Support / Shieldbearer: Grants or replenishes allied shields. Existing role retained after review."
+    },
+    {
+      "key": "mixela",
+      "name": "Mixela",
+      "before": {
+        "class": "Mage",
+        "subclass": "Lifedrainer"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Juggernaut"
+      },
+      "changed": true,
+      "reason": "Nearby deaths grow current and maximum Health rather than dealing magical drain damage."
+    },
+    {
+      "key": "laura",
+      "name": "Laura",
+      "before": {
+        "class": "Support",
+        "subclass": "Empowerer"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": true,
+      "reason": "Support / Buffer: Strengthens nearby allies with offensive, mobility or beneficial status effects. Filled or corrected the role label."
+    },
+    {
+      "key": "legendary-warrior",
+      "name": "Legendary Warrior",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Duelist"
+      },
+      "changed": true,
+      "reason": "Fighter / Duelist: Builds an advantage against a focused target or in isolated fights. Filled or corrected the role label."
+    },
+    {
+      "key": "lily",
+      "name": "Lily",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Saboteur"
+      },
+      "changed": true,
+      "reason": "Specialist / Saboteur: Trades an expendable body for an opening, death or one-off damage/debuff payload. Filled or corrected the role label."
+    },
+    {
+      "key": "radglic",
+      "name": "Radglic",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Marksman / Debuffer: Reduces enemy combat effectiveness or increases the damage enemies receive. Filled or corrected the role label."
+    },
+    {
+      "key": "arcanyx",
+      "name": "Arcanyx",
+      "before": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "changed": false,
+      "reason": "Mage / Nuker: Delivers concentrated ability volleys, bursts or chained area explosions. Existing role retained after review."
+    },
+    {
+      "key": "leafshade",
+      "name": "Leafshade",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Executioner"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": true,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Filled or corrected the role label."
+    },
+    {
+      "key": "jestro",
+      "name": "Jestro",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Disruptor"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Disruptor"
+      },
+      "changed": false,
+      "reason": "Specialist / Disruptor: Disables enemies or interferes with their actions, vision, resources or combat flow. Existing role retained after review."
+    },
+    {
+      "key": "jestro/forms/0",
+      "name": "Cratex",
+      "before": {
+        "class": "Fighter"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Trapper"
+      },
+      "changed": true,
+      "reason": "Specialist / Trapper: Waits for nearby enemies to trigger an area attack or control effect. Filled or corrected the role label."
+    },
+    {
+      "key": "tphoenix",
+      "name": "Tphoenix",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Reborn"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Reborn"
+      },
+      "changed": false,
+      "reason": "Fighter / Reborn: Survives or changes bodies through a rebirth lifecycle. Existing role retained after review."
+    },
+    {
+      "key": "tphoenix/forms/0",
+      "name": "Fire Egg",
+      "before": {
+        "class": "Tank"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Reborn"
+      },
+      "changed": true,
+      "reason": "Tank / Reborn: Survives or changes bodies through a rebirth lifecycle. Filled or corrected the role label."
+    },
+    {
+      "key": "tphoenix/forms/1",
+      "name": "Phoenix",
+      "before": {
+        "class": "Fighter"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Piercer"
+      },
+      "changed": true,
+      "reason": "Fighter / Piercer: Bypasses shields or penetrates targets through the authored attack profile. Filled or corrected the role label."
+    },
+    {
+      "key": "corsair-crew",
+      "name": "Corsair Crew",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Survivor"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Survivor"
+      },
+      "changed": false,
+      "reason": "Fighter / Survivor: Uses defensive triggers, reflection or body changes to stay in prolonged fights. Existing role retained after review."
+    },
+    {
+      "key": "corsair-crew/forms/0",
+      "name": "Pirate Girls",
+      "before": {
+        "class": "Marksman"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Sniper"
+      },
+      "changed": true,
+      "reason": "Marksman / Sniper: Uses long range, distance scaling or prepared precision shots to strike safely. Filled or corrected the role label."
+    },
+    {
+      "key": "ship-cannoneer",
+      "name": "Ship Cannoneer",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "changed": false,
+      "reason": "Marksman / Burst: Concentrates attack damage in volleys or heavy individual shots. Existing role retained after review."
+    },
+    {
+      "key": "toxic",
+      "name": "Toxic",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Poisoner"
+      },
+      "changed": true,
+      "reason": "Marksman / Poisoner: Adds poison damage or toxin stacks to repeated attacks. Filled or corrected the role label."
+    },
+    {
+      "key": "lumina",
+      "name": "Lumina",
+      "before": {
+        "class": "Tank",
+        "subclass": "Pure"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Juggernaut"
+      },
+      "changed": true,
+      "reason": "Tank / Juggernaut: Maintains prolonged offensive pressure through exceptional or growing durability. Filled or corrected the role label."
+    },
+    {
+      "key": "hell-boy",
+      "name": "Hell boy",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Slayer"
+      },
+      "changed": true,
+      "reason": "Fighter / Slayer: Gains special damage advantages against durable targets or particular creature categories. Filled or corrected the role label."
+    },
+    {
+      "key": "slasherx",
+      "name": "SlasherX",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Reaper"
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Executioner"
+      },
+      "changed": true,
+      "reason": "Assassin / Executioner: Uses critical opening strikes, finishing damage or instant-kill mechanics. Filled or corrected the role label."
+    },
+    {
+      "key": "sheriff",
+      "name": "Sheriff",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Marker"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Marker"
+      },
+      "changed": false,
+      "reason": "Marksman / Marker: Marks multiple enemies to increase subsequent damage against them. Existing role retained after review."
+    },
+    {
+      "key": "nurse",
+      "name": "Nurse",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Vampire"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": true,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Filled or corrected the role label."
+    },
+    {
+      "key": "tribe",
+      "name": "Tribe",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Burst"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Burst"
+      },
+      "changed": false,
+      "reason": "Fighter / Burst: Concentrates attack damage in volleys or heavy individual shots. Existing role retained after review."
+    },
+    {
+      "key": "earthshakers",
+      "name": "Earthshakers",
+      "before": {
+        "class": "Tank",
+        "subclass": "Stunner"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Stunner"
+      },
+      "changed": false,
+      "reason": "Tank / Stunner: Uses repeated stun effects to disrupt enemies at close range. Existing role retained after review."
+    },
+    {
+      "key": "whisper",
+      "name": "Whisper",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Possessor"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Possessor"
+      },
+      "changed": false,
+      "reason": "Specialist / Possessor: Takes temporary direct control of an enemy body. Existing role retained after review."
+    },
+    {
+      "key": "roguex",
+      "name": "RogueX",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Absorber"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Blind reduces enemy Range and Vision; no absorption mechanic exists."
+    },
+    {
+      "key": "void-striker",
+      "name": "Void Striker",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Burst"
+      },
+      "changed": true,
+      "reason": "Fighter / Burst: Concentrates attack damage in volleys or heavy individual shots. Filled or corrected the role label."
+    },
+    {
+      "key": "nightfang",
+      "name": "Nightfang",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Sniper"
+      },
+      "changed": true,
+      "reason": "Its authored 12-tile ranged attacks remain its primary role; stealth supports long-range shooting."
+    },
+    {
+      "key": "sunrise",
+      "name": "Sunrise",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Regenerator"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Regenerator"
+      },
+      "changed": false,
+      "reason": "Fighter / Regenerator: Recovers Health or Shield over time or through sustained combat conditions. Existing role retained after review."
+    },
+    {
+      "key": "shellbyte",
+      "name": "Shellbyte",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Ambusher"
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Diver"
+      },
+      "changed": true,
+      "reason": "Assassin / Diver: Reaches priority targets through leaps, charges or repeated passing attacks. Filled or corrected the role label."
+    },
+    {
+      "key": "wong",
+      "name": "Wong",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Juggernaut"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "changed": true,
+      "reason": "Fighter / Brawler: An all-round sustained close-combat fighter. Filled or corrected the role label."
+    },
+    {
+      "key": "umbra",
+      "name": "Umbra",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Phantom"
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Phantom"
+      },
+      "changed": false,
+      "reason": "Assassin / Phantom: Uses stealth and repositioning to escape or reset an engagement. Existing role retained after review."
+    },
+    {
+      "key": "leader",
+      "name": "Leader",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Snowballer"
+      },
+      "changed": true,
+      "reason": "Fighter / Snowballer: Accumulates offensive bonuses through time, repeated success or kills. Filled or corrected the role label."
+    },
+    {
+      "key": "hostess",
+      "name": "Hostess",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Skirmisher"
+      },
+      "changed": true,
+      "reason": "Fighter / Skirmisher: Combines close fighting with movement, repositioning or mobility-related growth. Filled or corrected the role label."
+    },
+    {
+      "key": "mystic-magician",
+      "name": "Mystic Magician",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Elementalist"
+      },
+      "changed": true,
+      "reason": "Mage / Elementalist: Cycles through distinct elemental attacks with different status effects. Filled or corrected the role label."
+    },
+    {
+      "key": "kitsune",
+      "name": "Kitsune",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Saboteur"
+      },
+      "changed": true,
+      "reason": "Specialist / Saboteur: Trades an expendable body for an opening, death or one-off damage/debuff payload. Filled or corrected the role label."
+    },
+    {
+      "key": "mertel",
+      "name": "Mertel",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": true,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Filled or corrected the role label."
+    },
+    {
+      "key": "nancy",
+      "name": "Nancy",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Charger"
+      },
+      "changed": true,
+      "reason": "Fighter / Charger: Closes distance or rushes through targets with an empowered opening or dash. Filled or corrected the role label."
+    },
+    {
+      "key": "veronica",
+      "name": "Veronica",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Shieldbearer"
+      },
+      "changed": true,
+      "reason": "Support / Shieldbearer: Grants or replenishes allied shields. Filled or corrected the role label."
+    },
+    {
+      "key": "reacher",
+      "name": "Reacher",
+      "before": {
+        "class": "Tank",
+        "subclass": "Anchor"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Anchor"
+      },
+      "changed": false,
+      "reason": "Tank / Anchor: Holds the frontline through defensive team synergy or repeated taunts. Existing role retained after review."
+    },
+    {
+      "key": "reacher/upgradedsecondForm",
+      "name": "Reacher",
+      "before": {
+        "class": "Suicide Assassin"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Anchor"
+      },
+      "changed": true,
+      "reason": "Tank / Anchor: Holds the frontline through defensive team synergy or repeated taunts. Filled or corrected the role label."
+    },
+    {
+      "key": "bastra",
+      "name": "Bastra",
+      "before": {
+        "class": "Tank",
+        "subclass": "Vanguard"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Piercer"
+      },
+      "changed": true,
+      "reason": "Long-range shield-piercing shots and ally-driven attack speed; not a frontline tank."
+    },
+    {
+      "key": "bastra/upgradedsecondForm",
+      "name": "Bastra",
+      "before": {
+        "class": "Suicide Assassin"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Piercer"
+      },
+      "changed": true,
+      "reason": "Long-range shield-piercing shots and ally-driven attack speed; not a frontline tank."
+    },
+    {
+      "key": "maapp",
+      "name": "Maapp",
+      "before": {
+        "class": "Tank",
+        "subclass": "Warden"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Fragile ranged radial damage with severe enemy damage reduction; a debuffer rather than a tank."
+    },
+    {
+      "key": "maapp/upgradedsecondForm",
+      "name": "Maapp",
+      "before": {
+        "class": "Suicide Assassin"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Fragile ranged radial damage with severe enemy damage reduction; a debuffer rather than a tank."
+    },
+    {
+      "key": "avara",
+      "name": "Avara",
+      "before": {
+        "class": "Tank",
+        "subclass": "Controller"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Alternating area attacks, slow, knockback and stun define a control caster."
+    },
+    {
+      "key": "avara/upgradedsecondForm",
+      "name": "Avara",
+      "before": {
+        "class": "Suicide Assassin"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Alternating area attacks, slow, knockback and stun define a control caster."
+    },
+    {
+      "key": "john-reynolds",
+      "name": "John Reynolds",
+      "before": {
+        "class": "Tank",
+        "subclass": "Anchor"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Anchor"
+      },
+      "changed": false,
+      "reason": "Tank / Anchor: Holds the frontline through defensive team synergy or repeated taunts. Existing role retained after review."
+    },
+    {
+      "key": "john-reynolds/upgradedsecondForm",
+      "name": "John Reynolds",
+      "before": {
+        "class": "Suicide Assassin"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Anchor"
+      },
+      "changed": true,
+      "reason": "Tank / Anchor: Holds the frontline through defensive team synergy or repeated taunts. Filled or corrected the role label."
+    },
+    {
+      "key": "atlas",
+      "name": "Atlas",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "atlas/upgradedsecondForm",
+      "name": "Atlas",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "great-stan",
+      "name": "Great Stan",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Bleeder"
+      },
+      "changed": true,
+      "reason": "Marksman / Bleeder: Applies bleeding damage and its associated healing denial. Filled or corrected the role label."
+    },
+    {
+      "key": "great-stan/upgradedsecondForm",
+      "name": "Great Stan",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Bleeder"
+      },
+      "changed": true,
+      "reason": "Marksman / Bleeder: Applies bleeding damage and its associated healing denial. Filled or corrected the role label."
+    },
+    {
+      "key": "marcy",
+      "name": "Marcy",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": true,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Filled or corrected the role label."
+    },
+    {
+      "key": "marcy/upgradedsecondForm",
+      "name": "Marcy",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": true,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Filled or corrected the role label."
+    },
+    {
+      "key": "shield-maiden",
+      "name": "Shield Maiden",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Shieldbearer"
+      },
+      "changed": true,
+      "reason": "Support / Shieldbearer: Grants or replenishes allied shields. Filled or corrected the role label."
+    },
+    {
+      "key": "shield-maiden/upgradedsecondForm",
+      "name": "Shield Maiden",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Shieldbearer"
+      },
+      "changed": true,
+      "reason": "Support / Shieldbearer: Grants or replenishes allied shields. Filled or corrected the role label."
+    },
+    {
+      "key": "shockwave",
+      "name": "ShockWave",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "shockwave/upgradedsecondForm",
+      "name": "ShockWave",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "xii-josh",
+      "name": "XII Josh",
+      "before": {},
+      "after": {
+        "class": "Fighter",
+        "subclass": "Skirmisher"
+      },
+      "changed": true,
+      "reason": "Fighter / Skirmisher: Combines close fighting with movement, repositioning or mobility-related growth. Filled or corrected the role label."
+    },
+    {
+      "key": "dumpsy",
+      "name": "Dumpsy",
+      "before": {},
+      "after": {
+        "class": "Tank",
+        "subclass": "Juggernaut"
+      },
+      "changed": true,
+      "reason": "Tank / Juggernaut: Maintains prolonged offensive pressure through exceptional or growing durability. Filled or corrected the role label."
+    },
+    {
+      "key": "blesser",
+      "name": "Blesser",
+      "before": {},
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": true,
+      "reason": "Support / Buffer: Strengthens nearby allies with offensive, mobility or beneficial status effects. Filled or corrected the role label."
+    },
+    {
+      "key": "js",
+      "name": "JS",
+      "before": {},
+      "after": {
+        "class": "Marksman",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Marksman / Debuffer: Reduces enemy combat effectiveness or increases the damage enemies receive. Filled or corrected the role label."
+    },
+    {
+      "key": "mimic",
+      "name": "Mimic",
+      "before": {},
+      "after": {
+        "class": "Specialist",
+        "subclass": "Mimic"
+      },
+      "changed": true,
+      "reason": "Specialist / Mimic: Copies an enemy body, weapon or combat statistics. Filled or corrected the role label."
+    },
+    {
+      "key": "the-seven-sins",
+      "name": "The Seven Sins",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Emergent Vessel"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Transformer"
+      },
+      "changed": true,
+      "reason": "Specialist / Transformer: Selects or changes into a different combat form as its defining mechanic. Filled or corrected the role label."
+    },
+    {
+      "key": "the-seven-sins/forms/0",
+      "name": "Pride",
+      "before": {
+        "class": "Tank",
+        "subclass": "Prideful"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Duelist"
+      },
+      "changed": true,
+      "reason": "Fighter / Duelist: Builds an advantage against a focused target or in isolated fights. Filled or corrected the role label."
+    },
+    {
+      "key": "the-seven-sins/forms/1",
+      "name": "Greed",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Hoarder"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Regenerator"
+      },
+      "changed": true,
+      "reason": "Tank / Regenerator: Recovers Health or Shield over time or through sustained combat conditions. Filled or corrected the role label."
+    },
+    {
+      "key": "the-seven-sins/forms/2",
+      "name": "Lust",
+      "before": {
+        "class": "Support",
+        "subclass": "Enthraller"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Warden"
+      },
+      "changed": true,
+      "reason": "Tank / Warden: Contains enemies or repels threats through defensive crowd control. Filled or corrected the role label."
+    },
+    {
+      "key": "the-seven-sins/forms/3",
+      "name": "Envy",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Mirror"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Mimic"
+      },
+      "changed": true,
+      "reason": "Specialist / Mimic: Copies an enemy body, weapon or combat statistics. Filled or corrected the role label."
+    },
+    {
+      "key": "the-seven-sins/forms/4",
+      "name": "Gluttony",
+      "before": {
+        "class": "Tank",
+        "subclass": "Devourer"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Bulwark"
+      },
+      "changed": true,
+      "reason": "Tank / Bulwark: Relies on large defensive reserves or strong incoming-damage prevention. Filled or corrected the role label."
+    },
+    {
+      "key": "the-seven-sins/forms/5",
+      "name": "Wrath",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "changed": false,
+      "reason": "Fighter / Berserker: Gains offensive power when Health or Shield is lost or a combat partner falls. Existing role retained after review."
+    },
+    {
+      "key": "the-seven-sins/forms/6",
+      "name": "Sloth",
+      "before": {
+        "class": "Tank",
+        "subclass": "Dormant"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Regenerator"
+      },
+      "changed": true,
+      "reason": "Tank / Regenerator: Recovers Health or Shield over time or through sustained combat conditions. Filled or corrected the role label."
+    },
+    {
+      "key": "the-seven-sins/forms/7",
+      "name": "Human",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Human"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "changed": true,
+      "reason": "Fighter / Brawler: An all-round sustained close-combat fighter. Filled or corrected the role label."
+    },
+    {
+      "key": "stella",
+      "name": "Stella",
+      "before": {},
+      "after": {
+        "class": "Marksman",
+        "subclass": "Artillery"
+      },
+      "changed": true,
+      "reason": "Marksman / Artillery: Projects heavy or broad attack damage, bombs or deployment strikes into an area. Filled or corrected the role label."
+    },
+    {
+      "key": "huang-chen",
+      "name": "Huáng-chén",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Regenerator"
+      },
+      "changed": true,
+      "reason": "Tank / Regenerator: Recovers Health or Shield over time or through sustained combat conditions. Filled or corrected the role label."
+    },
+    {
+      "key": "servant",
+      "name": "Servant",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Disruptor"
+      },
+      "changed": true,
+      "reason": "Support / Disruptor: Disables enemies or interferes with their actions, vision, resources or combat flow. Filled or corrected the role label."
+    },
+    {
+      "key": "survivor",
+      "name": "Survivor",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Harvester"
+      },
+      "changed": true,
+      "reason": "Fighter / Harvester: Gains offensive strength or resources from deaths, souls or kills. Filled or corrected the role label."
+    },
+    {
+      "key": "little-princess",
+      "name": "Little Princess",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Snowballer"
+      },
+      "changed": true,
+      "reason": "Fighter / Snowballer: Accumulates offensive bonuses through time, repeated success or kills. Filled or corrected the role label."
+    },
+    {
+      "key": "three-wise-monkeys",
+      "name": "Three Wise Monkeys",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Disruptor"
+      },
+      "changed": true,
+      "reason": "Support / Disruptor: Disables enemies or interferes with their actions, vision, resources or combat flow. Filled or corrected the role label."
+    },
+    {
+      "key": "plauge",
+      "name": "Plauge",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Weakness and Absolute Weakness define ranged debuff utility; no combat dimensions are inferred."
+    },
+    {
+      "key": "ase",
+      "name": "Ase",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Constructor"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Constructor"
+      },
+      "changed": true,
+      "reason": "Specialist / Constructor: Accumulates components to build a larger allied unit. Filled or corrected the role label."
+    },
+    {
+      "key": "ase/type1",
+      "name": "Ase",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Constructor"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Constructor"
+      },
+      "changed": true,
+      "reason": "Specialist / Constructor: Accumulates components to build a larger allied unit. Filled or corrected the role label."
+    },
+    {
+      "key": "ase/type1/forms/0",
+      "name": "Giga-R",
+      "before": {
+        "class": "Tank",
+        "subclass": "Bulwark"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Bulwark"
+      },
+      "changed": false,
+      "reason": "Tank / Bulwark: Relies on large defensive reserves or strong incoming-damage prevention. Existing role retained after review."
+    },
+    {
+      "key": "ase/type2",
+      "name": "Ase",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Constructor"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Constructor"
+      },
+      "changed": true,
+      "reason": "Specialist / Constructor: Accumulates components to build a larger allied unit. Filled or corrected the role label."
+    },
+    {
+      "key": "ase/type2/forms/0",
+      "name": "Giga-R",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Ravager"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Snowballer"
+      },
+      "changed": true,
+      "reason": "Marksman / Snowballer: Accumulates offensive bonuses through time, repeated success or kills. Filled or corrected the role label."
+    },
+    {
+      "key": "leno",
+      "name": "Leno",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "changed": false,
+      "reason": "Marksman / Sharpshooter: Maintains precise repeated ranged damage, often supported by critical hits. Existing role retained after review."
+    },
+    {
+      "key": "leno/type1",
+      "name": "Leno",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "changed": false,
+      "reason": "Marksman / Sharpshooter: Maintains precise repeated ranged damage, often supported by critical hits. Existing role retained after review."
+    },
+    {
+      "key": "leno/type2",
+      "name": "Leno",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Slayer"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Slayer"
+      },
+      "changed": false,
+      "reason": "Marksman / Slayer: Gains special damage advantages against durable targets or particular creature categories. Existing role retained after review."
+    },
+    {
+      "key": "king",
+      "name": "King",
+      "before": {
+        "class": "Tank",
+        "subclass": "Monarch"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": true,
+      "reason": "Support / Buffer: Strengthens nearby allies with offensive, mobility or beneficial status effects. Filled or corrected the role label."
+    },
+    {
+      "key": "king/type1",
+      "name": "King",
+      "before": {
+        "class": "Tank",
+        "subclass": "Monarch"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": true,
+      "reason": "Support / Buffer: Strengthens nearby allies with offensive, mobility or beneficial status effects. Filled or corrected the role label."
+    },
+    {
+      "key": "king/type2",
+      "name": "King",
+      "before": {
+        "class": "Tank",
+        "subclass": "Warden"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Commander"
+      },
+      "changed": true,
+      "reason": "A durable stationary commander that summons Guards and gains temporary mitigation."
+    },
+    {
+      "key": "king/type2/forms/0",
+      "name": "Guard",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Breaker"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Breaker"
+      },
+      "changed": false,
+      "reason": "Fighter / Breaker: Deals increased damage to shields or shielded targets. Existing role retained after review."
+    },
+    {
+      "key": "dracula",
+      "name": "Dracula",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": false,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Existing role retained after review."
+    },
+    {
+      "key": "dracula/type1",
+      "name": "Dracula",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": false,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Existing role retained after review."
+    },
+    {
+      "key": "dracula/type2",
+      "name": "Dracula",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Undying"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Survivor"
+      },
+      "changed": true,
+      "reason": "Fighter / Survivor: Uses defensive triggers, reflection or body changes to stay in prolonged fights. Filled or corrected the role label."
+    },
+    {
+      "key": "dracula/type2/forms/0",
+      "name": "Bats",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Swarmer"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Swarm"
+      },
+      "changed": true,
+      "reason": "Fighter / Swarm: Fights through several fragile bodies or gains strength from related units. Filled or corrected the role label."
+    },
+    {
+      "key": "leila",
+      "name": "Leila",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Trapper"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Artillery"
+      },
+      "changed": true,
+      "reason": "Marksman / Artillery: Projects heavy or broad attack damage, bombs or deployment strikes into an area. Filled or corrected the role label."
+    },
+    {
+      "key": "leila/type1",
+      "name": "Leila",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Trapper"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Artillery"
+      },
+      "changed": true,
+      "reason": "Bomb-assisted ranged area damage and Blind, without a placed trap."
+    },
+    {
+      "key": "leila/type2",
+      "name": "Leila",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Bleeder"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Bleeder"
+      },
+      "changed": false,
+      "reason": "Marksman / Bleeder: Applies bleeding damage and its associated healing denial. Existing role retained after review."
+    },
+    {
+      "key": "lord",
+      "name": "Lord",
+      "before": {
+        "class": "Tank",
+        "subclass": "Immortal"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Immortal"
+      },
+      "changed": false,
+      "reason": "Tank / Immortal: Survives lethal damage through a conditional Immortal window. Existing role retained after review."
+    },
+    {
+      "key": "lord/type1",
+      "name": "Lord",
+      "before": {
+        "class": "Tank",
+        "subclass": "Immortal"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Immortal"
+      },
+      "changed": false,
+      "reason": "Tank / Immortal: Survives lethal damage through a conditional Immortal window. Existing role retained after review."
+    },
+    {
+      "key": "lord/type2",
+      "name": "Lord",
+      "before": {
+        "class": "Tank",
+        "subclass": "Warlord"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Commander"
+      },
+      "changed": true,
+      "reason": "Tank / Commander: Combines a durable defensive presence with summoned reinforcements. Filled or corrected the role label."
+    },
+    {
+      "key": "lord/type2/forms/0",
+      "name": "Rider",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "changed": false,
+      "reason": "Fighter / Berserker: Gains offensive power when Health or Shield is lost or a combat partner falls. Existing role retained after review."
+    },
+    {
+      "key": "hunter",
+      "name": "Hunter",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Tracker"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Tracker"
+      },
+      "changed": false,
+      "reason": "Marksman / Tracker: Specializes in hunting selected enemy creature types. Existing role retained after review."
+    },
+    {
+      "key": "hunter/type1",
+      "name": "Hunter",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Tracker"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Tracker"
+      },
+      "changed": false,
+      "reason": "Marksman / Tracker: Specializes in hunting selected enemy creature types. Existing role retained after review."
+    },
+    {
+      "key": "hunter/type1/forms/0",
+      "name": "Wolf",
+      "before": {
+        "class": "Tank",
+        "subclass": "Ripper"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Breaker"
+      },
+      "changed": true,
+      "reason": "Fighter / Breaker: Deals increased damage to shields or shielded targets. Filled or corrected the role label."
+    },
+    {
+      "key": "hunter/type2",
+      "name": "Hunter",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Tracker"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Tracker"
+      },
+      "changed": false,
+      "reason": "Marksman / Tracker: Specializes in hunting selected enemy creature types. Existing role retained after review."
+    },
+    {
+      "key": "hunter/type2/forms/0",
+      "name": "Eagle",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Piercer"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Piercer"
+      },
+      "changed": true,
+      "reason": "Fighter / Piercer: Bypasses shields or penetrates targets through the authored attack profile. Filled or corrected the role label."
+    },
+    {
+      "key": "soul-master",
+      "name": "Soul Master",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Reaper"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Harvester"
+      },
+      "changed": true,
+      "reason": "Marksman / Harvester: Gains offensive strength or resources from deaths, souls or kills. Filled or corrected the role label."
+    },
+    {
+      "key": "soul-master/type1",
+      "name": "Soul Master",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Reaper"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Harvester"
+      },
+      "changed": true,
+      "reason": "Marksman / Harvester: Gains offensive strength or resources from deaths, souls or kills. Filled or corrected the role label."
+    },
+    {
+      "key": "soul-master/type2",
+      "name": "Soul Master",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Harvester"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Harvester"
+      },
+      "changed": false,
+      "reason": "Marksman / Harvester: Gains offensive strength or resources from deaths, souls or kills. Existing role retained after review."
+    },
+    {
+      "key": "mr-and-mrs-ray",
+      "name": "Mr. and Mrs. Ray",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Twinshot"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Sweeper"
+      },
+      "changed": true,
+      "reason": "Fighter / Sweeper: Deals close-range damage across arcs, circles or chained nearby targets. Filled or corrected the role label."
+    },
+    {
+      "key": "mr-and-mrs-ray/type1",
+      "name": "Mr. Ray",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Twinshot"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Sweeper"
+      },
+      "changed": true,
+      "reason": "Fighter / Sweeper: Deals close-range damage across arcs, circles or chained nearby targets. Filled or corrected the role label."
+    },
+    {
+      "key": "mr-and-mrs-ray/type1/forms/0",
+      "name": "Mrs. Ray",
+      "before": {
+        "class": "Tank",
+        "subclass": "Twinshot"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Sweeper"
+      },
+      "changed": true,
+      "reason": "Fighter / Sweeper: Deals close-range damage across arcs, circles or chained nearby targets. Filled or corrected the role label."
+    },
+    {
+      "key": "mr-and-mrs-ray/type2",
+      "name": "Mr. Ray",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Twinshot"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Charger"
+      },
+      "changed": true,
+      "reason": "Fighter / Charger: Closes distance or rushes through targets with an empowered opening or dash. Filled or corrected the role label."
+    },
+    {
+      "key": "mr-and-mrs-ray/type2/forms/0",
+      "name": "Mrs. Ray",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Twinshot"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Charger"
+      },
+      "changed": true,
+      "reason": "Fighter / Charger: Closes distance or rushes through targets with an empowered opening or dash. Filled or corrected the role label."
+    },
+    {
+      "key": "dragon",
+      "name": "Dragon",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Mage / Debuffer: Reduces enemy combat effectiveness or increases the damage enemies receive. Filled or corrected the role label."
+    },
+    {
+      "key": "dragon/type1",
+      "name": "Dragon (Light)",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Mage / Debuffer: Reduces enemy combat effectiveness or increases the damage enemies receive. Filled or corrected the role label."
+    },
+    {
+      "key": "dragon/type2",
+      "name": "Dragon (Dark)",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Mage / Debuffer: Reduces enemy combat effectiveness or increases the damage enemies receive. Filled or corrected the role label."
+    },
+    {
+      "key": "albert",
+      "name": "Albert",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Duelist"
+      },
+      "changed": true,
+      "reason": "Fighter / Duelist: Builds an advantage against a focused target or in isolated fights. Filled or corrected the role label."
+    },
+    {
+      "key": "chicken",
+      "name": "Chicken",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Suicide"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Saboteur"
+      },
+      "changed": true,
+      "reason": "Specialist / Saboteur: Trades an expendable body for an opening, death or one-off damage/debuff payload. Filled or corrected the role label."
+    },
+    {
+      "key": "frostshot",
+      "name": "Frostshot",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Sniper"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Sniper"
+      },
+      "changed": false,
+      "reason": "Marksman / Sniper: Uses long range, distance scaling or prepared precision shots to strike safely. Existing role retained after review."
+    },
+    {
+      "key": "hornets",
+      "name": "Hornets",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Bulwark"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Bulwark"
+      },
+      "changed": false,
+      "reason": "Fighter / Bulwark: Relies on large defensive reserves or strong incoming-damage prevention. Existing role retained after review."
+    },
+    {
+      "key": "warborn",
+      "name": "Warborn",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Regenerator"
+      },
+      "changed": true,
+      "reason": "Tank / Regenerator: Recovers Health or Shield over time or through sustained combat conditions. Filled or corrected the role label."
+    },
+    {
+      "key": "x-bot",
+      "name": "X-Bot",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "changed": false,
+      "reason": "Fighter / Brawler: An all-round sustained close-combat fighter. Existing role retained after review."
+    },
+    {
+      "key": "nyra",
+      "name": "Nyra",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Wanderer"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Wanderer"
+      },
+      "changed": false,
+      "reason": "Marksman / Wanderer: Converts movement or distance traveled into greater offensive strength. Existing role retained after review."
+    },
+    {
+      "key": "deadscope",
+      "name": "Deadscope",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Sniper"
+      },
+      "changed": true,
+      "reason": "Marksman / Sniper: Uses long range, distance scaling or prepared precision shots to strike safely. Filled or corrected the role label."
+    },
+    {
+      "key": "turtle",
+      "name": "Turtle",
+      "before": {
+        "class": "Tank",
+        "subclass": "Regenerator"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Regenerator"
+      },
+      "changed": false,
+      "reason": "Tank / Regenerator: Recovers Health or Shield over time or through sustained combat conditions. Existing role retained after review."
+    },
+    {
+      "key": "turtle/forms/0",
+      "name": "Mini Turtles",
+      "before": {
+        "class": "Fighter"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "changed": true,
+      "reason": "Fighter / Berserker: Gains offensive power when Health or Shield is lost or a combat partner falls. Filled or corrected the role label."
+    },
+    {
+      "key": "feral-wolf",
+      "name": "Feral Wolf",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Ambusher"
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Ambusher"
+      },
+      "changed": false,
+      "reason": "Assassin / Ambusher: Gains an opening advantage through concealment, surprise or enhanced first strikes. Existing role retained after review."
+    },
+    {
+      "key": "trac",
+      "name": "Trac",
+      "before": {
+        "class": "Tank",
+        "subclass": "Brawler"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Juggernaut"
+      },
+      "changed": true,
+      "reason": "Tank / Juggernaut: Maintains prolonged offensive pressure through exceptional or growing durability. Filled or corrected the role label."
+    },
+    {
+      "key": "tornado",
+      "name": "Tornado",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Disruptor"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Disruptor"
+      },
+      "changed": false,
+      "reason": "Specialist / Disruptor: Disables enemies or interferes with their actions, vision, resources or combat flow. Existing role retained after review."
+    },
+    {
+      "key": "dino",
+      "name": "Dino",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Rampager"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Rampager"
+      },
+      "changed": false,
+      "reason": "Fighter / Rampager: Increases attack damage with each successful damage event. Existing role retained after review."
+    },
+    {
+      "key": "tenta",
+      "name": "Tenta",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Multistriker"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "fire-archer",
+      "name": "Fire Archer",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "changed": false,
+      "reason": "Marksman / Burst: Concentrates attack damage in volleys or heavy individual shots. Existing role retained after review."
+    },
+    {
+      "key": "shadow-reaper",
+      "name": "Shadow Reaper",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Executioner"
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Executioner"
+      },
+      "changed": false,
+      "reason": "Assassin / Executioner: Uses critical opening strikes, finishing damage or instant-kill mechanics. Existing role retained after review."
+    },
+    {
+      "key": "voltriker",
+      "name": "Voltriker",
+      "before": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "changed": false,
+      "reason": "Mage / Nuker: Delivers concentrated ability volleys, bursts or chained area explosions. Existing role retained after review."
+    },
+    {
+      "key": "frostmaw",
+      "name": "Frostmaw",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Silencer"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Silencer"
+      },
+      "changed": false,
+      "reason": "Fighter / Silencer: Repeatedly prevents enemies from activating abilities. Existing role retained after review."
+    },
+    {
+      "key": "hexon",
+      "name": "Hexon",
+      "before": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": false,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Existing role retained after review."
+    },
+    {
+      "key": "mecha-shield",
+      "name": "Mecha Shield",
+      "before": {
+        "class": "Tank",
+        "subclass": "Pure"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Protector"
+      },
+      "changed": true,
+      "reason": "Tank / Protector: Reduces damage suffered by nearby allies while occupying the frontline. Filled or corrected the role label."
+    },
+    {
+      "key": "venomspikes",
+      "name": "Venomspikes",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Poisoner"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Poisoner"
+      },
+      "changed": true,
+      "reason": "Repeated poison stacks and percent-Health damage define sustained melee poison damage, without an assassination opener."
+    },
+    {
+      "key": "astranova",
+      "name": "Astranova",
+      "before": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "changed": false,
+      "reason": "Mage / Nuker: Delivers concentrated ability volleys, bursts or chained area explosions. Existing role retained after review."
+    },
+    {
+      "key": "kai",
+      "name": "Kai",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "changed": false,
+      "reason": "Fighter / Brawler: An all-round sustained close-combat fighter. Existing role retained after review."
+    },
+    {
+      "key": "cassandra",
+      "name": "Cassandra",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Brawler"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": true,
+      "reason": "Predominance and maximum-Health growth support nearby allies; damage is secondary."
+    },
+    {
+      "key": "dr-golbert",
+      "name": "Dr. Golbert",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Disruptor"
+      },
+      "changed": true,
+      "reason": "Specialist / Disruptor: Disables enemies or interferes with their actions, vision, resources or combat flow. Filled or corrected the role label."
+    },
+    {
+      "key": "indi",
+      "name": "Indi",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Bleeder"
+      },
+      "changed": true,
+      "reason": "Mage / Bleeder: Applies bleeding damage and its associated healing denial. Filled or corrected the role label."
+    },
+    {
+      "key": "punchman",
+      "name": "Punchman",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Snowballer"
+      },
+      "changed": true,
+      "reason": "Fighter / Snowballer: Accumulates offensive bonuses through time, repeated success or kills. Filled or corrected the role label."
+    },
+    {
+      "key": "witch",
+      "name": "Witch",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Diver"
+      },
+      "changed": true,
+      "reason": "Assassin / Diver: Reaches priority targets through leaps, charges or repeated passing attacks. Filled or corrected the role label."
+    },
+    {
+      "key": "bro",
+      "name": "Bro",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Juggernaut"
+      },
+      "changed": true,
+      "reason": "Tank / Juggernaut: Maintains prolonged offensive pressure through exceptional or growing durability. Filled or corrected the role label."
+    },
+    {
+      "key": "tooni",
+      "name": "Tooni",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "spinata",
+      "name": "Spinata",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": true,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Filled or corrected the role label."
+    },
+    {
+      "key": "hammies",
+      "name": "Hammies",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Skirmisher"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Skirmisher"
+      },
+      "changed": false,
+      "reason": "Fighter / Skirmisher: Combines close fighting with movement, repositioning or mobility-related growth. Existing role retained after review."
+    },
+    {
+      "key": "b-b",
+      "name": "B-B",
+      "before": {
+        "class": "Tank",
+        "subclass": "Brawler"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Bulwark"
+      },
+      "changed": true,
+      "reason": "Tank / Bulwark: Relies on large defensive reserves or strong incoming-damage prevention. Filled or corrected the role label."
+    },
+    {
+      "key": "scrapy",
+      "name": "Scrapy",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Piercer"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Piercer"
+      },
+      "changed": false,
+      "reason": "Marksman / Piercer: Bypasses shields or penetrates targets through the authored attack profile. Existing role retained after review."
+    },
+    {
+      "key": "nitrox",
+      "name": "Nitrox",
+      "before": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": false,
+      "reason": "Support / Buffer: Strengthens nearby allies with offensive, mobility or beneficial status effects. Existing role retained after review."
+    },
+    {
+      "key": "nortex",
+      "name": "Nortex",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Stacker"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "changed": true,
+      "reason": "Marksman / Burst: Concentrates attack damage in volleys or heavy individual shots. Filled or corrected the role label."
+    },
+    {
+      "key": "gloop",
+      "name": "Gloop",
+      "before": {
+        "class": "Tank",
+        "subclass": "Pure"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Warden"
+      },
+      "changed": true,
+      "reason": "Tank / Warden: Contains enemies or repels threats through defensive crowd control. Filled or corrected the role label."
+    },
+    {
+      "key": "henry",
+      "name": "Henry",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Slayer"
+      },
+      "changed": true,
+      "reason": "Fighter / Slayer: Gains special damage advantages against durable targets or particular creature categories. Filled or corrected the role label."
+    },
+    {
+      "key": "venomora",
+      "name": "Venomora",
+      "before": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": false,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Existing role retained after review."
+    },
+    {
+      "key": "blocker",
+      "name": "Blocker",
+      "before": {
+        "class": "Tank",
+        "subclass": "Protector"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Protector"
+      },
+      "changed": false,
+      "reason": "Tank / Protector: Reduces damage suffered by nearby allies while occupying the frontline. Existing role retained after review."
+    },
+    {
+      "key": "fen",
+      "name": "Fen",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Blinder"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Debuffer"
+      },
+      "changed": true,
+      "reason": "Marksman / Debuffer: Reduces enemy combat effectiveness or increases the damage enemies receive. Filled or corrected the role label."
+    },
+    {
+      "key": "ben",
+      "name": "Ben",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Bleeder"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Bleeder"
+      },
+      "changed": true,
+      "reason": "Marksman / Bleeder: Applies bleeding damage and its associated healing denial. Filled or corrected the role label."
+    },
+    {
+      "key": "freak",
+      "name": "Freak",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Splitter"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Splitter"
+      },
+      "changed": false,
+      "reason": "Specialist / Splitter: Splits into additional combat units when its original body dies. Existing role retained after review."
+    },
+    {
+      "key": "freak/forms/0",
+      "name": "Mini Freaks",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Suicide"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Saboteur"
+      },
+      "changed": true,
+      "reason": "Specialist / Saboteur: Trades an expendable body for an opening, death or one-off damage/debuff payload. Filled or corrected the role label."
+    },
+    {
+      "key": "nightprowler",
+      "name": "Nightprowler",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Executioner"
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Ambusher"
+      },
+      "changed": true,
+      "reason": "Assassin / Ambusher: Gains an opening advantage through concealment, surprise or enhanced first strikes. Filled or corrected the role label."
+    },
+    {
+      "key": "twins",
+      "name": "Twins",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "changed": false,
+      "reason": "Fighter / Berserker: Gains offensive power when Health or Shield is lost or a combat partner falls. Existing role retained after review."
+    },
+    {
+      "key": "bethe",
+      "name": "Bethe",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Ravager"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Snowballer"
+      },
+      "changed": true,
+      "reason": "Fighter / Snowballer: Accumulates offensive bonuses through time, repeated success or kills. Filled or corrected the role label."
+    },
+    {
+      "key": "snaykies",
+      "name": "Snaykies",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Poisoner"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Poisoner"
+      },
+      "changed": true,
+      "reason": "Fighter / Poisoner: Adds poison damage or toxin stacks to repeated attacks. Filled or corrected the role label."
+    },
+    {
+      "key": "soldier",
+      "name": "Soldier",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "changed": false,
+      "reason": "Marksman / Burst: Concentrates attack damage in volleys or heavy individual shots. Existing role retained after review."
+    },
+    {
+      "key": "bees",
+      "name": "Bees",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Suicide"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Saboteur"
+      },
+      "changed": true,
+      "reason": "Specialist / Saboteur: Trades an expendable body for an opening, death or one-off damage/debuff payload. Filled or corrected the role label."
+    },
+    {
+      "key": "hailey",
+      "name": "Hailey",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Berserker"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Sweeper"
+      },
+      "changed": true,
+      "reason": "Fighter / Sweeper: Deals close-range damage across arcs, circles or chained nearby targets. Filled or corrected the role label."
+    },
+    {
+      "key": "angels",
+      "name": "Angels",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Swarm"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Swarm"
+      },
+      "changed": false,
+      "reason": "Specialist / Swarm: Fights through several fragile bodies or gains strength from related units. Existing role retained after review."
+    },
+    {
+      "key": "boomix",
+      "name": "Boomix",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Piercer"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Boomerang"
+      },
+      "changed": true,
+      "reason": "Marksman / Boomerang: Damages enemies on outward and returning projectile paths. Filled or corrected the role label."
+    },
+    {
+      "key": "phewphew",
+      "name": "PhewPhew",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Breaker"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Breaker"
+      },
+      "changed": false,
+      "reason": "Marksman / Breaker: Deals increased damage to shields or shielded targets. Existing role retained after review."
+    },
+    {
+      "key": "chrono-mage",
+      "name": "Chrono Mage",
+      "before": {
+        "class": "Mage",
+        "subclass": "Debuffer"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Buffer"
+      },
+      "changed": true,
+      "reason": "Support / Buffer: Strengthens nearby allies with offensive, mobility or beneficial status effects. Filled or corrected the role label."
+    },
+    {
+      "key": "aegis-guard",
+      "name": "Aegis Guard",
+      "before": {
+        "class": "Tank",
+        "subclass": "Protector"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Protector"
+      },
+      "changed": false,
+      "reason": "Tank / Protector: Reduces damage suffered by nearby allies while occupying the frontline. Existing role retained after review."
+    },
+    {
+      "key": "ironjaw",
+      "name": "Ironjaw",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Vampire"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Vampire"
+      },
+      "changed": true,
+      "reason": "Fighter / Vampire: Sustains itself through lifesteal or turns successful healing into offensive growth. Filled or corrected the role label."
+    },
+    {
+      "key": "m-manager",
+      "name": "M-Manager",
+      "before": {
+        "class": "Support",
+        "subclass": "Resourcer"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Resourcer"
+      },
+      "changed": false,
+      "reason": "Support / Resourcer: Produces deployment resources for the team. Existing role retained after review."
+    },
+    {
+      "key": "srail",
+      "name": "Srail",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Sharpshooter"
+      },
+      "changed": false,
+      "reason": "Marksman / Sharpshooter: Maintains precise repeated ranged damage, often supported by critical hits. Existing role retained after review."
+    },
+    {
+      "key": "cryon",
+      "name": "Cryon",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Stunner"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "cow",
+      "name": "Cow",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Juggernaut"
+      },
+      "changed": true,
+      "reason": "Tank / Juggernaut: Maintains prolonged offensive pressure through exceptional or growing durability. Filled or corrected the role label."
+    },
+    {
+      "key": "trainer",
+      "name": "Trainer",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Warden"
+      },
+      "changed": true,
+      "reason": "Tank / Warden: Contains enemies or repels threats through defensive crowd control. Filled or corrected the role label."
+    },
+    {
+      "key": "burglar",
+      "name": "Burglar",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Poisoner"
+      },
+      "changed": true,
+      "reason": "Mage / Poisoner: Adds poison damage or toxin stacks to repeated attacks. Filled or corrected the role label."
+    },
+    {
+      "key": "stormblade",
+      "name": "Stormblade",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Splasher"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Sweeper"
+      },
+      "changed": true,
+      "reason": "Authored melee cone and chain strikes make it a melee area fighter, not a marksman."
+    },
+    {
+      "key": "erica",
+      "name": "Erica",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Controller"
+      },
+      "changed": true,
+      "reason": "Mage / Controller: Controls enemy movement or actions through roots, slows, stuns, taunts or imprisonment. Filled or corrected the role label."
+    },
+    {
+      "key": "stacy",
+      "name": "Stacy",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Burst"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Igniter"
+      },
+      "changed": true,
+      "reason": "Marksman / Igniter: Adds repeated burning damage or leaves damaging fire zones. Filled or corrected the role label."
+    },
+    {
+      "key": "death",
+      "name": "Death",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Harvester"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Harvester"
+      },
+      "changed": false,
+      "reason": "Fighter / Harvester: Gains offensive strength or resources from deaths, souls or kills. Existing role retained after review."
+    },
+    {
+      "key": "sylviana",
+      "name": "Sylviana",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Summoner"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Summoner"
+      },
+      "changed": false,
+      "reason": "Specialist / Summoner: Creates allied reinforcements or defensive summons as part of its combat plan. Existing role retained after review."
+    },
+    {
+      "key": "sylviana/forms/0",
+      "name": "Butterflies",
+      "before": {
+        "class": "Suicide Assassin"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Healer"
+      },
+      "changed": true,
+      "reason": "Support / Healer: Restores allied current Health, including paired current-and-maximum Health growth. Filled or corrected the role label."
+    },
+    {
+      "key": "malvaris",
+      "name": "Malvaris",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Summoner"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Summoner"
+      },
+      "changed": false,
+      "reason": "Fighter / Summoner: Creates allied reinforcements or defensive summons as part of its combat plan. Existing role retained after review."
+    },
+    {
+      "key": "malvaris/forms/0",
+      "name": "Phantomis",
+      "before": {
+        "class": "Suicide Assassin"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Swarm"
+      },
+      "changed": true,
+      "reason": "Fighter / Swarm: Fights through several fragile bodies or gains strength from related units. Filled or corrected the role label."
+    },
+    {
+      "key": "etheris",
+      "name": "Etheris",
+      "before": {
+        "class": "Tank",
+        "subclass": "Reflector"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Guardian"
+      },
+      "changed": true,
+      "reason": "Shares allied Health and Shield reserves; it does not reflect damage."
+    },
+    {
+      "key": "magma",
+      "name": "Magma",
+      "before": {
+        "class": "Tank",
+        "subclass": "Igniter"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Igniter"
+      },
+      "changed": false,
+      "reason": "Tank / Igniter: Adds repeated burning damage or leaves damaging fire zones. Existing role retained after review."
+    },
+    {
+      "key": "avalith",
+      "name": "Avalith",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Evader"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Boomerang"
+      },
+      "changed": true,
+      "reason": "Marksman / Boomerang: Damages enemies on outward and returning projectile paths. Filled or corrected the role label."
+    },
+    {
+      "key": "far",
+      "name": "Far",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Disabler"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Disruptor"
+      },
+      "changed": true,
+      "reason": "Specialist / Disruptor: Disables enemies or interferes with their actions, vision, resources or combat flow. Filled or corrected the role label."
+    },
+    {
+      "key": "demotron",
+      "name": "Demotron",
+      "before": {
+        "class": "Tank",
+        "subclass": "Regenerator"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Regenerator"
+      },
+      "changed": false,
+      "reason": "Tank / Regenerator: Recovers Health or Shield over time or through sustained combat conditions. Existing role retained after review."
+    },
+    {
+      "key": "format",
+      "name": "Format",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Mimic"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Mimic"
+      },
+      "changed": false,
+      "reason": "Specialist / Mimic: Copies an enemy body, weapon or combat statistics. Existing role retained after review."
+    },
+    {
+      "key": "pyhsic",
+      "name": "Pyhsic",
+      "before": {
+        "class": "Mage",
+        "subclass": "Deathcaller"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Deathcaller"
+      },
+      "changed": false,
+      "reason": "Mage / Deathcaller: Threatens periodic lethal executions tied to the victim’s Health. Existing role retained after review."
+    },
+    {
+      "key": "naar",
+      "name": "Naar",
+      "before": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "changed": false,
+      "reason": "Mage / Nuker: Delivers concentrated ability volleys, bursts or chained area explosions. Existing role retained after review."
+    },
+    {
+      "key": "lyra",
+      "name": "Lyra",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Flurry"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Flurry"
+      },
+      "changed": false,
+      "reason": "Fighter / Flurry: Alternates normal strikes with rapid multi-hit attack sequences. Existing role retained after review."
+    },
+    {
+      "key": "aeralis",
+      "name": "Aeralis",
+      "before": {
+        "class": "Marksman",
+        "subclass": "Repeller"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Repeller"
+      },
+      "changed": false,
+      "reason": "Marksman / Repeller: Keeps enemies at distance with repeated forced displacement. Existing role retained after review."
+    },
+    {
+      "key": "dark-necromancer",
+      "name": "Dark Necromancer",
+      "before": {
+        "class": "Fighter",
+        "subclass": "Summoner"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Summoner"
+      },
+      "changed": true,
+      "reason": "Specialist / Summoner: Creates allied reinforcements or defensive summons as part of its combat plan. Filled or corrected the role label."
+    },
+    {
+      "key": "dark-necromancer/forms/0",
+      "name": "Bladeknight",
+      "before": {
+        "class": "-"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Piercer"
+      },
+      "changed": true,
+      "reason": "Fighter / Piercer: Bypasses shields or penetrates targets through the authored attack profile. Filled or corrected the role label."
+    },
+    {
+      "key": "dark-necromancer/forms/1",
+      "name": "Stormbow",
+      "before": {
+        "class": "Ölü"
+      },
+      "after": {
+        "class": "Marksman",
+        "subclass": "Igniter"
+      },
+      "changed": true,
+      "reason": "Marksman / Igniter: Adds repeated burning damage or leaves damaging fire zones. Filled or corrected the role label."
+    },
+    {
+      "key": "dark-necromancer/forms/2",
+      "name": "Ironhide",
+      "before": {
+        "class": "Ölü"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Bulwark"
+      },
+      "changed": true,
+      "reason": "Tank / Bulwark: Relies on large defensive reserves or strong incoming-damage prevention. Filled or corrected the role label."
+    },
+    {
+      "key": "shine",
+      "name": "Shine",
+      "before": {
+        "class": "Support",
+        "subclass": "Healer"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Healer"
+      },
+      "changed": false,
+      "reason": "Support / Healer: Restores allied current Health, including paired current-and-maximum Health growth. Existing role retained after review."
+    },
+    {
+      "key": "bloodraider",
+      "name": "Bloodraider",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Bloodpact"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Bloodpact"
+      },
+      "changed": true,
+      "reason": "Fighter / Bloodpact: Trades its own Health for progressively increasing attack damage. Filled or corrected the role label."
+    },
+    {
+      "key": "fallen-angel",
+      "name": "Fallen Angel",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Hunter"
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Duelist"
+      },
+      "changed": true,
+      "reason": "Fighter / Duelist: Builds an advantage against a focused target or in isolated fights. Filled or corrected the role label."
+    },
+    {
+      "key": "worms",
+      "name": "Worms",
+      "before": {
+        "class": "Assassin",
+        "subclass": "Ambusher"
+      },
+      "after": {
+        "class": "Assassin",
+        "subclass": "Ambusher"
+      },
+      "changed": false,
+      "reason": "Assassin / Ambusher: Gains an opening advantage through concealment, surprise or enhanced first strikes. Existing role retained after review."
+    },
+    {
+      "key": "unara",
+      "name": "Unara",
+      "before": {
+        "class": "Mage",
+        "subclass": "Bomber"
+      },
+      "after": {
+        "class": "Mage",
+        "subclass": "Nuker"
+      },
+      "changed": true,
+      "reason": "Charged sequential magic orbs provide burst damage and displacement, not bomb explosions."
+    },
+    {
+      "key": "ali",
+      "name": "Ali",
+      "before": {
+        "class": "Support",
+        "subclass": "Guardian"
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Guardian"
+      },
+      "changed": false,
+      "reason": "Support / Guardian: Protects allies through immunity or linked defensive reserves. Existing role retained after review."
+    },
+    {
+      "key": "clara",
+      "name": "Clara",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Screamer"
+      },
+      "after": {
+        "class": "Tank",
+        "subclass": "Vanguard"
+      },
+      "changed": true,
+      "reason": "Taunt and rapid self-healing anchor a durable frontline initiator."
+    },
+    {
+      "key": "artist",
+      "name": "Artist",
+      "before": {
+        "class": "Specialist",
+        "subclass": "Summoner"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Summoner"
+      },
+      "changed": false,
+      "reason": "Specialist / Summoner: Creates allied reinforcements or defensive summons as part of its combat plan. Existing role retained after review."
+    },
+    {
+      "key": "artist/forms/0",
+      "name": "Flock of Ravens",
+      "before": {
+        "class": "Suicide Assassin"
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Swarm"
+      },
+      "changed": true,
+      "reason": "Timed, healthless, untargetable ravens form a swarm; they are not suicide assassins."
+    },
+    {
+      "key": "captain-vane",
+      "name": "Captain Vane",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Support",
+        "subclass": "Scout"
+      },
+      "changed": true,
+      "reason": "Support / Scout: Reveals or marks distant enemies to provide information. Filled or corrected the role label."
+    },
+    {
+      "key": "spiritcaller",
+      "name": "Spiritcaller",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Specialist",
+        "subclass": "Summoner"
+      },
+      "changed": true,
+      "reason": "Specialist / Summoner: Creates allied reinforcements or defensive summons as part of its combat plan. Filled or corrected the role label."
+    },
+    {
+      "key": "bolt",
+      "name": "Bolt",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Charger"
+      },
+      "changed": true,
+      "reason": "Fighter / Charger: Closes distance or rushes through targets with an empowered opening or dash. Filled or corrected the role label."
+    },
+    {
+      "key": "bolt/forms/0",
+      "name": "Volt",
+      "before": {
+        "class": "",
+        "subclass": ""
+      },
+      "after": {
+        "class": "Fighter",
+        "subclass": "Charger"
+      },
+      "changed": true,
+      "reason": "Fighter / Charger: Closes distance or rushes through targets with an empowered opening or dash. Filled or corrected the role label."
+    }
+  ]
+}

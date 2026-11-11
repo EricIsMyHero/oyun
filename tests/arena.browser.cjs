@@ -1181,7 +1181,7 @@ async function minimapPixelAt(page,point) {
     await codex.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
     await codex.goto(`http://127.0.0.1:${server.address().port}${prefix}index.html`,{waitUntil:'domcontentloaded'});
     await codex.evaluate(()=>showPortal('info'));
-    await codex.waitForFunction(()=>document.querySelectorAll('#codex-content .codex-entry').length===10);
+    await codex.waitForFunction(()=>document.querySelectorAll('#codex-content .codex-entry').length===11);
     await codex.getByRole('button',{name:'Card Stats',exact:true}).click();
     assert.equal(await codex.locator('.codex-entry.visible li').count(),24);
     await codex.getByRole('button',{name:'How to Play',exact:true}).click();

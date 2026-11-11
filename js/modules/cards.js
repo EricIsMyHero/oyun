@@ -156,8 +156,8 @@ function renderCards() {
   // Class
   if (activeClass !== 'all')
     filtered = filtered.filter(c => {
-      const src = c.isDual && c.type1 ? c.type1 : c;
-      return (src.class || c.class || '') === activeClass;
+      const choices = c.isDual ? [c.type1, c.type2].filter(Boolean) : [c];
+      return choices.some(form => (form.class || c.class || '') === activeClass);
     });
 
   // Type

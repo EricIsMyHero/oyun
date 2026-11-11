@@ -136,6 +136,19 @@
         "Example - Stun and Heal may remain active together. Cleanse removes Stun, but cannot free an imprisoned card. Predominance can remove Imprisonment. Neither removes unrelated positive buffs.",
         "Locked possession - Whisper retains its special unbreakable native possession rule. Predominance shortens its control duration by 25% instead of removing it."
       ]
+    },
+    {
+      "heading": "Card Roles",
+      "content": "Class describes a card’s primary battlefield role. Subclass describes its specialization, not its rarity or creature type. Every root, summon, partner upgrade and selectable form has its own role. Labels do not grant stats, change Power or fill missing combat profiles. The class filter includes both selectable Ethereal forms.",
+      "list": [
+        "Tank - Frontline durability, protection, engagement or sustained control.",
+        "Fighter - Sustained close combat, dueling and offensive scaling.",
+        "Assassin - Ambushes, infiltration, diving or decisive execution attacks.",
+        "Marksman - Repeated ranged weapon attacks, precision shooting and projectile pressure.",
+        "Mage - Ability-driven burst, area damage, damage over time or enemy control.",
+        "Support - Ally buffs, healing, protection, resources, vision or utility-focused disruption.",
+        "Specialist - Distinct deployment, summoning, copying, transformation or expendable-unit mechanics."
+      ]
     }
   ]
 }
