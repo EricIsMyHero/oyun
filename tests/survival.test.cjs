@@ -293,13 +293,13 @@ test('health and movement bonuses use the character base; critical hits double d
   assert.equal(e.hp, 80);
 });
 
-test('all 24 Codex keys, units and caps are reused; measured DPS is not an upgrade', () => {
+test('all 24 Codex keys and labels are reused, while Power references do not change Survival gameplay caps', () => {
   const g = game();
   const defs = g.run('SURVIVAL_STAT_DEFS');
   const modalDefs = g.run('[...STAT_DEFS,...ADD_STAT_DEFS,...EXTRA_STAT_DEFS]');
   assert.equal(Object.keys(defs).length, 24);
   for (const def of modalDefs) {
-    assert.equal(defs[def.key].cap, def.max);
+    assert.equal(defs[def.key].cap, ({attackSpeed:5,delay:200,sps:500,range:30000,speed:5000,vision:8000})[def.key] ?? def.max);
     assert.equal(defs[def.key].name, def.label);
   }
   assert.ok(!g.run('survivalUpgradePool()').some(c => c.key === 'stat:sps'));

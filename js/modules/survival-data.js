@@ -1,4 +1,4 @@
-/* Arena metadata uses the same keys, labels, icons and caps as the Codex modal.
+/* Survival reuses Codex labels and icons, with independent gameplay caps.
    JSON remains the source of character stats; no Codex combat scripts are run. */
 const SURVIVAL_STAT_RULES = {
   health: { step: 25, initial: 100, info: 'Maksimum can.' },
@@ -31,8 +31,9 @@ const SURVIVAL_STAT_GROUPS = [
   { name: 'Əlavə statlar', defs: ADD_STAT_DEFS },
   { name: 'Bonus statlar', defs: EXTRA_STAT_DEFS },
 ];
+const SURVIVAL_GAMEPLAY_CAPS = {attackSpeed:5,delay:200,sps:500,range:30000,speed:5000,vision:8000};
 const SURVIVAL_STAT_DEFS = Object.fromEntries(SURVIVAL_STAT_GROUPS.flatMap(group => group.defs.map(def =>
-  [def.key, { ...SURVIVAL_STAT_RULES[def.key], name: def.label, icon: def.icon, cap: def.max, color: def.color,
+  [def.key, { ...SURVIVAL_STAT_RULES[def.key], name: def.label, icon: def.icon, cap: SURVIVAL_GAMEPLAY_CAPS[def.key] ?? def.max, color: def.color,
     unit: def.suffix || SURVIVAL_STAT_RULES[def.key].unit || '' }])));
 const SURVIVAL_WEAPONS = {
   rifle: { name: 'Soldier tüfəngi', icon: '🔫', color: '#a5b4fc', kind: 'burst', damage: 5, interval: 2000, range: 480 },

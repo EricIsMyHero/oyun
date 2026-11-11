@@ -108,23 +108,23 @@ const STAT_DEFS = [
   { key: 'health',      label: 'Health',       icon: '❤️',  max: 1000, color: '#f87171' },
   { key: 'shield',      label: 'Shield',       icon: '🛡️',  max: 1000, color: '#60a5fa' },
   { key: 'damage',      label: 'Damage',       icon: '💥',  max: 200,  color: '#fb923c' },
-  { key: 'attackSpeed', label: 'Attack Speed', icon: '⏳',  max: 5,    color: '#fb923c' },
-  { key: 'delay',       label: 'Delay',        icon: '⏱️',  max: 200,  color: '#fb923c' },
-  { key: 'sps',         label: 'DPS',          icon: '🔥',  max: 500,  color: '#f472b6' },
+  { key: 'attackSpeed', label: 'Attack Speed', icon: '⏳',  max: .10, min: 50, color: '#fb923c' },
+  { key: 'delay',       label: 'Delay',        icon: '⏱️',  max: .10, min: 5, color: '#fb923c' },
+  { key: 'sps',         label: 'DPS',          icon: '🔥',  max: 2000, color: '#f472b6' },
   { key: 'mana',        label: 'Mana',         icon: '💧',  max: 20,   color: '#a78bfa' },
   { key: 'number',      label: 'Count',        icon: '🔢',  max: 15,   color: '#a78bfa' },
 ];
 
 /* ── Secondary / additional stats ── */
 const ADD_STAT_DEFS = [
-  { key: 'range',           label: 'Range',            icon: '🏹',  max: 30000, color: '#f87171', suffix: ''  },
-  { key: 'speed',           label: 'Speed',            icon: '👟',  max: 5000,  color: '#60a5fa', suffix: ''  },
+  { key: 'range',           label: 'Range',            icon: '🏹',  max: 15000, color: '#f87171', suffix: ''  },
+  { key: 'speed',           label: 'Speed',            icon: '👟',  max: 3000,  color: '#60a5fa', suffix: ''  },
   { key: 'criticalChance',  label: 'Critical Chance',  icon: '🎯',  max: 100,   color: '#fb923c', suffix: '%' },
   { key: 'criticDamage',    label: 'Critical Damage',  icon: '🧨',  max: 5,     color: '#f472b6', suffix: 'x' },
   { key: 'lifestealChance', label: 'Lifesteal Chance', icon: '🧛',  max: 100,   color: '#a78bfa', suffix: '%' },
   { key: 'lifesteal',       label: 'Lifesteal',        icon: '🩸',  max: 100,   color: '#4ade80', suffix: '%' },
   { key: 'dodge',           label: 'Dodge Chance',     icon: '💨',  max: 70,    color: '#c084fc', suffix: '%' },
-  { key: 'vision',          label: 'Vision',           icon: '👁️',  max: 8000,  color: '#c084fc', suffix: ''  },
+  { key: 'vision',          label: 'Vision',           icon: '👁️',  max: 21000, color: '#c084fc', suffix: ''  },
 ];
 
 /* ── Tertiary / bonus stats ──
@@ -264,7 +264,10 @@ function modalStatRating(def, value) {
   if (n === null) return null;
   const lower = ['attackSpeed','delay','shieldtakendamage','mana'].includes(def.key);
   const reference = def.key === 'delay' ? 5 : def.max;
-  const ratio = Math.max(0, Math.min(1, n / reference));
+  // Interval endpoints describe strength: max is the best (shortest) time.
+  const ratio = Math.max(0, Math.min(1, lower && Number.isFinite(def.min)
+    ? (n - def.max) / (def.min - def.max)
+    : n / reference));
   return Math.ceil((lower ? 1 - ratio : ratio) * 5);
 }
 
@@ -392,6 +395,7 @@ function buildModalStats(card) {
     `<div class="modal-stat-grid">${buildCombatProfile(card)}</div>`,
   ];
   return `<div class="modal-stats">
+    ${globalThis.ClashCardPower?.markup(card)||''}
     <div class="modal-stats-body">
       <div class="modal-stat-pages" role="tablist" aria-label="Stat pages">${names.map((name, i) => `<button type="button" role="tab" id="stat-tab-${i + 1}" aria-controls="stat-page-${i + 1}" aria-selected="${modalStatsPage === i + 1}" tabindex="${modalStatsPage === i + 1 ? 0 : -1}" data-stat-page="${i + 1}" title="${name}">${i + 1}</button>`).join('')}</div>
       ${bodies.map((body, i) => `<section class="modal-stat-page" id="stat-page-${i + 1}" role="tabpanel" aria-labelledby="stat-tab-${i + 1}" ${modalStatsPage === i + 1 ? '' : 'hidden'}><h3>${names[i]}</h3>${body}${i < 2 ? '<p class="modal-stat-note">Crystals show relative strength. Lower attack intervals, mana costs and shield depletion receive higher ratings.</p>' : ''}</section>`).join('')}

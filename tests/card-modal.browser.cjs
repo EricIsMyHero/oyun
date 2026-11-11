@@ -48,6 +48,15 @@ const server = http.createServer(async (req, res) => {
     await page.evaluate(()=>openModal(allCards.find(c=>c.id==='dragon')));assert.equal(await page.locator('.dual-type-card').count(),2);await page.locator('#dual-pick-2').click();assert.equal(await page.locator('[data-stat="damage"] .modal-stat-value').textContent(),'10x5');assert.equal(await page.locator('[data-stat="range"] .modal-stat-value').textContent(),'1.45 tiles');await page.locator('#modal-box').screenshot({path:'/tmp/oyun-book2-dragon-dark.png'});await page.locator('#modal-close').click();
     await page.locator('#cards-grid .card-item').filter({has:page.getByText('Nitrox', {exact:true})}).click();
     assert.equal(await page.locator('#modal-overlay').getAttribute('aria-hidden'), 'false');
+    const power=await page.evaluate(()=>ClashCardPower.breakdown(allCards.find(c=>c.id==='nitrox')));
+    assert.equal(await page.locator('#modal-content .power-breakdown').getAttribute('data-power-score'),String(power.score));
+    assert.equal(await page.locator('#modal-content [data-power-group="primary"] li').count(),10);
+    assert.equal(await page.locator('#modal-content [data-power-group="secondary"] li').count(),9);
+    assert.equal(await page.locator('#modal-content [data-power-group="combat"] li').count(),9);
+    await page.locator('#modal-content .power-breakdown > summary').click();
+    await page.locator('#modal-content [data-power-group="primary"] > summary').click();
+    await page.screenshot({path:'/tmp/oyun-power-breakdown-v43.png',fullPage:true});
+    await page.locator('#modal-content .power-breakdown > summary').click();
     assert.equal(await page.locator('#modal-content .modal-rarity-badge').count(), 0);
     assert.equal(await page.locator('#modal-content .modal-story-box').count(), 0);
     assert.equal(await page.locator('#stat-page-1 [data-stat]').count(), 14);

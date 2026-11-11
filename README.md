@@ -334,3 +334,8 @@ Only `survival-data.js` followed by `survival.js` is needed for this mode, after
 the existing Codex scripts. There is no separate passive-runtime download. The
 HTML versions the engine URL so deployments fetch the corrected script. Replace
 the ZIP contents together, including `index.html`; keep serving them over HTTP.
+
+Card Power uses fixed 500 / 100 / 200 stat budgets plus 200 editorial passive
+points. Open the Power breakdown in card details; see the [complete formula
+and individual passive ratings](docs/card-power.md). Export scores with
+`node scripts/power.js`.

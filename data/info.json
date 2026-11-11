@@ -44,7 +44,7 @@
     },
     {
       "heading": "Card Stats",
-      "content": "Cards have 24 numerical stats. Distances use 1,000 source points per tile; Speed is measured in tiles per second.",
+      "content": "Cards have 24 numerical stats. Distances use 1,000 source points per tile; Speed is measured in tiles per second. Power uses a fixed 1,000-point scale: 500 Primary Stats, 100 Recovery & Defense, 200 Combat Profile and 200 individually assigned passive points. Primary entries each contribute 10–50; the other two groups have a minimum of 1 per entry. DPS and Life do not add separate Power points. Open the Power breakdown in card details to inspect every contribution.",
       "list": [
         "Health - The total amount of life your card has. When it reaches zero, your character dies.",
         "Shield - By default, 70% of incoming damage goes to shield while it lasts. Shield Depletion changes this split; unabsorbed damage reaches health.",

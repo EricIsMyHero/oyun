@@ -1156,3 +1156,11 @@ deployed build.
 The card-fixes browser check exercises both impact areas, persistent Critical
 Chance theft and live inspector values, Ironjaw's 50% cap, and the corrected
 source DPS. Set `ARENA_CARD_FIXES_URL` to check a deployed Arena.
+
+## Fixed Card Power
+
+The catalog, Format and Blesser use the shared absolute 1,000-point model:
+500 Primary, 100 Recovery & Defense, 200 Combat Profile, and 200 editorial
+passive points. Collection size never rescales an existing score. Inspect a
+card to expand its per-entry Power breakdown. See [Card Power](card-power.md)
+for all formulas and the 232 individual passive ratings.
