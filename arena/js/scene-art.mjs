@@ -1,17 +1,55 @@
+import { ARENAS } from './map.mjs';
 import { projectPoint, transformWorld } from './projection.mjs';
 import { RULES, clamp } from './rules.mjs';
 
 const url=name=>new URL(`../assets/${name}`,import.meta.url).href;
 export const STRUCTURES=url('sprites/arena-structures.webp');
 export const LAVA_SURFACE=url('materials/molten-lava.webp');
+// The source coordinates are measured at the centers of the painted stone
+// rings, not the front edge of the court or the bottom of a sprite.
+export function guidePoint(map,point,width=1536,height=1024) {
+  if(map.projection==='portrait')return {x:(point.y+2)/(map.height+4)*width,y:(map.width+2-point.x)/(map.width+4)*height};
+  const scale=1536/75;
+  return {x:40.96+(point.x+point.y)*scale,y:588.8+(point.y-point.x)*scale*.5};
+}
+function anchor(map,source,world,width,height) {
+  const p=guidePoint(map,world,width,height);return [...source,p.x,p.y];
+}
+function landmarks(id,sources,width,height) {
+  const map=ARENAS[id],points=[...map.bases,...(map.nodes.length?map.nodes:[map.center])];
+  return sources.map((source,i)=>anchor(map,source,points[i],width,height));
+}
+export const PAINTED_BRIDGES=Object.freeze([
+  {lane:0,ends:[{x:23.5,y:4},{x:28,y:4}],source:[[590,367],[682,312]],walkway:[[562,357],[615,385],[702,326],[659,300]]},
+  {lane:2,ends:[{x:16,y:24},{x:19.5,y:24}],source:[[846,687],[928,651]],walkway:[[827,673],[861,708],[950,667],[910,637]]},
+]);
 export const SCENES=Object.freeze({
-  verdant:{url:url('maps/verdant-basin.webp'),width:1536,height:1024,
-    anchors:[[355,722,410,692],[1144,302,1126,333],[528,392,563,410],[760,505,768,512],[982,636,973,614],[240,605,327.68,609.28],[265,515,348.16,517.12],[780,265,778.24,302.08]]},
+  verdant:{url:url('maps/verdant-basin.webp?v=48'),width:1536,height:1024,
+    anchors:[...landmarks('verdant',[[332,722],[1145,302],[528,392],[760,505],[982,636]],1536,1024),
+      [240,605,327.68,609.28],[265,515,348.16,517.12],[780,265,778.24,302.08],
+      ...PAINTED_BRIDGES.flatMap(bridge=>bridge.source.map((source,i)=>anchor(ARENAS.verdant,source,bridge.ends[i],1536,1024)))]},
   waterfall:{url:url('maps/cascade-hollow.webp'),width:1024,height:1536,
-    anchors:[[512,1288,512,1257],[512,264,512,279],[352,771,354,768]]},
+    anchors:landmarks('waterfall',[[512,1274],[512,254],[352,771]],1024,1536)},
   lava:{url:url('maps/ember-rift.webp'),width:1024,height:1536,
-    anchors:[[514,1328,512,1317],[510,200,512,219],[512,776,512,768]]},
+    anchors:landmarks('lava',[[512,1322],[512,196],[512,776]],1024,1536)},
 });
+
+// Local atlas-cell pixels, measured by fitting the stone base's lower ellipse.
+// A sprite's bottom is its front rim, not the center of its ground footprint.
+export const STRUCTURE_FRAMES=Object.freeze({
+  blue:{column:0,row:0,ground:{x:313,y:441.2},glow:{x:313,y:140}},
+  red:{column:1,row:0,ground:{x:313,y:442.75},glow:{x:313,y:140}},
+  pump:{column:0,row:1,ground:{x:314,y:485.66},glow:{x:314,y:100}},
+  shrine:{column:1,row:1,ground:{x:311,y:451.61},glow:{x:313,y:195}},
+});
+export function structurePlacement(map,view,kind,point,side,atlasSize=1254) {
+  const castle=kind==='castle',frame=castle?STRUCTURE_FRAMES[side===0?'blue':'red']:STRUCTURE_FRAMES[map.theme==='waterfall'?'shrine':'pump'];
+  const cell=atlasSize/2,k=cell/627,inset=3*k,source={x:frame.column*cell+inset,y:frame.row*cell+inset,width:cell-6*k,height:cell-(castle?24:6)*k};
+  const size=view.scale*(castle?(map.theme==='waterfall'?4.7:6):map.theme==='waterfall'?2.7:3.6),scale=size/source.width,p=projectPoint(view,point);
+  const rect={x:p.x-(frame.ground.x-3)*k*scale,y:p.y-(frame.ground.y-3)*k*scale,width:size,height:source.height*scale};
+  const glow={x:rect.x+(frame.glow.x-3)*k*scale,y:rect.y+(frame.glow.y-3)*k*scale};
+  return {frame,source,rect,glow,size,ground:p};
+}
 
 // A small registration mesh puts painted pads precisely under simulation
 // anchors. Only the cached terrain uses this; no combat positions are warped.
@@ -72,30 +110,29 @@ function ring(renderer,ctx,point,radius,color,progress=1) {
 }
 export function paintStructure(renderer,ctx,kind,entity,side,time) {
   const image=renderer.image(STRUCTURES);if(!image)return false;
-  const s=renderer.view.scale,point=kind==='castle'?renderer.map.bases[side]:entity,p=renderer.screenAt(point),castle=kind==='castle';
-  const color=side===0?'#69d6ff':side===1?'#ff8068':'#89f4ed',cell=image.naturalWidth/2;
-  const column=castle?side:renderer.map.theme==='waterfall'?1:0,row=castle?0:1;
-  const size=s*(castle?(renderer.map.theme==='waterfall'?4.7:6):renderer.map.theme==='waterfall'?2.7:3.6);
-  const destroyed=castle&&entity?.hp<=0;
+  const s=renderer.view.scale,point=kind==='castle'?renderer.map.bases[side]:entity,castle=kind==='castle';
+  const {source,rect,glow,size,ground:p}=structurePlacement(renderer.map,renderer.view,kind,point,side,image.naturalWidth);
+  const color=side===0?'#69d6ff':side===1?'#ff8068':'#89f4ed',destroyed=castle&&entity?.hp<=0;
   ring(renderer,ctx,point,castle?renderer.map.castleRadius+.14:1.25,color+'72');
   ctx.save();ctx.imageSmoothingQuality='high';
   if(destroyed){ctx.filter='grayscale(1) brightness(.35)';ctx.globalAlpha=.8;}
-  ctx.drawImage(image,column*cell+3,row*cell+3,cell-6,cell-6,p.x-size/2,p.y-size*.88,size,size);ctx.restore();
-  // Light is live, ownership and capture progress never get baked into scenery.
-  const glowY=p.y-size*(castle ? .65 : .55),radius=size*(castle ? .18 : .22),pulse=.7+Math.sin(time*2.4+point.x)*.12;
+  ctx.drawImage(image,source.x,source.y,source.width,source.height,rect.x,rect.y,rect.width,rect.height);ctx.restore();
+  // Ownership light follows the crystal; both it and the labels share the
+  // sprite placement instead of separate bottom-of-image offsets.
+  const radius=size*(castle ? .18 : .22),pulse=.7+Math.sin(time*2.4+point.x)*.12;
   if(!destroyed){
     ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=pulse*.33;
-    const glow=ctx.createRadialGradient(p.x,glowY,0,p.x,glowY,radius);glow.addColorStop(0,color);glow.addColorStop(1,color+'00');ctx.fillStyle=glow;ctx.fillRect(p.x-radius,glowY-radius,radius*2,radius*2);ctx.restore();
+    const light=ctx.createRadialGradient(glow.x,glow.y,0,glow.x,glow.y,radius);light.addColorStop(0,color);light.addColorStop(1,color+'00');ctx.fillStyle=light;ctx.fillRect(glow.x-radius,glow.y-radius,radius*2,radius*2);ctx.restore();
   }
   if(castle){
-    const hp=entity?.hp??RULES.castleHealth,max=entity?.maxHp??RULES.castleHealth,labelY=renderer.camera.active?p.y-size*.94:Math.max(p.y-size*.94,16+s*.35),width=clamp(s*4.6,64,116);
+    const hp=entity?.hp??RULES.castleHealth,max=entity?.maxHp??RULES.castleHealth,labelY=renderer.camera.active?rect.y-s*.35:Math.max(rect.y-s*.35,16+s*.35),width=clamp(s*4.6,64,116);
     ctx.save();ctx.textAlign='center';ctx.font=`600 ${clamp(s*.35,9,12)}px system-ui,sans-serif`;ctx.fillStyle='#e9eadb';ctx.shadowColor='#07121d';ctx.shadowBlur=5;
     ctx.fillText(side?'CRIMSON CROWN':'AZURE CORE',p.x,labelY-s*.35);renderer.healthBar(ctx,p.x,labelY,width,hp/max,color,5);ctx.fillText(String(Math.ceil(Math.max(0,hp))),p.x,labelY+16);ctx.restore();
     if(destroyed){ctx.save();ctx.globalAlpha=.4;ctx.fillStyle='#17202e';ctx.beginPath();ctx.ellipse(p.x,p.y-size*.1,size*.35,size*.09,0,0,Math.PI*2);ctx.fill();ctx.restore();}
   }else{
     if(entity.capturing!=null&&entity.progress>0)ring(renderer,ctx,point,1.38,entity.capturing===0?'#a8e8ff':'#ffc09e',entity.progress/RULES.captureTime);
     ctx.save();ctx.textAlign='center';ctx.font=`600 ${clamp(s*.28,8,11)}px system-ui,sans-serif`;ctx.fillStyle='#e1f5ec';ctx.shadowColor='#102525';ctx.shadowBlur=5;
-    ctx.fillText(side===0?'+2% BLUE':side===1?'+2% RED':'CAPTURE',p.x,p.y+s*.7);ctx.restore();
+    ctx.fillText(side===0?'+2% BLUE':side===1?'+2% RED':'CAPTURE',p.x,rect.y+rect.height+s*.28);ctx.restore();
   }
   return true;
 }

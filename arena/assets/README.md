@@ -12,9 +12,17 @@ The combined download is approximately 2.7 MiB.
 - `sprites/arena-structures.webp`: two castles, mana pump and cascade shrine.
 
 Source registration dimensions and pad anchors live in `js/scene-art.mjs`.
-A small affine triangle mesh registers the painted courts and well pads to the
-unchanged combat coordinates. Castles, wells, capture progress and ownership
+A small affine triangle mesh registers measured court centers, well pads and
+both bridge entries to the unchanged combat coordinates. The forest bridges
+carry traffic along the northern and southern roads, with the creek below the
+deck. Their entry coordinates and painted walking polygons are recorded in
+`PAINTED_BRIDGES` and checked against the real routes. Castles, wells, capture progress and ownership
 are drawn separately, as are active lava, water glints, projectiles and units.
+Structure placement uses the center of the stone ground ellipse in each atlas
+cell. It does not align the image's bottom edge with the courtyard center.
+Castle crops also exclude glow from the next atlas row. The alpha-fit browser
+check measures the stone bases independently and verifies the actual draw calls
+on all three maps at 50%, 100% and 160% zoom.
 
 `js/projection.mjs` shares each map's transform between rendering, camera input,
 fog, deployment fields and minimap. The new maps face north vertically; the

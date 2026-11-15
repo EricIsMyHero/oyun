@@ -1202,7 +1202,12 @@ The tests write preview screenshots under `/tmp` for visual review.
 desktop and phone, local artwork loading, preview buttons, portrait projection,
 fog on the minimap, hazard phases, orb pickup, and click deployment. Set
 `ARENA_ENVIRONMENTS_URL` to check the deployed build. Registration/projection
-math is covered by `tests/arena-scene-art.test.cjs`.
+math is covered by `tests/arena-scene-art.test.cjs`. `node tests/arena-alignment.browser.cjs`
+independently fits the source sprites' stone-base alpha contours, then checks
+actual canvas draw calls against the castle/well centers on desktop and phone
+at three zoom levels. Set `ARENA_ALIGNMENT_URL` to verify a deployed build.
+Bridge entry/exit calibration and a clear walking strip through both decks are
+also tested against the simulation routes.
 
 The effects browser check also compares rendered pixels at each active area
 boundary, expired areas and hidden fog, and checks status icons, inspector labels,
