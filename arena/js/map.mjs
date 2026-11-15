@@ -3,6 +3,10 @@ import { RULES } from './rules.mjs';
 // The straight center road puts its pump 17.5 tiles from either castle.
 // Outer roads take longer forest routes; no bends are needed to pad the center.
 const PUMP_DISTANCE=17.5;
+// New arenas keep their authored world bounds. These offsets make the full
+// objective roads exactly 35 tiles, including their diagonal approaches.
+const SWAMP_OFFSET=Math.sqrt(PUMP_DISTANCE**2-16**2);
+const PRISON_BEND=(7**2-(PUMP_DISTANCE-13)**2)/(2*(PUMP_DISTANCE-13));
 
 export const MAP = Object.freeze({
   id:'verdant',name:'Verdant Basin',theme:'forest',description:'Three routes, three mana pumps. No environmental effects.',
@@ -44,12 +48,38 @@ export const ARENAS=freezeTree({
     routes:[[{x:4,y:9},{x:19,y:9},{x:34,y:9}]],nodes:[],
     center:{x:19,y:9},plaza:{minX:16.5,maxX:21.5,minY:6.5,maxY:11.5},
   },
+  swamp:{
+    id:'swamp',name:'Hollowfen',theme:'swamp',projection:'portrait',
+    description:'One main road and paired hollow-tree portals. Each castle is 17.5 walking tiles from the central well.',
+    width:40,height:26,roadWidth:2.2,castleRadius:1.05,pumpDistance:17.5,courtyard:{rear:1,front:2.5,side:1},
+    bases:[{x:4,y:13-SWAMP_OFFSET},{x:36,y:13+SWAMP_OFFSET}],center:{x:20,y:13},
+    routes:[[{x:4,y:13-SWAMP_OFFSET},{x:20,y:13},{x:36,y:13+SWAMP_OFFSET}],
+      [{x:4,y:13-SWAMP_OFFSET},{x:4,y:29-SWAMP_OFFSET,portal:'hollow'},{x:36,y:SWAMP_OFFSET-3,portal:'hollow'},{x:36,y:13+SWAMP_OFFSET}]],
+    nodes:[{id:'fen',name:'Rootwell',x:20,y:13}],
+    portals:[{id:'south-hollow',x:4,y:29-SWAMP_OFFSET,pair:'north-hollow'},{id:'north-hollow',x:36,y:SWAMP_OFFSET-3,pair:'south-hollow'}],
+  },
+  prison:{
+    id:'prison',name:'Ironveil Prison',theme:'prison',projection:'portrait',
+    description:'Two wells, each 17.5 walking tiles from either castle, and a central orb. Timed gates redirect the battle.',
+    width:34,height:26,roadWidth:2.2,castleRadius:1.05,pumpDistance:17.5,courtyard:{rear:1,front:2.5,side:1},
+    bases:[{x:4,y:13},{x:30,y:13}],center:{x:17,y:13},
+    routes:[[{x:4,y:13},{x:4+PRISON_BEND,y:6},{x:15.5,y:6},{x:17,y:6},{x:18.5,y:6},{x:30-PRISON_BEND,y:6},{x:30,y:13}],
+      [{x:4,y:13},{x:4+PRISON_BEND,y:13},{x:15.5,y:13},{x:18.5,y:13},{x:30-PRISON_BEND,y:13},{x:30,y:13}],
+      [{x:4,y:13},{x:4+PRISON_BEND,y:20},{x:15.5,y:20},{x:17,y:20},{x:18.5,y:20},{x:30-PRISON_BEND,y:20},{x:30,y:13}]],
+    crossways:[[{x:15.5,y:6},{x:15.5,y:9.5},{x:15.5,y:13},{x:15.5,y:16.5},{x:15.5,y:20}],
+      [{x:18.5,y:6},{x:18.5,y:9.5},{x:18.5,y:13},{x:18.5,y:16.5},{x:18.5,y:20}]],
+    nodes:[{id:'west-cell',name:'West Cell',x:17,y:6},{id:'east-cell',name:'East Cell',x:17,y:20}],
+    gates:[{id:'red',group:'red',axis:'x',x:17,y:13},
+      {id:'green-sw',group:'green',axis:'y',x:15.5,y:9.5},{id:'green-se',group:'green',axis:'y',x:15.5,y:16.5},
+      {id:'green-nw',group:'green',axis:'y',x:18.5,y:9.5},{id:'green-ne',group:'green',axis:'y',x:18.5,y:16.5}],
+  },
 });
 export function arenaFor(id='verdant',random=Math.random) {
   if(id==='random'){const maps=Object.values(ARENAS);return maps[Math.min(maps.length-1,Math.floor(random()*maps.length))];}
   if(!ARENAS[id])throw new Error(`Unknown arena: ${id}`);
   return ARENAS[id];
 }
+export const portalJump=(a,b)=>a.portal&&a.portal===b.portal;
 export const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 export function projectSegment(p,a,b) {
   const dx=b.x-a.x,dy=b.y-a.y;
@@ -59,12 +89,13 @@ export function projectSegment(p,a,b) {
 }
 export const routeFor=(lane,side,map=MAP)=>side===1?[...map.routes[lane]].reverse():[...map.routes[lane]];
 export function routeLength(points) {
-  return points.slice(1).reduce((total,p,i)=>total+distance(points[i],p),0);
+  return points.slice(1).reduce((total,p,i)=>total+(portalJump(points[i],p)?0:distance(points[i],p)),0);
 }
 export function pointOnRoute(lane,side,walkingDistance,map=MAP) {
   const route=routeFor(lane,side,map);
   let remaining=Math.max(0,walkingDistance);
   for(let i=1;i<route.length;i++) {
+    if(portalJump(route[i-1],route[i]))continue;
     const length=distance(route[i-1],route[i]);
     if(remaining<=length) {
       const t=remaining/(length||1);
@@ -76,7 +107,8 @@ export function pointOnRoute(lane,side,walkingDistance,map=MAP) {
 }
 export function closestRoute(p,map=MAP) {
   let best={lane:0,segment:0,distance:Infinity,x:p.x,y:p.y};
-  map.routes.forEach((route,lane)=>route.slice(1).forEach((b,i)=>{
+  [...map.routes,...(map.crossways||[])].forEach((route,index)=>route.slice(1).forEach((b,i)=>{
+    if(portalJump(route[i],b))return;const lane=index<map.routes.length?index:1;
     const hit=projectSegment(p,route[i],b);
     if(hit.distance<best.distance)best={...hit,lane,segment:i};
   }));
@@ -95,13 +127,13 @@ export function isCourtyard(p,side,map=MAP) {
   const b=courtyardFor(side,map);
   return p.x>=b.minX&&p.x<=b.maxX&&p.y>=b.minY&&p.y<=b.maxY;
 }
-export function isWalkable(p,map=MAP) {
+export function isWalkable(p,map=MAP,blocked=()=>false) {
   if(!p||!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<0||p.x>map.width||p.y<0||p.y>map.height)return false;
-  return isCourtyard(p,0,map)||isCourtyard(p,1,map)||inRect(p,map.plaza)||closestRoute(p,map).distance<=map.roadWidth/2-.05;
+  return !blocked(p)&&(isCourtyard(p,0,map)||isCourtyard(p,1,map)||inRect(p,map.plaza)||closestRoute(p,map).distance<=map.roadWidth/2-.05);
 }
 // Trace the whole segment, so a dash cannot cross a gap and reappear on a road.
-export function clipWalkableSegment(from,to,padding=.5,map=MAP) {
-  const valid=p=>p.x>=padding&&p.x<=map.width-padding&&p.y>=padding&&p.y<=map.height-padding&&isWalkable(p,map);
+export function clipWalkableSegment(from,to,padding=.5,map=MAP,blocked=()=>false) {
+  const valid=p=>p.x>=padding&&p.x<=map.width-padding&&p.y>=padding&&p.y<=map.height-padding&&isWalkable(p,map,blocked);
   if(!valid(from)||!Number.isFinite(to?.x)||!Number.isFinite(to?.y))return {x:from.x,y:from.y,blocked:true};
   const length=distance(from,to),steps=Math.max(1,Math.ceil(length/.05));
   const at=t=>({x:from.x+(to.x-from.x)*t,y:from.y+(to.y-from.y)*t});
@@ -122,16 +154,17 @@ export function isDeployable(p,side,buildings=[],map=MAP) {
 
 export const inRect=(p,rect)=>!!rect&&p.x>=rect.minX&&p.x<=rect.maxX&&p.y>=rect.minY&&p.y<=rect.maxY;
 export function objectiveFor(map,lane=0) {
+  if(map.theme==='prison')return lane===1?map.center:map.nodes[lane===0?0:1];
   const route=map.routes[lane]||map.routes[0];
   return map.nodes[lane]||map.nodes[0]||map.center||route[Math.floor(route.length/2)];
 }
-export function bindMap(map) {
+export function bindMap(map,blocked=()=>false) {
   return {
     routeFor:(lane,side)=>routeFor(lane,side,map),
     pointOnRoute:(lane,side,d)=>pointOnRoute(lane,side,d,map),
     closestRoute:p=>closestRoute(p,map),courtyardFor:side=>courtyardFor(side,map),
-    isCourtyard:(p,side)=>isCourtyard(p,side,map),isWalkable:p=>isWalkable(p,map),
-    clipWalkableSegment:(a,b,padding)=>clipWalkableSegment(a,b,padding,map),
+    isCourtyard:(p,side)=>isCourtyard(p,side,map),isWalkable:p=>isWalkable(p,map,blocked),
+    clipWalkableSegment:(a,b,padding)=>clipWalkableSegment(a,b,padding,map,blocked),
     isDeployable:(p,side,buildings)=>isDeployable(p,side,buildings,map),
     finitePoint:p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.x>=0&&p.x<=map.width&&p.y>=0&&p.y<=map.height,
   };

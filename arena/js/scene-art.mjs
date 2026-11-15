@@ -24,7 +24,7 @@ export const PAINTED_BRIDGES=Object.freeze([
   {lane:2,ends:[{x:16,y:24},{x:19.5,y:24}],source:[[846,687],[928,651]],walkway:[[827,673],[861,708],[950,667],[910,637]]},
 ]);
 export const SCENES=Object.freeze({
-  verdant:{url:url('maps/verdant-basin.webp?v=48'),width:1536,height:1024,
+  verdant:{url:url('maps/verdant-basin.webp?v=49'),width:1536,height:1024,
     anchors:[...landmarks('verdant',[[332,722],[1145,302],[528,392],[760,505],[982,636]],1536,1024),
       [240,605,327.68,609.28],[265,515,348.16,517.12],[780,265,778.24,302.08],
       ...PAINTED_BRIDGES.flatMap(bridge=>bridge.source.map((source,i)=>anchor(ARENAS.verdant,source,bridge.ends[i],1536,1024)))]},
@@ -32,6 +32,14 @@ export const SCENES=Object.freeze({
     anchors:landmarks('waterfall',[[512,1274],[512,254],[352,771]],1024,1536)},
   lava:{url:url('maps/ember-rift.webp'),width:1024,height:1536,
     anchors:landmarks('lava',[[512,1322],[512,196],[512,776]],1024,1536)},
+  swamp:{url:url('maps/hollowfen.webp'),width:1024,height:1536,
+    anchors:[...landmarks('swamp',[[244,1317],[750,198],[492,766]],1024,1536),
+      anchor(ARENAS.swamp,[819,1330],ARENAS.swamp.portals[0],1024,1536),anchor(ARENAS.swamp,[180,220],ARENAS.swamp.portals[1],1024,1536)]},
+  prison:{url:url('maps/ironveil-prison.webp'),width:1024,height:1536,
+    anchors:[...landmarks('prison',[[512,1313],[512,202],[174,751],[850,751]],1024,1536),anchor(ARENAS.prison,[512,749],ARENAS.prison.center,1024,1536),
+      ...[[343,829],[680,829],[343,707],[680,707]].map((p,i)=>anchor(ARENAS.prison,p,ARENAS.prison.gates[i+1],1024,1536)),
+      anchor(ARENAS.prison,[205,1102],ARENAS.prison.routes[0][1],1024,1536),anchor(ARENAS.prison,[819,1102],ARENAS.prison.routes[2][1],1024,1536),
+      anchor(ARENAS.prison,[205,403],ARENAS.prison.routes[0].at(-2),1024,1536),anchor(ARENAS.prison,[819,403],ARENAS.prison.routes[2].at(-2),1024,1536)]},
 });
 
 // Local atlas-cell pixels, measured by fitting the stone base's lower ellipse.

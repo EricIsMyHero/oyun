@@ -24,7 +24,7 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
      }return best;
     };
     const fitted=[[fit(0,0),fit(1,0)],[fit(0,1),fit(1,1)]],measurements=[];
-    for(const id of['verdant','waterfall','lava']){
+    for(const id of['verdant','waterfall','lava','swamp','prison']){
      a.previewArena(id);r.setBattleView(true);
      for(const zoom of[.5,1,1.6]){
       r.camera.setZoom(zoom);r.syncCamera();const calls=[],draw=r.ctx.drawImage;
@@ -40,8 +40,8 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
     }
     a.previewArena('verdant');return{maximumError:Math.max(...measurements.map(m=>m.error)),count:measurements.length};
    });
-   assert.ok(result.maximumError<1.5);assert.equal(result.count,30);results.push({viewport:viewport.width,...result});
-   for(const id of['verdant','waterfall','lava']){await page.locator(`[data-preview-arena="${id}"]`).click();await page.waitForTimeout(100);await page.locator('#arena-canvas').screenshot({path:`/tmp/arena-alignment-${id}-${viewport.width}-v48.png`});}
+   assert.ok(result.maximumError<1.5);assert.equal(result.count,51);results.push({viewport:viewport.width,...result});
+   for(const id of['verdant','waterfall','lava','swamp','prison']){await page.locator(`[data-preview-arena="${id}"]`).click();await page.waitForTimeout(100);await page.locator('#arena-canvas').screenshot({path:`/tmp/arena-alignment-${id}-${viewport.width}-v49.png`});}
    await page.close();
   }
   assert.deepEqual(errors,[]);console.log(JSON.stringify({results,errors},null,2));

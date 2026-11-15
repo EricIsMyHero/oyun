@@ -29,7 +29,7 @@ the artwork. Card portraits are cropped into small cached textures once after
 loading; terrain blits use only the visible atlas region. The scenery generator
 has its own deterministic seeds; drawing does not advance combat or change any
 card statistics. Fog covers the final world
-image, including every light and particle effect. The three illustrated terrain
+image, including every light and particle effect. The five illustrated terrain
 paintings and transparent structure atlas are served from `arena/assets/`; no
 external image host is needed. Procedural scenery remains a loading/error
 fallback. A small registration mesh aligns painted court and well pads with
@@ -37,7 +37,7 @@ combat coordinates, and the cached terrain avoids repainting that mesh while
 panning. Live castles, well ownership, capture progress, lava and water glints
 remain separate from the terrain painting.
 
-The lobby offers three preview buttons. Previewing a map does not choose the
+The lobby offers five preview buttons. Previewing a map does not choose the
 next battle: normal matches still select randomly. `?preview=waterfall` or
 `?preview=lava` opens a particular lobby preview. Cascade Hollow and Ember Rift
 use the references' portrait composition, with Azure at the bottom and Crimson
@@ -78,7 +78,7 @@ Spells can be used again when their turn returns and sufficient energy exists.
 
 ## Random battlegrounds
 
-Every new match randomly chooses one of three immutable map definitions. Each
+Every new match randomly chooses one of five immutable map definitions. Each
 engine, renderer, bot and camera uses that match’s geometry; restarting cannot
 change a running match or another simulation. `?arena=verdant`, `?arena=waterfall`
 and `?arena=lava` can open a particular battleground for practice and testing.
@@ -89,6 +89,8 @@ Without an override, selection is random.
 | Verdant Basin | 43 × 28 | 3 | Three mana wells | No environmental modifiers |
 | Cascade Hollow | 29 × 22 | 2 | One mana well | Water slows ground movement |
 | Ember Rift | 38 × 18 | 1 | One floating mana orb | Central basin periodically fills with lava |
+| Hollowfen | 40 × 26 | Main road + two half-roads | One well | Paired hollow trees teleport units |
+| Ironveil Prison | 34 × 26 | 3 + cross passages | Two wells and central orb | Gates alternate every 60 seconds |
 
 Cascade’s two routes each measure 25 walking tiles. Its well lies halfway along
 the northern route, exactly **12.5 walking tiles from either citadel**. The other
@@ -1230,3 +1232,41 @@ The catalog, Format and Blesser use the shared absolute 1,000-point model:
 passive points. Collection size never rescales an existing score. Inspect a
 card to expand its per-entry Power breakdown. See [Card Power](card-power.md)
 for all formulas and the 232 individual passive ratings.
+
+## Hollowfen and Ironveil Prison
+
+The new arenas retain their authored dimensions: **40 × 26 tiles** for
+Hollowfen and **34 × 26 tiles** for Ironveil. Every mana well is
+exactly **17.5 walking tiles from either castle** along its objective route.
+Hollowfen has a diagonal main road and one central well. Two half-roads lead
+from each citadel to a hollow tree. Touching either tree instantly teleports a
+living, unhidden card to the paired tree and places it just outside the exit,
+facing the next part of its journey. Both teams and all movement types can use
+them. A one-second re-entry guard and an exit offset prevent teleport loops.
+Passengers follow their hosts; the jump does not count as walked distance or
+lay a flame trail across the bog. The gap between trees is not walkable and is
+excluded from road projection, route length, deployment and banishment sampling.
+
+Ironveil has two outer wells and a central orb with the same 5-Mana / 30-second
+2% regeneration rule as Ember. Initially the four green cross-passage gates
+are closed and the central red gate is open. They trade states every 60 seconds
+of simulation time. A closing gate deals one 100-damage environmental hit using
+normal Shield, reduction and immunity rules, then moves the occupant across the
+gate in its direction of travel. Displacement still resolves for immune cards.
+Hidden passengers do not receive separate hits. The orb disappears while the
+red gate is closed and returns when the center reopens, honoring any pending
+pickup timer. These clocks freeze on pause and reset each match.
+
+All movement types follow the gate routing rule. Closed gates participate in
+walkability and dash clipping. A small road graph computes detours through open
+cross passages; cached paths are invalidated when gates switch, targets move,
+or a unit is displaced. Paths store coordinates, not references to other units.
+The gate state is structural, not a removable crowd-control status. Gate walls
+control movement; combat retains the ordinary attack and visibility rules.
+
+`tests/arena-topology.test.cjs` covers both teams, flying/hovering/ground units,
+portal route continuation, phase changes, ordinary gate damage, immunity,
+orb suppression, navigation, native-card hits and bot play. Run
+`node tests/arena-topology.browser.cjs` for desktop/phone previews, actual
+teleports, gate closing, orb removal/return, and the combined objective HUD.
+Set `ARENA_TOPOLOGY_URL` to verify the deployed build.

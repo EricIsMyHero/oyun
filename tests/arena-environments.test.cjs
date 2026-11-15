@@ -16,10 +16,10 @@ async function fixture(arenaId='verdant',options={}){
 }
 const close=(actual,expected)=>assert.ok(Math.abs(actual-expected)<1e-6,`${actual} ≈ ${expected}`);
 
-test('all three arenas have distinct dimensions, lane counts and objective topology',async()=>{
+test('all five arenas retain their lane and objective topology and requested dimensions',async()=>{
   const [,,{MAP,ARENAS,routeLength,pointOnRoute,distance,isWalkable}]=await modules;
-  assert.deepEqual(Object.values(ARENAS).map(m=>[m.routes.length,m.nodes.length]),[[3,3],[2,1],[1,0]]);
-  assert.equal(new Set(Object.values(ARENAS).map(m=>`${m.width}x${m.height}`)).size,3);
+  assert.deepEqual(Object.values(ARENAS).map(m=>[m.routes.length,m.nodes.length]),[[3,3],[2,1],[1,0],[2,1],[3,2]]);
+  assert.equal(new Set([ARENAS.verdant,ARENAS.waterfall,ARENAS.lava].map(m=>`${m.width}x${m.height}`)).size,3);
   assert.equal(MAP,ARENAS.verdant);
   for(const map of Object.values(ARENAS))for(const route of map.routes){assert.deepEqual(route[0],map.bases[0]);assert.deepEqual(route.at(-1),map.bases[1]);assert.ok(route.every(p=>isWalkable(p,map)));}
   for(const side of [0,1])close(distance(pointOnRoute(0,side,12.5,ARENAS.waterfall),ARENAS.waterfall.nodes[0]),0);
@@ -43,8 +43,8 @@ test('map bindings isolate simultaneous matches, movement bounds, deployment and
 
 test('seeded random match selection reaches all arenas and rejects unknown maps',async()=>{
   const ids=new Set();for(let i=1;i<=40;i++){const {e}=await fixture('random',{seed:i*100003});ids.add(e.map.id);const {e:again}=await fixture('random',{seed:i*100003});assert.equal(e.map.id,again.map.id);}
-  assert.equal(ids.size,3);
-  const adjacent=new Set();for(let seed=1000;seed<1020;seed++){const {e}=await fixture('random',{seed});adjacent.add(e.map.id);}assert.equal(adjacent.size,3);
+  assert.equal(ids.size,5);
+  const adjacent=new Set();for(let seed=1000;seed<1020;seed++){const {e}=await fixture('random',{seed});adjacent.add(e.map.id);}assert.equal(adjacent.size,5);
   await assert.rejects(()=>fixture('missing'),/Unknown arena/);
 });
 

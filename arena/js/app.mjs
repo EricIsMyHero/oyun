@@ -351,9 +351,9 @@ function previewArena(id='verdant') {
   state.renderer.setMap(map);state.renderer.setBattleView(false);
   $('preview-arena-number').textContent=`ARENA ${String(index+1).padStart(2,'0')}`;
   $('preview-arena-name').textContent=map.name;
-  $('preview-arena-theme').textContent=map.id==='waterfall'?'THE ENCHANTED CASCADE':map.id==='lava'?'THE VOLCANIC FRONTIER':'THE MANA FRONTIER';
+  $('preview-arena-theme').textContent=map.id==='waterfall'?'THE ENCHANTED CASCADE':map.id==='lava'?'THE VOLCANIC FRONTIER':map.id==='swamp'?'THE HOLLOW MARSH':map.id==='prison'?'THE SHIFTING CELLBLOCKS':'THE MANA FRONTIER';
   $('arena-stage').dataset.preview=map.id;
-  $('preview-objective-legend').innerHTML='<i class="legend-dot neutral"></i> '+(map.id==='lava'?'MANA ORB':'MANA WELLS');
+  $('preview-objective-legend').innerHTML='<i class="legend-dot neutral"></i> '+(map.id==='lava'?'MANA ORB':map.id==='prison'?'WELLS &amp; ORB':'MANA WELLS');
   document.querySelectorAll('[data-preview-arena]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.previewArena===map.id)));
   state.renderer.resize();
 }
@@ -491,8 +491,8 @@ function updateHUD(force=false) {
   const arena=s.arena,left=Math.max(0,Math.ceil((arena.nextPhaseAt||0)-s.time-1e-7));
   const condition=$('arena-condition');
   condition.hidden=arena.id==='verdant';
-  condition.dataset.active=String(arena.surge||arena.lavaActive);
-  condition.textContent=arena.id==='waterfall'?`WATER · ${arena.surge?'33':'15'}% MOVEMENT SLOW · ${arena.surge?'SURGE ENDS':'SURGE IN'} ${left}s`:arena.id==='lava'?`LAVA ${arena.lavaActive?'ACTIVE · ENDS':'IN'} ${left}s · GROUND CARDS ONLY`:'';
+  condition.dataset.active=String(arena.surge||arena.lavaActive||arena.gatePhase===1);
+  condition.textContent=arena.id==='waterfall'?`WATER · ${arena.surge?'33':'15'}% MOVEMENT SLOW · ${arena.surge?'SURGE ENDS':'SURGE IN'} ${left}s`:arena.id==='lava'?`LAVA ${arena.lavaActive?'ACTIVE · ENDS':'IN'} ${left}s · GROUND CARDS ONLY`:arena.id==='swamp'?'HOLLOW PORTALS · TOUCH A STUMP TO TRAVEL':arena.id==='prison'?`CENTER ${arena.gatePhase===1?'SEALED':'OPEN'} · GATES SWITCH IN ${left}s`:'';
   condition.title=state.engine.map.description;
   const remaining=Math.max(0,Math.ceil(s.remaining||0));
   $('match-clock').textContent=`${Math.floor(remaining/60)}:${String(remaining%60).padStart(2,'0')}`;
@@ -514,8 +514,8 @@ function updateHUD(force=false) {
   }).join('');
   if(arena.orb){
     const orb=arena.orb,remaining=Math.max(0,Math.ceil((orb.respawnAt||0)-s.time-1e-7)),visible=s.phase==='ended'||orb.pickedBy===0||isPointVisible(s,0,orb);
-    $('node-hud').innerHTML=`<span class="node-indicator orb-indicator"><i></i><span>${!visible?'MANA ORB · UNSEEN':orb.available?'MANA ORB · +5 MANA':`ORB RETURNS IN ${remaining}s`}</span></span>`;
-    $('node-hud').setAttribute('aria-label','Mana orb availability');
+    $('node-hud').innerHTML+=`<span class="node-indicator orb-indicator"><i></i><span>${orb.gateSuppressed?'ORB SEALED':!visible?'MANA ORB · UNSEEN':orb.available?'MANA ORB · +5 MANA':`ORB RETURNS IN ${remaining}s`}</span></span>`;
+    $('node-hud').setAttribute('aria-label','Mana objectives');
   }else $('node-hud').setAttribute('aria-label','Mana well ownership');
   const handKey=JSON.stringify([team.hand,team.hand.map(id=>mana>=(state.engine.cardFor(0,id)?.stats.mana||0)),state.selection]);
   if(force||handKey!==state.handSignature){

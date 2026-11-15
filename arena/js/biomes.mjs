@@ -1,3 +1,5 @@
+import { paintTopology } from './topology-art.mjs';
+import { portalJump } from './map.mjs';
 import { projectPoint, transformWorld } from './projection.mjs';
 import { SCENES, LAVA_SURFACE } from './scene-art.mjs';
 // Cached, tile-aligned arena artwork; animated hazards are painted separately.
@@ -43,7 +45,7 @@ export function paintBiome(r) {
     const p=r.screenAt(random()*map.width,random()*map.height);
     ellipse(ctx,p,s*(.025+random()*.08),s*.03,i%3===0?(lava?'#f2b78518':'#b4dfb425'):'#06182630');
   }
-  for(const route of map.routes)paving(r,ctx,route,random,lava);
+  for(const route of [...map.routes,...(map.crossways||[])]){let part=[route[0]];for(let i=1;i<route.length;i++){if(portalJump(route[i-1],route[i])){if(part.length>1)paving(r,ctx,part,random,lava);part=[];}part.push(route[i]);}if(part.length>1)paving(r,ctx,part,random,lava);}
   if(lava){
     const basin=rectPoints(map.plaza).map(p=>r.screenAt(p));
     polygon(ctx,basin,'#252938','#847076',s*.15);
@@ -58,7 +60,7 @@ export function paintBiome(r) {
     for(const radius of [1.35,1.05,.7]){ctx.beginPath();ctx.ellipse(center.x,center.y,s*radius,s*radius*.5,0,0,Math.PI*2);ctx.strokeStyle=radius===1.05?'#bc9da6':'#706077';ctx.lineWidth=s*.04;ctx.stroke();}
     for(let x=map.plaza.minX+.3;x<map.plaza.maxX;x+=.65)r.block(ctx,x,map.plaza.minY-.17,.45,.25,.16,'#72646a','#403a48','#988081');
     for(let x=map.plaza.minX+.3;x<map.plaza.maxX;x+=.65)r.block(ctx,x,map.plaza.maxY-.08,.45,.25,.16,'#72646a','#403a48','#988081');
-  }else river(r,ctx);
+  }else if(map.theme==='waterfall')river(r,ctx);
   for(let side=0;side<2;side++)r.courtyard(ctx,side);
   const props=[];
   for(let x=.5;x<map.width;x+=1.05)for(let y=.4;y<map.height;y+=1.1){
@@ -80,7 +82,7 @@ export function paintBiome(r) {
     }
   }
   ctx.restore();
-  if(!lava){
+  if(map.theme==='waterfall'){
     // Water pours over the island's cliff, rather than ending at a hard edge.
     const lip=r.screenAt(19.55,21.25),fallWidth=s*1.8,drop=s*2.5;
     const curtain=ctx.createLinearGradient(lip.x,lip.y,lip.x,lip.y+drop);
@@ -91,7 +93,7 @@ export function paintBiome(r) {
       ctx.beginPath();ctx.moveTo(x,lip.y+(i/14-.5)*s*.3);ctx.lineTo(x+s*.03,lip.y+drop*(.55+(i%4)*.1));ctx.strokeStyle='#cbffff80';ctx.lineWidth=s*.025;ctx.stroke();
     }
     const mist=ctx.createRadialGradient(lip.x,lip.y+drop*.8,0,lip.x,lip.y+drop*.8,s*1.5);mist.addColorStop(0,'#b3e8ef5c');mist.addColorStop(1,'#89ddec00');ellipse(ctx,{x:lip.x,y:lip.y+drop*.8},s*1.6,s*.8,mist);
-  }else{
+  }else if(lava){
     // A volcanic vent gives the rift a distinct silhouette and a light source.
     const p=r.screenAt(17,1.2),height=s*2.5;
     polygon(ctx,[{x:p.x-s*1.5,y:p.y+s*.4},{x:p.x-s*.5,y:p.y-height},{x:p.x+s*.45,y:p.y-height*.95},{x:p.x+s*1.4,y:p.y+s*.5}],'#34313f','#191e2b',s*.06);
@@ -106,6 +108,8 @@ export function paintBiome(r) {
 // The minimap uses its own projection but the same arena state.
 export function paintEnvironment(r,ctx,state,view) {
   if(r.map.theme==='forest')return;
+  if(['swamp','prison'].includes(r.map.theme))paintTopology(r,ctx,state,view);
+  if(r.map.theme==='swamp')return;
   const {scale:s,ox,oy}=view,project=p=>projectPoint(view,p);
   const time=state?.time||0,arena=state?.arena;
   ctx.save();
@@ -122,7 +126,7 @@ export function paintEnvironment(r,ctx,state,view) {
     }
     ctx.globalAlpha=1;
   }else{
-    const points=rectPoints(r.map.plaza).map(project),active=arena?.lavaActive;
+    const points=r.map.plaza?rectPoints(r.map.plaza).map(project):[],active=r.map.theme==='lava'&&arena?.lavaActive;
     if(active){
       // A molten surface with drifting crust, branching hot seams and bubbles.
       // Its exact world rectangle is also the engine's 5 × 5 damage footprint.
@@ -150,7 +154,7 @@ export function paintEnvironment(r,ctx,state,view) {
         ctx.beginPath();ctx.arc(x,y,radius,0,Math.PI*2);ctx.strokeStyle=`rgba(255,224,149,${Math.sin(cycle*Math.PI)*.8})`;ctx.lineWidth=.025;ctx.stroke();
       }
       ctx.strokeStyle='#ffb25a';ctx.lineWidth=.06;ctx.strokeRect(basin.minX+.04,basin.minY+.04,4.92,4.92);ctx.restore();
-    }else if(arena&&arena.nextPhaseAt-time<=5){
+    }else if(r.map.theme==='lava'&&arena&&arena.nextPhaseAt-time<=5){
       ctx.globalAlpha=.2+Math.sin(time*5)*.1;polygon(ctx,points,'#ff7335','#ffbe78',Math.max(1,s*.04));ctx.globalAlpha=1;
     }
     if(!arena||arena.orb?.available){

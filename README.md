@@ -3,7 +3,7 @@
 ## Real-time Arena
 
 Open [arena/index.html](arena/index.html) through the same HTTP server as the
-Codex to play the separate arena against a bot across three randomly chosen battlegrounds. Build an eight-card
+Codex to play the separate arena against a bot across five randomly chosen battlegrounds. Build an eight-card
 deck with a four-card hand and a cycling spell loadout of at most five Charge.
 The Codex contains 176 root cards, including 29 additions from Book2.xlsx and 9 from Book1.xlsx.
 The original 138 cards remain playable. New cards show explicit Arena lock
@@ -12,7 +12,7 @@ Ethereal forms are chosen before battle; Emergent deployment
 progression resets each match. Spells with missing essential battle data still
 show their lock reasons.
 
-All three arenas now use detailed local terrain paintings with crystal castle
+All five arenas now use detailed local terrain paintings with crystal castle
 and mana-well sprites. Preview buttons show each battleground before starting;
 normal matches remain random. The two canyon maps use a portrait composition
 with the blue castle below the red castle, plus animated water and molten lava.
@@ -355,3 +355,9 @@ The nine Book1 additions and JSON preservation policy are documented in
 All 241 definitions have reviewed class/subclass labels using seven primary
 classes. The [role audit and subclass glossary](docs/card-roles.md) records every
 assignment and correction. Class filters include either selectable Ethereal form.
+
+Hollowfen adds a main road with one mana well and two half-roads joined by
+instant paired tree portals. Ironveil Prison adds three roads, two wells and a
+central mana orb. Every minute its side gates and central gate trade states;
+units route through open corridors. Closing gates deal 100 normal damage and
+push occupants through. The orb is sealed while the central gate is closed.

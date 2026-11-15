@@ -1,5 +1,6 @@
 import { RULES, clamp, num, burst, energyForMana, RAY_CHARGE, addCharge } from './rules.mjs';
-import { arenaFor, bindMap, objectiveFor, routeLength, distance, projectSegment } from './map.mjs';
+import { arenaFor, bindMap, portalJump, objectiveFor, routeLength, distance, projectSegment } from './map.mjs';
+import { gateBlocked, tickTopology, topologyWaypoint, gateTravelBlocked } from './topology.mjs';
 import { createEnvironment, tickEnvironment, terrainSlow } from './environment.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
@@ -29,7 +30,7 @@ export class ArenaEngine {
     this.seed = (Number(seed) >>> 0) || 1;
     // Warm the seeded generator so adjacent restart seeds choose varied maps.
     this.map=arenaFor(arenaId,()=>{this.random();this.random();return this.random();});
-    Object.assign(this,bindMap(this.map));
+    Object.assign(this,bindMap(this.map,p=>gateBlocked(this,p)));
     this.bot = !!bot;
     const opponent=this.bot?buildBotLoadout(cards,spells,()=>this.random()):{deck,spellDeck,formChoices};
     this.accumulator = 0;
@@ -936,7 +937,7 @@ export class ArenaEngine {
   }
   _resetWaypoint(u){
     let best={distance:Infinity,index:1};
-    for(let i=1;i<u.route.length;i++){const q=projectSegment(u,u.route[i-1],u.route[i]);if(q.distance<best.distance)best={...q,index:i};}
+    for(let i=1;i<u.route.length;i++){if(portalJump(u.route[i-1],u.route[i]))continue;const q=projectSegment(u,u.route[i-1],u.route[i]);if(q.distance<best.distance)best={...q,index:i};}
     u.waypoint=best.index;
   }
   _canHit(u,target,layers=u.def?.combat?.targets||'both'){
@@ -1038,6 +1039,7 @@ export class ArenaEngine {
       while(u.waypoint<u.route.length-1&&distance(u,u.route[u.waypoint])<.25)u.waypoint++;
       destination=u.route[u.waypoint];
     }
+    destination=topologyWaypoint(this,u,destination);
     const node=this.state.nodes.find(n=>n.owner!==u.side&&distance(n,u)<=RULES.captureRadius);
     if(!target&&node&&!this.near(node,RULES.captureRadius,t=>t.side!==u.side&&!t.isBuilding).length)return;
     if(movement!=='flying'&&this.isCourtyard(u,u.side)&&!this.isCourtyard(destination,u.side)){
@@ -1056,6 +1058,7 @@ export class ArenaEngine {
     if(has(u,'fear',this.time)){dx=-dx;dy=-dy;}
     const travel=Math.min(d,speed*dt),p={x:u.x+dx/d*travel,y:u.y+dy/d*travel};
     u.facingX=dx/d;u.facingY=dy/d;
+    if(gateTravelBlocked(this,u,p))return;
     if(movement!=='flying'){
       if(!this.isWalkable(p)){
         // Leave a courtyard through a road at walking speed, rather than
@@ -1452,7 +1455,7 @@ export class ArenaEngine {
       for(const [u,sign,weight] of [[a,1,b.mass/total],[b,-1,a.mass/total]]){
         if(this._holding(u)||['stun','root','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
         const p={x:u.x+dx/d*overlap*sign*weight,y:u.y+dy/d*overlap*sign*weight};
-        if(this.isWalkable(p)&&!this.castles.some(c=>c.alive&&distance(p,c)<c.radius+u.radius)){u.x=p.x;u.y=p.y;}
+        if(this.isWalkable(p)&&!gateTravelBlocked(this,u,p)&&!this.castles.some(c=>c.alive&&distance(p,c)<c.radius+u.radius)){u.x=p.x;u.y=p.y;}
       }
     }
   }
@@ -1520,7 +1523,7 @@ export class ArenaEngine {
   }
   _tick(dt){
     this.state.time+=dt;this.state.remaining-=dt;
-    tickEnvironment(this,dt);
+    tickTopology(this);tickEnvironment(this,dt);
     this._syncPossessions();this._syncParasites();this._syncRayFusions();
     for(let side=0;side<2;side++){
       const owned=this.state.nodes.filter(n=>n.owner===side).length;
