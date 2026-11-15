@@ -89,7 +89,7 @@ async function minimapPixelAt(page,point) {
       if (url.hostname.endsWith('.r2.dev')) return route.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600"><rect width="400" height="600" fill="#173b35"/><path d="M0 500L200 90L400 500Z" fill="#54816e"/><circle cx="200" cy="230" r="60" fill="#b5cdbb"/></svg>'});
       return route.abort();
     });
-    await page.goto(`http://127.0.0.1:${server.address().port}${prefix}arena/`,{waitUntil:'domcontentloaded'});
+    await page.goto(`http://127.0.0.1:${server.address().port}${prefix}arena/?arena=verdant`,{waitUntil:'domcontentloaded'});
     await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===176);
     assert.equal(await page.locator('#start-match').isDisabled(),true,'an empty deck cannot start');
     const coverage=await page.evaluate(()=>({cards:arenaApp.catalog.cards.length,ready:arenaApp.catalog.cards.filter(c=>c.ready).length,spells:arenaApp.catalog.spells.length,locked:arenaApp.catalog.cards.find(c=>!c.ready),lockedSpell:arenaApp.catalog.spells.find(c=>!c.ready)}));

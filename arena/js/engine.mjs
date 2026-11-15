@@ -1,12 +1,12 @@
 import { RULES, clamp, num, burst, energyForMana, RAY_CHARGE, addCharge } from './rules.mjs';
-import { MAP, routeFor, routeLength, pointOnRoute, closestRoute, isDeployable, isWalkable, clipWalkableSegment, isCourtyard, courtyardFor, distance, projectSegment } from './map.mjs';
+import { arenaFor, bindMap, objectiveFor, routeLength, distance, projectSegment } from './map.mjs';
+import { createEnvironment, tickEnvironment, terrainSlow } from './environment.mjs';
 import { ABILITIES } from './abilities.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
 import { NEGATIVE_STATUSES as NEGATIVE, STATUS_INTERVALS, statusKind, statusParameters, statValue, statModifiers, statusMagnitude, effectDefinition, canApplyStatuses, canRemoveStatus, weaknessDurationMultiplier, bonusMultiplier } from './statuses.mjs';
 import { buildBotLoadout, createBotState, tickBot } from './bot.mjs';
 import { resolveDeckCard } from './ascension.mjs';
 
-const finitePoint = p => p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.x <= MAP.width && p.y >= 0 && p.y <= MAP.height;
 const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const active = (u,kind,time) => (u.statuses || []).filter(s => s.kind === kind && s.until > time+1e-7);
 const strongest = statusMagnitude;
@@ -16,7 +16,7 @@ const EPS = 1e-7;
 
 /** Pure fixed-step simulation. Render/UI modules never own combat timers. */
 export class ArenaEngine {
-  constructor({cards=[],spells=[],deck=[],spellDeck=[],formChoices={},seed=1,bot=true}={}) {
+  constructor({cards=[],spells=[],deck=[],spellDeck=[],formChoices={},seed=1,bot=true,arenaId='verdant'}={}) {
     this.cards = new Map();
     const add = c => { this.cards.set(c.id,c); for(const f of [...(c.forms||[]),...(c.typeVariants||[])]) add(f);if(c.ascended)add(c.ascended); };
     cards.forEach(add);
@@ -27,6 +27,9 @@ export class ArenaEngine {
     if(!spellDeck.length || new Set(spellDeck).size !== spellDeck.length || spellDeck.some(id => !this.spells.get(id)?.ready)) throw new Error('Choose complete, distinct spells.');
     if(spellDeck.reduce((s,id)=>s+num(this.spells.get(id).charge),0) > RULES.spellBudget) throw new Error('Spell charge capacity is five.');
     this.seed = (Number(seed) >>> 0) || 1;
+    // Warm the seeded generator so adjacent restart seeds choose varied maps.
+    this.map=arenaFor(arenaId,()=>{this.random();this.random();return this.random();});
+    Object.assign(this,bindMap(this.map));
     this.bot = !!bot;
     const opponent=this.bot?buildBotLoadout(cards,spells,()=>this.random()):{deck,spellDeck,formChoices};
     this.accumulator = 0;
@@ -38,10 +41,10 @@ export class ArenaEngine {
     this.vitalPools=new Map();
     this.abilityContext=null;
     this.state = {
-      time:0, phase:'regulation',remaining:RULES.regulation,paused:false,winner:null,
+      map:this.map,arena:createEnvironment(this.map),time:0, phase:'regulation',remaining:RULES.regulation,paused:false,winner:null,
       teams:[{deck,spellDeck,formChoices},opponent].map(loadout=>({deck:[...loadout.deck],formChoices:{...loadout.formChoices},cardDeployments:{},mana:RULES.startMana,energy:0,hand:loadout.deck.slice(0,RULES.handSize),queue:loadout.deck.slice(RULES.handSize),spellIds:[...loadout.spellDeck],spellIndex:0,deployed:0,spentMana:0})),
-      castles:MAP.bases.map((p,side)=>({id:`castle-${side}`,name:side?'Crimson Crown':'Azure Core',...p,side,radius:MAP.castleRadius,hp:RULES.castleHealth,maxHp:RULES.castleHealth,shield:0,maxShield:0,alive:true,isCastle:true,isBuilding:true,stats:{dodge:0,damageminimiser:0,shieldtakendamage:0,criticdamageminimiser:0},statuses:[],memory:{},cooldown:0})),
-      nodes:MAP.nodes.map(n=>({...n,owner:null,capturing:null,progress:0})),
+      castles:this.map.bases.map((p,side)=>({id:`castle-${side}`,name:side?'Crimson Crown':'Azure Core',...p,side,radius:this.map.castleRadius,hp:RULES.castleHealth,maxHp:RULES.castleHealth,shield:0,maxShield:0,alive:true,isCastle:true,isBuilding:true,stats:{dodge:0,damageminimiser:0,shieldtakendamage:0,criticdamageminimiser:0},statuses:[],memory:{},cooldown:0})),
+      nodes:this.map.nodes.map(n=>({...n,owner:null,capturing:null,progress:0})),
       units:[],projectiles:[],effects:[],events:[],fields:[],trails:[],sharedVitals:[],spawnStreams:[],
     };
     this.botState=this.bot?createBotState(this):null;
@@ -153,7 +156,7 @@ export class ArenaEngine {
   _possessionSide(host,side){
     if(host.side===side)return;
     host.side=side;host.targetId=host.burstTargetId=null;host.burstIndex=0;
-    host.route=routeFor(host.lane,side);this._resetWaypoint(host);
+    host.route=this.routeFor(host.lane,side);this._resetWaypoint(host);
   }
   possess(source,host){
     if(!canApplyStatuses(source,this.time))return false;
@@ -236,7 +239,7 @@ export class ArenaEngine {
       for(const[key,value]of Object.entries({hp,maxHp}))Object.defineProperty(u,key,{enumerable:true,configurable:true,writable:true,value});
       u.stats.health=maxHp;delete u.sharedVitalsId;delete u.sharedVitalContribution;delete u.fusedInto;delete u.rayFusion;delete u.rayDash;u.memory.rayPulse=0;
       u.hp=this.maxHealth(u)*fraction;
-      if(leader&&u!==leader){u.x=leader.x+(u.side?1:-1)*.45;u.y=leader.y+.3;if(!isWalkable(u)){const p=closestRoute(u);u.x=p.x;u.y=p.y;}this._resetWaypoint(u);}
+      if(leader&&u!==leader){u.x=leader.x+(u.side?1:-1)*.45;u.y=leader.y+.3;if(!this.isWalkable(u)){const p=this.closestRoute(u);u.x=p.x;u.y=p.y;}this._resetWaypoint(u);}
       this._capVitals(u);
     }
     this.vitalPools.delete(pool.id);this.state.sharedVitals=this.state.sharedVitals.filter(p=>p.id!==pool.id);
@@ -251,7 +254,7 @@ export class ArenaEngine {
   startRayDash(a,b){
     if(a.rayDash||b.rayDash)return false;
     const leader=this.rayLeader(a,b),fx=leader.facingX??(leader.side?-1:1),fy=leader.facingY||0,heading=Math.hypot(fx,fy),dx=heading>EPS?fx/heading:(leader.side?-1:1),dy=heading>EPS?fy/heading:0;
-    const end=clipWalkableSegment(leader,{x:leader.x+dx*5,y:leader.y+dy*5}),length=distance(leader,end);
+    const end=this.clipWalkableSegment(leader,{x:leader.x+dx*5,y:leader.y+dy*5}),length=distance(leader,end);
     if(length<=EPS||!this.fuseRays(a,b,2))return false;
     const pool=this._pool(a);
     leader.rayDash={until:pool.until,lastTime:this.time,remaining:length,length,maxLength:5,width:2,damage:75,startX:leader.x,startY:leader.y,dx,dy,hitIds:[],boundaryLimited:end.blocked};
@@ -262,7 +265,7 @@ export class ArenaEngine {
     const elapsed=Math.max(0,Math.min(this.time,dash.until)-dash.lastTime);dash.lastTime=this.time;
     const blocked=['stun','root','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time));
     const intended=blocked?0:Math.min(dash.remaining,dash.maxLength/3.75*elapsed),from={x:u.x,y:u.y};
-    const next=clipWalkableSegment(from,{x:u.x+dash.dx*intended,y:u.y+dash.dy*intended}),step=distance(from,next);
+    const next=this.clipWalkableSegment(from,{x:u.x+dash.dx*intended,y:u.y+dash.dy*intended}),step=distance(from,next);
     u.x=next.x;u.y=next.y;dash.remaining=Math.max(0,dash.remaining-step);u.moving=step>EPS;
     if(next.blocked){dash.boundaryLimited=true;dash.length=Math.min(dash.length,Math.max(0,(u.x-dash.startX)*dash.dx+(u.y-dash.startY)*dash.dy));dash.remaining=0;}
     const along=point=>(point.x-dash.startX)*dash.dx+(point.y-dash.startY)*dash.dy,previous=along(from),current=along(u);
@@ -273,7 +276,7 @@ export class ArenaEngine {
     })){
       dash.hitIds.push(target.id);this.damage(u,target,dash.damage,{kind:'ability',secondary:true});
     }
-    if(dash.until<=this.time+EPS){delete u.rayDash;if(!isWalkable(u)){const p=closestRoute(u);u.x=p.x;u.y=p.y;}this._resetWaypoint(u);}
+    if(dash.until<=this.time+EPS){delete u.rayDash;if(!this.isWalkable(u)){const p=this.closestRoute(u);u.x=p.x;u.y=p.y;}this._resetWaypoint(u);}
     return true;
   }
   parasitize(source,host){
@@ -354,7 +357,7 @@ export class ArenaEngine {
     delete u.lifeDecay;const decay=this.ability(u)?.lifeDecay;if(decay)u.lifeDecay={...decay,next:this.time+decay.interval};
     u.born=this.time;u.expiresAt=def.stats.life>0?this.time+def.stats.life:Infinity;
     u.statuses=u.statuses.filter(s=>!s.groundOnly||!def.combat.groundEffectImmune);
-    if(def.combat.movementType!=='flying'&&!isWalkable(u)){const point=closestRoute(u);u.x=point.x;u.y=point.y;}
+    if(def.combat.movementType!=='flying'&&!this.isWalkable(u)){const point=this.closestRoute(u);u.x=point.x;u.y=point.y;}
     this._resetWaypoint(u);this._capVitals(u);
   }
   takeFlight(u,duration){
@@ -366,7 +369,7 @@ export class ArenaEngine {
   _temporaryFlight(u){
     if(!u.temporaryFlight||u.temporaryFlight.until>this.time+EPS)return;
     u.def={...u.def,combat:u.temporaryFlight.combat};delete u.temporaryFlight;
-    if(!isWalkable(u)){const p=closestRoute(u);u.x=p.x;u.y=p.y;this._resetWaypoint(u);}
+    if(!this.isWalkable(u)){const p=this.closestRoute(u);u.x=p.x;u.y=p.y;this._resetWaypoint(u);}
     this._hook('land',u);
   }
   _setFormatForm(u,def,spawnHook=false){
@@ -451,9 +454,9 @@ export class ArenaEngine {
     if(!def?.ready)return {ok:false,error:'This card has incomplete battle data.'};
     const cost=num(def.stats.mana);
     if(team.mana+EPS<cost)return {ok:false,error:'Not enough mana.'};
-    if(!isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Deploy on a road or courtyard within your castle\'s 7.5-tile range.'};
+    if(!this.isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Deploy on a road or courtyard within your castle\'s 7.5-tile range.'};
     if(this.near(point,.18).some(u=>!u.isBuilding&&u.def.combat?.movementType!=='flying'))return {ok:false,error:'That position is occupied.'};
-    const lane=closestRoute(point).lane;
+    const lane=this.closestRoute(point).lane;
     const formation=this._formation(def,side,point,lane);
     if(!formation)return {ok:false,error:'There is not enough room for the whole formation.'};
     team.mana=Math.max(0,team.mana-cost);
@@ -479,16 +482,16 @@ export class ArenaEngine {
       candidates.push({x:point.x+Math.cos(angle)*ring*(radius*2+.04),y:point.y+Math.sin(angle)*ring*(radius*2+.04)});
     }
     for(const candidate of candidates){
-      if(!isDeployable(candidate,side,this.units.filter(u=>u.alive&&u.isBuilding)))continue;
-      if(closestRoute(candidate).lane!==lane&&distance(point,candidate)>1)continue;
+      if(!this.isDeployable(candidate,side,this.units.filter(u=>u.alive&&u.isBuilding)))continue;
+      if(this.closestRoute(candidate).lane!==lane&&distance(point,candidate)>1)continue;
       if(positions.some(p=>distance(p,candidate)<radius*2+.02))continue;
       if(this.units.some(u=>u.alive&&!u.engulfedBy&&!u.possessingId&&!u.parasitizingId&&!u.fusedInto&&u.def.combat?.movementType===def.combat?.movementType&&distance(candidate,u)<radius+u.radius+.02))continue;
       positions.push(candidate);if(positions.length===count)return positions;
     }
     return null;
   }
-  spawn(def,side,point,lane=closestRoute(point).lane,options={}){
-    if(!def||!finitePoint(point)||(side!==0&&side!==1))return [];
+  spawn(def,side,point,lane=this.closestRoute(point).lane,options={}){
+    if(!def||!this.finitePoint(point)||(side!==0&&side!==1))return [];
     const count=Math.max(0,Math.floor(options.count??num(def.stats.number,1)));
     const groupId=options.groupId??`group-${++this.serial}`;
     const schedule=this.ability({def})?.spawnSchedule;
@@ -504,9 +507,9 @@ export class ArenaEngine {
     for(let i=0;i<count;i++){
       const stats={...def.stats};
       const mass=bodyMass[def.combat?.weight]||1;
-      const route=routeFor(lane,side);
-      let p=options.positions?.[i]||{x:clamp(point.x+(count===1?0:(i%3-1)*.24),0,MAP.width),y:clamp(point.y+(Math.floor(i/3)-(Math.ceil(count/3)-1)/2)*.27,0,MAP.height)};
-      if(!options.positions&&def.combat?.movementType!=='flying'&&!isWalkable(p)){const projected=closestRoute(p);p={x:projected.x,y:projected.y};}
+      const route=this.routeFor(lane,side);
+      let p=options.positions?.[i]||{x:clamp(point.x+(count===1?0:(i%3-1)*.24),0,this.map.width),y:clamp(point.y+(Math.floor(i/3)-(Math.ceil(count/3)-1)/2)*.27,0,this.map.height)};
+      if(!options.positions&&def.combat?.movementType!=='flying'&&!this.isWalkable(p)){const projected=this.closestRoute(p);p={x:projected.x,y:projected.y};}
       let best={distance:Infinity,index:1};
       for(let j=1;j<route.length;j++) {const q=projectSegment(p,route[j-1],route[j]);if(q.distance<best.distance)best={...q,index:j};}
       const u={
@@ -537,7 +540,7 @@ export class ArenaEngine {
       const form=def.forms[index];if(!form)continue;
       for(let j=0;j<Math.max(1,Math.floor(num(ability.spawnFormCounts?.[index],num(form.stats.number,1))));j++){
         const placement=positions?.[slot++],back=parent.radius+.18+.07*(bodyMass[form.combat?.weight]||1)+.1;
-        const point=placement||{x:clamp(parent.x+(side===0?-back:back),.5,MAP.width-.5),y:clamp(parent.y+(j%2?1:-1)*.35,.5,MAP.height-.5)};
+        const point=placement||{x:clamp(parent.x+(side===0?-back:back),.5,this.map.width-.5),y:clamp(parent.y+(j%2?1:-1)*.35,.5,this.map.height-.5)};
         made.push(...this.spawn(form,side,point,lane,{count:1,groupId,positions:placement?[placement]:undefined}));
       }
     }
@@ -573,9 +576,9 @@ export class ArenaEngine {
     if(!spell?.ready)return {ok:false,error:'This spell has incomplete battle data.'};
     const cost=num(spell.energy);
     if(team.energy+EPS<cost)return {ok:false,error:'Not enough spell energy.'};
-    if(!finitePoint(point))return {ok:false,error:'Choose a point inside the arena.'};
+    if(!this.finitePoint(point))return {ok:false,error:'Choose a point inside the arena.'};
     const building=(spell.kind||String(spell.raw?.type).toLowerCase())==='building';
-    if(building&&!isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Place buildings on a road or courtyard within your castle\'s 7.5-tile range.'};
+    if(building&&!this.isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Place buildings on a road or courtyard within your castle\'s 7.5-tile range.'};
     const id=spell.id||slug(spell.name);
     const handled=new Set(['giga-bomb','spirit-of-the-wild','illustration-spell','laser','nightfall-curse','roots','lunar-mirrage','shock-bomb','shield-of-serenity','healing-light','dark-orb','reflector','guard-post','watchtower','obsidian-fortress','mana-surge','stagnantias-wrath']);
     if(!handled.has(id))return {ok:false,error:'This spell has incomplete battle data.'};
@@ -610,7 +613,7 @@ export class ArenaEngine {
         if(u.memory.conversion||u.possessedBy)continue;
         const conversion=this.status(u,'conversion',20,1,source,{originalSide:u.side});
         if(!conversion)continue;
-        u.memory.conversion={side:u.side,until:conversion.until};u.side=side;u.targetId=null;u.burstTargetId=null;u.route=routeFor(u.lane,side);this._resetWaypoint(u);
+        u.memory.conversion={side:u.side,until:conversion.until};u.side=side;u.targetId=null;u.burstTargetId=null;u.route=this.routeFor(u.lane,side);this._resetWaypoint(u);
         this.fx('capture',u.x,u.y,{side,duration:.8});
       }return;
     }
@@ -628,7 +631,7 @@ export class ArenaEngine {
     for(const c of castles)this.damage(source,c,castleAttack.damage+castleExtra,{kind:'spell'});
     if(id==='lunar-mirrage'){
       for(const u of allies.filter(u=>!u.memory.illusion)){
-        const copies=this.spawn(u.def,side,{x:clamp(u.x+.3,0,MAP.width),y:u.y},u.lane,{count:1});
+        const copies=this.spawn(u.def,side,{x:clamp(u.x+.3,0,this.map.width),y:u.y},u.lane,{count:1});
         for(const copy of copies){copy.memory.illusion=true;copy.expiresAt=this.time+27;}
       }
     }
@@ -639,7 +642,7 @@ export class ArenaEngine {
       stats:{health:num(raw.health),shield:0,damage:num(raw.damageToCard),attackSpeed:num(raw.attackSpeed),delay:0,sps:0,mana:0,number:1,range:reach*1000,speed:0,vision:reach*1000,criticalChance:0,criticDamage:1,lifestealChance:0,lifesteal:0,dodge:0,damageminimiser:0,shieldtakendamage:0},
       attack:{count:1,damage:num(raw.damageToCard),interval:num(raw.attackSpeed),delay:0},
       combat:{attackType:num(raw.attackSpeed)>0?'ranged':'none',attackWidth:500,attackDistance:reach*1000,attackShape:'single',multiTarget:false,maxTargets:1,movementType:'ground',targets:'both',weight:'very-heavy'},forms:[]};
-    const [u]=this.spawn(def,side,point,closestRoute(point).lane,{count:1});
+    const [u]=this.spawn(def,side,point,this.closestRoute(point).lane,{count:1});
     if(!u)return;
     u.isBuilding=true;u.radius=.44;u.buildingKind=kind;u.spell=spell;u.expiresAt=this.time+num(raw.lifetime);
   }
@@ -728,20 +731,20 @@ export class ArenaEngine {
     if(!target.alive)return;
     let chosen=null,fallback=null;
     for(let i=0;i<120;i++){
-      const lane=Math.floor(this.random()*MAP.routes.length),length=routeLength(MAP.routes[lane]);
-      const point=pointOnRoute(lane,target.side,this.random()*length);
+      const lane=Math.floor(this.random()*this.map.routes.length),length=routeLength(this.map.routes[lane]);
+      const point=this.pointOnRoute(lane,target.side,this.random()*length);
       if(distance(point,memory.origin)<=target.radius*2+.1||this.castles.some(c=>c.alive&&distance(c,point)<=c.radius+target.radius+.05))continue;
       if(this.units.some(u=>u!==target&&u.alive&&!u.banished&&!u.engulfedBy&&u.isBuilding&&distance(u,point)<u.radius+target.radius))continue;
       fallback||={...point,lane};
       if(this.units.some(u=>u!==target&&u.alive&&!u.banished&&!u.engulfedBy&&u.def.combat.movementType!=='flying'&&distance(u,point)<u.radius+target.radius))continue;
       chosen={...point,lane};break;
     }
-    if(!chosen&&!fallback)for(let lane=0;lane<MAP.routes.length&&!fallback;lane++)for(const fraction of [.25,.5,.75]){
-      const point=pointOnRoute(lane,target.side,routeLength(MAP.routes[lane])*fraction);
+    if(!chosen&&!fallback)for(let lane=0;lane<this.map.routes.length&&!fallback;lane++)for(const fraction of [.25,.5,.75]){
+      const point=this.pointOnRoute(lane,target.side,routeLength(this.map.routes[lane])*fraction);
       if(distance(point,memory.origin)>target.radius*2+.1&&!this.units.some(u=>u!==target&&u.alive&&u.isBuilding&&distance(u,point)<u.radius+target.radius)){fallback={...point,lane};break;}
     }
     chosen||=fallback;
-    Object.assign(target,chosen);target.route=routeFor(target.lane,target.side);this._resetWaypoint(target);
+    Object.assign(target,chosen);target.route=this.routeFor(target.lane,target.side);this._resetWaypoint(target);
     target.targetId=null;target.burstTargetId=null;
     this.fx('portal',target.x,target.y,{side:target.side,color:'#b8a3ff',duration:.7});
     if(penalty){const source=this.units.find(u=>u.id===memory.sourceId)||this.statusSources.get(memory.sourceId)||null;
@@ -774,11 +777,11 @@ export class ArenaEngine {
       for(let ring=0;ring<8&&!released;ring++)for(let i=0;i<12;i++){
         const angle=i/12*Math.PI*2,radius=host.radius+target.radius+.05+ring*.25;
         const p={x:host.x+Math.cos(angle)*radius,y:host.y+Math.sin(angle)*radius};
-        if(!finitePoint(p)||!isWalkable(p)||buildings.some(b=>b.alive&&distance(p,b)<target.radius+b.radius))continue;
+        if(!this.finitePoint(p)||!this.isWalkable(p)||buildings.some(b=>b.alive&&distance(p,b)<target.radius+b.radius))continue;
         if(this.units.some(u=>u!==target&&u!==host&&u.alive&&!u.engulfedBy&&u.def.combat.movementType!=='flying'&&distance(p,u)<target.radius+u.radius))continue;
         Object.assign(target,p);released=true;break;
       }
-      if(!released){const p=closestRoute(host);target.x=p.x;target.y=p.y;}
+      if(!released){const p=this.closestRoute(host);target.x=p.x;target.y=p.y;}
       this.fx('release',target.x,target.y,{side:target.side,radius:target.radius+.2,duration:.45});
     }
     target.targetId=null;target.burstTargetId=null;this._resetWaypoint(target);
@@ -810,7 +813,7 @@ export class ArenaEngine {
     const originalSide=u.memory.conversion.side;delete u.memory.conversion;
     if(u.possessedBy){const controller=this.units.find(t=>t.id===u.possessedBy);if(controller?.whisperState){controller.whisperState.originalSide=originalSide;return;}}
     u.side=originalSide;u.targetId=null;u.burstTargetId=null;
-    u.route=routeFor(u.lane,u.side);this._resetWaypoint(u);
+    u.route=this.routeFor(u.lane,u.side);this._resetWaypoint(u);
   }
   heal(target,amount,source=null,options={}){
     if(source&&!options.passive&&!canApplyStatuses(source,this.time))return 0;
@@ -847,7 +850,7 @@ export class ArenaEngine {
   retreat(u,tiles){
     let walked=0,best={distance:Infinity,walked:0};
     for(let i=1;i<u.route.length;i++){const a=u.route[i-1],b=u.route[i],length=distance(a,b),p=projectSegment(u,a,b);if(p.distance<best.distance)best={distance:p.distance,walked:walked+p.t*length};walked+=length;}
-    const before={x:u.x,y:u.y},point=pointOnRoute(u.lane,u.side,Math.max(this.castles[u.side].radius+u.radius+.03,best.walked-tiles));
+    const before={x:u.x,y:u.y},point=this.pointOnRoute(u.lane,u.side,Math.max(this.castles[u.side].radius+u.radius+.03,best.walked-tiles));
     Object.assign(u,point);this._resetWaypoint(u);this.fx('portal',before.x,before.y,{side:u.side,color:'#bdafef'});this.fx('leap',u.x,u.y,{side:u.side});
   }
   _burstBoost(u){return !has(u,'silence',this.time)&&this.ability(u)?.burstBoost&&(u.memory.burstBoost?.active||u.memory.burstBoost?.queued)?this.ability(u).burstBoost:null;}
@@ -926,8 +929,8 @@ export class ArenaEngine {
     if(!target?.alive||target.healthless||target.engulfedBy||target.possessingId||target.parasitizingId||target.fusedInto||target.isCastle||target.isBuilding||tiles<=0||has(target,'predominance',this.time))return;
     let dx=origin.x-awayFrom.x,dy=origin.y-awayFrom.y,len=Math.hypot(dx,dy);
     if(!len){dx=target.side?-1:1;dy=0;len=1;}
-    const p={x:clamp(origin.x+dx/len*tiles,.5,MAP.width-.5),y:clamp(origin.y+dy/len*tiles,.5,MAP.height-.5)};
-    if(target.def.combat.movementType!=='flying'){const q=closestRoute(p);target.x=q.x;target.y=q.y;}else Object.assign(target,p);
+    const p={x:clamp(origin.x+dx/len*tiles,.5,this.map.width-.5),y:clamp(origin.y+dy/len*tiles,.5,this.map.height-.5)};
+    if(target.def.combat.movementType!=='flying'){const q=this.closestRoute(p);target.x=q.x;target.y=q.y;}else Object.assign(target,p);
     this._resetWaypoint(target);
     return true;
   }
@@ -1005,10 +1008,10 @@ export class ArenaEngine {
     return p.attackType==='ranged'?this._range(u):this._reach(u,p);
   }
   _courtyardExit(u){
-    const bounds=courtyardFor(u.side),route=u.route;
+    const bounds=this.courtyardFor(u.side),route=u.route;
     for(let i=1;i<route.length;i++){
       const a=route[i-1],b=route[i];
-      if(isCourtyard(b,u.side))continue;
+      if(this.isCourtyard(b,u.side))continue;
       let t=1;
       if(b.x<bounds.minX)t=Math.min(t,(bounds.minX-a.x)/(b.x-a.x));
       if(b.x>bounds.maxX)t=Math.min(t,(bounds.maxX-a.x)/(b.x-a.x));
@@ -1037,7 +1040,7 @@ export class ArenaEngine {
     }
     const node=this.state.nodes.find(n=>n.owner!==u.side&&distance(n,u)<=RULES.captureRadius);
     if(!target&&node&&!this.near(node,RULES.captureRadius,t=>t.side!==u.side&&!t.isBuilding).length)return;
-    if(movement!=='flying'&&isCourtyard(u,u.side)&&!isCourtyard(destination,u.side)){
+    if(movement!=='flying'&&this.isCourtyard(u,u.side)&&!this.isCourtyard(destination,u.side)){
       // An off-road courtyard placement must enter its chosen lane through the
       // road/courtyard intersection, not aim across the forest toward a bend.
       const exit=this._courtyardExit(u);
@@ -1048,20 +1051,20 @@ export class ArenaEngine {
     }else delete u.memory.leavingCourtyard;
     let dx=destination.x-u.x,dy=destination.y-u.y,d=Math.hypot(dx,dy);
     if(d<EPS)return;
-    let slow=Math.max(strongest(u,'slow',this.time),strongest(u,'movementSlow',this.time),strongest(u,'ink',this.time));if(has(u,'poison',this.time))slow=Math.max(slow,.1);
+    let slow=Math.max(strongest(u,'slow',this.time),strongest(u,'movementSlow',this.time),strongest(u,'ink',this.time));if(has(u,'poison',this.time))slow=Math.max(slow,.1);slow=Math.max(slow,terrainSlow(this,u));
     let speed=this.statValue(u,'speed')/1000*(1+strongest(u,'speedBonus',this.time))*(1-clamp(slow,0,.95));
     if(has(u,'fear',this.time)){dx=-dx;dy=-dy;}
     const travel=Math.min(d,speed*dt),p={x:u.x+dx/d*travel,y:u.y+dy/d*travel};
     u.facingX=dx/d;u.facingY=dy/d;
     if(movement!=='flying'){
-      if(!isWalkable(p)){
+      if(!this.isWalkable(p)){
         // Leave a courtyard through a road at walking speed, rather than
         // snapping across the gap when a direct pursuit reaches its edge.
-        const q=closestRoute(u),toward=Math.hypot(q.x-u.x,q.y-u.y);
+        const q=this.closestRoute(u),toward=Math.hypot(q.x-u.x,q.y-u.y);
         if(toward<EPS)return;
         const correction=Math.min(toward,speed*dt);
         p.x=u.x+(q.x-u.x)/toward*correction;p.y=u.y+(q.y-u.y)/toward*correction;
-        if(!isWalkable(p))return;
+        if(!this.isWalkable(p))return;
       }
       const obstacles=this.castles.concat(this.units.filter(b=>b.isBuilding));
       const block=obstacles.find(b=>b.alive&&b.id!==u.id&&distance(p,b)<u.radius+b.radius);
@@ -1070,7 +1073,7 @@ export class ArenaEngine {
         let avoided=false;
         for(const sign of [direction,-direction]){
           const slide={x:u.x-dy/d*speed*dt*sign,y:u.y+dx/d*speed*dt*sign};
-          if(isWalkable(slide)&&distance(slide,block)>distance(u,block)&&!obstacles.some(b=>b.alive&&b.id!==u.id&&distance(slide,b)<u.radius+b.radius)){
+          if(this.isWalkable(slide)&&distance(slide,block)>distance(u,block)&&!obstacles.some(b=>b.alive&&b.id!==u.id&&distance(slide,b)<u.radius+b.radius)){
             Object.assign(p,slide);avoided=true;break;
           }
         }
@@ -1080,7 +1083,7 @@ export class ArenaEngine {
     const travelled=distance(u,p);
     if(travelled>EPS){u.facingX=(p.x-u.x)/travelled;u.facingY=(p.y-u.y)/travelled;}
     const from={x:u.x,y:u.y};
-    u.x=clamp(p.x,.5,MAP.width-.5);u.y=clamp(p.y,.5,MAP.height-.5);
+    u.x=clamp(p.x,.5,this.map.width-.5);u.y=clamp(p.y,.5,this.map.height-.5);
     u.memory.distance=(u.memory.distance||0)+travelled*1000;
     u.memory.movedTime=(u.memory.movedTime||0)+dt;
     u.moving=travelled>0;
@@ -1449,7 +1452,7 @@ export class ArenaEngine {
       for(const [u,sign,weight] of [[a,1,b.mass/total],[b,-1,a.mass/total]]){
         if(this._holding(u)||['stun','root','imprisonment','airborne','frozen'].some(kind=>has(u,kind,this.time)))continue;
         const p={x:u.x+dx/d*overlap*sign*weight,y:u.y+dy/d*overlap*sign*weight};
-        if(isWalkable(p)&&!this.castles.some(c=>c.alive&&distance(p,c)<c.radius+u.radius)){u.x=p.x;u.y=p.y;}
+        if(this.isWalkable(p)&&!this.castles.some(c=>c.alive&&distance(p,c)<c.radius+u.radius)){u.x=p.x;u.y=p.y;}
       }
     }
   }
@@ -1491,8 +1494,8 @@ export class ArenaEngine {
       this.vitalPools.delete(pool.id);return false;
     });
   }
-  _deploymentCandidates(side,lane,goal=MAP.nodes[lane],building=false){
-    const route=routeFor(lane,side),buildings=this.units.filter(u=>u.alive&&u.isBuilding);
+  _deploymentCandidates(side,lane,goal=objectiveFor(this.map,lane),building=false){
+    const route=this.routeFor(lane,side),buildings=this.units.filter(u=>u.alive&&u.isBuilding);
     const candidates=[],seen=new Set();
     for(let i=1;i<route.length;i++){
       const a=route[i-1],b=route[i],length=distance(a,b),steps=Math.max(1,Math.ceil(length/.4));
@@ -1500,13 +1503,13 @@ export class ArenaEngine {
       for(let step=0;step<=steps;step++)for(const offset of [0,.45,-.45]){
         const fraction=step/steps,point={x:a.x+(b.x-a.x)*fraction+nx*offset,y:a.y+(b.y-a.y)*fraction+ny*offset};
         const key=`${point.x.toFixed(4)},${point.y.toFixed(4)}`;
-        if(seen.has(key)||!isDeployable(point,side,buildings))continue;
+        if(seen.has(key)||!this.isDeployable(point,side,buildings))continue;
         if(building&&this.units.some(u=>u.alive&&!u.engulfedBy&&u.def.combat?.movementType!=='flying'&&distance(u,point)<u.radius+.5))continue;
         seen.add(key);candidates.push(point);
       }
     }
     // Both sides use the same road/range legality and tactical distance metric.
-    return candidates.sort((a,b)=>distance(a,goal)-distance(b,goal)||distance(a,MAP.bases[side])-distance(b,MAP.bases[side]));
+    return candidates.sort((a,b)=>distance(a,goal)-distance(b,goal)||distance(a,this.map.bases[side])-distance(b,this.map.bases[side]));
   }
   _bot(dt){tickBot(this,dt);}
   _finish(){
@@ -1517,10 +1520,11 @@ export class ArenaEngine {
   }
   _tick(dt){
     this.state.time+=dt;this.state.remaining-=dt;
+    tickEnvironment(this,dt);
     this._syncPossessions();this._syncParasites();this._syncRayFusions();
     for(let side=0;side<2;side++){
       const owned=this.state.nodes.filter(n=>n.owner===side).length;
-      this.teams[side].mana=Math.min(RULES.maxMana,this.teams[side].mana+dt/RULES.manaInterval*(1+owned*RULES.nodeBonus)*(this.state.phase==='overtime'?2:1));
+      this.teams[side].mana=Math.min(RULES.maxMana,this.teams[side].mana+dt/RULES.manaInterval*(1+owned*RULES.nodeBonus+(this.state.arena.orb?.bonusUntil[side]>this.time? .02:0))*(this.state.phase==='overtime'?2:1));
     }
     this._fields();this._trails(dt);
     this._syncCaptives();

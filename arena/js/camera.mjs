@@ -5,22 +5,23 @@ export const CAMERA = Object.freeze({ minZoom:.5, maxZoom:1.6, zoomSteps:Object.
 
 /** Camera coordinates are presentation only; simulation positions stay in tiles. */
 export class ArenaCamera {
-  constructor(width=960,height=600) {
-    this.width=width;this.height=height;this.active=false;this.zoom=1;
-    this.center={x:MAP.width/2,y:MAP.height/2};
+  constructor(width=960,height=600,map=MAP) {
+    this.map=map;this.width=width;this.height=height;this.active=false;this.zoom=1;
+    this.center={x:this.map.width/2,y:this.map.height/2};
   }
+  setMap(map) {this.map=map;this.setActive(this.active);}
   resize(width,height) {this.width=Math.max(1,width);this.height=Math.max(1,height);}
   setActive(active) {
     this.active=!!active;this.zoom=1;
     if(this.active)this.home();
-    else {this.zoom=1;this.center={x:MAP.width/2,y:MAP.height/2};}
+    else {this.zoom=1;this.center={x:this.map.width/2,y:this.map.height/2};}
   }
   get baseScale() {
     const span=this.width<600?CAMERA.mobileSpan:CAMERA.desktopSpan;
     return Math.max(this.width/span,this.height/22);
   }
   get view() {
-    const extent=MAP.width+MAP.height;
+    const extent=this.map.width+this.map.height;
     const scale=this.active?this.baseScale*this.zoom:Math.min(this.width/(extent+4),this.height/(extent*.5+6));
     return {width:this.width,height:this.height,scale,
       ox:this.width/2-(this.center.x+this.center.y)*scale,
@@ -28,10 +29,10 @@ export class ArenaCamera {
   }
   focus(point) {
     if(!point||!Number.isFinite(point.x)||!Number.isFinite(point.y))return;
-    this.center={x:clamp(point.x,0,MAP.width),y:clamp(point.y,0,MAP.height)};
+    this.center={x:clamp(point.x,0,this.map.width),y:clamp(point.y,0,this.map.height)};
   }
   home(side=0) {
-    const base=MAP.bases[side===1?1:0];
+    const base=this.map.bases[side===1?1:0];
     this.focus({x:base.x+(side===1?-4:4),y:base.y});
   }
   worldAt(x,y) {

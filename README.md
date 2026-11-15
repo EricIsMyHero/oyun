@@ -3,7 +3,7 @@
 ## Real-time Arena
 
 Open [arena/index.html](arena/index.html) through the same HTTP server as the
-Codex to play the separate, three-route arena against a bot. Build an eight-card
+Codex to play the separate arena against a bot across three randomly chosen battlegrounds. Build an eight-card
 deck with a four-card hand and a cycling spell loadout of at most five Charge.
 The Codex contains 176 root cards, including 29 additions from Book2.xlsx and 9 from Book1.xlsx.
 The original 138 cards remain playable. New cards show explicit Arena lock
@@ -24,13 +24,17 @@ and stops at the road or courtyard edge.
 Both castles have 1000 health and a 7.5-tile firing/deployment radius. Units and
 spell buildings deploy on roads or the castle courtyard inside that radius.
 Courtyards leave one tile behind and 2.5 ahead of the castle body; both are
-deployable. The enlarged 43×28-tile island has a straight central road with its
+deployable. Verdant Basin, the original 43×28-tile island, has a straight central road with its
 mana well 17.5 walking tiles from either castle; the two outer roads take about
 23.23 tiles to their wells. Unseen terrain is dark: allied cards reveal eight
 tiles, captured wells four and your castle 7.5. Castle shots track moving targets.
 Ranged cards fire from their Range (subject to Vision) and send projectiles far
 enough to reach that range; a short source Attack Distance no longer forces them
 into close combat. Melee cards retain their authored strike reach.
+Each new match randomly chooses Verdant Basin, Cascade Hollow (two routes,
+one well, water slows ground movement), or Ember Rift (one route, a floating
+mana orb, periodic lava). Cascade's well is 12.5 walking tiles from both bases;
+Ember's center is 15. Flying and hovering cards ignore both terrain hazards.
 Battles use a close camera: drag or swipe the map, scroll, or use WASD/arrow keys
 to explore. The fog-aware minimap moves the camera without revealing enemies;
 Home/Space or the citadel button returns to your base. Zoom buttons adjust detail.

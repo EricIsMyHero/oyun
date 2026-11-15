@@ -62,7 +62,49 @@ not mana, a casting delay, a cooldown, or a limited number of casts. Two spells
 with Charge two fit together; a Charge-five spell fills the complete capacity.
 Spells can be used again when their turn returns and sufficient energy exists.
 
-## Three-route battlefield
+## Random battlegrounds
+
+Every new match randomly chooses one of three immutable map definitions. Each
+engine, renderer, bot and camera uses that match’s geometry; restarting cannot
+change a running match or another simulation. `?arena=verdant`, `?arena=waterfall`
+and `?arena=lava` can open a particular battleground for practice and testing.
+Without an override, selection is random.
+
+| Arena | World size | Routes | Objective | Terrain rule |
+| --- | --- | --- | --- | --- |
+| Verdant Basin | 43 × 28 | 3 | Three mana wells | No environmental modifiers |
+| Cascade Hollow | 29 × 22 | 2 | One mana well | Water slows ground movement |
+| Ember Rift | 38 × 18 | 1 | One floating mana orb | Central basin periodically fills with lava |
+
+Cascade’s two routes each measure 25 walking tiles. Its well lies halfway along
+the northern route, exactly **12.5 walking tiles from either citadel**. The other
+route bypasses the objective. Both roads cross the river without a bridge. Water
+reduces movement speed by **15%**; from 90–120 seconds and every subsequent
+90-second cycle, the **30-second surge** raises the slow to **33%**. This terrain
+modifier affects movement, not attack timing, and uses the strongest movement
+slow rather than multiplying overlapping slows.
+
+Ember’s straight route is 30 tiles long: either citadel is **15 walking tiles**
+from the center. The depressed, walkable center measures **5 × 5 tiles**. Lava
+starts at 45 seconds, remains for **15 seconds**, and repeats every 45 seconds.
+Ground cards continuously inside lose **1% of effective maximum Health each
+second**, bypassing Shield; the loss uses a red lifetime-damage indicator.
+Flying, hovering, captive, banished, possessing and fused-away cards take no
+terrain damage. Lava exposure resets when leaving the active basin.
+
+The first eligible unit touching the floating orb immediately gives its team
+**5 Mana** (capped at 20) and **+2% Mana regeneration for 30 seconds**. All movement
+types can collect it. It respawns **5 seconds after the bonus expires**, 35
+seconds after pickup. The orb is an objective, not an attackable card or vision
+source. Dead, captive, possessing, banished and fused-away units cannot collect
+it. Both teams follow the same rules.
+
+Environmental clocks, exposure and orb timers use fixed simulation time and
+freeze on pause. New matches reset all of them. Hazards, orbs and minimap artwork
+are drawn below the visibility mask; moving the camera does not reveal enemies.
+The battle HUD shows the current arena, hazard phase and orb respawn time.
+
+## Original three-route battlefield
 
 The original illustrated map places the Azure Core castle at the southwest and
 the Crimson Crown castle at the northeast. The central road and two outer roads

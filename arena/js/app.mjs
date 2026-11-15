@@ -3,7 +3,7 @@ import { ArenaEngine } from './engine.mjs';
 import { ArenaRenderer } from './renderer.mjs';
 import { statusIconSVG, statusVisual, nativeCharge } from './visuals.mjs';
 import { RULES, STAT_KEYS, num, RAY_CHARGE } from './rules.mjs';
-import { MAP, distance, isDeployable } from './map.mjs';
+import { MAP, distance } from './map.mjs';
 import { isEntityVisible, isPointVisible } from './vision.mjs';
 import { CAMERA } from './camera.mjs';
 import { statusMagnitude, effectDefinition } from './statuses.mjs';
@@ -345,12 +345,13 @@ function togglePause() {
   if(!state.engine||state.engine.state.phase==='ended')return;
   if(state.pauseReasons.has('manual')||state.pauseReasons.has('visibility'))resumeMatch();else setPause('manual',true);
 }
-function startMatch() {
+function startMatch(options={}) {
   if(!canStart()){toast('Complete your 8-card deck and a valid spell loadout first.',true);return false;}
   try {
     if($('inspector').open)closeInspector();
     state.pauseReasons.clear();
-    state.engine=new ArenaEngine({cards:state.catalog.cards,spells:state.catalog.spells,deck:[...state.deck],spellDeck:[...state.spellDeck],formChoices:{...state.formChoices},seed:state.seed++,bot:true});
+    state.engine=new ArenaEngine({cards:state.catalog.cards,spells:state.catalog.spells,deck:[...state.deck],spellDeck:[...state.spellDeck],formChoices:{...state.formChoices},seed:state.seed++,bot:true,arenaId:options.arenaId||new URLSearchParams(location.search).get('arena')||'random'});
+    state.renderer.setMap(state.engine.map);
     state.renderer.shotTimes.clear();
     state.selection=null;state.pointer=null;state.drag=null;state.selectedUnitId=null;state.resultShown=false;state.handSignature='';state.spellSignature='';state.lastHUD=0;
     document.body.dataset.mode='battle';
@@ -376,7 +377,7 @@ function returnToLobby() {
   document.querySelectorAll('.battle-only').forEach(el=>{el.hidden=true;});
   $('pause-overlay').hidden=true;$('result-overlay').hidden=true;
   if($('inspector').open)closeInspector();
-  state.renderer.setBattleView(false);state.renderer.resize();
+  state.renderer.setMap(MAP);state.renderer.setBattleView(false);state.renderer.resize();
   window.scrollTo({top:0,behavior:'instant'});
 }
 function selectedDefinition() {
@@ -436,10 +437,10 @@ function isValidPlacement(point) {
   const def=selectedDefinition(),team=state.engine.state.teams[0];
   if(!def)return false;
   const visibleOccupants=state.engine.state.units.filter(u=>u.alive&&isEntityVisible(state.engine.state,0,u));
-  if(state.selection.kind==='card')return team.mana+1e-6>=def.stats.mana&&isDeployable(point,0,visibleOccupants);
+  if(state.selection.kind==='card')return team.mana+1e-6>=def.stats.mana&&state.engine.isDeployable(point,0,visibleOccupants);
   if(team.energy+1e-6<def.energy)return false;
-  if(def.kind==='building'||def.spellkind==='building')return isDeployable(point,0,visibleOccupants);
-  return point.x>=0&&point.x<=MAP.width&&point.y>=0&&point.y<=MAP.height;
+  if(def.kind==='building'||def.spellkind==='building')return state.engine.isDeployable(point,0,visibleOccupants);
+  return point.x>=0&&point.x<=state.engine.map.width&&point.y>=0&&point.y<=state.engine.map.height;
 }
 function commitPlacement(point) {
   if(!state.engine||state.engine.state.paused||state.engine.state.phase==='ended')return;
@@ -473,7 +474,14 @@ function updateHUD(force=false) {
   $('mana-fill').style.width=`${Math.min(100,mana/20*100)}%`;
   $('energy-value').textContent=energy.toFixed(2);
   const owned=(s.nodes||[]).filter(n=>n.owner===0).length;
-  $('mana-bonus').textContent=`+${owned*2}%`;
+  $('mana-bonus').textContent=`+${owned*2+(s.arena.orb?.bonusUntil[0]>s.time?2:0)}%`;
+  $('match-seed').textContent=state.engine.map.name.toUpperCase();
+  const arena=s.arena,left=Math.max(0,Math.ceil((arena.nextPhaseAt||0)-s.time-1e-7));
+  const condition=$('arena-condition');
+  condition.hidden=arena.id==='verdant';
+  condition.dataset.active=String(arena.surge||arena.lavaActive);
+  condition.textContent=arena.id==='waterfall'?`WATER · ${arena.surge?'33':'15'}% MOVEMENT SLOW · ${arena.surge?'SURGE ENDS':'SURGE IN'} ${left}s`:arena.id==='lava'?`LAVA ${arena.lavaActive?'ACTIVE · ENDS':'IN'} ${left}s · GROUND CARDS ONLY`:'';
+  condition.title=state.engine.map.description;
   const remaining=Math.max(0,Math.ceil(s.remaining||0));
   $('match-clock').textContent=`${Math.floor(remaining/60)}:${String(remaining%60).padStart(2,'0')}`;
   $('match-phase').textContent=s.phase==='overtime'?'OVERTIME · 2× MANA':s.phase==='ended'?'BATTLE COMPLETE':'REGULATION';
@@ -492,6 +500,11 @@ function updateHUD(force=false) {
     const owner=visible?(n.owner===0?'0':n.owner===1?'1':'neutral'):'unknown';
     return `<span class="node-indicator ${visible?(n.owner===0?'azure':n.owner===1?'crimson':''):'unknown'}" data-owner="${owner}" aria-label="${escapeHTML(n.name||n.id)}: ${visible?(n.owner===0?'Azure Core':n.owner===1?'Crimson Crown':'Neutral'):'Unseen'}"><i></i><span>${escapeHTML((n.name||n.id).toUpperCase())}</span><b style="width:${visible?Math.max(0,Math.min(100,(n.progress||0)/5*100)):0}%"></b></span>`;
   }).join('');
+  if(arena.orb){
+    const orb=arena.orb,remaining=Math.max(0,Math.ceil((orb.respawnAt||0)-s.time-1e-7)),visible=s.phase==='ended'||orb.pickedBy===0||isPointVisible(s,0,orb);
+    $('node-hud').innerHTML=`<span class="node-indicator orb-indicator"><i></i><span>${!visible?'MANA ORB · UNSEEN':orb.available?'MANA ORB · +5 MANA':`ORB RETURNS IN ${remaining}s`}</span></span>`;
+    $('node-hud').setAttribute('aria-label','Mana orb availability');
+  }else $('node-hud').setAttribute('aria-label','Mana well ownership');
   const handKey=JSON.stringify([team.hand,team.hand.map(id=>mana>=(state.engine.cardFor(0,id)?.stats.mana||0)),state.selection]);
   if(force||handKey!==state.handSignature){
     state.handSignature=handKey;

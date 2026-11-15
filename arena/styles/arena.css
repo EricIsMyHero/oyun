@@ -57,3 +57,6 @@ body[data-mode="battle"] .stage-message{left:16px;right:auto;bottom:16px;transfo
 .live-status{border-color:color-mix(in srgb,var(--status-color,#a8c9c1) 40%,#263b3e)}.live-status>svg{width:16px;height:16px;flex:none;color:var(--status-color,#b8d8ce)}
 
 .native-charge-track{height:6px;border:1px solid color-mix(in srgb,var(--charge-color) 50%,#273c43);border-radius:4px;overflow:hidden;background:#091820}.native-charge-track>i{display:block;height:100%;background:linear-gradient(90deg,color-mix(in srgb,var(--charge-color) 45%,#122430),var(--charge-color))}
+
+/* Match-specific terrain information remains clear above the fog. */
+.arena-condition{position:absolute;top:49px;left:50%;transform:translateX(-50%);max-width:90%;padding:5px 10px;border:1px solid #638a9c66;border-radius:3px;background:#0a1823e8;color:#c3dfe5;font-size:8px;letter-spacing:.7px;text-align:center;pointer-events:none;white-space:nowrap}.arena-condition[data-active="true"]{border-color:#dc9c686e;color:#ffd4a2;background:#231b21ed}.orb-indicator{border-color:#a08bba}.orb-indicator>i{background:#beabff;box-shadow:0 0 9px #b595ff80}@media(max-width:600px){.arena-condition{top:36px;font-size:6px;letter-spacing:.3px;padding:4px 6px}}

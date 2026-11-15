@@ -1,5 +1,5 @@
 import { RULES, num, clamp } from './rules.mjs';
-import { MAP, distance } from './map.mjs';
+import { objectiveFor, distance } from './map.mjs';
 import { visibilitySources, isEntityVisible } from './vision.mjs';
 
 const airTarget = def => ['air','both'].includes(def.combat?.targets);
@@ -62,7 +62,7 @@ function situation(engine) {
   const side=1,castle=engine.castles[side],sources=visibilitySources(engine.state,side);
   const allies=engine.units.filter(u=>living(u)&&u.side===side);
   const enemies=engine.units.filter(u=>living(u)&&u.side!==side&&isEntityVisible(engine.state,side,u,sources));
-  const lanes=MAP.routes.map((_,lane)=>{
+  const lanes=engine.map.routes.map((_,lane)=>{
     const army=allies.filter(u=>u.lane===lane),foes=enemies.filter(u=>u.lane===lane);
     const approaching=foes.filter(u=>distance(u,castle)<=12);
     const defenders=army.filter(u=>approaching.some(t=>canHit(u.def,t)&&distance(u,t)<=6));
@@ -81,7 +81,7 @@ function choosePlan(engine,view) {
   const defending=danger.danger>0;
   const lane=defending?danger:view.lanes.map(report=>{
     const needsSupport=report.army.some(u=>frontline(u.def)&&!u.isBuilding)&&!report.army.some(u=>ranged(u.def)&&!u.isBuilding);
-    return {...report,priority:(engine.state.nodes[report.lane].owner!==view.side?6:1)-report.investment*.45+(needsSupport?1.5:0)-report.foes.reduce((n,u)=>n+unitPower(u),0)*.2+engine.random()*.8};
+    return {...report,priority:(engine.state.nodes[report.lane]?.owner!==view.side?6:1)-report.investment*.45+(needsSupport?1.5:0)-report.foes.reduce((n,u)=>n+unitPower(u),0)*.2+engine.random()*.8};
   }).sort((a,b)=>b.priority-a.priority)[0];
   const urgent=defending&&lane.nearest<=7.5;
   const mode=defending?'defend':lane.army.some(u=>frontline(u.def)&&!u.isBuilding)?'support':'advance';
@@ -124,7 +124,7 @@ function deployPlan(engine,view,plan) {
   if(team.mana+1e-7<cost+reserve)return false;
   // An adequate marching force can finish its job while mana is banked.
   if(!plan.urgent&&plan.mode!=='defend'&&plan.report.investment>=12&&team.mana<18)return false;
-  let goal=MAP.nodes[plan.lane];
+  let goal=objectiveFor(engine.map,plan.lane);
   const target=[...plan.report.approaching].sort((a,b)=>distance(a,view.castle)-distance(b,view.castle))[0];
   if(target){
     const length=distance(view.castle,target)||1,back=ranged(def)?clamp(num(def.stats.range)/1000*.7,1.3,3):.8;
@@ -152,7 +152,7 @@ function castUsefulSpell(engine,view,plan) {
     if(id==='watchtower'||id==='obsidian-fortress'){
       if(!view.lanes[lane].army.some(u=>!u.isBuilding))return;
     }
-    for(const point of engine._deploymentCandidates(view.side,lane,MAP.nodes[lane],true).slice(0,24))if(engine.cast(view.side,point).ok){ai.nextSpellAt=engine.time+3;return;}
+    for(const point of engine._deploymentCandidates(view.side,lane,objectiveFor(engine.map,lane),true).slice(0,24))if(engine.cast(view.side,point).ok){ai.nextSpellAt=engine.time+3;return;}
     return;
   }
   let pool;

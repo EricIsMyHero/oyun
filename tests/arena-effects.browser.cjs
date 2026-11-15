@@ -22,7 +22,7 @@ const server=http.createServer(async(req,res)=>{
       if(url.hostname.endsWith('.r2.dev'))return r.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300"><rect width="200" height="300" fill="#254c4c"/><path d="M40 260L100 50L160 260Z" fill="#b3d7cc"/></svg>'});
       if(url.hostname.includes('fonts.'))return r.abort();return r.continue();
     });
-    await page.goto(process.env.ARENA_EFFECTS_URL||`http://127.0.0.1:${server.address().port}${prefix}arena/`,{waitUntil:'domcontentloaded'});
+    await page.goto(process.env.ARENA_EFFECTS_URL||`http://127.0.0.1:${server.address().port}${prefix}arena/?arena=verdant`,{waitUntil:'domcontentloaded'});
     await page.waitForFunction(()=>window.arenaApp?.catalog?.cards?.length===176);
     assert.equal(await page.evaluate(()=>arenaApp.catalog.cards.filter(c=>c.ready).length),138,'all roots including the authored Ray form IDs are ready');
     await page.locator('#quick-build').click();await page.locator('#start-match').click();
