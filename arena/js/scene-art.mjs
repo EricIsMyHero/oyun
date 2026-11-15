@@ -24,7 +24,7 @@ export const PAINTED_BRIDGES=Object.freeze([
   {lane:2,ends:[{x:16,y:24},{x:19.5,y:24}],source:[[846,687],[928,651]],walkway:[[827,673],[861,708],[950,667],[910,637]]},
 ]);
 export const SCENES=Object.freeze({
-  verdant:{url:url('maps/verdant-basin.webp?v=50'),width:1536,height:1024,
+  verdant:{url:url('maps/verdant-basin.webp?v=51'),width:1536,height:1024,
     anchors:[...landmarks('verdant',[[332,722],[1145,302],[528,392],[760,505],[982,636]],1536,1024),
       [240,605,327.68,609.28],[265,515,348.16,517.12],[780,265,778.24,302.08],
       ...PAINTED_BRIDGES.flatMap(bridge=>bridge.source.map((source,i)=>anchor(ARENAS.verdant,source,bridge.ends[i],1536,1024)))]},

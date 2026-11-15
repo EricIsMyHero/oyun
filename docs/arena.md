@@ -141,6 +141,14 @@ the castle body and occupied building footprints remain blocked. The deployment
 radius does not make surrounding forest walkable. Capturing a well does not
 unlock an extra deployment zone; normal spells retain their usual target areas.
 
+The placement marker uses the same deployment plan as the paid action: Mana,
+terrain, occupied positions and room for every formation member are checked
+together. Nearby troops do not block as if they were buildings. Preview checks
+only visible occupants so hidden enemies cannot be discovered by hovering;
+the paid action checks all occupants before spending Mana or cycling the hand.
+`node --test tests/arena-deployment.test.cjs` verifies this on both teams and
+every map, including companions and flying cards.
+
 The castle acquires visible ground or flying targets whose center is within
 7.5 tiles. Its shots track that target through lateral movement, rather than
 continuing toward an outdated position. Shots remain inside the 7.5-tile radial
@@ -180,6 +188,12 @@ while one is selected. Cards can also be dragged from the hand onto the map.
 Scroll or use **WASD / arrow keys** to pan. **Home / Space**, or the citadel
 button beside the minimap, returns to your castle. Click or drag the minimap
 to travel directly to another area; its frame shows your current viewport.
+The minimap and camera buttons sit in a dedicated dock below the battlefield,
+leaving the entire canvas available for placement. Touch input allows 12 pixels
+of finger drift before becoming a swipe; mouse dragging starts after 6 pixels.
+`node tests/arena-deployment.browser.cjs` checks every corridor at multiple zooms
+on desktop and touch screens, hand dragging, building placement and cancellation.
+Set `ARENA_DEPLOYMENT_URL` to run the same checks against the live site.
 
 Use the **+ / −** buttons (or keyboard keys) to step through **100%, 90%, 80%,
 75%, 70%, 60%, and 50%** when zooming out. Zooming in can continue to 120%, 140%,

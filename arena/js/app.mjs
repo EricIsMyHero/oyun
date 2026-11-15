@@ -448,10 +448,10 @@ function isValidPlacement(point) {
   if(!state.engine||!state.selection||!point)return false;
   const def=selectedDefinition(),team=state.engine.state.teams[0];
   if(!def)return false;
-  const visibleOccupants=state.engine.state.units.filter(u=>u.alive&&isEntityVisible(state.engine.state,0,u));
-  if(state.selection.kind==='card')return team.mana+1e-6>=def.stats.mana&&state.engine.isDeployable(point,0,visibleOccupants);
+  if(state.selection.kind==='card')return state.engine.deploymentPlan(0,state.selection.handIndex,point,{preview:true}).ok;
+  const visibleBuildings=state.engine.state.units.filter(u=>u.alive&&u.isBuilding&&isEntityVisible(state.engine.state,0,u));
   if(team.energy+1e-6<def.energy)return false;
-  if(def.kind==='building'||def.spellkind==='building')return state.engine.isDeployable(point,0,visibleOccupants);
+  if(def.kind==='building'||def.spellkind==='building')return state.engine.isDeployable(point,0,visibleBuildings);
   return point.x>=0&&point.x<=state.engine.map.width&&point.y>=0&&point.y<=state.engine.map.height;
 }
 function commitPlacement(point) {
@@ -649,7 +649,7 @@ document.addEventListener('pointerdown',event=>{
   if(event.target===canvas) {
     if(![0,1,2].includes(event.button))return;
     event.preventDefault();canvas.focus({preventScroll:true});
-    state.drag={pointerId:event.pointerId,kind:'map',x:event.clientX,y:event.clientY,lastX:event.clientX,lastY:event.clientY,panning:event.button!==0,captureTarget:canvas};
+    state.drag={pointerId:event.pointerId,kind:'map',x:event.clientX,y:event.clientY,lastX:event.clientX,lastY:event.clientY,threshold:event.pointerType==='touch'?12:6,panning:event.button!==0,captureTarget:canvas};
     canvas.setPointerCapture(event.pointerId);state.pointer=state.renderer.worldAt(event.clientX,event.clientY);return;
   }
   if(state.engine.state.paused)return;
@@ -662,7 +662,7 @@ window.addEventListener('pointermove',event=>{
   if(drag&&drag.pointerId!==event.pointerId)return;
   if(drag?.kind==='minimap'){focusMinimap(event);return;}
   if(drag?.kind==='map') {
-    if(!drag.panning&&Math.hypot(event.clientX-drag.x,event.clientY-drag.y)>6)drag.panning=true;
+    if(!drag.panning&&Math.hypot(event.clientX-drag.x,event.clientY-drag.y)>drag.threshold)drag.panning=true;
     if(drag.panning){
       state.renderer.panBy(event.clientX-drag.lastX,event.clientY-drag.lastY);
       drag.lastX=event.clientX;drag.lastY=event.clientY;state.pointer=null;

@@ -447,7 +447,9 @@ export class ArenaEngine {
   }
   _sourceFor(status){return this.units.find(u=>u.id===status.sourceId)||this.castles.find(u=>u.id===status.sourceId)||this.statusSources.get(status.sourceId)||null;}
   _validAction(side){return (side===0||side===1)&&!this.state.paused&&this.state.phase!=='ended';}
-  deploy(side,handIndex,point){
+  // Preview and commit share the same rules; a preview must not reveal hidden
+  // opponents by testing their collision footprints through the fog.
+  deploymentPlan(side,handIndex,point,{preview=false}={}){
     if(!this._validAction(side))return {ok:false,error:'The battle is paused or finished.'};
     const team=this.teams[side];
     if(!Number.isInteger(handIndex)||handIndex<0||handIndex>=team.hand.length)return {ok:false,error:'Select a card in your hand.'};
@@ -455,11 +457,18 @@ export class ArenaEngine {
     if(!def?.ready)return {ok:false,error:'This card has incomplete battle data.'};
     const cost=num(def.stats.mana);
     if(team.mana+EPS<cost)return {ok:false,error:'Not enough mana.'};
-    if(!this.isDeployable(point,side,this.units.filter(u=>u.alive&&u.isBuilding)))return {ok:false,error:'Deploy on a road or courtyard within your castle\'s 7.5-tile range.'};
-    if(this.near(point,.18).some(u=>!u.isBuilding&&u.def.combat?.movementType!=='flying'))return {ok:false,error:'That position is occupied.'};
+    const occupants=this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.parasitizingId&&!u.fusedInto&&(!preview||isEntityVisible(this.state,side,u)));
+    if(!this.isDeployable(point,side,occupants.filter(u=>u.isBuilding)))return {ok:false,error:'Deploy on a road or courtyard within your castle\'s 7.5-tile range.'};
+    if(occupants.some(u=>!u.isBuilding&&u.def.combat?.movementType!=='flying'&&distance(u,point)<=.18+(u.radius||0)))return {ok:false,error:'That position is occupied.'};
     const lane=this.closestRoute(point).lane;
-    const formation=this._formation(def,side,point,lane);
+    const formation=this._formation(def,side,point,lane,occupants);
     if(!formation)return {ok:false,error:'There is not enough room for the whole formation.'};
+    return {ok:true,def,cost,lane,formation};
+  }
+  deploy(side,handIndex,point){
+    const plan=this.deploymentPlan(side,handIndex,point);
+    if(!plan.ok)return plan;
+    const {def,cost,lane,formation}=plan,team=this.teams[side];
     team.mana=Math.max(0,team.mana-cost);
     team.energy=Math.round((team.energy+energyForMana(cost))*1e9)/1e9;
     team.spentMana+=cost;team.deployed++;
@@ -469,12 +478,13 @@ export class ArenaEngine {
     this.log('deploy',`${side?'Crimson':'Azure'} deployed ${def.name}.`,{side,cardId:def.id});
     return {ok:true,units};
   }
-  _formation(def,side,point,lane){
+  _formation(def,side,point,lane,occupants=this.units.filter(u=>u.alive&&!u.engulfedBy&&!u.banished&&!u.possessingId&&!u.parasitizingId&&!u.fusedInto)){
     const ability=this.ability({def}),forms=(ability?.spawnForms||[]).map(i=>def.forms[i]).filter(Boolean);
     const companions=(ability?.spawnForms||[]).reduce((n,index)=>n+(def.forms[index]?Math.max(1,Math.floor(num(ability.spawnFormCounts?.[index],num(def.forms[index].stats.number,1)))):0),0);
     const count=ability?.spawnSchedule?1:Math.max(1,Math.floor(num(def.stats.number,1)))*(1+companions);
     const radius=Math.max(...[def,...forms].map(f=>.18+.07*(bodyMass[f.combat?.weight]||1)));
     const positions=[];
+    const buildings=occupants.filter(u=>u.isBuilding);
     const candidates=[{...point}];
     if(forms.length)for(const sign of [-1,1])candidates.push({x:point.x+(side===0?-1:1)*(radius*2+.1),y:point.y+sign*(radius+.1)});
     // Stable radial packing; every paid unit receives a legal in-range location.
@@ -483,10 +493,10 @@ export class ArenaEngine {
       candidates.push({x:point.x+Math.cos(angle)*ring*(radius*2+.04),y:point.y+Math.sin(angle)*ring*(radius*2+.04)});
     }
     for(const candidate of candidates){
-      if(!this.isDeployable(candidate,side,this.units.filter(u=>u.alive&&u.isBuilding)))continue;
+      if(!this.isDeployable(candidate,side,buildings))continue;
       if(this.closestRoute(candidate).lane!==lane&&distance(point,candidate)>1)continue;
       if(positions.some(p=>distance(p,candidate)<radius*2+.02))continue;
-      if(this.units.some(u=>u.alive&&!u.engulfedBy&&!u.possessingId&&!u.parasitizingId&&!u.fusedInto&&u.def.combat?.movementType===def.combat?.movementType&&distance(candidate,u)<radius+u.radius+.02))continue;
+      if(occupants.some(u=>u.def.combat?.movementType===def.combat?.movementType&&distance(candidate,u)<radius+u.radius+.02))continue;
       positions.push(candidate);if(positions.length===count)return positions;
     }
     return null;

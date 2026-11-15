@@ -6,38 +6,38 @@
   <meta name="theme-color" content="#0b1718">
   <meta name="description" content="Command your Clash-A-Mana deck across five randomly chosen battlegrounds. Capture mana, cross waterfalls and survive the lava. Break the enemy citadel.">
   <title>Clash-A-Mana · The Arena</title>
-  <link rel="stylesheet" href="styles/arena.css?v=50">
-  <link rel="preload" as="image" href="assets/maps/verdant-basin.webp?v=50" fetchpriority="high">
+  <link rel="stylesheet" href="styles/arena.css?v=51">
+  <link rel="preload" as="image" href="assets/maps/verdant-basin.webp?v=51" fetchpriority="high">
   <link rel="preload" as="image" href="assets/sprites/arena-structures.webp">
   <script type="importmap">
     {"imports":{
-      "./js/app.mjs":"./js/app.mjs?v=50",
-      "./js/ascension.mjs":"./js/ascension.mjs?v=50",
-      "./js/abilities.mjs":"./js/abilities.mjs?v=50",
-      "./js/late-abilities.mjs":"./js/late-abilities.mjs?v=50",
-      "./js/art.mjs":"./js/art.mjs?v=50",
-      "./js/bot.mjs":"./js/bot.mjs?v=50",
-      "./js/camera.mjs":"./js/camera.mjs?v=50",
-      "./js/catalog.mjs":"./js/catalog.mjs?v=50",
-      "./js/engine.mjs":"./js/engine.mjs?v=50",
-      "./js/power.mjs":"./js/power.mjs?v=50",
+      "./js/app.mjs":"./js/app.mjs?v=51",
+      "./js/ascension.mjs":"./js/ascension.mjs?v=51",
+      "./js/abilities.mjs":"./js/abilities.mjs?v=51",
+      "./js/late-abilities.mjs":"./js/late-abilities.mjs?v=51",
+      "./js/art.mjs":"./js/art.mjs?v=51",
+      "./js/bot.mjs":"./js/bot.mjs?v=51",
+      "./js/camera.mjs":"./js/camera.mjs?v=51",
+      "./js/catalog.mjs":"./js/catalog.mjs?v=51",
+      "./js/engine.mjs":"./js/engine.mjs?v=51",
+      "./js/power.mjs":"./js/power.mjs?v=51",
       "../js/core/card-power.js":"../js/core/card-power.js?v=2",
       "../js/core/passive-power.js":"../js/core/passive-power.js?v=2",
-      "./js/map.mjs":"./js/map.mjs?v=50",
-      "./js/projection.mjs":"./js/projection.mjs?v=50",
-      "./js/scene-art.mjs":"./js/scene-art.mjs?v=50",
-      "./js/environment.mjs":"./js/environment.mjs?v=50",
-      "./js/topology.mjs":"./js/topology.mjs?v=50",
-      "./js/topology-art.mjs":"./js/topology-art.mjs?v=50",
-      "./js/biomes.mjs":"./js/biomes.mjs?v=50",
-      "./js/renderer.mjs":"./js/renderer.mjs?v=50",
-      "./js/rules.mjs":"./js/rules.mjs?v=50",
-      "./js/statuses.mjs":"./js/statuses.mjs?v=50",
-      "./js/visuals.mjs":"./js/visuals.mjs?v=50",
-      "./js/vision.mjs":"./js/vision.mjs?v=50"
+      "./js/map.mjs":"./js/map.mjs?v=51",
+      "./js/projection.mjs":"./js/projection.mjs?v=51",
+      "./js/scene-art.mjs":"./js/scene-art.mjs?v=51",
+      "./js/environment.mjs":"./js/environment.mjs?v=51",
+      "./js/topology.mjs":"./js/topology.mjs?v=51",
+      "./js/topology-art.mjs":"./js/topology-art.mjs?v=51",
+      "./js/biomes.mjs":"./js/biomes.mjs?v=51",
+      "./js/renderer.mjs":"./js/renderer.mjs?v=51",
+      "./js/rules.mjs":"./js/rules.mjs?v=51",
+      "./js/statuses.mjs":"./js/statuses.mjs?v=51",
+      "./js/visuals.mjs":"./js/visuals.mjs?v=51",
+      "./js/vision.mjs":"./js/vision.mjs?v=51"
     }}
   </script>
-  <script type="module" src="js/app.mjs?v=50"></script>
+  <script type="module" src="js/app.mjs?v=51"></script>
 <link rel="stylesheet" href="../styles/card-power.css?v=1">
 </head>
 <body data-mode="lobby">
@@ -83,6 +83,13 @@
           <div id="node-hud" class="node-hud battle-only" hidden aria-label="Mana well ownership"></div>
           <div id="arena-condition" class="arena-condition battle-only" hidden></div>
           <div class="camera-hint battle-only" hidden>DRAG TO EXPLORE <span>· WASD / ARROWS</span></div>
+          <div class="map-legend lobby-only"><span><i class="legend-dot azure"></i> AZURE CORE</span><span id="preview-objective-legend"><i class="legend-dot neutral"></i> MANA WELLS</span><span><i class="legend-dot crimson"></i> CRIMSON CROWN</span></div>
+          <div id="pause-overlay" class="stage-overlay" hidden><div class="overlay-panel"><span class="eyebrow">BATTLE ON HOLD</span><h2>Take your time.</h2><p id="pause-message">The arena is paused. Neither side can act.</p><button type="button" class="primary-button" id="resume-button">Resume battle <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button><button type="button" class="text-button" id="pause-edit-deck">Return to deck</button></div></div>
+          <div id="result-overlay" class="stage-overlay result-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="result-title"><div class="overlay-panel"><span class="eyebrow" id="result-eyebrow">BATTLE COMPLETE</span><svg class="result-emblem" viewBox="0 0 60 70" aria-hidden="true"><path d="m30 3 24 32-24 32L6 35Z"/><path d="m6 35 24 10 24-10M30 3v42"/></svg><h2 id="result-title">Victory</h2><p id="result-summary"></p><div class="result-score"><div><span>YOUR CITADEL</span><strong id="result-player-hp"></strong></div><span>—</span><div><span>ENEMY CITADEL</span><strong id="result-enemy-hp"></strong></div></div><button type="button" class="primary-button" id="play-again">Battle again <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button><button type="button" class="text-button" id="result-edit-deck">Edit your deck</button></div></div>
+        </div>
+
+        <div id="battle-navigation" class="battle-navigation battle-only" hidden>
+          <div id="stage-message" class="stage-message battle-only" hidden aria-live="polite">Select a card, then place it in the highlighted deployment area.</div>
           <aside id="camera-panel" class="camera-panel battle-only" hidden aria-label="Camera navigation">
             <div class="minimap-heading"><span>TACTICAL MAP</span><output id="camera-zoom" aria-label="Camera zoom">100%</output></div>
             <canvas id="arena-minimap" tabindex="0" aria-label="Tactical minimap. Click or drag to move the camera. The frame marks your view; hidden enemies are never shown."></canvas>
@@ -92,10 +99,6 @@
               <button type="button" id="camera-zoom-in" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10m-5-5v10"/></svg></button>
             </div>
           </aside>
-          <div class="map-legend lobby-only"><span><i class="legend-dot azure"></i> AZURE CORE</span><span id="preview-objective-legend"><i class="legend-dot neutral"></i> MANA WELLS</span><span><i class="legend-dot crimson"></i> CRIMSON CROWN</span></div>
-          <div id="stage-message" class="stage-message battle-only" hidden aria-live="polite">Select a card, then place it in the highlighted deployment area.</div>
-          <div id="pause-overlay" class="stage-overlay" hidden><div class="overlay-panel"><span class="eyebrow">BATTLE ON HOLD</span><h2>Take your time.</h2><p id="pause-message">The arena is paused. Neither side can act.</p><button type="button" class="primary-button" id="resume-button">Resume battle <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button><button type="button" class="text-button" id="pause-edit-deck">Return to deck</button></div></div>
-          <div id="result-overlay" class="stage-overlay result-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="result-title"><div class="overlay-panel"><span class="eyebrow" id="result-eyebrow">BATTLE COMPLETE</span><svg class="result-emblem" viewBox="0 0 60 70" aria-hidden="true"><path d="m30 3 24 32-24 32L6 35Z"/><path d="m6 35 24 10 24-10M30 3v42"/></svg><h2 id="result-title">Victory</h2><p id="result-summary"></p><div class="result-score"><div><span>YOUR CITADEL</span><strong id="result-player-hp"></strong></div><span>—</span><div><span>ENEMY CITADEL</span><strong id="result-enemy-hp"></strong></div></div><button type="button" class="primary-button" id="play-again">Battle again <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5"/></svg></button><button type="button" class="text-button" id="result-edit-deck">Edit your deck</button></div></div>
         </div>
 
         <div id="battle-hud" class="battle-hud battle-only" hidden>

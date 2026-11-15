@@ -142,8 +142,8 @@ export function clipWalkableSegment(from,to,padding=.5,map=MAP,blocked=()=>false
   }
   return {x:to.x,y:to.y,blocked:false};
 }
-export function isDeployable(p,side,buildings=[],map=MAP) {
-  if((side!==0&&side!==1)||!isWalkable(p,map))return false;
+export function isDeployable(p,side,buildings=[],map=MAP,blocked=()=>false) {
+  if((side!==0&&side!==1)||!isWalkable(p,map,blocked))return false;
   if(distance(p,map.bases[side])>RULES.castleRange+1e-9)return false;
   if(!isCourtyard(p,side,map)&&!inRect(p,map.plaza)&&closestRoute(p,map).distance>map.roadWidth/2-.1)return false;
   if(map.bases.some(base=>distance(p,base)<map.castleRadius+.35))return false;
@@ -163,7 +163,7 @@ export function bindMap(map,blocked=()=>false) {
     closestRoute:p=>closestRoute(p,map),courtyardFor:side=>courtyardFor(side,map),
     isCourtyard:(p,side)=>isCourtyard(p,side,map),isWalkable:p=>isWalkable(p,map,blocked),
     clipWalkableSegment:(a,b,padding)=>clipWalkableSegment(a,b,padding,map,blocked),
-    isDeployable:(p,side,buildings)=>isDeployable(p,side,buildings,map),
+    isDeployable:(p,side,buildings)=>isDeployable(p,side,buildings,map,blocked),
     finitePoint:p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.x>=0&&p.x<=map.width&&p.y>=0&&p.y<=map.height,
   };
 }
