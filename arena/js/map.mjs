@@ -3,10 +3,8 @@ import { RULES } from './rules.mjs';
 // The straight center road puts its pump 17.5 tiles from either castle.
 // Outer roads take longer forest routes; no bends are needed to pad the center.
 const PUMP_DISTANCE=17.5;
-// New arenas keep their authored world bounds. These offsets make the full
-// objective roads exactly 35 tiles, including their diagonal approaches.
+// Hollowfen's diagonal main road is 35 tiles within its authored world bounds.
 const SWAMP_OFFSET=Math.sqrt(PUMP_DISTANCE**2-16**2);
-const PRISON_BEND=(7**2-(PUMP_DISTANCE-13)**2)/(2*(PUMP_DISTANCE-13));
 
 export const MAP = Object.freeze({
   id:'verdant',name:'Verdant Basin',theme:'forest',description:'Three routes, three mana pumps. No environmental effects.',
@@ -60,18 +58,18 @@ export const ARENAS=freezeTree({
   },
   prison:{
     id:'prison',name:'Ironveil Prison',theme:'prison',projection:'portrait',
-    description:'Two wells, each 17.5 walking tiles from either castle, and a central orb. Timed gates redirect the battle.',
-    width:34,height:26,roadWidth:2.2,castleRadius:1.05,pumpDistance:17.5,courtyard:{rear:1,front:2.5,side:1},
+    description:'Three prison corridors, two outer wells and a central orb. Timed gates redirect the battle.',
+    width:34,height:26,roadWidth:2.2,castleRadius:1.05,pumpDistance:9+Math.sqrt(97),courtyard:{rear:1,front:2.5,side:1},
     bases:[{x:4,y:13},{x:30,y:13}],center:{x:17,y:13},
-    routes:[[{x:4,y:13},{x:4+PRISON_BEND,y:6},{x:15.5,y:6},{x:17,y:6},{x:18.5,y:6},{x:30-PRISON_BEND,y:6},{x:30,y:13}],
-      [{x:4,y:13},{x:4+PRISON_BEND,y:13},{x:15.5,y:13},{x:18.5,y:13},{x:30-PRISON_BEND,y:13},{x:30,y:13}],
-      [{x:4,y:13},{x:4+PRISON_BEND,y:20},{x:15.5,y:20},{x:17,y:20},{x:18.5,y:20},{x:30-PRISON_BEND,y:20},{x:30,y:13}]],
-    crossways:[[{x:15.5,y:6},{x:15.5,y:9.5},{x:15.5,y:13},{x:15.5,y:16.5},{x:15.5,y:20}],
-      [{x:18.5,y:6},{x:18.5,y:9.5},{x:18.5,y:13},{x:18.5,y:16.5},{x:18.5,y:20}]],
-    nodes:[{id:'west-cell',name:'West Cell',x:17,y:6},{id:'east-cell',name:'East Cell',x:17,y:20}],
+    routes:[[{x:4,y:13},{x:8,y:4},{x:15.5,y:4},{x:17,y:4},{x:18.5,y:4},{x:26,y:4},{x:30,y:13}],
+      [{x:4,y:13},{x:8,y:13},{x:15.5,y:13},{x:18.5,y:13},{x:26,y:13},{x:30,y:13}],
+      [{x:4,y:13},{x:8,y:22},{x:15.5,y:22},{x:17,y:22},{x:18.5,y:22},{x:26,y:22},{x:30,y:13}]],
+    crossways:[[{x:15.5,y:4},{x:15.5,y:8.5},{x:15.5,y:13},{x:15.5,y:17.5},{x:15.5,y:22}],
+      [{x:18.5,y:4},{x:18.5,y:8.5},{x:18.5,y:13},{x:18.5,y:17.5},{x:18.5,y:22}]],
+    nodes:[{id:'west-cell',name:'West Cell',x:17,y:4},{id:'east-cell',name:'East Cell',x:17,y:22}],
     gates:[{id:'red',group:'red',axis:'x',x:17,y:13},
-      {id:'green-sw',group:'green',axis:'y',x:15.5,y:9.5},{id:'green-se',group:'green',axis:'y',x:15.5,y:16.5},
-      {id:'green-nw',group:'green',axis:'y',x:18.5,y:9.5},{id:'green-ne',group:'green',axis:'y',x:18.5,y:16.5}],
+      {id:'green-sw',group:'green',axis:'y',x:15.5,y:8.5},{id:'green-se',group:'green',axis:'y',x:15.5,y:17.5},
+      {id:'green-nw',group:'green',axis:'y',x:18.5,y:8.5},{id:'green-ne',group:'green',axis:'y',x:18.5,y:17.5}],
   },
 });
 export function arenaFor(id='verdant',random=Math.random) {

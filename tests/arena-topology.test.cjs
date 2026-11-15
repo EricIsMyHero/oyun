@@ -32,8 +32,8 @@ test('a unit deployed along the half-road reaches the hollow, teleports and cont
 
 test('prison gates alternate on simulation minutes; pause freezes the state',async()=>{
  const{e}=await fixture('prison'),[,,,{gateBlocked}]=await modules;
- assert.equal(gateBlocked(e,{x:17,y:13}),false);assert.equal(gateBlocked(e,{x:15.5,y:9.5}),true);
- e.step(60);assert.equal(e.state.arena.gatePhase,1);assert.equal(gateBlocked(e,{x:17,y:13}),true);assert.equal(gateBlocked(e,{x:15.5,y:9.5}),false);
+ assert.equal(gateBlocked(e,{x:17,y:13}),false);assert.equal(gateBlocked(e,{x:15.5,y:8.5}),true);
+ e.step(60);assert.equal(e.state.arena.gatePhase,1);assert.equal(gateBlocked(e,{x:17,y:13}),true);assert.equal(gateBlocked(e,{x:15.5,y:8.5}),false);
  e.setPaused(true);e.step(90);close(e.time,60);assert.equal(e.state.arena.gatePhase,1);e.setPaused(false);e.step(60);assert.equal(e.state.arena.gatePhase,0);
 });
 
@@ -44,8 +44,8 @@ test('a closing central gate deals one ordinary 100-damage hit and pushes each s
 });
 
 test('green gates also crush and eject along their own crossing direction when closing',async()=>{
- const{e,spawn}=await fixture('prison');e.state.time=61;e.step(1/30);const u=spawn({x:15.5,y:9.5});u.facingY=-1;
- e.state.time=119.99;e.step(1/30);close(u.hp,970);assert.ok(u.y<9.1);assert.ok(e.isWalkable(u));
+ const{e,spawn}=await fixture('prison');e.state.time=61;e.step(1/30);const u=spawn({x:15.5,y:8.5});u.facingY=-1;
+ e.state.time=119.99;e.step(1/30);close(u.hp,970);assert.ok(u.y<8.1);assert.ok(e.isWalkable(u));
 });
 
 test('central orb is removed when its gate closes and returns when the center reopens',async()=>{
@@ -67,7 +67,7 @@ test('center units find a side detour around a closed red gate for every movemen
 });
 
 test('dash clipping cannot cross a closed gate and the cross passages remain walkable',async()=>{
- const{e}=await fixture('prison');e.state.time=61;e.step(1/30);const hit=e.clipWalkableSegment({x:16,y:13},{x:19,y:13});assert.equal(hit.blocked,true);assert.ok(hit.x<16.81);assert.equal(e.isWalkable({x:15.5,y:9.5}),true);
+ const{e}=await fixture('prison');e.state.time=61;e.step(1/30);const hit=e.clipWalkableSegment({x:16,y:13},{x:19,y:13});assert.equal(hit.blocked,true);assert.ok(hit.x<16.81);assert.equal(e.isWalkable({x:15.5,y:8.5}),true);
 });
 
 test('bot deploys legal cards and remains bounded on both new maps through multiple gate cycles',async()=>{
@@ -96,13 +96,14 @@ test('navigation caches keep coordinate points instead of circular references to
 });
 
 
-test('both new arenas retain their authored dimensions and every well is exactly 17.5 walking tiles from either castle',async()=>{
+test('new arenas retain their authored dimensions and symmetric objective routes',async()=>{
  const[,,{ARENAS,pointOnRoute,distance,routeLength}]=await modules;
  for(const map of[ARENAS.swamp,ARENAS.prison]){
   assert.deepEqual([map.width,map.height],map.id==='swamp'?[40,26]:[34,26]);
+  const halfDistance=map.id==='swamp'?17.5:9+Math.sqrt(97);close(map.pumpDistance,halfDistance);
   for(const node of map.nodes){const lane=map.routes.findIndex(route=>route.some(p=>distance(p,node)<1e-7));
-   for(const side of[0,1])close(distance(pointOnRoute(lane,side,17.5,map),node),0);
-   close(routeLength(map.routes[lane]),35);
+   for(const side of[0,1])close(distance(pointOnRoute(lane,side,halfDistance,map),node),0);
+   close(routeLength(map.routes[lane]),halfDistance*2);
   }
  }
 });

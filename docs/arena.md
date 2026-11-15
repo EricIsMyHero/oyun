@@ -1236,7 +1236,7 @@ for all formulas and the 232 individual passive ratings.
 ## Hollowfen and Ironveil Prison
 
 The new arenas retain their authored dimensions: **40 × 26 tiles** for
-Hollowfen and **34 × 26 tiles** for Ironveil. Every mana well is
+Hollowfen and **34 × 26 tiles** for Ironveil. Hollowfen's mana well is
 exactly **17.5 walking tiles from either castle** along its objective route.
 Hollowfen has a diagonal main road and one central well. Two half-roads lead
 from each citadel to a hollow tree. Touching either tree instantly teleports a
@@ -1247,7 +1247,9 @@ Passengers follow their hosts; the jump does not count as walked distance or
 lay a flame trail across the bog. The gap between trees is not walkable and is
 excluded from road projection, route length, deployment and banishment sampling.
 
-Ironveil has two outer wells and a central orb with the same 5-Mana / 30-second
+Ironveil uses its original wide outer corridors and tall cell blocks. Its two
+outer wells are about **18.85 walking tiles from either castle** along those
+routes. The central orb uses the same 5-Mana / 30-second
 2% regeneration rule as Ember. Initially the four green cross-passage gates
 are closed and the central red gate is open. They trade states every 60 seconds
 of simulation time. A closing gate deals one 100-damage environmental hit using
