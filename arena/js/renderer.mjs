@@ -3,6 +3,8 @@ import { RULES, clamp, num } from './rules.mjs';
 import { visibilitySources, isPointVisible, isEntityVisible } from './vision.mjs';
 import { groundAffected, waterContains } from './environment.mjs';
 import { paintBiome, paintEnvironment } from './biomes.mjs';
+import { projectPoint, projectDirection, unprojectPoint, transformWorld, atlasView } from './projection.mjs';
+import { SCENES, STRUCTURES, LAVA_SURFACE, paintScene, paintStructure, paintPreviewBackdrop } from './scene-art.mjs';
 import { ArenaCamera, CAMERA } from './camera.mjs';
 import { statValue } from './statuses.mjs';
 import { paintTree, paintRock, paintFern } from './art.mjs';
@@ -84,7 +86,7 @@ function paintFog(canvas,view,sources) {
   ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
   ctx.fillStyle='#020507';ctx.fillRect(0,0,w,h);
   ctx.setTransform(dpr,0,0,dpr,0,0);ctx.globalCompositeOperation='destination-out';
-  ctx.transform(scale,-scale*.5,scale,scale*.5,ox,oy);
+  transformWorld(ctx,view);
   for(const source of sources) {
     const clearEdge=Math.max(0,1-.65/source.radius);
     const gradient=ctx.createRadialGradient(source.x,source.y,0,source.x,source.y,source.radius);
@@ -115,6 +117,8 @@ export class ArenaRenderer {
     this.destroyed=false;
     this.resize=this.resize.bind(this);
     this.resize();
+    for(const scene of Object.values(SCENES))this.image(scene.url);
+    this.image(LAVA_SURFACE);
     if(typeof ResizeObserver!=='undefined') {
       this.observer=new ResizeObserver(this.resize);
       this.observer.observe(canvas);
@@ -168,10 +172,11 @@ export class ArenaRenderer {
     // artwork beneath the viewport. Panning never regenerates the forest.
     const scale=this.camera.active?this.camera.baseScale*CAMERA.maxZoom:this.view.scale;
     const dpr=this.camera.active?1:this.view.dpr;
-    const key=`${scale}:${dpr}`;
+    const painted=!!this.image(SCENES[this.map.id].url);this.image(STRUCTURES);
+    const key=`${this.map.id}:${scale}:${dpr}:${painted}`;
     if(this.backgroundKey===key)return;
-    const extent=this.map.width+this.map.height,width=Math.ceil((extent+4)*scale),height=Math.ceil((extent*.5+6)*scale);
-    this.backgroundView={width,height,scale,dpr,ox:width/2-extent*.5*scale,oy:height/2+(this.map.width-this.map.height)*.25*scale};
+    this.backgroundView=atlasView(this.map,scale,dpr);
+    const {width,height}=this.backgroundView;
     this.background.width=Math.ceil(width*dpr);this.background.height=Math.ceil(height*dpr);
     const viewport=this.view;
     try {this.view=this.backgroundView;this.makeBackground();}
@@ -182,6 +187,7 @@ export class ArenaRenderer {
   drawTerrain(ctx,view) {
     const atlas=this.backgroundView,ratio=view.scale/atlas.scale;
     ctx.fillStyle='#0a171b';ctx.fillRect(0,0,view.width,view.height);
+    paintPreviewBackdrop(this,ctx,view);
     const x=view.ox-atlas.ox*ratio,y=view.oy-atlas.oy*ratio;
     const left=Math.max(0,x),top=Math.max(0,y),right=Math.min(view.width,x+atlas.width*ratio),bottom=Math.min(view.height,y+atlas.height*ratio);
     if(right>left&&bottom>top)ctx.drawImage(this.background,(left-x)/ratio*atlas.dpr,(top-y)/ratio*atlas.dpr,(right-left)/ratio*atlas.dpr,(bottom-top)/ratio*atlas.dpr,left,top,right-left,bottom-top);
@@ -190,16 +196,12 @@ export class ArenaRenderer {
   /** Canvas-local CSS pixels. Use canvas rect offsets for page coordinates. */
   screenAt(x,y,z=0) {
     if(typeof x==='object') { z=y||0;y=x.y;x=x.x; }
-    const {scale:s,ox,oy}=this.view;
-    return {x:ox+(x+y)*s,y:oy+(y-x)*s*.5-z*s};
+    return projectPoint(this.view,{x,y},z);
   }
 
   worldAt(clientX,clientY) {
     const rect=this.canvas.getBoundingClientRect();
-    const {scale:s,ox,oy}=this.view;
-    const a=(clientX-rect.left-ox)/s;
-    const b=(clientY-rect.top-oy)/(s*.5);
-    return {x:(a-b)*.5,y:(a+b)*.5};
+    return unprojectPoint(this.view,clientX-rect.left,clientY-rect.top);
   }
 
   destroy() {
@@ -211,12 +213,12 @@ export class ArenaRenderer {
     for(const portrait of this.portraits.values()){portrait.width=1;portrait.height=1;}
     this.portraits.clear();
     this.fog.width=1;this.fog.height=1;this.fogKey=null;
+    if(this.backdrop){this.backdrop.width=1;this.backdrop.height=1;}
     this.background.width=1;this.background.height=1;this.minimapFog.width=1;this.minimapFog.height=1;
   }
 
   world(ctx,callback) {
-    const {ox,oy,scale:s}=this.view;
-    ctx.save();ctx.transform(s,-s*.5,s,s*.5,ox,oy);callback(ctx);ctx.restore();
+    ctx.save();transformWorld(ctx,this.view);callback(ctx);ctx.restore();
   }
 
   worldLine(ctx,points,width,color,dash=null) {
@@ -250,6 +252,7 @@ export class ArenaRenderer {
   }
 
   makeBackground() {
+    if(paintScene(this))return;
     if(this.map.theme!=='forest'){paintBiome(this);return;}
     const ctx=this.background.getContext('2d');
     const {width:w,height:h,scale:s,dpr}=this.view;
@@ -508,6 +511,7 @@ export class ArenaRenderer {
   }
 
   castle(ctx,castle,side,time) {
+    if(paintStructure(this,ctx,'castle',castle,side,time))return;
     const base=this.map.bases[side],s=this.view.scale,p=this.screenAt(base);
     const blue=side===0,color=TEAM[side];
     const artScale=(this.map.castleRadius||1.05)/1.65;
@@ -590,6 +594,7 @@ export class ArenaRenderer {
   }
 
   node(ctx,node,time) {
+    if(paintStructure(this,ctx,'node',node,node.owner,time))return;
     const s=this.view.scale,p=this.screenAt(node),owner=node.owner;
     const color=owner===0?TEAM[0]:owner===1?TEAM[1]:TEAL;
     const groundGlow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,s*2.1);
@@ -717,7 +722,7 @@ export class ArenaRenderer {
       polygon(ctx,[{x:p.x-size*.36,y:bodyY+size*.07},{x:p.x+size*.31,y:bodyY+size*.03},{x:p.x+size*.46,y:py-size*.03},{x:p.x-size*.48,y:py}],armor,'#18373b',1);
       if(u.def?.combat?.attackType==='ranged') {
         const fx=u.facingX??(side===0?1:-1),fy=u.facingY||0;
-        const length=Math.hypot(fx+fy,(fy-fx)*.5)||1,ax=(fx+fy)/length,ay=(fy-fx)*.5/length;
+        const aim=projectDirection(this.view,{x:fx,y:fy}),ax=aim.x,ay=aim.y;
         const recoil=attacking?.07:0;
         const grip={x:p.x+ax*size*(.24-recoil),y:py-size*.35+ay*size*.24};
         const tip={x:grip.x+ax*size*.65,y:grip.y+ay*size*.65};
@@ -1161,10 +1166,10 @@ export class ArenaRenderer {
     return {...camera.view,dpr:Math.min(2,globalThis.devicePixelRatio||1)};
   }
   minimapWorldAt(canvas,clientX,clientY) {
-    const bounds=canvas.getBoundingClientRect(),{scale,ox,oy}=this.minimapView(canvas);
-    const a=(clientX-bounds.left-ox)/scale,b=(clientY-bounds.top-oy)/(scale*.5);
-    return {x:(a-b)*.5,y:(a+b)*.5};
+    const bounds=canvas.getBoundingClientRect();
+    return unprojectPoint(this.minimapView(canvas),clientX-bounds.left,clientY-bounds.top);
   }
+
   drawMinimap(canvas,state,side=0) {
     if(!canvas||!state||this.destroyed)return;
     const view=this.minimapView(canvas),{width,height,dpr,scale,ox,oy}=view;
@@ -1173,7 +1178,7 @@ export class ArenaRenderer {
     const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);
     this.drawTerrain(ctx,view);
     paintEnvironment(this,ctx,state,view);
-    const project=p=>({x:ox+(p.x+p.y)*scale,y:oy+(p.y-p.x)*scale*.5});
+    const project=p=>projectPoint(view,p);
     const sources=visibilitySources(state,side);
     const key=`${side}:${width}:${height}:${dpr}:`+sources.map(source=>`${source.x},${source.y},${source.radius}`).join('|');
     if(key!==this.minimapFogKey){paintFog(this.minimapFog,view,sources);this.minimapFogKey=key;}
@@ -1208,7 +1213,7 @@ export class ArenaRenderer {
     const entityVisible=entity=>!state||isEntityVisible(state,viewerSide,entity,sources);
     paintEnvironment(this,ctx,state,this.view);
     // Slow river glints and fireflies make an idle preview feel alive.
-    for(let i=0;this.map.theme==='forest'&&i<12;i++) {
+    for(let i=0;this.map.theme==='forest'&&!this.image(SCENES.verdant.url)&&i<12;i++) {
       const p=pathPoint(this.river,((time*.3+i*2.3)%pathLength(this.river))),q=this.screenAt(p);
       if(this.map.bases.some((_,side)=>this.isCourtyard(p,side)))continue;
       if(!pointVisible(p))continue;

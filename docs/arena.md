@@ -29,8 +29,22 @@ the artwork. Card portraits are cropped into small cached textures once after
 loading; terrain blits use only the visible atlas region. The scenery generator
 has its own deterministic seeds; drawing does not advance combat or change any
 card statistics. Fog covers the final world
-image, including every new light and particle effect. Artwork is procedural and
-requires no additional external image service.
+image, including every light and particle effect. The three illustrated terrain
+paintings and transparent structure atlas are served from `arena/assets/`; no
+external image host is needed. Procedural scenery remains a loading/error
+fallback. A small registration mesh aligns painted court and well pads with
+combat coordinates, and the cached terrain avoids repainting that mesh while
+panning. Live castles, well ownership, capture progress, lava and water glints
+remain separate from the terrain painting.
+
+The lobby offers three preview buttons. Previewing a map does not choose the
+next battle: normal matches still select randomly. `?preview=waterfall` or
+`?preview=lava` opens a particular lobby preview. Cascade Hollow and Ember Rift
+use the references' portrait composition, with Azure at the bottom and Crimson
+at the top. A shared projection handles camera input, deployment outlines,
+spell areas, fog and minimap; the world's combat distances remain unchanged.
+The lava basin has moving glowing seams, dark floating crust and bubbles;
+water highlights accelerate during the waterfall surge.
 
 ## Match rules
 
@@ -1183,7 +1197,12 @@ fog visibility, hidden-enemy inspection,
 pause, restart and small-screen layouts. Browser import mappings version every
 arena module together, including vision, so a previous cached geometry cannot
 mix with the current map or renderer.
-The test writes preview screenshots under `/tmp` for visual review.
+The tests write preview screenshots under `/tmp` for visual review.
+`node tests/arena-environments.browser.cjs` checks all three painted scenes on
+desktop and phone, local artwork loading, preview buttons, portrait projection,
+fog on the minimap, hazard phases, orb pickup, and click deployment. Set
+`ARENA_ENVIRONMENTS_URL` to check the deployed build. Registration/projection
+math is covered by `tests/arena-scene-art.test.cjs`.
 
 The effects browser check also compares rendered pixels at each active area
 boundary, expired areas and hidden fog, and checks status icons, inspector labels,

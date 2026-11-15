@@ -3,7 +3,7 @@ import { ArenaEngine } from './engine.mjs';
 import { ArenaRenderer } from './renderer.mjs';
 import { statusIconSVG, statusVisual, nativeCharge } from './visuals.mjs';
 import { RULES, STAT_KEYS, num, RAY_CHARGE } from './rules.mjs';
-import { MAP, distance } from './map.mjs';
+import { MAP, ARENAS, distance } from './map.mjs';
 import { isEntityVisible, isPointVisible } from './vision.mjs';
 import { CAMERA } from './camera.mjs';
 import { statusMagnitude, effectDefinition } from './statuses.mjs';
@@ -345,6 +345,18 @@ function togglePause() {
   if(!state.engine||state.engine.state.phase==='ended')return;
   if(state.pauseReasons.has('manual')||state.pauseReasons.has('visibility'))resumeMatch();else setPause('manual',true);
 }
+function previewArena(id='verdant') {
+  if(state.engine||!state.renderer)return;
+  const map=ARENAS[id]||MAP,index=Object.keys(ARENAS).indexOf(map.id);
+  state.renderer.setMap(map);state.renderer.setBattleView(false);
+  $('preview-arena-number').textContent=`ARENA ${String(index+1).padStart(2,'0')}`;
+  $('preview-arena-name').textContent=map.name;
+  $('preview-arena-theme').textContent=map.id==='waterfall'?'THE ENCHANTED CASCADE':map.id==='lava'?'THE VOLCANIC FRONTIER':'THE MANA FRONTIER';
+  $('arena-stage').dataset.preview=map.id;
+  $('preview-objective-legend').innerHTML='<i class="legend-dot neutral"></i> '+(map.id==='lava'?'MANA ORB':'MANA WELLS');
+  document.querySelectorAll('[data-preview-arena]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.previewArena===map.id)));
+  state.renderer.resize();
+}
 function startMatch(options={}) {
   if(!canStart()){toast('Complete your 8-card deck and a valid spell loadout first.',true);return false;}
   try {
@@ -377,7 +389,7 @@ function returnToLobby() {
   document.querySelectorAll('.battle-only').forEach(el=>{el.hidden=true;});
   $('pause-overlay').hidden=true;$('result-overlay').hidden=true;
   if($('inspector').open)closeInspector();
-  state.renderer.setMap(MAP);state.renderer.setBattleView(false);state.renderer.resize();
+  previewArena('verdant');
   window.scrollTo({top:0,behavior:'instant'});
 }
 function selectedDefinition() {
@@ -591,6 +603,7 @@ document.addEventListener('click',event=>{
 });
 $('quick-build').addEventListener('click',quickBuild);
 $('clear-deck').addEventListener('click',()=>{state.deck=[];state.spellDeck=[];updateDeck();});
+document.querySelectorAll('[data-preview-arena]').forEach(button=>button.addEventListener('click',()=>previewArena(button.dataset.previewArena)));
 $('start-match').addEventListener('click',startMatch);
 $('troop-tab').addEventListener('click',()=>setTab('troops'));
 $('spell-tab').addEventListener('click',()=>setTab('spells'));
@@ -690,6 +703,7 @@ async function load() {
     if(!state.catalog.cards?.length||!state.catalog.spells?.length)throw new Error('The registry returned no cards or spells. Serve this page over HTTP and try again.');
     $('app-content').hidden=false;$('loading-state').hidden=true;
     state.renderer?.destroy();state.renderer=new ArenaRenderer($('arena-canvas'));
+    previewArena(new URLSearchParams(location.search).get('preview')||'verdant');
     $('troop-total').textContent=state.catalog.cards.length;$('spell-total').textContent=state.catalog.spells.length;
     const ready=state.catalog.cards.filter(c=>c.ready).length;
     $('roster-summary').textContent=`${state.catalog.cards.length} Codex units. ${ready} ready for battle. Complete data comes first.`;
@@ -704,6 +718,6 @@ async function load() {
 $('retry-load').addEventListener('click',load);
 window.arenaApp={
   get catalog(){return state.catalog;},get engine(){return state.engine;},get renderer(){return state.renderer;},get deck(){return [...state.deck];},get spellDeck(){return [...state.spellDeck];},get formChoices(){return {...state.formChoices};},get selection(){return state.selection;},
-  startMatch,returnToLobby,quickBuild,selectHand,selectSpell,clearSelection,
+  startMatch,returnToLobby,previewArena,quickBuild,selectHand,selectSpell,clearSelection,
 };
 load();

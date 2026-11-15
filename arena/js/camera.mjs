@@ -1,4 +1,5 @@
 import { MAP } from './map.mjs';
+import { framedView, unprojectPoint, crossScaleFor } from './projection.mjs';
 import { clamp } from './rules.mjs';
 
 export const CAMERA = Object.freeze({ minZoom:.5, maxZoom:1.6, zoomSteps:Object.freeze([.5,.6,.7,.75,.8,.9,1,1.2,1.4,1.6]), desktopSpan:32, mobileSpan:18 });
@@ -18,15 +19,14 @@ export class ArenaCamera {
   }
   get baseScale() {
     const span=this.width<600?CAMERA.mobileSpan:CAMERA.desktopSpan;
-    return Math.max(this.width/span,this.height/22);
+    return this.map.projection==='portrait'?Math.max(this.width/(Math.min(span,this.map.height+2)*crossScaleFor(this.map)),this.height/18):Math.max(this.width/span,this.height/22);
   }
   get view() {
-    const extent=this.map.width+this.map.height;
-    const scale=this.active?this.baseScale*this.zoom:Math.min(this.width/(extent+4),this.height/(extent*.5+6));
-    return {width:this.width,height:this.height,scale,
-      ox:this.width/2-(this.center.x+this.center.y)*scale,
-      oy:this.height/2-(this.center.y-this.center.x)*scale*.5};
+    const extent=this.map.width+this.map.height,portrait=this.map.projection==='portrait';
+    const scale=this.active?this.baseScale*this.zoom:portrait?Math.min(this.width/((this.map.height+4)*crossScaleFor(this.map)),this.height/(this.map.width+4)):Math.min(this.width/(extent+4),this.height/(extent*.5+6));
+    return framedView(this.map,this.width,this.height,scale,this.center);
   }
+
   focus(point) {
     if(!point||!Number.isFinite(point.x)||!Number.isFinite(point.y))return;
     this.center={x:clamp(point.x,0,this.map.width),y:clamp(point.y,0,this.map.height)};
@@ -36,14 +36,14 @@ export class ArenaCamera {
     this.focus({x:base.x+(side===1?-4:4),y:base.y});
   }
   worldAt(x,y) {
-    const {scale,ox,oy}=this.view,a=(x-ox)/scale,b=(y-oy)/(scale*.5);
-    return {x:(a-b)*.5,y:(a+b)*.5};
+    return unprojectPoint(this.view,x,y);
   }
   panBy(dx,dy) {
     if(!this.active||!Number.isFinite(dx)||!Number.isFinite(dy))return;
-    const s=this.view.scale;
-    this.focus({x:this.center.x-(dx/s-dy/(s*.5))*.5,y:this.center.y-(dx/s+dy/(s*.5))*.5});
+    const before=this.worldAt(0,0),after=this.worldAt(dx,dy);
+    this.focus({x:this.center.x+before.x-after.x,y:this.center.y+before.y-after.y});
   }
+
   setZoom(zoom,anchor={x:this.width/2,y:this.height/2}) {
     if(!this.active||!Number.isFinite(zoom)||zoom<=0)return;
     const before=this.worldAt(anchor.x,anchor.y);

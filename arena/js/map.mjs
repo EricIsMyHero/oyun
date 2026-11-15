@@ -26,7 +26,7 @@ freezeTree(MAP);
 export const ARENAS=freezeTree({
   verdant:MAP,
   waterfall:{
-    id:'waterfall',name:'Cascade Hollow',theme:'waterfall',
+    id:'waterfall',name:'Cascade Hollow',theme:'waterfall',projection:'portrait',
     description:'Two routes cross the waterfall. Ground cards move 15% slower in water; 33% during a surge.',
     width:29,height:22,roadWidth:2.2,castleRadius:1.05,pumpDistance:12.5,
     courtyard:{rear:1,front:2.5,side:1},bases:[{x:4,y:11},{x:25,y:11}],
@@ -37,7 +37,7 @@ export const ARENAS=freezeTree({
     waterWidth:2.4,
   },
   lava:{
-    id:'lava',name:'Ember Rift',theme:'lava',
+    id:'lava',name:'Ember Rift',theme:'lava',projection:'portrait',
     description:'One route, one mana orb. The central 5 × 5 basin fills with lava every 45 seconds for 15 seconds.',
     width:38,height:18,roadWidth:2.2,castleRadius:1.05,pumpDistance:15,
     courtyard:{rear:1,front:2.5,side:1},bases:[{x:4,y:9},{x:34,y:9}],

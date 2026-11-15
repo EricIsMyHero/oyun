@@ -1,3 +1,5 @@
+import { projectPoint, transformWorld } from './projection.mjs';
+import { SCENES, LAVA_SURFACE } from './scene-art.mjs';
 // Cached, tile-aligned arena artwork; animated hazards are painted separately.
 const polygon=(ctx,points,fill,stroke=null,width=1)=>{
   ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();
@@ -104,29 +106,50 @@ export function paintBiome(r) {
 // The minimap uses its own projection but the same arena state.
 export function paintEnvironment(r,ctx,state,view) {
   if(r.map.theme==='forest')return;
-  const {scale:s,ox,oy}=view,project=p=>({x:ox+(p.x+p.y)*s,y:oy+(p.y-p.x)*s*.5});
+  const {scale:s,ox,oy}=view,project=p=>projectPoint(view,p);
   const time=state?.time||0,arena=state?.arena;
   ctx.save();
   if(r.map.theme==='waterfall'){
-    const strong=arena?.surge,river=r.river;
-    // Closely spaced moving foam lines keep both flooded crossings legible.
+    const strong=arena?.surge,river=r.river,painted=!!r.image(SCENES[r.map.id].url);
+    // Small curved highlights follow the actual ford, with stronger foam in a surge.
     for(let i=1;i<river.length;i++){
       const a=river[i-1],b=river[i],length=Math.hypot(b.x-a.x,b.y-a.y),dx=(b.x-a.x)/length,dy=(b.y-a.y)/length;
-      for(let d=(time*(strong?1.4:.65))%.5;d<length;d+=.5){
-        const p={x:a.x+dx*d,y:a.y+dy*d},half=r.map.waterWidth*(strong ? .4:.29),left=project({x:p.x-dy*half,y:p.y+dx*half}),right=project({x:p.x+dy*half,y:p.y-dx*half});
-        ctx.beginPath();ctx.moveTo(left.x,left.y);ctx.lineTo(right.x,right.y);ctx.strokeStyle=strong?'#d6ffffaa':'#c1eee06b';ctx.lineWidth=Math.max(.6,s*(strong ? .045:.025));ctx.stroke();
+      for(let d=(time*(strong?1.5:.7))%.45;d<length;d+=strong ? .45 : .7){
+        const offset=Math.sin(d*8+i*3)*r.map.waterWidth*.28,p={x:a.x+dx*d-dy*offset,y:a.y+dy*d+dx*offset};
+        const start=project(p),middle=project({x:p.x+dx*.14-dy*.04,y:p.y+dy*.14+dx*.04}),end=project({x:p.x+dx*.29,y:p.y+dy*.29});
+        ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.quadraticCurveTo(middle.x,middle.y,end.x,end.y);ctx.strokeStyle=strong?'#e5ffff9c':'#c1eee055';ctx.lineWidth=Math.max(.5,s*(strong ? .028:.014));ctx.globalAlpha=painted ? .7 : 1;ctx.stroke();
       }
     }
+    ctx.globalAlpha=1;
   }else{
     const points=rectPoints(r.map.plaza).map(project),active=arena?.lavaActive;
     if(active){
-      polygon(ctx,points,'#c13f24e8','#ffb154',Math.max(1,s*.06));
-      ctx.save();polygon(ctx,points);ctx.clip();
-      for(let i=0;i<30;i++){
-        const p=project({x:r.map.plaza.minX+(i*1.733)%5,y:r.map.plaza.minY+(i*2.317)%5});
-        ellipse(ctx,p,s*(.08+(Math.sin(time*2+i)+1)*.08),s*.05,'#ffca68bd');
+      // A molten surface with drifting crust, branching hot seams and bubbles.
+      // Its exact world rectangle is also the engine's 5 × 5 damage footprint.
+      ctx.save();transformWorld(ctx,view);const basin=r.map.plaza;
+      ctx.beginPath();ctx.rect(basin.minX,basin.minY,5,5);ctx.clip();
+      const material=r.image(LAVA_SURFACE);
+      if(material){
+        r.lavaPatterns||=new WeakMap();let pattern=r.lavaPatterns.get(ctx);
+        if(!pattern){pattern=ctx.createPattern(material,'repeat');r.lavaPatterns.set(ctx,pattern);}
+        pattern.setTransform(new DOMMatrix([5/material.naturalWidth,0,0,5/material.naturalHeight,basin.minX+Math.sin(time*.18)*.06,basin.minY+time*.008]));
+        ctx.fillStyle=pattern;ctx.fillRect(basin.minX,basin.minY,5,5);
+      }else{
+      const base=ctx.createLinearGradient(basin.minX,basin.minY,basin.maxX,basin.maxY);base.addColorStop(0,'#9b301e');base.addColorStop(.45,'#e56621');base.addColorStop(1,'#a83721');ctx.fillStyle=base;ctx.fillRect(basin.minX,basin.minY,5,5);
+      for(let i=0;i<12;i++){
+        const x=basin.minX+((i*1.731)%5),y=basin.minY+((i*2.371)%5),radius=.5+(Math.sin(time*.8+i)+1)*.28;
+        const light=ctx.createRadialGradient(x,y,0,x,y,radius);light.addColorStop(0,'#ffd170b8');light.addColorStop(.5,'#ff862988');light.addColorStop(1,'#e8702000');ctx.fillStyle=light;ctx.fillRect(x-radius,y-radius,radius*2,radius*2);
       }
-      ctx.restore();
+      for(let i=0;i<27;i++){
+        const x=basin.minX+(i*1.717)%5+Math.sin(time*.3+i)*.06,y=basin.minY+(i*2.393)%5+Math.cos(time*.2+i)*.04,radius=.22+(i%4)*.055;
+        ctx.beginPath();for(let k=0;k<6;k++){const angle=k*Math.PI/3,rx=x+Math.cos(angle)*radius*(.8+(k%2)*.3),ry=y+Math.sin(angle)*radius;k?ctx.lineTo(rx,ry):ctx.moveTo(rx,ry);}ctx.closePath();ctx.fillStyle=i%3===0?'#4c2828':'#612b24';ctx.fill();ctx.strokeStyle='#ff9c3a80';ctx.lineWidth=.025;ctx.stroke();
+      }
+      }
+      for(let i=0;i<9;i++){
+        const x=basin.minX+(i*1.613)%5,y=basin.minY+(i*2.213)%5,cycle=(time*.55+i*.37)%1,radius=.035+Math.sin(cycle*Math.PI)*.065;
+        ctx.beginPath();ctx.arc(x,y,radius,0,Math.PI*2);ctx.strokeStyle=`rgba(255,224,149,${Math.sin(cycle*Math.PI)*.8})`;ctx.lineWidth=.025;ctx.stroke();
+      }
+      ctx.strokeStyle='#ffb25a';ctx.lineWidth=.06;ctx.strokeRect(basin.minX+.04,basin.minY+.04,4.92,4.92);ctx.restore();
     }else if(arena&&arena.nextPhaseAt-time<=5){
       ctx.globalAlpha=.2+Math.sin(time*5)*.1;polygon(ctx,points,'#ff7335','#ffbe78',Math.max(1,s*.04));ctx.globalAlpha=1;
     }

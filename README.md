@@ -12,6 +12,11 @@ Ethereal forms are chosen before battle; Emergent deployment
 progression resets each match. Spells with missing essential battle data still
 show their lock reasons.
 
+All three arenas now use detailed local terrain paintings with crystal castle
+and mana-well sprites. Preview buttons show each battleground before starting;
+normal matches remain random. The two canyon maps use a portrait composition
+with the blue castle below the red castle, plus animated water and molten lava.
+
 Persistent spells show their area and countdown; vector status icons identify
 affected cards, native charge bars hold up to 100 until ability use, and lifetime Health
 loss displays in red.
